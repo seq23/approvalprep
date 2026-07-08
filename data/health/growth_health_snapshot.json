@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "4.2.0",
+  "generatedAt": "2026-07-08T13:21:19.127Z",
+  "overallStatus": "STRUCTURAL_READY_REQUIRES_LIVE_TELEMETRY",
+  "overallScore": 74,
+  "panels": [
+    {
+      "name": "SEO",
+      "score": 82,
+      "status": "WARNING",
+      "reason": "Core SEO surfaces exist; live telemetry not configured.",
+      "missingData": [
+        "live telemetry"
+      ],
+      "nextAction": "Run setup doctor and connect GSC/Bing.",
+      "autoFixPossible": true,
+      "approvalRequired": false
+    },
+    {
+      "name": "AEO",
+      "score": 78,
+      "status": "WARNING",
+      "reason": "Answer atoms exist; content expansion still required.",
+      "missingData": [
+        "live telemetry"
+      ],
+      "nextAction": "Run weekly growth ops.",
+      "autoFixPossible": true,
+      "approvalRequired": false
+    },
+    {
+      "name": "GEO",
+      "score": 80,
+      "status": "WARNING",
+      "reason": "Entity/source structures exist; external proof unavailable.",
+      "missingData": [
+        "live telemetry"
+      ],
+      "nextAction": "Track observed wins separately.",
+      "autoFixPossible": true,
+      "approvalRequired": false
+    },
+    {
+      "name": "Citation Growth",
+      "score": 68,
+      "status": "WARNING",
+      "reason": "Six-month target is encoded; wins require proof.",
+      "missingData": [
+        "live telemetry"
+      ],
+      "nextAction": "Update citation strategy and import telemetry.",
+      "autoFixPossible": true,
+      "approvalRequired": false
+    },
+    {
+      "name": "Admin Control",
+      "score": 76,
+      "status": "WARNING",
+      "reason": "GitHub-native links exist; no backend writeback in V1.",
+      "missingData": [
+        "live telemetry"
+      ],
+      "nextAction": "Use edit links and PR review.",
+      "autoFixPossible": false,
+      "approvalRequired": true
+    }
+  ]
+}

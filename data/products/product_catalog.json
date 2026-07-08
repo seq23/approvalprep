@@ -1,0 +1,460 @@
+{
+  "schemaVersion": "2.0.0",
+  "catalogModel": "8_consolidated_products_covering_30_self_service_offerings",
+  "products": [
+    {
+      "sku": "free-preview",
+      "name": "Free Checklist Preview",
+      "status": "free",
+      "phase": "v2",
+      "stripe_enabled": false,
+      "price": 0,
+      "priceLabel": "Free",
+      "family": "free",
+      "badge": "Free starter checklist",
+      "cta_label": "Get the checklist",
+      "customer_situation": "You want a simple checklist before you buy.",
+      "outcome": "See what to gather before you apply.",
+      "includes": [
+        "basic document checklist",
+        "simple next steps",
+        "self-service boundary"
+      ],
+      "included_offerings": [
+        "free preview checklist"
+      ],
+      "trust_signals": [
+        "No account required",
+        "No saved customer documents",
+        "Self-service only",
+        "Plain-language guidance"
+      ],
+      "not_for": [
+        "guaranteed approval",
+        "credit repair services",
+        "fake documents",
+        "legal advice"
+      ],
+      "risk_note": "Low-risk free preview.",
+      "download": false
+    },
+    {
+      "sku": "letter-of-explanation",
+      "name": "Letter of Explanation",
+      "status": "active_paid",
+      "phase": "v2",
+      "stripe_enabled": true,
+      "stripe_price_env": "STRIPE_PRICE_LETTER_OF_EXPLANATION",
+      "price": 39,
+      "priceLabel": "$39",
+      "family": "letters",
+      "badge": "Best starter letter",
+      "cta_label": "Create my letter \u2014 $39",
+      "image": "/assets/products/letter-of-explanation.png",
+      "customer_situation": "You need to explain a gap, issue, or special situation in plain words before you apply.",
+      "outcome": "Prepare a truthful letter that explains what happened and what you are doing next.",
+      "description": "Prepare a clear, truthful letter that explains your situation before you apply. Use it for credit history, income gaps, job changes, address history, rental issues, late payments, bank statement questions, or other application questions. You fill it in yourself. ApprovalPrep does not contact anyone for you, repair credit, give legal advice, create fake documents, or promise approval.",
+      "includes": [
+        "plain-language letter structure",
+        "truthful explanation prompts",
+        "common use cases",
+        "self-review checklist"
+      ],
+      "included_offerings": [
+        "credit explanation letter",
+        "income gap explanation letter",
+        "employment gap explanation letter",
+        "address history explanation letter",
+        "rental issue explanation letter",
+        "late payment explanation letter",
+        "bank statement explanation letter",
+        "life event explanation letter",
+        "general application explanation letter"
+      ],
+      "trust_signals": [
+        "Instant verified download",
+        "No account required",
+        "No saved customer documents",
+        "Self-service only",
+        "Truthful templates only"
+      ],
+      "not_for": [
+        "fake documents",
+        "guaranteed approval",
+        "credit repair services",
+        "legal advice"
+      ],
+      "risk_note": "Use only true facts.",
+      "download": true
+    },
+    {
+      "sku": "income-employment-letter-kit",
+      "name": "Income + Employment Letter Kit",
+      "status": "active_paid",
+      "phase": "v2",
+      "stripe_enabled": true,
+      "stripe_price_env": "STRIPE_PRICE_INCOME_EMPLOYMENT_KIT",
+      "price": 59,
+      "priceLabel": "$59",
+      "family": "income_employment",
+      "badge": "Best for work and income",
+      "cta_label": "Get the income kit \u2014 $59",
+      "image": "/assets/products/income-employment-letter-kit.png",
+      "customer_situation": "You need to explain work, income, job changes, or employment gaps.",
+      "outcome": "Prepare self-service letters that explain your work and income clearly.",
+      "description": "Prepare self-service letters that explain your work and income clearly. This kit includes templates and guides for employment verification, proof of income, self-employment income, job changes, employment gaps, and bank statement explanations. You fill in the letters yourself and attach real documents if needed. ApprovalPrep does not contact employers, verify employment for you, create fake income papers, give financial advice, or promise approval.",
+      "includes": [
+        "employment verification letter",
+        "proof of income letter",
+        "self-employment income letter",
+        "job change letter",
+        "employment gap letter",
+        "bank statement explanation letter"
+      ],
+      "included_offerings": [
+        "employment verification letter",
+        "proof of income letter",
+        "self-employment income letter",
+        "job change letter",
+        "gap in employment letter",
+        "bank statement explanation letter"
+      ],
+      "trust_signals": [
+        "Instant verified download",
+        "No account required",
+        "No saved customer documents",
+        "Self-service only",
+        "Truthful templates only"
+      ],
+      "not_for": [
+        "fake income papers",
+        "employer contact by ApprovalPrep",
+        "employment verification service",
+        "financial advice",
+        "guaranteed approval"
+      ],
+      "risk_note": "Use real work and income facts only.",
+      "download": true
+    },
+    {
+      "sku": "credit-letter-kit",
+      "name": "Credit Letter Kit",
+      "status": "active_paid",
+      "phase": "v2",
+      "stripe_enabled": true,
+      "stripe_price_env": "STRIPE_PRICE_CREDIT_LETTER_KIT",
+      "price": 59,
+      "priceLabel": "$59",
+      "family": "credit",
+      "badge": "Best for DIY credit letters",
+      "cta_label": "Get the credit kit \u2014 $59",
+      "image": "/assets/products/credit-letter-kit.png",
+      "customer_situation": "You want to prepare your own credit letters and follow-up steps.",
+      "outcome": "Prepare clear self-service letters for possible credit report errors and related credit questions.",
+      "description": "Prepare your own self-service credit letters and checklists. This kit helps you write clear letters for possible credit report errors, late payments, goodwill requests, debt validation, and follow-up steps. You write and send the letters yourself. ApprovalPrep does not repair credit for you, contact credit bureaus for you, remove accurate items, contact creditors, give legal advice, or promise any result.",
+      "includes": [
+        "credit dispute letter",
+        "late payment explanation letter",
+        "goodwill letter",
+        "pay-for-delete request letter",
+        "debt validation letter",
+        "credit report error checklist",
+        "credit bureau follow-up letter"
+      ],
+      "included_offerings": [
+        "credit dispute letter",
+        "late payment explanation letter",
+        "goodwill letter",
+        "pay-for-delete request letter",
+        "debt validation letter",
+        "credit report error checklist",
+        "credit bureau follow-up letter"
+      ],
+      "trust_signals": [
+        "Instant verified download",
+        "No account required",
+        "No saved customer documents",
+        "Self-service only",
+        "No credit repair promise"
+      ],
+      "not_for": [
+        "credit repair services",
+        "bureau contact by ApprovalPrep",
+        "removing accurate items",
+        "legal advice",
+        "guaranteed results"
+      ],
+      "risk_note": "This is self-service only. You send your own letters.",
+      "download": true
+    },
+    {
+      "sku": "rental-application-kit",
+      "name": "Rental Application Kit",
+      "status": "active_paid",
+      "phase": "v2",
+      "stripe_enabled": true,
+      "stripe_price_env": "STRIPE_PRICE_RENTAL_APPLICATION_KIT",
+      "price": 129,
+      "priceLabel": "$129",
+      "family": "rental",
+      "badge": "Best for rental applications",
+      "cta_label": "Build my rental packet \u2014 $129",
+      "image": "/assets/products/rental-application-kit.png",
+      "customer_situation": "You want your rental papers organized before you apply.",
+      "outcome": "Build a clearer rental packet with letters, checklists, and document prep steps.",
+      "description": "Get your rental application papers organized before you apply. This self-service kit includes checklists, letter guidance, and document prep support to help you explain your situation clearly and keep your packet complete. Use it for apartment applications, rental history questions, income questions, employment details, landlord follow-up, and supporting document prep. You prepare and send your own materials. ApprovalPrep does not contact landlords, repair credit, create fake documents, act as your agent, or promise approval.",
+      "includes": [
+        "apartment application checklist",
+        "rental cover letter",
+        "rental history explanation",
+        "income explanation for renters",
+        "employment verification request",
+        "proof of income checklist",
+        "landlord follow-up letter",
+        "move-in document checklist",
+        "renter document packet"
+      ],
+      "included_offerings": [
+        "apartment application checklist",
+        "rental cover letter",
+        "rental history explanation",
+        "income explanation for renters",
+        "employment verification request",
+        "proof of income checklist",
+        "landlord follow-up letter",
+        "move-in document checklist",
+        "renter document packet"
+      ],
+      "trust_signals": [
+        "Instant verified download",
+        "No account required",
+        "No saved customer documents",
+        "Self-service only",
+        "No landlord contact by ApprovalPrep"
+      ],
+      "not_for": [
+        "fake rental documents",
+        "landlord contact by ApprovalPrep",
+        "credit repair",
+        "agent services",
+        "guaranteed approval"
+      ],
+      "risk_note": "You prepare and send your own materials.",
+      "download": true
+    },
+    {
+      "sku": "loan-prep-letter-kit",
+      "name": "Loan Prep Letter Kit",
+      "status": "active_paid",
+      "phase": "v2",
+      "stripe_enabled": true,
+      "stripe_price_env": "STRIPE_PRICE_LOAN_PREP_KIT",
+      "price": 99,
+      "priceLabel": "$99",
+      "family": "loan_prep",
+      "badge": "Best for financing prep",
+      "cta_label": "Get the loan prep kit \u2014 $99",
+      "image": "/assets/products/loan-prep-letter-kit.png",
+      "customer_situation": "You need to explain documents before a loan or financing review.",
+      "outcome": "Prepare letters and checklists for loan, auto, mortgage, or financing questions.",
+      "description": "Prepare letters and checklists before a loan or financing review. This self-service kit helps you explain credit history, income, job changes, bank statement questions, and other application details in a clear way. Use it for auto loans, personal loans, mortgage prep, or other financing situations where you need to explain your documents. ApprovalPrep is not a lender, broker, credit repair company, law firm, or financial advisor. We do not contact lenders for you or promise approval.",
+      "includes": [
+        "auto loan explanation letter",
+        "mortgage explanation letter",
+        "personal loan explanation letter",
+        "income explanation letter",
+        "credit explanation letter",
+        "bank statement explanation letter",
+        "document checklist",
+        "lender follow-up letter"
+      ],
+      "included_offerings": [
+        "auto loan explanation letter",
+        "mortgage explanation letter",
+        "personal loan explanation letter",
+        "income explanation letter",
+        "credit explanation letter",
+        "bank statement explanation letter",
+        "loan document checklist",
+        "lender follow-up letter"
+      ],
+      "trust_signals": [
+        "Instant verified download",
+        "No account required",
+        "No saved customer documents",
+        "Self-service only",
+        "Not a lender or broker"
+      ],
+      "not_for": [
+        "lender services",
+        "financial advice",
+        "credit repair",
+        "fake documents",
+        "guaranteed approval"
+      ],
+      "risk_note": "Not lending or financial advice.",
+      "download": true
+    },
+    {
+      "sku": "business-funding-prep-kit",
+      "name": "Business Funding Prep Kit",
+      "status": "active_paid",
+      "phase": "v2",
+      "stripe_enabled": true,
+      "stripe_price_env": "STRIPE_PRICE_BUSINESS_FUNDING_PREP_KIT",
+      "price": 149,
+      "priceLabel": "$149",
+      "family": "business_funding",
+      "badge": "Best for business funding prep",
+      "cta_label": "Build my funding packet \u2014 $149",
+      "image": "/assets/products/business-funding-prep-kit.png",
+      "customer_situation": "You need to organize business funding documents and explain business details.",
+      "outcome": "Prepare self-service letters and checklists for business funding or lender review.",
+      "description": "Prepare self-service letters and checklists for business funding or lender review. This kit helps you organize business documents, explain income, explain bank activity, describe use of funds, and prepare follow-up letters. Use it for business loan prep, SBA prep, lender questions, or business document readiness. ApprovalPrep is not a lender, broker, law firm, accountant, or financial advisor. We do not contact lenders for you, create fake documents, or promise funding.",
+      "includes": [
+        "business loan explanation letter",
+        "SBA document checklist",
+        "business income explanation",
+        "cash flow explanation",
+        "bank statement explanation",
+        "business address verification",
+        "use of funds explanation",
+        "lender follow-up letter"
+      ],
+      "included_offerings": [
+        "business loan explanation letter",
+        "SBA document checklist",
+        "business income explanation",
+        "cash flow explanation",
+        "bank statement explanation",
+        "business address verification",
+        "use of funds explanation",
+        "lender follow-up letter"
+      ],
+      "trust_signals": [
+        "Instant verified download",
+        "No account required",
+        "No saved customer documents",
+        "Self-service only",
+        "Not a lender or broker"
+      ],
+      "not_for": [
+        "loan brokerage",
+        "legal advice",
+        "accounting advice",
+        "fake documents",
+        "guaranteed funding"
+      ],
+      "risk_note": "Not legal, tax, accounting, or financial advice.",
+      "download": true
+    },
+    {
+      "sku": "life-admin-letter-kit",
+      "name": "Life Admin Letter Kit",
+      "status": "active_paid",
+      "phase": "v2",
+      "stripe_enabled": true,
+      "stripe_price_env": "STRIPE_PRICE_LIFE_ADMIN_LETTER_KIT",
+      "price": 79,
+      "priceLabel": "$79",
+      "family": "life_admin",
+      "badge": "Best for everyday paperwork",
+      "cta_label": "Get the life admin kit \u2014 $79",
+      "image": "/assets/products/life-admin-letter-kit.png",
+      "customer_situation": "You need simple letters or checklists for everyday paperwork problems.",
+      "outcome": "Prepare clear letters for address, residency, identity, account, and records questions.",
+      "description": "Prepare simple letters and checklists for everyday paperwork problems. This self-service kit helps you explain address history, residency, identity details, account issues, document requests, and other life-admin situations. Use it when you need a clear letter or checklist before sending documents to a school, employer, landlord, agency, company, or other office. ApprovalPrep does not contact anyone for you, give legal advice, create fake documents, or promise any result.",
+      "includes": [
+        "address verification letter",
+        "proof of residency letter",
+        "name/address explanation",
+        "identity document checklist",
+        "school/employer request letter",
+        "benefits explanation letter",
+        "utility/account explanation letter",
+        "general records request letter"
+      ],
+      "included_offerings": [
+        "address verification letter",
+        "proof of residency letter",
+        "name/address explanation",
+        "identity document checklist",
+        "school/employer request letter",
+        "benefits explanation letter",
+        "utility/account explanation letter",
+        "general records request letter"
+      ],
+      "trust_signals": [
+        "Instant verified download",
+        "No account required",
+        "No saved customer documents",
+        "Self-service only",
+        "Plain-language guidance"
+      ],
+      "not_for": [
+        "legal advice",
+        "agency contact by ApprovalPrep",
+        "fake documents",
+        "guaranteed results"
+      ],
+      "risk_note": "You send your own materials.",
+      "download": true
+    },
+    {
+      "sku": "complete-approvalprep-bundle",
+      "name": "Complete ApprovalPrep Bundle",
+      "status": "active_paid",
+      "phase": "v2",
+      "stripe_enabled": true,
+      "stripe_price_env": "STRIPE_PRICE_COMPLETE_APPROVALPREP_BUNDLE",
+      "price": 249,
+      "priceLabel": "$249",
+      "family": "complete_bundle",
+      "badge": "Best value",
+      "cta_label": "Get everything \u2014 $249",
+      "image": "/assets/products/complete-approvalprep-bundle.png",
+      "customer_situation": "You want the full self-service ApprovalPrep library instead of buying one kit at a time.",
+      "outcome": "Get every current self-service letter, guide, checklist, and packet in one bundle.",
+      "description": "Get the full ApprovalPrep self-service library in one bundle. This includes letters, guides, and checklists for rental applications, credit questions, income and employment proof, loan prep, business funding prep, and everyday paperwork issues. You prepare and send your own materials. ApprovalPrep does not repair credit, contact third parties, create fake documents, give legal or financial advice, or promise approval.",
+      "includes": [
+        "Letter of Explanation",
+        "Income + Employment Letter Kit",
+        "Credit Letter Kit",
+        "Rental Application Kit",
+        "Loan Prep Letter Kit",
+        "Business Funding Prep Kit",
+        "Life Admin Letter Kit"
+      ],
+      "included_offerings": [
+        "all active self-service offerings"
+      ],
+      "trust_signals": [
+        "Instant verified download",
+        "No account required",
+        "No saved customer documents",
+        "Self-service only",
+        "Full library access"
+      ],
+      "not_for": [
+        "human review",
+        "legal advice",
+        "financial advice",
+        "credit repair",
+        "third-party contact",
+        "guaranteed approval"
+      ],
+      "risk_note": "Self-service library only.",
+      "download": true
+    }
+  ],
+  "future_maybe": [
+    {
+      "sku": "human-review-premium",
+      "name": "Human Review Premium",
+      "status": "future_maybe",
+      "phase": "much_later",
+      "stripe_enabled": false,
+      "note": "Documented only. Not part of launch and no Stripe price is required."
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+name: Weekly Growth Ops
+
+on:
+  schedule:
+    - cron: "11 11 * * 1"
+  workflow_dispatch:
+    inputs:
+      fixture_trace:
+        description: "Run fixture trace only"
+        required: false
+        default: "true"
+      mode:
+        description: "fixture, dry_run, or live"
+        required: false
+        default: "dry_run"
+
+jobs:
+  weekly-growth-ops:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    env:
+      RUN_MODE: ${{ github.event.inputs.mode || 'dry_run' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - name: Apply delegated authority
+        run: npm run governance:apply-authority -- --mode=${{ env.RUN_MODE || 'dry_run' }}
+      - name: Attempt self-heal
+        run: npm run automation:self-heal-attempt -- --mode=${{ env.RUN_MODE || 'dry_run' }}
+      - name: Revalidate after self-heal
+        run: npm run automation:self-heal-revalidate
+      - name: Build owner exception index
+        run: npm run admin:build-owner-exceptions
+      - name: Build notification queue
+        run: npm run notifications:build-queue -- --mode=${{ env.RUN_MODE || 'dry_run' }}
+      - name: Validate delegated authority and notifications
+        run: |
+          npm run validate:delegated-authority
+          npm run validate:self-heal-progressions
+          npm run validate:owner-exceptions
+          npm run validate:notification-policy
+      - name: Fixture trace
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
+        run: |
+          npm run ux:browserless-report
+          npm run workflows:trace -- --workflow=weekly-growth-ops.yml
+      - name: Build admin index
+        run: npm run admin:build-index
+      - name: Ingest free sources
+        run: npm run intelligence:free-ingest
+      - name: Analyze intelligence
+        run: npm run intelligence:analyze
+      - name: Update citation strategy
+        run: npm run strategy:update-citations
+      - name: Build growth health
+        run: npm run health:build-growth
+      - name: Run safe automation
+        run: npm run automation:safe -- --mode=$RUN_MODE
+      - name: Validate v4.2 lean controls
+        run: |
+          npm run validate:admin-action-links
+          npm run validate:citation-strategy
+          npm run validate:growth-health
+          npm run validate:automation-safety
+      - name: Create PR for live mode
+        if: ${{ env.RUN_MODE == 'live' }}
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: automation/weekly-growth-ops
+          title: "Weekly ApprovalPrep growth ops refresh"
+          commit-message: "Refresh weekly growth ops data"
+          body: "Automated weekly growth ops. Review before merge. Fixture data is not live telemetry."

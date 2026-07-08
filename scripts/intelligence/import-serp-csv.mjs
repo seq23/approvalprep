@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+
+import fs from "node:fs"; import {env,writeJson,appendRun,statusOnly,now} from "./_lib.mjs";
+const connectorId="manual_serp_csv"; const file=env("SERP_IMPORT_CSV") || "data/imports/serp.csv"; if(!fs.existsSync(file)) statusOnly(connectorId,"NO_DATA",`No SERP CSV found at ${file}.`); else { const lines=fs.readFileSync(file,"utf8").split(/\r?\n/).filter(Boolean); const headers=lines.shift().split(",").map(h=>h.trim()); const rows=lines.map(line=>Object.fromEntries(line.split(",").map((v,i)=>[headers[i]||`col${i}`,v.trim()]))).map(r=>({...r,importedAt:now()})); writeJson("data/intelligence/serp_manual_imports.json",{schemaVersion:"4.1.0",imports:rows}); appendRun(connectorId,rows.length?"COMPLETE":"NO_DATA",{recordsImported:rows.length}); console.log(JSON.stringify({connectorId,status:rows.length?"COMPLETE":"NO_DATA",recordsImported:rows.length},null,2)); }

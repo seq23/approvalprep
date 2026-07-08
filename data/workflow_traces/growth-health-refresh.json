@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "4.2.1",
+  "workflow": "growth-health-refresh.yml",
+  "traceMode": "FIXTURE_TRACE_ONLY_NOT_PRODUCTION_TELEMETRY",
+  "proof_type": "fixture",
+  "real_telemetry": false,
+  "may_be_used_for_growth_claims": false,
+  "manualReady": true,
+  "scheduled": true,
+  "pushTriggered": false,
+  "pullRequestTriggered": false,
+  "hasCheckout": true,
+  "hasNodeSetup": true,
+  "usesNpmInstall": true,
+  "usesNpmCi": false,
+  "fixtureTraceInput": true,
+  "secretRefs": [],
+  "npmScripts": [
+    "health:build-growth",
+    "validate:growth-health",
+    "validate:seo-surfaces"
+  ],
+  "expectedDataTouches": [],
+  "proofBoundary": "This trace proves workflow shape, commands, secret references, and fixture/manual-run readiness. It does not prove GitHub Actions execution, provider credentials, or deployed runtime.",
+  "traceId": "a25a4809e4d7cc42"
+}

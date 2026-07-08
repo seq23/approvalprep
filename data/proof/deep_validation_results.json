@@ -1,0 +1,48 @@
+{
+  "repo": "approvalprep",
+  "base_artifact": "approvalprep_BASELINE_07-07-26_0f131f96cab5.zip",
+  "review": "v4.2.1 deep hostile validation",
+  "createdAt": "2026-07-08T13:04:38.742697Z",
+  "changed": true,
+  "fixes": [
+    "Upgraded Astro dependency range to ^7.0.6 after npm audit found Astro/esbuild advisories in the prior dependency set.",
+    "Strengthened workflow trace schema to include proof_type=fixture, real_telemetry=false, may_be_used_for_growth_claims=false.",
+    "Regenerated all workflow fixture traces under the stricter schema.",
+    "Added browserless visual mockups for admin dashboard and workflow trace."
+  ],
+  "checks": {
+    "zip_root": "approvalprep/",
+    "npm_install_ignore_scripts": "passed",
+    "npm_audit_after_upgrade": "0 vulnerabilities after Astro upgrade",
+    "npm_run_build": "passed 38 pages",
+    "npm_run_validate_all": "passed",
+    "isolated_validators": "passed all validate:* scripts except aggregate validate:all was separately run",
+    "isolated_operational_scripts": "passed env/seo/intelligence/admin/strategy/health/automation/setup doctor",
+    "workflow_fixture_trace": {
+      "status": "COMPLETE_FIXTURE_TRACE",
+      "workflowCount": 14,
+      "allHaveFixtureTraceInput": true
+    },
+    "route_dist_parity": {
+      "routes": 38,
+      "missing": []
+    },
+    "json_parse": "passed",
+    "node_syntax": "passed",
+    "mockups": [
+      "reports/mockups/admin-dashboard-mockup.png",
+      "reports/mockups/workflow-trace-mockup.png"
+    ]
+  },
+  "proofBoundaries": {
+    "notProven": [
+      "Cloudflare deployment",
+      "GitHub Actions hosted execution",
+      "real provider secrets",
+      "live GSC/Bing/IndexNow telemetry",
+      "Stripe/Resend live transaction path",
+      "real browser interaction with deployed URL"
+    ],
+    "fixtureOnly": "Workflow traces use faux data and are explicitly not production telemetry."
+  }
+}

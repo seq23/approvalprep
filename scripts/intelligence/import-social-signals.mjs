@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+
+import fs from "node:fs"; import {env,writeJson,appendRun,statusOnly,now} from "./_lib.mjs";
+const connectorId="manual_social_signal_import"; const file=env("SOCIAL_SIGNAL_IMPORT_JSON") || "data/imports/social-signals.json"; if(!fs.existsSync(file)) statusOnly(connectorId,"NO_DATA",`No social signal import found at ${file}.`); else { const raw=JSON.parse(fs.readFileSync(file,"utf8")); const imports=(Array.isArray(raw)?raw:raw.items||[]).map(x=>({platform:x.platform||"manual",signalType:x.signalType||"query_language",text:String(x.text||"").replace(/@\w+/g,"[redacted]").slice(0,500),sourceExposure:"internal_signal_only",importedAt:now()})); writeJson("data/intelligence/social_signal_imports.json",{schemaVersion:"4.1.0",imports}); appendRun(connectorId,imports.length?"COMPLETE":"NO_DATA",{recordsImported:imports.length}); console.log(JSON.stringify({connectorId,status:imports.length?"COMPLETE":"NO_DATA",recordsImported:imports.length},null,2)); }

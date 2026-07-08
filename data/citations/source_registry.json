@@ -1,0 +1,84 @@
+{
+  "sources": [
+    {
+      "source_id": "ftc_credit_dispute_sample",
+      "source_name": "FTC sample letter for disputing credit report errors",
+      "source_type": "official",
+      "url": "https://consumer.ftc.gov/articles/sample-letter-credit-bureaus-disputing-errors-credit-reports",
+      "authority_class": "official",
+      "allowed_use": [
+        "citation",
+        "background"
+      ],
+      "blocked_use": [
+        "fake_credit_repair_claims"
+      ],
+      "freshness_class": "periodic",
+      "last_reviewed_at": "2026-07-07"
+    },
+    {
+      "source_id": "cfpb_credit_report_dispute",
+      "source_name": "CFPB guide to disputing credit report errors",
+      "source_type": "official",
+      "url": "https://www.consumerfinance.gov/ask-cfpb/how-do-i-dispute-an-error-on-my-credit-report-en-314/",
+      "authority_class": "official",
+      "allowed_use": [
+        "citation",
+        "background"
+      ],
+      "blocked_use": [
+        "guarantee_claims"
+      ],
+      "freshness_class": "periodic",
+      "last_reviewed_at": "2026-07-07"
+    },
+    {
+      "source_id": "ftc_croa",
+      "source_name": "FTC Credit Repair Organizations Act",
+      "source_type": "official",
+      "url": "https://www.ftc.gov/legal-library/browse/statutes/credit-repair-organizations-act",
+      "authority_class": "official",
+      "allowed_use": [
+        "citation",
+        "background"
+      ],
+      "blocked_use": [
+        "legal_advice"
+      ],
+      "freshness_class": "periodic",
+      "last_reviewed_at": "2026-07-07"
+    },
+    {
+      "source_id": "sba_loan_prepare",
+      "source_name": "SBA loan guidance",
+      "source_type": "official",
+      "url": "https://www.sba.gov/funding-programs/loans",
+      "authority_class": "official",
+      "allowed_use": [
+        "citation",
+        "background"
+      ],
+      "blocked_use": [
+        "approval_guarantees"
+      ],
+      "freshness_class": "periodic",
+      "last_reviewed_at": "2026-07-07"
+    },
+    {
+      "source_id": "approvalprep_owner_policy",
+      "source_name": "ApprovalPrep owner product policy",
+      "source_type": "owned",
+      "url": "docs/INITIALIZATION_LOCK.md",
+      "authority_class": "internal",
+      "allowed_use": [
+        "product_boundary",
+        "background"
+      ],
+      "blocked_use": [
+        "external_fact_claim"
+      ],
+      "freshness_class": "stable",
+      "last_reviewed_at": "2026-07-07"
+    }
+  ]
+}

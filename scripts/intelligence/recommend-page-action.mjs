@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+
+import {readJson,writeJson,appendRun,now} from "./_lib.mjs";
+const connectorId="page_action_recommendation"; const briefs=readJson("data/intelligence/content_opportunity_briefs.json",{briefs:[]}).briefs; const opportunities=briefs.map(b=>({query:b.query,route:b.route,recommendedAction:b.recommendedAction,bestFormat:b.bestFormat,indexing:b.admissionStatus,adminReviewRequired:b.adminReviewRequired,createdAt:now()})); writeJson("data/intelligence/citation_opportunity_registry.json",{schemaVersion:"4.1.0",opportunities:opportunities.filter(o=>/indexable|utility/.test(o.indexing))}); appendRun(connectorId,opportunities.length?"COMPLETE":"NO_DATA",{recordsImported:opportunities.length}); console.log(JSON.stringify({connectorId,status:opportunities.length?"COMPLETE":"NO_DATA",recordsImported:opportunities.length},null,2));

@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "4.2.2",
+  "default": "do_not_notify_on_success",
+  "channels": {
+    "github_issue": {
+      "enabled": true,
+      "when": "owner_exception_or_hard_failure"
+    },
+    "email": {
+      "provider": "resend",
+      "enabledWhenConfigured": true,
+      "cadence": "weekly_digest"
+    }
+  },
+  "immediate": [
+    "payment_download_failure",
+    "exposed_secret",
+    "production_build_failure",
+    "legal_trust_page_missing",
+    "credential_failure_blocking_core_workflows",
+    "repeated_unsafe_content_block",
+    "owner_exception"
+  ],
+  "digestOnly": [
+    "self_healed_by_contract",
+    "approved_by_contract_summary",
+    "citation_opportunity_summary",
+    "competitor_gap_summary",
+    "source_not_configured"
+  ],
+  "neverNotify": [
+    "fixture_trace_success",
+    "dry_run_success",
+    "routine_self_heal_success",
+    "normal_health_snapshot_update",
+    "successful_indexnow_log"
+  ]
+}

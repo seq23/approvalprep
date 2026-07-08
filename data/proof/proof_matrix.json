@@ -1,0 +1,114 @@
+{
+  "proof": [
+    {
+      "id": "repo-structure",
+      "status": "STRUCTURAL_VALIDATION_REQUIRED",
+      "providerCredentialsRequired": false
+    },
+    {
+      "id": "route-manifest",
+      "status": "STRUCTURAL_VALIDATION_REQUIRED",
+      "providerCredentialsRequired": false
+    },
+    {
+      "id": "legal-trust",
+      "status": "STRUCTURAL_VALIDATION_REQUIRED",
+      "providerCredentialsRequired": false
+    },
+    {
+      "id": "plain-language",
+      "status": "STRUCTURAL_VALIDATION_REQUIRED",
+      "providerCredentialsRequired": false
+    },
+    {
+      "id": "download-safety",
+      "status": "STRUCTURAL_VALIDATION_REQUIRED",
+      "providerCredentialsRequired": false
+    },
+    {
+      "id": "prompt-guardrails",
+      "status": "STRUCTURAL_VALIDATION_REQUIRED",
+      "providerCredentialsRequired": false
+    },
+    {
+      "id": "atoms",
+      "status": "STRUCTURAL_VALIDATION_REQUIRED",
+      "providerCredentialsRequired": false
+    },
+    {
+      "id": "citation-claim-coverage",
+      "status": "STRUCTURAL_VALIDATION_REQUIRED",
+      "providerCredentialsRequired": false
+    },
+    {
+      "id": "external-telemetry-claims",
+      "status": "STRUCTURAL_VALIDATION_REQUIRED",
+      "providerCredentialsRequired": false
+    },
+    {
+      "id": "atlas-query-fanout",
+      "status": "STRUCTURAL_VALIDATION_REQUIRED",
+      "providerCredentialsRequired": false
+    },
+    {
+      "id": "seo-surfaces",
+      "status": "STRUCTURAL_VALIDATION_REQUIRED",
+      "providerCredentialsRequired": false
+    },
+    {
+      "id": "admin-manifest",
+      "status": "STRUCTURAL_VALIDATION_REQUIRED",
+      "providerCredentialsRequired": false
+    },
+    {
+      "id": "payment-download-boundary",
+      "status": "STRUCTURAL_VALIDATION_REQUIRED",
+      "providerCredentialsRequired": true
+    },
+    {
+      "id": "env-vault",
+      "status": "STRUCTURAL_VALIDATION_REQUIRED",
+      "providerCredentialsRequired": true
+    },
+    {
+      "id": "security",
+      "status": "STRUCTURAL_VALIDATION_REQUIRED",
+      "providerCredentialsRequired": false
+    },
+    {
+      "id": "build",
+      "status": "STRUCTURAL_VALIDATION_REQUIRED",
+      "providerCredentialsRequired": false
+    },
+    {
+      "id": "artifact-validation",
+      "status": "STRUCTURAL_VALIDATION_REQUIRED",
+      "providerCredentialsRequired": false
+    },
+    {
+      "id": "delegated_authority_contract",
+      "status": "structurally_checked",
+      "proof": "validator and fixture traces; live provider notifications require credentials"
+    },
+    {
+      "id": "self_heal_escalation",
+      "status": "structurally_checked",
+      "proof": "validator and fixture traces; live provider notifications require credentials"
+    },
+    {
+      "id": "notification_policy",
+      "status": "structurally_checked",
+      "proof": "validator and fixture traces; live provider notifications require credentials"
+    },
+    {
+      "id": "v4_2_4_browserless_ux",
+      "proof_type": "browserless_static_substitute",
+      "real_telemetry": false,
+      "may_be_used_for_growth_claims": false,
+      "files": [
+        "reports/ux/browserless-ux-audit.json",
+        "docs/HOSTILE_UX_REVIEW_REPORT_v4_2_4.md"
+      ]
+    }
+  ]
+}

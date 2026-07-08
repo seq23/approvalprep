@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "2.0.0",
+  "model": "30_plus_self_service_offerings_under_8_stripe_products",
+  "active_stripe_product_count": 8,
+  "categories": [
+    {
+      "product_sku": "letter-of-explanation",
+      "product_name": "Letter of Explanation",
+      "stripe_price_env": "STRIPE_PRICE_LETTER_OF_EXPLANATION",
+      "price": 39,
+      "offerings": [
+        "credit explanation letter",
+        "income gap explanation letter",
+        "employment gap explanation letter",
+        "address history explanation letter",
+        "rental issue explanation letter",
+        "late payment explanation letter",
+        "bank statement explanation letter",
+        "life event explanation letter",
+        "general application explanation letter"
+      ]
+    },
+    {
+      "product_sku": "income-employment-letter-kit",
+      "product_name": "Income + Employment Letter Kit",
+      "stripe_price_env": "STRIPE_PRICE_INCOME_EMPLOYMENT_KIT",
+      "price": 59,
+      "offerings": [
+        "employment verification letter",
+        "proof of income letter",
+        "self-employment income letter",
+        "job change letter",
+        "gap in employment letter",
+        "bank statement explanation letter"
+      ]
+    },
+    {
+      "product_sku": "credit-letter-kit",
+      "product_name": "Credit Letter Kit",
+      "stripe_price_env": "STRIPE_PRICE_CREDIT_LETTER_KIT",
+      "price": 59,
+      "offerings": [
+        "credit dispute letter",
+        "late payment explanation letter",
+        "goodwill letter",
+        "pay-for-delete request letter",
+        "debt validation letter",
+        "credit report error checklist",
+        "credit bureau follow-up letter"
+      ]
+    },
+    {
+      "product_sku": "rental-application-kit",
+      "product_name": "Rental Application Kit",
+      "stripe_price_env": "STRIPE_PRICE_RENTAL_APPLICATION_KIT",
+      "price": 129,
+      "offerings": [
+        "apartment application checklist",
+        "rental cover letter",
+        "rental history explanation",
+        "income explanation for renters",
+        "employment verification request",
+        "proof of income checklist",
+        "landlord follow-up letter",
+        "move-in document checklist",
+        "renter document packet"
+      ]
+    },
+    {
+      "product_sku": "loan-prep-letter-kit",
+      "product_name": "Loan Prep Letter Kit",
+      "stripe_price_env": "STRIPE_PRICE_LOAN_PREP_KIT",
+      "price": 99,
+      "offerings": [
+        "auto loan explanation letter",
+        "mortgage explanation letter",
+        "personal loan explanation letter",
+        "income explanation letter",
+        "credit explanation letter",
+        "bank statement explanation letter",
+        "loan document checklist",
+        "lender follow-up letter"
+      ]
+    },
+    {
+      "product_sku": "business-funding-prep-kit",
+      "product_name": "Business Funding Prep Kit",
+      "stripe_price_env": "STRIPE_PRICE_BUSINESS_FUNDING_PREP_KIT",
+      "price": 149,
+      "offerings": [
+        "business loan explanation letter",
+        "SBA document checklist",
+        "business income explanation",
+        "cash flow explanation",
+        "bank statement explanation",
+        "business address verification",
+        "use of funds explanation",
+        "lender follow-up letter"
+      ]
+    },
+    {
+      "product_sku": "life-admin-letter-kit",
+      "product_name": "Life Admin Letter Kit",
+      "stripe_price_env": "STRIPE_PRICE_LIFE_ADMIN_LETTER_KIT",
+      "price": 79,
+      "offerings": [
+        "address verification letter",
+        "proof of residency letter",
+        "name/address explanation",
+        "identity document checklist",
+        "school/employer request letter",
+        "benefits explanation letter",
+        "utility/account explanation letter",
+        "general records request letter"
+      ]
+    },
+    {
+      "product_sku": "complete-approvalprep-bundle",
+      "product_name": "Complete ApprovalPrep Bundle",
+      "stripe_price_env": "STRIPE_PRICE_COMPLETE_APPROVALPREP_BUNDLE",
+      "price": 249,
+      "offerings": [
+        "all active self-service offerings"
+      ]
+    }
+  ],
+  "human_review": "future_maybe_only_not_launch"
+}

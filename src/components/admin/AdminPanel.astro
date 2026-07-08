@@ -1,0 +1,4 @@
+---
+const { title, note = "" } = Astro.props;
+---
+<section class="band"><div class="shell"><h2>{title}</h2>{note && <p>{note}</p>}<slot /></div></section>

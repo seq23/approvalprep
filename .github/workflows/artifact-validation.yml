@@ -1,0 +1,20 @@
+name: Artifact Validation
+on:
+  workflow_dispatch:
+    inputs:
+      fixture_trace:
+        description: "Run fixture workflow data trace only"
+        required: false
+        default: "false"
+jobs:
+  artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npm install
+      - name: Run fixture workflow trace
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
+        run: npm run workflows:trace -- --workflow artifact-validation.yml
+      - run: npm run validate:all

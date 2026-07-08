@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "4.2.0",
+  "cadence": {
+    "dailyShortAnswers": {
+      "targetPerDay": 5,
+      "autoPublishAllowed": true,
+      "riskLimit": "low"
+    },
+    "weeklyArticles": {
+      "targetPerWeek": 5,
+      "autoPublishAllowed": false,
+      "approvalRequired": true
+    },
+    "monthlyAuthorityPages": {
+      "targetPerMonth": 4,
+      "autoPublishAllowed": false,
+      "approvalRequired": true
+    },
+    "refreshes": {
+      "targetPerWeek": 25,
+      "autoPublishAllowedForMechanical": true,
+      "approvalRequiredForRegulated": true
+    }
+  }
+}

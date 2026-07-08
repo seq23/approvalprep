@@ -1,0 +1,385 @@
+{
+  "schemaVersion": "1.0.0",
+  "validators": [
+    {
+      "id": "repo-structure",
+      "npmScript": "validate:repo",
+      "entrypoint": "scripts/validate/repo-structure.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-ops",
+      "scope": "Required repo files, authority files, and package identity"
+    },
+    {
+      "id": "route-manifest",
+      "npmScript": "validate:routes",
+      "entrypoint": "scripts/validate/route-manifest.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-ops",
+      "scope": "Routes must be admitted and backed by rendering"
+    },
+    {
+      "id": "legal-trust",
+      "npmScript": "validate:legal",
+      "entrypoint": "scripts/validate/legal-trust.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-ops",
+      "scope": "Legal/trust pages and credit disclaimers"
+    },
+    {
+      "id": "plain-language",
+      "npmScript": "validate:plain-language",
+      "entrypoint": "scripts/validate/plain-language.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-ops",
+      "scope": "Downloads and instructions must be clear and boundary-safe"
+    },
+    {
+      "id": "download-safety",
+      "npmScript": "validate:download-safety",
+      "entrypoint": "scripts/validate/download-safety.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-ops",
+      "scope": "Paid downloads must include required sections and safety language"
+    },
+    {
+      "id": "prompt-guardrails",
+      "npmScript": "validate:prompt-guardrails",
+      "entrypoint": "scripts/validate/prompt-guardrails.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-ops",
+      "scope": "Prompt boundaries and no fake docs"
+    },
+    {
+      "id": "atoms",
+      "npmScript": "validate:atoms",
+      "entrypoint": "scripts/validate/atoms.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-ops",
+      "scope": "Atom registry and source/usage mapping"
+    },
+    {
+      "id": "citation-claim-coverage",
+      "npmScript": "validate:citation-claims",
+      "entrypoint": "scripts/validate/citation-claim-coverage.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-ops",
+      "scope": "Factual and regulated claim coverage"
+    },
+    {
+      "id": "external-telemetry-claims",
+      "npmScript": "validate:telemetry-claims",
+      "entrypoint": "scripts/validate/external-telemetry-claims.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-ops",
+      "scope": "No unsupported ranking, indexing, or citation claims"
+    },
+    {
+      "id": "atlas-query-fanout",
+      "npmScript": "validate:atlas",
+      "entrypoint": "scripts/validate/atlas.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-ops",
+      "scope": "Atlas, Query Universe, and fanout admission"
+    },
+    {
+      "id": "seo-surfaces",
+      "npmScript": "validate:seo-surfaces",
+      "entrypoint": "scripts/validate/seo-surfaces.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-ops",
+      "scope": "Sitemap, robots, llms, answers, schema support"
+    },
+    {
+      "id": "admin-manifest",
+      "npmScript": "validate:admin",
+      "entrypoint": "scripts/validate/admin.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-ops",
+      "scope": "Admin manifests and Growth Health panels"
+    },
+    {
+      "id": "payment-download-boundary",
+      "npmScript": "validate:payment-download",
+      "entrypoint": "scripts/validate/payment-download.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-ops",
+      "scope": "Stripe verified downloads and no unverified export"
+    },
+    {
+      "id": "env-vault",
+      "npmScript": "validate:env",
+      "entrypoint": "scripts/env/env-audit.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-ops",
+      "scope": "Env/vault contract and secret exposure rules"
+    },
+    {
+      "id": "security",
+      "npmScript": "validate:security",
+      "entrypoint": "scripts/validate/security.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-ops",
+      "scope": "Secret leakage and unsafe phrases"
+    },
+    {
+      "id": "build",
+      "npmScript": "build",
+      "entrypoint": "astro build",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-ops",
+      "scope": "Production build"
+    },
+    {
+      "id": "artifact-validation",
+      "npmScript": "validate:artifact",
+      "entrypoint": "scripts/validate/artifact-validation.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-ops",
+      "scope": "ZIP root and manifest checks"
+    },
+    {
+      "id": "source-connectors-real",
+      "npmScript": "validate:intelligence-connectors",
+      "entrypoint": "scripts/validate/source-connectors-real.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-growth",
+      "scope": "Free source connectors must be real or honestly report status"
+    },
+    {
+      "id": "no-fake-intelligence-data",
+      "npmScript": "validate:no-fake-intelligence",
+      "entrypoint": "scripts/validate/no-fake-intelligence-data.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-growth",
+      "scope": "No fake ranking/citation/competitor data"
+    },
+    {
+      "id": "intelligence-source-freshness",
+      "npmScript": "validate:intelligence-freshness",
+      "entrypoint": "scripts/validate/intelligence-source-freshness.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-growth",
+      "scope": "Ingestion run statuses must be honest"
+    },
+    {
+      "id": "competitor-crawl-policy",
+      "npmScript": "validate:competitor-crawl",
+      "entrypoint": "scripts/validate/competitor-crawl-policy.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-growth",
+      "scope": "Competitor crawl watchlist and safety rules"
+    },
+    {
+      "id": "serp-import-schema",
+      "npmScript": "validate:serp-import",
+      "entrypoint": "scripts/validate/serp-import-schema.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-growth",
+      "scope": "Manual SERP imports must use parseable schema"
+    },
+    {
+      "id": "backlink-recommendation-honesty",
+      "npmScript": "validate:backlink-honesty",
+      "entrypoint": "scripts/validate/backlink-recommendation-honesty.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-growth",
+      "scope": "Backlink recommendations must not overclaim"
+    },
+    {
+      "id": "content-action-decision",
+      "npmScript": "validate:content-actions",
+      "entrypoint": "scripts/validate/content-action-decision.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-growth",
+      "scope": "Content decisions must separate growth and utility"
+    },
+    {
+      "id": "maintenance-brief-integrity",
+      "npmScript": "validate:maintenance-briefs",
+      "entrypoint": "scripts/validate/maintenance-brief-integrity.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-growth",
+      "scope": "Maintenance briefs must be actionable"
+    },
+    {
+      "id": "citation-opportunity-integrity",
+      "npmScript": "validate:citation-opportunities",
+      "entrypoint": "scripts/validate/citation-opportunity-integrity.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-growth",
+      "scope": "Citation opportunities cannot claim wins without telemetry"
+    },
+    {
+      "id": "workflow-data-trace",
+      "npmScript": "validate:workflow-trace",
+      "entrypoint": "scripts/validate/workflow-data-trace.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-ops",
+      "scope": "GitHub Actions trigger, data, secret, artifact, and fixture/manual-run trace"
+    },
+    {
+      "id": "setup-and-secrets",
+      "npmScript": "validate:setup-secrets",
+      "entrypoint": "scripts/validate/setup-and-secrets.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-ops",
+      "scope": "Secrets/vault/Wrangler deterministic setup"
+    },
+    {
+      "id": "admin-action-links",
+      "npmScript": "validate:admin-action-links",
+      "entrypoint": "scripts/validate/admin-action-links.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-ops",
+      "scope": "Admin GitHub edit/history link integrity"
+    },
+    {
+      "id": "citation-strategy",
+      "npmScript": "validate:citation-strategy",
+      "entrypoint": "scripts/validate/citation-strategy.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-ops",
+      "scope": "Six-month 100K citation target and no-guarantee KPI separation"
+    },
+    {
+      "id": "growth-health",
+      "npmScript": "validate:growth-health",
+      "entrypoint": "scripts/validate/growth-health.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-ops",
+      "scope": "Actionable SEO/AEO/GEO/citation/admin health dashboard data"
+    },
+    {
+      "id": "automation-safety",
+      "npmScript": "validate:automation-safety",
+      "entrypoint": "scripts/validate/automation-safety.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "owner": "approvalprep-ops",
+      "scope": "Hands-off automation allow/approval/block policy"
+    },
+    {
+      "id": "delegated-authority",
+      "command": "validate:delegated-authority",
+      "severity": "hard_fail",
+      "owner": "automation",
+      "fixPath": "repair governance/notification data and rerun validator"
+    },
+    {
+      "id": "self-heal-progressions",
+      "command": "validate:self-heal-progressions",
+      "severity": "hard_fail",
+      "owner": "automation",
+      "fixPath": "repair governance/notification data and rerun validator"
+    },
+    {
+      "id": "owner-exceptions",
+      "command": "validate:owner-exceptions",
+      "severity": "hard_fail",
+      "owner": "automation",
+      "fixPath": "repair governance/notification data and rerun validator"
+    },
+    {
+      "id": "notification-policy",
+      "command": "validate:notification-policy",
+      "severity": "hard_fail",
+      "owner": "automation",
+      "fixPath": "repair governance/notification data and rerun validator"
+    },
+    {
+      "id": "validate:ux-conversion",
+      "script": "validate:ux-conversion",
+      "phase": "v4.2.4",
+      "severity": "hard_fail",
+      "purpose": "Browserless UX, mobile, plain-language, credit-boundary, and conversion validation."
+    },
+    {
+      "id": "validate:public-page-depth",
+      "script": "validate:public-page-depth",
+      "phase": "v4.2.4",
+      "severity": "hard_fail",
+      "purpose": "Browserless UX, mobile, plain-language, credit-boundary, and conversion validation."
+    },
+    {
+      "id": "validate:cta-quality",
+      "script": "validate:cta-quality",
+      "phase": "v4.2.4",
+      "severity": "hard_fail",
+      "purpose": "Browserless UX, mobile, plain-language, credit-boundary, and conversion validation."
+    },
+    {
+      "id": "validate:trust-signals",
+      "script": "validate:trust-signals",
+      "phase": "v4.2.4",
+      "severity": "hard_fail",
+      "purpose": "Browserless UX, mobile, plain-language, credit-boundary, and conversion validation."
+    },
+    {
+      "id": "validate:browserless-accessibility",
+      "script": "validate:browserless-accessibility",
+      "phase": "v4.2.4",
+      "severity": "hard_fail",
+      "purpose": "Browserless UX, mobile, plain-language, credit-boundary, and conversion validation."
+    },
+    {
+      "id": "validate:mobile-ux",
+      "script": "validate:mobile-ux",
+      "phase": "v4.2.4",
+      "severity": "hard_fail",
+      "purpose": "Browserless UX, mobile, plain-language, credit-boundary, and conversion validation."
+    },
+    {
+      "id": "validate:plain-language-grade",
+      "script": "validate:plain-language-grade",
+      "phase": "v4.2.4",
+      "severity": "hard_fail",
+      "purpose": "Browserless UX, mobile, plain-language, credit-boundary, and conversion validation."
+    },
+    {
+      "id": "validate:credit-boundary",
+      "script": "validate:credit-boundary",
+      "phase": "v4.2.4",
+      "severity": "hard_fail",
+      "purpose": "Browserless UX, mobile, plain-language, credit-boundary, and conversion validation."
+    },
+    {
+      "id": "validate:customer-next-steps",
+      "script": "validate:customer-next-steps",
+      "phase": "v4.2.4",
+      "severity": "hard_fail",
+      "purpose": "Browserless UX, mobile, plain-language, credit-boundary, and conversion validation."
+    }
+  ],
+  "lastUpdatedFor": "v4.2.4"
+}

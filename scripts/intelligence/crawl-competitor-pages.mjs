@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+
+import {readJson,writeJson,appendRun,now} from "./_lib.mjs";
+const connectorId="competitor_public_crawler"; const watch=readJson("data/intelligence/competitor_watchlist.json",{competitors:[]}).competitors.filter(c=>c.allowed); const snapshots=[];
+for(const c of watch){ try{ const res=await fetch(c.baseUrl,{headers:{"User-Agent":"ApprovalPrepBot/1.0 public research; contact hello@approvalprep.com"}}); const html=await res.text(); snapshots.push({competitorId:c.id,url:c.baseUrl,status:res.status,title:(html.match(/<title[^>]*>(.*?)<\/title>/is)?.[1]||"").trim().slice(0,160),h1Count:(html.match(/<h1/gi)||[]).length,h2Count:(html.match(/<h2/gi)||[]).length,tableCount:(html.match(/<table/gi)||[]).length,listCount:(html.match(/<(ul|ol)/gi)||[]).length,faqHint:/faq|frequently asked/i.test(html),capturedAt:now()}); }catch(e){ snapshots.push({competitorId:c.id,url:c.baseUrl,status:"SOURCE_ERROR",error:e.message,capturedAt:now()}); } }
+writeJson("data/intelligence/competitor_page_snapshots.json",{schemaVersion:"4.1.0",snapshots}); appendRun(connectorId,snapshots.length?"COMPLETE":"NO_DATA",{recordsImported:snapshots.length}); console.log(JSON.stringify({connectorId,status:snapshots.length?"COMPLETE":"NO_DATA",recordsImported:snapshots.length},null,2));

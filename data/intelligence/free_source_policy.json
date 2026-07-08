@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "4.1.0",
+  "allowedFreeSources": [
+    "owned Google Search Console data",
+    "owned Google URL Inspection data",
+    "owned Bing Webmaster data",
+    "IndexNow receipts",
+    "ApprovalPrep sitemap and public pages",
+    "approved competitor public pages and sitemaps",
+    "manual SERP CSV imports",
+    "manual social/community signal imports with privacy stripping",
+    "official public sources"
+  ],
+  "privacyRules": [
+    "Do not expose usernames, private posts, screenshots, or personal data from social/community sources.",
+    "Treat social/community imports as language, objection, and FAQ signals only.",
+    "Never use social/community posts as factual authority."
+  ],
+  "crawlRules": [
+    "Respect robots.txt when fetchable.",
+    "Do not bypass blocks, logins, paywalls, or anti-bot systems.",
+    "Throttle through workflow scheduling, not rapid loops.",
+    "Only crawl URLs in the competitor watchlist or route manifests."
+  ],
+  "honestyRules": [
+    "No ranking win may be claimed without telemetry.",
+    "No citation win may be claimed without telemetry.",
+    "No backlink requirement may be stated as fact without link/authority evidence. Use PAID_BACKLINK_DATA_NEEDED when evidence is insufficient."
+  ]
+}

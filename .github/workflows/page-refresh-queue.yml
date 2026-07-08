@@ -1,0 +1,52 @@
+name: Intelligence - Page Refresh Queue
+on:
+  workflow_dispatch:
+    inputs:
+      fixture_trace:
+        description: "Run fixture workflow data trace only"
+        required: false
+        default: "false"
+  schedule:
+    - cron: "9 11 * * 1"
+permissions:
+  contents: write
+jobs:
+  queue:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - name: Apply delegated authority
+        run: npm run governance:apply-authority -- --mode=${{ env.RUN_MODE || 'dry_run' }}
+      - name: Attempt self-heal
+        run: npm run automation:self-heal-attempt -- --mode=${{ env.RUN_MODE || 'dry_run' }}
+      - name: Revalidate after self-heal
+        run: npm run automation:self-heal-revalidate
+      - name: Build owner exception index
+        run: npm run admin:build-owner-exceptions
+      - name: Build notification queue
+        run: npm run notifications:build-queue -- --mode=${{ env.RUN_MODE || 'dry_run' }}
+      - name: Validate delegated authority and notifications
+        run: |
+          npm run validate:delegated-authority
+          npm run validate:self-heal-progressions
+          npm run validate:owner-exceptions
+          npm run validate:notification-policy
+      - name: Run fixture workflow trace
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
+        run: npm run workflows:trace -- --workflow page-refresh-queue.yml
+      - run: npm run intelligence:growth-maintenance
+      - run: npm run validate:maintenance-briefs
+      - name: Commit refresh queue
+        run: |
+          git config user.name "approvalprep-bot"
+          git config user.email "hello@approvalprep.com"
+          git add data/intelligence/page_refresh_queue.json data/intelligence/growth_maintenance_briefs.json
+          git diff --cached --quiet || git commit -m "Update page refresh queue"
+          git push
+
+      - name: Validate automation safety
+        run: npm run validate:automation-safety

@@ -1,0 +1,8 @@
+---
+const { items = [] } = Astro.props;
+---
+<section class="section-block">
+  <p class="eyebrow">Use cases</p>
+  <h2>When this can help</h2>
+  <div class="grid">{items.map((item) => <article class="card"><p>{item}</p></article>)}</div>
+</section>

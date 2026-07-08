@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "repo": "approvalprep",
+  "policy": {
+    "master_passphrase": "blackgirlmagic",
+    "repo_owned_secret_value": "blackgirlmagic",
+    "vendor_secrets_required": true
+  },
+  "app": {
+    "ADMIN_GATE_PASSWORD": "blackgirlmagic",
+    "APP_SESSION_SECRET": "blackgirlmagic",
+    "DOWNLOAD_SIGNING_SECRET": "blackgirlmagic"
+  },
+  "cloudflare": {
+    "CLOUDFLARE_ACCOUNT_ID": "replace_with_cloudflare_value",
+    "CLOUDFLARE_API_TOKEN": "replace_with_cloudflare_value",
+    "CLOUDFLARE_PAGES_PROJECT": "approvalprep",
+    "CLOUDFLARE_D1_DATABASE_NAME": "approvalprep-db",
+    "CLOUDFLARE_KV_NAMESPACE_TITLE": "approvalprep-downloads",
+    "CLOUDFLARE_R2_BUCKET_NAME": "approvalprep-download-assets"
+  },
+  "stripe": {
+    "STRIPE_SECRET_KEY": "replace_with_stripe_value",
+    "STRIPE_WEBHOOK_SECRET": "replace_with_stripe_value",
+    "STRIPE_PRICE_ID_DEFAULT": "replace_with_stripe_price_id"
+  },
+  "resend": {
+    "RESEND_API_KEY": "replace_with_resend_value",
+    "APP_FROM_EMAIL": "replace_with_sender_email"
+  },
+  "runtime": {
+    "POSTDEPLOY_BASE_URL": "https://approvalprep.pages.dev"
+  }
+}

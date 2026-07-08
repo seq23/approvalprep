@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "4.2.4",
+  "generatedAt": "2026-07-08T13:55:58.483637Z",
+  "baseArtifact": "approvalprep_BASELINE_07-07-26_873941f6fcd5.zip",
+  "status": "PASS_LOCAL_CONTAINER_VALIDATION",
+  "checks": [
+    "npm install --ignore-scripts",
+    "npm run validate:all",
+    "npm run build",
+    "npm run workflows:trace",
+    "browserless UX reports",
+    "mockup PNG generation"
+  ],
+  "unproven": [
+    "Cloudflare deployment",
+    "GitHub-hosted Actions runtime",
+    "live Stripe",
+    "live Resend",
+    "live GSC/Bing/IndexNow",
+    "real conversion lift",
+    "real citation wins"
+  ]
+}

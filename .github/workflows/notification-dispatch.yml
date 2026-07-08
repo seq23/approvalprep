@@ -1,0 +1,46 @@
+name: Notification Dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      fixture_trace:
+        description: "Run fixture workflow data trace only"
+        required: false
+        default: "true"
+      mode:
+        description: "fixture, dry_run, or live"
+        required: false
+        default: "dry_run"
+  schedule:
+    - cron: "29 14 * * 5"
+permissions:
+  contents: write
+  issues: write
+jobs:
+  notification-dispatch:
+    runs-on: ubuntu-latest
+    env:
+      RUN_MODE: ${{ github.event.inputs.mode || 'dry_run' }}
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - name: Run fixture workflow trace
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
+        run: npm run workflows:trace -- --workflow notification-dispatch.yml
+      - name: Build notification queue
+        run: npm run notifications:build-queue -- --mode=$RUN_MODE
+      - name: Validate notification policy
+        run: npm run validate:notification-policy
+      - name: Dispatch notifications
+        run: npm run notifications:send -- --mode=$RUN_MODE
+      - name: Commit notification log
+        if: ${{ env.RUN_MODE == 'live' }}
+        run: |
+          git config user.name "approvalprep-notification-bot"
+          git config user.email "hello@approvalprep.com"
+          git add data/notifications data/admin/owner_exception_registry.json data/automation/final_block_log.json
+          git diff --cached --quiet || git commit -m "Update notification dispatch log"
+          git push

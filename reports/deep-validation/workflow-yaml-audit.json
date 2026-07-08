@@ -1,0 +1,307 @@
+{
+  "status": "PASS",
+  "workflowCount": 15,
+  "missingScripts": [],
+  "results": [
+    {
+      "workflow": "admin-manifest-check.yml",
+      "on": [
+        "workflow_dispatch",
+        "pull_request"
+      ],
+      "jobs": [
+        "admin"
+      ],
+      "npmScripts": [
+        "admin:build-index",
+        "validate:admin",
+        "validate:admin-action-links",
+        "workflows:trace"
+      ],
+      "missingScripts": []
+    },
+    {
+      "workflow": "artifact-validation.yml",
+      "on": [
+        "workflow_dispatch"
+      ],
+      "jobs": [
+        "artifact"
+      ],
+      "npmScripts": [
+        "validate:all",
+        "workflows:trace"
+      ],
+      "missingScripts": []
+    },
+    {
+      "workflow": "competitor-watch-refresh.yml",
+      "on": [
+        "workflow_dispatch",
+        "schedule"
+      ],
+      "jobs": [
+        "competitors"
+      ],
+      "npmScripts": [
+        "intelligence:crawl-competitors",
+        "intelligence:discover-competitors",
+        "validate:competitor-crawl",
+        "workflows:trace"
+      ],
+      "missingScripts": []
+    },
+    {
+      "workflow": "content-opportunity-analysis.yml",
+      "on": [
+        "workflow_dispatch",
+        "schedule"
+      ],
+      "jobs": [
+        "analyze"
+      ],
+      "npmScripts": [
+        "intelligence:content-opportunities",
+        "intelligence:recommend-page-actions",
+        "validate:citation-opportunities",
+        "validate:content-actions",
+        "workflows:trace"
+      ],
+      "missingScripts": []
+    },
+    {
+      "workflow": "growth-health-refresh.yml",
+      "on": [
+        "workflow_dispatch",
+        "schedule"
+      ],
+      "jobs": [
+        "growth"
+      ],
+      "npmScripts": [
+        "health:build-growth",
+        "validate:growth-health",
+        "validate:seo-surfaces",
+        "workflows:trace"
+      ],
+      "missingScripts": []
+    },
+    {
+      "workflow": "growth-maintenance-analysis.yml",
+      "on": [
+        "workflow_dispatch",
+        "schedule"
+      ],
+      "jobs": [
+        "maintenance"
+      ],
+      "npmScripts": [
+        "admin:build-owner-exceptions",
+        "automation:self-heal-attempt",
+        "automation:self-heal-revalidate",
+        "governance:apply-authority",
+        "intelligence:authority",
+        "intelligence:growth-brief",
+        "intelligence:growth-maintenance",
+        "notifications:build-queue",
+        "validate:backlink-honesty",
+        "validate:delegated-authority",
+        "validate:maintenance-briefs",
+        "validate:notification-policy",
+        "validate:owner-exceptions",
+        "validate:self-heal-progressions",
+        "workflows:trace"
+      ],
+      "missingScripts": []
+    },
+    {
+      "workflow": "indexing-submit.yml",
+      "on": [
+        "workflow_dispatch"
+      ],
+      "jobs": [
+        "indexing"
+      ],
+      "npmScripts": [
+        "seo:bing",
+        "seo:gsc",
+        "seo:indexnow",
+        "workflows:trace"
+      ],
+      "missingScripts": []
+    },
+    {
+      "workflow": "intelligence-ingest-free-sources.yml",
+      "on": [
+        "workflow_dispatch",
+        "schedule"
+      ],
+      "jobs": [
+        "ingest"
+      ],
+      "npmScripts": [
+        "intelligence:free-ingest",
+        "validate:all",
+        "workflows:trace"
+      ],
+      "missingScripts": []
+    },
+    {
+      "workflow": "notification-dispatch.yml",
+      "on": [
+        "workflow_dispatch",
+        "schedule"
+      ],
+      "jobs": [
+        "notification-dispatch"
+      ],
+      "npmScripts": [
+        "notifications:build-queue",
+        "notifications:send",
+        "validate:notification-policy",
+        "workflows:trace"
+      ],
+      "missingScripts": []
+    },
+    {
+      "workflow": "page-refresh-queue.yml",
+      "on": [
+        "workflow_dispatch",
+        "schedule"
+      ],
+      "jobs": [
+        "queue"
+      ],
+      "npmScripts": [
+        "admin:build-owner-exceptions",
+        "automation:self-heal-attempt",
+        "automation:self-heal-revalidate",
+        "governance:apply-authority",
+        "intelligence:growth-maintenance",
+        "notifications:build-queue",
+        "validate:automation-safety",
+        "validate:delegated-authority",
+        "validate:maintenance-briefs",
+        "validate:notification-policy",
+        "validate:owner-exceptions",
+        "validate:self-heal-progressions",
+        "workflows:trace"
+      ],
+      "missingScripts": []
+    },
+    {
+      "workflow": "release-report.yml",
+      "on": [
+        "workflow_dispatch"
+      ],
+      "jobs": [
+        "report"
+      ],
+      "npmScripts": [
+        "workflows:trace"
+      ],
+      "missingScripts": []
+    },
+    {
+      "workflow": "scheduled-content-release.yml",
+      "on": [
+        "schedule",
+        "workflow_dispatch"
+      ],
+      "jobs": [
+        "release"
+      ],
+      "npmScripts": [
+        "admin:build-owner-exceptions",
+        "automation:safe",
+        "automation:self-heal-attempt",
+        "automation:self-heal-revalidate",
+        "content:release",
+        "governance:apply-authority",
+        "notifications:build-queue",
+        "validate:automation-safety",
+        "validate:delegated-authority",
+        "validate:notification-policy",
+        "validate:owner-exceptions",
+        "validate:self-heal-progressions",
+        "workflows:trace"
+      ],
+      "missingScripts": []
+    },
+    {
+      "workflow": "setup-and-secret-audit.yml",
+      "on": [
+        "workflow_dispatch"
+      ],
+      "jobs": [
+        "setup-and-secret-audit"
+      ],
+      "npmScripts": [
+        "secrets:audit",
+        "setup:doctor",
+        "validate:setup-secrets",
+        "workflows:trace"
+      ],
+      "missingScripts": []
+    },
+    {
+      "workflow": "validate.yml",
+      "on": [
+        "workflow_dispatch",
+        "pull_request",
+        "push"
+      ],
+      "jobs": [
+        "validate"
+      ],
+      "npmScripts": [
+        "build",
+        "validate:admin-action-links",
+        "validate:all",
+        "validate:automation-safety",
+        "validate:citation-strategy",
+        "validate:delegated-authority",
+        "validate:growth-health",
+        "validate:notification-policy",
+        "validate:owner-exceptions",
+        "validate:self-heal-progressions",
+        "validate:setup-secrets",
+        "workflows:trace"
+      ],
+      "missingScripts": []
+    },
+    {
+      "workflow": "weekly-growth-ops.yml",
+      "on": [
+        "schedule",
+        "workflow_dispatch"
+      ],
+      "jobs": [
+        "weekly-growth-ops"
+      ],
+      "npmScripts": [
+        "admin:build-index",
+        "admin:build-owner-exceptions",
+        "automation:safe",
+        "automation:self-heal-attempt",
+        "automation:self-heal-revalidate",
+        "governance:apply-authority",
+        "health:build-growth",
+        "intelligence:analyze",
+        "intelligence:free-ingest",
+        "notifications:build-queue",
+        "strategy:update-citations",
+        "validate:admin-action-links",
+        "validate:automation-safety",
+        "validate:citation-strategy",
+        "validate:delegated-authority",
+        "validate:growth-health",
+        "validate:notification-policy",
+        "validate:owner-exceptions",
+        "validate:self-heal-progressions",
+        "workflows:trace"
+      ],
+      "missingScripts": []
+    }
+  ]
+}

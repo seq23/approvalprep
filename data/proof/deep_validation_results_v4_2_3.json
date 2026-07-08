@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "4.2.3-deep-validation",
+  "generatedAt": "2026-07-08T13:24:42.398441Z",
+  "sourceZip": "approvalprep_BASELINE_07-07-26_81298514cfd3.zip",
+  "status": "PASS_WITH_PATCH",
+  "patchesApplied": [
+    "Admin dashboard labels normalized to explicit Needs Owner / Approved by Contract / Final Blocks text for browserless UX validation."
+  ],
+  "dependencyInstall": "PASS npm install --ignore-scripts",
+  "npmAudit": "PASS 0 vulnerabilities",
+  "astroBuild": "PASS 38 static pages",
+  "validateAll": "PASS",
+  "isolatedValidators": "PASS all validate:* scripts",
+  "workflowTrace": "PASS 15 workflows traced with fixture proof boundaries",
+  "workflowCommandIsolation": "PASS all npm scripts referenced by workflow traces executed in fixture mode or honest no-credential mode",
+  "browserlessUi": "PASS 38 built pages inspected; admin exception cockpit labels/links present; no fake approve/publish buttons",
+  "functionsFixture": "PASS Cloudflare Pages Functions exercised with credential-missing/error fixture paths",
+  "routeParity": "PASS built dist route inspection complete",
+  "notProven": [
+    "GitHub-hosted Actions runtime",
+    "Cloudflare deployment",
+    "live Wrangler/GitHub CLI secret push",
+    "live Stripe checkout/payment verification",
+    "live Resend delivery",
+    "live GSC/Bing/IndexNow telemetry",
+    "real citation wins"
+  ]
+}

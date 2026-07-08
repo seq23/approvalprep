@@ -1,0 +1,7 @@
+---
+import { productCards } from "../data/content";
+import ProductValueCard from "./ProductValueCard.astro";
+---
+<div class="grid product-grid">
+  {productCards.map((product) => <ProductValueCard product={product} />)}
+</div>

@@ -1,0 +1,29 @@
+name: Growth Health Refresh
+on:
+  workflow_dispatch:
+    inputs:
+      fixture_trace:
+        description: "Run fixture workflow data trace only"
+        required: false
+        default: "false"
+  schedule:
+    - cron: "33 11 * * 1"
+jobs:
+  growth:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npm install
+      - name: Run fixture workflow trace
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
+        run: |
+          npm run ux:browserless-report
+          npm run workflows:trace -- --workflow growth-health-refresh.yml
+      - run: npm run validate:seo-surfaces
+
+      - name: Build growth health snapshot
+        run: npm run health:build-growth
+      - name: Validate growth health
+        run: npm run validate:growth-health

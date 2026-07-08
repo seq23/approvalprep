@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProductGrid from "../components/ProductGrid.astro";
+import BoundaryNotice from "../components/BoundaryNotice.astro";
+import TrustBar from "../components/TrustBar.astro";
+import HowItWorks from "../components/HowItWorks.astro";
+import OutcomeCTA from "../components/OutcomeCTA.astro";
+import UseCaseList from "../components/UseCaseList.astro";
+import WhatYouGet from "../components/WhatYouGet.astro";
+import FinalCTA from "../components/FinalCTA.astro";
+import CreditBoundaryExplainer from "../components/CreditBoundaryExplainer.astro";
+import NextStepsExplainer from "../components/NextStepsExplainer.astro";
+import { trustSignals, howItWorks, whyApprovalPrep } from "../data/content";
+---
+<BaseLayout title="ApprovalPrep - Self-Service Approval Prep" description="Prepare truthful letters, checklists, and application packets before you apply.">
+  <section class="hero shell">
+    <p class="eyebrow">Self-service approval prep</p>
+    <h1>Get your letters and documents ready before you apply.</h1>
+    <p class="lead">ApprovalPrep helps you prepare truthful letters, checklists, and document packets. We do not repair credit for you or contact anyone for you. You stay in control.</p>
+    <p class="supporting-copy">Apply with a cleaner packet, stronger letters, and fewer missing documents.</p>
+    <OutcomeCTA primary="Start my letter" secondary="Build my packet" href="/letter-of-explanation" secondaryHref="/apartment-application" />
+    <TrustBar signals={trustSignals} />
+  </section>
+  <section class="band"><div class="shell"><HowItWorks steps={howItWorks} /></div></section>
+  <section class="band"><div class="shell"><h2>Products</h2><ProductGrid /></div></section>
+  <section class="band"><div class="shell"><UseCaseList items={["You want to explain a credit, income, rental, or work issue.", "You want your packet ready before someone asks for more papers.", "You want a simple tool that does not save your documents."]} /></div></section>
+  <section class="band"><div class="shell"><WhatYouGet title="Why ApprovalPrep" items={whyApprovalPrep} /></div></section>
+  <section class="band"><div class="shell"><NextStepsExplainer /></div></section>
+  <section class="band"><div class="shell"><CreditBoundaryExplainer /></div></section>
+  <section class="band"><div class="shell"><BoundaryNotice /></div></section>
+  <FinalCTA primary="Start my letter" secondary="Build my packet" href="/letter-of-explanation" secondaryHref="/apartment-application" />
+</BaseLayout>

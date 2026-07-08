@@ -1,0 +1,34 @@
+name: Intelligence - Competitor Watch Refresh
+on:
+  workflow_dispatch:
+    inputs:
+      fixture_trace:
+        description: "Run fixture workflow data trace only"
+        required: false
+        default: "false"
+  schedule:
+    - cron: "31 7 * * 3"
+permissions:
+  contents: write
+jobs:
+  competitors:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - name: Run fixture workflow trace
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
+        run: npm run workflows:trace -- --workflow competitor-watch-refresh.yml
+      - run: npm run intelligence:discover-competitors
+      - run: npm run intelligence:crawl-competitors
+      - run: npm run validate:competitor-crawl
+      - name: Commit competitor intelligence
+        run: |
+          git config user.name "approvalprep-bot"
+          git config user.email "hello@approvalprep.com"
+          git add data/intelligence/competitor_*.json data/intelligence/ingestion_runs.json
+          git diff --cached --quiet || git commit -m "Refresh competitor intelligence"
+          git push

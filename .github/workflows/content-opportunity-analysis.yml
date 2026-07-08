@@ -1,0 +1,35 @@
+name: Intelligence - Content Opportunity Analysis
+on:
+  workflow_dispatch:
+    inputs:
+      fixture_trace:
+        description: "Run fixture workflow data trace only"
+        required: false
+        default: "false"
+  schedule:
+    - cron: "27 9 * * 1-5"
+permissions:
+  contents: write
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - name: Run fixture workflow trace
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
+        run: npm run workflows:trace -- --workflow content-opportunity-analysis.yml
+      - run: npm run intelligence:content-opportunities
+      - run: npm run intelligence:recommend-page-actions
+      - run: npm run validate:content-actions
+      - run: npm run validate:citation-opportunities
+      - name: Commit opportunity briefs
+        run: |
+          git config user.name "approvalprep-bot"
+          git config user.email "hello@approvalprep.com"
+          git add data/intelligence/content_opportunity_briefs.json data/intelligence/citation_opportunity_registry.json
+          git diff --cached --quiet || git commit -m "Update content opportunity intelligence"
+          git push

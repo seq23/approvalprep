@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "4.2.2",
+  "runModes": [
+    "fixture",
+    "dry_run",
+    "live"
+  ],
+  "autoSafe": [
+    "add_missing_canonical",
+    "add_sitemap_entry",
+    "refresh_sitemap",
+    "refresh_llms_txt",
+    "refresh_answers_index",
+    "add_internal_link_suggestion",
+    "add_atom_usage_mapping",
+    "add_noindex_to_shadow_page",
+    "repair_metadata_length_warning",
+    "write_indexnow_submission_record",
+    "update_fixture_trace"
+  ],
+  "approvalRequired": [
+    "new_indexable_page",
+    "regulated_credit_content",
+    "legal_or_financial_disclaimer_change",
+    "refund_policy_change",
+    "terms_privacy_security_change",
+    "payment_flow_change",
+    "download_template_change",
+    "prompt_guardrail_change",
+    "claim_source_change",
+    "content_with_compliance_risk_above_low",
+    "pricing_change"
+  ],
+  "blocked": [
+    "guarantee_approval",
+    "guarantee_credit_score_increase",
+    "claim_credit_repair_service",
+    "claim_we_contact_bureaus",
+    "create_fake_paystub",
+    "create_fake_employment_verification",
+    "remove_accurate_negative_items",
+    "publish_without_source_for_regulated_claim",
+    "publish_duplicate_thin_fanout",
+    "claim_citation_win_without_evidence"
+  ],
+  "autopublishPolicy": {
+    "allowedFor": [
+      "autoSafe",
+      "approved_low_risk",
+      "approved_by_contract",
+      "self_healed_by_contract"
+    ],
+    "forbiddenFor": [
+      "approvalRequired",
+      "blocked",
+      "regulated_without_approval",
+      "owner_exception",
+      "final_blocked_after_self_heal"
+    ]
+  },
+  "delegatedStatuses": [
+    "approved_by_contract",
+    "self_healed_by_contract",
+    "blocked_by_contract",
+    "owner_exception",
+    "final_blocked_after_self_heal"
+  ],
+  "decisionOrder": [
+    "absolute_forbidden_convert_to_safe_alternative_or_block",
+    "owner_level_exception",
+    "repairable_attempt_self_heal",
+    "revalidate_after_self_heal",
+    "approved_by_contract_execute",
+    "final_block_if_no_safe_repair"
+  ],
+  "selfHealBeforeFinalBlock": true
+}

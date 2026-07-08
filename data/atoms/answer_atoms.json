@@ -1,0 +1,113 @@
+{
+  "atoms": [
+    {
+      "atom_id": "atom_credit_boundary",
+      "atom_type": "boundary",
+      "title": "Self-service credit boundary",
+      "text": "We do not fix your credit for you. We do not contact credit bureaus, landlords, lenders, employers, or creditors for you. We give you self-service tools, letters, checklists, and step-by-step instructions so you can prepare and send your own paperwork.",
+      "source_basis": "owner policy and credit repair legal boundary",
+      "claim_ids": [
+        "claim_self_service_boundary",
+        "claim_not_credit_repair_company"
+      ],
+      "uniqueness_key": "credit-boundary-v4",
+      "route_owner": "/credit-repair-disclaimer",
+      "reuse_policy": "repeat on all credit pages",
+      "allowed_page_families": [
+        "credit_self_service",
+        "legal_trust"
+      ],
+      "forbidden_contexts": [
+        "credit_repair_service_claim"
+      ],
+      "last_reviewed_at": "2026-07-07"
+    },
+    {
+      "atom_id": "atom_dispute_steps",
+      "atom_type": "step",
+      "title": "Credit dispute steps",
+      "text": "Step 1: Review your credit report. Step 2: Mark possible errors. Step 3: Add proof. Step 4: Send your own dispute. Step 5: Save copies.",
+      "source_basis": "FTC and CFPB consumer guidance",
+      "claim_ids": [
+        "claim_consumer_dispute_right"
+      ],
+      "uniqueness_key": "credit-dispute-steps-v4",
+      "route_owner": "/credit-dispute-letter",
+      "reuse_policy": "credit pages only",
+      "allowed_page_families": [
+        "credit_self_service"
+      ],
+      "forbidden_contexts": [
+        "guaranteed_deletion"
+      ],
+      "last_reviewed_at": "2026-07-07"
+    },
+    {
+      "atom_id": "atom_no_fake_docs",
+      "atom_type": "boundary",
+      "title": "No fake documents",
+      "text": "ApprovalPrep helps you organize real facts. It does not create fake paystubs, fake employment, fake income, or fake offer letters.",
+      "source_basis": "owner product policy",
+      "claim_ids": [
+        "claim_no_fake_docs"
+      ],
+      "uniqueness_key": "no-fake-docs-v4",
+      "route_owner": "/employment-verification-letter",
+      "reuse_policy": "all document pages",
+      "allowed_page_families": [
+        "letter_studio",
+        "apartment_rental",
+        "auto",
+        "business",
+        "mortgage"
+      ],
+      "forbidden_contexts": [
+        "fake_documents"
+      ],
+      "last_reviewed_at": "2026-07-07"
+    },
+    {
+      "atom_id": "atom_no_guarantee",
+      "atom_type": "boundary",
+      "title": "No approval guarantee",
+      "text": "A better packet can make your information clearer. It does not guarantee approval.",
+      "source_basis": "owner product policy",
+      "claim_ids": [
+        "claim_no_approval_guarantee"
+      ],
+      "uniqueness_key": "no-guarantee-v4",
+      "route_owner": "/disclaimer",
+      "reuse_policy": "all pages and downloads",
+      "allowed_page_families": [
+        "letter_studio",
+        "apartment_rental",
+        "auto",
+        "business",
+        "mortgage",
+        "life_admin",
+        "moving",
+        "legal_trust"
+      ],
+      "forbidden_contexts": [
+        "guaranteed_approval"
+      ],
+      "last_reviewed_at": "2026-07-07"
+    },
+    {
+      "atom_id": "atom_letter_definition",
+      "atom_type": "definition",
+      "title": "Letter of explanation definition",
+      "text": "A letter of explanation is a short note that explains a gap, issue, or context in plain words.",
+      "source_basis": "ApprovalPrep editorial standard",
+      "claim_ids": [],
+      "uniqueness_key": "loe-definition-v4",
+      "route_owner": "/letter-of-explanation",
+      "reuse_policy": "letter pages",
+      "allowed_page_families": [
+        "letter_studio"
+      ],
+      "forbidden_contexts": [],
+      "last_reviewed_at": "2026-07-07"
+    }
+  ]
+}

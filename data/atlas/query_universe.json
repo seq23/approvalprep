@@ -1,0 +1,378 @@
+{
+  "queries": [
+    {
+      "query_id": "q_loe",
+      "query_text": "letter of explanation",
+      "query_normalized": "letter of explanation",
+      "source_platform": "manual_owner_note",
+      "source_type": "approved_plan_v4",
+      "intent_class": "generator",
+      "funnel_stage": "consideration",
+      "entity_ids": [
+        "approvalprep"
+      ],
+      "pillar_id": "letter_studio",
+      "cluster_id": "letter_studio",
+      "page_family_id": "letter_studio",
+      "route_owner": "/letter-of-explanation",
+      "atom_ids": [
+        "atom_no_fake_docs",
+        "atom_no_guarantee",
+        "atom_letter_definition"
+      ],
+      "claim_ids": [],
+      "source_ids": [],
+      "risk_level": "medium",
+      "privacy_class": "public_query",
+      "allowed_use": "query_language",
+      "status": "ADMITTED_INDEXABLE",
+      "reviewed_by": "owner_approved_plan_v4",
+      "reviewed_at": "2026-07-07"
+    },
+    {
+      "query_id": "q_credit_loe",
+      "query_text": "letter of explanation for credit issues",
+      "query_normalized": "letter of explanation for credit issues",
+      "source_platform": "manual_owner_note",
+      "source_type": "approved_plan_v4",
+      "intent_class": "scenario",
+      "funnel_stage": "consideration",
+      "entity_ids": [
+        "approvalprep"
+      ],
+      "pillar_id": "letter_studio",
+      "cluster_id": "letter_studio",
+      "page_family_id": "letter_studio",
+      "route_owner": "/letter-of-explanation/credit",
+      "atom_ids": [
+        "atom_no_fake_docs",
+        "atom_no_guarantee",
+        "atom_letter_definition"
+      ],
+      "claim_ids": [],
+      "source_ids": [],
+      "risk_level": "regulated",
+      "privacy_class": "public_query",
+      "allowed_use": "query_language",
+      "status": "ADMITTED_INDEXABLE",
+      "reviewed_by": "owner_approved_plan_v4",
+      "reviewed_at": "2026-07-07"
+    },
+    {
+      "query_id": "q_eviction_loe",
+      "query_text": "letter of explanation for eviction",
+      "query_normalized": "letter of explanation for eviction",
+      "source_platform": "manual_owner_note",
+      "source_type": "approved_plan_v4",
+      "intent_class": "scenario",
+      "funnel_stage": "consideration",
+      "entity_ids": [
+        "approvalprep"
+      ],
+      "pillar_id": "letter_studio",
+      "cluster_id": "letter_studio",
+      "page_family_id": "letter_studio",
+      "route_owner": "/letter-of-explanation/eviction",
+      "atom_ids": [
+        "atom_no_fake_docs",
+        "atom_no_guarantee",
+        "atom_letter_definition"
+      ],
+      "claim_ids": [],
+      "source_ids": [],
+      "risk_level": "medium",
+      "privacy_class": "public_query",
+      "allowed_use": "query_language",
+      "status": "ADMITTED_INDEXABLE",
+      "reviewed_by": "owner_approved_plan_v4",
+      "reviewed_at": "2026-07-07"
+    },
+    {
+      "query_id": "q_employment_verification",
+      "query_text": "employment verification letter",
+      "query_normalized": "employment verification letter",
+      "source_platform": "manual_owner_note",
+      "source_type": "approved_plan_v4",
+      "intent_class": "template",
+      "funnel_stage": "consideration",
+      "entity_ids": [
+        "approvalprep"
+      ],
+      "pillar_id": "letter_studio",
+      "cluster_id": "letter_studio",
+      "page_family_id": "letter_studio",
+      "route_owner": "/employment-verification-letter",
+      "atom_ids": [
+        "atom_no_fake_docs",
+        "atom_no_guarantee",
+        "atom_letter_definition"
+      ],
+      "claim_ids": [
+        "claim_no_fake_docs"
+      ],
+      "source_ids": [],
+      "risk_level": "high",
+      "privacy_class": "public_query",
+      "allowed_use": "query_language",
+      "status": "ADMITTED_INDEXABLE",
+      "reviewed_by": "owner_approved_plan_v4",
+      "reviewed_at": "2026-07-07"
+    },
+    {
+      "query_id": "q_proof_income",
+      "query_text": "proof of income letter",
+      "query_normalized": "proof of income letter",
+      "source_platform": "manual_owner_note",
+      "source_type": "approved_plan_v4",
+      "intent_class": "template",
+      "funnel_stage": "consideration",
+      "entity_ids": [
+        "approvalprep"
+      ],
+      "pillar_id": "letter_studio",
+      "cluster_id": "letter_studio",
+      "page_family_id": "letter_studio",
+      "route_owner": "/proof-of-income-letter",
+      "atom_ids": [
+        "atom_no_fake_docs",
+        "atom_no_guarantee",
+        "atom_letter_definition"
+      ],
+      "claim_ids": [],
+      "source_ids": [],
+      "risk_level": "medium",
+      "privacy_class": "public_query",
+      "allowed_use": "query_language",
+      "status": "ADMITTED_INDEXABLE",
+      "reviewed_by": "owner_approved_plan_v4",
+      "reviewed_at": "2026-07-07"
+    },
+    {
+      "query_id": "q_credit_dispute",
+      "query_text": "DIY credit dispute letter",
+      "query_normalized": "diy credit dispute letter",
+      "source_platform": "manual_owner_note",
+      "source_type": "approved_plan_v4",
+      "intent_class": "self_service",
+      "funnel_stage": "consideration",
+      "entity_ids": [
+        "approvalprep"
+      ],
+      "pillar_id": "credit_self_service",
+      "cluster_id": "credit_self_service",
+      "page_family_id": "credit_self_service",
+      "route_owner": "/credit-dispute-letter",
+      "atom_ids": [
+        "atom_credit_boundary",
+        "atom_dispute_steps"
+      ],
+      "claim_ids": [
+        "claim_consumer_dispute_right"
+      ],
+      "source_ids": [],
+      "risk_level": "regulated",
+      "privacy_class": "public_query",
+      "allowed_use": "query_language",
+      "status": "ADMITTED_INDEXABLE",
+      "reviewed_by": "owner_approved_plan_v4",
+      "reviewed_at": "2026-07-07"
+    },
+    {
+      "query_id": "q_not_credit_repair",
+      "query_text": "not a credit repair company",
+      "query_normalized": "not a credit repair company",
+      "source_platform": "manual_owner_note",
+      "source_type": "approved_plan_v4",
+      "intent_class": "boundary",
+      "funnel_stage": "consideration",
+      "entity_ids": [
+        "approvalprep"
+      ],
+      "pillar_id": "credit_self_service",
+      "cluster_id": "credit_self_service",
+      "page_family_id": "credit_self_service",
+      "route_owner": "/not-a-credit-repair-company",
+      "atom_ids": [
+        "atom_credit_boundary",
+        "atom_dispute_steps"
+      ],
+      "claim_ids": [
+        "claim_not_credit_repair_company"
+      ],
+      "source_ids": [],
+      "risk_level": "regulated",
+      "privacy_class": "public_query",
+      "allowed_use": "query_language",
+      "status": "ADMITTED_INDEXABLE",
+      "reviewed_by": "owner_approved_plan_v4",
+      "reviewed_at": "2026-07-07"
+    },
+    {
+      "query_id": "q_apartment_application",
+      "query_text": "apartment application checklist",
+      "query_normalized": "apartment application checklist",
+      "source_platform": "manual_owner_note",
+      "source_type": "approved_plan_v4",
+      "intent_class": "kit",
+      "funnel_stage": "consideration",
+      "entity_ids": [
+        "approvalprep"
+      ],
+      "pillar_id": "apartment_rental",
+      "cluster_id": "apartment_rental",
+      "page_family_id": "apartment_rental",
+      "route_owner": "/apartment-application",
+      "atom_ids": [
+        "atom_no_fake_docs",
+        "atom_no_guarantee"
+      ],
+      "claim_ids": [],
+      "source_ids": [],
+      "risk_level": "medium",
+      "privacy_class": "public_query",
+      "allowed_use": "query_language",
+      "status": "ADMITTED_INDEXABLE",
+      "reviewed_by": "owner_approved_plan_v4",
+      "reviewed_at": "2026-07-07"
+    },
+    {
+      "query_id": "q_rental_checklist",
+      "query_text": "rental application checklist",
+      "query_normalized": "rental application checklist",
+      "source_platform": "manual_owner_note",
+      "source_type": "approved_plan_v4",
+      "intent_class": "checklist",
+      "funnel_stage": "consideration",
+      "entity_ids": [
+        "approvalprep"
+      ],
+      "pillar_id": "apartment_rental",
+      "cluster_id": "apartment_rental",
+      "page_family_id": "apartment_rental",
+      "route_owner": "/rental-application-checklist",
+      "atom_ids": [
+        "atom_no_fake_docs",
+        "atom_no_guarantee"
+      ],
+      "claim_ids": [],
+      "source_ids": [],
+      "risk_level": "medium",
+      "privacy_class": "public_query",
+      "allowed_use": "query_language",
+      "status": "ADMITTED_INDEXABLE",
+      "reviewed_by": "owner_approved_plan_v4",
+      "reviewed_at": "2026-07-07"
+    },
+    {
+      "query_id": "q_auto_docs",
+      "query_text": "documents needed for car loan",
+      "query_normalized": "documents needed for car loan",
+      "source_platform": "manual_owner_note",
+      "source_type": "approved_plan_v4",
+      "intent_class": "checklist",
+      "funnel_stage": "consideration",
+      "entity_ids": [
+        "approvalprep"
+      ],
+      "pillar_id": "auto",
+      "cluster_id": "auto",
+      "page_family_id": "auto",
+      "route_owner": "/documents-needed-for-car-loan",
+      "atom_ids": [
+        "atom_no_fake_docs",
+        "atom_no_guarantee"
+      ],
+      "claim_ids": [],
+      "source_ids": [],
+      "risk_level": "medium",
+      "privacy_class": "public_query",
+      "allowed_use": "query_language",
+      "status": "ADMITTED_INDEXABLE",
+      "reviewed_by": "owner_approved_plan_v4",
+      "reviewed_at": "2026-07-07"
+    },
+    {
+      "query_id": "q_sba_checklist",
+      "query_text": "sba loan checklist",
+      "query_normalized": "sba loan checklist",
+      "source_platform": "manual_owner_note",
+      "source_type": "approved_plan_v4",
+      "intent_class": "checklist",
+      "funnel_stage": "consideration",
+      "entity_ids": [
+        "approvalprep"
+      ],
+      "pillar_id": "business",
+      "cluster_id": "business",
+      "page_family_id": "business",
+      "route_owner": "/sba-loan-checklist",
+      "atom_ids": [
+        "atom_no_fake_docs",
+        "atom_no_guarantee"
+      ],
+      "claim_ids": [],
+      "source_ids": [],
+      "risk_level": "medium",
+      "privacy_class": "public_query",
+      "allowed_use": "query_language",
+      "status": "ADMITTED_INDEXABLE",
+      "reviewed_by": "owner_approved_plan_v4",
+      "reviewed_at": "2026-07-07"
+    },
+    {
+      "query_id": "q_mortgage_docs",
+      "query_text": "mortgage document checklist",
+      "query_normalized": "mortgage document checklist",
+      "source_platform": "manual_owner_note",
+      "source_type": "approved_plan_v4",
+      "intent_class": "checklist",
+      "funnel_stage": "consideration",
+      "entity_ids": [
+        "approvalprep"
+      ],
+      "pillar_id": "mortgage",
+      "cluster_id": "mortgage",
+      "page_family_id": "mortgage",
+      "route_owner": "/mortgage-document-checklist",
+      "atom_ids": [
+        "atom_no_fake_docs",
+        "atom_no_guarantee"
+      ],
+      "claim_ids": [],
+      "source_ids": [],
+      "risk_level": "medium",
+      "privacy_class": "public_query",
+      "allowed_use": "query_language",
+      "status": "ADMITTED_INDEXABLE",
+      "reviewed_by": "owner_approved_plan_v4",
+      "reviewed_at": "2026-07-07"
+    },
+    {
+      "query_id": "q_important_docs",
+      "query_text": "important documents checklist",
+      "query_normalized": "important documents checklist",
+      "source_platform": "manual_owner_note",
+      "source_type": "approved_plan_v4",
+      "intent_class": "checklist",
+      "funnel_stage": "consideration",
+      "entity_ids": [
+        "approvalprep"
+      ],
+      "pillar_id": "life_admin",
+      "cluster_id": "life_admin",
+      "page_family_id": "life_admin",
+      "route_owner": "/important-documents-checklist",
+      "atom_ids": [
+        "atom_no_guarantee"
+      ],
+      "claim_ids": [],
+      "source_ids": [],
+      "risk_level": "low",
+      "privacy_class": "public_query",
+      "allowed_use": "query_language",
+      "status": "ADMITTED_INDEXABLE",
+      "reviewed_by": "owner_approved_plan_v4",
+      "reviewed_at": "2026-07-07"
+    }
+  ]
+}

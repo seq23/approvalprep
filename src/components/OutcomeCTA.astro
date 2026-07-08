@@ -1,0 +1,11 @@
+---
+const { primary = "Start my letter", secondary = "Build my packet", href = "/pricing", secondaryHref = "/apartment-application", primarySku = "" } = Astro.props;
+---
+<div class="hero-actions">
+  {primarySku ? (
+    <button class="button primary-button checkout-button" type="button" data-sku={primarySku}>{primary}</button>
+  ) : (
+    <a class="button primary-button" href={href}>{primary}</a>
+  )}
+  {secondary && <a class="button secondary secondary-button" href={secondaryHref}>{secondary}</a>}
+</div>

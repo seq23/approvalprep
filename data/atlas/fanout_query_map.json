@@ -1,0 +1,37 @@
+{
+  "rules": [
+    {
+      "rule": "No thin fanout",
+      "severity": "HARD_FAIL"
+    },
+    {
+      "rule": "No keyword-swapped duplicates",
+      "severity": "HARD_FAIL"
+    },
+    {
+      "rule": "Every child query needs unique intent",
+      "severity": "HARD_FAIL"
+    },
+    {
+      "rule": "Every regulated page needs source/disclaimer mapping",
+      "severity": "HARD_FAIL"
+    }
+  ],
+  "parent_queries": [
+    {
+      "parent_id": "q_loe",
+      "children": [
+        "q_credit_loe",
+        "q_eviction_loe"
+      ],
+      "status": "admitted_unique_intent"
+    },
+    {
+      "parent_id": "q_credit_dispute",
+      "children": [
+        "q_not_credit_repair"
+      ],
+      "status": "admitted_boundary_support"
+    }
+  ]
+}

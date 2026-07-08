@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "4.2.2",
+  "name": "ApprovalPrep Delegated Authority Contract",
+  "defaultRule": "Do not ask Sequoia for routine approval. Decide by contract, self-heal repairable issues, block forbidden issues, and escalate owner-level exceptions only.",
+  "statuses": [
+    "approved_by_contract",
+    "self_healed_by_contract",
+    "blocked_by_contract",
+    "owner_exception",
+    "final_blocked_after_self_heal",
+    "approval_required_by_law_or_account"
+  ],
+  "autoApprovedActions": [
+    "routine_low_risk_content_publish",
+    "seo_metadata_update",
+    "aeo_answer_block_update",
+    "geo_entity_clarity_update",
+    "sitemap_refresh",
+    "llms_txt_refresh",
+    "answers_index_refresh",
+    "glossary_entry",
+    "faq_addition",
+    "table_or_list_addition",
+    "checklist_addition",
+    "internal_link_update",
+    "competitor_gap_low_risk_fix",
+    "utility_page_low_risk",
+    "source_backed_non_regulated_claim",
+    "plain_language_repair"
+  ],
+  "selfHealAllowed": [
+    "unsafe_credit_repair_language",
+    "missing_credit_disclaimer",
+    "missing_source_mapping_non_regulated",
+    "missing_plain_language_steps",
+    "thin_page_should_merge",
+    "duplicate_fanout_should_merge",
+    "missing_schema",
+    "missing_internal_links",
+    "fake_document_request_safe_alternative",
+    "claim_citation_win_without_evidence_rewrite"
+  ],
+  "ownerExceptions": [
+    "domain_transfer",
+    "delete_production_repo",
+    "delete_production_deployment",
+    "material_refund_policy_change",
+    "material_terms_privacy_security_change",
+    "change_credit_repair_stance",
+    "stripe_price_outside_approved_range",
+    "new_subscription_model",
+    "new_user_accounts",
+    "store_customer_documents",
+    "paid_ad_spend",
+    "regulator_or_lawsuit_response",
+    "compromised_secret_rotation"
+  ],
+  "absoluteForbidden": [
+    "create_fake_paystub",
+    "create_fake_employment_verification",
+    "create_fake_income_document",
+    "guarantee_approval",
+    "guarantee_credit_score_increase",
+    "claim_credit_repair_service",
+    "claim_we_contact_bureaus",
+    "claim_we_dispute_for_you",
+    "remove_accurate_negative_items",
+    "claim_citation_win_without_evidence",
+    "publish_fixture_data_as_real",
+    "expose_secret"
+  ],
+  "safeRewrites": {
+    "claim_credit_repair_service": "We help you prepare your own self-service paperwork. We do not fix credit for you.",
+    "claim_we_contact_bureaus": "You prepare and send your own paperwork. ApprovalPrep does not contact bureaus or creditors for you.",
+    "create_fake_paystub": "Use truthful proof-of-income documents and an income explanation letter. ApprovalPrep does not create fake income documents.",
+    "create_fake_employment_verification": "Use a truthful employment verification request letter or employer-provided verification. ApprovalPrep does not create fake employment documents.",
+    "guarantee_approval": "ApprovalPrep helps you prepare. It does not guarantee approval."
+  },
+  "pricingAuthority": {
+    "singleLetterRange": [
+      29,
+      39
+    ],
+    "defaultSingleLetter": 39,
+    "letterStudioBundle": 79,
+    "apartmentKitRange": [
+      99,
+      149
+    ],
+    "defaultApartmentKit": 129
+  },
+  "citationAuthority": {
+    "target": 100000,
+    "timeframeMonths": 6,
+    "guaranteed": false,
+    "winsRequireTelemetry": true
+  },
+  "plainLanguageStandard": {
+    "target": "6th grade American consumer average",
+    "legalMax": "8th grade when accuracy requires it"
+  },
+  "ctaAuthority": {
+    "rule": "Every useful page may include honest, relevant CTAs. Noindex controls search exposure, not conversion.",
+    "blocked": [
+      "approval guarantees",
+      "credit repair promises",
+      "fake urgency",
+      "unrelated CTAs"
+    ]
+  }
+}

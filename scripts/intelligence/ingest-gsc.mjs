@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+
+import {env,fetchJson,writeJson,appendRun,statusOnly,now} from "./_lib.mjs";
+const connectorId="google_search_console_search_analytics";
+const site=env("GOOGLE_SEARCH_CONSOLE_SITE_URL"); const token=env("GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN");
+if(!site||!token) statusOnly(connectorId,"NOT_CONFIGURED","GOOGLE_SEARCH_CONSOLE_SITE_URL and GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN are required.");
+else { try{ const end=new Date(); const start=new Date(Date.now()-28*86400000); const body={startDate:start.toISOString().slice(0,10),endDate:end.toISOString().slice(0,10),dimensions:["query","page"],rowLimit:25000}; const url=`https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(site)}/searchAnalytics/query`; const data=await fetchJson(url,{method:"POST",headers:{Authorization:`Bearer ${token}`,"Content-Type":"application/json"},body:JSON.stringify(body)}); const rows=(data.rows||[]).map(r=>({query:r.keys?.[0]||"",page:r.keys?.[1]||"",clicks:r.clicks||0,impressions:r.impressions||0,ctr:r.ctr||0,position:r.position||0,importedAt:now()})); writeJson("data/intelligence/gsc_search_analytics.json",{schemaVersion:"4.1.0",source:"google_search_console_search_analytics",rows}); appendRun(connectorId,rows.length?"COMPLETE":"NO_DATA",{recordsImported:rows.length}); console.log(JSON.stringify({connectorId,status:rows.length?"COMPLETE":"NO_DATA",recordsImported:rows.length},null,2)); }catch(e){appendRun(connectorId,"SOURCE_ERROR",{reason:e.message,recordsImported:0}); throw e;} }

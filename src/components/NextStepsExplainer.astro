@@ -1,0 +1,8 @@
+---
+import { customerNextSteps } from "../data/content";
+---
+<section class="section-block">
+  <p class="eyebrow">What happens next</p>
+  <h2>You begin here. You finish the next steps.</h2>
+  <ol class="next-steps">{customerNextSteps.map((step) => <li>{step}</li>)}</ol>
+</section>

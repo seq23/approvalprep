@@ -1,0 +1,6 @@
+#!/usr/bin/env node
+
+import {env,readJson,fetchJson,writeJson,appendRun,statusOnly,now} from "./_lib.mjs";
+const connectorId="indexnow"; const key=env("INDEXNOW_KEY"); const host=env("APPROVALPREP_SITE_URL");
+if(!key||!host) statusOnly(connectorId,"NOT_CONFIGURED","INDEXNOW_KEY and APPROVALPREP_SITE_URL are required.");
+else { const base=host.replace(/^https?:\/\//,"").replace(/\/$/,""); const routes=readJson("data/routes/route_manifest.json",{routes:[]}).routes.filter(r=>r.index!==false).slice(0,10000); const urlList=routes.map(r=>`https://${base}${r.path==="/"?"":r.path}`); try{ const body={host:base,key,keyLocation:`https://${base}/${key}.txt`,urlList}; const receipt=await fetchJson("https://api.indexnow.org/indexnow",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).catch(async e=>({accepted:false,error:e.message})); const rows={submittedAt:now(),urlCount:urlList.length,receipt}; writeJson("data/intelligence/indexnow_intelligence_receipts.json",{schemaVersion:"4.1.0",receipts:[rows]}); appendRun(connectorId,urlList.length?"COMPLETE":"NO_DATA",{recordsImported:urlList.length}); console.log(JSON.stringify({connectorId,status:urlList.length?"COMPLETE":"NO_DATA",recordsImported:urlList.length},null,2)); }catch(e){appendRun(connectorId,"SOURCE_ERROR",{reason:e.message,recordsImported:0}); throw e;} }

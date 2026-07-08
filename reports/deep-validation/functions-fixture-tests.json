@@ -1,0 +1,45 @@
+{
+  "status": "PASS",
+  "tests": [
+    {
+      "file": "functions/api/create-checkout-session.js",
+      "status": 501,
+      "body": {
+        "status": "NOT_CONFIGURED",
+        "message": "Stripe secret is missing. Checkout cannot start.",
+        "sku": "letter-of-explanation"
+      }
+    },
+    {
+      "file": "functions/api/create-checkout-session.js",
+      "status": 400,
+      "body": {
+        "error": "Unknown SKU"
+      }
+    },
+    {
+      "file": "functions/api/verify-download.js",
+      "status": 501,
+      "body": {
+        "status": "NOT_CONFIGURED",
+        "message": "Stripe secret is missing. Download cannot be verified until Stripe payment is verified.",
+        "sku": "letter-of-explanation"
+      }
+    },
+    {
+      "file": "functions/api/resend-download-email.js",
+      "status": 400,
+      "body": {
+        "error": "Valid email is required."
+      }
+    },
+    {
+      "file": "functions/api/resend-download-email.js",
+      "status": 501,
+      "body": {
+        "status": "NOT_CONFIGURED",
+        "message": "Resend API key is missing."
+      }
+    }
+  ]
+}

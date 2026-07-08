@@ -1,0 +1,19 @@
+---
+const { product } = Astro.props;
+---
+<article class={`card product-card ${product.sku === "complete-approvalprep-bundle" ? "featured-product" : ""}`} id={product.sku}>
+  {product.image && <img class="product-image" src={product.image} alt={`${product.name} product image`} loading="lazy" width="900" height="900" />}
+  <span class="badge">{product.badge}</span>
+  <h3>{product.name}</h3>
+  <p>{product.customer_situation}</p>
+  <p><strong>What you get:</strong> {product.outcome}</p>
+  <ul>{(product.includes || []).slice(0,4).map((item) => <li>{item}</li>)}</ul>
+  <p class="price">{product.priceLabel}</p>
+  {product.stripe_enabled ? (
+    <button class="button primary-button checkout-button" type="button" data-sku={product.sku}>{product.cta_label}</button>
+  ) : (
+    <a class="button primary-button" href={product.download ? `/download?sku=${product.sku}` : "/pricing"}>{product.cta_label}</a>
+  )}
+  <p class="fine checkout-status" aria-live="polite"></p>
+  <p class="fine">{product.risk_note}</p>
+</article>

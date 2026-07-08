@@ -1,0 +1,111 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProductGrid from "../components/ProductGrid.astro";
+import BoundaryNotice from "../components/BoundaryNotice.astro";
+import TrustBar from "../components/TrustBar.astro";
+import HowItWorks from "../components/HowItWorks.astro";
+import OutcomeCTA from "../components/OutcomeCTA.astro";
+import UseCaseList from "../components/UseCaseList.astro";
+import WhatYouGet from "../components/WhatYouGet.astro";
+import FAQBlock from "../components/FAQBlock.astro";
+import FinalCTA from "../components/FinalCTA.astro";
+import CreditBoundaryExplainer from "../components/CreditBoundaryExplainer.astro";
+import NextStepsExplainer from "../components/NextStepsExplainer.astro";
+import manifest from "../../data/routes/route_manifest.json";
+import { routeCopy, boundary } from "../data/content";
+
+export function getStaticPaths() {
+  return manifest.routes
+    .filter((route) => route.path !== "/" && route.type !== "admin")
+    .map((route) => ({ params: { slug: route.path.slice(1) }, props: { route } }));
+}
+
+const { route } = Astro.props;
+const copy = routeCopy[route.path] || {
+  heading: route.title,
+  lead: "Use this page to understand what to prepare, what to send, and what ApprovalPrep does not do.",
+  shortAnswer: "ApprovalPrep gives you a plain next step. You stay in control.",
+  primaryCta: route.primary_cta || "Start my letter",
+  secondaryCta: route.secondary_cta || "Build my packet",
+  whoFor: ["People who want to prepare before they apply."],
+  value: ["Plain-language guidance."],
+  whatYouGet: ["Simple next steps."],
+  useCases: ["You need a clearer packet."],
+  steps: ["Read the page.", "Use only true facts.", "Review before sending."],
+  faq: [{ question: "Does ApprovalPrep do this for me?", answer: "No. ApprovalPrep is self-service. You send your own documents." }],
+  trustSignals: ["No account required", "No saved customer documents", "Self-service only", "Plain-language guidance"]
+};
+const canonical = "https://approvalprep.com" + route.path;
+const isCredit = route.family === "credit_self_service" || route.risk === "regulated" || route.path.includes("credit");
+const isPricing = route.path === "/pricing";
+const isDownload = route.path === "/download" || route.path === "/checkout/success";
+const isGlossary = route.path === "/glossary";
+const isMethodology = route.path === "/methodology";
+const skuForRoute = (() => {
+  const path = route.path;
+  if (path.includes("business") || path.includes("sba")) return "business-funding-prep-kit";
+  if (path.includes("apartment") || path.includes("rental") || path.includes("approved-for-an-apartment")) return "rental-application-kit";
+  if (path.includes("credit")) return "credit-letter-kit";
+  if (path.includes("employment") || path.includes("income")) return "income-employment-letter-kit";
+  if (path.includes("auto-loan") || path.includes("car-loan") || path.includes("mortgage") || path.includes("loan")) return "loan-prep-letter-kit";
+  if (path.includes("moving") || path.includes("important-documents")) return "life-admin-letter-kit";
+  if (path.includes("complete-approvalprep-bundle")) return "complete-approvalprep-bundle";
+  return "letter-of-explanation";
+})();
+const ctaHref = route.cta_policy === "purchase" ? `/pricing#${skuForRoute}` : (route.path.includes("apartment") || route.path.includes("rental") ? "/apartment-application" : "/letter-of-explanation");
+const primarySku = route.cta_policy === "purchase" ? skuForRoute : "";
+---
+<BaseLayout title={`${route.title} - ApprovalPrep`} description={copy.lead} canonical={canonical} noindex={!route.index}>
+  <section class="hero shell">
+    <p class="eyebrow">{route.family.replaceAll("_", " ")}</p>
+    <h1>{copy.heading}</h1>
+    <p class="lead">{copy.lead}</p>
+    <OutcomeCTA primary={copy.primaryCta} secondary={copy.secondaryCta} href={ctaHref} secondaryHref="/pricing" primarySku={primarySku} />
+    <TrustBar signals={copy.trustSignals} />
+    {isCredit && <CreditBoundaryExplainer />}
+    {isDownload && (
+      <div class="notice">
+        <strong>Verified download flow:</strong>
+        <p>Production downloads require Stripe payment verification before the PDF and editable DOCX files are released.</p>
+      </div>
+      <div class="card download-panel" data-download-panel>
+        <h2>Download status</h2>
+        <p class="fine" data-download-status>Waiting for Stripe verification. If you just paid, this should update automatically.</p>
+        <div class="download-links" data-download-links></div>
+      </div>
+    )}
+  </section>
+  {isPricing ? (
+    <section class="band"><div class="shell"><h2>V1 pricing</h2><ProductGrid /></div></section>
+  ) : isGlossary ? (
+    <section class="band"><div class="shell grid">
+      <article class="card"><h2>Letter of explanation</h2><p>A short note that explains a gap, issue, or context in plain words.</p></article>
+      <article class="card"><h2>Self-service credit tools</h2><p>Tools that help you prepare your own paperwork. They do not fix credit for you.</p></article>
+      <article class="card"><h2>Ready-to-Apply Kit</h2><p>A packet with letters, checklists, and next steps for an application.</p></article>
+    </div></section>
+  ) : isMethodology ? (
+    <section class="band"><div class="shell">
+      <h2>ApprovalPrep framework</h2>
+      <ol><li>Clarify the request.</li><li>Gather real documents.</li><li>Write a plain explanation.</li><li>Review for truth and safety.</li><li>Send the packet yourself.</li></ol>
+      <p>{boundary}</p>
+    </div></section>
+  ) : (
+    <>
+      <section class="band"><div class="shell"><article class="short-answer card"><p class="eyebrow">Short answer</p><p>{copy.shortAnswer}</p></article></div></section>
+      <section class="band"><div class="shell"><WhatYouGet title="Who this is for" items={copy.whoFor} /></div></section>
+      <section class="band"><div class="shell"><WhatYouGet title="Product / Guide Value" items={copy.value} /></div></section>
+      <section class="band"><div class="shell"><WhatYouGet title="What you get" items={copy.whatYouGet} /></div></section>
+      <section class="band"><div class="shell"><HowItWorks steps={copy.steps} /></div></section>
+      <section class="band"><div class="shell"><UseCaseList items={copy.useCases} /></div></section>
+      <section class="band"><div class="shell"><FAQBlock faq={copy.faq} /></div></section>
+      <section class="band"><div class="shell two"><div><h2>What this does not do</h2><p>It does not guarantee approval. It does not create fake documents. It does not contact anyone for you. It does not give legal or financial advice. It does not repair credit for you.</p></div><BoundaryNotice /></div></section>
+      <section class="band"><div class="shell"><NextStepsExplainer /></div></section>
+      <section class="band"><div class="shell"><WhatYouGet title="Why ApprovalPrep" items={["Plain steps", "Truthful templates only", "Clear next steps", "No fake document help"]} /></div></section>
+    </>
+  )}
+  <FinalCTA primary={copy.primaryCta} secondary={copy.secondaryCta} href={ctaHref} secondaryHref="/pricing" primarySku={primarySku} />
+  <section class="band"><div class="shell">
+    <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: copy.faq.map((item) => ({ "@type": "Question", name: item.question, acceptedAnswer: { "@type": "Answer", text: item.answer } })) })}></script>
+    <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@type": "HowTo", name: route.title, step: copy.steps.map((step, index) => ({ "@type": "HowToStep", position: index + 1, text: step })) })}></script>
+  </div></section>
+</BaseLayout>

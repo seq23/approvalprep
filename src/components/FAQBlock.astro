@@ -1,0 +1,8 @@
+---
+const { faq = [] } = Astro.props;
+---
+<section class="section-block">
+  <p class="eyebrow">Questions</p>
+  <h2>Before you buy</h2>
+  <div class="grid">{faq.map((item) => <article class="card"><h3>{item.question}</h3><p>{item.answer}</p></article>)}</div>
+</section>

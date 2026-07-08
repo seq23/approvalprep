@@ -1,0 +1,55 @@
+name: Scheduled Content Release
+on:
+  schedule:
+    - cron: "17 10 * * *"
+  workflow_dispatch:
+    inputs:
+      fixture_trace:
+        description: "Run fixture workflow data trace only"
+        required: false
+        default: "false"
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - name: Apply delegated authority
+        run: npm run governance:apply-authority -- --mode=${{ env.RUN_MODE || 'dry_run' }}
+      - name: Attempt self-heal
+        run: npm run automation:self-heal-attempt -- --mode=${{ env.RUN_MODE || 'dry_run' }}
+      - name: Revalidate after self-heal
+        run: npm run automation:self-heal-revalidate
+      - name: Build owner exception index
+        run: npm run admin:build-owner-exceptions
+      - name: Build notification queue
+        run: npm run notifications:build-queue -- --mode=${{ env.RUN_MODE || 'dry_run' }}
+      - name: Validate delegated authority and notifications
+        run: |
+          npm run validate:delegated-authority
+          npm run validate:self-heal-progressions
+          npm run validate:owner-exceptions
+          npm run validate:notification-policy
+      - name: Run fixture workflow trace
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
+        run: |
+          npm run ux:browserless-report
+          npm run workflows:trace -- --workflow scheduled-content-release.yml
+      - run: npm run content:release
+      - run: |
+          git config user.name "approvalprep-content-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data
+          if [ -d reports ]; then git add reports; fi
+          git diff --cached --quiet || git commit -m "chore(content): scheduled content release"
+          git push
+
+      - name: Run safe automation boundary
+        run: npm run automation:safe -- --mode=dry_run
+      - name: Validate automation safety
+        run: npm run validate:automation-safety

@@ -1,0 +1,10 @@
+---
+const { steps = [] } = Astro.props;
+---
+<section class="section-block">
+  <p class="eyebrow">How it works</p>
+  <h2>Simple steps. You stay in control.</h2>
+  <div class="steps-grid">
+    {steps.map((step, index) => <article class="card step-card"><span class="step-number">{index + 1}</span><p>{step}</p></article>)}
+  </div>
+</section>

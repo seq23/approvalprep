@@ -1,0 +1,42 @@
+name: Intelligence - Ingest Free Sources
+on:
+  workflow_dispatch:
+    inputs:
+      fixture_trace:
+        description: "Run fixture workflow data trace only"
+        required: false
+        default: "false"
+  schedule:
+    - cron: "17 8 * * *"
+permissions:
+  contents: write
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - name: Run fixture workflow trace
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
+        run: npm run workflows:trace -- --workflow intelligence-ingest-free-sources.yml
+      - name: Run free source ingestion
+        run: npm run intelligence:free-ingest
+        env:
+          APPROVALPREP_SITE_URL: ${{ secrets.APPROVALPREP_SITE_URL }}
+          GOOGLE_SEARCH_CONSOLE_SITE_URL: ${{ secrets.GOOGLE_SEARCH_CONSOLE_SITE_URL }}
+          GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN: ${{ secrets.GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN }}
+          BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}
+          BING_WEBMASTER_API_URL: ${{ secrets.BING_WEBMASTER_API_URL }}
+          SERP_IMPORT_CSV: data/imports/serp.csv
+          SOCIAL_SIGNAL_IMPORT_JSON: data/imports/social-signals.json
+      - run: npm run validate:all
+      - name: Commit intelligence data
+        run: |
+          git config user.name "approvalprep-bot"
+          git config user.email "hello@approvalprep.com"
+          git add data/intelligence
+          git diff --cached --quiet || git commit -m "Refresh free intelligence sources"
+          git push

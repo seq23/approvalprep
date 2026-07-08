@@ -1,0 +1,232 @@
+{
+  "routes": [
+    {
+      "route": "/",
+      "family": "brand_home",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "low"
+    },
+    {
+      "route": "/pricing",
+      "family": "pricing",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "low"
+    },
+    {
+      "route": "/letter-of-explanation",
+      "family": "letter_studio",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium"
+    },
+    {
+      "route": "/letter-of-explanation/credit",
+      "family": "letter_studio",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "regulated"
+    },
+    {
+      "route": "/letter-of-explanation/eviction",
+      "family": "letter_studio",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium"
+    },
+    {
+      "route": "/letter-of-explanation/income",
+      "family": "letter_studio",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium"
+    },
+    {
+      "route": "/letter-of-explanation/employment-gap",
+      "family": "letter_studio",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium"
+    },
+    {
+      "route": "/employment-verification-letter",
+      "family": "letter_studio",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "high"
+    },
+    {
+      "route": "/proof-of-income-letter",
+      "family": "letter_studio",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium"
+    },
+    {
+      "route": "/credit-dispute-letter",
+      "family": "credit_self_service",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "regulated"
+    },
+    {
+      "route": "/apartment-application",
+      "family": "apartment_rental",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium"
+    },
+    {
+      "route": "/rental-application-checklist",
+      "family": "apartment_rental",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium"
+    },
+    {
+      "route": "/how-to-get-approved-for-an-apartment",
+      "family": "apartment_rental",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium"
+    },
+    {
+      "route": "/auto-loan-documents",
+      "family": "auto",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium"
+    },
+    {
+      "route": "/car-loan-checklist",
+      "family": "auto",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium"
+    },
+    {
+      "route": "/documents-needed-for-car-loan",
+      "family": "auto",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium"
+    },
+    {
+      "route": "/sba-loan-checklist",
+      "family": "business",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium"
+    },
+    {
+      "route": "/business-loan-documents",
+      "family": "business",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium"
+    },
+    {
+      "route": "/mortgage-checklist",
+      "family": "mortgage",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium"
+    },
+    {
+      "route": "/mortgage-document-checklist",
+      "family": "mortgage",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium"
+    },
+    {
+      "route": "/important-documents-checklist",
+      "family": "life_admin",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "low"
+    },
+    {
+      "route": "/moving-checklist",
+      "family": "moving",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "low"
+    },
+    {
+      "route": "/glossary",
+      "family": "geo_surface",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "low"
+    },
+    {
+      "route": "/methodology",
+      "family": "geo_surface",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "low"
+    },
+    {
+      "route": "/checkout/success",
+      "family": "checkout",
+      "status": "ADMITTED_NOINDEX",
+      "risk": "medium"
+    },
+    {
+      "route": "/download",
+      "family": "download",
+      "status": "ADMITTED_NOINDEX",
+      "risk": "medium"
+    },
+    {
+      "route": "/privacy",
+      "family": "legal_trust",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "low"
+    },
+    {
+      "route": "/terms",
+      "family": "legal_trust",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "low"
+    },
+    {
+      "route": "/disclaimer",
+      "family": "legal_trust",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "regulated"
+    },
+    {
+      "route": "/refund-policy",
+      "family": "legal_trust",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "low"
+    },
+    {
+      "route": "/security",
+      "family": "legal_trust",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "low"
+    },
+    {
+      "route": "/accessibility",
+      "family": "legal_trust",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "low"
+    },
+    {
+      "route": "/contact",
+      "family": "legal_trust",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "low"
+    },
+    {
+      "route": "/editorial-policy",
+      "family": "legal_trust",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "low"
+    },
+    {
+      "route": "/ai-use-policy",
+      "family": "legal_trust",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium"
+    },
+    {
+      "route": "/credit-repair-disclaimer",
+      "family": "credit_self_service",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "regulated"
+    },
+    {
+      "route": "/not-a-credit-repair-company",
+      "family": "credit_self_service",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "regulated"
+    },
+    {
+      "route": "/admin",
+      "family": "admin",
+      "status": "ADMITTED_NOINDEX",
+      "risk": "medium"
+    }
+  ]
+}

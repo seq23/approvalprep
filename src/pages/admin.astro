@@ -1,0 +1,68 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+<BaseLayout title="Runtime Product Admin - ApprovalPrep" description="ApprovalPrep product administration dashboard." noindex={true}>
+  <section class="hero shell admin-hero">
+    <p class="eyebrow">Runtime Product Admin</p>
+    <h1>ApprovalPrep product dashboard</h1>
+    <p class="lead">Manage live, hidden, revoked, draft, and archived products. Upload images and paid downloads. Create Stripe products/prices from backend functions only.</p>
+  </section>
+
+  <section class="band"><div class="shell">
+    <div id="loginPanel" class="card admin-card">
+      <h2>Admin password</h2>
+      <p>This screen uses one simple password for the operator. Product mutations are still handled by server-side Cloudflare Functions.</p>
+      <input id="adminPassword" type="password" placeholder="Admin password" />
+      <button id="loginButton" class="button primary">Unlock admin</button>
+      <p id="loginStatus" class="small"></p>
+    </div>
+
+    <div id="adminApp" hidden>
+      <div class="admin-actions">
+        <button class="button" id="refreshProducts">Refresh products</button>
+        <button class="button" id="exportRegistry">Export registry JSON</button>
+      </div>
+      <div class="grid">
+        <article class="card"><h3>Live</h3><p id="countLive">0</p></article>
+        <article class="card"><h3>Draft</h3><p id="countDraft">0</p></article>
+        <article class="card"><h3>Revoked</h3><p id="countRevoked">0</p></article>
+      </div>
+      <h2>Add product</h2>
+      <form id="createProduct" class="admin-form">
+        <input name="name" placeholder="Product name" required />
+        <input name="price" type="number" min="1" step="0.01" placeholder="Price in dollars" required />
+        <input name="shortDescription" placeholder="Short description" />
+        <textarea name="longDescription" placeholder="Full description"></textarea>
+        <button class="button primary">Create draft product</button>
+      </form>
+
+      <h2>Products</h2>
+      <div id="productTable" class="admin-table"></div>
+
+      <h2>Upload asset</h2>
+      <form id="uploadAsset" class="admin-form">
+        <input name="productId" placeholder="Product slug or ID" required />
+        <select name="assetType"><option value="image">Image</option><option value="pdf">PDF</option><option value="docx">DOCX</option></select>
+        <input name="file" type="file" required />
+        <button class="button primary">Upload asset</button>
+      </form>
+      <pre id="adminOutput" class="admin-output"></pre>
+    </div>
+  </div></section>
+
+  <script>
+    const state = { token: sessionStorage.getItem('ap_admin_token') || '', products: [] };
+    const $ = (id) => document.getElementById(id);
+    function headers(){ return { 'content-type':'application/json', 'x-admin-token': state.token }; }
+    function print(data){ $('adminOutput').textContent = typeof data === 'string' ? data : JSON.stringify(data,null,2); }
+    async function login(){ const password=$('adminPassword').value; const res=await fetch('/api/admin/login',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({password})}); const data=await res.json(); if(!data.ok){ $('loginStatus').textContent=data.error||'Login failed'; return; } state.token=data.token; sessionStorage.setItem('ap_admin_token',state.token); $('loginPanel').hidden=true; $('adminApp').hidden=false; await loadProducts(); }
+    async function loadProducts(){ const res=await fetch('/api/admin/products',{headers:{'x-admin-token':state.token}}); const data=await res.json(); if(!data.ok){ print(data); return; } state.products=data.products||[]; renderProducts(); }
+    function count(status){ return state.products.filter(p=>p.status===status).length; }
+    function renderProducts(){ $('countLive').textContent=count('live'); $('countDraft').textContent=count('draft'); $('countRevoked').textContent=count('revoked'); const rows=state.products.map(p=>`<tr><td><strong>${p.name}</strong><br><small>${p.slug||p.id}</small></td><td>${p.status}</td><td>$${((p.price_cents??p.priceCents??0)/100).toFixed(2)}</td><td>${p.stripe_live_price_id||p.stripeLivePriceId||''}</td><td><button data-action="publish" data-id="${p.id}">Publish</button><button data-action="hide" data-id="${p.id}">Hide</button><button data-action="revoke" data-id="${p.id}">Revoke</button><button data-action="restore" data-id="${p.id}">Restore</button><button data-action="archive" data-id="${p.id}">Archive</button></td></tr>`).join(''); $('productTable').innerHTML=`<table><thead><tr><th>Product</th><th>Status</th><th>Price</th><th>Live price</th><th>Actions</th></tr></thead><tbody>${rows}</tbody></table>`; document.querySelectorAll('[data-action]').forEach(btn=>btn.addEventListener('click',()=>mutate(btn.dataset.action,btn.dataset.id))); }
+    async function mutate(action,id){ const body={id}; if(action==='revoke') body.reason=prompt('Reason for revocation')||'Admin revoked checkout'; const res=await fetch(`/api/admin/product-${action}`,{method:'POST',headers:headers(),body:JSON.stringify(body)}); const data=await res.json(); print(data); await loadProducts(); }
+    $('loginButton').addEventListener('click',login); $('refreshProducts').addEventListener('click',loadProducts); $('exportRegistry').addEventListener('click',async()=>print(await (await fetch('/api/admin/export-registry',{headers:{'x-admin-token':state.token}})).json()));
+    $('createProduct').addEventListener('submit',async(e)=>{ e.preventDefault(); const fd=new FormData(e.target); const body=Object.fromEntries(fd.entries()); const res=await fetch('/api/admin/products',{method:'POST',headers:headers(),body:JSON.stringify(body)}); const data=await res.json(); print(data); await loadProducts(); });
+    $('uploadAsset').addEventListener('submit',async(e)=>{ e.preventDefault(); const fd=new FormData(e.target); const res=await fetch('/api/admin/upload',{method:'POST',headers:{'x-admin-token':state.token},body:fd}); const data=await res.json(); print(data); await loadProducts(); });
+    if(state.token){ $('loginPanel').hidden=true; $('adminApp').hidden=false; loadProducts(); }
+  </script>
+</BaseLayout>

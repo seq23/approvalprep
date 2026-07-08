@@ -1,0 +1,23 @@
+{
+  "version": "4.3.0-runtime-admin",
+  "status": "STRUCTURALLY_CHECKED_LOCAL_CLOUDFLARE_STRIPE_VALIDATION_REQUIRED",
+  "checksRun": [
+    "npm ci",
+    "npm run validate:runtime-product-admin",
+    "node --check functions api/runtime files",
+    "npm run validate:all",
+    "npm run build",
+    "secret pattern scan"
+  ],
+  "unprovenLayers": [
+    "Cloudflare D1 binding creation",
+    "Cloudflare KV namespace creation",
+    "Cloudflare R2 bucket creation",
+    "admin password on deployed approvalprep.pages.dev",
+    "R2 upload persistence",
+    "D1 mutation persistence",
+    "Stripe live/test API calls",
+    "Stripe webhook signature verification and delivery",
+    "paid R2 download streaming after real test-card purchase"
+  ]
+}

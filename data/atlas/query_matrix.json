@@ -1,0 +1,95 @@
+{
+  "rows": [
+    {
+      "query_id": "q_loe",
+      "query": "letter of explanation",
+      "route": "/letter-of-explanation",
+      "status": "ADMITTED_INDEXABLE",
+      "intent": "generator"
+    },
+    {
+      "query_id": "q_credit_loe",
+      "query": "letter of explanation for credit issues",
+      "route": "/letter-of-explanation/credit",
+      "status": "ADMITTED_INDEXABLE",
+      "intent": "scenario"
+    },
+    {
+      "query_id": "q_eviction_loe",
+      "query": "letter of explanation for eviction",
+      "route": "/letter-of-explanation/eviction",
+      "status": "ADMITTED_INDEXABLE",
+      "intent": "scenario"
+    },
+    {
+      "query_id": "q_employment_verification",
+      "query": "employment verification letter",
+      "route": "/employment-verification-letter",
+      "status": "ADMITTED_INDEXABLE",
+      "intent": "template"
+    },
+    {
+      "query_id": "q_proof_income",
+      "query": "proof of income letter",
+      "route": "/proof-of-income-letter",
+      "status": "ADMITTED_INDEXABLE",
+      "intent": "template"
+    },
+    {
+      "query_id": "q_credit_dispute",
+      "query": "DIY credit dispute letter",
+      "route": "/credit-dispute-letter",
+      "status": "ADMITTED_INDEXABLE",
+      "intent": "self_service"
+    },
+    {
+      "query_id": "q_not_credit_repair",
+      "query": "not a credit repair company",
+      "route": "/not-a-credit-repair-company",
+      "status": "ADMITTED_INDEXABLE",
+      "intent": "boundary"
+    },
+    {
+      "query_id": "q_apartment_application",
+      "query": "apartment application checklist",
+      "route": "/apartment-application",
+      "status": "ADMITTED_INDEXABLE",
+      "intent": "kit"
+    },
+    {
+      "query_id": "q_rental_checklist",
+      "query": "rental application checklist",
+      "route": "/rental-application-checklist",
+      "status": "ADMITTED_INDEXABLE",
+      "intent": "checklist"
+    },
+    {
+      "query_id": "q_auto_docs",
+      "query": "documents needed for car loan",
+      "route": "/documents-needed-for-car-loan",
+      "status": "ADMITTED_INDEXABLE",
+      "intent": "checklist"
+    },
+    {
+      "query_id": "q_sba_checklist",
+      "query": "sba loan checklist",
+      "route": "/sba-loan-checklist",
+      "status": "ADMITTED_INDEXABLE",
+      "intent": "checklist"
+    },
+    {
+      "query_id": "q_mortgage_docs",
+      "query": "mortgage document checklist",
+      "route": "/mortgage-document-checklist",
+      "status": "ADMITTED_INDEXABLE",
+      "intent": "checklist"
+    },
+    {
+      "query_id": "q_important_docs",
+      "query": "important documents checklist",
+      "route": "/important-documents-checklist",
+      "status": "ADMITTED_INDEXABLE",
+      "intent": "checklist"
+    }
+  ]
+}

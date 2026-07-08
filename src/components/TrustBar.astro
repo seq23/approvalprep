@@ -1,0 +1,6 @@
+---
+const { signals = [] } = Astro.props;
+---
+<div class="trust-bar" aria-label="Trust signals">
+  {signals.map((signal) => <span>{signal}</span>)}
+</div>

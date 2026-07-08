@@ -1,0 +1,152 @@
+{
+  "schemaVersion": "4.1.0",
+  "principle": "No fake intelligence data. A connector must call a real source, import a real operator file, crawl an allowed public page, or return NOT_CONFIGURED, NO_DATA, or SOURCE_ERROR.",
+  "connectors": [
+    {
+      "id": "google_search_console_search_analytics",
+      "type": "owned_telemetry",
+      "cost": "free",
+      "script": "scripts/intelligence/ingest-gsc.mjs",
+      "requiredEnv": [
+        "GOOGLE_SEARCH_CONSOLE_SITE_URL",
+        "GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN"
+      ],
+      "states": [
+        "COMPLETE",
+        "NOT_CONFIGURED",
+        "SOURCE_ERROR",
+        "NO_DATA"
+      ],
+      "paidUpgrade": false
+    },
+    {
+      "id": "google_url_inspection",
+      "type": "owned_indexing",
+      "cost": "free",
+      "script": "scripts/intelligence/ingest-gsc-url-inspection.mjs",
+      "requiredEnv": [
+        "GOOGLE_SEARCH_CONSOLE_SITE_URL",
+        "GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN"
+      ],
+      "states": [
+        "COMPLETE",
+        "NOT_CONFIGURED",
+        "SOURCE_ERROR",
+        "NO_DATA"
+      ],
+      "paidUpgrade": false
+    },
+    {
+      "id": "bing_webmaster",
+      "type": "owned_telemetry",
+      "cost": "free",
+      "script": "scripts/intelligence/ingest-bing-webmaster.mjs",
+      "requiredEnv": [
+        "BING_WEBMASTER_API_KEY",
+        "BING_WEBMASTER_API_URL"
+      ],
+      "states": [
+        "COMPLETE",
+        "NOT_CONFIGURED",
+        "SOURCE_ERROR",
+        "NO_DATA"
+      ],
+      "paidUpgrade": false
+    },
+    {
+      "id": "indexnow",
+      "type": "submission",
+      "cost": "free",
+      "script": "scripts/intelligence/submit-indexnow.mjs",
+      "requiredEnv": [
+        "INDEXNOW_KEY",
+        "APPROVALPREP_SITE_URL"
+      ],
+      "states": [
+        "COMPLETE",
+        "NOT_CONFIGURED",
+        "SOURCE_ERROR",
+        "NO_DATA"
+      ],
+      "paidUpgrade": false
+    },
+    {
+      "id": "owned_site_crawler",
+      "type": "owned_crawl",
+      "cost": "free",
+      "script": "scripts/intelligence/crawl-owned-site.mjs",
+      "requiredEnv": [],
+      "states": [
+        "COMPLETE",
+        "SOURCE_ERROR",
+        "NO_DATA"
+      ],
+      "paidUpgrade": false
+    },
+    {
+      "id": "competitor_public_crawler",
+      "type": "competitor_crawl",
+      "cost": "free",
+      "script": "scripts/intelligence/crawl-competitor-pages.mjs",
+      "requiredEnv": [],
+      "states": [
+        "COMPLETE",
+        "NO_DATA",
+        "SOURCE_ERROR"
+      ],
+      "paidUpgrade": false
+    },
+    {
+      "id": "competitor_sitemap_discovery",
+      "type": "competitor_crawl",
+      "cost": "free",
+      "script": "scripts/intelligence/discover-competitor-sitemaps.mjs",
+      "requiredEnv": [],
+      "states": [
+        "COMPLETE",
+        "NO_DATA",
+        "SOURCE_ERROR"
+      ],
+      "paidUpgrade": false
+    },
+    {
+      "id": "manual_serp_csv",
+      "type": "operator_import",
+      "cost": "free",
+      "script": "scripts/intelligence/import-serp-csv.mjs",
+      "requiredEnv": [],
+      "states": [
+        "COMPLETE",
+        "NO_DATA",
+        "SOURCE_ERROR"
+      ],
+      "paidUpgrade": false
+    },
+    {
+      "id": "manual_social_signal_import",
+      "type": "operator_import",
+      "cost": "free",
+      "script": "scripts/intelligence/import-social-signals.mjs",
+      "requiredEnv": [],
+      "states": [
+        "COMPLETE",
+        "NO_DATA",
+        "SOURCE_ERROR"
+      ],
+      "paidUpgrade": false
+    },
+    {
+      "id": "official_source_fetcher",
+      "type": "source_support",
+      "cost": "free",
+      "script": "scripts/intelligence/import-official-sources.mjs",
+      "requiredEnv": [],
+      "states": [
+        "COMPLETE",
+        "NO_DATA",
+        "SOURCE_ERROR"
+      ],
+      "paidUpgrade": false
+    }
+  ]
+}

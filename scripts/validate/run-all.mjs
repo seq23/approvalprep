@@ -1,0 +1,8 @@
+#!/usr/bin/env node
+import { spawnSync } from "node:child_process";
+const scripts = ["validate:repo", "validate:routes", "validate:legal", "validate:plain-language", "validate:download-safety", "validate:prompt-guardrails", "validate:atoms", "validate:citation-claims", "validate:telemetry-claims", "validate:atlas", "validate:seo-surfaces", "validate:admin", "validate:payment-download", "env:audit", "validate:env-examples", "validate:vault-schema", "validate:security", "validate:intelligence-connectors", "validate:no-fake-intelligence", "validate:intelligence-freshness", "validate:competitor-crawl", "validate:serp-import", "validate:backlink-honesty", "validate:content-actions", "validate:maintenance-briefs", "validate:citation-opportunities", "validate:workflow-trace", "validate:setup-secrets", "validate:admin-action-links", "validate:citation-strategy", "validate:growth-health", "validate:automation-safety", "validate:delegated-authority", "validate:self-heal-progressions", "validate:owner-exceptions", "validate:notification-policy", "ux:browserless-report", "validate:ux-conversion", "validate:public-page-depth", "validate:cta-quality", "validate:trust-signals", "validate:browserless-accessibility", "validate:mobile-ux", "validate:plain-language-grade", "validate:credit-boundary", "validate:customer-next-steps", "validate:product-model"];
+for (const script of scripts) {
+  const result = spawnSync("npm", ["run", script, "--silent"], { stdio: "inherit", shell: false });
+  if (result.status !== 0) process.exit(result.status || 1);
+}
+console.log("[validate:all] OK");

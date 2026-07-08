@@ -1,0 +1,21 @@
+{
+  "repo": "approvalprep",
+  "sourceOfTruth": "ApprovalPrep Cumulative Plan v4",
+  "allowedMutation": [
+    "src",
+    "data",
+    "docs",
+    "scripts",
+    "public",
+    ".github",
+    "templates",
+    "prompts",
+    "deployment"
+  ],
+  "forbiddenMutation": [
+    "real secrets",
+    "customer documents",
+    "fake documents",
+    "approval guarantees"
+  ]
+}

@@ -1,0 +1,122 @@
+---
+import "../styles/global.css";
+import SiteFooter from "../components/SiteFooter.astro";
+import manifest from "../../data/routes/route_manifest.json";
+const { title = "ApprovalPrep", description = "Self-service approval prep tools.", canonical = "https://approvalprep.com", noindex = false } = Astro.props;
+const nav = manifest.routes.filter((route) => route.nav);
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex,follow" />}
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@type": "Organization", name: "ApprovalPrep", url: "https://approvalprep.com" })}></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="shell nav">
+        <a class="brand" href="/">ApprovalPrep</a>
+        <nav class="nav-links" aria-label="Primary">
+          {nav.map((item) => <a href={item.path}>{item.title}</a>)}
+        </nav>
+      </div>
+    </header>
+    <main><slot /></main>
+
+    <script is:inline>
+      if (!window.__approvalPrepCheckoutBound) {
+        window.__approvalPrepCheckoutBound = true;
+        document.addEventListener("DOMContentLoaded", () => {
+          const params = new URLSearchParams(window.location.search);
+          if (params.get("checkout") === "cancelled") {
+            const target = document.querySelector("main");
+            const note = document.createElement("div");
+            note.className = "shell notice checkout-cancelled";
+            note.innerHTML = "<strong>Checkout was cancelled.</strong><p>No payment was completed. You can choose a product below and try again when ready.</p>";
+            target?.prepend(note);
+          }
+        });
+
+        document.addEventListener("DOMContentLoaded", async () => {
+          const panel = document.querySelector("[data-download-panel]");
+          if (!panel) return;
+          const status = panel.querySelector("[data-download-status]");
+          const links = panel.querySelector("[data-download-links]");
+          const params = new URLSearchParams(window.location.search);
+          const session_id = params.get("session_id") || "";
+          const sku = params.get("sku") || "";
+          if (!session_id || !sku) {
+            if (status) status.textContent = "No verified Stripe session was found. Return to pricing and complete checkout to unlock downloads.";
+            return;
+          }
+          if (status) status.textContent = "Verifying your payment with Stripe...";
+          try {
+            const response = await fetch("/api/verify-download", {
+              method: "POST",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify({ session_id, sku })
+            });
+            const payload = await response.json().catch(() => ({}));
+            if (!response.ok || payload.status !== "VERIFIED") {
+              throw new Error(payload.message || "Payment could not be verified yet.");
+            }
+            if (status) status.textContent = "Payment verified. Your files are ready.";
+            if (links) {
+              links.innerHTML = "";
+              for (const file of payload.files || []) {
+                const a = document.createElement("a");
+                a.className = "button secondary secondary-button";
+                a.href = file;
+                a.textContent = file.endsWith(".pdf") ? "Download PDF guide" : "Download editable Word document";
+                a.setAttribute("download", "");
+                links.appendChild(a);
+              }
+            }
+          } catch (error) {
+            if (status) status.textContent = error.message || "Download verification failed. Please contact support with your Stripe receipt.";
+          }
+        });
+        document.addEventListener("click", async (event) => {
+          const button = event.target.closest(".checkout-button[data-sku]");
+          if (!button) return;
+          const scope = button.closest(".product-card, .final-cta, .hero, section") || document;
+          let status = scope.querySelector(".checkout-status");
+          if (!status) {
+            status = document.createElement("p");
+            status.className = "fine checkout-status";
+            status.setAttribute("aria-live", "polite");
+            button.insertAdjacentElement("afterend", status);
+          }
+          const original = button.textContent;
+          button.disabled = true;
+          button.textContent = "Starting checkout...";
+          status.textContent = "Opening secure Stripe checkout.";
+          try {
+            const response = await fetch("/api/create-checkout-session", {
+              method: "POST",
+              headers: { "content-type": "application/json" },
+              body: JSON.stringify({ sku: button.dataset.sku })
+            });
+            const payload = await response.json().catch(() => ({}));
+            if (!response.ok || !payload.checkoutUrl) {
+              throw new Error(payload.message || payload.error || "Checkout is not configured yet.");
+            }
+            window.location.href = payload.checkoutUrl;
+          } catch (error) {
+            status.textContent = error.message || "Checkout could not start. Please try again.";
+            button.disabled = false;
+            button.textContent = original;
+          }
+        });
+      }
+    </script>
+    <SiteFooter />
+  </body>
+</html>

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "4.2.2",
+  "rules": [
+    {
+      "issue": "unsafe_credit_repair_language",
+      "repair": "rewrite_to_self_service_boundary",
+      "maxAttempts": 2,
+      "requiresOwner": false
+    },
+    {
+      "issue": "missing_credit_disclaimer",
+      "repair": "insert_approved_credit_boundary",
+      "maxAttempts": 1,
+      "requiresOwner": false
+    },
+    {
+      "issue": "fake_document_request",
+      "repair": "convert_to_truthful_document_checklist_or_request_letter",
+      "maxAttempts": 1,
+      "requiresOwner": false
+    },
+    {
+      "issue": "claim_citation_win_without_evidence",
+      "repair": "rewrite_as_citation_target_or_opportunity",
+      "maxAttempts": 1,
+      "requiresOwner": false
+    },
+    {
+      "issue": "thin_duplicate_fanout",
+      "repair": "merge_into_existing_route_or_faq",
+      "maxAttempts": 1,
+      "requiresOwner": false
+    },
+    {
+      "issue": "material_terms_privacy_security_change",
+      "repair": "none_owner_exception",
+      "maxAttempts": 0,
+      "requiresOwner": true
+    }
+  ]
+}

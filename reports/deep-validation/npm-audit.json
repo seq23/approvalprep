@@ -1,0 +1,159 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "astro": {
+      "name": "astro",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        {
+          "source": 1117141,
+          "name": "astro",
+          "dependency": "astro",
+          "title": "Astro: XSS in define:vars via incomplete </script> tag sanitization",
+          "url": "https://github.com/advisories/GHSA-j687-52p2-xcff",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-79"
+          ],
+          "cvss": {
+            "score": 6.1,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N"
+          },
+          "range": "<6.1.6"
+        },
+        {
+          "source": 1118920,
+          "name": "astro",
+          "dependency": "astro",
+          "title": "Astro: Server island encrypted parameters vulnerable to cross-component replay",
+          "url": "https://github.com/advisories/GHSA-xr5h-phrj-8vxv",
+          "severity": "low",
+          "cwe": [
+            "CWE-79",
+            "CWE-323"
+          ],
+          "cvss": {
+            "score": 6.1,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N"
+          },
+          "range": "<6.1.10"
+        },
+        {
+          "source": 1120912,
+          "name": "astro",
+          "dependency": "astro",
+          "title": "Astro: Reflected XSS via unescaped slot name",
+          "url": "https://github.com/advisories/GHSA-8hv8-536x-4wqp",
+          "severity": "high",
+          "cwe": [
+            "CWE-79",
+            "CWE-80"
+          ],
+          "cvss": {
+            "score": 7.1,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:L/I:H/A:N"
+          },
+          "range": "<6.3.3"
+        },
+        {
+          "source": 1120914,
+          "name": "astro",
+          "dependency": "astro",
+          "title": "Astro: XSS via Unescaped Attribute Names in Spread Props",
+          "url": "https://github.com/advisories/GHSA-jrpj-wcv7-9fh9",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-79"
+          ],
+          "cvss": {
+            "score": 4.2,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:L/A:N"
+          },
+          "range": "<6.4.6"
+        },
+        {
+          "source": 1120917,
+          "name": "astro",
+          "dependency": "astro",
+          "title": "Astro: Host header SSRF in prerendered error page fetch",
+          "url": "https://github.com/advisories/GHSA-2pvr-wf23-7pc7",
+          "severity": "high",
+          "cwe": [
+            "CWE-20",
+            "CWE-918"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:L/A:N"
+          },
+          "range": "<6.4.6"
+        },
+        "esbuild"
+      ],
+      "effects": [],
+      "range": "<=7.0.0-beta.6",
+      "nodes": [
+        "node_modules/astro"
+      ],
+      "fixAvailable": {
+        "name": "astro",
+        "version": "7.0.6",
+        "isSemVerMajor": true
+      }
+    },
+    "esbuild": {
+      "name": "esbuild",
+      "severity": "low",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1120680,
+          "name": "esbuild",
+          "dependency": "esbuild",
+          "title": "esbuild allows arbitrary file read when running the development server on Windows",
+          "url": "https://github.com/advisories/GHSA-g7r4-m6w7-qqqr",
+          "severity": "low",
+          "cwe": [
+            "CWE-22"
+          ],
+          "cvss": {
+            "score": 2.5,
+            "vectorString": "CVSS:3.1/AV:L/AC:H/PR:L/UI:N/S:U/C:N/I:L/A:N"
+          },
+          "range": ">=0.27.3 <0.28.1"
+        }
+      ],
+      "effects": [
+        "astro"
+      ],
+      "range": "0.27.3 - 0.28.0",
+      "nodes": [
+        "node_modules/esbuild"
+      ],
+      "fixAvailable": {
+        "name": "astro",
+        "version": "7.0.6",
+        "isSemVerMajor": true
+      }
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 1,
+      "moderate": 0,
+      "high": 1,
+      "critical": 0,
+      "total": 2
+    },
+    "dependencies": {
+      "prod": 290,
+      "dev": 0,
+      "optional": 107,
+      "peer": 0,
+      "peerOptional": 0,
+      "total": 396
+    }
+  }
+}

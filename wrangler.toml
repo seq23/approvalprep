@@ -1,0 +1,32 @@
+name = "approvalprep"
+compatibility_date = "2026-07-08"
+pages_build_output_dir = "dist"
+
+[vars]
+PUBLIC_SITE_URL = "https://approvalprep.com"
+PUBLIC_BRAND_NAME = "ApprovalPrep"
+PUBLIC_ADMIN_GATE_ENABLED = "true"
+
+[env.production.vars]
+PUBLIC_SITE_URL = "https://approvalprep.com"
+PUBLIC_BRAND_NAME = "ApprovalPrep"
+
+[env.preview.vars]
+PUBLIC_SITE_URL = "https://preview.approvalprep.com"
+PUBLIC_BRAND_NAME = "ApprovalPrep"
+
+
+[[d1_databases]]
+binding = "PRODUCTS_DB"
+database_name = "approvalprep-products"
+database_id = "REPLACE_WITH_CLOUDFLARE_D1_DATABASE_ID"
+
+[[kv_namespaces]]
+binding = "PRODUCTS_KV"
+id = "REPLACE_WITH_CLOUDFLARE_KV_NAMESPACE_ID"
+preview_id = "REPLACE_WITH_CLOUDFLARE_KV_PREVIEW_NAMESPACE_ID"
+
+[[r2_buckets]]
+binding = "PRODUCT_ASSETS_R2"
+bucket_name = "approvalprep-product-assets"
+preview_bucket_name = "approvalprep-product-assets-preview"

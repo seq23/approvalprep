@@ -1,0 +1,9 @@
+---
+import { creditBoundary, doesNotDo } from "../data/content";
+---
+<section class="section-block boundary-explainer">
+  <p class="eyebrow">Self-service only</p>
+  <h2>We help you prepare. We do not act for you.</h2>
+  <p>{creditBoundary}</p>
+  <ul>{doesNotDo.map((item) => <li>{item}</li>)}</ul>
+</section>

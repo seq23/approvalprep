@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "4.2.4",
+  "intro": "This dashboard is an exception cockpit. Most routine actions are handled by contract. You only need to pay attention to Needs Owner, hard failures, and provider setup problems.",
+  "statuses": {
+    "approved_by_contract": "The system decided this was safe and moved forward.",
+    "self_healed": "The system found a problem, fixed it safely, and checked it again.",
+    "final_block": "The system could not safely fix the problem.",
+    "needs_owner": "This is a real owner-level decision.",
+    "fixture_only": "This uses faux data and does not prove live results.",
+    "not_configured": "An API key or provider setup is missing."
+  }
+}

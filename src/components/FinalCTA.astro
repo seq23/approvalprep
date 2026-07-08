@@ -1,0 +1,16 @@
+---
+const { primary = "Start my letter", secondary = "Build my packet", href = "/pricing", secondaryHref = "/apartment-application", primarySku = "" } = Astro.props;
+---
+<section class="final-cta shell">
+  <p class="eyebrow">Next step</p>
+  <h2>Get your papers ready before you apply.</h2>
+  <p>Your next step is simple: choose the letter or packet, fill in your truthful details, download it, review it, and send it yourself when you are ready.</p>
+  <div class="hero-actions">
+    {primarySku ? (
+      <button class="button primary-button checkout-button" type="button" data-sku={primarySku}>{primary}</button>
+    ) : (
+      <a class="button primary-button" href={href}>{primary}</a>
+    )}
+    {secondary && <a class="button secondary secondary-button" href={secondaryHref}>{secondary}</a>}
+  </div>
+</section>

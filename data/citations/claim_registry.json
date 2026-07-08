@@ -1,0 +1,81 @@
+{
+  "claims": [
+    {
+      "claim_id": "claim_self_service_boundary",
+      "claim_text": "ApprovalPrep gives self-service tools, letters, checklists, and step-by-step instructions. It does not contact third parties for users.",
+      "claim_type": "product_fact",
+      "risk_class": "regulated",
+      "page_route": "/credit-repair-disclaimer",
+      "atom_id": "atom_credit_boundary",
+      "source_ids": [
+        "approvalprep_owner_policy"
+      ],
+      "citation_mode": "required",
+      "freshness_class": "evergreen",
+      "last_verified_at": "2026-07-07",
+      "status": "active"
+    },
+    {
+      "claim_id": "claim_not_credit_repair_company",
+      "claim_text": "ApprovalPrep is not a credit repair company and does not fix credit for users.",
+      "claim_type": "legal_boundary",
+      "risk_class": "regulated",
+      "page_route": "/not-a-credit-repair-company",
+      "atom_id": "atom_credit_boundary",
+      "source_ids": [
+        "ftc_croa",
+        "approvalprep_owner_policy"
+      ],
+      "citation_mode": "required",
+      "freshness_class": "periodic",
+      "last_verified_at": "2026-07-07",
+      "status": "active"
+    },
+    {
+      "claim_id": "claim_consumer_dispute_right",
+      "claim_text": "Consumers may dispute possible errors on credit reports with credit reporting companies and furnishers.",
+      "claim_type": "process",
+      "risk_class": "regulated",
+      "page_route": "/credit-dispute-letter",
+      "atom_id": "atom_dispute_steps",
+      "source_ids": [
+        "ftc_credit_dispute_sample",
+        "cfpb_credit_report_dispute"
+      ],
+      "citation_mode": "required",
+      "freshness_class": "periodic",
+      "last_verified_at": "2026-07-07",
+      "status": "active"
+    },
+    {
+      "claim_id": "claim_no_fake_docs",
+      "claim_text": "ApprovalPrep does not create fake paystubs, fake employment records, fake income documents, or fake offer letters.",
+      "claim_type": "product_fact",
+      "risk_class": "high",
+      "page_route": "/employment-verification-letter",
+      "atom_id": "atom_no_fake_docs",
+      "source_ids": [
+        "approvalprep_owner_policy"
+      ],
+      "citation_mode": "required",
+      "freshness_class": "evergreen",
+      "last_verified_at": "2026-07-07",
+      "status": "active"
+    },
+    {
+      "claim_id": "claim_no_approval_guarantee",
+      "claim_text": "ApprovalPrep does not guarantee approval from landlords, lenders, employers, creditors, or agencies.",
+      "claim_type": "product_fact",
+      "risk_class": "high",
+      "page_route": "/disclaimer",
+      "atom_id": "atom_no_guarantee",
+      "source_ids": [
+        "approvalprep_owner_policy"
+      ],
+      "citation_mode": "required",
+      "freshness_class": "evergreen",
+      "last_verified_at": "2026-07-07",
+      "status": "active"
+    }
+  ]
+}
