@@ -19,14 +19,41 @@ PUBLIC_BRAND_NAME = "ApprovalPrep"
 [[d1_databases]]
 binding = "PRODUCTS_DB"
 database_name = "approvalprep-products"
-database_id = "REPLACE_WITH_CLOUDFLARE_D1_DATABASE_ID"
+database_id = "ed95a580-31bd-4c01-acdf-a1888206ebd2"
 
 [[kv_namespaces]]
 binding = "PRODUCTS_KV"
-id = "REPLACE_WITH_CLOUDFLARE_KV_NAMESPACE_ID"
-preview_id = "REPLACE_WITH_CLOUDFLARE_KV_PREVIEW_NAMESPACE_ID"
+id = "fef8ffa88ccb4296905f8781cdc063a2"
+preview_id = "4d834e23277043a0a936a0183684ed6d"
 
 [[r2_buckets]]
 binding = "PRODUCT_ASSETS_R2"
 bucket_name = "approvalprep-product-assets"
 preview_bucket_name = "approvalprep-product-assets-preview"
+
+
+[[env.production.d1_databases]]
+binding = "PRODUCTS_DB"
+database_name = "approvalprep-products"
+database_id = "ed95a580-31bd-4c01-acdf-a1888206ebd2"
+
+[[env.production.kv_namespaces]]
+binding = "PRODUCTS_KV"
+id = "fef8ffa88ccb4296905f8781cdc063a2"
+
+[[env.production.r2_buckets]]
+binding = "PRODUCT_ASSETS_R2"
+bucket_name = "approvalprep-product-assets"
+
+[[env.preview.d1_databases]]
+binding = "PRODUCTS_DB"
+database_name = "approvalprep-products"
+database_id = "ed95a580-31bd-4c01-acdf-a1888206ebd2"
+
+[[env.preview.kv_namespaces]]
+binding = "PRODUCTS_KV"
+id = "4d834e23277043a0a936a0183684ed6d"
+
+[[env.preview.r2_buckets]]
+binding = "PRODUCT_ASSETS_R2"
+bucket_name = "approvalprep-product-assets-preview"

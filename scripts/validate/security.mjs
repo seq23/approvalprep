@@ -1,12 +1,38 @@
 #!/usr/bin/env node
 import fs from "node:fs";
+import { spawnSync } from "node:child_process";
 import { walk, fail } from "./_common.mjs";
 const secretPatterns = [/sk_live_[a-z0-9]/i, /rk_live_[a-z0-9]/i, /re_[a-z0-9]{20,}/i];
 
-const forbiddenFiles = [".env", ".env.local", ".env.production", ".dev.vars", ".dev.vars.local", ".ops/vault.enc", "deployment/setup-state.json"];
+const forbiddenFiles = [".env", ".env.local", ".env.production", ".dev.vars", ".dev.vars.local", "deployment/setup-state.json"];
 for (const file of forbiddenFiles) {
   if (fs.existsSync(file)) fail(`[security] forbidden local secret/state file present: ${file}`);
 }
+
+function git(args) {
+  return spawnSync("git", args, { encoding: "utf8" });
+}
+
+function assertIgnoredLocalOnly(file) {
+  if (!fs.existsSync(file)) return;
+
+  const tracked = git(["ls-files", "--error-unmatch", file]);
+  if (tracked.status === 0) {
+    fail(`[security] forbidden secret/state file is tracked by git: ${file}`);
+  }
+
+  const staged = git(["diff", "--cached", "--name-only", "--", file]);
+  if ((staged.stdout || "").split(/\r?\n/).includes(file)) {
+    fail(`[security] forbidden secret/state file is staged: ${file}`);
+  }
+
+  const ignored = git(["check-ignore", "--quiet", file]);
+  if (ignored.status !== 0) {
+    fail(`[security] local secret/state file exists but is not protected by .gitignore: ${file}`);
+  }
+}
+
+assertIgnoredLocalOnly(".ops/vault.enc");
 for (const file of walk(".").filter((f) => /(^|\/)vault\.(json|dec\.json|local\.json)$/.test(f) || /\.passphrase\.txt$/.test(f) || /approvalprep-cloudflare-ops-bundle/.test(f))) {
   fail(`[security] forbidden private ops artifact present: ${file}`);
 }
