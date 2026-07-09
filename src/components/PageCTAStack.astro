@@ -1,0 +1,7 @@
+---
+const { primary = "Open the free Studio", secondary = "Compare paid kits", sku = "", primaryHref = "/letter-writing-studio", secondaryHref = "/pricing" } = Astro.props;
+---
+<div class="page-cta-stack">
+  {sku ? <button class="button primary-button checkout-button" type="button" data-sku={sku}>{primary}</button> : <a class="button primary-button" href={primaryHref}>{primary}</a>}
+  <a class="button secondary-button" href={secondaryHref}>{secondary}</a>
+</div>

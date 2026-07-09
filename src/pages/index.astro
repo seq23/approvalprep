@@ -11,7 +11,9 @@ import FinalCTA from "../components/FinalCTA.astro";
 import CreditBoundaryExplainer from "../components/CreditBoundaryExplainer.astro";
 import NextStepsExplainer from "../components/NextStepsExplainer.astro";
 import DataPrivacyNotice from "../components/DataPrivacyNotice.astro";
-import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComparison } from "../data/content";
+import FreeStudioCTA from "../components/FreeStudioCTA.astro";
+import OfferingUniverse from "../components/OfferingUniverse.astro";
+import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComparison, offeringCategories } from "../data/content";
 ---
 <BaseLayout title="ApprovalPrep - Self-Service Approval Prep" description="Prepare truthful letters, checklists, and application packets before you apply.">
   <section class="hero hero-split shell">
@@ -20,7 +22,7 @@ import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComp
       <h1>Get your application documents ready before someone asks twice.</h1>
       <p class="lead">ApprovalPrep helps you prepare clear, truthful letters, checklists, and document packets for credit questions, rental applications, income verification, loan reviews, business funding, and everyday paperwork issues.</p>
       <p class="supporting-copy">Choose the situation, answer plain-language prompts, download your files, review them, and send them yourself when ready.</p>
-      <OutcomeCTA primary="Find my document path" secondary="Compare kits" href="#choose-path" secondaryHref="/pricing" />
+      <OutcomeCTA primary="Start free for $0" secondary="Compare kits" href="/letter-writing-studio" secondaryHref="/pricing" />
       <TrustBar signals={trustSignals} />
     </div>
     <aside class="hero-panel" aria-label="ApprovalPrep process">
@@ -48,12 +50,18 @@ import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComp
       ))}
     </div>
   </div></section>
+  <FreeStudioCTA />
   <section class="band"><div class="shell">
     <p class="eyebrow">Compare kits</p>
     <h2>Not sure which one fits? Compare the common paths.</h2>
     <div class="table-wrap"><table class="comparison-table"><thead><tr><th>Product</th><th>Best for</th><th>Includes</th><th>Price</th></tr></thead><tbody>
       {productComparison.map((row) => <tr><td><a href={row.href}>{row.product}</a></td><td>{row.bestFor}</td><td>{row.includes}</td><td><strong>{row.price}</strong></td></tr>)}
     </tbody></table></div>
+  </div></section>
+  <section class="band"><div class="shell">
+    <p class="eyebrow">30+ self-service documents</p>
+    <h2>Eight paid kits cover the full ApprovalPrep offering universe.</h2>
+    <OfferingUniverse categories={offeringCategories} />
   </div></section>
   <section class="band"><div class="shell"><p class="eyebrow">Products</p><h2>Choose the kit that matches the application pressure.</h2><ProductGrid /></div></section>
   <section class="band"><div class="shell"><HowItWorks steps={howItWorks} /></div></section>
@@ -63,5 +71,5 @@ import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComp
   <section class="band"><div class="shell"><DataPrivacyNotice /></div></section>
   <section class="band"><div class="shell"><CreditBoundaryExplainer /></div></section>
   <section class="band"><div class="shell"><BoundaryNotice /></div></section>
-  <FinalCTA primary="Create my explanation letter" secondary="Compare all kits" href="/letter-of-explanation" secondaryHref="/pricing" />
+  <FinalCTA primary="Start free for $0" secondary="Compare all kits" href="/letter-writing-studio" secondaryHref="/pricing" />
 </BaseLayout>

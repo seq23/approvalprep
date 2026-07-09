@@ -1,0 +1,10 @@
+---
+const { title = "Why this matters", items = [] } = Astro.props;
+---
+<section class="band"><div class="shell">
+  <p class="eyebrow">Fit check</p>
+  <h2>{title}</h2>
+  <div class="grid">
+    {items.map((item) => <article class="card"><h3>{item.title}</h3><p>{item.copy}</p></article>)}
+  </div>
+</div></section>

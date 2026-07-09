@@ -1,0 +1,31 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import LetterStudio from "../components/LetterStudio.astro";
+import FreeStudioCTA from "../components/FreeStudioCTA.astro";
+import TrustAndBoundaryBand from "../components/TrustAndBoundaryBand.astro";
+---
+<BaseLayout title="Free Letter Writing Studio - ApprovalPrep" description="Draft a first-pass explanation letter for $0. No account, no stored answers, no upload, and no payment required." canonical="https://approvalprep.com/letter-writing-studio">
+  <section class="hero hero-split shell">
+    <div>
+      <p class="eyebrow">Free Letter Writing Studio</p>
+      <h1>Draft a clearer explanation letter before you buy a kit.</h1>
+      <p class="lead">Start for $0. Choose your situation, answer guided prompts, create a first-pass draft, and see which ApprovalPrep kit fits your next step.</p>
+      <p class="supporting-copy">No account, no upload, no payment, no AI call, and no stored answers. The Studio runs in your browser using static templates and local logic.</p>
+      <div class="hero-actions"><a class="button primary-button" href="#studio">Start for $0</a><a class="button secondary-button" href="/pricing">Compare paid kits</a></div>
+    </div>
+    <aside class="hero-panel">
+      <p class="eyebrow">What the paid kits add</p>
+      <h2>The Studio is the starting point, not the whole product.</h2>
+      <ul class="compact-list">
+        <li>Editable DOCX templates</li>
+        <li>PDF guide and examples</li>
+        <li>Review checklists</li>
+        <li>Supporting document guidance</li>
+        <li>Situation-specific next steps</li>
+      </ul>
+    </aside>
+  </section>
+  <section class="band" id="studio"><div class="shell"><LetterStudio /></div></section>
+  <TrustAndBoundaryBand />
+  <FreeStudioCTA />
+</BaseLayout>

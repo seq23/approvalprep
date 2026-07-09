@@ -10,6 +10,7 @@ const { product } = Astro.props;
   {product.image && <div class="product-media"><img class="product-image" src={product.image} alt={`${product.name} product preview`} loading="lazy" width="1200" height="900" /></div>}
   <p class="product-outcome"><strong>What you get:</strong> {product.outcome}</p>
   <ul class="product-includes">{(product.includes || []).slice(0,4).map((item) => <li>{item}</li>)}</ul>
+  {product.included_offerings && <details class="included-details"><summary>Included in this kit</summary><ul>{product.included_offerings.map((item) => <li>{item}</li>)}</ul></details>}
   <div class="product-purchase-row"><p class="price">{product.priceLabel}</p></div>
   {product.stripe_enabled ? (
     <button class="button primary-button checkout-button" type="button" data-sku={product.sku}>{product.cta_label}</button>

@@ -1,0 +1,98 @@
+---
+import { studioBenefits, studioFields, studioSituations } from "../data/letterStudio";
+---
+<section class="studio-shell" data-letter-studio>
+  <div class="notice data-privacy-notice">
+    <strong>$0 browser-only drafting tool.</strong>
+    <p>Your answers stay in your browser. ApprovalPrep does not store your letter answers, completed drafts, uploaded documents, or personal application details.</p>
+  </div>
+  <div class="studio-grid">
+    <form class="card studio-form">
+      <p class="eyebrow">Step 1</p>
+      <h2>Choose the situation.</h2>
+      <label>
+        Situation
+        <select name="situation">
+          {studioSituations.map((item) => <option value={item.id}>{item.label}</option>)}
+        </select>
+      </label>
+      <p class="fine" data-risk-note>{studioSituations[0].risk}</p>
+      <div class="studio-fields">
+        {studioFields.map(([name, label, placeholder]) => (
+          <label>
+            {label}
+            <textarea name={name} placeholder={placeholder}></textarea>
+          </label>
+        ))}
+      </div>
+      <div class="hero-actions">
+        <button class="button primary-button" type="button" data-generate-draft>Create first-pass draft</button>
+        <button class="button secondary-button" type="reset" data-reset-studio>Start over</button>
+      </div>
+      <p class="fine">This free tool uses static templates and local browser logic only. It is not AI, legal advice, credit repair, financial advice, or a promise of approval.</p>
+    </form>
+    <aside class="card studio-preview">
+      <p class="eyebrow">Step 2</p>
+      <h2>Your first-pass draft</h2>
+      <pre data-draft-output>Choose a situation and answer the prompts to create a first-pass draft.</pre>
+      <div class="hero-actions">
+        <button class="button secondary-button" type="button" data-copy-draft>Copy draft</button>
+        <button class="button secondary-button" type="button" data-download-draft>Download TXT</button>
+      </div>
+      <div class="recommendation-card" data-recommendation>
+        <p class="eyebrow">Recommended next step</p>
+        <h3>Letter of Explanation</h3>
+        <p>The free draft helps you start. The paid kit gives you editable DOCX templates, examples, checklists, and review steps.</p>
+        <a class="button primary-button" href="/pricing#letter-of-explanation">See the full kit</a>
+      </div>
+      <ul class="compact-list">
+        {studioBenefits.map((item) => <li>{item}</li>)}
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<script define:vars={{ studioSituations }}>
+  const root = document.querySelector("[data-letter-studio]");
+  if (root) {
+    const form = root.querySelector(".studio-form");
+    const output = root.querySelector("[data-draft-output]");
+    const risk = root.querySelector("[data-risk-note]");
+    const recommendation = root.querySelector("[data-recommendation]");
+    const situations = studioSituations;
+    const selected = () => situations.find((item) => item.id === form.situation.value) || situations[0];
+    const val = (name) => String(form.elements[name]?.value || "").trim();
+    const renderRecommendation = (situation) => {
+      recommendation.innerHTML = `<p class="eyebrow">Recommended next step</p><h3>${situation.recommendationName}</h3><p>The free draft helps you start. The paid kit gives you editable DOCX templates, examples, checklists, supporting document guidance, and review steps for this situation.</p><a class="button primary-button" href="/pricing#${situation.recommendationSku}">See the full kit</a>`;
+      risk.textContent = situation.risk;
+    };
+    form.situation.addEventListener("change", () => renderRecommendation(selected()));
+    root.querySelector("[data-generate-draft]").addEventListener("click", () => {
+      const situation = selected();
+      const recipient = val("recipient") || "the reviewer";
+      const issue = val("issue") || "[briefly describe the issue]";
+      const dates = val("dates") || "[add relevant dates]";
+      const facts = val("facts") || "[add the key facts]";
+      const support = val("support") || "[list supporting documents]";
+      const changed = val("changed") || "[explain what changed or what happens next]";
+      const ask = val("ask") || "[state what you want the reviewer to understand]";
+      output.textContent = `To ${recipient},\n\n${situation.opener} ${issue}.\n\nThe relevant timeline is: ${dates}.\n\nThe key facts are: ${facts}.\n\nDocuments that may support this explanation include: ${support}.\n\nCurrent status or next step: ${changed}.\n\nI am sharing this so you can understand: ${ask}.\n\nThank you for reviewing this information.\n\n[Your name]`;
+      renderRecommendation(situation);
+    });
+    root.querySelector("[data-copy-draft]").addEventListener("click", async () => {
+      await navigator.clipboard?.writeText(output.textContent || "");
+    });
+    root.querySelector("[data-download-draft]").addEventListener("click", () => {
+      const blob = new Blob([output.textContent || ""], { type: "text/plain" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "approvalprep-first-pass-draft.txt";
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+    root.querySelector("[data-reset-studio]").addEventListener("click", () => {
+      output.textContent = "Choose a situation and answer the prompts to create a first-pass draft.";
+      renderRecommendation(situations[0]);
+    });
+  }
+</script>

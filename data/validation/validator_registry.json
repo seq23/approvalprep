@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "lastUpdatedAt": "2026-07-09T01:25:59.977Z",
+  "lastUpdatedAt": "2026-07-09T02:30:00.000Z",
   "policy": "Hard fails protect customer journey, payment/download safety, regulated boundaries, real growth machinery, and operator automation. Cosmetic preferences and live-provider success are not hard fails unless the repo falsely claims them.",
   "validators": [
     {
@@ -563,6 +563,61 @@
       "owner": "approvalprep-ops",
       "group": "release-critical",
       "scope": "Astro static build and Cloudflare Pages deploy artifact"
+    },
+    {
+      "id": "stripe-mode",
+      "npmScript": "validate:stripe-mode",
+      "entrypoint": "scripts/validate/stripe-mode.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents broken checkout/payment release",
+      "owner": "approvalprep-ops",
+      "group": "release-critical",
+      "scope": "Stripe test/live mode selection and price ID coverage"
+    },
+    {
+      "id": "offering-visibility",
+      "npmScript": "validate:offering-visibility",
+      "entrypoint": "scripts/validate/offering-visibility.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents hidden or fake offering universe",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "30+ offering visibility in public UI"
+    },
+    {
+      "id": "letter-studio",
+      "npmScript": "validate:letter-studio",
+      "entrypoint": "scripts/validate/letter-studio.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents confusing or low-conversion user experience",
+      "owner": "approvalprep-ops",
+      "group": "ux-critical",
+      "scope": "$0 browser-only Letter Writing Studio"
+    },
+    {
+      "id": "navigation-architecture",
+      "npmScript": "validate:navigation-architecture",
+      "entrypoint": "scripts/validate/navigation-architecture.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents confusing or low-conversion user experience",
+      "owner": "approvalprep-ops",
+      "group": "ux-critical",
+      "scope": "Buyer-guided navigation architecture"
+    },
+    {
+      "id": "commercial-page-cta-depth",
+      "npmScript": "validate:commercial-page-cta-depth",
+      "entrypoint": "scripts/validate/commercial-page-cta-depth.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents confusing or low-conversion user experience",
+      "owner": "approvalprep-ops",
+      "group": "ux-critical",
+      "scope": "Commercial page CTA rhythm and conversion sections"
     },
     {
       "id": "artifact-validation",

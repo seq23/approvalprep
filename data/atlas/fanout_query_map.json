@@ -821,6 +821,25 @@
         "purchase_evaluation"
       ],
       "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0211_letter_writing_studio_definition",
+      "route_owner": "/letter-writing-studio",
+      "page_family_id": "letter_studio",
+      "children": [
+        "atlas_q_0212_letter_writing_studio_checklist",
+        "atlas_q_0213_letter_writing_studio_how_to",
+        "atlas_q_0214_letter_writing_studio_safety_no_storage",
+        "atlas_q_0215_letter_writing_studio_purchase_evaluation"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "how_to",
+        "safety_no_storage",
+        "purchase_evaluation"
+      ],
+      "status": "admitted_unique_intent_fanout"
     }
   ]
 }

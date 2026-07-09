@@ -1,0 +1,18 @@
+---
+const { product, offerings = [] } = Astro.props;
+---
+{product && offerings.length > 0 && (
+  <section class="band"><div class="shell">
+    <p class="eyebrow">Included offerings</p>
+    <h2>{product.name || product.product_name} includes these self-service tools.</h2>
+    <div class="offering-list cards">
+      {offerings.map((offering) => (
+        <article class="card offering-item">
+          <h3>{offering.name || offering}</h3>
+          {offering.customerSituation && <p>{offering.customerSituation}</p>}
+          {offering.riskBoundary && <p class="fine">{offering.riskBoundary}</p>}
+        </article>
+      ))}
+    </div>
+  </div></section>
+)}

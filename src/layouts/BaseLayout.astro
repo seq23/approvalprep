@@ -2,9 +2,8 @@
 import "../styles/global.css";
 import SiteFooter from "../components/SiteFooter.astro";
 import DataPrivacyNotice from "../components/DataPrivacyNotice.astro";
-import manifest from "../../data/routes/route_manifest.json";
+import { navCta, primaryNav } from "../data/navigation";
 const { title = "ApprovalPrep", description = "Self-service approval prep tools.", canonical = "https://approvalprep.com", noindex = false } = Astro.props;
-const nav = manifest.routes.filter((route) => route.nav);
 ---
 <!doctype html>
 <html lang="en">
@@ -25,7 +24,13 @@ const nav = manifest.routes.filter((route) => route.nav);
       <div class="shell nav">
         <a class="brand" href="/">ApprovalPrep</a>
         <nav class="nav-links" aria-label="Primary">
-          {nav.map((item) => <a href={item.path}>{item.title}</a>)}
+          {primaryNav.map((item) => item.href ? <a href={item.href}>{item.title}</a> : (
+            <details class="nav-menu">
+              <summary>{item.title}</summary>
+              <div class="nav-menu-panel">{item.links.map(([href, label]) => <a href={href}>{label}</a>)}</div>
+            </details>
+          ))}
+          <a class="button nav-cta" href={navCta.href}>{navCta.label}</a>
         </nav>
       </div>
     </header>

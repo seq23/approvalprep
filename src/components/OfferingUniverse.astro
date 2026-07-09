@@ -1,0 +1,20 @@
+---
+const { categories = [] } = Astro.props;
+---
+<div class="offering-universe">
+  {categories.map((category) => (
+    <article class="card offering-category" id={`offerings-${category.product_sku}`}>
+      <p class="eyebrow">{category.product_name}</p>
+      <h3>{category.offerings.length} self-service tools included</h3>
+      <div class="offering-list">
+        {category.offerings.map((offering) => (
+          <div class="offering-item">
+            <strong>{offering.name || offering}</strong>
+            {offering.customerSituation && <p>{offering.customerSituation}</p>}
+          </div>
+        ))}
+      </div>
+      <a class="button secondary-button" href={`/pricing#${category.product_sku}`}>See {category.product_name}</a>
+    </article>
+  ))}
+</div>

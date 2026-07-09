@@ -1,4 +1,5 @@
 import productsData from "../../data/products/products.json";
+import offeringData from "../../data/products/full_offering_catalog.json";
 import nextStepsData from "../../data/content/customer_next_steps.json";
 import boundaryData from "../../data/legal/self_service_boundary.json";
 
@@ -11,6 +12,10 @@ export const limitedOperationalRecords = boundaryData.limitedOperationalRecords;
 export const customerNextSteps = nextStepsData.steps;
 export const nextStepsShort = nextStepsData.shortCopy;
 export const productCards = productsData.products.filter((product) => product.status === "active_paid" && product.stripe_enabled);
+export const offeringCategories = offeringData.categories;
+export const allOfferings = offeringCategories.flatMap((category) => category.offerings.map((offering) => ({ ...offering, productSku: category.product_sku, productName: category.product_name, price: category.price })));
+export const offeringsForSku = (sku) => offeringCategories.find((category) => category.product_sku === sku)?.offerings || [];
+export const productForSku = (sku) => productCards.find((product) => product.sku === sku) || offeringCategories.find((category) => category.product_sku === sku);
 
 export const trustSignals = ["No account required", "No stored letter answers", "PDF + editable DOCX", "Stripe-verified download", "You send it yourself", "Self-service only"];
 export const howItWorks = ["Choose the situation you need to prepare for.", "Answer plain-language prompts using real facts.", "Download your PDF and editable DOCX files.", "Review everything before you send it yourself."];
@@ -536,6 +541,71 @@ export const routeFamilyCopy = {
 };
 
 export const routeCopy = {
+  "/letter-writing-studio": {
+    "heading": "Free Letter Writing Studio",
+    "lead": "Draft a first-pass explanation letter for $0 before you buy anything. No account, no upload, no stored answers, and no payment required.",
+    "shortAnswer": "The Studio is a free browser-only drafting tool. It helps you organize messy facts, create a first-pass draft, and choose the paid kit that fits your situation. ApprovalPrep does not store your answers or send anything for you.",
+    "primaryCta": "Start for $0",
+    "secondaryCta": "Compare paid kits",
+    "decisionContext": [
+      "Most people do not start with a product name. They start with pressure: a landlord asked a question, a lender wants an explanation, a credit issue needs careful wording, or an office needs a clear note.",
+      "The Studio gives that uncertain user a safe first step. It uses local templates and browser-only logic to help them shape a draft without creating an account, uploading documents, or paying before they understand the right path."
+    ],
+    "whoFor": [
+      "People who know they need to explain something but do not know which kit fits.",
+      "Buyers who want to start for $0 before choosing a paid template packet.",
+      "Anyone who wants a first-pass draft while keeping answers in their own browser."
+    ],
+    "value": [
+      "Reduces anxiety by turning a messy situation into a structured first-pass letter.",
+      "Recommends the right paid kit only after the user sees the situation more clearly.",
+      "Keeps the free tool zero-cost for ApprovalPrep because it uses static templates, not AI or server-side generation."
+    ],
+    "whatYouGet": [
+      "Situation selection.",
+      "Guided drafting prompts.",
+      "Browser-only first-pass draft.",
+      "Risk and boundary reminders.",
+      "Recommended paid kit for the full templates, examples, checklists, and review steps."
+    ],
+    "prepBrief": [
+      "Start with the real situation you need to explain, not the product name you think you need.",
+      "Gather dates, facts, names, and supporting documents before drafting.",
+      "Keep sensitive documents on your own device. The Studio does not need uploads.",
+      "Use the Studio draft as a starting point, then decide whether the paid kit gives you the fuller packet."
+    ],
+    "commonMistakes": [
+      "Writing too much before you know what the reviewer needs.",
+      "Including unsupported facts, emotional over-explanations, or promises you do not control.",
+      "Treating the free draft as a finished application packet.",
+      "Choosing a paid kit before identifying whether the issue is rental, credit, income, loan, business, or life-admin."
+    ],
+    "reviewChecklist": [
+      "Does the draft use only true facts?",
+      "Does it avoid legal, credit repair, or approval promises?",
+      "Does it name the documents that support the explanation?",
+      "Does the recommended kit match the situation you selected?",
+      "Do you understand that ApprovalPrep does not store the answers or send the letter for you?"
+    ],
+    "useCases": [
+      "You are not sure whether you need a credit, rental, income, loan, business, or life-admin letter.",
+      "You want to organize facts before buying a paid kit.",
+      "You want a first-pass draft without storing your answers."
+    ],
+    "steps": [
+      "Choose your situation.",
+      "Answer the guided prompts with true facts.",
+      "Generate a first-pass draft in your browser.",
+      "Review the boundary notes.",
+      "Choose the recommended paid kit if you need the full packet."
+    ],
+    "faq": [
+      {"question":"Does the Studio cost anything?","answer":"No. The Letter Writing Studio is free to use and costs $0 to start."},
+      {"question":"Does ApprovalPrep store my answers?","answer":"No. The Studio runs in your browser and ApprovalPrep does not store your letter answers, completed drafts, or uploaded documents."},
+      {"question":"Is this AI?","answer":"No. The Studio uses static templates and browser-only logic. It does not call an AI API."}
+    ],
+    "trustSignals": ["$0 to start", "No account required", "No stored answers", "No upload", "Browser-only", "Self-service only"]
+  },
   "/pricing": {
     "heading": "Pricing",
     "lead": "Pricing helps you prepare for compare all kits with truthful details, organized supporting documents, and a clear next step before buyer decision becomes urgent.",

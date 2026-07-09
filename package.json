@@ -105,7 +105,13 @@
     "ops:r2:upload": "node scripts/ops/r2-upload-assets.mjs",
     "ops:test:real": "node scripts/ops/real-smoke-test.mjs",
     "validate:env-examples": "node scripts/validate/env-examples.mjs",
-    "validate:vault-schema": "node scripts/validate/vault-schema.mjs"
+    "validate:vault-schema": "node scripts/validate/vault-schema.mjs",
+    "validate:stripe-mode": "node scripts/validate/stripe-mode.mjs",
+    "validate:offering-visibility": "node scripts/validate/offering-visibility.mjs",
+    "validate:letter-studio": "node scripts/validate/letter-studio.mjs",
+    "validate:navigation-architecture": "node scripts/validate/navigation-architecture.mjs",
+    "validate:commercial-page-cta-depth": "node scripts/validate/commercial-page-cta-depth.mjs",
+    "ops:stripe:test-checkout": "node scripts/ops/stripe-test-checkout-smoke.mjs"
   },
   "dependencies": {
     "astro": "^7.0.6",

@@ -6,6 +6,7 @@ import { fail, readJson } from "./_common.mjs";
 function loadContent() {
   let src = fs.readFileSync("src/data/content.ts", "utf8");
   src = src.replace(/import productsData[^\n]+/, `const productsData = ${fs.readFileSync("data/products/products.json", "utf8")};`);
+  src = src.replace(/import offeringData[^\n]+/, `const offeringData = ${fs.readFileSync("data/products/full_offering_catalog.json", "utf8")};`);
   src = src.replace(/import nextStepsData[^\n]+/, `const nextStepsData = ${fs.readFileSync("data/content/customer_next_steps.json", "utf8")};`);
   src = src.replace(/import boundaryData[^\n]+/, `const boundaryData = ${fs.readFileSync("data/legal/self_service_boundary.json", "utf8")};`);
   src = src.replace(/export const /g, "const ");
@@ -46,12 +47,17 @@ for (const route of manifest.routes.filter((item) => item.type !== "admin" && it
 
 const indexPage = fs.readFileSync("src/pages/index.astro", "utf8");
 const dynamicPage = fs.readFileSync("src/pages/[...slug].astro", "utf8");
+const studioPage = fs.readFileSync("src/pages/letter-writing-studio.astro", "utf8");
+const studioComponent = fs.readFileSync("src/components/LetterStudio.astro", "utf8");
 const footer = fs.readFileSync("src/components/SiteFooter.astro", "utf8");
-for (const token of ["Find my document path", "Choose by situation", "Compare kits", "BoundaryNotice", "FinalCTA"]) {
+for (const token of ["Start free for $0", "Choose by situation", "Compare kits", "FreeStudioCTA", "OfferingUniverse", "FinalCTA"]) {
   if (!indexPage.includes(token)) failures.push(`homepage missing journey token ${token}`);
 }
-for (const token of ["Decision context", "What to prepare first", "Review before you send", "FinalCTA"]) {
+for (const token of ["Decision context", "What to prepare first", "Review before you send", "IncludedOfferings", "FinalCTA"]) {
   if (!dynamicPage.includes(token)) failures.push(`dynamic page missing journey token ${token}`);
+}
+for (const token of ["Start for $0", "does not store", "LetterStudio", "Compare paid kits"]) {
+  if (!studioPage.includes(token) && !studioComponent.includes(token)) failures.push(`studio page missing journey token ${token}`);
 }
 for (const token of ["Products", "Popular Guides", "Legal", "Resources"]) {
   if (!footer.includes(token) && !JSON.stringify(content.footerGroups).includes(token)) failures.push(`footer missing ${token}`);

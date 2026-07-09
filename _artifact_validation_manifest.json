@@ -1,9 +1,9 @@
 {
-  "artifactName": "approvalprep-main_BASELINE_07-08-26_e1eee09e4903.zip",
+  "artifactName": "approvalprep-main_BASELINE_07-08-26_37026dbe7b4b.zip",
   "sourceZip": "/workspace/.cache/02-approvalprep-main.zip",
   "zipRoot": "approvalprep-main/",
-  "version": "4.3.1-sitewide-production-foundation",
-  "status": "STRUCTURALLY_CHECKED_PRIVACY_PASS_VALIDATE_ALL_PASSED_CLOUDFLARE_ASTRO_SYNTAX_FIX_APPLIED_BUILD_BLOCKED_LOCALLY_BY_NPM_REGISTRY_403",
+  "version": "4.4.0-product-completion-studio-nav-checkout",
+  "status": "STRUCTURALLY_CHECKED_VALIDATE_ALL_PASSED_STUDIO_NAV_OFFERING_STRIPE_MODE_PASS_BUILD_BLOCKED_LOCALLY_BY_NPM_REGISTRY_403",
   "implemented": [
     "sitewide professional UX and copy foundation",
     "route-aware page template improvements",
@@ -31,7 +31,18 @@
     "data privacy hard-fail validator",
     "Cloudflare Astro template closing-tag failure fixed in catch-all route",
     "production Wrangler admin gate var mirrored into env.production.vars",
-    "missing build validator registered in validation registry and matrix contract"
+    "missing build validator registered in validation registry and matrix contract",
+    "Stripe test/live mode-aware checkout resolver",
+    "D1 product seed upsert path preserving test and live Stripe IDs",
+    "Stripe test checkout smoke script",
+    "$0 browser-only Letter Writing Studio",
+    "homepage free Studio CTA explaining start for $0",
+    "30+ offering universe surfaced on public pages",
+    "included offerings rendered on commercial product pages",
+    "buyer-guided top navigation with Products, Letter Studio, Use Cases, Pricing, Resources, and Start Here",
+    "commercial page CTA depth and purchase-next-step sections",
+    "new hard-fail validators for Stripe mode, offering visibility, Letter Studio, navigation architecture, and commercial CTA depth",
+    "Studio route admitted into atlas, sitemap, and E2E journey validation"
   ],
   "notImplemented": [
     "Stripe price changes",
@@ -40,22 +51,27 @@
     "credit repair services",
     "legal or financial advice",
     "guaranteed observed citations",
-    "live Cloudflare/Stripe/Resend/GSC/Bing validation"
+    "live Cloudflare/Stripe/Resend/GSC/Bing validation",
+    "deployed Stripe test checkout smoke against Cloudflare production URL",
+    "browser-rendered Astro build proof in this sandbox"
   ],
   "providerValidation": {
-    "cloudflareDeploy": "PRIOR_RUN_FAILED_ON_ASTRO_TEMPLATE_MISMATCH_SOURCE_PATCH_APPLIED_REDEPLOY_REQUIRED",
-    "githubActionsHostedRun": "VALIDATION_REGISTRY_BUILD_ENTRY_PATCHED_REDO_HOSTED_RUN_REQUIRED",
-    "stripeTestCheckout": "LOCAL_OR_DEPLOYED_VALIDATION_REQUIRED",
+    "cloudflareDeploy": "REDEPLOY_REQUIRED_FOR_THIS_PRODUCT_COMPLETION_ARTIFACT",
+    "githubActionsHostedRun": "VALIDATE_ALL_PASSED_LOCALLY_HOSTED_RUN_REQUIRED",
+    "stripeTestCheckout": "TEST_MODE_WIRED_SMOKE_SCRIPT_ADDED_DEPLOYED_SECRET_RUN_REQUIRED",
     "stripeWebhookDelivery": "LOCAL_OR_DEPLOYED_VALIDATION_REQUIRED",
     "r2PaidDownloadStreaming": "LOCAL_OR_DEPLOYED_VALIDATION_REQUIRED",
     "realCitationWins": "NOT_CLAIMED_WITHOUT_TELEMETRY",
     "sitemapRobotsLlmAnswers": "STRUCTURALLY_VALIDATED",
-    "queryAtlasFanout": "STRUCTURALLY_VALIDATED",
+    "queryAtlasFanout": "STRUCTURALLY_VALIDATED_215_QUERIES_43_FANOUT_PARENTS",
     "workflowFixtureTrace": "STRUCTURALLY_VALIDATED_NOT_LIVE_PROVIDER_PROOF",
     "adminGrowthCockpit": "STRUCTURALLY_VALIDATED",
     "customerDocumentStoragePromise": "STRUCTURALLY_VALIDATED_NO_CUSTOMER_DOCUMENT_CONTENT_STORAGE_PATH_FOUND",
-    "localEntitlementEmailStorage": "REMOVED_FROM_RUNTIME_WRITES"
+    "localEntitlementEmailStorage": "REMOVED_FROM_RUNTIME_WRITES",
+    "letterWritingStudioCost": "ZERO_MARGINAL_COST_BROWSER_ONLY_NO_API_NO_STORAGE",
+    "offeringVisibility": "STRUCTURALLY_VALIDATED_56_OFFERING_ROWS",
+    "navigationArchitecture": "STRUCTURALLY_VALIDATED"
   },
   "createdAt": "2026-07-09T00:40:53.174Z",
-  "updatedAt": "2026-07-09T01:47:00.000Z"
+  "updatedAt": "2026-07-09T02:35:00.000Z"
 }

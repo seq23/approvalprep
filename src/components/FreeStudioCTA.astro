@@ -1,0 +1,22 @@
+---
+import { studioBenefits } from "../data/letterStudio";
+---
+<section class="free-studio-cta band">
+  <div class="shell two">
+    <div>
+      <p class="eyebrow">$0 starting point</p>
+      <h2>Start for $0 before you buy anything.</h2>
+      <p class="lead">Use the free Letter Writing Studio to organize your facts, build a first-pass draft, and see which ApprovalPrep kit fits your situation. Your answers stay in your browser. ApprovalPrep does not store your draft, upload your documents, or charge you to start.</p>
+      <div class="hero-actions">
+        <a class="button primary-button" href="/letter-writing-studio">Open the free Studio</a>
+        <a class="button secondary-button" href="/pricing">Compare paid kits</a>
+      </div>
+    </div>
+    <div class="card">
+      <h3>What you can do for free</h3>
+      <ul class="compact-list">
+        {studioBenefits.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </div>
+</section>

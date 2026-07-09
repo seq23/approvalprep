@@ -9,10 +9,17 @@ Hard failures block release. Warnings are visible but do not block unless they e
 - Product images must fit their assigned containers with no important text, logo, or document edge cropped.
 - The footer must include Products, Popular Guides, Company, Legal, and Resources link groups.
 - Copy must explain what ApprovalPrep does, what the user receives, what happens next, and what ApprovalPrep does not do.
+- The homepage must explain the free `$0` Letter Writing Studio path before asking uncertain users to buy.
+- The top NAV must guide buyers through Products, Letter Studio, Use Cases, Pricing, Resources, and a Start Here CTA.
+- Commercial pages must include repeated CTAs, included offerings, purchase-next-step explanation, trust boundaries, and no-storage reassurance.
+- The 30+ self-service offering universe must be visible on public pages and tied back to the 8 paid products.
+- The Letter Writing Studio must be `$0`, browser-only, no API, no AI/vendor call, no upload, no account, and no stored answers.
 
 ## Payment and Downloads
 
 - Stripe checkout must include SKU metadata.
+- Stripe checkout must choose test price IDs with test keys and live price IDs with live keys.
+- Stripe test checkout must be smoke-tested against the deployed URL before treating checkout as live-proven.
 - Stripe webhooks must verify `stripe-signature` with `STRIPE_WEBHOOK_SECRET`.
 - Paid PDF/DOCX files must not be served directly from `public/downloads`.
 - Verified downloads must use entitlement-protected API links backed by D1/R2.

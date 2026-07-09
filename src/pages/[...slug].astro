@@ -12,12 +12,18 @@ import FinalCTA from "../components/FinalCTA.astro";
 import CreditBoundaryExplainer from "../components/CreditBoundaryExplainer.astro";
 import NextStepsExplainer from "../components/NextStepsExplainer.astro";
 import DataPrivacyNotice from "../components/DataPrivacyNotice.astro";
+import OfferingUniverse from "../components/OfferingUniverse.astro";
+import IncludedOfferings from "../components/IncludedOfferings.astro";
+import PageCTAStack from "../components/PageCTAStack.astro";
+import ProblemAgitationFit from "../components/ProblemAgitationFit.astro";
+import WhatHappensAfterPurchase from "../components/WhatHappensAfterPurchase.astro";
+import TrustAndBoundaryBand from "../components/TrustAndBoundaryBand.astro";
 import manifest from "../../data/routes/route_manifest.json";
-import { routeCopy, boundary, productComparison, routeFamilyCopy } from "../data/content";
+import { routeCopy, boundary, productComparison, routeFamilyCopy, offeringCategories, offeringsForSku, productForSku } from "../data/content";
 
 export function getStaticPaths() {
   return manifest.routes
-    .filter((route) => route.path !== "/" && route.type !== "admin")
+    .filter((route) => route.path !== "/" && route.path !== "/letter-writing-studio" && route.type !== "admin")
     .map((route) => ({ params: { slug: route.path.slice(1) }, props: { route } }));
 }
 
@@ -57,6 +63,9 @@ const skuForRoute = (() => {
 })();
 const ctaHref = route.cta_policy === "purchase" ? `/pricing#${skuForRoute}` : (route.path.includes("apartment") || route.path.includes("rental") ? "/apartment-application" : "/letter-of-explanation");
 const primarySku = route.cta_policy === "purchase" ? skuForRoute : "";
+const routeProduct = productForSku(skuForRoute);
+const routeOfferings = offeringsForSku(skuForRoute);
+const isCommercial = route.cta_policy === "purchase" || route.page_intent === "product";
 ---
 <BaseLayout title={`${route.title} - ApprovalPrep`} description={copy.lead} canonical={canonical} noindex={!route.index}>
   <section class={`hero shell ${isLegal ? "legal-hero" : "hero-split"}`}>
@@ -98,6 +107,7 @@ const primarySku = route.cta_policy === "purchase" ? skuForRoute : "";
         </tbody></table></div>
       </div></section>
       <section class="band"><div class="shell"><p class="eyebrow">Products</p><h2>ApprovalPrep kits</h2><ProductGrid /></div></section>
+      <section class="band"><div class="shell"><p class="eyebrow">All included offerings</p><h2>30+ self-service tools grouped into 8 paid kits.</h2><OfferingUniverse categories={offeringCategories} /></div></section>
     </>
   ) : isGlossary ? (
     <section class="band"><div class="shell grid">
@@ -133,6 +143,12 @@ const primarySku = route.cta_policy === "purchase" ? skuForRoute : "";
   ) : (
     <>
       <section class="band"><div class="shell"><article class="short-answer card"><p class="eyebrow">Short answer</p><p>{copy.shortAnswer}</p></article></div></section>
+      {isCommercial && <PageCTAStack primary={copy.primaryCta} secondary="Start free for $0 first" sku={primarySku} secondaryHref="/letter-writing-studio" />}
+      {isCommercial && <ProblemAgitationFit title="Make the situation easier to review." items={[
+        {title:"The pressure", copy:"A reviewer is asking for clarity, proof, or context. Sending scattered facts can create more questions."},
+        {title:"The better move", copy:"Prepare a clear explanation, attach real supporting documents, and keep a copy trail."},
+        {title:"The boundary", copy:"ApprovalPrep gives self-service tools. It does not contact anyone, create fake documents, or promise approval."}
+      ]} />}
       {copy.decisionContext && (
         <section class="band"><div class="shell">
           <p class="eyebrow">Decision context</p>
@@ -144,6 +160,8 @@ const primarySku = route.cta_policy === "purchase" ? skuForRoute : "";
       <section class="band"><div class="shell"><WhatYouGet title="Who this is for" items={copy.whoFor} /></div></section>
       <section class="band"><div class="shell"><WhatYouGet title="Product / Guide Value" items={copy.value} /></div></section>
       <section class="band"><div class="shell"><WhatYouGet title="What you get" items={copy.whatYouGet} /></div></section>
+      {isCommercial && <IncludedOfferings product={routeProduct} offerings={routeOfferings} />}
+      {isCommercial && <WhatHappensAfterPurchase />}
       {copy.prepBrief && <section class="band"><div class="shell"><WhatYouGet title="What to prepare first" items={copy.prepBrief} /></div></section>}
       {familyCopy?.avoid && <section class="band"><div class="shell"><WhatYouGet title="Avoid these mistakes" items={familyCopy.avoid} /></div></section>}
       {copy.commonMistakes && <section class="band"><div class="shell"><WhatYouGet title="Common mistakes this helps prevent" items={copy.commonMistakes} /></div></section>}
@@ -154,6 +172,7 @@ const primarySku = route.cta_policy === "purchase" ? skuForRoute : "";
       <section class="band"><div class="shell two"><div><h2>What this does not do</h2><p>It does not guarantee approval. It does not create fake documents. It does not contact anyone for you. It does not give legal or financial advice. It does not repair credit for you.</p></div><BoundaryNotice /></div></section>
       <section class="band"><div class="shell"><NextStepsExplainer /></div></section>
       <section class="band"><div class="shell"><DataPrivacyNotice /></div></section>
+      {isCommercial && <TrustAndBoundaryBand />}
       <section class="band"><div class="shell"><WhatYouGet title="Why ApprovalPrep" items={["Plain steps", "Truthful templates only", "Clear next steps", "No fake document help"]} /></div></section>
     </>
   )}
