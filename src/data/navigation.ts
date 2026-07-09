@@ -13,17 +13,6 @@ export const primaryNav = [
     ]
   },
   { title: "Letter Studio", href: "/letter-writing-studio" },
-  {
-    title: "Use Cases",
-    links: [
-      ["/apartment-application", "Rental applications"],
-      ["/credit-letter-kit", "Credit letters"],
-      ["/income-employment-letter-kit", "Income and employment"],
-      ["/loan-prep-letter-kit", "Loan prep"],
-      ["/business-funding-prep-kit", "Business funding"],
-      ["/life-admin-letter-kit", "Life admin"]
-    ]
-  },
   { title: "Pricing", href: "/pricing" },
   {
     title: "Resources",
@@ -39,4 +28,15 @@ export const primaryNav = [
   }
 ];
 
-export const navCta = { href: "/letter-writing-studio", label: "Start Here $0" };
+export const secondaryNav = [
+  ["/credit-letter-kit", "DIY credit letters"],
+  ["/letter-of-explanation", "Explain credit or income"],
+  ["/apartment-application", "Get apartment-ready"],
+  ["/income-employment-letter-kit", "Prepare job and income proof"],
+  ["/loan-prep-letter-kit", "Get loan-ready"],
+  ["/business-funding-prep-kit", "Prepare business funding"],
+  ["/life-admin-letter-kit", "Fix life-admin paperwork"],
+  ["/complete-approvalprep-bundle", "Full document library"]
+];
+
+export const navCta = { href: "/pricing", label: "See pricing" };

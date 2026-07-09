@@ -4,7 +4,7 @@ const files = ["src/pages/index.astro", "src/pages/[...slug].astro", "src/compon
 const missing = files.filter((f) => !fs.existsSync(f));
 if (missing.length) throw new Error(`Missing UX files: ${missing.join(", ")}`);
 const index = fs.readFileSync("src/pages/index.astro", "utf8");
-for (const token of ["Get your application documents ready", "Choose by situation", "Compare kits", "TrustBar", "FinalCTA", "BoundaryNotice"]) {
+for (const token of ["Self-service credit repair letters", "Choose by pressure point", "Compare all kits and prices", "TrustBar", "FinalCTA", "BoundaryNotice"]) {
   if (!index.includes(token)) throw new Error(`Homepage missing UX token: ${token}`);
 }
 const footer = fs.readFileSync("src/components/SiteFooter.astro", "utf8");

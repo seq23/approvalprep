@@ -9,8 +9,10 @@ Hard failures block release. Warnings are visible but do not block unless they e
 - Product images must fit their assigned containers with no important text, logo, or document edge cropped.
 - The footer must include Products, Popular Guides, Company, Legal, and Resources link groups.
 - Copy must explain what ApprovalPrep does, what the user receives, what happens next, and what ApprovalPrep does not do.
-- The homepage must explain the free `$0` Letter Writing Studio path before asking uncertain users to buy.
-- The top NAV must guide buyers through Products, Letter Studio, Use Cases, Pricing, Resources, and a Start Here CTA.
+- The homepage must lead with the strongest compliant buying promise: self-service credit repair letters and approval-ready direct-download document kits without high monthly fees.
+- The homepage must explain the optional free `$0` Letter Writing Studio path without making it look required before purchase.
+- The top NAV must guide buyers through Products, Letter Studio, Pricing, Resources, and a pricing CTA.
+- Use cases must appear in a visible secondary nav rail with the important subpages laid out directly.
 - Commercial pages must include repeated CTAs, included offerings, purchase-next-step explanation, trust boundaries, and no-storage reassurance.
 - The 30+ self-service offering universe must be visible on public pages and tied back to the 8 paid products.
 - The Letter Writing Studio must be `$0`, browser-only, no API, no AI/vendor call, no upload, no account, and no stored answers.

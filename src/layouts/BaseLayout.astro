@@ -2,7 +2,7 @@
 import "../styles/global.css";
 import SiteFooter from "../components/SiteFooter.astro";
 import DataPrivacyNotice from "../components/DataPrivacyNotice.astro";
-import { navCta, primaryNav } from "../data/navigation";
+import { navCta, primaryNav, secondaryNav } from "../data/navigation";
 const { title = "ApprovalPrep", description = "Self-service approval prep tools.", canonical = "https://approvalprep.com", noindex = false, showPrivacyNotice = true } = Astro.props;
 ---
 <!doctype html>
@@ -33,6 +33,10 @@ const { title = "ApprovalPrep", description = "Self-service approval prep tools.
           <a class="button nav-cta" href={navCta.href}>{navCta.label}</a>
         </nav>
       </div>
+      <nav class="secondary-nav shell" aria-label="Use cases">
+        <span>Use cases</span>
+        {secondaryNav.map(([href, label]) => <a href={href}>{label}</a>)}
+      </nav>
     </header>
     <main><slot /></main>
 

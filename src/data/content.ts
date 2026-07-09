@@ -23,40 +23,46 @@ export const whyApprovalPrep = ["Built for application pressure, not vague paper
 
 export const homepageChooser = [
   {
-    "title": "I need to explain a situation",
-    "copy": "Prepare a clear letter for a gap, issue, late payment, job change, rental question, or other application context.",
+    "title": "I need a fast explanation letter",
+    "copy": "Use one $39 direct-download kit for credit, income, job gap, address history, late payment, bank statement, rental issue, life event, or general application explanations.",
     "href": "/letter-of-explanation",
-    "product": "Letter of Explanation"
+    "product": "Letter of Explanation Kit",
+    "cta": "Buy the explanation kit — $39"
   },
   {
-    "title": "I am applying for a rental",
-    "copy": "Organize your renter documents, cover letter, income explanation, rental history details, and follow-up materials.",
+    "title": "I want to get apartment-ready",
+    "copy": "Build a cleaner rental packet before you apply: cover letter, income explanation, rental history explanation, landlord follow-up, and move-in document checklist.",
     "href": "/apartment-application",
-    "product": "Rental Application Kit"
+    "product": "Rental Application Kit",
+    "cta": "Get the rental kit — $129"
   },
   {
-    "title": "I have credit questions",
-    "copy": "Prepare your own credit dispute, goodwill, late-payment, debt-validation, or follow-up letters. ApprovalPrep does not repair credit for you.",
+    "title": "I want self-service credit repair letters",
+    "copy": "Prepare your own credit dispute, goodwill, late-payment, pay-for-delete request, debt-validation, credit-report-error checklist, and follow-up letters.",
     "href": "/credit-letter-kit",
-    "product": "Credit Letter Kit"
+    "product": "Credit Letter Kit",
+    "cta": "Get DIY credit letters — $59"
   },
   {
-    "title": "I need income or work proof",
-    "copy": "Prepare employment, proof-of-income, self-employment, job-change, and employment-gap letters using truthful details.",
+    "title": "I need to prove income or explain work",
+    "copy": "Prepare employment verification, proof-of-income, self-employment, job-change, employment-gap, and bank-statement explanation letters.",
     "href": "/income-employment-letter-kit",
-    "product": "Income + Employment Letter Kit"
+    "product": "Income + Employment Letter Kit",
+    "cta": "Get the income kit — $59"
   },
   {
-    "title": "I am preparing for financing",
-    "copy": "Get document checklists and explanation letters for loan, mortgage, auto, SBA, or business funding review.",
+    "title": "I need to get loan-ready",
+    "copy": "Organize auto, mortgage, personal-loan, income, credit, bank-statement, lender follow-up, and loan document checklist materials before review.",
     "href": "/loan-prep-letter-kit",
-    "product": "Loan / Funding Prep"
+    "product": "Loan Prep Letter Kit",
+    "cta": "Get the loan prep kit — $99"
   },
   {
-    "title": "I want the whole library",
-    "copy": "Get every current ApprovalPrep kit in one bundle so you do not have to choose one paperwork lane today.",
+    "title": "I want every current document kit",
+    "copy": "Get the full direct-download library: credit letters, explanation letters, rental prep, income proof, loan prep, business funding, and life-admin paperwork.",
     "href": "/complete-approvalprep-bundle",
-    "product": "Complete Bundle"
+    "product": "Complete ApprovalPrep Bundle",
+    "cta": "Get the full bundle — $249"
   }
 ];
 

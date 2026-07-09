@@ -15,37 +15,42 @@ import FreeStudioCTA from "../components/FreeStudioCTA.astro";
 import OfferingUniverse from "../components/OfferingUniverse.astro";
 import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComparison, offeringCategories } from "../data/content";
 ---
-<BaseLayout title="ApprovalPrep - Self-Service Approval Prep" description="Prepare truthful letters, checklists, and application packets before you apply.">
+<BaseLayout title="ApprovalPrep - Self-Service Credit Repair Letters and Approval Prep" description="Download self-service credit repair letters, explanation letters, rental packets, income proof templates, and approval-prep document kits.">
   <section class="hero hero-split shell">
     <div>
-      <p class="eyebrow">Self-service approval prep</p>
-      <h1>Get your application documents ready before someone asks twice.</h1>
-      <p class="lead">ApprovalPrep helps you prepare clear, truthful letters, checklists, and document packets for credit questions, rental applications, income verification, loan reviews, business funding, and everyday paperwork issues.</p>
-      <p class="supporting-copy">Choose the situation, answer plain-language prompts, download your files, review them, and send them yourself when ready.</p>
-      <OutcomeCTA primary="Start free for $0" secondary="Compare kits" href="/letter-writing-studio" secondaryHref="/pricing" />
+      <p class="eyebrow">DIY credit letters + approval paperwork</p>
+      <h1>Self-service credit repair letters and approval-ready documents, without the high monthly fees.</h1>
+      <p class="lead">ApprovalPrep gives you direct-download PDF and editable DOCX kits for credit report questions, goodwill letters, debt validation, rental applications, income proof, loan reviews, and explanation letters.</p>
+      <p class="supporting-copy">Buy the kit, download the files, fill in your true facts, and send the paperwork yourself. The free Studio is optional if you want to draft before you buy.</p>
+      <OutcomeCTA primary="Get DIY credit letters — $59" secondary="Compare all kits and prices" href="/pricing#credit-letter-kit" secondaryHref="/pricing" />
       <TrustBar signals={trustSignals} />
     </div>
     <aside class="hero-panel" aria-label="ApprovalPrep process">
-      <p class="eyebrow">What you control</p>
-      <h2>Prepare before the application pressure hits.</h2>
+      <p class="eyebrow">Why people use it</p>
+      <h2>Fix the paperwork story before it costs you the apartment, job, loan, or account.</h2>
       <ol class="compact-list">
-        <li>Pick the paperwork situation.</li>
-        <li>Use truthful prompts and checklists.</li>
-        <li>Download PDF + editable DOCX files.</li>
-        <li>Review and send the materials yourself.</li>
+        <li>Challenge possible credit report errors with your own prepared letters.</li>
+        <li>Explain late payments, gaps, income changes, or address history clearly.</li>
+        <li>Build a stronger rental, lender, employer, or funding packet before review.</li>
+        <li>Pay once for the kit instead of starting an open-ended monthly service.</li>
       </ol>
-      <div class="notice mini-notice"><strong>Boundary:</strong> no credit repair, no fake documents, no legal or financial advice, no approval guarantee.</div>
+      <div class="hero-actions">
+        <a class="button primary-button" href="/pricing">See kits from $39</a>
+        <a class="button secondary-button" href="/letter-writing-studio">Draft for $0 first</a>
+      </div>
     </aside>
   </section>
   <section class="band" id="choose-path"><div class="shell">
-    <p class="eyebrow">Choose by situation</p>
-    <h2>Start with the problem you need to prepare for.</h2>
+    <p class="eyebrow">Choose by pressure point</p>
+    <h2>What are you trying to get ready for?</h2>
+    <p class="lead">People do not shop for paperwork. They shop for the next approval that paperwork can protect. Start with the situation, then buy the direct-download kit that matches it.</p>
     <div class="decision-grid">
       {homepageChooser.map((item) => (
         <a class="decision-card" href={item.href}>
           <span>{item.product}</span>
           <h3>{item.title}</h3>
           <p>{item.copy}</p>
+          <strong>{item.cta}</strong>
         </a>
       ))}
     </div>
@@ -59,15 +64,15 @@ import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComp
     </tbody></table></div>
   </div></section>
   <section class="band"><div class="shell">
-    <p class="eyebrow">30+ self-service documents</p>
-    <h2>Eight paid kits cover the full ApprovalPrep offering universe.</h2>
-    <p class="lead">Scan by paperwork lane first. Each kit groups related letters, checklists, and next steps so buyers do not have to sort through dozens of separate products.</p>
+    <p class="eyebrow">30+ self-service documents. 8 direct-download kits.</p>
+    <h2>Buy one kit, get the related letters and checklists together.</h2>
+    <p class="lead">The offer is intentionally simple: you do not buy every letter one by one. Each paid kit bundles the letters, checklists, examples, and next steps for that paperwork lane, then unlocks as PDF + editable DOCX after checkout.</p>
     <OfferingUniverse categories={offeringCategories} variant="summary" />
   </div></section>
   <section class="band"><div class="shell"><p class="eyebrow">Products</p><h2>Choose the kit that matches the application pressure.</h2><ProductGrid /></div></section>
   <section class="band"><div class="shell"><HowItWorks steps={howItWorks} /></div></section>
   <section class="band"><div class="shell"><WhatYouGet title="Why ApprovalPrep" items={whyApprovalPrep} /></div></section>
-  <section class="band"><div class="shell"><UseCaseList items={["You need to explain a credit, income, rental, work, loan, or business funding question in plain words.", "You want your packet ready before a landlord, lender, employer, bureau, or office asks for more documents.", "You want self-service tools that help you prepare without storing customer documents or contacting anyone for you."]} /></div></section>
+  <section class="band"><div class="shell"><UseCaseList items={["You want self-service credit repair letters or credit explanation paperwork you can prepare and send yourself.", "You want to get apartment-ready, job-ready, loan-ready, or funding-ready before a reviewer asks for more documents.", "You want a lower-cost paperwork kit instead of an open-ended service, while keeping control of what you send and when."]} /></div></section>
   <section class="band"><div class="shell"><NextStepsExplainer /></div></section>
   <section class="band"><div class="shell"><DataPrivacyNotice /></div></section>
   <section class="band"><div class="shell"><CreditBoundaryExplainer /></div></section>

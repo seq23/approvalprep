@@ -36,6 +36,10 @@ a { color: var(--brand-dark); }
 .nav-menu-panel a { min-height: 38px; padding: 6px 8px; border-radius: 6px; }
 .nav-menu-panel a:hover { background: var(--color-soft); text-decoration: none; }
 .nav-cta { padding: 10px 16px; min-height: 40px; color: #fff !important; }
+.secondary-nav { display: flex; align-items: center; gap: 10px; padding: 0 0 12px; overflow-x: auto; scrollbar-width: thin; }
+.secondary-nav span { flex: 0 0 auto; color: var(--muted); font-size: .78rem; font-weight: 900; text-transform: uppercase; letter-spacing: .08em; }
+.secondary-nav a { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 34px; border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px; background: #fff; color: var(--brand-dark); text-decoration: none; font-size: .86rem; font-weight: 850; }
+.secondary-nav a:hover { background: var(--color-soft); }
 .hero { padding: 58px 0 38px; }
 .hero h1 { font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 4.2rem); line-height: 1.02; margin: 10px 0 16px; max-width: 880px; letter-spacing: 0; }
 h2 { font-family: var(--font-display); letter-spacing: 0; }
@@ -88,6 +92,7 @@ textarea { min-height: 130px; }
   .nav-menu summary { width: 100%; min-height: 42px; }
   .nav-menu-panel { position: static; box-shadow: none; margin-bottom: 8px; width: 100%; }
   .nav-cta { width: 100%; justify-content: center; }
+  .secondary-nav { width: 100%; padding-bottom: 10px; }
   .hero { padding-top: 34px; }
   .hero h1 { font-size: clamp(2rem, 12vw, 3.1rem); }
   .hero-actions, .actions { flex-direction: column; width: 100%; }
@@ -180,6 +185,7 @@ button:disabled { opacity: .7; cursor: wait; transform: none; }
 .decision-card:hover { transform: translateY(-2px); box-shadow: 0 24px 55px rgba(16,32,31,.1); }
 .decision-card span { color: var(--brand-dark); font-weight: 900; font-size: .86rem; }
 .decision-card h3 { margin: 8px 0; }
+.decision-card strong { display: inline-flex; margin-top: 8px; color: var(--ink); }
 .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: #fff; box-shadow: 0 18px 45px rgba(16,32,31,.06); }
 .comparison-table th { background: var(--color-soft); font-weight: 900; }
 .comparison-table th, .comparison-table td { padding: 14px; }
