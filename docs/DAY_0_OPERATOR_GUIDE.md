@@ -57,3 +57,20 @@ Run `npm run validate:all`, `npm run build`, and `npm run workflows:trace`.
 ## How to recover
 
 Read the failing validator, fix only the failing file or rule, rerun validation, then package a new full ZIP snapshot.
+
+---
+
+# Safe Harbor Citation OS — Day-0 Addendum
+
+For the current ApprovalPrep repo, Day-0 operators should also read:
+
+- `docs/DAY_0_VA_SAFE_HARBOR_CITATION_OS_GUIDE.md`
+- `docs/SYSTEM_MAP_PLAIN_ENGLISH.md`
+- `docs/REAL_VS_FIXTURE_DATA_GUIDE.md`
+- `docs/WORKFLOW_AUTOMATION_MAP.md`
+- `docs/admin/CONTENT_APPROVAL_WORKFLOW.md`
+- `docs/automation/HANDS_OFF_AUTOMATION_POLICY.md`
+
+Plain-English rule:
+
+ApprovalPrep can autopublish safe educational and template-preview content only when the Safe Harbor checks pass. Regulated, unsupported, or edge-case content must block or enter the approval queue. Paid PDF and DOCX files must remain protected behind checkout.

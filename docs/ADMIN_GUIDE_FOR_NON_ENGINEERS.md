@@ -18,3 +18,20 @@ Act on Needs Owner, hard failures, payment/download failures, exposed secrets, a
 ## What to ignore
 
 Ignore normal success, fixture trace success, dry-run success, routine sitemap updates, and routine health snapshots.
+
+---
+
+# Safe Harbor Admin Panel Addendum
+
+The admin area now includes Safe Harbor and citation-operation signals.
+
+A non-engineer should read the Safe Harbor panel as follows:
+
+- SAFE_AUTOPUBLISH: passed guardrails
+- REWRITTEN_AND_AUTOPUBLISHED: risky wording was safely rewritten before publication
+- BLOCKED_PROHIBITED_CLAIM: do not publish
+- BLOCKED_SOURCE_REQUIRED: needs approved source coverage
+- BLOCKED_MISSING_DISCLOSURE: needs required disclosure
+- APPROVAL_REQUIRED_EDGE_CASE: owner/operator review needed
+
+Do not override blocked regulated content manually. Copy the decision, path, and reason, then escalate.
