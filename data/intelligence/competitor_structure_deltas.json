@@ -7,16 +7,20 @@
       "found": [
         {
           "path": "/robots.txt",
-          "status": "SOURCE_ERROR",
-          "error": "fetch failed"
+          "status": 200,
+          "sitemapMentions": [
+            "https://templatearchive.com/sitemap_index.xml"
+          ],
+          "urlCount": 0
         },
         {
           "path": "/sitemap.xml",
-          "status": "SOURCE_ERROR",
-          "error": "fetch failed"
+          "status": 403,
+          "sitemapMentions": [],
+          "urlCount": 0
         }
       ],
-      "checkedAt": "2026-07-08T13:21:57.110Z"
+      "checkedAt": "2026-07-09T11:21:12.341Z"
     },
     {
       "competitorId": "rocket_lawyer",
@@ -24,16 +28,21 @@
       "found": [
         {
           "path": "/robots.txt",
-          "status": "SOURCE_ERROR",
-          "error": "fetch failed"
+          "status": 200,
+          "sitemapMentions": [
+            "https://www.rocketlawyer.com/index.xml",
+            "https://www.rocketlawyer.com/llms.txt"
+          ],
+          "urlCount": 0
         },
         {
           "path": "/sitemap.xml",
-          "status": "SOURCE_ERROR",
-          "error": "fetch failed"
+          "status": 200,
+          "sitemapMentions": [],
+          "urlCount": 7
         }
       ],
-      "checkedAt": "2026-07-08T13:22:02.115Z"
+      "checkedAt": "2026-07-09T11:21:12.503Z"
     }
   ]
 }
