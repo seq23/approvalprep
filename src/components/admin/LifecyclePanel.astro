@@ -1,0 +1,17 @@
+---
+const { title, description, decay, consolidation } = Astro.props;
+const items = decay.items || [];
+const candidates = consolidation.candidates || [];
+const approvalItems = items.filter((item) => item.ownerReviewRequired);
+---
+<article class="card dashboard-card">
+  <p class="eyebrow">Lifecycle control</p>
+  <h3>{title}</h3>
+  <p>{description}</p>
+  <ul class="compact-list">
+    <li><strong>{items.length}</strong> refresh recommendations</li>
+    <li><strong>{approvalItems.length}</strong> approval-gated refreshes</li>
+    <li><strong>{candidates.length}</strong> consolidation candidates</li>
+  </ul>
+  <p class="fine">Lifecycle records are structural unless live provider telemetry is present. Consolidations and redirects stay approval-gated.</p>
+</article>

@@ -4,6 +4,10 @@ import products from "../../data/products/products.json";
 import atoms from "../../data/atoms/answer_atoms.json";
 import claims from "../../data/citations/claim_registry.json";
 import sources from "../../data/citations/source_registry.json";
+import generatedAnswers from "../../data/content/generated_answers.json";
+import toolRegistry from "../../data/tools/tool_registry.json";
+import templateRegistry from "../../data/templates/template_registry.json";
+import reportRegistry from "../../data/reports/public_report_registry.json";
 
 export const GET: APIRoute = async () => new Response(`# ApprovalPrep Full LLM Index
 
@@ -39,6 +43,18 @@ Owner: https://approvalprep.com${atom.route_owner}
 Text: ${atom.text}
 Claims: ${(atom.claim_ids || []).join(", ") || "none"}
 `).join("\n")}
+
+## Published Blog Answer Pages
+${generatedAnswers.answers.filter((answer) => answer.status === "published_by_contract").map((answer) => `- https://approvalprep.com/blog/${answer.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 100)} | ${answer.title} | related=${answer.route} | risk=${answer.riskLevel}`).join("\n")}
+
+## Free Tools
+${toolRegistry.tools.filter((tool) => tool.status === "published_by_contract").map((tool) => `- https://approvalprep.com${tool.path} | ${tool.title} | ${tool.primaryQuery} | product=${tool.targetProductSku}`).join("\n")}
+
+## Template Previews
+${templateRegistry.templates.filter((template) => template.status === "published_by_contract").map((template) => `- https://approvalprep.com${template.path} | ${template.title} | ${template.primaryQuery} | product=${template.targetProductSku}`).join("\n")}
+
+## Public Reports
+${reportRegistry.reports.filter((report) => report.status === "published_by_contract").map((report) => `- https://approvalprep.com${report.path} | ${report.title} | ${report.primaryQuery} | sources=${(report.sourceIds || []).join(", ")}`).join("\n")}
 
 ## Claims
 ${claims.claims.map((claim) => `- ${claim.claim_id}: ${claim.claim_text} | risk=${claim.risk_class} | sources=${claim.source_ids.join(", ")}`).join("\n")}

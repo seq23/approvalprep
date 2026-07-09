@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import RelatedContent from "../../components/RelatedContent.astro";
+import TrustAndBoundaryBand from "../../components/TrustAndBoundaryBand.astro";
+import { webPageSchema, breadcrumbSchema, itemListSchema } from "../../lib/schema";
+import registry from "../../../data/templates/template_registry.json";
+
+export function getStaticPaths() {
+  return registry.templates
+    .filter((template) => template.status === "published_by_contract")
+    .map((template) => ({ params: { slug: template.path.replace(/^\/templates\//, "") }, props: { template } }));
+}
+const { template } = Astro.props;
+const canonical = `https://approvalprep.com${template.path}`;
+const schema = [
+  webPageSchema({ title: template.title, description: template.summary, url: canonical }),
+  breadcrumbSchema(template.path),
+  itemListSchema({ name: `${template.title} safe preview`, items: template.safePreview })
+];
+---
+<BaseLayout title={`${template.title} - ApprovalPrep`} description={template.summary} canonical={canonical} schema={schema}>
+  <section class="hero shell hero-split">
+    <div>
+      <p class="eyebrow">Template guidance</p>
+      <h1>{template.title}</h1>
+      <p class="lead">{template.summary}</p>
+      <div class="hero-actions">
+        <a class="button primary-button" href={`/pricing#${template.targetProductSku}`}>Get the editable kit</a>
+        <a class="button secondary-button" href="/letter-writing-studio">Start free for $0</a>
+      </div>
+    </div>
+    <aside class="hero-panel">
+      <p class="eyebrow">Paid file boundary</p>
+      <h2>Preview the structure. Buy the editable kit.</h2>
+      <p>{template.paidBoundary}</p>
+    </aside>
+  </section>
+  <section class="band"><div class="shell">
+    <p class="eyebrow">Safe preview</p>
+    <h2>What the template should help you organize.</h2>
+    <div class="card"><ol class="compact-list">{template.safePreview.map((item) => <li>{item}</li>)}</ol></div>
+  </div></section>
+  <RelatedContent path={template.path} title="Related guides, tools, and kits" />
+  <TrustAndBoundaryBand />
+</BaseLayout>

@@ -28,6 +28,17 @@ for (const file of ["functions/api/verify-download.js", "functions/api/stripe-we
   if (/customer_details\?\.email|session\.customer_email/.test(text)) fail(`[data-privacy] local entitlement code must not store Stripe customer email: ${file}`);
 }
 
+
+const trackEvent = fs.existsSync("functions/api/track-event.js") ? fs.readFileSync("functions/api/track-event.js", "utf8") : "";
+if (trackEvent) {
+  for (const blocked of ["letterText", "documentText", "email", "phone", "name", "address", "ssn", "dob", "fullIp", "userAgentRaw", "freeText"]) {
+    if (!trackEvent.includes(blocked)) fail(`[data-privacy] track-event missing blocked field guard: ${blocked}`);
+  }
+  for (const sensitive of ["customer_email", "user_agent", "request.headers.get('user-agent')", "cf-connecting-ip", "x-forwarded-for"]) {
+    if (trackEvent.toLowerCase().includes(sensitive)) fail(`[data-privacy] track-event may capture sensitive header/data: ${sensitive}`);
+  }
+}
+
 const downloadVerify = fs.readFileSync("functions/api/download-verify.js", "utf8");
 if (downloadVerify.includes("SELECT *") || downloadVerify.includes("customer_email")) fail("[data-privacy] download-verify must not expose raw entitlement records");
 
@@ -38,6 +49,7 @@ if (/body:\s*JSON\.stringify\(\{[^}]*answer|body:\s*JSON\.stringify\(\{[^}]*docu
 
 const allowedOperational = [
   "functions/api/resend-download-email.js",
+  "functions/api/track-event.js",
   "functions/api/admin/",
   "functions/_runtime/admin.js",
   "functions/_runtime/catalog.js"

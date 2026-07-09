@@ -21,12 +21,13 @@ import TrustAndBoundaryBand from "../components/TrustAndBoundaryBand.astro";
 import PricingDeck from "../components/PricingDeck.astro";
 import GuidePlaybook from "../components/GuidePlaybook.astro";
 import LegalPolicyPage from "../components/LegalPolicyPage.astro";
+import RelatedContent from "../components/RelatedContent.astro";
 import manifest from "../../data/routes/route_manifest.json";
 import { routeCopy, boundary, productCards, productComparison, routeFamilyCopy, offeringCategories, offeringsForSku, productForSku } from "../data/content";
 
 export function getStaticPaths() {
   return manifest.routes
-    .filter((route) => !["/", "/letter-writing-studio", "/resources", "/blog", "/contact", "/methodology"].includes(route.path) && route.type !== "admin")
+    .filter((route) => !["/", "/letter-writing-studio", "/resources", "/blog", "/contact", "/methodology"].includes(route.path) && !route.path.startsWith("/tools/") && !route.path.startsWith("/templates/") && !route.path.startsWith("/reports/") && route.type !== "admin")
     .map((route) => ({ params: { slug: route.path.slice(1) }, props: { route } }));
 }
 

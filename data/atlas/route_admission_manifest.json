@@ -377,6 +377,204 @@
       "risk": "medium",
       "index": true,
       "minimum_queries": 5
+    },
+    {
+      "route": "/letter-of-explanation/address-history",
+      "family": "letter_studio",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5,
+      "source": "hostile_review_atlas_repair_2026_07_09"
+    },
+    {
+      "route": "/letter-of-explanation/bank-statement-deposits",
+      "family": "letter_studio",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5,
+      "source": "hostile_review_atlas_repair_2026_07_09"
+    },
+    {
+      "route": "/letter-of-explanation/income-change",
+      "family": "income_employment",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5,
+      "source": "hostile_review_atlas_repair_2026_07_09"
+    },
+    {
+      "route": "/tools/apartment-application-readiness-checklist",
+      "family": "tools",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "low",
+      "index": true,
+      "minimum_queries": 5,
+      "source": "hostile_review_atlas_repair_2026_07_09"
+    },
+    {
+      "route": "/tools/proof-of-income-packet-checklist",
+      "family": "tools",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "low",
+      "index": true,
+      "minimum_queries": 5,
+      "source": "hostile_review_atlas_repair_2026_07_09"
+    },
+    {
+      "route": "/tools/business-funding-document-checklist",
+      "family": "tools",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "low",
+      "index": true,
+      "minimum_queries": 5,
+      "source": "hostile_review_atlas_repair_2026_07_09"
+    },
+    {
+      "route": "/tools/mortgage-document-readiness-checklist",
+      "family": "tools",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "low",
+      "index": true,
+      "minimum_queries": 5,
+      "source": "hostile_review_atlas_repair_2026_07_09"
+    },
+    {
+      "route": "/tools/car-loan-document-checklist",
+      "family": "tools",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "low",
+      "index": true,
+      "minimum_queries": 5,
+      "source": "hostile_review_atlas_repair_2026_07_09"
+    },
+    {
+      "route": "/tools/important-documents-folder-checklist",
+      "family": "tools",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "low",
+      "index": true,
+      "minimum_queries": 5,
+      "source": "hostile_review_atlas_repair_2026_07_09"
+    },
+    {
+      "route": "/templates/letters/address-history-explanation",
+      "family": "templates",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5,
+      "source": "hostile_review_atlas_repair_2026_07_09"
+    },
+    {
+      "route": "/templates/letters/employment-gap-explanation",
+      "family": "templates",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5,
+      "source": "hostile_review_atlas_repair_2026_07_09"
+    },
+    {
+      "route": "/templates/letters/bank-statement-deposit-explanation",
+      "family": "templates",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5,
+      "source": "hostile_review_atlas_repair_2026_07_09"
+    },
+    {
+      "route": "/templates/rental/rental-application-cover-letter",
+      "family": "templates",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5,
+      "source": "hostile_review_atlas_repair_2026_07_09"
+    },
+    {
+      "route": "/templates/income/self-employed-proof-of-income",
+      "family": "templates",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5,
+      "source": "hostile_review_atlas_repair_2026_07_09"
+    },
+    {
+      "route": "/reports/document-readiness-index",
+      "family": "public_reports",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "low",
+      "index": true,
+      "minimum_queries": 5,
+      "source": "hostile_review_atlas_repair_2026_07_09"
+    },
+    {
+      "route": "/reports/apartment-application-prep-report",
+      "family": "public_reports",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5,
+      "source": "hostile_review_atlas_repair_2026_07_09"
+    },
+    {
+      "route": "/reports/small-business-funding-document-prep-report",
+      "family": "public_reports",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5,
+      "source": "hostile_review_atlas_repair_2026_07_09"
+    },
+    {
+      "route": "/rental-application/cover-letter",
+      "family": "apartment_rental",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5,
+      "source": "citation_os_self_heal"
+    },
+    {
+      "route": "/proof-of-income/self-employed",
+      "family": "income_employment",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5,
+      "source": "citation_os_self_heal"
+    },
+    {
+      "route": "/auto-loan/income-verification",
+      "family": "auto",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5,
+      "source": "citation_os_self_heal"
+    },
+    {
+      "route": "/business-funding/documents-for-llc",
+      "family": "business_funding",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5,
+      "source": "citation_os_self_heal"
+    },
+    {
+      "route": "/mortgage/gift-letter-explanation",
+      "family": "mortgage",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5,
+      "source": "citation_os_self_heal"
     }
   ]
 }

@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import RelatedContent from "../../components/RelatedContent.astro";
+import TrustAndBoundaryBand from "../../components/TrustAndBoundaryBand.astro";
+import { articleSchema, breadcrumbSchema, itemListSchema } from "../../lib/schema";
+import registry from "../../../data/reports/public_report_registry.json";
+
+export function getStaticPaths() {
+  return registry.reports
+    .filter((report) => report.status === "published_by_contract")
+    .map((report) => ({ params: { slug: report.path.split("/").pop() }, props: { report } }));
+}
+const { report } = Astro.props;
+const canonical = `https://approvalprep.com${report.path}`;
+const schema = [
+  articleSchema({ title: report.title, description: report.summary, url: canonical, datePublished: registry.generatedAt }),
+  breadcrumbSchema(report.path),
+  itemListSchema({ name: `${report.title} sections`, items: report.sections.map((section) => section.heading) })
+];
+---
+<BaseLayout title={`${report.title} - ApprovalPrep`} description={report.summary} canonical={canonical} schema={schema}>
+  <section class="hero shell hero-split">
+    <div>
+      <p class="eyebrow">Public report</p>
+      <h1>{report.title}</h1>
+      <p class="lead">{report.summary}</p>
+      <div class="hero-actions">
+        <a class="button primary-button" href="/resources">Browse resources</a>
+        <a class="button secondary-button" href={`/pricing#${report.targetProductSku}`}>Compare related kit</a>
+      </div>
+    </div>
+    <aside class="hero-panel">
+      <p class="eyebrow">Methodology</p>
+      <h2>Educational, not predictive.</h2>
+      <p>{report.methodology}</p>
+    </aside>
+  </section>
+  <section class="band"><div class="shell">
+    <p class="eyebrow">Report sections</p>
+    <div class="grid">
+      {report.sections.map((section) => <article class="card"><h2>{section.heading}</h2><p>{section.body}</p></article>)}
+    </div>
+  </div></section>
+  <section class="band"><div class="shell two">
+    <article class="notice"><strong>Report boundary:</strong><p>This report is a preparation resource. It does not claim approval odds, rankings, legal advice, credit repair, underwriting advice, or live market research.</p></article>
+    <article class="notice"><strong>Source model:</strong><p>Source identifiers: {report.sourceIds.join(", ")}. Owned methodology and boundary sources are tracked in the report source registry.</p></article>
+  </div></section>
+  <RelatedContent path={report.path} title="Related ApprovalPrep resources" />
+  <TrustAndBoundaryBand />
+</BaseLayout>

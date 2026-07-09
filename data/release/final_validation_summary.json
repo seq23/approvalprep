@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-09T23:27:27.849Z",
+  "status": "PASS_IN_ARTIFACT_SANDBOX_LOCAL_UPDATER_SHOULD_REPEAT",
+  "artifactName": "approvalprep-main_PHASE_A-F_HOSTILE_REVIEW_FIX_07-09-26.zip",
+  "hostileReviewFindings": [
+    {
+      "id": "missing-source-refresh-script",
+      "severity": "hard_fail",
+      "status": "fixed",
+      "note": "citation-os:weekly referenced citations:source-refresh without an implemented package script."
+    },
+    {
+      "id": "source-evidence-builders-missing",
+      "severity": "hard_fail",
+      "status": "fixed",
+      "note": "Added unsupported claims, source quality, source depth, and source refresh builders."
+    },
+    {
+      "id": "nested-npm-runner-instability",
+      "severity": "hard_fail",
+      "status": "fixed",
+      "note": "validate:all now runs package scripts directly; daily/weekly workflows use deterministic sequence runner."
+    }
+  ],
+  "validation": {
+    "build": "PASS",
+    "validateAll": "PASS",
+    "citationOsDaily": "PASS",
+    "citationOsWeekly": "PASS",
+    "zipIntegrity": "PASS_AFTER_REOPEN"
+  }
+}

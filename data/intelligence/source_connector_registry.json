@@ -8,8 +8,8 @@
       "cost": "free",
       "script": "scripts/intelligence/ingest-gsc.mjs",
       "requiredEnv": [
-        "GOOGLE_SEARCH_CONSOLE_SITE_URL",
-        "GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN"
+        "GSC_SITE_URL",
+        "GSC_ACCESS_TOKEN"
       ],
       "states": [
         "COMPLETE",
@@ -17,7 +17,12 @@
         "SOURCE_ERROR",
         "NO_DATA"
       ],
-      "paidUpgrade": false
+      "paidUpgrade": false,
+      "optionalEnv": [
+        "GOOGLE_SEARCH_CONSOLE_SITE_URL",
+        "GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN",
+        "GSC_SEARCH_ANALYTICS_IMPORT_FILE"
+      ]
     },
     {
       "id": "google_url_inspection",
@@ -25,8 +30,8 @@
       "cost": "free",
       "script": "scripts/intelligence/ingest-gsc-url-inspection.mjs",
       "requiredEnv": [
-        "GOOGLE_SEARCH_CONSOLE_SITE_URL",
-        "GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN"
+        "GSC_SITE_URL",
+        "GSC_ACCESS_TOKEN"
       ],
       "states": [
         "COMPLETE",
@@ -34,7 +39,13 @@
         "SOURCE_ERROR",
         "NO_DATA"
       ],
-      "paidUpgrade": false
+      "paidUpgrade": false,
+      "optionalEnv": [
+        "GOOGLE_SEARCH_CONSOLE_SITE_URL",
+        "GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN",
+        "GSC_URL_INSPECTION_IMPORT_FILE",
+        "GSC_URL_INSPECTION_LIMIT"
+      ]
     },
     {
       "id": "bing_webmaster",
@@ -51,7 +62,10 @@
         "SOURCE_ERROR",
         "NO_DATA"
       ],
-      "paidUpgrade": false
+      "paidUpgrade": false,
+      "optionalEnv": [
+        "BING_WEBMASTER_IMPORT_FILE"
+      ]
     },
     {
       "id": "indexnow",
@@ -68,7 +82,12 @@
         "SOURCE_ERROR",
         "NO_DATA"
       ],
-      "paidUpgrade": false
+      "paidUpgrade": false,
+      "optionalEnv": [
+        "RUN_MODE",
+        "INDEXNOW_MODE",
+        "INDEXNOW_CHANGED_ONLY"
+      ]
     },
     {
       "id": "owned_site_crawler",
@@ -147,6 +166,28 @@
         "SOURCE_ERROR"
       ],
       "paidUpgrade": false
+    },
+    {
+      "id": "cloudflare_crawler_logs",
+      "type": "owned_crawler_telemetry",
+      "cost": "free_or_existing_cloudflare_plan",
+      "script": "scripts/intelligence/ingest-cloudflare-crawler-logs.mjs",
+      "requiredEnv": [
+        "CLOUDFLARE_ACCOUNT_ID",
+        "CLOUDFLARE_ZONE_ID",
+        "CLOUDFLARE_API_TOKEN"
+      ],
+      "optionalEnv": [
+        "CLOUDFLARE_CRAWLER_LOG_IMPORT_FILE"
+      ],
+      "states": [
+        "COMPLETE",
+        "NOT_CONFIGURED",
+        "SOURCE_ERROR",
+        "NO_DATA"
+      ],
+      "paidUpgrade": false
     }
-  ]
+  ],
+  "lastUpdatedAt": "2026-07-09T21:05:00.000Z"
 }

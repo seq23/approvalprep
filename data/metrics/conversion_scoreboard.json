@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-09T21:19:33.724Z",
+  "warning": "Conversion tracking is privacy-safe structural instrumentation. Live conversion volume is not claimed without deployed runtime events.",
+  "metrics": [
+    {
+      "label": "Allowed privacy-safe event types",
+      "value": 8,
+      "source": "conversion_events_schema",
+      "claimType": "structural"
+    },
+    {
+      "label": "Blocked sensitive fields",
+      "value": 11,
+      "source": "conversion_events_schema",
+      "claimType": "structural"
+    },
+    {
+      "label": "Live conversion events imported",
+      "value": 0,
+      "source": "conversion_report",
+      "claimType": "live_or_zero"
+    },
+    {
+      "label": "Runtime tracking endpoint present",
+      "value": 1,
+      "source": "functions/api/track-event.js",
+      "claimType": "structural"
+    },
+    {
+      "label": "Checkout/download E2E proof present",
+      "value": 1,
+      "source": "reports/ops/local-checkout-download-e2e.json",
+      "claimType": "proof_artifact"
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-09T23:26:51.066Z",
+  "status": "measurement_foundation",
+  "warning": "Confirmed citations are not claimed here unless imported into an approved citation ledger. This scoreboard measures citation readiness and available provider telemetry only.",
+  "sourceStates": [
+    {
+      "name": "gsc",
+      "mode": "unavailable",
+      "fetchedAt": null,
+      "live": false,
+      "note": "not live provider data; do not claim live performance"
+    },
+    {
+      "name": "bing",
+      "mode": "unavailable",
+      "fetchedAt": null,
+      "live": false,
+      "note": "not live provider data; do not claim live performance"
+    },
+    {
+      "name": "indexnow",
+      "mode": "unavailable",
+      "fetchedAt": null,
+      "live": false,
+      "note": "not live provider data; do not claim live performance"
+    }
+  ],
+  "metrics": [
+    {
+      "label": "Citation targets",
+      "value": 440,
+      "source": "repo_static",
+      "claimType": "structural"
+    },
+    {
+      "label": "Citation opportunities",
+      "value": 0,
+      "source": "repo_static",
+      "claimType": "structural"
+    },
+    {
+      "label": "Claims in registry",
+      "value": 5,
+      "source": "repo_static",
+      "claimType": "structural"
+    },
+    {
+      "label": "Claims with source coverage",
+      "value": 0,
+      "source": "repo_static",
+      "claimType": "structural"
+    },
+    {
+      "label": "Sources in registry",
+      "value": 5,
+      "source": "repo_static",
+      "claimType": "structural"
+    },
+    {
+      "label": "GSC live rows",
+      "value": 0,
+      "source": "gsc",
+      "claimType": "unavailable"
+    },
+    {
+      "label": "Bing live rows",
+      "value": 0,
+      "source": "bing",
+      "claimType": "unavailable"
+    },
+    {
+      "label": "IndexNow receipts",
+      "value": 0,
+      "source": "indexnow",
+      "claimType": "submission_receipt"
+    }
+  ]
+}

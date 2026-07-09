@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "4.2.1",
+  "workflow": "citation-os-daily.yml",
+  "traceMode": "FIXTURE_TRACE_ONLY_NOT_PRODUCTION_TELEMETRY",
+  "proof_type": "fixture",
+  "real_telemetry": false,
+  "may_be_used_for_growth_claims": false,
+  "manualReady": true,
+  "scheduled": true,
+  "pushTriggered": false,
+  "pullRequestTriggered": false,
+  "hasCheckout": true,
+  "hasNodeSetup": true,
+  "nodeVersionOk": true,
+  "runnerPinned": true,
+  "timeoutSet": true,
+  "usesNpmInstall": false,
+  "usesNpmCi": false,
+  "buildsProject": false,
+  "dependencyInstallPolicyOk": true,
+  "fixtureTraceInput": true,
+  "secretRefs": [],
+  "npmScripts": [
+    "citation-os:daily"
+  ],
+  "missingNpmScripts": [],
+  "expectedDataTouches": [],
+  "proofBoundary": "This trace proves workflow shape, commands, secret references, and fixture/manual-run readiness. It does not prove GitHub Actions execution, provider credentials, or deployed runtime.",
+  "traceId": "62e0a9841ac4b3e7"
+}

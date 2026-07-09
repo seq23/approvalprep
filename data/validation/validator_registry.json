@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "lastUpdatedAt": "2026-07-09T13:30:11.271Z",
+  "lastUpdatedAt": "2026-07-09T23:45:00.000Z",
   "policy": "Hard fails protect customer journey, payment/download safety, regulated boundaries, real growth machinery, and operator automation. Cosmetic preferences and live-provider success are not hard fails unless the repo falsely claims them.",
   "validators": [
     {
@@ -675,6 +675,17 @@
       "scope": "Commercial page CTA rhythm and conversion sections"
     },
     {
+      "id": "content-approval-governance",
+      "npmScript": "validate:content-approval-governance",
+      "entrypoint": "scripts/validate/content-approval-governance.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents regulated or high-risk generated content from being promoted without approval history",
+      "owner": "approvalprep-ops",
+      "group": "governance-critical",
+      "scope": "Content approval queue, approval history, publication policy, and promotion scripts"
+    },
+    {
       "id": "artifact-validation",
       "npmScript": "validate:artifact",
       "entrypoint": "scripts/validate/artifact-validation.mjs",
@@ -684,6 +695,380 @@
       "owner": "approvalprep-ops",
       "group": "ops-critical",
       "scope": "Artifact manifest and package contract"
+    },
+    {
+      "id": "page-factory",
+      "npmScript": "validate:page-factory",
+      "entrypoint": "scripts/validate/page-factory.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "Content surface expansion page factory integrity",
+      "owner": "approvalprep-growth",
+      "group": "citation-os-batch-1",
+      "scope": "Content surface expansion page factory integrity"
+    },
+    {
+      "id": "blog-detail-pages",
+      "npmScript": "validate:blog-detail-pages",
+      "entrypoint": "scripts/validate/blog-detail-pages.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "Crawlable blog answer detail page integrity",
+      "owner": "approvalprep-growth",
+      "group": "citation-os-batch-1",
+      "scope": "Crawlable blog answer detail page integrity"
+    },
+    {
+      "id": "atom-coverage-depth",
+      "npmScript": "validate:atom-coverage-depth",
+      "entrypoint": "scripts/validate/atom-coverage-depth.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "Expanded citation atom depth and honesty boundary",
+      "owner": "approvalprep-growth",
+      "group": "citation-os-batch-1",
+      "scope": "Expanded citation atom depth and honesty boundary"
+    },
+    {
+      "id": "discovery-surfaces",
+      "npmScript": "validate:discovery-surfaces",
+      "entrypoint": "scripts/validate/discovery-surfaces.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "Sitemap feed llms and public discovery surface coverage",
+      "owner": "approvalprep-growth",
+      "group": "citation-os-batch-1",
+      "scope": "Sitemap feed llms and public discovery surface coverage"
+    },
+    {
+      "id": "structured-data",
+      "npmScript": "validate:structured-data",
+      "entrypoint": "scripts/validate/structured-data.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "Reusable schema and structured data wiring",
+      "owner": "approvalprep-growth",
+      "group": "citation-os-batch-1",
+      "scope": "Reusable schema and structured data wiring"
+    },
+    {
+      "id": "internal-link-graph",
+      "npmScript": "validate:internal-link-graph",
+      "entrypoint": "scripts/validate/internal-link-graph.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "Internal authority link graph, anchors, and orphan prevention",
+      "owner": "approvalprep-growth",
+      "group": "citation-os-batch-2",
+      "scope": "Internal authority link graph, anchors, and orphan prevention"
+    },
+    {
+      "id": "authority-assets",
+      "npmScript": "validate:authority-assets",
+      "entrypoint": "scripts/validate/authority-assets.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "Free tool/checklist authority asset integrity",
+      "owner": "approvalprep-growth",
+      "group": "citation-os-batch-2",
+      "scope": "Free tool/checklist authority asset integrity"
+    },
+    {
+      "id": "template-library",
+      "npmScript": "validate:template-library",
+      "entrypoint": "scripts/validate/template-library.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "Template preview library safety and route coverage",
+      "owner": "approvalprep-growth",
+      "group": "citation-os-batch-2",
+      "scope": "Template preview library safety and route coverage"
+    },
+    {
+      "id": "metrics-scoreboards",
+      "npmScript": "validate:metrics-scoreboards",
+      "entrypoint": "scripts/validate/metrics-scoreboards.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents dashboards from claiming fake or malformed measurement data",
+      "owner": "approvalprep-growth",
+      "group": "measurement",
+      "scope": "Content velocity, citation, indexing, crawler, and conversion scoreboards"
+    },
+    {
+      "id": "provider-integrations",
+      "npmScript": "validate:provider-integrations",
+      "entrypoint": "scripts/validate/provider-integrations.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents fake or unmanaged provider telemetry integrations",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "GSC, Bing, IndexNow, and Cloudflare connector contract"
+    },
+    {
+      "id": "cloudflare-crawler-intelligence",
+      "npmScript": "validate:cloudflare-crawler-intelligence",
+      "entrypoint": "scripts/validate/cloudflare-crawler-intelligence.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents fake crawler visibility and invalid crawler gap reporting",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "Cloudflare crawler log schema and crawler gap report"
+    },
+    {
+      "id": "indexing-provider-ledgers",
+      "npmScript": "validate:indexing-provider-ledgers",
+      "entrypoint": "scripts/validate/indexing-provider-ledgers.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents invalid provider ledgers and fake indexing claims",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "GSC, Bing, and IndexNow provider data ledgers"
+    },
+    {
+      "id": "citation-ledger",
+      "npmScript": "validate:citation-ledger",
+      "entrypoint": "scripts/validate/citation-ledger.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents fake citation/backlink claims and unsafe handoff exports",
+      "owner": "approvalprep-growth",
+      "group": "citation-os",
+      "scope": "Citation candidates, confirmed citation evidence, and mention watchlist"
+    },
+    {
+      "id": "backlink-handoff",
+      "npmScript": "validate:backlink-handoff",
+      "entrypoint": "scripts/validate/backlink-handoff.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents fake citation/backlink claims and unsafe handoff exports",
+      "owner": "approvalprep-growth",
+      "group": "citation-os",
+      "scope": "Export-only backlink handoff contract and safe snippets"
+    },
+    {
+      "id": "content-lifecycle",
+      "npmScript": "validate:content-lifecycle",
+      "entrypoint": "scripts/validate/content-lifecycle.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents unsafe refresh, pruning, consolidation, or redirect operations",
+      "owner": "approvalprep-growth",
+      "group": "growth-lifecycle",
+      "scope": "Content decay report, consolidation plan, retired pages, and redirect ledger"
+    },
+    {
+      "id": "public-reports",
+      "npmScript": "validate:public-reports",
+      "entrypoint": "scripts/validate/public-reports.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents fake public reports, unsupported methodology, or thin authority assets",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "Public report registry, source coverage, and methodology boundaries"
+    },
+    {
+      "id": "repurposing",
+      "npmScript": "validate:repurposing",
+      "entrypoint": "scripts/validate/repurposing.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents public free downloads from leaking paid files or missing safety boundaries",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "Free checklist repurposing outputs and public download boundaries"
+    },
+    {
+      "id": "conversion-attribution",
+      "npmScript": "validate:conversion-attribution",
+      "entrypoint": "scripts/validate/conversion-attribution.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents privacy-unsafe conversion tracking or fake conversion claims",
+      "owner": "approvalprep-growth",
+      "group": "conversion-critical",
+      "scope": "Conversion event schema, runtime endpoint, tracking component, and static conversion report"
+    },
+    {
+      "id": "experiments",
+      "npmScript": "validate:experiments",
+      "entrypoint": "scripts/validate/experiments.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents unsafe or unapproved experiment application",
+      "owner": "approvalprep-growth",
+      "group": "conversion-critical",
+      "scope": "Experiment registry, approval gating, and experiment result honesty"
+    },
+    {
+      "id": "safe-harbor-autopublish",
+      "npmScript": "validate:safe-harbor-autopublish",
+      "entrypoint": "scripts/validate/safe-harbor-autopublish.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "protects regulated autopublish, source evidence, workflow safety, privacy, or final readiness boundaries",
+      "owner": "approvalprep-ops",
+      "group": "phase-a-f",
+      "scope": "ApprovalPrep Phase A-F Citation OS hardening"
+    },
+    {
+      "id": "prohibited-claims",
+      "npmScript": "validate:prohibited-claims",
+      "entrypoint": "scripts/validate/prohibited-claims.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "protects regulated autopublish, source evidence, workflow safety, privacy, or final readiness boundaries",
+      "owner": "approvalprep-ops",
+      "group": "phase-a-f",
+      "scope": "ApprovalPrep Phase A-F Citation OS hardening"
+    },
+    {
+      "id": "required-disclosures",
+      "npmScript": "validate:required-disclosures",
+      "entrypoint": "scripts/validate/required-disclosures.mjs",
+      "severity": "STRONG_WARNING",
+      "blocksRelease": false,
+      "blockReason": "surfaces operational quality risk without blocking release by default",
+      "owner": "approvalprep-ops",
+      "group": "phase-a-f",
+      "scope": "ApprovalPrep Phase A-F Citation OS hardening"
+    },
+    {
+      "id": "source-required-claims",
+      "npmScript": "validate:source-required-claims",
+      "entrypoint": "scripts/validate/source-required-claims.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "protects regulated autopublish, source evidence, workflow safety, privacy, or final readiness boundaries",
+      "owner": "approvalprep-ops",
+      "group": "phase-a-f",
+      "scope": "ApprovalPrep Phase A-F Citation OS hardening"
+    },
+    {
+      "id": "template-preview-safety",
+      "npmScript": "validate:template-preview-safety",
+      "entrypoint": "scripts/validate/template-preview-safety.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "protects regulated autopublish, source evidence, workflow safety, privacy, or final readiness boundaries",
+      "owner": "approvalprep-ops",
+      "group": "phase-a-f",
+      "scope": "ApprovalPrep Phase A-F Citation OS hardening"
+    },
+    {
+      "id": "source-evidence-depth",
+      "npmScript": "validate:source-evidence-depth",
+      "entrypoint": "scripts/validate/source-evidence-depth.mjs",
+      "severity": "STRONG_WARNING",
+      "blocksRelease": false,
+      "blockReason": "surfaces operational quality risk without blocking release by default",
+      "owner": "approvalprep-ops",
+      "group": "phase-a-f",
+      "scope": "ApprovalPrep Phase A-F Citation OS hardening"
+    },
+    {
+      "id": "location-source-coverage",
+      "npmScript": "validate:location-source-coverage",
+      "entrypoint": "scripts/validate/location-source-coverage.mjs",
+      "severity": "STRONG_WARNING",
+      "blocksRelease": false,
+      "blockReason": "surfaces operational quality risk without blocking release by default",
+      "owner": "approvalprep-ops",
+      "group": "phase-a-f",
+      "scope": "ApprovalPrep Phase A-F Citation OS hardening"
+    },
+    {
+      "id": "regulated-template-previews",
+      "npmScript": "validate:regulated-template-previews",
+      "entrypoint": "scripts/validate/regulated-template-previews.mjs",
+      "severity": "STRONG_WARNING",
+      "blocksRelease": false,
+      "blockReason": "surfaces operational quality risk without blocking release by default",
+      "owner": "approvalprep-ops",
+      "group": "phase-a-f",
+      "scope": "ApprovalPrep Phase A-F Citation OS hardening"
+    },
+    {
+      "id": "workflow-write-scopes",
+      "npmScript": "validate:workflow-write-scopes",
+      "entrypoint": "scripts/validate/workflow-write-scopes.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "protects regulated autopublish, source evidence, workflow safety, privacy, or final readiness boundaries",
+      "owner": "approvalprep-ops",
+      "group": "phase-a-f",
+      "scope": "ApprovalPrep Phase A-F Citation OS hardening"
+    },
+    {
+      "id": "self-healing",
+      "npmScript": "validate:self-healing",
+      "entrypoint": "scripts/validate/self-healing.mjs",
+      "severity": "STRONG_WARNING",
+      "blocksRelease": false,
+      "blockReason": "surfaces operational quality risk without blocking release by default",
+      "owner": "approvalprep-ops",
+      "group": "phase-a-f",
+      "scope": "ApprovalPrep Phase A-F Citation OS hardening"
+    },
+    {
+      "id": "conversion-privacy",
+      "npmScript": "validate:conversion-privacy",
+      "entrypoint": "scripts/validate/conversion-privacy.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "protects regulated autopublish, source evidence, workflow safety, privacy, or final readiness boundaries",
+      "owner": "approvalprep-ops",
+      "group": "phase-a-f",
+      "scope": "ApprovalPrep Phase A-F Citation OS hardening"
+    },
+    {
+      "id": "experiment-safety",
+      "npmScript": "validate:experiment-safety",
+      "entrypoint": "scripts/validate/experiment-safety.mjs",
+      "severity": "STRONG_WARNING",
+      "blocksRelease": false,
+      "blockReason": "surfaces operational quality risk without blocking release by default",
+      "owner": "approvalprep-ops",
+      "group": "phase-a-f",
+      "scope": "ApprovalPrep Phase A-F Citation OS hardening"
+    },
+    {
+      "id": "page-action-safety",
+      "npmScript": "validate:page-action-safety",
+      "entrypoint": "scripts/validate/page-action-safety.mjs",
+      "severity": "STRONG_WARNING",
+      "blocksRelease": false,
+      "blockReason": "surfaces operational quality risk without blocking release by default",
+      "owner": "approvalprep-ops",
+      "group": "phase-a-f",
+      "scope": "ApprovalPrep Phase A-F Citation OS hardening"
+    },
+    {
+      "id": "final-readiness-ledger",
+      "npmScript": "validate:final-readiness-ledger",
+      "entrypoint": "scripts/validate/final-readiness-ledger.mjs",
+      "severity": "STRONG_WARNING",
+      "blocksRelease": false,
+      "blockReason": "surfaces operational quality risk without blocking release by default",
+      "owner": "approvalprep-ops",
+      "group": "phase-a-f",
+      "scope": "ApprovalPrep Phase A-F Citation OS hardening"
+    },
+    {
+      "id": "validator-severity",
+      "npmScript": "validate:validator-severity",
+      "entrypoint": "scripts/validate/validator-severity.mjs",
+      "severity": "STRONG_WARNING",
+      "blocksRelease": false,
+      "blockReason": "surfaces operational quality risk without blocking release by default",
+      "owner": "approvalprep-ops",
+      "group": "phase-a-f",
+      "scope": "ApprovalPrep Phase A-F Citation OS hardening"
     }
   ]
 }

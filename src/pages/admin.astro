@@ -11,6 +11,38 @@ import indexingReceipts from "../../data/seo/indexing_receipts.json";
 import submissionRegistry from "../../data/seo/submission_registry.json";
 import selfHealingLog from "../../data/automation/self_healing_log.json";
 import finalBlocks from "../../data/automation/final_block_log.json";
+import ContentVelocityDashboard from "../components/admin/ContentVelocityDashboard.astro";
+import CitationDashboard from "../components/admin/CitationDashboard.astro";
+import IndexingDashboard from "../components/admin/IndexingDashboard.astro";
+import CrawlerDashboard from "../components/admin/CrawlerDashboard.astro";
+import ConversionDashboard from "../components/admin/ConversionDashboard.astro";
+import CitationLedgerPanel from "../components/admin/CitationLedgerPanel.astro";
+import BacklinkHandoffPanel from "../components/admin/BacklinkHandoffPanel.astro";
+import LifecyclePanel from "../components/admin/LifecyclePanel.astro";
+import ApprovalQueuePanel from "../components/admin/ApprovalQueuePanel.astro";
+import ExperimentPanel from "../components/admin/ExperimentPanel.astro";
+import SafeHarborPanel from "../components/admin/SafeHarborPanel.astro";
+import contentVelocity from "../../data/metrics/content_velocity.json";
+import citationScoreboard from "../../data/metrics/citation_scoreboard.json";
+import indexingScoreboard from "../../data/metrics/indexing_scoreboard.json";
+import crawlerScoreboard from "../../data/metrics/crawler_scoreboard.json";
+import conversionScoreboard from "../../data/metrics/conversion_scoreboard.json";
+import citationCandidates from "../../data/citations/citation_candidates.json";
+import confirmedCitations from "../../data/citations/confirmed_citations.json";
+import mentionWatchlist from "../../data/citations/mention_watchlist.json";
+import backlinkNeeds from "../../data/backlink_handoff/backlink_needs.json";
+import contentDecayReport from "../../data/intelligence/content_decay_report.json";
+import consolidationPlan from "../../data/content/consolidation_plan.json";
+import approvalQueue from "../../data/governance/content_approval_queue.json";
+import approvalHistory from "../../data/governance/content_approval_history.json";
+import publicReportRegistry from "../../data/reports/public_report_registry.json";
+import repurposeRegistry from "../../data/repurposing/repurpose_registry.json";
+import experimentRegistry from "../../data/experiments/experiment_registry.json";
+import experimentResults from "../../data/experiments/experiment_results.json";
+import safeHarborAudit from "../../data/governance/safe_harbor_audit_ledger.json";
+import safeHarborRewrites from "../../data/governance/safe_harbor_rewrite_ledger.json";
+import sourceDepth from "../../data/citations/claim_source_depth_report.json";
+import nonHealableBlockers from "../../data/self_healing/non_healable_blockers.json";
 
 const cockpitStats = [
   ["Indexed query universe", queryUniverse.queries.length],
@@ -55,6 +87,25 @@ const cockpitStats = [
       <div class="notice mini-notice">
         <strong>Operator rule:</strong> use Growth Health, Query Universe, Citation Gaps, Indexing, Self-Healing Log, and Blockers to decide what needs owner attention. Fixture traces prove workflow shape, not live provider success.
       </div>
+      <div class="grid measurement-grid">
+        <ContentVelocityDashboard title="Content velocity" description="Structural publication output from the current repo." data={contentVelocity} />
+        <CitationDashboard title="Citation readiness" description="Citation targets, opportunities, and source coverage without fake confirmed-citation claims." data={citationScoreboard} />
+        <IndexingDashboard title="Indexing readiness" description="Sitemap/submission/provider inspection visibility." data={indexingScoreboard} />
+        <CrawlerDashboard title="Crawler visibility" description="Owned crawl and external crawler readiness." data={crawlerScoreboard} />
+        <ConversionDashboard title="Conversion proof" description="Checkout proof artifacts separated from live conversion analytics." data={conversionScoreboard} />
+        <CitationLedgerPanel title="Citation ledger" description="Candidate and confirmed citation records without fake win claims." candidates={citationCandidates} confirmed={confirmedCitations} watchlist={mentionWatchlist} />
+        <BacklinkHandoffPanel title="Backlink repo handoff" description="Priority pages, anchors, and safe snippets for the separate backlink workflow." needs={backlinkNeeds} />
+        <LifecyclePanel title="Lifecycle control" description="Refresh, pruning, consolidation, and redirect governance for public content surfaces." decay={contentDecayReport} consolidation={consolidationPlan} />
+        <ApprovalQueuePanel title="Content approval governance" description="Regulated, credit-sensitive, and high-risk content that must not promote by automation alone." queue={approvalQueue} history={approvalHistory} />
+        <ExperimentPanel title="Conversion experiments" description="Approval-gated experiment queue for safe CTA/content improvements." registry={experimentRegistry} results={experimentResults} />
+        <SafeHarborPanel title="Safe Harbor autopublish" description="Regulated-adjacent content may autopublish only after deterministic safety gates pass." audit={safeHarborAudit} rewrites={safeHarborRewrites} sources={sourceDepth} blockers={nonHealableBlockers} />
+        <article class="card">
+          <p class="eyebrow">Authority reports</p>
+          <h3>{publicReportRegistry.reports.length} public reports</h3>
+          <p>{repurposeRegistry.outputs.length} free repurposed checklist outputs are tracked for public distribution. Reports are methodology-labeled and do not claim live market research, rankings, or approval odds.</p>
+        </article>
+      </div>
+
     </div>
 
     <div id="loginPanel" class="card admin-card">

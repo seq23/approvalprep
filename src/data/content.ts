@@ -2,6 +2,7 @@ import productsData from "../../data/products/products.json";
 import offeringData from "../../data/products/full_offering_catalog.json";
 import nextStepsData from "../../data/content/customer_next_steps.json";
 import boundaryData from "../../data/legal/self_service_boundary.json";
+import generatedRouteCopyData from "../../data/content/generated_route_copy.json";
 
 export const boundary = boundaryData.footerBoundary;
 export const creditBoundary = boundaryData.creditBoundary;
@@ -554,7 +555,7 @@ export const routeFamilyCopy = {
   }
 };
 
-export const routeCopy = {
+const manualRouteCopy = {
   "/resources": {
     "heading": "Resources",
     "lead": "ApprovalPrep resources help users find guides, policies, publishing updates, glossary definitions, privacy boundaries, and product paths without guessing where the next piece of content lives.",
@@ -4711,3 +4712,5 @@ export const routeCopy = {
     "noindexCtaAllowed": false
   }
 };
+
+export const routeCopy = { ...(generatedRouteCopyData.routes || {}), ...manualRouteCopy };

@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "1.0.0",
+  "lastUpdatedAt": "2026-07-09T22:45:00.000Z",
+  "policy": {
+    "mode": "approval_gated",
+    "blocked": [
+      "fake urgency",
+      "guaranteed approval",
+      "misleading credit repair language",
+      "fake scarcity",
+      "unsupported financial/legal claims"
+    ],
+    "allowed": [
+      "title",
+      "meta description",
+      "CTA copy",
+      "related content blocks",
+      "short answer format",
+      "pricing CTA placement"
+    ]
+  },
+  "experiments": [
+    {
+      "id": "pricing-secondary-cta-studio-first",
+      "status": "candidate",
+      "surface": "pricing",
+      "risk": "low",
+      "hypothesis": "A clearer free-Studio secondary CTA may increase prepared checkout starts without adding pressure or false urgency.",
+      "variants": [
+        {
+          "id": "control",
+          "label": "Current pricing CTA copy"
+        },
+        {
+          "id": "studio-first",
+          "label": "Start free first, then choose a kit"
+        }
+      ],
+      "primaryMetric": "pricing_click_to_checkout_start",
+      "requiresApproval": true,
+      "autoApplyEligible": false,
+      "createdAt": "2026-07-09T22:45:00.000Z"
+    }
+  ]
+}

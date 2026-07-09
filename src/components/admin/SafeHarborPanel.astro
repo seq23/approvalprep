@@ -1,0 +1,20 @@
+---
+const { title='Safe Harbor', description='', audit, rewrites, sources, blockers } = Astro.props;
+const decisions = audit?.decisions || [];
+const summary = audit?.summary || {};
+const blocked = decisions.filter((d) => String(d.decision || '').startsWith('BLOCKED') || d.decision === 'APPROVAL_REQUIRED_EDGE_CASE');
+---
+<article class="card">
+  <p class="eyebrow">Governed autopublish</p>
+  <h3>{title}</h3>
+  <p>{description}</p>
+  <ul class="fine-list">
+    <li><strong>{decisions.length}</strong> regulated decisions audited</li>
+    <li><strong>{summary.SAFE_AUTOPUBLISH || 0}</strong> safe autopublish decisions</li>
+    <li><strong>{summary.REWRITTEN_AND_AUTOPUBLISHED || 0}</strong> rewritten and autopublished</li>
+    <li><strong>{blocked.length}</strong> blocked or approval-required</li>
+    <li><strong>{(rewrites?.rewrites || []).length}</strong> safe wording rewrites logged</li>
+    <li><strong>{(sources?.claims || sources?.items || []).length}</strong> source/depth queue records</li>
+    <li><strong>{(blockers?.blockers || []).length}</strong> non-healable blockers</li>
+  </ul>
+</article>

@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import RelatedContent from "../../components/RelatedContent.astro";
+import TrustAndBoundaryBand from "../../components/TrustAndBoundaryBand.astro";
+import { webPageSchema, breadcrumbSchema, itemListSchema } from "../../lib/schema";
+import registry from "../../../data/tools/tool_registry.json";
+
+export function getStaticPaths() {
+  return registry.tools
+    .filter((tool) => tool.status === "published_by_contract")
+    .map((tool) => ({ params: { slug: tool.path.split("/").pop() }, props: { tool } }));
+}
+const { tool } = Astro.props;
+const canonical = `https://approvalprep.com${tool.path}`;
+const schema = [
+  webPageSchema({ title: tool.title, description: tool.summary, url: canonical }),
+  breadcrumbSchema(tool.path),
+  itemListSchema({ name: tool.title, items: tool.checklist })
+];
+---
+<BaseLayout title={`${tool.title} - ApprovalPrep`} description={tool.summary} canonical={canonical} schema={schema}>
+  <section class="hero shell hero-split">
+    <div>
+      <p class="eyebrow">Free checklist</p>
+      <h1>{tool.title}</h1>
+      <p class="lead">{tool.summary}</p>
+      <div class="hero-actions">
+        <a class="button primary-button" href="/letter-writing-studio">Start free for $0</a>
+        <a class="button secondary-button" href={`/pricing#${tool.targetProductSku}`}>Compare the matching kit</a>
+      </div>
+    </div>
+    <aside class="hero-panel">
+      <p class="eyebrow">Boundary</p>
+      <h2>Use real documents only.</h2>
+      <p>ApprovalPrep helps you organize truthful facts. It does not create fake documents, contact reviewers, or guarantee approval.</p>
+    </aside>
+  </section>
+  <section class="band"><div class="shell">
+    <p class="eyebrow">Checklist</p>
+    <h2>Prepare these items before you draft or send anything.</h2>
+    <div class="card"><ol class="compact-list">{tool.checklist.map((item) => <li>{item}</li>)}</ol></div>
+  </div></section>
+  <RelatedContent path={tool.path} title="Related tools, guides, and kits" />
+  <TrustAndBoundaryBand />
+</BaseLayout>

@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0.0",
+  "mode": "safe_harbor_autopublish",
+  "generatedAt": "2026-07-09T23:45:00.000Z",
+  "defaultRegulatedDecision": "approval_required_unless_safe_harbor_passes",
+  "allowedFrames": [
+    "self_service_document_prep",
+    "educational_checklist",
+    "truthful_explanation_support",
+    "document_organization",
+    "review_before_sending",
+    "template_preview",
+    "methodology_labeled_report"
+  ],
+  "blockedFrames": [
+    "credit_repair_service",
+    "legal_advice",
+    "guaranteed_outcome",
+    "debt_elimination",
+    "false_dispute_instruction",
+    "state_law_claim_without_source",
+    "paid_template_public_leakage",
+    "fake_document_instruction"
+  ],
+  "regulatedFamilies": [
+    "credit_self_service",
+    "housing_application",
+    "loan_prep",
+    "state_location",
+    "debt_context",
+    "credit_boundary",
+    "regulated_template_preview"
+  ],
+  "regulatedPathPatterns": [
+    "credit",
+    "dispute",
+    "debt",
+    "collection",
+    "late-payment",
+    "state",
+    "location",
+    "landlord",
+    "tenant",
+    "bureau",
+    "lender",
+    "mortgage",
+    "loan"
+  ],
+  "safeHarborRequired": [
+    "self_service_boundary",
+    "truthful_information_warning",
+    "no_guarantee_disclosure",
+    "user_sends_own_documents",
+    "supporting_documents_instruction",
+    "not_legal_credit_repair_lender_disclosure"
+  ],
+  "autopublishAllowedDecisions": [
+    "SAFE_AUTOPUBLISH",
+    "REWRITTEN_AND_AUTOPUBLISHED"
+  ],
+  "queueDecisions": [
+    "BLOCKED_PROHIBITED_CLAIM",
+    "BLOCKED_SOURCE_REQUIRED",
+    "BLOCKED_MISSING_DISCLOSURE",
+    "BLOCKED_TEMPLATE_LEAKAGE_RISK",
+    "APPROVAL_REQUIRED_EDGE_CASE"
+  ]
+}

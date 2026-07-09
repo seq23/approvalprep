@@ -18,3 +18,9 @@ CREATE INDEX IF NOT EXISTS idx_products_status ON products(status);
 CREATE INDEX IF NOT EXISTS idx_assets_product ON product_assets(product_id);
 CREATE INDEX IF NOT EXISTS idx_audit_product ON product_audit_log(product_id);
 CREATE INDEX IF NOT EXISTS idx_entitlements_session ON download_entitlements(stripe_session_id);
+
+CREATE TABLE IF NOT EXISTS conversion_events (
+  id TEXT PRIMARY KEY, event TEXT NOT NULL, path TEXT NOT NULL DEFAULT '', target_url TEXT NOT NULL DEFAULT '', sku TEXT NOT NULL DEFAULT '', source TEXT NOT NULL DEFAULT '', session_id_hash TEXT NOT NULL DEFAULT '', created_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_conversion_events_event ON conversion_events(event);
+CREATE INDEX IF NOT EXISTS idx_conversion_events_created ON conversion_events(created_at);

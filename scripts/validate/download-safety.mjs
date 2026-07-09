@@ -35,7 +35,31 @@ for (const item of manifest.products) {
     fail("[download-safety] public paid downloads may not expose markdown or txt files for " + item.sku);
   }
 }
-if (fs.existsSync(path.join(root, "public/downloads"))) fail("[download-safety] public/downloads must not contain paid download assets");
+const publicDownloadsDir = path.join(root, "public/downloads");
+if (fs.existsSync(publicDownloadsDir)) {
+  const publicFiles = [];
+  function walk(dir) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) walk(full);
+      else publicFiles.push(full);
+    }
+  }
+  walk(publicDownloadsDir);
+  const protectedNames = new Set();
+  for (const item of manifest.products) {
+    for (const key of item.r2Keys || []) protectedNames.add(path.basename(key).toLowerCase());
+  }
+  for (const file of publicFiles) {
+    const rel = path.relative(root, file);
+    const base = path.basename(file).toLowerCase();
+    if (protectedNames.has(base) || /\.(pdf|docx)$/i.test(base)) {
+      fail(`[download-safety] public/downloads contains protected paid-looking asset ${rel}`);
+    }
+    const text = fs.readFileSync(file, "utf8");
+    checkText(rel, text);
+  }
+}
 
 const verify = fs.readFileSync(path.join(root, "functions/api/verify-download.js"), "utf8").toLowerCase();
 if (verify.includes("-guide.md") || verify.includes("-worksheet.txt")) fail("[download-safety] verify-download exposes markdown/txt files");

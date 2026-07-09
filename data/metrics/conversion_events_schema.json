@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0.0",
+  "lastUpdatedAt": "2026-07-09T22:45:00.000Z",
+  "privacyBoundary": "Only non-sensitive interaction events are allowed. Do not send letter answers, document contents, email addresses, phone numbers, full IP addresses, or free-text customer facts.",
+  "allowedEvents": [
+    "page_view",
+    "related_link_click",
+    "studio_click",
+    "pricing_click",
+    "product_cta_click",
+    "checkout_start",
+    "checkout_success_seen",
+    "download_verified"
+  ],
+  "allowedFields": [
+    "event",
+    "url",
+    "path",
+    "referrerPath",
+    "targetUrl",
+    "sku",
+    "source",
+    "sessionIdHash",
+    "createdAt"
+  ],
+  "blockedFields": [
+    "letterText",
+    "documentText",
+    "email",
+    "phone",
+    "name",
+    "address",
+    "ssn",
+    "dob",
+    "fullIp",
+    "userAgentRaw",
+    "freeText"
+  ],
+  "retention": "Aggregate reporting only unless runtime D1 retention is explicitly configured."
+}

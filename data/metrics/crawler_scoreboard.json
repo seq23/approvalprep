@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-09T23:26:33.609Z",
+  "warning": "Cloudflare crawler data is unavailable until Cloudflare log ingestion is configured. Owned crawl data is not the same as external bot visits.",
+  "metrics": [
+    {
+      "label": "Owned crawl pages",
+      "value": 70,
+      "source": "owned_crawl",
+      "claimType": "structural"
+    },
+    {
+      "label": "Cloudflare crawler visits",
+      "value": 0,
+      "source": "cloudflare",
+      "claimType": "unavailable"
+    },
+    {
+      "label": "AI crawler visits",
+      "value": 0,
+      "source": "cloudflare",
+      "claimType": "unavailable"
+    }
+  ]
+}

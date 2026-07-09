@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import answersData from "../../data/content/generated_answers.json";
 const published = answersData.answers.filter((item) => item.status === "published_by_contract");
 const review = answersData.answers.filter((item) => item.status !== "published_by_contract");
+const slugify = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 100);
 ---
 <BaseLayout title="ApprovalPrep Blog - Daily Document Prep Answers" description="Daily and cadenced ApprovalPrep publishing for self-service document prep, explanation letters, application packets, and paperwork readiness." canonical="https://approvalprep.com/blog">
   <section class="hero shell">
@@ -19,7 +20,7 @@ const review = answersData.answers.filter((item) => item.status !== "published_b
       <div>
         <p class="eyebrow">Published answers</p>
         <h2>{published.length} answers available now.</h2>
-        <p class="lead">Each answer points back to the relevant product, guide, or policy page so users can keep moving instead of landing on a dead-end article.</p>
+        <p class="lead">Each answer now has its own crawlable detail page and still points back to the relevant product, guide, or policy page.</p>
       </div>
       <div class="card"><h3>Cadence</h3><p>Daily answer assets and scheduled content should publish here after they pass safety, boundary, and approval rules.</p></div>
     </div>
@@ -29,7 +30,7 @@ const review = answersData.answers.filter((item) => item.status !== "published_b
           <p class="eyebrow">{item.riskLevel} risk</p>
           <h3>{item.title}</h3>
           <p>{item.answer}</p>
-          <a class="button secondary-button" href={item.route}>Continue to related page</a>
+          <div class="hero-actions"><a class="button primary-button" href={`/blog/${slugify(item.title)}`}>Read answer page</a><a class="button secondary-button" href={item.route}>Related page</a></div>
         </article>
       ))}
     </div>

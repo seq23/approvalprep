@@ -1,0 +1,30 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-09T23:45:00.000Z",
+  "patterns": [
+    {
+      "id": "state-law-claim",
+      "pattern": "state law|California law|Texas law|Tennessee law|landlord must|tenant has the right|statute|legal right",
+      "requiresSource": true,
+      "requiresApprovalIfUnsourced": true
+    },
+    {
+      "id": "bureau-obligation-claim",
+      "pattern": "credit bureau must|bureau is required|must delete|must correct|FCRA requires",
+      "requiresSource": true,
+      "requiresApprovalIfUnsourced": true
+    },
+    {
+      "id": "lender-obligation-claim",
+      "pattern": "lender must|underwriter must|bank is required|must approve",
+      "requiresSource": true,
+      "requiresApprovalIfUnsourced": true
+    },
+    {
+      "id": "housing-obligation-claim",
+      "pattern": "landlord is required|property manager must|housing provider must",
+      "requiresSource": true,
+      "requiresApprovalIfUnsourced": true
+    }
+  ]
+}

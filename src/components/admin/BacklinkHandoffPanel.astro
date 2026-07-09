@@ -1,0 +1,13 @@
+---
+const { title, description, needs } = Astro.props;
+const rows = (needs?.needs || []).slice(0, 8);
+---
+<article class="card admin-metric-panel">
+  <p class="eyebrow">Backlink handoff</p>
+  <h3>{title}</h3>
+  {description && <p class="fine">{description}</p>}
+  <div class="table-wrap"><table><thead><tr><th>Priority URL</th><th>Priority</th><th>Risk</th></tr></thead><tbody>
+    {rows.map((item) => <tr><td>{item.targetRoute || item.targetUrl}</td><td><strong>{item.priority}</strong></td><td>{item.risk}</td></tr>)}
+  </tbody></table></div>
+  <p class="fine">Export only. Outreach, prospecting, and link operations belong in the separate backlink repo.</p>
+</article>

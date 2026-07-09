@@ -2,8 +2,10 @@
 import "../styles/global.css";
 import SiteFooter from "../components/SiteFooter.astro";
 import DataPrivacyNotice from "../components/DataPrivacyNotice.astro";
+import StructuredData from "../components/StructuredData.astro";
+import AnalyticsEvent from "../components/AnalyticsEvent.astro";
 import { navCta, primaryNav, secondaryNav } from "../data/navigation";
-const { title = "ApprovalPrep", description = "Self-service approval prep tools.", canonical = "https://approvalprep.com", noindex = false, showPrivacyNotice = true } = Astro.props;
+const { title = "ApprovalPrep", description = "Self-service approval prep tools.", canonical = "https://approvalprep.com", noindex = false, showPrivacyNotice = true, schema = [] } = Astro.props;
 ---
 <!doctype html>
 <html lang="en">
@@ -18,6 +20,7 @@ const { title = "ApprovalPrep", description = "Self-service approval prep tools.
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@type": "Organization", name: "ApprovalPrep", url: "https://approvalprep.com" })}></script>
+    <StructuredData schema={schema} />
   </head>
   <body>
     <header class="site-header">
@@ -39,6 +42,7 @@ const { title = "ApprovalPrep", description = "Self-service approval prep tools.
       </nav>
     </header>
     <main><slot /></main>
+    <AnalyticsEvent surface="approvalprep" />
 
     <script is:inline>
       if (!window.__approvalPrepCheckoutBound) {

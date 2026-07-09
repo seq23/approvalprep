@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-09T21:30:00.000Z",
+  "producer": "approvalprep",
+  "consumer": "external-backlink-repo",
+  "boundaries": [
+    "ApprovalPrep exports needs, anchors, snippets, and priority pages only.",
+    "ApprovalPrep does not send outreach, scrape emails, buy links, or claim confirmed backlinks without import evidence."
+  ],
+  "exports": [
+    "backlink_needs.json",
+    "anchor_targets.json",
+    "citation_snippets.json",
+    "priority_pages.csv"
+  ],
+  "acceptedImports": [
+    "confirmed_backlinks.json",
+    "confirmed_mentions.json",
+    "outreach_status.json"
+  ]
+}

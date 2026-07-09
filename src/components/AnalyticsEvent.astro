@@ -1,0 +1,52 @@
+---
+const { surface = 'site' } = Astro.props;
+---
+<script is:inline define:vars={{ surface }}>
+  (() => {
+    if (window.__approvalPrepAnalyticsBound) return;
+    window.__approvalPrepAnalyticsBound = true;
+    const allowed = new Set(['page_view','related_link_click','studio_click','pricing_click','product_cta_click','checkout_start','checkout_success_seen','download_verified']);
+    const hash = (value) => {
+      const text = String(value || '');
+      if (!text) return '';
+      let h = 2166136261;
+      for (let i = 0; i < text.length; i++) { h ^= text.charCodeAt(i); h = Math.imul(h, 16777619); }
+      return `fnv1a_${(h >>> 0).toString(16)}`;
+    };
+    const cleanPath = (value) => {
+      try { const url = new URL(String(value || ''), window.location.origin); return url.pathname + url.search; } catch { return String(value || '').slice(0, 160); }
+    };
+    const send = (event, extra = {}) => {
+      if (!allowed.has(event)) return;
+      const payload = {
+        event,
+        path: cleanPath(window.location.href),
+        referrerPath: document.referrer ? cleanPath(document.referrer) : '',
+        source,
+        ...extra
+      };
+      const body = JSON.stringify(payload);
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon('/api/track-event', new Blob([body], { type: 'application/json' }));
+      } else {
+        fetch('/api/track-event', { method:'POST', headers:{ 'content-type':'application/json' }, body, keepalive:true }).catch(() => {});
+      }
+    };
+    document.addEventListener('DOMContentLoaded', () => {
+      send('page_view');
+      const params = new URLSearchParams(window.location.search);
+      if (window.location.pathname === '/checkout/success') send('checkout_success_seen', { sku: params.get('sku') || '', sessionIdHash: hash(params.get('session_id') || '') });
+    });
+    document.addEventListener('click', (event) => {
+      const target = event.target instanceof Element ? event.target.closest('a,button') : null;
+      if (!target) return;
+      const href = target.getAttribute('href') || '';
+      const sku = target.getAttribute('data-sku') || '';
+      if (target.classList.contains('checkout-button') || sku) send('checkout_start', { sku, targetUrl: href || 'stripe_checkout' });
+      else if (href.includes('/pricing')) send('pricing_click', { targetUrl: href });
+      else if (href.includes('/letter-writing-studio')) send('studio_click', { targetUrl: href });
+      else if (target.closest('.related-content') || target.closest('.blog-card')) send('related_link_click', { targetUrl: href });
+      else if (target.classList.contains('primary-button') || target.classList.contains('secondary-button')) send('product_cta_click', { targetUrl: href, sku });
+    }, { capture:true });
+  })();
+</script>

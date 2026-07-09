@@ -1,0 +1,792 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-09T23:26:32.573Z",
+  "mode": "structural",
+  "policy": "Lifecycle recommendations do not claim traffic, ranking, indexing, or conversion decay without live telemetry.",
+  "items": [
+    {
+      "route": "/",
+      "title": "ApprovalPrep",
+      "risk": "low",
+      "pageFamily": "brand_home",
+      "recommendedAction": "protect_and_refresh",
+      "reasonCodes": [
+        "core_conversion_route"
+      ],
+      "priorityScore": 70,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/letter-writing-studio",
+      "title": "Free Letter Writing Studio",
+      "risk": "medium",
+      "pageFamily": "letter_studio",
+      "recommendedAction": "protect_and_refresh",
+      "reasonCodes": [
+        "core_conversion_route"
+      ],
+      "priorityScore": 70,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/blog",
+      "title": "ApprovalPrep Blog",
+      "risk": "medium",
+      "pageFamily": "geo_surface",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/resources",
+      "title": "Resources",
+      "risk": "low",
+      "pageFamily": "geo_surface",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/pricing",
+      "title": "Pricing",
+      "risk": "low",
+      "pageFamily": "pricing",
+      "recommendedAction": "protect_and_refresh",
+      "reasonCodes": [
+        "core_conversion_route"
+      ],
+      "priorityScore": 70,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/letter-of-explanation",
+      "title": "Letter of Explanation Generator",
+      "risk": "medium",
+      "pageFamily": "letter_studio",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/letter-of-explanation/credit",
+      "title": "Credit Letter of Explanation",
+      "risk": "regulated",
+      "pageFamily": "letter_studio",
+      "recommendedAction": "approval_required_refresh",
+      "reasonCodes": [
+        "regulated_or_credit_sensitive"
+      ],
+      "priorityScore": 90,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": true
+    },
+    {
+      "route": "/letter-of-explanation/eviction",
+      "title": "Eviction Letter of Explanation",
+      "risk": "medium",
+      "pageFamily": "letter_studio",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/letter-of-explanation/income",
+      "title": "Income Letter of Explanation",
+      "risk": "medium",
+      "pageFamily": "letter_studio",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/letter-of-explanation/employment-gap",
+      "title": "Employment Gap Letter of Explanation",
+      "risk": "medium",
+      "pageFamily": "letter_studio",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/employment-verification-letter",
+      "title": "Employment Verification Letter",
+      "risk": "high",
+      "pageFamily": "letter_studio",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/proof-of-income-letter",
+      "title": "Proof of Income Letter",
+      "risk": "medium",
+      "pageFamily": "letter_studio",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/credit-dispute-letter",
+      "title": "Credit Dispute Letter Generator",
+      "risk": "regulated",
+      "pageFamily": "credit_self_service",
+      "recommendedAction": "approval_required_refresh",
+      "reasonCodes": [
+        "regulated_or_credit_sensitive"
+      ],
+      "priorityScore": 90,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": true
+    },
+    {
+      "route": "/apartment-application",
+      "title": "Apartment Ready-to-Apply Kit",
+      "risk": "medium",
+      "pageFamily": "apartment_rental",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/rental-application-checklist",
+      "title": "Rental Application Checklist",
+      "risk": "medium",
+      "pageFamily": "apartment_rental",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/how-to-get-approved-for-an-apartment",
+      "title": "How to Get Approved for an Apartment",
+      "risk": "medium",
+      "pageFamily": "apartment_rental",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/auto-loan-documents",
+      "title": "Auto Loan Documents",
+      "risk": "medium",
+      "pageFamily": "auto",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/car-loan-checklist",
+      "title": "Car Loan Checklist",
+      "risk": "medium",
+      "pageFamily": "auto",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/documents-needed-for-car-loan",
+      "title": "Documents Needed for a Car Loan",
+      "risk": "medium",
+      "pageFamily": "auto",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/sba-loan-checklist",
+      "title": "SBA Loan Checklist",
+      "risk": "medium",
+      "pageFamily": "business",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/business-loan-documents",
+      "title": "Business Loan Documents",
+      "risk": "medium",
+      "pageFamily": "business",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/mortgage-checklist",
+      "title": "Mortgage Checklist",
+      "risk": "medium",
+      "pageFamily": "mortgage",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/mortgage-document-checklist",
+      "title": "Mortgage Document Checklist",
+      "risk": "medium",
+      "pageFamily": "mortgage",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/important-documents-checklist",
+      "title": "Important Documents Checklist",
+      "risk": "low",
+      "pageFamily": "life_admin",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/moving-checklist",
+      "title": "Moving Checklist",
+      "risk": "low",
+      "pageFamily": "moving",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/glossary",
+      "title": "ApprovalPrep Glossary",
+      "risk": "low",
+      "pageFamily": "geo_surface",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/methodology",
+      "title": "ApprovalPrep Methodology",
+      "risk": "low",
+      "pageFamily": "geo_surface",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/income-employment-letter-kit",
+      "title": "Income + Employment Letter Kit",
+      "risk": "medium",
+      "pageFamily": "income_employment",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/credit-letter-kit",
+      "title": "Credit Letter Kit",
+      "risk": "regulated",
+      "pageFamily": "credit",
+      "recommendedAction": "approval_required_refresh",
+      "reasonCodes": [
+        "regulated_or_credit_sensitive"
+      ],
+      "priorityScore": 90,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": true
+    },
+    {
+      "route": "/rental-application-kit",
+      "title": "Rental Application Kit",
+      "risk": "medium",
+      "pageFamily": "rental",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/loan-prep-letter-kit",
+      "title": "Loan Prep Letter Kit",
+      "risk": "medium",
+      "pageFamily": "loan_prep",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/business-funding-prep-kit",
+      "title": "Business Funding Prep Kit",
+      "risk": "medium",
+      "pageFamily": "business_funding",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/life-admin-letter-kit",
+      "title": "Life Admin Letter Kit",
+      "risk": "medium",
+      "pageFamily": "life_admin",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/complete-approvalprep-bundle",
+      "title": "Complete ApprovalPrep Bundle",
+      "risk": "medium",
+      "pageFamily": "complete_bundle",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/letter-of-explanation/address-history",
+      "title": "Address History Letter of Explanation",
+      "risk": "medium",
+      "pageFamily": "letter_studio",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/letter-of-explanation/bank-statement-deposits",
+      "title": "Bank Statement Deposit Letter of Explanation",
+      "risk": "medium",
+      "pageFamily": "letter_studio",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/letter-of-explanation/income-change",
+      "title": "Income Change Letter of Explanation",
+      "risk": "medium",
+      "pageFamily": "income_employment",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/tools/apartment-application-readiness-checklist",
+      "title": "Apartment Application Readiness Checklist",
+      "risk": "low",
+      "pageFamily": "tools",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/tools/proof-of-income-packet-checklist",
+      "title": "Proof of Income Packet Checklist",
+      "risk": "low",
+      "pageFamily": "tools",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/tools/business-funding-document-checklist",
+      "title": "Business Funding Document Checklist",
+      "risk": "low",
+      "pageFamily": "tools",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/tools/mortgage-document-readiness-checklist",
+      "title": "Mortgage Document Readiness Checklist",
+      "risk": "low",
+      "pageFamily": "tools",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/tools/car-loan-document-checklist",
+      "title": "Car Loan Document Checklist",
+      "risk": "low",
+      "pageFamily": "tools",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/tools/important-documents-folder-checklist",
+      "title": "Important Documents Folder Checklist",
+      "risk": "low",
+      "pageFamily": "tools",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/templates/letters/address-history-explanation",
+      "title": "Address History Explanation Letter Template",
+      "risk": "medium",
+      "pageFamily": "templates",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/templates/letters/employment-gap-explanation",
+      "title": "Employment Gap Explanation Letter Template",
+      "risk": "medium",
+      "pageFamily": "templates",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/templates/letters/bank-statement-deposit-explanation",
+      "title": "Bank Statement Deposit Explanation Letter Template",
+      "risk": "medium",
+      "pageFamily": "templates",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/templates/rental/rental-application-cover-letter",
+      "title": "Rental Application Cover Letter Template",
+      "risk": "medium",
+      "pageFamily": "templates",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/templates/income/self-employed-proof-of-income",
+      "title": "Self-Employed Proof of Income Template",
+      "risk": "medium",
+      "pageFamily": "templates",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/reports/document-readiness-index",
+      "title": "ApprovalPrep Document Readiness Index",
+      "risk": "low",
+      "pageFamily": "public_reports",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/reports/apartment-application-prep-report",
+      "title": "Apartment Application Prep Report",
+      "risk": "medium",
+      "pageFamily": "public_reports",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/reports/small-business-funding-document-prep-report",
+      "title": "Small Business Funding Document Prep Report",
+      "risk": "medium",
+      "pageFamily": "public_reports",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/rental-application/cover-letter",
+      "title": "Rental Application Cover Letter",
+      "risk": "medium",
+      "pageFamily": "apartment_rental",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/proof-of-income/self-employed",
+      "title": "Self-Employed Proof of Income Packet",
+      "risk": "medium",
+      "pageFamily": "income_employment",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/auto-loan/income-verification",
+      "title": "Auto Loan Income Verification Documents",
+      "risk": "medium",
+      "pageFamily": "auto",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/business-funding/documents-for-llc",
+      "title": "Business Funding Documents for an LLC",
+      "risk": "medium",
+      "pageFamily": "business_funding",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/mortgage/gift-letter-explanation",
+      "title": "Mortgage Gift Letter Explanation",
+      "risk": "medium",
+      "pageFamily": "mortgage",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import BoundaryNotice from "../../components/BoundaryNotice.astro";
+import answersData from "../../../data/content/generated_answers.json";
+import { articleSchema, breadcrumbSchema } from "../../lib/schema";
+
+const slugify = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 100);
+export function getStaticPaths() {
+  const toSlug = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 100);
+  return answersData.answers.filter((item) => item.status === "published_by_contract").map((answer) => ({ params: { slug: toSlug(answer.title) }, props: { answer } }));
+}
+const { answer } = Astro.props;
+const slug = slugify(answer.title);
+const canonical = `https://approvalprep.com/blog/${slug}`;
+const description = answer.answer.slice(0, 155);
+const schema = [articleSchema({ title: answer.title, description, url: canonical, datePublished: answersData.generatedAt }), breadcrumbSchema(`/blog/${slug}`)];
+---
+<BaseLayout title={`${answer.title} - ApprovalPrep Blog`} description={description} canonical={canonical} schema={schema}>
+  <section class="hero shell">
+    <p class="eyebrow">Daily document-prep answer · {answer.riskLevel} risk</p>
+    <h1>{answer.title}</h1>
+    <p class="lead">{answer.answer}</p>
+    <div class="hero-actions">
+      <a class="button primary-button" href={answer.route}>Continue to related page</a>
+      <a class="button secondary-button" href="/letter-writing-studio">Start free for $0</a>
+    </div>
+  </section>
+  <section class="band"><div class="shell two">
+    <article class="card">
+      <p class="eyebrow">Self-service boundary</p>
+      <h2>Use this as preparation, not representation.</h2>
+      <p>ApprovalPrep helps you organize truthful facts, supporting documents, and next steps. It does not contact third parties, create fake documents, provide legal or financial advice, repair credit, or promise approval.</p>
+    </article>
+    <BoundaryNotice />
+  </div></section>
+  <section class="band"><div class="shell">
+    <article class="notice">
+      <strong>Related next step:</strong>
+      <p>Use the related guide or product page to move from a short answer into a practical packet.</p>
+      <a class="button secondary-button" href={answer.route}>Open related ApprovalPrep page</a>
+    </article>
+  </div></section>
+</BaseLayout>

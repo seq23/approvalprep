@@ -1,0 +1,19 @@
+---
+const { title, description, registry, results } = Astro.props;
+const experiments = registry?.experiments || [];
+---
+<article class="card admin-metric-panel">
+  <p class="eyebrow">Experimentation</p>
+  <h3>{title}</h3>
+  {description && <p class="fine">{description}</p>}
+  <p class="fine"><strong>Boundary:</strong> experiments are approval-gated. No fake urgency, guaranteed approval, or regulated claim tests are allowed.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Experiment</th><th>Status</th><th>Surface</th><th>Auto apply</th></tr></thead>
+      <tbody>
+        {experiments.map((item) => <tr><td>{item.id}</td><td>{item.status}</td><td>{item.surface}</td><td>{item.autoApplyEligible ? 'yes' : 'no'}</td></tr>)}
+      </tbody>
+    </table>
+  </div>
+  <p class="fine">Results mode: {results?.mode || 'not generated'}</p>
+</article>

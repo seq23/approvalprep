@@ -11,7 +11,24 @@ for (const file of ["functions/api/create-checkout-session.js", "functions/api/v
   if (!exists(file)) fail("[payment] missing Cloudflare Pages Function " + file);
 }
 
-if (exists("public/downloads")) fail("[payment] paid download assets must not be deployed from public/downloads");
+const publicDownloads = path.join(root, "public/downloads");
+if (exists("public/downloads")) {
+  const publicFiles = [];
+  function walkPublicDownloads(dir) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, entry.name);
+      if (entry.isDirectory()) walkPublicDownloads(full);
+      else publicFiles.push(full);
+    }
+  }
+  walkPublicDownloads(publicDownloads);
+  for (const file of publicFiles) {
+    const rel = path.relative(root, file);
+    if (/\.(pdf|docx)$/i.test(file) || !rel.startsWith("public/downloads/free-checklists/")) {
+      fail(`[payment] paid download assets must not be deployed from public/downloads: ${rel}`);
+    }
+  }
+}
 const verify = fs.readFileSync(path.join(root, "functions/api/verify-download.js"), "utf8");
 if (!verify.includes("PAYMENT_NOT_COMPLETED") || !verify.includes("PAYMENT_PENDING")) fail("[payment] verify endpoint must distinguish unpaid sessions from pending Stripe verification");
 if (!verify.includes("findPaidEntitlement") || !verify.includes('status: "VERIFIED"')) fail("[payment] verify endpoint must support paid entitlement lookup before releasing downloads");

@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-09T23:45:00.000Z",
+  "hardBlockedPatterns": [
+    {
+      "id": "guaranteed-approval",
+      "pattern": "guaranteed approval(?!\\?)|approval is guaranteed|will get approved|guarantee approval(?!\\?)",
+      "severity": "hard_fail",
+      "reason": "Outcome guarantee"
+    },
+    {
+      "id": "credit-repair-service",
+      "pattern": "we repair your credit|fix your credit for you|credit repair company|remove negative items",
+      "severity": "hard_fail",
+      "reason": "Credit repair service positioning"
+    },
+    {
+      "id": "false-dispute",
+      "pattern": "dispute even if accurate|say it is not yours even if|claim it is false even if|fabricate|fake document",
+      "severity": "hard_fail",
+      "reason": "False or unsupported dispute instruction"
+    },
+    {
+      "id": "debt-deletion-promise",
+      "pattern": "erase your debt|delete your debt|debt will be removed|collection will be deleted",
+      "severity": "hard_fail",
+      "reason": "Debt deletion promise"
+    },
+    {
+      "id": "we-send-for-you",
+      "pattern": "we send the letter for you|we contact the bureau for you|we file the dispute for you",
+      "severity": "hard_fail",
+      "reason": "Agency/service behavior outside ApprovalPrep boundary"
+    }
+  ],
+  "rewriteablePatterns": [
+    {
+      "id": "too-strong-remove",
+      "pattern": "remove this from your credit report",
+      "replacement": "prepare a truthful dispute or explanation if you believe the item is inaccurate or needs context"
+    },
+    {
+      "id": "must-approve",
+      "pattern": "must approve your application",
+      "replacement": "may review your application with the supporting context you provide"
+    },
+    {
+      "id": "fix-credit",
+      "pattern": "fix your credit",
+      "replacement": "organize truthful credit-related documents and explanations"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+---
+const { title = "Approval queue", description = "Content that cannot promote without approval.", queue, history } = Astro.props;
+const items = queue?.items || [];
+const approvals = history?.approvals || [];
+---
+<article class="card admin-panel approval-queue-panel">
+  <p class="eyebrow">Governance</p>
+  <h3>{title}</h3>
+  <p>{description}</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Metric</th><th>Count</th></tr></thead>
+      <tbody>
+        <tr><td>Items requiring approval</td><td><strong>{items.length}</strong></td></tr>
+        <tr><td>Approval history records</td><td><strong>{approvals.length}</strong></td></tr>
+        <tr><td>Approved records</td><td><strong>{approvals.filter((item) => item.status === "approved").length}</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  {items.length > 0 && (
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Content</th><th>Risk</th><th>Reason</th></tr></thead>
+        <tbody>
+          {items.slice(0, 8).map((item) => (
+            <tr><td><strong>{item.title}</strong><br /><small>{item.path}</small></td><td>{item.risk}</td><td>{item.reason}</td></tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
+</article>

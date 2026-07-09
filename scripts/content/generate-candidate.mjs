@@ -14,6 +14,7 @@ function loadRouteCopy() {
   src = src.replace(/import offeringData[^\n]+/, `const offeringData = ${fs.readFileSync("data/products/full_offering_catalog.json", "utf8")};`);
   src = src.replace(/import nextStepsData[^\n]+/, `const nextStepsData = ${fs.readFileSync("data/content/customer_next_steps.json", "utf8")};`);
   src = src.replace(/import boundaryData[^\n]+/, `const boundaryData = ${fs.readFileSync("data/legal/self_service_boundary.json", "utf8")};`);
+  src = src.replace(/import generatedRouteCopyData[^\n]+/, `const generatedRouteCopyData = ${fs.readFileSync("data/content/generated_route_copy.json", "utf8")};`);
   src = src.replace(/export const /g, "const ");
   src += "\nresult = { routeCopy };";
   const context = { result: null };

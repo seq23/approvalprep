@@ -1,0 +1,18 @@
+---
+const { title, description, data } = Astro.props;
+const metrics = data?.metrics || [];
+---
+<article class="card admin-metric-panel">
+  <p class="eyebrow">Measurement</p>
+  <h3>{title}</h3>
+  {description && <p class="fine">{description}</p>}
+  {data?.warning && <p class="fine"><strong>Boundary:</strong> {data.warning}</p>}
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Metric</th><th>Value</th><th>Source</th></tr></thead>
+      <tbody>
+        {metrics.map((metric) => <tr><td>{metric.label}</td><td><strong>{metric.value}</strong></td><td>{metric.source}</td></tr>)}
+      </tbody>
+    </table>
+  </div>
+</article>

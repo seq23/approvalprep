@@ -1,0 +1,14 @@
+---
+const { title, description, candidates, confirmed, watchlist } = Astro.props;
+---
+<article class="card admin-metric-panel">
+  <p class="eyebrow">Citation ledger</p>
+  <h3>{title}</h3>
+  {description && <p class="fine">{description}</p>}
+  <div class="table-wrap"><table><thead><tr><th>Ledger</th><th>Count</th></tr></thead><tbody>
+    <tr><td>Candidates</td><td><strong>{(candidates?.candidates || []).length}</strong></td></tr>
+    <tr><td>Confirmed citations</td><td><strong>{(confirmed?.citations || []).length}</strong></td></tr>
+    <tr><td>Mention watch terms</td><td><strong>{(watchlist?.watchlist || []).length}</strong></td></tr>
+  </tbody></table></div>
+  <p class="fine">Confirmed citation count stays zero unless evidence is imported with source URL, target URL, first seen date, and evidence source.</p>
+</article>

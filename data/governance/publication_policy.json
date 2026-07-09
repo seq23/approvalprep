@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "ApprovalPrep Content Publication Policy",
+  "defaultMode": "contract_governed",
+  "autoPublishAllowedWhen": [
+    "risk is low or medium",
+    "content does not contain prohibited claims",
+    "regulated credit-sensitive content is not promoted without approval",
+    "route or asset has a registry record",
+    "source-backed claims are mapped when required"
+  ],
+  "approvalRequiredWhen": [
+    "risk is regulated",
+    "risk is high",
+    "content is credit-dispute or credit-repair adjacent",
+    "content contains state-specific legal or regulated financial claims",
+    "content is marked approval_required by a generation workflow",
+    "source coverage is missing for a factual regulated claim"
+  ],
+  "prohibitedClaims": [
+    "guarantee approval",
+    "guarantee credit score increase",
+    "we repair your credit",
+    "we contact bureaus for you",
+    "we dispute for you",
+    "remove accurate negative items",
+    "create fake paystub",
+    "create fake employment verification",
+    "create fake income document"
+  ],
+  "safeStatuses": [
+    "published_by_contract",
+    "approved_by_contract",
+    "approval_required",
+    "blocked_by_policy",
+    "retired"
+  ],
+  "promotionRules": {
+    "requiresApprovedBy": true,
+    "requiresApprovedAt": true,
+    "requiresSourceChecksum": true,
+    "regulatedContentCannotSelfPromote": true
+  }
+}
