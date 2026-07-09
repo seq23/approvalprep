@@ -11,10 +11,13 @@ for (const product of products) {
     headers: { "content-type": "application/json" },
     body: JSON.stringify({ sku: product.sku })
   });
-  const payload = await response.json().catch(() => ({}));
+  const raw = await response.text();
+  let payload = {};
+  try { payload = JSON.parse(raw); } catch {}
   const ok = response.ok && /checkout\.stripe\.com/.test(payload.checkoutUrl || "");
-  results.push({ sku: product.sku, status: response.status, ok, error: payload.error || "", message: payload.message || "" });
-  if (!ok) console.error(`[stripe-test] ${product.sku} failed ${response.status} ${payload.error || ""} ${payload.message || ""}`);
+  const bodySnippet = raw.slice(0, 500);
+  results.push({ sku: product.sku, status: response.status, ok, error: payload.error || "", message: payload.message || "", bodySnippet });
+  if (!ok) console.error(`[stripe-test] ${product.sku} failed ${response.status} ${payload.error || ""} ${payload.message || ""} ${bodySnippet}`);
 }
 mkdirSync("reports/ops", { recursive: true });
 writeFileSync("reports/ops/stripe-test-checkout-smoke.json", JSON.stringify({ baseUrl: base, ranAt: new Date().toISOString(), results }, null, 2) + "\n");

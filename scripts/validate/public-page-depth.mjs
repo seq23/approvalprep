@@ -3,8 +3,16 @@ import fs from "node:fs";
 import vm from "node:vm";
 
 const page = fs.readFileSync("src/pages/[...slug].astro", "utf8");
-for (const token of ["Decision context", "What to prepare first", "Common mistakes this helps prevent", "Review before you send", "FAQBlock", "What this does not do", "NextStepsExplainer"]) {
+for (const token of ["Decision context", "What to prepare first", "Common mistakes this helps prevent", "Review before you send", "FAQBlock", "What this does not do", "NextStepsExplainer", "GuidePlaybook", "LegalPolicyPage"]) {
   if (!page.includes(token)) throw new Error(`Dynamic page missing depth section: ${token}`);
+}
+const guide = fs.readFileSync("src/components/GuidePlaybook.astro", "utf8");
+for (const token of ["Use this when", "Gather first", "Review before sending", "Avoid", "Start free for $0"]) {
+  if (!guide.includes(token)) throw new Error(`[public-page-depth] guide playbook missing token: ${token}`);
+}
+const methodology = fs.readFileSync("src/pages/methodology.astro", "utf8");
+for (const token of ["How ApprovalPrep works", "What it is not", "No legal advice", "No credit repair service", "No approval guarantee"]) {
+  if (!methodology.includes(token)) throw new Error(`[public-page-depth] methodology page missing safe token: ${token}`);
 }
 
 function loadRouteCopy() {

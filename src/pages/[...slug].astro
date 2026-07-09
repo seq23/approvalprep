@@ -18,12 +18,15 @@ import PageCTAStack from "../components/PageCTAStack.astro";
 import ProblemAgitationFit from "../components/ProblemAgitationFit.astro";
 import WhatHappensAfterPurchase from "../components/WhatHappensAfterPurchase.astro";
 import TrustAndBoundaryBand from "../components/TrustAndBoundaryBand.astro";
+import PricingDeck from "../components/PricingDeck.astro";
+import GuidePlaybook from "../components/GuidePlaybook.astro";
+import LegalPolicyPage from "../components/LegalPolicyPage.astro";
 import manifest from "../../data/routes/route_manifest.json";
-import { routeCopy, boundary, productComparison, routeFamilyCopy, offeringCategories, offeringsForSku, productForSku } from "../data/content";
+import { routeCopy, boundary, productCards, productComparison, routeFamilyCopy, offeringCategories, offeringsForSku, productForSku } from "../data/content";
 
 export function getStaticPaths() {
   return manifest.routes
-    .filter((route) => route.path !== "/" && route.path !== "/letter-writing-studio" && route.type !== "admin")
+    .filter((route) => !["/", "/letter-writing-studio", "/resources", "/blog", "/contact", "/methodology"].includes(route.path) && route.type !== "admin")
     .map((route) => ({ params: { slug: route.path.slice(1) }, props: { route } }));
 }
 
@@ -47,8 +50,8 @@ const isCredit = route.family === "credit_self_service" || route.risk === "regul
 const isPricing = route.path === "/pricing";
 const isDownload = route.path === "/download" || route.path === "/checkout/success";
 const isGlossary = route.path === "/glossary";
-const isMethodology = route.path === "/methodology";
 const isLegal = route.type === "legal";
+const isGuide = route.page_intent === "guide";
 const familyCopy = routeFamilyCopy[route.family] || routeFamilyCopy[route.risk === "regulated" ? "credit_self_service" : "letter_studio"];
 const skuForRoute = (() => {
   const path = route.path;
@@ -66,6 +69,7 @@ const primarySku = route.cta_policy === "purchase" ? skuForRoute : "";
 const routeProduct = productForSku(skuForRoute);
 const routeOfferings = offeringsForSku(skuForRoute);
 const isCommercial = route.cta_policy === "purchase" || route.page_intent === "product";
+const primaryCtaWithPrice = primarySku && routeProduct ? `Buy ${routeProduct.name} — ${routeProduct.priceLabel}` : copy.primaryCta;
 ---
 <BaseLayout title={`${route.title} - ApprovalPrep`} description={copy.lead} canonical={canonical} noindex={!route.index}>
   <section class={`hero shell ${isLegal ? "legal-hero" : "hero-split"}`}>
@@ -74,7 +78,7 @@ const isCommercial = route.cta_policy === "purchase" || route.page_intent === "p
       <h1>{copy.heading}</h1>
       <p class="lead">{copy.lead}</p>
       {familyCopy?.promise && <p class="supporting-copy">{familyCopy.promise}</p>}
-      {!isLegal && <OutcomeCTA primary={copy.primaryCta} secondary={copy.secondaryCta} href={ctaHref} secondaryHref="/pricing" primarySku={primarySku} />}
+      {!isLegal && <OutcomeCTA primary={primaryCtaWithPrice} secondary={copy.secondaryCta} href={ctaHref} secondaryHref="/pricing" primarySku={primarySku} />}
       <TrustBar signals={copy.trustSignals} />
     </div>
     {!isLegal && (
@@ -99,15 +103,34 @@ const isCommercial = route.cta_policy === "purchase" || route.page_intent === "p
   </section>
   {isPricing ? (
     <>
+      <section class="band pricing-band"><div class="shell">
+        <div class="pricing-header">
+          <div>
+            <p class="eyebrow">Pricing first</p>
+            <h2>Choose the kit that matches the paperwork pressure.</h2>
+            <p class="lead">ApprovalPrep has 8 checkout products. Those 8 kits contain 56 named self-service tools, templates, checklists, and letter types. You do not buy 56 separate files; you choose the kit that contains the paperwork you need.</p>
+          </div>
+          <div class="card pricing-start-free">
+            <p class="eyebrow">$0 starting path</p>
+            <h3>Not sure yet?</h3>
+            <p>Use the free Letter Writing Studio first. It does not store your answers and helps you choose the right kit.</p>
+            <a class="button secondary-button" href="/letter-writing-studio">Start free for $0</a>
+          </div>
+        </div>
+        <div class="pricing-model-grid">
+          <article class="notice"><strong>How the offers work:</strong><p>Every paid product is a direct paid download. Pick one paid kit below; Stripe unlocks that kit's PDF guide and editable DOCX file. The named offerings listed inside each card are the tools covered by that kit. The $39 Letter of Explanation Kit includes all 9 explanation-letter templates listed in that card.</p></article>
+          <article class="notice"><strong>Not ready to buy?</strong><p>Start with the free $0 Studio. It helps you draft a first-pass letter and choose the right paid kit without storing your answers.</p></article>
+        </div>
+        <PricingDeck products={productCards} />
+      </div></section>
       <section class="band"><div class="shell">
         <p class="eyebrow">Compare kits</p>
-        <h2>Choose the document path that matches your situation.</h2>
+        <h2>Compare by buyer situation.</h2>
         <div class="table-wrap"><table class="comparison-table"><thead><tr><th>Product</th><th>Best for</th><th>Includes</th><th>Price</th></tr></thead><tbody>
           {productComparison.map((row) => <tr><td><a href={row.href}>{row.product}</a></td><td>{row.bestFor}</td><td>{row.includes}</td><td><strong>{row.price}</strong></td></tr>)}
         </tbody></table></div>
       </div></section>
-      <section class="band"><div class="shell"><p class="eyebrow">Products</p><h2>ApprovalPrep kits</h2><ProductGrid /></div></section>
-      <section class="band"><div class="shell"><p class="eyebrow">All included offerings</p><h2>30+ self-service tools grouped into 8 paid kits.</h2><OfferingUniverse categories={offeringCategories} /></div></section>
+      <section class="band"><div class="shell"><p class="eyebrow">All included offerings</p><h2>56 self-service offering rows grouped into 8 paid checkout kits.</h2><p class="lead">This is the full universe of named use cases. Each item rolls up into one of the 8 priced kits above.</p><OfferingUniverse categories={offeringCategories} /></div></section>
     </>
   ) : isGlossary ? (
     <section class="band"><div class="shell grid">
@@ -115,35 +138,13 @@ const isCommercial = route.cta_policy === "purchase" || route.page_intent === "p
       <article class="card"><h2>Self-service credit tools</h2><p>Tools that help you prepare your own paperwork. They do not fix credit for you.</p></article>
       <article class="card"><h2>Ready-to-Apply Kit</h2><p>A packet with letters, checklists, and next steps for an application.</p></article>
     </div></section>
-  ) : isMethodology ? (
-    <section class="band"><div class="shell">
-      <h2>ApprovalPrep framework</h2>
-      <ol><li>Clarify the request.</li><li>Gather real documents.</li><li>Write a plain explanation.</li><li>Review for truth and safety.</li><li>Send the packet yourself.</li></ol>
-      <p>{boundary}</p>
-    </div></section>
   ) : isLegal ? (
-    <>
-      <section class="band"><div class="shell"><article class="short-answer card"><p class="eyebrow">Plain English</p><p>{copy.shortAnswer}</p></article></div></section>
-      {copy.decisionContext && (
-        <section class="band"><div class="shell">
-          <p class="eyebrow">Policy context</p>
-          <h2>What this policy is meant to clarify.</h2>
-          <div class="copy-stack">{copy.decisionContext.map((paragraph) => <p>{paragraph}</p>)}</div>
-        </div>
-        </section>
-      )}
-      <section class="band"><div class="shell"><WhatYouGet title="What this policy covers" items={copy.whatYouGet} /></div></section>
-      {copy.prepBrief && <section class="band"><div class="shell"><WhatYouGet title="What to review first" items={copy.prepBrief} /></div></section>}
-      {copy.commonMistakes && <section class="band"><div class="shell"><WhatYouGet title="Common misunderstandings to avoid" items={copy.commonMistakes} /></div></section>}
-      {copy.reviewChecklist && <section class="band"><div class="shell"><WhatYouGet title="Before you rely on this page" items={copy.reviewChecklist} /></div></section>}
-      <section class="band"><div class="shell"><DataPrivacyNotice /></div></section>
-      <section class="band"><div class="shell"><FAQBlock faq={copy.faq} /></div></section>
-      <section class="band"><div class="shell"><BoundaryNotice /></div></section>
-    </>
+    <LegalPolicyPage route={route} copy={copy} />
   ) : (
     <>
       <section class="band"><div class="shell"><article class="short-answer card"><p class="eyebrow">Short answer</p><p>{copy.shortAnswer}</p></article></div></section>
-      {isCommercial && <PageCTAStack primary={copy.primaryCta} secondary="Start free for $0 first" sku={primarySku} secondaryHref="/letter-writing-studio" />}
+      {isGuide && <GuidePlaybook copy={copy} product={routeProduct} ctaHref={ctaHref} />}
+      {isCommercial && <PageCTAStack primary={primaryCtaWithPrice} secondary="Start free for $0 first" sku={primarySku} secondaryHref="/letter-writing-studio" />}
       {isCommercial && <ProblemAgitationFit title="Make the situation easier to review." items={[
         {title:"The pressure", copy:"A reviewer is asking for clarity, proof, or context. Sending scattered facts can create more questions."},
         {title:"The better move", copy:"Prepare a clear explanation, attach real supporting documents, and keep a copy trail."},
@@ -176,7 +177,7 @@ const isCommercial = route.cta_policy === "purchase" || route.page_intent === "p
       <section class="band"><div class="shell"><WhatYouGet title="Why ApprovalPrep" items={["Plain steps", "Truthful templates only", "Clear next steps", "No fake document help"]} /></div></section>
     </>
   )}
-  <FinalCTA primary={copy.primaryCta} secondary={copy.secondaryCta} href={ctaHref} secondaryHref="/pricing" primarySku={primarySku} />
+  {!isLegal && <FinalCTA primary={primaryCtaWithPrice} secondary={copy.secondaryCta} href={ctaHref} secondaryHref="/pricing" primarySku={primarySku} />}
   <section class="band"><div class="shell">
     <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: copy.faq.map((item) => ({ "@type": "Question", name: item.question, acceptedAnswer: { "@type": "Answer", text: item.answer } })) })}></script>
     <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@type": "HowTo", name: route.title, step: copy.steps.map((step, index) => ({ "@type": "HowToStep", position: index + 1, text: step })) })}></script>

@@ -1,6 +1,9 @@
 {
   "schemaVersion": "3.0.0",
   "delivery": "entitlement_protected_r2_download",
+  "deliveryModel": "all_paid_products_are_direct_paid_downloads",
+  "studioRequiredForPaidProducts": false,
+  "checkoutResult": "Verified Stripe payment unlocks the purchased kit PDF guide and editable DOCX file.",
   "consumerFormats": [
     "pdf",
     "docx"
@@ -13,7 +16,7 @@
   "products": [
     {
       "sku": "letter-of-explanation",
-      "name": "Letter of Explanation",
+      "name": "Letter of Explanation Kit",
       "files": [
         "/api/download-file?type=pdf&session_id={STRIPE_SESSION_ID}",
         "/api/download-file?type=docx&session_id={STRIPE_SESSION_ID}"
@@ -243,7 +246,5 @@
         "downloads/complete-approvalprep-bundle.docx"
       ]
     }
-  ],
-  "publicPaidDownloadsAllowed": false,
-  "seedAssetDirectory": "seed-downloads"
+  ]
 }

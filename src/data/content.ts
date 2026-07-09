@@ -239,6 +239,14 @@ export const footerGroups = [
     "title": "Resources",
     "links": [
       [
+        "/resources",
+        "Resource Hub"
+      ],
+      [
+        "/blog",
+        "Blog"
+      ],
+      [
         "/llms.txt",
         "llms.txt"
       ],
@@ -541,6 +549,140 @@ export const routeFamilyCopy = {
 };
 
 export const routeCopy = {
+  "/resources": {
+    "heading": "Resources",
+    "lead": "ApprovalPrep resources help users find guides, policies, publishing updates, glossary definitions, privacy boundaries, and product paths without guessing where the next piece of content lives.",
+    "shortAnswer": "The Resources hub is the organizing layer for ApprovalPrep education. It points users to the blog, methodology, glossary, legal policies, pricing, and the free Studio while keeping the self-service boundary visible.",
+    "primaryCta": "Read the publishing hub",
+    "secondaryCta": "Start free for $0",
+    "decisionContext": [
+      "A resource section should not be a pile of footer links. It should explain where the content engine publishes, where users can learn the method, where policies live, and where buyers can return when they are ready to choose a kit.",
+      "ApprovalPrep uses Resources as the public map for evergreen guides, daily answer assets, policy pages, and user education. That gives people a recovery path when they are not ready to buy yet, and gives future publishing a visible home."
+    ],
+    "whoFor": [
+      "Users who need education before choosing a kit.",
+      "Visitors who want the blog or cadenced publishing stream.",
+      "Users checking privacy, disclaimers, refund, or credit-repair boundaries before buying.",
+      "Search and LLM crawlers that need a clear map of ApprovalPrep content surfaces."
+    ],
+    "value": [
+      "Separates product buying pages from educational resources.",
+      "Gives daily and cadenced publishing a public path instead of hiding it inside JSON or admin artifacts.",
+      "Keeps trust, privacy, and self-service boundaries easy to find.",
+      "Routes uncertain users back to the free Studio or pricing page instead of leaving them stranded."
+    ],
+    "whatYouGet": [
+      "A public resource hub.",
+      "Links to the blog, methodology, glossary, pricing, privacy, and disclaimers.",
+      "A plain explanation of where new content goes.",
+      "A safe path back to the free Studio or paid kits."
+    ],
+    "useCases": [
+      "You want to read before buying.",
+      "You want the latest daily ApprovalPrep answers.",
+      "You need privacy or disclaimer information.",
+      "You want to understand the method behind the kits."
+    ],
+    "prepBrief": [
+      "Use Resources when the user is not ready for checkout.",
+      "Send publishing assets to the blog, not only LLM files.",
+      "Keep regulated or approval-required assets governed before promotion.",
+      "Make policies and disclaimers visible without overwhelming commercial pages."
+    ],
+    "commonMistakes": [
+      "Treating resources as a footer-only afterthought.",
+      "Publishing daily content without a public index.",
+      "Mixing legal policy pages into conversion pages without hierarchy.",
+      "Letting users hit a dead end after reading an article."
+    ],
+    "reviewChecklist": [
+      "Can the user find the blog?",
+      "Can the user find privacy and disclaimers?",
+      "Can the user get back to pricing or the free Studio?",
+      "Does the page explain where new content goes?",
+      "Does it avoid claiming ranking, indexing, or approval outcomes?"
+    ],
+    "steps": [
+      "Choose the resource type.",
+      "Read the guide, article, or policy.",
+      "Return to the Studio or pricing when ready.",
+      "Use only truthful facts in any document you prepare.",
+      "Review the self-service boundary before sending anything."
+    ],
+    "faq": [
+      {"question":"Where does new content go?","answer":"Daily and cadenced publishing goes to the Blog, while evergreen policies and method pages remain in Resources."},
+      {"question":"Is Resources a paid product?","answer":"No. It is a public navigation and education hub."},
+      {"question":"Does reading a resource replace professional advice?","answer":"No. ApprovalPrep is self-service only and does not provide legal, financial, lending, or credit repair advice."}
+    ],
+    "trustSignals": ["Public resource hub", "Blog publishing path", "Privacy links", "Policy links", "Self-service boundary"]
+  },
+  "/blog": {
+    "heading": "ApprovalPrep Blog",
+    "lead": "The ApprovalPrep Blog is the public home for daily and cadenced document-prep publishing: short answers, route-specific explainers, and practical self-service guidance.",
+    "shortAnswer": "The Blog answers the question of where ongoing content goes. Published answer assets live here, point back to relevant product or guide pages, and keep users moving toward the right next step.",
+    "primaryCta": "Start free for $0",
+    "secondaryCta": "Browse resources",
+    "decisionContext": [
+      "A content engine without a public publishing surface creates hidden work. The answers may exist in JSON, LLM files, or internal reports, but users cannot browse them and search engines cannot treat them as a coherent editorial body.",
+      "The Blog solves that by giving daily and cadenced publishing a visible index. Each entry should be useful on its own, but it should also route users back to the related product, guide, policy, or free Studio path."
+    ],
+    "whoFor": [
+      "Users who want short practical answers before choosing a kit.",
+      "Visitors coming from search or LLM surfaces who need a next step.",
+      "Operators reviewing what has been published versus what still needs approval.",
+      "Users who prefer educational content before commercial pages."
+    ],
+    "value": [
+      "Creates a real home for daily publishing.",
+      "Turns generated answer assets into a navigable public surface.",
+      "Keeps regulated answers visibly governed through approval status.",
+      "Supports SEO/AEO/GEO without pretending publication is proof of ranking or citations."
+    ],
+    "whatYouGet": [
+      "A list of published daily answers.",
+      "Links back to related product and guide pages.",
+      "Clear separation between published and approval-required answer assets.",
+      "A publishing path that can expand into individual article pages later."
+    ],
+    "useCases": [
+      "You want quick guidance on a document-prep topic.",
+      "You want to see what ApprovalPrep publishes daily.",
+      "You need to find the related product page after reading an answer.",
+      "You want content that stays inside the self-service boundary."
+    ],
+    "prepBrief": [
+      "Publish only answer assets that have passed the required status rules.",
+      "Keep credit-sensitive and regulated content in approval-required state until reviewed.",
+      "Link every answer to a relevant route so the reader has a next step.",
+      "Avoid ranking, citation, or approval claims without telemetry proof."
+    ],
+    "commonMistakes": [
+      "Letting daily content exist only in machine-readable files.",
+      "Publishing answer assets with no user journey.",
+      "Mixing approved and approval-required content without clear labels.",
+      "Making blog posts that do not point to a useful product, guide, or policy page."
+    ],
+    "reviewChecklist": [
+      "Does the answer have a clear related route?",
+      "Does it avoid fake document, credit repair, legal, or approval claims?",
+      "Is the risk level visible?",
+      "Is the status appropriate before public promotion?",
+      "Does the user have a next step after reading?"
+    ],
+    "steps": [
+      "Generate or approve an answer asset.",
+      "Confirm its related route and risk level.",
+      "Publish approved items to the Blog index.",
+      "Keep approval-required items visibly governed.",
+      "Route readers to Studio, pricing, product pages, or policies."
+    ],
+    "faq": [
+      {"question":"Is the Blog where daily content goes?","answer":"Yes. The Blog is the public index for daily and cadenced ApprovalPrep publishing."},
+      {"question":"Do all generated answers publish automatically?","answer":"No. Regulated or approval-required answers must remain governed until reviewed."},
+      {"question":"Does publishing prove ranking or LLM citation wins?","answer":"No. Publication is a content surface. Ranking, indexing, and LLM surfacing require separate telemetry proof."}
+    ],
+    "trustSignals": ["Daily publishing home", "Related-page links", "Approval queue separation", "Self-service only", "No ranking proof claims"]
+  },
   "/letter-writing-studio": {
     "heading": "Free Letter Writing Studio",
     "lead": "Draft a first-pass explanation letter for $0 before you buy anything. No account, no upload, no stored answers, and no payment required.",

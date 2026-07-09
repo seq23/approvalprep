@@ -11,4 +11,6 @@ const admin=fs.readFileSync('src/pages/admin.astro','utf8');
 ['/api/admin/login','/api/admin/products','/api/admin/upload','revoke'].forEach(s=>{if(!admin.includes(s)) fail(`admin UI missing ${s}`)});
 const wrangler=fs.readFileSync('wrangler.toml','utf8');
 ['PRODUCTS_DB','PRODUCTS_KV','PRODUCT_ASSETS_R2'].forEach(s=>{if(!wrangler.includes(s)) fail(`wrangler missing ${s}`)});
+const catalog=fs.readFileSync('functions/_runtime/catalog.js','utf8');
+['try {','catch','seedProducts().filter','return seedProducts().find'].forEach(s=>{if(!catalog.includes(s)) fail(`catalog missing runtime fallback ${s}`)});
 console.log('PASS runtime-product-admin');

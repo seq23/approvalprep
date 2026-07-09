@@ -3,7 +3,7 @@ import "../styles/global.css";
 import SiteFooter from "../components/SiteFooter.astro";
 import DataPrivacyNotice from "../components/DataPrivacyNotice.astro";
 import { navCta, primaryNav } from "../data/navigation";
-const { title = "ApprovalPrep", description = "Self-service approval prep tools.", canonical = "https://approvalprep.com", noindex = false } = Astro.props;
+const { title = "ApprovalPrep", description = "Self-service approval prep tools.", canonical = "https://approvalprep.com", noindex = false, showPrivacyNotice = true } = Astro.props;
 ---
 <!doctype html>
 <html lang="en">
@@ -123,7 +123,7 @@ const { title = "ApprovalPrep", description = "Self-service approval prep tools.
         });
       }
     </script>
-    <DataPrivacyNotice compact={true} />
+    {showPrivacyNotice && <DataPrivacyNotice compact={true} />}
     <SiteFooter />
   </body>
 </html>

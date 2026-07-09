@@ -840,6 +840,44 @@
         "purchase_evaluation"
       ],
       "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0216_resources_definition",
+      "route_owner": "/resources",
+      "page_family_id": "geo_surface",
+      "children": [
+        "atlas_q_0217_resources_guide_index",
+        "atlas_q_0218_resources_publishing_path",
+        "atlas_q_0219_resources_privacy_boundary",
+        "atlas_q_0220_resources_purchase_path"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "guide_index",
+        "publishing_path",
+        "privacy_boundary",
+        "purchase_path"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0221_blog_definition",
+      "route_owner": "/blog",
+      "page_family_id": "geo_surface",
+      "children": [
+        "atlas_q_0222_blog_daily_answers",
+        "atlas_q_0223_blog_cadence",
+        "atlas_q_0224_blog_safety_review",
+        "atlas_q_0225_blog_next_step"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "daily_answers",
+        "cadence",
+        "safety_review",
+        "next_step"
+      ],
+      "status": "admitted_unique_intent_fanout"
     }
   ]
 }

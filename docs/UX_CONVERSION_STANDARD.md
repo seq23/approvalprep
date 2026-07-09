@@ -16,3 +16,7 @@ Top navigation must act like a buying guide: Products, Letter Studio, Use Cases,
 ## Commercial CTA Rhythm
 
 Commercial pages need a hero CTA, mid-page fit CTA, included-offerings CTA, post-objection CTA, and final CTA. The path must support both uncertain users who should start with the free Studio and ready buyers who should proceed to checkout.
+
+## Paid Product Delivery Model
+
+Every paid ApprovalPrep product is a direct paid download. The free Studio can help a user draft, orient, and choose a kit, but it is never required to buy or use a paid product. After verified Stripe checkout, the buyer unlocks the purchased kit PDF guide and editable DOCX file.

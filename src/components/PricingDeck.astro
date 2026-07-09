@@ -1,0 +1,25 @@
+---
+const { products = [] } = Astro.props;
+---
+<div class="pricing-deck">
+  {products.map((product) => (
+    <article class={`pricing-card ${product.sku === "complete-approvalprep-bundle" ? "pricing-card-featured" : ""}`} id={product.sku}>
+      <div>
+        <p class="eyebrow">{product.badge}</p>
+        <h3>{product.name}</h3>
+        <p>{product.customer_situation}</p>
+      </div>
+      <p class="pricing-amount">{product.priceLabel}</p>
+      <p class="fine"><strong>{(product.included_offerings || []).length || (product.includes || []).length} included tools</strong> bundled into this one checkout.</p>
+      <p class="fine"><strong>Direct paid download:</strong> after checkout, this kit unlocks a PDF guide and editable DOCX file. The free Studio is optional.</p>
+      {product.sku === "letter-of-explanation" && <p class="notice mini-notice"><strong>$39 direct download:</strong> includes all 9 explanation-letter templates in the kit. The free Studio is optional and not required.</p>}
+      <ul class="compact-list">
+        {(product.included_offerings || product.includes || []).slice(0, 5).map((item) => <li>{item}</li>)}
+      </ul>
+      {(product.included_offerings || []).length > 5 && <p class="fine">+ {(product.included_offerings || []).length - 5} more tools included</p>}
+      <button class="button primary-button checkout-button" type="button" data-sku={product.sku}>Buy {product.name} — {product.priceLabel}</button>
+      <p class="fine">Opens secure Stripe checkout for this direct-download kit.</p>
+      <p class="fine checkout-status" aria-live="polite"></p>
+    </article>
+  ))}
+</div>

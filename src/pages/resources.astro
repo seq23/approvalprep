@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import TrustAndBoundaryBand from "../components/TrustAndBoundaryBand.astro";
+---
+<BaseLayout title="Resources - ApprovalPrep" description="ApprovalPrep resources, guides, publishing updates, policies, and self-service document prep education." canonical="https://approvalprep.com/resources">
+  <section class="hero shell">
+    <p class="eyebrow">Resources</p>
+    <h1>Find the guide, policy, or publishing stream that matches your question.</h1>
+    <p class="lead">ApprovalPrep resources are organized around real user jobs: draft a letter, compare kits, understand boundaries, read document-prep guidance, or follow the daily publishing stream.</p>
+    <div class="hero-actions">
+      <a class="button primary-button" href="/blog">Read the publishing hub</a>
+      <a class="button secondary-button" href="/letter-writing-studio">Start free for $0</a>
+    </div>
+  </section>
+  <section class="band"><div class="shell">
+    <p class="eyebrow">Resource paths</p>
+    <h2>Choose the kind of help you need.</h2>
+    <div class="resource-grid">
+      <a class="card resource-card" href="/blog"><span>Publishing</span><h3>Daily ApprovalPrep answers</h3><p>Cadenced answer assets, plain-English explainers, and route-specific preparation guidance.</p></a>
+      <a class="card resource-card" href="/methodology"><span>How it works</span><h3>Methodology</h3><p>The ApprovalPrep framework for truthful facts, supporting documents, review steps, and self-service boundaries.</p></a>
+      <a class="card resource-card" href="/glossary"><span>Definitions</span><h3>Glossary</h3><p>Plain-language definitions for document prep, explanation letters, packets, and self-service boundaries.</p></a>
+      <a class="card resource-card" href="/pricing"><span>Buying help</span><h3>Compare kits</h3><p>See the 8 paid kits, prices, included tools, and the full self-service offering universe.</p></a>
+      <a class="card resource-card" href="/privacy"><span>Trust</span><h3>Privacy and no-storage policy</h3><p>Understand what ApprovalPrep stores, what it does not store, and how the free Studio stays browser-only.</p></a>
+      <a class="card resource-card" href="/disclaimer"><span>Boundaries</span><h3>Disclaimers</h3><p>Review the no-credit-repair, no-legal-advice, no-approval-guarantee boundaries before using a kit.</p></a>
+    </div>
+  </div></section>
+  <section class="band"><div class="shell two">
+    <div>
+      <p class="eyebrow">Where new content goes</p>
+      <h2>The blog is the home for daily and cadenced publishing.</h2>
+      <p>Generated answer assets should not live only in JSON, admin reports, or LLM surfaces. The public publishing hub gives users and crawlers a clear place to find fresh explainers, preparation answers, and product-adjacent guidance.</p>
+    </div>
+    <div class="notice"><strong>Publishing rule:</strong><p>Regulated or sensitive topics can be queued for approval before public promotion. Fixture traces are not ranking proof, and published answers do not claim guaranteed outcomes.</p></div>
+  </div></section>
+  <TrustAndBoundaryBand />
+</BaseLayout>

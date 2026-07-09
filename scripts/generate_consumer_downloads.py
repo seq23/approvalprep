@@ -12,8 +12,9 @@ from reportlab.lib import colors
 from reportlab.lib.units import inch
 
 ROOT = Path(__file__).resolve().parents[1]
-DOWNLOADS = ROOT/'public'/'downloads'
-DOWNLOADS.mkdir(parents=True, exist_ok=True)
+SEED_DOWNLOADS = ROOT/'seed-downloads'
+SEED_DOWNLOADS.mkdir(parents=True, exist_ok=True)
+DOWNLOADS = SEED_DOWNLOADS
 
 # Remove consumer-hostile public markdown/text outputs. Keep source markdown under templates/prompts only.
 for p in DOWNLOADS.glob('*.md'):
@@ -144,6 +145,13 @@ def make_docx(product):
     doc.add_heading('Start Here', level=1)
     doc.add_paragraph(spec['use'])
     doc.add_paragraph('This kit gives you a clear path. It does not make a decision for the person reading your papers.')
+    doc.add_heading('Included Templates and Tools In This Kit', level=1)
+    doc.add_paragraph('This is one direct paid download. The items below are included inside this kit; you do not need to buy them separately or use the free Studio first.')
+    for item in product.get('included_offerings', []):
+        doc.add_heading(item.title(), level=2)
+        doc.add_paragraph(f'Use this included tool when your situation involves {item}. Fill in only true facts, attach real supporting documents if useful, review the wording, and send it yourself when ready.')
+        doc.add_paragraph('Template starter:')
+        doc.add_paragraph(f'I am writing to explain or organize information related to {item}. The truthful facts are: [fill in your facts]. The supporting documents I am including are: [list real documents].')
     doc.add_heading('Before You Fill This In', level=1)
     for item in ['Use simple words.', 'Use true facts only.', 'Do not guess.', 'Do not hide important facts.', 'Do not send private documents unless the recipient asked for them or they clearly support your letter.']:
         doc.add_paragraph(item, style='List Bullet')
@@ -185,6 +193,9 @@ def make_docx(product):
         doc.add_paragraph(item, style='List Bullet')
     out = DOWNLOADS/f"{product['sku']}.docx"
     doc.save(out)
+    target = SEED_DOWNLOADS/f"{product['sku']}.docx"
+    if out.resolve() != target.resolve():
+        shutil.copy2(out, target)
     return out
 
 styles = getSampleStyleSheet()
@@ -216,6 +227,12 @@ def make_pdf(product):
     flow.append(P('Start Here', 'H1x'))
     flow.append(P(spec['use']))
     flow.append(P('This kit gives you a clear path. It does not make a decision for the person reading your papers.'))
+    flow.append(P('Included Templates and Tools In This Kit', 'H1x'))
+    flow.append(P('This is one direct paid download. The items below are included inside this kit; you do not need to buy them separately or use the free Studio first.'))
+    for item in product.get('included_offerings', []):
+        flow.append(P(item.title(), 'H2x'))
+        flow.append(P(f'Use this included tool when your situation involves {item}. Fill in only true facts, attach real supporting documents if useful, review the wording, and send it yourself when ready.'))
+        flow.append(P(f'Template starter: I am writing to explain or organize information related to {item}. The truthful facts are: [fill in your facts]. The supporting documents I am including are: [list real documents].'))
     flow.append(P('Before You Fill This In', 'H1x'))
     flow.extend(bullets(['Use simple words.', 'Use true facts only.', 'Do not guess.', 'Do not hide important facts.', 'Do not send private documents unless the recipient asked for them or they clearly support your letter.']))
     flow.append(P('Step-by-Step Instructions', 'H1x'))
@@ -247,6 +264,9 @@ def make_pdf(product):
     flow.append(P('What ApprovalPrep Does Not Do', 'H1x'))
     flow.extend(bullets(DISCLAIMER[1:6]))
     doc.build(flow)
+    target = SEED_DOWNLOADS/f"{product['sku']}.pdf"
+    if out.resolve() != target.resolve():
+        shutil.copy2(out, target)
     return out
 
 made=[]
@@ -273,9 +293,26 @@ text = text.replace('a.textContent = file.split("/").pop();', 'a.textContent = f
 layout.write_text(text)
 
 # Update manifest for 8 active product downloads only.
-manifest = {'schemaVersion':'3.0.0','delivery':'verified_stripe_download','consumerFormats':['pdf','docx'],'removedConsumerFormats':['markdown','txt'],'reason':'Public paid downloads must be useful to average consumers. Markdown and TXT are source/internal formats only.','products':[]}
+manifest = {
+  'schemaVersion':'3.0.0',
+  'delivery':'entitlement_protected_r2_download',
+  'deliveryModel':'all_paid_products_are_direct_paid_downloads',
+  'studioRequiredForPaidProducts':False,
+  'checkoutResult':'Verified Stripe payment unlocks the purchased kit PDF guide and editable DOCX file.',
+  'consumerFormats':['pdf','docx'],
+  'removedConsumerFormats':['markdown','txt'],
+  'reason':'Public paid downloads must be useful to average consumers. Markdown and TXT are source/internal formats only.',
+  'products':[]
+}
 for p in products:
-    manifest['products'].append({'sku':p['sku'],'name':p['name'],'files':[f'/downloads/{p["sku"]}.pdf',f'/downloads/{p["sku"]}.docx'],'firstPageRequires':['plain-language self-service boundary','not legal/financial/credit-repair/lending advice','no third-party contact','no fake documents','no promises or guarantees'],'requiredSections':COMMON_SECTIONS})
+    manifest['products'].append({
+      'sku':p['sku'],
+      'name':p['name'],
+      'files':[f'/api/download-file?type=pdf&session_id={{STRIPE_SESSION_ID}}',f'/api/download-file?type=docx&session_id={{STRIPE_SESSION_ID}}'],
+      'firstPageRequires':['plain-language self-service boundary','not legal/financial/credit-repair/lending advice','no third-party contact','no fake documents','no promises or guarantees'],
+      'requiredSections':COMMON_SECTIONS,
+      'r2Keys':[f'downloads/{p["sku"]}.pdf',f'downloads/{p["sku"]}.docx']
+    })
 (ROOT/'data/products/download_manifest.json').write_text(json.dumps(manifest, indent=2))
 
 # Add hostile review report.

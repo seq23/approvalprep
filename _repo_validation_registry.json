@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "lastUpdatedAt": "2026-07-09T02:30:00.000Z",
+  "lastUpdatedAt": "2026-07-09T04:32:00.000Z",
   "policy": "Hard fails protect customer journey, payment/download safety, regulated boundaries, real growth machinery, and operator automation. Cosmetic preferences and live-provider success are not hard fails unless the repo falsely claims them.",
   "validators": [
     {
@@ -68,6 +68,28 @@
       "owner": "approvalprep-ops",
       "group": "release-critical",
       "scope": "Protected paid download model and no public paid assets"
+    },
+    {
+      "id": "download-first-page-boundary",
+      "npmScript": "validate:download-first-page-boundary",
+      "entrypoint": "scripts/validate/download-first-page-boundary.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents paid download files without first-page legal and self-service boundary language",
+      "owner": "approvalprep-products",
+      "group": "release-critical",
+      "scope": "First-page disclaimers and legal boundary language in paid PDF/DOCX downloads"
+    },
+    {
+      "id": "download-offering-coverage",
+      "npmScript": "validate:download-offering-coverage",
+      "entrypoint": "scripts/validate/download-offering-coverage.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents paid kit files from omitting the named offerings they claim to include",
+      "owner": "approvalprep-products",
+      "group": "release-critical",
+      "scope": "Bundled PDF/DOCX coverage for every named offering in the offering catalog"
     },
     {
       "id": "data-privacy",
@@ -585,6 +607,17 @@
       "owner": "approvalprep-growth",
       "group": "growth-critical",
       "scope": "30+ offering visibility in public UI"
+    },
+    {
+      "id": "offering-contracts",
+      "npmScript": "validate:offering-contracts",
+      "entrypoint": "scripts/validate/offering-contracts.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents named offerings without reviewable docs, assets, or safety contract",
+      "owner": "approvalprep-products",
+      "group": "release-critical",
+      "scope": "Per-offering review docs, PDF/DOCX asset mapping, and offering contract standard"
     },
     {
       "id": "letter-studio",

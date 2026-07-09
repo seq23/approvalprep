@@ -28,6 +28,8 @@ export const primaryNav = [
   {
     title: "Resources",
     links: [
+      ["/resources", "Resource hub"],
+      ["/blog", "Blog"],
       ["/methodology", "Methodology"],
       ["/glossary", "Glossary"],
       ["/privacy", "Privacy"],

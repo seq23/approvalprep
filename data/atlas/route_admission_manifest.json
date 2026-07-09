@@ -361,6 +361,22 @@
       "risk": "medium",
       "index": true,
       "minimum_queries": 5
+    },
+    {
+      "route": "/resources",
+      "family": "geo_surface",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "low",
+      "index": true,
+      "minimum_queries": 5
+    },
+    {
+      "route": "/blog",
+      "family": "geo_surface",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5
     }
   ]
 }

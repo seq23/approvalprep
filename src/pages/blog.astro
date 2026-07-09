@@ -1,0 +1,44 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import answersData from "../../data/content/generated_answers.json";
+const published = answersData.answers.filter((item) => item.status === "published_by_contract");
+const review = answersData.answers.filter((item) => item.status !== "published_by_contract");
+---
+<BaseLayout title="ApprovalPrep Blog - Daily Document Prep Answers" description="Daily and cadenced ApprovalPrep publishing for self-service document prep, explanation letters, application packets, and paperwork readiness." canonical="https://approvalprep.com/blog">
+  <section class="hero shell">
+    <p class="eyebrow">Publishing hub</p>
+    <h1>Daily document-prep answers live here.</h1>
+    <p class="lead">This is the public home for ApprovalPrep’s daily and cadenced publishing: short explainers, route-specific answers, preparation prompts, and self-service document guidance.</p>
+    <div class="hero-actions">
+      <a class="button primary-button" href="/letter-writing-studio">Start free for $0</a>
+      <a class="button secondary-button" href="/resources">Browse all resources</a>
+    </div>
+  </section>
+  <section class="band"><div class="shell">
+    <div class="publishing-header">
+      <div>
+        <p class="eyebrow">Published answers</p>
+        <h2>{published.length} answers available now.</h2>
+        <p class="lead">Each answer points back to the relevant product, guide, or policy page so users can keep moving instead of landing on a dead-end article.</p>
+      </div>
+      <div class="card"><h3>Cadence</h3><p>Daily answer assets and scheduled content should publish here after they pass safety, boundary, and approval rules.</p></div>
+    </div>
+    <div class="blog-list">
+      {published.map((item) => (
+        <article class="card blog-card">
+          <p class="eyebrow">{item.riskLevel} risk</p>
+          <h3>{item.title}</h3>
+          <p>{item.answer}</p>
+          <a class="button secondary-button" href={item.route}>Continue to related page</a>
+        </article>
+      ))}
+    </div>
+  </div></section>
+  {review.length > 0 && (
+    <section class="band"><div class="shell">
+      <p class="eyebrow">Approval queue</p>
+      <h2>{review.length} answer assets require review before public promotion.</h2>
+      <p class="lead">Credit-sensitive and regulated content should stay visibly governed. This queue makes the boundary clear without pretending every generated asset is automatically approved.</p>
+    </div></section>
+  )}
+</BaseLayout>

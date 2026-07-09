@@ -8,5 +8,7 @@ if (offerings.size < 30) { console.error(`[product-model] expected at least 30 i
 for (const p of active) {
   if (!p.stripe_price_env?.startsWith('STRIPE_PRICE_')) { console.error(`[product-model] ${p.sku} missing stripe_price_env`); process.exit(1); }
   if (!p.cta_label || !p.description || !p.trust_signals || p.trust_signals.length < 4) { console.error(`[product-model] ${p.sku} missing conversion fields`); process.exit(1); }
+  if (p.delivery_model !== 'direct_paid_download' || p.studio_required !== false) { console.error(`[product-model] ${p.sku} must be direct paid download and not Studio-gated`); process.exit(1); }
+  if (!/direct paid download/i.test(p.description)) { console.error(`[product-model] ${p.sku} description must state direct paid download`); process.exit(1); }
 }
 console.log(`[product-model] OK: ${active.length} active products cover ${offerings.size} offerings`);

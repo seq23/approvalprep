@@ -1,20 +1,31 @@
 ---
-const { categories = [] } = Astro.props;
+const { categories = [], variant = "full" } = Astro.props;
+const isSummary = variant === "summary";
 ---
-<div class="offering-universe">
+<div class={isSummary ? "offering-summary-grid" : "offering-universe"}>
   {categories.map((category) => (
-    <article class="card offering-category" id={`offerings-${category.product_sku}`}>
+    <article class={isSummary ? "card offering-summary-card" : "card offering-category"} id={`offerings-${category.product_sku}`}>
       <p class="eyebrow">{category.product_name}</p>
-      <h3>{category.offerings.length} self-service tools included</h3>
-      <div class="offering-list">
-        {category.offerings.map((offering) => (
-          <div class="offering-item">
-            <strong>{offering.name || offering}</strong>
-            {offering.customerSituation && <p>{offering.customerSituation}</p>}
+      <h3>{category.offerings.length} tools included</h3>
+      {isSummary ? (
+        <>
+          <p class="fine">{category.product_name === "Complete ApprovalPrep Bundle" ? "The full self-service library in one purchase." : "Best when this paperwork lane matches your situation."}</p>
+          <div class="offering-chip-list">
+            {category.offerings.slice(0, 5).map((offering) => <span>{offering.name || offering}</span>)}
           </div>
-        ))}
-      </div>
-      <a class="button secondary-button" href={`/pricing#${category.product_sku}`}>See {category.product_name}</a>
+          {category.offerings.length > 5 && <p class="fine">+ {category.offerings.length - 5} more included</p>}
+        </>
+      ) : (
+        <div class="offering-list">
+          {category.offerings.map((offering) => (
+            <div class="offering-item">
+              <strong>{offering.name || offering}</strong>
+              {offering.customerSituation && <p>{offering.customerSituation}</p>}
+            </div>
+          ))}
+        </div>
+      )}
+      <a class="button secondary-button" href={`/pricing#${category.product_sku}`}>See {category.product_name} pricing</a>
     </article>
   ))}
 </div>

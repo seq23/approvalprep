@@ -1,0 +1,179 @@
+---
+import DataPrivacyNotice from "./DataPrivacyNotice.astro";
+import BoundaryNotice from "./BoundaryNotice.astro";
+
+const { route, copy } = Astro.props;
+const effectiveDate = "July 8, 2026";
+const legalPolicies = {
+  "/privacy": {
+    summary: "ApprovalPrep does not ask users to create accounts for public self-service tools and does not store letter answers, completed drafts, uploaded documents, or personal application packets.",
+    covers: [
+      "What information may be processed to operate checkout, downloads, support, security, and analytics.",
+      "What ApprovalPrep intentionally does not store: customer letter answers, completed drafts, uploaded documents, or private application packets.",
+      "How payment and download verification rely on service providers without turning ApprovalPrep into a document-storage product."
+    ],
+    limits: [
+      "Stripe, Cloudflare, email, analytics, and other providers may process limited operational records under their own terms.",
+      "Do not send sensitive documents by email unless you choose to do so and understand the risk.",
+      "No website can promise perfect security, but ApprovalPrep keeps the public product designed around minimal data collection."
+    ]
+  },
+  "/terms": {
+    summary: "ApprovalPrep is a self-service document-prep website. By using it, users agree to use truthful information, review their own materials, and send documents themselves.",
+    covers: [
+      "Permitted use of templates, guides, checklists, downloadable files, and the free Letter Writing Studio.",
+      "User responsibility for accuracy, legality, completeness, review, submission, and final decisions.",
+      "Site boundaries: no professional advice, no credit repair service, no third-party contact, no fake documents, and no approval guarantee."
+    ],
+    limits: [
+      "ApprovalPrep materials are educational and self-service only.",
+      "Users should get qualified professional help for legal, tax, credit, lending, immigration, court, or regulated issues.",
+      "ApprovalPrep may update products, policies, pages, and downloadable materials over time."
+    ]
+  },
+  "/disclaimer": {
+    summary: "ApprovalPrep helps users organize truthful facts and self-service paperwork. It does not provide legal, financial, lending, credit repair, tax, or professional advice.",
+    covers: [
+      "No attorney-client, advisor-client, lender, broker, credit repair, or representative relationship is created.",
+      "Templates and examples are starting points for the user to review and customize.",
+      "ApprovalPrep does not promise approval, deletion, acceptance, funding, housing, employment, or any third-party outcome."
+    ],
+    limits: [
+      "Do not use ApprovalPrep to create false statements, fake documents, misleading proof, threats, or impersonation.",
+      "Regulated disputes and legal deadlines may require a qualified professional.",
+      "Users are responsible for deciding whether a template is appropriate for their facts."
+    ]
+  },
+  "/refund-policy": {
+    summary: "Digital products are delivered as downloadable self-service files. Refund handling should be clear, limited, and tied to access or fulfillment issues.",
+    covers: [
+      "Refund requests for duplicate purchases, failed access, incorrect charges, or technical delivery problems.",
+      "How users can contact ApprovalPrep with order details when a paid download does not unlock as expected.",
+      "Why completed digital delivery may limit refund eligibility unless required by applicable law."
+    ],
+    limits: [
+      "ApprovalPrep does not guarantee a third party will accept a packet or approve an application.",
+      "Dissatisfaction with an external outcome is not the same as a product delivery failure.",
+      "This policy does not limit rights that cannot be waived under applicable consumer law."
+    ]
+  },
+  "/security": {
+    summary: "ApprovalPrep is designed around minimal data collection, protected paid downloads, and operational controls that reduce unnecessary exposure of customer document contents.",
+    covers: [
+      "Checkout, download verification, admin access, provider configuration, and release validation boundaries.",
+      "The public no-storage promise for letter answers, completed drafts, uploads, and personal application packets.",
+      "Operational records needed for payment, delivery, security, support, and site reliability."
+    ],
+    limits: [
+      "Users should avoid sending sensitive documents by email unless they choose that channel.",
+      "Security depends on provider configuration, environment variables, deployment settings, and ongoing monitoring.",
+      "ApprovalPrep cannot control third-party websites or institutions after a user sends materials."
+    ]
+  },
+  "/accessibility": {
+    summary: "ApprovalPrep aims to keep public pages, checkout paths, and self-service guidance readable, navigable, and usable across common devices.",
+    covers: [
+      "Plain-language content, visible links, keyboard-friendly controls, readable contrast, and responsive layouts.",
+      "Continued improvement when accessibility issues are found.",
+      "A contact path for users who need help accessing information."
+    ],
+    limits: [
+      "Some third-party checkout, email, analytics, or provider interfaces are controlled by their providers.",
+      "Accessibility work is ongoing and should be validated as the site changes.",
+      "Users can contact info@approvalprep.com for access issues or alternate support needs."
+    ]
+  },
+  "/editorial-policy": {
+    summary: "ApprovalPrep content should be plain, useful, truthful, and bounded. It should help users prepare without overstating outcomes or drifting into professional advice.",
+    covers: [
+      "How guides, blog answers, glossary pages, product pages, and policy pages should stay practical.",
+      "Review expectations for credit-sensitive, legal-sensitive, financial, lending, tax, or regulated topics.",
+      "The rule that content should route users to a useful next step, not a dead-end article."
+    ],
+    limits: [
+      "Generated or drafted content should not be treated as automatically approved for public use.",
+      "ApprovalPrep should not publish fake expertise, fake evidence, or guaranteed outcome claims.",
+      "Content can explain preparation steps but should point users to qualified help when facts are complex."
+    ]
+  },
+  "/ai-use-policy": {
+    summary: "ApprovalPrep may use software-assisted workflows to organize public content and operations, but customer-facing self-service tools must stay truthful, bounded, and reviewable.",
+    covers: [
+      "Use of generated drafts, validation checks, publishing queues, and admin tooling.",
+      "Rules against fake claims, fake documents, legal advice, credit repair promises, or fabricated proof.",
+      "The free Letter Writing Studio is browser-only static logic and does not require paid AI calls or customer document storage."
+    ],
+    limits: [
+      "AI-assisted output should be reviewed before sensitive public publication.",
+      "Automation does not replace legal, compliance, editorial, security, or owner judgment.",
+      "ApprovalPrep should not claim live rankings, citations, or telemetry that has not been observed."
+    ]
+  },
+  "/credit-repair-disclaimer": {
+    summary: "ApprovalPrep is not a credit repair company and does not sell credit repair services. Credit-related tools are self-service templates and preparation materials only.",
+    covers: [
+      "Users write, review, and send their own letters and supporting materials.",
+      "ApprovalPrep does not contact credit bureaus, creditors, collectors, furnishers, lenders, landlords, or agencies for users.",
+      "ApprovalPrep does not promise deletion, score increases, approval, funding, or acceptance."
+    ],
+    limits: [
+      "Credit disputes and deadlines may involve legal rights or regulated procedures; users may need qualified help.",
+      "Users should only dispute information they believe is inaccurate, incomplete, unverifiable, or otherwise appropriate to question.",
+      "No template should be used to make false statements or misrepresent facts."
+    ]
+  },
+  "/not-a-credit-repair-company": {
+    summary: "ApprovalPrep does not perform credit repair. It provides self-service organization tools for users who choose to prepare and send their own materials.",
+    covers: [
+      "No third-party credit repair services, no bureau contact, no creditor contact, and no dispute submission by ApprovalPrep.",
+      "No promise that a record will be removed, changed, suppressed, or improved.",
+      "A clear separation between self-service preparation materials and regulated credit repair services."
+    ],
+    limits: [
+      "Users remain responsible for the truthfulness and suitability of anything they send.",
+      "ApprovalPrep cannot control how credit bureaus, creditors, collectors, lenders, or landlords respond.",
+      "Professional advice may be needed for complex credit, legal, identity theft, bankruptcy, or debt matters."
+    ]
+  }
+};
+
+const policy = legalPolicies[route.path] || {
+  summary: copy.shortAnswer,
+  covers: copy.whatYouGet || [],
+  limits: copy.commonMistakes || []
+};
+---
+<section class="band legal-policy-band">
+  <div class="shell legal-policy-layout">
+    <aside class="legal-policy-meta card">
+      <p class="eyebrow">Policy page</p>
+      <p><strong>Effective:</strong> {effectiveDate}</p>
+      <p><strong>Contact:</strong> <a href="mailto:info@approvalprep.com">info@approvalprep.com</a></p>
+      <p class="fine">This page is general information about ApprovalPrep’s site and services. It is not legal advice.</p>
+    </aside>
+    <article class="legal-policy-body">
+      <p class="eyebrow">Plain-English summary</p>
+      <h2>{route.title}</h2>
+      <p class="lead">{policy.summary}</p>
+      <div class="legal-policy-grid">
+        <div class="card">
+          <h3>What this covers</h3>
+          <ul>{policy.covers.map((item) => <li>{item}</li>)}</ul>
+        </div>
+        <div class="card warning-card">
+          <h3>Important limits</h3>
+          <ul>{policy.limits.map((item) => <li>{item}</li>)}</ul>
+        </div>
+      </div>
+      <DataPrivacyNotice />
+      <BoundaryNotice />
+      <div class="legal-links">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/disclaimer">Disclaimer</a>
+        <a href="/refund-policy">Refund policy</a>
+        <a href="/contact">Contact</a>
+      </div>
+    </article>
+  </div>
+</section>

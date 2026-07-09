@@ -42,8 +42,8 @@ import { studioBenefits, studioFields, studioSituations } from "../data/letterSt
       <div class="recommendation-card" data-recommendation>
         <p class="eyebrow">Recommended next step</p>
         <h3>Letter of Explanation</h3>
-        <p>The free draft helps you start. The paid kit gives you editable DOCX templates, examples, checklists, and review steps.</p>
-        <a class="button primary-button" href="/pricing#letter-of-explanation">See the full kit</a>
+        <p>The free draft helps you start. The $39 paid kit is a direct download with a PDF guide and editable DOCX templates for 9 explanation-letter situations. You do not have to use the Studio to buy it.</p>
+        <a class="button primary-button" href="/pricing#letter-of-explanation">Buy the kit — $39</a>
       </div>
       <ul class="compact-list">
         {studioBenefits.map((item) => <li>{item}</li>)}
@@ -63,7 +63,7 @@ import { studioBenefits, studioFields, studioSituations } from "../data/letterSt
     const selected = () => situations.find((item) => item.id === form.situation.value) || situations[0];
     const val = (name) => String(form.elements[name]?.value || "").trim();
     const renderRecommendation = (situation) => {
-      recommendation.innerHTML = `<p class="eyebrow">Recommended next step</p><h3>${situation.recommendationName}</h3><p>The free draft helps you start. The paid kit gives you editable DOCX templates, examples, checklists, supporting document guidance, and review steps for this situation.</p><a class="button primary-button" href="/pricing#${situation.recommendationSku}">See the full kit</a>`;
+      recommendation.innerHTML = `<p class="eyebrow">Recommended next step</p><h3>${situation.recommendationName}</h3><p>The free draft helps you start. Paid kits are direct downloads with PDF guides, editable DOCX templates, examples, checklists, supporting document guidance, and review steps. The Studio is optional and not required to buy.</p><a class="button primary-button" href="/pricing#${situation.recommendationSku}">See kit pricing</a>`;
       risk.textContent = situation.risk;
     };
     form.situation.addEventListener("change", () => renderRecommendation(selected()));

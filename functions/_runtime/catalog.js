@@ -34,21 +34,37 @@ export function publicProduct(p){ const normalized = normalizeRuntimeProduct(p);
 export async function listD1Products(env, includeNonLive=false){
   if (!env.PRODUCTS_DB) return seedProducts();
   const q = includeNonLive ? 'SELECT * FROM products ORDER BY featured_rank ASC, price_cents ASC' : "SELECT * FROM products WHERE status='live' AND visibility='public' ORDER BY featured_rank ASC, price_cents ASC";
-  const res = await env.PRODUCTS_DB.prepare(q).all();
-  if (!res.results || !res.results.length) return seedProducts().filter(p=> includeNonLive || (p.status==='live' && p.visibility==='public'));
-  return res.results.map(normalizeRuntimeProduct);
+  try {
+    const res = await env.PRODUCTS_DB.prepare(q).all();
+    if (!res.results || !res.results.length) return seedProducts().filter(p=> includeNonLive || (p.status==='live' && p.visibility==='public'));
+    return res.results.map(normalizeRuntimeProduct);
+  } catch {
+    return seedProducts().filter(p=> includeNonLive || (p.status==='live' && p.visibility==='public'));
+  }
 }
 export async function getProductBySlug(env, slug){
-  if (env.PRODUCTS_DB){ const row = await env.PRODUCTS_DB.prepare('SELECT * FROM products WHERE slug=?').bind(slug).first(); if (row) return normalizeRuntimeProduct(row); }
+  if (env.PRODUCTS_DB){
+    try {
+      const row = await env.PRODUCTS_DB.prepare('SELECT * FROM products WHERE slug=?').bind(slug).first();
+      if (row) return normalizeRuntimeProduct(row);
+    } catch {}
+  }
   return seedProducts().find(p=>p.slug===slug) || null;
 }
 export async function refreshPublicCache(env){
   const products = await listD1Products(env,false);
   const payload = { schemaVersion:'4.3.0', generatedAt:nowIso(), products: products.map(publicProduct) };
-  if (env.PRODUCTS_KV) await env.PRODUCTS_KV.put(PUBLIC_CACHE_KEY, JSON.stringify(payload));
+  if (env.PRODUCTS_KV) {
+    try { await env.PRODUCTS_KV.put(PUBLIC_CACHE_KEY, JSON.stringify(payload)); } catch {}
+  }
   return payload;
 }
 export async function readPublicCatalog(env){
-  if (env.PRODUCTS_KV){ const cached = await env.PRODUCTS_KV.get(PUBLIC_CACHE_KEY, 'json'); if (cached?.products?.length) return cached; }
+  if (env.PRODUCTS_KV){
+    try {
+      const cached = await env.PRODUCTS_KV.get(PUBLIC_CACHE_KEY, 'json');
+      if (cached?.products?.length) return cached;
+    } catch {}
+  }
   return refreshPublicCache(env);
 }
