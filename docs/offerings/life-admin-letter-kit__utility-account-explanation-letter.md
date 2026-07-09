@@ -1,4 +1,4 @@
-# Utility/Account Explanation Letter
+# Utility/account Explanation Letter
 
 **Offering ID:** `life-admin-letter-kit__utility-account-explanation-letter`  
 **Bundled product:** Life Admin Letter Kit (`life-admin-letter-kit`)  

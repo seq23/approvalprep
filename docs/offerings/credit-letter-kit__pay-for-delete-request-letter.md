@@ -1,4 +1,4 @@
-# Pay-For-Delete Request Letter
+# Pay-for-delete Request Letter
 
 **Offering ID:** `credit-letter-kit__pay-for-delete-request-letter`  
 **Bundled product:** Credit Letter Kit (`credit-letter-kit`)  

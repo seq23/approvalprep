@@ -32,7 +32,8 @@ const downloadVerify = fs.readFileSync("functions/api/download-verify.js", "utf8
 if (downloadVerify.includes("SELECT *") || downloadVerify.includes("customer_email")) fail("[data-privacy] download-verify must not expose raw entitlement records");
 
 const layout = fs.readFileSync("src/layouts/BaseLayout.astro", "utf8");
-if (!layout.includes("body: JSON.stringify({ sku: button.dataset.sku })")) fail("[data-privacy] checkout should only send SKU from public page");
+if (!layout.includes("body: JSON.stringify({ sku: button.dataset.sku, discount_code })")) fail("[data-privacy] checkout should only send SKU and optional discount code from public page");
+if (!layout.includes("product SKU and optional discount code")) fail("[data-privacy] checkout privacy copy must disclose SKU plus optional discount code only");
 if (/body:\s*JSON\.stringify\(\{[^}]*answer|body:\s*JSON\.stringify\(\{[^}]*document/i.test(layout)) fail("[data-privacy] checkout script appears to send customer document data");
 
 const allowedOperational = [

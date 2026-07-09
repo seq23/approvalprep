@@ -11,7 +11,7 @@ const { products = [] } = Astro.props;
       </div>
       <p class="pricing-amount">{product.priceLabel}</p>
       <p class="fine"><strong>{(product.included_offerings || []).length || (product.includes || []).length} included tools</strong> bundled into this one checkout.</p>
-      <p class="fine"><strong>Direct paid download:</strong> after checkout, this kit unlocks a PDF guide and editable DOCX file. The free Studio is optional.</p>
+      <p class="fine"><strong>Direct paid download:</strong> after checkout, this kit unlocks a PDF guide plus an editable DOCX file with fill-in placeholders. Fill it yourself or use the optional browser-only Studio for a prefilled first-pass draft.</p>
       {product.sku === "letter-of-explanation" && <p class="notice mini-notice"><strong>$39 direct download:</strong> includes all 9 explanation-letter templates in the kit. The free Studio is optional and not required.</p>}
       <ul class="compact-list">
         {(product.included_offerings || product.includes || []).slice(0, 5).map((item) => <li>{item}</li>)}

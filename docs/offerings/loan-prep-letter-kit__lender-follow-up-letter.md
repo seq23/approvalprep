@@ -1,4 +1,4 @@
-# Lender Follow-Up Letter
+# Lender Follow-up Letter
 
 **Offering ID:** `loan-prep-letter-kit__lender-follow-up-letter`  
 **Bundled product:** Loan Prep Letter Kit (`loan-prep-letter-kit`)  

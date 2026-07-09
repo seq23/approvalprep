@@ -24,7 +24,7 @@ for (const [profile, validators] of Object.entries(matrix.profiles)) {
   }
 }
 
-for (const required of ["public-page-depth", "atlas-query-fanout", "seo-aeo-geo-surfaces", "admin-dashboard", "e2e-user-journey", "workflow-data-trace", "automation-safety"]) {
+for (const required of ["public-page-depth", "atlas-query-fanout", "seo-aeo-geo-surfaces", "admin-dashboard", "e2e-user-journey", "product-flow-e2e", "workflow-data-trace", "automation-safety"]) {
   if (!ids.has(required)) fail("[validation-registry] required validator missing " + required);
 }
 

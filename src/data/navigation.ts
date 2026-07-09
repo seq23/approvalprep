@@ -39,4 +39,4 @@ export const secondaryNav = [
   ["/complete-approvalprep-bundle", "Full document library"]
 ];
 
-export const navCta = { href: "/pricing", label: "See pricing" };
+export const navCta = { href: "/letter-writing-studio", label: "Try our Letter Studio - Free!" };

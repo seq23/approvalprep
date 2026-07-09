@@ -9,6 +9,7 @@ const { product } = Astro.props;
   </div>
   {product.image && <div class="product-media"><img class="product-image" src={product.image} alt={`${product.name} product preview`} loading="lazy" width="1200" height="900" /></div>}
   <p class="product-outcome"><strong>What you get:</strong> {product.outcome}</p>
+  <p class="fine"><strong>How filling works:</strong> the PDF explains the kit, and the editable DOCX includes placeholders you complete yourself. You can also use the free Studio to create a browser-only prefilled first-pass draft.</p>
   <ul class="product-includes">{(product.includes || []).slice(0,4).map((item) => <li>{item}</li>)}</ul>
   {product.included_offerings && <details class="included-details"><summary>Included in this kit</summary><ul>{product.included_offerings.map((item) => <li>{item}</li>)}</ul></details>}
   <div class="product-purchase-row"><p class="price">{product.priceLabel}</p></div>

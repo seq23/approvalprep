@@ -1,0 +1,278 @@
+{
+  "status": "PASS",
+  "ranAt": "2026-07-09T14:38:11.351Z",
+  "model": "direct_paid_download_with_optional_browser_only_prefill",
+  "productCount": 8,
+  "testCode": {
+    "code": "TEST100",
+    "sourceOfTruth": "Stripe promotion code, created in Stripe test mode as 100% off and active",
+    "expectedCheckoutResult": "completed Checkout Session with payment_status=no_payment_required and amount_total=0",
+    "expectedFulfillmentResult": "verify-download returns protected PDF and DOCX download links"
+  },
+  "products": [
+    {
+      "sku": "letter-of-explanation",
+      "name": "Letter of Explanation Kit",
+      "price": "$39",
+      "route": "/letter-of-explanation",
+      "includedOfferingCount": 9,
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "assets": {
+        "pdf": "downloads/letter-of-explanation.pdf",
+        "docx": "downloads/letter-of-explanation.docx"
+      },
+      "journey": [
+        "discover",
+        "compare",
+        "optional_discount_code",
+        "stripe_checkout",
+        "verified_success",
+        "protected_download",
+        "optional_browser_only_prefill",
+        "customer_review_and_send"
+      ],
+      "needs": [
+        "Buyer can arrive from home Products grid, use-case rail, product page, or pricing page.",
+        "CTA should send SKU letter-of-explanation and optional discount code only.",
+        "Stripe Checkout must create a payment session using the matching test/live price ID.",
+        "For testing, enter TEST100 after creating it as an active 100% off Stripe test-mode promotion code.",
+        "After completed payment or completed 100% off session, success page must unlock protected PDF and DOCX links.",
+        "Buyer chooses either direct DOCX/PDF download or optional browser-only Studio prefill; no required pre-purchase intake.",
+        "Buyer reviews placeholders, edits truthfully, attaches real documents where appropriate, and sends materials themselves."
+      ],
+      "issues": []
+    },
+    {
+      "sku": "income-employment-letter-kit",
+      "name": "Income + Employment Letter Kit",
+      "price": "$59",
+      "route": "/income-employment-letter-kit",
+      "includedOfferingCount": 6,
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "assets": {
+        "pdf": "downloads/income-employment-letter-kit.pdf",
+        "docx": "downloads/income-employment-letter-kit.docx"
+      },
+      "journey": [
+        "discover",
+        "compare",
+        "optional_discount_code",
+        "stripe_checkout",
+        "verified_success",
+        "protected_download",
+        "optional_browser_only_prefill",
+        "customer_review_and_send"
+      ],
+      "needs": [
+        "Buyer can arrive from home Products grid, use-case rail, product page, or pricing page.",
+        "CTA should send SKU income-employment-letter-kit and optional discount code only.",
+        "Stripe Checkout must create a payment session using the matching test/live price ID.",
+        "For testing, enter TEST100 after creating it as an active 100% off Stripe test-mode promotion code.",
+        "After completed payment or completed 100% off session, success page must unlock protected PDF and DOCX links.",
+        "Buyer chooses either direct DOCX/PDF download or optional browser-only Studio prefill; no required pre-purchase intake.",
+        "Buyer reviews placeholders, edits truthfully, attaches real documents where appropriate, and sends materials themselves."
+      ],
+      "issues": []
+    },
+    {
+      "sku": "credit-letter-kit",
+      "name": "Credit Letter Kit",
+      "price": "$59",
+      "route": "/credit-letter-kit",
+      "includedOfferingCount": 7,
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "assets": {
+        "pdf": "downloads/credit-letter-kit.pdf",
+        "docx": "downloads/credit-letter-kit.docx"
+      },
+      "journey": [
+        "discover",
+        "compare",
+        "optional_discount_code",
+        "stripe_checkout",
+        "verified_success",
+        "protected_download",
+        "optional_browser_only_prefill",
+        "customer_review_and_send"
+      ],
+      "needs": [
+        "Buyer can arrive from home Products grid, use-case rail, product page, or pricing page.",
+        "CTA should send SKU credit-letter-kit and optional discount code only.",
+        "Stripe Checkout must create a payment session using the matching test/live price ID.",
+        "For testing, enter TEST100 after creating it as an active 100% off Stripe test-mode promotion code.",
+        "After completed payment or completed 100% off session, success page must unlock protected PDF and DOCX links.",
+        "Buyer chooses either direct DOCX/PDF download or optional browser-only Studio prefill; no required pre-purchase intake.",
+        "Buyer reviews placeholders, edits truthfully, attaches real documents where appropriate, and sends materials themselves."
+      ],
+      "issues": []
+    },
+    {
+      "sku": "rental-application-kit",
+      "name": "Rental Application Kit",
+      "price": "$129",
+      "route": "/rental-application-kit",
+      "includedOfferingCount": 9,
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "assets": {
+        "pdf": "downloads/rental-application-kit.pdf",
+        "docx": "downloads/rental-application-kit.docx"
+      },
+      "journey": [
+        "discover",
+        "compare",
+        "optional_discount_code",
+        "stripe_checkout",
+        "verified_success",
+        "protected_download",
+        "optional_browser_only_prefill",
+        "customer_review_and_send"
+      ],
+      "needs": [
+        "Buyer can arrive from home Products grid, use-case rail, product page, or pricing page.",
+        "CTA should send SKU rental-application-kit and optional discount code only.",
+        "Stripe Checkout must create a payment session using the matching test/live price ID.",
+        "For testing, enter TEST100 after creating it as an active 100% off Stripe test-mode promotion code.",
+        "After completed payment or completed 100% off session, success page must unlock protected PDF and DOCX links.",
+        "Buyer chooses either direct DOCX/PDF download or optional browser-only Studio prefill; no required pre-purchase intake.",
+        "Buyer reviews placeholders, edits truthfully, attaches real documents where appropriate, and sends materials themselves."
+      ],
+      "issues": []
+    },
+    {
+      "sku": "loan-prep-letter-kit",
+      "name": "Loan Prep Letter Kit",
+      "price": "$99",
+      "route": "/loan-prep-letter-kit",
+      "includedOfferingCount": 8,
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "assets": {
+        "pdf": "downloads/loan-prep-letter-kit.pdf",
+        "docx": "downloads/loan-prep-letter-kit.docx"
+      },
+      "journey": [
+        "discover",
+        "compare",
+        "optional_discount_code",
+        "stripe_checkout",
+        "verified_success",
+        "protected_download",
+        "optional_browser_only_prefill",
+        "customer_review_and_send"
+      ],
+      "needs": [
+        "Buyer can arrive from home Products grid, use-case rail, product page, or pricing page.",
+        "CTA should send SKU loan-prep-letter-kit and optional discount code only.",
+        "Stripe Checkout must create a payment session using the matching test/live price ID.",
+        "For testing, enter TEST100 after creating it as an active 100% off Stripe test-mode promotion code.",
+        "After completed payment or completed 100% off session, success page must unlock protected PDF and DOCX links.",
+        "Buyer chooses either direct DOCX/PDF download or optional browser-only Studio prefill; no required pre-purchase intake.",
+        "Buyer reviews placeholders, edits truthfully, attaches real documents where appropriate, and sends materials themselves."
+      ],
+      "issues": []
+    },
+    {
+      "sku": "business-funding-prep-kit",
+      "name": "Business Funding Prep Kit",
+      "price": "$149",
+      "route": "/business-funding-prep-kit",
+      "includedOfferingCount": 8,
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "assets": {
+        "pdf": "downloads/business-funding-prep-kit.pdf",
+        "docx": "downloads/business-funding-prep-kit.docx"
+      },
+      "journey": [
+        "discover",
+        "compare",
+        "optional_discount_code",
+        "stripe_checkout",
+        "verified_success",
+        "protected_download",
+        "optional_browser_only_prefill",
+        "customer_review_and_send"
+      ],
+      "needs": [
+        "Buyer can arrive from home Products grid, use-case rail, product page, or pricing page.",
+        "CTA should send SKU business-funding-prep-kit and optional discount code only.",
+        "Stripe Checkout must create a payment session using the matching test/live price ID.",
+        "For testing, enter TEST100 after creating it as an active 100% off Stripe test-mode promotion code.",
+        "After completed payment or completed 100% off session, success page must unlock protected PDF and DOCX links.",
+        "Buyer chooses either direct DOCX/PDF download or optional browser-only Studio prefill; no required pre-purchase intake.",
+        "Buyer reviews placeholders, edits truthfully, attaches real documents where appropriate, and sends materials themselves."
+      ],
+      "issues": []
+    },
+    {
+      "sku": "life-admin-letter-kit",
+      "name": "Life Admin Letter Kit",
+      "price": "$79",
+      "route": "/life-admin-letter-kit",
+      "includedOfferingCount": 8,
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "assets": {
+        "pdf": "downloads/life-admin-letter-kit.pdf",
+        "docx": "downloads/life-admin-letter-kit.docx"
+      },
+      "journey": [
+        "discover",
+        "compare",
+        "optional_discount_code",
+        "stripe_checkout",
+        "verified_success",
+        "protected_download",
+        "optional_browser_only_prefill",
+        "customer_review_and_send"
+      ],
+      "needs": [
+        "Buyer can arrive from home Products grid, use-case rail, product page, or pricing page.",
+        "CTA should send SKU life-admin-letter-kit and optional discount code only.",
+        "Stripe Checkout must create a payment session using the matching test/live price ID.",
+        "For testing, enter TEST100 after creating it as an active 100% off Stripe test-mode promotion code.",
+        "After completed payment or completed 100% off session, success page must unlock protected PDF and DOCX links.",
+        "Buyer chooses either direct DOCX/PDF download or optional browser-only Studio prefill; no required pre-purchase intake.",
+        "Buyer reviews placeholders, edits truthfully, attaches real documents where appropriate, and sends materials themselves."
+      ],
+      "issues": []
+    },
+    {
+      "sku": "complete-approvalprep-bundle",
+      "name": "Complete ApprovalPrep Bundle",
+      "price": "$249",
+      "route": "/complete-approvalprep-bundle",
+      "includedOfferingCount": 50,
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "assets": {
+        "pdf": "downloads/complete-approvalprep-bundle.pdf",
+        "docx": "downloads/complete-approvalprep-bundle.docx"
+      },
+      "journey": [
+        "discover",
+        "compare",
+        "optional_discount_code",
+        "stripe_checkout",
+        "verified_success",
+        "protected_download",
+        "optional_browser_only_prefill",
+        "customer_review_and_send"
+      ],
+      "needs": [
+        "Buyer can arrive from home Products grid, use-case rail, product page, or pricing page.",
+        "CTA should send SKU complete-approvalprep-bundle and optional discount code only.",
+        "Stripe Checkout must create a payment session using the matching test/live price ID.",
+        "For testing, enter TEST100 after creating it as an active 100% off Stripe test-mode promotion code.",
+        "After completed payment or completed 100% off session, success page must unlock protected PDF and DOCX links.",
+        "Buyer chooses either direct DOCX/PDF download or optional browser-only Studio prefill; no required pre-purchase intake.",
+        "Buyer reviews placeholders, edits truthfully, attaches real documents where appropriate, and sends materials themselves."
+      ],
+      "issues": []
+    }
+  ]
+}

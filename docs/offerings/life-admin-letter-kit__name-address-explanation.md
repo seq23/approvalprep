@@ -1,4 +1,4 @@
-# Name/Address Explanation
+# Name/address Explanation
 
 **Offering ID:** `life-admin-letter-kit__name-address-explanation`  
 **Bundled product:** Life Admin Letter Kit (`life-admin-letter-kit`)  

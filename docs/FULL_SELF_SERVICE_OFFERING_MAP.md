@@ -96,7 +96,56 @@ Price: $79
 
 Price: $249
 
-- all active self-service offerings
+- credit explanation letter
+- income gap explanation letter
+- employment gap explanation letter
+- address history explanation letter
+- rental issue explanation letter
+- late payment explanation letter
+- bank statement explanation letter
+- life event explanation letter
+- general application explanation letter
+- employment verification letter
+- proof of income letter
+- self-employment income letter
+- job change letter
+- gap in employment letter
+- credit dispute letter
+- goodwill letter
+- pay-for-delete request letter
+- debt validation letter
+- credit report error checklist
+- credit bureau follow-up letter
+- apartment application checklist
+- rental cover letter
+- rental history explanation
+- income explanation for renters
+- employment verification request
+- proof of income checklist
+- landlord follow-up letter
+- move-in document checklist
+- renter document packet
+- auto loan explanation letter
+- mortgage explanation letter
+- personal loan explanation letter
+- income explanation letter
+- loan document checklist
+- lender follow-up letter
+- business loan explanation letter
+- SBA document checklist
+- business income explanation
+- cash flow explanation
+- bank statement explanation
+- business address verification
+- use of funds explanation
+- address verification letter
+- proof of residency letter
+- name/address explanation
+- identity document checklist
+- school/employer request letter
+- benefits explanation letter
+- utility/account explanation letter
+- general records request letter
 
 ## Much later / not launch
 

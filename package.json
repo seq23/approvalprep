@@ -94,6 +94,7 @@
     "validate:credit-boundary": "node scripts/validate/credit-boundary-coverage.mjs",
     "validate:customer-next-steps": "node scripts/validate/customer-next-steps.mjs",
     "validate:e2e-user-journey": "node scripts/validate/e2e-user-journey.mjs",
+    "validate:product-flow-e2e": "node scripts/validate/product-flow-e2e.mjs",
     "validate:product-model": "node scripts/validate/product-model-v2.mjs",
     "validate:runtime-product-admin": "node scripts/validate/runtime-product-admin.mjs",
     "env:audit": "node scripts/validate/setup-and-secrets.mjs",
@@ -115,7 +116,8 @@
     "validate:letter-studio": "node scripts/validate/letter-studio.mjs",
     "validate:navigation-architecture": "node scripts/validate/navigation-architecture.mjs",
     "validate:commercial-page-cta-depth": "node scripts/validate/commercial-page-cta-depth.mjs",
-    "ops:stripe:test-checkout": "node scripts/ops/stripe-test-checkout-smoke.mjs"
+    "ops:stripe:test-checkout": "node scripts/ops/stripe-test-checkout-smoke.mjs",
+    "ops:local:checkout-download-e2e": "node scripts/ops/local-checkout-download-e2e.mjs"
   },
   "dependencies": {
     "astro": "^7.0.6",

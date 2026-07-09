@@ -1,4 +1,4 @@
-# Lender Follow-Up Letter
+# Lender Follow-up Letter
 
 **Offering ID:** `business-funding-prep-kit__lender-follow-up-letter`  
 **Bundled product:** Business Funding Prep Kit (`business-funding-prep-kit`)  

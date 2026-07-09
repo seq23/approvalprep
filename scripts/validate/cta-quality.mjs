@@ -16,7 +16,7 @@ if (!pricingDeck.includes("Buy {product.name} — {product.priceLabel}") || !pri
   throw new Error("Pricing deck CTAs must include price and checkout destination context");
 }
 const dynamic = fs.readFileSync("src/pages/[...slug].astro", "utf8");
-if (!dynamic.includes("primaryCtaWithPrice") || !dynamic.includes("56 named self-service tools")) {
+if (!dynamic.includes("primaryCtaWithPrice") || !dynamic.includes("50 named self-service tools")) {
   throw new Error("Dynamic pricing/commercial pages must explain priced kit model and use price-aware CTAs");
 }
 const studio = fs.readFileSync("src/components/LetterStudio.astro", "utf8");

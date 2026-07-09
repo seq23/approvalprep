@@ -67,16 +67,28 @@ const { title = "ApprovalPrep", description = "Self-service approval prep tools.
             return;
           }
             if (status) status.textContent = "Verifying your payment with Stripe. ApprovalPrep does not store your letter answers or completed customer documents.";
-          try {
+          const verify = async (attempt = 1) => {
             const response = await fetch("/api/verify-download", {
               method: "POST",
               headers: { "content-type": "application/json" },
               body: JSON.stringify({ session_id, sku })
             });
             const payload = await response.json().catch(() => ({}));
-            if (!response.ok || payload.status !== "VERIFIED") {
-              throw new Error(payload.message || "Payment could not be verified yet.");
+            if (response.ok && payload.status === "VERIFIED") return payload;
+            if ((response.status === 202 || payload.status === "PAYMENT_PENDING") && attempt < 8) {
+              if (status) status.textContent = `Stripe is still confirming the payment. Retrying automatically (${attempt}/8)...`;
+              await new Promise((resolve) => setTimeout(resolve, 1500 * attempt));
+              return verify(attempt + 1);
             }
+            if (payload.status === "PAYMENT_NOT_COMPLETED" || response.status === 402) {
+              const error = new Error(payload.message || "No completed payment was found for this checkout session.");
+              error.code = "PAYMENT_NOT_COMPLETED";
+              throw error;
+            }
+            throw new Error(payload.message || "Payment could not be verified yet. Contact info@approvalprep.com with your Stripe receipt and this session id.");
+          };
+          try {
+            const payload = await verify();
             if (status) status.textContent = "Payment verified. Your files are ready.";
             if (links) {
               links.innerHTML = "";
@@ -88,9 +100,30 @@ const { title = "ApprovalPrep", description = "Self-service approval prep tools.
                 a.setAttribute("download", "");
                 links.appendChild(a);
               }
+              const support = document.createElement("p");
+              support.className = "fine";
+              support.textContent = `Choose either path: download the blank/editable kit files now, or use the free browser-only Studio to prefill a draft without storing your answers. Session: ${session_id}`;
+              links.appendChild(support);
+              const studio = document.createElement("a");
+              studio.className = "button secondary secondary-button";
+              studio.href = `/letter-writing-studio?sku=${encodeURIComponent(sku)}&source=checkout-success`;
+              studio.textContent = "Optional: prefill a draft in the Studio";
+              links.appendChild(studio);
             }
           } catch (error) {
-            if (status) status.textContent = error.message || "Download verification failed. Please contact support with your Stripe receipt.";
+            if (status) status.textContent = `${error.message || "Download verification failed."} Session: ${session_id}`;
+            if (links && error.code === "PAYMENT_NOT_COMPLETED") {
+              links.innerHTML = "";
+              const pricing = document.createElement("a");
+              pricing.className = "button primary-button";
+              pricing.href = "/pricing";
+              pricing.textContent = "Return to pricing and complete checkout";
+              links.appendChild(pricing);
+              const support = document.createElement("p");
+              support.className = "fine";
+              support.textContent = "ApprovalPrep cannot release paid files until Stripe confirms this session as paid. If Stripe shows a completed payment, email info@approvalprep.com with the receipt and session id.";
+              links.appendChild(support);
+            }
           }
         });
         document.addEventListener("click", async (event) => {
@@ -107,12 +140,14 @@ const { title = "ApprovalPrep", description = "Self-service approval prep tools.
           const original = button.textContent;
           button.disabled = true;
           button.textContent = "Starting checkout...";
-            status.textContent = "Opening secure Stripe checkout. We only send the product SKU to start checkout, not your letter answers or personal document contents.";
+            status.textContent = "Opening secure Stripe checkout. We only send the product SKU and optional discount code to start checkout, not your letter answers or personal document contents.";
+          const discountInput = document.querySelector("[data-discount-code]");
+          const discount_code = String(discountInput?.value || "").trim();
           try {
             const response = await fetch("/api/create-checkout-session", {
               method: "POST",
               headers: { "content-type": "application/json" },
-              body: JSON.stringify({ sku: button.dataset.sku })
+              body: JSON.stringify({ sku: button.dataset.sku, discount_code })
             });
             const payload = await response.json().catch(() => ({}));
             if (!response.ok || !payload.checkoutUrl) {

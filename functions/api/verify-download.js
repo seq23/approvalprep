@@ -45,6 +45,18 @@ function downloadManifestFor(sku, sessionId) {
   };
 }
 
+async function findPaidEntitlement(env, sessionId, sku) {
+  if (!env.PRODUCTS_DB) return null;
+  const ent = await env.PRODUCTS_DB.prepare(
+    "SELECT product_id,payment_status,expires_at,revoked_at FROM download_entitlements WHERE stripe_session_id=? AND revoked_at IS NULL"
+  ).bind(sessionId).first();
+  if (!ent) return null;
+  if (ent.payment_status !== "paid") return null;
+  if (ent.product_id !== sku) return null;
+  if (ent.expires_at && new Date(ent.expires_at) < new Date()) return null;
+  return ent;
+}
+
 async function recordVerifiedEntitlement(env, session, sku) {
   if (!env.PRODUCTS_DB) return;
   const existing = await env.PRODUCTS_DB.prepare("SELECT id FROM download_entitlements WHERE stripe_session_id=?").bind(session.id).first();
@@ -54,7 +66,7 @@ async function recordVerifiedEntitlement(env, session, sku) {
     session.id,
     sku,
     "",
-    session.payment_status || "unknown",
+    session.payment_status === "no_payment_required" ? "paid" : (session.payment_status || "unknown"),
     session.amount_total || 0,
     session.currency || "usd",
     new Date().toISOString(),
@@ -67,16 +79,48 @@ export async function onRequestPost(context) {
   const sku = String(body.sku || "");
   const sessionId = String(body.session_id || "");
   if (!allowedSkus.has(sku)) return json({ error: "Unknown SKU" }, 400);
-  if (!context.env.STRIPE_SECRET_KEY) return json({ status: "NOT_CONFIGURED", message: "Stripe secret is missing. Download cannot be verified until Stripe payment is verified.", sku }, 501);
   if (!sessionId) return json({ status: "NOT_VERIFIED", message: "Missing Stripe session id.", sku }, 403);
+
+  const entitlement = await findPaidEntitlement(context.env, sessionId, sku);
+  if (entitlement) return json({ status: "VERIFIED", source: "entitlement", ...downloadManifestFor(sku, sessionId) });
+
+  if (!context.env.STRIPE_SECRET_KEY) return json({ status: "NOT_CONFIGURED", message: "Stripe secret is missing and no paid entitlement was found yet. Please contact info@approvalprep.com with your Stripe receipt.", sku }, 501);
 
   const res = await fetch(`https://api.stripe.com/v1/checkout/sessions/${encodeURIComponent(sessionId)}`, {
     headers: { Authorization: `Bearer ${context.env.STRIPE_SECRET_KEY}` }
   });
   const data = await res.json().catch(() => ({}));
-  if (!res.ok) return json({ status: "SOURCE_ERROR", provider: "stripe", message: data.error?.message || "Stripe verification failed." }, 502);
+  if (!res.ok) return json({ status: "SOURCE_ERROR", provider: "stripe", message: data.error?.message || "Stripe verification failed. Please contact info@approvalprep.com with your Stripe receipt.", sku }, 502);
   const paidSku = data.metadata?.sku || data.metadata?.product_id || data.client_reference_id || "";
-  if (data.payment_status !== "paid" || paidSku !== sku) return json({ status: "NOT_VERIFIED", message: "Stripe payment is verified only when Stripe returns paid status for this SKU.", sku }, 403);
+  if (paidSku !== sku) {
+    return json({
+      status: "SKU_MISMATCH",
+      message: "This Stripe session does not match the requested product. Contact info@approvalprep.com with your Stripe receipt and session id.",
+      sku
+    }, 409);
+  }
+  const isPaid = data.payment_status === "paid";
+  const isZeroDollarPromotion = data.payment_status === "no_payment_required" && data.status === "complete" && Number(data.amount_total || 0) === 0;
+  if (!isPaid && !isZeroDollarPromotion) {
+    const checkoutStatus = String(data.status || "");
+    const paymentStatus = String(data.payment_status || "unknown");
+    if (checkoutStatus === "open" || checkoutStatus === "expired" || paymentStatus === "unpaid") {
+      return json({
+        status: "PAYMENT_NOT_COMPLETED",
+        message: "Stripe has not confirmed this checkout session as paid yet. If Stripe shows a completed payment, contact info@approvalprep.com with the receipt and session id so access can be resolved.",
+        sku,
+        checkoutStatus,
+        paymentStatus
+      }, 402);
+    }
+    return json({
+      status: "PAYMENT_PENDING",
+      message: "Stripe is still confirming the payment. This page will retry automatically for a short time.",
+      sku,
+      checkoutStatus,
+      paymentStatus
+    }, 202);
+  }
   await recordVerifiedEntitlement(context.env, data, sku);
-  return json({ status: "VERIFIED", ...downloadManifestFor(sku, sessionId) });
+  return json({ status: "VERIFIED", source: isZeroDollarPromotion ? "stripe_zero_dollar_promotion" : "stripe", ...downloadManifestFor(sku, sessionId) });
 }

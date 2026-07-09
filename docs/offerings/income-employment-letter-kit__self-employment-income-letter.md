@@ -1,4 +1,4 @@
-# Self-Employment Income Letter
+# Self-employment Income Letter
 
 **Offering ID:** `income-employment-letter-kit__self-employment-income-letter`  
 **Bundled product:** Income + Employment Letter Kit (`income-employment-letter-kit`)  

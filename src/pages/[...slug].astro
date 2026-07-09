@@ -78,7 +78,7 @@ const primaryCtaWithPrice = primarySku && routeProduct ? `Buy ${routeProduct.nam
       <h1>{copy.heading}</h1>
       <p class="lead">{copy.lead}</p>
       {familyCopy?.promise && <p class="supporting-copy">{familyCopy.promise}</p>}
-      {!isLegal && <OutcomeCTA primary={primaryCtaWithPrice} secondary={copy.secondaryCta} href={ctaHref} secondaryHref="/pricing" primarySku={primarySku} />}
+      {!isLegal && !isDownload && <OutcomeCTA primary={primaryCtaWithPrice} secondary={copy.secondaryCta} href={ctaHref} secondaryHref="/pricing" primarySku={primarySku} />}
       <TrustBar signals={copy.trustSignals} />
     </div>
     {!isLegal && (
@@ -92,7 +92,7 @@ const primaryCtaWithPrice = primarySku && routeProduct ? `Buy ${routeProduct.nam
     {isDownload && (
       <div class="notice">
         <strong>Verified download flow:</strong>
-        <p>Production downloads require Stripe payment verification before the PDF and editable DOCX files are released.</p>
+        <p>Production downloads require a completed Stripe payment before the PDF guide and editable DOCX kit files are released. If Stripe has not confirmed this checkout session as paid, no paid files are unlocked yet.</p>
       </div>
       <div class="card download-panel" data-download-panel>
         <h2>Download status</h2>
@@ -101,14 +101,23 @@ const primaryCtaWithPrice = primarySku && routeProduct ? `Buy ${routeProduct.nam
       </div>
     )}
   </section>
-  {isPricing ? (
+  {isDownload ? (
+    <>
+      <section class="band"><div class="shell">
+        <article class="notice">
+          <strong>If your download does not appear right away:</strong>
+          <p>If Stripe confirms a completed payment, this page unlocks the PDF guide and editable DOCX kit files. If Stripe still has the session open or unconfirmed, return to pricing and complete checkout. After purchase, you can either download the blank/editable templates or use the free browser-only Studio to prefill a draft without storing your answers. If Stripe shows a completed payment and you still cannot access your files, email <a href="mailto:info@approvalprep.com">info@approvalprep.com</a> with the receipt and session id shown above.</p>
+        </article>
+      </div></section>
+    </>
+  ) : isPricing ? (
     <>
       <section class="band pricing-band"><div class="shell">
         <div class="pricing-header">
           <div>
             <p class="eyebrow">Pricing first</p>
             <h2>Choose the kit that matches the paperwork pressure.</h2>
-            <p class="lead">ApprovalPrep has 8 checkout products. Those 8 kits contain 56 named self-service tools, templates, checklists, and letter types. You do not buy 56 separate files; you choose the kit that contains the paperwork you need.</p>
+            <p class="lead">ApprovalPrep has 8 checkout products covering 50 named self-service tools, templates, checklists, and letter types. You do not buy 50 separate files; you choose the kit that contains the paperwork you need, or the Complete Bundle for the full library.</p>
           </div>
           <div class="card pricing-start-free">
             <p class="eyebrow">$0 starting path</p>
@@ -121,6 +130,17 @@ const primaryCtaWithPrice = primarySku && routeProduct ? `Buy ${routeProduct.nam
           <article class="notice"><strong>How the offers work:</strong><p>Every paid product is a direct paid download. Pick one paid kit below; Stripe unlocks that kit's PDF guide and editable DOCX file. The named offerings listed inside each card are the tools covered by that kit. The $39 Letter of Explanation Kit includes all 9 explanation-letter templates listed in that card.</p></article>
           <article class="notice"><strong>Not ready to buy?</strong><p>Start with the free $0 Studio. It helps you draft a first-pass letter and choose the right paid kit without storing your answers.</p></article>
         </div>
+        <div class="card discount-card">
+          <div>
+            <p class="eyebrow">Discount code</p>
+            <h3>Testing or promo code?</h3>
+            <p class="fine">Enter a Stripe promotion code before choosing a kit. For test-mode fulfillment, create the Stripe promotion code <strong>TEST100</strong> for 100% off, then enter it here to complete checkout without charging a card.</p>
+          </div>
+          <label>
+            Code
+            <input data-discount-code type="text" inputmode="text" autocomplete="off" placeholder="TEST100" />
+          </label>
+        </div>
         <PricingDeck products={productCards} />
       </div></section>
       <section class="band"><div class="shell">
@@ -130,7 +150,7 @@ const primaryCtaWithPrice = primarySku && routeProduct ? `Buy ${routeProduct.nam
           {productComparison.map((row) => <tr><td><a href={row.href}>{row.product}</a></td><td>{row.bestFor}</td><td>{row.includes}</td><td><strong>{row.price}</strong></td></tr>)}
         </tbody></table></div>
       </div></section>
-      <section class="band"><div class="shell"><p class="eyebrow">All included offerings</p><h2>56 self-service offering rows grouped into 8 paid checkout kits.</h2><p class="lead">This is the full universe of named use cases. Each item rolls up into one of the 8 priced kits above.</p><OfferingUniverse categories={offeringCategories} /></div></section>
+      <section class="band"><div class="shell"><p class="eyebrow">All included offerings</p><h2>50 named self-service tools organized into 8 paid checkout kits.</h2><p class="lead">This is the full universe of named use cases. The Complete Bundle includes the full library; the smaller kits include the tools for that specific situation.</p><OfferingUniverse categories={offeringCategories} /></div></section>
     </>
   ) : isGlossary ? (
     <section class="band"><div class="shell grid">

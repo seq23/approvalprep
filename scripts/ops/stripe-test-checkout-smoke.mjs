@@ -4,6 +4,7 @@ import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 const base = (process.env.POSTDEPLOY_BASE_URL || process.env.PLAYWRIGHT_BASE_URL || "").replace(/\/$/, "");
 if (!base) throw new Error("POSTDEPLOY_BASE_URL is required");
 const products = JSON.parse(readFileSync("data/products/products.json", "utf8")).products.filter((p) => p.status === "active_paid" && p.stripe_enabled);
+const scope = "checkout_session_creation_only_not_payment_or_download_proof";
 const results = [];
 for (const product of products) {
   const response = await fetch(`${base}/api/create-checkout-session`, {
@@ -20,6 +21,6 @@ for (const product of products) {
   if (!ok) console.error(`[stripe-test] ${product.sku} failed ${response.status} ${payload.error || ""} ${payload.message || ""} ${bodySnippet}`);
 }
 mkdirSync("reports/ops", { recursive: true });
-writeFileSync("reports/ops/stripe-test-checkout-smoke.json", JSON.stringify({ baseUrl: base, ranAt: new Date().toISOString(), results }, null, 2) + "\n");
+writeFileSync("reports/ops/stripe-test-checkout-smoke.json", JSON.stringify({ baseUrl: base, ranAt: new Date().toISOString(), scope, note: "This confirms each SKU can create a Stripe Checkout session. It does not prove that a card was charged, a webhook fired, or protected downloads were released.", results }, null, 2) + "\n");
 if (results.some((item) => !item.ok)) process.exit(1);
-console.log(`[stripe-test] OK products=${results.length}`);
+console.log(`[stripe-test] OK products=${results.length} scope=${scope}`);

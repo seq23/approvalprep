@@ -576,6 +576,17 @@
       "scope": "End-to-end browserless conversion journey and internal links"
     },
     {
+      "id": "product-flow-e2e",
+      "npmScript": "validate:product-flow-e2e",
+      "entrypoint": "scripts/validate/product-flow-e2e.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents broken paid product journey, fulfillment, or document-fill confusion",
+      "owner": "approvalprep-products",
+      "group": "release-critical",
+      "scope": "Per-product paid journey, Stripe checkout, protected download, discount-code test path, and optional Studio prefill"
+    },
+    {
       "id": "product-model-v2",
       "npmScript": "validate:product-model",
       "entrypoint": "scripts/validate/product-model-v2.mjs",

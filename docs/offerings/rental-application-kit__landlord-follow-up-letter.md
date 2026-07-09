@@ -1,4 +1,4 @@
-# Landlord Follow-Up Letter
+# Landlord Follow-up Letter
 
 **Offering ID:** `rental-application-kit__landlord-follow-up-letter`  
 **Bundled product:** Rental Application Kit (`rental-application-kit`)  

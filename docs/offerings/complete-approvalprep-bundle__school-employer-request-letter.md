@@ -1,6 +1,6 @@
-# All Active Self-Service Offerings
+# School/employer Request Letter
 
-**Offering ID:** `complete-approvalprep-bundle__all-active-self-service-offerings`  
+**Offering ID:** `complete-approvalprep-bundle__school-employer-request-letter`  
 **Bundled product:** Complete ApprovalPrep Bundle (`complete-approvalprep-bundle`)  
 **Price:** $249  
 **Delivery model:** Direct paid download; Studio not required  
@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service all active self-service offerings you can prepare with truthful facts before you send your paperwork.
+You need a self-service school/employer request letter you can prepare with truthful facts before you send your paperwork.
 
 ## How Purchase Works
 
@@ -45,9 +45,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: all active self-service offerings template
+- Search intent: school/employer request letter template
 - CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: You need a self-service all active self-service offerings you can prepare with truthful facts before you send your paperwork.
+- Customer situation: You need a self-service school/employer request letter you can prepare with truthful facts before you send your paperwork.
 
 ## Safety Boundary
 

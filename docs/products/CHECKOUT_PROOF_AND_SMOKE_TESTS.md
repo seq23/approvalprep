@@ -28,7 +28,7 @@ Pass condition:
 - Every response includes a `checkoutUrl` containing `checkout.stripe.com`.
 - `reports/ops/stripe-test-checkout-smoke.json` records `ok: true` for every SKU.
 - Each paid SKU unlocks the purchased kit PDF guide and editable DOCX file after verified payment.
-- The 8 paid kits are the checkout products. The 56 offering rows are the named tools/templates/checklists inside those kits.
+- The 8 paid kits are the checkout products. The catalog has 50 named tools/templates/checklists; the Complete ApprovalPrep Bundle includes the full library in one PDF and one DOCX.
 
 Fail condition:
 

@@ -1,4 +1,4 @@
-# Move-In Document Checklist
+# Move-in Document Checklist
 
 **Offering ID:** `rental-application-kit__move-in-document-checklist`  
 **Bundled product:** Rental Application Kit (`rental-application-kit`)  

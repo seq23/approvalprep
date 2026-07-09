@@ -11,7 +11,7 @@ const components = [
 for (const token of ["OutcomeCTA", "PageCTAStack", "FinalCTA", "PricingDeck", "checkout-button", "Start free for $0"]) {
   if (!dynamic.includes(token) && !home.includes(token) && !components.includes(token)) fail(`[commercial-cta-depth] missing ${token}`);
 }
-for (const token of ["8 checkout products", "56 named self-service tools", "Opens secure Stripe checkout", "Buy {product.name} — {product.priceLabel}", "primaryCtaWithPrice"]) {
+for (const token of ["8 checkout products", "50 named self-service tools", "Opens secure Stripe checkout", "Buy {product.name} — {product.priceLabel}", "primaryCtaWithPrice", "fill-in placeholders", "prefilled first-pass draft"]) {
   if (!dynamic.includes(token) && !components.includes(token)) fail(`[commercial-cta-depth] missing pricing clarity token: ${token}`);
 }
 for (const token of ["ProblemAgitationFit", "WhatHappensAfterPurchase", "TrustAndBoundaryBand", "IncludedOfferings"]) {

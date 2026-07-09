@@ -1,4 +1,4 @@
-# Credit Bureau Follow-Up Letter
+# Credit Bureau Follow-up Letter
 
 **Offering ID:** `credit-letter-kit__credit-bureau-follow-up-letter`  
 **Bundled product:** Credit Letter Kit (`credit-letter-kit`)  

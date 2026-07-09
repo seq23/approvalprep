@@ -1,4 +1,4 @@
-# School/Employer Request Letter
+# School/employer Request Letter
 
 **Offering ID:** `life-admin-letter-kit__school-employer-request-letter`  
 **Bundled product:** Life Admin Letter Kit (`life-admin-letter-kit`)  
