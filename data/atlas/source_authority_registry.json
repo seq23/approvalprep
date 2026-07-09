@@ -1,44 +1,61 @@
 {
+  "schemaVersion": "2.0.0",
+  "generatedAt": "2026-07-09T00:58:41.398Z",
   "sources": [
     {
       "source_id": "ftc_credit_dispute_sample",
       "authority_class": "official",
+      "source_type": "official",
       "allowed_use": [
         "citation",
         "background"
-      ]
+      ],
+      "freshness_class": "periodic",
+      "url": "https://consumer.ftc.gov/articles/sample-letter-credit-bureaus-disputing-errors-credit-reports"
     },
     {
       "source_id": "cfpb_credit_report_dispute",
       "authority_class": "official",
+      "source_type": "official",
       "allowed_use": [
         "citation",
         "background"
-      ]
+      ],
+      "freshness_class": "periodic",
+      "url": "https://www.consumerfinance.gov/ask-cfpb/how-do-i-dispute-an-error-on-my-credit-report-en-314/"
     },
     {
       "source_id": "ftc_croa",
       "authority_class": "official",
+      "source_type": "official",
       "allowed_use": [
         "citation",
         "background"
-      ]
+      ],
+      "freshness_class": "periodic",
+      "url": "https://www.ftc.gov/legal-library/browse/statutes/credit-repair-organizations-act"
     },
     {
       "source_id": "sba_loan_prepare",
       "authority_class": "official",
+      "source_type": "official",
       "allowed_use": [
         "citation",
         "background"
-      ]
+      ],
+      "freshness_class": "periodic",
+      "url": "https://www.sba.gov/funding-programs/loans"
     },
     {
       "source_id": "approvalprep_owner_policy",
       "authority_class": "internal",
+      "source_type": "owned",
       "allowed_use": [
         "product_boundary",
         "background"
-      ]
+      ],
+      "freshness_class": "stable",
+      "url": "docs/INITIALIZATION_LOCK.md"
     }
   ]
 }

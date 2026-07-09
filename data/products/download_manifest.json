@@ -1,6 +1,6 @@
 {
   "schemaVersion": "3.0.0",
-  "delivery": "verified_stripe_download",
+  "delivery": "entitlement_protected_r2_download",
   "consumerFormats": [
     "pdf",
     "docx"
@@ -15,8 +15,8 @@
       "sku": "letter-of-explanation",
       "name": "Letter of Explanation",
       "files": [
-        "/downloads/letter-of-explanation.pdf",
-        "/downloads/letter-of-explanation.docx"
+        "/api/download-file?type=pdf&session_id={STRIPE_SESSION_ID}",
+        "/api/download-file?type=docx&session_id={STRIPE_SESSION_ID}"
       ],
       "firstPageRequires": [
         "plain-language self-service boundary",
@@ -34,14 +34,18 @@
         "What to Attach",
         "What to Do Next",
         "What ApprovalPrep Does Not Do"
+      ],
+      "r2Keys": [
+        "downloads/letter-of-explanation.pdf",
+        "downloads/letter-of-explanation.docx"
       ]
     },
     {
       "sku": "income-employment-letter-kit",
       "name": "Income + Employment Letter Kit",
       "files": [
-        "/downloads/income-employment-letter-kit.pdf",
-        "/downloads/income-employment-letter-kit.docx"
+        "/api/download-file?type=pdf&session_id={STRIPE_SESSION_ID}",
+        "/api/download-file?type=docx&session_id={STRIPE_SESSION_ID}"
       ],
       "firstPageRequires": [
         "plain-language self-service boundary",
@@ -59,14 +63,18 @@
         "What to Attach",
         "What to Do Next",
         "What ApprovalPrep Does Not Do"
+      ],
+      "r2Keys": [
+        "downloads/income-employment-letter-kit.pdf",
+        "downloads/income-employment-letter-kit.docx"
       ]
     },
     {
       "sku": "credit-letter-kit",
       "name": "Credit Letter Kit",
       "files": [
-        "/downloads/credit-letter-kit.pdf",
-        "/downloads/credit-letter-kit.docx"
+        "/api/download-file?type=pdf&session_id={STRIPE_SESSION_ID}",
+        "/api/download-file?type=docx&session_id={STRIPE_SESSION_ID}"
       ],
       "firstPageRequires": [
         "plain-language self-service boundary",
@@ -84,14 +92,18 @@
         "What to Attach",
         "What to Do Next",
         "What ApprovalPrep Does Not Do"
+      ],
+      "r2Keys": [
+        "downloads/credit-letter-kit.pdf",
+        "downloads/credit-letter-kit.docx"
       ]
     },
     {
       "sku": "rental-application-kit",
       "name": "Rental Application Kit",
       "files": [
-        "/downloads/rental-application-kit.pdf",
-        "/downloads/rental-application-kit.docx"
+        "/api/download-file?type=pdf&session_id={STRIPE_SESSION_ID}",
+        "/api/download-file?type=docx&session_id={STRIPE_SESSION_ID}"
       ],
       "firstPageRequires": [
         "plain-language self-service boundary",
@@ -109,14 +121,18 @@
         "What to Attach",
         "What to Do Next",
         "What ApprovalPrep Does Not Do"
+      ],
+      "r2Keys": [
+        "downloads/rental-application-kit.pdf",
+        "downloads/rental-application-kit.docx"
       ]
     },
     {
       "sku": "loan-prep-letter-kit",
       "name": "Loan Prep Letter Kit",
       "files": [
-        "/downloads/loan-prep-letter-kit.pdf",
-        "/downloads/loan-prep-letter-kit.docx"
+        "/api/download-file?type=pdf&session_id={STRIPE_SESSION_ID}",
+        "/api/download-file?type=docx&session_id={STRIPE_SESSION_ID}"
       ],
       "firstPageRequires": [
         "plain-language self-service boundary",
@@ -134,14 +150,18 @@
         "What to Attach",
         "What to Do Next",
         "What ApprovalPrep Does Not Do"
+      ],
+      "r2Keys": [
+        "downloads/loan-prep-letter-kit.pdf",
+        "downloads/loan-prep-letter-kit.docx"
       ]
     },
     {
       "sku": "business-funding-prep-kit",
       "name": "Business Funding Prep Kit",
       "files": [
-        "/downloads/business-funding-prep-kit.pdf",
-        "/downloads/business-funding-prep-kit.docx"
+        "/api/download-file?type=pdf&session_id={STRIPE_SESSION_ID}",
+        "/api/download-file?type=docx&session_id={STRIPE_SESSION_ID}"
       ],
       "firstPageRequires": [
         "plain-language self-service boundary",
@@ -159,14 +179,18 @@
         "What to Attach",
         "What to Do Next",
         "What ApprovalPrep Does Not Do"
+      ],
+      "r2Keys": [
+        "downloads/business-funding-prep-kit.pdf",
+        "downloads/business-funding-prep-kit.docx"
       ]
     },
     {
       "sku": "life-admin-letter-kit",
       "name": "Life Admin Letter Kit",
       "files": [
-        "/downloads/life-admin-letter-kit.pdf",
-        "/downloads/life-admin-letter-kit.docx"
+        "/api/download-file?type=pdf&session_id={STRIPE_SESSION_ID}",
+        "/api/download-file?type=docx&session_id={STRIPE_SESSION_ID}"
       ],
       "firstPageRequires": [
         "plain-language self-service boundary",
@@ -184,14 +208,18 @@
         "What to Attach",
         "What to Do Next",
         "What ApprovalPrep Does Not Do"
+      ],
+      "r2Keys": [
+        "downloads/life-admin-letter-kit.pdf",
+        "downloads/life-admin-letter-kit.docx"
       ]
     },
     {
       "sku": "complete-approvalprep-bundle",
       "name": "Complete ApprovalPrep Bundle",
       "files": [
-        "/downloads/complete-approvalprep-bundle.pdf",
-        "/downloads/complete-approvalprep-bundle.docx"
+        "/api/download-file?type=pdf&session_id={STRIPE_SESSION_ID}",
+        "/api/download-file?type=docx&session_id={STRIPE_SESSION_ID}"
       ],
       "firstPageRequires": [
         "plain-language self-service boundary",
@@ -209,7 +237,13 @@
         "What to Attach",
         "What to Do Next",
         "What ApprovalPrep Does Not Do"
+      ],
+      "r2Keys": [
+        "downloads/complete-approvalprep-bundle.pdf",
+        "downloads/complete-approvalprep-bundle.docx"
       ]
     }
-  ]
+  ],
+  "publicPaidDownloadsAllowed": false,
+  "seedAssetDirectory": "seed-downloads"
 }

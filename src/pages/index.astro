@@ -10,23 +10,58 @@ import WhatYouGet from "../components/WhatYouGet.astro";
 import FinalCTA from "../components/FinalCTA.astro";
 import CreditBoundaryExplainer from "../components/CreditBoundaryExplainer.astro";
 import NextStepsExplainer from "../components/NextStepsExplainer.astro";
-import { trustSignals, howItWorks, whyApprovalPrep } from "../data/content";
+import DataPrivacyNotice from "../components/DataPrivacyNotice.astro";
+import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComparison } from "../data/content";
 ---
 <BaseLayout title="ApprovalPrep - Self-Service Approval Prep" description="Prepare truthful letters, checklists, and application packets before you apply.">
-  <section class="hero shell">
-    <p class="eyebrow">Self-service approval prep</p>
-    <h1>Get your letters and documents ready before you apply.</h1>
-    <p class="lead">ApprovalPrep helps you prepare truthful letters, checklists, and document packets. We do not repair credit for you or contact anyone for you. You stay in control.</p>
-    <p class="supporting-copy">Apply with a cleaner packet, stronger letters, and fewer missing documents.</p>
-    <OutcomeCTA primary="Start my letter" secondary="Build my packet" href="/letter-of-explanation" secondaryHref="/apartment-application" />
-    <TrustBar signals={trustSignals} />
+  <section class="hero hero-split shell">
+    <div>
+      <p class="eyebrow">Self-service approval prep</p>
+      <h1>Get your application documents ready before someone asks twice.</h1>
+      <p class="lead">ApprovalPrep helps you prepare clear, truthful letters, checklists, and document packets for credit questions, rental applications, income verification, loan reviews, business funding, and everyday paperwork issues.</p>
+      <p class="supporting-copy">Choose the situation, answer plain-language prompts, download your files, review them, and send them yourself when ready.</p>
+      <OutcomeCTA primary="Find my document path" secondary="Compare kits" href="#choose-path" secondaryHref="/pricing" />
+      <TrustBar signals={trustSignals} />
+    </div>
+    <aside class="hero-panel" aria-label="ApprovalPrep process">
+      <p class="eyebrow">What you control</p>
+      <h2>Prepare before the application pressure hits.</h2>
+      <ol class="compact-list">
+        <li>Pick the paperwork situation.</li>
+        <li>Use truthful prompts and checklists.</li>
+        <li>Download PDF + editable DOCX files.</li>
+        <li>Review and send the materials yourself.</li>
+      </ol>
+      <div class="notice mini-notice"><strong>Boundary:</strong> no credit repair, no fake documents, no legal or financial advice, no approval guarantee.</div>
+    </aside>
   </section>
+  <section class="band" id="choose-path"><div class="shell">
+    <p class="eyebrow">Choose by situation</p>
+    <h2>Start with the problem you need to prepare for.</h2>
+    <div class="decision-grid">
+      {homepageChooser.map((item) => (
+        <a class="decision-card" href={item.href}>
+          <span>{item.product}</span>
+          <h3>{item.title}</h3>
+          <p>{item.copy}</p>
+        </a>
+      ))}
+    </div>
+  </div></section>
+  <section class="band"><div class="shell">
+    <p class="eyebrow">Compare kits</p>
+    <h2>Not sure which one fits? Compare the common paths.</h2>
+    <div class="table-wrap"><table class="comparison-table"><thead><tr><th>Product</th><th>Best for</th><th>Includes</th><th>Price</th></tr></thead><tbody>
+      {productComparison.map((row) => <tr><td><a href={row.href}>{row.product}</a></td><td>{row.bestFor}</td><td>{row.includes}</td><td><strong>{row.price}</strong></td></tr>)}
+    </tbody></table></div>
+  </div></section>
+  <section class="band"><div class="shell"><p class="eyebrow">Products</p><h2>Choose the kit that matches the application pressure.</h2><ProductGrid /></div></section>
   <section class="band"><div class="shell"><HowItWorks steps={howItWorks} /></div></section>
-  <section class="band"><div class="shell"><h2>Products</h2><ProductGrid /></div></section>
-  <section class="band"><div class="shell"><UseCaseList items={["You want to explain a credit, income, rental, or work issue.", "You want your packet ready before someone asks for more papers.", "You want a simple tool that does not save your documents."]} /></div></section>
   <section class="band"><div class="shell"><WhatYouGet title="Why ApprovalPrep" items={whyApprovalPrep} /></div></section>
+  <section class="band"><div class="shell"><UseCaseList items={["You need to explain a credit, income, rental, work, loan, or business funding question in plain words.", "You want your packet ready before a landlord, lender, employer, bureau, or office asks for more documents.", "You want self-service tools that help you prepare without storing customer documents or contacting anyone for you."]} /></div></section>
   <section class="band"><div class="shell"><NextStepsExplainer /></div></section>
+  <section class="band"><div class="shell"><DataPrivacyNotice /></div></section>
   <section class="band"><div class="shell"><CreditBoundaryExplainer /></div></section>
   <section class="band"><div class="shell"><BoundaryNotice /></div></section>
-  <FinalCTA primary="Start my letter" secondary="Build my packet" href="/letter-of-explanation" secondaryHref="/apartment-application" />
+  <FinalCTA primary="Create my explanation letter" secondary="Compare all kits" href="/letter-of-explanation" secondaryHref="/pricing" />
 </BaseLayout>

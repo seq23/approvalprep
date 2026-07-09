@@ -1,81 +1,593 @@
 {
+  "schemaVersion": "2.0.0",
+  "generatedAt": "2026-07-09T00:55:44.958Z",
   "targets": [
     {
-      "query_id": "q_loe",
-      "query": "letter of explanation",
-      "desired_surface": "citation_visibility_strategy",
+      "query_id": "q_001",
+      "query": "approvalprep checklist",
+      "route": "/",
+      "desired_surface": "citation_ready_answer_asset",
       "telemetry_required_for_win_claim": true
     },
     {
-      "query_id": "q_credit_loe",
-      "query": "letter of explanation for credit issues",
-      "desired_surface": "citation_visibility_strategy",
+      "query_id": "q_002",
+      "query": "what to prepare for approvalprep",
+      "route": "/",
+      "desired_surface": "citation_ready_answer_asset",
       "telemetry_required_for_win_claim": true
     },
     {
-      "query_id": "q_eviction_loe",
-      "query": "letter of explanation for eviction",
-      "desired_surface": "citation_visibility_strategy",
+      "query_id": "q_003",
+      "query": "pricing checklist",
+      "route": "/pricing",
+      "desired_surface": "citation_ready_answer_asset",
       "telemetry_required_for_win_claim": true
     },
     {
-      "query_id": "q_employment_verification",
-      "query": "employment verification letter",
-      "desired_surface": "citation_visibility_strategy",
+      "query_id": "q_004",
+      "query": "what to prepare for pricing",
+      "route": "/pricing",
+      "desired_surface": "citation_ready_answer_asset",
       "telemetry_required_for_win_claim": true
     },
     {
-      "query_id": "q_proof_income",
-      "query": "proof of income letter",
-      "desired_surface": "citation_visibility_strategy",
+      "query_id": "q_005",
+      "query": "write a clear letter of explanation. checklist",
+      "route": "/letter-of-explanation",
+      "desired_surface": "citation_ready_answer_asset",
       "telemetry_required_for_win_claim": true
     },
     {
-      "query_id": "q_credit_dispute",
-      "query": "DIY credit dispute letter",
-      "desired_surface": "citation_visibility_strategy",
+      "query_id": "q_006",
+      "query": "what to prepare for write a clear letter of explanation.",
+      "route": "/letter-of-explanation",
+      "desired_surface": "citation_ready_answer_asset",
       "telemetry_required_for_win_claim": true
     },
     {
-      "query_id": "q_not_credit_repair",
-      "query": "not a credit repair company",
-      "desired_surface": "citation_visibility_strategy",
+      "query_id": "q_007",
+      "query": "credit letter of explanation checklist",
+      "route": "/letter-of-explanation/credit",
+      "desired_surface": "citation_ready_answer_asset",
       "telemetry_required_for_win_claim": true
     },
     {
-      "query_id": "q_apartment_application",
-      "query": "apartment application checklist",
-      "desired_surface": "citation_visibility_strategy",
+      "query_id": "q_008",
+      "query": "what to prepare for credit letter of explanation",
+      "route": "/letter-of-explanation/credit",
+      "desired_surface": "citation_ready_answer_asset",
       "telemetry_required_for_win_claim": true
     },
     {
-      "query_id": "q_rental_checklist",
-      "query": "rental application checklist",
-      "desired_surface": "citation_visibility_strategy",
+      "query_id": "q_009",
+      "query": "eviction letter of explanation checklist",
+      "route": "/letter-of-explanation/eviction",
+      "desired_surface": "citation_ready_answer_asset",
       "telemetry_required_for_win_claim": true
     },
     {
-      "query_id": "q_auto_docs",
-      "query": "documents needed for car loan",
-      "desired_surface": "citation_visibility_strategy",
+      "query_id": "q_010",
+      "query": "what to prepare for eviction letter of explanation",
+      "route": "/letter-of-explanation/eviction",
+      "desired_surface": "citation_ready_answer_asset",
       "telemetry_required_for_win_claim": true
     },
     {
-      "query_id": "q_sba_checklist",
-      "query": "sba loan checklist",
-      "desired_surface": "citation_visibility_strategy",
+      "query_id": "q_011",
+      "query": "income letter of explanation checklist",
+      "route": "/letter-of-explanation/income",
+      "desired_surface": "citation_ready_answer_asset",
       "telemetry_required_for_win_claim": true
     },
     {
-      "query_id": "q_mortgage_docs",
-      "query": "mortgage document checklist",
-      "desired_surface": "citation_visibility_strategy",
+      "query_id": "q_012",
+      "query": "what to prepare for income letter of explanation",
+      "route": "/letter-of-explanation/income",
+      "desired_surface": "citation_ready_answer_asset",
       "telemetry_required_for_win_claim": true
     },
     {
-      "query_id": "q_important_docs",
-      "query": "important documents checklist",
-      "desired_surface": "citation_visibility_strategy",
+      "query_id": "q_013",
+      "query": "employment gap letter of explanation checklist",
+      "route": "/letter-of-explanation/employment-gap",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_014",
+      "query": "what to prepare for employment gap letter of explanation",
+      "route": "/letter-of-explanation/employment-gap",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_015",
+      "query": "employment verification letter checklist",
+      "route": "/employment-verification-letter",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_016",
+      "query": "what to prepare for employment verification letter",
+      "route": "/employment-verification-letter",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_017",
+      "query": "proof of income letter checklist",
+      "route": "/proof-of-income-letter",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_018",
+      "query": "what to prepare for proof of income letter",
+      "route": "/proof-of-income-letter",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_019",
+      "query": "credit dispute letter generator checklist",
+      "route": "/credit-dispute-letter",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_020",
+      "query": "what to prepare for credit dispute letter generator",
+      "route": "/credit-dispute-letter",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_021",
+      "query": "apartment ready-to-apply kit checklist",
+      "route": "/apartment-application",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_022",
+      "query": "what to prepare for apartment ready-to-apply kit",
+      "route": "/apartment-application",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_023",
+      "query": "rental application checklist checklist",
+      "route": "/rental-application-checklist",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_024",
+      "query": "what to prepare for rental application checklist",
+      "route": "/rental-application-checklist",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_025",
+      "query": "how to get approved for an apartment checklist",
+      "route": "/how-to-get-approved-for-an-apartment",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_026",
+      "query": "what to prepare for how to get approved for an apartment",
+      "route": "/how-to-get-approved-for-an-apartment",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_027",
+      "query": "auto loan documents checklist",
+      "route": "/auto-loan-documents",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_028",
+      "query": "what to prepare for auto loan documents",
+      "route": "/auto-loan-documents",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_029",
+      "query": "car loan checklist checklist",
+      "route": "/car-loan-checklist",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_030",
+      "query": "what to prepare for car loan checklist",
+      "route": "/car-loan-checklist",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_031",
+      "query": "documents needed for a car loan checklist",
+      "route": "/documents-needed-for-car-loan",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_032",
+      "query": "what to prepare for documents needed for a car loan",
+      "route": "/documents-needed-for-car-loan",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_033",
+      "query": "sba loan checklist checklist",
+      "route": "/sba-loan-checklist",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_034",
+      "query": "what to prepare for sba loan checklist",
+      "route": "/sba-loan-checklist",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_035",
+      "query": "business loan documents checklist",
+      "route": "/business-loan-documents",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_036",
+      "query": "what to prepare for business loan documents",
+      "route": "/business-loan-documents",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_037",
+      "query": "mortgage checklist checklist",
+      "route": "/mortgage-checklist",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_038",
+      "query": "what to prepare for mortgage checklist",
+      "route": "/mortgage-checklist",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_039",
+      "query": "mortgage document checklist checklist",
+      "route": "/mortgage-document-checklist",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_040",
+      "query": "what to prepare for mortgage document checklist",
+      "route": "/mortgage-document-checklist",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_041",
+      "query": "important documents checklist checklist",
+      "route": "/important-documents-checklist",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_042",
+      "query": "what to prepare for important documents checklist",
+      "route": "/important-documents-checklist",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_043",
+      "query": "moving checklist checklist",
+      "route": "/moving-checklist",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_044",
+      "query": "what to prepare for moving checklist",
+      "route": "/moving-checklist",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_045",
+      "query": "approvalprep glossary checklist",
+      "route": "/glossary",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_046",
+      "query": "what to prepare for approvalprep glossary",
+      "route": "/glossary",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_047",
+      "query": "approvalprep methodology checklist",
+      "route": "/methodology",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_048",
+      "query": "what to prepare for approvalprep methodology",
+      "route": "/methodology",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_049",
+      "query": "privacy policy checklist",
+      "route": "/privacy",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_050",
+      "query": "what to prepare for privacy policy",
+      "route": "/privacy",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_051",
+      "query": "terms of use checklist",
+      "route": "/terms",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_052",
+      "query": "what to prepare for terms of use",
+      "route": "/terms",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_053",
+      "query": "disclaimer checklist",
+      "route": "/disclaimer",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_054",
+      "query": "what to prepare for disclaimer",
+      "route": "/disclaimer",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_055",
+      "query": "refund policy checklist",
+      "route": "/refund-policy",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_056",
+      "query": "what to prepare for refund policy",
+      "route": "/refund-policy",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_057",
+      "query": "security checklist",
+      "route": "/security",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_058",
+      "query": "what to prepare for security",
+      "route": "/security",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_059",
+      "query": "accessibility checklist",
+      "route": "/accessibility",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_060",
+      "query": "what to prepare for accessibility",
+      "route": "/accessibility",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_061",
+      "query": "contact checklist",
+      "route": "/contact",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_062",
+      "query": "what to prepare for contact",
+      "route": "/contact",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_063",
+      "query": "editorial policy checklist",
+      "route": "/editorial-policy",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_064",
+      "query": "what to prepare for editorial policy",
+      "route": "/editorial-policy",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_065",
+      "query": "ai use policy checklist",
+      "route": "/ai-use-policy",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_066",
+      "query": "what to prepare for ai use policy",
+      "route": "/ai-use-policy",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_067",
+      "query": "credit repair disclaimer checklist",
+      "route": "/credit-repair-disclaimer",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_068",
+      "query": "what to prepare for credit repair disclaimer",
+      "route": "/credit-repair-disclaimer",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_069",
+      "query": "not a credit repair company checklist",
+      "route": "/not-a-credit-repair-company",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_070",
+      "query": "what to prepare for not a credit repair company",
+      "route": "/not-a-credit-repair-company",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_071",
+      "query": "income + employment letter kit checklist",
+      "route": "/income-employment-letter-kit",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_072",
+      "query": "what to prepare for income + employment letter kit",
+      "route": "/income-employment-letter-kit",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_073",
+      "query": "credit letter kit checklist",
+      "route": "/credit-letter-kit",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_074",
+      "query": "what to prepare for credit letter kit",
+      "route": "/credit-letter-kit",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_075",
+      "query": "rental application kit checklist",
+      "route": "/rental-application-kit",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_076",
+      "query": "what to prepare for rental application kit",
+      "route": "/rental-application-kit",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_077",
+      "query": "loan prep letter kit checklist",
+      "route": "/loan-prep-letter-kit",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_078",
+      "query": "what to prepare for loan prep letter kit",
+      "route": "/loan-prep-letter-kit",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_079",
+      "query": "business funding prep kit checklist",
+      "route": "/business-funding-prep-kit",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_080",
+      "query": "what to prepare for business funding prep kit",
+      "route": "/business-funding-prep-kit",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_081",
+      "query": "life admin letter kit checklist",
+      "route": "/life-admin-letter-kit",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_082",
+      "query": "what to prepare for life admin letter kit",
+      "route": "/life-admin-letter-kit",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_083",
+      "query": "complete approvalprep bundle checklist",
+      "route": "/complete-approvalprep-bundle",
+      "desired_surface": "citation_ready_answer_asset",
+      "telemetry_required_for_win_claim": true
+    },
+    {
+      "query_id": "q_084",
+      "query": "what to prepare for complete approvalprep bundle",
+      "route": "/complete-approvalprep-bundle",
+      "desired_surface": "citation_ready_answer_asset",
       "telemetry_required_for_win_claim": true
     }
   ]

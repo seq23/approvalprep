@@ -37,9 +37,9 @@ for (const key of ["ADMIN_GATE_PASSWORD", "APP_SESSION_SECRET", "DOWNLOAD_SIGNIN
 
 run("npx", ["wrangler", "d1", "migrations", "apply", env.CLOUDFLARE_D1_DATABASE_NAME, "--remote"]);
 run("node", ["scripts/runtime/seed-product-registry.mjs"]);
-const downloads = "public/downloads";
+const downloads = "seed-downloads";
 for (const file of fs.readdirSync(downloads).filter((f) => /\.(pdf|docx)$/i.test(f))) {
-  run("npx", ["wrangler", "r2", "object", "put", `${env.CLOUDFLARE_R2_BUCKET_NAME}/${file}`, "--file", path.join(downloads, file)]);
+  run("npx", ["wrangler", "r2", "object", "put", `${env.CLOUDFLARE_R2_BUCKET_NAME}/downloads/${file}`, "--file", path.join(downloads, file)]);
 }
 await smoke(env.POSTDEPLOY_BASE_URL);
 console.log("ApprovalPrep real deploy completed.");

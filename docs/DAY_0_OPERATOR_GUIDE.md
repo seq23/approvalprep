@@ -28,6 +28,8 @@ Stripe handles payment. ApprovalPrep releases downloads after Stripe verifies th
 
 Downloads are controlled through verified payment functions. No saved customer documents or user accounts are required in V1.
 
+ApprovalPrep must not store customer letter answers, completed worksheets, filled-in templates, or uploaded personal application documents. The runtime may keep limited operational records such as Stripe session IDs, product IDs, payment status, timestamps, product asset records, and admin audit records so purchases can be verified and files can be delivered.
+
 ## How admin works
 
 `/admin` is an exception cockpit. Most routine work is handled by contract. Look at Needs Owner, hard failures, and provider setup problems.

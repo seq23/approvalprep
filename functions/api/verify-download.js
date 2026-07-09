@@ -32,17 +32,34 @@ function priceFor(env, sku) {
 }
 
 
-function downloadManifestFor(sku) {
+function downloadManifestFor(sku, sessionId) {
   return {
     sku,
     verified: true,
-    delivery: "controlled_template_download",
+    delivery: "entitlement_protected_download",
     files: [
-      `/downloads/${sku}.pdf`,
-      `/downloads/${sku}.docx`
+      `/api/download-file?session_id=${encodeURIComponent(sessionId)}&type=pdf`,
+      `/api/download-file?session_id=${encodeURIComponent(sessionId)}&type=docx`
     ],
     requiredSections: ["What this is", "When to use it", "What to review before sending", "What to attach", "Where to send it", "What to do next", "What this does not do"]
   };
+}
+
+async function recordVerifiedEntitlement(env, session, sku) {
+  if (!env.PRODUCTS_DB) return;
+  const existing = await env.PRODUCTS_DB.prepare("SELECT id FROM download_entitlements WHERE stripe_session_id=?").bind(session.id).first();
+  const id = existing?.id || crypto.randomUUID();
+  await env.PRODUCTS_DB.prepare("INSERT OR REPLACE INTO download_entitlements (id,stripe_session_id,product_id,customer_email,payment_status,amount_total,currency,created_at,expires_at) VALUES (?,?,?,?,?,?,?,?,?)").bind(
+    id,
+    session.id,
+    sku,
+    "",
+    session.payment_status || "unknown",
+    session.amount_total || 0,
+    session.currency || "usd",
+    new Date().toISOString(),
+    new Date(Date.now() + 1000 * 60 * 60 * 24 * 30).toISOString()
+  ).run();
 }
 
 export async function onRequestPost(context) {
@@ -58,6 +75,8 @@ export async function onRequestPost(context) {
   });
   const data = await res.json().catch(() => ({}));
   if (!res.ok) return json({ status: "SOURCE_ERROR", provider: "stripe", message: data.error?.message || "Stripe verification failed." }, 502);
-  if (data.payment_status !== "paid" || data.metadata?.sku !== sku) return json({ status: "NOT_VERIFIED", message: "Stripe payment is verified only when Stripe returns paid status for this SKU.", sku }, 403);
-  return json({ status: "VERIFIED", ...downloadManifestFor(sku) });
+  const paidSku = data.metadata?.sku || data.metadata?.product_id || data.client_reference_id || "";
+  if (data.payment_status !== "paid" || paidSku !== sku) return json({ status: "NOT_VERIFIED", message: "Stripe payment is verified only when Stripe returns paid status for this SKU.", sku }, 403);
+  await recordVerifiedEntitlement(context.env, data, sku);
+  return json({ status: "VERIFIED", ...downloadManifestFor(sku, sessionId) });
 }

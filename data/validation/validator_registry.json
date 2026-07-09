@@ -1,5 +1,7 @@
 {
-  "schemaVersion": "1.0.0",
+  "schemaVersion": "2.0.0",
+  "lastUpdatedAt": "2026-07-09T01:25:59.977Z",
+  "policy": "Hard fails protect customer journey, payment/download safety, regulated boundaries, real growth machinery, and operator automation. Cosmetic preferences and live-provider success are not hard fails unless the repo falsely claims them.",
   "validators": [
     {
       "id": "repo-structure",
@@ -7,8 +9,21 @@
       "entrypoint": "scripts/validate/repo-structure.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
+      "blockReason": "prevents broken customer/payment/legal/site release",
       "owner": "approvalprep-ops",
-      "scope": "Required repo files, authority files, and package identity"
+      "group": "release-critical",
+      "scope": "Core repo files, authority files, package identity"
+    },
+    {
+      "id": "validation-registry",
+      "npmScript": "validate:validation-registry",
+      "entrypoint": "scripts/validate/validation-registry.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents stale or divergent validator registry and matrix",
+      "owner": "approvalprep-ops",
+      "group": "ops-critical",
+      "scope": "Validation registry and matrix completeness"
     },
     {
       "id": "route-manifest",
@@ -16,8 +31,10 @@
       "entrypoint": "scripts/validate/route-manifest.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
+      "blockReason": "prevents broken customer/payment/legal/site release",
       "owner": "approvalprep-ops",
-      "scope": "Routes must be admitted and backed by rendering"
+      "group": "release-critical",
+      "scope": "Route admission and rendering contract"
     },
     {
       "id": "legal-trust",
@@ -25,8 +42,10 @@
       "entrypoint": "scripts/validate/legal-trust.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
+      "blockReason": "prevents broken customer/payment/legal/site release",
       "owner": "approvalprep-ops",
-      "scope": "Legal/trust pages and credit disclaimers"
+      "group": "release-critical",
+      "scope": "Legal/trust pages and regulated boundary pages"
     },
     {
       "id": "plain-language",
@@ -34,8 +53,10 @@
       "entrypoint": "scripts/validate/plain-language.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
+      "blockReason": "prevents broken customer/payment/legal/site release",
       "owner": "approvalprep-ops",
-      "scope": "Downloads and instructions must be clear and boundary-safe"
+      "group": "release-critical",
+      "scope": "Plain-language safety and customer comprehension"
     },
     {
       "id": "download-safety",
@@ -43,8 +64,21 @@
       "entrypoint": "scripts/validate/download-safety.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
+      "blockReason": "prevents broken customer/payment/legal/site release",
       "owner": "approvalprep-ops",
-      "scope": "Paid downloads must include required sections and safety language"
+      "group": "release-critical",
+      "scope": "Protected paid download model and no public paid assets"
+    },
+    {
+      "id": "data-privacy",
+      "npmScript": "validate:data-privacy",
+      "entrypoint": "scripts/validate/data-privacy.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents false no-storage claims, customer document retention, and raw entitlement exposure",
+      "owner": "approvalprep-ops",
+      "group": "release-critical",
+      "scope": "Customer document data minimization, privacy notices, and operational-record boundary"
     },
     {
       "id": "prompt-guardrails",
@@ -52,8 +86,10 @@
       "entrypoint": "scripts/validate/prompt-guardrails.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
+      "blockReason": "prevents broken customer/payment/legal/site release",
       "owner": "approvalprep-ops",
-      "scope": "Prompt boundaries and no fake docs"
+      "group": "release-critical",
+      "scope": "No fake documents, no unsafe prompt behavior"
     },
     {
       "id": "atoms",
@@ -61,8 +97,10 @@
       "entrypoint": "scripts/validate/atoms.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
-      "owner": "approvalprep-ops",
-      "scope": "Atom registry and source/usage mapping"
+      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "Answer atom corpus and source/usage mapping"
     },
     {
       "id": "citation-claim-coverage",
@@ -70,8 +108,10 @@
       "entrypoint": "scripts/validate/citation-claim-coverage.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
-      "owner": "approvalprep-ops",
-      "scope": "Factual and regulated claim coverage"
+      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "Regulated and factual claim coverage"
     },
     {
       "id": "external-telemetry-claims",
@@ -79,8 +119,10 @@
       "entrypoint": "scripts/validate/external-telemetry-claims.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
-      "owner": "approvalprep-ops",
-      "scope": "No unsupported ranking, indexing, or citation claims"
+      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "No unsupported ranking/indexing/citation claims"
     },
     {
       "id": "atlas-query-fanout",
@@ -88,26 +130,32 @@
       "entrypoint": "scripts/validate/atlas.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
-      "owner": "approvalprep-ops",
-      "scope": "Atlas, Query Universe, and fanout admission"
+      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "Atlas, query universe, fanout, route query coverage"
     },
     {
-      "id": "seo-surfaces",
+      "id": "seo-aeo-geo-surfaces",
       "npmScript": "validate:seo-surfaces",
       "entrypoint": "scripts/validate/seo-surfaces.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
-      "owner": "approvalprep-ops",
-      "scope": "Sitemap, robots, llms, answers, schema support"
+      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "Sitemap, robots, llms, answers, atom/query depth, provider receipts"
     },
     {
-      "id": "admin-manifest",
+      "id": "admin-dashboard",
       "npmScript": "validate:admin",
       "entrypoint": "scripts/validate/admin.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
+      "blockReason": "prevents broken operator workflow or unsafe automation",
       "owner": "approvalprep-ops",
-      "scope": "Admin manifests and Growth Health panels"
+      "group": "ops-critical",
+      "scope": "Admin dashboard and growth cockpit wiring"
     },
     {
       "id": "payment-download-boundary",
@@ -115,17 +163,43 @@
       "entrypoint": "scripts/validate/payment-download.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
+      "blockReason": "prevents broken customer/payment/legal/site release",
       "owner": "approvalprep-ops",
-      "scope": "Stripe verified downloads and no unverified export"
+      "group": "release-critical",
+      "scope": "Stripe metadata, webhook signature, entitlement downloads"
     },
     {
-      "id": "env-vault",
-      "npmScript": "validate:env",
-      "entrypoint": "scripts/env/env-audit.mjs",
+      "id": "setup-and-secrets",
+      "npmScript": "env:audit",
+      "entrypoint": "scripts/validate/setup-and-secrets.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
+      "blockReason": "prevents broken operator workflow or unsafe automation",
       "owner": "approvalprep-ops",
-      "scope": "Env/vault contract and secret exposure rules"
+      "group": "ops-critical",
+      "scope": "Repo-safe setup docs and no committed live secrets"
+    },
+    {
+      "id": "env-examples",
+      "npmScript": "validate:env-examples",
+      "entrypoint": "scripts/validate/env-examples.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents broken operator workflow or unsafe automation",
+      "owner": "approvalprep-ops",
+      "group": "ops-critical",
+      "scope": "Example env completeness and secret-shape safety"
+    },
+    {
+      "id": "vault-schema",
+      "npmScript": "validate:vault-schema",
+      "entrypoint": "scripts/validate/vault-schema.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents broken operator workflow or unsafe automation",
+      "owner": "approvalprep-ops",
+      "group": "ops-critical",
+      "scope": "Vault example schema and encrypted vault safety"
     },
     {
       "id": "security",
@@ -133,26 +207,10 @@
       "entrypoint": "scripts/validate/security.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
+      "blockReason": "prevents broken customer/payment/legal/site release",
       "owner": "approvalprep-ops",
-      "scope": "Secret leakage and unsafe phrases"
-    },
-    {
-      "id": "build",
-      "npmScript": "build",
-      "entrypoint": "astro build",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "owner": "approvalprep-ops",
-      "scope": "Production build"
-    },
-    {
-      "id": "artifact-validation",
-      "npmScript": "validate:artifact",
-      "entrypoint": "scripts/validate/artifact-validation.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "owner": "approvalprep-ops",
-      "scope": "ZIP root and manifest checks"
+      "group": "release-critical",
+      "scope": "Secret leakage and unsafe phrase scan"
     },
     {
       "id": "source-connectors-real",
@@ -160,8 +218,10 @@
       "entrypoint": "scripts/validate/source-connectors-real.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
+      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
       "owner": "approvalprep-growth",
-      "scope": "Free source connectors must be real or honestly report status"
+      "group": "growth-critical",
+      "scope": "Connector config must be real or honestly marked not configured"
     },
     {
       "id": "no-fake-intelligence-data",
@@ -169,8 +229,10 @@
       "entrypoint": "scripts/validate/no-fake-intelligence-data.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
+      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
       "owner": "approvalprep-growth",
-      "scope": "No fake ranking/citation/competitor data"
+      "group": "growth-critical",
+      "scope": "No fake ranking/citation/competitor telemetry"
     },
     {
       "id": "intelligence-source-freshness",
@@ -178,8 +240,10 @@
       "entrypoint": "scripts/validate/intelligence-source-freshness.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
+      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
       "owner": "approvalprep-growth",
-      "scope": "Ingestion run statuses must be honest"
+      "group": "growth-critical",
+      "scope": "Ingestion statuses must be honest and fresh enough for fixture mode"
     },
     {
       "id": "competitor-crawl-policy",
@@ -187,8 +251,10 @@
       "entrypoint": "scripts/validate/competitor-crawl-policy.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
+      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
       "owner": "approvalprep-growth",
-      "scope": "Competitor crawl watchlist and safety rules"
+      "group": "growth-critical",
+      "scope": "Competitor crawl policy, watchlist, and safety"
     },
     {
       "id": "serp-import-schema",
@@ -196,8 +262,10 @@
       "entrypoint": "scripts/validate/serp-import-schema.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
+      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
       "owner": "approvalprep-growth",
-      "scope": "Manual SERP imports must use parseable schema"
+      "group": "growth-critical",
+      "scope": "Manual SERP import schema integrity"
     },
     {
       "id": "backlink-recommendation-honesty",
@@ -205,8 +273,10 @@
       "entrypoint": "scripts/validate/backlink-recommendation-honesty.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
+      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
       "owner": "approvalprep-growth",
-      "scope": "Backlink recommendations must not overclaim"
+      "group": "growth-critical",
+      "scope": "Backlink recommendations cannot overclaim"
     },
     {
       "id": "content-action-decision",
@@ -214,8 +284,10 @@
       "entrypoint": "scripts/validate/content-action-decision.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
+      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
       "owner": "approvalprep-growth",
-      "scope": "Content decisions must separate growth and utility"
+      "group": "growth-critical",
+      "scope": "Content action decisions separate utility, compliance, and growth"
     },
     {
       "id": "maintenance-brief-integrity",
@@ -223,8 +295,10 @@
       "entrypoint": "scripts/validate/maintenance-brief-integrity.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
+      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
       "owner": "approvalprep-growth",
-      "scope": "Maintenance briefs must be actionable"
+      "group": "growth-critical",
+      "scope": "Maintenance briefs are actionable and honest"
     },
     {
       "id": "citation-opportunity-integrity",
@@ -232,8 +306,10 @@
       "entrypoint": "scripts/validate/citation-opportunity-integrity.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
+      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
       "owner": "approvalprep-growth",
-      "scope": "Citation opportunities cannot claim wins without telemetry"
+      "group": "growth-critical",
+      "scope": "Citation opportunities cannot imply observed performance"
     },
     {
       "id": "workflow-data-trace",
@@ -241,17 +317,21 @@
       "entrypoint": "scripts/validate/workflow-data-trace.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
+      "blockReason": "prevents broken operator workflow or unsafe automation",
       "owner": "approvalprep-ops",
-      "scope": "GitHub Actions trigger, data, secret, artifact, and fixture/manual-run trace"
+      "group": "ops-critical",
+      "scope": "GitHub Actions fixture trace shape and manual readiness"
     },
     {
-      "id": "setup-and-secrets",
+      "id": "setup-secrets",
       "npmScript": "validate:setup-secrets",
       "entrypoint": "scripts/validate/setup-and-secrets.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
+      "blockReason": "prevents broken operator workflow or unsafe automation",
       "owner": "approvalprep-ops",
-      "scope": "Secrets/vault/Wrangler deterministic setup"
+      "group": "ops-critical",
+      "scope": "Setup docs and forbidden secret files"
     },
     {
       "id": "admin-action-links",
@@ -259,8 +339,10 @@
       "entrypoint": "scripts/validate/admin-action-links.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
+      "blockReason": "prevents broken operator workflow or unsafe automation",
       "owner": "approvalprep-ops",
-      "scope": "Admin GitHub edit/history link integrity"
+      "group": "ops-critical",
+      "scope": "Admin action links point to real repo edit/history targets"
     },
     {
       "id": "citation-strategy",
@@ -268,8 +350,10 @@
       "entrypoint": "scripts/validate/citation-strategy.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
-      "owner": "approvalprep-ops",
-      "scope": "Six-month 100K citation target and no-guarantee KPI separation"
+      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "100K strategy separates targets, generated surfaces, and observed proof"
     },
     {
       "id": "growth-health",
@@ -277,8 +361,10 @@
       "entrypoint": "scripts/validate/growth-health.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
-      "owner": "approvalprep-ops",
-      "scope": "Actionable SEO/AEO/GEO/citation/admin health dashboard data"
+      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "Growth health panels and statuses"
     },
     {
       "id": "automation-safety",
@@ -286,100 +372,197 @@
       "entrypoint": "scripts/validate/automation-safety.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
+      "blockReason": "prevents broken operator workflow or unsafe automation",
       "owner": "approvalprep-ops",
-      "scope": "Hands-off automation allow/approval/block policy"
+      "group": "ops-critical",
+      "scope": "Automation/autopublish blocks high-risk changes"
     },
     {
       "id": "delegated-authority",
-      "command": "validate:delegated-authority",
-      "severity": "hard_fail",
-      "owner": "automation",
-      "fixPath": "repair governance/notification data and rerun validator"
+      "npmScript": "validate:delegated-authority",
+      "entrypoint": "scripts/validate/delegated-authority.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents broken operator workflow or unsafe automation",
+      "owner": "approvalprep-ops",
+      "group": "ops-critical",
+      "scope": "Delegated authority contract and absolute forbiddens"
     },
     {
       "id": "self-heal-progressions",
-      "command": "validate:self-heal-progressions",
-      "severity": "hard_fail",
-      "owner": "automation",
-      "fixPath": "repair governance/notification data and rerun validator"
+      "npmScript": "validate:self-heal-progressions",
+      "entrypoint": "scripts/validate/self-heal-progressions.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents broken operator workflow or unsafe automation",
+      "owner": "approvalprep-ops",
+      "group": "ops-critical",
+      "scope": "Self-heal attempt/revalidation/final-block loop"
     },
     {
       "id": "owner-exceptions",
-      "command": "validate:owner-exceptions",
-      "severity": "hard_fail",
-      "owner": "automation",
-      "fixPath": "repair governance/notification data and rerun validator"
+      "npmScript": "validate:owner-exceptions",
+      "entrypoint": "scripts/validate/owner-exceptions.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents broken operator workflow or unsafe automation",
+      "owner": "approvalprep-ops",
+      "group": "ops-critical",
+      "scope": "Owner exception index integrity"
     },
     {
       "id": "notification-policy",
-      "command": "validate:notification-policy",
-      "severity": "hard_fail",
-      "owner": "automation",
-      "fixPath": "repair governance/notification data and rerun validator"
+      "npmScript": "validate:notification-policy",
+      "entrypoint": "scripts/validate/notification-policy.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents broken operator workflow or unsafe automation",
+      "owner": "approvalprep-ops",
+      "group": "ops-critical",
+      "scope": "Notification policy and queue safety"
     },
     {
-      "id": "validate:ux-conversion",
-      "script": "validate:ux-conversion",
-      "phase": "v4.2.4",
-      "severity": "hard_fail",
-      "purpose": "Browserless UX, mobile, plain-language, credit-boundary, and conversion validation."
+      "id": "browserless-ux-report",
+      "npmScript": "ux:browserless-report",
+      "entrypoint": "scripts/ux/build-browserless-ux-report.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents confusing or low-conversion user experience",
+      "owner": "approvalprep-ux",
+      "group": "ux-critical",
+      "scope": "Browserless UX report artifact generation"
     },
     {
-      "id": "validate:public-page-depth",
-      "script": "validate:public-page-depth",
-      "phase": "v4.2.4",
-      "severity": "hard_fail",
-      "purpose": "Browserless UX, mobile, plain-language, credit-boundary, and conversion validation."
+      "id": "ux-conversion",
+      "npmScript": "validate:ux-conversion",
+      "entrypoint": "scripts/validate/ux-conversion.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents confusing or low-conversion user experience",
+      "owner": "approvalprep-ux",
+      "group": "ux-critical",
+      "scope": "Homepage, footer, CTA, and conversion structure"
     },
     {
-      "id": "validate:cta-quality",
-      "script": "validate:cta-quality",
-      "phase": "v4.2.4",
-      "severity": "hard_fail",
-      "purpose": "Browserless UX, mobile, plain-language, credit-boundary, and conversion validation."
+      "id": "public-page-depth",
+      "npmScript": "validate:public-page-depth",
+      "entrypoint": "scripts/validate/public-page-depth.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents confusing or low-conversion user experience",
+      "owner": "approvalprep-ux",
+      "group": "ux-critical",
+      "scope": "Route-specific copy depth and anti-thin-page rules"
     },
     {
-      "id": "validate:trust-signals",
-      "script": "validate:trust-signals",
-      "phase": "v4.2.4",
-      "severity": "hard_fail",
-      "purpose": "Browserless UX, mobile, plain-language, credit-boundary, and conversion validation."
+      "id": "cta-quality",
+      "npmScript": "validate:cta-quality",
+      "entrypoint": "scripts/validate/cta-quality.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents confusing or low-conversion user experience",
+      "owner": "approvalprep-ux",
+      "group": "ux-critical",
+      "scope": "CTA clarity and conversion path quality"
     },
     {
-      "id": "validate:browserless-accessibility",
-      "script": "validate:browserless-accessibility",
-      "phase": "v4.2.4",
-      "severity": "hard_fail",
-      "purpose": "Browserless UX, mobile, plain-language, credit-boundary, and conversion validation."
+      "id": "trust-signal-coverage",
+      "npmScript": "validate:trust-signals",
+      "entrypoint": "scripts/validate/trust-signal-coverage.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents confusing or low-conversion user experience",
+      "owner": "approvalprep-ux",
+      "group": "ux-critical",
+      "scope": "Trust signal placement and boundary language"
     },
     {
-      "id": "validate:mobile-ux",
-      "script": "validate:mobile-ux",
-      "phase": "v4.2.4",
-      "severity": "hard_fail",
-      "purpose": "Browserless UX, mobile, plain-language, credit-boundary, and conversion validation."
+      "id": "browserless-accessibility",
+      "npmScript": "validate:browserless-accessibility",
+      "entrypoint": "scripts/validate/browserless-accessibility.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents confusing or low-conversion user experience",
+      "owner": "approvalprep-ux",
+      "group": "ux-critical",
+      "scope": "Static accessibility and browserless checks"
     },
     {
-      "id": "validate:plain-language-grade",
-      "script": "validate:plain-language-grade",
-      "phase": "v4.2.4",
-      "severity": "hard_fail",
-      "purpose": "Browserless UX, mobile, plain-language, credit-boundary, and conversion validation."
+      "id": "mobile-ux",
+      "npmScript": "validate:mobile-ux",
+      "entrypoint": "scripts/validate/mobile-ux.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents confusing or low-conversion user experience",
+      "owner": "approvalprep-ux",
+      "group": "ux-critical",
+      "scope": "Responsive/mobile standards"
     },
     {
-      "id": "validate:credit-boundary",
-      "script": "validate:credit-boundary",
-      "phase": "v4.2.4",
-      "severity": "hard_fail",
-      "purpose": "Browserless UX, mobile, plain-language, credit-boundary, and conversion validation."
+      "id": "plain-language-grade",
+      "npmScript": "validate:plain-language-grade",
+      "entrypoint": "scripts/validate/plain-language-grade.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents confusing or low-conversion user experience",
+      "owner": "approvalprep-ux",
+      "group": "ux-critical",
+      "scope": "Readable consumer-facing language"
     },
     {
-      "id": "validate:customer-next-steps",
-      "script": "validate:customer-next-steps",
-      "phase": "v4.2.4",
-      "severity": "hard_fail",
-      "purpose": "Browserless UX, mobile, plain-language, credit-boundary, and conversion validation."
+      "id": "credit-boundary-coverage",
+      "npmScript": "validate:credit-boundary",
+      "entrypoint": "scripts/validate/credit-boundary-coverage.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents broken customer/payment/legal/site release",
+      "owner": "approvalprep-ops",
+      "group": "release-critical",
+      "scope": "Credit repair/dispute boundary coverage"
+    },
+    {
+      "id": "customer-next-steps",
+      "npmScript": "validate:customer-next-steps",
+      "entrypoint": "scripts/validate/customer-next-steps.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents confusing or low-conversion user experience",
+      "owner": "approvalprep-ux",
+      "group": "ux-critical",
+      "scope": "Post-download and customer next-step clarity"
+    },
+    {
+      "id": "e2e-user-journey",
+      "npmScript": "validate:e2e-user-journey",
+      "entrypoint": "scripts/validate/e2e-user-journey.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents confusing or low-conversion user experience",
+      "owner": "approvalprep-ux",
+      "group": "ux-critical",
+      "scope": "End-to-end browserless conversion journey and internal links"
+    },
+    {
+      "id": "product-model-v2",
+      "npmScript": "validate:product-model",
+      "entrypoint": "scripts/validate/product-model-v2.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents broken customer/payment/legal/site release",
+      "owner": "approvalprep-ops",
+      "group": "release-critical",
+      "scope": "Product catalog and runtime model integrity"
+    },
+    {
+      "id": "artifact-validation",
+      "npmScript": "validate:artifact",
+      "entrypoint": "scripts/validate/artifact-validation.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents broken operator workflow or unsafe automation",
+      "owner": "approvalprep-ops",
+      "group": "ops-critical",
+      "scope": "Artifact manifest and package contract"
     }
-  ],
-  "lastUpdatedFor": "v4.2.4"
+  ]
 }

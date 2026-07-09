@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import SiteFooter from "../components/SiteFooter.astro";
+import DataPrivacyNotice from "../components/DataPrivacyNotice.astro";
 import manifest from "../../data/routes/route_manifest.json";
 const { title = "ApprovalPrep", description = "Self-service approval prep tools.", canonical = "https://approvalprep.com", noindex = false } = Astro.props;
 const nav = manifest.routes.filter((route) => route.nav);
@@ -56,7 +57,7 @@ const nav = manifest.routes.filter((route) => route.nav);
             if (status) status.textContent = "No verified Stripe session was found. Return to pricing and complete checkout to unlock downloads.";
             return;
           }
-          if (status) status.textContent = "Verifying your payment with Stripe...";
+            if (status) status.textContent = "Verifying your payment with Stripe. ApprovalPrep does not store your letter answers or completed customer documents.";
           try {
             const response = await fetch("/api/verify-download", {
               method: "POST",
@@ -97,7 +98,7 @@ const nav = manifest.routes.filter((route) => route.nav);
           const original = button.textContent;
           button.disabled = true;
           button.textContent = "Starting checkout...";
-          status.textContent = "Opening secure Stripe checkout.";
+            status.textContent = "Opening secure Stripe checkout. We only send the product SKU to start checkout, not your letter answers or personal document contents.";
           try {
             const response = await fetch("/api/create-checkout-session", {
               method: "POST",
@@ -117,6 +118,7 @@ const nav = manifest.routes.filter((route) => route.nav);
         });
       }
     </script>
+    <DataPrivacyNotice compact={true} />
     <SiteFooter />
   </body>
 </html>

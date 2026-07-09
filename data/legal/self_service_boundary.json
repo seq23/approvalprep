@@ -1,13 +1,28 @@
 {
   "schemaVersion": "4.2.4",
-  "footerBoundary": "ApprovalPrep is a self-service tool. We do not repair credit for you. We do not contact credit bureaus, landlords, lenders, employers, or anyone else for you. We help you prepare truthful letters, checklists, and document packets so you can take your next step.",
+  "footerBoundary": "ApprovalPrep is a self-service tool. We do not repair credit for you. We do not contact credit bureaus, landlords, lenders, employers, or anyone else for you. We do not store your letter answers, completed worksheets, or uploaded personal documents. We help you prepare truthful letters, checklists, and document packets so you can take your next step.",
   "creditBoundary": "This is a self-service letter tool. You write and send the letter yourself. We do not dispute items for you, contact credit bureaus for you, or promise any result.",
+  "dataBoundary": "ApprovalPrep does not store your letter answers, completed worksheets, or uploaded personal documents. Checkout and download systems may keep limited operational records, such as Stripe session IDs, product IDs, timestamps, payment status, and asset records, so we can verify purchases, deliver files, prevent abuse, and run the site.",
+  "dataDoesNotStore": [
+    "We do not store your answers to letter prompts.",
+    "We do not store completed worksheets or filled-in templates.",
+    "We do not ask you to upload personal application documents.",
+    "We do not keep copies of the letters or packets you prepare on your own device.",
+    "We do not sell customer document data."
+  ],
+  "limitedOperationalRecords": [
+    "Stripe payment/session identifiers used to verify checkout.",
+    "Product and download entitlement records used to unlock purchased files.",
+    "Admin product, asset, and audit records used to run the catalog.",
+    "Temporary email delivery details if you ask for a download email."
+  ],
   "doesNotDo": [
     "We do not fix your credit.",
     "We do not promise approval.",
     "We do not make fake documents.",
     "We do not send letters for you.",
     "We do not give legal advice.",
-    "We do not contact anyone for you."
+    "We do not contact anyone for you.",
+    "We do not store your completed customer documents."
   ]
 }

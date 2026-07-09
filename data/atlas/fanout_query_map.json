@@ -1,4 +1,6 @@
 {
+  "schemaVersion": "2.0.0",
+  "generatedAt": "2026-07-09T00:58:41.397Z",
   "rules": [
     {
       "rule": "No thin fanout",
@@ -13,25 +15,812 @@
       "severity": "HARD_FAIL"
     },
     {
+      "rule": "Every indexed route needs at least five admitted queries",
+      "severity": "HARD_FAIL"
+    },
+    {
       "rule": "Every regulated page needs source/disclaimer mapping",
       "severity": "HARD_FAIL"
     }
   ],
   "parent_queries": [
     {
-      "parent_id": "q_loe",
+      "parent_id": "atlas_q_0001_home_definition",
+      "route_owner": "/",
+      "page_family_id": "brand_home",
       "children": [
-        "q_credit_loe",
-        "q_eviction_loe"
+        "atlas_q_0002_home_checklist",
+        "atlas_q_0003_home_how_to",
+        "atlas_q_0004_home_mistake_prevention",
+        "atlas_q_0005_home_answer_asset"
       ],
-      "status": "admitted_unique_intent"
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "how_to",
+        "mistake_prevention",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
     },
     {
-      "parent_id": "q_credit_dispute",
+      "parent_id": "atlas_q_0006_pricing_definition",
+      "route_owner": "/pricing",
+      "page_family_id": "pricing",
       "children": [
-        "q_not_credit_repair"
+        "atlas_q_0007_pricing_checklist",
+        "atlas_q_0008_pricing_how_to",
+        "atlas_q_0009_pricing_mistake_prevention",
+        "atlas_q_0010_pricing_answer_asset"
       ],
-      "status": "admitted_boundary_support"
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "how_to",
+        "mistake_prevention",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0011_letter_of_explanation_definition",
+      "route_owner": "/letter-of-explanation",
+      "page_family_id": "letter_studio",
+      "children": [
+        "atlas_q_0012_letter_of_explanation_checklist",
+        "atlas_q_0013_letter_of_explanation_how_to",
+        "atlas_q_0014_letter_of_explanation_mistake_prevention",
+        "atlas_q_0015_letter_of_explanation_purchase_evaluation"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "how_to",
+        "mistake_prevention",
+        "purchase_evaluation"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0016_letter_of_explanation_credit_definition",
+      "route_owner": "/letter-of-explanation/credit",
+      "page_family_id": "letter_studio",
+      "children": [
+        "atlas_q_0017_letter_of_explanation_credit_checklist",
+        "atlas_q_0018_letter_of_explanation_credit_how_to",
+        "atlas_q_0019_letter_of_explanation_credit_mistake_prevention",
+        "atlas_q_0020_letter_of_explanation_credit_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "how_to",
+        "mistake_prevention",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0021_letter_of_explanation_eviction_definition",
+      "route_owner": "/letter-of-explanation/eviction",
+      "page_family_id": "letter_studio",
+      "children": [
+        "atlas_q_0022_letter_of_explanation_eviction_checklist",
+        "atlas_q_0023_letter_of_explanation_eviction_how_to",
+        "atlas_q_0024_letter_of_explanation_eviction_mistake_prevention",
+        "atlas_q_0025_letter_of_explanation_eviction_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "how_to",
+        "mistake_prevention",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0026_letter_of_explanation_income_definition",
+      "route_owner": "/letter-of-explanation/income",
+      "page_family_id": "letter_studio",
+      "children": [
+        "atlas_q_0027_letter_of_explanation_income_checklist",
+        "atlas_q_0028_letter_of_explanation_income_how_to",
+        "atlas_q_0029_letter_of_explanation_income_mistake_prevention",
+        "atlas_q_0030_letter_of_explanation_income_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "how_to",
+        "mistake_prevention",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0031_letter_of_explanation_employment_gap_definition",
+      "route_owner": "/letter-of-explanation/employment-gap",
+      "page_family_id": "letter_studio",
+      "children": [
+        "atlas_q_0032_letter_of_explanation_employment_gap_checklist",
+        "atlas_q_0033_letter_of_explanation_employment_gap_how_to",
+        "atlas_q_0034_letter_of_explanation_employment_gap_mistake_prevention",
+        "atlas_q_0035_letter_of_explanation_employment_gap_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "how_to",
+        "mistake_prevention",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0036_employment_verification_letter_definition",
+      "route_owner": "/employment-verification-letter",
+      "page_family_id": "letter_studio",
+      "children": [
+        "atlas_q_0037_employment_verification_letter_checklist",
+        "atlas_q_0038_employment_verification_letter_how_to",
+        "atlas_q_0039_employment_verification_letter_mistake_prevention",
+        "atlas_q_0040_employment_verification_letter_purchase_evaluation"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "how_to",
+        "mistake_prevention",
+        "purchase_evaluation"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0041_proof_of_income_letter_definition",
+      "route_owner": "/proof-of-income-letter",
+      "page_family_id": "letter_studio",
+      "children": [
+        "atlas_q_0042_proof_of_income_letter_checklist",
+        "atlas_q_0043_proof_of_income_letter_how_to",
+        "atlas_q_0044_proof_of_income_letter_mistake_prevention",
+        "atlas_q_0045_proof_of_income_letter_purchase_evaluation"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "how_to",
+        "mistake_prevention",
+        "purchase_evaluation"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0046_credit_dispute_letter_self_service",
+      "route_owner": "/credit-dispute-letter",
+      "page_family_id": "credit_self_service",
+      "children": [
+        "atlas_q_0047_credit_dispute_letter_boundary",
+        "atlas_q_0048_credit_dispute_letter_checklist",
+        "atlas_q_0049_credit_dispute_letter_mistake_prevention",
+        "atlas_q_0050_credit_dispute_letter_purchase_evaluation"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "boundary",
+        "checklist",
+        "mistake_prevention",
+        "purchase_evaluation"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0051_apartment_application_checklist",
+      "route_owner": "/apartment-application",
+      "page_family_id": "apartment_rental",
+      "children": [
+        "atlas_q_0052_apartment_application_approval_prep",
+        "atlas_q_0053_apartment_application_packet",
+        "atlas_q_0054_apartment_application_mistake_prevention",
+        "atlas_q_0055_apartment_application_purchase_evaluation"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "approval_prep",
+        "packet",
+        "mistake_prevention",
+        "purchase_evaluation"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0056_rental_application_checklist_checklist",
+      "route_owner": "/rental-application-checklist",
+      "page_family_id": "apartment_rental",
+      "children": [
+        "atlas_q_0057_rental_application_checklist_approval_prep",
+        "atlas_q_0058_rental_application_checklist_packet",
+        "atlas_q_0059_rental_application_checklist_mistake_prevention",
+        "atlas_q_0060_rental_application_checklist_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "approval_prep",
+        "packet",
+        "mistake_prevention",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0061_how_to_get_approved_for_an_apartment_checklist",
+      "route_owner": "/how-to-get-approved-for-an-apartment",
+      "page_family_id": "apartment_rental",
+      "children": [
+        "atlas_q_0062_how_to_get_approved_for_an_apartment_approval_prep",
+        "atlas_q_0063_how_to_get_approved_for_an_apartment_packet",
+        "atlas_q_0064_how_to_get_approved_for_an_apartment_mistake_prevention",
+        "atlas_q_0065_how_to_get_approved_for_an_apartment_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "approval_prep",
+        "packet",
+        "mistake_prevention",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0066_auto_loan_documents_document_list",
+      "route_owner": "/auto-loan-documents",
+      "page_family_id": "auto",
+      "children": [
+        "atlas_q_0067_auto_loan_documents_checklist",
+        "atlas_q_0068_auto_loan_documents_prep_steps",
+        "atlas_q_0069_auto_loan_documents_mistake_prevention",
+        "atlas_q_0070_auto_loan_documents_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "prep_steps",
+        "mistake_prevention",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0071_car_loan_checklist_document_list",
+      "route_owner": "/car-loan-checklist",
+      "page_family_id": "auto",
+      "children": [
+        "atlas_q_0072_car_loan_checklist_checklist",
+        "atlas_q_0073_car_loan_checklist_prep_steps",
+        "atlas_q_0074_car_loan_checklist_mistake_prevention",
+        "atlas_q_0075_car_loan_checklist_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "prep_steps",
+        "mistake_prevention",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0076_documents_needed_for_car_loan_document_list",
+      "route_owner": "/documents-needed-for-car-loan",
+      "page_family_id": "auto",
+      "children": [
+        "atlas_q_0077_documents_needed_for_car_loan_checklist",
+        "atlas_q_0078_documents_needed_for_car_loan_prep_steps",
+        "atlas_q_0079_documents_needed_for_car_loan_mistake_prevention",
+        "atlas_q_0080_documents_needed_for_car_loan_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "prep_steps",
+        "mistake_prevention",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0081_sba_loan_checklist_document_list",
+      "route_owner": "/sba-loan-checklist",
+      "page_family_id": "business",
+      "children": [
+        "atlas_q_0082_sba_loan_checklist_checklist",
+        "atlas_q_0083_sba_loan_checklist_prep_steps",
+        "atlas_q_0084_sba_loan_checklist_mistake_prevention",
+        "atlas_q_0085_sba_loan_checklist_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "prep_steps",
+        "mistake_prevention",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0086_business_loan_documents_document_list",
+      "route_owner": "/business-loan-documents",
+      "page_family_id": "business",
+      "children": [
+        "atlas_q_0087_business_loan_documents_checklist",
+        "atlas_q_0088_business_loan_documents_prep_steps",
+        "atlas_q_0089_business_loan_documents_mistake_prevention",
+        "atlas_q_0090_business_loan_documents_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "prep_steps",
+        "mistake_prevention",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0091_mortgage_checklist_document_list",
+      "route_owner": "/mortgage-checklist",
+      "page_family_id": "mortgage",
+      "children": [
+        "atlas_q_0092_mortgage_checklist_checklist",
+        "atlas_q_0093_mortgage_checklist_prep_steps",
+        "atlas_q_0094_mortgage_checklist_mistake_prevention",
+        "atlas_q_0095_mortgage_checklist_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "prep_steps",
+        "mistake_prevention",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0096_mortgage_document_checklist_document_list",
+      "route_owner": "/mortgage-document-checklist",
+      "page_family_id": "mortgage",
+      "children": [
+        "atlas_q_0097_mortgage_document_checklist_checklist",
+        "atlas_q_0098_mortgage_document_checklist_prep_steps",
+        "atlas_q_0099_mortgage_document_checklist_mistake_prevention",
+        "atlas_q_0100_mortgage_document_checklist_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "prep_steps",
+        "mistake_prevention",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0101_important_documents_checklist_definition",
+      "route_owner": "/important-documents-checklist",
+      "page_family_id": "life_admin",
+      "children": [
+        "atlas_q_0102_important_documents_checklist_checklist",
+        "atlas_q_0103_important_documents_checklist_how_to",
+        "atlas_q_0104_important_documents_checklist_mistake_prevention",
+        "atlas_q_0105_important_documents_checklist_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "how_to",
+        "mistake_prevention",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0106_moving_checklist_definition",
+      "route_owner": "/moving-checklist",
+      "page_family_id": "moving",
+      "children": [
+        "atlas_q_0107_moving_checklist_checklist",
+        "atlas_q_0108_moving_checklist_how_to",
+        "atlas_q_0109_moving_checklist_mistake_prevention",
+        "atlas_q_0110_moving_checklist_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "how_to",
+        "mistake_prevention",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0111_glossary_definition",
+      "route_owner": "/glossary",
+      "page_family_id": "geo_surface",
+      "children": [
+        "atlas_q_0112_glossary_checklist",
+        "atlas_q_0113_glossary_how_to",
+        "atlas_q_0114_glossary_mistake_prevention",
+        "atlas_q_0115_glossary_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "how_to",
+        "mistake_prevention",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0116_methodology_definition",
+      "route_owner": "/methodology",
+      "page_family_id": "geo_surface",
+      "children": [
+        "atlas_q_0117_methodology_checklist",
+        "atlas_q_0118_methodology_how_to",
+        "atlas_q_0119_methodology_mistake_prevention",
+        "atlas_q_0120_methodology_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "how_to",
+        "mistake_prevention",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0121_privacy_policy",
+      "route_owner": "/privacy",
+      "page_family_id": "legal_trust",
+      "children": [
+        "atlas_q_0122_privacy_boundary",
+        "atlas_q_0123_privacy_plain_english",
+        "atlas_q_0124_privacy_faq",
+        "atlas_q_0125_privacy_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "boundary",
+        "plain_english",
+        "faq",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0126_terms_policy",
+      "route_owner": "/terms",
+      "page_family_id": "legal_trust",
+      "children": [
+        "atlas_q_0127_terms_boundary",
+        "atlas_q_0128_terms_plain_english",
+        "atlas_q_0129_terms_faq",
+        "atlas_q_0130_terms_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "boundary",
+        "plain_english",
+        "faq",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0131_disclaimer_policy",
+      "route_owner": "/disclaimer",
+      "page_family_id": "legal_trust",
+      "children": [
+        "atlas_q_0132_disclaimer_boundary",
+        "atlas_q_0133_disclaimer_plain_english",
+        "atlas_q_0134_disclaimer_faq",
+        "atlas_q_0135_disclaimer_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "boundary",
+        "plain_english",
+        "faq",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0136_refund_policy_policy",
+      "route_owner": "/refund-policy",
+      "page_family_id": "legal_trust",
+      "children": [
+        "atlas_q_0137_refund_policy_boundary",
+        "atlas_q_0138_refund_policy_plain_english",
+        "atlas_q_0139_refund_policy_faq",
+        "atlas_q_0140_refund_policy_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "boundary",
+        "plain_english",
+        "faq",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0141_security_policy",
+      "route_owner": "/security",
+      "page_family_id": "legal_trust",
+      "children": [
+        "atlas_q_0142_security_boundary",
+        "atlas_q_0143_security_plain_english",
+        "atlas_q_0144_security_faq",
+        "atlas_q_0145_security_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "boundary",
+        "plain_english",
+        "faq",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0146_accessibility_policy",
+      "route_owner": "/accessibility",
+      "page_family_id": "legal_trust",
+      "children": [
+        "atlas_q_0147_accessibility_boundary",
+        "atlas_q_0148_accessibility_plain_english",
+        "atlas_q_0149_accessibility_faq",
+        "atlas_q_0150_accessibility_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "boundary",
+        "plain_english",
+        "faq",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0151_contact_policy",
+      "route_owner": "/contact",
+      "page_family_id": "legal_trust",
+      "children": [
+        "atlas_q_0152_contact_boundary",
+        "atlas_q_0153_contact_plain_english",
+        "atlas_q_0154_contact_faq",
+        "atlas_q_0155_contact_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "boundary",
+        "plain_english",
+        "faq",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0156_editorial_policy_policy",
+      "route_owner": "/editorial-policy",
+      "page_family_id": "legal_trust",
+      "children": [
+        "atlas_q_0157_editorial_policy_boundary",
+        "atlas_q_0158_editorial_policy_plain_english",
+        "atlas_q_0159_editorial_policy_faq",
+        "atlas_q_0160_editorial_policy_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "boundary",
+        "plain_english",
+        "faq",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0161_ai_use_policy_policy",
+      "route_owner": "/ai-use-policy",
+      "page_family_id": "legal_trust",
+      "children": [
+        "atlas_q_0162_ai_use_policy_boundary",
+        "atlas_q_0163_ai_use_policy_plain_english",
+        "atlas_q_0164_ai_use_policy_faq",
+        "atlas_q_0165_ai_use_policy_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "boundary",
+        "plain_english",
+        "faq",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0166_credit_repair_disclaimer_self_service",
+      "route_owner": "/credit-repair-disclaimer",
+      "page_family_id": "credit_self_service",
+      "children": [
+        "atlas_q_0167_credit_repair_disclaimer_boundary",
+        "atlas_q_0168_credit_repair_disclaimer_checklist",
+        "atlas_q_0169_credit_repair_disclaimer_mistake_prevention",
+        "atlas_q_0170_credit_repair_disclaimer_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "boundary",
+        "checklist",
+        "mistake_prevention",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0171_not_a_credit_repair_company_self_service",
+      "route_owner": "/not-a-credit-repair-company",
+      "page_family_id": "credit_self_service",
+      "children": [
+        "atlas_q_0172_not_a_credit_repair_company_boundary",
+        "atlas_q_0173_not_a_credit_repair_company_checklist",
+        "atlas_q_0174_not_a_credit_repair_company_mistake_prevention",
+        "atlas_q_0175_not_a_credit_repair_company_answer_asset"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "boundary",
+        "checklist",
+        "mistake_prevention",
+        "answer_asset"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0176_income_employment_letter_kit_definition",
+      "route_owner": "/income-employment-letter-kit",
+      "page_family_id": "income_employment",
+      "children": [
+        "atlas_q_0177_income_employment_letter_kit_checklist",
+        "atlas_q_0178_income_employment_letter_kit_how_to",
+        "atlas_q_0179_income_employment_letter_kit_mistake_prevention",
+        "atlas_q_0180_income_employment_letter_kit_purchase_evaluation"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "how_to",
+        "mistake_prevention",
+        "purchase_evaluation"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0181_credit_letter_kit_self_service",
+      "route_owner": "/credit-letter-kit",
+      "page_family_id": "credit",
+      "children": [
+        "atlas_q_0182_credit_letter_kit_boundary",
+        "atlas_q_0183_credit_letter_kit_checklist",
+        "atlas_q_0184_credit_letter_kit_mistake_prevention",
+        "atlas_q_0185_credit_letter_kit_purchase_evaluation"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "boundary",
+        "checklist",
+        "mistake_prevention",
+        "purchase_evaluation"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0186_rental_application_kit_checklist",
+      "route_owner": "/rental-application-kit",
+      "page_family_id": "rental",
+      "children": [
+        "atlas_q_0187_rental_application_kit_approval_prep",
+        "atlas_q_0188_rental_application_kit_packet",
+        "atlas_q_0189_rental_application_kit_mistake_prevention",
+        "atlas_q_0190_rental_application_kit_purchase_evaluation"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "approval_prep",
+        "packet",
+        "mistake_prevention",
+        "purchase_evaluation"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0191_loan_prep_letter_kit_document_list",
+      "route_owner": "/loan-prep-letter-kit",
+      "page_family_id": "loan_prep",
+      "children": [
+        "atlas_q_0192_loan_prep_letter_kit_checklist",
+        "atlas_q_0193_loan_prep_letter_kit_prep_steps",
+        "atlas_q_0194_loan_prep_letter_kit_mistake_prevention",
+        "atlas_q_0195_loan_prep_letter_kit_purchase_evaluation"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "prep_steps",
+        "mistake_prevention",
+        "purchase_evaluation"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0196_business_funding_prep_kit_document_list",
+      "route_owner": "/business-funding-prep-kit",
+      "page_family_id": "business_funding",
+      "children": [
+        "atlas_q_0197_business_funding_prep_kit_checklist",
+        "atlas_q_0198_business_funding_prep_kit_prep_steps",
+        "atlas_q_0199_business_funding_prep_kit_mistake_prevention",
+        "atlas_q_0200_business_funding_prep_kit_purchase_evaluation"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "prep_steps",
+        "mistake_prevention",
+        "purchase_evaluation"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0201_life_admin_letter_kit_definition",
+      "route_owner": "/life-admin-letter-kit",
+      "page_family_id": "life_admin",
+      "children": [
+        "atlas_q_0202_life_admin_letter_kit_checklist",
+        "atlas_q_0203_life_admin_letter_kit_how_to",
+        "atlas_q_0204_life_admin_letter_kit_mistake_prevention",
+        "atlas_q_0205_life_admin_letter_kit_purchase_evaluation"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "how_to",
+        "mistake_prevention",
+        "purchase_evaluation"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0206_complete_approvalprep_bundle_definition",
+      "route_owner": "/complete-approvalprep-bundle",
+      "page_family_id": "complete_bundle",
+      "children": [
+        "atlas_q_0207_complete_approvalprep_bundle_checklist",
+        "atlas_q_0208_complete_approvalprep_bundle_how_to",
+        "atlas_q_0209_complete_approvalprep_bundle_mistake_prevention",
+        "atlas_q_0210_complete_approvalprep_bundle_purchase_evaluation"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "how_to",
+        "mistake_prevention",
+        "purchase_evaluation"
+      ],
+      "status": "admitted_unique_intent_fanout"
     }
   ]
 }

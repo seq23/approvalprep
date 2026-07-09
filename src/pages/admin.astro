@@ -1,5 +1,28 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import growthHealth from "../../data/admin/growth_health.json";
+import queryUniverse from "../../data/atlas/query_universe.json";
+import fanoutMap from "../../data/atlas/fanout_query_map.json";
+import atoms from "../../data/atoms/answer_atoms.json";
+import answers from "../../data/content/generated_answers.json";
+import citationOpportunities from "../../data/intelligence/citation_opportunity_registry.json";
+import workflowTrace from "../../data/workflow_traces/latest.json";
+import indexingReceipts from "../../data/seo/indexing_receipts.json";
+import submissionRegistry from "../../data/seo/submission_registry.json";
+import selfHealingLog from "../../data/automation/self_healing_log.json";
+import finalBlocks from "../../data/automation/final_block_log.json";
+
+const cockpitStats = [
+  ["Indexed query universe", queryUniverse.queries.length],
+  ["Fan-out parents", fanoutMap.parent_queries.length],
+  ["Answer atoms", atoms.atoms.length],
+  ["Generated answer assets", answers.answers.length],
+  ["Citation opportunities", citationOpportunities.opportunities.length],
+  ["Workflow traces", workflowTrace.workflowCount],
+  ["Provider receipts", (submissionRegistry.submissions || []).length + (indexingReceipts.receipts || []).length],
+  ["Self-heal log entries", (selfHealingLog.entries || []).length],
+  ["Final blocks", (finalBlocks.blocks || []).length]
+];
 ---
 <BaseLayout title="Runtime Product Admin - ApprovalPrep" description="ApprovalPrep product administration dashboard." noindex={true}>
   <section class="hero shell admin-hero">
@@ -9,6 +32,31 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </section>
 
   <section class="band"><div class="shell">
+    <div class="card admin-card">
+      <p class="eyebrow">Growth cockpit</p>
+      <h2>SEO / AEO / GEO operating dashboard</h2>
+      <p class="fine">These panels show structural readiness and fixture/dry-run traces. They do not claim live rankings, traffic, indexing, or LLM citations without provider telemetry.</p>
+      <div class="grid">
+        {growthHealth.panels.map((panel) => (
+          <article class="card">
+            <h3>{panel.name}</h3>
+            <p>{panel.status}</p>
+          </article>
+        ))}
+      </div>
+      <div class="table-wrap admin-cockpit-table">
+        <table>
+          <thead><tr><th>System area</th><th>Current count</th></tr></thead>
+          <tbody>
+            {cockpitStats.map(([label, value]) => <tr><td>{label}</td><td><strong>{value}</strong></td></tr>)}
+          </tbody>
+        </table>
+      </div>
+      <div class="notice mini-notice">
+        <strong>Operator rule:</strong> use Growth Health, Query Universe, Citation Gaps, Indexing, Self-Healing Log, and Blockers to decide what needs owner attention. Fixture traces prove workflow shape, not live provider success.
+      </div>
+    </div>
+
     <div id="loginPanel" class="card admin-card">
       <h2>Admin password</h2>
       <p>This screen uses one simple password for the operator. Product mutations are still handled by server-side Cloudflare Functions.</p>
@@ -40,6 +88,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <div id="productTable" class="admin-table"></div>
 
       <h2>Upload asset</h2>
+      <p class="fine">Images are checked for supported type and product fit, not an arbitrary 2MB ApprovalPrep cap. PDF and DOCX uploads still use the configured document safety limit.</p>
       <form id="uploadAsset" class="admin-form">
         <input name="productId" placeholder="Product slug or ID" required />
         <select name="assetType"><option value="image">Image</option><option value="pdf">PDF</option><option value="docx">DOCX</option></select>

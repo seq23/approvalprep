@@ -1,36 +1,19 @@
 {
-  "criteria": [
-    {
-      "id": "repo_identity",
-      "status": "required"
-    },
-    {
-      "id": "route_manifest",
-      "status": "required"
-    },
-    {
-      "id": "legal_trust",
-      "status": "required"
-    },
-    {
-      "id": "credit_boundary",
-      "status": "required"
-    },
-    {
-      "id": "downloads",
-      "status": "required"
-    },
-    {
-      "id": "admin_growth_health",
-      "status": "required"
-    },
-    {
-      "id": "validators",
-      "status": "required"
-    },
-    {
-      "id": "artifact_packaging",
-      "status": "required"
-    }
+  "schemaVersion": "4.3.1",
+  "hardFail": [
+    "No public paid downloads under public/downloads",
+    "Stripe webhook verifies stripe-signature with STRIPE_WEBHOOK_SECRET",
+    "Checkout writes sku metadata used by download verification",
+    "Product media uses no-crop contained image frames",
+    "Footer contains product, guide, company, legal, and resource links",
+    "Admin queue contains no OWNER/approvalprep placeholders",
+    "100K citation claims separate planned targets from observed wins",
+    "Observed citation wins require telemetry or manual proof",
+    "Content release generates actual answer assets, not only ledger entries"
+  ],
+  "softWarnings": [
+    "Cloudflare D1/KV/R2 live persistence requires deployed smoke test",
+    "Stripe test-card purchase requires local/deployed validation",
+    "Real GSC/Bing/IndexNow telemetry requires configured credentials"
   ]
 }

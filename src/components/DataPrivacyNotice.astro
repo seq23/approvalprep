@@ -1,0 +1,21 @@
+---
+import { dataBoundary, dataDoesNotStore, limitedOperationalRecords } from "../data/content";
+
+const { compact = false } = Astro.props;
+---
+<aside class={`notice data-privacy-notice ${compact ? "compact-privacy-notice" : ""}`}>
+  <strong>Your document data stays with you.</strong>
+  <p>{dataBoundary}</p>
+  {!compact && (
+    <div class="privacy-grid">
+      <div>
+        <h3>We do not store</h3>
+        <ul>{dataDoesNotStore.map((item) => <li>{item}</li>)}</ul>
+      </div>
+      <div>
+        <h3>Limited operational records</h3>
+        <ul>{limitedOperationalRecords.map((item) => <li>{item}</li>)}</ul>
+      </div>
+    </div>
+  )}
+</aside>

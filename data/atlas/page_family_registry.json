@@ -1,79 +1,146 @@
 {
+  "schemaVersion": "2.0.0",
+  "generatedAt": "2026-07-09T00:58:41.374Z",
   "pageFamilies": [
     {
-      "id": "letter_studio",
-      "status": "allowed_v1",
-      "admission_required": true
-    },
-    {
       "id": "apartment_rental",
-      "status": "allowed_v1",
-      "admission_required": true
-    },
-    {
-      "id": "credit_self_service",
-      "status": "allowed_v1",
-      "admission_required": true
+      "status": "allowed_v2",
+      "admission_required": true,
+      "minimum_queries_per_indexed_route": 5,
+      "thin_fanout_allowed": false
     },
     {
       "id": "auto",
-      "status": "allowed_v1",
-      "admission_required": true
-    },
-    {
-      "id": "business",
-      "status": "allowed_v1",
-      "admission_required": true
-    },
-    {
-      "id": "mortgage",
-      "status": "allowed_v1",
-      "admission_required": true
-    },
-    {
-      "id": "life_admin",
-      "status": "allowed_v1",
-      "admission_required": true
-    },
-    {
-      "id": "moving",
-      "status": "allowed_v1",
-      "admission_required": true
-    },
-    {
-      "id": "legal_trust",
-      "status": "allowed_v1",
-      "admission_required": true
-    },
-    {
-      "id": "geo_surface",
-      "status": "allowed_v1",
-      "admission_required": true
-    },
-    {
-      "id": "checkout",
-      "status": "allowed_v1",
-      "admission_required": true
-    },
-    {
-      "id": "download",
-      "status": "allowed_v1",
-      "admission_required": true
-    },
-    {
-      "id": "admin",
-      "status": "allowed_v1",
-      "admission_required": true
+      "status": "allowed_v2",
+      "admission_required": true,
+      "minimum_queries_per_indexed_route": 5,
+      "thin_fanout_allowed": false
     },
     {
       "id": "brand_home",
-      "status": "allowed_v1",
-      "admission_required": true
+      "status": "allowed_v2",
+      "admission_required": true,
+      "minimum_queries_per_indexed_route": 5,
+      "thin_fanout_allowed": false
+    },
+    {
+      "id": "business",
+      "status": "allowed_v2",
+      "admission_required": true,
+      "minimum_queries_per_indexed_route": 5,
+      "thin_fanout_allowed": false
+    },
+    {
+      "id": "business_funding",
+      "status": "allowed_v2",
+      "admission_required": true,
+      "minimum_queries_per_indexed_route": 5,
+      "thin_fanout_allowed": false
+    },
+    {
+      "id": "checkout",
+      "status": "allowed_v2",
+      "admission_required": true,
+      "minimum_queries_per_indexed_route": 5,
+      "thin_fanout_allowed": false
+    },
+    {
+      "id": "complete_bundle",
+      "status": "allowed_v2",
+      "admission_required": true,
+      "minimum_queries_per_indexed_route": 5,
+      "thin_fanout_allowed": false
+    },
+    {
+      "id": "credit",
+      "status": "allowed_v2",
+      "admission_required": true,
+      "minimum_queries_per_indexed_route": 5,
+      "thin_fanout_allowed": false
+    },
+    {
+      "id": "credit_self_service",
+      "status": "allowed_v2",
+      "admission_required": true,
+      "minimum_queries_per_indexed_route": 5,
+      "thin_fanout_allowed": false
+    },
+    {
+      "id": "download",
+      "status": "allowed_v2",
+      "admission_required": true,
+      "minimum_queries_per_indexed_route": 5,
+      "thin_fanout_allowed": false
+    },
+    {
+      "id": "geo_surface",
+      "status": "allowed_v2",
+      "admission_required": true,
+      "minimum_queries_per_indexed_route": 5,
+      "thin_fanout_allowed": false
+    },
+    {
+      "id": "income_employment",
+      "status": "allowed_v2",
+      "admission_required": true,
+      "minimum_queries_per_indexed_route": 5,
+      "thin_fanout_allowed": false
+    },
+    {
+      "id": "legal_trust",
+      "status": "allowed_v2",
+      "admission_required": true,
+      "minimum_queries_per_indexed_route": 5,
+      "thin_fanout_allowed": false
+    },
+    {
+      "id": "letter_studio",
+      "status": "allowed_v2",
+      "admission_required": true,
+      "minimum_queries_per_indexed_route": 5,
+      "thin_fanout_allowed": false
+    },
+    {
+      "id": "life_admin",
+      "status": "allowed_v2",
+      "admission_required": true,
+      "minimum_queries_per_indexed_route": 5,
+      "thin_fanout_allowed": false
+    },
+    {
+      "id": "loan_prep",
+      "status": "allowed_v2",
+      "admission_required": true,
+      "minimum_queries_per_indexed_route": 5,
+      "thin_fanout_allowed": false
+    },
+    {
+      "id": "mortgage",
+      "status": "allowed_v2",
+      "admission_required": true,
+      "minimum_queries_per_indexed_route": 5,
+      "thin_fanout_allowed": false
+    },
+    {
+      "id": "moving",
+      "status": "allowed_v2",
+      "admission_required": true,
+      "minimum_queries_per_indexed_route": 5,
+      "thin_fanout_allowed": false
     },
     {
       "id": "pricing",
-      "status": "allowed_v1",
-      "admission_required": true
+      "status": "allowed_v2",
+      "admission_required": true,
+      "minimum_queries_per_indexed_route": 5,
+      "thin_fanout_allowed": false
+    },
+    {
+      "id": "rental",
+      "status": "allowed_v2",
+      "admission_required": true,
+      "minimum_queries_per_indexed_route": 5,
+      "thin_fanout_allowed": false
     }
   ]
 }

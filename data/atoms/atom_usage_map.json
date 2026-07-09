@@ -1,95 +1,1764 @@
 {
+  "schemaVersion": "2.0.0",
   "usage": [
     {
-      "atom_id": "atom_credit_boundary",
+      "atom_id": "atom_home_short_answer",
       "routes": [
-        "/credit-dispute-letter",
-        "/privacy",
-        "/terms",
-        "/disclaimer",
-        "/refund-policy",
-        "/security",
-        "/accessibility",
-        "/contact",
-        "/editorial-policy",
-        "/ai-use-policy",
-        "/credit-repair-disclaimer",
-        "/not-a-credit-repair-company"
+        "/",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
       ]
     },
     {
-      "atom_id": "atom_dispute_steps",
+      "atom_id": "atom_home_prep_checklist",
       "routes": [
-        "/credit-dispute-letter",
-        "/credit-repair-disclaimer",
-        "/not-a-credit-repair-company"
+        "/",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
       ]
     },
     {
-      "atom_id": "atom_no_fake_docs",
+      "atom_id": "atom_home_mistakes",
+      "routes": [
+        "/",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_home_review",
+      "routes": [
+        "/",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_pricing_short_answer",
+      "routes": [
+        "/pricing",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_pricing_prep_checklist",
+      "routes": [
+        "/pricing",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_pricing_mistakes",
+      "routes": [
+        "/pricing",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_pricing_review",
+      "routes": [
+        "/pricing",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_letter_of_explanation_short_answer",
       "routes": [
         "/letter-of-explanation",
-        "/letter-of-explanation/credit",
-        "/letter-of-explanation/eviction",
-        "/letter-of-explanation/income",
-        "/letter-of-explanation/employment-gap",
-        "/employment-verification-letter",
-        "/proof-of-income-letter",
-        "/apartment-application",
-        "/rental-application-checklist",
-        "/how-to-get-approved-for-an-apartment",
-        "/auto-loan-documents",
-        "/car-loan-checklist",
-        "/documents-needed-for-car-loan",
-        "/sba-loan-checklist",
-        "/business-loan-documents",
-        "/mortgage-checklist",
-        "/mortgage-document-checklist"
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
       ]
     },
     {
-      "atom_id": "atom_no_guarantee",
+      "atom_id": "atom_letter_of_explanation_prep_checklist",
       "routes": [
         "/letter-of-explanation",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_letter_of_explanation_mistakes",
+      "routes": [
+        "/letter-of-explanation",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_letter_of_explanation_review",
+      "routes": [
+        "/letter-of-explanation",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_letter_of_explanation_credit_short_answer",
+      "routes": [
         "/letter-of-explanation/credit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_letter_of_explanation_credit_prep_checklist",
+      "routes": [
+        "/letter-of-explanation/credit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_letter_of_explanation_credit_mistakes",
+      "routes": [
+        "/letter-of-explanation/credit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_letter_of_explanation_credit_review",
+      "routes": [
+        "/letter-of-explanation/credit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_letter_of_explanation_eviction_short_answer",
+      "routes": [
         "/letter-of-explanation/eviction",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_letter_of_explanation_eviction_prep_checklist",
+      "routes": [
+        "/letter-of-explanation/eviction",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_letter_of_explanation_eviction_mistakes",
+      "routes": [
+        "/letter-of-explanation/eviction",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_letter_of_explanation_eviction_review",
+      "routes": [
+        "/letter-of-explanation/eviction",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_letter_of_explanation_income_short_answer",
+      "routes": [
         "/letter-of-explanation/income",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_letter_of_explanation_income_prep_checklist",
+      "routes": [
+        "/letter-of-explanation/income",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_letter_of_explanation_income_mistakes",
+      "routes": [
+        "/letter-of-explanation/income",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_letter_of_explanation_income_review",
+      "routes": [
+        "/letter-of-explanation/income",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_letter_of_explanation_employment_gap_short_answer",
+      "routes": [
         "/letter-of-explanation/employment-gap",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_letter_of_explanation_employment_gap_prep_checklist",
+      "routes": [
+        "/letter-of-explanation/employment-gap",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_letter_of_explanation_employment_gap_mistakes",
+      "routes": [
+        "/letter-of-explanation/employment-gap",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_letter_of_explanation_employment_gap_review",
+      "routes": [
+        "/letter-of-explanation/employment-gap",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_employment_verification_letter_short_answer",
+      "routes": [
         "/employment-verification-letter",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_employment_verification_letter_prep_checklist",
+      "routes": [
+        "/employment-verification-letter",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_employment_verification_letter_mistakes",
+      "routes": [
+        "/employment-verification-letter",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_employment_verification_letter_review",
+      "routes": [
+        "/employment-verification-letter",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_proof_of_income_letter_short_answer",
+      "routes": [
         "/proof-of-income-letter",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_proof_of_income_letter_prep_checklist",
+      "routes": [
+        "/proof-of-income-letter",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_proof_of_income_letter_mistakes",
+      "routes": [
+        "/proof-of-income-letter",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_proof_of_income_letter_review",
+      "routes": [
+        "/proof-of-income-letter",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_credit_dispute_letter_short_answer",
+      "routes": [
+        "/credit-dispute-letter",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_credit_dispute_letter_prep_checklist",
+      "routes": [
+        "/credit-dispute-letter",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_credit_dispute_letter_mistakes",
+      "routes": [
+        "/credit-dispute-letter",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_credit_dispute_letter_review",
+      "routes": [
+        "/credit-dispute-letter",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_apartment_application_short_answer",
+      "routes": [
         "/apartment-application",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_apartment_application_prep_checklist",
+      "routes": [
+        "/apartment-application",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_apartment_application_mistakes",
+      "routes": [
+        "/apartment-application",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_apartment_application_review",
+      "routes": [
+        "/apartment-application",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_rental_application_checklist_short_answer",
+      "routes": [
         "/rental-application-checklist",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_rental_application_checklist_prep_checklist",
+      "routes": [
+        "/rental-application-checklist",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_rental_application_checklist_mistakes",
+      "routes": [
+        "/rental-application-checklist",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_rental_application_checklist_review",
+      "routes": [
+        "/rental-application-checklist",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_how_to_get_approved_for_an_apartment_short_answer",
+      "routes": [
         "/how-to-get-approved-for-an-apartment",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_how_to_get_approved_for_an_apartment_prep_checklist",
+      "routes": [
+        "/how-to-get-approved-for-an-apartment",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_how_to_get_approved_for_an_apartment_mistakes",
+      "routes": [
+        "/how-to-get-approved-for-an-apartment",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_how_to_get_approved_for_an_apartment_review",
+      "routes": [
+        "/how-to-get-approved-for-an-apartment",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_auto_loan_documents_short_answer",
+      "routes": [
         "/auto-loan-documents",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_auto_loan_documents_prep_checklist",
+      "routes": [
+        "/auto-loan-documents",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_auto_loan_documents_mistakes",
+      "routes": [
+        "/auto-loan-documents",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_auto_loan_documents_review",
+      "routes": [
+        "/auto-loan-documents",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_car_loan_checklist_short_answer",
+      "routes": [
         "/car-loan-checklist",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_car_loan_checklist_prep_checklist",
+      "routes": [
+        "/car-loan-checklist",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_car_loan_checklist_mistakes",
+      "routes": [
+        "/car-loan-checklist",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_car_loan_checklist_review",
+      "routes": [
+        "/car-loan-checklist",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_documents_needed_for_car_loan_short_answer",
+      "routes": [
         "/documents-needed-for-car-loan",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_documents_needed_for_car_loan_prep_checklist",
+      "routes": [
+        "/documents-needed-for-car-loan",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_documents_needed_for_car_loan_mistakes",
+      "routes": [
+        "/documents-needed-for-car-loan",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_documents_needed_for_car_loan_review",
+      "routes": [
+        "/documents-needed-for-car-loan",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_sba_loan_checklist_short_answer",
+      "routes": [
         "/sba-loan-checklist",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_sba_loan_checklist_prep_checklist",
+      "routes": [
+        "/sba-loan-checklist",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_sba_loan_checklist_mistakes",
+      "routes": [
+        "/sba-loan-checklist",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_sba_loan_checklist_review",
+      "routes": [
+        "/sba-loan-checklist",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_business_loan_documents_short_answer",
+      "routes": [
         "/business-loan-documents",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_business_loan_documents_prep_checklist",
+      "routes": [
+        "/business-loan-documents",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_business_loan_documents_mistakes",
+      "routes": [
+        "/business-loan-documents",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_business_loan_documents_review",
+      "routes": [
+        "/business-loan-documents",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_mortgage_checklist_short_answer",
+      "routes": [
         "/mortgage-checklist",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_mortgage_checklist_prep_checklist",
+      "routes": [
+        "/mortgage-checklist",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_mortgage_checklist_mistakes",
+      "routes": [
+        "/mortgage-checklist",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_mortgage_checklist_review",
+      "routes": [
+        "/mortgage-checklist",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_mortgage_document_checklist_short_answer",
+      "routes": [
         "/mortgage-document-checklist",
-        "/important-documents-checklist",
-        "/moving-checklist",
-        "/privacy",
-        "/terms",
-        "/disclaimer",
-        "/refund-policy",
-        "/security",
-        "/accessibility",
-        "/contact",
-        "/editorial-policy",
-        "/ai-use-policy"
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
       ]
     },
     {
-      "atom_id": "atom_letter_definition",
+      "atom_id": "atom_mortgage_document_checklist_prep_checklist",
       "routes": [
-        "/letter-of-explanation",
-        "/letter-of-explanation/credit",
-        "/letter-of-explanation/eviction",
-        "/letter-of-explanation/income",
-        "/letter-of-explanation/employment-gap",
-        "/employment-verification-letter",
-        "/proof-of-income-letter"
+        "/mortgage-document-checklist",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_mortgage_document_checklist_mistakes",
+      "routes": [
+        "/mortgage-document-checklist",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_mortgage_document_checklist_review",
+      "routes": [
+        "/mortgage-document-checklist",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_important_documents_checklist_short_answer",
+      "routes": [
+        "/important-documents-checklist",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_important_documents_checklist_prep_checklist",
+      "routes": [
+        "/important-documents-checklist",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_important_documents_checklist_mistakes",
+      "routes": [
+        "/important-documents-checklist",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_important_documents_checklist_review",
+      "routes": [
+        "/important-documents-checklist",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_moving_checklist_short_answer",
+      "routes": [
+        "/moving-checklist",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_moving_checklist_prep_checklist",
+      "routes": [
+        "/moving-checklist",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_moving_checklist_mistakes",
+      "routes": [
+        "/moving-checklist",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_moving_checklist_review",
+      "routes": [
+        "/moving-checklist",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_glossary_short_answer",
+      "routes": [
+        "/glossary",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_glossary_prep_checklist",
+      "routes": [
+        "/glossary",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_glossary_mistakes",
+      "routes": [
+        "/glossary",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_glossary_review",
+      "routes": [
+        "/glossary",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_methodology_short_answer",
+      "routes": [
+        "/methodology",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_methodology_prep_checklist",
+      "routes": [
+        "/methodology",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_methodology_mistakes",
+      "routes": [
+        "/methodology",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_methodology_review",
+      "routes": [
+        "/methodology",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_checkout_success_short_answer",
+      "routes": [
+        "/checkout/success",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_checkout_success_prep_checklist",
+      "routes": [
+        "/checkout/success",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_checkout_success_mistakes",
+      "routes": [
+        "/checkout/success",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_checkout_success_review",
+      "routes": [
+        "/checkout/success",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_download_short_answer",
+      "routes": [
+        "/download",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_download_prep_checklist",
+      "routes": [
+        "/download",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_download_mistakes",
+      "routes": [
+        "/download",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_download_review",
+      "routes": [
+        "/download",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_privacy_short_answer",
+      "routes": [
+        "/privacy",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_privacy_prep_checklist",
+      "routes": [
+        "/privacy",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_privacy_mistakes",
+      "routes": [
+        "/privacy",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_privacy_review",
+      "routes": [
+        "/privacy",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_terms_short_answer",
+      "routes": [
+        "/terms",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_terms_prep_checklist",
+      "routes": [
+        "/terms",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_terms_mistakes",
+      "routes": [
+        "/terms",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_terms_review",
+      "routes": [
+        "/terms",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_disclaimer_short_answer",
+      "routes": [
+        "/disclaimer",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_disclaimer_prep_checklist",
+      "routes": [
+        "/disclaimer",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_disclaimer_mistakes",
+      "routes": [
+        "/disclaimer",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_disclaimer_review",
+      "routes": [
+        "/disclaimer",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_refund_policy_short_answer",
+      "routes": [
+        "/refund-policy",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_refund_policy_prep_checklist",
+      "routes": [
+        "/refund-policy",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_refund_policy_mistakes",
+      "routes": [
+        "/refund-policy",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_refund_policy_review",
+      "routes": [
+        "/refund-policy",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_security_short_answer",
+      "routes": [
+        "/security",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_security_prep_checklist",
+      "routes": [
+        "/security",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_security_mistakes",
+      "routes": [
+        "/security",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_security_review",
+      "routes": [
+        "/security",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_accessibility_short_answer",
+      "routes": [
+        "/accessibility",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_accessibility_prep_checklist",
+      "routes": [
+        "/accessibility",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_accessibility_mistakes",
+      "routes": [
+        "/accessibility",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_accessibility_review",
+      "routes": [
+        "/accessibility",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_contact_short_answer",
+      "routes": [
+        "/contact",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_contact_prep_checklist",
+      "routes": [
+        "/contact",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_contact_mistakes",
+      "routes": [
+        "/contact",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_contact_review",
+      "routes": [
+        "/contact",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_editorial_policy_short_answer",
+      "routes": [
+        "/editorial-policy",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_editorial_policy_prep_checklist",
+      "routes": [
+        "/editorial-policy",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_editorial_policy_mistakes",
+      "routes": [
+        "/editorial-policy",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_editorial_policy_review",
+      "routes": [
+        "/editorial-policy",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_ai_use_policy_short_answer",
+      "routes": [
+        "/ai-use-policy",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_ai_use_policy_prep_checklist",
+      "routes": [
+        "/ai-use-policy",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_ai_use_policy_mistakes",
+      "routes": [
+        "/ai-use-policy",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_ai_use_policy_review",
+      "routes": [
+        "/ai-use-policy",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_credit_repair_disclaimer_short_answer",
+      "routes": [
+        "/credit-repair-disclaimer",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_credit_repair_disclaimer_prep_checklist",
+      "routes": [
+        "/credit-repair-disclaimer",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_credit_repair_disclaimer_mistakes",
+      "routes": [
+        "/credit-repair-disclaimer",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_credit_repair_disclaimer_review",
+      "routes": [
+        "/credit-repair-disclaimer",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_not_a_credit_repair_company_short_answer",
+      "routes": [
+        "/not-a-credit-repair-company",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_not_a_credit_repair_company_prep_checklist",
+      "routes": [
+        "/not-a-credit-repair-company",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_not_a_credit_repair_company_mistakes",
+      "routes": [
+        "/not-a-credit-repair-company",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_not_a_credit_repair_company_review",
+      "routes": [
+        "/not-a-credit-repair-company",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_income_employment_letter_kit_short_answer",
+      "routes": [
+        "/income-employment-letter-kit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_income_employment_letter_kit_prep_checklist",
+      "routes": [
+        "/income-employment-letter-kit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_income_employment_letter_kit_mistakes",
+      "routes": [
+        "/income-employment-letter-kit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_income_employment_letter_kit_review",
+      "routes": [
+        "/income-employment-letter-kit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_credit_letter_kit_short_answer",
+      "routes": [
+        "/credit-letter-kit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_credit_letter_kit_prep_checklist",
+      "routes": [
+        "/credit-letter-kit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_credit_letter_kit_mistakes",
+      "routes": [
+        "/credit-letter-kit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_credit_letter_kit_review",
+      "routes": [
+        "/credit-letter-kit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_rental_application_kit_short_answer",
+      "routes": [
+        "/rental-application-kit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_rental_application_kit_prep_checklist",
+      "routes": [
+        "/rental-application-kit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_rental_application_kit_mistakes",
+      "routes": [
+        "/rental-application-kit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_rental_application_kit_review",
+      "routes": [
+        "/rental-application-kit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_loan_prep_letter_kit_short_answer",
+      "routes": [
+        "/loan-prep-letter-kit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_loan_prep_letter_kit_prep_checklist",
+      "routes": [
+        "/loan-prep-letter-kit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_loan_prep_letter_kit_mistakes",
+      "routes": [
+        "/loan-prep-letter-kit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_loan_prep_letter_kit_review",
+      "routes": [
+        "/loan-prep-letter-kit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_business_funding_prep_kit_short_answer",
+      "routes": [
+        "/business-funding-prep-kit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_business_funding_prep_kit_prep_checklist",
+      "routes": [
+        "/business-funding-prep-kit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_business_funding_prep_kit_mistakes",
+      "routes": [
+        "/business-funding-prep-kit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_business_funding_prep_kit_review",
+      "routes": [
+        "/business-funding-prep-kit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_life_admin_letter_kit_short_answer",
+      "routes": [
+        "/life-admin-letter-kit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_life_admin_letter_kit_prep_checklist",
+      "routes": [
+        "/life-admin-letter-kit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_life_admin_letter_kit_mistakes",
+      "routes": [
+        "/life-admin-letter-kit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_life_admin_letter_kit_review",
+      "routes": [
+        "/life-admin-letter-kit",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_complete_approvalprep_bundle_short_answer",
+      "routes": [
+        "/complete-approvalprep-bundle",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_complete_approvalprep_bundle_prep_checklist",
+      "routes": [
+        "/complete-approvalprep-bundle",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_complete_approvalprep_bundle_mistakes",
+      "routes": [
+        "/complete-approvalprep-bundle",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
+      ]
+    },
+    {
+      "atom_id": "atom_complete_approvalprep_bundle_review",
+      "routes": [
+        "/complete-approvalprep-bundle",
+        "/",
+        "/pricing",
+        "/llms.txt",
+        "/llms-full.txt"
       ]
     }
   ]

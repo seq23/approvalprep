@@ -6,4 +6,6 @@ GitHub JSON and Markdown files are the source of truth for content, products, ro
 
 The `/admin` page reads repo data. It does not store customer documents. It uses GitHub edit links for operator changes.
 
+ApprovalPrep does not store customer letter answers, completed worksheets, filled-in templates, or uploaded personal application documents. Stripe, download verification, product admin, and asset delivery use limited operational records only: session IDs, product IDs, payment status, timestamps, product asset metadata, and admin audit history.
+
 Fixture data proves workflow shape. Live telemetry comes only from connected providers such as Stripe, Resend, Google Search Console, Bing, IndexNow, Cloudflare, and GitHub Actions.

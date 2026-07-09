@@ -28,14 +28,14 @@ function checkText(label, text) {
 for (const item of manifest.products) {
   if (!Array.isArray(item.files) || item.files.length < 2) fail("[download-safety] product missing consumer files " + item.sku);
   for (const file of item.files) {
-    const rel = String(file).replace(/^\//, "public/");
-    const full = path.join(root, rel);
-    if (!fs.existsSync(full)) fail("[download-safety] missing download file " + file);
+    if (!String(file).startsWith("/api/download-file")) fail("[download-safety] paid downloads must use protected API links for " + item.sku);
   }
+  if (!Array.isArray(item.r2Keys) || item.r2Keys.length < 2) fail("[download-safety] product missing R2 keys " + item.sku);
   if (item.files.some((file) => String(file).endsWith(".md") || String(file).endsWith(".txt"))) {
     fail("[download-safety] public paid downloads may not expose markdown or txt files for " + item.sku);
   }
 }
+if (fs.existsSync(path.join(root, "public/downloads"))) fail("[download-safety] public/downloads must not contain paid download assets");
 
 const verify = fs.readFileSync(path.join(root, "functions/api/verify-download.js"), "utf8").toLowerCase();
 if (verify.includes("-guide.md") || verify.includes("-worksheet.txt")) fail("[download-safety] verify-download exposes markdown/txt files");

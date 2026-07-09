@@ -11,8 +11,9 @@ import FAQBlock from "../components/FAQBlock.astro";
 import FinalCTA from "../components/FinalCTA.astro";
 import CreditBoundaryExplainer from "../components/CreditBoundaryExplainer.astro";
 import NextStepsExplainer from "../components/NextStepsExplainer.astro";
+import DataPrivacyNotice from "../components/DataPrivacyNotice.astro";
 import manifest from "../../data/routes/route_manifest.json";
-import { routeCopy, boundary } from "../data/content";
+import { routeCopy, boundary, productComparison, routeFamilyCopy } from "../data/content";
 
 export function getStaticPaths() {
   return manifest.routes
@@ -41,6 +42,8 @@ const isPricing = route.path === "/pricing";
 const isDownload = route.path === "/download" || route.path === "/checkout/success";
 const isGlossary = route.path === "/glossary";
 const isMethodology = route.path === "/methodology";
+const isLegal = route.type === "legal";
+const familyCopy = routeFamilyCopy[route.family] || routeFamilyCopy[route.risk === "regulated" ? "credit_self_service" : "letter_studio"];
 const skuForRoute = (() => {
   const path = route.path;
   if (path.includes("business") || path.includes("sba")) return "business-funding-prep-kit";
@@ -56,13 +59,23 @@ const ctaHref = route.cta_policy === "purchase" ? `/pricing#${skuForRoute}` : (r
 const primarySku = route.cta_policy === "purchase" ? skuForRoute : "";
 ---
 <BaseLayout title={`${route.title} - ApprovalPrep`} description={copy.lead} canonical={canonical} noindex={!route.index}>
-  <section class="hero shell">
-    <p class="eyebrow">{route.family.replaceAll("_", " ")}</p>
-    <h1>{copy.heading}</h1>
-    <p class="lead">{copy.lead}</p>
-    <OutcomeCTA primary={copy.primaryCta} secondary={copy.secondaryCta} href={ctaHref} secondaryHref="/pricing" primarySku={primarySku} />
-    <TrustBar signals={copy.trustSignals} />
-    {isCredit && <CreditBoundaryExplainer />}
+  <section class={`hero shell ${isLegal ? "legal-hero" : "hero-split"}`}>
+    <div>
+      <p class="eyebrow">{familyCopy?.label || route.family.replaceAll("_", " ")}</p>
+      <h1>{copy.heading}</h1>
+      <p class="lead">{copy.lead}</p>
+      {familyCopy?.promise && <p class="supporting-copy">{familyCopy.promise}</p>}
+      {!isLegal && <OutcomeCTA primary={copy.primaryCta} secondary={copy.secondaryCta} href={ctaHref} secondaryHref="/pricing" primarySku={primarySku} />}
+      <TrustBar signals={copy.trustSignals} />
+    </div>
+    {!isLegal && (
+      <aside class="hero-panel">
+        <p class="eyebrow">Before you start</p>
+        <h2>Prepare the facts first.</h2>
+        <ul class="compact-list">{(familyCopy?.prepare || []).map((item) => <li>{item}</li>)}</ul>
+      </aside>
+    )}
+    {isCredit && <div class="hero-boundary"><CreditBoundaryExplainer /></div>}
     {isDownload && (
       <div class="notice">
         <strong>Verified download flow:</strong>
@@ -76,7 +89,16 @@ const primarySku = route.cta_policy === "purchase" ? skuForRoute : "";
     )}
   </section>
   {isPricing ? (
-    <section class="band"><div class="shell"><h2>V1 pricing</h2><ProductGrid /></div></section>
+    <>
+      <section class="band"><div class="shell">
+        <p class="eyebrow">Compare kits</p>
+        <h2>Choose the document path that matches your situation.</h2>
+        <div class="table-wrap"><table class="comparison-table"><thead><tr><th>Product</th><th>Best for</th><th>Includes</th><th>Price</th></tr></thead><tbody>
+          {productComparison.map((row) => <tr><td><a href={row.href}>{row.product}</a></td><td>{row.bestFor}</td><td>{row.includes}</td><td><strong>{row.price}</strong></td></tr>)}
+        </tbody></table></div>
+      </div></section>
+      <section class="band"><div class="shell"><p class="eyebrow">Products</p><h2>ApprovalPrep kits</h2><ProductGrid /></div></section>
+    </>
   ) : isGlossary ? (
     <section class="band"><div class="shell grid">
       <article class="card"><h2>Letter of explanation</h2><p>A short note that explains a gap, issue, or context in plain words.</p></article>
@@ -89,17 +111,47 @@ const primarySku = route.cta_policy === "purchase" ? skuForRoute : "";
       <ol><li>Clarify the request.</li><li>Gather real documents.</li><li>Write a plain explanation.</li><li>Review for truth and safety.</li><li>Send the packet yourself.</li></ol>
       <p>{boundary}</p>
     </div></section>
+  ) : isLegal ? (
+    <>
+      <section class="band"><div class="shell"><article class="short-answer card"><p class="eyebrow">Plain English</p><p>{copy.shortAnswer}</p></article></div></section>
+      {copy.decisionContext && (
+        <section class="band"><div class="shell">
+          <p class="eyebrow">Policy context</p>
+          <h2>What this policy is meant to clarify.</h2>
+          <div class="copy-stack">{copy.decisionContext.map((paragraph) => <p>{paragraph}</p>)}</div>
+        </section>
+      )}
+      <section class="band"><div class="shell"><WhatYouGet title="What this policy covers" items={copy.whatYouGet} /></div></section>
+      {copy.prepBrief && <section class="band"><div class="shell"><WhatYouGet title="What to review first" items={copy.prepBrief} /></div></section>}
+      {copy.commonMistakes && <section class="band"><div class="shell"><WhatYouGet title="Common misunderstandings to avoid" items={copy.commonMistakes} /></div></section>}
+      {copy.reviewChecklist && <section class="band"><div class="shell"><WhatYouGet title="Before you rely on this page" items={copy.reviewChecklist} /></div></section>}
+      <section class="band"><div class="shell"><DataPrivacyNotice /></div></section>
+      <section class="band"><div class="shell"><FAQBlock faq={copy.faq} /></div></section>
+      <section class="band"><div class="shell"><BoundaryNotice /></div></section>
+    </>
   ) : (
     <>
       <section class="band"><div class="shell"><article class="short-answer card"><p class="eyebrow">Short answer</p><p>{copy.shortAnswer}</p></article></div></section>
+      {copy.decisionContext && (
+        <section class="band"><div class="shell">
+          <p class="eyebrow">Decision context</p>
+          <h2>What this page helps you decide.</h2>
+          <div class="copy-stack">{copy.decisionContext.map((paragraph) => <p>{paragraph}</p>)}</div>
+        </section>
+      )}
       <section class="band"><div class="shell"><WhatYouGet title="Who this is for" items={copy.whoFor} /></div></section>
       <section class="band"><div class="shell"><WhatYouGet title="Product / Guide Value" items={copy.value} /></div></section>
       <section class="band"><div class="shell"><WhatYouGet title="What you get" items={copy.whatYouGet} /></div></section>
+      {copy.prepBrief && <section class="band"><div class="shell"><WhatYouGet title="What to prepare first" items={copy.prepBrief} /></div></section>}
+      {familyCopy?.avoid && <section class="band"><div class="shell"><WhatYouGet title="Avoid these mistakes" items={familyCopy.avoid} /></div></section>}
+      {copy.commonMistakes && <section class="band"><div class="shell"><WhatYouGet title="Common mistakes this helps prevent" items={copy.commonMistakes} /></div></section>}
       <section class="band"><div class="shell"><HowItWorks steps={copy.steps} /></div></section>
+      {copy.reviewChecklist && <section class="band"><div class="shell"><WhatYouGet title="Review before you send" items={copy.reviewChecklist} /></div></section>}
       <section class="band"><div class="shell"><UseCaseList items={copy.useCases} /></div></section>
       <section class="band"><div class="shell"><FAQBlock faq={copy.faq} /></div></section>
       <section class="band"><div class="shell two"><div><h2>What this does not do</h2><p>It does not guarantee approval. It does not create fake documents. It does not contact anyone for you. It does not give legal or financial advice. It does not repair credit for you.</p></div><BoundaryNotice /></div></section>
       <section class="band"><div class="shell"><NextStepsExplainer /></div></section>
+      <section class="band"><div class="shell"><DataPrivacyNotice /></div></section>
       <section class="band"><div class="shell"><WhatYouGet title="Why ApprovalPrep" items={["Plain steps", "Truthful templates only", "Clear next steps", "No fake document help"]} /></div></section>
     </>
   )}

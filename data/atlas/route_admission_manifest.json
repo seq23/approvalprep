@@ -1,232 +1,358 @@
 {
+  "schemaVersion": "2.0.0",
+  "generatedAt": "2026-07-09T00:58:41.379Z",
   "routes": [
     {
       "route": "/",
       "family": "brand_home",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "low"
+      "risk": "low",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/pricing",
       "family": "pricing",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "low"
+      "risk": "low",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/letter-of-explanation",
       "family": "letter_studio",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "medium"
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/letter-of-explanation/credit",
       "family": "letter_studio",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "regulated"
+      "risk": "regulated",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/letter-of-explanation/eviction",
       "family": "letter_studio",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "medium"
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/letter-of-explanation/income",
       "family": "letter_studio",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "medium"
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/letter-of-explanation/employment-gap",
       "family": "letter_studio",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "medium"
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/employment-verification-letter",
       "family": "letter_studio",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "high"
+      "risk": "high",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/proof-of-income-letter",
       "family": "letter_studio",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "medium"
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/credit-dispute-letter",
       "family": "credit_self_service",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "regulated"
+      "risk": "regulated",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/apartment-application",
       "family": "apartment_rental",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "medium"
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/rental-application-checklist",
       "family": "apartment_rental",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "medium"
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/how-to-get-approved-for-an-apartment",
       "family": "apartment_rental",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "medium"
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/auto-loan-documents",
       "family": "auto",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "medium"
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/car-loan-checklist",
       "family": "auto",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "medium"
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/documents-needed-for-car-loan",
       "family": "auto",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "medium"
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/sba-loan-checklist",
       "family": "business",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "medium"
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/business-loan-documents",
       "family": "business",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "medium"
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/mortgage-checklist",
       "family": "mortgage",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "medium"
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/mortgage-document-checklist",
       "family": "mortgage",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "medium"
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/important-documents-checklist",
       "family": "life_admin",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "low"
+      "risk": "low",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/moving-checklist",
       "family": "moving",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "low"
+      "risk": "low",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/glossary",
       "family": "geo_surface",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "low"
+      "risk": "low",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/methodology",
       "family": "geo_surface",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "low"
+      "risk": "low",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/checkout/success",
       "family": "checkout",
-      "status": "ADMITTED_NOINDEX",
-      "risk": "medium"
+      "status": "ADMITTED_SUPPORT_NOINDEX",
+      "risk": "medium",
+      "index": false,
+      "minimum_queries": 1
     },
     {
       "route": "/download",
       "family": "download",
-      "status": "ADMITTED_NOINDEX",
-      "risk": "medium"
+      "status": "ADMITTED_SUPPORT_NOINDEX",
+      "risk": "medium",
+      "index": false,
+      "minimum_queries": 1
     },
     {
       "route": "/privacy",
       "family": "legal_trust",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "low"
+      "risk": "low",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/terms",
       "family": "legal_trust",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "low"
+      "risk": "low",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/disclaimer",
       "family": "legal_trust",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "regulated"
+      "risk": "regulated",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/refund-policy",
       "family": "legal_trust",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "low"
+      "risk": "low",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/security",
       "family": "legal_trust",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "low"
+      "risk": "low",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/accessibility",
       "family": "legal_trust",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "low"
+      "risk": "low",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/contact",
       "family": "legal_trust",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "low"
+      "risk": "low",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/editorial-policy",
       "family": "legal_trust",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "low"
+      "risk": "low",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/ai-use-policy",
       "family": "legal_trust",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "medium"
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/credit-repair-disclaimer",
       "family": "credit_self_service",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "regulated"
+      "risk": "regulated",
+      "index": true,
+      "minimum_queries": 5
     },
     {
       "route": "/not-a-credit-repair-company",
       "family": "credit_self_service",
       "status": "ADMITTED_INDEXABLE",
-      "risk": "regulated"
+      "risk": "regulated",
+      "index": true,
+      "minimum_queries": 5
     },
     {
-      "route": "/admin",
-      "family": "admin",
-      "status": "ADMITTED_NOINDEX",
-      "risk": "medium"
+      "route": "/income-employment-letter-kit",
+      "family": "income_employment",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5
+    },
+    {
+      "route": "/credit-letter-kit",
+      "family": "credit",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "regulated",
+      "index": true,
+      "minimum_queries": 5
+    },
+    {
+      "route": "/rental-application-kit",
+      "family": "rental",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5
+    },
+    {
+      "route": "/loan-prep-letter-kit",
+      "family": "loan_prep",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5
+    },
+    {
+      "route": "/business-funding-prep-kit",
+      "family": "business_funding",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5
+    },
+    {
+      "route": "/life-admin-letter-kit",
+      "family": "life_admin",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5
+    },
+    {
+      "route": "/complete-approvalprep-bundle",
+      "family": "complete_bundle",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5
     }
   ]
 }

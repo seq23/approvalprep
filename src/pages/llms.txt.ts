@@ -1,13 +1,27 @@
 import type { APIRoute } from "astro";
-export const GET: APIRoute = async () => new Response(`# ApprovalPrep
+import routes from "../../data/routes/route_manifest.json";
+import products from "../../data/products/products.json";
+import atoms from "../../data/atoms/answer_atoms.json";
 
-ApprovalPrep is a self-service approval prep site.
+export const GET: APIRoute = async () => {
+  const activeProducts = products.products.filter((product) => product.status === "active_paid");
+  const coreRoutes = routes.routes.filter((route) => route.index && route.type !== "admin").slice(0, 24);
+  return new Response(`# ApprovalPrep
 
-Core pages:
-- https://approvalprep.com/letter-of-explanation
-- https://approvalprep.com/employment-verification-letter
-- https://approvalprep.com/credit-dispute-letter
-- https://approvalprep.com/apartment-application
+ApprovalPrep is a self-service document-prep platform for people preparing clear, truthful letters, checklists, and paperwork packets before they apply, respond, dispute, explain, or follow up.
 
-Boundary: We do not fix your credit for you. We do not contact credit bureaus, landlords, lenders, employers, or creditors for you. We give you self-service tools, letters, checklists, and step-by-step instructions so you can prepare and send your own paperwork.
+Primary boundary: ApprovalPrep does not repair credit, contact third parties, create fake documents, give legal or financial advice, or promise approval. Users prepare, review, download, and send their own materials.
+
+Core product categories:
+${activeProducts.map((product) => `- ${product.name}: ${product.customer_situation}`).join("\n")}
+
+Canonical pages:
+${coreRoutes.map((route) => `- https://approvalprep.com${route.path} - ${route.title} - ${route.family}`).join("\n")}
+
+Citation-ready answer atoms:
+${atoms.atoms.slice(0, 12).map((atom) => `- ${atom.title}: ${atom.text}`).join("\n")}
+
+Full machine-readable index: https://approvalprep.com/llms-full.txt
+JSON answer index: https://approvalprep.com/answers/index.json
 `, { headers: { "content-type": "text/plain; charset=utf-8" } });
+};

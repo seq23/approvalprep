@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
 import atoms from "../../../data/atoms/answer_atoms.json";
 import claims from "../../../data/citations/claim_registry.json";
-export const GET: APIRoute = async () => new Response(JSON.stringify({ brand: "ApprovalPrep", boundary: "We do not fix your credit for you. We do not contact credit bureaus, landlords, lenders, employers, or creditors for you. We give you self-service tools, letters, checklists, and step-by-step instructions so you can prepare and send your own paperwork.", atoms: atoms.atoms, claims: claims.claims }, null, 2), { headers: { "content-type": "application/json" } });
+import generated from "../../../data/content/generated_answers.json";
+export const GET: APIRoute = async () => new Response(JSON.stringify({ brand: "ApprovalPrep", boundary: "ApprovalPrep is self-service only. It does not repair credit, contact third parties, create fake documents, give legal or financial advice, or promise approval.", generatedAnswers: generated.answers, atoms: atoms.atoms, claims: claims.claims }, null, 2), { headers: { "content-type": "application/json" } });

@@ -1,10 +1,26 @@
 ---
-import { boundary } from "../data/content";
+import { boundary, footerGroups } from "../data/content";
 ---
 <footer class="site-footer">
-  <div class="shell">
-    <p><strong>ApprovalPrep</strong> is a self-service tool.</p>
-    <p>{boundary}</p>
-    <p class="fine"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/disclaimer">Disclaimer</a> · <a href="/credit-repair-disclaimer">Credit repair disclaimer</a> · <a href="/llms.txt">llms.txt</a></p>
+  <div class="shell footer-shell">
+    <div class="footer-brand">
+      <a class="brand footer-logo" href="/">ApprovalPrep</a>
+      <p>Self-service document prep for application letters, checklists, and paperwork packets. You prepare, review, download, and send your own materials.</p>
+      <p class="fine">{boundary}</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      {footerGroups.map((group) => (
+        <section>
+          <h2>{group.title}</h2>
+          <ul>
+            {group.links.map(([href, label]) => <li><a href={href}>{label}</a></li>)}
+          </ul>
+        </section>
+      ))}
+    </nav>
+    <div class="footer-bottom">
+      <p class="fine">© {new Date().getFullYear()} ApprovalPrep. Self-service tools only.</p>
+      <p class="fine">No credit repair. No legal or financial advice. No third-party contact. No fake documents. No approval guarantees.</p>
+    </div>
   </div>
 </footer>
