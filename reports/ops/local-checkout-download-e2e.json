@@ -1,0 +1,27 @@
+{
+  "baseUrl": "http://localhost:8788",
+  "ranAt": "2026-07-09T17:09:58.474Z",
+  "scope": "checkout_session_creation_success_page_optional_completed_download_proof_and_fixture_fulfillment",
+  "protectedDownloadRoute": "/api/download-file",
+  "proofBoundary": "checkout creation and success UI only; completed payment/download proof requires a real completed Checkout Session ID",
+  "completedSessionInputNames": [
+    "LOCAL_E2E_COMPLETED_SESSION_ID",
+    "APPROVALPREP_COMPLETED_SESSION_ID",
+    "STRIPE_CHECKOUT_SESSION_ID"
+  ],
+  "discountCode": "TEST100",
+  "products": [],
+  "completedSession": null,
+  "fixture": {
+    "ok": true,
+    "verifyStatus": 200,
+    "verifyApiStatus": "VERIFIED",
+    "entitlementRecorded": false,
+    "warningPresent": true,
+    "pdfStatus": 200,
+    "docxStatus": 200,
+    "boundary": "mocked Stripe complete/no_payment_required session plus D1 failure plus R2 attachment fetch"
+  },
+  "failures": [],
+  "status": "PASS_CHECKOUT_CREATION_SUCCESS_UI_AND_FIXTURE_FULFILLMENT"
+}

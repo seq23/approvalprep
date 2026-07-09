@@ -244,3 +244,15 @@ button:disabled { opacity: .7; cursor: wait; transform: none; }
   .methodology-steps { grid-template-columns: 1fr; }
   .legal-policy-meta { position: static; }
 }
+
+.checkout-success-hero { grid-column: 1 / -1; text-align: center; border: 1px solid #bbf7d0; background: linear-gradient(180deg, #f0fdf4, #ffffff); border-radius: 18px; padding: 38px 22px; box-shadow: 0 26px 70px rgba(16, 32, 31, .10); }
+.checkout-success-hero h1 { color: #166534; margin: 8px auto 12px; max-width: 760px; }
+.checkout-success-hero .lead { margin-left: auto; margin-right: auto; }
+.success-badge { display: inline-flex; align-items: center; justify-content: center; width: 70px; height: 70px; border-radius: 999px; background: #16a34a; color: #fff; font-size: 2.3rem; font-weight: 950; box-shadow: 0 18px 40px rgba(22, 163, 74, .25); }
+.success-flow-notice { grid-column: 1 / -1; border-left-color: #16a34a; background: #f0fdf4; }
+.download-panel { border-color: #bbf7d0; }
+.download-links { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-top: 14px; }
+.path-choice-band { background: #fff; }
+.path-choice-grid { margin-top: 18px; }
+.path-choice-card { display: grid; gap: 10px; align-content: start; }
+.path-choice-card h3 { margin: 0; }

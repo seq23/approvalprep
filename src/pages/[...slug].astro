@@ -90,13 +90,24 @@ const primaryCtaWithPrice = primarySku && routeProduct ? `Buy ${routeProduct.nam
     )}
     {isCredit && <div class="hero-boundary"><CreditBoundaryExplainer /></div>}
     {isDownload && (
-      <div class="notice">
-        <strong>Verified download flow:</strong>
-        <p>Production downloads require a completed Stripe payment before the PDF guide and editable DOCX kit files are released. If Stripe has not confirmed this checkout session as paid, no paid files are unlocked yet.</p>
+      <div class="checkout-success-hero" aria-label="Checkout success confirmation">
+        <div class="success-badge" aria-hidden="true">✓</div>
+        <p class="eyebrow">Checkout complete</p>
+        <h1>Success! Your checkout is complete.</h1>
+        <p class="lead">ApprovalPrep is verifying Stripe now. Once verified, your PDF guide and editable DOCX kit unlock on this page.</p>
+      </div>
+      <div class="notice success-flow-notice">
+        <strong>What happens next:</strong>
+        <ol class="compact-list">
+          <li>Stripe confirms the completed checkout session.</li>
+          <li>This page unlocks your protected PDF guide and editable DOCX template kit.</li>
+          <li>You choose: download the blank/editable templates now, or open the free Letter Studio to prefill a first-pass draft in your browser.</li>
+        </ol>
+        <p>If Stripe has not confirmed this checkout session as paid, no paid files are unlocked yet.</p>
       </div>
       <div class="card download-panel" data-download-panel>
-        <h2>Download status</h2>
-        <p class="fine" data-download-status>Waiting for Stripe verification. If you just paid, this should update automatically.</p>
+        <h2>Your download options</h2>
+        <p class="fine" data-download-status>Waiting for Stripe verification. If you just checked out, this should update automatically.</p>
         <div class="download-links" data-download-links></div>
       </div>
     )}
@@ -106,7 +117,7 @@ const primaryCtaWithPrice = primarySku && routeProduct ? `Buy ${routeProduct.nam
       <section class="band"><div class="shell">
         <article class="notice">
           <strong>If your download does not appear right away:</strong>
-          <p>If Stripe confirms a completed payment, this page unlocks the PDF guide and editable DOCX kit files. If Stripe still has the session open or unconfirmed, return to pricing and complete checkout. After purchase, you can either download the blank/editable templates or use the free browser-only Studio to prefill a draft without storing your answers. If Stripe shows a completed payment and you still cannot access your files, email <a href="mailto:info@approvalprep.com">info@approvalprep.com</a> with the receipt and session id shown above.</p>
+          <p>If Stripe confirms a completed payment, this page unlocks the PDF guide and editable DOCX kit files. Your two choices are clear: download the blank/editable templates immediately, or use the free browser-only Studio to prefill a draft without storing your answers. If Stripe still has the session open or unconfirmed, return to pricing and complete checkout. If Stripe shows a completed payment and you still cannot access your files, email <a href="mailto:info@approvalprep.com">info@approvalprep.com</a> with the receipt and session id shown above.</p>
         </article>
       </div></section>
     </>

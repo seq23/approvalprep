@@ -28,17 +28,24 @@ if (!layout.includes("Optional: prefill a draft in the Studio") || !layout.inclu
 const slugPage = fs.readFileSync(path.join(root, "src/pages/[...slug].astro"), "utf8");
 if (!slugPage.includes("If Stripe has not confirmed this checkout session as paid") || !slugPage.includes("download the blank/editable templates")) fail("[payment] checkout success page must explain paid-download versus optional prefill choice");
 if (!slugPage.includes("TEST100") || !slugPage.includes("data-discount-code")) fail("[payment] pricing page must expose discount code entry and TEST100 operator guidance");
+
+const homepage = fs.readFileSync(path.join(root, "src/pages/index.astro"), "utf8");
+for (const token of ["After checkout, you choose", "Option A: Download now", "Option B: Use the free Studio", "replace the placeholders with your true facts"]) {
+  if (!homepage.includes(token)) fail("[payment] homepage must clearly explain direct download versus Studio prefill option: " + token);
+}
+if (!slugPage.includes("Success! Your checkout is complete.") || !slugPage.includes("Your download options") || !slugPage.includes("What happens next:")) fail("[payment] checkout success page must look and read like a successful checkout screen");
+
 if (!verify.includes("no_payment_required") || !verify.includes("stripe_zero_dollar_promotion")) fail("[payment] verify endpoint must treat completed 100% off Stripe sessions as valid download unlocks");
 const smoke = fs.readFileSync(path.join(root, "scripts/ops/stripe-test-checkout-smoke.mjs"), "utf8");
 if (!smoke.includes("checkout_session_creation_only")) fail("[payment] Stripe smoke test must state that it proves checkout session creation, not completed payment/download delivery");
 const packageJson = fs.readFileSync(path.join(root, "package.json"), "utf8");
 if (!packageJson.includes("ops:local:checkout-download-e2e")) fail("[payment] package scripts must expose the local checkout/download E2E operator test");
 const localE2E = fs.readFileSync(path.join(root, "scripts/ops/local-checkout-download-e2e.mjs"), "utf8");
-for (const token of ["LOCAL_E2E_COMPLETED_SESSION_ID", "LOCAL_E2E_COMPLETED_SKU", "TEST100", "discount_code", "/api/verify-download", "/api/download-file", "PASS_COMPLETED_CHECKOUT_AND_PROTECTED_DOWNLOAD_PROOF", "PASS_CHECKOUT_CREATION_AND_SUCCESS_UI_ONLY", "reports/ops/local-checkout-download-e2e.json"]) {
+for (const token of ["LOCAL_E2E_COMPLETED_SESSION_ID", "LOCAL_E2E_COMPLETED_SKU", "TEST100", "discount_code", "/api/verify-download", "/api/download-file", "PASS_COMPLETED_CHECKOUT_AND_PROTECTED_DOWNLOAD_PROOF", "PASS_CHECKOUT_CREATION_AND_SUCCESS_UI_ONLY", "LOCAL_E2E_FIXTURE_ONLY", "PASS_CHECKOUT_CREATION_SUCCESS_UI_AND_FIXTURE_FULFILLMENT", "reports/ops/local-checkout-download-e2e.json"]) {
   if (!localE2E.includes(token)) fail("[payment] local checkout/download E2E script missing required proof token: " + token);
 }
 const localE2EDoc = fs.readFileSync(path.join(root, "docs/products/LOCAL_CHECKOUT_DOWNLOAD_E2E.md"), "utf8");
-for (const token of ["Checkout creation plus success-page UI proof", "Completed-session protected download proof", "TEST100", "cs_test_", "That is not download proof"]) {
+for (const token of ["Checkout creation plus success-page UI proof", "Completed-session protected download proof", "Fixture fulfillment fallback proof", "LOCAL_E2E_FIXTURE_ONLY", "TEST100", "cs_test_", "That is not download proof"]) {
   if (!localE2EDoc.includes(token)) fail("[payment] local checkout/download E2E docs missing required operator guidance: " + token);
 }
 console.log("[payment] OK");

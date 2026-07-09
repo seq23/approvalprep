@@ -9,30 +9,11 @@ const allowedSkus = new Set([
   "complete-approvalprep-bundle"
 ]);
 
-const skuPriceEnv = {
-  "letter-of-explanation": "STRIPE_PRICE_LETTER_OF_EXPLANATION",
-  "income-employment-letter-kit": "STRIPE_PRICE_INCOME_EMPLOYMENT_KIT",
-  "credit-letter-kit": "STRIPE_PRICE_CREDIT_LETTER_KIT",
-  "rental-application-kit": "STRIPE_PRICE_RENTAL_APPLICATION_KIT",
-  "loan-prep-letter-kit": "STRIPE_PRICE_LOAN_PREP_KIT",
-  "business-funding-prep-kit": "STRIPE_PRICE_BUSINESS_FUNDING_PREP_KIT",
-  "life-admin-letter-kit": "STRIPE_PRICE_LIFE_ADMIN_LETTER_KIT",
-  "complete-approvalprep-bundle": "STRIPE_PRICE_COMPLETE_APPROVALPREP_BUNDLE"
-};
-
 function json(body, status = 200) {
   return new Response(JSON.stringify(body), { status, headers: { "content-type": "application/json" } });
 }
 
-function priceFor(env, sku) {
-  const direct = env[skuPriceEnv[sku]] || "";
-  if (direct) return direct;
-  const raw = env.STRIPE_PRICE_MAP || "{}";
-  try { return JSON.parse(raw)[sku] || ""; } catch { return ""; }
-}
-
-
-function downloadManifestFor(sku, sessionId) {
+function downloadManifestFor(sku, sessionId, extras = {}) {
   return {
     sku,
     verified: true,
@@ -41,86 +22,130 @@ function downloadManifestFor(sku, sessionId) {
       `/api/download-file?session_id=${encodeURIComponent(sessionId)}&type=pdf`,
       `/api/download-file?session_id=${encodeURIComponent(sessionId)}&type=docx`
     ],
-    requiredSections: ["What this is", "When to use it", "What to review before sending", "What to attach", "Where to send it", "What to do next", "What this does not do"]
+    studio: "/letter-writing-studio",
+    requiredSections: ["What this is", "When to use it", "What to review before sending", "What to attach", "Where to send it", "What to do next", "What this does not do"],
+    ...extras
   };
 }
 
 async function findPaidEntitlement(env, sessionId, sku) {
-  if (!env.PRODUCTS_DB) return null;
-  const ent = await env.PRODUCTS_DB.prepare(
-    "SELECT product_id,payment_status,expires_at,revoked_at FROM download_entitlements WHERE stripe_session_id=? AND revoked_at IS NULL"
-  ).bind(sessionId).first();
-  if (!ent) return null;
-  if (ent.payment_status !== "paid") return null;
-  if (ent.product_id !== sku) return null;
-  if (ent.expires_at && new Date(ent.expires_at) < new Date()) return null;
-  return ent;
+  if (!env.PRODUCTS_DB) return { entitlement: null, warning: "PRODUCTS_DB binding missing; using Stripe verification fallback." };
+  try {
+    const ent = await env.PRODUCTS_DB.prepare(
+      "SELECT product_id,payment_status,expires_at,revoked_at FROM download_entitlements WHERE stripe_session_id=? AND revoked_at IS NULL"
+    ).bind(sessionId).first();
+    if (!ent) return { entitlement: null };
+    if (ent.payment_status !== "paid") return { entitlement: null };
+    if (ent.product_id !== sku) return { entitlement: null };
+    if (ent.expires_at && new Date(ent.expires_at) < new Date()) return { entitlement: null };
+    return { entitlement: ent };
+  } catch (error) {
+    return { entitlement: null, warning: `Entitlement lookup failed; using Stripe verification fallback. ${error?.message || "Unknown D1 error"}` };
+  }
 }
 
 async function recordVerifiedEntitlement(env, session, sku) {
-  if (!env.PRODUCTS_DB) return;
-  const existing = await env.PRODUCTS_DB.prepare("SELECT id FROM download_entitlements WHERE stripe_session_id=?").bind(session.id).first();
-  const id = existing?.id || crypto.randomUUID();
-  await env.PRODUCTS_DB.prepare("INSERT OR REPLACE INTO download_entitlements (id,stripe_session_id,product_id,customer_email,payment_status,amount_total,currency,created_at,expires_at) VALUES (?,?,?,?,?,?,?,?,?)").bind(
-    id,
-    session.id,
-    sku,
-    "",
-    session.payment_status === "no_payment_required" ? "paid" : (session.payment_status || "unknown"),
-    session.amount_total || 0,
-    session.currency || "usd",
-    new Date().toISOString(),
-    new Date(Date.now() + 1000 * 60 * 60 * 24 * 30).toISOString()
-  ).run();
+  if (!env.PRODUCTS_DB) return { recorded: false, warning: "PRODUCTS_DB binding missing; entitlement was not stored." };
+  try {
+    const existing = await env.PRODUCTS_DB.prepare("SELECT id FROM download_entitlements WHERE stripe_session_id=?").bind(session.id).first();
+    const id = existing?.id || crypto.randomUUID();
+    await env.PRODUCTS_DB.prepare("INSERT OR REPLACE INTO download_entitlements (id,stripe_session_id,product_id,customer_email,payment_status,amount_total,currency,created_at,expires_at) VALUES (?,?,?,?,?,?,?,?,?)").bind(
+      id,
+      session.id,
+      sku,
+      "",
+      session.payment_status === "no_payment_required" ? "paid" : (session.payment_status || "unknown"),
+      session.amount_total || 0,
+      session.currency || "usd",
+      new Date().toISOString(),
+      new Date(Date.now() + 1000 * 60 * 60 * 24 * 30).toISOString()
+    ).run();
+    return { recorded: true };
+  } catch (error) {
+    return { recorded: false, warning: `Entitlement write failed; download-file will verify directly with Stripe. ${error?.message || "Unknown D1 error"}` };
+  }
+}
+
+async function fetchStripeSession(env, sessionId) {
+  if (!env.STRIPE_SECRET_KEY) return { ok: false, status: 501, body: { status: "NOT_CONFIGURED", message: "Stripe secret is missing. Please contact info@approvalprep.com with your Stripe receipt." } };
+  let res;
+  try {
+    res = await fetch(`https://api.stripe.com/v1/checkout/sessions/${encodeURIComponent(sessionId)}`, {
+      headers: { Authorization: `Bearer ${env.STRIPE_SECRET_KEY}` }
+    });
+  } catch (error) {
+    return { ok: false, status: 502, body: { status: "SOURCE_ERROR", provider: "stripe", message: `Stripe verification request failed. ${error?.message || "Unknown fetch error"}` } };
+  }
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) return { ok: false, status: 502, body: { status: "SOURCE_ERROR", provider: "stripe", message: data.error?.message || "Stripe verification failed. Please contact info@approvalprep.com with your Stripe receipt." } };
+  return { ok: true, data };
+}
+
+function stripeSessionProduct(session) {
+  return session.metadata?.sku || session.metadata?.product_id || session.client_reference_id || "";
+}
+
+function stripeSessionIsComplete(session) {
+  const isPaid = session.payment_status === "paid";
+  const isZeroDollarPromotion = session.payment_status === "no_payment_required" && session.status === "complete" && Number(session.amount_total || 0) === 0;
+  return { isPaid, isZeroDollarPromotion, ok: isPaid || isZeroDollarPromotion };
 }
 
 export async function onRequestPost(context) {
-  const body = await context.request.json().catch(() => ({}));
-  const sku = String(body.sku || "");
-  const sessionId = String(body.session_id || "");
-  if (!allowedSkus.has(sku)) return json({ error: "Unknown SKU" }, 400);
-  if (!sessionId) return json({ status: "NOT_VERIFIED", message: "Missing Stripe session id.", sku }, 403);
+  try {
+    const body = await context.request.json().catch(() => ({}));
+    const sku = String(body.sku || "");
+    const sessionId = String(body.session_id || "");
+    if (!allowedSkus.has(sku)) return json({ error: "Unknown SKU" }, 400);
+    if (!sessionId) return json({ status: "NOT_VERIFIED", message: "Missing Stripe session id.", sku }, 403);
 
-  const entitlement = await findPaidEntitlement(context.env, sessionId, sku);
-  if (entitlement) return json({ status: "VERIFIED", source: "entitlement", ...downloadManifestFor(sku, sessionId) });
+    const entitlementResult = await findPaidEntitlement(context.env, sessionId, sku);
+    if (entitlementResult.entitlement) return json({ status: "VERIFIED", source: "entitlement", ...downloadManifestFor(sku, sessionId) });
 
-  if (!context.env.STRIPE_SECRET_KEY) return json({ status: "NOT_CONFIGURED", message: "Stripe secret is missing and no paid entitlement was found yet. Please contact info@approvalprep.com with your Stripe receipt.", sku }, 501);
+    const stripe = await fetchStripeSession(context.env, sessionId);
+    if (!stripe.ok) return json({ ...stripe.body, sku, warning: entitlementResult.warning || undefined }, stripe.status);
 
-  const res = await fetch(`https://api.stripe.com/v1/checkout/sessions/${encodeURIComponent(sessionId)}`, {
-    headers: { Authorization: `Bearer ${context.env.STRIPE_SECRET_KEY}` }
-  });
-  const data = await res.json().catch(() => ({}));
-  if (!res.ok) return json({ status: "SOURCE_ERROR", provider: "stripe", message: data.error?.message || "Stripe verification failed. Please contact info@approvalprep.com with your Stripe receipt.", sku }, 502);
-  const paidSku = data.metadata?.sku || data.metadata?.product_id || data.client_reference_id || "";
-  if (paidSku !== sku) {
-    return json({
-      status: "SKU_MISMATCH",
-      message: "This Stripe session does not match the requested product. Contact info@approvalprep.com with your Stripe receipt and session id.",
-      sku
-    }, 409);
-  }
-  const isPaid = data.payment_status === "paid";
-  const isZeroDollarPromotion = data.payment_status === "no_payment_required" && data.status === "complete" && Number(data.amount_total || 0) === 0;
-  if (!isPaid && !isZeroDollarPromotion) {
-    const checkoutStatus = String(data.status || "");
-    const paymentStatus = String(data.payment_status || "unknown");
-    if (checkoutStatus === "open" || checkoutStatus === "expired" || paymentStatus === "unpaid") {
+    const paidSku = stripeSessionProduct(stripe.data);
+    if (paidSku !== sku) {
       return json({
-        status: "PAYMENT_NOT_COMPLETED",
-        message: "Stripe has not confirmed this checkout session as paid yet. If Stripe shows a completed payment, contact info@approvalprep.com with the receipt and session id so access can be resolved.",
+        status: "SKU_MISMATCH",
+        message: "This Stripe session does not match the requested product. Contact info@approvalprep.com with your Stripe receipt and session id.",
+        sku,
+        paidSku
+      }, 409);
+    }
+
+    const completion = stripeSessionIsComplete(stripe.data);
+    if (!completion.ok) {
+      const checkoutStatus = String(stripe.data.status || "");
+      const paymentStatus = String(stripe.data.payment_status || "unknown");
+      if (checkoutStatus === "open" || checkoutStatus === "expired" || paymentStatus === "unpaid") {
+        return json({
+          status: "PAYMENT_NOT_COMPLETED",
+          message: "Stripe has not confirmed this checkout session as paid yet. If Stripe shows a completed payment, contact info@approvalprep.com with the receipt and session id so access can be resolved.",
+          sku,
+          checkoutStatus,
+          paymentStatus
+        }, 402);
+      }
+      return json({
+        status: "PAYMENT_PENDING",
+        message: "Stripe is still confirming the payment. This page will retry automatically for a short time.",
         sku,
         checkoutStatus,
         paymentStatus
-      }, 402);
+      }, 202);
     }
+
+    const record = await recordVerifiedEntitlement(context.env, stripe.data, sku);
     return json({
-      status: "PAYMENT_PENDING",
-      message: "Stripe is still confirming the payment. This page will retry automatically for a short time.",
-      sku,
-      checkoutStatus,
-      paymentStatus
-    }, 202);
+      status: "VERIFIED",
+      source: completion.isZeroDollarPromotion ? "stripe_zero_dollar_promotion" : "stripe",
+      entitlementRecorded: record.recorded,
+      warning: record.warning || entitlementResult.warning || undefined,
+      ...downloadManifestFor(sku, sessionId)
+    });
+  } catch (error) {
+    return json({ status: "VERIFY_DOWNLOAD_EXCEPTION", message: error?.message || "Unknown verify-download exception" }, 500);
   }
-  await recordVerifiedEntitlement(context.env, data, sku);
-  return json({ status: "VERIFIED", source: isZeroDollarPromotion ? "stripe_zero_dollar_promotion" : "stripe", ...downloadManifestFor(sku, sessionId) });
 }

@@ -1,9 +1,9 @@
 {
-  "artifactName": "approvalprep-main_BASELINE_07-09-26_7e4b9c2d1f80.zip",
+  "artifactName": "approvalprep-main_BASELINE_07-09-26_d6f4a72e9c31.zip",
   "sourceZip": "/workspace/.cache/02-approvalprep-main.zip",
   "zipRoot": "approvalprep-main/",
-  "version": "4.5.5-local-checkout-download-e2e",
-  "status": "STRUCTURALLY_CHECKED_VALIDATE_ALL_PASSED_LOCAL_CHECKOUT_DOWNLOAD_E2E_ADDED",
+  "version": "4.5.8-live-fulfillment-fallback-success-ui-studio-choice",
+  "status": "STRUCTURALLY_CHECKED_VALIDATE_ALL_PASSED_FIXTURE_FULFILLMENT_PASSED_REDEPLOY_REQUIRED",
   "implemented": [
     "sitewide professional UX and copy foundation",
     "route-aware page template improvements",
@@ -91,14 +91,14 @@
     "workflow dependency policy hardened: stdlib automation workflows do not install dependencies; validate/build workflow uses npm ci",
     "workflow trace generator and validator updated to enforce pinned runner, Node 22, timeout, dependency policy, and known npm scripts across all 14 workflows",
     "scheduled-content-release workflow hardened with concurrency, explicit runner, explicit Node, no unnecessary dependency install, and local content-release proof",
-    "local workflow command smoke executed all YAML npm payload paths except hosted-only git push/PR action and Astro build provider path"
-    ,"checkout verify endpoint now checks paid D1 entitlements before Stripe and releases only protected download links",
+    "local workflow command smoke executed all YAML npm payload paths except hosted-only git push/PR action and Astro build provider path",
+    "checkout verify endpoint now checks paid D1 entitlements before Stripe and releases only protected download links",
     "checkout verify endpoint now distinguishes paid, pending, SKU mismatch, and unconfirmed checkout sessions",
     "checkout success UI now tells customers when Stripe has not confirmed the session as paid and gives a support path when Stripe shows completed payment",
     "checkout success UI now presents the intended choice after payment: download the blank/editable paid kit files or optionally use the free browser-only Studio to prefill a draft",
     "payment-download validator now hard-fails missing unconfirmed-session handling, entitlement lookup, optional Studio prefill path, or overstated Stripe smoke-test proof",
-    "Stripe checkout smoke report now explicitly states that it proves checkout-session creation only, not completed payment, webhook delivery, or download release"
-    ,"pricing page now includes a discount-code entry before the kit cards",
+    "Stripe checkout smoke report now explicitly states that it proves checkout-session creation only, not completed payment, webhook delivery, or download release",
+    "pricing page now includes a discount-code entry before the kit cards",
     "checkout runtime now resolves Stripe promotion codes and applies them to Checkout Sessions",
     "Stripe Checkout still allows promotion codes when no code is entered on-site",
     "completed 100% off Stripe sessions now unlock protected downloads through the same verifier path",
@@ -128,7 +128,19 @@
     "local checkout/download E2E operator script added for full-price checkout, TEST100 checkout, success-page choice UI, completed-session verification, and protected PDF/DOCX attachment fetch",
     "local checkout/download E2E script writes reports/ops/local-checkout-download-e2e.json and explicitly separates checkout creation proof from completed download proof",
     "payment-download validator now hard-fails if the local checkout/download E2E script or operator runbook is missing required discount, completed-session, verify-download, download-file, and proof-boundary tokens",
-    "local checkout/download E2E operator runbook added under docs/products with local/deployed base URL commands, single-product test command, TEST100 command, and completed cs_test session proof command"
+    "local checkout/download E2E operator runbook added under docs/products with local/deployed base URL commands, single-product test command, TEST100 command, and completed cs_test session proof command",
+    "local checkout/download E2E success-page check corrected to separate static server-rendered download panel proof from browser-inserted post-verification button proof",
+    "local checkout/download E2E failure output now includes exact missing success-page tokens, HTTP status, and body snippet for diagnosing stale deploys, forbidden responses, or missing verifier wiring",
+    "verify-download now catches D1 entitlement lookup/write failures and falls back to direct Stripe Checkout Session verification instead of throwing Cloudflare 1101",
+    "verify-download now returns JSON diagnostics for exceptions instead of text/plain Worker crashes",
+    "download-file now verifies the Stripe Checkout Session directly when D1 entitlement rows are missing or D1 is unavailable, then streams the purchased PDF/DOCX from R2 using the product registry R2 key",
+    "download-file now uses D1 product_assets only as an override and no longer requires D1 to authorize completed Stripe sessions",
+    "checkout success page now has a prominent green Success confirmation, checkout-complete copy, and clear download-options panel",
+    "homepage now explains the two post-checkout paths in steps: download PDF/DOCX as-is or use the free browser-only Studio to prefill a draft",
+    "local checkout/download E2E now supports fixture-only fulfillment testing without a manual Stripe checkout",
+    "local checkout/download E2E now mocks a completed no-cost Stripe session, forced D1 failure, and protected PDF/DOCX R2 delivery fallback",
+    "local checkout/download E2E now accepts APPPROVALPREP/Stripe session ID aliases and prints HTTP/API diagnostic details when completed-session verification fails",
+    "payment-download validator now hard-fails missing homepage path-choice copy, checkout success-page Success copy, or fixture fallback test coverage"
   ],
   "notImplemented": [
     "Stripe price changes",
@@ -147,7 +159,9 @@
     "automatic creation of the TEST100 promotion code inside Stripe; create it once in Stripe test mode as a 100% off active promotion code",
     "completed live-card charge proof from this sandbox",
     "local Astro build proof in this sandbox because npm ci was blocked by registry policy on zwitch-2.0.4.tgz",
-    "automatic browser completion of Stripe-hosted card entry; the new local E2E script verifies completed download delivery when supplied a completed Stripe Checkout Session ID"
+    "automatic browser completion of Stripe-hosted card entry; the new local E2E script verifies completed download delivery when supplied a completed Stripe Checkout Session ID",
+    "automatic browser completion of Stripe-hosted Checkout; Stripe hosted completion remains manual or provider-driven",
+    "hardcoded live customer session IDs in repo source; completed sessions must be provided through environment variables"
   ],
   "providerValidation": {
     "cloudflareDeploy": "REDEPLOY_REQUIRED_FOR_THIS_PRODUCT_COMPLETION_ARTIFACT",
@@ -183,8 +197,14 @@
     "githubHostedRunnerAcquisition": "EXTERNAL_GITHUB_HOSTED_RUNNER_FAILURE_CLASS_NOT_REPO_CODE_CORRELATION_ID_PROVIDED_BY_GITHUB",
     "scheduledContentRelease": "LOCAL_CONTENT_RELEASE_PASSED_GENERATED_30_ROUTE_ANSWER_ASSETS_VALIDATE_ALL_PASSED",
     "workflowYamlFleet": "STRUCTURALLY_VALIDATED_14_WORKFLOWS_PINNED_UBUNTU_24_04_NODE_22_12_TIMEOUTS_KNOWN_NPM_SCRIPTS",
-    "workflowCommandSmoke": "LOCAL_SMOKE_PASSED_FOR_ALL_WORKFLOW_NPM_PAYLOADS_EXCEPT_HOSTED_ONLY_GIT_PUSH_PR_ACTION_AND_ASTRO_BUILD_PATH"
+    "workflowCommandSmoke": "LOCAL_SMOKE_PASSED_FOR_ALL_WORKFLOW_NPM_PAYLOADS_EXCEPT_HOSTED_ONLY_GIT_PUSH_PR_ACTION_AND_ASTRO_BUILD_PATH",
+    "liveNoCostOrder": "USER_CONFIRMED_STRIPE_LIVE_NO_COST_ORDER_EXISTS_FOR_LETTER_OF_EXPLANATION_SESSION_CS_LIVE_B1JJ...; PRIOR_DEPLOY_VERIFY_DOWNLOAD_RETURNED_CLOUDFLARE_1101",
+    "productionFulfillmentPatch": "STRUCTURALLY_VALIDATED_LOCAL_VALIDATE_ALL_PASSED; REDEPLOY_REQUIRED_THEN_RERUN_CURL_WITH_LIVE_SESSION",
+    "fixtureFulfillmentTest": "PASSED_LOCAL_E2E_FIXTURE_ONLY_MOCKED_COMPLETED_NO_COST_STRIPE_SESSION_D1_FAILURE_AND_R2_ATTACHMENT_DELIVERY",
+    "checkoutSuccessUX": "STRUCTURALLY_VALIDATED_PROMINENT_SUCCESS_PAGE_AND_DOWNLOAD_OR_STUDIO_OPTIONS",
+    "homepageDownloadOrStudioChoice": "STRUCTURALLY_VALIDATED_CLEAR_STEPS_FOR_DOWNLOAD_AS_IS_OR_USE_STUDIO_TO_PREFILL",
+    "completedLiveSessionProof": "REQUIRES_REDEPLOY_OF_THIS_ARTIFACT_THEN_RERUN_WITH_CS_LIVE_SESSION; PRIOR_DEPLOY_RETURNED_CLOUDFLARE_1101"
   },
   "createdAt": "2026-07-09T00:40:53.174Z",
-  "updatedAt": "2026-07-09T14:18:00.000Z"
+  "updatedAt": "2026-07-09T17:09:36Z"
 }
