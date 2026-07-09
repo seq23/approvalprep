@@ -11,14 +11,20 @@
   "pullRequestTriggered": false,
   "hasCheckout": true,
   "hasNodeSetup": true,
-  "usesNpmInstall": true,
+  "nodeVersionOk": true,
+  "runnerPinned": true,
+  "timeoutSet": true,
+  "usesNpmInstall": false,
   "usesNpmCi": false,
+  "buildsProject": false,
+  "dependencyInstallPolicyOk": true,
   "fixtureTraceInput": true,
   "secretRefs": [],
   "npmScripts": [
     "workflows:trace"
   ],
+  "missingNpmScripts": [],
   "expectedDataTouches": [],
   "proofBoundary": "This trace proves workflow shape, commands, secret references, and fixture/manual-run readiness. It does not prove GitHub Actions execution, provider credentials, or deployed runtime.",
-  "traceId": "7143de63ec14ca8d"
+  "traceId": "a40e59fe00e8a55d"
 }

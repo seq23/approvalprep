@@ -1,6 +1,6 @@
 {
   "schemaVersion": "4.2.1",
-  "generatedAt": "2026-07-09T02:58:01.040Z",
+  "generatedAt": "2026-07-09T13:34:07.574Z",
   "status": "COMPLETE_FIXTURE_TRACE",
   "workflowCount": 14,
   "manualReadyCount": 14,
@@ -9,7 +9,11 @@
   "pullRequestTriggeredCount": 2,
   "allManualReady": true,
   "allHaveFixtureTraceInput": true,
-  "allUseNpmInstallNotCi": true,
+  "allUsePinnedRunner": true,
+  "allUseNode22": true,
+  "allHaveTimeout": true,
+  "allFollowDependencyInstallPolicy": true,
+  "allNpmScriptsKnown": true,
   "traces": [
     {
       "workflow": "admin-manifest-check.yml",
@@ -23,8 +27,13 @@
       "pullRequestTriggered": true,
       "hasCheckout": true,
       "hasNodeSetup": true,
-      "usesNpmInstall": true,
+      "nodeVersionOk": true,
+      "runnerPinned": true,
+      "timeoutSet": true,
+      "usesNpmInstall": false,
       "usesNpmCi": false,
+      "buildsProject": false,
+      "dependencyInstallPolicyOk": true,
       "fixtureTraceInput": true,
       "secretRefs": [],
       "npmScripts": [
@@ -33,9 +42,10 @@
         "validate:admin-action-links",
         "workflows:trace"
       ],
+      "missingNpmScripts": [],
       "expectedDataTouches": [],
       "proofBoundary": "This trace proves workflow shape, commands, secret references, and fixture/manual-run readiness. It does not prove GitHub Actions execution, provider credentials, or deployed runtime.",
-      "traceId": "73829de19be75d67"
+      "traceId": "a20f4261c7353652"
     },
     {
       "workflow": "artifact-validation.yml",
@@ -49,17 +59,23 @@
       "pullRequestTriggered": false,
       "hasCheckout": true,
       "hasNodeSetup": true,
-      "usesNpmInstall": true,
+      "nodeVersionOk": true,
+      "runnerPinned": true,
+      "timeoutSet": true,
+      "usesNpmInstall": false,
       "usesNpmCi": false,
+      "buildsProject": false,
+      "dependencyInstallPolicyOk": true,
       "fixtureTraceInput": true,
       "secretRefs": [],
       "npmScripts": [
         "validate:all",
         "workflows:trace"
       ],
+      "missingNpmScripts": [],
       "expectedDataTouches": [],
       "proofBoundary": "This trace proves workflow shape, commands, secret references, and fixture/manual-run readiness. It does not prove GitHub Actions execution, provider credentials, or deployed runtime.",
-      "traceId": "6fdb97a913cfe925"
+      "traceId": "c55e39e6bb17c3e1"
     },
     {
       "workflow": "competitor-watch-refresh.yml",
@@ -73,8 +89,13 @@
       "pullRequestTriggered": false,
       "hasCheckout": true,
       "hasNodeSetup": true,
-      "usesNpmInstall": true,
+      "nodeVersionOk": true,
+      "runnerPinned": true,
+      "timeoutSet": true,
+      "usesNpmInstall": false,
       "usesNpmCi": false,
+      "buildsProject": false,
+      "dependencyInstallPolicyOk": true,
       "fixtureTraceInput": true,
       "secretRefs": [],
       "npmScripts": [
@@ -83,9 +104,10 @@
         "validate:competitor-crawl",
         "workflows:trace"
       ],
+      "missingNpmScripts": [],
       "expectedDataTouches": [],
       "proofBoundary": "This trace proves workflow shape, commands, secret references, and fixture/manual-run readiness. It does not prove GitHub Actions execution, provider credentials, or deployed runtime.",
-      "traceId": "16a49adfc718afbb"
+      "traceId": "dae6620d99237f6f"
     },
     {
       "workflow": "content-opportunity-analysis.yml",
@@ -99,8 +121,13 @@
       "pullRequestTriggered": false,
       "hasCheckout": true,
       "hasNodeSetup": true,
-      "usesNpmInstall": true,
+      "nodeVersionOk": true,
+      "runnerPinned": true,
+      "timeoutSet": true,
+      "usesNpmInstall": false,
       "usesNpmCi": false,
+      "buildsProject": false,
+      "dependencyInstallPolicyOk": true,
       "fixtureTraceInput": true,
       "secretRefs": [],
       "npmScripts": [
@@ -110,9 +137,10 @@
         "validate:content-actions",
         "workflows:trace"
       ],
+      "missingNpmScripts": [],
       "expectedDataTouches": [],
       "proofBoundary": "This trace proves workflow shape, commands, secret references, and fixture/manual-run readiness. It does not prove GitHub Actions execution, provider credentials, or deployed runtime.",
-      "traceId": "a011082895cb4a9a"
+      "traceId": "3b46c762616e4e6a"
     },
     {
       "workflow": "growth-health-refresh.yml",
@@ -126,8 +154,13 @@
       "pullRequestTriggered": false,
       "hasCheckout": true,
       "hasNodeSetup": true,
-      "usesNpmInstall": true,
+      "nodeVersionOk": true,
+      "runnerPinned": true,
+      "timeoutSet": true,
+      "usesNpmInstall": false,
       "usesNpmCi": false,
+      "buildsProject": false,
+      "dependencyInstallPolicyOk": true,
       "fixtureTraceInput": true,
       "secretRefs": [],
       "npmScripts": [
@@ -135,9 +168,10 @@
         "validate:growth-health",
         "validate:seo-surfaces"
       ],
+      "missingNpmScripts": [],
       "expectedDataTouches": [],
       "proofBoundary": "This trace proves workflow shape, commands, secret references, and fixture/manual-run readiness. It does not prove GitHub Actions execution, provider credentials, or deployed runtime.",
-      "traceId": "a25a4809e4d7cc42"
+      "traceId": "fb9d24e99688c66a"
     },
     {
       "workflow": "growth-maintenance-analysis.yml",
@@ -151,8 +185,13 @@
       "pullRequestTriggered": false,
       "hasCheckout": true,
       "hasNodeSetup": true,
-      "usesNpmInstall": true,
+      "nodeVersionOk": true,
+      "runnerPinned": true,
+      "timeoutSet": true,
+      "usesNpmInstall": false,
       "usesNpmCi": false,
+      "buildsProject": false,
+      "dependencyInstallPolicyOk": true,
       "fixtureTraceInput": true,
       "secretRefs": [],
       "npmScripts": [
@@ -168,9 +207,10 @@
         "validate:maintenance-briefs",
         "workflows:trace"
       ],
+      "missingNpmScripts": [],
       "expectedDataTouches": [],
       "proofBoundary": "This trace proves workflow shape, commands, secret references, and fixture/manual-run readiness. It does not prove GitHub Actions execution, provider credentials, or deployed runtime.",
-      "traceId": "1f923027f58deaff"
+      "traceId": "7887412166cec9cf"
     },
     {
       "workflow": "indexing-submit.yml",
@@ -184,8 +224,13 @@
       "pullRequestTriggered": false,
       "hasCheckout": true,
       "hasNodeSetup": true,
-      "usesNpmInstall": true,
+      "nodeVersionOk": true,
+      "runnerPinned": true,
+      "timeoutSet": true,
+      "usesNpmInstall": false,
       "usesNpmCi": false,
+      "buildsProject": false,
+      "dependencyInstallPolicyOk": true,
       "fixtureTraceInput": true,
       "secretRefs": [],
       "npmScripts": [
@@ -194,9 +239,10 @@
         "seo:indexnow",
         "workflows:trace"
       ],
+      "missingNpmScripts": [],
       "expectedDataTouches": [],
       "proofBoundary": "This trace proves workflow shape, commands, secret references, and fixture/manual-run readiness. It does not prove GitHub Actions execution, provider credentials, or deployed runtime.",
-      "traceId": "f9c5ecdb7dd1ff07"
+      "traceId": "71588ada7f54772f"
     },
     {
       "workflow": "intelligence-ingest-free-sources.yml",
@@ -210,8 +256,13 @@
       "pullRequestTriggered": false,
       "hasCheckout": true,
       "hasNodeSetup": true,
-      "usesNpmInstall": true,
+      "nodeVersionOk": true,
+      "runnerPinned": true,
+      "timeoutSet": true,
+      "usesNpmInstall": false,
       "usesNpmCi": false,
+      "buildsProject": false,
+      "dependencyInstallPolicyOk": true,
       "fixtureTraceInput": true,
       "secretRefs": [
         "APPROVALPREP_SITE_URL",
@@ -225,9 +276,10 @@
         "validate:all",
         "workflows:trace"
       ],
+      "missingNpmScripts": [],
       "expectedDataTouches": [],
       "proofBoundary": "This trace proves workflow shape, commands, secret references, and fixture/manual-run readiness. It does not prove GitHub Actions execution, provider credentials, or deployed runtime.",
-      "traceId": "ec79972d8fcc85de"
+      "traceId": "427e4b5ae41d30c8"
     },
     {
       "workflow": "notification-dispatch.yml",
@@ -241,8 +293,13 @@
       "pullRequestTriggered": false,
       "hasCheckout": true,
       "hasNodeSetup": true,
-      "usesNpmInstall": true,
+      "nodeVersionOk": true,
+      "runnerPinned": true,
+      "timeoutSet": true,
+      "usesNpmInstall": false,
       "usesNpmCi": false,
+      "buildsProject": false,
+      "dependencyInstallPolicyOk": true,
       "fixtureTraceInput": true,
       "secretRefs": [
         "RESEND_API_KEY"
@@ -253,9 +310,10 @@
         "validate:notification-policy",
         "workflows:trace"
       ],
+      "missingNpmScripts": [],
       "expectedDataTouches": [],
       "proofBoundary": "This trace proves workflow shape, commands, secret references, and fixture/manual-run readiness. It does not prove GitHub Actions execution, provider credentials, or deployed runtime.",
-      "traceId": "e60332d12798cd64"
+      "traceId": "1fcb25c94fa8bd66"
     },
     {
       "workflow": "page-refresh-queue.yml",
@@ -269,8 +327,13 @@
       "pullRequestTriggered": false,
       "hasCheckout": true,
       "hasNodeSetup": true,
-      "usesNpmInstall": true,
+      "nodeVersionOk": true,
+      "runnerPinned": true,
+      "timeoutSet": true,
+      "usesNpmInstall": false,
       "usesNpmCi": false,
+      "buildsProject": false,
+      "dependencyInstallPolicyOk": true,
       "fixtureTraceInput": true,
       "secretRefs": [],
       "npmScripts": [
@@ -284,9 +347,10 @@
         "validate:maintenance-briefs",
         "workflows:trace"
       ],
+      "missingNpmScripts": [],
       "expectedDataTouches": [],
       "proofBoundary": "This trace proves workflow shape, commands, secret references, and fixture/manual-run readiness. It does not prove GitHub Actions execution, provider credentials, or deployed runtime.",
-      "traceId": "7e5ea05052ca2476"
+      "traceId": "e432283d502148e5"
     },
     {
       "workflow": "release-report.yml",
@@ -300,16 +364,22 @@
       "pullRequestTriggered": false,
       "hasCheckout": true,
       "hasNodeSetup": true,
-      "usesNpmInstall": true,
+      "nodeVersionOk": true,
+      "runnerPinned": true,
+      "timeoutSet": true,
+      "usesNpmInstall": false,
       "usesNpmCi": false,
+      "buildsProject": false,
+      "dependencyInstallPolicyOk": true,
       "fixtureTraceInput": true,
       "secretRefs": [],
       "npmScripts": [
         "workflows:trace"
       ],
+      "missingNpmScripts": [],
       "expectedDataTouches": [],
       "proofBoundary": "This trace proves workflow shape, commands, secret references, and fixture/manual-run readiness. It does not prove GitHub Actions execution, provider credentials, or deployed runtime.",
-      "traceId": "7143de63ec14ca8d"
+      "traceId": "a40e59fe00e8a55d"
     },
     {
       "workflow": "scheduled-content-release.yml",
@@ -323,8 +393,13 @@
       "pullRequestTriggered": false,
       "hasCheckout": true,
       "hasNodeSetup": true,
-      "usesNpmInstall": true,
+      "nodeVersionOk": true,
+      "runnerPinned": true,
+      "timeoutSet": true,
+      "usesNpmInstall": false,
       "usesNpmCi": false,
+      "buildsProject": false,
+      "dependencyInstallPolicyOk": true,
       "fixtureTraceInput": true,
       "secretRefs": [],
       "npmScripts": [
@@ -337,9 +412,10 @@
         "notifications:build-queue",
         "validate:automation-safety"
       ],
+      "missingNpmScripts": [],
       "expectedDataTouches": [],
       "proofBoundary": "This trace proves workflow shape, commands, secret references, and fixture/manual-run readiness. It does not prove GitHub Actions execution, provider credentials, or deployed runtime.",
-      "traceId": "264bee9b226eac3e"
+      "traceId": "de2d412e6ad52d22"
     },
     {
       "workflow": "validate.yml",
@@ -353,8 +429,13 @@
       "pullRequestTriggered": true,
       "hasCheckout": true,
       "hasNodeSetup": true,
-      "usesNpmInstall": true,
-      "usesNpmCi": false,
+      "nodeVersionOk": true,
+      "runnerPinned": true,
+      "timeoutSet": true,
+      "usesNpmInstall": false,
+      "usesNpmCi": true,
+      "buildsProject": true,
+      "dependencyInstallPolicyOk": true,
       "fixtureTraceInput": true,
       "secretRefs": [],
       "npmScripts": [
@@ -362,9 +443,10 @@
         "validate:all",
         "workflows:trace"
       ],
+      "missingNpmScripts": [],
       "expectedDataTouches": [],
       "proofBoundary": "This trace proves workflow shape, commands, secret references, and fixture/manual-run readiness. It does not prove GitHub Actions execution, provider credentials, or deployed runtime.",
-      "traceId": "fdc6b6283e33b9d7"
+      "traceId": "ac6e60ed32c2514b"
     },
     {
       "workflow": "weekly-growth-ops.yml",
@@ -378,8 +460,13 @@
       "pullRequestTriggered": false,
       "hasCheckout": true,
       "hasNodeSetup": true,
-      "usesNpmInstall": true,
+      "nodeVersionOk": true,
+      "runnerPinned": true,
+      "timeoutSet": true,
+      "usesNpmInstall": false,
       "usesNpmCi": false,
+      "buildsProject": false,
+      "dependencyInstallPolicyOk": true,
       "fixtureTraceInput": true,
       "secretRefs": [],
       "npmScripts": [
@@ -395,9 +482,10 @@
         "notifications:build-queue",
         "strategy:update-citations"
       ],
+      "missingNpmScripts": [],
       "expectedDataTouches": [],
       "proofBoundary": "This trace proves workflow shape, commands, secret references, and fixture/manual-run readiness. It does not prove GitHub Actions execution, provider credentials, or deployed runtime.",
-      "traceId": "ce18b8afd563b239"
+      "traceId": "8dc87598186751b8"
     }
   ]
 }

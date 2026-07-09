@@ -2,93 +2,156 @@
   "schemaVersion": "4.1.0",
   "runs": [
     {
-      "id": "7a4ba722-0874-474c-9d63-05e54db8d8fd",
+      "id": "fe7bec98-60c9-4a09-a2ad-2838c526128d",
       "connectorId": "growth_brief_generation",
       "status": "COMPLETE",
-      "ranAt": "2026-07-09T13:36:04.594Z",
+      "ranAt": "2026-07-09T13:34:06.347Z",
       "recordsImported": 40
     },
     {
-      "id": "8174f90d-f83a-41c5-942f-84e3f72d75ec",
+      "id": "5cff35a7-a3d7-4b45-bdf4-f22bb85f937f",
+      "connectorId": "page_action_recommendation",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-09T13:34:06.118Z",
+      "recordsImported": 225
+    },
+    {
+      "id": "40c72d46-2d92-497e-bec0-acdf0f5a9218",
       "connectorId": "authority_requirement_analysis",
       "status": "COMPLETE",
-      "ranAt": "2026-07-09T13:36:04.432Z",
+      "ranAt": "2026-07-09T13:34:05.862Z",
       "recordsImported": 45
     },
     {
-      "id": "b1b52695-eaca-48fb-bfe1-f31bea0103f0",
+      "id": "c1ca23aa-3c6d-4913-b2c0-aea8e65c7e27",
       "connectorId": "growth_maintenance_analysis",
       "status": "COMPLETE",
-      "ranAt": "2026-07-09T13:36:04.263Z",
+      "ranAt": "2026-07-09T13:34:05.616Z",
       "recordsImported": 45
     },
     {
-      "id": "06e17e5f-4121-40d3-99ef-37825cad03f6",
+      "id": "f982e6ba-d454-4a95-b7b8-fc76a4bc563b",
+      "connectorId": "content_opportunity_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-09T13:34:05.363Z",
+      "recordsImported": 225
+    },
+    {
+      "id": "5ce45bbe-8bcc-4fdf-8d1e-7467dd58e232",
       "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
-      "ranAt": "2026-07-09T11:21:18.732Z",
+      "ranAt": "2026-07-09T13:34:03.676Z",
       "recordsImported": 4
     },
     {
-      "id": "4349ff69-3450-4725-8767-cba5723c0da6",
+      "id": "5e9e33cb-dd2a-4010-8e72-d661deeef131",
       "connectorId": "manual_social_signal_import",
       "status": "NO_DATA",
-      "ranAt": "2026-07-09T11:21:13.408Z",
+      "ranAt": "2026-07-09T13:33:53.209Z",
       "reason": "No social signal import found at data/imports/social-signals.json.",
       "recordsImported": 0
     },
     {
-      "id": "5cbd3087-cc4e-4bc0-bd17-e8139774827f",
+      "id": "df657348-42c6-4206-87cb-3741fb612616",
       "connectorId": "manual_serp_csv",
       "status": "NO_DATA",
-      "ranAt": "2026-07-09T11:21:13.257Z",
+      "ranAt": "2026-07-09T13:33:52.971Z",
       "reason": "No SERP CSV found at data/imports/serp.csv.",
       "recordsImported": 0
     },
     {
-      "id": "055ea693-56bf-45bc-964d-212fba92b7f5",
+      "id": "9689b85e-847e-4e63-9219-05e93ac65da7",
       "connectorId": "competitor_public_crawler",
       "status": "COMPLETE",
-      "ranAt": "2026-07-09T11:21:13.107Z",
+      "ranAt": "2026-07-09T13:33:52.708Z",
       "recordsImported": 2
     },
     {
-      "id": "7abbe7c4-2bb2-4f9e-961b-b6a0e218227f",
+      "id": "37c0f452-8f50-446b-9316-d5ae5af9a239",
       "connectorId": "competitor_sitemap_discovery",
       "status": "COMPLETE",
-      "ranAt": "2026-07-09T11:21:12.504Z",
+      "ranAt": "2026-07-09T13:33:47.673Z",
       "recordsImported": 2
     },
     {
-      "id": "9791b6f6-0bda-4bde-bd8f-6090e02c9d1e",
+      "id": "97096392-2122-4dcf-bbdd-2effd646dfd4",
       "connectorId": "owned_site_crawler",
       "status": "COMPLETE",
-      "ranAt": "2026-07-09T11:21:11.120Z",
+      "ranAt": "2026-07-09T13:33:37.201Z",
       "recordsImported": 48
     },
     {
-      "id": "a8e6f3e8-c80e-49c6-ad2d-d027c550cbef",
+      "id": "8086af84-6951-4583-bf5d-db1f2592bc6d",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-07-09T11:21:10.969Z",
+      "ranAt": "2026-07-09T13:33:36.945Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL are required. Set the exact Bing endpoint for the owned property.",
       "recordsImported": 0
     },
     {
-      "id": "c1692203-2e76-4541-87c9-6164e9535b48",
+      "id": "d9b8e32e-f4f9-4d62-b995-8cf9cd7745cd",
       "connectorId": "google_url_inspection",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-07-09T11:21:10.822Z",
+      "ranAt": "2026-07-09T13:33:36.678Z",
       "reason": "GOOGLE_SEARCH_CONSOLE_SITE_URL and GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN are required.",
       "recordsImported": 0
     },
     {
-      "id": "757693d3-1205-464e-8000-82fab15c2241",
+      "id": "ba2539aa-2891-4d06-983a-2a3ad7eaaf8b",
       "connectorId": "google_search_console_search_analytics",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-07-09T11:21:10.671Z",
+      "ranAt": "2026-07-09T13:33:36.432Z",
       "reason": "GOOGLE_SEARCH_CONSOLE_SITE_URL and GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN are required.",
       "recordsImported": 0
+    },
+    {
+      "id": "d1e6297c-2f85-4532-8feb-e393a3ff4973",
+      "connectorId": "growth_brief_generation",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-09T13:33:34.184Z",
+      "recordsImported": 40
+    },
+    {
+      "id": "7dea0f8a-ccee-41cd-84c3-1d4f59363419",
+      "connectorId": "authority_requirement_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-09T13:33:33.902Z",
+      "recordsImported": 45
+    },
+    {
+      "id": "6f79dc80-af17-48b5-894b-12aff44dd755",
+      "connectorId": "growth_maintenance_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-09T13:33:33.625Z",
+      "recordsImported": 45
+    },
+    {
+      "id": "30a5545b-d1b2-4a61-86d3-e5e154d1acda",
+      "connectorId": "page_action_recommendation",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-09T13:33:29.187Z",
+      "recordsImported": 225
+    },
+    {
+      "id": "b6665231-6083-4c42-a0e9-6263c3e2363e",
+      "connectorId": "content_opportunity_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-09T13:33:28.932Z",
+      "recordsImported": 225
+    },
+    {
+      "id": "3b8c2700-403e-404a-b773-45e8a91066d8",
+      "connectorId": "competitor_public_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-09T13:33:28.161Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "17bb4bf2-997c-4049-8e6c-1365800a39b3",
+      "connectorId": "competitor_sitemap_discovery",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-09T13:33:23.196Z",
+      "recordsImported": 2
     },
     {
       "id": "ce41a5ce-de2a-4124-8df6-28e976f82bd4",

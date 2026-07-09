@@ -10,12 +10,12 @@ on:
     - cron: "33 11 * * 1"
 jobs:
   growth:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: 20 }
-      - run: npm install
+        with: { node-version: 22.12.0 }
       - name: Run fixture workflow trace
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
         run: |

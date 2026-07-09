@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "lastUpdatedAt": "2026-07-09T04:32:00.000Z",
+  "lastUpdatedAt": "2026-07-09T13:30:11.271Z",
   "policy": "Hard fails protect customer journey, payment/download safety, regulated boundaries, real growth machinery, and operator automation. Cosmetic preferences and live-provider success are not hard fails unless the repo falsely claims them.",
   "validators": [
     {
@@ -310,6 +310,17 @@
       "owner": "approvalprep-growth",
       "group": "growth-critical",
       "scope": "Content action decisions separate utility, compliance, and growth"
+    },
+    {
+      "id": "content-release",
+      "npmScript": "validate:content-release",
+      "entrypoint": "scripts/validate/content-release.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents scheduled content release workflow from passing validation while the actual content generation path is broken",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "Scheduled content generation, self-heal smoke execution, generated answer assets, and release ledger mutation contract"
     },
     {
       "id": "maintenance-brief-integrity",

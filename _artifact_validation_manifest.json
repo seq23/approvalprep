@@ -1,9 +1,9 @@
 {
-  "artifactName": "approvalprep-main_BASELINE_07-08-26_f5304b96e663.zip",
+  "artifactName": "approvalprep-main_BASELINE_07-09-26_c8b2965c6f3b.zip",
   "sourceZip": "/workspace/.cache/02-approvalprep-main.zip",
   "zipRoot": "approvalprep-main/",
-  "version": "4.4.8-homepage-credit-repair-conversion-nav-pass",
-  "status": "STRUCTURALLY_CHECKED_VALIDATE_ALL_PASSED_HOMEPAGE_CREDIT_REPAIR_CONVERSION_NAV_PASS_BUILD_BLOCKED_LOCALLY_BY_NPM_REGISTRY_403",
+  "version": "4.4.9-workflow-content-release-hardening",
+  "status": "STRUCTURALLY_CHECKED_VALIDATE_ALL_PASSED_WORKFLOW_FLEET_AUDITED_CONTENT_RELEASE_BUG_FIXED_RUNNER_HARDENED",
   "implemented": [
     "sitewide professional UX and copy foundation",
     "route-aware page template improvements",
@@ -84,7 +84,14 @@
     "primary nav removed Start Here $0 and moved Use Cases out of primary dropdown",
     "secondary use-case nav rail added with direct links for DIY credit letters, explanation letters, apartment readiness, income/job proof, loan readiness, business funding, life-admin paperwork, and full bundle",
     "navigation and CTA validators updated to hard-fail reintroduction of Start Here $0 primary nav or hero no-credit-repair warning copy",
-    "UX conversion standard and acceptance criteria updated to match the revenue-first compliant homepage and secondary use-case nav architecture"
+    "UX conversion standard and acceptance criteria updated to match the revenue-first compliant homepage and secondary use-case nav architecture",
+    "scheduled content release generator now strips offeringData import before vm execution so content:release can run after homepage/offering catalog expansion",
+    "content-release validator added and wired into validate:all, registry, and validation matrix as a hard fail",
+    "all GitHub workflow YAML files audited and standardized to ubuntu-24.04, Node 22.12.0, and timeout-minutes",
+    "workflow dependency policy hardened: stdlib automation workflows do not install dependencies; validate/build workflow uses npm ci",
+    "workflow trace generator and validator updated to enforce pinned runner, Node 22, timeout, dependency policy, and known npm scripts across all 14 workflows",
+    "scheduled-content-release workflow hardened with concurrency, explicit runner, explicit Node, no unnecessary dependency install, and local content-release proof",
+    "local workflow command smoke executed all YAML npm payload paths except hosted-only git push/PR action and Astro build provider path"
   ],
   "notImplemented": [
     "Stripe price changes",
@@ -96,8 +103,9 @@
     "live Cloudflare/Stripe/Resend/GSC/Bing validation",
     "deployed Stripe test checkout smoke against Cloudflare production URL",
     "browser-rendered Astro build proof in this sandbox due npm registry 403 on zwitch dependency",
-    "hosted GitHub Actions execution proof until runs are observed in GitHub",
-    "deployed Stripe checkout proof until ops:stripe:test-checkout passes against production"
+    "deployed Stripe checkout proof until ops:stripe:test-checkout passes against production",
+    "GitHub hosted runner acquisition cannot be fixed from repo code; rerun required when GitHub hosted runner capacity is available",
+    "hosted GitHub Actions execution proof still requires rerunning workflows on GitHub after this artifact is applied"
   ],
   "providerValidation": {
     "cloudflareDeploy": "REDEPLOY_REQUIRED_FOR_THIS_PRODUCT_COMPLETION_ARTIFACT",
@@ -125,9 +133,13 @@
     "checkoutProof": "REQUIRES_DEPLOYED_STRIPE_SMOKE_TEST_FOR_LIVE_PROOF",
     "githubActionsProof": "FIXTURE_TRACE_VALIDATED_14_WORKFLOWS_HOSTED_RUNS_REQUIRED_FOR_PRODUCTION_PROOF",
     "homepageConversionPositioning": "STRUCTURALLY_VALIDATED_SELF_SERVICE_CREDIT_REPAIR_LETTERS_VALUE_FIRST_HERO_NO_TOP_WARNING_COPY",
-    "localValidateAll": "PASSED_AFTER_HOMEPAGE_NAV_CONVERSION_PASS",
-    "localAstroBuild": "BLOCKED_IN_THIS_SANDBOX_BY_NPM_REGISTRY_403_ON_ZWITCH_DEPENDENCY_ASTRO_BINARY_NOT_INSTALLED"
+    "localValidateAll": "PASSED_WITH_61_VALIDATORS_INCLUDING_CONTENT_RELEASE",
+    "localAstroBuild": "NOT_RERUN_IN_THIS_PASS_DEPENDENCY_INSTALL_REQUIRES_REGISTRY_ACCESS; VALIDATE_WORKFLOW_USES_NPM_CI_FOR_BUILD_ON_GITHUB",
+    "githubHostedRunnerAcquisition": "EXTERNAL_GITHUB_HOSTED_RUNNER_FAILURE_CLASS_NOT_REPO_CODE_CORRELATION_ID_PROVIDED_BY_GITHUB",
+    "scheduledContentRelease": "LOCAL_CONTENT_RELEASE_PASSED_GENERATED_30_ROUTE_ANSWER_ASSETS_VALIDATE_ALL_PASSED",
+    "workflowYamlFleet": "STRUCTURALLY_VALIDATED_14_WORKFLOWS_PINNED_UBUNTU_24_04_NODE_22_12_TIMEOUTS_KNOWN_NPM_SCRIPTS",
+    "workflowCommandSmoke": "LOCAL_SMOKE_PASSED_FOR_ALL_WORKFLOW_NPM_PAYLOADS_EXCEPT_HOSTED_ONLY_GIT_PUSH_PR_ACTION_AND_ASTRO_BUILD_PATH"
   },
   "createdAt": "2026-07-09T00:40:53.174Z",
-  "updatedAt": "2026-07-09T03:54:48.154Z"
+  "updatedAt": "2026-07-09T13:35:30.445Z"
 }

@@ -16,7 +16,8 @@ on:
 
 jobs:
   weekly-growth-ops:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
     permissions:
       contents: write
       pull-requests: write
@@ -26,8 +27,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
-      - run: npm install
+          node-version: 22.12.0
       - name: Apply delegated authority
         run: npm run governance:apply-authority -- --mode=${{ env.RUN_MODE || 'dry_run' }}
       - name: Attempt self-heal
