@@ -1,7 +1,110 @@
 {
   "schemaVersion": "4.1.0",
-  "generatedAt": "2026-07-08T13:22:13.641Z",
+  "generatedAt": "2026-07-09T13:36:04.593Z",
   "sourceStatus": [
+    {
+      "id": "8174f90d-f83a-41c5-942f-84e3f72d75ec",
+      "connectorId": "authority_requirement_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-09T13:36:04.432Z",
+      "recordsImported": 45
+    },
+    {
+      "id": "b1b52695-eaca-48fb-bfe1-f31bea0103f0",
+      "connectorId": "growth_maintenance_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-09T13:36:04.263Z",
+      "recordsImported": 45
+    },
+    {
+      "id": "06e17e5f-4121-40d3-99ef-37825cad03f6",
+      "connectorId": "official_source_fetcher",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-09T11:21:18.732Z",
+      "recordsImported": 4
+    },
+    {
+      "id": "4349ff69-3450-4725-8767-cba5723c0da6",
+      "connectorId": "manual_social_signal_import",
+      "status": "NO_DATA",
+      "ranAt": "2026-07-09T11:21:13.408Z",
+      "reason": "No social signal import found at data/imports/social-signals.json.",
+      "recordsImported": 0
+    },
+    {
+      "id": "5cbd3087-cc4e-4bc0-bd17-e8139774827f",
+      "connectorId": "manual_serp_csv",
+      "status": "NO_DATA",
+      "ranAt": "2026-07-09T11:21:13.257Z",
+      "reason": "No SERP CSV found at data/imports/serp.csv.",
+      "recordsImported": 0
+    },
+    {
+      "id": "055ea693-56bf-45bc-964d-212fba92b7f5",
+      "connectorId": "competitor_public_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-09T11:21:13.107Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "7abbe7c4-2bb2-4f9e-961b-b6a0e218227f",
+      "connectorId": "competitor_sitemap_discovery",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-09T11:21:12.504Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "9791b6f6-0bda-4bde-bd8f-6090e02c9d1e",
+      "connectorId": "owned_site_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-09T11:21:11.120Z",
+      "recordsImported": 48
+    },
+    {
+      "id": "a8e6f3e8-c80e-49c6-ad2d-d027c550cbef",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-07-09T11:21:10.969Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL are required. Set the exact Bing endpoint for the owned property.",
+      "recordsImported": 0
+    },
+    {
+      "id": "c1692203-2e76-4541-87c9-6164e9535b48",
+      "connectorId": "google_url_inspection",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-07-09T11:21:10.822Z",
+      "reason": "GOOGLE_SEARCH_CONSOLE_SITE_URL and GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "757693d3-1205-464e-8000-82fab15c2241",
+      "connectorId": "google_search_console_search_analytics",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-07-09T11:21:10.671Z",
+      "reason": "GOOGLE_SEARCH_CONSOLE_SITE_URL and GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "ce41a5ce-de2a-4124-8df6-28e976f82bd4",
+      "connectorId": "page_action_recommendation",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-08T13:22:14.255Z",
+      "recordsImported": 13
+    },
+    {
+      "id": "e61c304c-d76e-427e-9cf3-9eff2f394ed6",
+      "connectorId": "growth_maintenance_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-08T13:22:13.950Z",
+      "recordsImported": 35
+    },
+    {
+      "id": "ca164024-77f4-49d6-a662-b085a47d8731",
+      "connectorId": "growth_brief_generation",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-08T13:22:13.642Z",
+      "recordsImported": 33
+    },
     {
       "id": "2fef0ef2-08a0-414d-a290-8e82377496f6",
       "connectorId": "official_source_fetcher",
@@ -45,110 +148,6 @@
       "status": "COMPLETE",
       "ranAt": "2026-07-08T13:21:56.769Z",
       "recordsImported": 38
-    },
-    {
-      "id": "af991589-9c39-4df4-b7a1-044de37533cd",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-07-08T13:21:56.515Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL are required. Set the exact Bing endpoint for the owned property.",
-      "recordsImported": 0
-    },
-    {
-      "id": "82f60ec3-3e69-4d6c-832e-2ea8a0039b85",
-      "connectorId": "google_url_inspection",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-07-08T13:21:56.264Z",
-      "reason": "GOOGLE_SEARCH_CONSOLE_SITE_URL and GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "b04fbcd9-2746-48a9-9735-4d89dddcc010",
-      "connectorId": "google_search_console_search_analytics",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-07-08T13:21:56.003Z",
-      "reason": "GOOGLE_SEARCH_CONSOLE_SITE_URL and GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "8676656a-6e5a-40d1-8feb-dd6aa97d8148",
-      "connectorId": "competitor_sitemap_discovery",
-      "status": "COMPLETE",
-      "ranAt": "2026-07-08T13:21:33.837Z",
-      "recordsImported": 2
-    },
-    {
-      "id": "05307cf6-2223-4d52-82a2-9c082d1d2586",
-      "connectorId": "owned_site_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-07-08T13:21:28.494Z",
-      "recordsImported": 38
-    },
-    {
-      "id": "e561ce32-3c33-48eb-8fc5-b4c929846a23",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-07-08T13:21:28.233Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL are required. Set the exact Bing endpoint for the owned property.",
-      "recordsImported": 0
-    },
-    {
-      "id": "2cb2b99d-9297-41b1-8afd-5a1cad9e6e2f",
-      "connectorId": "google_url_inspection",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-07-08T13:21:27.984Z",
-      "reason": "GOOGLE_SEARCH_CONSOLE_SITE_URL and GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "4e50a8da-2c94-4c59-b4d9-f970bd724598",
-      "connectorId": "google_search_console_search_analytics",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-07-08T13:21:27.733Z",
-      "reason": "GOOGLE_SEARCH_CONSOLE_SITE_URL and GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "a1b614c8-f671-417c-a4c9-097089655f65",
-      "connectorId": "competitor_sitemap_discovery",
-      "status": "COMPLETE",
-      "ranAt": "2026-07-08T13:21:27.261Z",
-      "recordsImported": 2
-    },
-    {
-      "id": "9c2b6d5c-fd3b-4957-acae-e93685219925",
-      "connectorId": "competitor_public_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-07-08T13:21:21.600Z",
-      "recordsImported": 2
-    },
-    {
-      "id": "f8eb65ad-f9ec-46ee-b96a-bac3755fe370",
-      "connectorId": "content_opportunity_analysis",
-      "status": "COMPLETE",
-      "ranAt": "2026-07-08T13:21:21.242Z",
-      "recordsImported": 13
-    },
-    {
-      "id": "a8f3190d-ab68-49d9-ba5b-f7d02c3a7fb8",
-      "connectorId": "authority_requirement_analysis",
-      "status": "COMPLETE",
-      "ranAt": "2026-07-08T13:21:20.961Z",
-      "recordsImported": 35
-    },
-    {
-      "id": "e48dfcec-9c82-4094-97d0-eb3a101cf4c4",
-      "connectorId": "growth_brief_generation",
-      "status": "COMPLETE",
-      "ranAt": "2026-07-08T13:21:20.660Z",
-      "recordsImported": 33
-    },
-    {
-      "id": "604809a2-2f6f-4502-8db1-3f3a480a6800",
-      "connectorId": "page_action_recommendation",
-      "status": "COMPLETE",
-      "ranAt": "2026-07-08T13:21:20.376Z",
-      "recordsImported": 13
     }
   ],
   "topContentOpportunities": [
@@ -170,7 +169,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-08T13:21:21.240Z"
+      "createdAt": "2026-07-09T12:19:07.750Z"
     },
     {
       "id": "brief_",
@@ -190,7 +189,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-08T13:21:21.241Z"
+      "createdAt": "2026-07-09T12:19:07.750Z"
     },
     {
       "id": "brief_",
@@ -210,7 +209,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-08T13:21:21.241Z"
+      "createdAt": "2026-07-09T12:19:07.750Z"
     },
     {
       "id": "brief_",
@@ -230,7 +229,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-08T13:21:21.241Z"
+      "createdAt": "2026-07-09T12:19:07.750Z"
     },
     {
       "id": "brief_",
@@ -250,7 +249,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-08T13:21:21.241Z"
+      "createdAt": "2026-07-09T12:19:07.750Z"
     },
     {
       "id": "brief_",
@@ -270,7 +269,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-08T13:21:21.241Z"
+      "createdAt": "2026-07-09T12:19:07.750Z"
     },
     {
       "id": "brief_",
@@ -290,7 +289,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-08T13:21:21.241Z"
+      "createdAt": "2026-07-09T12:19:07.750Z"
     },
     {
       "id": "brief_",
@@ -310,7 +309,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-08T13:21:21.241Z"
+      "createdAt": "2026-07-09T12:19:07.751Z"
     },
     {
       "id": "brief_",
@@ -330,7 +329,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-08T13:21:21.241Z"
+      "createdAt": "2026-07-09T12:19:07.751Z"
     },
     {
       "id": "brief_",
@@ -350,7 +349,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-08T13:21:21.241Z"
+      "createdAt": "2026-07-09T12:19:07.751Z"
     },
     {
       "id": "brief_",
@@ -370,7 +369,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-08T13:21:21.241Z"
+      "createdAt": "2026-07-09T12:19:07.751Z"
     },
     {
       "id": "brief_",
@@ -390,7 +389,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-08T13:21:21.241Z"
+      "createdAt": "2026-07-09T12:19:07.751Z"
     },
     {
       "id": "brief_",
@@ -410,7 +409,147 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-08T13:21:21.241Z"
+      "createdAt": "2026-07-09T12:19:07.751Z"
+    },
+    {
+      "id": "brief_",
+      "query": "",
+      "route": null,
+      "pageFamily": "unknown",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 0,
+      "competitorGapScore": 0,
+      "userUtilityScore": 20,
+      "productSupportScore": 30,
+      "complianceRiskScore": 20,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "merge_or_do_not_build",
+      "admissionStatus": "blocked_duplicate_or_thin",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": true,
+      "reason": "Not enough unique utility unless tied to a product flow.",
+      "createdAt": "2026-07-09T12:19:07.751Z"
+    },
+    {
+      "id": "brief_",
+      "query": "",
+      "route": null,
+      "pageFamily": "unknown",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 0,
+      "competitorGapScore": 0,
+      "userUtilityScore": 20,
+      "productSupportScore": 30,
+      "complianceRiskScore": 20,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "merge_or_do_not_build",
+      "admissionStatus": "blocked_duplicate_or_thin",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": true,
+      "reason": "Not enough unique utility unless tied to a product flow.",
+      "createdAt": "2026-07-09T12:19:07.751Z"
+    },
+    {
+      "id": "brief_",
+      "query": "",
+      "route": null,
+      "pageFamily": "unknown",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 0,
+      "competitorGapScore": 0,
+      "userUtilityScore": 20,
+      "productSupportScore": 30,
+      "complianceRiskScore": 20,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "merge_or_do_not_build",
+      "admissionStatus": "blocked_duplicate_or_thin",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": true,
+      "reason": "Not enough unique utility unless tied to a product flow.",
+      "createdAt": "2026-07-09T12:19:07.751Z"
+    },
+    {
+      "id": "brief_",
+      "query": "",
+      "route": null,
+      "pageFamily": "unknown",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 0,
+      "competitorGapScore": 0,
+      "userUtilityScore": 20,
+      "productSupportScore": 30,
+      "complianceRiskScore": 20,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "merge_or_do_not_build",
+      "admissionStatus": "blocked_duplicate_or_thin",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": true,
+      "reason": "Not enough unique utility unless tied to a product flow.",
+      "createdAt": "2026-07-09T12:19:07.751Z"
+    },
+    {
+      "id": "brief_",
+      "query": "",
+      "route": null,
+      "pageFamily": "unknown",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 0,
+      "competitorGapScore": 0,
+      "userUtilityScore": 20,
+      "productSupportScore": 30,
+      "complianceRiskScore": 20,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "merge_or_do_not_build",
+      "admissionStatus": "blocked_duplicate_or_thin",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": true,
+      "reason": "Not enough unique utility unless tied to a product flow.",
+      "createdAt": "2026-07-09T12:19:07.751Z"
+    },
+    {
+      "id": "brief_",
+      "query": "",
+      "route": null,
+      "pageFamily": "unknown",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 0,
+      "competitorGapScore": 0,
+      "userUtilityScore": 20,
+      "productSupportScore": 30,
+      "complianceRiskScore": 20,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "merge_or_do_not_build",
+      "admissionStatus": "blocked_duplicate_or_thin",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": true,
+      "reason": "Not enough unique utility unless tied to a product flow.",
+      "createdAt": "2026-07-09T12:19:07.751Z"
+    },
+    {
+      "id": "brief_",
+      "query": "",
+      "route": null,
+      "pageFamily": "unknown",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 0,
+      "competitorGapScore": 0,
+      "userUtilityScore": 20,
+      "productSupportScore": 30,
+      "complianceRiskScore": 20,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "merge_or_do_not_build",
+      "admissionStatus": "blocked_duplicate_or_thin",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": true,
+      "reason": "Not enough unique utility unless tied to a product flow.",
+      "createdAt": "2026-07-09T12:19:07.751Z"
     }
   ],
   "topMaintenanceActions": [
@@ -428,7 +567,55 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-07-08T13:21:19.848Z"
+      "createdAt": "2026-07-09T13:36:04.261Z"
+    },
+    {
+      "route": "/letter-writing-studio",
+      "pageFamily": "letter_studio",
+      "currentQueryCoverage": 0,
+      "gscTrend": "NO_DATA",
+      "competitorDelta": "NO_COMPETITOR_STRUCTURE_GAP",
+      "recommendedFix": "add_internal_links_and_answer_atoms",
+      "expectedEffort": "medium",
+      "authorityRequirement": "low",
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "citationOpportunity": "medium",
+      "priorityScore": 55,
+      "safeToSelfHeal": true,
+      "adminReviewRequired": false,
+      "createdAt": "2026-07-09T13:36:04.262Z"
+    },
+    {
+      "route": "/blog",
+      "pageFamily": "geo_surface",
+      "currentQueryCoverage": 0,
+      "gscTrend": "NO_DATA",
+      "competitorDelta": "NO_COMPETITOR_STRUCTURE_GAP",
+      "recommendedFix": "add_internal_links_and_answer_atoms",
+      "expectedEffort": "medium",
+      "authorityRequirement": "low",
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "citationOpportunity": "low",
+      "priorityScore": 55,
+      "safeToSelfHeal": true,
+      "adminReviewRequired": false,
+      "createdAt": "2026-07-09T13:36:04.262Z"
+    },
+    {
+      "route": "/resources",
+      "pageFamily": "geo_surface",
+      "currentQueryCoverage": 0,
+      "gscTrend": "NO_DATA",
+      "competitorDelta": "NO_COMPETITOR_STRUCTURE_GAP",
+      "recommendedFix": "add_internal_links_and_answer_atoms",
+      "expectedEffort": "medium",
+      "authorityRequirement": "low",
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "citationOpportunity": "low",
+      "priorityScore": 55,
+      "safeToSelfHeal": true,
+      "adminReviewRequired": false,
+      "createdAt": "2026-07-09T13:36:04.262Z"
     },
     {
       "route": "/pricing",
@@ -444,7 +631,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-07-08T13:21:19.848Z"
+      "createdAt": "2026-07-09T13:36:04.262Z"
     },
     {
       "route": "/letter-of-explanation",
@@ -460,7 +647,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-07-08T13:21:19.848Z"
+      "createdAt": "2026-07-09T13:36:04.262Z"
     },
     {
       "route": "/letter-of-explanation/credit",
@@ -476,7 +663,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-07-08T13:21:19.848Z"
+      "createdAt": "2026-07-09T13:36:04.262Z"
     },
     {
       "route": "/letter-of-explanation/eviction",
@@ -492,7 +679,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-07-08T13:21:19.848Z"
+      "createdAt": "2026-07-09T13:36:04.262Z"
     },
     {
       "route": "/letter-of-explanation/income",
@@ -508,7 +695,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-07-08T13:21:19.848Z"
+      "createdAt": "2026-07-09T13:36:04.262Z"
     },
     {
       "route": "/letter-of-explanation/employment-gap",
@@ -524,7 +711,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-07-08T13:21:19.848Z"
+      "createdAt": "2026-07-09T13:36:04.262Z"
     },
     {
       "route": "/employment-verification-letter",
@@ -540,7 +727,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-07-08T13:21:19.848Z"
+      "createdAt": "2026-07-09T13:36:04.262Z"
     },
     {
       "route": "/proof-of-income-letter",
@@ -556,7 +743,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-07-08T13:21:19.848Z"
+      "createdAt": "2026-07-09T13:36:04.262Z"
     },
     {
       "route": "/credit-dispute-letter",
@@ -572,7 +759,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-07-08T13:21:19.848Z"
+      "createdAt": "2026-07-09T13:36:04.262Z"
     },
     {
       "route": "/apartment-application",
@@ -588,7 +775,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-07-08T13:21:19.848Z"
+      "createdAt": "2026-07-09T13:36:04.262Z"
     },
     {
       "route": "/rental-application-checklist",
@@ -604,7 +791,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-07-08T13:21:19.848Z"
+      "createdAt": "2026-07-09T13:36:04.262Z"
     },
     {
       "route": "/how-to-get-approved-for-an-apartment",
@@ -620,7 +807,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-07-08T13:21:19.848Z"
+      "createdAt": "2026-07-09T13:36:04.262Z"
     },
     {
       "route": "/auto-loan-documents",
@@ -636,7 +823,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-07-08T13:21:19.848Z"
+      "createdAt": "2026-07-09T13:36:04.262Z"
     },
     {
       "route": "/car-loan-checklist",
@@ -652,7 +839,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-07-08T13:21:19.848Z"
+      "createdAt": "2026-07-09T13:36:04.262Z"
     },
     {
       "route": "/documents-needed-for-car-loan",
@@ -668,7 +855,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-07-08T13:21:19.848Z"
+      "createdAt": "2026-07-09T13:36:04.262Z"
     },
     {
       "route": "/sba-loan-checklist",
@@ -684,55 +871,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-07-08T13:21:19.848Z"
-    },
-    {
-      "route": "/business-loan-documents",
-      "pageFamily": "business",
-      "currentQueryCoverage": 0,
-      "gscTrend": "NO_DATA",
-      "competitorDelta": "NO_COMPETITOR_STRUCTURE_GAP",
-      "recommendedFix": "add_internal_links_and_answer_atoms",
-      "expectedEffort": "medium",
-      "authorityRequirement": "low",
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "citationOpportunity": "low",
-      "priorityScore": 55,
-      "safeToSelfHeal": true,
-      "adminReviewRequired": false,
-      "createdAt": "2026-07-08T13:21:19.848Z"
-    },
-    {
-      "route": "/mortgage-checklist",
-      "pageFamily": "mortgage",
-      "currentQueryCoverage": 0,
-      "gscTrend": "NO_DATA",
-      "competitorDelta": "NO_COMPETITOR_STRUCTURE_GAP",
-      "recommendedFix": "add_internal_links_and_answer_atoms",
-      "expectedEffort": "medium",
-      "authorityRequirement": "low",
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "citationOpportunity": "medium",
-      "priorityScore": 55,
-      "safeToSelfHeal": true,
-      "adminReviewRequired": false,
-      "createdAt": "2026-07-08T13:21:19.848Z"
-    },
-    {
-      "route": "/mortgage-document-checklist",
-      "pageFamily": "mortgage",
-      "currentQueryCoverage": 0,
-      "gscTrend": "NO_DATA",
-      "competitorDelta": "NO_COMPETITOR_STRUCTURE_GAP",
-      "recommendedFix": "add_internal_links_and_answer_atoms",
-      "expectedEffort": "medium",
-      "authorityRequirement": "low",
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "citationOpportunity": "medium",
-      "priorityScore": 55,
-      "safeToSelfHeal": true,
-      "adminReviewRequired": false,
-      "createdAt": "2026-07-08T13:21:19.848Z"
+      "createdAt": "2026-07-09T13:36:04.262Z"
     }
   ],
   "hardTruth": "Low ranking potential never blocks useful onsite content. It only changes indexing, priority, and authority strategy."
