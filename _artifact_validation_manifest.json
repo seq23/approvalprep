@@ -1,9 +1,9 @@
 {
-  "artifactName": "approvalprep-main_BASELINE_07-08-26_a78906c9bdd8.zip",
+  "artifactName": "approvalprep-main_BASELINE_07-08-26_e1eee09e4903.zip",
   "sourceZip": "/workspace/.cache/02-approvalprep-main.zip",
   "zipRoot": "approvalprep-main/",
   "version": "4.3.1-sitewide-production-foundation",
-  "status": "STRUCTURALLY_CHECKED_PRIVACY_PASS_VALIDATE_ALL_PASSED_BUILD_BLOCKED_BY_NPM_REGISTRY_403",
+  "status": "STRUCTURALLY_CHECKED_PRIVACY_PASS_VALIDATE_ALL_PASSED_CLOUDFLARE_ASTRO_SYNTAX_FIX_APPLIED_BUILD_BLOCKED_LOCALLY_BY_NPM_REGISTRY_403",
   "implemented": [
     "sitewide professional UX and copy foundation",
     "route-aware page template improvements",
@@ -28,7 +28,10 @@
     "sitewide customer document data privacy notice",
     "no local storage of Stripe customer email in entitlement records",
     "safe entitlement verification response",
-    "data privacy hard-fail validator"
+    "data privacy hard-fail validator",
+    "Cloudflare Astro template closing-tag failure fixed in catch-all route",
+    "production Wrangler admin gate var mirrored into env.production.vars",
+    "missing build validator registered in validation registry and matrix contract"
   ],
   "notImplemented": [
     "Stripe price changes",
@@ -40,8 +43,8 @@
     "live Cloudflare/Stripe/Resend/GSC/Bing validation"
   ],
   "providerValidation": {
-    "cloudflareDeploy": "NOT_PROVEN_IN_SANDBOX",
-    "githubActionsHostedRun": "NOT_PROVEN_IN_SANDBOX",
+    "cloudflareDeploy": "PRIOR_RUN_FAILED_ON_ASTRO_TEMPLATE_MISMATCH_SOURCE_PATCH_APPLIED_REDEPLOY_REQUIRED",
+    "githubActionsHostedRun": "VALIDATION_REGISTRY_BUILD_ENTRY_PATCHED_REDO_HOSTED_RUN_REQUIRED",
     "stripeTestCheckout": "LOCAL_OR_DEPLOYED_VALIDATION_REQUIRED",
     "stripeWebhookDelivery": "LOCAL_OR_DEPLOYED_VALIDATION_REQUIRED",
     "r2PaidDownloadStreaming": "LOCAL_OR_DEPLOYED_VALIDATION_REQUIRED",
@@ -54,5 +57,5 @@
     "localEntitlementEmailStorage": "REMOVED_FROM_RUNTIME_WRITES"
   },
   "createdAt": "2026-07-09T00:40:53.174Z",
-  "updatedAt": "2026-07-09T01:32:30.220Z"
+  "updatedAt": "2026-07-09T01:47:00.000Z"
 }

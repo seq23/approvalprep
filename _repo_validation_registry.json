@@ -554,6 +554,17 @@
       "scope": "Product catalog and runtime model integrity"
     },
     {
+      "id": "build",
+      "npmScript": "build",
+      "entrypoint": "astro build",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents deploy-time compiler, route, and template failures",
+      "owner": "approvalprep-ops",
+      "group": "release-critical",
+      "scope": "Astro static build and Cloudflare Pages deploy artifact"
+    },
+    {
       "id": "artifact-validation",
       "npmScript": "validate:artifact",
       "entrypoint": "scripts/validate/artifact-validation.mjs",

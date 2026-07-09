@@ -119,6 +119,7 @@ const primarySku = route.cta_policy === "purchase" ? skuForRoute : "";
           <p class="eyebrow">Policy context</p>
           <h2>What this policy is meant to clarify.</h2>
           <div class="copy-stack">{copy.decisionContext.map((paragraph) => <p>{paragraph}</p>)}</div>
+        </div>
         </section>
       )}
       <section class="band"><div class="shell"><WhatYouGet title="What this policy covers" items={copy.whatYouGet} /></div></section>
@@ -137,6 +138,7 @@ const primarySku = route.cta_policy === "purchase" ? skuForRoute : "";
           <p class="eyebrow">Decision context</p>
           <h2>What this page helps you decide.</h2>
           <div class="copy-stack">{copy.decisionContext.map((paragraph) => <p>{paragraph}</p>)}</div>
+        </div>
         </section>
       )}
       <section class="band"><div class="shell"><WhatYouGet title="Who this is for" items={copy.whoFor} /></div></section>
