@@ -2,6 +2,74 @@
   "schemaVersion": "4.1.0",
   "runs": [
     {
+      "id": "cbad30e3-baf1-4f02-989d-617e5613e1f6",
+      "connectorId": "official_source_fetcher",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-13T11:31:37.481Z",
+      "recordsImported": 4
+    },
+    {
+      "id": "134900ef-417f-4b43-b487-8498dca23ab4",
+      "connectorId": "manual_social_signal_import",
+      "status": "NO_DATA",
+      "ranAt": "2026-07-13T11:31:34.150Z",
+      "reason": "No social signal import found at data/imports/social-signals.json.",
+      "recordsImported": 0
+    },
+    {
+      "id": "0a7eab84-0205-45fd-a7ca-5ee101cd4e62",
+      "connectorId": "manual_serp_csv",
+      "status": "NO_DATA",
+      "ranAt": "2026-07-13T11:31:34.018Z",
+      "reason": "No SERP CSV found at data/imports/serp.csv.",
+      "recordsImported": 0
+    },
+    {
+      "id": "afdbc2a5-cbfc-4fb7-8656-d1600cb48203",
+      "connectorId": "competitor_public_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-13T11:31:33.884Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "39afb75b-6998-4933-9506-c94014b18afd",
+      "connectorId": "competitor_sitemap_discovery",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-13T11:31:33.263Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "85a4e2ec-bd39-48a1-8473-d9c2a50b54d3",
+      "connectorId": "owned_site_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-13T11:31:31.946Z",
+      "recordsImported": 70
+    },
+    {
+      "id": "deb32756-f9f0-4e44-b9e6-0c045a62abad",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-07-13T11:31:31.809Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "b49bd66e-a4f7-4465-8ca1-27c049556712",
+      "connectorId": "google_url_inspection",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-07-13T11:31:31.677Z",
+      "reason": "GSC_SITE_URL and GSC_ACCESS_TOKEN, or GSC_URL_INSPECTION_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "73bf3cb6-2cfa-4996-a7cf-a83c19f90ea1",
+      "connectorId": "google_search_console_search_analytics",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-07-13T11:31:31.541Z",
+      "reason": "GSC_SITE_URL and GSC_ACCESS_TOKEN, or GSC_SEARCH_ANALYTICS_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
       "id": "bf12695c-5eaa-4d49-b635-ab729b98a382",
       "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
