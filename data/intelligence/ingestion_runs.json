@@ -2,6 +2,117 @@
   "schemaVersion": "4.1.0",
   "runs": [
     {
+      "id": "818785d9-b016-4daa-a5a4-05fb2da7d1d0",
+      "connectorId": "cloudflare_crawler_logs",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-07-13T15:11:35.259Z",
+      "reason": "Cloudflare crawler ingestion requires Cloudflare credentials or a manual import file.",
+      "recordsImported": 0
+    },
+    {
+      "id": "feb184cd-7b46-429a-ac2d-61dd542de157",
+      "connectorId": "growth_brief_generation",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-13T15:11:35.231Z",
+      "recordsImported": 40
+    },
+    {
+      "id": "65639c5e-b903-4adf-b5e9-c57b2f936428",
+      "connectorId": "page_action_recommendation",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-13T15:11:35.200Z",
+      "recordsImported": 335
+    },
+    {
+      "id": "032be50d-1916-4a78-bfee-14a049e90748",
+      "connectorId": "authority_requirement_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-13T15:11:35.171Z",
+      "recordsImported": 67
+    },
+    {
+      "id": "2f4f49fb-3ef4-437f-9ade-ea3231cfed8a",
+      "connectorId": "growth_maintenance_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-13T15:11:35.141Z",
+      "recordsImported": 67
+    },
+    {
+      "id": "b158f810-b27c-4dce-af4c-55ebbd899a4e",
+      "connectorId": "content_opportunity_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-13T15:11:35.111Z",
+      "recordsImported": 335
+    },
+    {
+      "id": "af70195b-9a25-4612-b280-11b9f7ee93bf",
+      "connectorId": "official_source_fetcher",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-13T15:11:35.077Z",
+      "recordsImported": 4
+    },
+    {
+      "id": "b8ed7c76-b081-44bd-a78c-061273af6af0",
+      "connectorId": "manual_social_signal_import",
+      "status": "NO_DATA",
+      "ranAt": "2026-07-13T15:11:31.302Z",
+      "reason": "No social signal import found at data/imports/social-signals.json.",
+      "recordsImported": 0
+    },
+    {
+      "id": "90159827-de17-4c20-a742-b4891d2a697b",
+      "connectorId": "manual_serp_csv",
+      "status": "NO_DATA",
+      "ranAt": "2026-07-13T15:11:31.274Z",
+      "reason": "No SERP CSV found at data/imports/serp.csv.",
+      "recordsImported": 0
+    },
+    {
+      "id": "811eff95-e0a1-4b17-b54e-83f0e56f3a91",
+      "connectorId": "competitor_public_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-13T15:11:31.246Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "431b6d34-e1f7-409b-be5a-3e7bf180cfb0",
+      "connectorId": "competitor_sitemap_discovery",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-13T15:11:30.757Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "c0e8a45c-37b6-4da4-b04e-a2d2835a8362",
+      "connectorId": "owned_site_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-13T15:11:29.696Z",
+      "recordsImported": 70
+    },
+    {
+      "id": "95731ed8-3db4-44c1-985e-1dee712483d6",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-07-13T15:11:29.669Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "e0b67494-ac29-414a-820e-e3ae611142d3",
+      "connectorId": "google_url_inspection",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-07-13T15:11:29.642Z",
+      "reason": "GSC_SITE_URL and GSC_ACCESS_TOKEN, or GSC_URL_INSPECTION_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "ddc635c7-54cd-4f13-ac36-341ad06ea4e2",
+      "connectorId": "google_search_console_search_analytics",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-07-13T15:11:29.615Z",
+      "reason": "GSC_SITE_URL and GSC_ACCESS_TOKEN, or GSC_SEARCH_ANALYTICS_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
       "id": "cbad30e3-baf1-4f02-989d-617e5613e1f6",
       "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
