@@ -2,6 +2,27 @@
   "schemaVersion": "4.1.0",
   "runs": [
     {
+      "id": "a12c7129-b67b-4663-a672-49d556c38e99",
+      "connectorId": "growth_brief_generation",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-14T12:01:34.643Z",
+      "recordsImported": 40
+    },
+    {
+      "id": "f88d2f5b-98e5-41a2-8d30-f2a41de5b7fe",
+      "connectorId": "authority_requirement_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-14T12:01:34.492Z",
+      "recordsImported": 67
+    },
+    {
+      "id": "aa94e521-c661-46a1-8198-c831b8d7c1a3",
+      "connectorId": "growth_maintenance_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-14T12:01:34.342Z",
+      "recordsImported": 67
+    },
+    {
       "id": "c3ad797f-f160-41ca-b7dc-560a902a487d",
       "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
@@ -1832,29 +1853,6 @@
       "ranAt": "2026-07-08T12:21:00.678Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL are required. Set the exact Bing endpoint for the owned property.",
       "recordsImported": 0
-    },
-    {
-      "id": "40bb7f47-fb40-45eb-8afb-32ba3ebf6de6",
-      "connectorId": "google_url_inspection",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-07-08T12:21:00.413Z",
-      "reason": "GOOGLE_SEARCH_CONSOLE_SITE_URL and GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "df09aeaf-a931-442e-9214-606100acc45a",
-      "connectorId": "google_search_console_search_analytics",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-07-08T12:21:00.140Z",
-      "reason": "GOOGLE_SEARCH_CONSOLE_SITE_URL and GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "78fcf9e5-a7a1-4967-b475-b7cd21da693f",
-      "connectorId": "growth_brief_generation",
-      "status": "COMPLETE",
-      "ranAt": "2026-07-08T12:14:38.194Z",
-      "recordsImported": 33
     }
   ]
 }
