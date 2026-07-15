@@ -2,6 +2,20 @@
   "schemaVersion": "4.1.0",
   "runs": [
     {
+      "id": "440a45e2-3f9f-4514-acde-f9a3467ca26c",
+      "connectorId": "competitor_public_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-15T09:29:03.957Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "7b1c04ea-78b2-4d0c-a32f-e50ff5c58d07",
+      "connectorId": "competitor_sitemap_discovery",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-15T09:29:03.366Z",
+      "recordsImported": 2
+    },
+    {
       "id": "a12c7129-b67b-4663-a672-49d556c38e99",
       "connectorId": "growth_brief_generation",
       "status": "COMPLETE",
@@ -1838,21 +1852,6 @@
       "status": "COMPLETE",
       "ranAt": "2026-07-08T12:21:06.320Z",
       "recordsImported": 2
-    },
-    {
-      "id": "800dbd9d-0f70-46e3-a374-3dd173402e3f",
-      "connectorId": "owned_site_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-07-08T12:21:00.960Z",
-      "recordsImported": 38
-    },
-    {
-      "id": "ec854eea-1a09-40b6-8439-d561fd0c21d2",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-07-08T12:21:00.678Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL are required. Set the exact Bing endpoint for the owned property.",
-      "recordsImported": 0
     }
   ]
 }
