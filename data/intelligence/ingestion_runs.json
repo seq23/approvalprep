@@ -2,6 +2,27 @@
   "schemaVersion": "4.1.0",
   "runs": [
     {
+      "id": "da541d25-34c5-4e94-88dc-7caa7d00c945",
+      "connectorId": "growth_brief_generation",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-21T12:11:12.369Z",
+      "recordsImported": 40
+    },
+    {
+      "id": "9ac0c72b-6f8e-4b33-a6a2-89477b9638c8",
+      "connectorId": "authority_requirement_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-21T12:11:12.238Z",
+      "recordsImported": 67
+    },
+    {
+      "id": "0fbfc173-9e20-492a-8c0f-9d3e39c1dbd1",
+      "connectorId": "growth_maintenance_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-21T12:11:12.110Z",
+      "recordsImported": 67
+    },
+    {
       "id": "1487fd2a-4e90-4427-bc14-e4c3e67e02cb",
       "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
@@ -1842,29 +1863,6 @@
       "status": "COMPLETE",
       "ranAt": "2026-07-09T21:19:25.538Z",
       "recordsImported": 4
-    },
-    {
-      "id": "cd28e4e4-5349-4e8e-be58-4ca15089988a",
-      "connectorId": "manual_social_signal_import",
-      "status": "NO_DATA",
-      "ranAt": "2026-07-09T21:19:15.195Z",
-      "reason": "No social signal import found at data/imports/social-signals.json.",
-      "recordsImported": 0
-    },
-    {
-      "id": "b076fb37-0d4c-4fa4-9e7c-f99b6d1eb3c0",
-      "connectorId": "manual_serp_csv",
-      "status": "NO_DATA",
-      "ranAt": "2026-07-09T21:19:14.932Z",
-      "reason": "No SERP CSV found at data/imports/serp.csv.",
-      "recordsImported": 0
-    },
-    {
-      "id": "9c68fbcc-c92e-473e-a715-6cdb4410cf55",
-      "connectorId": "competitor_public_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-07-09T21:19:14.673Z",
-      "recordsImported": 2
     }
   ]
 }
