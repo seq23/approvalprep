@@ -2,6 +2,20 @@
   "schemaVersion": "4.1.0",
   "runs": [
     {
+      "id": "63d73985-9573-496f-8792-43a60f0573ff",
+      "connectorId": "competitor_public_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-22T09:59:44.468Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "cf66fd9c-6318-418b-a2da-cdd5439d86b3",
+      "connectorId": "competitor_sitemap_discovery",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-22T09:59:43.815Z",
+      "recordsImported": 2
+    },
+    {
       "id": "da541d25-34c5-4e94-88dc-7caa7d00c945",
       "connectorId": "growth_brief_generation",
       "status": "COMPLETE",
@@ -1848,21 +1862,6 @@
       "ranAt": "2026-07-09T21:19:26.249Z",
       "reason": "GSC_SITE_URL and GSC_ACCESS_TOKEN, or GSC_URL_INSPECTION_IMPORT_FILE, are required.",
       "recordsImported": 0
-    },
-    {
-      "id": "13be75bf-9f70-455e-9eab-a1bdadc0aef9",
-      "connectorId": "google_search_console_search_analytics",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-07-09T21:19:25.983Z",
-      "reason": "GSC_SITE_URL and GSC_ACCESS_TOKEN, or GSC_SEARCH_ANALYTICS_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "353dec63-f94a-4abe-bf07-6e4e68f9d2a8",
-      "connectorId": "official_source_fetcher",
-      "status": "COMPLETE",
-      "ranAt": "2026-07-09T21:19:25.538Z",
-      "recordsImported": 4
     }
   ]
 }
