@@ -1,153 +1,155 @@
 {
   "schemaVersion": "4.1.0",
-  "generatedAt": "2026-07-21T12:11:12.368Z",
+  "generatedAt": "2026-07-23T12:13:08.956Z",
   "sourceStatus": [
     {
-      "id": "9ac0c72b-6f8e-4b33-a6a2-89477b9638c8",
+      "id": "05b22f50-383f-491f-829b-72514667d946",
       "connectorId": "authority_requirement_analysis",
       "status": "COMPLETE",
-      "ranAt": "2026-07-21T12:11:12.238Z",
+      "ranAt": "2026-07-23T12:13:08.790Z",
       "recordsImported": 67
     },
     {
-      "id": "0fbfc173-9e20-492a-8c0f-9d3e39c1dbd1",
+      "id": "486704ce-4655-4f3b-a087-2525f8134f92",
       "connectorId": "growth_maintenance_analysis",
       "status": "COMPLETE",
-      "ranAt": "2026-07-21T12:11:12.110Z",
+      "ranAt": "2026-07-23T12:13:08.616Z",
       "recordsImported": 67
     },
     {
-      "id": "1487fd2a-4e90-4427-bc14-e4c3e67e02cb",
+      "id": "064767c4-c75c-430d-b39d-db643df1cb7b",
       "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
-      "ranAt": "2026-07-21T10:34:57.030Z",
+      "ranAt": "2026-07-23T10:35:59.182Z",
       "recordsImported": 4
     },
     {
-      "id": "e209395b-9fad-4e5f-a7d2-56bd87e6eb65",
+      "id": "4070e843-d900-4be6-93cc-ad0aac89f3e0",
       "connectorId": "manual_social_signal_import",
       "status": "NO_DATA",
-      "ranAt": "2026-07-21T10:34:52.675Z",
+      "ranAt": "2026-07-23T10:35:54.157Z",
       "reason": "No social signal import found at data/imports/social-signals.json.",
       "recordsImported": 0
     },
     {
-      "id": "19e238b3-cd01-4e59-b02e-7daa4845e7e5",
+      "id": "cf660751-f1d2-4ac6-acf3-b3cf044a2c37",
       "connectorId": "manual_serp_csv",
       "status": "NO_DATA",
-      "ranAt": "2026-07-21T10:34:52.532Z",
+      "ranAt": "2026-07-23T10:35:54.007Z",
       "reason": "No SERP CSV found at data/imports/serp.csv.",
       "recordsImported": 0
     },
     {
-      "id": "10e8253e-7925-4fae-ac7d-f02c0180c713",
+      "id": "1fda21ce-a3bd-4ce3-9e82-94af6ce174c7",
       "connectorId": "competitor_public_crawler",
       "status": "COMPLETE",
-      "ranAt": "2026-07-21T10:34:52.362Z",
+      "ranAt": "2026-07-23T10:35:53.870Z",
       "recordsImported": 2
     },
     {
-      "id": "1c25e466-5d8a-41f5-8da4-fceea7adf933",
+      "id": "c9b8e16e-2d2f-4405-b807-ca139ce59e17",
       "connectorId": "competitor_sitemap_discovery",
       "status": "COMPLETE",
-      "ranAt": "2026-07-21T10:34:51.861Z",
+      "ranAt": "2026-07-23T10:35:53.295Z",
       "recordsImported": 2
     },
     {
-      "id": "a005e61b-c5b3-40d0-bfe9-30647b1a862b",
+      "id": "f5371868-4503-4fa2-aecd-ac35aace532b",
       "connectorId": "owned_site_crawler",
       "status": "COMPLETE",
-      "ranAt": "2026-07-21T10:34:51.350Z",
+      "ranAt": "2026-07-23T10:35:52.353Z",
       "recordsImported": 70
     },
     {
-      "id": "fe703426-bf44-4e22-bb95-8a33ff1417f0",
+      "id": "0bcdcc5a-5b3b-46d0-95c9-e794cabfb047",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-07-21T10:34:51.208Z",
+      "ranAt": "2026-07-23T10:35:52.211Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "05e8790d-993d-4e29-b6ca-a802b8dacd99",
+      "id": "7df88f80-7261-4846-8dca-efaced9ce960",
       "connectorId": "google_url_inspection",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-07-21T10:34:51.064Z",
+      "ranAt": "2026-07-23T10:35:52.066Z",
       "reason": "GSC_SITE_URL and GSC_ACCESS_TOKEN, or GSC_URL_INSPECTION_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "10e5fc9b-32a1-4a81-ab7f-fb9897843727",
+      "id": "dcfba96e-baab-4e99-af16-876472270c2a",
       "connectorId": "google_search_console_search_analytics",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-07-21T10:34:50.923Z",
+      "ranAt": "2026-07-23T10:35:51.928Z",
       "reason": "GSC_SITE_URL and GSC_ACCESS_TOKEN, or GSC_SEARCH_ANALYTICS_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "c04e41b5-d426-4a86-9153-549c5ba1c1c4",
-      "connectorId": "cloudflare_crawler_logs",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-07-20T14:33:30.300Z",
-      "reason": "Cloudflare crawler ingestion requires Cloudflare credentials or a manual import file.",
-      "recordsImported": 0
-    },
-    {
-      "id": "9398445b-55cc-4536-879c-fbaee233b51f",
-      "connectorId": "growth_brief_generation",
-      "status": "COMPLETE",
-      "ranAt": "2026-07-20T14:33:30.267Z",
-      "recordsImported": 40
-    },
-    {
-      "id": "0046b901-d18c-4e4b-b313-a67ef19b3918",
-      "connectorId": "page_action_recommendation",
-      "status": "COMPLETE",
-      "ranAt": "2026-07-20T14:33:30.232Z",
-      "recordsImported": 335
-    },
-    {
-      "id": "a5eb4c25-e484-4537-83f6-e63246b55c47",
-      "connectorId": "authority_requirement_analysis",
-      "status": "COMPLETE",
-      "ranAt": "2026-07-20T14:33:30.198Z",
-      "recordsImported": 67
-    },
-    {
-      "id": "3f93a878-53c4-49e5-b476-f559a732b3da",
-      "connectorId": "growth_maintenance_analysis",
-      "status": "COMPLETE",
-      "ranAt": "2026-07-20T14:33:30.163Z",
-      "recordsImported": 67
-    },
-    {
-      "id": "914623ef-e96d-4c72-b7ac-4ba401828123",
-      "connectorId": "content_opportunity_analysis",
-      "status": "COMPLETE",
-      "ranAt": "2026-07-20T14:33:30.126Z",
-      "recordsImported": 335
-    },
-    {
-      "id": "77d1a41b-2008-4e3c-a958-15413fc70486",
+      "id": "afbc9e98-4612-4620-8484-e5ae3fd7d43e",
       "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
-      "ranAt": "2026-07-20T14:33:30.085Z",
+      "ranAt": "2026-07-22T10:35:24.479Z",
       "recordsImported": 4
     },
     {
-      "id": "c5dfc21e-dbd0-4f9d-af7d-0a9360b88bc3",
+      "id": "0e2cb1ca-2d08-461f-93ad-09305d3451fb",
       "connectorId": "manual_social_signal_import",
       "status": "NO_DATA",
-      "ranAt": "2026-07-20T14:33:26.516Z",
+      "ranAt": "2026-07-22T10:35:13.611Z",
       "reason": "No social signal import found at data/imports/social-signals.json.",
       "recordsImported": 0
     },
     {
-      "id": "ea99c5c9-6bb0-465b-81b3-217c54310d4d",
+      "id": "6433235c-f146-4ead-9439-0af4a60cca38",
       "connectorId": "manual_serp_csv",
       "status": "NO_DATA",
-      "ranAt": "2026-07-20T14:33:26.483Z",
+      "ranAt": "2026-07-22T10:35:13.526Z",
       "reason": "No SERP CSV found at data/imports/serp.csv.",
+      "recordsImported": 0
+    },
+    {
+      "id": "a2bd41a2-0dfb-4ea2-9532-6fa0f431a511",
+      "connectorId": "competitor_public_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-22T10:35:13.438Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "9e9a762e-8b74-447e-ba53-0572d718505f",
+      "connectorId": "competitor_sitemap_discovery",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-22T10:35:12.884Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "70739c3f-9988-46aa-a612-6b1bb9150921",
+      "connectorId": "owned_site_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-22T10:35:12.104Z",
+      "recordsImported": 70
+    },
+    {
+      "id": "36814317-fabb-43ef-853e-c2dce7ac1db8",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-07-22T10:35:12.017Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "d88e57f5-85de-4725-bdbf-5ec6766a8796",
+      "connectorId": "google_url_inspection",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-07-22T10:35:11.926Z",
+      "reason": "GSC_SITE_URL and GSC_ACCESS_TOKEN, or GSC_URL_INSPECTION_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "12c77e71-03b9-4a73-99d3-447df0212ee1",
+      "connectorId": "google_search_console_search_analytics",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-07-22T10:35:11.837Z",
+      "reason": "GSC_SITE_URL and GSC_ACCESS_TOKEN, or GSC_SEARCH_ANALYTICS_IMPORT_FILE, are required.",
       "recordsImported": 0
     }
   ],
@@ -170,7 +172,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-21T11:21:51.793Z"
+      "createdAt": "2026-07-23T11:22:49.396Z"
     },
     {
       "id": "brief_",
@@ -190,7 +192,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-21T11:21:51.793Z"
+      "createdAt": "2026-07-23T11:22:49.396Z"
     },
     {
       "id": "brief_",
@@ -210,7 +212,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-21T11:21:51.793Z"
+      "createdAt": "2026-07-23T11:22:49.396Z"
     },
     {
       "id": "brief_",
@@ -230,7 +232,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-21T11:21:51.793Z"
+      "createdAt": "2026-07-23T11:22:49.396Z"
     },
     {
       "id": "brief_",
@@ -250,7 +252,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-21T11:21:51.793Z"
+      "createdAt": "2026-07-23T11:22:49.396Z"
     },
     {
       "id": "brief_",
@@ -270,7 +272,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-21T11:21:51.793Z"
+      "createdAt": "2026-07-23T11:22:49.396Z"
     },
     {
       "id": "brief_",
@@ -290,7 +292,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-21T11:21:51.793Z"
+      "createdAt": "2026-07-23T11:22:49.396Z"
     },
     {
       "id": "brief_",
@@ -310,7 +312,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-21T11:21:51.793Z"
+      "createdAt": "2026-07-23T11:22:49.397Z"
     },
     {
       "id": "brief_",
@@ -330,7 +332,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-21T11:21:51.794Z"
+      "createdAt": "2026-07-23T11:22:49.397Z"
     },
     {
       "id": "brief_",
@@ -350,7 +352,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-21T11:21:51.794Z"
+      "createdAt": "2026-07-23T11:22:49.397Z"
     },
     {
       "id": "brief_",
@@ -370,7 +372,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-21T11:21:51.794Z"
+      "createdAt": "2026-07-23T11:22:49.397Z"
     },
     {
       "id": "brief_",
@@ -390,7 +392,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-21T11:21:51.794Z"
+      "createdAt": "2026-07-23T11:22:49.397Z"
     },
     {
       "id": "brief_",
@@ -410,7 +412,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-21T11:21:51.794Z"
+      "createdAt": "2026-07-23T11:22:49.397Z"
     },
     {
       "id": "brief_",
@@ -430,7 +432,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-21T11:21:51.794Z"
+      "createdAt": "2026-07-23T11:22:49.397Z"
     },
     {
       "id": "brief_",
@@ -450,7 +452,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-21T11:21:51.794Z"
+      "createdAt": "2026-07-23T11:22:49.397Z"
     },
     {
       "id": "brief_",
@@ -470,7 +472,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-21T11:21:51.794Z"
+      "createdAt": "2026-07-23T11:22:49.397Z"
     },
     {
       "id": "brief_",
@@ -490,7 +492,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-21T11:21:51.794Z"
+      "createdAt": "2026-07-23T11:22:49.397Z"
     },
     {
       "id": "brief_",
@@ -510,7 +512,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-21T11:21:51.794Z"
+      "createdAt": "2026-07-23T11:22:49.397Z"
     },
     {
       "id": "brief_",
@@ -530,7 +532,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-21T11:21:51.794Z"
+      "createdAt": "2026-07-23T11:22:49.397Z"
     },
     {
       "id": "brief_",
@@ -550,7 +552,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Not enough unique utility unless tied to a product flow.",
-      "createdAt": "2026-07-21T11:21:51.794Z"
+      "createdAt": "2026-07-23T11:22:49.397Z"
     }
   ],
   "topMaintenanceActions": [
@@ -568,7 +570,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-07-21T12:11:12.108Z"
+      "createdAt": "2026-07-23T12:13:08.614Z"
     },
     {
       "route": "/letter-writing-studio",
@@ -584,7 +586,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-07-21T12:11:12.108Z"
+      "createdAt": "2026-07-23T12:13:08.614Z"
     },
     {
       "route": "/blog",
@@ -600,7 +602,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-07-21T12:11:12.108Z"
+      "createdAt": "2026-07-23T12:13:08.614Z"
     },
     {
       "route": "/resources",
@@ -616,7 +618,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-07-21T12:11:12.108Z"
+      "createdAt": "2026-07-23T12:13:08.614Z"
     },
     {
       "route": "/pricing",
@@ -632,7 +634,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-07-21T12:11:12.108Z"
+      "createdAt": "2026-07-23T12:13:08.614Z"
     },
     {
       "route": "/letter-of-explanation",
@@ -648,7 +650,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-07-21T12:11:12.108Z"
+      "createdAt": "2026-07-23T12:13:08.614Z"
     },
     {
       "route": "/letter-of-explanation/credit",
@@ -664,7 +666,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-07-21T12:11:12.108Z"
+      "createdAt": "2026-07-23T12:13:08.614Z"
     },
     {
       "route": "/letter-of-explanation/eviction",
@@ -680,7 +682,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-07-21T12:11:12.108Z"
+      "createdAt": "2026-07-23T12:13:08.614Z"
     },
     {
       "route": "/letter-of-explanation/income",
@@ -696,7 +698,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-07-21T12:11:12.108Z"
+      "createdAt": "2026-07-23T12:13:08.614Z"
     },
     {
       "route": "/letter-of-explanation/employment-gap",
@@ -712,7 +714,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-07-21T12:11:12.108Z"
+      "createdAt": "2026-07-23T12:13:08.614Z"
     },
     {
       "route": "/employment-verification-letter",
@@ -728,7 +730,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-07-21T12:11:12.108Z"
+      "createdAt": "2026-07-23T12:13:08.614Z"
     },
     {
       "route": "/proof-of-income-letter",
@@ -744,7 +746,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-07-21T12:11:12.108Z"
+      "createdAt": "2026-07-23T12:13:08.614Z"
     },
     {
       "route": "/credit-dispute-letter",
@@ -760,7 +762,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-07-21T12:11:12.108Z"
+      "createdAt": "2026-07-23T12:13:08.614Z"
     },
     {
       "route": "/apartment-application",
@@ -776,7 +778,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-07-21T12:11:12.108Z"
+      "createdAt": "2026-07-23T12:13:08.614Z"
     },
     {
       "route": "/rental-application-checklist",
@@ -792,7 +794,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-07-21T12:11:12.108Z"
+      "createdAt": "2026-07-23T12:13:08.614Z"
     },
     {
       "route": "/how-to-get-approved-for-an-apartment",
@@ -808,7 +810,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-07-21T12:11:12.108Z"
+      "createdAt": "2026-07-23T12:13:08.614Z"
     },
     {
       "route": "/auto-loan-documents",
@@ -824,7 +826,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-07-21T12:11:12.108Z"
+      "createdAt": "2026-07-23T12:13:08.614Z"
     },
     {
       "route": "/car-loan-checklist",
@@ -840,7 +842,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-07-21T12:11:12.108Z"
+      "createdAt": "2026-07-23T12:13:08.614Z"
     },
     {
       "route": "/documents-needed-for-car-loan",
@@ -856,7 +858,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-07-21T12:11:12.108Z"
+      "createdAt": "2026-07-23T12:13:08.614Z"
     },
     {
       "route": "/sba-loan-checklist",
@@ -872,7 +874,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-07-21T12:11:12.108Z"
+      "createdAt": "2026-07-23T12:13:08.614Z"
     }
   ],
   "hardTruth": "Low ranking potential never blocks useful onsite content. It only changes indexing, priority, and authority strategy."
