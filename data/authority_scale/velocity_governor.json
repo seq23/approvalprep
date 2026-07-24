@@ -1,0 +1,33 @@
+{
+  "schema_version": "1.0",
+  "mode": "risk_adjusted_dynamic_safety_ceiling",
+  "current_default_new_page_ceiling_per_day": 3,
+  "scale_tiers": [
+    3,
+    5,
+    10,
+    15,
+    25
+  ],
+  "targets_are_quotas": false,
+  "risk_rules": {
+    "high_or_regulated": "existing source/claim/credit-boundary gates remain authoritative; no automatic scale-up merely due backlog",
+    "medium": "may scale only with clean validation, distinct intent and sufficient sources",
+    "low": "may scale within governor after proof"
+  },
+  "scale_up_requires": [
+    "distinct admitted backlog",
+    "clean validation",
+    "source coverage",
+    "no credit-boundary regressions",
+    "acceptable duplicate rate",
+    "stable indexation"
+  ],
+  "scale_down_triggers": [
+    "claim/source failure",
+    "regulated boundary failure",
+    "duplicate pressure",
+    "validation regression",
+    "indexation backlog"
+  ]
+}
