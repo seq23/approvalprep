@@ -1,26 +1,5 @@
 #!/usr/bin/env node
-import fs from "node:fs";
-
-const mode = process.env.RUN_MODE || "dry_run";
-const accessToken = process.env.GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN || "";
-const site = process.env.GOOGLE_SEARCH_CONSOLE_SITE_URL || process.env.APPROVALPREP_SITE_URL || "https://approvalprep.com";
-const sitemap = `${site.replace(/\/$/, "")}/sitemap.xml`;
-const liveReady = Boolean(accessToken) && mode === "live";
-const receipt = {
-  provider: "Google Search Console",
-  mode,
-  status: liveReady ? "READY_TO_SUBMIT_SITEMAP" : "DRY_RUN_REQUIRES_LIVE_MODE_OR_TOKEN",
-  site,
-  sitemap,
-  submittedSitemapCount: liveReady ? 1 : 0,
-  preparedSitemapCount: 1,
-  rankingProof: false,
-  claimsIndexed: false,
-  generatedAt: new Date().toISOString()
-};
-
-const registry = JSON.parse(fs.readFileSync("data/seo/submission_registry.json", "utf8"));
-registry.submissions = [...(registry.submissions || []), receipt];
-registry.note = "Submission receipts are operational logs only. They are not ranking, indexing, citation, or traffic proof.";
-fs.writeFileSync("data/seo/submission_registry.json", JSON.stringify(registry, null, 2) + "\n");
-console.log(`[gsc] ${receipt.status} sitemap=${receipt.sitemap}`);
+import fs from 'node:fs';
+const mode=process.env.RUN_MODE||'dry_run';const accessToken=process.env.GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN||process.env.GSC_ACCESS_TOKEN||'';const site=process.env.GOOGLE_SEARCH_CONSOLE_SITE_URL||process.env.GSC_SITE_URL||process.env.APPROVALPREP_SITE_URL||'https://approvalprep.com';const sitemap=`${site.replace(/\/$/,'')}/sitemap.xml`;let status='DRY_RUN_REQUIRES_LIVE_MODE_OR_TOKEN',httpStatus=null,error=null;
+if(mode==='live'&&accessToken){const endpoint=`https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(site)}/sitemaps/${encodeURIComponent(sitemap)}`;try{const r=await fetch(endpoint,{method:'PUT',headers:{Authorization:`Bearer ${accessToken}`}});httpStatus=r.status;if(!r.ok)throw new Error(`GSC sitemap submit HTTP ${r.status}: ${(await r.text()).slice(0,500)}`);status='SUBMITTED';}catch(e){status='SOURCE_ERROR';error=e.message;process.exitCode=1;}}
+const receipt={provider:'Google Search Console',mode,status,site,sitemap,httpStatus,error,submittedSitemapCount:status==='SUBMITTED'?1:0,preparedSitemapCount:1,rankingProof:false,claimsIndexed:false,generatedAt:new Date().toISOString()};const p='data/seo/submission_registry.json';const registry=JSON.parse(fs.readFileSync(p,'utf8'));registry.submissions=[...(registry.submissions||[]),receipt].slice(-500);registry.note='Submission receipts are operational logs only. They are not ranking, indexing, citation, or traffic proof.';fs.writeFileSync(p,JSON.stringify(registry,null,2)+'\n');console.log(`[gsc] ${status} sitemap=${sitemap}`);

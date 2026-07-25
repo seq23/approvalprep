@@ -16,7 +16,8 @@ const ledger = readJson("data/release/release_ledger.json");
 const existingPaths = new Set(manifest.routes.map((route) => route.path));
 const registeredPaths = new Set(registry.pages.map((page) => page.path));
 const registeredQueries = new Set(registry.pages.map((page) => page.primaryQuery).filter(Boolean));
-const cap = Number(opportunities.dailyPublishCap || 3);
+const velocityDecision = fs.existsSync("data/authority_scale/velocity_decision.json") ? readJson("data/authority_scale/velocity_decision.json") : {};
+const cap = Number(velocityDecision.recommended_new_url_ceiling_per_day || opportunities.dailyPublishCap || 3);
 const candidates = opportunities.opportunities
   .filter((item) => item && item.path && item.title && item.primaryQuery)
   .filter((item) => !existingPaths.has(item.path) && !registeredPaths.has(item.path) && !registeredQueries.has(item.primaryQuery))

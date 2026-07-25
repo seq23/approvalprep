@@ -6,8 +6,20 @@ on:
         description: "Run fixture workflow data trace only"
         required: false
         default: "false"
+  workflow_run:
+    workflows:
+      - Scheduled Content Release
+      - Citation OS Daily
+    branches: [main]
+    types: [completed]
+permissions:
+  contents: write
+concurrency:
+  group: approvalprep-indexing-submit-main
+  cancel-in-progress: false
 jobs:
   indexing:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
@@ -17,6 +29,30 @@ jobs:
       - name: Run fixture workflow trace
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
         run: npm run workflows:trace -- --workflow indexing-submit.yml
-      - run: npm run seo:indexnow
-      - run: npm run seo:bing
-      - run: npm run seo:gsc
+      - name: Refresh sitemap and citation-yield scoreboard
+        run: npm run seo:sitemap && npm run authority:yield:build
+      - name: Submit IndexNow, Bing telemetry lane, and Search Console when configured
+        env:
+          RUN_MODE: live
+          INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}
+          APPROVALPREP_SITE_URL: ${{ vars.APPROVALPREP_SITE_URL }}
+          GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN: ${{ secrets.GSC_ACCESS_TOKEN }}
+          GOOGLE_SEARCH_CONSOLE_SITE_URL: ${{ secrets.GSC_SITE_URL }}
+          GSC_ACCESS_TOKEN: ${{ secrets.GSC_ACCESS_TOKEN }}
+          GSC_SITE_URL: ${{ secrets.GSC_SITE_URL }}
+        run: |
+          npm run seo:indexnow
+          npm run seo:bing
+          npm run seo:gsc
+      - name: Validate truthful yield and indexing ledgers
+        run: |
+          npm run authority:yield:validate
+          npm run validate:indexing-provider-ledgers
+      - name: Commit operational receipts only
+        run: |
+          git config user.name "approvalprep-indexing-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/seo data/intelligence data/metrics data/authority_scale public/sitemap.xml 2>/dev/null || true
+          git diff --cached --quiet || git commit -m "chore(indexing): submit validated publication surfaces"
+          git pull --rebase origin main
+          git push origin HEAD:main
