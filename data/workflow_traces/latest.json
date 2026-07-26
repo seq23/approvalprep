@@ -1,6 +1,6 @@
 {
   "schemaVersion": "4.2.1",
-  "generatedAt": "2026-07-24T11:55:55.131Z",
+  "generatedAt": "2026-07-26T11:37:02.943Z",
   "status": "COMPLETE_FIXTURE_TRACE",
   "workflowCount": 16,
   "manualReadyCount": 16,
@@ -299,17 +299,20 @@
       "buildsProject": false,
       "dependencyInstallPolicyOk": true,
       "fixtureTraceInput": true,
-      "secretRefs": [],
+      "secretRefs": [
+        "GSC_ACCESS_TOKEN",
+        "GSC_SITE_URL",
+        "INDEXNOW_KEY"
+      ],
       "npmScripts": [
-        "seo:bing",
-        "seo:gsc",
-        "seo:indexnow",
+        "authority:yield:build",
+        "seo:sitemap",
         "workflows:trace"
       ],
       "missingNpmScripts": [],
       "expectedDataTouches": [],
       "proofBoundary": "This trace proves workflow shape, commands, secret references, and fixture/manual-run readiness. It does not prove GitHub Actions execution, provider credentials, or deployed runtime.",
-      "traceId": "71588ada7f54772f"
+      "traceId": "3bd0d8ebc0b2e5da"
     },
     {
       "workflow": "intelligence-ingest-free-sources.yml",
