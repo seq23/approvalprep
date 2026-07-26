@@ -2,9 +2,10 @@
   "schemaVersion": "4.2.0",
   "cadence": {
     "dailyShortAnswers": {
-      "targetPerDay": 5,
+      "targetPerDay": 3,
       "autoPublishAllowed": true,
-      "riskLimit": "low"
+      "riskLimit": "low",
+      "safetyCeilingSource": "data/authority_scale/velocity_governor.json"
     },
     "weeklyArticles": {
       "targetPerWeek": 5,

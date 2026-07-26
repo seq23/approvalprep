@@ -10,12 +10,21 @@ on:
     - cron: "31 7 * * 3"
 permissions:
   contents: write
+concurrency:
+  group: approvalprep-main-writer
+  cancel-in-progress: false
+
 jobs:
   competitors:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Synchronize latest main
+        run: bash scripts/workflows/prepare-main-writer.sh
       - uses: actions/setup-node@v4
         with:
           node-version: 22.12.0
@@ -31,4 +40,4 @@ jobs:
           git config user.email "hello@approvalprep.com"
           git add data/intelligence/competitor_*.json data/intelligence/ingestion_runs.json
           git diff --cached --quiet || git commit -m "Refresh competitor intelligence"
-          git push
+          bash scripts/workflows/safe-push-main.sh

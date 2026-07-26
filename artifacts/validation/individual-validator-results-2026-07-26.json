@@ -1,0 +1,784 @@
+{
+  "generated_at": "2026-07-26T15:14:42.220Z",
+  "total": 97,
+  "passed": 97,
+  "failed": 0,
+  "results": [
+    {
+      "name": "validate:admin",
+      "status": 0,
+      "duration_ms": 160,
+      "started_at": "2026-07-26T15:14:31.563Z",
+      "stdout": "[admin] OK panels=10 queries=335 atoms=724 answers=33\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:admin-action-links",
+      "status": 0,
+      "duration_ms": 176,
+      "started_at": "2026-07-26T15:14:31.723Z",
+      "stdout": "[admin-action-links] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:artifact",
+      "status": 0,
+      "duration_ms": 183,
+      "started_at": "2026-07-26T15:14:31.899Z",
+      "stdout": "[artifact] OK approvalprep-main_PHASE_A-F_HOSTILE_REVIEW_FIX_07-09-26.zip\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:atlas",
+      "status": 0,
+      "duration_ms": 102,
+      "started_at": "2026-07-26T15:14:32.082Z",
+      "stdout": "[atlas] OK routes=69 queries=335 fanoutParents=67\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:atom-coverage-depth",
+      "status": 0,
+      "duration_ms": 106,
+      "started_at": "2026-07-26T15:14:32.184Z",
+      "stdout": "[atom-coverage-depth] OK atoms=724 targets=440\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:atoms",
+      "status": 0,
+      "duration_ms": 113,
+      "started_at": "2026-07-26T15:14:32.291Z",
+      "stdout": "[atoms] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:authority-assets",
+      "status": 0,
+      "duration_ms": 98,
+      "started_at": "2026-07-26T15:14:32.404Z",
+      "stdout": "[authority-assets] OK tools=6\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:automation-safety",
+      "status": 0,
+      "duration_ms": 99,
+      "started_at": "2026-07-26T15:14:32.503Z",
+      "stdout": "[automation-safety] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:backlink-handoff",
+      "status": 0,
+      "duration_ms": 101,
+      "started_at": "2026-07-26T15:14:32.602Z",
+      "stdout": "[validate:backlink-handoff] OK needs=67\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:backlink-honesty",
+      "status": 0,
+      "duration_ms": 97,
+      "started_at": "2026-07-26T15:14:32.703Z",
+      "stdout": "[backlink-recommendation-honesty] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:blog-detail-pages",
+      "status": 0,
+      "duration_ms": 98,
+      "started_at": "2026-07-26T15:14:32.800Z",
+      "stdout": "[blog-detail-pages] OK published=30\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:browserless-accessibility",
+      "status": 0,
+      "duration_ms": 96,
+      "started_at": "2026-07-26T15:14:32.898Z",
+      "stdout": "[validate:browserless-accessibility] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:citation-claims",
+      "status": 0,
+      "duration_ms": 99,
+      "started_at": "2026-07-26T15:14:32.994Z",
+      "stdout": "[claims] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:citation-ledger",
+      "status": 0,
+      "duration_ms": 98,
+      "started_at": "2026-07-26T15:14:33.093Z",
+      "stdout": "[validate:citation-ledger] OK candidates=80 confirmed=0\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:citation-opportunities",
+      "status": 0,
+      "duration_ms": 114,
+      "started_at": "2026-07-26T15:14:33.191Z",
+      "stdout": "[citation-opportunity-integrity] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:citation-strategy",
+      "status": 0,
+      "duration_ms": 99,
+      "started_at": "2026-07-26T15:14:33.305Z",
+      "stdout": "[citation-strategy] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:cloudflare-crawler-intelligence",
+      "status": 0,
+      "duration_ms": 98,
+      "started_at": "2026-07-26T15:14:33.404Z",
+      "stdout": "[cloudflare-crawler] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:commercial-page-cta-depth",
+      "status": 0,
+      "duration_ms": 98,
+      "started_at": "2026-07-26T15:14:33.502Z",
+      "stdout": "[commercial-cta-depth] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:competitor-crawl",
+      "status": 0,
+      "duration_ms": 97,
+      "started_at": "2026-07-26T15:14:33.600Z",
+      "stdout": "[competitor-crawl-policy] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:content-actions",
+      "status": 0,
+      "duration_ms": 98,
+      "started_at": "2026-07-26T15:14:33.697Z",
+      "stdout": "[content-action-decision] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:content-approval-governance",
+      "status": 0,
+      "duration_ms": 98,
+      "started_at": "2026-07-26T15:14:33.796Z",
+      "stdout": "[validate:content-approval-governance] OK queued=26 approvals=0\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:content-lifecycle",
+      "status": 0,
+      "duration_ms": 97,
+      "started_at": "2026-07-26T15:14:33.894Z",
+      "stdout": "[validate:content-lifecycle] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:content-release",
+      "status": 0,
+      "duration_ms": 190,
+      "started_at": "2026-07-26T15:14:33.991Z",
+      "stdout": "[content-release] OK cumulative=33 fixtureAdded=3 idempotent=true\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:conversion-attribution",
+      "status": 0,
+      "duration_ms": 110,
+      "started_at": "2026-07-26T15:14:34.181Z",
+      "stdout": "[conversion-attribution] OK events=8 blocked=11\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:conversion-privacy",
+      "status": 0,
+      "duration_ms": 106,
+      "started_at": "2026-07-26T15:14:34.292Z",
+      "stdout": "[validate:conversion-privacy] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:credit-boundary",
+      "status": 0,
+      "duration_ms": 107,
+      "started_at": "2026-07-26T15:14:34.398Z",
+      "stdout": "[validate:credit-boundary] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:cta-quality",
+      "status": 0,
+      "duration_ms": 99,
+      "started_at": "2026-07-26T15:14:34.505Z",
+      "stdout": "[validate:cta-quality] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:customer-next-steps",
+      "status": 0,
+      "duration_ms": 95,
+      "started_at": "2026-07-26T15:14:34.604Z",
+      "stdout": "[validate:customer-next-steps] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:data-privacy",
+      "status": 0,
+      "duration_ms": 107,
+      "started_at": "2026-07-26T15:14:34.699Z",
+      "stdout": "[data-privacy] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:delegated-authority",
+      "status": 0,
+      "duration_ms": 95,
+      "started_at": "2026-07-26T15:14:34.807Z",
+      "stdout": "[delegated-authority] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:discovery-surfaces",
+      "status": 0,
+      "duration_ms": 100,
+      "started_at": "2026-07-26T15:14:34.903Z",
+      "stdout": "[discovery-surfaces] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:download-first-page-boundary",
+      "status": 0,
+      "duration_ms": 105,
+      "started_at": "2026-07-26T15:14:35.003Z",
+      "stdout": "[download-first-page-boundary] OK products=8 files=16\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:download-offering-coverage",
+      "status": 0,
+      "duration_ms": 114,
+      "started_at": "2026-07-26T15:14:35.109Z",
+      "stdout": "[download-offering-coverage] OK products=8 offerings=105\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:download-safety",
+      "status": 0,
+      "duration_ms": 126,
+      "started_at": "2026-07-26T15:14:35.223Z",
+      "stdout": "[download-safety] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:e2e-user-journey",
+      "status": 0,
+      "duration_ms": 117,
+      "started_at": "2026-07-26T15:14:35.349Z",
+      "stdout": "[e2e-user-journey] OK routes=70 homepageChoices=6 footerGroups=5\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:env-examples",
+      "status": 0,
+      "duration_ms": 100,
+      "started_at": "2026-07-26T15:14:35.466Z",
+      "stdout": "[env-examples] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:experiment-safety",
+      "status": 0,
+      "duration_ms": 104,
+      "started_at": "2026-07-26T15:14:35.566Z",
+      "stdout": "[validate:experiment-safety] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:experiments",
+      "status": 0,
+      "duration_ms": 107,
+      "started_at": "2026-07-26T15:14:35.670Z",
+      "stdout": "[experiments] OK experiments=1\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:final-readiness-ledger",
+      "status": 0,
+      "duration_ms": 111,
+      "started_at": "2026-07-26T15:14:35.778Z",
+      "stdout": "[validate:final-readiness-ledger] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:growth-health",
+      "status": 0,
+      "duration_ms": 109,
+      "started_at": "2026-07-26T15:14:35.889Z",
+      "stdout": "[growth-health] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:indexing-provider-ledgers",
+      "status": 0,
+      "duration_ms": 98,
+      "started_at": "2026-07-26T15:14:35.998Z",
+      "stdout": "[indexing-provider-ledgers] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:intelligence-connectors",
+      "status": 0,
+      "duration_ms": 101,
+      "started_at": "2026-07-26T15:14:36.096Z",
+      "stdout": "[source-connectors-real] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:intelligence-freshness",
+      "status": 0,
+      "duration_ms": 100,
+      "started_at": "2026-07-26T15:14:36.197Z",
+      "stdout": "[intelligence-source-freshness] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:internal-link-graph",
+      "status": 0,
+      "duration_ms": 105,
+      "started_at": "2026-07-26T15:14:36.297Z",
+      "stdout": "[internal-link-graph] OK records=55 anchors=261\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:kpi-truth",
+      "status": 0,
+      "duration_ms": 101,
+      "started_at": "2026-07-26T15:14:36.402Z",
+      "stdout": "{\n  \"ok\": true,\n  \"standard\": \"PORTFOLIO_100K_SURFACING_TRUTH_CONTRACT\",\n  \"observed_events\": 0,\n  \"verified_citations\": 0,\n  \"errors\": []\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:legal",
+      "status": 0,
+      "duration_ms": 105,
+      "started_at": "2026-07-26T15:14:36.503Z",
+      "stdout": "[legal] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:letter-studio",
+      "status": 0,
+      "duration_ms": 114,
+      "started_at": "2026-07-26T15:14:36.608Z",
+      "stdout": "[letter-studio] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:location-source-coverage",
+      "status": 0,
+      "duration_ms": 108,
+      "started_at": "2026-07-26T15:14:36.722Z",
+      "stdout": "[validate:location-source-coverage] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:maintenance-briefs",
+      "status": 0,
+      "duration_ms": 109,
+      "started_at": "2026-07-26T15:14:36.830Z",
+      "stdout": "[maintenance-brief-integrity] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:metrics-scoreboards",
+      "status": 0,
+      "duration_ms": 98,
+      "started_at": "2026-07-26T15:14:36.940Z",
+      "stdout": "[validate:metrics-scoreboards] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:mobile-ux",
+      "status": 0,
+      "duration_ms": 99,
+      "started_at": "2026-07-26T15:14:37.038Z",
+      "stdout": "[validate:mobile-ux] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:navigation-architecture",
+      "status": 0,
+      "duration_ms": 101,
+      "started_at": "2026-07-26T15:14:37.137Z",
+      "stdout": "[navigation] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:no-fake-intelligence",
+      "status": 0,
+      "duration_ms": 108,
+      "started_at": "2026-07-26T15:14:37.238Z",
+      "stdout": "[no-fake-intelligence-data] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:notification-policy",
+      "status": 0,
+      "duration_ms": 99,
+      "started_at": "2026-07-26T15:14:37.346Z",
+      "stdout": "[notification-policy] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:offering-contracts",
+      "status": 0,
+      "duration_ms": 108,
+      "started_at": "2026-07-26T15:14:37.445Z",
+      "stdout": "[offering-contracts] OK offerings=105 products=8\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:offering-visibility",
+      "status": 0,
+      "duration_ms": 100,
+      "started_at": "2026-07-26T15:14:37.554Z",
+      "stdout": "[offering-visibility] OK offerings=105\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:owner-exceptions",
+      "status": 0,
+      "duration_ms": 99,
+      "started_at": "2026-07-26T15:14:37.654Z",
+      "stdout": "[owner-exceptions] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:page-action-safety",
+      "status": 0,
+      "duration_ms": 104,
+      "started_at": "2026-07-26T15:14:37.754Z",
+      "stdout": "[validate:page-action-safety] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:page-factory",
+      "status": 0,
+      "duration_ms": 100,
+      "started_at": "2026-07-26T15:14:37.858Z",
+      "stdout": "[page-factory] OK opportunities=9 pages=9\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:payment-download",
+      "status": 0,
+      "duration_ms": 102,
+      "started_at": "2026-07-26T15:14:37.958Z",
+      "stdout": "[payment] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:plain-language",
+      "status": 0,
+      "duration_ms": 99,
+      "started_at": "2026-07-26T15:14:38.060Z",
+      "stdout": "[plain-language] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:plain-language-grade",
+      "status": 0,
+      "duration_ms": 99,
+      "started_at": "2026-07-26T15:14:38.159Z",
+      "stdout": "[validate:plain-language-grade] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:product-flow-e2e",
+      "status": 0,
+      "duration_ms": 106,
+      "started_at": "2026-07-26T15:14:38.258Z",
+      "stdout": "[product-flow-e2e] OK products=8 report=reports/ux/product-flow-e2e-report.json\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:product-model",
+      "status": 0,
+      "duration_ms": 96,
+      "started_at": "2026-07-26T15:14:38.364Z",
+      "stdout": "[product-model] OK: 8 active products cover 50 offerings\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:prohibited-claims",
+      "status": 0,
+      "duration_ms": 116,
+      "started_at": "2026-07-26T15:14:38.461Z",
+      "stdout": "[validate:prohibited-claims] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:prompt-guardrails",
+      "status": 0,
+      "duration_ms": 99,
+      "started_at": "2026-07-26T15:14:38.578Z",
+      "stdout": "[prompt-guardrails] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:provider-integrations",
+      "status": 0,
+      "duration_ms": 100,
+      "started_at": "2026-07-26T15:14:38.677Z",
+      "stdout": "[provider-integrations] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:public-page-depth",
+      "status": 0,
+      "duration_ms": 114,
+      "started_at": "2026-07-26T15:14:38.777Z",
+      "stdout": "[validate:public-page-depth] OK avgWords=743 minWords=502\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:public-reports",
+      "status": 0,
+      "duration_ms": 99,
+      "started_at": "2026-07-26T15:14:38.891Z",
+      "stdout": "[public-reports] OK reports=3\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:regulated-template-previews",
+      "status": 0,
+      "duration_ms": 102,
+      "started_at": "2026-07-26T15:14:38.990Z",
+      "stdout": "[validate:regulated-template-previews] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:repo",
+      "status": 0,
+      "duration_ms": 101,
+      "started_at": "2026-07-26T15:14:39.093Z",
+      "stdout": "[repo-structure] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:repurposing",
+      "status": 0,
+      "duration_ms": 100,
+      "started_at": "2026-07-26T15:14:39.194Z",
+      "stdout": "[repurposing] OK outputs=2\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:required-disclosures",
+      "status": 0,
+      "duration_ms": 102,
+      "started_at": "2026-07-26T15:14:39.294Z",
+      "stdout": "[validate:required-disclosures] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:routes",
+      "status": 0,
+      "duration_ms": 100,
+      "started_at": "2026-07-26T15:14:39.396Z",
+      "stdout": "[routes] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:runtime-product-admin",
+      "status": 0,
+      "duration_ms": 99,
+      "started_at": "2026-07-26T15:14:39.496Z",
+      "stdout": "PASS runtime-product-admin\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:safe-harbor-autopublish",
+      "status": 0,
+      "duration_ms": 102,
+      "started_at": "2026-07-26T15:14:39.596Z",
+      "stdout": "[validate:safe-harbor-autopublish] OK audited=21\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:security",
+      "status": 0,
+      "duration_ms": 163,
+      "started_at": "2026-07-26T15:14:39.698Z",
+      "stdout": "[security] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:self-heal-progressions",
+      "status": 0,
+      "duration_ms": 103,
+      "started_at": "2026-07-26T15:14:39.861Z",
+      "stdout": "[self-heal-progressions] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:self-healing",
+      "status": 0,
+      "duration_ms": 100,
+      "started_at": "2026-07-26T15:14:39.964Z",
+      "stdout": "[validate:self-healing] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:seo-surfaces",
+      "status": 0,
+      "duration_ms": 105,
+      "started_at": "2026-07-26T15:14:40.064Z",
+      "stdout": "[seo] OK indexedRoutes=67 atoms=724 queries=335 answers=33\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:serp-import",
+      "status": 0,
+      "duration_ms": 96,
+      "started_at": "2026-07-26T15:14:40.169Z",
+      "stdout": "[serp-import-schema] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:setup-secrets",
+      "status": 0,
+      "duration_ms": 97,
+      "started_at": "2026-07-26T15:14:40.265Z",
+      "stdout": "[setup-and-secrets] OK — repo-safe setup docs present; live secrets are intentionally not committed\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:source-evidence-depth",
+      "status": 0,
+      "duration_ms": 98,
+      "started_at": "2026-07-26T15:14:40.362Z",
+      "stdout": "[validate:source-evidence-depth] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:source-required-claims",
+      "status": 0,
+      "duration_ms": 101,
+      "started_at": "2026-07-26T15:14:40.460Z",
+      "stdout": "[validate:source-required-claims] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:stripe-mode",
+      "status": 0,
+      "duration_ms": 95,
+      "started_at": "2026-07-26T15:14:40.561Z",
+      "stdout": "[stripe-mode] OK products=8\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:structured-data",
+      "status": 0,
+      "duration_ms": 95,
+      "started_at": "2026-07-26T15:14:40.656Z",
+      "stdout": "[structured-data] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:telemetry-claims",
+      "status": 0,
+      "duration_ms": 148,
+      "started_at": "2026-07-26T15:14:40.752Z",
+      "stdout": "[telemetry] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:template-library",
+      "status": 0,
+      "duration_ms": 115,
+      "started_at": "2026-07-26T15:14:40.901Z",
+      "stdout": "[template-library] OK templates=5\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:template-preview-safety",
+      "status": 0,
+      "duration_ms": 102,
+      "started_at": "2026-07-26T15:14:41.016Z",
+      "stdout": "[validate:template-preview-safety] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:trust-signals",
+      "status": 0,
+      "duration_ms": 95,
+      "started_at": "2026-07-26T15:14:41.119Z",
+      "stdout": "[validate:trust-signals] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:ux-conversion",
+      "status": 0,
+      "duration_ms": 123,
+      "started_at": "2026-07-26T15:14:41.214Z",
+      "stdout": "[validate:ux-conversion] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:validation-registry",
+      "status": 0,
+      "duration_ms": 134,
+      "started_at": "2026-07-26T15:14:41.338Z",
+      "stdout": "[validation-registry] OK validators=98\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:validator-severity",
+      "status": 0,
+      "duration_ms": 120,
+      "started_at": "2026-07-26T15:14:41.472Z",
+      "stdout": "[validate:validator-severity] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:vault-schema",
+      "status": 0,
+      "duration_ms": 101,
+      "started_at": "2026-07-26T15:14:41.592Z",
+      "stdout": "[vault-schema] OK\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:workflow-main-writer-safety",
+      "status": 0,
+      "duration_ms": 322,
+      "started_at": "2026-07-26T15:14:41.693Z",
+      "stdout": "[workflow-main-writer-safety] OK writers=10 scenarios=5\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:workflow-trace",
+      "status": 0,
+      "duration_ms": 101,
+      "started_at": "2026-07-26T15:14:42.015Z",
+      "stdout": "[workflow-data-trace] OK 16 workflows, 10 serialized writers, 110 faux scenarios\n",
+      "stderr": ""
+    },
+    {
+      "name": "validate:workflow-write-scopes",
+      "status": 0,
+      "duration_ms": 103,
+      "started_at": "2026-07-26T15:14:42.116Z",
+      "stdout": "[validate:workflow-write-scopes] OK workflows=16\n",
+      "stderr": ""
+    }
+  ]
+}

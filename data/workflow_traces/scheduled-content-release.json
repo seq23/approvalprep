@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "4.2.1",
+  "schemaVersion": "4.3.0",
   "workflow": "scheduled-content-release.yml",
   "traceMode": "FIXTURE_TRACE_ONLY_NOT_PRODUCTION_TELEMETRY",
   "proof_type": "fixture",
@@ -15,8 +15,8 @@
   "runnerPinned": true,
   "timeoutSet": true,
   "usesNpmInstall": false,
-  "usesNpmCi": false,
-  "buildsProject": false,
+  "usesNpmCi": true,
+  "buildsProject": true,
   "dependencyInstallPolicyOk": true,
   "fixtureTraceInput": true,
   "secretRefs": [],
@@ -25,13 +25,55 @@
     "automation:safe",
     "automation:self-heal-attempt",
     "automation:self-heal-revalidate",
+    "build",
     "content:release",
     "governance:apply-authority",
     "notifications:build-queue",
+    "validate:all",
     "validate:automation-safety"
   ],
   "missingNpmScripts": [],
   "expectedDataTouches": [],
-  "proofBoundary": "This trace proves workflow shape, commands, secret references, and fixture/manual-run readiness. It does not prove GitHub Actions execution, provider credentials, or deployed runtime.",
-  "traceId": "e03c5dea7e21f9bf"
+  "mainWriter": true,
+  "sharedWriterConcurrency": true,
+  "fullMainCheckout": true,
+  "preparesLatestMain": true,
+  "safePushHelper": true,
+  "directUnsafePush": false,
+  "fauxScenarios": [
+    {
+      "id": "manual_fixture_dispatch",
+      "status": "PASS"
+    },
+    {
+      "id": "known_command_resolution",
+      "status": "PASS"
+    },
+    {
+      "id": "pinned_runtime_and_timeout",
+      "status": "PASS"
+    },
+    {
+      "id": "secret_boundary",
+      "status": "NOT_APPLICABLE"
+    },
+    {
+      "id": "latest_main_before_generation",
+      "status": "PASS"
+    },
+    {
+      "id": "no_change_commit_path",
+      "status": "PASS"
+    },
+    {
+      "id": "remote_advance_rebase_retry",
+      "status": "PASS"
+    },
+    {
+      "id": "conflict_blocks_without_force",
+      "status": "PASS"
+    }
+  ],
+  "proofBoundary": "This trace proves workflow shape, commands, secret references, serialized main-writer controls, and fixture/manual-run readiness. It does not prove GitHub Actions execution, provider credentials, or deployed runtime.",
+  "traceId": "aa9fa5a6fc3e42eb"
 }

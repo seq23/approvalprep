@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "lastUpdatedAt": "2026-07-09T23:45:00.000Z",
+  "lastUpdatedAt": "2026-07-26T14:57:32.917Z",
   "policy": "Hard fails protect customer journey, payment/download safety, regulated boundaries, real growth machinery, and operator automation. Cosmetic preferences and live-provider success are not hard fails unless the repo falsely claims them.",
   "validators": [
     {
@@ -1069,6 +1069,17 @@
       "owner": "approvalprep-ops",
       "group": "phase-a-f",
       "scope": "ApprovalPrep Phase A-F Citation OS hardening"
+    },
+    {
+      "id": "workflow-main-writer-safety",
+      "npmScript": "validate:workflow-main-writer-safety",
+      "entrypoint": "scripts/validate/workflow-main-writer-safety.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents lost scheduled commits, unsafe force pushes, and cross-workflow main branch races",
+      "owner": "approvalprep-ops",
+      "group": "ops-critical",
+      "scope": "All GitHub workflows that commit or push to main"
     }
   ]
 }

@@ -15,6 +15,10 @@ on:
 permissions:
   contents: write
   issues: write
+concurrency:
+  group: approvalprep-main-writer
+  cancel-in-progress: false
+
 jobs:
   notification-dispatch:
     runs-on: ubuntu-24.04
@@ -24,6 +28,11 @@ jobs:
       RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Synchronize latest main
+        run: bash scripts/workflows/prepare-main-writer.sh
       - uses: actions/setup-node@v4
         with:
           node-version: 22.12.0
@@ -43,4 +52,4 @@ jobs:
           git config user.email "hello@approvalprep.com"
           git add data/notifications data/admin/owner_exception_registry.json data/automation/final_block_log.json
           git diff --cached --quiet || git commit -m "Update notification dispatch log"
-          git push
+          bash scripts/workflows/safe-push-main.sh

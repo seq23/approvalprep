@@ -10,12 +10,21 @@ on:
     - cron: "9 11 * * 1"
 permissions:
   contents: write
+concurrency:
+  group: approvalprep-main-writer
+  cancel-in-progress: false
+
 jobs:
   queue:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Synchronize latest main
+        run: bash scripts/workflows/prepare-main-writer.sh
       - uses: actions/setup-node@v4
         with:
           node-version: 22.12.0
@@ -46,7 +55,6 @@ jobs:
           git config user.email "hello@approvalprep.com"
           git add data/intelligence/page_refresh_queue.json data/intelligence/growth_maintenance_briefs.json
           git diff --cached --quiet || git commit -m "Update page refresh queue"
-          git push
-
+          bash scripts/workflows/safe-push-main.sh
       - name: Validate automation safety
         run: npm run validate:automation-safety

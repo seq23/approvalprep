@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-26T15:28:46.936Z",
+  "status": "PASS",
+  "writerWorkflowCount": 10,
+  "sharedConcurrencyGroup": "approvalprep-main-writer",
+  "writers": [
+    {
+      "workflow": "citation-os-daily.yml",
+      "sharedConcurrency": true,
+      "cancelInProgressFalse": true,
+      "fullCheckout": true,
+      "preparesLatestMain": true,
+      "safePush": true,
+      "directPush": false
+    },
+    {
+      "workflow": "citation-os-weekly.yml",
+      "sharedConcurrency": true,
+      "cancelInProgressFalse": true,
+      "fullCheckout": true,
+      "preparesLatestMain": true,
+      "safePush": true,
+      "directPush": false
+    },
+    {
+      "workflow": "competitor-watch-refresh.yml",
+      "sharedConcurrency": true,
+      "cancelInProgressFalse": true,
+      "fullCheckout": true,
+      "preparesLatestMain": true,
+      "safePush": true,
+      "directPush": false
+    },
+    {
+      "workflow": "content-opportunity-analysis.yml",
+      "sharedConcurrency": true,
+      "cancelInProgressFalse": true,
+      "fullCheckout": true,
+      "preparesLatestMain": true,
+      "safePush": true,
+      "directPush": false
+    },
+    {
+      "workflow": "growth-maintenance-analysis.yml",
+      "sharedConcurrency": true,
+      "cancelInProgressFalse": true,
+      "fullCheckout": true,
+      "preparesLatestMain": true,
+      "safePush": true,
+      "directPush": false
+    },
+    {
+      "workflow": "indexing-submit.yml",
+      "sharedConcurrency": true,
+      "cancelInProgressFalse": true,
+      "fullCheckout": true,
+      "preparesLatestMain": true,
+      "safePush": true,
+      "directPush": false
+    },
+    {
+      "workflow": "intelligence-ingest-free-sources.yml",
+      "sharedConcurrency": true,
+      "cancelInProgressFalse": true,
+      "fullCheckout": true,
+      "preparesLatestMain": true,
+      "safePush": true,
+      "directPush": false
+    },
+    {
+      "workflow": "notification-dispatch.yml",
+      "sharedConcurrency": true,
+      "cancelInProgressFalse": true,
+      "fullCheckout": true,
+      "preparesLatestMain": true,
+      "safePush": true,
+      "directPush": false
+    },
+    {
+      "workflow": "page-refresh-queue.yml",
+      "sharedConcurrency": true,
+      "cancelInProgressFalse": true,
+      "fullCheckout": true,
+      "preparesLatestMain": true,
+      "safePush": true,
+      "directPush": false
+    },
+    {
+      "workflow": "scheduled-content-release.yml",
+      "sharedConcurrency": true,
+      "cancelInProgressFalse": true,
+      "fullCheckout": true,
+      "preparesLatestMain": true,
+      "safePush": true,
+      "directPush": false
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "latest_main_sync",
+      "status": "PASS"
+    },
+    {
+      "id": "remote_advance_rebase_retry",
+      "status": "PASS"
+    },
+    {
+      "id": "both_changes_preserved",
+      "status": "PASS"
+    },
+    {
+      "id": "no_change_noop",
+      "status": "PASS"
+    },
+    {
+      "id": "conflict_blocks_without_force",
+      "status": "PASS"
+    }
+  ],
+  "errors": []
+}

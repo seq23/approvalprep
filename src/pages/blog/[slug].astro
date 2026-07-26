@@ -13,7 +13,8 @@ const { answer } = Astro.props;
 const slug = slugify(answer.title);
 const canonical = `https://approvalprep.com/blog/${slug}`;
 const description = answer.answer.slice(0, 155);
-const schema = [articleSchema({ title: answer.title, description, url: canonical, datePublished: answersData.generatedAt }), breadcrumbSchema(`/blog/${slug}`)];
+const publishedAt = answer.publishedAt || answersData.generatedAt;
+const schema = [articleSchema({ title: answer.title, description, url: canonical, datePublished: publishedAt }), breadcrumbSchema(`/blog/${slug}`)];
 ---
 <BaseLayout title={`${answer.title} - ApprovalPrep Blog`} description={description} canonical={canonical} schema={schema}>
   <section class="hero shell">
@@ -25,11 +26,32 @@ const schema = [articleSchema({ title: answer.title, description, url: canonical
       <a class="button secondary-button" href="/letter-writing-studio">Start free for $0</a>
     </div>
   </section>
+  {answer.steps?.length > 0 && (
+    <section class="band"><div class="shell">
+      <p class="eyebrow">Practical sequence</p>
+      <h2>Use this order before you send anything.</h2>
+      <ol class="card">{answer.steps.map((step) => <li>{step}</li>)}</ol>
+    </div></section>
+  )}
+  {answer.checklist?.length > 0 && (
+    <section class="band"><div class="shell two">
+      <article class="card">
+        <p class="eyebrow">Review checklist</p>
+        <h2>Check the packet for clarity and proof.</h2>
+        <ul>{answer.checklist.map((item) => <li>{item}</li>)}</ul>
+      </article>
+      <article class="card">
+        <p class="eyebrow">Common mistakes</p>
+        <h2>Remove avoidable friction.</h2>
+        <ul>{(answer.commonMistakes || []).map((item) => <li>{item}</li>)}</ul>
+      </article>
+    </div></section>
+  )}
   <section class="band"><div class="shell two">
     <article class="card">
       <p class="eyebrow">Self-service boundary</p>
       <h2>Use this as preparation, not representation.</h2>
-      <p>ApprovalPrep helps you organize truthful facts, supporting documents, and next steps. It does not contact third parties, create fake documents, provide legal or financial advice, repair credit, or promise approval.</p>
+      <p>{answer.boundary || "ApprovalPrep helps you organize truthful facts, supporting documents, and next steps. It does not contact third parties, create fake documents, provide legal or financial advice, repair credit, or promise approval."}</p>
     </article>
     <BoundaryNotice />
   </div></section>

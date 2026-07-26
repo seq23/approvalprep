@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "4.2.1",
+  "schemaVersion": "4.3.0",
   "workflow": "intelligence-ingest-free-sources.yml",
   "traceMode": "FIXTURE_TRACE_ONLY_NOT_PRODUCTION_TELEMETRY",
   "proof_type": "fixture",
@@ -33,6 +33,46 @@
   ],
   "missingNpmScripts": [],
   "expectedDataTouches": [],
-  "proofBoundary": "This trace proves workflow shape, commands, secret references, and fixture/manual-run readiness. It does not prove GitHub Actions execution, provider credentials, or deployed runtime.",
-  "traceId": "427e4b5ae41d30c8"
+  "mainWriter": true,
+  "sharedWriterConcurrency": true,
+  "fullMainCheckout": true,
+  "preparesLatestMain": true,
+  "safePushHelper": true,
+  "directUnsafePush": false,
+  "fauxScenarios": [
+    {
+      "id": "manual_fixture_dispatch",
+      "status": "PASS"
+    },
+    {
+      "id": "known_command_resolution",
+      "status": "PASS"
+    },
+    {
+      "id": "pinned_runtime_and_timeout",
+      "status": "PASS"
+    },
+    {
+      "id": "secret_boundary",
+      "status": "PROVIDER_GATED_NO_FAKE_SUCCESS"
+    },
+    {
+      "id": "latest_main_before_generation",
+      "status": "PASS"
+    },
+    {
+      "id": "no_change_commit_path",
+      "status": "PASS"
+    },
+    {
+      "id": "remote_advance_rebase_retry",
+      "status": "PASS"
+    },
+    {
+      "id": "conflict_blocks_without_force",
+      "status": "PASS"
+    }
+  ],
+  "proofBoundary": "This trace proves workflow shape, commands, secret references, serialized main-writer controls, and fixture/manual-run readiness. It does not prove GitHub Actions execution, provider credentials, or deployed runtime.",
+  "traceId": "0515a9543ec107eb"
 }

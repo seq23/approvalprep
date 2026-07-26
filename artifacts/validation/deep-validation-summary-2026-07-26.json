@@ -1,0 +1,124 @@
+{
+  "schema_version": "1.0",
+  "repo_id": "approvalprep",
+  "generated_at": "2026-07-26T00:00:00.000Z",
+  "source_artifact": "approvalprep-main_BASELINE_07-24-26_66f379782610(1).zip",
+  "root_cause": {
+    "failure": "non_fast_forward_push_after_local_release_commit",
+    "cause": "multiple scheduled workflows could update main concurrently while each used a plain git push from a stale checkout",
+    "failed_commit_had_local_changes": true,
+    "remote_history_overwritten": false
+  },
+  "implementation": {
+    "shared_main_writer_concurrency_group": "approvalprep-main-writer",
+    "main_writing_workflows": 10,
+    "workflow_files": 16,
+    "safe_push_force_enabled": false,
+    "safe_push_rebase_retry_enabled": true,
+    "scheduled_content_cron": "7 10 * * *",
+    "citation_daily_cron": "37 10 * * *"
+  },
+  "content_release": {
+    "release_id": "content-release-2026-07-26",
+    "cumulative_answer_count": 33,
+    "new_low_risk_pages": 3,
+    "daily_ceiling": 3,
+    "release_ledger": {
+      "id": "content-release-2026-07-26",
+      "date": "2026-07-26",
+      "status": "published_low_risk_answers",
+      "pagesPublished": 3,
+      "dailySafetyCeiling": 3,
+      "riskLimit": "low",
+      "publishedIds": [
+        "daily-2026-07-26-07-what-should-i-know-about-apartment-application-readiness-checklist",
+        "daily-2026-07-26-08-what-should-i-know-about-proof-of-income-packet-checklist",
+        "daily-2026-07-26-09-what-should-i-know-about-business-funding-document-checklist"
+      ],
+      "publishedRoutes": [
+        "/blog/what-should-i-know-about-apartment-application-readiness-checklist",
+        "/blog/what-should-i-know-about-proof-of-income-packet-checklist",
+        "/blog/what-should-i-know-about-business-funding-document-checklist"
+      ],
+      "validationRequired": true,
+      "cumulativeAnswerCount": 33
+    },
+    "pages": [
+      {
+        "title": "What should I know about Apartment Application Readiness Checklist?",
+        "slug": "what-should-i-know-about-apartment-application-readiness-checklist",
+        "public_route": "/blog/what-should-i-know-about-apartment-application-readiness-checklist",
+        "risk_level": "low"
+      },
+      {
+        "title": "What should I know about Proof of Income Packet Checklist?",
+        "slug": "what-should-i-know-about-proof-of-income-packet-checklist",
+        "public_route": "/blog/what-should-i-know-about-proof-of-income-packet-checklist",
+        "risk_level": "low"
+      },
+      {
+        "title": "What should I know about Business Funding Document Checklist?",
+        "slug": "what-should-i-know-about-business-funding-document-checklist",
+        "public_route": "/blog/what-should-i-know-about-business-funding-document-checklist",
+        "risk_level": "low"
+      }
+    ],
+    "same_day_rerun": "NOOP_ALREADY_RELEASED",
+    "sitemap_url_count": 103
+  },
+  "validation": {
+    "validate_all": "PASS",
+    "individual_validator_total": 97,
+    "individual_validator_passed": 97,
+    "individual_validator_failed": 0,
+    "workflow_yaml_parsed": 16,
+    "workflow_trace": {
+      "workflows": 16,
+      "serialized_writers": 10,
+      "faux_scenarios": 110,
+      "status": "PASS"
+    },
+    "main_writer_isolated_git_scenarios": {
+      "count": 5,
+      "status": "PASS",
+      "includes": [
+        "latest_main_sync",
+        "remote_advance_rebase",
+        "both_changes_preserved",
+        "no_change_noop",
+        "conflict_no_overwrite"
+      ]
+    },
+    "browserless_accessibility": "PASS",
+    "product_flow_e2e_browserless": "PASS",
+    "authority_scale": {
+      "fanout_records": 100000,
+      "frozen_outputs": 8,
+      "published_by_contract": 8,
+      "unscoped_drift": 0,
+      "status": "PASS"
+    },
+    "dependency_install": {
+      "status": "BLOCKED_EXTERNAL_PACKAGE_GATEWAY",
+      "command": "npm ci --no-audit --no-fund",
+      "observed_errors": [
+        "HTTP 503 fetching zod-3.25.76.tgz",
+        "HTTP 503 fetching youch-core-0.3.3.tgz",
+        "HTTP 503 fetching yocto-queue-1.2.2.tgz"
+      ],
+      "repository_lockfile_modified": false
+    },
+    "astro_production_build": {
+      "status": "NOT_EXECUTED_DEPENDENCY_INSTALL_BLOCKED",
+      "fallbacks": [
+        "97 isolated validators",
+        "validate:all",
+        "browserless accessibility",
+        "browserless product flow",
+        "route and blog detail validators",
+        "workflow faux traces"
+      ]
+    }
+  },
+  "artifact_status": "STRUCTURALLY_AND_DEEPLY_CHECKED_WITH_EXTERNAL_INSTALL_BUILD_BLOCKER"
+}

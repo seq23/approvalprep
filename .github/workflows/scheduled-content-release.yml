@@ -1,7 +1,7 @@
 name: Scheduled Content Release
 on:
   schedule:
-    - cron: "17 10 * * *"
+    - cron: "7 10 * * *"
   workflow_dispatch:
     inputs:
       fixture_trace:
@@ -11,17 +11,25 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: scheduled-content-release-${{ github.ref }}
-  cancel-in-progress: true
+  group: approvalprep-main-writer
+  cancel-in-progress: false
 jobs:
   release:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Synchronize latest main
+        run: bash scripts/workflows/prepare-main-writer.sh
       - uses: actions/setup-node@v4
         with:
           node-version: 22.12.0
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
       - name: Apply delegated authority
         run: npm run governance:apply-authority -- --mode=${{ env.RUN_MODE || 'dry_run' }}
       - name: Attempt self-heal
@@ -43,16 +51,21 @@ jobs:
         run: |
           npm run ux:browserless-report
           npm run workflows:trace -- --workflow scheduled-content-release.yml
-      - run: npm run content:release
-      - run: |
-          git config user.name "approvalprep-content-bot"
-          git config user.email "actions@users.noreply.github.com"
-          git add data
-          if [ -d reports ]; then git add reports; fi
-          git diff --cached --quiet || git commit -m "chore(content): scheduled content release"
-          git push
-
+      - name: Generate and freeze today's low-risk release
+        run: npm run content:release
+      - name: Build the production site
+        run: npm run build
+      - name: Run the complete local release gate
+        run: npm run validate:all
       - name: Run safe automation boundary
         run: npm run automation:safe -- --mode=dry_run
       - name: Validate automation safety
         run: npm run validate:automation-safety
+      - name: Commit and publish validated content
+        run: |
+          git config user.name "approvalprep-content-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data public/sitemap.xml
+          if [ -d reports ]; then git add reports; fi
+          git diff --cached --quiet || git commit -m "chore(content): scheduled content release"
+          bash scripts/workflows/safe-push-main.sh

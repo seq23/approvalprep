@@ -8,10 +8,14 @@ on:
         required: false
         default: "true"
   schedule:
-    - cron: "17 10 * * *"
+    - cron: "37 10 * * *"
 
 permissions:
   contents: write
+
+concurrency:
+  group: approvalprep-main-writer
+  cancel-in-progress: false
 
 jobs:
   citation-os-daily:
@@ -19,6 +23,11 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Synchronize latest main
+        run: bash scripts/workflows/prepare-main-writer.sh
       - uses: actions/setup-node@v4
         with:
           node-version: 22.12.0
@@ -29,4 +38,4 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/content/generated_answers.json data/content/page_registry.json data/content/generated_route_copy.json data/routes/route_manifest.json data/routes/redirects.json data/release/release_ledger.json data/atoms/*.json data/atlas/*.json data/intelligence/*.json data/tools/*.json data/templates/*.json data/reports/*.json data/repurposing/*.json public/downloads/free-checklists/* data/metrics/*.json data/citations/*.json data/backlink_handoff/* data/governance/*.json data/experiments/*.json data/self_healing/*.json data/locations/*.json data/validation/*.json data/workflow_traces/*.json public/sitemap.xml reports/ux/product-flow-e2e-report.json
           git diff --cached --quiet || git commit -m "chore(citation-os): daily content and authority expansion"
-          git push
+          bash scripts/workflows/safe-push-main.sh
