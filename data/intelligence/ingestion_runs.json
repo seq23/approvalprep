@@ -2,6 +2,20 @@
   "schemaVersion": "4.1.0",
   "runs": [
     {
+      "id": "d0479c76-14c5-4e7e-951b-deb911ee792e",
+      "connectorId": "competitor_public_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-29T10:08:14.894Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "8a7a81cd-d7f3-4d52-a1b1-c25282d3b0ba",
+      "connectorId": "competitor_sitemap_discovery",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-29T10:08:14.401Z",
+      "recordsImported": 2
+    },
+    {
       "id": "ec99194e-96d7-43aa-9c92-3f21ce2a4f6d",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
@@ -1856,21 +1870,6 @@
       "status": "COMPLETE",
       "ranAt": "2026-07-09T23:25:35.018Z",
       "recordsImported": 335
-    },
-    {
-      "id": "11c4eb76-af6e-4dc7-bd6a-be323d973a66",
-      "connectorId": "official_source_fetcher",
-      "status": "COMPLETE",
-      "ranAt": "2026-07-09T23:25:34.480Z",
-      "recordsImported": 4
-    },
-    {
-      "id": "5fa62d92-a771-435b-ae08-ab15e17ebc82",
-      "connectorId": "manual_social_signal_import",
-      "status": "NO_DATA",
-      "ranAt": "2026-07-09T23:25:24.138Z",
-      "reason": "No social signal import found at data/imports/social-signals.json.",
-      "recordsImported": 0
     }
   ]
 }
