@@ -2,6 +2,27 @@
   "schemaVersion": "4.1.0",
   "runs": [
     {
+      "id": "8016c480-42a7-4846-aa04-8bfb9b5ec8c6",
+      "connectorId": "growth_brief_generation",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-30T12:15:07.724Z",
+      "recordsImported": 40
+    },
+    {
+      "id": "0c7db0b7-0fb4-40e9-af63-8721537162fc",
+      "connectorId": "authority_requirement_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-30T12:15:07.605Z",
+      "recordsImported": 67
+    },
+    {
+      "id": "8d2c8b38-c57d-4062-98c9-932af1616a3f",
+      "connectorId": "growth_maintenance_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-07-30T12:15:07.504Z",
+      "recordsImported": 67
+    },
+    {
       "id": "f4a6cc7d-a70b-468a-a3a4-bc005e14784e",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
@@ -1855,29 +1876,6 @@
       "status": "COMPLETE",
       "ranAt": "2026-07-10T11:20:58.171Z",
       "recordsImported": 4
-    },
-    {
-      "id": "cfee67df-ddf1-48c0-8308-9c839041c410",
-      "connectorId": "manual_social_signal_import",
-      "status": "NO_DATA",
-      "ranAt": "2026-07-10T11:20:57.502Z",
-      "reason": "No social signal import found at data/imports/social-signals.json.",
-      "recordsImported": 0
-    },
-    {
-      "id": "5ef60706-2ee0-4f20-8c67-355650ae0d8e",
-      "connectorId": "manual_serp_csv",
-      "status": "NO_DATA",
-      "ranAt": "2026-07-10T11:20:57.360Z",
-      "reason": "No SERP CSV found at data/imports/serp.csv.",
-      "recordsImported": 0
-    },
-    {
-      "id": "d1d6da6a-5801-4f84-96a0-3b2a663028a7",
-      "connectorId": "competitor_public_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-07-10T11:20:57.219Z",
-      "recordsImported": 2
     }
   ]
 }
