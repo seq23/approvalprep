@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-07-30T12:14:18.491Z",
+  "generatedAt": "2026-07-31T12:30:49.917Z",
   "policy": "data/governance/publication_policy.json",
   "items": [
     {
@@ -339,6 +339,58 @@
       "requiredAction": "credit-repair-service",
       "sourceFile": "data/routes/route_manifest.json",
       "sourceChecksum": "safeharbor-c5164d04b2ee4ad0",
+      "ownerApprovalRequired": true
+    },
+    {
+      "contentId": "/609-dispute-letter",
+      "type": "safe_harbor",
+      "title": "/609-dispute-letter",
+      "path": "/609-dispute-letter",
+      "risk": "regulated",
+      "currentStatus": "blocked",
+      "reason": "BLOCKED_PROHIBITED_CLAIM",
+      "requiredAction": "false-dispute",
+      "sourceFile": "data/routes/route_manifest.json",
+      "sourceChecksum": "safeharbor-c82d716711566a9d",
+      "ownerApprovalRequired": true
+    },
+    {
+      "contentId": "/goodwill-letter-to-remove-late-payment",
+      "type": "safe_harbor",
+      "title": "/goodwill-letter-to-remove-late-payment",
+      "path": "/goodwill-letter-to-remove-late-payment",
+      "risk": "regulated",
+      "currentStatus": "blocked",
+      "reason": "BLOCKED_PROHIBITED_CLAIM",
+      "requiredAction": "false-dispute",
+      "sourceFile": "data/routes/route_manifest.json",
+      "sourceChecksum": "safeharbor-50b78619a942e170",
+      "ownerApprovalRequired": true
+    },
+    {
+      "contentId": "/letter-of-explanation/late-payment",
+      "type": "safe_harbor",
+      "title": "/letter-of-explanation/late-payment",
+      "path": "/letter-of-explanation/late-payment",
+      "risk": "regulated",
+      "currentStatus": "blocked",
+      "reason": "BLOCKED_PROHIBITED_CLAIM",
+      "requiredAction": "false-dispute",
+      "sourceFile": "data/routes/route_manifest.json",
+      "sourceChecksum": "safeharbor-83406967c13dbfe1",
+      "ownerApprovalRequired": true
+    },
+    {
+      "contentId": "/letter-of-explanation/large-deposit",
+      "type": "safe_harbor",
+      "title": "/letter-of-explanation/large-deposit",
+      "path": "/letter-of-explanation/large-deposit",
+      "risk": "regulated",
+      "currentStatus": "blocked",
+      "reason": "BLOCKED_PROHIBITED_CLAIM",
+      "requiredAction": "false-dispute",
+      "sourceFile": "data/routes/route_manifest.json",
+      "sourceChecksum": "safeharbor-dd9e5ac589a264e7",
       "ownerApprovalRequired": true
     }
   ]
