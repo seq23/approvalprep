@@ -1,0 +1,6 @@
+---
+import AuthorityGuidePage from "../components/AuthorityGuidePage.astro";
+import registry from "../../data/content/seo_recovery_pages.json";
+const page=registry.pages.find((item)=>item.path==="/609-dispute-letter");
+---
+<AuthorityGuidePage page={page} />

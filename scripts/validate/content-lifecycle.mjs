@@ -26,7 +26,10 @@ for (const candidate of plan.candidates) {
 const redirects = JSON.parse(fs.readFileSync("data/routes/redirects.json", "utf8"));
 if (!Array.isArray(redirects.redirects)) throw new Error("redirects missing redirects array");
 for (const redirect of redirects.redirects) {
-  if (!redirect.from || !redirect.to || ![301,302,307,308].includes(redirect.status)) throw new Error("invalid redirect record");
-  if (redirect.from === redirect.to) throw new Error(`redirect loop ${redirect.from}`);
+  const source = redirect.source || redirect.from;
+  const destination = redirect.destination || redirect.to;
+  const status = redirect.statusCode || redirect.status;
+  if (!source || !destination || ![301,302,307,308].includes(status)) throw new Error("invalid redirect record");
+  if (source === destination) throw new Error(`redirect loop ${source}`);
 }
 console.log("[validate:content-lifecycle] OK");

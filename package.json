@@ -1,6 +1,6 @@
 {
   "name": "approvalprep",
-  "version": "0.4.3-runtime-admin",
+  "version": "0.5.1-seo-recovery-publishing-preserved",
   "private": true,
   "type": "module",
   "scripts": {
@@ -217,7 +217,12 @@
     "authority:yield:build": "node scripts/authority_scale/build_citation_yield_feedback.mjs && node scripts/authority_scale/evaluate_velocity.mjs",
     "authority:yield:validate": "node scripts/authority_scale/validate_citation_yield_feedback.mjs",
     "authority:velocity:evaluate": "node scripts/authority_scale/evaluate_velocity.mjs",
-    "validate:workflow-main-writer-safety": "node scripts/validate/workflow-main-writer-safety.mjs"
+    "validate:workflow-main-writer-safety": "node scripts/validate/workflow-main-writer-safety.mjs",
+    "routes:redirects": "node scripts/routes/build-redirects.mjs",
+    "validate:redirect-map": "node scripts/validate/redirect-map.mjs",
+    "seo:canonical-host": "node scripts/seo/check-canonical-host.mjs",
+    "reports:document-readiness": "node scripts/reports/build-document-readiness-index.mjs",
+    "metrics:seo-recovery": "node scripts/metrics/build-seo-recovery-scorecard.mjs"
   },
   "dependencies": {
     "astro": "^7.0.6",

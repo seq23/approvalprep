@@ -147,8 +147,16 @@ export const footerGroups = [
     "title": "Popular Guides",
     "links": [
       [
-        "/letter-of-explanation/credit",
-        "Credit Letter of Explanation"
+        "/employment-verification-letter",
+        "Employment Verification Letter"
+      ],
+      [
+        "/609-dispute-letter",
+        "609 Dispute Letter"
+      ],
+      [
+        "/goodwill-letter-to-remove-late-payment",
+        "Goodwill Letter"
       ],
       [
         "/rental-application-checklist",

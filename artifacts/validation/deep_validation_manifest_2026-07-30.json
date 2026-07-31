@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.0.0",
+  "repo": "approvalprep",
+  "validatedAt": "2026-07-30T20:37:00-05:00",
+  "mode": "verification_deep_validation",
+  "status": "ALL_REPO_TESTS_PASS_BUILD_ENVIRONMENT_BLOCKED",
+  "checks": {
+    "validateAll": "PASS",
+    "additionalValidators": "PASS",
+    "dailyWorkflowSimulation": "PASS",
+    "weeklyWorkflowAtomicSimulation": "PASS",
+    "authorityScale": "PASS",
+    "javascriptSyntaxFiles": 238,
+    "typescriptSyntaxFiles": 10,
+    "astroFrontmatterFiles": 62,
+    "jsonFiles": 257,
+    "yamlFiles": 16,
+    "shellFiles": 2,
+    "browserlessPages": 73,
+    "indexedRoutes": 71,
+    "redirects": 42,
+    "readinessIndexSources": 100
+  },
+  "productionBuild": {
+    "status": "ENVIRONMENT_BLOCKED",
+    "reason": "Configured npm mirror returned 404 for required public packages before dependency installation.",
+    "repositoryCauseProven": false,
+    "vendoredWorkaroundIncluded": false
+  },
+  "scopeGuard": {
+    "publishingSystemPreserved": true,
+    "blogRoutePreserved": true,
+    "releaseEnginePreserved": true,
+    "architecturalReplacement": false
+  },
+  "packaging": {
+    "status": "PASS",
+    "singleRoot": "approvalprep-main",
+    "zipIntegrity": "PASS",
+    "forbiddenDependencyFolders": 0
+  }
+}

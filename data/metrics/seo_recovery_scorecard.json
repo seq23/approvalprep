@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-31T01:01:17.325Z",
+  "mode": "structural_baseline_plus_external_imports",
+  "externalDataStatus": "NOT_IMPORTED",
+  "periods": [
+    30,
+    60,
+    90
+  ],
+  "metrics": [
+    {
+      "id": "canonical_host_consistency",
+      "label": "Canonical host consistency",
+      "baseline": "repo configured apex; live redirect unverified",
+      "target": "all alternate hosts one-hop 301/308 to apex",
+      "source": "live header check"
+    },
+    {
+      "id": "legacy_duplicate_urls",
+      "label": "Legacy duplicate URLs remaining in sitemap",
+      "baseline": 42,
+      "currentStructural": 0,
+      "target": 0,
+      "source": "sitemap + redirect registry"
+    },
+    {
+      "id": "public_derivative_answer_pages",
+      "label": "Public derivative answer pages",
+      "baseline": 42,
+      "currentStructural": 45,
+      "target": 0,
+      "source": "route/build registry"
+    },
+    {
+      "id": "indexable_routes",
+      "label": "Indexable canonical routes",
+      "baseline": 67,
+      "currentStructural": 71,
+      "target": "stable plus five approved pages",
+      "source": "route manifest"
+    },
+    {
+      "id": "employment_page_impressions",
+      "label": "Employment verification page impressions",
+      "baseline": "GSC export required",
+      "target": "positive 30/60/90 trend",
+      "source": "GSC"
+    },
+    {
+      "id": "employment_page_position",
+      "label": "Employment verification page average position",
+      "baseline": "GSC/Semrush export required",
+      "target": "improve without host split",
+      "source": "GSC + Semrush"
+    },
+    {
+      "id": "new_page_indexation",
+      "label": "Five recovery pages indexed",
+      "baseline": 0,
+      "target": 5,
+      "source": "GSC URL inspection/export"
+    },
+    {
+      "id": "editorial_referring_domains",
+      "label": "Verified editorial referring domains",
+      "baseline": 0,
+      "target": "measured, no guarantee",
+      "source": "GSC/Semrush/manual verification"
+    },
+    {
+      "id": "readiness_index_links",
+      "label": "Verified links to Readiness Index",
+      "baseline": 0,
+      "target": "measured, no guarantee",
+      "source": "outreach ledger + backlink export"
+    },
+    {
+      "id": "conversion_assists",
+      "label": "Recovery-page assisted conversions",
+      "baseline": "analytics export required",
+      "target": "measured after deployment",
+      "source": "analytics/checkout telemetry"
+    }
+  ],
+  "status": "STRUCTURAL_IMPLEMENTATION_COMPLETE_EXTERNAL_MEASUREMENT_REQUIRED"
+}

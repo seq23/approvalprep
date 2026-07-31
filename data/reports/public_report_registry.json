@@ -1,40 +1,58 @@
 {
-  "schemaVersion": "1.0.0",
-  "generatedAt": "2026-07-09T22:18:00.000Z",
+  "schemaVersion": "1.1.0",
+  "generatedAt": "2026-07-30T19:21:00-05:00",
   "reports": [
     {
       "id": "document-readiness-index",
       "path": "/reports/document-readiness-index",
-      "title": "ApprovalPrep Document Readiness Index",
+      "title": "2026 ApprovalPrep Document Readiness Index: A Catalog of 100 Public Application Checklists",
       "status": "published_by_contract",
       "risk": "low",
       "primaryQuery": "document readiness checklist report",
-      "summary": "A public, methodology-labeled report that explains the document-readiness signals ApprovalPrep uses to help people prepare truthful application packets.",
-      "methodology": "This report uses ApprovalPrep-owned route, checklist, template, atom, and source-coverage data. It is an educational readiness index, not a market survey or guarantee of any approval outcome.",
+      "summary": "A transparent 100-source catalog across rental, employment/income verification, mortgage/home-loan, and small-business funding preparation, with primary-source coding and explicit limitations.",
+      "methodology": "The release catalogs 100 public sources in a balanced four-category sampling frame. URL/source metadata is coded for all 100; item-level preparation signals are reported only for eight primary sources marked as deep reviewed. It is not a market survey, approval model, or claim that every source requires the same documents.",
       "sections": [
         {
-          "heading": "What the index measures",
-          "body": "The index measures whether a document-prep page has a clear user job, a checklist, a self-service boundary, supporting links, and a next step."
+          "heading": "100 public sources, four categories",
+          "body": "The catalog contains 25 sources each for rental applications, employment and income verification, mortgage and home-loan preparation, and small-business funding."
         },
         {
-          "heading": "How to use it",
-          "body": "Use the index as a preparation guide: gather real documents, check dates and amounts, separate facts from context, and keep a copy trail."
+          "heading": "A split-format information problem",
+          "body": "The catalog contains 82 HTML sources and 18 PDF sources, showing why applicants often need a clean source list and copy trail."
         },
         {
-          "heading": "What it does not claim",
-          "body": "The index does not measure lender, landlord, employer, or agency approval odds. It does not provide legal, credit repair, financial, or underwriting advice."
+          "heading": "Authority is distributed",
+          "body": "The catalog includes 21 government or public-authority sources alongside financial institutions, universities, housing organizations, and private operators."
+        },
+        {
+          "heading": "Primary-source preparation pattern",
+          "body": "Eight primary sources were deep reviewed. Those sources repeatedly emphasized factual identity, income or employment, assets or fund sources, and traceable support. This pattern is not applied to sources that were only cataloged."
+        },
+        {
+          "heading": "What the report does not claim",
+          "body": "The dataset does not measure approval odds, rankings, traffic, market share, or applicant outcomes. The requester’s current instructions remain authoritative."
         }
       ],
       "sourceIds": [
         "approvalprep-methodology",
-        "approvalprep-self-service-boundary"
+        "approvalprep-self-service-boundary",
+        "dri-dol-employment",
+        "dri-cfpb-loan-packet",
+        "dri-cfpb-lender-requests",
+        "dri-fannie-documents",
+        "dri-sba-loans"
       ],
       "relatedRoutes": [
-        "/methodology",
-        "/resources",
-        "/letter-writing-studio"
+        "/employment-verification-letter",
+        "/rental-application-checklist",
+        "/mortgage-document-checklist",
+        "/sba-loan-checklist"
       ],
-      "targetProductSku": "complete-approvalprep-bundle"
+      "targetProductSku": "complete-approvalprep-bundle",
+      "downloadPath": "/reports/document-readiness-index-2026.csv",
+      "datasetPath": "data/reports/document_readiness_index/coded_dataset.json",
+      "sampleSize": 100,
+      "deepCodedSources": 8
     },
     {
       "id": "apartment-application-prep-report",
@@ -86,7 +104,7 @@
         },
         {
           "heading": "Preparation principle",
-          "body": "A stronger packet separates evidence from explanation and makes the reviewer\u2019s document request easier to follow."
+          "body": "A stronger packet separates evidence from explanation and makes the reviewer’s document request easier to follow."
         },
         {
           "heading": "Boundary",

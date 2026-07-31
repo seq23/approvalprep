@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-31T01:01:17.225Z",
+  "sampleSize": 100,
+  "categoryCounts": {
+    "rental_application": 25,
+    "employment_income_verification": 25,
+    "mortgage_home_loan": 25,
+    "small_business_funding": 25
+  },
+  "formatCounts": {
+    "pdf": 18,
+    "html": 82
+  },
+  "sourceTypeCounts": {
+    "housing_authority_or_nonprofit": 6,
+    "government_or_public_authority": 21,
+    "private_operator_or_publisher": 45,
+    "education_or_public_institution": 12,
+    "financial_institution_or_gse": 16
+  },
+  "deepCodedPrimarySources": 8,
+  "findings": [
+    {
+      "id": "balanced-catalog",
+      "headline": "The source catalog is balanced across four high-pressure application categories.",
+      "metric": "25 sources per category",
+      "interpretation": "This was a deliberate sampling frame, not an estimate of category prevalence."
+    },
+    {
+      "id": "format-friction",
+      "headline": "Application guidance is split across web pages and downloadable files.",
+      "metric": "82 HTML sources and 18 PDF sources",
+      "interpretation": "Applicants often need to collect instructions from more than one format; the index preserves direct source URLs."
+    },
+    {
+      "id": "authority-mix",
+      "headline": "The public guidance ecosystem is fragmented across authorities, institutions, and private operators.",
+      "metric": "21 government/public-authority sources; 16 financial/GSE sources; 12 education/public-institution sources",
+      "interpretation": "No single checklist should be treated as universal. The actual requester’s current instructions control."
+    },
+    {
+      "id": "primary-source-pattern",
+      "headline": "Deep-reviewed primary sources repeatedly center factual identity, income/employment, assets/funds, and traceable support.",
+      "metric": "8 primary sources deep coded",
+      "interpretation": "This pattern is a preparation framework, not a claim that every one of the 100 cataloged sources asks for every field."
+    }
+  ],
+  "limitations": [
+    "The 100-source catalog records public source metadata and URLs. Most records were not coded line-by-line in this release.",
+    "Only records marked deepContentCoding=true support item-level preparation-signal findings.",
+    "Requirements change by requester, jurisdiction, program, and date.",
+    "The report does not measure approval odds, market share, ranking, or applicant outcomes."
+  ]
+}

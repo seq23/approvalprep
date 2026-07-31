@@ -27,7 +27,7 @@ import { routeCopy, boundary, productCards, productComparison, routeFamilyCopy, 
 
 export function getStaticPaths() {
   return manifest.routes
-    .filter((route) => !["/", "/letter-writing-studio", "/resources", "/blog", "/contact", "/methodology"].includes(route.path) && !route.path.startsWith("/tools/") && !route.path.startsWith("/templates/") && !route.path.startsWith("/reports/") && route.type !== "admin")
+    .filter((route) => !["/", "/letter-writing-studio", "/resources", "/blog", "/contact", "/methodology", "/employment-verification-letter", "/609-dispute-letter", "/goodwill-letter-to-remove-late-payment", "/letter-of-explanation/late-payment", "/letter-of-explanation/large-deposit"].includes(route.path) && !route.path.startsWith("/tools/") && !route.path.startsWith("/templates/") && !route.path.startsWith("/reports/") && route.type !== "admin")
     .map((route) => ({ params: { slug: route.path.slice(1) }, props: { route } }));
 }
 

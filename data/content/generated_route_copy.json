@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0.0",
+  "schemaVersion": "1.1.0",
   "routes": {
     "/letter-of-explanation/address-history": {
       "heading": "Address History Letter of Explanation",
@@ -1191,102 +1191,123 @@
     },
     "/employment-verification-letter": {
       "heading": "Employment Verification Letter",
-      "lead": "Use this ApprovalPrep page to prepare employment verification letter with truthful facts, supporting documents, and a clear next step before you send anything yourself.",
-      "shortAnswer": "Employment Verification Letter is a self-service preparation page. It helps you organize what happened, what proof supports it, what to avoid saying, and which ApprovalPrep kit or free tool may help next. It does not create documents for you, contact reviewers, or guarantee any approval outcome.",
+      "lead": "Create a clear employment verification letter with the fields, employer version, employee request, checklist, and source-backed boundaries a reviewer may need.",
+      "shortAnswer": "An employment verification letter confirms factual employment details. The exact fields depend on the requester and the employer’s disclosure policy.",
       "decisionContext": [
-        "Use this page when the reviewer, application, lender, landlord, employer, or funding contact is asking for clarity around employment verification letter.",
-        "The best use of this page is to separate facts from assumptions, then match each important fact to a document, date, amount, name, address, or other support you actually have.",
-        "This is not a place to invent a better story. It is a place to make the truthful packet easier to read and easier to review."
+        "An employment verification letter confirms factual employment details. The exact fields depend on the requester and the employer’s disclosure policy.",
+        "Start by identifying the exact reviewer, application, account, or transaction involved. A useful packet answers the real request instead of copying a generic internet letter.",
+        "Every statement should match the documents available to the user. If the evidence does not support a detail, revise the detail or ask the requester what alternative evidence is accepted.",
+        "Keep the final packet narrow. A reviewer should be able to follow the issue, timeline, evidence, and requested next step without searching through unrelated records."
       ],
       "whoFor": [
-        "People preparing their own letter studio paperwork and wanting a safer structure before sending it.",
-        "People who have real documents but need help organizing what to include, what to leave out, and what to explain briefly.",
-        "People who want a plain-language path to the right ApprovalPrep kit, checklist, template preview, or Studio workflow.",
-        "People who need to reduce application pressure without handing off representation to ApprovalPrep."
+        "People preparing a truthful self-service letter or document packet for their own application, account, or review.",
+        "People who need a field-level checklist and copyable structure instead of generic motivational advice.",
+        "People who want to distinguish a factual request, courtesy request, explanation, and dispute before choosing the next action.",
+        "People who will review and send their own materials and understand that ApprovalPrep does not represent them or control the decision."
       ],
       "value": [
-        "Gives the page a specific job so the user does not wander through generic paperwork advice.",
-        "Connects the preparation problem to relevant products, tools, reports, templates, or supporting guides.",
-        "Keeps the self-service boundary visible so the user understands that ApprovalPrep does not act as a law firm, credit repair company, broker, lender, landlord, employer, or agency.",
-        "Creates a citation-ready answer surface for search engines and LLM systems while keeping claims conservative."
+        "Turns a broad paperwork problem into a sequence of facts, fields, evidence, review checks, and a clear delivery step.",
+        "Uses source-backed boundaries for regulated or verification-sensitive claims and avoids promises that a letter will create a particular outcome.",
+        "Keeps the canonical route responsible for its intent, reducing duplicate answer pages and helping users find the maintained version.",
+        "Connects the educational page to a free drafting tool or paid editable kit without hiding the self-service boundary."
       ],
       "whatYouGet": [
-        "A short explanation of what this paperwork situation means.",
-        "A preparation checklist for documents, facts, dates, and support.",
-        "Common mistakes to avoid before sending anything.",
-        "A review checklist for truth, completeness, copy trail, and next step.",
-        "Links back to related ApprovalPrep resources instead of leaving the user at a dead end."
+        "A plain-English explanation of the document’s job and limitations.",
+        "A list of the facts and fields to gather before drafting.",
+        "An exact sequence for building and reviewing the packet.",
+        "A copyable template that must be adapted to the user’s real facts.",
+        "Common mistakes, FAQs, official sources, and related ApprovalPrep routes."
       ],
       "useCases": [
-        "You need to prepare around employment verification letter.",
-        "You have supporting documents but need a cleaner packet structure.",
-        "You want to understand the safe public guidance before buying or downloading a paid kit.",
-        "You need a self-service checklist before using the free Letter Writing Studio."
+        "You need to prepare employment verification letter for your own use.",
+        "A reviewer has asked a specific question and you need a clean factual response.",
+        "You have real documents but need to connect them to a short explanation.",
+        "You want to check the official or primary-source boundary before sending anything.",
+        "You need a maintained canonical resource rather than a thin derivative answer."
       ],
       "prepBrief": [
-        "Write down the exact request, question, or application issue in one sentence.",
-        "Gather only real documents you already have or can legitimately obtain.",
-        "Create a timeline with dates, names, addresses, amounts, accounts, jobs, or application details where relevant.",
-        "Mark which statements are supported by proof and which are context only.",
-        "Decide whether you need a checklist, a template preview, the free Studio, or a paid editable kit.",
-        "Keep copies of the final packet and note when and how you send it."
+        "Employee legal name",
+        "Employer legal name and contact information",
+        "Job title or position",
+        "Employment start date",
+        "Current employment status",
+        "End date, if applicable",
+        "Compensation only when authorized and requested",
+        "Authorized verifier name, title, signature, and date",
+        "Copy the exact request and deadline into your working notes.",
+        "Use copies of supporting documents and keep originals unless the requester specifically requires otherwise.",
+        "Redact unrelated sensitive information only when permitted and never alter a material fact."
       ],
       "commonMistakes": [
-        "Writing a long emotional story when a short factual explanation would be clearer.",
-        "Making unsupported claims that the attached documents do not actually prove.",
-        "Using language that sounds like legal advice, credit repair promises, approval guarantees, or threats.",
-        "Sending original documents when copies would be safer unless originals are specifically required.",
-        "Forgetting to check spelling, dates, names, amounts, and consistency across the packet.",
-        "Assuming ApprovalPrep sends, negotiates, disputes, verifies, or contacts anyone for the user."
+        "Using a personal email or unverifiable contact when an official channel is available.",
+        "Adding performance opinions, reasons for separation, or sensitive details that were not requested.",
+        "Including salary without authorization.",
+        "Letting dates, title, status, or pay frequency conflict with records.",
+        "Treating a self-written statement as employer verification when the requester requires third-party confirmation.",
+        "Using a template without replacing every placeholder.",
+        "Sending before checking that names, dates, amounts, account references, and attachments agree."
       ],
       "reviewChecklist": [
-        "Every factual claim is truthful and supportable.",
-        "Every attachment has a purpose and is referenced clearly.",
-        "The explanation is short enough for a reviewer to understand quickly.",
-        "No fake document, approval guarantee, or credit repair language appears.",
-        "The next step is clear: review, download, use the Studio, compare kits, or send the packet yourself.",
-        "The user has saved a copy trail before submitting anything."
+        "The letter answers the exact request in the first paragraph.",
+        "Every date, amount, title, account, and status matches the source records.",
+        "Each attachment supports a specific sentence or timeline point.",
+        "No promise of approval, deletion, verification, underwriting result, or third-party action appears.",
+        "Sensitive information is limited to what the requester needs.",
+        "The sender has saved the final letter, attachments, delivery proof, and response."
       ],
       "steps": [
-        "Clarify the paperwork request.",
-        "Gather real proof.",
-        "Draft a short factual explanation or checklist.",
-        "Review the packet against the boundary rules.",
-        "Choose the relevant ApprovalPrep next step.",
-        "Send the materials yourself only after review."
+        "Ask the requester exactly which fields and format it accepts.",
+        "Ask HR or the authorized employer representative how verification is handled.",
+        "Gather the employee’s correct name, title, dates, and any consent form.",
+        "Draft or request a concise verification using only authorized facts.",
+        "Check every date, amount, and contact detail against employer records.",
+        "Send through the channel the requester specified and save a copy."
       ],
       "faq": [
         {
-          "question": "Does Employment Verification Letter guarantee approval?",
-          "answer": "No. ApprovalPrep helps users prepare clearer self-service materials. It does not control reviewer decisions or promise approval."
+          "question": "What is an employment verification letter?",
+          "answer": "It is a factual confirmation of employment details such as employer, job title, dates, and current status. The requester and employer policy determine the accepted fields and delivery method."
         },
         {
-          "question": "Will ApprovalPrep contact anyone or submit this for me?",
-          "answer": "No. ApprovalPrep does not contact landlords, lenders, employers, bureaus, agencies, or reviewers for you. You send your own materials."
+          "question": "Does it need salary information?",
+          "answer": "Not always. Include compensation only when the requester requires it and the employer is authorized to disclose it."
         },
         {
-          "question": "Can I use this page instead of professional advice?",
-          "answer": "This page is educational and self-service. Legal, tax, lending, court, immigration, credit, or regulated issues may require a qualified professional."
+          "question": "Can an employee write the letter?",
+          "answer": "An employee can request or draft a proposed version, but a requester may require verification from HR, a supervisor, payroll, or an authorized verification service."
         },
         {
-          "question": "What should I do before using a paid kit?",
-          "answer": "Gather your real documents first, confirm the facts, and use the public guidance or free Studio to decide whether a paid PDF/DOCX kit fits your situation."
+          "question": "What if the employer uses an automated verification service?",
+          "answer": "Follow that process. A platform-generated verification may be more acceptable than a manually signed letter."
+        },
+        {
+          "question": "Does a verification letter guarantee approval?",
+          "answer": "No. It confirms facts; it does not control a landlord, lender, employer, agency, or other reviewer’s decision."
+        },
+        {
+          "question": "Can ApprovalPrep send employment verification letter for me?",
+          "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
+        },
+        {
+          "question": "Should I use original documents?",
+          "answer": "Usually keep originals and send copies unless the requester’s current instructions specifically require originals or an official verification channel."
+        },
+        {
+          "question": "What if the requester asks for something different?",
+          "answer": "Follow the requester’s current instructions and ask for clarification. This page is a preparation framework, not a substitute for the reviewer’s rules."
         }
       ],
       "trustSignals": [
+        "Source-backed boundaries",
+        "Copyable template",
         "Self-service only",
-        "No fake document help",
-        "No approval promise",
-        "No stored letter answers",
-        "You send it yourself",
-        "Clear next step"
+        "No fake documents",
+        "No approval guarantee",
+        "Official-source links"
       ],
-      "citationSummary": "Employment Verification Letter: self-service ApprovalPrep guidance for preparing employment verification letter with truthful facts, supporting proof, clear boundaries, and related next steps.",
-      "targetProductSku": "letter-of-explanation",
-      "generatedBy": "hostile_review_depth_repair",
-      "generatedAt": "2026-07-09T23:10:00.000Z",
-      "primaryCta": "Start free for $0",
-      "secondaryCta": "Compare paid kits"
+      "primaryCta": "Use the free Letter Writing Studio",
+      "secondaryCta": "Compare the Income + Employment Kit",
+      "citationSummary": "An employment verification letter confirms factual employment details. The exact fields depend on the requester and the employer’s disclosure policy."
     },
     "/proof-of-income-letter": {
       "heading": "Proof of Income Letter",
@@ -6534,6 +6555,486 @@
       "targetProductSku": "loan-prep-letter-kit",
       "generatedBy": "citation_os_self_heal",
       "generatedAt": "2026-07-09T21:15:36.747Z"
+    },
+    "/609-dispute-letter": {
+      "heading": "609 Dispute Letter: What Section 609 Does—and Does Not—Do",
+      "lead": "Use a source-backed 609 letter template while understanding the difference between FCRA disclosure rights and the credit-report dispute process.",
+      "shortAnswer": "Section 609 of the Fair Credit Reporting Act concerns disclosure of information in a consumer’s file. The reinvestigation procedure for disputed credit-report information is addressed in Section 611.",
+      "decisionContext": [
+        "Section 609 of the Fair Credit Reporting Act concerns disclosure of information in a consumer’s file. The reinvestigation procedure for disputed credit-report information is addressed in Section 611.",
+        "Start by identifying the exact reviewer, application, account, or transaction involved. A useful packet answers the real request instead of copying a generic internet letter.",
+        "Every statement should match the documents available to the user. If the evidence does not support a detail, revise the detail or ask the requester what alternative evidence is accepted.",
+        "Keep the final packet narrow. A reviewer should be able to follow the issue, timeline, evidence, and requested next step without searching through unrelated records."
+      ],
+      "whoFor": [
+        "People preparing a truthful self-service letter or document packet for their own application, account, or review.",
+        "People who need a field-level checklist and copyable structure instead of generic motivational advice.",
+        "People who want to distinguish a factual request, courtesy request, explanation, and dispute before choosing the next action.",
+        "People who will review and send their own materials and understand that ApprovalPrep does not represent them or control the decision."
+      ],
+      "value": [
+        "Turns a broad paperwork problem into a sequence of facts, fields, evidence, review checks, and a clear delivery step.",
+        "Uses source-backed boundaries for regulated or verification-sensitive claims and avoids promises that a letter will create a particular outcome.",
+        "Keeps the canonical route responsible for its intent, reducing duplicate answer pages and helping users find the maintained version.",
+        "Connects the educational page to a free drafting tool or paid editable kit without hiding the self-service boundary."
+      ],
+      "whatYouGet": [
+        "A plain-English explanation of the document’s job and limitations.",
+        "A list of the facts and fields to gather before drafting.",
+        "An exact sequence for building and reviewing the packet.",
+        "A copyable template that must be adapted to the user’s real facts.",
+        "Common mistakes, FAQs, official sources, and related ApprovalPrep routes."
+      ],
+      "useCases": [
+        "You need to prepare 609 dispute letter: what section 609 does—and does not—do for your own use.",
+        "A reviewer has asked a specific question and you need a clean factual response.",
+        "You have real documents but need to connect them to a short explanation.",
+        "You want to check the official or primary-source boundary before sending anything.",
+        "You need a maintained canonical resource rather than a thin derivative answer."
+      ],
+      "prepBrief": [
+        "Your full name and current address",
+        "Credit reporting company",
+        "Report confirmation number, if available",
+        "Account or item being questioned",
+        "Specific factual error or disclosure request",
+        "Copies of identity/address documents when required",
+        "Copies of records supporting the request",
+        "Requested response and copy-trail details",
+        "Copy the exact request and deadline into your working notes.",
+        "Use copies of supporting documents and keep originals unless the requester specifically requires otherwise.",
+        "Redact unrelated sensitive information only when permitted and never alter a material fact."
+      ],
+      "commonMistakes": [
+        "Calling every request a dispute without identifying a specific factual error.",
+        "Sending a copied “loophole” letter that does not match your report.",
+        "Demanding deletion of accurate information.",
+        "Failing to attach support or identify the report item.",
+        "Sending original documents or unnecessary identity information.",
+        "Using a template without replacing every placeholder.",
+        "Sending before checking that names, dates, amounts, account references, and attachments agree."
+      ],
+      "reviewChecklist": [
+        "The letter answers the exact request in the first paragraph.",
+        "Every date, amount, title, account, and status matches the source records.",
+        "Each attachment supports a specific sentence or timeline point.",
+        "No promise of approval, deletion, verification, underwriting result, or third-party action appears.",
+        "Sensitive information is limited to what the requester needs.",
+        "The sender has saved the final letter, attachments, delivery proof, and response."
+      ],
+      "steps": [
+        "Get and review your current credit reports.",
+        "Separate a file-disclosure request from a factual dispute.",
+        "List each specific item and explain what is inaccurate, incomplete, or missing.",
+        "Attach copies of supporting records and redact unrelated sensitive information.",
+        "Send through the reporting company’s accepted channel and keep proof.",
+        "Review the response and updated report before deciding the next step."
+      ],
+      "faq": [
+        {
+          "question": "What does FCRA Section 609 cover?",
+          "answer": "It addresses disclosures a consumer reporting agency must provide about information in the consumer’s file, subject to the statute’s terms."
+        },
+        {
+          "question": "Where is the credit-report dispute procedure?",
+          "answer": "The FCRA reinvestigation procedure for disputed information is in Section 611, codified at 15 U.S.C. § 1681i."
+        },
+        {
+          "question": "Will a 609 letter delete accurate information?",
+          "answer": "No automatic deletion right follows from sending a form letter. Accurate negative information generally cannot be forced off a report simply because it is unfavorable."
+        },
+        {
+          "question": "What should a factual dispute include?",
+          "answer": "Identify the item, explain the specific inaccuracy or incompleteness, and include copies of documents that support your position."
+        },
+        {
+          "question": "Does ApprovalPrep dispute for me?",
+          "answer": "No. ApprovalPrep is a self-service preparation tool. You review and send your own materials."
+        },
+        {
+          "question": "Can ApprovalPrep send 609 dispute letter: what section 609 does—and does not—do for me?",
+          "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
+        },
+        {
+          "question": "Should I use original documents?",
+          "answer": "Usually keep originals and send copies unless the requester’s current instructions specifically require originals or an official verification channel."
+        },
+        {
+          "question": "What if the requester asks for something different?",
+          "answer": "Follow the requester’s current instructions and ask for clarification. This page is a preparation framework, not a substitute for the reviewer’s rules."
+        }
+      ],
+      "trustSignals": [
+        "Source-backed boundaries",
+        "Copyable template",
+        "Self-service only",
+        "No fake documents",
+        "No approval guarantee",
+        "Official-source links"
+      ],
+      "primaryCta": "Prepare a DIY dispute letter",
+      "secondaryCta": "Compare the Credit Letter Kit",
+      "citationSummary": "Section 609 of the Fair Credit Reporting Act concerns disclosure of information in a consumer’s file. The reinvestigation procedure for disputed credit-report information is addressed in Section 611."
+    },
+    "/goodwill-letter-to-remove-late-payment": {
+      "heading": "Goodwill Letter to Remove a Late Payment",
+      "lead": "Prepare a concise goodwill request asking a creditor to consider a discretionary late-payment adjustment without claiming a legal right to remove accurate information.",
+      "shortAnswer": "A goodwill letter is a courtesy request. It can explain an isolated late payment and ask a creditor to consider an adjustment, but the creditor is not required to grant it.",
+      "decisionContext": [
+        "A goodwill letter is a courtesy request. It can explain an isolated late payment and ask a creditor to consider an adjustment, but the creditor is not required to grant it.",
+        "Start by identifying the exact reviewer, application, account, or transaction involved. A useful packet answers the real request instead of copying a generic internet letter.",
+        "Every statement should match the documents available to the user. If the evidence does not support a detail, revise the detail or ask the requester what alternative evidence is accepted.",
+        "Keep the final packet narrow. A reviewer should be able to follow the issue, timeline, evidence, and requested next step without searching through unrelated records."
+      ],
+      "whoFor": [
+        "People preparing a truthful self-service letter or document packet for their own application, account, or review.",
+        "People who need a field-level checklist and copyable structure instead of generic motivational advice.",
+        "People who want to distinguish a factual request, courtesy request, explanation, and dispute before choosing the next action.",
+        "People who will review and send their own materials and understand that ApprovalPrep does not represent them or control the decision."
+      ],
+      "value": [
+        "Turns a broad paperwork problem into a sequence of facts, fields, evidence, review checks, and a clear delivery step.",
+        "Uses source-backed boundaries for regulated or verification-sensitive claims and avoids promises that a letter will create a particular outcome.",
+        "Keeps the canonical route responsible for its intent, reducing duplicate answer pages and helping users find the maintained version.",
+        "Connects the educational page to a free drafting tool or paid editable kit without hiding the self-service boundary."
+      ],
+      "whatYouGet": [
+        "A plain-English explanation of the document’s job and limitations.",
+        "A list of the facts and fields to gather before drafting.",
+        "An exact sequence for building and reviewing the packet.",
+        "A copyable template that must be adapted to the user’s real facts.",
+        "Common mistakes, FAQs, official sources, and related ApprovalPrep routes."
+      ],
+      "useCases": [
+        "You need to prepare goodwill letter to remove a late payment for your own use.",
+        "A reviewer has asked a specific question and you need a clean factual response.",
+        "You have real documents but need to connect them to a short explanation.",
+        "You want to check the official or primary-source boundary before sending anything.",
+        "You need a maintained canonical resource rather than a thin derivative answer."
+      ],
+      "prepBrief": [
+        "Your name and contact information",
+        "Creditor and account identifier",
+        "Date and amount of the late payment",
+        "Brief truthful explanation",
+        "Relevant positive payment history",
+        "Corrective action taken",
+        "Clear courtesy request",
+        "Supporting records, if useful",
+        "Copy the exact request and deadline into your working notes.",
+        "Use copies of supporting documents and keep originals unless the requester specifically requires otherwise.",
+        "Redact unrelated sensitive information only when permitted and never alter a material fact."
+      ],
+      "commonMistakes": [
+        "Claiming the creditor is legally required to remove accurate reporting.",
+        "Disputing an accurate late payment as if it were an error.",
+        "Writing a long emotional story without a clear account timeline.",
+        "Threatening complaints or litigation in a courtesy request.",
+        "Sending the same generic letter repeatedly without new information.",
+        "Using a template without replacing every placeholder.",
+        "Sending before checking that names, dates, amounts, account references, and attachments agree."
+      ],
+      "reviewChecklist": [
+        "The letter answers the exact request in the first paragraph.",
+        "Every date, amount, title, account, and status matches the source records.",
+        "Each attachment supports a specific sentence or timeline point.",
+        "No promise of approval, deletion, verification, underwriting result, or third-party action appears.",
+        "Sensitive information is limited to what the requester needs.",
+        "The sender has saved the final letter, attachments, delivery proof, and response."
+      ],
+      "steps": [
+        "Confirm the reported payment history is accurate.",
+        "If it is inaccurate, use a factual dispute instead of a goodwill request.",
+        "Write a short account-specific timeline.",
+        "Explain what changed and how future payments are protected.",
+        "Ask respectfully for a one-time discretionary adjustment.",
+        "Send through an accepted channel and keep a copy."
+      ],
+      "faq": [
+        {
+          "question": "Is a goodwill adjustment guaranteed?",
+          "answer": "No. It is a discretionary courtesy decision by the creditor."
+        },
+        {
+          "question": "What if the late payment is actually wrong?",
+          "answer": "Use the creditor and credit-report dispute channels for a specific factual error rather than framing it as goodwill."
+        },
+        {
+          "question": "Should I admit the payment was late?",
+          "answer": "Use truthful, precise language. A goodwill request is generally for accurate history, so do not manufacture a dispute."
+        },
+        {
+          "question": "What supporting documents help?",
+          "answer": "Only include records relevant to the explanation or corrective action, such as proof of a bank error or account setup. Do not overshare unrelated personal records."
+        },
+        {
+          "question": "Can ApprovalPrep contact the creditor?",
+          "answer": "No. You review and send your own request."
+        },
+        {
+          "question": "Can ApprovalPrep send goodwill letter to remove a late payment for me?",
+          "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
+        },
+        {
+          "question": "Should I use original documents?",
+          "answer": "Usually keep originals and send copies unless the requester’s current instructions specifically require originals or an official verification channel."
+        },
+        {
+          "question": "What if the requester asks for something different?",
+          "answer": "Follow the requester’s current instructions and ask for clarification. This page is a preparation framework, not a substitute for the reviewer’s rules."
+        }
+      ],
+      "trustSignals": [
+        "Source-backed boundaries",
+        "Copyable template",
+        "Self-service only",
+        "No fake documents",
+        "No approval guarantee",
+        "Official-source links"
+      ],
+      "primaryCta": "Use the free Letter Writing Studio",
+      "secondaryCta": "Compare the Credit Letter Kit",
+      "citationSummary": "A goodwill letter is a courtesy request. It can explain an isolated late payment and ask a creditor to consider an adjustment, but the creditor is not required to grant it."
+    },
+    "/letter-of-explanation/late-payment": {
+      "heading": "Letter of Explanation for a Late Payment",
+      "lead": "Write a factual late-payment explanation for a lender, landlord, or other reviewer with a clear timeline, supporting documents, and no approval promises.",
+      "shortAnswer": "A late-payment explanation should identify the payment, explain the specific cause, show what changed, and point to evidence without minimizing or exaggerating the facts.",
+      "decisionContext": [
+        "A late-payment explanation should identify the payment, explain the specific cause, show what changed, and point to evidence without minimizing or exaggerating the facts.",
+        "Start by identifying the exact reviewer, application, account, or transaction involved. A useful packet answers the real request instead of copying a generic internet letter.",
+        "Every statement should match the documents available to the user. If the evidence does not support a detail, revise the detail or ask the requester what alternative evidence is accepted.",
+        "Keep the final packet narrow. A reviewer should be able to follow the issue, timeline, evidence, and requested next step without searching through unrelated records."
+      ],
+      "whoFor": [
+        "People preparing a truthful self-service letter or document packet for their own application, account, or review.",
+        "People who need a field-level checklist and copyable structure instead of generic motivational advice.",
+        "People who want to distinguish a factual request, courtesy request, explanation, and dispute before choosing the next action.",
+        "People who will review and send their own materials and understand that ApprovalPrep does not represent them or control the decision."
+      ],
+      "value": [
+        "Turns a broad paperwork problem into a sequence of facts, fields, evidence, review checks, and a clear delivery step.",
+        "Uses source-backed boundaries for regulated or verification-sensitive claims and avoids promises that a letter will create a particular outcome.",
+        "Keeps the canonical route responsible for its intent, reducing duplicate answer pages and helping users find the maintained version.",
+        "Connects the educational page to a free drafting tool or paid editable kit without hiding the self-service boundary."
+      ],
+      "whatYouGet": [
+        "A plain-English explanation of the document’s job and limitations.",
+        "A list of the facts and fields to gather before drafting.",
+        "An exact sequence for building and reviewing the packet.",
+        "A copyable template that must be adapted to the user’s real facts.",
+        "Common mistakes, FAQs, official sources, and related ApprovalPrep routes."
+      ],
+      "useCases": [
+        "You need to prepare letter of explanation for a late payment for your own use.",
+        "A reviewer has asked a specific question and you need a clean factual response.",
+        "You have real documents but need to connect them to a short explanation.",
+        "You want to check the official or primary-source boundary before sending anything.",
+        "You need a maintained canonical resource rather than a thin derivative answer."
+      ],
+      "prepBrief": [
+        "Reviewer or application reference",
+        "Account and late-payment month",
+        "Due date and payment date",
+        "Specific cause",
+        "Supporting records",
+        "Current account status",
+        "Corrective steps",
+        "Contact information",
+        "Copy the exact request and deadline into your working notes.",
+        "Use copies of supporting documents and keep originals unless the requester specifically requires otherwise.",
+        "Redact unrelated sensitive information only when permitted and never alter a material fact."
+      ],
+      "commonMistakes": [
+        "Using vague phrases such as “things happened” without dates.",
+        "Blaming a third party without evidence.",
+        "Attaching a large volume of unrelated personal records.",
+        "Claiming the issue can never happen again.",
+        "Asking ApprovalPrep to submit or negotiate with the reviewer.",
+        "Using a template without replacing every placeholder.",
+        "Sending before checking that names, dates, amounts, account references, and attachments agree."
+      ],
+      "reviewChecklist": [
+        "The letter answers the exact request in the first paragraph.",
+        "Every date, amount, title, account, and status matches the source records.",
+        "Each attachment supports a specific sentence or timeline point.",
+        "No promise of approval, deletion, verification, underwriting result, or third-party action appears.",
+        "Sensitive information is limited to what the requester needs.",
+        "The sender has saved the final letter, attachments, delivery proof, and response."
+      ],
+      "steps": [
+        "Copy the reviewer’s request into your notes.",
+        "Build a short timeline from statements and receipts.",
+        "Identify the narrow cause without adding unrelated history.",
+        "Attach only records that support the explanation.",
+        "State the current status and prevention steps.",
+        "Review for consistency and send through the requested channel."
+      ],
+      "faq": [
+        {
+          "question": "How long should the explanation be?",
+          "answer": "Usually one focused page is easier to review, but follow the requester’s instructions."
+        },
+        {
+          "question": "Should I include personal hardship details?",
+          "answer": "Include only the context needed to explain the payment and support the timeline. Avoid unnecessary sensitive detail."
+        },
+        {
+          "question": "What if the payment was reported inaccurately?",
+          "answer": "A letter of explanation may answer an application question, but use the appropriate creditor or credit-report dispute process for a factual reporting error."
+        },
+        {
+          "question": "Does an explanation guarantee approval?",
+          "answer": "No. It provides context; the reviewer applies its own criteria."
+        },
+        {
+          "question": "Can I use this for a mortgage?",
+          "answer": "You can adapt the structure, but follow the lender’s exact request and ask what documents it requires."
+        },
+        {
+          "question": "Can ApprovalPrep send letter of explanation for a late payment for me?",
+          "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
+        },
+        {
+          "question": "Should I use original documents?",
+          "answer": "Usually keep originals and send copies unless the requester’s current instructions specifically require originals or an official verification channel."
+        },
+        {
+          "question": "What if the requester asks for something different?",
+          "answer": "Follow the requester’s current instructions and ask for clarification. This page is a preparation framework, not a substitute for the reviewer’s rules."
+        }
+      ],
+      "trustSignals": [
+        "Source-backed boundaries",
+        "Copyable template",
+        "Self-service only",
+        "No fake documents",
+        "No approval guarantee",
+        "Official-source links"
+      ],
+      "primaryCta": "Create a letter of explanation",
+      "secondaryCta": "Compare the Loan Prep Kit",
+      "citationSummary": "A late-payment explanation should identify the payment, explain the specific cause, show what changed, and point to evidence without minimizing or exaggerating the facts."
+    },
+    "/letter-of-explanation/large-deposit": {
+      "heading": "Letter of Explanation for a Large Deposit",
+      "lead": "Explain the source of a large bank deposit with a traceable timeline, supporting documents, and lender-specific follow-up questions.",
+      "shortAnswer": "A lender may ask for the source of a large deposit when reviewing assets. The accepted evidence depends on the transaction, account, loan program, and lender instructions.",
+      "decisionContext": [
+        "A lender may ask for the source of a large deposit when reviewing assets. The accepted evidence depends on the transaction, account, loan program, and lender instructions.",
+        "Start by identifying the exact reviewer, application, account, or transaction involved. A useful packet answers the real request instead of copying a generic internet letter.",
+        "Every statement should match the documents available to the user. If the evidence does not support a detail, revise the detail or ask the requester what alternative evidence is accepted.",
+        "Keep the final packet narrow. A reviewer should be able to follow the issue, timeline, evidence, and requested next step without searching through unrelated records."
+      ],
+      "whoFor": [
+        "People preparing a truthful self-service letter or document packet for their own application, account, or review.",
+        "People who need a field-level checklist and copyable structure instead of generic motivational advice.",
+        "People who want to distinguish a factual request, courtesy request, explanation, and dispute before choosing the next action.",
+        "People who will review and send their own materials and understand that ApprovalPrep does not represent them or control the decision."
+      ],
+      "value": [
+        "Turns a broad paperwork problem into a sequence of facts, fields, evidence, review checks, and a clear delivery step.",
+        "Uses source-backed boundaries for regulated or verification-sensitive claims and avoids promises that a letter will create a particular outcome.",
+        "Keeps the canonical route responsible for its intent, reducing duplicate answer pages and helping users find the maintained version.",
+        "Connects the educational page to a free drafting tool or paid editable kit without hiding the self-service boundary."
+      ],
+      "whatYouGet": [
+        "A plain-English explanation of the document’s job and limitations.",
+        "A list of the facts and fields to gather before drafting.",
+        "An exact sequence for building and reviewing the packet.",
+        "A copyable template that must be adapted to the user’s real facts.",
+        "Common mistakes, FAQs, official sources, and related ApprovalPrep routes."
+      ],
+      "useCases": [
+        "You need to prepare letter of explanation for a large deposit for your own use.",
+        "A reviewer has asked a specific question and you need a clean factual response.",
+        "You have real documents but need to connect them to a short explanation.",
+        "You want to check the official or primary-source boundary before sending anything.",
+        "You need a maintained canonical resource rather than a thin derivative answer."
+      ],
+      "prepBrief": [
+        "Applicant and application number",
+        "Account and statement period",
+        "Deposit date and amount",
+        "Source of funds",
+        "Originating account or payer",
+        "Transaction reference",
+        "Documents attached",
+        "Contact information",
+        "Copy the exact request and deadline into your working notes.",
+        "Use copies of supporting documents and keep originals unless the requester specifically requires otherwise.",
+        "Redact unrelated sensitive information only when permitted and never alter a material fact."
+      ],
+      "commonMistakes": [
+        "Calling a deposit “savings” when the money came from another source.",
+        "Submitting only the receiving statement without tracing the origin.",
+        "Creating or altering bank, gift, payroll, sale, or loan documents.",
+        "Assuming one lender’s documentation rule applies to another.",
+        "Hiding a new debt or borrowed source.",
+        "Using a template without replacing every placeholder.",
+        "Sending before checking that names, dates, amounts, account references, and attachments agree."
+      ],
+      "reviewChecklist": [
+        "The letter answers the exact request in the first paragraph.",
+        "Every date, amount, title, account, and status matches the source records.",
+        "Each attachment supports a specific sentence or timeline point.",
+        "No promise of approval, deletion, verification, underwriting result, or third-party action appears.",
+        "Sensitive information is limited to what the requester needs.",
+        "The sender has saved the final letter, attachments, delivery proof, and response."
+      ],
+      "steps": [
+        "Identify the exact deposit the lender flagged.",
+        "Classify the truthful source: transfer, gift, sale, payroll, refund, loan, cash, or other.",
+        "Gather the documents that trace the source and transfer.",
+        "Ask whether a lender form, donor statement, bill of sale, or additional statement is required.",
+        "Write a concise explanation that matches the documents.",
+        "Redact unrelated account information only when permitted and retain the full copy trail."
+      ],
+      "faq": [
+        {
+          "question": "What counts as a large deposit?",
+          "answer": "There is no single universal number for every application. The lender identifies the deposits it needs explained based on its review and applicable requirements."
+        },
+        {
+          "question": "Do I need every bank statement?",
+          "answer": "Provide the periods and accounts the lender requests. Ask before sending extra sensitive records."
+        },
+        {
+          "question": "How do I explain a transfer between my own accounts?",
+          "answer": "Show the outgoing transaction from the source account and the matching incoming deposit in the reviewed account."
+        },
+        {
+          "question": "What about a cash deposit?",
+          "answer": "Tell the truth and ask what evidence the lender accepts. Do not create a false receipt or source story."
+        },
+        {
+          "question": "Does a clean explanation guarantee the loan?",
+          "answer": "No. It only addresses one documentation question."
+        },
+        {
+          "question": "Can ApprovalPrep send letter of explanation for a large deposit for me?",
+          "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
+        },
+        {
+          "question": "Should I use original documents?",
+          "answer": "Usually keep originals and send copies unless the requester’s current instructions specifically require originals or an official verification channel."
+        },
+        {
+          "question": "What if the requester asks for something different?",
+          "answer": "Follow the requester’s current instructions and ask for clarification. This page is a preparation framework, not a substitute for the reviewer’s rules."
+        }
+      ],
+      "trustSignals": [
+        "Source-backed boundaries",
+        "Copyable template",
+        "Self-service only",
+        "No fake documents",
+        "No approval guarantee",
+        "Official-source links"
+      ],
+      "primaryCta": "Create a letter of explanation",
+      "secondaryCta": "Compare the Loan Prep Kit",
+      "citationSummary": "A lender may ask for the source of a large deposit when reviewing assets. The accepted evidence depends on the transaction, account, loan program, and lender instructions."
     }
   }
 }

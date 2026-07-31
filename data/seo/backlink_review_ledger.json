@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-30T19:21:00-05:00",
+  "status": "REVIEW_REQUIRED_BEFORE_DISAVOW",
+  "manualActionStatus": "UNKNOWN_OWNER_CHECK_REQUIRED",
+  "candidates": [
+    {
+      "domain": "blinks.monster",
+      "source": "user_semrush_observation",
+      "classification": "suspected_automated_pbn",
+      "reviewStatus": "unverified_no_export"
+    },
+    {
+      "domain": "seol.store",
+      "source": "user_semrush_observation",
+      "classification": "suspected_automated_pbn",
+      "reviewStatus": "unverified_no_export"
+    },
+    {
+      "domainPattern": "fiverr-*.site",
+      "source": "user_semrush_observation",
+      "classification": "pattern_only_not_valid_disavow_entry",
+      "reviewStatus": "exact_domains_required"
+    },
+    {
+      "domainPattern": "seo-growth-*.shop",
+      "source": "user_semrush_observation",
+      "classification": "pattern_only_not_valid_disavow_entry",
+      "reviewStatus": "exact_domains_required"
+    }
+  ],
+  "decisionRules": [
+    "Never disavow by wildcard",
+    "Review exact root domains and source URLs",
+    "Check GSC Manual Actions",
+    "Preserve prior disavow file",
+    "Upload only adjudicated domain: entries",
+    "A new upload replaces the old list"
+  ]
+}

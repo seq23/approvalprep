@@ -1,0 +1,33 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-30T19:21:00-05:00",
+  "preferredOrigin": "https://approvalprep.com",
+  "rules": [
+    {
+      "id": "www-to-apex",
+      "sourceHost": "www.approvalprep.com",
+      "targetOrigin": "https://approvalprep.com",
+      "statusCode": 301,
+      "preservePath": true,
+      "preserveQuery": true,
+      "deployment": "Cloudflare Bulk Redirect or Pages _redirects fallback"
+    },
+    {
+      "id": "pages-dev-to-apex",
+      "sourceHost": "approvalprep.pages.dev",
+      "targetOrigin": "https://approvalprep.com",
+      "statusCode": 301,
+      "preservePath": true,
+      "preserveQuery": true,
+      "deployment": "Cloudflare Pages custom-domain redirect or Worker route",
+      "accountActionRequired": true
+    }
+  ],
+  "verification": [
+    "GET apex URL returns 200",
+    "GET www URL returns one permanent hop to same apex path",
+    "query string is preserved",
+    "sitemap and canonicals use apex",
+    "pages.dev does not serve an indexable duplicate"
+  ]
+}

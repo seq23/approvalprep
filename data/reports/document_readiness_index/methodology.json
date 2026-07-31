@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-07-30T19:21:00-05:00",
+  "title": "Document Readiness Index methodology",
+  "samplingFrame": "100 public application-checklist or document-guidance sources; 25 each for rental, employment/income verification, mortgage/home loan, and small-business funding.",
+  "codingLevels": {
+    "catalog": "URL, organization, category, source type, format, and access date",
+    "deep": "Specific preparation signals only for primary sources marked deepContentCoding=true"
+  },
+  "admissionRules": [
+    "Publicly accessible source URL",
+    "Relevant to an application, verification, loan, rental, or funding document process",
+    "No duplicate URL",
+    "Source type and format recorded",
+    "Item-level findings require deep review flag"
+  ],
+  "exclusions": [
+    "Paywalled-only sources",
+    "Duplicate mirrors where a primary source was available",
+    "Pages with no document/application relevance"
+  ],
+  "limitations": [
+    "The 100-source catalog records public source metadata and URLs. Most records were not coded line-by-line in this release.",
+    "Only records marked deepContentCoding=true support item-level preparation-signal findings.",
+    "Requirements change by requester, jurisdiction, program, and date.",
+    "The report does not measure approval odds, market share, ranking, or applicant outcomes."
+  ]
+}

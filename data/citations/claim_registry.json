@@ -76,6 +76,103 @@
       "freshness_class": "evergreen",
       "last_verified_at": "2026-07-07",
       "status": "active"
+    },
+    {
+      "claim_id": "claim_employment_verification_fields_vary",
+      "claim_text": "Employment verification fields and delivery methods vary by requester and employer policy.",
+      "claim_type": "process_boundary",
+      "risk_class": "medium",
+      "page_route": "/employment-verification-letter",
+      "atom_id": null,
+      "source_ids": [
+        "dol_employment_verification",
+        "dfas_civilian_employment_verification"
+      ],
+      "citation_mode": "required",
+      "freshness_class": "annual_review",
+      "last_verified_at": "2026-07-30",
+      "status": "active"
+    },
+    {
+      "claim_id": "claim_fcra_609_disclosure_scope",
+      "claim_text": "FCRA Section 609 concerns disclosures to consumers, while the disputed-accuracy reinvestigation procedure appears in Section 611.",
+      "claim_type": "statutory_scope",
+      "risk_class": "regulated",
+      "page_route": "/609-dispute-letter",
+      "atom_id": null,
+      "source_ids": [
+        "frca_609_cornell",
+        "frca_611_cornell"
+      ],
+      "citation_mode": "required",
+      "freshness_class": "annual_review",
+      "last_verified_at": "2026-07-30",
+      "status": "active"
+    },
+    {
+      "claim_id": "claim_609_not_deletion_loophole",
+      "claim_text": "Sending a form commonly called a 609 letter does not create an automatic right to delete accurate information.",
+      "claim_type": "consumer_boundary",
+      "risk_class": "regulated",
+      "page_route": "/609-dispute-letter",
+      "atom_id": null,
+      "source_ids": [
+        "frca_609_cornell",
+        "frca_611_cornell",
+        "cfpb_accurate_negative_information"
+      ],
+      "citation_mode": "required",
+      "freshness_class": "semiannual_review",
+      "last_verified_at": "2026-07-30",
+      "status": "active"
+    },
+    {
+      "claim_id": "claim_goodwill_discretionary",
+      "claim_text": "A goodwill adjustment is discretionary, and accurate negative information generally cannot be forced off a credit report merely because the consumer requests it.",
+      "claim_type": "consumer_boundary",
+      "risk_class": "regulated",
+      "page_route": "/goodwill-letter-to-remove-late-payment",
+      "atom_id": null,
+      "source_ids": [
+        "cfpb_accurate_negative_information"
+      ],
+      "citation_mode": "required",
+      "freshness_class": "semiannual_review",
+      "last_verified_at": "2026-07-30",
+      "status": "active"
+    },
+    {
+      "claim_id": "claim_late_payment_loe_document_response",
+      "claim_text": "A letter of explanation should respond to the reviewer’s specific request with a factual timeline and supporting documents.",
+      "claim_type": "preparation_process",
+      "risk_class": "regulated",
+      "page_route": "/letter-of-explanation/late-payment",
+      "atom_id": null,
+      "source_ids": [
+        "cfpb_loan_application_packet",
+        "cfpb_lender_document_requests"
+      ],
+      "citation_mode": "required",
+      "freshness_class": "semiannual_review",
+      "last_verified_at": "2026-07-30",
+      "status": "active"
+    },
+    {
+      "claim_id": "claim_large_deposit_source_documents",
+      "claim_text": "A lender may request documentation showing the source of a large deposit, and the exact accepted evidence varies with the transaction and lender instructions.",
+      "claim_type": "mortgage_documentation",
+      "risk_class": "regulated",
+      "page_route": "/letter-of-explanation/large-deposit",
+      "atom_id": null,
+      "source_ids": [
+        "cfpb_lender_document_requests",
+        "fannie_home_loan_documents"
+      ],
+      "citation_mode": "required",
+      "freshness_class": "semiannual_review",
+      "last_verified_at": "2026-07-30",
+      "status": "active"
     }
-  ]
+  ],
+  "generatedAt": "2026-07-30T19:21:00-05:00"
 }

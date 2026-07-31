@@ -7,7 +7,7 @@ import registry from "../../../data/reports/public_report_registry.json";
 
 export function getStaticPaths() {
   return registry.reports
-    .filter((report) => report.status === "published_by_contract")
+    .filter((report) => report.status === "published_by_contract" && report.id !== "document-readiness-index")
     .map((report) => ({ params: { slug: report.path.split("/").pop() }, props: { report } }));
 }
 const { report } = Astro.props;

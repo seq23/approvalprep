@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-07-09T22:18:00.000Z",
+  "generatedAt": "2026-07-30T19:21:00-05:00",
   "sources": [
     {
       "id": "approvalprep-methodology",
@@ -43,6 +43,51 @@
         "business packet readiness"
       ],
       "lastCheckedAt": "2026-07-09T22:18:00.000Z"
+    },
+    {
+      "id": "dri-dol-employment",
+      "type": "government_primary",
+      "url": "https://www.dol.gov/agencies/oasam/centers-offices/human-resources-center/employment-verification",
+      "supports": [
+        "employment verification channel and process"
+      ],
+      "lastCheckedAt": "2026-07-30T19:21:00-05:00"
+    },
+    {
+      "id": "dri-cfpb-loan-packet",
+      "type": "government_primary",
+      "url": "https://www.consumerfinance.gov/owning-a-home/prepare/create-a-loan-application-packet/",
+      "supports": [
+        "loan application document categories"
+      ],
+      "lastCheckedAt": "2026-07-30T19:21:00-05:00"
+    },
+    {
+      "id": "dri-cfpb-lender-requests",
+      "type": "government_primary",
+      "url": "https://www.consumerfinance.gov/owning-a-home/close/submit-documents-and-answer-requests-from-the-lender/",
+      "supports": [
+        "lender follow-up documentation and fund-source requests"
+      ],
+      "lastCheckedAt": "2026-07-30T19:21:00-05:00"
+    },
+    {
+      "id": "dri-fannie-documents",
+      "type": "gse_primary",
+      "url": "https://yourhome.fanniemae.com/buy/home-loan-documents",
+      "supports": [
+        "home loan document categories"
+      ],
+      "lastCheckedAt": "2026-07-30T19:21:00-05:00"
+    },
+    {
+      "id": "dri-sba-loans",
+      "type": "government_primary",
+      "url": "https://www.sba.gov/funding-programs/loans",
+      "supports": [
+        "small business loan program and lender documentation context"
+      ],
+      "lastCheckedAt": "2026-07-30T19:21:00-05:00"
     }
   ]
 }

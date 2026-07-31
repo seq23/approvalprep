@@ -1080,6 +1080,17 @@
       "owner": "approvalprep-ops",
       "group": "ops-critical",
       "scope": "All GitHub workflows that commit or push to main"
+    },
+    {
+      "id": "redirect-map",
+      "npmScript": "validate:redirect-map",
+      "entrypoint": "scripts/validate/redirect-map.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents redirect loss and duplicate URL recurrence",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "Canonical host and 42 legacy duplicate redirects"
     }
   ]
 }

@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0.0",
+  "capturedAt": "2026-07-30T19:54:00-05:00",
+  "repo": "approvalprep",
+  "canonicalOrigin": "https://approvalprep.com",
+  "sourceZip": {
+    "name": "approvalprep-main(1).zip",
+    "sha256": "6c905de3970a2a85fb3a4969ab36f46612ce0ea51ea5306383b9b425e582bd23"
+  },
+  "recoveryPlan": {
+    "path": "docs/seo/APPROVALPREP_SEO_RECOVERY_PLAN_2026-07-30.md",
+    "sha256": "0d014585a888ff3b20d416befcff84b9dd7cc75f694c8c76da5d251a8e4172ab"
+  },
+  "redirectMap": {
+    "path": "data/seo/legacy_duplicate_redirect_map.csv",
+    "sha256": "823de0311b685f288fe79cf0979f6d63181f245aab9195098b51802f4d0f6617"
+  },
+  "preChangeCounts": {
+    "routeManifestRoutes": 70,
+    "indexableRoutes": 67,
+    "sitemapUrls": 115,
+    "generatedAnswerAssets": 45,
+    "publicGeneratedAnswerPages": 42
+  },
+  "externalEvidenceStatus": {
+    "googleSearchConsole": "EXPORT_REQUIRED",
+    "semrushBacklinks": "EXPORT_REQUIRED",
+    "cloudflareHostRules": "ACCOUNT_ACCESS_REQUIRED",
+    "liveRedirectHeaders": "NETWORK_OR_DEPLOYMENT_REQUIRED",
+    "manualActionStatus": "OWNER_ACCOUNT_CHECK_REQUIRED"
+  },
+  "rollback": {
+    "sourceZipIsAuthority": true,
+    "restoreInstruction": "Reapply the source ZIP with the local updater if the recovery snapshot must be rolled back."
+  },
+  "correctedImplementation": {
+    "publishingSystem": "PRESERVED",
+    "preservationReceipt": "artifacts/seo_recovery/PUBLISHING_SYSTEM_PRESERVATION_RECEIPT.json"
+  }
+}
