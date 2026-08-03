@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-07-27T15:13:32.090Z",
+  "generatedAt": "2026-08-03T15:16:12.013Z",
   "sources": [
     {
       "sourceId": "ftc_credit_dispute_sample",
@@ -54,6 +54,102 @@
       "sourceId": "approvalprep_owner_policy",
       "url": "docs/INITIALIZATION_LOCK.md",
       "authorityClass": "internal",
+      "score": 65,
+      "status": "usable",
+      "checks": {
+        "hasUrl": true,
+        "hasPublisher": true,
+        "hasReviewDate": true
+      }
+    },
+    {
+      "sourceId": "dol_employment_verification",
+      "url": "https://www.dol.gov/agencies/oasam/centers-offices/human-resources-center/employment-verification",
+      "authorityClass": "primary",
+      "score": 65,
+      "status": "usable",
+      "checks": {
+        "hasUrl": true,
+        "hasPublisher": true,
+        "hasReviewDate": true
+      }
+    },
+    {
+      "sourceId": "dfas_civilian_employment_verification",
+      "url": "https://www.dfas.mil/CivilianEmployees/Civilian-Employment-Verification/",
+      "authorityClass": "primary",
+      "score": 65,
+      "status": "usable",
+      "checks": {
+        "hasUrl": true,
+        "hasPublisher": true,
+        "hasReviewDate": true
+      }
+    },
+    {
+      "sourceId": "frca_609_cornell",
+      "url": "https://www.law.cornell.edu/uscode/text/15/1681g",
+      "authorityClass": "primary_text",
+      "score": 65,
+      "status": "usable",
+      "checks": {
+        "hasUrl": true,
+        "hasPublisher": true,
+        "hasReviewDate": true
+      }
+    },
+    {
+      "sourceId": "frca_611_cornell",
+      "url": "https://www.law.cornell.edu/uscode/text/15/1681i",
+      "authorityClass": "primary_text",
+      "score": 65,
+      "status": "usable",
+      "checks": {
+        "hasUrl": true,
+        "hasPublisher": true,
+        "hasReviewDate": true
+      }
+    },
+    {
+      "sourceId": "cfpb_accurate_negative_information",
+      "url": "https://www.consumerfinance.gov/ask-cfpb/is-it-possible-to-remove-accurate-negative-information-from-my-credit-report-en-1249/",
+      "authorityClass": "primary",
+      "score": 65,
+      "status": "usable",
+      "checks": {
+        "hasUrl": true,
+        "hasPublisher": true,
+        "hasReviewDate": true
+      }
+    },
+    {
+      "sourceId": "cfpb_loan_application_packet",
+      "url": "https://www.consumerfinance.gov/owning-a-home/prepare/create-a-loan-application-packet/",
+      "authorityClass": "primary",
+      "score": 65,
+      "status": "usable",
+      "checks": {
+        "hasUrl": true,
+        "hasPublisher": true,
+        "hasReviewDate": true
+      }
+    },
+    {
+      "sourceId": "cfpb_lender_document_requests",
+      "url": "https://www.consumerfinance.gov/owning-a-home/close/submit-documents-and-answer-requests-from-the-lender/",
+      "authorityClass": "primary",
+      "score": 65,
+      "status": "usable",
+      "checks": {
+        "hasUrl": true,
+        "hasPublisher": true,
+        "hasReviewDate": true
+      }
+    },
+    {
+      "sourceId": "fannie_home_loan_documents",
+      "url": "https://yourhome.fanniemae.com/buy/home-loan-documents",
+      "authorityClass": "primary",
       "score": 65,
       "status": "usable",
       "checks": {

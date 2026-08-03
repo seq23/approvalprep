@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-07-27T15:13:31.965Z",
+  "generatedAt": "2026-08-03T15:16:11.917Z",
   "mode": "structural",
   "policy": "Lifecycle recommendations do not claim traffic, ranking, indexing, or conversion decay without live telemetry.",
   "items": [
@@ -147,8 +147,8 @@
     {
       "route": "/employment-verification-letter",
       "title": "Employment Verification Letter",
-      "risk": "high",
-      "pageFamily": "letter_studio",
+      "risk": "medium",
+      "pageFamily": "income_employment",
       "recommendedAction": "refresh",
       "reasonCodes": [
         "no_live_performance_data_yet"
@@ -157,6 +157,62 @@
       "source": "route_manifest_and_existing_intelligence",
       "claimType": "structural_not_live_performance",
       "ownerReviewRequired": false
+    },
+    {
+      "route": "/609-dispute-letter",
+      "title": "609 Dispute Letter: What Section 609 Does—and Does Not—Do",
+      "risk": "regulated",
+      "pageFamily": "credit_self_service",
+      "recommendedAction": "approval_required_refresh",
+      "reasonCodes": [
+        "regulated_or_credit_sensitive"
+      ],
+      "priorityScore": 90,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": true
+    },
+    {
+      "route": "/goodwill-letter-to-remove-late-payment",
+      "title": "Goodwill Letter to Remove a Late Payment",
+      "risk": "regulated",
+      "pageFamily": "credit_self_service",
+      "recommendedAction": "approval_required_refresh",
+      "reasonCodes": [
+        "regulated_or_credit_sensitive"
+      ],
+      "priorityScore": 90,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": true
+    },
+    {
+      "route": "/letter-of-explanation/late-payment",
+      "title": "Letter of Explanation for a Late Payment",
+      "risk": "regulated",
+      "pageFamily": "letter_studio",
+      "recommendedAction": "approval_required_refresh",
+      "reasonCodes": [
+        "regulated_or_credit_sensitive"
+      ],
+      "priorityScore": 90,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": true
+    },
+    {
+      "route": "/letter-of-explanation/large-deposit",
+      "title": "Letter of Explanation for a Large Deposit",
+      "risk": "regulated",
+      "pageFamily": "mortgage",
+      "recommendedAction": "approval_required_refresh",
+      "reasonCodes": [
+        "regulated_or_credit_sensitive"
+      ],
+      "priorityScore": 90,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": true
     },
     {
       "route": "/proof-of-income-letter",

@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-07-27T15:13:31.936Z",
+  "generatedAt": "2026-08-03T15:16:11.894Z",
   "sourceMode": "unavailable",
-  "publicRouteCount": 67,
+  "publicRouteCount": 71,
   "crawledRouteCount": 0,
   "uncrawledRoutes": [
     {
@@ -78,9 +78,37 @@
     {
       "path": "/employment-verification-letter",
       "title": "Employment Verification Letter",
+      "family": "income_employment",
+      "risk": "medium",
+      "priority": "normal"
+    },
+    {
+      "path": "/609-dispute-letter",
+      "title": "609 Dispute Letter: What Section 609 Does—and Does Not—Do",
+      "family": "credit_self_service",
+      "risk": "regulated",
+      "priority": "normal"
+    },
+    {
+      "path": "/goodwill-letter-to-remove-late-payment",
+      "title": "Goodwill Letter to Remove a Late Payment",
+      "family": "credit_self_service",
+      "risk": "regulated",
+      "priority": "normal"
+    },
+    {
+      "path": "/letter-of-explanation/late-payment",
+      "title": "Letter of Explanation for a Late Payment",
       "family": "letter_studio",
-      "risk": "high",
-      "priority": "high"
+      "risk": "regulated",
+      "priority": "normal"
+    },
+    {
+      "path": "/letter-of-explanation/large-deposit",
+      "title": "Letter of Explanation for a Large Deposit",
+      "family": "mortgage",
+      "risk": "regulated",
+      "priority": "normal"
     },
     {
       "path": "/proof-of-income-letter",
