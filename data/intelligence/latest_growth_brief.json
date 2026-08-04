@@ -1,7 +1,120 @@
 {
   "schemaVersion": "4.1.0",
-  "generatedAt": "2026-08-03T15:16:11.838Z",
+  "generatedAt": "2026-08-04T12:28:58.925Z",
   "sourceStatus": [
+    {
+      "id": "b3e26a5a-0ac4-49ad-b40d-73529d0192e0",
+      "connectorId": "authority_requirement_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-08-04T12:28:58.744Z",
+      "recordsImported": 71
+    },
+    {
+      "id": "6d1f2270-cf94-45b5-afe9-aba028d97b3f",
+      "connectorId": "growth_maintenance_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-08-04T12:28:58.567Z",
+      "recordsImported": 71
+    },
+    {
+      "id": "333974b7-a7f8-410e-980d-1bdf3e19aacd",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-08-04T12:10:20.957Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "5f4f06cd-f9c8-4089-849c-4681baee3de2",
+      "connectorId": "indexnow",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-08-04T12:10:20.786Z",
+      "reason": "INDEXNOW_KEY is required for live submission.",
+      "recordsImported": 0
+    },
+    {
+      "id": "30a4d032-3f03-4b8e-b387-eac2373c452b",
+      "connectorId": "official_source_fetcher",
+      "status": "COMPLETE",
+      "ranAt": "2026-08-04T10:58:40.684Z",
+      "recordsImported": 12
+    },
+    {
+      "id": "3ddbd6db-d9bc-4a2e-a9e0-7c6fd54f1bde",
+      "connectorId": "manual_social_signal_import",
+      "status": "NO_DATA",
+      "ranAt": "2026-08-04T10:58:31.371Z",
+      "reason": "No social signal import found at data/imports/social-signals.json.",
+      "recordsImported": 0
+    },
+    {
+      "id": "63a38e6a-8395-4b92-938c-2a37c9299f90",
+      "connectorId": "manual_serp_csv",
+      "status": "NO_DATA",
+      "ranAt": "2026-08-04T10:58:31.188Z",
+      "reason": "No SERP CSV found at data/imports/serp.csv.",
+      "recordsImported": 0
+    },
+    {
+      "id": "8bcde9a4-8fe7-4d00-8d7a-3de80e4391e7",
+      "connectorId": "competitor_public_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-08-04T10:58:31.054Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "10b77877-e3d2-47a2-807a-b83a370b6dbc",
+      "connectorId": "competitor_sitemap_discovery",
+      "status": "COMPLETE",
+      "ranAt": "2026-08-04T10:58:30.476Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "dfb0bd92-87a9-4aa4-a609-b25e41a91932",
+      "connectorId": "owned_site_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-08-04T10:58:29.579Z",
+      "recordsImported": 74
+    },
+    {
+      "id": "d04b7917-a43b-454f-9ff4-546b5c743a3c",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-08-04T10:58:29.441Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "43415393-88b0-4876-bf54-bf587ec81d4d",
+      "connectorId": "google_url_inspection",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-08-04T10:58:29.304Z",
+      "reason": "GSC_SITE_URL and GSC_ACCESS_TOKEN, or GSC_URL_INSPECTION_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "ac9b3296-c6cd-40ba-970d-80988948bfa3",
+      "connectorId": "google_search_console_search_analytics",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-08-04T10:58:29.164Z",
+      "reason": "GSC_SITE_URL and GSC_ACCESS_TOKEN, or GSC_SEARCH_ANALYTICS_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "16b05e0f-77f4-45b3-9831-6ddfd1f9e40f",
+      "connectorId": "cloudflare_crawler_logs",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-08-03T15:16:11.868Z",
+      "reason": "Cloudflare crawler ingestion requires Cloudflare credentials or a manual import file.",
+      "recordsImported": 0
+    },
+    {
+      "id": "d95cefd1-2faa-4c70-841c-65f06de01752",
+      "connectorId": "growth_brief_generation",
+      "status": "COMPLETE",
+      "ranAt": "2026-08-03T15:16:11.840Z",
+      "recordsImported": 40
+    },
     {
       "id": "64967ad9-7887-4836-8719-c6298bbe2d2d",
       "connectorId": "page_action_recommendation",
@@ -36,128 +149,12 @@
       "status": "COMPLETE",
       "ranAt": "2026-08-03T15:16:10.459Z",
       "recordsImported": 12
-    },
-    {
-      "id": "8335f4bc-c6bd-48d5-9ddf-f26eaa2dce4c",
-      "connectorId": "manual_social_signal_import",
-      "status": "NO_DATA",
-      "ranAt": "2026-08-03T15:16:05.353Z",
-      "reason": "No social signal import found at data/imports/social-signals.json.",
-      "recordsImported": 0
-    },
-    {
-      "id": "6140f19c-ff72-4e67-aab0-77f5bbf700bf",
-      "connectorId": "manual_serp_csv",
-      "status": "NO_DATA",
-      "ranAt": "2026-08-03T15:16:05.327Z",
-      "reason": "No SERP CSV found at data/imports/serp.csv.",
-      "recordsImported": 0
-    },
-    {
-      "id": "f10059a5-b89c-4de4-a2c8-9d0ee65c9713",
-      "connectorId": "competitor_public_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-03T15:16:05.274Z",
-      "recordsImported": 2
-    },
-    {
-      "id": "64433093-7fc3-4989-a0d7-f59723cf03f8",
-      "connectorId": "competitor_sitemap_discovery",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-03T15:16:04.879Z",
-      "recordsImported": 2
-    },
-    {
-      "id": "6fbfa907-4b23-467b-bf9b-98f5c7ac28f2",
-      "connectorId": "owned_site_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-03T15:16:04.512Z",
-      "recordsImported": 74
-    },
-    {
-      "id": "3f304684-c16b-462e-a058-ddaf3a4db80c",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-03T15:16:04.485Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "2206f3c5-4490-4e93-9f04-e75542397ba6",
-      "connectorId": "google_url_inspection",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-03T15:16:04.459Z",
-      "reason": "GSC_SITE_URL and GSC_ACCESS_TOKEN, or GSC_URL_INSPECTION_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "6a51e147-22d5-4e6d-9981-b1dacecd76c1",
-      "connectorId": "google_search_console_search_analytics",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-03T15:16:04.433Z",
-      "reason": "GSC_SITE_URL and GSC_ACCESS_TOKEN, or GSC_SEARCH_ANALYTICS_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "236a592c-6f74-44a7-9459-5b52890dd0eb",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-03T13:28:02.349Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "879c9f9e-d28d-4c2d-9178-141efd51211a",
-      "connectorId": "indexnow",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-03T13:28:02.171Z",
-      "reason": "INDEXNOW_KEY is required for live submission.",
-      "recordsImported": 0
-    },
-    {
-      "id": "f0858858-c473-40ae-82ad-e8843a6bdae5",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-03T13:17:18.580Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "72df2d72-4cbb-439d-a3ab-b24fd4c67861",
-      "connectorId": "indexnow",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-03T13:17:18.412Z",
-      "reason": "INDEXNOW_KEY is required for live submission.",
-      "recordsImported": 0
-    },
-    {
-      "id": "16328dd2-10b6-4a52-bc84-1329fc7cd674",
-      "connectorId": "official_source_fetcher",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-03T11:48:01.073Z",
-      "recordsImported": 12
-    },
-    {
-      "id": "928f3923-6c6c-406e-a86d-60c1fe7d4b3b",
-      "connectorId": "manual_social_signal_import",
-      "status": "NO_DATA",
-      "ranAt": "2026-08-03T11:47:57.337Z",
-      "reason": "No social signal import found at data/imports/social-signals.json.",
-      "recordsImported": 0
-    },
-    {
-      "id": "f40f81eb-cc31-48ea-a185-2b7f040dc152",
-      "connectorId": "manual_serp_csv",
-      "status": "NO_DATA",
-      "ranAt": "2026-08-03T11:47:57.195Z",
-      "reason": "No SERP CSV found at data/imports/serp.csv.",
-      "recordsImported": 0
     }
   ],
   "topContentOpportunities": [
     {
-      "id": "brief_maxfanout_040001_64b37ee0dd",
-      "query": "what is letter of explanation for entrepreneurs self service",
+      "id": "brief_maxfanout_045001_0f1cb6094b",
+      "query": "what is letter of explanation for self employed applicants before applying",
       "route": null,
       "pageFamily": "letter-of-explanation",
       "searchOpportunityScore": 0,
@@ -173,11 +170,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-03T15:16:11.644Z"
+      "createdAt": "2026-08-04T11:37:03.143Z"
     },
     {
-      "id": "brief_maxfanout_040005_5b08f3409c",
-      "query": "what is self employed income documents for entrepreneurs self service",
+      "id": "brief_maxfanout_045005_eae25d3763",
+      "query": "what is self employed income documents for self employed applicants before applying",
       "route": null,
       "pageFamily": "self-employed-income-documents",
       "searchOpportunityScore": 0,
@@ -193,11 +190,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-03T15:16:11.644Z"
+      "createdAt": "2026-08-04T11:37:03.143Z"
     },
     {
-      "id": "brief_maxfanout_040016_613d54b5aa",
-      "query": "what is gift letter explanation for entrepreneurs self service",
+      "id": "brief_maxfanout_045016_2b7b3f57e5",
+      "query": "what is gift letter explanation for self employed applicants before applying",
       "route": null,
       "pageFamily": "gift-letter-explanation",
       "searchOpportunityScore": 0,
@@ -213,11 +210,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-03T15:16:11.644Z"
+      "createdAt": "2026-08-04T11:37:03.143Z"
     },
     {
-      "id": "brief_maxfanout_040026_9aeb8ccce9",
-      "query": "what is apartment application documents for entrepreneurs self service",
+      "id": "brief_maxfanout_045026_8da7eea195",
+      "query": "what is apartment application documents for self employed applicants before applying",
       "route": null,
       "pageFamily": "apartment-application-documents",
       "searchOpportunityScore": 0,
@@ -233,11 +230,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-03T15:16:11.644Z"
+      "createdAt": "2026-08-04T11:37:03.143Z"
     },
     {
-      "id": "brief_maxfanout_040030_aafae229c6",
-      "query": "what is document discrepancy explanation for entrepreneurs self service",
+      "id": "brief_maxfanout_045030_28b5c337bc",
+      "query": "what is document discrepancy explanation for self employed applicants before applying",
       "route": null,
       "pageFamily": "document-discrepancy-explanation",
       "searchOpportunityScore": 0,
@@ -253,11 +250,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-03T15:16:11.644Z"
+      "createdAt": "2026-08-04T11:37:03.143Z"
     },
     {
-      "id": "brief_maxfanout_040041_7552352474",
-      "query": "how to prepare letter of explanation for entrepreneurs self service",
+      "id": "brief_maxfanout_045041_41d2b51510",
+      "query": "how to prepare letter of explanation for self employed applicants before applying",
       "route": null,
       "pageFamily": "letter-of-explanation",
       "searchOpportunityScore": 0,
@@ -273,11 +270,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-03T15:16:11.644Z"
+      "createdAt": "2026-08-04T11:37:03.143Z"
     },
     {
-      "id": "brief_maxfanout_040045_441d0cb236",
-      "query": "how to prepare self employed income documents for entrepreneurs self service",
+      "id": "brief_maxfanout_045045_0354fda977",
+      "query": "how to prepare self employed income documents for self employed applicants before applying",
       "route": null,
       "pageFamily": "self-employed-income-documents",
       "searchOpportunityScore": 0,
@@ -293,11 +290,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-03T15:16:11.644Z"
+      "createdAt": "2026-08-04T11:37:03.143Z"
     },
     {
-      "id": "brief_maxfanout_040056_6105dfce1d",
-      "query": "how to prepare gift letter explanation for entrepreneurs self service",
+      "id": "brief_maxfanout_045056_108bfc1c75",
+      "query": "how to prepare gift letter explanation for self employed applicants before applying",
       "route": null,
       "pageFamily": "gift-letter-explanation",
       "searchOpportunityScore": 0,
@@ -313,11 +310,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-03T15:16:11.644Z"
+      "createdAt": "2026-08-04T11:37:03.143Z"
     },
     {
-      "id": "brief_maxfanout_040066_7f90f66d2f",
-      "query": "how to prepare apartment application documents for entrepreneurs self service",
+      "id": "brief_maxfanout_045066_7b49ac62e9",
+      "query": "how to prepare apartment application documents for self employed applicants before applying",
       "route": null,
       "pageFamily": "apartment-application-documents",
       "searchOpportunityScore": 0,
@@ -333,11 +330,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-03T15:16:11.644Z"
+      "createdAt": "2026-08-04T11:37:03.143Z"
     },
     {
-      "id": "brief_maxfanout_040070_142ac3c6e3",
-      "query": "how to prepare document discrepancy explanation for entrepreneurs self service",
+      "id": "brief_maxfanout_045070_d7c1af2b4b",
+      "query": "how to prepare document discrepancy explanation for self employed applicants before applying",
       "route": null,
       "pageFamily": "document-discrepancy-explanation",
       "searchOpportunityScore": 0,
@@ -353,11 +350,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-03T15:16:11.644Z"
+      "createdAt": "2026-08-04T11:37:03.143Z"
     },
     {
-      "id": "brief_maxfanout_040081_191b0cce52",
-      "query": "letter of explanation checklist for entrepreneurs self service",
+      "id": "brief_maxfanout_045081_cd1b208304",
+      "query": "letter of explanation checklist for self employed applicants before applying",
       "route": null,
       "pageFamily": "letter-of-explanation",
       "searchOpportunityScore": 0,
@@ -373,11 +370,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-08-03T15:16:11.644Z"
+      "createdAt": "2026-08-04T11:37:03.143Z"
     },
     {
-      "id": "brief_maxfanout_040083_f6470dbf78",
-      "query": "rental application preparation checklist for entrepreneurs self service",
+      "id": "brief_maxfanout_045083_b53e7235ce",
+      "query": "rental application preparation checklist for self employed applicants before applying",
       "route": null,
       "pageFamily": "rental-application-preparation",
       "searchOpportunityScore": 0,
@@ -393,11 +390,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-03T15:16:11.644Z"
+      "createdAt": "2026-08-04T11:37:03.143Z"
     },
     {
-      "id": "brief_maxfanout_040084_4f20c16bb1",
-      "query": "proof of income checklist for entrepreneurs self service",
+      "id": "brief_maxfanout_045084_cee1a300d2",
+      "query": "proof of income checklist for self employed applicants before applying",
       "route": null,
       "pageFamily": "proof-of-income",
       "searchOpportunityScore": 0,
@@ -413,11 +410,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-08-03T15:16:11.644Z"
+      "createdAt": "2026-08-04T11:37:03.143Z"
     },
     {
-      "id": "brief_maxfanout_040085_2018b99b28",
-      "query": "self employed income documents checklist for entrepreneurs self service",
+      "id": "brief_maxfanout_045085_0259687c44",
+      "query": "self employed income documents checklist for self employed applicants before applying",
       "route": null,
       "pageFamily": "self-employed-income-documents",
       "searchOpportunityScore": 0,
@@ -433,11 +430,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-03T15:16:11.644Z"
+      "createdAt": "2026-08-04T11:37:03.143Z"
     },
     {
-      "id": "brief_maxfanout_040090_5196ff22d3",
-      "query": "credit report understanding checklist for entrepreneurs self service",
+      "id": "brief_maxfanout_045090_8670f057b8",
+      "query": "credit report understanding checklist for self employed applicants before applying",
       "route": null,
       "pageFamily": "credit-report-understanding",
       "searchOpportunityScore": 0,
@@ -453,11 +450,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-03T15:16:11.644Z"
+      "createdAt": "2026-08-04T11:37:03.143Z"
     },
     {
-      "id": "brief_maxfanout_040091_7c74005876",
-      "query": "credit dispute self service checklist for entrepreneurs",
+      "id": "brief_maxfanout_045091_7c0b07d826",
+      "query": "credit dispute self service checklist for self employed applicants before applying",
       "route": null,
       "pageFamily": "credit-dispute-self-service",
       "searchOpportunityScore": 0,
@@ -473,11 +470,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-03T15:16:11.644Z"
+      "createdAt": "2026-08-04T11:37:03.143Z"
     },
     {
-      "id": "brief_maxfanout_040092_4b5cea6166",
-      "query": "credit utilization checklist for entrepreneurs self service",
+      "id": "brief_maxfanout_045092_b1120a8e1d",
+      "query": "credit utilization checklist for self employed applicants before applying",
       "route": null,
       "pageFamily": "credit-utilization",
       "searchOpportunityScore": 0,
@@ -493,11 +490,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-03T15:16:11.644Z"
+      "createdAt": "2026-08-04T11:37:03.143Z"
     },
     {
-      "id": "brief_maxfanout_040096_178b158750",
-      "query": "gift letter explanation checklist for entrepreneurs self service",
+      "id": "brief_maxfanout_045096_f1c072d42f",
+      "query": "gift letter explanation checklist for self employed applicants before applying",
       "route": null,
       "pageFamily": "gift-letter-explanation",
       "searchOpportunityScore": 0,
@@ -513,11 +510,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-08-03T15:16:11.644Z"
+      "createdAt": "2026-08-04T11:37:03.143Z"
     },
     {
-      "id": "brief_maxfanout_040098_41d90ad274",
-      "query": "address history explanation checklist for entrepreneurs self service",
+      "id": "brief_maxfanout_045098_186fb70d7b",
+      "query": "address history explanation checklist for self employed applicants before applying",
       "route": null,
       "pageFamily": "address-history-explanation",
       "searchOpportunityScore": 0,
@@ -533,11 +530,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-08-03T15:16:11.644Z"
+      "createdAt": "2026-08-04T11:37:03.143Z"
     },
     {
-      "id": "brief_maxfanout_040099_5e7efc4060",
-      "query": "income change explanation checklist for entrepreneurs self service",
+      "id": "brief_maxfanout_045099_ad6ab91f21",
+      "query": "income change explanation checklist for self employed applicants before applying",
       "route": null,
       "pageFamily": "income-change-explanation",
       "searchOpportunityScore": 0,
@@ -553,7 +550,7 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-03T15:16:11.644Z"
+      "createdAt": "2026-08-04T11:37:03.143Z"
     }
   ],
   "topMaintenanceActions": [
@@ -571,7 +568,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-03T15:16:11.717Z"
+      "createdAt": "2026-08-04T12:28:58.565Z"
     },
     {
       "route": "/letter-writing-studio",
@@ -587,7 +584,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-03T15:16:11.717Z"
+      "createdAt": "2026-08-04T12:28:58.565Z"
     },
     {
       "route": "/blog",
@@ -603,7 +600,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-03T15:16:11.717Z"
+      "createdAt": "2026-08-04T12:28:58.565Z"
     },
     {
       "route": "/resources",
@@ -619,7 +616,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-03T15:16:11.717Z"
+      "createdAt": "2026-08-04T12:28:58.565Z"
     },
     {
       "route": "/pricing",
@@ -635,7 +632,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-03T15:16:11.717Z"
+      "createdAt": "2026-08-04T12:28:58.565Z"
     },
     {
       "route": "/letter-of-explanation",
@@ -651,7 +648,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-03T15:16:11.717Z"
+      "createdAt": "2026-08-04T12:28:58.565Z"
     },
     {
       "route": "/letter-of-explanation/credit",
@@ -667,7 +664,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-03T15:16:11.717Z"
+      "createdAt": "2026-08-04T12:28:58.565Z"
     },
     {
       "route": "/letter-of-explanation/eviction",
@@ -683,7 +680,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-03T15:16:11.717Z"
+      "createdAt": "2026-08-04T12:28:58.565Z"
     },
     {
       "route": "/letter-of-explanation/income",
@@ -699,7 +696,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-03T15:16:11.717Z"
+      "createdAt": "2026-08-04T12:28:58.565Z"
     },
     {
       "route": "/letter-of-explanation/employment-gap",
@@ -715,7 +712,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-03T15:16:11.717Z"
+      "createdAt": "2026-08-04T12:28:58.565Z"
     },
     {
       "route": "/employment-verification-letter",
@@ -731,7 +728,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-03T15:16:11.717Z"
+      "createdAt": "2026-08-04T12:28:58.565Z"
     },
     {
       "route": "/609-dispute-letter",
@@ -747,7 +744,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-03T15:16:11.717Z"
+      "createdAt": "2026-08-04T12:28:58.565Z"
     },
     {
       "route": "/goodwill-letter-to-remove-late-payment",
@@ -763,7 +760,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-03T15:16:11.717Z"
+      "createdAt": "2026-08-04T12:28:58.565Z"
     },
     {
       "route": "/letter-of-explanation/late-payment",
@@ -779,7 +776,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-03T15:16:11.717Z"
+      "createdAt": "2026-08-04T12:28:58.565Z"
     },
     {
       "route": "/letter-of-explanation/large-deposit",
@@ -795,7 +792,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-03T15:16:11.717Z"
+      "createdAt": "2026-08-04T12:28:58.565Z"
     },
     {
       "route": "/proof-of-income-letter",
@@ -811,7 +808,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-03T15:16:11.717Z"
+      "createdAt": "2026-08-04T12:28:58.565Z"
     },
     {
       "route": "/credit-dispute-letter",
@@ -827,7 +824,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-03T15:16:11.717Z"
+      "createdAt": "2026-08-04T12:28:58.565Z"
     },
     {
       "route": "/apartment-application",
@@ -843,7 +840,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-03T15:16:11.717Z"
+      "createdAt": "2026-08-04T12:28:58.565Z"
     },
     {
       "route": "/rental-application-checklist",
@@ -859,7 +856,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-03T15:16:11.717Z"
+      "createdAt": "2026-08-04T12:28:58.565Z"
     },
     {
       "route": "/how-to-get-approved-for-an-apartment",
@@ -875,7 +872,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-03T15:16:11.717Z"
+      "createdAt": "2026-08-04T12:28:58.565Z"
     }
   ],
   "hardTruth": "Low ranking potential never blocks useful onsite content. It only changes indexing, priority, and authority strategy."
