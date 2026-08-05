@@ -2,6 +2,22 @@
   "schemaVersion": "4.1.0",
   "runs": [
     {
+      "id": "61dc840b-fe9f-4480-b715-71d1be94c844",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-08-05T12:08:02.996Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "f7424399-eb76-47cc-a903-ad6fe4bb50f7",
+      "connectorId": "indexnow",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-08-05T12:08:02.826Z",
+      "reason": "INDEXNOW_KEY is required for live submission.",
+      "recordsImported": 0
+    },
+    {
       "id": "5bb81fad-1499-424c-a70d-a453db34b288",
       "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
@@ -1871,21 +1887,6 @@
       "status": "NOT_CONFIGURED",
       "ranAt": "2026-07-19T10:01:33.192Z",
       "reason": "GSC_SITE_URL and GSC_ACCESS_TOKEN, or GSC_SEARCH_ANALYTICS_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "85f4d365-12b0-45e8-b9c0-3d6b511cdbae",
-      "connectorId": "official_source_fetcher",
-      "status": "COMPLETE",
-      "ranAt": "2026-07-18T09:48:37.695Z",
-      "recordsImported": 4
-    },
-    {
-      "id": "b0ebda48-99a5-444c-8501-29b7fa102859",
-      "connectorId": "manual_social_signal_import",
-      "status": "NO_DATA",
-      "ranAt": "2026-07-18T09:48:32.422Z",
-      "reason": "No social signal import found at data/imports/social-signals.json.",
       "recordsImported": 0
     }
   ]
