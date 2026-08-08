@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import fs from "node:fs";
-import { env, fetchJson, writeJson, appendRun, statusOnly, now } from "./_lib.mjs";
+import { env, fetchJson, writeJson, appendRun, statusOnly, now, checkBudget } from "./_lib.mjs";
 
 const connectorId = "cloudflare_crawler_logs";
 const outputFile = "data/intelligence/cloudflare_crawler_logs.json";
@@ -37,6 +37,9 @@ if (importFile) {
 } else if (!accountId || !zoneId || !token) {
   writeJson(outputFile, { schemaVersion: "4.2.0", connectorId, mode: "unavailable", fetchedAt: null, visits: [], errors: [{ code: "NOT_CONFIGURED", message: "Set CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_ZONE_ID, and CLOUDFLARE_API_TOKEN, or provide CLOUDFLARE_CRAWLER_LOG_IMPORT_FILE." }] });
   statusOnly(connectorId, "NOT_CONFIGURED", "Cloudflare crawler ingestion requires Cloudflare credentials or a manual import file.");
+} else if (!checkBudget(connectorId).allowed) {
+  // Budget-held: leave the last real snapshot in place rather than overwriting it with empty data.
+  statusOnly(connectorId, "BUDGET_HELD", checkBudget(connectorId).reason);
 } else {
   try {
     const since = new Date(Date.now() - 7 * 86400000).toISOString();

@@ -20,3 +20,15 @@ export function actionDecision({query, hasRoute=false, searchScore=0, citationSc
  if(u>=35) return {admissionStatus:"noindex_utility_page",recommendedAction:"add_faq_section_or_checklist",userUtilityScore:u,reason:"Low growth value but possible onsite support value."};
  return {admissionStatus:"blocked_duplicate_or_thin",recommendedAction:"merge_or_do_not_build",userUtilityScore:u,reason:"Not enough unique utility unless tied to a product flow."}; }
 export function backlinkDecision({searchScore=0, internalLinkScore=0, competitorDelta=0, evidence=false}){ if(!evidence && searchScore>60) return "PAID_BACKLINK_DATA_NEEDED"; if(searchScore<35) return "NO_BACKLINK_NEEDED"; if(internalLinkScore<50) return "INTERNAL_LINKS_FIRST"; if(competitorDelta>50) return "DIGITAL_PR_RECOMMENDED"; return "SOURCE_AUTHORITY_FIRST"; }
+export function checkBudget(connectorId, budgetFile="data/intelligence/provider_budget.json"){
+  const limits=(readJson(budgetFile,{budgets:{}}).budgets||{})[connectorId];
+  if(!limits) return {allowed:true, reason:"no_budget_defined"};
+  const runs=readJson("data/intelligence/ingestion_runs.json",{runs:[]}).runs||[];
+  const attempts=runs.filter((r)=>r.connectorId===connectorId && r.status!=="BUDGET_HELD" && r.mode!=="manual_import" && r.mode!=="unavailable");
+  const dayAgo=Date.now()-86400000, weekAgo=Date.now()-7*86400000;
+  const dailyCount=attempts.filter((r)=>new Date(r.ranAt).getTime()>=dayAgo).length;
+  const weeklyCount=attempts.filter((r)=>new Date(r.ranAt).getTime()>=weekAgo).length;
+  if(limits.dailyCeiling!=null && dailyCount>=limits.dailyCeiling) return {allowed:false, reason:`daily ceiling ${limits.dailyCeiling} reached (${dailyCount} live attempts in 24h)`};
+  if(limits.weeklyCeiling!=null && weeklyCount>=limits.weeklyCeiling) return {allowed:false, reason:`weekly ceiling ${limits.weeklyCeiling} reached (${weeklyCount} live attempts in 7d)`};
+  return {allowed:true, reason:"within_budget"};
+}

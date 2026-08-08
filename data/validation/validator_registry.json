@@ -1091,6 +1091,28 @@
       "owner": "approvalprep-growth",
       "group": "growth-critical",
       "scope": "Canonical host and 42 legacy duplicate redirects"
+    },
+    {
+      "id": "retest-lifecycle",
+      "npmScript": "validate:retest-lifecycle",
+      "entrypoint": "scripts/validate/retest-lifecycle.mjs",
+      "severity": "STRONG_WARNING",
+      "blocksRelease": false,
+      "blockReason": "prevents fabricated or premature search-repair retest outcomes",
+      "owner": "approvalprep-growth",
+      "group": "search-intelligence",
+      "scope": "Delayed retest state machine and IMPROVED/UNCHANGED/REGRESSED/INCONCLUSIVE outcome ledger"
+    },
+    {
+      "id": "provider-cost-controls",
+      "npmScript": "validate:provider-cost-controls",
+      "entrypoint": "scripts/validate/provider-cost-controls.mjs",
+      "severity": "STRONG_WARNING",
+      "blocksRelease": false,
+      "blockReason": "prevents unbounded live-provider request volume and cost drift",
+      "owner": "approvalprep-growth",
+      "group": "search-intelligence",
+      "scope": "Per-connector daily/weekly request ceilings for GSC, Bing, competitor crawl, Cloudflare, IndexNow"
     }
   ]
 }

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { env, readJson, fetchJson, writeJson, appendRun, statusOnly, now } from "./_lib.mjs";
+import { env, readJson, fetchJson, writeJson, appendRun, statusOnly, now, checkBudget } from "./_lib.mjs";
 
 const connectorId = "indexnow";
 const key = env("INDEXNOW_KEY");
@@ -20,6 +20,15 @@ if (!key) {
   statusOnly(connectorId, "NOT_CONFIGURED", "INDEXNOW_KEY is required for live submission.");
 } else {
   const receipt = { submittedAt: now(), provider: "IndexNow", mode, host, keyLocation: `${site}/${key}.txt`, preparedUrlCount: urls.length, submittedUrlCount: mode === "live" ? urlList.length : 0, urls: mode === "live" ? urlList : [], dryRunPreparedUrls: mode === "live" ? [] : urlList.slice(0, 250), changedOnly, status: mode === "live" ? "READY" : "DRY_RUN", response: null, errors: [], claimsIndexed: false, rankingProof: false };
+  const budget = mode === "live" ? checkBudget(connectorId) : { allowed: true };
+  if (mode === "live" && urlList.length && !budget.allowed) {
+    receipt.status = "BUDGET_HELD";
+    receipt.errors.push({ code: "BUDGET_HELD", message: budget.reason });
+    appendRun(connectorId, "BUDGET_HELD", { mode, reason: budget.reason, recordsImported: 0 });
+    writeJson("data/intelligence/indexnow_intelligence_receipts.json", { schemaVersion: "4.2.0", mode, receipts: [receipt, ...(previous.receipts || [])].slice(0, 100), latest: receipt });
+    console.log(JSON.stringify({ connectorId, mode, status: receipt.status, preparedUrlCount: receipt.preparedUrlCount, submittedUrlCount: receipt.submittedUrlCount }, null, 2));
+    process.exit(0);
+  }
   if (mode === "live" && urlList.length) {
     try {
       receipt.response = await fetchJson("https://api.indexnow.org/indexnow", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ host, key, keyLocation: receipt.keyLocation, urlList }) });
