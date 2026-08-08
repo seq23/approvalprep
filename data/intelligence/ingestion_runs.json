@@ -2,6 +2,22 @@
   "schemaVersion": "4.1.0",
   "runs": [
     {
+      "id": "5f5985ea-42d8-49f6-bd27-8bf11703fdde",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-08-08T10:51:27.340Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "90bf43c2-dbe3-4dc3-8f5a-851a5efe886f",
+      "connectorId": "indexnow",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-08-08T10:51:27.172Z",
+      "reason": "INDEXNOW_KEY is required for live submission.",
+      "recordsImported": 0
+    },
+    {
       "id": "dda50c1c-af93-4915-85b4-870bfefcd7a7",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
@@ -1880,20 +1896,6 @@
       "status": "COMPLETE",
       "ranAt": "2026-07-21T12:11:12.369Z",
       "recordsImported": 40
-    },
-    {
-      "id": "9ac0c72b-6f8e-4b33-a6a2-89477b9638c8",
-      "connectorId": "authority_requirement_analysis",
-      "status": "COMPLETE",
-      "ranAt": "2026-07-21T12:11:12.238Z",
-      "recordsImported": 67
-    },
-    {
-      "id": "0fbfc173-9e20-492a-8c0f-9d3e39c1dbd1",
-      "connectorId": "growth_maintenance_analysis",
-      "status": "COMPLETE",
-      "ranAt": "2026-07-21T12:11:12.110Z",
-      "recordsImported": 67
     }
   ]
 }
