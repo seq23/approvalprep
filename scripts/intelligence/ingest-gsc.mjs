@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import fs from "node:fs";
-import { env, fetchJson, writeJson, appendRun, statusOnly, now } from "./_lib.mjs";
+import { env, fetchJson, writeJson, appendRun, statusOnly, now, checkBudget } from "./_lib.mjs";
 
 const connectorId = "google_search_console_search_analytics";
 const siteUrl = env("GSC_SITE_URL") || env("GOOGLE_SEARCH_CONSOLE_SITE_URL");
@@ -30,6 +30,9 @@ if (importFile) {
 } else if (!siteUrl || !accessToken) {
   writeJson(outputFile, { schemaVersion: "4.2.0", connectorId, mode: "unavailable", siteUrl: siteUrl || null, fetchedAt: null, rows: [], errors: [{ code: "NOT_CONFIGURED", message: "Set GSC_SITE_URL and GSC_ACCESS_TOKEN, or provide GSC_SEARCH_ANALYTICS_IMPORT_FILE." }] });
   statusOnly(connectorId, "NOT_CONFIGURED", "GSC_SITE_URL and GSC_ACCESS_TOKEN, or GSC_SEARCH_ANALYTICS_IMPORT_FILE, are required.");
+} else if (!checkBudget(connectorId).allowed) {
+  // Budget-held: leave the last real snapshot in place rather than overwriting it with empty data.
+  statusOnly(connectorId, "BUDGET_HELD", checkBudget(connectorId).reason);
 } else {
   try {
     const end = new Date();

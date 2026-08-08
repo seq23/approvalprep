@@ -5,7 +5,7 @@ import fs from 'node:fs';
 const pkg = JSON.parse(fs.readFileSync('package.json','utf8'));
 const sequences = {
   daily: ['content:generate','content:generate-pages','content:generate-atoms-expanded','governance:safe-harbor:all','content:self-heal-citation-os','intelligence:internal-links','content:apply-internal-links','seo:sitemap','citation-handoff:all','metrics:content-velocity','metrics:citation-scoreboard','workflows:trace','validate:all'],
-  weekly: ['intelligence:free-ingest','intelligence:analyze','intelligence:cloudflare-crawlers','intelligence:crawler-gap','content:decay-report','content:consolidation-plan','citations:watchlist','citations:audit-sources','citations:source-refresh','governance:safe-harbor:all','handoff:backlinks','metrics:citation-scoreboard','metrics:indexing-scoreboard','metrics:crawler-scoreboard','workflows:trace','validate:all']
+  weekly: ['intelligence:free-ingest','intelligence:analyze','intelligence:cloudflare-crawlers','intelligence:crawler-gap','intelligence:retest-queue','intelligence:retest-evaluate','content:decay-report','content:consolidation-plan','citations:watchlist','citations:audit-sources','citations:source-refresh','governance:safe-harbor:all','handoff:backlinks','metrics:citation-scoreboard','metrics:indexing-scoreboard','metrics:crawler-scoreboard','workflows:trace','validate:all']
 };
 const name = process.argv[2];
 if (!sequences[name]) {

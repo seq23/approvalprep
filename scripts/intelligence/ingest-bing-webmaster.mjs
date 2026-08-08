@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import fs from "node:fs";
-import { env, fetchJson, writeJson, appendRun, statusOnly, now } from "./_lib.mjs";
+import { env, fetchJson, writeJson, appendRun, statusOnly, now, checkBudget } from "./_lib.mjs";
 
 const connectorId = "bing_webmaster";
 const apiKey = env("BING_WEBMASTER_API_KEY");
@@ -21,6 +21,9 @@ if (importFile) {
 } else if (!apiKey || !apiUrl) {
   writeJson(outputFile, { schemaVersion: "4.2.0", connectorId, mode: "unavailable", fetchedAt: null, rows: [], errors: [{ code: "NOT_CONFIGURED", message: "Set BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or provide BING_WEBMASTER_IMPORT_FILE." }] });
   statusOnly(connectorId, "NOT_CONFIGURED", "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.");
+} else if (!checkBudget(connectorId).allowed) {
+  // Budget-held: leave the last real snapshot in place rather than overwriting it with empty data.
+  statusOnly(connectorId, "BUDGET_HELD", checkBudget(connectorId).reason);
 } else {
   try {
     const data = await fetchJson(apiUrl, { headers: { "Ocp-Apim-Subscription-Key": apiKey } });
