@@ -226,7 +226,9 @@
     "validate:redirect-map": "node scripts/validate/redirect-map.mjs",
     "seo:canonical-host": "node scripts/seo/check-canonical-host.mjs",
     "reports:document-readiness": "node scripts/reports/build-document-readiness-index.mjs",
-    "metrics:seo-recovery": "node scripts/metrics/build-seo-recovery-scorecard.mjs"
+    "metrics:seo-recovery": "node scripts/metrics/build-seo-recovery-scorecard.mjs",
+    "validate:orchestrator-self-test": "node scripts/validate/run-all-self-test.mjs",
+    "validation:registry:sync": "node scripts/validate/sync-validator-registry.mjs"
   },
   "dependencies": {
     "astro": "^7.0.6",

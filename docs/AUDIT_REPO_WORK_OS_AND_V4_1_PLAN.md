@@ -27,7 +27,7 @@ The latest v4.1 artifact was reopened from ZIP and reviewed as source of truth. 
 |---|---:|---|---|
 | Correct repo/root/artifact discipline | Complete structurally | ZIP root `approvalprep/`, `REPO_IDENTITY.md`, `_repo_update_contract.json`, artifact manifest | GitHub branch/deploy not proven |
 | No fake completion | Complete structurally | Manifest labels local/build/provider proof as unproven where appropriate | Local updater still required |
-| Validation registry/matrix | Complete structurally | `data/validation/validator_registry.json`, `_repo_validation_matrix.json`, `scripts/validate/run-all.mjs` | Local build validator still depends on install |
+| Validation registry/matrix | Complete structurally | `_repo_validation_registry.json` (canonical; data mirror generated), `_repo_validation_matrix.json`, `scripts/validate/run-all.mjs` | Local build validator still depends on install |
 | SEO/AEO/GEO/Atlas/Query Universe | Complete structurally | `data/atlas/*`, `data/atoms/*`, `data/citations/*`, `public/llms.txt` routes, answers route | Live citation/ranking telemetry not claimed |
 | Self-healing/content workflow | Complete structurally | `scripts/content/self-heal.mjs`, scheduled content workflow, admin manifest | Autonomous legal/credit rewrite not allowed |
 | Admin approval dashboard | Complete structurally | `src/pages/admin.astro`, `data/admin/*`, Growth Health panels | Frontend gate is not real auth |

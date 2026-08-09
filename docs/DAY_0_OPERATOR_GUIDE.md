@@ -14,7 +14,7 @@ People who need a clearer packet before a landlord, lender, employer, credit bur
 
 ## Products
 
-The first products are Letter of Explanation, Employment Verification Letter, Proof of Income Letter, Credit Dispute Letter, Letter Studio Bundle, and Apartment Application Kit.
+The live paid catalog currently includes eight products: Letter of Explanation; Income + Employment Letter Kit; Credit Letter Kit; Rental Application Kit; Loan Prep Letter Kit; Business Funding Prep Kit; Life Admin Letter Kit; and the Complete ApprovalPrep Bundle. The maintained catalog source is `docs/products/LIVE_PRODUCT_CATALOG.md`; use that file instead of copying product IDs or prices into operator notes.
 
 ## How public pages work
 
@@ -32,7 +32,7 @@ ApprovalPrep must not store customer letter answers, completed worksheets, fille
 
 ## How admin works
 
-`/admin` is an exception cockpit. Most routine work is handled by contract. Look at Needs Owner, hard failures, and provider setup problems.
+`/admin` has two operator roles. The growth/SEO cockpit is primarily an exception-and-health surface. The product admin area is the real commerce mutation surface for creating, publishing, hiding, uploading assets for, and revoking products. Before mutating products, read `docs/products/PRODUCT_ADMIN_RUNBOOK.md`; for rollback/recovery, read `docs/products/PRODUCT_ROLLBACK_RUNBOOK.md`.
 
 ## How automation works
 
@@ -70,6 +70,9 @@ For the current ApprovalPrep repo, Day-0 operators should also read:
 - `docs/WORKFLOW_AUTOMATION_MAP.md`
 - `docs/admin/CONTENT_APPROVAL_WORKFLOW.md`
 - `docs/automation/HANDS_OFF_AUTOMATION_POLICY.md`
+- `docs/products/PRODUCT_ADMIN_RUNBOOK.md`
+- `docs/products/PRODUCT_ROLLBACK_RUNBOOK.md`
+- `docs/products/LIVE_PRODUCT_CATALOG.md`
 
 Plain-English rule:
 

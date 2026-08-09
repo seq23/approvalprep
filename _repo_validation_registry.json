@@ -1,7 +1,7 @@
 {
   "schemaVersion": "2.0.0",
-  "lastUpdatedAt": "2026-07-26T14:57:32.917Z",
-  "policy": "Hard fails protect customer journey, payment/download safety, regulated boundaries, real growth machinery, and operator automation. Cosmetic preferences and live-provider success are not hard fails unless the repo falsely claims them.",
+  "lastUpdatedAt": "2026-08-09T00:00:00.000Z",
+  "policy": "The root registry is the single execution authority. HARD_FAIL blocks immediately; STRONG_WARNING records and continues. The data/validation registry is generated from this file.",
   "validators": [
     {
       "id": "repo-structure",
@@ -24,6 +24,17 @@
       "owner": "approvalprep-ops",
       "group": "ops-critical",
       "scope": "Validation registry and matrix completeness"
+    },
+    {
+      "id": "validator-orchestrator-self-test",
+      "npmScript": "validate:orchestrator-self-test",
+      "entrypoint": "scripts/validate/run-all-self-test.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents regression of HARD_FAIL versus STRONG_WARNING orchestration semantics",
+      "owner": "approvalprep-ops",
+      "group": "ops-critical",
+      "scope": "Validator orchestrator severity, stop/continue, and registry-shape regression fixtures"
     },
     {
       "id": "route-manifest",
@@ -596,6 +607,17 @@
       "owner": "approvalprep-ops",
       "group": "release-critical",
       "scope": "Product catalog and runtime model integrity"
+    },
+    {
+      "id": "runtime-product-admin",
+      "npmScript": "validate:runtime-product-admin",
+      "entrypoint": "scripts/validate/runtime-product-admin.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents drift in the live D1-backed product/admin/download runtime contract",
+      "owner": "approvalprep-products",
+      "group": "release-critical",
+      "scope": "Runtime product registry, admin mutation surface, Cloudflare bindings, and catalog fallback behavior"
     },
     {
       "id": "build",

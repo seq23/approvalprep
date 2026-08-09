@@ -23,31 +23,6 @@ jobs:
       - name: Run fixture workflow trace
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
         run: npm run workflows:trace -- --workflow validate.yml
-      - run: npm run validate:all
-      - name: Browserless UX validation
-        run: |
-          npm run ux:browserless-report
-          npm run validate:ux-conversion
-          npm run validate:public-page-depth
-          npm run validate:cta-quality
-          npm run validate:trust-signals
-          npm run validate:browserless-accessibility
-          npm run validate:mobile-ux
-          npm run validate:plain-language-grade
-          npm run validate:credit-boundary
-          npm run validate:customer-next-steps
-      - name: Validate delegated authority and notification policy
-        run: |
-          npm run validate:delegated-authority
-          npm run validate:self-heal-progressions
-          npm run validate:owner-exceptions
-          npm run validate:notification-policy
+      - name: Run canonical severity-aware validator registry
+        run: npm run validate:all
       - run: npm run build
-
-      - name: Validate v4.2 lean controls
-        run: |
-          npm run validate:setup-secrets
-          npm run validate:admin-action-links
-          npm run validate:citation-strategy
-          npm run validate:growth-health
-          npm run validate:automation-safety

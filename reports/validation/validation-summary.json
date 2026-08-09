@@ -1,0 +1,938 @@
+{
+  "schemaVersion": "1.0.0",
+  "status": "PASS",
+  "orchestratorSource": "_repo_validation_registry.json",
+  "executed": 103,
+  "passed": 103,
+  "warnings": 0,
+  "hardFailures": 0,
+  "results": [
+    {
+      "id": "repo-structure",
+      "npmScript": "validate:repo",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 133
+    },
+    {
+      "id": "validation-registry",
+      "npmScript": "validate:validation-registry",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 137
+    },
+    {
+      "id": "validator-orchestrator-self-test",
+      "npmScript": "validate:orchestrator-self-test",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 131
+    },
+    {
+      "id": "route-manifest",
+      "npmScript": "validate:routes",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 129
+    },
+    {
+      "id": "legal-trust",
+      "npmScript": "validate:legal",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 135
+    },
+    {
+      "id": "plain-language",
+      "npmScript": "validate:plain-language",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 135
+    },
+    {
+      "id": "download-safety",
+      "npmScript": "validate:download-safety",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 134
+    },
+    {
+      "id": "download-first-page-boundary",
+      "npmScript": "validate:download-first-page-boundary",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 141
+    },
+    {
+      "id": "download-offering-coverage",
+      "npmScript": "validate:download-offering-coverage",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 138
+    },
+    {
+      "id": "data-privacy",
+      "npmScript": "validate:data-privacy",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 143
+    },
+    {
+      "id": "prompt-guardrails",
+      "npmScript": "validate:prompt-guardrails",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 134
+    },
+    {
+      "id": "atoms",
+      "npmScript": "validate:atoms",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 153
+    },
+    {
+      "id": "citation-claim-coverage",
+      "npmScript": "validate:citation-claims",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 136
+    },
+    {
+      "id": "external-telemetry-claims",
+      "npmScript": "validate:telemetry-claims",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 350
+    },
+    {
+      "id": "atlas-query-fanout",
+      "npmScript": "validate:atlas",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 136
+    },
+    {
+      "id": "seo-aeo-geo-surfaces",
+      "npmScript": "validate:seo-surfaces",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 140
+    },
+    {
+      "id": "admin-dashboard",
+      "npmScript": "validate:admin",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 135
+    },
+    {
+      "id": "payment-download-boundary",
+      "npmScript": "validate:payment-download",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 135
+    },
+    {
+      "id": "setup-and-secrets",
+      "npmScript": "env:audit",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 140
+    },
+    {
+      "id": "env-examples",
+      "npmScript": "validate:env-examples",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 132
+    },
+    {
+      "id": "vault-schema",
+      "npmScript": "validate:vault-schema",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 138
+    },
+    {
+      "id": "security",
+      "npmScript": "validate:security",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 413
+    },
+    {
+      "id": "source-connectors-real",
+      "npmScript": "validate:intelligence-connectors",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 128
+    },
+    {
+      "id": "no-fake-intelligence-data",
+      "npmScript": "validate:no-fake-intelligence",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 151
+    },
+    {
+      "id": "intelligence-source-freshness",
+      "npmScript": "validate:intelligence-freshness",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 133
+    },
+    {
+      "id": "competitor-crawl-policy",
+      "npmScript": "validate:competitor-crawl",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 129
+    },
+    {
+      "id": "serp-import-schema",
+      "npmScript": "validate:serp-import",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 128
+    },
+    {
+      "id": "backlink-recommendation-honesty",
+      "npmScript": "validate:backlink-honesty",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 130
+    },
+    {
+      "id": "content-action-decision",
+      "npmScript": "validate:content-actions",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 140
+    },
+    {
+      "id": "content-release",
+      "npmScript": "validate:content-release",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 267
+    },
+    {
+      "id": "maintenance-brief-integrity",
+      "npmScript": "validate:maintenance-briefs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 131
+    },
+    {
+      "id": "citation-opportunity-integrity",
+      "npmScript": "validate:citation-opportunities",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 136
+    },
+    {
+      "id": "workflow-data-trace",
+      "npmScript": "validate:workflow-trace",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 137
+    },
+    {
+      "id": "setup-secrets",
+      "npmScript": "validate:setup-secrets",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 130
+    },
+    {
+      "id": "admin-action-links",
+      "npmScript": "validate:admin-action-links",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 133
+    },
+    {
+      "id": "citation-strategy",
+      "npmScript": "validate:citation-strategy",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 131
+    },
+    {
+      "id": "growth-health",
+      "npmScript": "validate:growth-health",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 131
+    },
+    {
+      "id": "automation-safety",
+      "npmScript": "validate:automation-safety",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 132
+    },
+    {
+      "id": "delegated-authority",
+      "npmScript": "validate:delegated-authority",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 130
+    },
+    {
+      "id": "self-heal-progressions",
+      "npmScript": "validate:self-heal-progressions",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 129
+    },
+    {
+      "id": "owner-exceptions",
+      "npmScript": "validate:owner-exceptions",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 130
+    },
+    {
+      "id": "notification-policy",
+      "npmScript": "validate:notification-policy",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 130
+    },
+    {
+      "id": "browserless-ux-report",
+      "npmScript": "ux:browserless-report",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 135
+    },
+    {
+      "id": "ux-conversion",
+      "npmScript": "validate:ux-conversion",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 132
+    },
+    {
+      "id": "public-page-depth",
+      "npmScript": "validate:public-page-depth",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 158
+    },
+    {
+      "id": "cta-quality",
+      "npmScript": "validate:cta-quality",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 142
+    },
+    {
+      "id": "trust-signal-coverage",
+      "npmScript": "validate:trust-signals",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 155
+    },
+    {
+      "id": "browserless-accessibility",
+      "npmScript": "validate:browserless-accessibility",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 133
+    },
+    {
+      "id": "mobile-ux",
+      "npmScript": "validate:mobile-ux",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 130
+    },
+    {
+      "id": "plain-language-grade",
+      "npmScript": "validate:plain-language-grade",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 132
+    },
+    {
+      "id": "credit-boundary-coverage",
+      "npmScript": "validate:credit-boundary",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 133
+    },
+    {
+      "id": "customer-next-steps",
+      "npmScript": "validate:customer-next-steps",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 132
+    },
+    {
+      "id": "e2e-user-journey",
+      "npmScript": "validate:e2e-user-journey",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 140
+    },
+    {
+      "id": "product-flow-e2e",
+      "npmScript": "validate:product-flow-e2e",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 144
+    },
+    {
+      "id": "product-model-v2",
+      "npmScript": "validate:product-model",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 134
+    },
+    {
+      "id": "runtime-product-admin",
+      "npmScript": "validate:runtime-product-admin",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 131
+    },
+    {
+      "id": "build",
+      "npmScript": "build",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 2745
+    },
+    {
+      "id": "stripe-mode",
+      "npmScript": "validate:stripe-mode",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 148
+    },
+    {
+      "id": "offering-visibility",
+      "npmScript": "validate:offering-visibility",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 137
+    },
+    {
+      "id": "offering-contracts",
+      "npmScript": "validate:offering-contracts",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 138
+    },
+    {
+      "id": "letter-studio",
+      "npmScript": "validate:letter-studio",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 130
+    },
+    {
+      "id": "navigation-architecture",
+      "npmScript": "validate:navigation-architecture",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 130
+    },
+    {
+      "id": "commercial-page-cta-depth",
+      "npmScript": "validate:commercial-page-cta-depth",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 129
+    },
+    {
+      "id": "content-approval-governance",
+      "npmScript": "validate:content-approval-governance",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 134
+    },
+    {
+      "id": "artifact-validation",
+      "npmScript": "validate:artifact",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 132
+    },
+    {
+      "id": "page-factory",
+      "npmScript": "validate:page-factory",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 132
+    },
+    {
+      "id": "blog-detail-pages",
+      "npmScript": "validate:blog-detail-pages",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 133
+    },
+    {
+      "id": "atom-coverage-depth",
+      "npmScript": "validate:atom-coverage-depth",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 136
+    },
+    {
+      "id": "discovery-surfaces",
+      "npmScript": "validate:discovery-surfaces",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 135
+    },
+    {
+      "id": "structured-data",
+      "npmScript": "validate:structured-data",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 133
+    },
+    {
+      "id": "internal-link-graph",
+      "npmScript": "validate:internal-link-graph",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 133
+    },
+    {
+      "id": "authority-assets",
+      "npmScript": "validate:authority-assets",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 132
+    },
+    {
+      "id": "template-library",
+      "npmScript": "validate:template-library",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 132
+    },
+    {
+      "id": "metrics-scoreboards",
+      "npmScript": "validate:metrics-scoreboards",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 137
+    },
+    {
+      "id": "provider-integrations",
+      "npmScript": "validate:provider-integrations",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 133
+    },
+    {
+      "id": "cloudflare-crawler-intelligence",
+      "npmScript": "validate:cloudflare-crawler-intelligence",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 131
+    },
+    {
+      "id": "indexing-provider-ledgers",
+      "npmScript": "validate:indexing-provider-ledgers",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 133
+    },
+    {
+      "id": "citation-ledger",
+      "npmScript": "validate:citation-ledger",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 131
+    },
+    {
+      "id": "backlink-handoff",
+      "npmScript": "validate:backlink-handoff",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 132
+    },
+    {
+      "id": "content-lifecycle",
+      "npmScript": "validate:content-lifecycle",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 137
+    },
+    {
+      "id": "public-reports",
+      "npmScript": "validate:public-reports",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 133
+    },
+    {
+      "id": "repurposing",
+      "npmScript": "validate:repurposing",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 134
+    },
+    {
+      "id": "conversion-attribution",
+      "npmScript": "validate:conversion-attribution",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 131
+    },
+    {
+      "id": "experiments",
+      "npmScript": "validate:experiments",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 130
+    },
+    {
+      "id": "safe-harbor-autopublish",
+      "npmScript": "validate:safe-harbor-autopublish",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 136
+    },
+    {
+      "id": "prohibited-claims",
+      "npmScript": "validate:prohibited-claims",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 147
+    },
+    {
+      "id": "required-disclosures",
+      "npmScript": "validate:required-disclosures",
+      "severity": "STRONG_WARNING",
+      "blocksRelease": false,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 133
+    },
+    {
+      "id": "source-required-claims",
+      "npmScript": "validate:source-required-claims",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 139
+    },
+    {
+      "id": "template-preview-safety",
+      "npmScript": "validate:template-preview-safety",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 135
+    },
+    {
+      "id": "source-evidence-depth",
+      "npmScript": "validate:source-evidence-depth",
+      "severity": "STRONG_WARNING",
+      "blocksRelease": false,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 135
+    },
+    {
+      "id": "location-source-coverage",
+      "npmScript": "validate:location-source-coverage",
+      "severity": "STRONG_WARNING",
+      "blocksRelease": false,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 134
+    },
+    {
+      "id": "regulated-template-previews",
+      "npmScript": "validate:regulated-template-previews",
+      "severity": "STRONG_WARNING",
+      "blocksRelease": false,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 133
+    },
+    {
+      "id": "workflow-write-scopes",
+      "npmScript": "validate:workflow-write-scopes",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 132
+    },
+    {
+      "id": "self-healing",
+      "npmScript": "validate:self-healing",
+      "severity": "STRONG_WARNING",
+      "blocksRelease": false,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 132
+    },
+    {
+      "id": "conversion-privacy",
+      "npmScript": "validate:conversion-privacy",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 130
+    },
+    {
+      "id": "experiment-safety",
+      "npmScript": "validate:experiment-safety",
+      "severity": "STRONG_WARNING",
+      "blocksRelease": false,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 131
+    },
+    {
+      "id": "page-action-safety",
+      "npmScript": "validate:page-action-safety",
+      "severity": "STRONG_WARNING",
+      "blocksRelease": false,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 133
+    },
+    {
+      "id": "final-readiness-ledger",
+      "npmScript": "validate:final-readiness-ledger",
+      "severity": "STRONG_WARNING",
+      "blocksRelease": false,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 132
+    },
+    {
+      "id": "validator-severity",
+      "npmScript": "validate:validator-severity",
+      "severity": "STRONG_WARNING",
+      "blocksRelease": false,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 141
+    },
+    {
+      "id": "workflow-main-writer-safety",
+      "npmScript": "validate:workflow-main-writer-safety",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 1313
+    },
+    {
+      "id": "redirect-map",
+      "npmScript": "validate:redirect-map",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 131
+    },
+    {
+      "id": "retest-lifecycle",
+      "npmScript": "validate:retest-lifecycle",
+      "severity": "STRONG_WARNING",
+      "blocksRelease": false,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 132
+    },
+    {
+      "id": "provider-cost-controls",
+      "npmScript": "validate:provider-cost-controls",
+      "severity": "STRONG_WARNING",
+      "blocksRelease": false,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 131
+    }
+  ]
+}
