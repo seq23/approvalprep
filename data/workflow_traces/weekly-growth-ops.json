@@ -1,7 +1,7 @@
 {
-  "schemaVersion": "4.3.0",
+  "schemaVersion": "4.4.0",
   "workflow": "weekly-growth-ops.yml",
-  "traceMode": "FIXTURE_TRACE_ONLY_NOT_PRODUCTION_TELEMETRY",
+  "traceMode": "FIXTURE_TRACE_WITH_TRANSITIVE_PACKAGE_RESOLUTION_NOT_PRODUCTION_TELEMETRY",
   "proof_type": "fixture",
   "real_telemetry": false,
   "may_be_used_for_growth_claims": false,
@@ -17,6 +17,8 @@
   "usesNpmInstall": false,
   "usesNpmCi": false,
   "buildsProject": false,
+  "requiresDependencyInstall": false,
+  "installDependencyReason": null,
   "dependencyInstallPolicyOk": true,
   "fixtureTraceInput": true,
   "secretRefs": [],
@@ -30,6 +32,35 @@
     "health:build-growth",
     "intelligence:analyze",
     "intelligence:free-ingest",
+    "notifications:build-queue",
+    "strategy:update-citations"
+  ],
+  "transitiveNpmScripts": [
+    "admin:build-index",
+    "admin:build-owner-exceptions",
+    "authority:scale:fanout",
+    "authority:scale:fanout-window",
+    "automation:safe",
+    "automation:self-heal-attempt",
+    "automation:self-heal-revalidate",
+    "governance:apply-authority",
+    "health:build-growth",
+    "intelligence:analyze",
+    "intelligence:authority",
+    "intelligence:bing",
+    "intelligence:content-opportunities",
+    "intelligence:crawl-competitors",
+    "intelligence:crawl-owned",
+    "intelligence:discover-competitors",
+    "intelligence:free-ingest",
+    "intelligence:growth-brief",
+    "intelligence:growth-maintenance",
+    "intelligence:gsc",
+    "intelligence:gsc-url-inspection",
+    "intelligence:import-serp",
+    "intelligence:import-social",
+    "intelligence:official-sources",
+    "intelligence:recommend-page-actions",
     "notifications:build-queue",
     "strategy:update-citations"
   ],
@@ -51,6 +82,12 @@
       "status": "PASS"
     },
     {
+      "id": "transitive_dependency_install",
+      "status": "PASS",
+      "requires_dependency_install": false,
+      "reason": null
+    },
+    {
       "id": "pinned_runtime_and_timeout",
       "status": "PASS"
     },
@@ -63,6 +100,6 @@
       "status": "PASS"
     }
   ],
-  "proofBoundary": "This trace proves workflow shape, commands, secret references, serialized main-writer controls, and fixture/manual-run readiness. It does not prove GitHub Actions execution, provider credentials, or deployed runtime.",
+  "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
   "traceId": "8dc87598186751b8"
 }

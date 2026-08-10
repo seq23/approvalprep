@@ -1,7 +1,7 @@
 {
-  "schemaVersion": "4.3.0",
+  "schemaVersion": "4.4.0",
   "workflow": "release-report.yml",
-  "traceMode": "FIXTURE_TRACE_ONLY_NOT_PRODUCTION_TELEMETRY",
+  "traceMode": "FIXTURE_TRACE_WITH_TRANSITIVE_PACKAGE_RESOLUTION_NOT_PRODUCTION_TELEMETRY",
   "proof_type": "fixture",
   "real_telemetry": false,
   "may_be_used_for_growth_claims": false,
@@ -17,10 +17,15 @@
   "usesNpmInstall": false,
   "usesNpmCi": false,
   "buildsProject": false,
+  "requiresDependencyInstall": false,
+  "installDependencyReason": null,
   "dependencyInstallPolicyOk": true,
   "fixtureTraceInput": true,
   "secretRefs": [],
   "npmScripts": [
+    "workflows:trace"
+  ],
+  "transitiveNpmScripts": [
     "workflows:trace"
   ],
   "missingNpmScripts": [],
@@ -41,6 +46,12 @@
       "status": "PASS"
     },
     {
+      "id": "transitive_dependency_install",
+      "status": "PASS",
+      "requires_dependency_install": false,
+      "reason": null
+    },
+    {
       "id": "pinned_runtime_and_timeout",
       "status": "PASS"
     },
@@ -53,6 +64,6 @@
       "status": "PASS"
     }
   ],
-  "proofBoundary": "This trace proves workflow shape, commands, secret references, serialized main-writer controls, and fixture/manual-run readiness. It does not prove GitHub Actions execution, provider credentials, or deployed runtime.",
+  "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
   "traceId": "a40e59fe00e8a55d"
 }
