@@ -1,165 +1,167 @@
 {
   "schemaVersion": "4.1.0",
-  "generatedAt": "2026-08-06T12:30:00.221Z",
+  "generatedAt": "2026-08-11T11:01:54.334Z",
   "sourceStatus": [
     {
-      "id": "dd1f5aee-315c-4baf-8228-b65115e1c6ac",
+      "id": "2e0b3624-88ee-45d1-bc38-5eb9f782fbe6",
       "connectorId": "authority_requirement_analysis",
       "status": "COMPLETE",
-      "ranAt": "2026-08-06T12:30:00.033Z",
+      "ranAt": "2026-08-11T11:01:54.154Z",
       "recordsImported": 71
     },
     {
-      "id": "7b6bac88-9c3b-46e5-9739-b75f3088d72e",
+      "id": "74a2aa91-4f9d-4859-a1e0-cd6cbcf1fd70",
       "connectorId": "growth_maintenance_analysis",
       "status": "COMPLETE",
-      "ranAt": "2026-08-06T12:29:59.876Z",
+      "ranAt": "2026-08-11T11:01:53.991Z",
       "recordsImported": 71
     },
     {
-      "id": "38c2cddf-de8d-4f5e-ab31-ec754a9befc9",
+      "id": "b2f46f94-de76-4747-87c2-8659fa5879a0",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-06T11:28:34.524Z",
+      "ranAt": "2026-08-11T10:57:58.231Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "6cc10226-6974-4224-a3b6-012474fb5327",
+      "id": "4a0cdc32-623b-47f3-86d2-27de06152081",
       "connectorId": "indexnow",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-06T11:28:34.359Z",
+      "ranAt": "2026-08-11T10:57:58.056Z",
       "reason": "INDEXNOW_KEY is required for live submission.",
       "recordsImported": 0
     },
     {
-      "id": "190e7021-b920-4da4-8d7b-6681cf5a7061",
+      "id": "19979e9f-31e4-4902-bf57-0f5f01227491",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-06T10:59:13.501Z",
+      "ranAt": "2026-08-11T10:27:08.858Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "f5f1a00f-eb54-4560-b447-43254c81b445",
+      "id": "40012e7c-50d8-4836-abe6-bb5e2a021449",
       "connectorId": "indexnow",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-06T10:59:13.330Z",
+      "ranAt": "2026-08-11T10:27:08.718Z",
       "reason": "INDEXNOW_KEY is required for live submission.",
       "recordsImported": 0
     },
     {
-      "id": "a1155880-f19d-4d0a-8add-ef9924f317f1",
+      "id": "6bac0126-f129-4748-a96a-2fc856408dca",
       "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
-      "ranAt": "2026-08-06T09:16:59.813Z",
+      "ranAt": "2026-08-11T08:37:27.694Z",
       "recordsImported": 12
     },
     {
-      "id": "5d2cf986-39a9-4fa6-ab72-fae4105f67ab",
+      "id": "7493efd7-d7e1-4331-aebc-c731631d734d",
       "connectorId": "manual_social_signal_import",
       "status": "NO_DATA",
-      "ranAt": "2026-08-06T09:16:53.434Z",
+      "ranAt": "2026-08-11T08:37:20.973Z",
       "reason": "No social signal import found at data/imports/social-signals.json.",
       "recordsImported": 0
     },
     {
-      "id": "9ec5c7c3-db94-4a37-b76e-62c90c4158f3",
+      "id": "71242665-4bb0-48fc-9f70-29100a2e211d",
       "connectorId": "manual_serp_csv",
       "status": "NO_DATA",
-      "ranAt": "2026-08-06T09:16:53.300Z",
+      "ranAt": "2026-08-11T08:37:20.829Z",
       "reason": "No SERP CSV found at data/imports/serp.csv.",
       "recordsImported": 0
     },
     {
-      "id": "6f7e50c3-d3cd-4383-9502-f7606eca4f7d",
+      "id": "4d0648c0-d82e-437b-ad40-d10613015d38",
       "connectorId": "competitor_public_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-06T09:16:53.129Z",
-      "recordsImported": 2
+      "status": "BUDGET_HELD",
+      "ranAt": "2026-08-11T08:37:20.691Z",
+      "reason": "weekly ceiling 2 reached (6 live attempts in 7d)",
+      "recordsImported": 0
     },
     {
-      "id": "09fb6e09-ef38-4234-910e-056c61355071",
+      "id": "3760b44b-5889-48ad-8d76-e59fd2990c9b",
       "connectorId": "competitor_sitemap_discovery",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-06T09:16:52.562Z",
-      "recordsImported": 2
+      "status": "BUDGET_HELD",
+      "ranAt": "2026-08-11T08:37:20.553Z",
+      "reason": "weekly ceiling 2 reached (6 live attempts in 7d)",
+      "recordsImported": 0
     },
     {
-      "id": "cc8d20fc-5cfe-4f18-95ff-0ce6cb41ec5b",
+      "id": "b5fb412d-5125-412d-addb-cfbcc3c49805",
       "connectorId": "owned_site_crawler",
       "status": "COMPLETE",
-      "ranAt": "2026-08-06T09:16:52.068Z",
+      "ranAt": "2026-08-11T08:37:20.414Z",
       "recordsImported": 74
     },
     {
-      "id": "b870831d-a9e5-4786-9d56-4566cc47b743",
+      "id": "08b8250e-9570-4967-b499-4357d96e3565",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-06T09:16:51.931Z",
+      "ranAt": "2026-08-11T08:37:20.274Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "9cdc965a-95b2-4ccc-88be-a6b7a7310492",
+      "id": "54181ee5-79db-4b26-9f05-e6da501dc4e8",
       "connectorId": "google_url_inspection",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-06T09:16:51.794Z",
+      "ranAt": "2026-08-11T08:37:20.133Z",
       "reason": "GSC_SITE_URL and GSC_ACCESS_TOKEN, or GSC_URL_INSPECTION_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "a662282f-1553-4f9a-a958-23c34f811103",
+      "id": "bb119cd9-73eb-42e1-bf7e-d53211786a84",
       "connectorId": "google_search_console_search_analytics",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-06T09:16:51.659Z",
+      "ranAt": "2026-08-11T08:37:19.996Z",
       "reason": "GSC_SITE_URL and GSC_ACCESS_TOKEN, or GSC_SEARCH_ANALYTICS_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "7b822f2e-9051-4df9-a07c-c2c958cf6c66",
+      "id": "dd9efaaa-ed19-48d8-afcf-f502258a08d8",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-05T12:25:53.550Z",
+      "ranAt": "2026-08-09T10:52:18.657Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "920ddd55-c0d8-46bb-924e-ff7546554bd2",
+      "id": "ff417b81-69c1-4d0a-beb4-4dd9e44fd07b",
       "connectorId": "indexnow",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-05T12:25:53.411Z",
+      "ranAt": "2026-08-09T10:52:18.520Z",
       "reason": "INDEXNOW_KEY is required for live submission.",
       "recordsImported": 0
     },
     {
-      "id": "61dc840b-fe9f-4480-b715-71d1be94c844",
+      "id": "49b1c706-ed47-4cfe-88be-82610919e16a",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-05T12:08:02.996Z",
+      "ranAt": "2026-08-09T10:17:40.242Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "f7424399-eb76-47cc-a903-ad6fe4bb50f7",
+      "id": "198d94db-1f63-4ad9-92e3-5d8d6208db2b",
       "connectorId": "indexnow",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-05T12:08:02.826Z",
+      "ranAt": "2026-08-09T10:17:40.073Z",
       "reason": "INDEXNOW_KEY is required for live submission.",
       "recordsImported": 0
     },
     {
-      "id": "5bb81fad-1499-424c-a70d-a453db34b288",
+      "id": "ed7954fc-4cf8-47bc-b544-2b46815672ed",
       "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
-      "ranAt": "2026-08-05T10:47:19.120Z",
+      "ranAt": "2026-08-09T08:30:53.518Z",
       "recordsImported": 12
     }
   ],
   "topContentOpportunities": [
     {
-      "id": "brief_maxfanout_055001_46008a3cfc",
-      "query": "what is letter of explanation for people with document gaps before applying",
+      "id": "brief_maxfanout_080001_f34fc8de8d",
+      "query": "what is letter of explanation for families with missing documents",
       "route": null,
       "pageFamily": "letter-of-explanation",
       "searchOpportunityScore": 0,
@@ -172,14 +174,14 @@
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
+      "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-06T10:18:10.918Z"
+      "createdAt": "2026-08-11T09:45:09.957Z"
     },
     {
-      "id": "brief_maxfanout_055003_d40ce19728",
-      "query": "what is rental application preparation for people with document gaps before applying",
+      "id": "brief_maxfanout_080003_62fb5bfef0",
+      "query": "what is rental application preparation for families with missing documents",
       "route": null,
       "pageFamily": "rental-application-preparation",
       "searchOpportunityScore": 0,
@@ -192,14 +194,14 @@
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
+      "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-06T10:18:10.918Z"
+      "createdAt": "2026-08-11T09:45:09.957Z"
     },
     {
-      "id": "brief_maxfanout_055004_fa9ea82700",
-      "query": "what is proof of income for people with document gaps before applying",
+      "id": "brief_maxfanout_080004_82edc06070",
+      "query": "what is proof of income for families with missing documents",
       "route": null,
       "pageFamily": "proof-of-income",
       "searchOpportunityScore": 0,
@@ -212,14 +214,14 @@
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
+      "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-06T10:18:10.918Z"
+      "createdAt": "2026-08-11T09:45:09.957Z"
     },
     {
-      "id": "brief_maxfanout_055005_ab64bdba65",
-      "query": "what is self employed income documents for people with document gaps before applying",
+      "id": "brief_maxfanout_080005_caa5e87c1a",
+      "query": "what is self employed income documents for families with missing documents",
       "route": null,
       "pageFamily": "self-employed-income-documents",
       "searchOpportunityScore": 0,
@@ -235,11 +237,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-06T10:18:10.918Z"
+      "createdAt": "2026-08-11T09:45:09.957Z"
     },
     {
-      "id": "brief_maxfanout_055010_4626bf99df",
-      "query": "what is credit report understanding for people with document gaps before applying",
+      "id": "brief_maxfanout_080010_6ee3459c0e",
+      "query": "what is credit report understanding for families with missing documents",
       "route": null,
       "pageFamily": "credit-report-understanding",
       "searchOpportunityScore": 0,
@@ -252,14 +254,14 @@
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
+      "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-06T10:18:10.918Z"
+      "createdAt": "2026-08-11T09:45:09.957Z"
     },
     {
-      "id": "brief_maxfanout_055011_8741f1efa5",
-      "query": "what is credit dispute self service for people with document gaps before applying",
+      "id": "brief_maxfanout_080011_ec09229e08",
+      "query": "what is credit dispute self service for families with missing documents",
       "route": null,
       "pageFamily": "credit-dispute-self-service",
       "searchOpportunityScore": 0,
@@ -272,14 +274,14 @@
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
+      "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-06T10:18:10.918Z"
+      "createdAt": "2026-08-11T09:45:09.957Z"
     },
     {
-      "id": "brief_maxfanout_055012_25ab70f031",
-      "query": "what is credit utilization for people with document gaps before applying",
+      "id": "brief_maxfanout_080012_fb9c57a7d3",
+      "query": "what is credit utilization for families with missing documents",
       "route": null,
       "pageFamily": "credit-utilization",
       "searchOpportunityScore": 0,
@@ -292,14 +294,14 @@
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
+      "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-06T10:18:10.918Z"
+      "createdAt": "2026-08-11T09:45:09.957Z"
     },
     {
-      "id": "brief_maxfanout_055016_240a5b531f",
-      "query": "what is gift letter explanation for people with document gaps before applying",
+      "id": "brief_maxfanout_080016_5492967c23",
+      "query": "what is gift letter explanation for families with missing documents",
       "route": null,
       "pageFamily": "gift-letter-explanation",
       "searchOpportunityScore": 0,
@@ -312,14 +314,14 @@
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
+      "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-06T10:18:10.918Z"
+      "createdAt": "2026-08-11T09:45:09.957Z"
     },
     {
-      "id": "brief_maxfanout_055018_5e4c003b32",
-      "query": "what is address history explanation for people with document gaps before applying",
+      "id": "brief_maxfanout_080018_b5f81bbdca",
+      "query": "what is address history explanation for families with missing documents",
       "route": null,
       "pageFamily": "address-history-explanation",
       "searchOpportunityScore": 0,
@@ -332,14 +334,14 @@
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
+      "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-06T10:18:10.918Z"
+      "createdAt": "2026-08-11T09:45:09.957Z"
     },
     {
-      "id": "brief_maxfanout_055019_e4c6fe612b",
-      "query": "what is income change explanation for people with document gaps before applying",
+      "id": "brief_maxfanout_080019_dcbd571a9d",
+      "query": "what is income change explanation for families with missing documents",
       "route": null,
       "pageFamily": "income-change-explanation",
       "searchOpportunityScore": 0,
@@ -352,14 +354,14 @@
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
+      "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-06T10:18:10.918Z"
+      "createdAt": "2026-08-11T09:45:09.957Z"
     },
     {
-      "id": "brief_maxfanout_055020_81577e3f47",
-      "query": "what is employment verification for people with document gaps before applying",
+      "id": "brief_maxfanout_080020_485cdbcf1b",
+      "query": "what is employment verification for families with missing documents",
       "route": null,
       "pageFamily": "employment-verification",
       "searchOpportunityScore": 0,
@@ -372,14 +374,14 @@
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
+      "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-06T10:18:10.918Z"
+      "createdAt": "2026-08-11T09:45:09.957Z"
     },
     {
-      "id": "brief_maxfanout_055026_1ac8a68485",
-      "query": "what is apartment application documents for people with document gaps before applying",
+      "id": "brief_maxfanout_080026_ce3f04b5ea",
+      "query": "what is apartment application documents for families with missing documents",
       "route": null,
       "pageFamily": "apartment-application-documents",
       "searchOpportunityScore": 0,
@@ -395,11 +397,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-06T10:18:10.918Z"
+      "createdAt": "2026-08-11T09:45:09.957Z"
     },
     {
-      "id": "brief_maxfanout_055030_475627f5ba",
-      "query": "what is document discrepancy explanation for people with document gaps before applying",
+      "id": "brief_maxfanout_080030_ea950f3cf1",
+      "query": "what is document discrepancy explanation for families with missing documents",
       "route": null,
       "pageFamily": "document-discrepancy-explanation",
       "searchOpportunityScore": 0,
@@ -412,14 +414,14 @@
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
+      "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-06T10:18:10.918Z"
+      "createdAt": "2026-08-11T09:45:09.958Z"
     },
     {
-      "id": "brief_maxfanout_055034_e361991207",
-      "query": "what is income verification packet for people with document gaps before applying",
+      "id": "brief_maxfanout_080034_bbb050a33b",
+      "query": "what is income verification packet for families with missing documents",
       "route": null,
       "pageFamily": "income-verification-packet",
       "searchOpportunityScore": 0,
@@ -432,14 +434,14 @@
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
+      "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-06T10:18:10.918Z"
+      "createdAt": "2026-08-11T09:45:09.958Z"
     },
     {
-      "id": "brief_maxfanout_055035_95bec3ef99",
-      "query": "what is credit readiness education for people with document gaps before applying",
+      "id": "brief_maxfanout_080035_b62c3c52ea",
+      "query": "what is credit readiness education for families with missing documents",
       "route": null,
       "pageFamily": "credit-readiness-education",
       "searchOpportunityScore": 0,
@@ -452,14 +454,14 @@
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
+      "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-06T10:18:10.918Z"
+      "createdAt": "2026-08-11T09:45:09.958Z"
     },
     {
-      "id": "brief_maxfanout_055037_c2e822af9f",
-      "query": "what is rental screening preparation for people with document gaps before applying",
+      "id": "brief_maxfanout_080037_e90cf34bb5",
+      "query": "what is rental screening preparation for families with missing documents",
       "route": null,
       "pageFamily": "rental-screening-preparation",
       "searchOpportunityScore": 0,
@@ -472,14 +474,14 @@
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
+      "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-06T10:18:10.918Z"
+      "createdAt": "2026-08-11T09:45:09.958Z"
     },
     {
-      "id": "brief_maxfanout_055041_c7eafc9039",
-      "query": "how to prepare letter of explanation for people with document gaps before applying",
+      "id": "brief_maxfanout_080041_d96e920396",
+      "query": "how to prepare letter of explanation for families with missing documents",
       "route": null,
       "pageFamily": "letter-of-explanation",
       "searchOpportunityScore": 0,
@@ -492,14 +494,14 @@
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
+      "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-06T10:18:10.918Z"
+      "createdAt": "2026-08-11T09:45:09.958Z"
     },
     {
-      "id": "brief_maxfanout_055043_8e84f83ebc",
-      "query": "how to prepare rental application preparation for people with document gaps before applying",
+      "id": "brief_maxfanout_080043_3d49d0cf72",
+      "query": "how to prepare rental application preparation for families with missing documents",
       "route": null,
       "pageFamily": "rental-application-preparation",
       "searchOpportunityScore": 0,
@@ -512,14 +514,14 @@
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
+      "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-06T10:18:10.918Z"
+      "createdAt": "2026-08-11T09:45:09.958Z"
     },
     {
-      "id": "brief_maxfanout_055044_c5c3379332",
-      "query": "how to prepare proof of income for people with document gaps before applying",
+      "id": "brief_maxfanout_080044_ee63f8d2f2",
+      "query": "how to prepare proof of income for families with missing documents",
       "route": null,
       "pageFamily": "proof-of-income",
       "searchOpportunityScore": 0,
@@ -532,14 +534,14 @@
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
+      "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-06T10:18:10.918Z"
+      "createdAt": "2026-08-11T09:45:09.958Z"
     },
     {
-      "id": "brief_maxfanout_055045_97012d2631",
-      "query": "how to prepare self employed income documents for people with document gaps before applying",
+      "id": "brief_maxfanout_080045_bcbe750f43",
+      "query": "how to prepare self employed income documents for families with missing documents",
       "route": null,
       "pageFamily": "self-employed-income-documents",
       "searchOpportunityScore": 0,
@@ -555,7 +557,7 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-06T10:18:10.918Z"
+      "createdAt": "2026-08-11T09:45:09.958Z"
     }
   ],
   "topMaintenanceActions": [
@@ -573,7 +575,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-06T12:29:59.874Z"
+      "createdAt": "2026-08-11T11:01:53.988Z"
     },
     {
       "route": "/letter-writing-studio",
@@ -589,7 +591,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-06T12:29:59.874Z"
+      "createdAt": "2026-08-11T11:01:53.989Z"
     },
     {
       "route": "/blog",
@@ -605,7 +607,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-06T12:29:59.874Z"
+      "createdAt": "2026-08-11T11:01:53.989Z"
     },
     {
       "route": "/resources",
@@ -621,7 +623,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-06T12:29:59.874Z"
+      "createdAt": "2026-08-11T11:01:53.989Z"
     },
     {
       "route": "/pricing",
@@ -637,7 +639,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-06T12:29:59.874Z"
+      "createdAt": "2026-08-11T11:01:53.989Z"
     },
     {
       "route": "/letter-of-explanation",
@@ -653,7 +655,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-06T12:29:59.874Z"
+      "createdAt": "2026-08-11T11:01:53.989Z"
     },
     {
       "route": "/letter-of-explanation/credit",
@@ -669,7 +671,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-06T12:29:59.874Z"
+      "createdAt": "2026-08-11T11:01:53.989Z"
     },
     {
       "route": "/letter-of-explanation/eviction",
@@ -685,7 +687,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-06T12:29:59.874Z"
+      "createdAt": "2026-08-11T11:01:53.989Z"
     },
     {
       "route": "/letter-of-explanation/income",
@@ -701,7 +703,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-06T12:29:59.874Z"
+      "createdAt": "2026-08-11T11:01:53.989Z"
     },
     {
       "route": "/letter-of-explanation/employment-gap",
@@ -717,7 +719,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-06T12:29:59.874Z"
+      "createdAt": "2026-08-11T11:01:53.989Z"
     },
     {
       "route": "/employment-verification-letter",
@@ -733,7 +735,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-06T12:29:59.874Z"
+      "createdAt": "2026-08-11T11:01:53.989Z"
     },
     {
       "route": "/609-dispute-letter",
@@ -749,7 +751,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-06T12:29:59.874Z"
+      "createdAt": "2026-08-11T11:01:53.989Z"
     },
     {
       "route": "/goodwill-letter-to-remove-late-payment",
@@ -765,7 +767,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-06T12:29:59.874Z"
+      "createdAt": "2026-08-11T11:01:53.989Z"
     },
     {
       "route": "/letter-of-explanation/late-payment",
@@ -781,7 +783,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-06T12:29:59.874Z"
+      "createdAt": "2026-08-11T11:01:53.989Z"
     },
     {
       "route": "/letter-of-explanation/large-deposit",
@@ -797,7 +799,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-06T12:29:59.874Z"
+      "createdAt": "2026-08-11T11:01:53.989Z"
     },
     {
       "route": "/proof-of-income-letter",
@@ -813,7 +815,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-06T12:29:59.874Z"
+      "createdAt": "2026-08-11T11:01:53.989Z"
     },
     {
       "route": "/credit-dispute-letter",
@@ -829,7 +831,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-06T12:29:59.874Z"
+      "createdAt": "2026-08-11T11:01:53.989Z"
     },
     {
       "route": "/apartment-application",
@@ -845,7 +847,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-06T12:29:59.874Z"
+      "createdAt": "2026-08-11T11:01:53.989Z"
     },
     {
       "route": "/rental-application-checklist",
@@ -861,7 +863,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-06T12:29:59.874Z"
+      "createdAt": "2026-08-11T11:01:53.989Z"
     },
     {
       "route": "/how-to-get-approved-for-an-apartment",
@@ -877,7 +879,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-06T12:29:59.874Z"
+      "createdAt": "2026-08-11T11:01:53.989Z"
     }
   ],
   "hardTruth": "Low ranking potential never blocks useful onsite content. It only changes indexing, priority, and authority strategy."

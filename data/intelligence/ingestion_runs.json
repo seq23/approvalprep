@@ -2,6 +2,27 @@
   "schemaVersion": "4.1.0",
   "runs": [
     {
+      "id": "5e25f5de-18fd-49a5-ad4c-de24aafa2f36",
+      "connectorId": "growth_brief_generation",
+      "status": "COMPLETE",
+      "ranAt": "2026-08-11T11:01:54.336Z",
+      "recordsImported": 40
+    },
+    {
+      "id": "2e0b3624-88ee-45d1-bc38-5eb9f782fbe6",
+      "connectorId": "authority_requirement_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-08-11T11:01:54.154Z",
+      "recordsImported": 71
+    },
+    {
+      "id": "74a2aa91-4f9d-4859-a1e0-cd6cbcf1fd70",
+      "connectorId": "growth_maintenance_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-08-11T11:01:53.991Z",
+      "recordsImported": 71
+    },
+    {
       "id": "b2f46f94-de76-4747-87c2-8659fa5879a0",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
@@ -1882,30 +1903,6 @@
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
       "ranAt": "2026-07-27T11:43:27.431Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "02037654-9726-4c0f-853a-3fe8b7c09434",
-      "connectorId": "google_url_inspection",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-07-27T11:43:27.287Z",
-      "reason": "GSC_SITE_URL and GSC_ACCESS_TOKEN, or GSC_URL_INSPECTION_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "153b2465-95df-4bf3-a213-ebd7e6aaa622",
-      "connectorId": "google_search_console_search_analytics",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-07-27T11:43:27.146Z",
-      "reason": "GSC_SITE_URL and GSC_ACCESS_TOKEN, or GSC_SEARCH_ANALYTICS_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "df727f24-5af4-4acb-9eba-da2a38ae2d7f",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-07-26T15:31:17.798Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     }
