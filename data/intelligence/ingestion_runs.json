@@ -2,6 +2,22 @@
   "schemaVersion": "4.1.0",
   "runs": [
     {
+      "id": "2e628e52-6587-43dd-9b19-ea5d4ab27c9a",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-08-17T10:50:17.678Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "27328a19-e250-4e61-8128-9db4a0e87df5",
+      "connectorId": "indexnow",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-08-17T10:50:17.530Z",
+      "reason": "INDEXNOW_KEY is required for live submission.",
+      "recordsImported": 0
+    },
+    {
       "id": "6260f368-f718-4064-8622-e8ca0b2d4d85",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
@@ -1907,21 +1923,6 @@
       "ranAt": "2026-07-31T12:09:05.652Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
-    },
-    {
-      "id": "daf21e21-f4bb-4c68-9276-899d8792e633",
-      "connectorId": "indexnow",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-07-31T12:09:05.519Z",
-      "reason": "INDEXNOW_KEY is required for live submission.",
-      "recordsImported": 0
-    },
-    {
-      "id": "49c8a7fe-de4a-4b88-a746-a336327d713f",
-      "connectorId": "official_source_fetcher",
-      "status": "COMPLETE",
-      "ranAt": "2026-07-31T11:00:52.351Z",
-      "recordsImported": 12
     }
   ]
 }
