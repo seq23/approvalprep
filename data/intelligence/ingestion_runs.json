@@ -2,6 +2,22 @@
   "schemaVersion": "4.1.0",
   "runs": [
     {
+      "id": "1de6e3f6-37dd-42fe-aa20-1a4411d822c7",
+      "connectorId": "competitor_public_crawler",
+      "status": "BUDGET_HELD",
+      "ranAt": "2026-08-19T07:46:36.326Z",
+      "reason": "weekly ceiling 2 reached (2 live attempts in 7d)",
+      "recordsImported": 0
+    },
+    {
+      "id": "68defe37-d6a1-4c14-b66d-a14d11f8be34",
+      "connectorId": "competitor_sitemap_discovery",
+      "status": "BUDGET_HELD",
+      "ranAt": "2026-08-19T07:46:36.176Z",
+      "reason": "weekly ceiling 2 reached (2 live attempts in 7d)",
+      "recordsImported": 0
+    },
+    {
       "id": "3d7d72ef-04ee-4991-be67-ab7c5acaf111",
       "connectorId": "growth_brief_generation",
       "status": "COMPLETE",
@@ -1904,20 +1920,6 @@
       "ranAt": "2026-08-03T11:47:57.195Z",
       "reason": "No SERP CSV found at data/imports/serp.csv.",
       "recordsImported": 0
-    },
-    {
-      "id": "67cbd6af-3e1a-4c12-8060-ea73277ae4f8",
-      "connectorId": "competitor_public_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-03T11:47:57.053Z",
-      "recordsImported": 2
-    },
-    {
-      "id": "5f206dbf-408b-4d49-b22c-01da7c2ffcad",
-      "connectorId": "competitor_sitemap_discovery",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-03T11:47:56.448Z",
-      "recordsImported": 2
     }
   ]
 }
