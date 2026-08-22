@@ -2,6 +2,22 @@
   "schemaVersion": "4.1.0",
   "runs": [
     {
+      "id": "7ecd99a4-425e-4359-b0b3-dd2d7f7e8b4d",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-08-22T10:14:30.752Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "02ca64d6-c751-45c0-8495-8a13a6961a30",
+      "connectorId": "indexnow",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-08-22T10:14:30.584Z",
+      "reason": "INDEXNOW_KEY is required for live submission.",
+      "recordsImported": 0
+    },
+    {
       "id": "94c4cb02-c80a-49c3-8fbd-5f4d79922284",
       "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
@@ -1913,22 +1929,6 @@
       "status": "NOT_CONFIGURED",
       "ranAt": "2026-08-06T09:16:51.659Z",
       "reason": "GSC_SITE_URL and GSC_ACCESS_TOKEN, or GSC_SEARCH_ANALYTICS_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "7b822f2e-9051-4df9-a07c-c2c958cf6c66",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-05T12:25:53.550Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "920ddd55-c0d8-46bb-924e-ff7546554bd2",
-      "connectorId": "indexnow",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-05T12:25:53.411Z",
-      "reason": "INDEXNOW_KEY is required for live submission.",
       "recordsImported": 0
     }
   ]
