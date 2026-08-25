@@ -1135,6 +1135,15 @@
       "owner": "approvalprep-growth",
       "group": "search-intelligence",
       "scope": "Per-connector daily/weekly request ceilings for GSC, Bing, competitor crawl, Cloudflare, IndexNow"
+    },
+    {
+      "id": "query-atlas",
+      "npmScript": "validate:query-atlas",
+      "entrypoint": "scripts/validate/query-atlas.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents generating pages against synthetic fanout permutations that carry no demand evidence - the scaled content abuse pattern named by the March 2026 core update",
+      "group": "growth-critical"
     }
   ]
 }
