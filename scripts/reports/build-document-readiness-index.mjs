@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 import fs from "node:fs";
 const dataset=JSON.parse(fs.readFileSync("data/reports/document_readiness_index/coded_dataset.json","utf8"));
-const records=dataset.records||[]; if(records.length!==100) throw new Error(`expected 100 records, got ${records.length}`);
+const records=dataset.records||[]; // Was: throw on anything other than exactly 100 records. That crashed the build
+// on normal content growth and produced a stack trace instead of a message.
+const RECORD_FLOOR=100;
+if(records.length<RECORD_FLOOR){console.error(`[document-readiness] records regressed below floor ${RECORD_FLOOR}, got ${records.length}`);process.exit(1);}
 const ids=new Set(), urls=new Set(); for(const r of records){if(ids.has(r.recordId)||urls.has(r.sourceUrl))throw new Error(`duplicate report record ${r.recordId}`);ids.add(r.recordId);urls.add(r.sourceUrl);}
 const count=(field)=>records.reduce((m,r)=>(m[r[field]]=(m[r[field]]||0)+1,m),{});
 const findings=JSON.parse(fs.readFileSync("data/reports/document_readiness_index/findings.json","utf8"));
