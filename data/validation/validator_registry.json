@@ -1144,6 +1144,28 @@
       "blocksRelease": true,
       "blockReason": "prevents generating pages against synthetic fanout permutations that carry no demand evidence - the scaled content abuse pattern named by the March 2026 core update",
       "group": "growth-critical"
+    },
+    {
+      "id": "no-internal-instruction-leak",
+      "npmScript": "validate:no-instruction-leak",
+      "entrypoint": "scripts/validators/validate_no_internal_instruction_leak.js",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents publishing external-agent build directives as reader-facing page copy, including inside the direct-answer block answer engines extract",
+      "owner": "approvalprep-ops",
+      "group": "content-quality",
+      "scope": "Built HTML surface in dist/, including dist/templates and dist/reports"
+    },
+    {
+      "id": "no-empty-table-cells",
+      "npmScript": "validate:no-empty-cells",
+      "entrypoint": "scripts/validators/validate_no_empty_table_cells.js",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents shipping tables whose empty cells break column-to-header alignment and make the table unusable as a fact source",
+      "owner": "approvalprep-ops",
+      "group": "content-quality",
+      "scope": "Built HTML surface in dist/, including dist/templates and dist/reports"
     }
   ],
   "generatedFrom": "_repo_validation_registry.json",

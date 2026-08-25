@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "orchestratorSource": "_repo_validation_registry.json",
-  "validatorCount": 104,
-  "hardFailCount": 93,
+  "validatorCount": 106,
+  "hardFailCount": 95,
   "strongWarningCount": 11,
   "validators": [
     {
@@ -940,6 +940,24 @@
       "severity": "HARD_FAIL",
       "blocksRelease": true,
       "group": "growth-critical"
+    },
+    {
+      "order": 105,
+      "id": "no-internal-instruction-leak",
+      "npmScript": "validate:no-instruction-leak",
+      "entrypoint": "scripts/validators/validate_no_internal_instruction_leak.js",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "content-quality"
+    },
+    {
+      "order": 106,
+      "id": "no-empty-table-cells",
+      "npmScript": "validate:no-empty-cells",
+      "entrypoint": "scripts/validators/validate_no_empty_table_cells.js",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "content-quality"
     }
   ]
 }
