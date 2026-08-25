@@ -234,7 +234,8 @@
     "validate:no-instruction-leak": "node scripts/validators/validate_no_internal_instruction_leak.js",
     "validate:no-empty-cells": "node scripts/validators/validate_no_empty_table_cells.js",
     "selfheal": "node scripts/selfheal/heal-until-clean.mjs",
-    "selfheal:dry": "node scripts/selfheal/heal-until-clean.mjs --dry-run"
+    "selfheal:dry": "node scripts/selfheal/heal-until-clean.mjs --dry-run",
+    "validate:content-pattern": "node scripts/validators/validate_content_pattern_contract.js"
   },
   "dependencies": {
     "astro": "^7.0.6",

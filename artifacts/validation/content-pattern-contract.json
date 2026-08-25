@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "1.0.0",
+  "validator": "content-pattern-contract",
+  "spec": ".clarity/content-pattern-spec.json",
+  "generatedAt": "2026-08-25T21:54:49.986Z",
+  "enforcement": "block",
+  "pagesChecked": 94,
+  "status": "PASS",
+  "blockingFailures": 0,
+  "summary": [
+    {
+      "id": "direct_answer",
+      "blocking": true,
+      "pagesMissing": 0,
+      "coveragePct": 100,
+      "why": "no direct-answer block - nothing here is quotable without surrounding context"
+    },
+    {
+      "id": "query_in_heading",
+      "blocking": true,
+      "pagesMissing": 0,
+      "coveragePct": 100,
+      "why": "h1 missing or too short to carry the searcher phrasing"
+    },
+    {
+      "id": "no_empty_table_cells",
+      "blocking": true,
+      "pagesMissing": 0,
+      "coveragePct": 100,
+      "why": "table ships empty cells - the agent calls these impossible to cite"
+    },
+    {
+      "id": "conversion_path",
+      "blocking": true,
+      "pagesMissing": 0,
+      "coveragePct": 100,
+      "why": "no conversion path - an answer-engine citation lands with nowhere to go"
+    },
+    {
+      "id": "checklist",
+      "blocking": false,
+      "pagesMissing": 0,
+      "coveragePct": 100,
+      "why": "no checklist or numbered protocol (agent request #1, 730 occurrences)"
+    },
+    {
+      "id": "comparison_table",
+      "blocking": false,
+      "pagesMissing": 91,
+      "coveragePct": 3.2,
+      "why": "no comparison or cost table (agent request #2, 529 occurrences)"
+    },
+    {
+      "id": "concrete_numbers",
+      "blocking": false,
+      "pagesMissing": 5,
+      "coveragePct": 94.7,
+      "why": "no concrete cost or timeline figures (agent request #5, 365 occurrences)"
+    },
+    {
+      "id": "named_sources",
+      "blocking": false,
+      "pagesMissing": 88,
+      "coveragePct": 6.4,
+      "why": "no named primary source (agent request #6, 288 occurrences)"
+    },
+    {
+      "id": "faq",
+      "blocking": false,
+      "pagesMissing": 51,
+      "coveragePct": 45.7,
+      "why": "no FAQ block or FAQPage schema (agent request #9)"
+    },
+    {
+      "id": "structured_data",
+      "blocking": false,
+      "pagesMissing": 0,
+      "coveragePct": 100,
+      "why": "no JSON-LD structured data (agent request #10)"
+    }
+  ],
+  "worstGaps": {
+    "direct_answer": [],
+    "query_in_heading": [],
+    "no_empty_table_cells": [],
+    "conversion_path": [],
+    "checklist": [],
+    "comparison_table": [
+      "dist/609-dispute-letter/index.html",
+      "dist/apartment-application/index.html",
+      "dist/auto-loan-documents/index.html",
+      "dist/auto-loan/income-verification/index.html",
+      "dist/blog/how-should-i-prepare-for-apartment-application-readiness-checklist/index.html",
+      "dist/blog/how-should-i-prepare-for-approvalprep-document-readiness-index/index.html",
+      "dist/blog/how-should-i-prepare-for-approvalprep-glossary/index.html",
+      "dist/blog/how-should-i-prepare-for-approvalprep-methodology/index.html",
+      "dist/blog/how-should-i-prepare-for-business-funding-document-checklist/index.html",
+      "dist/blog/how-should-i-prepare-for-car-loan-document-checklist/index.html",
+      "dist/blog/how-should-i-prepare-for-important-documents-checklist/index.html",
+      "dist/blog/how-should-i-prepare-for-important-documents-folder-checklist/index.html",
+      "dist/blog/how-should-i-prepare-for-mortgage-document-readiness-checklist/index.html",
+      "dist/blog/how-should-i-prepare-for-moving-checklist/index.html",
+      "dist/blog/how-should-i-prepare-for-pricing/index.html",
+      "dist/blog/how-should-i-prepare-for-proof-of-income-packet-checklist/index.html",
+      "dist/blog/how-should-i-prepare-for-resources/index.html",
+      "dist/blog/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-apartment-application-readiness-checklist/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-document-readiness-index/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-glossary/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-methodology/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-business-funding-document-checklist/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-car-loan-document-checklist/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-important-documents-checklist/index.html"
+    ],
+    "concrete_numbers": [
+      "dist/contact/index.html",
+      "dist/glossary/index.html",
+      "dist/letter-of-explanation/late-payment/index.html",
+      "dist/not-a-credit-repair-company/index.html",
+      "dist/refund-policy/index.html"
+    ],
+    "named_sources": [
+      "dist/apartment-application/index.html",
+      "dist/auto-loan-documents/index.html",
+      "dist/auto-loan/income-verification/index.html",
+      "dist/blog/how-should-i-prepare-for-apartment-application-readiness-checklist/index.html",
+      "dist/blog/how-should-i-prepare-for-approvalprep-document-readiness-index/index.html",
+      "dist/blog/how-should-i-prepare-for-approvalprep-glossary/index.html",
+      "dist/blog/how-should-i-prepare-for-approvalprep-methodology/index.html",
+      "dist/blog/how-should-i-prepare-for-business-funding-document-checklist/index.html",
+      "dist/blog/how-should-i-prepare-for-car-loan-document-checklist/index.html",
+      "dist/blog/how-should-i-prepare-for-important-documents-checklist/index.html",
+      "dist/blog/how-should-i-prepare-for-important-documents-folder-checklist/index.html",
+      "dist/blog/how-should-i-prepare-for-mortgage-document-readiness-checklist/index.html",
+      "dist/blog/how-should-i-prepare-for-moving-checklist/index.html",
+      "dist/blog/how-should-i-prepare-for-pricing/index.html",
+      "dist/blog/how-should-i-prepare-for-proof-of-income-packet-checklist/index.html",
+      "dist/blog/how-should-i-prepare-for-resources/index.html",
+      "dist/blog/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-apartment-application-readiness-checklist/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-document-readiness-index/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-glossary/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-methodology/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-business-funding-document-checklist/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-car-loan-document-checklist/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-important-documents-checklist/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-important-documents-folder-checklist/index.html"
+    ],
+    "faq": [
+      "dist/blog/how-should-i-prepare-for-apartment-application-readiness-checklist/index.html",
+      "dist/blog/how-should-i-prepare-for-approvalprep-document-readiness-index/index.html",
+      "dist/blog/how-should-i-prepare-for-approvalprep-glossary/index.html",
+      "dist/blog/how-should-i-prepare-for-approvalprep-methodology/index.html",
+      "dist/blog/how-should-i-prepare-for-business-funding-document-checklist/index.html",
+      "dist/blog/how-should-i-prepare-for-car-loan-document-checklist/index.html",
+      "dist/blog/how-should-i-prepare-for-important-documents-checklist/index.html",
+      "dist/blog/how-should-i-prepare-for-important-documents-folder-checklist/index.html",
+      "dist/blog/how-should-i-prepare-for-mortgage-document-readiness-checklist/index.html",
+      "dist/blog/how-should-i-prepare-for-moving-checklist/index.html",
+      "dist/blog/how-should-i-prepare-for-pricing/index.html",
+      "dist/blog/how-should-i-prepare-for-proof-of-income-packet-checklist/index.html",
+      "dist/blog/how-should-i-prepare-for-resources/index.html",
+      "dist/blog/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-apartment-application-readiness-checklist/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-document-readiness-index/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-glossary/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-methodology/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-business-funding-document-checklist/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-car-loan-document-checklist/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-important-documents-checklist/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-important-documents-folder-checklist/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-mortgage-document-readiness-checklist/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-moving-checklist/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-pricing/index.html"
+    ],
+    "structured_data": []
+  },
+  "blockingBacklog": []
+}
