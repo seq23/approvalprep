@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-08-25T21:52:11.311Z",
+  "validationCommand": "npm run validate:all",
+  "registrySource": "_repo_validation_registry.json",
+  "maxAttempts": 3,
+  "dryRun": true,
+  "declaredRepairs": {
+    "validation-registry": "npm run validation:registry:sync",
+    "atlas-query-fanout": "npm run content:self-heal-citation-os",
+    "self-heal-progressions": "npm run automation:self-heal-attempt && npm run automation:self-heal-revalidate",
+    "prohibited-claims": "npm run governance:safe-harbor-rewrite"
+  },
+  "status": "CLEAN",
+  "safeToPush": true,
+  "nonBlockingWarnings": [],
+  "attempts": [
+    {
+      "attempt": 1,
+      "blocked": [],
+      "repaired": [],
+      "result": "CLEAN"
+    }
+  ]
+}

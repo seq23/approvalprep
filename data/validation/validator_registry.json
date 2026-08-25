@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "lastUpdatedAt": "2026-08-09T00:00:00.000Z",
+  "lastUpdatedAt": "2026-08-25T21:51:08.107Z",
   "policy": "The root registry is the single execution authority. HARD_FAIL blocks immediately; STRONG_WARNING records and continues. The data/validation registry is generated from this file.",
   "validators": [
     {
@@ -23,7 +23,9 @@
       "blockReason": "prevents stale or divergent validator registry and matrix",
       "owner": "approvalprep-ops",
       "group": "ops-critical",
-      "scope": "Validation registry and matrix completeness"
+      "scope": "Validation registry and matrix completeness",
+      "repairCommand": "npm run validation:registry:sync",
+      "repairRationale": "validate:validation-registry hard-fails when data/validation/validator_registry.json diverges from this canonical file; sync-validator-registry.mjs regenerates that exact mirror from this file."
     },
     {
       "id": "validator-orchestrator-self-test",
@@ -166,7 +168,9 @@
       "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
       "owner": "approvalprep-growth",
       "group": "growth-critical",
-      "scope": "Atlas, query universe, fanout, route query coverage"
+      "scope": "Atlas, query universe, fanout, route query coverage",
+      "repairCommand": "npm run content:self-heal-citation-os",
+      "repairRationale": "validate:atlas fails on routes missing from the admission manifest, indexed routes with fewer than five queries, and routes without four fanout children; self-heal-citation-os.mjs admits missing routes and generates the missing queries, fanout parents, and query-matrix mirror for exactly those routes."
     },
     {
       "id": "seo-aeo-geo-surfaces",
@@ -441,7 +445,9 @@
       "blockReason": "prevents broken operator workflow or unsafe automation",
       "owner": "approvalprep-ops",
       "group": "ops-critical",
-      "scope": "Self-heal attempt/revalidation/final-block loop"
+      "scope": "Self-heal attempt/revalidation/final-block loop",
+      "repairCommand": "npm run automation:self-heal-attempt && npm run automation:self-heal-revalidate",
+      "repairRationale": "validate:self-heal-progressions fails when data/automation/self_heal_attempts.json or final_block_log.json is missing or malformed; attempt-self-heal.mjs writes the first from the live content queue and revalidate-after-self-heal.mjs derives the second from it. It does not supply the playbook, so a thin playbook remains an unrepairable failure by design."
     },
     {
       "id": "owner-exceptions",
@@ -947,7 +953,9 @@
       "blockReason": "protects regulated autopublish, source evidence, workflow safety, privacy, or final readiness boundaries",
       "owner": "approvalprep-ops",
       "group": "phase-a-f",
-      "scope": "ApprovalPrep Phase A-F Citation OS hardening"
+      "scope": "ApprovalPrep Phase A-F Citation OS hardening",
+      "repairCommand": "npm run governance:safe-harbor-rewrite",
+      "repairRationale": "validate:prohibited-claims scans generated_route_copy.json for hardBlockedPatterns; apply-safe-harbor-rewrites.mjs rewrites the offending claim language in that same file using the rewriteablePatterns of the same registry (the fix-credit rewrite removes text matching the credit-repair-service hard block). It rewrites the text, it does not suppress the check."
     },
     {
       "id": "required-disclosures",
@@ -1168,6 +1176,7 @@
       "scope": "Built HTML surface in dist/, including dist/templates and dist/reports"
     }
   ],
+  "repairPolicy": "A validator may declare repairCommand only when that command repairs the same defect the validator detects. scripts/selfheal/heal-until-clean.mjs runs it on a blocking failure and re-validates.",
   "generatedFrom": "_repo_validation_registry.json",
   "generatedPolicy": "Do not edit this mirror manually; regenerate from the root canonical registry."
 }
