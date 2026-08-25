@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && PAGES_OUT_DIR=dist node scripts/build_404.mjs",
     "preview": "astro preview",
     "validate": "npm run validate:all",
     "validate:all": "node scripts/validate/run-all.mjs",

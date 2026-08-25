@@ -44,6 +44,9 @@ const SKIP_TOP_LEVEL = new Set([
 // Legal, transactional and operator surfaces. None of them answer a search
 // query, so holding them to a direct-answer contract would measure nothing.
 const SKIP_FILES = new Set([
+  // Not an answer surface: it exists so Cloudflare Pages returns a real 404
+  // instead of falling back to index.html under a 200.
+  'dist/404.html',
   'dist/disclaimer/index.html',
   'dist/privacy/index.html',
   'dist/terms/index.html',
