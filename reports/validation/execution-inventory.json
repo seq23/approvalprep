@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "orchestratorSource": "_repo_validation_registry.json",
-  "validatorCount": 103,
-  "hardFailCount": 92,
+  "validatorCount": 104,
+  "hardFailCount": 93,
   "strongWarningCount": 11,
   "validators": [
     {
@@ -931,6 +931,15 @@
       "severity": "STRONG_WARNING",
       "blocksRelease": false,
       "group": "search-intelligence"
+    },
+    {
+      "order": 104,
+      "id": "query-atlas",
+      "npmScript": "validate:query-atlas",
+      "entrypoint": "scripts/validate/query-atlas.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "growth-critical"
     }
   ]
 }
