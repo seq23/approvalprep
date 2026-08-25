@@ -6,7 +6,10 @@ const routes=new Set(manifest.routes.map(r=>r.path));
 const data=JSON.parse(fs.readFileSync("data/routes/redirects.json","utf8"));
 const file=fs.readFileSync("public/_redirects","utf8");
 const seen=new Set();
-if((data.redirects||[]).length!==42) fail(`[redirect-map] expected 42 legacy redirects, got ${(data.redirects||[]).length}`);
+// Floor, not an exact count: adding a legacy redirect is normal maintenance and
+// must not fail the build. Losing redirects silently is the real regression.
+const REDIRECT_FLOOR=42;
+if((data.redirects||[]).length<REDIRECT_FLOOR) fail(`[redirect-map] redirects regressed below floor ${REDIRECT_FLOOR}, got ${(data.redirects||[]).length}`);
 for(const r of data.redirects||[]){
  if(seen.has(r.source)) fail(`[redirect-map] duplicate ${r.source}`); seen.add(r.source);
  if(r.statusCode!==301) fail(`[redirect-map] non-301 ${r.source}`);
