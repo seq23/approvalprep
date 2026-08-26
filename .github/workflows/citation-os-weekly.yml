@@ -46,10 +46,20 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      - name: Observe whether answer engines cite us
+        # The probe shipped in seven repos and was invoked by none, so no
+        # citation observation was ever taken. Grounded mode reads the pages
+        # the answer was actually built from; knowledge mode would only show
+        # whether a model memorised the brand, which is not a citation.
+        continue-on-error: true
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          CITATION_PROBE_MODE: grounded
+        run: node scripts/llm_citation_probe.mjs --limit 25
       - name: Commit citation OS weekly outputs
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/intelligence/*.json data/seo/*.json data/metrics/*.json data/citations/*.json data/backlink_handoff/* data/governance/*.json data/reports/*.json data/repurposing/*.json public/downloads/free-checklists/* data/content/*.json data/routes/*.json data/atoms/*.json data/atlas/*.json data/workflow_traces/*.json data/experiments/*.json data/self_healing/*.json data/locations/*.json data/validation/*.json public/sitemap.xml
+          git add data/signals/*.json data/intelligence/*.json data/seo/*.json data/metrics/*.json data/citations/*.json data/backlink_handoff/* data/governance/*.json data/reports/*.json data/repurposing/*.json public/downloads/free-checklists/* data/content/*.json data/routes/*.json data/atoms/*.json data/atlas/*.json data/workflow_traces/*.json data/experiments/*.json data/self_healing/*.json data/locations/*.json data/validation/*.json public/sitemap.xml
           git diff --cached --quiet || git commit -m "chore(citation-os): weekly intelligence and lifecycle refresh"
           bash scripts/workflows/safe-push-main.sh
