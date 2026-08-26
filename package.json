@@ -239,7 +239,8 @@
     "clarity:install": "node scripts/install_clarity.mjs",
     "cadence:headroom": "node scripts/cadence/publish_headroom.mjs",
     "validate:operator-doc-currency": "node scripts/validators/validate_operator_doc_currency.mjs docs/runbooks docs/ops",
-    "cadence:gate": "node scripts/cadence_gate.cjs"
+    "cadence:gate": "node scripts/cadence_gate.cjs",
+    "citation:probe": "node scripts/llm_citation_probe.mjs"
   },
   "dependencies": {
     "astro": "^7.0.6",
