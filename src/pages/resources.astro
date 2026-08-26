@@ -2,10 +2,16 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import TrustAndBoundaryBand from "../components/TrustAndBoundaryBand.astro";
 import RecommendationSummary from "../components/RecommendationSummary.astro";
+import RouteFaq from "../components/RouteFaq.astro";
+import { faqSchema } from "../lib/schema";
+import { routeAnswers } from "../lib/routeAnswers";
 import { routeCopy } from "../data/content";
 const copy = routeCopy["/resources"];
+// Published answers written about /resources, previously reachable only on
+// their own /blog/ pages. One list feeds both the block and the schema.
+const faq = routeAnswers("/resources");
 ---
-<BaseLayout title="Resources - ApprovalPrep" description="ApprovalPrep resources, guides, publishing updates, policies, and self-service document prep education." canonical="https://approvalprep.com/resources">
+<BaseLayout title="Resources - ApprovalPrep" description="ApprovalPrep resources, guides, publishing updates, policies, and self-service document prep education." canonical="https://approvalprep.com/resources" schema={faq.length ? [faqSchema(faq.map((i) => ({ question: i.question, answer: i.answer })))] : []}>
   <section class="hero shell">
     <p class="eyebrow">Resources</p>
     <h1>Find the guide, policy, or publishing stream that matches your question.</h1>
@@ -61,5 +67,6 @@ const copy = routeCopy["/resources"];
       <a class="card resource-card" href="/reports/small-business-funding-document-prep-report"><span>Report</span><h3>Business funding document prep report</h3><p>Organize business funding documents without pretending ApprovalPrep provides lending advice.</p></a>
     </div>
   </div></section>
+  <RouteFaq items={faq} heading="Questions people ask about ApprovalPrep resources" />
   <TrustAndBoundaryBand />
 </BaseLayout>

@@ -3,7 +3,9 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import RelatedContent from "../../components/RelatedContent.astro";
 import TrustAndBoundaryBand from "../../components/TrustAndBoundaryBand.astro";
 import RecommendationSummary from "../../components/RecommendationSummary.astro";
-import { webPageSchema, breadcrumbSchema, itemListSchema } from "../../lib/schema";
+import RouteFaq from "../../components/RouteFaq.astro";
+import { webPageSchema, breadcrumbSchema, itemListSchema, faqSchema } from "../../lib/schema";
+import { routeAnswers } from "../../lib/routeAnswers";
 import registry from "../../../data/tools/tool_registry.json";
 
 export function getStaticPaths() {
@@ -13,10 +15,16 @@ export function getStaticPaths() {
 }
 const { tool } = Astro.props;
 const canonical = `https://approvalprep.com${tool.path}`;
+// The site already holds published answers written about this exact tool, in
+// data/content/generated_answers.json. They were rendered only on their own
+// /blog/ page, so the tool page itself carried no Q&A and no FAQPage. The same
+// list drives the visible block and the schema, so the two cannot drift.
+const faq = routeAnswers(tool.path);
 const schema = [
   webPageSchema({ title: tool.title, description: tool.summary, url: canonical }),
   breadcrumbSchema(tool.path),
-  itemListSchema({ name: tool.title, items: tool.checklist })
+  itemListSchema({ name: tool.title, items: tool.checklist }),
+  ...(faq.length ? [faqSchema(faq.map((item) => ({ question: item.question, answer: item.answer })))] : [])
 ];
 ---
 <BaseLayout title={`${tool.title} - ApprovalPrep`} description={tool.summary} canonical={canonical} schema={schema}>
@@ -47,6 +55,7 @@ const schema = [
       ctaHref={`/pricing#${tool.targetProductSku}`}
     />
   </div></section>
+  <RouteFaq items={faq} heading={`Questions people ask about ${tool.title}`} />
   <RelatedContent path={tool.path} title="Related tools, guides, and kits" />
   <TrustAndBoundaryBand />
 </BaseLayout>

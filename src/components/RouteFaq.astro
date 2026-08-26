@@ -1,0 +1,44 @@
+---
+/**
+ * Visible question-and-answer block for a page, built from the site's own
+ * published answers for that route (src/lib/routeAnswers.ts).
+ *
+ * Contract, matching RecommendationSummary.astro: everything rendered is lifted
+ * from existing authored content. A page with no published answers passes an
+ * empty list and this renders nothing, rather than emitting invented questions
+ * to raise a coverage number.
+ *
+ * The heading of each item is the question exactly as it was authored, because
+ * that phrasing is what the answer was written against - rewording it would
+ * break the match between the heading and the span underneath it, which is the
+ * whole point of the block. The paragraph under each heading is the complete
+ * authored answer, not a truncation: a fragment cut mid-sentence is what reads
+ * as broken when an answer engine quotes it.
+ *
+ * Whatever is rendered here must also be what the caller passes to faqSchema(),
+ * so the markup and the JSON-LD cannot drift apart.
+ */
+const {
+  items = [],
+  heading = "Questions people ask about this page",
+  eyebrow = "FAQ"
+} = Astro.props;
+const show = Array.isArray(items) && items.length > 0;
+---
+{show && (
+  <section class="band" data-content-block="faq" data-bhpc-agent-block="faq">
+    <div class="shell">
+      <p class="eyebrow">{eyebrow}</p>
+      <h2>{heading}</h2>
+      <div class="grid">
+        {items.map((item) => (
+          <article class="card">
+            <h3>{item.question}</h3>
+            <p>{item.answer}</p>
+            {item.href && <a class="button secondary-button" href={item.href}>Read the full answer</a>}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

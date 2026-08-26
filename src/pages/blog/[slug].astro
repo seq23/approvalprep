@@ -3,7 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import BoundaryNotice from "../../components/BoundaryNotice.astro";
 import RecommendationSummary from "../../components/RecommendationSummary.astro";
 import answersData from "../../../data/content/generated_answers.json";
-import { articleSchema, breadcrumbSchema } from "../../lib/schema";
+import { articleSchema, breadcrumbSchema, faqSchema } from "../../lib/schema";
 
 const slugify = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 100);
 export function getStaticPaths() {
@@ -13,9 +13,21 @@ export function getStaticPaths() {
 const { answer } = Astro.props;
 const slug = slugify(answer.title);
 const canonical = `https://approvalprep.com/blog/${slug}`;
-const description = answer.answer.slice(0, 155);
+// Cut on a word boundary. slice(0, 155) alone ended these mid-word - "increase
+// based on ac" - which is what a search result then shows.
+const description = answer.answer.length <= 155
+  ? answer.answer
+  : `${answer.answer.slice(0, 155).replace(/\s+\S*$/, "")}...`;
 const publishedAt = answer.publishedAt || answersData.generatedAt;
-const schema = [articleSchema({ title: answer.title, description, url: canonical, datePublished: publishedAt }), breadcrumbSchema(`/blog/${slug}`)];
+// FAQPage describes what this page is rather than being bolted onto it: the
+// <h1> is the authored question and the lead paragraph directly beneath it is
+// the authored answer, both from the same record. One pair, not padded with
+// invented questions.
+const schema = [
+  articleSchema({ title: answer.title, description, url: canonical, datePublished: publishedAt }),
+  faqSchema([{ question: answer.title, answer: answer.answer }]),
+  breadcrumbSchema(`/blog/${slug}`)
+];
 ---
 <BaseLayout title={`${answer.title} - ApprovalPrep Blog`} description={description} canonical={canonical} schema={schema}>
   <section class="hero shell">

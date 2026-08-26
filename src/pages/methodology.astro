@@ -1,8 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import RecommendationSummary from "../components/RecommendationSummary.astro";
+import RouteFaq from "../components/RouteFaq.astro";
+import { faqSchema } from "../lib/schema";
+import { routeAnswers } from "../lib/routeAnswers";
+
+// Published answers written about /methodology, previously visible only on
+// their own /blog/ pages. Same list feeds the block and the schema.
+const faq = routeAnswers("/methodology");
 ---
-<BaseLayout title="Methodology - ApprovalPrep" description="A clear explanation of how ApprovalPrep helps users prepare truthful self-service paperwork." canonical="https://approvalprep.com/methodology">
+<BaseLayout title="Methodology - ApprovalPrep" description="A clear explanation of how ApprovalPrep helps users prepare truthful self-service paperwork." canonical="https://approvalprep.com/methodology" schema={faq.length ? [faqSchema(faq.map((i) => ({ question: i.question, answer: i.answer })))] : []}>
   <section class="hero shell methodology-hero">
     <p class="eyebrow">Methodology</p>
     <h1>How ApprovalPrep works.</h1>
@@ -38,4 +45,5 @@ import RecommendationSummary from "../components/RecommendationSummary.astro";
       </div>
     </div>
   </section>
+  <RouteFaq items={faq} heading="Questions people ask about the ApprovalPrep method" />
 </BaseLayout>
