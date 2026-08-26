@@ -24,11 +24,13 @@
   "secretRefs": [],
   "npmScripts": [
     "build",
+    "cadence:gate",
     "validate:all",
     "workflows:trace"
   ],
   "transitiveNpmScripts": [
     "build",
+    "cadence:gate",
     "env:audit",
     "ux:browserless-report",
     "validate:admin",
@@ -175,5 +177,5 @@
     }
   ],
   "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-  "traceId": "3d46c3b7a758da88"
+  "traceId": "3644e28789cbd05d"
 }

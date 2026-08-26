@@ -26,3 +26,19 @@ jobs:
       - name: Run canonical severity-aware validator registry
         run: npm run validate:all
       - run: npm run build
+      - name: Cadence gate
+        # Blocks publishing faster than the library can be kept inside the
+        # 91-day window where pages stay citable. Warnings, including
+        # library_over_ceiling, are reported without failing the run.
+        #
+        # Runs after the build on purpose. scripts/cadence_gate.cjs reads every
+        # sitemap*.xml it can find, and dist/ is gitignored - before the build
+        # the only sitemap in the tree is public/sitemap.xml, so the gate would
+        # be measuring a stale snapshot rather than what this branch produces.
+        #
+        # This step is read-only in effect: the gate rewrites
+        # data/cadence/known_urls.json, and nothing here commits, so the "new
+        # since last run" comparison is always against the committed ledger -
+        # which is what makes it a real per-branch cap. The ledger is advanced
+        # by the one workflow that actually publishes, scheduled-content-release.
+        run: npm run cadence:gate

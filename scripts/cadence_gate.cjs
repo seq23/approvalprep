@@ -31,7 +31,12 @@
  * substantive refresh, and it is worth seeing rather than being rewarded by the
  * freshness rules above.
  *
- * Usage: node cadence_gate.js [--json] [--policy path]
+ * Usage: node cadence_gate.cjs [--json] [--policy path]
+ *
+ * The .cjs extension is required, not incidental: package.json declares
+ * "type": "module", so a .js file here would be loaded as ESM and its
+ * require() calls would throw. The nine sibling repos carry the byte-identical
+ * script as scripts/cadence_gate.js because they are CommonJS packages.
  */
 'use strict';
 const fs = require('fs');
