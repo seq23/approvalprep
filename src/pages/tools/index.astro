@@ -1,0 +1,21 @@
+---
+import LibraryIndexPage from "../../components/LibraryIndexPage.astro";
+import registry from "../../../data/tools/tool_registry.json";
+import { routeCopy } from "../../data/content";
+
+// The `tools` route family from data/routes/route_manifest.json. Entries are the
+// published tools from the registry that governs the family; each is named by its
+// own registered title and described by its own registered summary.
+const entries = registry.tools
+  .filter((tool) => tool.status === "published_by_contract")
+  .map((tool) => ({ path: tool.path, title: tool.title, summary: tool.summary, label: "Free checklist" }));
+---
+<LibraryIndexPage
+  path="/tools"
+  eyebrow="Free checklist tools"
+  entryEyebrow="Every published checklist"
+  entriesHeading={`All ${entries.length} free ApprovalPrep checklists`}
+  entriesLead="Each checklist covers one application situation. Open the one that matches what a reviewer has asked you for."
+  entries={entries}
+  copy={routeCopy["/tools"]}
+/>

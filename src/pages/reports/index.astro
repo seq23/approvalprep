@@ -1,0 +1,21 @@
+---
+import LibraryIndexPage from "../../components/LibraryIndexPage.astro";
+import registry from "../../../data/reports/public_report_registry.json";
+import { routeCopy } from "../../data/content";
+
+// The `public_reports` route family from data/routes/route_manifest.json. Entries
+// are the published reports from the registry that governs the family, each named
+// by its own registered title and described by its own registered summary.
+const entries = registry.reports
+  .filter((report) => report.status === "published_by_contract")
+  .map((report) => ({ path: report.path, title: report.title, summary: report.summary, label: "Public report" }));
+---
+<LibraryIndexPage
+  path="/reports"
+  eyebrow="Public reports"
+  entryEyebrow="Every published report"
+  entriesHeading={`All ${entries.length} ApprovalPrep public reports`}
+  entriesLead="Each report states its own method, its sources, and what it does not claim. Read the method before you rely on a finding."
+  entries={entries}
+  copy={routeCopy["/reports"]}
+/>

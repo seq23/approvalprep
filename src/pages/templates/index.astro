@@ -1,0 +1,22 @@
+---
+import LibraryIndexPage from "../../components/LibraryIndexPage.astro";
+import registry from "../../../data/templates/template_registry.json";
+import { routeCopy } from "../../data/content";
+
+// The `templates` route family from data/routes/route_manifest.json. Entries are
+// the published template guidance pages from the registry that governs the family.
+// The URL segment between /templates and each page (letters, rental, income) has
+// no page of its own, so it is not linked here or in the breadcrumb trail.
+const entries = registry.templates
+  .filter((template) => template.status === "published_by_contract")
+  .map((template) => ({ path: template.path, title: template.title, summary: template.summary, label: "Template guidance" }));
+---
+<LibraryIndexPage
+  path="/templates"
+  eyebrow="Template previews"
+  entryEyebrow="Every published template preview"
+  entriesHeading={`All ${entries.length} ApprovalPrep letter template previews`}
+  entriesLead="Each preview shows the structure of one letter and what belongs in it. The editable PDF and DOCX files stay in the paid kit."
+  entries={entries}
+  copy={routeCopy["/templates"]}
+/>

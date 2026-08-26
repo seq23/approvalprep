@@ -564,6 +564,213 @@ export const routeFamilyCopy = {
 };
 
 const manualRouteCopy = {
+  // Section indexes for the three route families that publish children under a
+  // URL prefix - tools, templates and public_reports in route_manifest.json -
+  // and previously had nothing at the prefix itself.
+  "/tools": {
+    "primaryCta": "Compare the paid kits",
+    "secondaryCta": "Start free for $0",
+    "heading": "Free ApprovalPrep Document Checklists",
+    "lead": "Six free checklists, one for each application situation ApprovalPrep publishes for: apartment applications, proof of income, small-business funding, mortgage documents, car loans, and the important-documents folder you keep for everything else.",
+    "shortAnswer": "Open the checklist that matches the request you actually received, work through it using documents you already have, and only then decide whether a paid kit adds anything. Every checklist here is free, needs no account, and keeps nothing you type.",
+    "decisionContext": [
+      "Use this section when someone has asked you for paperwork and you are not sure what the full list is supposed to contain. A checklist answers that before you start writing anything.",
+      "Each checklist covers one situation rather than paperwork in general, because the documents a leasing office wants are not the documents a small-business lender wants. Pick the one that names your situation and ignore the rest.",
+      "A checklist is not a purchase decision. Work through it first. If it turns out you can gather everything yourself and write your own note, you are finished here and it cost nothing."
+    ],
+    "whoFor": [
+      "People who have received a document request and want the complete list before they start gathering.",
+      "People who want to know what a reviewer usually asks for before an application is submitted rather than after.",
+      "People deciding whether a paid ApprovalPrep kit is worth it, who want to see the free version of the work first.",
+      "People helping a family member assemble an application packet and needing a shared list to work from."
+    ],
+    "value": [
+      "Gives each application situation its own list, so nothing is padded with items that do not apply to you.",
+      "Puts the free version of the work first, so a purchase is a choice rather than the only way to see anything.",
+      "Names the matching paid kit on every checklist without hiding the checklist behind it.",
+      "Keeps the self-service boundary visible: these lists help you prepare your own paperwork and nothing more."
+    ],
+    "whatYouGet": [
+      "Six free checklists covering apartment applications, proof of income, business funding, mortgage documents, car loans, and personal document storage.",
+      "The specific items a reviewer in that situation commonly asks for, in the order it makes sense to gather them.",
+      "A pointer from each checklist to the ApprovalPrep kit built for the same situation, with its price shown.",
+      "Answers to the questions people ask about each checklist, published on the checklist itself.",
+      "A clear statement of what ApprovalPrep does not do, on every page in this section."
+    ],
+    "useCases": [
+      "A leasing office sent a document request and you want to be sure nothing is missing before you reply.",
+      "You are self-employed and need to know what counts as proof of income before a lender asks.",
+      "You are gathering business funding paperwork and want the areas listed out rather than remembered.",
+      "You want one folder of important documents assembled once so the next application is faster."
+    ],
+    "prepBrief": [
+      "Find the exact wording of the request you received, if there is one.",
+      "Note the deadline you are working against.",
+      "Collect the documents you already hold before deciding what is missing.",
+      "Decide who else needs to supply something, such as an employer or an accountant."
+    ],
+    "commonMistakes": [
+      "Gathering documents from a general paperwork article rather than the list for your actual situation.",
+      "Sending an incomplete packet quickly instead of a complete one a few days later.",
+      "Producing a document you cannot support because the checklist named it and you wanted a full set.",
+      "Skipping the copy trail, so there is no record of what you sent or when you sent it."
+    ],
+    "reviewChecklist": [
+      "Every item on the list is either gathered or deliberately marked as not applicable to you.",
+      "Every date, amount, name, and address matches the document it came from.",
+      "Nothing in the packet claims something you cannot show evidence for.",
+      "You kept a copy of everything and noted the date you sent it."
+    ],
+    "steps": [
+      "Choose the checklist that names your situation.",
+      "Work down it and mark what you already hold.",
+      "Request the missing items from whoever holds them.",
+      "Check each gathered document against the facts you plan to state.",
+      "Send the packet yourself and keep a copy of what you sent."
+    ],
+    "trustSignals": ["Free with no account", "No stored answers", "Self-service only", "Real documents only"],
+    "faq": [
+      { "question": "Do the checklists cost anything?", "answer": "No. Every checklist in this section is free to read and use, and none of them requires an account or an email address." },
+      { "question": "Do I need a paid kit to use a checklist?", "answer": "No. Each checklist names the ApprovalPrep kit built for the same situation, but the checklist works on its own. The paid kit adds letter templates and editable files, not the list." },
+      { "question": "Will ApprovalPrep send the documents for me?", "answer": "No. ApprovalPrep is self-service. You gather your own documents, write your own letter, review it yourself, and send it yourself. ApprovalPrep never contacts a landlord, lender, employer, or bureau on your behalf." }
+    ]
+  },
+  "/templates": {
+    "primaryCta": "Get the editable kits",
+    "secondaryCta": "Start free for $0",
+    "heading": "ApprovalPrep Letter Template Previews",
+    "lead": "Five public previews showing how each ApprovalPrep letter is structured: address history, employment gap, bank statement deposits, a rental application cover letter, and self-employed proof of income.",
+    "shortAnswer": "Read the preview for the letter you need, use its structure to draft your own version in plain words, and buy the matching kit only if you want the editable PDF and DOCX files. The previews explain structure; the paid kits carry the files.",
+    "decisionContext": [
+      "Use this section when you know roughly what you have to explain but not how the explanation is supposed to be laid out. Each preview shows the order the facts belong in.",
+      "The previews are public on purpose. A person who can write the letter themselves after reading one has been helped, and that is a better outcome than a page that withholds structure to force a purchase.",
+      "What stays behind checkout is the editable file, not the knowledge. If you want a document you can open, fill in, and print, the matching kit is where that lives."
+    ],
+    "whoFor": [
+      "People who have to explain one specific thing and want to see how the explanation is normally organized.",
+      "People who write comfortably and only need the shape of the letter, not a fill-in-the-blank file.",
+      "People deciding between writing their own letter and buying the editable kit.",
+      "People who want to check what a paid kit actually contains before paying for it."
+    ],
+    "value": [
+      "Shows the structure of each letter in public rather than describing it vaguely and charging to see it.",
+      "Keeps every preview tied to the situation it was written for, so the ordering advice is specific.",
+      "States plainly which paid kit holds the editable file for that letter, and what that file adds.",
+      "Holds the same boundary as the rest of the site: truthful facts, real documents, no invented records."
+    ],
+    "whatYouGet": [
+      "Five template previews covering address history, employment gaps, bank statement deposits, rental cover letters, and self-employed income.",
+      "The order the facts belong in, from the opening sentence to the specific request you close with.",
+      "Guidance on referencing supporting documents without overstating what they prove.",
+      "A clear statement of where the public preview ends and the paid editable file begins.",
+      "The name and price of the kit that contains the editable version of that letter."
+    ],
+    "useCases": [
+      "A lender asked about a deposit on your bank statement and you need to explain where it came from.",
+      "An application asks for your address history and yours has gaps you need to account for.",
+      "You have a gap between jobs and want to describe it without over-explaining.",
+      "You are self-employed and a reviewer wants your income set out in a way they can follow."
+    ],
+    "prepBrief": [
+      "Write the single thing you have to explain in one sentence.",
+      "List the dates, amounts, names, and addresses involved.",
+      "Pull the documents that support each of those facts.",
+      "Decide what you are actually asking the reviewer to do next."
+    ],
+    "commonMistakes": [
+      "Writing a long history when the reviewer asked about one specific item.",
+      "Stating something the attached documents do not actually show.",
+      "Leaving out the request, so the reviewer finishes the letter without knowing what you want.",
+      "Treating a template as a promise that the application will be approved."
+    ],
+    "reviewChecklist": [
+      "Every fact in the letter matches a document you can produce.",
+      "The letter answers the question that was asked and stops there.",
+      "The closing states the specific review step you are asking for.",
+      "You saved a copy of the letter and the attachments you sent with it."
+    ],
+    "steps": [
+      "Open the preview for the letter you have to write.",
+      "Gather the facts and documents it asks you to line up.",
+      "Draft the letter in your own words following that order.",
+      "Read it back against your documents and cut anything you cannot support.",
+      "Send it yourself, or buy the matching kit if you want the editable file."
+    ],
+    "trustSignals": ["Structure shown in public", "No stored drafts", "Truthful templates only", "Self-service only"],
+    "faq": [
+      { "question": "Is the preview the whole template?", "answer": "The preview explains the structure and what belongs in each part. The editable PDF and DOCX files stay in the paid kit behind a Stripe-verified download." },
+      { "question": "Can I write the letter from the preview alone?", "answer": "Yes. The previews are published so that someone who writes comfortably can follow the structure and produce their own letter without buying anything." },
+      { "question": "Will a template guarantee approval?", "answer": "No. A clearer letter is easier for a reviewer to follow, but ApprovalPrep does not promise any application outcome and does not create documents on your behalf." }
+    ]
+  },
+  "/reports": {
+    "primaryCta": "Compare the paid kits",
+    "secondaryCta": "Start free for $0",
+    "heading": "ApprovalPrep Public Reports",
+    "lead": "Three public reports on what applicants are actually asked to produce: a catalog of public application checklists, a rental application prep report, and a small-business funding document prep report.",
+    "shortAnswer": "Each report states its own method, lists the sources it was built from, and says what it does not claim. Read the method first, then use the findings to decide what to gather before you apply.",
+    "decisionContext": [
+      "Use this section when you want the reasoning behind ApprovalPrep's guidance rather than the guidance itself. The reports show which public sources were read and how they were coded.",
+      "A report is useful for deciding what to prepare across a whole category. A checklist is better once you know your specific situation, and a letter template is better once you know what you have to explain.",
+      "Every report names its limitations in the report itself. Those limits are part of the finding, not a disclaimer bolted onto the end of it."
+    ],
+    "whoFor": [
+      "People who want to see the source material behind a recommendation before acting on it.",
+      "People preparing for a category of application and wanting to know what is commonly requested across it.",
+      "Writers, advisers, and researchers looking for a citable description of what applicants are asked to produce.",
+      "People deciding whether ApprovalPrep's guidance is grounded in anything before they buy a kit."
+    ],
+    "value": [
+      "Publishes the method alongside the finding, so a reader can judge how much weight the finding carries.",
+      "Names the public sources each report was built from rather than asserting conclusions without provenance.",
+      "States the limits of each report openly, including what the sample does not cover.",
+      "Connects each report to the checklists and kits for the same situation without overstating what a report proves."
+    ],
+    "whatYouGet": [
+      "Three public reports covering application checklists in general, rental applications, and small-business funding.",
+      "The method used to select and code the sources behind each report.",
+      "The document-prep areas each report identifies, described in plain language.",
+      "An explicit statement of what each report does not claim.",
+      "Links from each report to the checklist, template, or kit built for the same situation."
+    ],
+    "useCases": [
+      "You want to know what rental applications commonly ask for before you start viewing places.",
+      "You are preparing for small-business funding conversations and want the document areas mapped out.",
+      "You want to cite a described method rather than an unsourced claim about application paperwork.",
+      "You are deciding how much to trust ApprovalPrep's guidance and want to inspect its basis."
+    ],
+    "prepBrief": [
+      "Decide which application category you are actually preparing for.",
+      "Read the method section before the findings.",
+      "Note which findings apply to your situation and which do not.",
+      "Check the stated limitations against the decision you are about to make."
+    ],
+    "commonMistakes": [
+      "Treating a described pattern as a rule that every reviewer follows.",
+      "Quoting a finding without the limitation published next to it.",
+      "Using a report as a substitute for the specific instructions a reviewer gave you.",
+      "Assuming a report about document preparation says anything about approval odds."
+    ],
+    "reviewChecklist": [
+      "You read the method before relying on the finding.",
+      "The finding you are using actually covers your situation.",
+      "You carried the stated limitation along with anything you quote.",
+      "You still followed the specific instructions your own reviewer gave you."
+    ],
+    "steps": [
+      "Choose the report that covers your application category.",
+      "Read its method and its stated limitations.",
+      "Note the document-prep areas that apply to you.",
+      "Move to the checklist or template for your specific situation.",
+      "Gather your own documents and send them yourself."
+    ],
+    "trustSignals": ["Method published", "Sources named", "Limitations stated", "No approval claims"],
+    "faq": [
+      { "question": "Are these reports independent research?", "answer": "They are ApprovalPrep's own reports. Each one publishes the method it used and the public sources it was built from, so a reader can check the basis rather than take the finding on trust." },
+      { "question": "Can a report tell me whether I will be approved?", "answer": "No. The reports describe what applicants are commonly asked to produce. They say nothing about approval odds, and ApprovalPrep does not promise any application outcome." },
+      { "question": "Which should I read first, a report or a checklist?", "answer": "Read a report when you want the reasoning across a whole category. Go straight to a checklist when you already know your situation and want the list of what to gather." }
+    ]
+  },
   "/resources": {
     "heading": "Resources",
     "lead": "ApprovalPrep resources help users find guides, policies, publishing updates, glossary definitions, privacy boundaries, and product paths without guessing where the next piece of content lives.",
