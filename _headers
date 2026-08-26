@@ -18,3 +18,10 @@
 
 /package-lock.json
   X-Robots-Tag: noindex, nofollow
+
+# Astro content-hashes everything under /_astro/ (BaseLayout.BSbxXRL7.css), so a
+# given URL can never change content - a new build emits a new filename. Without
+# a rule here Cloudflare Pages applied its 4-hour default, so returning visitors
+# revalidated the same immutable bytes several times a day.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
