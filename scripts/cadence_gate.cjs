@@ -115,27 +115,43 @@ const newUrls = [...urls.keys()].filter((u) => !known.has(u));
 // already governs its children, introduces no subject matter of its own, and so
 // consumes none of the refresh capacity the cap is protecting.
 //
-// The classification is not invented here. data/routes/route_manifest.json
-// already records page_intent for every route, and the three that carry
-// "section_index" - /tools, /templates, /reports - were each named as the
-// BreadcrumbList parent of pages that shipped without the parent existing. A
-// reviewer can see exactly which URLs this exempts by reading that manifest.
+// The classification is not invented here. It is read from whichever registry
+// the repo already keeps: data/cadence/section_indexes.json, written by the
+// generator that emits the pages, or the page_intent field that
+// data/routes/route_manifest.json already records for every route. Here it is
+// the manifest, and the three routes that carry "section_index" - /tools,
+// /templates, /reports - were each named as the BreadcrumbList parent of pages
+// that shipped without the parent existing. A reviewer can see exactly which
+// URLs are exempt by reading that file. An unreadable or absent registry
+// exempts nothing.
 //
-// They stay inside urls.size, so staleness, the ceiling and the lastmod checks
-// below all still count them: they are pages a crawler fetches either way. Only
-// the publication cadence cap ignores them, and they are reported, not silent.
+// Section indexes stay inside urls.size, so staleness, the ceiling and the
+// lastmod checks below all still count them: they are pages a crawler fetches
+// either way. Only the publication cadence cap ignores them, and they are
+// reported as a warning rather than passing silently.
 function sectionIndexPaths() {
-  const f = path.join(ROOT, 'data/routes/route_manifest.json');
-  if (!fs.existsSync(f)) return new Set();
-  try {
-    const routes = JSON.parse(fs.readFileSync(f, 'utf8')).routes || [];
-    return new Set(routes.filter((r) => r.page_intent === 'section_index')
-      .map((r) => String(r.path || '').replace(/\/+$/, '')));
-  } catch { return new Set(); }
+  const out = new Set();
+  const norm = (p) => String(p || '').replace(/\/index\.html$/, '').replace(/\/+$/, '') || '/';
+  const registry = path.join(ROOT, 'data/cadence/section_indexes.json');
+  if (fs.existsSync(registry)) {
+    try { for (const r of JSON.parse(fs.readFileSync(registry, 'utf8')).routes || []) out.add(norm(r)); }
+    catch { /* an unreadable registry exempts nothing */ }
+  }
+  const manifest = path.join(ROOT, 'data/routes/route_manifest.json');
+  if (fs.existsSync(manifest)) {
+    try {
+      for (const r of JSON.parse(fs.readFileSync(manifest, 'utf8')).routes || []) {
+        if (r.page_intent === 'section_index') out.add(norm(r.path));
+      }
+    } catch { /* same */ }
+  }
+  return out;
 }
 const sectionIndexes = sectionIndexPaths();
 const isSectionIndex = (u) => {
-  try { return sectionIndexes.has(new URL(u).pathname.replace(/\/+$/, '')); } catch { return false; }
+  try {
+    return sectionIndexes.has(new URL(u).pathname.replace(/\/index\.html$/, '').replace(/\/+$/, '') || '/');
+  } catch { return false; }
 };
 const newSectionIndexes = newUrls.filter(isSectionIndex);
 const newPublications = newUrls.filter((u) => !isSectionIndex(u));
