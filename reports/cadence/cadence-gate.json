@@ -1,14 +1,20 @@
 {
   "generated_at": "2026-08-26",
   "policy_source": "data/cadence/policy.json",
-  "urls": 108,
-  "dated": 108,
+  "urls": 111,
+  "dated": 111,
   "undated": 0,
   "stale_over_window": 0,
   "stale_pct": 0,
-  "fresh_within_30d": 108,
+  "fresh_within_30d": 111,
   "lastmod_within_7d": 31,
-  "new_since_last_run": 0,
+  "new_since_last_run": 3,
+  "new_publications_since_last_run": 0,
+  "new_section_indexes_since_last_run": [
+    "https://approvalprep.com/reports",
+    "https://approvalprep.com/templates",
+    "https://approvalprep.com/tools"
+  ],
   "ledger_initialised": true,
   "maintainable_ceiling": 104,
   "policy": {
@@ -22,7 +28,8 @@
   },
   "blocking": [],
   "warnings": [
-    "library_over_ceiling: 108 pages against a ceiling of 104 (8 substantive refreshes per week held inside 91 days). 4 pages cannot be kept current at this capacity."
+    "new_section_indexes: 3 navigation index route(s) are new since the last run and sit outside the publication cap (https://approvalprep.com/reports, https://approvalprep.com/templates, https://approvalprep.com/tools)",
+    "library_over_ceiling: 111 pages against a ceiling of 104 (8 substantive refreshes per week held inside 91 days). 7 pages cannot be kept current at this capacity."
   ],
   "status": "CLEAR"
 }
