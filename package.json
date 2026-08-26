@@ -236,7 +236,8 @@
     "selfheal": "node scripts/selfheal/heal-until-clean.mjs",
     "selfheal:dry": "node scripts/selfheal/heal-until-clean.mjs --dry-run",
     "validate:content-pattern": "node scripts/validators/validate_content_pattern_contract.js",
-    "clarity:install": "node scripts/install_clarity.mjs"
+    "clarity:install": "node scripts/install_clarity.mjs",
+    "cadence:headroom": "node scripts/cadence/publish_headroom.mjs"
   },
   "dependencies": {
     "astro": "^7.0.6",
