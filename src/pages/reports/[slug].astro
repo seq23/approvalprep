@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import RelatedContent from "../../components/RelatedContent.astro";
 import TrustAndBoundaryBand from "../../components/TrustAndBoundaryBand.astro";
+import RecommendationSummary from "../../components/RecommendationSummary.astro";
 import { articleSchema, breadcrumbSchema, itemListSchema } from "../../lib/schema";
 import registry from "../../../data/reports/public_report_registry.json";
 
@@ -17,6 +18,11 @@ const schema = [
   breadcrumbSchema(report.path),
   itemListSchema({ name: `${report.title} sections`, items: report.sections.map((section) => section.heading) })
 ];
+// The first preparation section of a report is what it recommends. Boundary and
+// limitation sections state what the report does not do, so they are never
+// lifted into the recommendation block; a report with only those gets no block.
+const recommendedSection = (report.sections || []).find((section) => !/boundary|limitation|does not|not claim/i.test(section.heading));
+const remainingSections = (report.sections || []).filter((section) => section !== recommendedSection);
 ---
 <BaseLayout title={`${report.title} - ApprovalPrep`} description={report.summary} canonical={canonical} schema={schema}>
   <section class="hero shell hero-split">
@@ -35,10 +41,15 @@ const schema = [
       <p>{report.methodology}</p>
     </aside>
   </section>
+  {recommendedSection && (
+    <section class="band recommendation-summary-band"><div class="shell">
+      <RecommendationSummary headline={recommendedSection.heading} statement={recommendedSection.body} ctaLabel="Compare related kit" ctaHref={`/pricing#${report.targetProductSku}`} />
+    </div></section>
+  )}
   <section class="band"><div class="shell">
     <p class="eyebrow">Report sections</p>
     <div class="grid">
-      {report.sections.map((section) => <article class="card"><h2>{section.heading}</h2><p>{section.body}</p></article>)}
+      {remainingSections.map((section) => <article class="card"><h2>{section.heading}</h2><p>{section.body}</p></article>)}
     </div>
   </div></section>
   <section class="band"><div class="shell two">

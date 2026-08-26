@@ -3,13 +3,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import FAQBlock from "./FAQBlock.astro";
 import RelatedContent from "./RelatedContent.astro";
 import TrustAndBoundaryBand from "./TrustAndBoundaryBand.astro";
+import RecommendationSummary from "./RecommendationSummary.astro";
 import { articleSchema, breadcrumbSchema, faqSchema, howToSchema, itemListSchema } from "../lib/schema";
 const { page }=Astro.props;
 const canonical=`https://approvalprep.com${page.path}`;
 const schema=[articleSchema({title:page.title,description:page.description,url:canonical,datePublished:"2026-07-30"}),breadcrumbSchema(page.path),faqSchema(page.faq),howToSchema({name:`How to prepare ${page.title}`,steps:page.steps}),itemListSchema({name:`${page.title} fields`,items:page.fields})];
 ---
 <BaseLayout title={`${page.title} - ApprovalPrep`} description={page.description} canonical={canonical} schema={schema}>
-<section class="hero shell hero-split"><div><p class="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p class="lead">{page.description}</p><div class="hero-actions"><a class="button primary-button" href={page.primaryHref}>{page.primaryCta}</a><a class="button secondary-button" href={page.secondaryHref}>{page.secondaryCta}</a></div></div><aside class="hero-panel"><p class="eyebrow">Plain answer</p><h2>Prepare facts a reviewer can verify.</h2><p>{page.summary}</p></aside></section>
+<section class="hero shell hero-split"><div><p class="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p class="lead">{page.description}</p><div class="hero-actions"><a class="button primary-button" href={page.primaryHref}>{page.primaryCta}</a><a class="button secondary-button" href={page.secondaryHref}>{page.secondaryCta}</a></div></div><RecommendationSummary variant="panel" headline="Prepare facts a reviewer can verify." statement={page.summary} /></section>
 <section class="band"><div class="shell two"><article><p class="eyebrow">Key facts</p><h2>Know the boundary before drafting.</h2><ul class="compact-list">{page.keyFacts.map((x)=><li>{x}</li>)}</ul></article><article class="card"><p class="eyebrow">Fields to collect</p><h2>Build the factual record.</h2><ul class="compact-list">{page.fields.map((x)=><li>{x}</li>)}</ul></article></div></section>
 <section class="band"><div class="shell"><p class="eyebrow">Exact sequence</p><h2>Prepare it step by step.</h2><ol class="steps-list">{page.steps.map((x,i)=><li><strong>{i+1}.</strong> {x}</li>)}</ol></div></section>
 <section class="band"><div class="shell two"><article class="card template-card"><p class="eyebrow">Copyable template</p><h2>{page.templateTitle}</h2><pre>{page.template}</pre></article><article class="card template-card"><p class="eyebrow">Second tool</p><h2>{page.alternateTitle}</h2><pre>{page.alternateTemplate}</pre></article></div></section>

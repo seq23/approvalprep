@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import BoundaryNotice from "../../components/BoundaryNotice.astro";
+import RecommendationSummary from "../../components/RecommendationSummary.astro";
 import answersData from "../../../data/content/generated_answers.json";
 import { articleSchema, breadcrumbSchema } from "../../lib/schema";
 
@@ -26,11 +27,12 @@ const schema = [articleSchema({ title: answer.title, description, url: canonical
       <a class="button secondary-button" href="/letter-writing-studio">Start free for $0</a>
     </div>
   </section>
+  {/* The practical sequence is what this answer recommends doing, so it carries
+      the recommendation_summary marking instead of being restated above it. An
+      answer with no sequence gets no block. */}
   {answer.steps?.length > 0 && (
-    <section class="band"><div class="shell">
-      <p class="eyebrow">Practical sequence</p>
-      <h2>Use this order before you send anything.</h2>
-      <ol class="card">{answer.steps.map((step) => <li>{step}</li>)}</ol>
+    <section class="band recommendation-summary-band"><div class="shell">
+      <RecommendationSummary headline="Use this order before you send anything." points={answer.steps} ordered={true} ctaLabel="Open related ApprovalPrep page" ctaHref={answer.route} />
     </div></section>
   )}
   {answer.checklist?.length > 0 && (

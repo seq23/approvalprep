@@ -22,6 +22,7 @@ import PricingDeck from "../components/PricingDeck.astro";
 import GuidePlaybook from "../components/GuidePlaybook.astro";
 import LegalPolicyPage from "../components/LegalPolicyPage.astro";
 import RelatedContent from "../components/RelatedContent.astro";
+import RecommendationSummary from "../components/RecommendationSummary.astro";
 import manifest from "../../data/routes/route_manifest.json";
 import { routeCopy, boundary, productCards, productComparison, routeFamilyCopy, offeringCategories, offeringsForSku, productForSku } from "../data/content";
 
@@ -71,6 +72,12 @@ const routeProduct = productForSku(skuForRoute);
 const routeOfferings = offeringsForSku(skuForRoute);
 const isCommercial = route.cta_policy === "purchase" || route.page_intent === "product";
 const primaryCtaWithPrice = primarySku && routeProduct ? `Buy ${routeProduct.name} — ${routeProduct.priceLabel}` : copy.primaryCta;
+// recommendation_summary (.clarity/content-pattern-spec.json): the page's own
+// shortAnswer states what it recommends, and the hero CTA is the step it
+// recommends taking. Legal policy pages state policy and the download/checkout
+// surfaces are transactional, so neither carries a recommendation: they get no
+// block rather than a placeholder.
+const showRecommendation = Boolean(copy.shortAnswer) && !isLegal && !isDownload;
 ---
 <BaseLayout title={`${route.title} - ApprovalPrep`} description={copy.lead} canonical={canonical} noindex={!route.index}>
   <section class={`hero shell ${isLegal ? "legal-hero" : "hero-split"}`}>
@@ -113,6 +120,11 @@ const primaryCtaWithPrice = primarySku && routeProduct ? `Buy ${routeProduct.nam
       </div>
     )}
   </section>
+  {showRecommendation && (
+    <section class="band recommendation-summary-band"><div class="shell">
+      <RecommendationSummary statement={copy.shortAnswer} ctaLabel={primaryCtaWithPrice} ctaHref={ctaHref} />
+    </div></section>
+  )}
   {isDownload ? (
     <>
       <section class="band"><div class="shell">
@@ -174,7 +186,9 @@ const primaryCtaWithPrice = primarySku && routeProduct ? `Buy ${routeProduct.nam
     <LegalPolicyPage route={route} copy={copy} />
   ) : (
     <>
-      <section class="band"><div class="shell"><article class="short-answer card"><p class="eyebrow">Short answer</p><p>{copy.shortAnswer}</p></article></div></section>
+      {/* The former "Short answer" card carried copy.shortAnswer verbatim. It is
+          now folded into the recommendation_summary block above the fold rather
+          than published twice. */}
       {isGuide && <GuidePlaybook copy={copy} product={routeProduct} ctaHref={ctaHref} />}
       {isCommercial && <PageCTAStack primary={primaryCtaWithPrice} secondary="Start free for $0 first" sku={primarySku} secondaryHref="/letter-writing-studio" />}
       {isCommercial && <ProblemAgitationFit title="Make the situation easier to review." items={[

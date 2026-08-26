@@ -1,6 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import TrustAndBoundaryBand from "../components/TrustAndBoundaryBand.astro";
+import RecommendationSummary from "../components/RecommendationSummary.astro";
+import { routeCopy } from "../data/content";
+const copy = routeCopy["/resources"];
 ---
 <BaseLayout title="Resources - ApprovalPrep" description="ApprovalPrep resources, guides, publishing updates, policies, and self-service document prep education." canonical="https://approvalprep.com/resources">
   <section class="hero shell">
@@ -12,6 +15,11 @@ import TrustAndBoundaryBand from "../components/TrustAndBoundaryBand.astro";
       <a class="button secondary-button" href="/letter-writing-studio">Start free for $0</a>
     </div>
   </section>
+  {/* recommendation_summary: this page's own copy record in src/data/content.ts
+      states what it points users to. Nothing here is composed for the block. */}
+  <section class="band recommendation-summary-band"><div class="shell">
+    <RecommendationSummary statement={copy.shortAnswer} />
+  </div></section>
   <section class="band"><div class="shell">
     <p class="eyebrow">Resource paths</p>
     <h2>Choose the kind of help you need.</h2>

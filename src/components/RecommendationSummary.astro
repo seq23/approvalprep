@@ -1,0 +1,58 @@
+---
+/**
+ * recommendation_summary block.
+ *
+ * The single most-requested block in the agent-recommendation corpus:
+ * asked for on 913 of 913 accepted recommendations across every run
+ * (.clarity/content-pattern-spec.json). It is a short statement of what the
+ * page actually recommends, placed high enough that an answer engine reaches
+ * it inside the opening third of the document.
+ *
+ * Contract for callers:
+ *  - Everything passed in must be lifted from that page's own existing content.
+ *    Nothing here generates, infers, or fills in copy.
+ *  - A page whose recommendation cannot be located passes nothing and gets
+ *    nothing: the component renders empty rather than emitting a placeholder,
+ *    a framework card, or text that announces the gap.
+ *  - Do not duplicate. Where the source text already sits in a panel next to
+ *    this block, fold that panel into the block instead of shipping both.
+ *
+ * variant="panel" renders it as the hero-side panel (already inside the
+ * opening third); the default renders the block for a band/shell section.
+ */
+const {
+  statement = "",
+  headline = "",
+  detail = "",
+  points = [],
+  ordered = false,
+  ctaLabel = "",
+  ctaHref = "",
+  eyebrow = "",
+  variant = "card"
+} = Astro.props;
+
+// Render only when the page supplied a real recommendation to carry.
+const show = Boolean((statement || headline) && (statement || detail || points.length));
+const Tag = variant === "panel" ? "aside" : "article";
+const List = ordered ? "ol" : "ul";
+const wrapperClass = variant === "panel" ? "hero-panel recommendation-summary" : "card recommendation-summary";
+const eyebrowText = eyebrow || (headline ? "What this page recommends" : "Recommendation");
+const headingText = headline || "What this page recommends";
+---
+{show && (
+  <Tag
+    class={wrapperClass}
+    id="recommendation-summary"
+    data-content-block="recommendation_summary"
+    data-bhpc-agent-block="recommendation_summary"
+    aria-labelledby="recommendation-summary-title"
+  >
+    <p class="eyebrow">{eyebrowText}</p>
+    <h2 id="recommendation-summary-title">{headingText}</h2>
+    {statement && <p class="recommendation-summary-statement">{statement}</p>}
+    {detail && <p>{detail}</p>}
+    {points.length > 0 && <List class="compact-list">{points.map((item) => <li>{item}</li>)}</List>}
+    {ctaHref && ctaLabel && <a class="button secondary-button" href={ctaHref}>{ctaLabel}</a>}
+  </Tag>
+)}

@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import RelatedContent from "../../components/RelatedContent.astro";
 import TrustAndBoundaryBand from "../../components/TrustAndBoundaryBand.astro";
+import RecommendationSummary from "../../components/RecommendationSummary.astro";
 import { webPageSchema, breadcrumbSchema, itemListSchema } from "../../lib/schema";
 import registry from "../../../data/tools/tool_registry.json";
 
@@ -35,10 +36,16 @@ const schema = [
       <p>ApprovalPrep helps you organize truthful facts. It does not create fake documents, contact reviewers, or guarantee approval.</p>
     </aside>
   </section>
-  <section class="band"><div class="shell">
-    <p class="eyebrow">Checklist</p>
-    <h2>Prepare these items before you draft or send anything.</h2>
-    <div class="card"><ol class="compact-list">{tool.checklist.map((item) => <li>{item}</li>)}</ol></div>
+  {/* The checklist section is what this page recommends, so it carries the
+      recommendation_summary marking instead of being restated above it. */}
+  <section class="band recommendation-summary-band"><div class="shell">
+    <RecommendationSummary
+      headline="Prepare these items before you draft or send anything."
+      points={tool.checklist}
+      ordered={true}
+      ctaLabel="Compare the matching kit"
+      ctaHref={`/pricing#${tool.targetProductSku}`}
+    />
   </div></section>
   <RelatedContent path={tool.path} title="Related tools, guides, and kits" />
   <TrustAndBoundaryBand />

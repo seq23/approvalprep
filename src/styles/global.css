@@ -256,3 +256,13 @@ button:disabled { opacity: .7; cursor: wait; transform: none; }
 .path-choice-grid { margin-top: 18px; }
 .path-choice-card { display: grid; gap: 10px; align-content: start; }
 .path-choice-card h3 { margin: 0; }
+
+/* recommendation_summary block: the short statement of what a page recommends,
+   kept inside the opening third of the document. */
+.recommendation-summary { max-width: 980px; margin: 0 auto; border-left: 4px solid var(--brand); display: grid; gap: 10px; }
+.recommendation-summary h2 { margin: 0; }
+.recommendation-summary p { margin: 0; }
+.recommendation-summary .recommendation-summary-statement { font-size: 1.05rem; line-height: 1.7; }
+.recommendation-summary .compact-list { margin: 4px 0; }
+.recommendation-summary .button { justify-self: start; margin-top: 4px; }
+.recommendation-summary-band { background: #fff; }

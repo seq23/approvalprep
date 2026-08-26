@@ -1,6 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import answersData from "../../data/content/generated_answers.json";
+import RecommendationSummary from "../components/RecommendationSummary.astro";
+import { routeCopy } from "../data/content";
+const copy = routeCopy["/blog"];
 const published = answersData.answers.filter((item) => item.status === "published_by_contract");
 const review = answersData.answers.filter((item) => item.status !== "published_by_contract");
 const slugify = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 100);
@@ -15,6 +18,11 @@ const slugify = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").repla
       <a class="button secondary-button" href="/resources">Browse all resources</a>
     </div>
   </section>
+  {/* recommendation_summary: this hub's own copy record in src/data/content.ts
+      states what it directs readers to. Nothing here is composed for the block. */}
+  <section class="band recommendation-summary-band"><div class="shell">
+    <RecommendationSummary statement={copy.shortAnswer} ctaLabel="Start free for $0" ctaHref="/letter-writing-studio" />
+  </div></section>
   <section class="band"><div class="shell">
     <div class="publishing-header">
       <div>

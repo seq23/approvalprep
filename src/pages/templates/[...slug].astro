@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import RelatedContent from "../../components/RelatedContent.astro";
 import TrustAndBoundaryBand from "../../components/TrustAndBoundaryBand.astro";
+import RecommendationSummary from "../../components/RecommendationSummary.astro";
 import { webPageSchema, breadcrumbSchema, itemListSchema } from "../../lib/schema";
 import registry from "../../../data/templates/template_registry.json";
 
@@ -35,10 +36,16 @@ const schema = [
       <p>{template.paidBoundary}</p>
     </aside>
   </section>
-  <section class="band"><div class="shell">
-    <p class="eyebrow">Safe preview</p>
-    <h2>What the template should help you organize.</h2>
-    <div class="card"><ol class="compact-list">{template.safePreview.map((item) => <li>{item}</li>)}</ol></div>
+  {/* The safe preview is what this page recommends doing with the template, so
+      it carries the recommendation_summary marking rather than being restated. */}
+  <section class="band recommendation-summary-band"><div class="shell">
+    <RecommendationSummary
+      headline="What the template should help you organize."
+      points={template.safePreview}
+      ordered={true}
+      ctaLabel="Get the editable kit"
+      ctaHref={`/pricing#${template.targetProductSku}`}
+    />
   </div></section>
   <RelatedContent path={template.path} title="Related guides, tools, and kits" />
   <TrustAndBoundaryBand />

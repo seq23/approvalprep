@@ -12,6 +12,7 @@ import CreditBoundaryExplainer from "../components/CreditBoundaryExplainer.astro
 import NextStepsExplainer from "../components/NextStepsExplainer.astro";
 import DataPrivacyNotice from "../components/DataPrivacyNotice.astro";
 import FreeStudioCTA from "../components/FreeStudioCTA.astro";
+import RecommendationSummary from "../components/RecommendationSummary.astro";
 import OfferingUniverse from "../components/OfferingUniverse.astro";
 import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComparison, offeringCategories } from "../data/content";
 ---
@@ -21,7 +22,6 @@ import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComp
       <p class="eyebrow">DIY credit letters + approval paperwork</p>
       <h1>Self-service credit repair letters and approval-ready documents, without the high monthly fees.</h1>
       <p class="lead">ApprovalPrep gives you direct-download PDF and editable DOCX kits for credit report questions, goodwill letters, debt validation, rental applications, income proof, loan reviews, and explanation letters.</p>
-      <p class="supporting-copy">Buy the kit, download the files, fill in your true facts, and send the paperwork yourself. The free Studio is optional if you want to draft before you buy.</p>
       <OutcomeCTA primary="Get DIY credit letters — $59" secondary="Compare all kits and prices" href="/pricing#credit-letter-kit" secondaryHref="/pricing" />
       <TrustBar signals={trustSignals} />
     </div>
@@ -40,6 +40,18 @@ import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComp
       </div>
     </aside>
   </section>
+
+  {/* The hero's supporting line already stated what the site recommends doing.
+      It is folded into the recommendation_summary block here rather than
+      published in both places. */}
+  <section class="band recommendation-summary-band"><div class="shell">
+    <RecommendationSummary
+      headline="Buy the kit, download the files, fill in your true facts, and send the paperwork yourself."
+      statement="The free Studio is optional if you want to draft before you buy."
+      ctaLabel="See kits from $39"
+      ctaHref="/pricing"
+    />
+  </div></section>
 
   <section class="band path-choice-band" id="download-or-studio"><div class="shell">
     <p class="eyebrow">After checkout, you choose</p>
