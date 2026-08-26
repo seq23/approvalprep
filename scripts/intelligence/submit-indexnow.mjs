@@ -1,8 +1,25 @@
 #!/usr/bin/env node
+import fs from "node:fs";
 import { env, readJson, fetchJson, writeJson, appendRun, statusOnly, now, checkBudget } from "./_lib.mjs";
 
 const connectorId = "indexnow";
-const key = env("INDEXNOW_KEY");
+// An IndexNow key is not a secret: the protocol verifies ownership by requiring
+// the same value to be readable at https://<host>/<key>.txt, so it is public by
+// construction. Treating it as a secret is what kept this lane dead — the repo
+// shipped the literal placeholder "INDEXNOW_KEY_CONFIGURED_IN_ENV" as the key
+// file, no INDEXNOW_KEY was ever set, and every run recorded NOT_CONFIGURED
+// with submittedUrlCount 0. The key now lives in public/indexnow-key.txt (and
+// is published at public/<key>.txt), so the lane works with no secret plumbing.
+// INDEXNOW_KEY still wins if set, for rotation.
+const keyFromFile = (() => {
+  try {
+    const value = fs.readFileSync("public/indexnow-key.txt", "utf8").trim();
+    return /^[A-Za-z0-9-]{8,128}$/.test(value) ? value : "";
+  } catch {
+    return "";
+  }
+})();
+const key = env("INDEXNOW_KEY") || keyFromFile;
 const site = (env("APPROVALPREP_SITE_URL") || "https://approvalprep.com").replace(/\/$/, "");
 const mode = env("RUN_MODE") || env("INDEXNOW_MODE") || "dry_run";
 const host = site.replace(/^https?:\/\//, "");
