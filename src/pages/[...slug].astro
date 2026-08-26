@@ -78,6 +78,21 @@ const primaryCtaWithPrice = primarySku && routeProduct ? `Buy ${routeProduct.nam
 // surfaces are transactional, so neither carries a recommendation: they get no
 // block rather than a placeholder.
 const showRecommendation = Boolean(copy.shortAnswer) && !isLegal && !isDownload;
+// A route that owns child routes in the manifest is the parent of a section and
+// should link to what is under it. /letter-of-explanation owned nine situation
+// guides and linked to none of them, so five of the nine had no inbound link on
+// the whole site. Labels are each child's own registered heading; the blurb is
+// that child's own registered description or short answer. Nothing is composed
+// here, and the section renders only where real children exist.
+const childRoutes = manifest.routes
+  .filter((item) => item.index && item.type === "public"
+    && item.path.startsWith(`${route.path}/`)
+    && !item.path.slice(route.path.length + 1).includes("/"))
+  .map((item) => ({
+    path: item.path,
+    heading: routeCopy[item.path]?.heading || item.title,
+    blurb: item.description || routeCopy[item.path]?.shortAnswer || ""
+  }));
 ---
 <BaseLayout title={`${route.title} - ApprovalPrep`} description={copy.lead} canonical={canonical} noindex={!route.index}>
   <section class={`hero shell ${isLegal ? "legal-hero" : "hero-split"}`}>
@@ -123,6 +138,22 @@ const showRecommendation = Boolean(copy.shortAnswer) && !isLegal && !isDownload;
   {showRecommendation && (
     <section class="band recommendation-summary-band"><div class="shell">
       <RecommendationSummary statement={copy.shortAnswer} ctaLabel={primaryCtaWithPrice} ctaHref={ctaHref} />
+    </div></section>
+  )}
+  {childRoutes.length > 0 && (
+    <section class="band"><div class="shell">
+      <p class="eyebrow">Pick your situation</p>
+      <h2>{`All ${childRoutes.length} situations covered under ${route.title}`}</h2>
+      <p class="lead">Each page below covers one situation end to end. Open the one that matches what you have been asked to explain.</p>
+      <div class="resource-grid">
+        {childRoutes.map((child) => (
+          <a class="card resource-card" href={child.path}>
+            <span>{familyCopy?.label || route.family.replaceAll("_", " ")}</span>
+            <h3>{child.heading}</h3>
+            <p>{child.blurb}</p>
+          </a>
+        ))}
+      </div>
     </div></section>
   )}
   {isDownload ? (
