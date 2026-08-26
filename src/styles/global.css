@@ -24,6 +24,13 @@ html { overflow-x: hidden; }
 body { margin: 0; color: var(--ink); background: var(--color-surface); line-height: 1.55; overflow-x: hidden; }
 a { color: var(--brand-dark); }
 .shell { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+.breadcrumbs { border-bottom: 1px solid var(--line); background: rgba(255,255,255,.6); }
+.breadcrumb-list { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; list-style: none; margin: 0; padding: 10px 0; font-size: .86rem; color: var(--muted); }
+.breadcrumb-list li { display: flex; align-items: center; gap: 10px; }
+.breadcrumb-list li + li::before { content: "/"; color: var(--line); }
+.breadcrumb-list a { color: var(--muted); text-decoration: none; }
+.breadcrumb-list a:hover, .breadcrumb-list a:focus-visible { color: var(--brand-dark); text-decoration: underline; }
+.breadcrumb-list [aria-current="page"] { color: var(--ink); font-weight: 700; }
 .site-header { border-bottom: 1px solid var(--line); background: rgba(255,255,255,.96); position: sticky; top: 0; z-index: 5; backdrop-filter: blur(12px); }
 .nav { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 14px 0; }
 .brand { font-weight: 900; font-size: 1.15rem; text-decoration: none; color: var(--ink); }

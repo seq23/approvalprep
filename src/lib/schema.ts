@@ -1,3 +1,8 @@
+import routeManifest from "../../data/routes/route_manifest.json";
+import toolRegistry from "../../data/tools/tool_registry.json";
+import templateRegistry from "../../data/templates/template_registry.json";
+import reportRegistry from "../../data/reports/public_report_registry.json";
+
 export const orgSchema = () => ({ "@context": "https://schema.org", "@type": "Organization", name: "ApprovalPrep", url: "https://approvalprep.com" });
 
 export const webPageSchema = ({ title, description, url }: { title: string; description: string; url: string }) => ({
@@ -33,19 +38,49 @@ export const howToSchema = ({ name, steps }: { name: string; steps: string[] }) 
   step: steps.map((step, index) => ({ "@type": "HowToStep", position: index + 1, text: step }))
 });
 
-export const breadcrumbSchema = (path: string) => {
-  const parts = path.split("/").filter(Boolean);
-  return {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: "https://approvalprep.com" }, ...parts.map((part, index) => ({
-      "@type": "ListItem",
-      position: index + 2,
-      name: part.replace(/-/g, " "),
-      item: `https://approvalprep.com/${parts.slice(0, index + 1).join("/")}`
-    }))]
-  };
+// Every published surface that carries a title, keyed by its path. The trail is
+// built from these rather than from the URL slug: a crumb named "letter of
+// explanation large deposit" is a de-slugged guess, while the registries hold
+// the page's own title. It also lets the trail skip a path segment that has no
+// page behind it (/auto-loan, /templates/letters), instead of emitting a crumb
+// that links to a 404.
+const titleByPath = new Map<string, string>();
+for (const route of (routeManifest as any).routes || []) titleByPath.set(route.path, route.title);
+for (const tool of (toolRegistry as any).tools || []) titleByPath.set(tool.path, tool.title);
+for (const template of (templateRegistry as any).templates || []) titleByPath.set(template.path, template.title);
+for (const report of (reportRegistry as any).reports || []) titleByPath.set(report.path, report.title);
+
+export const titleForPath = (path: string) => titleByPath.get(path) || "";
+
+/**
+ * Ordered breadcrumb trail for a path. Each entry is a real, existing page and
+ * is named by that page's own title. `currentTitle` names the final crumb for
+ * surfaces whose title lives outside the registries (blog posts).
+ */
+export const breadcrumbTrail = (path: string, currentTitle = "") => {
+  const segments = path.split("/").filter(Boolean);
+  const trail = [{ name: titleByPath.get("/") || "ApprovalPrep", url: "/" }];
+  let accumulated = "";
+  segments.forEach((segment, index) => {
+    accumulated += `/${segment}`;
+    const isLast = index === segments.length - 1;
+    const name = (isLast && currentTitle) || titleByPath.get(accumulated);
+    if (!name) return;
+    trail.push({ name, url: accumulated });
+  });
+  return trail;
 };
+
+export const breadcrumbSchema = (path: string, currentTitle = "") => ({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: breadcrumbTrail(path, currentTitle).map((crumb, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: crumb.name,
+    item: `https://approvalprep.com${crumb.url}`
+  }))
+});
 
 export const itemListSchema = ({ name, items }: { name: string; items: string[] }) => ({
   "@context": "https://schema.org",

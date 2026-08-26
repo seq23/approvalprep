@@ -4,8 +4,18 @@ import SiteFooter from "../components/SiteFooter.astro";
 import DataPrivacyNotice from "../components/DataPrivacyNotice.astro";
 import StructuredData from "../components/StructuredData.astro";
 import AnalyticsEvent from "../components/AnalyticsEvent.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import { titleForPath } from "../lib/schema";
 import { navCta, primaryNav, secondaryNav } from "../data/navigation";
 const { title = "ApprovalPrep", description = "Self-service approval prep tools.", canonical = "https://approvalprep.com", noindex = false, showPrivacyNotice = true, schema = [] } = Astro.props;
+// Breadcrumbs belong to the layout so every surface gets the same trail from the
+// same source. The path comes from the route being rendered; the crumb label
+// comes from the page's registered title, falling back to the <title> with the
+// site suffix removed for surfaces that live outside the route registries.
+const currentPath = Astro.url.pathname.replace(/\/+$/, "") || "/";
+const crumbTitle = titleForPath(currentPath) || String(title).replace(/\s*-\s*ApprovalPrep\s*$/, "");
+// A page that already publishes its own BreadcrumbList must not get a second one.
+const hasBreadcrumbSchema = (Array.isArray(schema) ? schema : []).some((entry) => entry && entry["@type"] === "BreadcrumbList");
 ---
 <!doctype html>
 <html lang="en">
@@ -46,7 +56,10 @@ const { title = "ApprovalPrep", description = "Self-service approval prep tools.
         {secondaryNav.map(([href, label]) => <a href={href}>{label}</a>)}
       </nav>
     </header>
-    <main><slot /></main>
+    <main>
+      <Breadcrumbs path={currentPath} title={crumbTitle} emitSchema={!hasBreadcrumbSchema} />
+      <slot />
+    </main>
     <AnalyticsEvent surface="approvalprep" />
 
     <script is:inline>

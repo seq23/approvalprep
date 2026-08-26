@@ -1,0 +1,28 @@
+---
+// Visible breadcrumb trail. Every crumb is a page that actually exists and is
+// labelled with that page's own registered title, so the anchor text varies by
+// destination instead of repeating a generic "Back" label. Path segments with
+// no page behind them are skipped rather than linked to a 404.
+//
+// The JSON-LD is emitted here only when the page has not already published a
+// BreadcrumbList of its own (tools, templates, reports, blog posts and the
+// authority guides pass one through BaseLayout's `schema` prop). One
+// BreadcrumbList per page, never two.
+import { breadcrumbTrail, breadcrumbSchema } from "../lib/schema";
+const { path = "", title = "", emitSchema = true } = Astro.props;
+const trail = breadcrumbTrail(path, title);
+---
+{trail.length > 1 && (
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol class="shell breadcrumb-list">
+      {trail.map((crumb, index) => (
+        <li>
+          {index === trail.length - 1
+            ? <span aria-current="page">{crumb.name}</span>
+            : <a href={crumb.url}>{crumb.name}</a>}
+        </li>
+      ))}
+    </ol>
+    {emitSchema && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema(path, title))}></script>}
+  </nav>
+)}

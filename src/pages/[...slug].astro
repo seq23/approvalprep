@@ -223,6 +223,11 @@ const showRecommendation = Boolean(copy.shortAnswer) && !isLegal && !isDownload;
       <section class="band"><div class="shell"><WhatYouGet title="Why ApprovalPrep" items={["Plain steps", "Truthful templates only", "Clear next steps", "No fake document help"]} /></div></section>
     </>
   )}
+  {/* data/atlas/internal_link_graph.json already held a same-family / relevant-product
+      link set for every one of these routes, and this page imported the component that
+      renders it without ever placing it. The guides, checklists and kits it points at
+      were therefore reachable only from the sitemap. */}
+  <RelatedContent path={route.path} title={`Keep preparing after ${route.title}`} />
   {!isLegal && <FinalCTA primary={primaryCtaWithPrice} secondary={copy.secondaryCta} href={ctaHref} secondaryHref="/pricing" primarySku={primarySku} />}
   <section class="band"><div class="shell">
     <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: copy.faq.map((item) => ({ "@type": "Question", name: item.question, acceptedAnswer: { "@type": "Answer", text: item.answer } })) })}></script>
