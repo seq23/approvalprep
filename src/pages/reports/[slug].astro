@@ -3,7 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import RelatedContent from "../../components/RelatedContent.astro";
 import TrustAndBoundaryBand from "../../components/TrustAndBoundaryBand.astro";
 import RecommendationSummary from "../../components/RecommendationSummary.astro";
-import { articleSchema, breadcrumbSchema, itemListSchema } from "../../lib/schema";
+import { articleSchema, breadcrumbSchema, itemListSchema, canonicalUrl } from "../../lib/schema";
 import registry from "../../../data/reports/public_report_registry.json";
 
 export function getStaticPaths() {
@@ -12,7 +12,7 @@ export function getStaticPaths() {
     .map((report) => ({ params: { slug: report.path.split("/").pop() }, props: { report } }));
 }
 const { report } = Astro.props;
-const canonical = `https://approvalprep.com${report.path}`;
+const canonical = canonicalUrl(report.path);
 const schema = [
   articleSchema({ title: report.title, description: report.summary, url: canonical, datePublished: registry.generatedAt }),
   breadcrumbSchema(report.path),

@@ -5,7 +5,7 @@ import DataPrivacyNotice from "../components/DataPrivacyNotice.astro";
 import StructuredData from "../components/StructuredData.astro";
 import AnalyticsEvent from "../components/AnalyticsEvent.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
-import { titleForPath } from "../lib/schema";
+import { titleForPath, canonicalUrl } from "../lib/schema";
 import { navCta, primaryNav, secondaryNav } from "../data/navigation";
 const { title = "ApprovalPrep", description = "Self-service approval prep tools.", canonical = "https://approvalprep.com", noindex = false, showPrivacyNotice = true, schema = [] } = Astro.props;
 // Breadcrumbs belong to the layout so every surface gets the same trail from the
@@ -16,6 +16,9 @@ const currentPath = Astro.url.pathname.replace(/\/+$/, "") || "/";
 const crumbTitle = titleForPath(currentPath) || String(title).replace(/\s*-\s*ApprovalPrep\s*$/, "");
 // A page that already publishes its own BreadcrumbList must not get a second one.
 const hasBreadcrumbSchema = (Array.isArray(schema) ? schema : []).some((entry) => entry && entry["@type"] === "BreadcrumbList");
+// Normalising here rather than at each call site means a page cannot ship a
+// canonical that names the redirecting URL form, however it built the string.
+const canonicalHref = canonicalUrl(canonical);
 ---
 <!doctype html>
 <html lang="en">
@@ -25,12 +28,12 @@ const hasBreadcrumbSchema = (Array.isArray(schema) ? schema : []).some((entry) =
     <title>{title}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex,follow" />}
-    <link rel="canonical" href={canonical} />
+    <link rel="canonical" href={canonicalHref} />
     <meta property="og:site_name" content="ApprovalPrep" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
+    <meta property="og:url" content={canonicalHref} />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
