@@ -22,7 +22,7 @@ const { surface = 'site' } = Astro.props;
         event,
         path: cleanPath(window.location.href),
         referrerPath: document.referrer ? cleanPath(document.referrer) : '',
-        source,
+        source: surface,
         ...extra
       };
       const body = JSON.stringify(payload);
