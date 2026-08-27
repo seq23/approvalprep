@@ -1,164 +1,169 @@
 {
   "schemaVersion": "4.1.0",
-  "generatedAt": "2026-08-25T10:54:52.496Z",
+  "generatedAt": "2026-08-27T14:22:48.910Z",
   "sourceStatus": [
     {
-      "id": "f3cd3350-80d1-4040-bf0c-39d0a28c7a4c",
+      "id": "ab36fb42-7a54-4d15-840c-5462fc7584bf",
       "connectorId": "authority_requirement_analysis",
       "status": "COMPLETE",
-      "ranAt": "2026-08-25T10:54:52.313Z",
-      "recordsImported": 71
+      "ranAt": "2026-08-27T14:22:48.770Z",
+      "recordsImported": 74
     },
     {
-      "id": "508f9296-a4c2-465b-a471-5bf1817c89a5",
+      "id": "7585ffff-9a7e-4593-9d77-b1434cc6af68",
       "connectorId": "growth_maintenance_analysis",
       "status": "COMPLETE",
-      "ranAt": "2026-08-25T10:54:52.154Z",
-      "recordsImported": 71
+      "ranAt": "2026-08-27T14:22:48.640Z",
+      "recordsImported": 74
     },
     {
-      "id": "677cffe3-0b4a-4c1c-818d-cc29b9667369",
+      "id": "c62c58a4-317f-40d7-a497-84bbb94a77b5",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-25T10:51:09.816Z",
+      "ranAt": "2026-08-27T14:19:10.586Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "09839727-7485-4f47-94f2-591919c1a651",
+      "id": "56e1921c-fef2-4914-ac3d-1bc32e59aada",
       "connectorId": "indexnow",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-25T10:51:09.648Z",
-      "reason": "INDEXNOW_KEY is required for live submission.",
+      "status": "BUDGET_HELD",
+      "ranAt": "2026-08-27T14:19:10.415Z",
+      "mode": "live",
+      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
       "recordsImported": 0
     },
     {
-      "id": "01d99c00-65ec-49f0-bba3-3d89055e6505",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-25T10:16:57.061Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "7a372366-b5f1-4d13-aaf8-7b8cfdcdb735",
-      "connectorId": "indexnow",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-25T10:16:56.893Z",
-      "reason": "INDEXNOW_KEY is required for live submission.",
-      "recordsImported": 0
-    },
-    {
-      "id": "a1420f48-1050-4191-9b6e-73bd4a1b52fa",
+      "id": "17cb8e9a-c2e5-4c3b-8a88-7aabf6f67fa3",
       "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
-      "ranAt": "2026-08-25T08:30:54.695Z",
+      "ranAt": "2026-08-27T11:44:27.485Z",
       "recordsImported": 12
     },
     {
-      "id": "31852f86-b93f-4b45-891b-0890f1af5134",
+      "id": "c555176c-7446-46d9-b1fc-c3efbee41cf9",
       "connectorId": "manual_social_signal_import",
       "status": "NO_DATA",
-      "ranAt": "2026-08-25T08:30:51.065Z",
+      "ranAt": "2026-08-27T11:44:22.198Z",
       "reason": "No social signal import found at data/imports/social-signals.json.",
       "recordsImported": 0
     },
     {
-      "id": "8f2c6ddc-d420-4605-ab52-dbd33f7e2899",
+      "id": "d118f4ce-84c0-4f3c-b4ab-6a31cbaaf2aa",
       "connectorId": "manual_serp_csv",
       "status": "NO_DATA",
-      "ranAt": "2026-08-25T08:30:50.923Z",
+      "ranAt": "2026-08-27T11:44:22.071Z",
       "reason": "No SERP CSV found at data/imports/serp.csv.",
       "recordsImported": 0
     },
     {
-      "id": "ba35b177-bd38-42b5-9730-de24d6be9e1a",
+      "id": "409a3eab-79ed-4cc6-9035-cdf0dd738fc5",
       "connectorId": "competitor_public_crawler",
       "status": "BUDGET_HELD",
-      "ranAt": "2026-08-25T08:30:50.781Z",
-      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
+      "ranAt": "2026-08-27T11:44:21.942Z",
+      "reason": "weekly ceiling 2 reached (2 live attempts in 7d)",
       "recordsImported": 0
     },
     {
-      "id": "6eeb16f0-6014-4f2c-8f13-9baff88d2baa",
+      "id": "ab07fe83-02b7-42f9-99a9-a9fe06851c6e",
       "connectorId": "competitor_sitemap_discovery",
       "status": "BUDGET_HELD",
-      "ranAt": "2026-08-25T08:30:50.637Z",
-      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
+      "ranAt": "2026-08-27T11:44:21.806Z",
+      "reason": "weekly ceiling 2 reached (2 live attempts in 7d)",
       "recordsImported": 0
     },
     {
-      "id": "6ccd04d0-d6c6-4850-9628-1fa6945c84c5",
+      "id": "e7980625-c1c8-4fb9-b184-6d66502ec57a",
       "connectorId": "owned_site_crawler",
       "status": "COMPLETE",
-      "ranAt": "2026-08-25T08:30:50.485Z",
-      "recordsImported": 74
+      "ranAt": "2026-08-27T11:44:21.674Z",
+      "recordsImported": 77
     },
     {
-      "id": "6f440534-02eb-481e-b535-adc468900cd1",
+      "id": "57e2f86e-e8ea-475e-aca5-c697787f974d",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-25T08:30:50.329Z",
+      "ranAt": "2026-08-27T11:44:21.520Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "bfa23c85-7eb0-46a5-82a4-98f53a63eb2d",
+      "id": "9636aeae-f4ad-4f9f-96e6-5ed12d2ef0ad",
       "connectorId": "google_url_inspection",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-25T08:30:50.190Z",
+      "ranAt": "2026-08-27T11:44:21.357Z",
       "reason": "GSC_SITE_URL and GSC_ACCESS_TOKEN, or GSC_URL_INSPECTION_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "67e70173-b734-48d4-9cd5-57c54c120b69",
+      "id": "7484ce02-689a-413d-b9c5-c1cabb402909",
       "connectorId": "google_search_console_search_analytics",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-25T08:30:50.045Z",
+      "ranAt": "2026-08-27T11:44:21.220Z",
       "reason": "GSC_SITE_URL and GSC_ACCESS_TOKEN, or GSC_SEARCH_ANALYTICS_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "a43de306-54c7-4f8c-ac64-77570d862ad8",
-      "connectorId": "retest_outcome_evaluator",
+      "id": "30c7a452-8695-4526-8fd1-4ffb86e14d0b",
+      "connectorId": "indexnow",
       "status": "COMPLETE",
-      "ranAt": "2026-08-24T12:28:13.165Z",
-      "recordsImported": 0
+      "ranAt": "2026-08-26T20:16:20.783Z",
+      "mode": "dry_run",
+      "recordsImported": 0,
+      "preparedUrlCount": 71
     },
     {
-      "id": "bfbdb55e-f798-4779-92fa-db8fb76fef17",
-      "connectorId": "retest_queue_builder",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-24T12:28:13.131Z",
-      "recordsImported": 0
-    },
-    {
-      "id": "b077c3d1-d7be-49ff-8044-cdfc084179f8",
-      "connectorId": "cloudflare_crawler_logs",
+      "id": "45624459-d7dd-438a-9434-cc82a6a4c55e",
+      "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-24T12:28:13.058Z",
-      "reason": "Cloudflare crawler ingestion requires Cloudflare credentials or a manual import file.",
+      "ranAt": "2026-08-26T10:52:13.539Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "d42ba990-9c32-4367-9963-a853562c2238",
-      "connectorId": "growth_brief_generation",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-24T12:28:13.023Z",
-      "recordsImported": 40
+      "id": "6cda213a-0822-4d98-8a87-6eefa053da35",
+      "connectorId": "indexnow",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-08-26T10:52:13.365Z",
+      "reason": "INDEXNOW_KEY is required for live submission.",
+      "recordsImported": 0
     },
     {
-      "id": "cb8d5492-aaa3-42e2-8216-94e5cf8b3777",
-      "connectorId": "page_action_recommendation",
+      "id": "5fba30ee-8d75-44ef-9a8e-ca69667a9536",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-08-26T10:19:16.707Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "eb27e9ce-352f-4793-a64c-366890b2fb3f",
+      "connectorId": "indexnow",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-08-26T10:19:16.537Z",
+      "reason": "INDEXNOW_KEY is required for live submission.",
+      "recordsImported": 0
+    },
+    {
+      "id": "7043be50-2254-47df-8652-b51463638b20",
+      "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
-      "ranAt": "2026-08-24T12:28:12.970Z",
-      "recordsImported": 5355
+      "ranAt": "2026-08-26T08:30:59.713Z",
+      "recordsImported": 12
+    },
+    {
+      "id": "6685b56d-f93c-4a0a-8adb-9d25e2bbe9c3",
+      "connectorId": "manual_social_signal_import",
+      "status": "NO_DATA",
+      "ranAt": "2026-08-26T08:30:57.667Z",
+      "reason": "No social signal import found at data/imports/social-signals.json.",
+      "recordsImported": 0
     }
   ],
   "topContentOpportunities": [
     {
-      "id": "brief_maxfanout_050001_888e31bfa5",
-      "query": "what is letter of explanation for gig workers before applying",
+      "id": "brief_maxfanout_060001_0a389fc7d3",
+      "query": "what is letter of explanation for small business owners after a denial",
       "route": null,
       "pageFamily": "letter-of-explanation",
       "searchOpportunityScore": 0,
@@ -174,11 +179,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-25T09:41:36.050Z"
+      "createdAt": "2026-08-27T12:57:48.590Z"
     },
     {
-      "id": "brief_maxfanout_050005_0555773e27",
-      "query": "what is self employed income documents for gig workers before applying",
+      "id": "brief_maxfanout_060005_beaf331fab",
+      "query": "what is self employed income documents for small business owners after a denial",
       "route": null,
       "pageFamily": "self-employed-income-documents",
       "searchOpportunityScore": 0,
@@ -194,11 +199,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-25T09:41:36.050Z"
+      "createdAt": "2026-08-27T12:57:48.590Z"
     },
     {
-      "id": "brief_maxfanout_050016_57520a87ec",
-      "query": "what is gift letter explanation for gig workers before applying",
+      "id": "brief_maxfanout_060016_6a4df43518",
+      "query": "what is gift letter explanation for small business owners after a denial",
       "route": null,
       "pageFamily": "gift-letter-explanation",
       "searchOpportunityScore": 0,
@@ -214,11 +219,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-25T09:41:36.050Z"
+      "createdAt": "2026-08-27T12:57:48.590Z"
     },
     {
-      "id": "brief_maxfanout_050026_ae42bd7e7b",
-      "query": "what is apartment application documents for gig workers before applying",
+      "id": "brief_maxfanout_060026_5707debb79",
+      "query": "what is apartment application documents for small business owners after a denial",
       "route": null,
       "pageFamily": "apartment-application-documents",
       "searchOpportunityScore": 0,
@@ -234,11 +239,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-25T09:41:36.050Z"
+      "createdAt": "2026-08-27T12:57:48.590Z"
     },
     {
-      "id": "brief_maxfanout_050030_5dbc435e23",
-      "query": "what is document discrepancy explanation for gig workers before applying",
+      "id": "brief_maxfanout_060030_eadb51d03d",
+      "query": "what is document discrepancy explanation for small business owners after a denial",
       "route": null,
       "pageFamily": "document-discrepancy-explanation",
       "searchOpportunityScore": 0,
@@ -254,11 +259,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-25T09:41:36.050Z"
+      "createdAt": "2026-08-27T12:57:48.590Z"
     },
     {
-      "id": "brief_maxfanout_050041_9758505351",
-      "query": "how to prepare letter of explanation for gig workers before applying",
+      "id": "brief_maxfanout_060041_796b1fe49c",
+      "query": "how to prepare letter of explanation for small business owners after a denial",
       "route": null,
       "pageFamily": "letter-of-explanation",
       "searchOpportunityScore": 0,
@@ -274,11 +279,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-25T09:41:36.050Z"
+      "createdAt": "2026-08-27T12:57:48.590Z"
     },
     {
-      "id": "brief_maxfanout_050045_93a036a765",
-      "query": "how to prepare self employed income documents for gig workers before applying",
+      "id": "brief_maxfanout_060045_42c9b0548d",
+      "query": "how to prepare self employed income documents for small business owners after a denial",
       "route": null,
       "pageFamily": "self-employed-income-documents",
       "searchOpportunityScore": 0,
@@ -294,11 +299,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-25T09:41:36.050Z"
+      "createdAt": "2026-08-27T12:57:48.590Z"
     },
     {
-      "id": "brief_maxfanout_050056_a41949d70f",
-      "query": "how to prepare gift letter explanation for gig workers before applying",
+      "id": "brief_maxfanout_060056_b20d5add48",
+      "query": "how to prepare gift letter explanation for small business owners after a denial",
       "route": null,
       "pageFamily": "gift-letter-explanation",
       "searchOpportunityScore": 0,
@@ -314,11 +319,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-25T09:41:36.050Z"
+      "createdAt": "2026-08-27T12:57:48.590Z"
     },
     {
-      "id": "brief_maxfanout_050066_4a9fd45c0a",
-      "query": "how to prepare apartment application documents for gig workers before applying",
+      "id": "brief_maxfanout_060066_37015a3394",
+      "query": "how to prepare apartment application documents for small business owners after a denial",
       "route": null,
       "pageFamily": "apartment-application-documents",
       "searchOpportunityScore": 0,
@@ -334,11 +339,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-25T09:41:36.050Z"
+      "createdAt": "2026-08-27T12:57:48.590Z"
     },
     {
-      "id": "brief_maxfanout_050070_85421d482b",
-      "query": "how to prepare document discrepancy explanation for gig workers before applying",
+      "id": "brief_maxfanout_060070_88380db1a2",
+      "query": "how to prepare document discrepancy explanation for small business owners after a denial",
       "route": null,
       "pageFamily": "document-discrepancy-explanation",
       "searchOpportunityScore": 0,
@@ -354,11 +359,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-25T09:41:36.050Z"
+      "createdAt": "2026-08-27T12:57:48.590Z"
     },
     {
-      "id": "brief_maxfanout_050081_e5e8c0392c",
-      "query": "letter of explanation checklist for gig workers before applying",
+      "id": "brief_maxfanout_060081_9529adb9a2",
+      "query": "letter of explanation checklist for small business owners after a denial",
       "route": null,
       "pageFamily": "letter-of-explanation",
       "searchOpportunityScore": 0,
@@ -374,11 +379,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-08-25T09:41:36.050Z"
+      "createdAt": "2026-08-27T12:57:48.590Z"
     },
     {
-      "id": "brief_maxfanout_050083_9ce6fee957",
-      "query": "rental application preparation checklist for gig workers before applying",
+      "id": "brief_maxfanout_060083_d5f592a7c1",
+      "query": "rental application preparation checklist for small business owners after a denial",
       "route": null,
       "pageFamily": "rental-application-preparation",
       "searchOpportunityScore": 0,
@@ -394,11 +399,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-25T09:41:36.050Z"
+      "createdAt": "2026-08-27T12:57:48.590Z"
     },
     {
-      "id": "brief_maxfanout_050084_7a9c088cc4",
-      "query": "proof of income checklist for gig workers before applying",
+      "id": "brief_maxfanout_060084_2af704abeb",
+      "query": "proof of income checklist for small business owners after a denial",
       "route": null,
       "pageFamily": "proof-of-income",
       "searchOpportunityScore": 0,
@@ -414,11 +419,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-08-25T09:41:36.050Z"
+      "createdAt": "2026-08-27T12:57:48.591Z"
     },
     {
-      "id": "brief_maxfanout_050085_d6fe0b40ff",
-      "query": "self employed income documents checklist for gig workers before applying",
+      "id": "brief_maxfanout_060085_2af5499db7",
+      "query": "self employed income documents checklist for small business owners after a denial",
       "route": null,
       "pageFamily": "self-employed-income-documents",
       "searchOpportunityScore": 0,
@@ -434,11 +439,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-25T09:41:36.050Z"
+      "createdAt": "2026-08-27T12:57:48.591Z"
     },
     {
-      "id": "brief_maxfanout_050090_5c3149815a",
-      "query": "credit report understanding checklist for gig workers before applying",
+      "id": "brief_maxfanout_060090_a08a7c93ac",
+      "query": "credit report understanding checklist for small business owners after a denial",
       "route": null,
       "pageFamily": "credit-report-understanding",
       "searchOpportunityScore": 0,
@@ -454,11 +459,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-25T09:41:36.050Z"
+      "createdAt": "2026-08-27T12:57:48.591Z"
     },
     {
-      "id": "brief_maxfanout_050091_3752caf938",
-      "query": "credit dispute self service checklist for gig workers before applying",
+      "id": "brief_maxfanout_060091_7fd4dd7557",
+      "query": "credit dispute self service checklist for small business owners after a denial",
       "route": null,
       "pageFamily": "credit-dispute-self-service",
       "searchOpportunityScore": 0,
@@ -474,11 +479,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-25T09:41:36.050Z"
+      "createdAt": "2026-08-27T12:57:48.591Z"
     },
     {
-      "id": "brief_maxfanout_050092_c4e181d7a4",
-      "query": "credit utilization checklist for gig workers before applying",
+      "id": "brief_maxfanout_060092_7358223324",
+      "query": "credit utilization checklist for small business owners after a denial",
       "route": null,
       "pageFamily": "credit-utilization",
       "searchOpportunityScore": 0,
@@ -494,11 +499,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-25T09:41:36.050Z"
+      "createdAt": "2026-08-27T12:57:48.591Z"
     },
     {
-      "id": "brief_maxfanout_050096_4edba6595e",
-      "query": "gift letter explanation checklist for gig workers before applying",
+      "id": "brief_maxfanout_060096_83355b3eee",
+      "query": "gift letter explanation checklist for small business owners after a denial",
       "route": null,
       "pageFamily": "gift-letter-explanation",
       "searchOpportunityScore": 0,
@@ -514,11 +519,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-08-25T09:41:36.050Z"
+      "createdAt": "2026-08-27T12:57:48.591Z"
     },
     {
-      "id": "brief_maxfanout_050098_af2a5b02a3",
-      "query": "address history explanation checklist for gig workers before applying",
+      "id": "brief_maxfanout_060098_544574bfed",
+      "query": "address history explanation checklist for small business owners after a denial",
       "route": null,
       "pageFamily": "address-history-explanation",
       "searchOpportunityScore": 0,
@@ -534,11 +539,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-08-25T09:41:36.050Z"
+      "createdAt": "2026-08-27T12:57:48.591Z"
     },
     {
-      "id": "brief_maxfanout_050099_6d36d12567",
-      "query": "income change explanation checklist for gig workers before applying",
+      "id": "brief_maxfanout_060099_0b0f820f7f",
+      "query": "income change explanation checklist for small business owners after a denial",
       "route": null,
       "pageFamily": "income-change-explanation",
       "searchOpportunityScore": 0,
@@ -554,7 +559,7 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-25T09:41:36.050Z"
+      "createdAt": "2026-08-27T12:57:48.591Z"
     }
   ],
   "topMaintenanceActions": [
@@ -572,7 +577,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-25T10:54:52.152Z"
+      "createdAt": "2026-08-27T14:22:48.638Z"
     },
     {
       "route": "/letter-writing-studio",
@@ -588,7 +593,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-25T10:54:52.152Z"
+      "createdAt": "2026-08-27T14:22:48.638Z"
     },
     {
       "route": "/blog",
@@ -604,7 +609,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-25T10:54:52.152Z"
+      "createdAt": "2026-08-27T14:22:48.638Z"
     },
     {
       "route": "/resources",
@@ -620,7 +625,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-25T10:54:52.152Z"
+      "createdAt": "2026-08-27T14:22:48.638Z"
     },
     {
       "route": "/pricing",
@@ -636,7 +641,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-25T10:54:52.152Z"
+      "createdAt": "2026-08-27T14:22:48.638Z"
     },
     {
       "route": "/letter-of-explanation",
@@ -652,7 +657,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-25T10:54:52.152Z"
+      "createdAt": "2026-08-27T14:22:48.638Z"
     },
     {
       "route": "/letter-of-explanation/credit",
@@ -668,7 +673,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-25T10:54:52.152Z"
+      "createdAt": "2026-08-27T14:22:48.638Z"
     },
     {
       "route": "/letter-of-explanation/eviction",
@@ -684,7 +689,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-25T10:54:52.152Z"
+      "createdAt": "2026-08-27T14:22:48.638Z"
     },
     {
       "route": "/letter-of-explanation/income",
@@ -700,7 +705,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-25T10:54:52.152Z"
+      "createdAt": "2026-08-27T14:22:48.638Z"
     },
     {
       "route": "/letter-of-explanation/employment-gap",
@@ -716,7 +721,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-25T10:54:52.152Z"
+      "createdAt": "2026-08-27T14:22:48.639Z"
     },
     {
       "route": "/employment-verification-letter",
@@ -732,7 +737,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-25T10:54:52.152Z"
+      "createdAt": "2026-08-27T14:22:48.639Z"
     },
     {
       "route": "/609-dispute-letter",
@@ -748,7 +753,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-25T10:54:52.152Z"
+      "createdAt": "2026-08-27T14:22:48.639Z"
     },
     {
       "route": "/goodwill-letter-to-remove-late-payment",
@@ -764,7 +769,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-25T10:54:52.152Z"
+      "createdAt": "2026-08-27T14:22:48.639Z"
     },
     {
       "route": "/letter-of-explanation/late-payment",
@@ -780,7 +785,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-25T10:54:52.152Z"
+      "createdAt": "2026-08-27T14:22:48.639Z"
     },
     {
       "route": "/letter-of-explanation/large-deposit",
@@ -796,7 +801,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-25T10:54:52.152Z"
+      "createdAt": "2026-08-27T14:22:48.639Z"
     },
     {
       "route": "/proof-of-income-letter",
@@ -812,7 +817,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-25T10:54:52.152Z"
+      "createdAt": "2026-08-27T14:22:48.639Z"
     },
     {
       "route": "/credit-dispute-letter",
@@ -828,7 +833,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-25T10:54:52.152Z"
+      "createdAt": "2026-08-27T14:22:48.639Z"
     },
     {
       "route": "/apartment-application",
@@ -844,7 +849,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-25T10:54:52.152Z"
+      "createdAt": "2026-08-27T14:22:48.639Z"
     },
     {
       "route": "/rental-application-checklist",
@@ -860,7 +865,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-25T10:54:52.152Z"
+      "createdAt": "2026-08-27T14:22:48.639Z"
     },
     {
       "route": "/how-to-get-approved-for-an-apartment",
@@ -876,7 +881,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-25T10:54:52.152Z"
+      "createdAt": "2026-08-27T14:22:48.639Z"
     }
   ],
   "hardTruth": "Low ranking potential never blocks useful onsite content. It only changes indexing, priority, and authority strategy."
