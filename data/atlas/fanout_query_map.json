@@ -1496,6 +1496,63 @@
         "purchase_evaluation"
       ],
       "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0381_employment_verification_form_definition",
+      "route_owner": "/employment-verification-form",
+      "page_family_id": "income_employment",
+      "children": [
+        "atlas_q_0382_employment_verification_form_checklist",
+        "atlas_q_0383_employment_verification_form_how_to",
+        "atlas_q_0384_employment_verification_form_mistake_prevention",
+        "atlas_q_0385_employment_verification_form_purchase_evaluation"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "how_to",
+        "mistake_prevention",
+        "purchase_evaluation"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0386_employment_verification_letter_template_definition",
+      "route_owner": "/employment-verification-letter-template",
+      "page_family_id": "income_employment",
+      "children": [
+        "atlas_q_0387_employment_verification_letter_template_checklist",
+        "atlas_q_0388_employment_verification_letter_template_how_to",
+        "atlas_q_0389_employment_verification_letter_template_mistake_prevention",
+        "atlas_q_0390_employment_verification_letter_template_purchase_evaluation"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "how_to",
+        "mistake_prevention",
+        "purchase_evaluation"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0391_proof_of_employment_letter_definition",
+      "route_owner": "/proof-of-employment-letter",
+      "page_family_id": "income_employment",
+      "children": [
+        "atlas_q_0392_proof_of_employment_letter_checklist",
+        "atlas_q_0393_proof_of_employment_letter_how_to",
+        "atlas_q_0394_proof_of_employment_letter_mistake_prevention",
+        "atlas_q_0395_proof_of_employment_letter_purchase_evaluation"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "how_to",
+        "mistake_prevention",
+        "purchase_evaluation"
+      ],
+      "status": "admitted_unique_intent_fanout"
     }
   ]
 }

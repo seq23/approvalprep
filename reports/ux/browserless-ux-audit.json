@@ -2,7 +2,7 @@
   "schemaVersion": "4.2.4",
   "proof_type": "browserless_static_substitute",
   "realBrowser": false,
-  "pagesChecked": 78,
+  "pagesChecked": 81,
   "productCount": 0,
   "requiredSections": [
     "Hero",
@@ -883,6 +883,39 @@
       "conversion_role": "assist",
       "cta_policy": "purchase",
       "primary_cta": "Complete a rental verification form",
+      "cta_allowed": true,
+      "status": "BROWSERLESS_STATIC_CHECK_READY"
+    },
+    {
+      "path": "/employment-verification-form",
+      "index": true,
+      "indexing": "index",
+      "page_intent": "free_tool",
+      "conversion_role": "assist",
+      "cta_policy": "purchase",
+      "primary_cta": "Build my verification request",
+      "cta_allowed": true,
+      "status": "BROWSERLESS_STATIC_CHECK_READY"
+    },
+    {
+      "path": "/employment-verification-letter-template",
+      "index": true,
+      "indexing": "index",
+      "page_intent": "free_tool",
+      "conversion_role": "assist",
+      "cta_policy": "purchase",
+      "primary_cta": "Write my verification letter",
+      "cta_allowed": true,
+      "status": "BROWSERLESS_STATIC_CHECK_READY"
+    },
+    {
+      "path": "/proof-of-employment-letter",
+      "index": true,
+      "indexing": "index",
+      "page_intent": "free_tool",
+      "conversion_role": "assist",
+      "cta_policy": "purchase",
+      "primary_cta": "Build my proof of employment packet",
       "cta_allowed": true,
       "status": "BROWSERLESS_STATIC_CHECK_READY"
     }

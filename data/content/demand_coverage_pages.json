@@ -66,12 +66,42 @@
       "comparison": {
         "heading": "Landlord reference letter, verification form, or rent ledger — which one were you actually asked for?",
         "intro": "Leasing offices use these three names loosely and they are not the same document. Asking your old landlord for the wrong one costs you a round trip.",
-        "columns": ["Document", "Who fills it in", "What it settles", "Typical turnaround", "Ask for this when"],
+        "columns": [
+          "Document",
+          "Who fills it in",
+          "What it settles",
+          "Typical turnaround",
+          "Ask for this when"
+        ],
         "rows": [
-          ["Landlord reference letter", "The landlord, in prose, signed", "How you rented, including the landlord's opinion of you as a tenant", "2 to 7 days", "The application asks for a reference, or you want to explain a thin rental history"],
-          ["Rental verification form", "The landlord, in fixed fields, usually returned by email or fax", "Dates, rent, balance owed, late count, notices — facts only, no opinion", "3 to 10 days", "The leasing office or housing agency sent you their own form to have completed"],
-          ["Rent ledger or payment history", "The landlord's accounting software, exported", "Exactly what was paid and when, month by month", "1 to 3 days", "Someone has questioned your payment record and you want the raw record"],
-          ["Tenant screening report", "A screening company, bought by the new landlord", "Credit, eviction filings, and public records — nothing about your conduct as a tenant", "Same day", "You cannot; the landlord orders this, and you have the right to a copy if it is used against you"]
+          [
+            "Landlord reference letter",
+            "The landlord, in prose, signed",
+            "How you rented, including the landlord's opinion of you as a tenant",
+            "2 to 7 days",
+            "The application asks for a reference, or you want to explain a thin rental history"
+          ],
+          [
+            "Rental verification form",
+            "The landlord, in fixed fields, usually returned by email or fax",
+            "Dates, rent, balance owed, late count, notices — facts only, no opinion",
+            "3 to 10 days",
+            "The leasing office or housing agency sent you their own form to have completed"
+          ],
+          [
+            "Rent ledger or payment history",
+            "The landlord's accounting software, exported",
+            "Exactly what was paid and when, month by month",
+            "1 to 3 days",
+            "Someone has questioned your payment record and you want the raw record"
+          ],
+          [
+            "Tenant screening report",
+            "A screening company, bought by the new landlord",
+            "Credit, eviction filings, and public records — nothing about your conduct as a tenant",
+            "Same day",
+            "You cannot; the landlord orders this, and you have the right to a copy if it is used against you"
+          ]
         ]
       },
       "generator": {
@@ -79,18 +109,99 @@
         "intro": "Fill in whatever you know. The draft updates as you type. Choose the version you need: the landlord's signed letter, your request asking for it, or a facts-only confirmation for a property manager whose policy will not let them give an opinion.",
         "filename": "landlord-reference-letter",
         "fields": [
-          { "name": "tenantName", "label": "Tenant's full name (as on the lease)", "type": "text", "placeholder": "Dana Okonkwo", "required": true },
-          { "name": "propertyAddress", "label": "Rental address, including unit", "type": "text", "placeholder": "418 Ellsworth Ave, Apt 3B, Columbus, OH 43201", "required": true },
-          { "name": "landlordName", "label": "Landlord or property manager name", "type": "text", "placeholder": "Marisol Vega, Ellsworth Property Group", "required": true },
-          { "name": "landlordContact", "label": "Landlord's business phone and email", "type": "text", "placeholder": "(614) 555-0142 / marisol@ellsworthpg.com", "required": true, "help": "Use the contact a leasing agent will actually reach during business hours." },
-          { "name": "moveIn", "label": "Tenancy start date", "type": "date", "required": true },
-          { "name": "moveOut", "label": "Tenancy end date", "type": "date", "help": "Leave blank if the tenant still lives there." },
-          { "name": "rentAmount", "label": "Monthly rent", "type": "text", "placeholder": "$1,450", "required": true },
-          { "name": "latePayments", "label": "Payment record", "type": "select", "options": ["paid in full and on time every month", "was late once", "was late two or three times", "was late more than three times but cleared the balance", "still owes a balance"] },
-          { "name": "notices", "label": "Notice history", "type": "select", "options": ["no notices were served", "one late-rent notice was served", "a lease violation notice was served and resolved", "an eviction was filed"] },
-          { "name": "condition", "label": "Condition at move-out and deposit outcome", "type": "textarea", "placeholder": "The unit was left clean and undamaged. The full security deposit was returned." },
-          { "name": "rentAgain", "label": "Would you rent to this tenant again?", "type": "select", "options": ["I would rent to this tenant again without reservation", "I would rent to this tenant again", "I am not able to answer that question under company policy"] },
-          { "name": "recipient", "label": "Addressed to", "type": "text", "placeholder": "Riverbend Apartments Leasing Office" }
+          {
+            "name": "tenantName",
+            "label": "Tenant's full name (as on the lease)",
+            "type": "text",
+            "placeholder": "Dana Okonkwo",
+            "required": true
+          },
+          {
+            "name": "propertyAddress",
+            "label": "Rental address, including unit",
+            "type": "text",
+            "placeholder": "418 Ellsworth Ave, Apt 3B, Columbus, OH 43201",
+            "required": true
+          },
+          {
+            "name": "landlordName",
+            "label": "Landlord or property manager name",
+            "type": "text",
+            "placeholder": "Marisol Vega, Ellsworth Property Group",
+            "required": true
+          },
+          {
+            "name": "landlordContact",
+            "label": "Landlord's business phone and email",
+            "type": "text",
+            "placeholder": "(614) 555-0142 / marisol@ellsworthpg.com",
+            "required": true,
+            "help": "Use the contact a leasing agent will actually reach during business hours."
+          },
+          {
+            "name": "moveIn",
+            "label": "Tenancy start date",
+            "type": "date",
+            "required": true
+          },
+          {
+            "name": "moveOut",
+            "label": "Tenancy end date",
+            "type": "date",
+            "help": "Leave blank if the tenant still lives there."
+          },
+          {
+            "name": "rentAmount",
+            "label": "Monthly rent",
+            "type": "text",
+            "placeholder": "$1,450",
+            "required": true
+          },
+          {
+            "name": "latePayments",
+            "label": "Payment record",
+            "type": "select",
+            "options": [
+              "paid in full and on time every month",
+              "was late once",
+              "was late two or three times",
+              "was late more than three times but cleared the balance",
+              "still owes a balance"
+            ]
+          },
+          {
+            "name": "notices",
+            "label": "Notice history",
+            "type": "select",
+            "options": [
+              "no notices were served",
+              "one late-rent notice was served",
+              "a lease violation notice was served and resolved",
+              "an eviction was filed"
+            ]
+          },
+          {
+            "name": "condition",
+            "label": "Condition at move-out and deposit outcome",
+            "type": "textarea",
+            "placeholder": "The unit was left clean and undamaged. The full security deposit was returned."
+          },
+          {
+            "name": "rentAgain",
+            "label": "Would you rent to this tenant again?",
+            "type": "select",
+            "options": [
+              "I would rent to this tenant again without reservation",
+              "I would rent to this tenant again",
+              "I am not able to answer that question under company policy"
+            ]
+          },
+          {
+            "name": "recipient",
+            "label": "Addressed to",
+            "type": "text",
+            "placeholder": "Riverbend Apartments Leasing Office"
+          }
         ],
         "outputs": [
           {
@@ -125,17 +236,44 @@
         "Letting the landlord mention children, a medical situation, an immigration status, or a religion. It does not help the tenant and it exposes the landlord to a fair-housing complaint."
       ],
       "faq": [
-        { "question": "What should a landlord reference letter include?", "answer": "The rental address, the tenancy dates, the monthly rent, the payment record, any notices served, the condition of the unit at move-out, a direct answer on whether the landlord would rent to the tenant again, and the landlord's business contact so the reference can be verified." },
-        { "question": "Can I write my own landlord reference letter?", "answer": "You can draft it and send it to your landlord to correct and sign, and doing so usually gets you a faster reply. What you cannot do is sign it yourself and submit it as a reference — a leasing office treats that as your own statement, which is a different and much weaker thing." },
-        { "question": "What if my old landlord will not write one?", "answer": "Ask instead for the facts-only confirmation, which many management companies are permitted to send when a full reference is not. If that is also refused, substitute the evidence you control: cancelled rent cheques, bank statements showing the transfers, the signed lease, and the return of your deposit." },
-        { "question": "Is a landlord reference letter the same as rental verification?", "answer": "No. A reference letter is written prose with an opinion in it. A rental verification form is a fixed set of fields the landlord completes with no opinion, usually on a form the new landlord or housing agency supplies. Some applications ask for one, some for the other, and a few for both." },
-        { "question": "How long should it be?", "answer": "One page, and usually three or four sentences. A leasing agent reading dozens of applications gives it perhaps twenty seconds, so the dates, the rent, and the payment record should all be visible without scrolling." },
-        { "question": "Does a strong reference letter guarantee I get the apartment?", "answer": "No. It settles one question among several. Income, credit, occupancy limits, pets, and the timing of other applications all sit outside what any reference letter can influence." }
+        {
+          "question": "What should a landlord reference letter include?",
+          "answer": "The rental address, the tenancy dates, the monthly rent, the payment record, any notices served, the condition of the unit at move-out, a direct answer on whether the landlord would rent to the tenant again, and the landlord's business contact so the reference can be verified."
+        },
+        {
+          "question": "Can I write my own landlord reference letter?",
+          "answer": "You can draft it and send it to your landlord to correct and sign, and doing so usually gets you a faster reply. What you cannot do is sign it yourself and submit it as a reference — a leasing office treats that as your own statement, which is a different and much weaker thing."
+        },
+        {
+          "question": "What if my old landlord will not write one?",
+          "answer": "Ask instead for the facts-only confirmation, which many management companies are permitted to send when a full reference is not. If that is also refused, substitute the evidence you control: cancelled rent cheques, bank statements showing the transfers, the signed lease, and the return of your deposit."
+        },
+        {
+          "question": "Is a landlord reference letter the same as rental verification?",
+          "answer": "No. A reference letter is written prose with an opinion in it. A rental verification form is a fixed set of fields the landlord completes with no opinion, usually on a form the new landlord or housing agency supplies. Some applications ask for one, some for the other, and a few for both."
+        },
+        {
+          "question": "How long should it be?",
+          "answer": "One page, and usually three or four sentences. A leasing agent reading dozens of applications gives it perhaps twenty seconds, so the dates, the rent, and the payment record should all be visible without scrolling."
+        },
+        {
+          "question": "Does a strong reference letter guarantee I get the apartment?",
+          "answer": "No. It settles one question among several. Income, credit, occupancy limits, pets, and the timing of other applications all sit outside what any reference letter can influence."
+        }
       ],
       "sources": [
-        { "label": "Federal Trade Commission — Using Consumer Reports: What Landlords Need to Know", "url": "https://www.ftc.gov/business-guidance/resources/using-consumer-reports-what-landlords-need-know" },
-        { "label": "Consumer Financial Protection Bureau — What is a tenant screening report?", "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-tenant-screening-report-en-2102/" },
-        { "label": "U.S. Department of Justice, Civil Rights Division — The Fair Housing Act", "url": "https://www.justice.gov/crt/fair-housing-act-1" }
+        {
+          "label": "Federal Trade Commission — Using Consumer Reports: What Landlords Need to Know",
+          "url": "https://www.ftc.gov/business-guidance/resources/using-consumer-reports-what-landlords-need-know"
+        },
+        {
+          "label": "Consumer Financial Protection Bureau — What is a tenant screening report?",
+          "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-tenant-screening-report-en-2102/"
+        },
+        {
+          "label": "U.S. Department of Justice, Civil Rights Division — The Fair Housing Act",
+          "url": "https://www.justice.gov/crt/fair-housing-act-1"
+        }
       ],
       "boundary": "ApprovalPrep does not contact your landlord, verify a tenancy, sign anything on a landlord's behalf, or produce a reference from a landlord who did not write one. The generator on this page assembles text from what you type, in your browser. You send it yourself, and a landlord signs their own name or nobody does.",
       "decisionContext": [
@@ -170,13 +308,40 @@
         "You are the landlord, a former tenant has asked for a reference, and you want to help without overstepping.",
         "You need the reference and a completed verification form for the same application."
       ],
-      "relatedPaths": ["/rental-application-checklist", "/apartment-application", "/rental-application-kit"],
-      "inboundFrom": ["/rental-application-checklist", "/apartment-application"],
+      "relatedPaths": [
+        "/rental-application-checklist",
+        "/apartment-application",
+        "/rental-application-kit"
+      ],
+      "inboundFrom": [
+        "/rental-application-checklist",
+        "/apartment-application"
+      ],
       "atoms": [
-        { "id": "short_answer", "type": "short_answer", "title": "short answer", "text": "A landlord reference letter is a current or former landlord's signed statement about one tenancy: the address, the dates, the rent, the payment record, any notices served, and whether they would rent to that tenant again. It is written by the landlord, it carries an opinion, and it gets verified by phone." },
-        { "id": "field_set", "type": "checklist", "title": "field set", "text": "Collect before asking: the tenant's legal name as it appears on the lease, the full rental address including unit, the landlord's business phone and email, the tenancy start and end dates, the monthly rent and any mid-tenancy increase, the number of late payments, any notices served, the move-out condition and deposit outcome, and a direct answer on renting to the tenant again." },
-        { "id": "distinction", "type": "definition", "title": "distinction from verification", "text": "A landlord reference letter is prose with an opinion in it. A rental verification form is a fixed field sheet with no opinion, usually supplied by the new landlord or a housing agency. A tenant screening report is a consumer report the landlord buys and the tenant never writes. Applications ask for these interchangeably and they settle different questions." },
-        { "id": "mistakes", "type": "mistake_prevention", "title": "mistakes", "text": "The failures that cost applications: the tenant writes and signs it themselves, the contact given is a friend rather than the real landlord, the letter offers praise with no dates or rent figure, a late payment is concealed that the screening report will show anyway, or the landlord mentions family, health, religion, or national origin and creates a fair-housing exposure." }
+        {
+          "id": "short_answer",
+          "type": "short_answer",
+          "title": "short answer",
+          "text": "A landlord reference letter is a current or former landlord's signed statement about one tenancy: the address, the dates, the rent, the payment record, any notices served, and whether they would rent to that tenant again. It is written by the landlord, it carries an opinion, and it gets verified by phone."
+        },
+        {
+          "id": "field_set",
+          "type": "checklist",
+          "title": "field set",
+          "text": "Collect before asking: the tenant's legal name as it appears on the lease, the full rental address including unit, the landlord's business phone and email, the tenancy start and end dates, the monthly rent and any mid-tenancy increase, the number of late payments, any notices served, the move-out condition and deposit outcome, and a direct answer on renting to the tenant again."
+        },
+        {
+          "id": "distinction",
+          "type": "definition",
+          "title": "distinction from verification",
+          "text": "A landlord reference letter is prose with an opinion in it. A rental verification form is a fixed field sheet with no opinion, usually supplied by the new landlord or a housing agency. A tenant screening report is a consumer report the landlord buys and the tenant never writes. Applications ask for these interchangeably and they settle different questions."
+        },
+        {
+          "id": "mistakes",
+          "type": "mistake_prevention",
+          "title": "mistakes",
+          "text": "The failures that cost applications: the tenant writes and signs it themselves, the contact given is a friend rather than the real landlord, the letter offers praise with no dates or rent figure, a late payment is concealed that the screening report will show anyway, or the landlord mentions family, health, religion, or national origin and creates a fair-housing exposure."
+        }
       ]
     },
     {
@@ -243,12 +408,42 @@
       "comparison": {
         "heading": "Four documents a leasing office might mean by 'rental verification'",
         "intro": "These names get used interchangeably and they are not substitutes. The column that matters is the last one: what each document cannot settle.",
-        "columns": ["Document", "Who completes it", "Form", "What it settles", "What it cannot settle"],
+        "columns": [
+          "Document",
+          "Who completes it",
+          "Form",
+          "What it settles",
+          "What it cannot settle"
+        ],
         "rows": [
-          ["Rental verification form", "The previous landlord, from their ledger", "Fixed fields, returned to the requester", "Dates, rent, balance, late count, notices, would-rent-again", "Anything about income, credit, or why a late payment happened"],
-          ["Landlord reference letter", "The previous landlord, in prose", "A signed letter, usually one page", "How the landlord judges the tenancy overall", "Precise figures — a letter rarely carries the month-by-month record"],
-          ["Rent ledger or payment history", "The landlord's accounting software", "An exported statement, often 1 to 3 pages", "Exactly what was paid, and on what date, every month", "Whether notices were served or how the unit was left"],
-          ["Tenant screening report", "A screening company, ordered by the new landlord", "A purchased consumer report", "Credit file, public records, and eviction filings", "Whether the tenant paid this particular landlord on time"]
+          [
+            "Rental verification form",
+            "The previous landlord, from their ledger",
+            "Fixed fields, returned to the requester",
+            "Dates, rent, balance, late count, notices, would-rent-again",
+            "Anything about income, credit, or why a late payment happened"
+          ],
+          [
+            "Landlord reference letter",
+            "The previous landlord, in prose",
+            "A signed letter, usually one page",
+            "How the landlord judges the tenancy overall",
+            "Precise figures — a letter rarely carries the month-by-month record"
+          ],
+          [
+            "Rent ledger or payment history",
+            "The landlord's accounting software",
+            "An exported statement, often 1 to 3 pages",
+            "Exactly what was paid, and on what date, every month",
+            "Whether notices were served or how the unit was left"
+          ],
+          [
+            "Tenant screening report",
+            "A screening company, ordered by the new landlord",
+            "A purchased consumer report",
+            "Credit file, public records, and eviction filings",
+            "Whether the tenant paid this particular landlord on time"
+          ]
         ]
       },
       "generator": {
@@ -256,22 +451,129 @@
         "intro": "One set of answers produces the three pieces this actually takes: the completed verification, the cover request that gets it answered, and the tenant authorization without which most management companies will not reply.",
         "filename": "rental-verification",
         "fields": [
-          { "name": "tenantName", "label": "Tenant's full legal name", "type": "text", "placeholder": "Dana Okonkwo", "required": true },
-          { "name": "coTenant", "label": "Co-tenant named on the lease", "type": "text", "placeholder": "Leave blank if none" },
-          { "name": "propertyAddress", "label": "Rental address, including unit", "type": "text", "placeholder": "418 Ellsworth Ave, Apt 3B, Columbus, OH 43201", "required": true },
-          { "name": "landlordName", "label": "Previous landlord or management company", "type": "text", "placeholder": "Ellsworth Property Group", "required": true },
-          { "name": "landlordContact", "label": "Their phone, email, or fax", "type": "text", "placeholder": "(614) 555-0142 / records@ellsworthpg.com" },
-          { "name": "requesterName", "label": "Who is requesting the verification", "type": "text", "placeholder": "Riverbend Apartments Leasing Office", "required": true },
-          { "name": "returnTo", "label": "Where the completed form should be returned", "type": "text", "placeholder": "leasing@riverbendapts.com", "required": true },
-          { "name": "returnBy", "label": "Return-by date", "type": "date", "help": "A request with no deadline goes to the bottom of the pile." },
-          { "name": "leaseStart", "label": "Lease start date", "type": "date", "required": true },
-          { "name": "leaseEnd", "label": "Lease end date", "type": "date", "help": "Leave blank for a current tenancy." },
-          { "name": "monthlyRent", "label": "Monthly rent", "type": "text", "placeholder": "$1,450", "required": true },
-          { "name": "balanceOwed", "label": "Outstanding balance, if any", "type": "text", "placeholder": "$0" },
-          { "name": "lateCount", "label": "Number of late payments", "type": "select", "options": ["0", "1", "2", "3", "4 or more"] },
-          { "name": "noticeHistory", "label": "Notices served during the tenancy", "type": "select", "options": ["None", "One late-rent notice", "A lease violation notice, resolved", "An eviction was filed"] },
-          { "name": "depositOutcome", "label": "Deposit outcome", "type": "select", "options": ["Returned in full", "Partially withheld for damage", "Withheld in full", "Tenancy is current; deposit still held"] },
-          { "name": "rentAgain", "label": "Would you rent to this tenant again?", "type": "select", "options": ["Yes", "Yes, with conditions", "No", "Company policy does not permit an answer"] }
+          {
+            "name": "tenantName",
+            "label": "Tenant's full legal name",
+            "type": "text",
+            "placeholder": "Dana Okonkwo",
+            "required": true
+          },
+          {
+            "name": "coTenant",
+            "label": "Co-tenant named on the lease",
+            "type": "text",
+            "placeholder": "Leave blank if none"
+          },
+          {
+            "name": "propertyAddress",
+            "label": "Rental address, including unit",
+            "type": "text",
+            "placeholder": "418 Ellsworth Ave, Apt 3B, Columbus, OH 43201",
+            "required": true
+          },
+          {
+            "name": "landlordName",
+            "label": "Previous landlord or management company",
+            "type": "text",
+            "placeholder": "Ellsworth Property Group",
+            "required": true
+          },
+          {
+            "name": "landlordContact",
+            "label": "Their phone, email, or fax",
+            "type": "text",
+            "placeholder": "(614) 555-0142 / records@ellsworthpg.com"
+          },
+          {
+            "name": "requesterName",
+            "label": "Who is requesting the verification",
+            "type": "text",
+            "placeholder": "Riverbend Apartments Leasing Office",
+            "required": true
+          },
+          {
+            "name": "returnTo",
+            "label": "Where the completed form should be returned",
+            "type": "text",
+            "placeholder": "leasing@riverbendapts.com",
+            "required": true
+          },
+          {
+            "name": "returnBy",
+            "label": "Return-by date",
+            "type": "date",
+            "help": "A request with no deadline goes to the bottom of the pile."
+          },
+          {
+            "name": "leaseStart",
+            "label": "Lease start date",
+            "type": "date",
+            "required": true
+          },
+          {
+            "name": "leaseEnd",
+            "label": "Lease end date",
+            "type": "date",
+            "help": "Leave blank for a current tenancy."
+          },
+          {
+            "name": "monthlyRent",
+            "label": "Monthly rent",
+            "type": "text",
+            "placeholder": "$1,450",
+            "required": true
+          },
+          {
+            "name": "balanceOwed",
+            "label": "Outstanding balance, if any",
+            "type": "text",
+            "placeholder": "$0"
+          },
+          {
+            "name": "lateCount",
+            "label": "Number of late payments",
+            "type": "select",
+            "options": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4 or more"
+            ]
+          },
+          {
+            "name": "noticeHistory",
+            "label": "Notices served during the tenancy",
+            "type": "select",
+            "options": [
+              "None",
+              "One late-rent notice",
+              "A lease violation notice, resolved",
+              "An eviction was filed"
+            ]
+          },
+          {
+            "name": "depositOutcome",
+            "label": "Deposit outcome",
+            "type": "select",
+            "options": [
+              "Returned in full",
+              "Partially withheld for damage",
+              "Withheld in full",
+              "Tenancy is current; deposit still held"
+            ]
+          },
+          {
+            "name": "rentAgain",
+            "label": "Would you rent to this tenant again?",
+            "type": "select",
+            "options": [
+              "Yes",
+              "Yes, with conditions",
+              "No",
+              "Company policy does not permit an answer"
+            ]
+          }
         ],
         "outputs": [
           {
@@ -306,17 +608,44 @@
         "Sending it with no deadline and no return path. A request that does not say where to send the answer or by when is the easiest thing in a records inbox to defer."
       ],
       "faq": [
-        { "question": "What is a rental verification form?", "answer": "A fixed-field request sent to a current or former landlord asking them to confirm one tenancy from their own records: the dates, the rent, any balance owed, the number of late payments, the notices served, the deposit outcome, and whether they would rent to that tenant again." },
-        { "question": "Who fills out a rental verification form?", "answer": "The previous landlord or their management company. The requester — a leasing office, a mortgage underwriter, or a housing agency — sends it; the tenant signs the authorization that permits it to be answered; the landlord completes and returns it." },
-        { "question": "Why do rental verification forms come back blank?", "answer": "Most often because no signed tenant authorization was included, and a management company's standing instruction is to ignore unsigned requests. The next most common reasons are that it went to an individual agent who has left, or that it arrived with no return-by date and no return address." },
-        { "question": "Can a tenant fill out their own rental verification form?", "answer": "A tenant can pre-fill the tenancy details to save the landlord a lookup, and should sign the authorization. What a tenant cannot do is complete and return the form as though it came from the landlord — the value of the document is that it comes from the landlord's records." },
-        { "question": "How long does rental verification take?", "answer": "A small landlord often replies in 1 to 3 days. A management company's records office typically takes 5 to 10 days, and a first follow-up call after 5 days is usually what moves it." },
-        { "question": "Is a verification form the same as a credit or screening check?", "answer": "No. A verification form comes directly from the landlord's own tenancy records. A tenant screening report is a consumer report bought from a screening company and is governed by the Fair Credit Reporting Act, including the notice a landlord owes you if it is used against your application." }
+        {
+          "question": "What is a rental verification form?",
+          "answer": "A fixed-field request sent to a current or former landlord asking them to confirm one tenancy from their own records: the dates, the rent, any balance owed, the number of late payments, the notices served, the deposit outcome, and whether they would rent to that tenant again."
+        },
+        {
+          "question": "Who fills out a rental verification form?",
+          "answer": "The previous landlord or their management company. The requester — a leasing office, a mortgage underwriter, or a housing agency — sends it; the tenant signs the authorization that permits it to be answered; the landlord completes and returns it."
+        },
+        {
+          "question": "Why do rental verification forms come back blank?",
+          "answer": "Most often because no signed tenant authorization was included, and a management company's standing instruction is to ignore unsigned requests. The next most common reasons are that it went to an individual agent who has left, or that it arrived with no return-by date and no return address."
+        },
+        {
+          "question": "Can a tenant fill out their own rental verification form?",
+          "answer": "A tenant can pre-fill the tenancy details to save the landlord a lookup, and should sign the authorization. What a tenant cannot do is complete and return the form as though it came from the landlord — the value of the document is that it comes from the landlord's records."
+        },
+        {
+          "question": "How long does rental verification take?",
+          "answer": "A small landlord often replies in 1 to 3 days. A management company's records office typically takes 5 to 10 days, and a first follow-up call after 5 days is usually what moves it."
+        },
+        {
+          "question": "Is a verification form the same as a credit or screening check?",
+          "answer": "No. A verification form comes directly from the landlord's own tenancy records. A tenant screening report is a consumer report bought from a screening company and is governed by the Fair Credit Reporting Act, including the notice a landlord owes you if it is used against your application."
+        }
       ],
       "sources": [
-        { "label": "U.S. Department of Housing and Urban Development — Request for Tenancy Approval (form HUD-52517)", "url": "https://www.hud.gov/sites/dfiles/OCHCO/documents/52517.pdf" },
-        { "label": "Federal Trade Commission — Fair Credit Reporting Act", "url": "https://www.ftc.gov/legal-library/browse/statutes/fair-credit-reporting-act" },
-        { "label": "Consumer Financial Protection Bureau — What is a tenant screening report?", "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-tenant-screening-report-en-2102/" }
+        {
+          "label": "U.S. Department of Housing and Urban Development — Request for Tenancy Approval (form HUD-52517)",
+          "url": "https://www.hud.gov/sites/dfiles/OCHCO/documents/52517.pdf"
+        },
+        {
+          "label": "Federal Trade Commission — Fair Credit Reporting Act",
+          "url": "https://www.ftc.gov/legal-library/browse/statutes/fair-credit-reporting-act"
+        },
+        {
+          "label": "Consumer Financial Protection Bureau — What is a tenant screening report?",
+          "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-tenant-screening-report-en-2102/"
+        }
       ],
       "boundary": "ApprovalPrep does not send verification requests, contact landlords, complete a form on a landlord's behalf, or store anything you type into the generator. The page builds text in your browser from your own answers. The tenant signs their own authorization and the landlord completes their own form.",
       "decisionContext": [
@@ -351,13 +680,1174 @@
         "A housing agency needs a previous tenancy verified before a voucher can be issued.",
         "You are the landlord, a verification arrived, and you want to know what you may and may not answer."
       ],
-      "relatedPaths": ["/apartment-application", "/rental-application-checklist", "/rental-application-kit"],
-      "inboundFrom": ["/apartment-application", "/how-to-get-approved-for-an-apartment"],
+      "relatedPaths": [
+        "/apartment-application",
+        "/rental-application-checklist",
+        "/rental-application-kit"
+      ],
+      "inboundFrom": [
+        "/apartment-application",
+        "/how-to-get-approved-for-an-apartment"
+      ],
       "atoms": [
-        { "id": "short_answer", "type": "short_answer", "title": "short answer", "text": "A rental verification form is a fixed-field request sent to a current or former landlord asking them to confirm one tenancy from their own records: lease dates, monthly rent, any balance owed, the number of late payments, notices served, the deposit outcome, and whether they would rent to that tenant again." },
-        { "id": "authorization", "type": "checklist", "title": "authorization requirement", "text": "Most management companies are instructed to ignore a verification request that arrives without the tenant's signed authorization to release rental history. Send the authorization in the same message as the form, name the same address on both, give a return-by date, and give a working return email or fax." },
-        { "id": "field_set", "type": "definition", "title": "standard field set", "text": "The standard fields are: tenant of record, co-tenant on the lease, full address with unit, lease start and end, monthly rent and any increase, balance outstanding, count of late payments, NSF or returned payments, notices served including any eviction filing, security deposit outcome, and would-rent-again." },
-        { "id": "mistakes", "type": "mistake_prevention", "title": "mistakes", "text": "Verifications fail for five repeatable reasons: no signed authorization was included, the form travelled through the applicant's hands instead of landlord to requester, a substitute form was used where the requester supplied their own, fields were answered from memory rather than the ledger, or the request carried no deadline and no return path." }
+        {
+          "id": "short_answer",
+          "type": "short_answer",
+          "title": "short answer",
+          "text": "A rental verification form is a fixed-field request sent to a current or former landlord asking them to confirm one tenancy from their own records: lease dates, monthly rent, any balance owed, the number of late payments, notices served, the deposit outcome, and whether they would rent to that tenant again."
+        },
+        {
+          "id": "authorization",
+          "type": "checklist",
+          "title": "authorization requirement",
+          "text": "Most management companies are instructed to ignore a verification request that arrives without the tenant's signed authorization to release rental history. Send the authorization in the same message as the form, name the same address on both, give a return-by date, and give a working return email or fax."
+        },
+        {
+          "id": "field_set",
+          "type": "definition",
+          "title": "standard field set",
+          "text": "The standard fields are: tenant of record, co-tenant on the lease, full address with unit, lease start and end, monthly rent and any increase, balance outstanding, count of late payments, NSF or returned payments, notices served including any eviction filing, security deposit outcome, and would-rent-again."
+        },
+        {
+          "id": "mistakes",
+          "type": "mistake_prevention",
+          "title": "mistakes",
+          "text": "Verifications fail for five repeatable reasons: no signed authorization was included, the form travelled through the applicant's hands instead of landlord to requester, a substitute form was used where the requester supplied their own, fields were answered from memory rather than the ledger, or the request carried no deadline and no return path."
+        }
+      ]
+    },
+    {
+      "id": "employment-verification-form",
+      "path": "/employment-verification-form",
+      "family": "income_employment",
+      "risk": "medium",
+      "sku": "income-employment-letter-kit",
+      "targetQuery": "employment verification form",
+      "monthlyVolume": 4400,
+      "keywordDifficulty": 32,
+      "eyebrow": "Employment + income",
+      "title": "Employment Verification Form",
+      "anchorText": "Which employment verification form you need",
+      "description": "An employment verification form is a fixed field sheet an employer completes and returns directly to whoever asked for it. Which form you need is decided by the requester, not by you — a mortgage file, a VA file, and a benefits office each require their own and none accepts a substitute.",
+      "summary": "Ask the requester which form they use before filling in anything. Mortgage underwriting uses Fannie Mae Form 1005, a VA loan file uses VA Form 26-8497, a state benefits office has its own, and Form I-9 is not a verification of employment at all.",
+      "definitionLabel": "What it is",
+      "definition": "An employment verification form is a structured request that an employer or payroll department completes on an employee's behalf — confirming employment dates, job title, current status, and, where written authorization exists, hours and compensation — and returns directly to the party that asked for it.",
+      "definitionDetail": "Two things separate it from the other documents it gets confused with. It is completed by the employer rather than the employee, and it travels from the employer to the requester without passing through the applicant's hands. A verification letter is prose the employer writes; Form I-9 is the employer's own work-authorization record and never leaves their files.",
+      "primaryCta": "Build my verification request",
+      "primaryHref": "#generator",
+      "secondaryCta": "See the Income + Employment Letter Kit",
+      "secondaryHref": "/pricing#income-employment-letter-kit",
+      "queries": [
+        "employment verification form",
+        "which employment verification form do I need",
+        "how to get an employment verification form completed",
+        "employment verification form rejected or returned incomplete",
+        "employment verification form and the income and employment letter kit"
+      ],
+      "keyFacts": [
+        "There is no single national employment verification form. Mortgage underwriting uses Fannie Mae Form 1005 or Freddie Mac Form 90, VA loan files use VA Form 26-8497, and most state benefits offices publish their own. Substituting one for another gets a file returned as incomplete.",
+        "Form I-9 is not an employment verification form. It records that an employer checked a new hire's identity and work authorization, it is kept in the employer's own files, and it is not sent to landlords, lenders, or agencies.",
+        "Written employee consent is normally required before payroll releases income. Employers that will confirm dates and title on a phone call will often not release pay without a signed release on file.",
+        "Many mid-size and large employers outsource verification entirely to an automated service. When they do, a form sent to HR will not be answered at all — the requester has to go through the service, and the employee may need to release a PIN or access code.",
+        "A form that reaches the requester by way of the applicant loses most of its value. Underwriters and caseworkers treat a verification the applicant handled as an applicant statement."
+      ],
+      "fields": [
+        "Employee's full legal name and, where the form asks, the last four digits of the Social Security number",
+        "Employer's legal name, worksite address, and the payroll or HR contact who is authorized to verify",
+        "Job title and whether the position is full-time, part-time, seasonal, or contract",
+        "Date of hire, and the separation date where employment has ended",
+        "Current employment status as of the date the form is signed",
+        "Base pay rate, pay frequency, and average hours per week — only where the form asks and consent is on file",
+        "Overtime, bonus, or commission history where the form requests it, usually over the last 2 years",
+        "Verifier's name, title, direct phone, business email, signature, and date",
+        "The employee's signed authorization to release employment and income information"
+      ],
+      "steps": [
+        "Ask the requester which form they use and whether they will accept an alternative. Underwriters and benefits caseworkers usually cannot; landlords and new employers usually can.",
+        "Ask your employer how verification is handled before you send anything. If it is outsourced to an automated service, a form emailed to HR will sit unanswered and you will lose a week finding out.",
+        "Sign the release first. Send the authorization together with the form, not after payroll has already declined to answer.",
+        "Give payroll a return path and a deadline. Name the fax number, secure portal, or email the completed form goes to, and the date it is needed by.",
+        "Check the completed form against your own records before it goes out — hire date, title, pay rate, and pay frequency all have to match your pay stubs.",
+        "Follow up by phone after 5 business days. The usual cause of a stalled verification is a shared inbox nobody reads, not a refusal."
+      ],
+      "reviewChecklist": [
+        "The form is the one the requester named, not a similar form from another program.",
+        "Your signed authorization is attached and dates from within the window the requester allows.",
+        "Every figure matches your most recent pay stubs, including pay frequency.",
+        "The verifier's phone number reaches a person who can confirm what they signed.",
+        "The completed form went from the employer to the requester, not through you."
+      ],
+      "comparison": {
+        "heading": "Five documents called an employment verification form, and who each one is actually for",
+        "intro": "These get used interchangeably and they are not substitutes. The last column is the one that costs people a week.",
+        "columns": [
+          "Form",
+          "Who asks for it",
+          "Who completes it",
+          "What it asks for",
+          "What it is not"
+        ],
+        "rows": [
+          [
+            "Fannie Mae Form 1005 / Freddie Mac Form 90 — Request for Verification of Employment",
+            "A mortgage underwriter",
+            "Employer or payroll, returned direct to the lender",
+            "Dates, title, current base pay, overtime and bonus over 2 years, probability of continued employment",
+            "Not something an applicant can complete, and not accepted if the applicant delivers it"
+          ],
+          [
+            "VA Form 26-8497 — Request for Verification of Employment",
+            "A VA-approved mortgage lender",
+            "Employer or payroll",
+            "The same ground as Form 1005, on the VA's own layout",
+            "Not interchangeable with Form 1005 on a VA loan file"
+          ],
+          [
+            "State benefits verification (SNAP, Medicaid, childcare subsidy)",
+            "A state or county agency caseworker",
+            "Employer, often with the agency's own cover sheet",
+            "Hours worked, gross pay, pay frequency, and the last 30 days of pay dates",
+            "Not a document the agency will accept from the applicant"
+          ],
+          [
+            "Form I-9 — Employment Eligibility Verification",
+            "Nobody outside the employer",
+            "Employer and employee together, at hire",
+            "Identity and work authorization documents",
+            "Not a verification of employment; it stays in the employer's files and is never sent out"
+          ],
+          [
+            "The employer's own form, or an automated verification service",
+            "A landlord, a new employer, a smaller lender",
+            "HR, payroll, or a third-party verification service",
+            "Dates, title, status, and sometimes income behind an access code",
+            "Not standardized — every employer's differs, and some cannot be completed by hand at all"
+          ]
+        ]
+      },
+      "generator": {
+        "heading": "Build the verification request in your browser",
+        "intro": "One set of answers produces the three pieces a verification actually takes: the standard field sheet for an employer with no form of their own, the request to HR that gets it completed, and the signed release without which payroll will not give out pay.",
+        "filename": "employment-verification",
+        "fields": [
+          {
+            "name": "employeeName",
+            "label": "Employee's full legal name",
+            "type": "text",
+            "placeholder": "Priya Raman",
+            "required": true
+          },
+          {
+            "name": "employerName",
+            "label": "Employer's legal name",
+            "type": "text",
+            "placeholder": "Northgate Logistics LLC",
+            "required": true
+          },
+          {
+            "name": "employerAddress",
+            "label": "Employer's worksite address",
+            "type": "text",
+            "placeholder": "2200 Rand Rd, Suite 140, Des Plaines, IL 60016"
+          },
+          {
+            "name": "jobTitle",
+            "label": "Job title",
+            "type": "text",
+            "placeholder": "Operations Coordinator",
+            "required": true
+          },
+          {
+            "name": "employmentType",
+            "label": "Position type",
+            "type": "select",
+            "options": [
+              "full-time",
+              "part-time",
+              "seasonal",
+              "contract"
+            ]
+          },
+          {
+            "name": "startDate",
+            "label": "Date of hire",
+            "type": "date",
+            "required": true
+          },
+          {
+            "name": "status",
+            "label": "Current status",
+            "type": "select",
+            "options": [
+              "currently employed",
+              "on approved leave",
+              "no longer employed"
+            ]
+          },
+          {
+            "name": "endDate",
+            "label": "Separation date",
+            "type": "date",
+            "help": "Leave blank if still employed."
+          },
+          {
+            "name": "payRate",
+            "label": "Base pay rate",
+            "type": "text",
+            "placeholder": "$29.50 per hour, or $61,400 per year"
+          },
+          {
+            "name": "payFrequency",
+            "label": "Pay frequency",
+            "type": "select",
+            "options": [
+              "weekly",
+              "every two weeks",
+              "twice a month",
+              "monthly"
+            ]
+          },
+          {
+            "name": "hoursPerWeek",
+            "label": "Average hours per week",
+            "type": "text",
+            "placeholder": "40"
+          },
+          {
+            "name": "verifierName",
+            "label": "Verifier's name and title",
+            "type": "text",
+            "placeholder": "Angela Doss, Payroll Manager",
+            "required": true
+          },
+          {
+            "name": "verifierContact",
+            "label": "Verifier's direct phone and business email",
+            "type": "text",
+            "placeholder": "(847) 555-0119 / adoss@northgatelog.com",
+            "required": true
+          },
+          {
+            "name": "requesterName",
+            "label": "Who is requesting the verification",
+            "type": "text",
+            "placeholder": "Summit Credit Union, Loan Processing",
+            "required": true
+          },
+          {
+            "name": "returnTo",
+            "label": "Where the completed form is returned",
+            "type": "text",
+            "placeholder": "verifications@summitcu.org or fax (312) 555-0184",
+            "required": true
+          },
+          {
+            "name": "purpose",
+            "label": "Purpose of the request",
+            "type": "select",
+            "options": [
+              "a rental application",
+              "a mortgage or loan application",
+              "a government benefits determination",
+              "a new employer's background check",
+              "a visa or immigration filing",
+              "a court or child support matter"
+            ]
+          },
+          {
+            "name": "returnBy",
+            "label": "Needed by",
+            "type": "date"
+          }
+        ],
+        "outputs": [
+          {
+            "id": "form",
+            "label": "The standard field sheet",
+            "note": "For an employer that has no form of its own. It carries the fields every requester asks for, in the order they read them. Where the requester named a specific form — Form 1005, VA 26-8497, an agency VOE — use theirs instead; this is not a substitute for a named form.",
+            "body": "VERIFICATION OF EMPLOYMENT\n\nTo:      {{requesterName}}\nReturn:  {{returnTo}}\nFor:     {{purpose}}{{#returnBy}}\nNeeded by: {{returnBy}}{{/returnBy}}\n\nEMPLOYER\n  Legal name ............... {{employerName}}\n  Worksite address ......... {{employerAddress}}\n\nEMPLOYEE\n  Full legal name .......... {{employeeName}}\n  Job title ................ {{jobTitle}}\n  Position type ............ {{employmentType}}\n  Date of hire ............. {{startDate}}\n  Current status ........... {{status}}\n  Separation date .......... {{endDate}}\n\nCOMPENSATION (complete only if the employee's signed release is on file)\n  Base pay rate ............ {{payRate}}\n  Pay frequency ............ {{payFrequency}}\n  Average hours per week ... {{hoursPerWeek}}\n\nI confirm the information above is taken from this employer's payroll and personnel records.\n\n  Verifier ................. {{verifierName}}\n  Direct contact ........... {{verifierContact}}\n\n  Signature ______________________________   Date ____________\n\nPlease return this completed form directly to {{returnTo}}. Do not return it by way of the employee."
+          },
+          {
+            "id": "request",
+            "label": "The request to HR or payroll",
+            "note": "Send this with the release attached. Naming the exact fields and the return path is what moves a verification from a shared inbox to someone's desk.",
+            "body": "Subject: Employment verification request — {{employeeName}}\n\nHello {{verifierName}},\n\n{{requesterName}} has asked for verification of my employment with {{employerName}} in connection with {{purpose}}. My signed authorization to release this information is attached.\n\nThe requester is asking you to confirm:\n\n  1. My job title and whether the position is {{employmentType}}\n  2. My date of hire\n  3. My current employment status as of the date you sign\n  4. My base pay rate, pay frequency, and average weekly hours\n\nPlease send the completed verification directly to {{returnTo}}{{#returnBy}}, by {{returnBy}}{{/returnBy}}. It should go from your office to theirs rather than back through me.\n\nIf this employer uses an outside verification service rather than completing forms in-house, please tell me which service and what the employer code is, and I will direct the requester there instead.\n\nIf anything above does not match the payroll record, please correct it rather than repeating it back.\n\nThank you,\n{{employeeName}}"
+          },
+          {
+            "id": "release",
+            "label": "The employee's release",
+            "note": "Payroll will confirm dates and title without this, and will usually refuse to release pay figures. Send it in the same message as the request.",
+            "body": "AUTHORIZATION TO RELEASE EMPLOYMENT AND INCOME INFORMATION\n\nI, {{employeeName}}, am {{status}} at {{employerName}}.\n\nI authorize {{employerName}}, its payroll department, and any verification service acting on its behalf, to release my employment and income information to {{requesterName}} at {{returnTo}}.\n\nThe information I am authorizing to be released is limited to: my job title, my position type, my date of hire{{#endDate}} and separation date{{/endDate}}, my current employment status, my base pay rate, my pay frequency, and my average weekly hours.\n\nThis authorization is given for the purpose of {{purpose}}{{#returnBy}} and is valid through {{returnBy}}{{/returnBy}}. A copy of this authorization may be relied upon as though it were the original.\n\n  Employee signature ______________________________   Date ____________\n\n  Print name ..... {{employeeName}}\n  Job title ...... {{jobTitle}}\n  Employer ....... {{employerName}}"
+          }
+        ]
+      },
+      "templateTitle": "What to send when the requester will not name a form",
+      "template": "Subject: Which verification form do you need for [applicant name]?\n\nHello,\n\nBefore I ask my employer to complete anything, I want to send them the right form.\n\nCould you tell me:\n\n  1. Do you require a specific form — Fannie Mae Form 1005, VA Form 26-8497, or your own — or will a signed verification on employer letterhead be accepted?\n  2. Where should the completed verification be returned: an email address, a fax number, or a portal?\n  3. Is there a deadline?\n  4. Do you need income included, or only dates, title, and status?\n\nMy employer outsources verification to [service name, if applicable], so if you have an established route to that service it may be faster than sending a form.\n\nThank you,\n[applicant name], [phone]",
+      "alternateTitle": "Escalation when payroll has not returned it",
+      "alternateTemplate": "Subject: Second request — employment verification for [employee name], needed by [date]\n\nHello,\n\nOn [date] I sent a verification request for my employment at [employer name], with my signed release attached. [Requester name] has not received it and my application is on hold pending it.\n\nA copy of the request and the release is attached again.\n\nIf completing the form is the obstacle, a short signed statement on company letterhead confirming my title, my hire date, and that I am currently employed would be accepted by [requester name] as an interim document while the full form is processed.\n\nIf verification for this employer is handled by an outside service, please tell me the service name and employer code and I will route the request there instead.\n\nReturn to: [email or fax]\nNeeded by: [date]\n\n[employee name], [job title], [phone]",
+      "mistakes": [
+        "Filling in the form yourself and having your manager sign it. Underwriters and caseworkers are trained to spot an applicant-completed form, and a wrong pay frequency in your own handwriting is worse than a delay.",
+        "Sending a benefits agency's form to a mortgage underwriter, or the reverse. The forms look similar and ask overlapping questions, and neither office will accept the other's.",
+        "Confusing Form I-9 with a verification of employment. Asking HR for a copy of your I-9 to send to a landlord will get a refusal and a delay.",
+        "Omitting the signed release, then reading payroll's refusal to disclose pay as an unwillingness to help.",
+        "Hand-carrying the completed form to the requester. A verification that passed through the applicant is treated as an applicant statement, which is not what was asked for."
+      ],
+      "faq": [
+        {
+          "question": "What is an employment verification form?",
+          "answer": "A structured request that an employer or payroll department completes, confirming employment dates, job title, current status, and — where a signed release exists — hours and pay, returned directly to the party that asked for it rather than to the employee."
+        },
+        {
+          "question": "Which employment verification form do I need?",
+          "answer": "Whichever one the requester names. A conventional mortgage file uses Fannie Mae Form 1005 or Freddie Mac Form 90, a VA loan file uses VA Form 26-8497, state benefits offices publish their own, and landlords and new employers usually accept anything reasonable. Ask before you send anything."
+        },
+        {
+          "question": "Can I fill out my own employment verification form?",
+          "answer": "You can pre-fill the factual details to save payroll a lookup, and you should sign the release. What you cannot do is complete it as though it came from the employer — the value of the document is that it comes from payroll records and travels directly to the requester."
+        },
+        {
+          "question": "How long does an employment verification take?",
+          "answer": "A small employer often replies in 1 to 3 days. A large payroll department typically takes 5 to 10 days, and an automated verification service can answer the same day once the requester has the employer code. A follow-up call after 5 business days is usually what moves a stalled request."
+        },
+        {
+          "question": "Is Form I-9 an employment verification form?",
+          "answer": "No. Form I-9 records that the employer examined a new hire's identity and work authorization documents. It is retained in the employer's files and is not the document a landlord, lender, or agency is asking for."
+        },
+        {
+          "question": "What if my employer refuses to complete a form?",
+          "answer": "Many employers have a policy of confirming only dates, title, and status, and of routing anything further to a verification service. Ask which service and pass that on to the requester. Where nothing is available, substitute what you control: recent pay stubs, your W-2, and an IRS wage and income transcript."
+        }
+      ],
+      "sources": [
+        {
+          "label": "U.S. Citizenship and Immigration Services — Form I-9, Employment Eligibility Verification",
+          "url": "https://www.uscis.gov/i-9"
+        },
+        {
+          "label": "U.S. Department of Veterans Affairs — VA Form 26-8497, Request for Verification of Employment",
+          "url": "https://www.va.gov/find-forms/about-form-26-8497/"
+        },
+        {
+          "label": "U.S. Department of Labor — Employment Verification",
+          "url": "https://www.dol.gov/agencies/oasam/centers-offices/human-resources-center/employment-verification"
+        }
+      ],
+      "boundary": "ApprovalPrep does not verify employment, contact employers, complete a form on an employer's behalf, or create employer signatures or income records. The generator on this page assembles text in your browser from what you type. Your employer completes and returns their own verification, or nobody does.",
+      "decisionContext": [
+        "This page helps you decide which form to obtain before you spend anyone's time on the wrong one. The forms overlap enough to look interchangeable and are treated as anything but by the offices that read them.",
+        "It also helps you decide who to ask. Where verification is outsourced to a service, a form emailed to HR is never answered, and the fastest route is to get the employer code to the requester on day one.",
+        "Where a verification cannot be obtained at all, the decision becomes what to substitute. Pay stubs and an IRS wage and income transcript are stronger evidence than a form nobody will complete, and both are things you can get yourself.",
+        "The generator is free and browser-only. The paid Income + Employment Letter Kit at $59 is the editable download for people who want the verification, the letters, and the income documents as files they keep."
+      ],
+      "whoFor": [
+        "Applicants who have been asked for an employment verification form and given no instructions on which one.",
+        "Applicants whose employer routes verification to an outside service and who do not know what to tell the requester.",
+        "HR and payroll staff completing a verification and unsure what may be released without a signed authorization.",
+        "Anyone whose file has been returned as incomplete because the wrong verification form was submitted."
+      ],
+      "value": [
+        "A comparison of the five documents that share this name, including the one that is not a verification of employment at all.",
+        "A working generator producing the field sheet, the request to payroll, and the release from one set of answers.",
+        "The release language that is the difference between payroll confirming dates only and payroll confirming income.",
+        "Realistic turnaround figures and a working escalation for a request that has gone unanswered."
+      ],
+      "whatYouGet": [
+        "A browser-only generator producing three documents from one set of answers.",
+        "A five-way comparison table naming the actual forms by number.",
+        "A message to send a requester who will not say which form they need.",
+        "An escalation template for a verification stalled in payroll.",
+        "Primary sources at USCIS, the VA, and the Department of Labor."
+      ],
+      "useCases": [
+        "A lender asked for a verification of employment and did not say which form.",
+        "Your file came back incomplete because the wrong form was submitted.",
+        "HR says verification is handled by an outside service and you do not know what to do with that.",
+        "A benefits caseworker needs hours and gross pay confirmed within a deadline.",
+        "You are in payroll, a verification arrived, and you need to know what you may release."
+      ],
+      "relatedPaths": [
+        "/employment-verification-letter",
+        "/proof-of-income-letter",
+        "/income-employment-letter-kit"
+      ],
+      "inboundFrom": [
+        "/employment-verification-letter",
+        "/proof-of-income-letter"
+      ],
+      "atoms": [
+        {
+          "id": "short_answer",
+          "type": "short_answer",
+          "title": "short answer",
+          "text": "An employment verification form is a structured request an employer or payroll department completes, confirming employment dates, job title, current status, and — where a signed release exists — hours and pay, returned directly to the requester rather than to the employee."
+        },
+        {
+          "id": "which_form",
+          "type": "definition",
+          "title": "which form",
+          "text": "There is no single national form. Conventional mortgage underwriting uses Fannie Mae Form 1005 or Freddie Mac Form 90, VA loan files use VA Form 26-8497, state benefits offices publish their own, and landlords and new employers usually accept an employer's own. Form I-9 is not a verification of employment; it is the employer's work-authorization record and stays in their files."
+        },
+        {
+          "id": "checklist",
+          "type": "checklist",
+          "title": "field set",
+          "text": "Collect before requesting: employee legal name, employer legal name and worksite address, job title and position type, date of hire and any separation date, current status, base pay rate and pay frequency, average weekly hours, the authorized verifier's name, title, direct phone and business email, and the employee's signed release."
+        },
+        {
+          "id": "mistakes",
+          "type": "mistake_prevention",
+          "title": "mistakes",
+          "text": "Verifications fail for five repeatable reasons: the applicant completed the form themselves, a form from a different program was substituted, Form I-9 was requested instead, no signed release accompanied the request so payroll withheld income, or the completed form was hand-carried by the applicant instead of sent employer to requester."
+        }
+      ]
+    },
+    {
+      "id": "employment-verification-letter-template",
+      "path": "/employment-verification-letter-template",
+      "family": "income_employment",
+      "risk": "medium",
+      "sku": "income-employment-letter-kit",
+      "targetQuery": "employment verification letter template",
+      "monthlyVolume": 3600,
+      "keywordDifficulty": 27,
+      "eyebrow": "Employment + income",
+      "title": "Employment Verification Letter Template",
+      "anchorText": "Six employment verification letter templates",
+      "description": "Six employment verification letter templates, one for each requester that asks for one: a landlord, a lender, a benefits agency, an immigration filing, a contractor's client, and a former employer. Fill the fields in once below and the generator writes whichever version you need.",
+      "summary": "There is no single employment verification letter. The three lines a leasing office wants will get a mortgage file returned, and the detail an immigration filing needs will make a landlord's copy overshare. Choose the template by who is going to read it.",
+      "definitionLabel": "What it is",
+      "definition": "An employment verification letter is a short statement signed by an employer confirming that a named person works or worked at a named employer, giving the job title, the dates of employment, the current status, and — only where the employer is authorized to disclose it — the compensation.",
+      "definitionDetail": "It is prose rather than a form, which is what makes it flexible and what makes it weaker. A form's fields are the same for every applicant, so a reviewer can compare; a letter is written from scratch each time, so a reviewer reads it and then telephones the number at the bottom.",
+      "primaryCta": "Write my verification letter",
+      "primaryHref": "#generator",
+      "secondaryCta": "See the Income + Employment Letter Kit",
+      "secondaryHref": "/pricing#income-employment-letter-kit",
+      "queries": [
+        "employment verification letter template",
+        "employment verification letter template for a landlord",
+        "how to write an employment verification letter",
+        "employment verification letter template mistakes",
+        "employment verification letter template and the income and employment letter kit"
+      ],
+      "keyFacts": [
+        "The letter belongs to the employer. HR, payroll, or a manager with signing authority writes and signs it; a letter an employee wrote about themselves is a self-statement and gets read as one.",
+        "Include compensation only where the reader needs it and the employer is authorized to disclose it. A landlord usually needs income; a new employer usually does not; and putting salary in a letter that did not ask for it is the most common overshare on this document.",
+        "Every letter gets a phone call if anything about it is unusual. The verifier's direct line and business email carry more weight than the letterhead does.",
+        "Reason for separation does not belong in a verification letter. Many employers have a written policy against stating it, and volunteering it creates exposure for the employer and rarely helps the employee.",
+        "For a self-employed applicant there is no employer to sign. The equivalent is a client or contracting party confirming the engagement, alongside a CPA letter and the tax records that support it."
+      ],
+      "fields": [
+        "Employee's full legal name as payroll holds it",
+        "Employer's legal name, and the letterhead or business email the letter will be sent from",
+        "Job title and whether the role is full-time, part-time, seasonal, or contract",
+        "Start date, and the end date where employment has ended",
+        "Current status as of the date the letter is signed",
+        "Annual salary or hourly rate and pay frequency, where the reader needs it and disclosure is authorized",
+        "Average weekly hours, where a benefits office or a lender has asked for them",
+        "The reader's name and organization, so the letter is addressed rather than sent to whom it may concern",
+        "The authorized signer's name, title, direct phone, business email, and the date"
+      ],
+      "steps": [
+        "Identify the reader first. The whole shape of the letter — how much income detail, whether hours appear, whether a start date alone is enough — follows from who is reading it.",
+        "Ask that reader what they require in writing. A leasing office that says a letter is fine will often add, when asked, that it must show gross monthly income.",
+        "Take the facts from payroll rather than memory. Title, hire date, and pay frequency all have to survive comparison with a pay stub.",
+        "Have it signed by someone with authority to verify. A colleague's signature on company letterhead is worse than a short letter from HR.",
+        "Keep it under one page. A verification letter that runs long reads as though it is arguing rather than confirming.",
+        "Send it the way the reader asked for it, and keep a copy of what went out and on what date."
+      ],
+      "reviewChecklist": [
+        "The letter names one reader and one purpose rather than opening 'to whom it may concern'.",
+        "Every figure matches the most recent pay stub, including pay frequency.",
+        "Nothing appears about performance, conduct, health, or reason for separation.",
+        "Income appears only if the reader asked for it and the employer authorized it.",
+        "The signer's direct phone number reaches someone who can confirm what they signed."
+      ],
+      "comparison": {
+        "heading": "What each reader actually needs in the letter",
+        "intro": "Six readers, six different letters. The middle column is where most templates on the internet go wrong: they include everything, which is the wrong answer for four of these six.",
+        "columns": [
+          "Who is reading it",
+          "Must include",
+          "Should leave out",
+          "Signed by",
+          "Usual deadline"
+        ],
+        "rows": [
+          [
+            "Landlord or leasing office",
+            "Title, hire date, current status, gross monthly or annual income",
+            "Reason for separation, performance, anything about household",
+            "HR or payroll",
+            "3 to 5 days, often before a hold expires"
+          ],
+          [
+            "Mortgage or auto lender",
+            "Title, hire date, status, base pay, pay frequency, and whether pay is salaried or variable",
+            "Opinions about future earnings the employer cannot support",
+            "HR or payroll only",
+            "5 to 10 days; underwriters often also require a form"
+          ],
+          [
+            "Government benefits agency",
+            "Hours per week, gross pay, pay frequency, and the most recent pay dates",
+            "Annual salary alone, which agencies cannot convert to a monthly determination",
+            "HR or payroll",
+            "Fixed by the agency, often 10 days from notice"
+          ],
+          [
+            "Visa or immigration filing",
+            "Title, hire date, status, salary, and a description of the role's duties",
+            "Anything speculative about future sponsorship",
+            "An officer or authorized representative of the employer",
+            "Set by the filing deadline, so ask early"
+          ],
+          [
+            "Self-employed or contractor",
+            "Engagement dates, scope of work, amounts paid, and the payer's contact",
+            "Claims about work not yet contracted",
+            "The client or contracting party, with a CPA letter alongside",
+            "3 to 7 days per client"
+          ],
+          [
+            "Former employee, employment ended",
+            "Title, hire date, separation date, and that the record is closed",
+            "Reason for separation, eligibility for rehire unless policy allows it",
+            "HR only",
+            "5 to 10 days; records requests are slower"
+          ]
+        ]
+      },
+      "generator": {
+        "heading": "Write the letter your reader is expecting",
+        "intro": "Fill the fields in once and switch between the six versions. Each one includes what that reader needs and leaves out what they did not ask for — which is the part a general-purpose template gets wrong.",
+        "filename": "employment-verification-letter",
+        "fields": [
+          {
+            "name": "employeeName",
+            "label": "Employee's full legal name",
+            "type": "text",
+            "placeholder": "Priya Raman",
+            "required": true
+          },
+          {
+            "name": "employerName",
+            "label": "Employer's legal name",
+            "type": "text",
+            "placeholder": "Northgate Logistics LLC",
+            "required": true
+          },
+          {
+            "name": "jobTitle",
+            "label": "Job title",
+            "type": "text",
+            "placeholder": "Operations Coordinator",
+            "required": true
+          },
+          {
+            "name": "employmentType",
+            "label": "Position type",
+            "type": "select",
+            "options": [
+              "full-time",
+              "part-time",
+              "seasonal",
+              "contract"
+            ]
+          },
+          {
+            "name": "startDate",
+            "label": "Start date",
+            "type": "date",
+            "required": true
+          },
+          {
+            "name": "endDate",
+            "label": "End date",
+            "type": "date",
+            "help": "Leave blank if currently employed."
+          },
+          {
+            "name": "salary",
+            "label": "Salary or hourly rate",
+            "type": "text",
+            "placeholder": "$61,400 per year, or $29.50 per hour"
+          },
+          {
+            "name": "payFrequency",
+            "label": "Pay frequency",
+            "type": "select",
+            "options": [
+              "every two weeks",
+              "twice a month",
+              "monthly",
+              "weekly"
+            ]
+          },
+          {
+            "name": "hoursPerWeek",
+            "label": "Average hours per week",
+            "type": "text",
+            "placeholder": "40"
+          },
+          {
+            "name": "duties",
+            "label": "What the role involves",
+            "type": "textarea",
+            "placeholder": "Coordinates inbound freight scheduling across three regional warehouses and manages a team of four."
+          },
+          {
+            "name": "recipient",
+            "label": "Addressed to",
+            "type": "text",
+            "placeholder": "Riverbend Apartments Leasing Office",
+            "required": true
+          },
+          {
+            "name": "signerName",
+            "label": "Signer's name and title",
+            "type": "text",
+            "placeholder": "Angela Doss, Payroll Manager",
+            "required": true
+          },
+          {
+            "name": "signerContact",
+            "label": "Signer's direct phone and business email",
+            "type": "text",
+            "placeholder": "(847) 555-0119 / adoss@northgatelog.com",
+            "required": true
+          }
+        ],
+        "outputs": [
+          {
+            "id": "landlord",
+            "label": "For a landlord or leasing office",
+            "note": "Income belongs in this one — a leasing office is checking rent against gross income. Nothing about performance or conduct belongs in it at all.",
+            "body": "[{{employerName}} letterhead]\n\n[Date]\n\n{{recipient}}\n\nRe: Employment verification for {{employeeName}}\n\nTo the leasing office,\n\nThis confirms that {{employeeName}} is employed by {{employerName}} as a {{employmentType}} {{jobTitle}}. {{employeeName}} began employment on {{startDate}} and is currently employed in that position.\n\n{{#salary}}Current compensation is {{salary}}, paid {{payFrequency}}.{{/salary}}{{#hoursPerWeek}} Scheduled hours average {{hoursPerWeek}} per week.{{/hoursPerWeek}}\n\nI am authorized to verify this information on behalf of {{employerName}}. Please contact me at {{signerContact}} if you would like to confirm any part of it.\n\nSincerely,\n\n{{signerName}}\n{{employerName}}\n{{signerContact}}"
+          },
+          {
+            "id": "lender",
+            "label": "For a mortgage or auto lender",
+            "note": "Underwriters read this beside a pay stub and a verification form. Say whether pay is salaried or variable — a lender treats those differently, and a letter that does not say invites a follow-up.",
+            "body": "[{{employerName}} letterhead]\n\n[Date]\n\n{{recipient}}\n\nRe: Verification of employment — {{employeeName}}\n\nTo the underwriting department,\n\nThis letter verifies the employment of {{employeeName}} with {{employerName}}.\n\n  Position ............ {{jobTitle}}\n  Position type ....... {{employmentType}}\n  Date of hire ........ {{startDate}}\n  Current status ...... {{#endDate}}Employment ended {{endDate}}{{/endDate}}{{^endDate}}Actively employed as of the date of this letter{{/endDate}}\n  Base compensation ... {{salary}}, paid {{payFrequency}}\n  Scheduled hours ..... {{hoursPerWeek}} per week\n\nThe compensation stated above is the employee's base pay. This employer does not make representations about future earnings, continued employment, or bonus and overtime amounts that have not yet been earned.\n\nI am authorized by {{employerName}} to release this verification. Direct enquiries to {{signerContact}}.\n\n{{signerName}}\n{{employerName}}"
+          },
+          {
+            "id": "benefits",
+            "label": "For a government benefits agency",
+            "note": "Agencies determine eligibility from hours and gross pay per pay period, not from annual salary. A letter that gives only an annual figure usually comes back with a request for the numbers below.",
+            "body": "[{{employerName}} letterhead]\n\n[Date]\n\n{{recipient}}\n\nRe: Employment and income verification — {{employeeName}}\n\nTo the eligibility caseworker,\n\nThis confirms the employment of {{employeeName}} with {{employerName}}.\n\n  Job title ................ {{jobTitle}}\n  Position type ............ {{employmentType}}\n  Date of hire ............. {{startDate}}\n  Employment status ........ {{#endDate}}Ended {{endDate}}{{/endDate}}{{^endDate}}Currently employed{{/endDate}}\n  Average hours per week ... {{hoursPerWeek}}\n  Rate of pay .............. {{salary}}\n  Pay frequency ............ {{payFrequency}}\n\nPay stubs for the most recent pay periods can be provided on request and will show gross pay and pay dates for the period your office is reviewing.\n\nI am authorized to verify this information on behalf of {{employerName}} and can be reached at {{signerContact}}.\n\n{{signerName}}\n{{employerName}}"
+          },
+          {
+            "id": "immigration",
+            "label": "For a visa or immigration filing",
+            "note": "This is the one version where a description of the duties matters, because the filing is usually about the nature of the role and not only its existence. Keep every claim to what the employer can support today.",
+            "body": "[{{employerName}} letterhead]\n\n[Date]\n\n{{recipient}}\n\nRe: Employment verification — {{employeeName}}\n\nTo whom it may concern at {{recipient}},\n\nI am an authorized representative of {{employerName}} and I am writing to confirm the employment of {{employeeName}}.\n\n{{employeeName}} has been employed by {{employerName}} since {{startDate}} in the {{employmentType}} position of {{jobTitle}}{{#endDate}}, through {{endDate}}{{/endDate}}. Current annual compensation is {{salary}}, paid {{payFrequency}}, for an average of {{hoursPerWeek}} hours per week.\n\n{{#duties}}The position involves the following: {{duties}}\n\n{{/duties}}This letter states the employment record as it exists on the date signed. It makes no representation regarding future employment, future sponsorship, or any immigration determination, which are outside this employer's control.\n\nI can be reached at {{signerContact}} to confirm any part of this letter.\n\nSincerely,\n\n{{signerName}}\n{{employerName}}"
+          },
+          {
+            "id": "contractor",
+            "label": "Self-employed or contractor — the client confirms",
+            "note": "There is no employer to sign, so the equivalent is the paying client confirming the engagement. Send it alongside your 1099s and the bank record of the deposits; on its own a client letter settles very little.",
+            "body": "[Client letterhead]\n\n[Date]\n\n{{recipient}}\n\nRe: Confirmation of contracted work — {{employeeName}}\n\nTo whom it concerns,\n\nThis confirms that {{employeeName}} has performed contracted work for {{employerName}} beginning {{startDate}}{{#endDate}} and continuing through {{endDate}}{{/endDate}}{{^endDate}} and continuing on an ongoing basis{{/endDate}}.\n\n{{#duties}}The scope of the engagement is: {{duties}}\n\n{{/duties}}{{#salary}}Amounts paid under this engagement are {{salary}}, billed {{payFrequency}}.\n\n{{/salary}}{{employeeName}} is an independent contractor and not an employee of {{employerName}}. Payments made are reported as contractor payments, and this confirmation is not a guarantee of future work.\n\nI can confirm the above at {{signerContact}}.\n\n{{signerName}}\n{{employerName}}"
+          },
+          {
+            "id": "former",
+            "label": "Former employee — employment has ended",
+            "note": "Say that the record is closed and stop. Reason for separation is the single detail most employers have a written policy against stating, and volunteering it helps nobody.",
+            "body": "[{{employerName}} letterhead]\n\n[Date]\n\n{{recipient}}\n\nRe: Employment record — {{employeeName}}\n\nTo whom it concerns,\n\nThis confirms that {{employeeName}} was employed by {{employerName}} as a {{employmentType}} {{jobTitle}} from {{startDate}} to {{endDate}}.\n\n{{#salary}}Compensation at the time of separation was {{salary}}, paid {{payFrequency}}.{{/salary}}\n\nThe employment record for {{employeeName}} is closed as of {{endDate}}. Company policy limits this office to confirming dates, position, and compensation; no statement regarding the circumstances of separation is offered or implied, and none should be inferred from its absence.\n\nEnquiries may be directed to {{signerContact}}.\n\n{{signerName}}\n{{employerName}}"
+          }
+        ]
+      },
+      "templateTitle": "The minimum letter, when the reader has not said what they need",
+      "template": "[Employer letterhead] — [Date]\n\n[Reader name and organization]\n\nRe: Employment verification for [employee full legal name]\n\nThis confirms that [employee name] is employed by [employer legal name] as a [full-time / part-time] [job title]. [Employee name] began employment on [start date] and is currently employed in that position.\n\nI am authorized to verify this information on behalf of [employer legal name]. Please contact me at [direct phone] or [business email] with any questions.\n\n[Signer name]\n[Signer title]\n[Employer legal name]",
+      "alternateTitle": "What an employee sends HR to get the letter written",
+      "alternateTemplate": "Subject: Employment verification letter request — needed by [date]\n\nHello [HR or payroll contact],\n\nI need an employment verification letter for [purpose: a rental application / a mortgage file / a benefits determination / a visa filing].\n\nThe reader is [reader name and organization] and they have asked for:\n\n  - My job title and position type\n  - My hire date and current employment status\n  - [Include only if the reader asked: my rate of pay and pay frequency]\n  - [Include only if the reader asked: my average hours per week]\n\nThey have not asked for reason for separation, performance information, or anything about my household, so none of that needs to appear.\n\nI authorize release of the information listed above to [reader name] as permitted by company policy. Please tell me if a signed consent form is needed.\n\nIt should go to [email / portal / postal address] by [date]. A copy to me would be appreciated.\n\nThank you,\n[employee name], [job title], [employee ID if used]",
+      "mistakes": [
+        "Using one all-purpose template for every reader. A letter that includes salary, hours, duties, and separation history satisfies no reader well and overshares for four of the six.",
+        "Opening 'to whom it may concern' when the reader is known. An addressed letter is harder to have been written for someone else, and reviewers treat it accordingly.",
+        "Signing it yourself as the employee. It becomes a statement about you rather than a verification of you, which is a different document with much less weight.",
+        "Sending it from a personal email address. A letter about employment that arrives from a personal account invites the exact verification call the letter was meant to avoid.",
+        "Stating a reason for separation. Most employers have a policy against it, it is almost never asked for, and it can only cost the employee."
+      ],
+      "faq": [
+        {
+          "question": "What should an employment verification letter template include?",
+          "answer": "At minimum: the employee's full legal name, the employer's legal name, the job title and position type, the hire date, the current status, and an authorized signer with a direct phone number. Compensation, hours, and duties are added only where the specific reader has asked for them."
+        },
+        {
+          "question": "Who should write an employment verification letter?",
+          "answer": "HR, payroll, or a manager with authority to verify on the employer's behalf. An employee can draft it and send it to HR to correct and sign, which usually speeds things up, but the signature has to come from the employer."
+        },
+        {
+          "question": "Should salary be in the letter?",
+          "answer": "Only when the reader asked for it and the employer is authorized to disclose it. A landlord and a lender normally need it; a new employer's background check normally does not; and a letter that volunteers it to a reader who did not ask has overshared."
+        },
+        {
+          "question": "Do I need a different template for a landlord and a lender?",
+          "answer": "Yes, in practice. A leasing office wants gross monthly income and a current-status line. An underwriter wants base pay separated from variable pay and will usually also require a verification form, and a letter that blurs the two invites a follow-up condition."
+        },
+        {
+          "question": "What does a self-employed person send instead?",
+          "answer": "There is no employer to sign, so the equivalent is a paying client confirming the engagement, sent alongside 1099s, the bank record of the deposits, and where the reader will accept one, a CPA letter. Any single one of those on its own settles very little."
+        },
+        {
+          "question": "How long should the letter be?",
+          "answer": "One page and usually four to six sentences. A verification letter that runs long reads as though it is arguing a case, and a reviewer who reads an argument starts looking for what is being argued around."
+        }
+      ],
+      "sources": [
+        {
+          "label": "U.S. Department of Labor — Employment Verification",
+          "url": "https://www.dol.gov/agencies/oasam/centers-offices/human-resources-center/employment-verification"
+        },
+        {
+          "label": "U.S. Citizenship and Immigration Services — Working in the United States",
+          "url": "https://www.uscis.gov/working-in-the-united-states"
+        },
+        {
+          "label": "Fannie Mae — Selling Guide",
+          "url": "https://selling-guide.fanniemae.com/"
+        }
+      ],
+      "boundary": "ApprovalPrep does not write letters on an employer's behalf, contact employers, produce signatures, or create employment or income records. The generator on this page assembles text in your browser from what you type. An authorized person at the employer signs their own name, or the letter is not a verification.",
+      "decisionContext": [
+        "This page helps you decide which version of the letter to produce, which is the decision most template pages skip entirely by publishing one letter for every situation.",
+        "It also helps you decide what to leave out. Oversharing is the more common failure here: salary sent to a reader who did not ask, a reason for separation nobody requested, hours added to a letter that needed a start date.",
+        "For a self-employed applicant the decision is different again — there is no employer, so the page shows what stands in for one and what has to travel alongside it.",
+        "The generator is free and browser-only. The paid Income + Employment Letter Kit at $59 is the editable download for people who want these as files they keep and re-edit."
+      ],
+      "whoFor": [
+        "Employees who have been asked for a verification letter and need to tell HR exactly what to write.",
+        "HR and payroll staff writing one and deciding what may and may not be included.",
+        "Self-employed and contract workers who have no employer to ask.",
+        "Former employees needing a closed employment record confirmed for a new application."
+      ],
+      "value": [
+        "Six templates instead of one, chosen by who is reading the letter rather than by what the writer happens to know.",
+        "An explicit should-leave-out column, because oversharing is the more common failure on this document.",
+        "A working generator that switches between all six versions from one set of answers.",
+        "A request an employee can send HR that specifies the letter rather than asking for one."
+      ],
+      "whatYouGet": [
+        "A browser-only generator with six letter versions.",
+        "A comparison table of what each reader requires and what they do not.",
+        "A minimum template for when the reader has not said what they need.",
+        "A request to HR that names the fields, so the letter comes back right the first time.",
+        "Primary sources at the Department of Labor, USCIS, and Fannie Mae."
+      ],
+      "useCases": [
+        "A leasing office asked for proof of employment and gave you no format.",
+        "An underwriter returned the letter because base pay and bonus were not separated.",
+        "A benefits caseworker needs weekly hours, and the letter you have gives an annual salary.",
+        "You are filing a visa petition and need the role's duties described.",
+        "You are in HR writing one of these and want to know what to leave out."
+      ],
+      "relatedPaths": [
+        "/employment-verification-letter",
+        "/employment-verification-form",
+        "/income-employment-letter-kit"
+      ],
+      "inboundFrom": [
+        "/employment-verification-letter"
+      ],
+      "atoms": [
+        {
+          "id": "short_answer",
+          "type": "short_answer",
+          "title": "short answer",
+          "text": "An employment verification letter is a short employer-signed statement confirming that a named person works or worked at a named employer, giving the job title, the employment dates, the current status, and — only where the employer is authorized — the compensation. There is no single correct version; the content follows from who is reading it."
+        },
+        {
+          "id": "by_reader",
+          "type": "definition",
+          "title": "by reader",
+          "text": "A leasing office needs gross monthly income and current status. An underwriter needs base pay separated from variable pay. A benefits agency needs weekly hours and pay frequency rather than annual salary. An immigration filing needs the duties described. A contractor's equivalent is a client confirmation sent alongside 1099s. A former-employee letter states dates and stops."
+        },
+        {
+          "id": "leave_out",
+          "type": "checklist",
+          "title": "what to leave out",
+          "text": "Leave out reason for separation, performance or conduct information, anything about the employee's household or health, income the reader did not ask for, and any claim about future employment or earnings the employer cannot support on the day the letter is signed."
+        },
+        {
+          "id": "mistakes",
+          "type": "mistake_prevention",
+          "title": "mistakes",
+          "text": "The repeated failures: one all-purpose template used for every reader, an unaddressed to-whom-it-may-concern opening where the reader is known, the employee signing it themselves, delivery from a personal email address, and a volunteered reason for separation that nobody requested."
+        }
+      ]
+    },
+    {
+      "id": "proof-of-employment-letter",
+      "path": "/proof-of-employment-letter",
+      "family": "income_employment",
+      "risk": "medium",
+      "sku": "income-employment-letter-kit",
+      "targetQuery": "proof of employment letter",
+      "monthlyVolume": 2900,
+      "keywordDifficulty": 30,
+      "eyebrow": "Employment + income",
+      "title": "Proof of Employment Letter",
+      "anchorText": "Proof of employment: what actually counts",
+      "description": "A proof of employment letter is the weakest item in the employment evidence stack and the easiest one to obtain. This page ranks the eight things reviewers accept as proof, shows where the letter sits among them, and gives you what to attach so the letter holds.",
+      "summary": "Send the letter with the two documents that outrank it — a recent pay stub and a W-2 or IRS wage and income transcript — and a reviewer stops having to trust the letter at all. A letter sent alone is a claim; a letter sent with payroll records is corroboration.",
+      "definitionLabel": "What it is",
+      "definition": "A proof of employment letter is a signed statement offered as evidence that a person is or was employed. Reviewers rank it below payroll records and tax documents, because it is the only item in the evidence stack that someone types by hand rather than a system producing it.",
+      "definitionDetail": "That ranking is the useful thing to know about it. The letter is quick to get and easy to doubt; the documents above it are slower to get and hard to argue with. Sending the letter alone asks a reviewer to take the employer's word for something; sending it with a pay stub and a wage transcript asks them to check.",
+      "primaryCta": "Build my proof of employment packet",
+      "primaryHref": "#generator",
+      "secondaryCta": "See the Income + Employment Letter Kit",
+      "secondaryHref": "/pricing#income-employment-letter-kit",
+      "queries": [
+        "proof of employment letter",
+        "what counts as proof of employment",
+        "how to get proof of employment",
+        "proof of employment letter rejected",
+        "proof of employment letter and the income and employment letter kit"
+      ],
+      "keyFacts": [
+        "Proof of employment is a stack, not a document. Reviewers weigh eight common items differently, and the letter sits in the middle of that stack rather than at the top of it.",
+        "The two items above the letter are both obtainable without your employer's help. Pay stubs come from your own payroll portal, and an IRS wage and income transcript can be pulled online for completed tax years.",
+        "A letter that arrives alone gets verified by phone. A letter that arrives with a pay stub whose year-to-date figure matches it usually does not.",
+        "A job started this year is the hardest case, because the tax record does not exist yet. There the offer letter, the first pay stubs, and a current-status letter have to carry it together.",
+        "An automated verification service is a consumer reporting agency in this context. If a report from one is used against your application, the Fair Credit Reporting Act gives you the right to know and to see it."
+      ],
+      "fields": [
+        "Full legal name exactly as payroll and the IRS hold it",
+        "Employer's legal name, which is often not the trading name you know",
+        "Job title, position type, and date of hire",
+        "Current employment status as of the date the packet is sent",
+        "Gross pay per pay period and pay frequency, from the stub rather than from memory",
+        "Year-to-date gross on the most recent pay stub",
+        "The last two W-2 forms, or an IRS wage and income transcript covering the same years",
+        "The authorized verifier's name, title, direct phone, and business email",
+        "The exact list of what the reviewer said they would accept"
+      ],
+      "steps": [
+        "Ask the reviewer what they accept, in a list. Most will name two or three items, and a packet built to that list is finished on the first pass.",
+        "Pull the documents you can get without asking anyone: your last 2 pay stubs from the payroll portal, your last 2 W-2 forms, and an IRS wage and income transcript.",
+        "Check that the documents agree with each other before you ask for the letter. If the stub and the W-2 use different employer legal names, explain that in one sentence rather than letting the reviewer find it.",
+        "Ask the employer for the letter last, once you know exactly what it needs to say. A letter drafted to match documents you already hold does not need rewriting.",
+        "Attach the letter to the records rather than sending it separately. A cover note listing what is enclosed stops a reviewer looking for something you already sent.",
+        "Keep a copy of the whole packet and the date it went out. Reviewers lose things, and a resend that is identical to the first is faster than reassembling it."
+      ],
+      "reviewChecklist": [
+        "The employer's legal name is identical on the letter, the pay stub, and the W-2.",
+        "The year-to-date figure on the newest pay stub is consistent with the pay rate stated in the letter.",
+        "The letter carries a direct phone number rather than a general switchboard.",
+        "Anything the reviewer listed and you cannot supply is named in the cover note with what you sent in its place.",
+        "Nothing in the packet has been retyped, edited, or reformatted from the original."
+      ],
+      "comparison": {
+        "heading": "The eight things offered as proof of employment, ranked by how a reviewer weighs them",
+        "intro": "This is the ranking that decides whether your packet gets one look or three. The letter is in it, but it is not near the top.",
+        "columns": [
+          "Evidence",
+          "Comes from",
+          "How hard to get",
+          "How a reviewer weighs it",
+          "Why it gets rejected"
+        ],
+        "rows": [
+          [
+            "IRS wage and income transcript",
+            "The IRS, built from what the employer already filed",
+            "Free; immediate online, or 5 to 10 days by post",
+            "Strongest — the employer reported it under penalty of perjury",
+            "Covers only completed tax years, so it says nothing about a job started this year"
+          ],
+          [
+            "Pay stubs from the last 30 days",
+            "Your employer's payroll system",
+            "Immediate from the payroll portal",
+            "Very strong — current pay and current employment in one document",
+            "Retyped or reformatted stubs; reviewers check the year-to-date arithmetic"
+          ],
+          [
+            "Completed verification form returned direct",
+            "Employer or payroll, sent to the requester",
+            "3 to 10 days",
+            "Very strong, precisely because it never passes through the applicant's hands",
+            "Returned incomplete, or hand-carried by the applicant"
+          ],
+          [
+            "W-2 for the last two years",
+            "Your employer, annually",
+            "Immediate if you kept them",
+            "Strong evidence of the prior year",
+            "Proves last year rather than this month"
+          ],
+          [
+            "Employment verification letter",
+            "Employer or HR, signed",
+            "1 to 5 days",
+            "Moderate — accepted, and then verified by telephone",
+            "Personal email, no letterhead, no direct number for the signer"
+          ],
+          [
+            "Offer letter",
+            "The employer, at hire",
+            "Immediate",
+            "Weak on its own",
+            "An offer is not evidence the job started, or that it continues"
+          ],
+          [
+            "Bank statements showing direct deposit",
+            "Your bank",
+            "Immediate",
+            "Supporting only",
+            "Shows money arriving; it does not show who employs you or in what role"
+          ],
+          [
+            "A statement you wrote about yourself",
+            "You",
+            "Immediate",
+            "Not evidence",
+            "It is the claim the reviewer is trying to check, restated"
+          ]
+        ]
+      },
+      "generator": {
+        "heading": "Build the letter and the packet it travels in",
+        "intro": "Two documents from one set of answers: the proof of employment letter for your employer to sign, and the cover note that tells the reviewer what is enclosed and what stands in for anything missing.",
+        "filename": "proof-of-employment",
+        "fields": [
+          {
+            "name": "employeeName",
+            "label": "Your full legal name",
+            "type": "text",
+            "placeholder": "Priya Raman",
+            "required": true
+          },
+          {
+            "name": "employerName",
+            "label": "Employer's legal name (as on the W-2, not the trading name)",
+            "type": "text",
+            "placeholder": "Northgate Logistics LLC",
+            "required": true
+          },
+          {
+            "name": "jobTitle",
+            "label": "Job title",
+            "type": "text",
+            "placeholder": "Operations Coordinator",
+            "required": true
+          },
+          {
+            "name": "employmentType",
+            "label": "Position type",
+            "type": "select",
+            "options": [
+              "full-time",
+              "part-time",
+              "seasonal",
+              "contract"
+            ]
+          },
+          {
+            "name": "startDate",
+            "label": "Date of hire",
+            "type": "date",
+            "required": true
+          },
+          {
+            "name": "status",
+            "label": "Current status",
+            "type": "select",
+            "options": [
+              "currently employed",
+              "on approved leave",
+              "employment has ended"
+            ]
+          },
+          {
+            "name": "grossPay",
+            "label": "Gross pay per pay period",
+            "type": "text",
+            "placeholder": "$2,361.54"
+          },
+          {
+            "name": "payFrequency",
+            "label": "Pay frequency",
+            "type": "select",
+            "options": [
+              "every two weeks",
+              "twice a month",
+              "monthly",
+              "weekly"
+            ]
+          },
+          {
+            "name": "ytd",
+            "label": "Year-to-date gross on your newest pay stub",
+            "type": "text",
+            "placeholder": "$44,869.26"
+          },
+          {
+            "name": "enclosures",
+            "label": "What you are enclosing",
+            "type": "textarea",
+            "placeholder": "Two pay stubs dated 8 Aug and 22 Aug 2026; W-2 for 2024 and 2025; IRS wage and income transcript for 2025."
+          },
+          {
+            "name": "missing",
+            "label": "Anything the reviewer asked for that you cannot supply",
+            "type": "textarea",
+            "placeholder": "No W-2 for 2026 — I started this role in March, so the first W-2 for this employer will not exist until January."
+          },
+          {
+            "name": "recipient",
+            "label": "Addressed to",
+            "type": "text",
+            "placeholder": "Summit Credit Union, Loan Processing",
+            "required": true
+          },
+          {
+            "name": "signerName",
+            "label": "Employer signer's name and title",
+            "type": "text",
+            "placeholder": "Angela Doss, Payroll Manager",
+            "required": true
+          },
+          {
+            "name": "signerContact",
+            "label": "Signer's direct phone and business email",
+            "type": "text",
+            "placeholder": "(847) 555-0119 / adoss@northgatelog.com",
+            "required": true
+          }
+        ],
+        "outputs": [
+          {
+            "id": "letter",
+            "label": "The proof of employment letter",
+            "note": "Written to be checked against the pay stub travelling with it. The pay-period figure and the year-to-date figure are in the letter on purpose: a reviewer who can reconcile the two stops needing to ring anyone.",
+            "body": "[{{employerName}} letterhead]\n\n[Date]\n\n{{recipient}}\n\nRe: Proof of employment — {{employeeName}}\n\nTo whom it concerns,\n\nThis confirms that {{employeeName}} is employed by {{employerName}} as a {{employmentType}} {{jobTitle}}, hired on {{startDate}}. As of the date of this letter, {{employeeName}} is {{status}}.\n\n{{#grossPay}}Gross pay is {{grossPay}} per pay period, paid {{payFrequency}}.{{/grossPay}}{{#ytd}} Year-to-date gross earnings through the most recent pay period are {{ytd}}, which will agree with the pay stub enclosed with this letter.{{/ytd}}\n\nThis letter confirms the employment record as it stands today. It is not a representation about continued employment or future earnings.\n\nI am authorized to verify this information for {{employerName}} and can be reached directly at {{signerContact}}.\n\nSincerely,\n\n{{signerName}}\n{{employerName}}\n{{signerContact}}"
+          },
+          {
+            "id": "cover",
+            "label": "The cover note for the packet",
+            "note": "The part most people skip. A reviewer who can see what is enclosed, and can see that you already know what is missing and why, does not go looking for it.",
+            "body": "{{recipient}}\n\n[Date]\n\nRe: Proof of employment — {{employeeName}}\n\nEnclosed is documentation of my employment with {{employerName}}, where I have worked as a {{employmentType}} {{jobTitle}} since {{startDate}}. I am {{status}}.\n\nEnclosed:\n\n{{enclosures}}\n\nThe figures agree across the documents: gross pay of {{grossPay}} paid {{payFrequency}}, with year-to-date gross of {{ytd}} on the most recent stub.\n\n{{#missing}}One item you asked for is not included, and here is why:\n\n{{missing}}\n\nIf a substitute would help, please tell me which and I will send it.\n\n{{/missing}}My employer's payroll contact is {{signerName}} at {{signerContact}}, and they are authorized to confirm any of this directly.\n\nPlease tell me if anything further is needed and I will send it the same day.\n\n{{employeeName}}"
+          }
+        ]
+      },
+      "templateTitle": "Proof of employment for a job that started this year",
+      "template": "[Employer letterhead] — [Date]\n\n[Reviewer name and organization]\n\nRe: Proof of employment — [employee name]\n\nThis confirms that [employee name] began employment with [employer legal name] on [start date] as a [full-time / part-time] [job title], and is currently employed in that position.\n\nBecause employment began in [year], no W-2 exists for this employer yet; the first will be issued in January [year + 1]. Enclosed instead are the [number] most recent pay stubs, which show gross pay of $[amount] per pay period paid [frequency], and year-to-date gross of $[amount].\n\nI am authorized to verify this on behalf of [employer legal name] and can be reached at [direct phone] or [business email].\n\n[Signer name], [title]",
+      "alternateTitle": "Proof of employment where the employer will not respond",
+      "alternateTemplate": "[Reviewer name and organization] — [Date]\n\nRe: Proof of employment — [your name]\n\nYou asked for a letter from my employer. [Employer legal name] routes all verification through [service name / a policy of confirming nothing in writing], and has not provided one. Rather than hold the file, I am sending the payroll and tax record directly.\n\nEnclosed:\n\n  1. Pay stubs for the [number] most recent pay periods, showing gross of $[amount] per period and year-to-date gross of $[amount]\n  2. W-2 forms for [year] and [year]\n  3. IRS wage and income transcript for [year], which reflects what [employer legal name] filed\n  4. Bank statements for [number] months showing the matching direct deposits\n\nMy employer's verification service is [service name]; the employer code is [code] and I can release an access PIN on request if your office verifies through them.\n\nIf a letter remains required, please tell me what alternative your office will accept and I will obtain it.\n\n[your name], [phone], [email]",
+      "mistakes": [
+        "Sending the letter alone. It is the item in the stack a reviewer trusts least, and on its own it produces a verification call and a delay rather than a decision.",
+        "Retyping or reformatting a pay stub to make it clearer. A stub that does not look like the payroll system produced it is treated as altered, and the year-to-date arithmetic is checked.",
+        "Using the trading name instead of the employer's legal name. When the letter says one name and the W-2 says another, a reviewer has to resolve it, and resolving it takes days.",
+        "Offering an offer letter as proof of current employment. It shows a job was offered, not that it started or that it continues.",
+        "Staying silent about a document you cannot produce. A reviewer who finds a gap themselves treats it as a gap; a reviewer told about it in advance treats it as a fact of the case."
+      ],
+      "faq": [
+        {
+          "question": "What counts as proof of employment?",
+          "answer": "Ranked by how reviewers weigh it: an IRS wage and income transcript, pay stubs from the last 30 days, a verification form returned directly by the employer, W-2 forms, an employment verification letter, an offer letter, bank statements showing direct deposit, and last of all a statement you wrote about yourself, which is not evidence."
+        },
+        {
+          "question": "Is a proof of employment letter enough on its own?",
+          "answer": "Rarely. It is accepted, and then verified by telephone, which costs days. Sent alongside a recent pay stub whose year-to-date figure reconciles with it, the same letter usually closes the question without a call."
+        },
+        {
+          "question": "How do I prove employment for a job I started this year?",
+          "answer": "The tax record does not exist yet, so the offer letter, the first pay stubs, and a current-status letter have to carry it together. Say plainly in the cover note that no W-2 exists for this employer yet and when the first one will be issued."
+        },
+        {
+          "question": "What if my employer will not give me a letter?",
+          "answer": "Send the payroll and tax record instead: recent pay stubs, W-2 forms, an IRS wage and income transcript, and bank statements showing the matching deposits. If verification is outsourced, give the reviewer the service name and employer code so they can verify through the route your employer actually uses."
+        },
+        {
+          "question": "Can I write my own proof of employment letter?",
+          "answer": "You can write it and ask your employer to correct and sign it. What you cannot do is sign it yourself and offer it as proof — a statement you wrote about your own employment is the claim being checked, not evidence for it."
+        },
+        {
+          "question": "Is an automated verification service report the same as a letter?",
+          "answer": "No, and it is often stronger, because it comes from payroll data rather than from someone typing. It is also a consumer report in this context, so if it is used against your application the Fair Credit Reporting Act gives you the right to be told and to see it."
+        }
+      ],
+      "sources": [
+        {
+          "label": "Internal Revenue Service — Transcript types and ways to order them",
+          "url": "https://www.irs.gov/individuals/transcript-types-and-ways-to-order-them"
+        },
+        {
+          "label": "Federal Trade Commission — Fair Credit Reporting Act",
+          "url": "https://www.ftc.gov/legal-library/browse/statutes/fair-credit-reporting-act"
+        },
+        {
+          "label": "Social Security Administration — Your Social Security Statement",
+          "url": "https://www.ssa.gov/myaccount/statement.html"
+        }
+      ],
+      "boundary": "ApprovalPrep does not verify employment, contact employers, obtain tax transcripts on your behalf, or create pay stubs, W-2 forms, or any other income record. The generator on this page assembles text in your browser from what you type. You gather your own documents and send your own packet.",
+      "decisionContext": [
+        "This page helps you decide what to send, and in what combination, when someone asks for proof of employment. The ranking of the evidence is the decision; the letter is only one row in it.",
+        "It also helps you decide what to do when the letter is unavailable. Two of the three strongest items in the stack can be obtained without your employer's cooperation at all, which changes what a refusal from HR actually costs you.",
+        "For a job started this year the decision is how to explain an absence rather than how to fill it. Saying why the W-2 does not exist yet is stronger than hoping nobody looks.",
+        "The generator is free and browser-only. The paid Income + Employment Letter Kit at $59 is the editable download for people who want the letters and the packet structure as files they keep."
+      ],
+      "whoFor": [
+        "Applicants asked for proof of employment who do not know which documents will satisfy it.",
+        "Applicants whose employer will not write a letter or routes everything to a verification service.",
+        "People a few months into a new job, where the tax record does not exist yet.",
+        "Anyone whose packet came back with a request for something they thought they had already sent."
+      ],
+      "value": [
+        "An eight-row ranking of what reviewers actually accept, with the rejection reason for each.",
+        "A letter written to reconcile against the pay stub travelling with it, rather than to stand alone.",
+        "A cover note that names what is missing and why, which is the part most packets skip.",
+        "Two fallback templates: a job started this year, and an employer that will not respond at all."
+      ],
+      "whatYouGet": [
+        "A browser-only generator producing the letter and the packet cover note.",
+        "The evidence ranking as a comparison table you can work down.",
+        "A template for a job with no tax record yet.",
+        "A template for sending the payroll and tax record when the employer will not write anything.",
+        "Primary sources at the IRS, the FTC, and the Social Security Administration."
+      ],
+      "useCases": [
+        "A lender asked for proof of employment and named three acceptable documents.",
+        "Your employer confirms nothing in writing and routes verification to an outside service.",
+        "You started the job in March and have no W-2 for this employer.",
+        "The letter you sent produced a verification call and a week's delay.",
+        "A caseworker rejected the packet because the employer name did not match across documents."
+      ],
+      "relatedPaths": [
+        "/proof-of-income-letter",
+        "/employment-verification-letter",
+        "/proof-of-income/self-employed"
+      ],
+      "inboundFrom": [
+        "/proof-of-income-letter",
+        "/letter-of-explanation/employment-gap"
+      ],
+      "atoms": [
+        {
+          "id": "short_answer",
+          "type": "short_answer",
+          "title": "short answer",
+          "text": "A proof of employment letter is a signed statement offered as evidence that a person is or was employed. Reviewers rank it below payroll records and tax documents, because it is the only item in the evidence stack that a person types by hand rather than a system producing it."
+        },
+        {
+          "id": "ranking",
+          "type": "definition",
+          "title": "evidence ranking",
+          "text": "Ranked by how reviewers weigh them: IRS wage and income transcript, pay stubs from the last 30 days, a verification form returned direct by the employer, W-2 forms, an employment verification letter, an offer letter, bank statements showing direct deposit, and last a self-written statement, which is not evidence at all."
+        },
+        {
+          "id": "packet",
+          "type": "checklist",
+          "title": "packet",
+          "text": "Send the letter attached to the records rather than alone: two recent pay stubs, the last two W-2 forms, an IRS wage and income transcript, and a cover note listing what is enclosed and naming anything the reviewer asked for that cannot be supplied, with the reason and the substitute."
+        },
+        {
+          "id": "mistakes",
+          "type": "mistake_prevention",
+          "title": "mistakes",
+          "text": "The repeated failures: sending the letter with nothing attached, retyping a pay stub so it no longer looks like payroll produced it, using a trading name where the W-2 carries a different legal name, offering an offer letter as proof of current employment, and staying silent about a document that cannot be produced."
+        }
       ]
     }
   ]
