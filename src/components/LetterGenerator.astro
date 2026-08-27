@@ -1,0 +1,185 @@
+---
+/**
+ * A real, working generator — not prose about one.
+ *
+ * The six /tools/ pages on this site are described as tools and contain zero
+ * inputs, zero buttons and zero checkboxes; the SERPs these pages target are
+ * won by a raw Google Doc, a .DOCX and a set of county PDFs. None of those let
+ * a person type their details and leave with finished text. This does.
+ *
+ * Same discipline as the free Letter Studio: everything happens in the reader's
+ * browser. No fetch, no network call, no storage API, no upload. The page ships
+ * the templates as static strings and the only work done at runtime is token
+ * substitution, so nothing a reader types can leave the tab.
+ *
+ * The generator is configured entirely from the page's own registry entry, so
+ * each page's tool asks for that page's fields and emits that page's documents.
+ * Template syntax:
+ *   {{field}}             value, or a visible [Label] placeholder when empty
+ *   {{#field}}…{{/field}} block kept only when that field has a value
+ *   {{^field}}…{{/field}} block kept only when that field is empty
+ */
+const { generator, sku = "", skuLabel = "", skuPrice = "" } = Astro.props;
+const fields = generator?.fields || [];
+const outputs = generator?.outputs || [];
+const idFor = (name) => `gen-${name}`;
+---
+{generator && (
+<section class="band generator-band" id="generator">
+  <div class="shell">
+    <p class="eyebrow">Working generator</p>
+    <h2>{generator.heading}</h2>
+    <p class="lead">{generator.intro}</p>
+    <div class="notice data-privacy-notice">
+      <strong>Runs entirely in this browser tab.</strong>
+      <p>Everything you type stays on this device. ApprovalPrep does not send, store, or receive the names, dates, addresses, or amounts you enter here — the page holds the templates and does the substitution locally.</p>
+    </div>
+    <div class="generator-grid" data-letter-generator>
+      <form class="card generator-form" novalidate>
+        <p class="eyebrow">Step 1</p>
+        <h3>Fill in the facts you can verify.</h3>
+        <p class="fine">Leave a box empty and the draft keeps a visible <strong>[placeholder]</strong> there, so nothing gets sent with a blank you did not notice.</p>
+        <div class="generator-fields">
+          {fields.map((field) => (
+            <label for={idFor(field.name)}>
+              {field.label}
+              {field.type === "textarea" ? (
+                <textarea id={idFor(field.name)} name={field.name} rows="3" placeholder={field.placeholder} autocomplete="off"></textarea>
+              ) : field.type === "select" ? (
+                <select id={idFor(field.name)} name={field.name}>
+                  {(field.options || []).map((option) => <option value={option}>{option}</option>)}
+                </select>
+              ) : (
+                <input id={idFor(field.name)} name={field.name} type={field.type === "date" ? "date" : "text"} placeholder={field.placeholder} autocomplete="off" />
+              )}
+              {field.help && <span class="fine">{field.help}</span>}
+            </label>
+          ))}
+        </div>
+        <div class="hero-actions">
+          <button class="button primary-button" type="button" data-generate>Build my draft</button>
+          <button class="button secondary secondary-button" type="button" data-clear>Clear the form</button>
+        </div>
+        <p class="fine">Static templates and local text substitution only. This is not AI, legal advice, financial advice, credit repair, or a promise of approval. Use only facts you can support with real documents.</p>
+      </form>
+      <div class="card generator-output">
+        <p class="eyebrow">Step 2</p>
+        <h3>Copy your draft.</h3>
+        <label class="generator-variant" for="gen-output-choice">
+          Document
+          <select id="gen-output-choice" data-output-choice>
+            {outputs.map((output) => <option value={output.id}>{output.label}</option>)}
+          </select>
+        </label>
+        <p class="fine" data-output-note>{outputs[0]?.note || ""}</p>
+        <pre data-output aria-live="polite">Fill in the form and choose <strong>Build my draft</strong>. Your finished text appears here, ready to copy.</pre>
+        <div class="hero-actions">
+          <button class="button secondary secondary-button" type="button" data-copy>Copy text</button>
+          <button class="button secondary secondary-button" type="button" data-download>Download .txt</button>
+        </div>
+        <p class="fine" data-generator-status role="status" aria-live="polite"></p>
+        {sku && (
+          <div class="recommendation-card">
+            <p class="eyebrow">Next step</p>
+            <h3>{skuLabel}</h3>
+            <p>The generator above is free and always will be. The paid kit is a direct download: a PDF guide plus editable DOCX versions of this document and the related letters, so you can keep and re-edit them outside the browser.</p>
+            <button class="button primary-button checkout-button" type="button" data-sku={sku}>{`Buy the ${skuLabel} — ${skuPrice}`}</button>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</section>
+)}
+
+{generator && (
+<script define:vars={{ outputs, fields, filename: generator.filename || "approvalprep-draft" }}>
+  const root = document.querySelector("[data-letter-generator]");
+  if (root) {
+    const form = root.querySelector(".generator-form");
+    const out = root.querySelector("[data-output]");
+    const note = root.querySelector("[data-output-note]");
+    const choice = root.querySelector("[data-output-choice]");
+    const status = root.querySelector("[data-generator-status]");
+    const labels = Object.fromEntries(fields.map((f) => [f.name, f.label]));
+
+    const values = () => Object.fromEntries(fields.map((f) => [f.name, String(form.elements[f.name]?.value || "").trim()]));
+
+    // Conditional blocks resolve before token substitution so an optional
+    // sentence disappears completely rather than leaving an orphan placeholder
+    // in the middle of a paragraph a reviewer will read.
+    const render = (body, data) => body
+      .replace(/\{\{#(\w+)\}\}([\s\S]*?)\{\{\/\1\}\}/g, (_, key, block) => (data[key] ? block : ""))
+      .replace(/\{\{\^(\w+)\}\}([\s\S]*?)\{\{\/\1\}\}/g, (_, key, block) => (data[key] ? "" : block))
+      .replace(/\{\{(\w+)\}\}/g, (_, key) => data[key] || `[${labels[key] || key}]`)
+      .replace(/\n{3,}/g, "\n\n")
+      .trim();
+
+    const selected = () => outputs.find((o) => o.id === choice.value) || outputs[0];
+
+    const draw = () => {
+      const output = selected();
+      note.textContent = output.note || "";
+      out.textContent = render(output.body, values());
+    };
+
+    root.querySelector("[data-generate]").addEventListener("click", () => {
+      draw();
+      const blanks = fields.filter((f) => f.required && !values()[f.name]).map((f) => f.label);
+      status.textContent = blanks.length
+        ? `Draft built. Still to fill in before you send it: ${blanks.join(", ")}.`
+        : "Draft built. Read it once for anything that is not accurate, then copy or download it.";
+    });
+
+    choice.addEventListener("change", () => {
+      note.textContent = selected().note || "";
+      if (out.dataset.built === "1") draw();
+    });
+
+    form.addEventListener("input", () => { out.dataset.built = "1"; draw(); });
+
+    root.querySelector("[data-clear]").addEventListener("click", () => {
+      form.reset();
+      out.dataset.built = "";
+      out.textContent = "Fill in the form and choose Build my draft. Your finished text appears here, ready to copy.";
+      status.textContent = "Form cleared. Nothing you typed was saved anywhere.";
+    });
+
+    root.querySelector("[data-copy]").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard?.writeText(out.textContent || "");
+        status.textContent = "Copied. Paste it into your email, your word processor, or the form you were given.";
+      } catch {
+        status.textContent = "Your browser blocked the copy button. Select the text above and copy it by hand.";
+      }
+    });
+
+    root.querySelector("[data-download]").addEventListener("click", () => {
+      const blob = new Blob([out.textContent || ""], { type: "text/plain" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `${filename}-${selected().id}.txt`;
+      link.click();
+      URL.revokeObjectURL(link.href);
+      status.textContent = "Saved to your downloads as a plain text file.";
+    });
+  }
+</script>
+)}
+
+<style>
+  .generator-grid { display: grid; gap: 1.25rem; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+  .generator-fields { display: grid; gap: .85rem; margin: 1rem 0; }
+  .generator-fields label, .generator-variant { display: grid; gap: .35rem; font-weight: 600; }
+  .generator-fields input, .generator-fields textarea, .generator-fields select, .generator-variant select {
+    width: 100%; padding: .6rem .7rem; font: inherit; font-weight: 400;
+    border: 1px solid rgba(0,0,0,.25); border-radius: .5rem; background: #fff; min-height: 44px;
+  }
+  .generator-fields textarea { min-height: 88px; resize: vertical; }
+  .generator-output pre {
+    white-space: pre-wrap; font-family: inherit; line-height: 1.65; margin: .75rem 0;
+    background: var(--surface-muted, #f5f3ef); padding: 1rem; border-radius: .75rem;
+    max-height: 30rem; overflow: auto;
+  }
+  @media (max-width: 740px) { .generator-grid { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,364 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-08-27",
+  "provenance": "Pages built against measured search demand held in data/queries/evidence/evidence_queries.json. Each page owns one query that this site had no page for.",
+  "pages": [
+    {
+      "id": "landlord-reference-letter",
+      "path": "/landlord-reference-letter",
+      "family": "apartment_rental",
+      "risk": "medium",
+      "sku": "rental-application-kit",
+      "targetQuery": "landlord reference letter",
+      "monthlyVolume": 1600,
+      "keywordDifficulty": 13,
+      "eyebrow": "Rental applications",
+      "title": "Landlord Reference Letter",
+      "anchorText": "Build a landlord reference letter",
+      "description": "A landlord reference letter is a current or former landlord's signed statement about one tenancy: the address, the dates, the rent, the payment record, and whether they would rent to you again. Build one in the browser below, from either side of the request.",
+      "summary": "Ask a landlord for facts they can check against their own ledger — dates, rent, late count, notice history — instead of praise. A checkable letter survives a screening review; a warm one gets skimmed and set aside.",
+      "definitionLabel": "What it is",
+      "definition": "A landlord reference letter is a signed statement from a current or former landlord describing one specific tenancy: the rental address, the dates the tenant lived there, the rent amount, the payment record, and whether the landlord would rent to that tenant again.",
+      "definitionDetail": "It is written in prose and it carries an opinion, which is what separates it from a rental verification form (a fixed field sheet with no opinion) and from a tenant screening report (a consumer report bought by the landlord from a screening company, which the tenant does not write and cannot edit).",
+      "primaryCta": "Build my landlord reference letter",
+      "primaryHref": "#generator",
+      "secondaryCta": "See the Rental Application Kit",
+      "secondaryHref": "/pricing#rental-application-kit",
+      "queries": [
+        "landlord reference letter",
+        "what to include in a landlord reference letter",
+        "how to ask a landlord for a reference letter",
+        "landlord reference letter mistakes that get an application rejected",
+        "landlord reference letter template and rental application kit"
+      ],
+      "keyFacts": [
+        "The letter belongs to the landlord, not the tenant. A tenant can draft a version and ask the landlord to confirm and sign it, but a leasing office treats a letter the tenant signed themselves as a self-statement, not a reference.",
+        "Corporate property managers frequently have a written policy that limits them to confirming dates, rent, and balance. That is not a refusal; ask for the facts-only version rather than pressing for an opinion they are not allowed to give.",
+        "The reference is checked. A leasing agent who has any doubt calls the number on the letter, so the phone number and email must be the landlord's real business contact, not a friend standing in.",
+        "The Fair Housing Act applies to what a landlord writes as much as to who they rent to. A reference that comments on a tenant's family size, disability, national origin, or religion creates a fair-housing problem for the landlord who wrote it.",
+        "A reference letter does not replace proof of income or a credit check. It answers one question — how this person rented — and leaves the other questions to other documents."
+      ],
+      "fields": [
+        "Tenant's full legal name as it appears on the lease",
+        "Full rental address including unit number",
+        "Landlord or property manager's name and business contact",
+        "Tenancy start date and end date, or a statement that the tenancy is current",
+        "Monthly rent amount and whether it changed during the tenancy",
+        "Number of late payments and any notices served",
+        "Condition of the unit at move-out and whether the deposit was returned",
+        "A direct answer on whether the landlord would rent to the tenant again"
+      ],
+      "steps": [
+        "Ask the leasing office what they will accept: a signed letter, a completed verification form, or a phone call. Some accept only one, and building the wrong one costs you a week.",
+        "Ask your landlord early, and ask in writing. A landlord who is asked by text on a Friday afternoon writes a worse letter than one who gets a written request with the facts already listed.",
+        "Send the landlord the facts you already know — address, dates, rent — so they are confirming a record rather than reconstructing one from memory.",
+        "Let the landlord write the opinion sentence in their own words. A letter where every sentence sounds like the tenant wrote it reads as coached.",
+        "Check every date and amount against your lease and your payment records before the letter goes out. A rent figure that is $50 off is the kind of thing a screener notices.",
+        "Ask for it on letterhead or from the landlord's business email address, and keep a copy of what was sent and when."
+      ],
+      "reviewChecklist": [
+        "Every date matches the lease, not your memory of it.",
+        "The rent figure matches what you actually paid, including any mid-tenancy increase.",
+        "The landlord's phone number and email are ones that will be answered during business hours.",
+        "Nothing in the letter mentions family, health, disability, religion, or national origin.",
+        "The letter names one tenancy and one address, not a general character reference."
+      ],
+      "comparison": {
+        "heading": "Landlord reference letter, verification form, or rent ledger — which one were you actually asked for?",
+        "intro": "Leasing offices use these three names loosely and they are not the same document. Asking your old landlord for the wrong one costs you a round trip.",
+        "columns": ["Document", "Who fills it in", "What it settles", "Typical turnaround", "Ask for this when"],
+        "rows": [
+          ["Landlord reference letter", "The landlord, in prose, signed", "How you rented, including the landlord's opinion of you as a tenant", "2 to 7 days", "The application asks for a reference, or you want to explain a thin rental history"],
+          ["Rental verification form", "The landlord, in fixed fields, usually returned by email or fax", "Dates, rent, balance owed, late count, notices — facts only, no opinion", "3 to 10 days", "The leasing office or housing agency sent you their own form to have completed"],
+          ["Rent ledger or payment history", "The landlord's accounting software, exported", "Exactly what was paid and when, month by month", "1 to 3 days", "Someone has questioned your payment record and you want the raw record"],
+          ["Tenant screening report", "A screening company, bought by the new landlord", "Credit, eviction filings, and public records — nothing about your conduct as a tenant", "Same day", "You cannot; the landlord orders this, and you have the right to a copy if it is used against you"]
+        ]
+      },
+      "generator": {
+        "heading": "Build a landlord reference letter in your browser",
+        "intro": "Fill in whatever you know. The draft updates as you type. Choose the version you need: the landlord's signed letter, your request asking for it, or a facts-only confirmation for a property manager whose policy will not let them give an opinion.",
+        "filename": "landlord-reference-letter",
+        "fields": [
+          { "name": "tenantName", "label": "Tenant's full name (as on the lease)", "type": "text", "placeholder": "Dana Okonkwo", "required": true },
+          { "name": "propertyAddress", "label": "Rental address, including unit", "type": "text", "placeholder": "418 Ellsworth Ave, Apt 3B, Columbus, OH 43201", "required": true },
+          { "name": "landlordName", "label": "Landlord or property manager name", "type": "text", "placeholder": "Marisol Vega, Ellsworth Property Group", "required": true },
+          { "name": "landlordContact", "label": "Landlord's business phone and email", "type": "text", "placeholder": "(614) 555-0142 / marisol@ellsworthpg.com", "required": true, "help": "Use the contact a leasing agent will actually reach during business hours." },
+          { "name": "moveIn", "label": "Tenancy start date", "type": "date", "required": true },
+          { "name": "moveOut", "label": "Tenancy end date", "type": "date", "help": "Leave blank if the tenant still lives there." },
+          { "name": "rentAmount", "label": "Monthly rent", "type": "text", "placeholder": "$1,450", "required": true },
+          { "name": "latePayments", "label": "Payment record", "type": "select", "options": ["paid in full and on time every month", "was late once", "was late two or three times", "was late more than three times but cleared the balance", "still owes a balance"] },
+          { "name": "notices", "label": "Notice history", "type": "select", "options": ["no notices were served", "one late-rent notice was served", "a lease violation notice was served and resolved", "an eviction was filed"] },
+          { "name": "condition", "label": "Condition at move-out and deposit outcome", "type": "textarea", "placeholder": "The unit was left clean and undamaged. The full security deposit was returned." },
+          { "name": "rentAgain", "label": "Would you rent to this tenant again?", "type": "select", "options": ["I would rent to this tenant again without reservation", "I would rent to this tenant again", "I am not able to answer that question under company policy"] },
+          { "name": "recipient", "label": "Addressed to", "type": "text", "placeholder": "Riverbend Apartments Leasing Office" }
+        ],
+        "outputs": [
+          {
+            "id": "reference",
+            "label": "The landlord's reference letter",
+            "note": "The version a leasing office expects. It should go out on the landlord's letterhead or from their business email address, signed and dated.",
+            "body": "[Landlord letterhead]\n\n[Date]\n\n{{recipient}}\n\nRe: Rental reference for {{tenantName}}\n\nTo the leasing office,\n\nI am the {{landlordName}} of record for {{propertyAddress}}. I am writing to confirm the tenancy of {{tenantName}} at that address.\n\n{{tenantName}} rented the unit from {{moveIn}}{{#moveOut}} through {{moveOut}}{{/moveOut}}{{^moveOut}} and is a current tenant{{/moveOut}}. The monthly rent was {{rentAmount}}. During the tenancy the tenant {{latePayments}}, and {{notices}}.\n\n{{#condition}}{{condition}}\n\n{{/condition}}{{rentAgain}}.\n\nIf you would like to confirm any of the above, I can be reached at {{landlordContact}}.\n\nSincerely,\n\n{{landlordName}}\nOwner / property manager, {{propertyAddress}}\n{{landlordContact}}"
+          },
+          {
+            "id": "request",
+            "label": "Your request asking the landlord for it",
+            "note": "Send this to a current or former landlord. It lists the facts for them so they are confirming a record instead of reconstructing one, which is the difference between a reply in two days and a reply in two weeks.",
+            "body": "Subject: Reference request for {{propertyAddress}}\n\nHello {{landlordName}},\n\nI am applying for a rental and the leasing office has asked for a reference from a previous landlord. Would you be willing to write a short one for my tenancy at {{propertyAddress}}?\n\nTo save you the lookup, here is what I have on record. Please correct anything that does not match your own records:\n\n  Tenant:        {{tenantName}}\n  Address:       {{propertyAddress}}\n  Tenancy:       {{moveIn}}{{#moveOut}} to {{moveOut}}{{/moveOut}}\n  Monthly rent:  {{rentAmount}}\n\nThe leasing office is looking for the dates, the rent, my payment record, and whether you would rent to me again. A short paragraph on your letterhead or from your business email is enough — it does not need to be long.\n\nIf company policy limits you to confirming dates and rent without an opinion, that is fine and useful on its own. Please send whatever you are able to.\n\nThe letter should go to: {{recipient}}\n\nThank you for your time,\n{{tenantName}}"
+          },
+          {
+            "id": "facts-only",
+            "label": "Facts-only confirmation (no opinion)",
+            "note": "For a property manager whose written policy bars them from giving a character opinion. Many large management companies can only send this. It is still accepted by most leasing offices.",
+            "body": "[Landlord letterhead]\n\n[Date]\n\n{{recipient}}\n\nRe: Tenancy confirmation — {{tenantName}}\n\nThis confirms the following tenancy record for {{propertyAddress}}:\n\n  Tenant of record:   {{tenantName}}\n  Tenancy start:      {{moveIn}}\n  Tenancy end:        {{moveOut}}\n  Monthly rent:       {{rentAmount}}\n  Payment record:     The tenant {{latePayments}}.\n  Notice history:     During the tenancy, {{notices}}.\n\nCompany policy limits this office to confirming the factual tenancy record above. No opinion regarding the tenant is offered or implied by this confirmation, and none should be inferred from its absence.\n\nQuestions about this record may be directed to {{landlordContact}}.\n\n{{landlordName}}\n{{landlordContact}}"
+          }
+        ]
+      },
+      "templateTitle": "Short reference, for a landlord who wants three sentences",
+      "template": "[Landlord letterhead] — [Date]\n\nTo the leasing office,\n\n[Tenant name] rented [full address] from [start date] to [end date] at [monthly rent] per month. [Tenant name] paid rent in full and on time, no notices were served during the tenancy, and the unit was returned in good condition with the deposit refunded in full.\n\nI would rent to [tenant name] again. I can be reached at [business phone] or [business email] to confirm any of this.\n\n[Landlord name], [title]",
+      "alternateTitle": "Reference where the payment record is not clean",
+      "alternateTemplate": "[Landlord letterhead] — [Date]\n\nTo the leasing office,\n\n[Tenant name] rented [full address] from [start date] to [end date] at [monthly rent] per month.\n\n[Tenant name] was late on rent [number] times, in [month/year] and [month/year]. In each case the balance was paid in full within [number] days and no eviction was filed. The remainder of the tenancy was paid on time, and the unit was returned in good condition.\n\nOn that record, I would rent to [tenant name] again.\n\n[Landlord name], [title], [business phone], [business email]",
+      "mistakes": [
+        "Writing the letter yourself and asking the landlord only to sign it. Leasing agents read a lot of these and a tenant-voiced letter is obvious; ask the landlord to put the opinion sentence in their own words.",
+        "Using a friend, a relative, or a personal cell number in place of the real landlord. The reference gets called, and a reference that does not check out is worse for the application than no reference at all.",
+        "Asking for praise instead of facts. A letter that says a tenant was wonderful and gives no dates, no rent figure, and no payment record settles nothing a screener needs settled.",
+        "Hiding a late payment the ledger will show anyway. A reference that says the record was spotless next to a screening report showing two late months damages everything else in the packet.",
+        "Letting the landlord mention children, a medical situation, an immigration status, or a religion. It does not help the tenant and it exposes the landlord to a fair-housing complaint."
+      ],
+      "faq": [
+        { "question": "What should a landlord reference letter include?", "answer": "The rental address, the tenancy dates, the monthly rent, the payment record, any notices served, the condition of the unit at move-out, a direct answer on whether the landlord would rent to the tenant again, and the landlord's business contact so the reference can be verified." },
+        { "question": "Can I write my own landlord reference letter?", "answer": "You can draft it and send it to your landlord to correct and sign, and doing so usually gets you a faster reply. What you cannot do is sign it yourself and submit it as a reference — a leasing office treats that as your own statement, which is a different and much weaker thing." },
+        { "question": "What if my old landlord will not write one?", "answer": "Ask instead for the facts-only confirmation, which many management companies are permitted to send when a full reference is not. If that is also refused, substitute the evidence you control: cancelled rent cheques, bank statements showing the transfers, the signed lease, and the return of your deposit." },
+        { "question": "Is a landlord reference letter the same as rental verification?", "answer": "No. A reference letter is written prose with an opinion in it. A rental verification form is a fixed set of fields the landlord completes with no opinion, usually on a form the new landlord or housing agency supplies. Some applications ask for one, some for the other, and a few for both." },
+        { "question": "How long should it be?", "answer": "One page, and usually three or four sentences. A leasing agent reading dozens of applications gives it perhaps twenty seconds, so the dates, the rent, and the payment record should all be visible without scrolling." },
+        { "question": "Does a strong reference letter guarantee I get the apartment?", "answer": "No. It settles one question among several. Income, credit, occupancy limits, pets, and the timing of other applications all sit outside what any reference letter can influence." }
+      ],
+      "sources": [
+        { "label": "Federal Trade Commission — Using Consumer Reports: What Landlords Need to Know", "url": "https://www.ftc.gov/business-guidance/resources/using-consumer-reports-what-landlords-need-know" },
+        { "label": "Consumer Financial Protection Bureau — What is a tenant screening report?", "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-tenant-screening-report-en-2102/" },
+        { "label": "U.S. Department of Justice, Civil Rights Division — The Fair Housing Act", "url": "https://www.justice.gov/crt/fair-housing-act-1" }
+      ],
+      "boundary": "ApprovalPrep does not contact your landlord, verify a tenancy, sign anything on a landlord's behalf, or produce a reference from a landlord who did not write one. The generator on this page assembles text from what you type, in your browser. You send it yourself, and a landlord signs their own name or nobody does.",
+      "decisionContext": [
+        "This page helps you decide which of three documents your leasing office actually wants, and then produce it. Reference letter, verification form, and rent ledger get used interchangeably in listings and they answer different questions.",
+        "It also helps you decide what to ask your landlord for. A landlord who is asked for a glowing reference often produces something vague; a landlord who is asked to confirm five specific facts usually produces something a screener can use.",
+        "Where the payment record is not clean, the decision is whether to name it. Naming it costs less than it appears to, because a screening report will show it anyway and an unexplained gap between two documents reads worse than a disclosed late payment.",
+        "The generator is free and stays free. The paid Rental Application Kit is for the case where you want the editable file and the rest of the rental packet in one download."
+      ],
+      "whoFor": [
+        "Renters applying for an apartment who have been asked for a reference from a previous landlord.",
+        "Renters with a thin or interrupted rental history who need the record explained rather than hidden.",
+        "Landlords and small property managers who have been asked to write a reference and want to stay inside fair-housing lines.",
+        "Anyone who was handed a rental verification form and cannot tell whether a letter would satisfy it."
+      ],
+      "value": [
+        "A working generator that produces finished text in the browser, rather than a page describing what a letter should contain.",
+        "Three versions covering the three real situations: the landlord writes it, the tenant asks for it, or the management company can only confirm facts.",
+        "A comparison table that settles which document was actually requested before you spend a week chasing the wrong one.",
+        "Fair-housing boundaries stated plainly, so a landlord writing a favour does not create a problem for themselves."
+      ],
+      "whatYouGet": [
+        "A browser-only generator producing three distinct documents from one set of answers.",
+        "A short template and a second template for the case where the payment record is not clean.",
+        "A field list to send your landlord so they confirm a record instead of reconstructing one.",
+        "A review checklist to run before the letter is sent.",
+        "Primary sources on tenant screening and fair housing."
+      ],
+      "useCases": [
+        "The leasing office asked for a landlord reference and gave you no format.",
+        "Your previous property manager says company policy bars them from giving a reference.",
+        "You were late on rent twice and need the letter to address it rather than avoid it.",
+        "You are the landlord, a former tenant has asked for a reference, and you want to help without overstepping.",
+        "You need the reference and a completed verification form for the same application."
+      ],
+      "relatedPaths": ["/rental-application-checklist", "/apartment-application", "/rental-application-kit"],
+      "inboundFrom": ["/rental-application-checklist", "/apartment-application"],
+      "atoms": [
+        { "id": "short_answer", "type": "short_answer", "title": "short answer", "text": "A landlord reference letter is a current or former landlord's signed statement about one tenancy: the address, the dates, the rent, the payment record, any notices served, and whether they would rent to that tenant again. It is written by the landlord, it carries an opinion, and it gets verified by phone." },
+        { "id": "field_set", "type": "checklist", "title": "field set", "text": "Collect before asking: the tenant's legal name as it appears on the lease, the full rental address including unit, the landlord's business phone and email, the tenancy start and end dates, the monthly rent and any mid-tenancy increase, the number of late payments, any notices served, the move-out condition and deposit outcome, and a direct answer on renting to the tenant again." },
+        { "id": "distinction", "type": "definition", "title": "distinction from verification", "text": "A landlord reference letter is prose with an opinion in it. A rental verification form is a fixed field sheet with no opinion, usually supplied by the new landlord or a housing agency. A tenant screening report is a consumer report the landlord buys and the tenant never writes. Applications ask for these interchangeably and they settle different questions." },
+        { "id": "mistakes", "type": "mistake_prevention", "title": "mistakes", "text": "The failures that cost applications: the tenant writes and signs it themselves, the contact given is a friend rather than the real landlord, the letter offers praise with no dates or rent figure, a late payment is concealed that the screening report will show anyway, or the landlord mentions family, health, religion, or national origin and creates a fair-housing exposure." }
+      ]
+    },
+    {
+      "id": "rental-verification-form",
+      "path": "/rental-verification-form",
+      "family": "apartment_rental",
+      "risk": "medium",
+      "sku": "rental-application-kit",
+      "targetQuery": "rental verification form",
+      "monthlyVolume": 1300,
+      "keywordDifficulty": 13,
+      "eyebrow": "Rental applications",
+      "title": "Rental Verification Form",
+      "anchorText": "Complete a rental verification form",
+      "description": "A rental verification form is the fixed field sheet a new landlord or housing agency sends to a previous landlord: dates, rent, balance owed, late count, notices, would-rent-again. Complete one below — with the tenant authorization that is the reason most of them come back blank.",
+      "summary": "Send the authorization with the form, not after it. A previous landlord who receives a verification request without written tenant consent is usually instructed to ignore it, which is why these forms sit unanswered for weeks.",
+      "definitionLabel": "What it is",
+      "definition": "A rental verification form is a structured request sent to a current or former landlord asking them to confirm one tenancy in checkable fields rather than in prose: the dates, the rent amount, any balance owed, the number of late payments, the notices served, and whether they would rent to the tenant again.",
+      "definitionDetail": "It is filled in by the landlord and returned to whoever sent it — a leasing office, a mortgage underwriter documenting rent history, or a public housing agency. Unlike a reference letter it contains no opinion beyond the final question, and unlike a screening report it comes from the landlord's own records rather than from a consumer reporting agency.",
+      "primaryCta": "Complete a rental verification form",
+      "primaryHref": "#generator",
+      "secondaryCta": "See the Rental Application Kit",
+      "secondaryHref": "/pricing#rental-application-kit",
+      "queries": [
+        "rental verification form",
+        "what fields are on a rental verification form",
+        "how to fill out a rental verification form",
+        "why a rental verification form comes back blank",
+        "rental verification form template and rental application kit"
+      ],
+      "keyFacts": [
+        "Most previous landlords will not answer without written authorization from the tenant. A management company's standing instruction is to ignore an unsigned request, so the authorization is not a formality — it is the thing that makes the form answerable.",
+        "The form is returned to the requester, not to the tenant. A tenant who fills one in and hands it to the leasing office has produced a self-statement; the form only carries weight when it travels from the previous landlord's office directly to the requester.",
+        "Answers must come from the ledger, not from memory. A landlord who writes 'never late' and later produces a ledger showing two late months has created a contradiction that damages the tenant.",
+        "A verification form is a consumer inquiry in some contexts and not in others. When a landlord orders a screening report the Fair Credit Reporting Act applies; a direct landlord-to-landlord verification is not a consumer report, which is why it can be answered without a screening company.",
+        "There is no single national form. HUD supplies its own for voucher tenancies, mortgage underwriters use their own for rent history, and most leasing offices use one written in-house — so ask which one before you send anything."
+      ],
+      "fields": [
+        "Tenant's full legal name and any co-tenant named on the lease",
+        "Full rental address including unit number",
+        "Previous landlord or management company name, phone, and email or fax",
+        "Requester's name, organization, and where the completed form should be returned",
+        "Lease start date and lease end date, or current-tenancy status",
+        "Monthly rent, and whether rent was ever increased during the tenancy",
+        "Any outstanding balance, and any amount charged against the deposit",
+        "Number of late payments, notices served, and whether an eviction was ever filed",
+        "The tenant's signed and dated authorization to release the rental history"
+      ],
+      "steps": [
+        "Ask the requester which form they want. If they have their own, use theirs; a substitute form is a common reason a file is returned as incomplete.",
+        "Have the tenant sign the authorization first. Send it in the same message as the form, not as a follow-up after the landlord has already ignored the request.",
+        "Address the request to the management office, not to an individual leasing agent who may have moved on. Include the property address in the subject line so it can be found by unit.",
+        "Give the landlord a deadline and a return path. A form with no return-by date and no fax or email goes to the bottom of the pile.",
+        "Ask the landlord to answer from the ledger. Anything they cannot support from their records should be left blank rather than guessed.",
+        "Follow up once by phone after 5 days. The most common outcome is not refusal, it is that the email went to a shared inbox nobody reads."
+      ],
+      "reviewChecklist": [
+        "The tenant's authorization is signed and dated, and names the same address as the form.",
+        "The rental address on the form matches the lease exactly, unit number included.",
+        "There is a return-by date and a working return address, fax, or email on the form.",
+        "Every field the landlord answered can be supported from the rent ledger.",
+        "The form went from the previous landlord to the requester, not by way of the tenant."
+      ],
+      "comparison": {
+        "heading": "Four documents a leasing office might mean by 'rental verification'",
+        "intro": "These names get used interchangeably and they are not substitutes. The column that matters is the last one: what each document cannot settle.",
+        "columns": ["Document", "Who completes it", "Form", "What it settles", "What it cannot settle"],
+        "rows": [
+          ["Rental verification form", "The previous landlord, from their ledger", "Fixed fields, returned to the requester", "Dates, rent, balance, late count, notices, would-rent-again", "Anything about income, credit, or why a late payment happened"],
+          ["Landlord reference letter", "The previous landlord, in prose", "A signed letter, usually one page", "How the landlord judges the tenancy overall", "Precise figures — a letter rarely carries the month-by-month record"],
+          ["Rent ledger or payment history", "The landlord's accounting software", "An exported statement, often 1 to 3 pages", "Exactly what was paid, and on what date, every month", "Whether notices were served or how the unit was left"],
+          ["Tenant screening report", "A screening company, ordered by the new landlord", "A purchased consumer report", "Credit file, public records, and eviction filings", "Whether the tenant paid this particular landlord on time"]
+        ]
+      },
+      "generator": {
+        "heading": "Complete a rental verification form in your browser",
+        "intro": "One set of answers produces the three pieces this actually takes: the completed verification, the cover request that gets it answered, and the tenant authorization without which most management companies will not reply.",
+        "filename": "rental-verification",
+        "fields": [
+          { "name": "tenantName", "label": "Tenant's full legal name", "type": "text", "placeholder": "Dana Okonkwo", "required": true },
+          { "name": "coTenant", "label": "Co-tenant named on the lease", "type": "text", "placeholder": "Leave blank if none" },
+          { "name": "propertyAddress", "label": "Rental address, including unit", "type": "text", "placeholder": "418 Ellsworth Ave, Apt 3B, Columbus, OH 43201", "required": true },
+          { "name": "landlordName", "label": "Previous landlord or management company", "type": "text", "placeholder": "Ellsworth Property Group", "required": true },
+          { "name": "landlordContact", "label": "Their phone, email, or fax", "type": "text", "placeholder": "(614) 555-0142 / records@ellsworthpg.com" },
+          { "name": "requesterName", "label": "Who is requesting the verification", "type": "text", "placeholder": "Riverbend Apartments Leasing Office", "required": true },
+          { "name": "returnTo", "label": "Where the completed form should be returned", "type": "text", "placeholder": "leasing@riverbendapts.com", "required": true },
+          { "name": "returnBy", "label": "Return-by date", "type": "date", "help": "A request with no deadline goes to the bottom of the pile." },
+          { "name": "leaseStart", "label": "Lease start date", "type": "date", "required": true },
+          { "name": "leaseEnd", "label": "Lease end date", "type": "date", "help": "Leave blank for a current tenancy." },
+          { "name": "monthlyRent", "label": "Monthly rent", "type": "text", "placeholder": "$1,450", "required": true },
+          { "name": "balanceOwed", "label": "Outstanding balance, if any", "type": "text", "placeholder": "$0" },
+          { "name": "lateCount", "label": "Number of late payments", "type": "select", "options": ["0", "1", "2", "3", "4 or more"] },
+          { "name": "noticeHistory", "label": "Notices served during the tenancy", "type": "select", "options": ["None", "One late-rent notice", "A lease violation notice, resolved", "An eviction was filed"] },
+          { "name": "depositOutcome", "label": "Deposit outcome", "type": "select", "options": ["Returned in full", "Partially withheld for damage", "Withheld in full", "Tenancy is current; deposit still held"] },
+          { "name": "rentAgain", "label": "Would you rent to this tenant again?", "type": "select", "options": ["Yes", "Yes, with conditions", "No", "Company policy does not permit an answer"] }
+        ],
+        "outputs": [
+          {
+            "id": "form",
+            "label": "The completed verification form",
+            "note": "The landlord's answers, in the field order a leasing office reads. Every line here should be answerable from the rent ledger; anything that is not should be left blank rather than estimated.",
+            "body": "RENTAL VERIFICATION\n\nCompleted by: {{landlordName}}\nContact:      {{landlordContact}}\nReturned to:  {{requesterName}} — {{returnTo}}\nDate:         [date completed]\n\nTENANCY\n  Tenant of record ......... {{tenantName}}\n  Co-tenant on lease ....... {{coTenant}}\n  Address .................. {{propertyAddress}}\n  Lease start .............. {{leaseStart}}\n  Lease end ................ {{leaseEnd}}\n\nRENT\n  Monthly rent ............. {{monthlyRent}}\n  Balance outstanding ...... {{balanceOwed}}\n  Late payments ............ {{lateCount}}\n\nTENANCY RECORD\n  Notices served ........... {{noticeHistory}}\n  Security deposit ......... {{depositOutcome}}\n  Would rent again ......... {{rentAgain}}\n\nI confirm the above is taken from this office's tenancy records for the address named.\n\nSignature ______________________________  Date ____________\nPrint name and title ___________________________________"
+          },
+          {
+            "id": "request",
+            "label": "The cover request to the previous landlord",
+            "note": "Send this with the form and the authorization in one message. Requests that arrive in three separate emails get answered least often.",
+            "body": "Subject: Rental verification request — {{propertyAddress}} — {{tenantName}}\n\nTo the records office at {{landlordName}},\n\n{{requesterName}} is processing a rental application from {{tenantName}}, who lists {{propertyAddress}} as a previous address. We are requesting verification of that tenancy.\n\nThe tenant's signed authorization to release this information is included with this request.\n\nWe are asking you to confirm, from your records:\n\n  1. Lease start and end dates\n  2. Monthly rent, and any increase during the tenancy\n  3. Any balance currently outstanding\n  4. The number of late payments\n  5. Any notices served, including any eviction filing\n  6. The security deposit outcome\n  7. Whether your office would rent to this tenant again\n\nPlease leave blank anything your records do not support rather than estimating it.\n\nPlease return the completed form to {{returnTo}}{{#returnBy}} by {{returnBy}}{{/returnBy}}. If a different office handles verifications, we would be grateful if you could forward this on and let us know where it went.\n\nThank you,\n{{requesterName}}\n{{returnTo}}"
+          },
+          {
+            "id": "authorization",
+            "label": "The tenant's authorization to release rental history",
+            "note": "The tenant signs and dates this. It is the piece most requests are missing, and it is the reason a management company's standing instruction is to ignore an unsigned verification request.",
+            "body": "AUTHORIZATION TO RELEASE RENTAL HISTORY\n\nI, {{tenantName}}, was a tenant at {{propertyAddress}}{{#leaseStart}} beginning {{leaseStart}}{{/leaseStart}}{{#leaseEnd}} and ending {{leaseEnd}}{{/leaseEnd}}.\n\nI authorize {{landlordName}}, and any agent or management company acting for that owner, to release my tenancy record for that address to {{requesterName}} at {{returnTo}}.\n\nThe information I am authorizing to be released is limited to: my tenancy dates, my monthly rent, any balance owed, my payment record, any notices served, my security deposit outcome, and whether the landlord would rent to me again.\n\nThis authorization is given for the purpose of a rental application{{#returnBy}} and is valid through {{returnBy}}{{/returnBy}}. A copy of this authorization may be relied on as though it were the original.\n\nTenant signature ______________________________  Date ____________\n\nPrint name: {{tenantName}}{{#coTenant}}\n\nCo-tenant signature ___________________________  Date ____________\n\nPrint name: {{coTenant}}{{/coTenant}}"
+          }
+        ]
+      },
+      "templateTitle": "The standard field set, if you are building your own form",
+      "template": "RENTAL VERIFICATION — [property address]\n\nTenant of record ......... [full legal name]\nCo-tenant on lease ....... [name, or \"none\"]\nLease start / end ........ [date] / [date, or \"current\"]\nMonthly rent ............. $[amount]\nRent increased during term [yes: to $[amount] on [date] / no]\nBalance outstanding ...... $[amount, or \"$0\"]\nLate payments ............ [count] ([months])\nNSF or returned payments . [count]\nNotices served ........... [none / late-rent / lease violation / eviction filed]\nSecurity deposit ......... [returned in full / $[amount] withheld for [reason]]\nWould rent again ......... [yes / yes with conditions / no / policy prohibits an answer]\n\nCompleted by [name, title] — [phone] — [email]\nSignature ______________________  Date ____________",
+      "alternateTitle": "Follow-up when the form has not come back",
+      "alternateTemplate": "Subject: Second request — rental verification, [property address]\n\nHello,\n\nOn [date] we sent a rental verification request for [tenant name] at [property address], with the tenant's signed authorization attached. We have not had a reply and the application is on hold pending it.\n\nA copy of the request and the authorization is attached again.\n\nIf your office does not complete verifications in this format, a rent ledger for the tenancy period, or a short email confirming the dates, the rent, and the balance, would be enough for our purposes.\n\nIf this request should go to a different office, please tell us where and we will resend it there.\n\nReturn to: [email or fax]\nWe would be grateful for a reply within 5 days.\n\n[requester name], [organization], [phone]",
+      "mistakes": [
+        "Sending the form without the tenant's signed authorization. This is the single largest cause of an unanswered verification, and it is fully preventable.",
+        "Letting the tenant carry the form. A verification that passes through the applicant's hands loses most of its value; it has to travel from the previous landlord's office to the requester.",
+        "Using your own form when the requester supplied one. Housing agencies and underwriters often cannot accept a substitute, and the file is returned as incomplete.",
+        "Answering fields from memory. A landlord who guesses at a late count and is later contradicted by their own ledger has damaged the tenant they were trying to help.",
+        "Sending it with no deadline and no return path. A request that does not say where to send the answer or by when is the easiest thing in a records inbox to defer."
+      ],
+      "faq": [
+        { "question": "What is a rental verification form?", "answer": "A fixed-field request sent to a current or former landlord asking them to confirm one tenancy from their own records: the dates, the rent, any balance owed, the number of late payments, the notices served, the deposit outcome, and whether they would rent to that tenant again." },
+        { "question": "Who fills out a rental verification form?", "answer": "The previous landlord or their management company. The requester — a leasing office, a mortgage underwriter, or a housing agency — sends it; the tenant signs the authorization that permits it to be answered; the landlord completes and returns it." },
+        { "question": "Why do rental verification forms come back blank?", "answer": "Most often because no signed tenant authorization was included, and a management company's standing instruction is to ignore unsigned requests. The next most common reasons are that it went to an individual agent who has left, or that it arrived with no return-by date and no return address." },
+        { "question": "Can a tenant fill out their own rental verification form?", "answer": "A tenant can pre-fill the tenancy details to save the landlord a lookup, and should sign the authorization. What a tenant cannot do is complete and return the form as though it came from the landlord — the value of the document is that it comes from the landlord's records." },
+        { "question": "How long does rental verification take?", "answer": "A small landlord often replies in 1 to 3 days. A management company's records office typically takes 5 to 10 days, and a first follow-up call after 5 days is usually what moves it." },
+        { "question": "Is a verification form the same as a credit or screening check?", "answer": "No. A verification form comes directly from the landlord's own tenancy records. A tenant screening report is a consumer report bought from a screening company and is governed by the Fair Credit Reporting Act, including the notice a landlord owes you if it is used against your application." }
+      ],
+      "sources": [
+        { "label": "U.S. Department of Housing and Urban Development — Request for Tenancy Approval (form HUD-52517)", "url": "https://www.hud.gov/sites/dfiles/OCHCO/documents/52517.pdf" },
+        { "label": "Federal Trade Commission — Fair Credit Reporting Act", "url": "https://www.ftc.gov/legal-library/browse/statutes/fair-credit-reporting-act" },
+        { "label": "Consumer Financial Protection Bureau — What is a tenant screening report?", "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-tenant-screening-report-en-2102/" }
+      ],
+      "boundary": "ApprovalPrep does not send verification requests, contact landlords, complete a form on a landlord's behalf, or store anything you type into the generator. The page builds text in your browser from your own answers. The tenant signs their own authorization and the landlord completes their own form.",
+      "decisionContext": [
+        "This page helps you decide what to send, in what order, so that a verification request is actually answered rather than filed. The order matters more than the wording: authorization first, in the same message as the form.",
+        "It also helps you decide whether a verification form is what was asked for at all. A leasing office that says 'rental verification' sometimes means a reference letter and sometimes means a rent ledger, and the three take different amounts of time to obtain.",
+        "For a landlord being asked to complete one, the decision is what to answer and what to leave blank. Anything that cannot be supported from the ledger should be left blank; a guess that is later contradicted hurts the tenant more than a blank does.",
+        "The generator is free. The paid Rental Application Kit is the editable download for people who want the verification, the cover letter, and the rest of the rental packet in one file set."
+      ],
+      "whoFor": [
+        "Renters whose application is on hold because a previous landlord has not returned a verification.",
+        "Renters who were handed a blank verification form and no instructions on who completes it.",
+        "Landlords and property managers asked to verify a former tenant and unsure what they may disclose.",
+        "Anyone documenting rent history for a mortgage file or a housing agency rather than a lease."
+      ],
+      "value": [
+        "A working generator that outputs the completed form, the cover request, and the tenant authorization from one set of answers.",
+        "The authorization language that is the actual bottleneck, rather than another blank form to print.",
+        "A four-way comparison that settles which document the requester meant before you chase the wrong one.",
+        "Realistic turnaround figures and a follow-up template for the common case where nothing comes back."
+      ],
+      "whatYouGet": [
+        "A browser-only generator producing three documents: the verification, the request, and the release.",
+        "The standard field set, if you need to build a form of your own.",
+        "A second-request template for a verification that has gone unanswered.",
+        "A review checklist covering the five things that stop these forms being returned.",
+        "Primary sources on the HUD tenancy form, the Fair Credit Reporting Act, and tenant screening."
+      ],
+      "useCases": [
+        "The leasing office sent you a blank verification form and you do not know who completes it.",
+        "Your old management company has ignored two verification requests.",
+        "A mortgage underwriter has asked for 12 months of documented rent history.",
+        "A housing agency needs a previous tenancy verified before a voucher can be issued.",
+        "You are the landlord, a verification arrived, and you want to know what you may and may not answer."
+      ],
+      "relatedPaths": ["/apartment-application", "/rental-application-checklist", "/rental-application-kit"],
+      "inboundFrom": ["/apartment-application", "/how-to-get-approved-for-an-apartment"],
+      "atoms": [
+        { "id": "short_answer", "type": "short_answer", "title": "short answer", "text": "A rental verification form is a fixed-field request sent to a current or former landlord asking them to confirm one tenancy from their own records: lease dates, monthly rent, any balance owed, the number of late payments, notices served, the deposit outcome, and whether they would rent to that tenant again." },
+        { "id": "authorization", "type": "checklist", "title": "authorization requirement", "text": "Most management companies are instructed to ignore a verification request that arrives without the tenant's signed authorization to release rental history. Send the authorization in the same message as the form, name the same address on both, give a return-by date, and give a working return email or fax." },
+        { "id": "field_set", "type": "definition", "title": "standard field set", "text": "The standard fields are: tenant of record, co-tenant on the lease, full address with unit, lease start and end, monthly rent and any increase, balance outstanding, count of late payments, NSF or returned payments, notices served including any eviction filing, security deposit outcome, and would-rent-again." },
+        { "id": "mistakes", "type": "mistake_prevention", "title": "mistakes", "text": "Verifications fail for five repeatable reasons: no signed authorization was included, the form travelled through the applicant's hands instead of landlord to requester, a substitute form was used where the requester supplied their own, fields were answered from memory rather than the ledger, or the request carried no deadline and no return path." }
+      ]
+    }
+  ]
+}

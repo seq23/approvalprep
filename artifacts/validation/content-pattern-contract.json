@@ -2,9 +2,9 @@
   "schemaVersion": "1.0.0",
   "validator": "content-pattern-contract",
   "spec": ".clarity/content-pattern-spec.json",
-  "generatedAt": "2026-08-26T20:14:31.006Z",
+  "generatedAt": "2026-08-27T15:30:26.932Z",
   "enforcement": "block",
-  "pagesChecked": 94,
+  "pagesChecked": 102,
   "status": "PASS",
   "blockingFailures": 0,
   "summary": [
@@ -46,29 +46,29 @@
     {
       "id": "comparison_table",
       "blocking": false,
-      "pagesMissing": 91,
-      "coveragePct": 3.2,
+      "pagesMissing": 97,
+      "coveragePct": 4.9,
       "why": "no comparison or cost table (agent request #2, 529 occurrences)"
     },
     {
       "id": "concrete_numbers",
       "blocking": false,
-      "pagesMissing": 5,
-      "coveragePct": 94.7,
+      "pagesMissing": 4,
+      "coveragePct": 96.1,
       "why": "no concrete cost or timeline figures (agent request #5, 365 occurrences)"
     },
     {
       "id": "named_sources",
       "blocking": false,
-      "pagesMissing": 88,
-      "coveragePct": 6.4,
+      "pagesMissing": 0,
+      "coveragePct": 100,
       "why": "no named primary source (agent request #6, 288 occurrences)"
     },
     {
       "id": "faq",
       "blocking": false,
       "pagesMissing": 11,
-      "coveragePct": 88.3,
+      "coveragePct": 89.2,
       "why": "no FAQ block or FAQPage schema (agent request #9)"
     },
     {
@@ -82,35 +82,35 @@
       "id": "recommendation_summary",
       "blocking": false,
       "pagesMissing": 3,
-      "coveragePct": 96.8,
+      "coveragePct": 97.1,
       "why": "no recommendation summary - asked for on 913 of 913 agent recommendations, the single most requested block"
     },
     {
       "id": "definition_callout",
       "blocking": false,
-      "pagesMissing": 93,
-      "coveragePct": 1.1,
+      "pagesMissing": 99,
+      "coveragePct": 2.9,
       "why": "no definition callout (agent requested 196 times) - this is what an answer engine lifts for \"what is X\""
     },
     {
       "id": "trust_block",
       "blocking": false,
-      "pagesMissing": 55,
-      "coveragePct": 41.5,
+      "pagesMissing": 63,
+      "coveragePct": 38.2,
       "why": "no trust or authorship block (agent requested 215 times) - entity clarity is a citation factor"
     },
     {
       "id": "source_block",
       "blocking": false,
-      "pagesMissing": 88,
-      "coveragePct": 6.4,
+      "pagesMissing": 94,
+      "coveragePct": 7.8,
       "why": "no sources block - a claim with no visible provenance is the first thing an engine discounts"
     },
     {
       "id": "protocol",
       "blocking": false,
-      "pagesMissing": 12,
-      "coveragePct": 87.2,
+      "pagesMissing": 0,
+      "coveragePct": 100,
       "why": "no ordered protocol - ordered steps are what gets lifted for \"how do I\""
     },
     {
@@ -123,7 +123,7 @@
     {
       "id": "prompt_template",
       "blocking": false,
-      "pagesMissing": 94,
+      "pagesMissing": 102,
       "coveragePct": 0,
       "why": "no copy-ready prompt - the artifact this audience actually reuses"
     }
@@ -163,38 +163,11 @@
     ],
     "concrete_numbers": [
       "dist/contact/index.html",
-      "dist/glossary/index.html",
       "dist/letter-of-explanation/late-payment/index.html",
       "dist/not-a-credit-repair-company/index.html",
       "dist/refund-policy/index.html"
     ],
-    "named_sources": [
-      "dist/apartment-application/index.html",
-      "dist/auto-loan-documents/index.html",
-      "dist/auto-loan/income-verification/index.html",
-      "dist/blog/how-should-i-prepare-for-apartment-application-readiness-checklist/index.html",
-      "dist/blog/how-should-i-prepare-for-approvalprep-document-readiness-index/index.html",
-      "dist/blog/how-should-i-prepare-for-approvalprep-glossary/index.html",
-      "dist/blog/how-should-i-prepare-for-approvalprep-methodology/index.html",
-      "dist/blog/how-should-i-prepare-for-business-funding-document-checklist/index.html",
-      "dist/blog/how-should-i-prepare-for-car-loan-document-checklist/index.html",
-      "dist/blog/how-should-i-prepare-for-important-documents-checklist/index.html",
-      "dist/blog/how-should-i-prepare-for-important-documents-folder-checklist/index.html",
-      "dist/blog/how-should-i-prepare-for-mortgage-document-readiness-checklist/index.html",
-      "dist/blog/how-should-i-prepare-for-moving-checklist/index.html",
-      "dist/blog/how-should-i-prepare-for-pricing/index.html",
-      "dist/blog/how-should-i-prepare-for-proof-of-income-packet-checklist/index.html",
-      "dist/blog/how-should-i-prepare-for-resources/index.html",
-      "dist/blog/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-apartment-application-readiness-checklist/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-document-readiness-index/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-glossary/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-methodology/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-business-funding-document-checklist/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-car-loan-document-checklist/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-important-documents-checklist/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-important-documents-folder-checklist/index.html"
-    ],
+    "named_sources": [],
     "faq": [
       "dist/blog/index.html",
       "dist/contact/index.html",
@@ -295,20 +268,7 @@
       "dist/blog/what-mistakes-should-i-avoid-with-important-documents-checklist/index.html",
       "dist/blog/what-mistakes-should-i-avoid-with-important-documents-folder-checklist/index.html"
     ],
-    "protocol": [
-      "dist/blog/index.html",
-      "dist/contact/index.html",
-      "dist/glossary/index.html",
-      "dist/letter-writing-studio/index.html",
-      "dist/methodology/index.html",
-      "dist/not-a-credit-repair-company/index.html",
-      "dist/pricing/index.html",
-      "dist/refund-policy/index.html",
-      "dist/reports/apartment-application-prep-report/index.html",
-      "dist/reports/document-readiness-index/index.html",
-      "dist/reports/small-business-funding-document-prep-report/index.html",
-      "dist/resources/index.html"
-    ],
+    "protocol": [],
     "cta_callout": [],
     "prompt_template": [
       "dist/609-dispute-letter/index.html",

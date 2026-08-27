@@ -25,11 +25,24 @@ import LegalPolicyPage from "../components/LegalPolicyPage.astro";
 import RelatedContent from "../components/RelatedContent.astro";
 import RecommendationSummary from "../components/RecommendationSummary.astro";
 import manifest from "../../data/routes/route_manifest.json";
+import demandCoverage from "../../data/content/demand_coverage_pages.json";
 import { routeCopy, boundary, productCards, productComparison, routeFamilyCopy, offeringCategories, offeringsForSku, productForSku } from "../data/content";
 
 export function getStaticPaths() {
+  // Routes that own a dedicated page file. Astro cannot build two pages for one
+  // URL, so a path listed here must be excluded from the dynamic route or the
+  // build collides. The measured-demand pages are read from their own registry
+  // rather than copied into this list, so adding a page cannot forget this step.
+  // getStaticPaths is hoisted and evaluated in isolation, so this has to live
+  // inside it rather than at module scope.
+  const dedicatedPaths = new Set([
+    "/", "/letter-writing-studio", "/resources", "/blog", "/contact", "/methodology",
+    "/employment-verification-letter", "/609-dispute-letter", "/goodwill-letter-to-remove-late-payment",
+    "/letter-of-explanation/late-payment", "/letter-of-explanation/large-deposit",
+    ...demandCoverage.pages.map((page) => page.path)
+  ]);
   return manifest.routes
-    .filter((route) => !["/", "/letter-writing-studio", "/resources", "/blog", "/contact", "/methodology", "/employment-verification-letter", "/609-dispute-letter", "/goodwill-letter-to-remove-late-payment", "/letter-of-explanation/late-payment", "/letter-of-explanation/large-deposit"].includes(route.path) && !route.path.startsWith("/tools") && !route.path.startsWith("/templates") && !route.path.startsWith("/reports") && route.type !== "admin")
+    .filter((route) => !dedicatedPaths.has(route.path) && !route.path.startsWith("/tools") && !route.path.startsWith("/templates") && !route.path.startsWith("/reports") && route.type !== "admin")
     .map((route) => ({ params: { slug: route.path.slice(1) }, props: { route } }));
 }
 
