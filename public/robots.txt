@@ -1,3 +1,142 @@
+# Citation-first crawl policy.
+# Search engines and AI answer engines are explicitly welcome on this site.
+# The per-agent Allow groups below are deliberate: they override any
+# prepended blanket Disallow (e.g. Cloudflare managed robots.txt) for the
+# same agent, because merged same-name groups resolve equal-length
+# Allow/Disallow conflicts in favour of Allow.
+
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+Disallow: /checkout/success
+Disallow: /download
+
+User-agent: Bingbot
+Allow: /
+Disallow: /admin
+Disallow: /checkout/success
+Disallow: /download
+
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /admin
+Disallow: /checkout/success
+Disallow: /download
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin
+Disallow: /checkout/success
+Disallow: /download
+
+User-agent: GPTBot
+Allow: /
+Disallow: /admin
+Disallow: /checkout/success
+Disallow: /download
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /admin
+Disallow: /checkout/success
+Disallow: /download
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin
+Disallow: /checkout/success
+Disallow: /download
+
+User-agent: Claude-User
+Allow: /
+Disallow: /admin
+Disallow: /checkout/success
+Disallow: /download
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /admin
+Disallow: /checkout/success
+Disallow: /download
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /admin
+Disallow: /checkout/success
+Disallow: /download
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin
+Disallow: /checkout/success
+Disallow: /download
+
+User-agent: Perplexity-User
+Allow: /
+Disallow: /admin
+Disallow: /checkout/success
+Disallow: /download
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin
+Disallow: /checkout/success
+Disallow: /download
+
+User-agent: Applebot
+Allow: /
+Disallow: /admin
+Disallow: /checkout/success
+Disallow: /download
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /admin
+Disallow: /checkout/success
+Disallow: /download
+
+User-agent: DuckAssistBot
+Allow: /
+Disallow: /admin
+Disallow: /checkout/success
+Disallow: /download
+
+User-agent: Amazonbot
+Allow: /
+Disallow: /admin
+Disallow: /checkout/success
+Disallow: /download
+
+User-agent: CCBot
+Allow: /
+Disallow: /admin
+Disallow: /checkout/success
+Disallow: /download
+
+User-agent: meta-externalagent
+Allow: /
+Disallow: /admin
+Disallow: /checkout/success
+Disallow: /download
+
+User-agent: Bytespider
+Allow: /
+Disallow: /admin
+Disallow: /checkout/success
+Disallow: /download
+
+User-agent: cohere-ai
+Allow: /
+Disallow: /admin
+Disallow: /checkout/success
+Disallow: /download
+
+User-agent: CloudflareBrowserRenderingCrawler
+Allow: /
+Disallow: /admin
+Disallow: /checkout/success
+Disallow: /download
+
 User-agent: *
 Allow: /
 Disallow: /admin
