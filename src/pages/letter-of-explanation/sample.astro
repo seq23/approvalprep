@@ -1,0 +1,6 @@
+---
+import AuthorityGuidePage from "../../components/AuthorityGuidePage.astro";
+import registry from "../../../data/content/demand_coverage_pages.json";
+const page=registry.pages.find((item)=>item.path==="/letter-of-explanation/sample");
+---
+<AuthorityGuidePage page={page} />
