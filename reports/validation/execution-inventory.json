@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "orchestratorSource": "_repo_validation_registry.json",
-  "validatorCount": 107,
-  "hardFailCount": 96,
+  "validatorCount": 110,
+  "hardFailCount": 99,
   "strongWarningCount": 11,
   "validators": [
     {
@@ -967,6 +967,33 @@
       "severity": "HARD_FAIL",
       "blocksRelease": true,
       "group": "content-quality"
+    },
+    {
+      "order": 108,
+      "id": "runtime-bindings",
+      "npmScript": "validate:runtime-bindings",
+      "entrypoint": "scripts/validators/validate-runtime-bindings.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "conversion-critical"
+    },
+    {
+      "order": 109,
+      "id": "sitemap-url-form",
+      "npmScript": "validate:sitemap-url-form",
+      "entrypoint": "scripts/validate/sitemap-url-form.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "release-critical"
+    },
+    {
+      "order": 110,
+      "id": "download-key-contract",
+      "npmScript": "validate:download-key-contract",
+      "entrypoint": "scripts/validate/download-key-contract.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "conversion-critical"
     }
   ]
 }
