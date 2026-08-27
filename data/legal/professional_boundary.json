@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "1.0.0",
+  "purpose": "Per-page professional boundary block. Every public page states, in its own words, that ApprovalPrep is not a law firm or a licensed financial professional and is not a substitute for one, and points to a free authoritative resource for the situation that page is about.",
+  "reviewedAt": "2026-08-27",
+  "sourceVerification": "Every url below was requested over HTTPS on 2026-08-27 and returned 200 at the url as written. Do not add a url here without checking it the same way.",
+  "excludedPaths": ["/admin"],
+  "rules": [
+    { "family": "credit", "pattern": "^/(609-dispute-letter|credit-dispute-letter|credit-letter-kit|goodwill-letter[a-z-]*)$|^/letter-of-explanation/(credit|late-payment)$" },
+    { "family": "rental", "pattern": "^/(apartment-application|how-to-get-approved-for-an-apartment|landlord-reference-letter)$|^/rental-|^/rental-application/|^/letter-of-explanation/eviction$|^/templates/rental/|^/tools/apartment-" },
+    { "family": "employment", "pattern": "^/(employment-verification[a-z-]*|proof-of-employment-letter|proof-of-income-letter|income-employment-letter-kit)$|^/proof-of-income/|^/letter-of-explanation/(employment-gap|income|income-change)$|^/templates/income/|^/templates/letters/employment-gap-explanation$|^/tools/proof-of-income-" },
+    { "family": "business", "pattern": "^/(business-funding-prep-kit|business-loan-documents|sba-loan-checklist)$|^/business-funding/|^/tools/business-funding-|^/reports/small-business-" },
+    { "family": "lending", "pattern": "^/letter-of-explanation|^/(how-to-write-a-letter-of-explanation|loan-prep-letter-kit|documents-needed-for-car-loan|auto-loan-documents|car-loan-checklist|mortgage-checklist|mortgage-document-checklist)$|^/mortgage/|^/auto-loan/|^/templates/letters/|^/tools/(mortgage|car-loan)-" }
+  ],
+  "families": {
+    "credit": {
+      "heading": "Before you send a credit letter",
+      "body": "ApprovalPrep is not a law firm and not a credit repair company, and this page is not legal advice. A letter template is not a substitute for an attorney or a credit counselor. Get real advice first if the debt is in collections, if you have been sued, or if you are not sure an item is wrong. You send the letter yourself, and what it says is on you.",
+      "resourcesLabel": "Free official help",
+      "resources": [
+        { "label": "CFPB: how to dispute an error on your credit report", "url": "https://www.consumerfinance.gov/ask-cfpb/how-do-i-dispute-an-error-on-my-credit-report-en-314/" },
+        { "label": "AnnualCreditReport.com: the free federal credit report site", "url": "https://www.annualcreditreport.com/" }
+      ]
+    },
+    "lending": {
+      "heading": "Before you send this to a lender",
+      "body": "ApprovalPrep is not a law firm, a lender, or a licensed financial advisor, and this page is not legal or financial advice. A letter of explanation does not change what you owe or how an underwriter decides. It is not a substitute for advice about your own loan. If you are behind on a mortgage or worried about losing your home, talk to a HUD-approved housing counselor before you sign anything.",
+      "resourcesLabel": "Free official help",
+      "resources": [
+        { "label": "CFPB: find a HUD-approved housing counselor (free)", "url": "https://www.consumerfinance.gov/find-a-housing-counselor/" },
+        { "label": "CFPB: Owning a Home loan guide", "url": "https://www.consumerfinance.gov/owning-a-home/" }
+      ]
+    },
+    "rental": {
+      "heading": "Before you send this to a landlord",
+      "body": "ApprovalPrep is not a law firm and this page is not legal advice. A cover letter or reference letter cannot change what a screening report says, and it is not a substitute for a tenant lawyer if you are facing eviction or think you were turned down unfairly. Only put facts in your letter that you can back up.",
+      "resourcesLabel": "Free official help",
+      "resources": [
+        { "label": "CFPB: what a tenant screening report is and your rights", "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-tenant-screening-report-en-2102/" }
+      ]
+    },
+    "employment": {
+      "heading": "Before you send this to an employer or verifier",
+      "body": "ApprovalPrep is not a law firm and not an HR or payroll advisor, and this page is not legal advice. An income or employment letter has to be true and has to come from someone allowed to confirm it. Never sign someone else's name. This page is not a substitute for an employment lawyer if your work records are being used against you.",
+      "resourcesLabel": "Free official help",
+      "resources": [
+        { "label": "FTC: background checks and what employers must follow", "url": "https://www.ftc.gov/business-guidance/resources/background-checks-what-employers-need-know" }
+      ]
+    },
+    "business": {
+      "heading": "Before you send this to a funder",
+      "body": "ApprovalPrep is not a law firm, an accountant, or a licensed financial advisor, and this page is not legal, tax, or financial advice. Business funding paperwork can create legal and tax duties, and a template is not a substitute for a lawyer or an accountant. Have one review anything you are unsure about before you sign it.",
+      "resourcesLabel": "Free official help",
+      "resources": [
+        { "label": "SBA: official loan programs and free local help", "url": "https://www.sba.gov/loans/" }
+      ]
+    },
+    "general": {
+      "heading": "What this page is not",
+      "body": "ApprovalPrep helps you get your own paperwork ready. It is not a law firm, a credit repair company, or a licensed financial advisor, and nothing here is legal or financial advice. It is not a substitute for talking to a lawyer, a tax professional, or a credit counselor about your own situation.",
+      "resourcesLabel": "Free official help",
+      "resources": [
+        { "label": "CFPB: submit a complaint about a financial company", "url": "https://www.consumerfinance.gov/complaint/" }
+      ]
+    }
+  }
+}

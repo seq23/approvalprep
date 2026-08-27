@@ -5,6 +5,7 @@ import DataPrivacyNotice from "../components/DataPrivacyNotice.astro";
 import StructuredData from "../components/StructuredData.astro";
 import AnalyticsEvent from "../components/AnalyticsEvent.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
+import ProfessionalBoundaryBlock from "../components/ProfessionalBoundaryBlock.astro";
 import { titleForPath, canonicalUrl } from "../lib/schema";
 import { navCta, primaryNav, secondaryNav } from "../data/navigation";
 const { title = "ApprovalPrep", description = "Self-service approval prep tools.", canonical = "https://approvalprep.com", noindex = false, showPrivacyNotice = true, schema = [] } = Astro.props;
@@ -62,6 +63,7 @@ const canonicalHref = canonicalUrl(canonical);
     <main>
       <Breadcrumbs path={currentPath} title={crumbTitle} emitSchema={!hasBreadcrumbSchema} />
       <slot />
+      <ProfessionalBoundaryBlock path={currentPath} />
     </main>
     <AnalyticsEvent surface="approvalprep" />
 

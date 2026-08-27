@@ -69,6 +69,12 @@ h2 { font-family: var(--font-display); letter-spacing: 0; }
 .trust-bar span, .badge, .pill { display: inline-flex; align-items: center; min-height: 30px; border-radius: 999px; padding: 4px 10px; background: var(--color-soft); border: 1px solid var(--line); font-size: .84rem; font-weight: 800; color: var(--brand-dark); }
 .notice { border-left: 4px solid var(--brand); background: var(--color-soft); padding: 16px; border-radius: 8px; }
 .boundary-notice { border-left-color: var(--color-accent); }
+.professional-boundary { border-left-color: var(--color-accent); max-width: 980px; margin: 0 auto; }
+.professional-boundary h2 { margin: 6px 0 10px; font-size: 1.15rem; }
+.professional-boundary p { margin-bottom: 10px; }
+.boundary-resources { margin: 0; padding-left: 1.1rem; }
+.boundary-resources li { margin-bottom: 4px; }
+.boundary-resources a { font-weight: 700; }
 .data-privacy-notice { border-left-color: var(--brand-dark); max-width: 980px; margin: 0 auto; }
 .data-privacy-notice p { margin-bottom: 0; }
 .privacy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 14px; }
