@@ -1,0 +1,46 @@
+---
+// The professional boundary block. This is the on-page statement that
+// ApprovalPrep is not a lawyer or a licensed financial professional and is not
+// a substitute for one, plus a free authoritative resource for the situation
+// the page is actually about.
+//
+// It renders from the layout rather than from each page so that a new route
+// cannot ship without it. The wording is deliberately not one paragraph reused
+// 123 times: a 609 dispute letter and a rental cover letter carry different
+// risks, so each family gets its own sentence and its own resource. The copy
+// and the routing rules live in data/legal/professional_boundary.json so that
+// validate:credit-boundary can assert coverage against the same source.
+import boundaryData from "../../data/legal/professional_boundary.json";
+
+const { path = "/" } = Astro.props;
+
+const familyForPath = (pathname) => {
+  const clean = String(pathname || "/").replace(/\/+$/, "") || "/";
+  for (const rule of boundaryData.rules || []) {
+    if (new RegExp(rule.pattern).test(clean)) return rule.family;
+  }
+  return "general";
+};
+
+const currentPath = String(path || "/").replace(/\/+$/, "") || "/";
+const excluded = (boundaryData.excludedPaths || []).includes(currentPath);
+const family = familyForPath(currentPath);
+const copy = boundaryData.families[family] || boundaryData.families.general;
+---
+{!excluded && (
+  <section class="band boundary-block" data-boundary-block data-boundary-family={family} aria-labelledby="professional-boundary-heading">
+    <div class="shell">
+      <aside class="notice professional-boundary">
+        <p class="eyebrow">Know the limits</p>
+        <h2 id="professional-boundary-heading">{copy.heading}</h2>
+        <p>{copy.body}</p>
+        <p class="fine">{copy.resourcesLabel}:</p>
+        <ul class="boundary-resources">
+          {copy.resources.map((resource) => (
+            <li><a href={resource.url} rel="noopener" target="_blank">{resource.label}</a></li>
+          ))}
+        </ul>
+      </aside>
+    </div>
+  </section>
+)}
