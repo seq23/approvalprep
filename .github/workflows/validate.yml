@@ -36,9 +36,10 @@ jobs:
         # the only sitemap in the tree is public/sitemap.xml, so the gate would
         # be measuring a stale snapshot rather than what this branch produces.
         #
-        # This step is read-only in effect: the gate rewrites
-        # data/cadence/known_urls.json, and nothing here commits, so the "new
-        # since last run" comparison is always against the committed ledger -
-        # which is what makes it a real per-branch cap. The ledger is advanced
-        # by the one workflow that actually publishes, scheduled-content-release.
+        # This step is read-only: scripts/cadence_gate.cjs writes
+        # data/cadence/known_urls.json only under --accept, which is not passed
+        # here, so the "new since last run" comparison is always against the
+        # committed ledger - which is what makes it a real per-branch cap. The
+        # ledger is advanced by the one workflow that actually publishes,
+        # scheduled-content-release, in its explicit --accept step.
         run: npm run cadence:gate

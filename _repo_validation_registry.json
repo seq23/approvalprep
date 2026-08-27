@@ -1112,6 +1112,17 @@
       "scope": "All GitHub workflows that commit or push to main"
     },
     {
+      "id": "cadence-ledger-advance",
+      "npmScript": "validate:cadence-ledger-advance",
+      "entrypoint": "scripts/validate/cadence-ledger-advance.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents a frozen cadence ledger from permanently blocking scheduled publishing, and prevents the gate from clearing its own blocks",
+      "owner": "approvalprep-ops",
+      "group": "ops-critical",
+      "scope": "Cadence ledger contract between scripts/cadence_gate.cjs and the workflows that check or advance it"
+    },
+    {
       "id": "redirect-map",
       "npmScript": "validate:redirect-map",
       "entrypoint": "scripts/validate/redirect-map.mjs",

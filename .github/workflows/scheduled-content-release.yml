@@ -62,11 +62,12 @@ jobs:
         # runs, and the release is held instead of shipped.
         #
         # After the build for the same reason as in validate.yml - dist/ carries
-        # the sitemap the gate measures. The ledger and report it writes
-        # (data/cadence/known_urls.json, reports/cadence/cadence-gate.json) are
-        # already inside the `git add data` / `git add reports` paths of the
-        # commit step, so a cleared gate advances the ledger with the release it
-        # cleared, and no separate bookkeeping step is needed.
+        # the sitemap the gate measures.
+        #
+        # Checking is read-only. scripts/cadence_gate.cjs writes the ledger only
+        # under --accept, so this step measures today's release against the last
+        # accepted baseline and never moves it. Advancing the baseline is the
+        # separate step below, which runs only once this one has cleared.
         run: npm run cadence:gate
       - name: Run the complete local release gate
         run: npm run validate:all
@@ -74,6 +75,30 @@ jobs:
         run: npm run automation:safe -- --mode=dry_run
       - name: Validate automation safety
         run: npm run validate:automation-safety
+      - name: Record the released URL set as the new cadence baseline
+        # This is the step that makes the cap a rate rather than a ratchet.
+        #
+        # "New since the last run" is measured against data/cadence/known_urls.json.
+        # Nothing else in this repo writes that ledger: validate.yml only checks,
+        # and checking deliberately stopped writing it so the gate cannot consume
+        # its own evidence. So if the one workflow that actually publishes does not
+        # record what it published, the ledger freezes at its last accepted value
+        # while content:release keeps adding pages, and the count of "new" URLs
+        # climbs every single day until it crosses new_pages_per_week and stays
+        # over it forever - a permanent daily red with no bad release behind it.
+        # Measured on the pre-fix workflow at one page per day: CLEAR, CLEAR, then
+        # BLOCKED on day 3 and every day after.
+        #
+        # This does not soften the cap. It runs only after the gate above exited
+        # zero, so a day that publishes more than the policy allows still fails at
+        # that step and never reaches this one. What it records is a release that
+        # already passed the cap and the full validator registry, and the reason
+        # names the run, so the ledger stays an audit record of accepted releases
+        # rather than a re-run. It must stay ahead of the commit step below, whose
+        # staged data/ paths are what carry the advanced ledger back to main.
+        run: |
+          npm run cadence:gate -- --accept --reason \
+            "scheduled-content-release run ${{ github.run_id }} on $(date -u +%F): cadence gate CLEAR and validate:all green; recording the released URL set as the baseline the cap applies from tomorrow."
       - name: Commit and publish validated content
         run: |
           git config user.name "approvalprep-content-bot"

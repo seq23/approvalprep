@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-08-27T17:38:29.182Z",
+  "status": "PASS",
+  "ledger": "data/cadence/known_urls.json",
+  "publishingWorkflows": [
+    {
+      "workflow": "scheduled-content-release.yml",
+      "advancesLedger": true
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "check_clears_within_cap",
+      "status": "PASS"
+    },
+    {
+      "id": "check_does_not_write_ledger",
+      "status": "PASS"
+    },
+    {
+      "id": "accept_advances_ledger",
+      "status": "PASS"
+    },
+    {
+      "id": "accept_requires_reason",
+      "status": "PASS"
+    },
+    {
+      "id": "cap_still_blocks_over_limit",
+      "status": "PASS"
+    }
+  ],
+  "errors": []
+}
