@@ -4,7 +4,7 @@ import RelatedContent from "../../components/RelatedContent.astro";
 import TrustAndBoundaryBand from "../../components/TrustAndBoundaryBand.astro";
 import RecommendationSummary from "../../components/RecommendationSummary.astro";
 import RouteFaq from "../../components/RouteFaq.astro";
-import { webPageSchema, breadcrumbSchema, itemListSchema, faqSchema } from "../../lib/schema";
+import { webPageSchema, breadcrumbSchema, itemListSchema, faqSchema, canonicalUrl } from "../../lib/schema";
 import { routeAnswers } from "../../lib/routeAnswers";
 import registry from "../../../data/tools/tool_registry.json";
 
@@ -14,7 +14,7 @@ export function getStaticPaths() {
     .map((tool) => ({ params: { slug: tool.path.split("/").pop() }, props: { tool } }));
 }
 const { tool } = Astro.props;
-const canonical = `https://approvalprep.com${tool.path}`;
+const canonical = canonicalUrl(tool.path);
 // The site already holds published answers written about this exact tool, in
 // data/content/generated_answers.json. They were rendered only on their own
 // /blog/ page, so the tool page itself carried no Q&A and no FAQPage. The same

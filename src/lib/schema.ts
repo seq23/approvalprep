@@ -3,7 +3,20 @@ import toolRegistry from "../../data/tools/tool_registry.json";
 import templateRegistry from "../../data/templates/template_registry.json";
 import reportRegistry from "../../data/reports/public_report_registry.json";
 
-export const orgSchema = () => ({ "@context": "https://schema.org", "@type": "Organization", name: "ApprovalPrep", url: "https://approvalprep.com" });
+export const SITE_ORIGIN = "https://approvalprep.com";
+
+// Cloudflare Pages serves this build's directory output (`foo/index.html`) as
+// `/foo/` with a 200 and 308-redirects `/foo`. Every public URL we publish -
+// canonical tags, og:url, breadcrumb items, sitemap entries - must therefore
+// name the trailing-slash form, or we point crawlers at a redirect. This is the
+// single rule; scripts/seo/generate-sitemap.mjs applies the same one.
+export const canonicalUrl = (input: string) => {
+  const url = new URL(String(input || "/"), SITE_ORIGIN);
+  const pathname = url.pathname.replace(/\/+$/, "");
+  return `${SITE_ORIGIN}${pathname}/${url.search}${url.hash}`;
+};
+
+export const orgSchema = () => ({ "@context": "https://schema.org", "@type": "Organization", name: "ApprovalPrep", url: canonicalUrl("/") });
 
 export const webPageSchema = ({ title, description, url }: { title: string; description: string; url: string }) => ({
   "@context": "https://schema.org",
@@ -78,7 +91,7 @@ export const breadcrumbSchema = (path: string, currentTitle = "") => ({
     "@type": "ListItem",
     position: index + 1,
     name: crumb.name,
-    item: `https://approvalprep.com${crumb.url}`
+    item: canonicalUrl(crumb.url)
   }))
 });
 

@@ -3,7 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import BoundaryNotice from "../../components/BoundaryNotice.astro";
 import RecommendationSummary from "../../components/RecommendationSummary.astro";
 import answersData from "../../../data/content/generated_answers.json";
-import { articleSchema, breadcrumbSchema, faqSchema } from "../../lib/schema";
+import { articleSchema, breadcrumbSchema, faqSchema, canonicalUrl } from "../../lib/schema";
 
 const slugify = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 100);
 export function getStaticPaths() {
@@ -12,7 +12,7 @@ export function getStaticPaths() {
 }
 const { answer } = Astro.props;
 const slug = slugify(answer.title);
-const canonical = `https://approvalprep.com/blog/${slug}`;
+const canonical = canonicalUrl(`/blog/${slug}`);
 // Cut on a word boundary. slice(0, 155) alone ended these mid-word - "increase
 // based on ac" - which is what a search result then shows.
 const description = answer.answer.length <= 155

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { canonicalUrl } from "../lib/schema";
 import ProductGrid from "../components/ProductGrid.astro";
 import BoundaryNotice from "../components/BoundaryNotice.astro";
 import TrustBar from "../components/TrustBar.astro";
@@ -47,7 +48,7 @@ const copy = routeCopy[route.path] || {
   faq: [{ question: "Does ApprovalPrep do this for me?", answer: "No. ApprovalPrep is self-service. You send your own documents." }],
   trustSignals: ["No account required", "No saved customer documents", "Self-service only", "Plain-language guidance"]
 };
-const canonical = "https://approvalprep.com" + route.path;
+const canonical = canonicalUrl(route.path);
 const isCredit = route.family === "credit_self_service" || route.risk === "regulated" || route.path.includes("credit");
 const isPricing = route.path === "/pricing";
 const isDownload = route.path === "/download" || route.path === "/checkout/success";

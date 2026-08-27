@@ -32,9 +32,9 @@ function sanitize(body){
 export async function onRequestPost({ request, env }){
   let event;
   try { event = sanitize(await readJson(request)); } catch (e) { return json({ ok:false, error:e.message || 'INVALID_EVENT' }, 400); }
-  if (!env.DB || typeof env.DB.prepare !== 'function') return json({ ok:true, recorded:false, mode:'no_d1_binding', acceptedEvent:event.event });
+  if (!env.PRODUCTS_DB || typeof env.PRODUCTS_DB.prepare !== 'function') return json({ ok:true, recorded:false, mode:'no_d1_binding', acceptedEvent:event.event });
   try {
-    await env.DB.prepare('INSERT INTO conversion_events (id,event,path,target_url,sku,source,session_id_hash,created_at) VALUES (?,?,?,?,?,?,?,?)')
+    await env.PRODUCTS_DB.prepare('INSERT INTO conversion_events (id,event,path,target_url,sku,source,session_id_hash,created_at) VALUES (?,?,?,?,?,?,?,?)')
       .bind(crypto.randomUUID(), event.event, event.path || event.url || '', event.targetUrl || '', event.sku || '', event.source || '', event.sessionIdHash || '', event.createdAt)
       .run();
     return json({ ok:true, recorded:true, acceptedEvent:event.event });

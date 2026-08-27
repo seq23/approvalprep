@@ -4,11 +4,22 @@ const manifest = JSON.parse(fs.readFileSync("data/routes/route_manifest.json", "
 const generated = JSON.parse(fs.readFileSync("data/content/generated_answers.json", "utf8"));
 const reports = JSON.parse(fs.readFileSync("data/reports/public_report_registry.json", "utf8"));
 const slugify = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 100);
+// The build emits directory output (`foo/index.html`), so Cloudflare Pages
+// serves `/foo/` with a 200 and 308-redirects `/foo`. A sitemap that names the
+// redirecting form spends crawl budget on redirects and hands search engines a
+// URL that is not the one they will index. This is the same rule the canonical
+// tags apply (canonicalUrl in src/lib/schema.ts) - change one, change both.
+const SITE_ORIGIN = "https://approvalprep.com";
+const canonicalUrl = (input) => {
+  const url = new URL(String(input || "/"), SITE_ORIGIN);
+  return `${SITE_ORIGIN}${url.pathname.replace(/\/+$/, "")}/${url.search}${url.hash}`;
+};
 const urls = new Set();
-for (const route of manifest.routes.filter((route) => route.index && route.type !== "admin")) urls.add(`https://approvalprep.com${route.path === "/" ? "" : route.path}`);
-for (const answer of generated.answers.filter((item) => item.status === "published_by_contract")) urls.add(`https://approvalprep.com/blog/${slugify(answer.title)}`);
-for (const report of reports.reports.filter((item) => item.status === "published_by_contract")) urls.add(`https://approvalprep.com${report.path}`);
-for (const path of ["/feed.xml", "/content-index.json", "/citation-targets.json", "/answers/index.json", "/llms.txt", "/llms-full.txt"]) urls.add(`https://approvalprep.com${path}`);
+for (const route of manifest.routes.filter((route) => route.index && route.type !== "admin")) urls.add(canonicalUrl(route.path));
+for (const answer of generated.answers.filter((item) => item.status === "published_by_contract")) urls.add(canonicalUrl(`/blog/${slugify(answer.title)}`));
+for (const report of reports.reports.filter((item) => item.status === "published_by_contract")) urls.add(canonicalUrl(report.path));
+// /llms.txt, /feed.xml, /content-index.json and friends are still served; they
+// are machine-readable feeds, not indexable pages, and a sitemap lists pages.
 // These URLs come from data records rather than files, and none of the records
 // carries its own date, so the honest lastmod is the last commit of the manifest
 // that declares the URL. It is coarser than a per-page date but it is true: it
@@ -29,7 +40,7 @@ const sourceDate = {
   report: commitDate("data/reports/public_report_registry.json"),
 };
 const dateFor = (url) => (url.includes("/blog/") ? sourceDate.blog
-  : reports.reports.some((r) => url.endsWith(r.path)) ? sourceDate.report
+  : reports.reports.some((r) => url === canonicalUrl(r.path)) ? sourceDate.report
   : sourceDate.route);
 const body = [...urls].sort().map((url) => {
   const mod = dateFor(url);

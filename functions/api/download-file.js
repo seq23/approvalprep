@@ -1,5 +1,6 @@
 import { json } from '../_runtime/responses.js';
 import { getProductBySlug } from '../_runtime/catalog.js';
+import { productAssetKey } from '../_runtime/asset-keys.js';
 
 function contentTypeFor(type) {
   return type === 'docx' ? 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' : 'application/pdf';
@@ -9,10 +10,14 @@ function filenameFor(product, type) {
   return `${product.slug || product.id}.${type}`;
 }
 
+// The fallback used to be `downloads/<slug>.<ext>`, a prefix that has never
+// held a single object in approvalprep-product-assets. Whenever the D1
+// product_assets lookup below did not resolve - D1 unreachable, the row missing
+// or inactive - a paying customer got R2_OBJECT_MISSING. It now falls back to
+// the key the uploader actually writes.
 function r2KeyFor(product, type) {
-  return type === 'docx'
-    ? (product.docxKey || `downloads/${product.slug || product.id}.docx`)
-    : (product.pdfKey || `downloads/${product.slug || product.id}.pdf`);
+  const declared = type === 'docx' ? product.docxKey : product.pdfKey;
+  return declared || productAssetKey(product.slug || product.id, type);
 }
 
 async function readEntitlement(env, sid) {

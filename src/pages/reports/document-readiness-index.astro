@@ -4,12 +4,12 @@ import RelatedContent from "../../components/RelatedContent.astro";
 import TrustAndBoundaryBand from "../../components/TrustAndBoundaryBand.astro";
 import RecommendationSummary from "../../components/RecommendationSummary.astro";
 import RouteFaq from "../../components/RouteFaq.astro";
-import { articleSchema, breadcrumbSchema, itemListSchema, faqSchema } from "../../lib/schema";
+import { articleSchema, breadcrumbSchema, itemListSchema, faqSchema, canonicalUrl } from "../../lib/schema";
 import { routeAnswers } from "../../lib/routeAnswers";
 import registry from "../../../data/reports/public_report_registry.json";
 import findings from "../../../data/reports/document_readiness_index/findings.json";
 import dataset from "../../../data/reports/document_readiness_index/coded_dataset.json";
-const report=registry.reports.find((r)=>r.id==="document-readiness-index"); const canonical="https://approvalprep.com/reports/document-readiness-index";
+const report=registry.reports.find((r)=>r.id==="document-readiness-index"); const canonical=canonicalUrl("/reports/document-readiness-index");
 // Published answers written about this report, previously visible only on their
 // own /blog/ pages.
 const faq=routeAnswers(report.path);
