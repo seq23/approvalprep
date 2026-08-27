@@ -2,9 +2,9 @@
   "schemaVersion": "1.0.0",
   "validator": "content-pattern-contract",
   "spec": ".clarity/content-pattern-spec.json",
-  "generatedAt": "2026-08-27T15:38:09.507Z",
+  "generatedAt": "2026-08-27T15:42:50.984Z",
   "enforcement": "block",
-  "pagesChecked": 105,
+  "pagesChecked": 107,
   "status": "PASS",
   "blockingFailures": 0,
   "summary": [
@@ -47,14 +47,14 @@
       "id": "comparison_table",
       "blocking": false,
       "pagesMissing": 97,
-      "coveragePct": 7.6,
+      "coveragePct": 9.3,
       "why": "no comparison or cost table (agent request #2, 529 occurrences)"
     },
     {
       "id": "concrete_numbers",
       "blocking": false,
       "pagesMissing": 5,
-      "coveragePct": 95.2,
+      "coveragePct": 95.3,
       "why": "no concrete cost or timeline figures (agent request #5, 365 occurrences)"
     },
     {
@@ -68,7 +68,7 @@
       "id": "faq",
       "blocking": false,
       "pagesMissing": 11,
-      "coveragePct": 89.5,
+      "coveragePct": 89.7,
       "why": "no FAQ block or FAQPage schema (agent request #9)"
     },
     {
@@ -82,28 +82,28 @@
       "id": "recommendation_summary",
       "blocking": false,
       "pagesMissing": 3,
-      "coveragePct": 97.1,
+      "coveragePct": 97.2,
       "why": "no recommendation summary - asked for on 913 of 913 agent recommendations, the single most requested block"
     },
     {
       "id": "definition_callout",
       "blocking": false,
       "pagesMissing": 99,
-      "coveragePct": 5.7,
+      "coveragePct": 7.5,
       "why": "no definition callout (agent requested 196 times) - this is what an answer engine lifts for \"what is X\""
     },
     {
       "id": "trust_block",
       "blocking": false,
-      "pagesMissing": 66,
-      "coveragePct": 37.1,
+      "pagesMissing": 68,
+      "coveragePct": 36.4,
       "why": "no trust or authorship block (agent requested 215 times) - entity clarity is a citation factor"
     },
     {
       "id": "source_block",
       "blocking": false,
       "pagesMissing": 94,
-      "coveragePct": 10.5,
+      "coveragePct": 12.1,
       "why": "no sources block - a claim with no visible provenance is the first thing an engine discounts"
     },
     {
@@ -123,7 +123,7 @@
     {
       "id": "prompt_template",
       "blocking": false,
-      "pagesMissing": 105,
+      "pagesMissing": 107,
       "coveragePct": 0,
       "why": "no copy-ready prompt - the artifact this audience actually reuses"
     }

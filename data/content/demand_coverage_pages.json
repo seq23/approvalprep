@@ -1849,6 +1849,692 @@
           "text": "The repeated failures: sending the letter with nothing attached, retyping a pay stub so it no longer looks like payroll produced it, using a trading name where the W-2 carries a different legal name, offering an offer letter as proof of current employment, and staying silent about a document that cannot be produced."
         }
       ]
+    },
+    {
+      "id": "letter-of-explanation-template",
+      "path": "/letter-of-explanation/template",
+      "family": "letter_studio",
+      "risk": "medium",
+      "sku": "letter-of-explanation",
+      "targetQuery": "letter of explanation template",
+      "monthlyVolume": 590,
+      "keywordDifficulty": 35,
+      "eyebrow": "Letters of explanation",
+      "title": "Letter of Explanation Template",
+      "anchorText": "The letter of explanation template",
+      "description": "One letter of explanation template, five sentences long, that adapts to any condition you have been asked to explain. Fill it in below and the generator produces the full letter, a short single-question version, and the covering email it travels in.",
+      "summary": "A letter of explanation is five sentences: what happened, when, why, what it means now, and what is attached. Everything longer than that is either a second condition that needs its own letter or an argument the reviewer did not ask for.",
+      "definitionLabel": "The structure",
+      "definition": "A letter of explanation is a short signed statement answering one specific question a reviewer has raised about your file, structured as five parts: the condition being answered, what happened and when, why it happened, what the current position is, and the documents attached that support all of it.",
+      "definitionDetail": "The structure matters more than the wording, because a reviewer is not reading for persuasion. They have a condition to clear, and they are looking for the four facts that let them clear it. A letter that buries those facts in a paragraph of context takes three readings; a letter that puts them in order takes one.",
+      "primaryCta": "Fill in the template",
+      "primaryHref": "#generator",
+      "secondaryCta": "See the Letter of Explanation Kit",
+      "secondaryHref": "/pricing#letter-of-explanation",
+      "queries": [
+        "letter of explanation template",
+        "what to include in a letter of explanation template",
+        "how to fill in a letter of explanation template",
+        "letter of explanation template mistakes",
+        "letter of explanation template and the letter of explanation kit"
+      ],
+      "keyFacts": [
+        "One letter answers one condition. If the reviewer raised three, send three letters — a single letter covering all three gets cleared on none of them until the reviewer has separated them for you.",
+        "Quote the condition back in the first line, in the reviewer's own words. That is what lets a processor match your letter to the open item without reading the rest of it.",
+        "The letter is corroboration, not evidence. It is the attachments that clear the condition; the letter tells the reviewer what the attachments show and in what order to read them.",
+        "Never explain something that has not been asked about. Volunteering a second issue opens a second condition, and reviewers are required to document what they learn.",
+        "Sign and date it. An unsigned letter of explanation is treated as a draft in most underwriting and benefits workflows, and gets returned rather than read."
+      ],
+      "fields": [
+        "The exact wording of the condition, as the reviewer sent it",
+        "The reviewer's name, organization, and the file, loan, or case number",
+        "What happened, in one sentence, with no adjectives",
+        "The dates the event began and ended",
+        "The reason, stated plainly and only as far as you can support it",
+        "What the position is today, and whether it is resolved",
+        "The list of documents attached, with dates, in the order the reviewer should read them",
+        "Your full legal name as it appears on the application, and the date you signed"
+      ],
+      "steps": [
+        "Copy the condition into a blank document first. The letter is built around it, and paraphrasing the condition is the fastest way to answer a question nobody asked.",
+        "Write the four facts as four separate lines before you write any prose: what, when, why, where it stands now.",
+        "Gather the documents that prove each of those four lines. A fact with nothing behind it either gets removed or gets an explicit note that no document exists for it.",
+        "Assemble the five parts in order and stop. Do not add background, apology, or anything about how the application matters to you.",
+        "Read it once for anything that could open a new question. Delete that sentence.",
+        "Sign it, date it, list the attachments by name and date, and send it by the route the reviewer specified."
+      ],
+      "reviewChecklist": [
+        "The first line quotes the condition, not your summary of it.",
+        "Every date in the letter matches the dates on the attached documents.",
+        "There is nothing in the letter about a topic the reviewer did not raise.",
+        "Each attachment is named in the letter and actually attached.",
+        "It is signed, dated, and carries the file or case number the reviewer uses."
+      ],
+      "comparison": {
+        "heading": "How the same template changes shape by who is reading it",
+        "intro": "The five parts stay the same. What varies is how much of each part the reader needs, and what would be a mistake to include.",
+        "columns": [
+          "Reader",
+          "What clears the condition",
+          "Length that works",
+          "Common overshare",
+          "Attach"
+        ],
+        "rows": [
+          [
+            "Mortgage underwriter",
+            "The condition wording quoted back, the dates, and the documents that reconcile",
+            "5 to 7 sentences",
+            "Financial context nobody asked for, which opens new conditions",
+            "Statements covering the dated period, plus any third-party letter"
+          ],
+          [
+            "Auto or personal lender",
+            "A plain cause and the current status",
+            "3 to 5 sentences",
+            "Comparisons to other lenders or other applications",
+            "The most recent statement showing the account current"
+          ],
+          [
+            "Landlord or leasing office",
+            "What happened and that it is over",
+            "3 to 4 sentences",
+            "Details about health, family, or a former landlord dispute",
+            "Proof of the resolution — a paid receipt, a release, a payment record"
+          ],
+          [
+            "Bank or account review team",
+            "Where the money came from, and from whom",
+            "4 to 6 sentences",
+            "Speculation about why the review was triggered",
+            "The transfer record on both sides, plus the sender's own confirmation"
+          ],
+          [
+            "Benefits or agency caseworker",
+            "Dates and amounts matching the period under review",
+            "4 to 6 sentences",
+            "Anything about a different benefit or a different period",
+            "Pay records and any notice you received, with dates"
+          ]
+        ]
+      },
+      "generator": {
+        "heading": "Fill in the template",
+        "intro": "The five parts, as fields. The generator produces the full letter, a short single-question version for a reviewer who wants two lines, and the covering email that carries it.",
+        "filename": "letter-of-explanation",
+        "fields": [
+          {
+            "name": "yourName",
+            "label": "Your full legal name, as on the application",
+            "type": "text",
+            "placeholder": "Priya Raman",
+            "required": true
+          },
+          {
+            "name": "recipient",
+            "label": "Reviewer name and organization",
+            "type": "text",
+            "placeholder": "Marcus Bell, Summit Credit Union Underwriting",
+            "required": true
+          },
+          {
+            "name": "fileRef",
+            "label": "File, loan, or case number",
+            "type": "text",
+            "placeholder": "Loan #4471-88203",
+            "required": true
+          },
+          {
+            "name": "condition",
+            "label": "The condition, in the reviewer's own words",
+            "type": "textarea",
+            "placeholder": "Provide a signed letter of explanation for the $8,400 deposit to the checking account ending 2214 on 12 June 2026.",
+            "required": true
+          },
+          {
+            "name": "whatHappened",
+            "label": "What happened, in one sentence",
+            "type": "textarea",
+            "placeholder": "My sister repaid a loan I made to her in 2024 for her vehicle purchase.",
+            "required": true
+          },
+          {
+            "name": "dateStart",
+            "label": "Date it began",
+            "type": "date",
+            "required": true
+          },
+          {
+            "name": "dateEnd",
+            "label": "Date it ended",
+            "type": "date",
+            "help": "Leave blank if it is ongoing."
+          },
+          {
+            "name": "why",
+            "label": "Why it happened",
+            "type": "textarea",
+            "placeholder": "She sold the vehicle in May 2026 and repaid the balance in a single transfer."
+          },
+          {
+            "name": "nowStatus",
+            "label": "Where it stands today",
+            "type": "textarea",
+            "placeholder": "The loan between us is settled. No further payments are expected in either direction."
+          },
+          {
+            "name": "attachments",
+            "label": "Documents attached, with dates",
+            "type": "textarea",
+            "placeholder": "1. Bank statement for account 2214, June 2026, showing the deposit on 12 June.\n2. My sister's transfer confirmation from her bank, dated 12 June 2026.\n3. Her signed note confirming the repayment, dated 3 August 2026."
+          },
+          {
+            "name": "noDocument",
+            "label": "Anything you cannot document, and why",
+            "type": "textarea",
+            "placeholder": "The original 2024 loan was informal and there is no written agreement. The bank record of the outgoing transfer in 2024 is attached in its place."
+          }
+        ],
+        "outputs": [
+          {
+            "id": "full",
+            "label": "The full letter",
+            "note": "The five parts in order. Sign it, date it, and attach the documents in the order they are listed — a reviewer working down the list should never have to search for the next one.",
+            "body": "[Date]\n\n{{recipient}}\nRe: {{fileRef}} — Letter of explanation\n\nTo {{recipient}},\n\nThis letter responds to the following condition on my file:\n\n  \"{{condition}}\"\n\nWhat happened: {{whatHappened}} This began on {{dateStart}}{{#dateEnd}} and ended on {{dateEnd}}{{/dateEnd}}{{^dateEnd}} and is ongoing{{/dateEnd}}.\n\nWhy it happened: {{why}}\n\nWhere it stands now: {{nowStatus}}\n\nThe following documents are attached in support:\n\n{{attachments}}\n\n{{#noDocument}}One point cannot be documented: {{noDocument}}\n\n{{/noDocument}}Everything stated above is true to the best of my knowledge. Please tell me if anything further would help clear this condition and I will send it the same day.\n\nSigned ______________________________   Date ____________\n\n{{yourName}}"
+          },
+          {
+            "id": "short",
+            "label": "Short version, single question",
+            "note": "For a reviewer who asked one narrow question and wants two lines, not a page. Anything longer than this on a narrow condition tends to invite a second look rather than close the first.",
+            "body": "[Date]\n\nRe: {{fileRef}}\n\n{{recipient}},\n\nRegarding \"{{condition}}\":\n\n{{whatHappened}} on {{dateStart}}{{#dateEnd}}, resolved {{dateEnd}}{{/dateEnd}}. {{why}} {{nowStatus}}\n\nAttached:\n\n{{attachments}}\n\nSigned ______________________________   Date ____________\n\n{{yourName}}"
+          },
+          {
+            "id": "email",
+            "label": "The covering email",
+            "note": "Put the file number and the condition in the subject line. A processor clearing twenty conditions a day matches on the subject line before opening anything.",
+            "body": "Subject: {{fileRef}} — letter of explanation and supporting documents\n\n{{recipient}},\n\nAttached is the signed letter of explanation for the condition below, together with the supporting documents.\n\n  Condition: {{condition}}\n\n  Attached:\n{{attachments}}\n\n{{#noDocument}}  Not available: {{noDocument}}\n\n{{/noDocument}}If your office needs anything else to clear this item, please tell me what and I will send it the same day.\n\n{{yourName}}\n{{fileRef}}"
+          }
+        ]
+      },
+      "templateTitle": "The template, as a skeleton to copy",
+      "template": "[Date]\n\n[Reviewer name and organization]\nRe: [file / loan / case number] — Letter of explanation\n\nThis letter responds to the following condition on my file:\n\n  \"[paste the condition in the reviewer's own words]\"\n\nWhat happened: [one sentence, no adjectives]. This began on [date] and ended on [date].\n\nWhy it happened: [the plain reason, only as far as you can support it].\n\nWhere it stands now: [resolved / current / ongoing, and what the position is today].\n\nThe following documents are attached in support:\n\n  1. [document name], dated [date]\n  2. [document name], dated [date]\n\nEverything stated above is true to the best of my knowledge.\n\nSigned ______________________  Date ____________\n[Your full legal name, as it appears on the application]",
+      "alternateTitle": "When you have been asked to explain three things at once",
+      "alternateTemplate": "Send three letters, not one, and one covering email.\n\nSubject: [file number] — three letters of explanation, conditions [ref], [ref], [ref]\n\n[Reviewer name],\n\nThree conditions were raised on this file. Each is answered in its own signed letter, attached separately so they can be cleared independently:\n\n  Letter 1 — [condition wording]\n            Attachments: [document], [document]\n\n  Letter 2 — [condition wording]\n            Attachments: [document]\n\n  Letter 3 — [condition wording]\n            Attachments: [document], [document]\n\nNothing in one letter depends on another. If two can be cleared and one cannot, please clear the two and tell me what the third still needs.\n\n[Your name], [file number], [phone]",
+      "mistakes": [
+        "Paraphrasing the condition instead of quoting it. A processor matching your letter to an open item cannot match a paraphrase, and the letter sits unread.",
+        "Covering several conditions in one letter. Each condition is cleared separately in the reviewer's system, and a combined letter blocks all of them until someone unpicks it.",
+        "Explaining something nobody asked about. Reviewers are required to document what they learn, so a volunteered issue becomes a new condition.",
+        "Sending the letter without the documents named in it, or naming documents that are not attached. Both produce the same result: the condition stays open.",
+        "Writing at length. A letter of explanation that runs past a page reads as an argument, and an argument invites scrutiny of what is being argued around."
+      ],
+      "faq": [
+        {
+          "question": "What should a letter of explanation template include?",
+          "answer": "Five parts, in order: the condition quoted in the reviewer's own words, what happened and when, why it happened, where the matter stands today, and the documents attached in support. Plus your legal name, the file number, a signature, and a date."
+        },
+        {
+          "question": "How long should a letter of explanation be?",
+          "answer": "Five to seven sentences for most conditions, and three or four for a narrow one. If it runs past a page, that is usually a sign it is answering more than one condition and should be split."
+        },
+        {
+          "question": "Can one letter cover more than one condition?",
+          "answer": "It can, but it should not. Conditions are cleared one at a time in the reviewer's system, so a combined letter stays open on all of them until someone separates it. Three conditions means three signed letters and one covering email."
+        },
+        {
+          "question": "Does a letter of explanation need to be signed?",
+          "answer": "Yes. Most underwriting and benefits workflows treat an unsigned letter as a draft and return it rather than reading it. Sign it, date it, and use the legal name that appears on the application."
+        },
+        {
+          "question": "What if I cannot document part of the explanation?",
+          "answer": "Say so in the letter, name what does not exist, and offer whatever stands in its place. A reviewer told about a gap in advance treats it as a fact of the case; a reviewer who finds it treats it as a gap."
+        },
+        {
+          "question": "Do I have to use a template at all?",
+          "answer": "No, but the structure is doing the work. The reviewer is not reading for persuasion — they have one condition to clear and four facts to find. A letter that puts those four facts in a predictable order gets read once."
+        }
+      ],
+      "sources": [
+        {
+          "label": "Consumer Financial Protection Bureau — Owning a Home",
+          "url": "https://www.consumerfinance.gov/owning-a-home/"
+        },
+        {
+          "label": "Fannie Mae — Selling Guide",
+          "url": "https://selling-guide.fanniemae.com/"
+        },
+        {
+          "label": "Freddie Mac — Single-Family Seller/Servicer Guide",
+          "url": "https://guide.freddiemac.com/"
+        }
+      ],
+      "boundary": "ApprovalPrep does not write your explanation, contact a reviewer, decide what your documents show, or clear a condition. The generator assembles your own words in your browser. You state only facts you can support, you sign it yourself, and you send it yourself.",
+      "decisionContext": [
+        "This page helps you decide what shape the letter takes, which is a different question from what to say. The five parts are the same for every condition; how much of each part a reader needs is not.",
+        "It also helps you decide what to leave out, which on this document is where most of the damage happens. A volunteered detail becomes a documented condition.",
+        "Where several conditions have been raised, the decision is whether to combine them. Splitting them is almost always right, because conditions clear individually.",
+        "The generator is free and browser-only. The $39 Letter of Explanation Kit is the editable download covering nine explanation-letter situations as files you keep."
+      ],
+      "whoFor": [
+        "Anyone who has been sent a condition and told to provide a signed letter of explanation.",
+        "People who have written one, had it returned, and cannot see what was wrong with it.",
+        "People facing several conditions at once who need to know whether to answer them together.",
+        "Anyone who needs the structure rather than a story about someone else's situation."
+      ],
+      "value": [
+        "One template with a stated structure, rather than a wall of situation-specific samples.",
+        "A working generator producing the full letter, a short version, and the covering email.",
+        "A reader-by-reader table of what clears the condition and what oversharing looks like for each.",
+        "An explicit instruction for the multiple-conditions case, which is where most letters go wrong."
+      ],
+      "whatYouGet": [
+        "A browser-only generator with three output documents.",
+        "The five-part skeleton as copyable text.",
+        "A pattern for answering three conditions without blocking any of them.",
+        "A review checklist for the five things that get a letter returned.",
+        "Primary sources at the CFPB, Fannie Mae, and Freddie Mac."
+      ],
+      "useCases": [
+        "An underwriter has issued a condition requiring a signed letter of explanation.",
+        "Your letter was returned and you were not told why.",
+        "Three conditions arrived at once and you do not know whether to combine them.",
+        "You need to explain something you cannot fully document.",
+        "A caseworker wants an explanation covering a specific date range."
+      ],
+      "relatedPaths": [
+        "/letter-of-explanation",
+        "/letter-of-explanation/late-payment",
+        "/letter-of-explanation/large-deposit"
+      ],
+      "inboundFrom": [
+        "/letter-of-explanation"
+      ],
+      "atoms": [
+        {
+          "id": "short_answer",
+          "type": "short_answer",
+          "title": "short answer",
+          "text": "A letter of explanation is five parts: the condition quoted in the reviewer's own words, what happened and when, why it happened, where the matter stands today, and the documents attached in support. Five to seven sentences clears most conditions."
+        },
+        {
+          "id": "structure",
+          "type": "definition",
+          "title": "structure",
+          "text": "The structure carries the weight rather than the wording. A reviewer is not reading for persuasion; they have one condition to clear and four facts to find, so a letter that presents those facts in a predictable order is read once instead of three times."
+        },
+        {
+          "id": "checklist",
+          "type": "checklist",
+          "title": "before sending",
+          "text": "Before sending: the first line quotes the condition rather than paraphrasing it, every date matches the attached documents, nothing appears about a topic the reviewer did not raise, every named attachment is actually attached, and the letter is signed, dated, and carries the file or case number."
+        },
+        {
+          "id": "mistakes",
+          "type": "mistake_prevention",
+          "title": "mistakes",
+          "text": "The failures that get a letter returned: paraphrasing the condition, covering several conditions in one letter when each clears separately, volunteering an issue nobody raised, naming attachments that are not enclosed, and writing at length so the letter reads as an argument rather than an answer."
+        }
+      ]
+    },
+    {
+      "id": "letter-of-explanation-mortgage",
+      "path": "/letter-of-explanation/mortgage",
+      "family": "mortgage",
+      "risk": "medium",
+      "sku": "loan-prep-letter-kit",
+      "targetQuery": "letter of explanation for mortgage",
+      "monthlyVolume": 480,
+      "keywordDifficulty": 23,
+      "eyebrow": "Mortgage prep",
+      "title": "Letter of Explanation for a Mortgage",
+      "anchorText": "Letter of explanation for a mortgage",
+      "description": "Underwriters do not ask for letters of explanation at random. Eight standard conditions generate almost all of them, and each one needs a different set of facts. This page maps the condition wording to what the letter has to contain and what has to travel with it.",
+      "summary": "Answer the condition the underwriter wrote, not the topic it belongs to. A letter about your finances in general, sent against a condition about one deposit on one date, does not clear that condition and usually creates a second one.",
+      "definitionLabel": "Why underwriting asks",
+      "definition": "A mortgage letter of explanation is a signed statement an underwriter requires when the file contains something the documents alone do not settle — a deposit with no visible source, a gap in employment, a recent credit inquiry, an address that does not reconcile — and the loan cannot be cleared to close until it is answered.",
+      "definitionDetail": "It is issued as a condition, which means it has a place in a checklist and a person whose job is to close it. That is why the mechanics matter as much as the content: a letter that a processor cannot match to the open condition does not clear it, however well written it is.",
+      "primaryCta": "Prepare my mortgage explanation letter",
+      "primaryHref": "#generator",
+      "secondaryCta": "See the Loan Prep Letter Kit",
+      "secondaryHref": "/pricing#loan-prep-letter-kit",
+      "queries": [
+        "letter of explanation for mortgage",
+        "what conditions require a mortgage letter of explanation",
+        "how to write a letter of explanation for a mortgage underwriter",
+        "mortgage letter of explanation rejected by underwriting",
+        "letter of explanation for mortgage and the loan prep letter kit"
+      ],
+      "keyFacts": [
+        "Conditions are tracked individually. Each one has an identifier in the lender's system and is cleared on its own, which is why one letter per condition moves faster than one letter covering four.",
+        "A large deposit condition is about the source of the funds, not the amount. Underwriters need to see the money leave an identifiable place and arrive, which usually means a statement from both sides.",
+        "A credit inquiry condition is asking whether new debt was opened. The answer that clears it is a direct statement that no new account resulted, and it has to be true on the day you sign.",
+        "Gift funds are a separate document. A gift letter has its own required elements — donor, relationship, amount, and a statement that no repayment is expected — and a letter of explanation is not a substitute for one.",
+        "Anything you volunteer becomes a condition. Underwriters document what they learn, so a sentence explaining an unrelated issue creates a new item on the checklist rather than goodwill."
+      ],
+      "fields": [
+        "The condition identifier and its wording, exactly as the lender issued it",
+        "The loan number and the processor or underwriter's name",
+        "The account, employer, address, or date the condition names",
+        "The dates the event began and ended",
+        "The source of any funds involved, and the name of the party they came from",
+        "Whether any new debt resulted, stated directly",
+        "The current position as of the day you sign",
+        "The statements, letters, or records that reconcile against each figure in the letter"
+      ],
+      "steps": [
+        "Get the condition list from your loan officer in writing. Verbal relays lose the condition identifier, and the identifier is what routes your letter.",
+        "Sort the conditions into one letter each, and note which documents each will need before writing anything.",
+        "For any funds condition, obtain the record from both sides of the transfer. A statement showing money arriving, with nothing showing it leaving somewhere identifiable, does not close a source-of-funds question.",
+        "Write each letter to its condition, quoting the wording, and stop at the point the condition is answered.",
+        "Reconcile every figure against the attached statements before you send. A rounded number in the letter against an exact one on the statement causes a second request.",
+        "Send them together with one covering email that lists the condition identifiers, and ask the processor to confirm which ones are cleared."
+      ],
+      "reviewChecklist": [
+        "Each letter names one condition identifier and answers only that condition.",
+        "Every amount in the letter matches the statement to the cent.",
+        "A funds explanation shows both sides of the transfer, not only the arrival.",
+        "A credit inquiry explanation states directly whether new debt resulted.",
+        "Nothing in any letter refers to a matter the underwriter did not raise."
+      ],
+      "comparison": {
+        "heading": "The eight conditions that generate almost every mortgage letter of explanation",
+        "intro": "Match the wording your lender sent to the row below. The third column is what actually clears it; the fourth is what people send instead and why it does not.",
+        "columns": [
+          "Condition wording you were sent",
+          "What the underwriter is really asking",
+          "What clears it",
+          "What fails"
+        ],
+        "rows": [
+          [
+            "Explain the deposit of $[amount] on [date]",
+            "Where did this money come from, and is it borrowed",
+            "A statement from the sending account plus the receiving statement, and the sender's own confirmation",
+            "The receiving statement alone — it shows arrival, not source"
+          ],
+          [
+            "Explain all credit inquiries within the last 120 days",
+            "Did you open new debt that is not on the application",
+            "A line-by-line list of the inquiries with a direct statement that no new account resulted",
+            "A general statement about shopping around, with no inquiry list"
+          ],
+          [
+            "Explain the late payment(s) on [account] in [month]",
+            "Is this a pattern or an event, and is it over",
+            "The cause, the date it was cured, and a current statement showing the account in good standing",
+            "An apology with no cure date and no current statement"
+          ],
+          [
+            "Explain the gap in employment from [date] to [date]",
+            "Was there income during the gap, and is the current job stable",
+            "The dates, what happened, how the gap was covered, and the current employer's start date and status",
+            "A narrative about the industry, with no dates and no current-status confirmation"
+          ],
+          [
+            "Explain the address history discrepancy",
+            "Are you the same person as the credit file, and where were you living",
+            "The actual dates at each address and a document tying you to each — a lease, a utility bill, a licence",
+            "A statement of the correct address with nothing tying you to the dates"
+          ],
+          [
+            "Explain the name variation on [document]",
+            "Is this the same person",
+            "The legal basis for the variation and a document showing both forms — marriage certificate, court order, licence",
+            "A statement that both names are yours"
+          ],
+          [
+            "Explain the NSF or overdraft items in [month]",
+            "Is the account managed, and is the reserve real",
+            "The cause, whether it recurred, and statements for the following months showing it did not",
+            "An explanation of the single month, with no following months shown"
+          ],
+          [
+            "Provide a letter of explanation for the gift funds",
+            "Is this a gift or an undisclosed loan",
+            "A gift letter with donor, relationship, amount, and a no-repayment statement — plus the transfer record",
+            "A letter of explanation used in place of a gift letter; they are different documents"
+          ]
+        ]
+      },
+      "generator": {
+        "heading": "Write the letter for one condition",
+        "intro": "Choose the condition type, fill in the facts, and the generator writes the letter and the covering email that names the condition identifier. Run it once per condition rather than trying to cover several at a time.",
+        "filename": "mortgage-letter-of-explanation",
+        "fields": [
+          {
+            "name": "yourName",
+            "label": "Your full legal name, as on the loan application",
+            "type": "text",
+            "placeholder": "Priya Raman",
+            "required": true
+          },
+          {
+            "name": "loanNumber",
+            "label": "Loan number",
+            "type": "text",
+            "placeholder": "4471-88203",
+            "required": true
+          },
+          {
+            "name": "conditionRef",
+            "label": "Condition identifier",
+            "type": "text",
+            "placeholder": "Condition 14",
+            "required": true
+          },
+          {
+            "name": "recipient",
+            "label": "Processor or underwriter",
+            "type": "text",
+            "placeholder": "Marcus Bell, Summit Credit Union Underwriting",
+            "required": true
+          },
+          {
+            "name": "conditionText",
+            "label": "The condition, in the lender's own words",
+            "type": "textarea",
+            "placeholder": "Provide a signed letter of explanation for the $8,400 deposit to account ending 2214 on 12 June 2026.",
+            "required": true
+          },
+          {
+            "name": "subject",
+            "label": "The account, employer, address, or item it names",
+            "type": "text",
+            "placeholder": "Checking account ending 2214"
+          },
+          {
+            "name": "amount",
+            "label": "Amount involved",
+            "type": "text",
+            "placeholder": "$8,400.00",
+            "help": "Copy it from the statement to the cent, not rounded."
+          },
+          {
+            "name": "dateStart",
+            "label": "Date it happened, or began",
+            "type": "date",
+            "required": true
+          },
+          {
+            "name": "dateEnd",
+            "label": "Date it ended or was cured",
+            "type": "date"
+          },
+          {
+            "name": "cause",
+            "label": "What happened and why",
+            "type": "textarea",
+            "placeholder": "My sister repaid an informal loan I made to her in 2024 toward a vehicle purchase. She sold the vehicle in May 2026 and repaid the balance in one transfer.",
+            "required": true
+          },
+          {
+            "name": "sourceParty",
+            "label": "Who the funds came from, and your relationship",
+            "type": "text",
+            "placeholder": "Anika Raman, my sister"
+          },
+          {
+            "name": "newDebt",
+            "label": "Did any new debt result?",
+            "type": "select",
+            "options": [
+              "No new credit account was opened and no new debt resulted",
+              "A new account was opened and is disclosed below",
+              "Not applicable to this condition"
+            ]
+          },
+          {
+            "name": "nowStatus",
+            "label": "Where it stands today",
+            "type": "textarea",
+            "placeholder": "The loan between us is settled. No repayment is owed in either direction and no further transfers are expected."
+          },
+          {
+            "name": "attachments",
+            "label": "Documents attached, with dates",
+            "type": "textarea",
+            "placeholder": "1. Statement for account ending 2214, June 2026, deposit shown 12 June.\n2. Sender's bank transfer confirmation dated 12 June 2026.\n3. Signed statement from Anika Raman dated 3 August 2026."
+          }
+        ],
+        "outputs": [
+          {
+            "id": "condition",
+            "label": "The condition letter",
+            "note": "One condition, answered and closed. The condition identifier appears in the reference line so a processor can route it without opening the attachments.",
+            "body": "[Date]\n\n{{recipient}}\nRe: Loan {{loanNumber}} — {{conditionRef}} — Letter of explanation\n\nTo {{recipient}},\n\nThis letter answers {{conditionRef}} on loan {{loanNumber}}, which reads:\n\n  \"{{conditionText}}\"\n\nItem in question: {{subject}}{{#amount}}, in the amount of {{amount}}{{/amount}}, dated {{dateStart}}{{#dateEnd}} and resolved {{dateEnd}}{{/dateEnd}}.\n\nExplanation: {{cause}}\n\n{{#sourceParty}}Source of funds: The funds came from {{sourceParty}}. The transfer record from the sending account is attached alongside the receiving statement.\n\n{{/sourceParty}}{{newDebt}}.\n\nCurrent position: {{nowStatus}}\n\nAttached in support:\n\n{{attachments}}\n\nThe figures in this letter are taken from the attached statements and agree with them. Everything stated is true to the best of my knowledge.\n\nSigned ______________________________   Date ____________\n\n{{yourName}}\nLoan {{loanNumber}}"
+          },
+          {
+            "id": "email",
+            "label": "The covering email to the processor",
+            "note": "Ask which conditions are cleared. A processor who answers that question tells you what is still open before it costs you a closing date.",
+            "body": "Subject: Loan {{loanNumber}} — {{conditionRef}} response attached\n\n{{recipient}},\n\nAttached is the signed letter of explanation for {{conditionRef}} on loan {{loanNumber}}, together with the supporting documents.\n\n  Condition:  {{conditionText}}\n  Item:       {{subject}}{{#amount}} — {{amount}}{{/amount}}\n  Date:       {{dateStart}}{{#dateEnd}} to {{dateEnd}}{{/dateEnd}}\n\n  Attached:\n{{attachments}}\n\nCould you confirm when {{conditionRef}} is cleared, and let me know if any other condition on this file is still open? If anything further is needed for this one I will send it the same day.\n\n{{yourName}}\nLoan {{loanNumber}}"
+          },
+          {
+            "id": "inquiries",
+            "label": "Credit inquiry version",
+            "note": "For the 120-day inquiry condition, which is asking one question: did new debt result. List the inquiries individually and answer that question directly — a general statement about rate shopping does not close it.",
+            "body": "[Date]\n\n{{recipient}}\nRe: Loan {{loanNumber}} — {{conditionRef}} — Credit inquiries\n\nTo {{recipient}},\n\nThis letter answers {{conditionRef}}:\n\n  \"{{conditionText}}\"\n\nThe inquiries on my credit report within the period in question are listed below, with the reason for each:\n\n  [date] — [creditor name] — [reason] — [no account opened / account opened, disclosed on the application]\n  [date] — [creditor name] — [reason] — [no account opened / account opened, disclosed on the application]\n  [date] — [creditor name] — [reason] — [no account opened / account opened, disclosed on the application]\n\n{{#cause}}Context: {{cause}}\n\n{{/cause}}{{newDebt}}, other than any account listed above and disclosed on my application. My debts and monthly obligations are as stated on the application as of {{dateStart}}.\n\n{{#attachments}}Attached in support:\n\n{{attachments}}\n\n{{/attachments}}Everything stated above is true to the best of my knowledge.\n\nSigned ______________________________   Date ____________\n\n{{yourName}}\nLoan {{loanNumber}}"
+          }
+        ]
+      },
+      "templateTitle": "Employment gap condition",
+      "template": "[Date]\n\n[Processor name], [lender]\nRe: Loan [number] — Condition [ref] — Employment gap\n\nThis letter answers Condition [ref]:\n\n  \"[paste the condition wording]\"\n\nI was employed by [previous employer] as [title] until [end date]. I began at [current employer] as [title] on [start date]. The gap between those dates was [length].\n\nReason for the gap: [plain reason — role eliminated, relocation, caring responsibility, returned to study].\n\nHow the period was covered: [severance / savings / partner's income / unemployment benefit], in the approximate amount of $[amount] over the period.\n\nCurrent position: I have been employed at [current employer] since [start date] in a [full-time / part-time] permanent position at $[amount] per year. My employer's verification is attached.\n\nAttached: 1. Employment verification from [current employer] dated [date]. 2. Separation letter from [previous employer] dated [date]. 3. Bank statements for [months] showing the period was covered.\n\nSigned ______________________  Date ____________\n[Your full legal name] — Loan [number]",
+      "alternateTitle": "Address history condition",
+      "alternateTemplate": "[Date]\n\n[Processor name], [lender]\nRe: Loan [number] — Condition [ref] — Address history\n\nThis letter answers Condition [ref]:\n\n  \"[paste the condition wording]\"\n\nMy address history for the period under review is:\n\n  [start date] to [end date] — [full address] — [owned / rented / lived with family]\n  [start date] to [end date] — [full address] — [owned / rented / lived with family]\n\nThe discrepancy on my credit file arises because [reason — mail forwarding, a lease in another party's name, a period living with family with no utility in my name].\n\nAttached, tying me to each address for the dates stated:\n\n  1. [Lease / deed] for [address], dated [date]\n  2. [Utility bill / bank statement] for [address], dated [date]\n  3. [Driver's licence / voter record] showing [address]\n\nSigned ______________________  Date ____________\n[Your full legal name] — Loan [number]",
+      "mistakes": [
+        "Sending one letter for four conditions. Each has an identifier and clears separately, so a combined letter leaves all four open until a processor separates them.",
+        "Answering a source-of-funds condition with only the receiving statement. It shows the money arrived; the underwriter is asking where it came from and whether it is borrowed.",
+        "Rounding an amount. A letter saying $8,400 against a statement showing $8,412.63 produces a second request rather than a cleared condition.",
+        "Using a letter of explanation where a gift letter is required. They are different documents with different required elements, and the substitution is caught every time.",
+        "Explaining an issue the underwriter did not raise. It becomes a documented condition on the file, which is the opposite of what volunteering it was meant to achieve."
+      ],
+      "faq": [
+        {
+          "question": "Why does a mortgage underwriter want a letter of explanation?",
+          "answer": "Because the file contains something the documents alone do not settle — a deposit with no visible source, an employment gap, a recent credit inquiry, an address that does not reconcile. It is issued as a condition, which means the loan cannot be cleared to close until it is answered."
+        },
+        {
+          "question": "What are the most common mortgage letter of explanation requests?",
+          "answer": "Eight cover almost all of them: a large deposit, credit inquiries within the last 120 days, late payments, an employment gap, an address history discrepancy, a name variation, NSF or overdraft activity, and gift funds."
+        },
+        {
+          "question": "How do I explain a large deposit to an underwriter?",
+          "answer": "Show both sides of the transfer. Name the sender and your relationship to them, attach the statement from the sending account and the receiving statement, and state directly that the funds are not borrowed and no repayment is owed."
+        },
+        {
+          "question": "Do I need one letter or several?",
+          "answer": "One per condition. Conditions are tracked and cleared individually, so a single letter covering several of them stays open on all of them until someone unpicks it. Send them together with one covering email listing the identifiers."
+        },
+        {
+          "question": "Is a letter of explanation the same as a gift letter?",
+          "answer": "No. A gift letter has specific required elements — the donor, the relationship, the amount, and an express statement that no repayment is expected — and lenders will not accept a general explanation in its place."
+        },
+        {
+          "question": "Will a letter of explanation get my mortgage approved?",
+          "answer": "No. It clears one condition. The credit decision rests on income, assets, the debt-to-income calculation, the appraisal, and the lender's own overlays, none of which any letter can change."
+        }
+      ],
+      "sources": [
+        {
+          "label": "Fannie Mae — Selling Guide",
+          "url": "https://selling-guide.fanniemae.com/"
+        },
+        {
+          "label": "Freddie Mac — Single-Family Seller/Servicer Guide",
+          "url": "https://guide.freddiemac.com/"
+        },
+        {
+          "label": "Internal Revenue Service — Frequently Asked Questions on Gift Taxes",
+          "url": "https://www.irs.gov/businesses/small-businesses-self-employed/frequently-asked-questions-on-gift-taxes"
+        }
+      ],
+      "boundary": "ApprovalPrep is not a lender, broker, or mortgage adviser. It does not contact your lender, clear conditions, decide what your statements show, or influence an underwriting decision. The generator assembles your own words in your browser. You send your own letters.",
+      "decisionContext": [
+        "This page helps you decide which of the eight standard conditions you have been sent, because the condition determines what the letter must contain and what has to travel with it.",
+        "It also helps you decide how to split the work. Conditions clear individually, so the decision between one letter and four is really a decision about whether any of them clear this week.",
+        "For funds conditions the decision is which records to obtain. The sending side is the one people skip, and it is the side the underwriter is actually asking about.",
+        "The generator is free and browser-only. The $99 Loan Prep Letter Kit is the editable download covering the explanation letters and checklists for a full loan file."
+      ],
+      "whoFor": [
+        "Borrowers who have received a conditional approval with letters of explanation attached to it.",
+        "Borrowers whose letter was returned and who were told only that it was insufficient.",
+        "Borrowers facing several conditions at once with a closing date to hold.",
+        "Anyone asked about a deposit, an inquiry, an employment gap, or an address that does not reconcile."
+      ],
+      "value": [
+        "The eight standard conditions mapped to what actually clears each and what fails.",
+        "A generator producing the condition letter, the covering email, and a dedicated credit-inquiry version.",
+        "Two full worked templates for the two hardest conditions: employment gap and address history.",
+        "Explicit separation of the letter of explanation from the gift letter, which is a routine and expensive confusion."
+      ],
+      "whatYouGet": [
+        "A browser-only generator with three outputs, run once per condition.",
+        "A condition-to-remedy table you can match your lender's wording against.",
+        "Employment gap and address history templates written to condition wording.",
+        "A review checklist covering the five reasons letters come back from underwriting.",
+        "Primary sources at Fannie Mae, Freddie Mac, and the IRS."
+      ],
+      "useCases": [
+        "Conditional approval arrived with four letters of explanation on the condition list.",
+        "The underwriter asked about a deposit and you only have the receiving statement.",
+        "You have been asked to explain every credit inquiry in the last 120 days.",
+        "There is a gap in your employment history and a closing date to hold.",
+        "Your credit file shows an address you cannot immediately document."
+      ],
+      "relatedPaths": [
+        "/letter-of-explanation",
+        "/mortgage-checklist",
+        "/mortgage/gift-letter-explanation"
+      ],
+      "inboundFrom": [
+        "/mortgage-checklist",
+        "/letter-of-explanation"
+      ],
+      "atoms": [
+        {
+          "id": "short_answer",
+          "type": "short_answer",
+          "title": "short answer",
+          "text": "A mortgage letter of explanation is a signed statement an underwriter requires when the file contains something the documents alone do not settle. It is issued as a condition with its own identifier, and the loan cannot be cleared to close until that condition is answered."
+        },
+        {
+          "id": "conditions",
+          "type": "definition",
+          "title": "the eight conditions",
+          "text": "Eight conditions generate almost every mortgage letter of explanation: a large deposit, credit inquiries within the last 120 days, late payments, an employment gap, an address history discrepancy, a name variation, NSF or overdraft activity, and gift funds. Each needs a different set of facts and different attachments."
+        },
+        {
+          "id": "funds",
+          "type": "checklist",
+          "title": "source of funds",
+          "text": "A large-deposit condition asks where the money came from, not how much it was. What clears it is the statement from the sending account together with the receiving statement and the sender's own confirmation. The receiving statement alone shows arrival, not source, and does not close the question."
+        },
+        {
+          "id": "mistakes",
+          "type": "mistake_prevention",
+          "title": "mistakes",
+          "text": "Letters come back from underwriting for five reasons: one letter was sent for several separately-tracked conditions, a funds explanation showed only the receiving side, an amount was rounded rather than matched to the statement, a letter of explanation was used where a gift letter is required, or an issue nobody raised was volunteered and became a new condition."
+        }
+      ]
     }
   ]
 }

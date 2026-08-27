@@ -1553,6 +1553,44 @@
         "purchase_evaluation"
       ],
       "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0396_letter_of_explanation_template_definition",
+      "route_owner": "/letter-of-explanation/template",
+      "page_family_id": "letter_studio",
+      "children": [
+        "atlas_q_0397_letter_of_explanation_template_checklist",
+        "atlas_q_0398_letter_of_explanation_template_how_to",
+        "atlas_q_0399_letter_of_explanation_template_mistake_prevention",
+        "atlas_q_0400_letter_of_explanation_template_purchase_evaluation"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "how_to",
+        "mistake_prevention",
+        "purchase_evaluation"
+      ],
+      "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0401_letter_of_explanation_mortgage_definition",
+      "route_owner": "/letter-of-explanation/mortgage",
+      "page_family_id": "mortgage",
+      "children": [
+        "atlas_q_0402_letter_of_explanation_mortgage_checklist",
+        "atlas_q_0403_letter_of_explanation_mortgage_how_to",
+        "atlas_q_0404_letter_of_explanation_mortgage_mistake_prevention",
+        "atlas_q_0405_letter_of_explanation_mortgage_purchase_evaluation"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "how_to",
+        "mistake_prevention",
+        "purchase_evaluation"
+      ],
+      "status": "admitted_unique_intent_fanout"
     }
   ]
 }
