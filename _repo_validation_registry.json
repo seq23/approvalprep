@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "lastUpdatedAt": "2026-08-25T21:54:09.590Z",
+  "lastUpdatedAt": "2026-08-27T14:41:39.519091Z",
   "policy": "The root registry is the single execution authority. HARD_FAIL blocks immediately; STRONG_WARNING records and continues. The data/validation registry is generated from this file.",
   "validators": [
     {
@@ -1207,6 +1207,39 @@
       "owner": "approvalprep-ops",
       "group": "content-quality",
       "scope": "Built HTML surface in dist/, including dist/templates and dist/reports"
+    },
+    {
+      "id": "runtime-bindings",
+      "npmScript": "validate:runtime-bindings",
+      "entrypoint": "scripts/validators/validate-runtime-bindings.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents shipping a Worker that reads an env binding wrangler.toml does not declare, or a define:vars inline script that reads an identifier it was not given - the two shapes that silently dropped every conversion event since launch",
+      "owner": "approvalprep-ops",
+      "group": "conversion-critical",
+      "scope": "functions/**, src/**/*.astro inline scripts, wrangler.toml bindings and vars"
+    },
+    {
+      "id": "sitemap-url-form",
+      "npmScript": "validate:sitemap-url-form",
+      "entrypoint": "scripts/validate/sitemap-url-form.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents publishing a sitemap or canonical tag that names a URL the server 308-redirects, which spends crawl budget on redirects and points search engines at a URL they will not index",
+      "owner": "approvalprep-ops",
+      "group": "release-critical",
+      "scope": "dist/sitemap.xml and the canonical/og:url tags of every built indexable page"
+    },
+    {
+      "id": "download-key-contract",
+      "npmScript": "validate:download-key-contract",
+      "entrypoint": "scripts/validate/download-key-contract.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents shipping a paid download whose R2 key the uploader never writes - a paying customer receiving R2_OBJECT_MISSING instead of the file they bought",
+      "owner": "approvalprep-ops",
+      "group": "conversion-critical",
+      "scope": "functions/_runtime/asset-keys.js, functions/api/download-file.js, seed product keys, scripts/ops/r2-upload-assets.mjs"
     }
   ],
   "repairPolicy": "A validator may declare repairCommand only when that command repairs the same defect the validator detects. scripts/selfheal/heal-until-clean.mjs runs it on a blocking failure and re-validates."

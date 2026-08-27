@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import fs from "node:fs";
+import { hasDemand, demandRecord, measuredVolume, allRecords } from "../lib/demand_gate.mjs";
 
 const now = new Date().toISOString();
 const today = now.slice(0, 10);
@@ -17,11 +18,31 @@ const existingPaths = new Set(manifest.routes.map((route) => route.path));
 const registeredPaths = new Set(registry.pages.map((page) => page.path));
 const registeredQueries = new Set(registry.pages.map((page) => page.primaryQuery).filter(Boolean));
 const velocityDecision = fs.existsSync("data/authority_scale/velocity_decision.json") ? readJson("data/authority_scale/velocity_decision.json") : {};
+// A safety cap on a bad run, not a number to reach. The loop below stops when
+// it runs out of demand-backed candidates, which is almost always first.
 const cap = Number(velocityDecision.recommended_new_url_ceiling_per_day || opportunities.dailyPublishCap || 3);
+
+// The demand gate, applied before anything else looks at an opportunity.
+// `page_opportunities.json` is hand-typed, so until now the only thing standing
+// between a row in it and a live indexed route was whether someone had typed
+// the row. `priority: 98` on the first entry is a number a person chose; it is
+// not evidence. Ordering is by measured volume instead, and a candidate with no
+// measurement is refused rather than ranked last.
+const withoutDemand = [];
 const candidates = opportunities.opportunities
   .filter((item) => item && item.path && item.title && item.primaryQuery)
   .filter((item) => !existingPaths.has(item.path) && !registeredPaths.has(item.path) && !registeredQueries.has(item.primaryQuery))
-  .sort((a, b) => Number(b.priority || 0) - Number(a.priority || 0));
+  .filter((item) => {
+    if (hasDemand(item.primaryQuery)) return true;
+    withoutDemand.push({ path: item.path, primaryQuery: item.primaryQuery, reason: "no_demand_record" });
+    return false;
+  })
+  .sort((a, b) => (measuredVolume(b.primaryQuery) || 0) - (measuredVolume(a.primaryQuery) || 0));
+
+if (withoutDemand.length) {
+  console.warn(`[content:generate-pages] refused ${withoutDemand.length} opportunity/opportunities with no demand record:`);
+  for (const item of withoutDemand) console.warn(`  - ${item.path} (query: "${item.primaryQuery}")`);
+}
 
 const selected = [];
 const blocked = [];
@@ -48,8 +69,29 @@ for (const item of candidates) {
   selected.push(item);
 }
 
+// Everything this factory writes into `routeCopy` below is one fixed template
+// with `item.primaryQuery` and `item.title` interpolated into it: the same
+// `lead`, the same five `steps`, the same four `commonMistakes`, the same three
+// FAQ answers, on every page it has ever produced. A page like that answers the
+// query in the sense that it contains the words, and in no other sense.
+//
+// So the factory may open a route, but it may not put boilerplate into the
+// index. `index` is granted only when the copy differs from the template - which
+// today means: only after a person has written something. Until then the route
+// is `noindex` and carries `requires_authored_copy`, which is visible backlog
+// rather than a URL competing for a 14,800/mo term with filler behind it.
+const boilerplateFingerprint = (copy, item) => JSON.stringify(copy)
+  .split(item.primaryQuery).join("<QUERY>")
+  .split(item.title).join("<TITLE>");
+const templateFingerprints = new Set(
+  Object.entries(routeCopy.routes || {})
+    .filter(([, copy]) => copy && copy.generatedBy === "page_factory")
+    .map(([, copy]) => boilerplateFingerprint(copy, { primaryQuery: copy.targetProductSku || "", title: copy.heading || "" }))
+);
+
 for (const item of selected) {
   const supporting = [item.primaryQuery, ...(item.secondaryQueries || [])].filter(Boolean);
+  const record = demandRecord(item.primaryQuery);
   manifest.routes.push({
     path: item.path,
     title: item.title,
@@ -132,18 +174,34 @@ for (const item of selected) {
     generatedBy: "page_factory",
     generatedAt: now
   };
+
+  // Decide indexability from the copy that was just written, not from intent.
+  const fingerprint = boilerplateFingerprint(routeCopy.routes[item.path], item);
+  const isBoilerplate = templateFingerprints.has(fingerprint);
+  templateFingerprints.add(fingerprint);
+  const route = manifest.routes[manifest.routes.length - 1];
+  if (isBoilerplate) {
+    route.index = false;
+    route.indexing = "noindex";
+    route.requires_authored_copy = true;
+    route.noindex_reason = "route copy is the page-factory template with the query interpolated; it is not yet an answer";
+  }
+
   registry.pages.push({
     id: item.id,
     path: item.path,
     title: item.title,
-    status: "published_by_contract",
+    status: isBoilerplate ? "requires_authored_copy" : "published_by_contract",
     risk: item.risk,
     family: item.family,
     primaryQuery: item.primaryQuery,
     source: "page_factory",
     generatedAt: now,
     lastValidatedAt: null,
-    targetProductSku: item.targetProductSku
+    targetProductSku: item.targetProductSku,
+    demandEvidence: record
+      ? { sourceType: record.source_type, evidenceTier: record.evidence_tier, volume: record.volume, keywordDifficulty: record.keyword_difficulty }
+      : null
   });
 }
 
@@ -153,6 +211,8 @@ ledger.releases.push({
   pagesPublished: selected.length,
   approvalRequired: blocked.length,
   blocked: blocked.length,
+  refusedNoDemandRecord: withoutDemand.length,
+  demandRecordsAvailable: allRecords().length,
   validationRequired: true
 });
 

@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "orchestratorSource": "_repo_validation_registry.json",
-  "validatorCount": 109,
-  "hardFailCount": 98,
+  "validatorCount": 110,
+  "hardFailCount": 99,
   "strongWarningCount": 11,
   "validators": [
     {
@@ -907,15 +907,6 @@
     },
     {
       "order": 101,
-      "id": "cadence-ledger-advance",
-      "npmScript": "validate:cadence-ledger-advance",
-      "entrypoint": "scripts/validate/cadence-ledger-advance.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "group": "ops-critical"
-    },
-    {
-      "order": 102,
       "id": "redirect-map",
       "npmScript": "validate:redirect-map",
       "entrypoint": "scripts/validate/redirect-map.mjs",
@@ -924,7 +915,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 103,
+      "order": 102,
       "id": "retest-lifecycle",
       "npmScript": "validate:retest-lifecycle",
       "entrypoint": "scripts/validate/retest-lifecycle.mjs",
@@ -933,7 +924,7 @@
       "group": "search-intelligence"
     },
     {
-      "order": 104,
+      "order": 103,
       "id": "provider-cost-controls",
       "npmScript": "validate:provider-cost-controls",
       "entrypoint": "scripts/validate/provider-cost-controls.mjs",
@@ -942,7 +933,7 @@
       "group": "search-intelligence"
     },
     {
-      "order": 105,
+      "order": 104,
       "id": "query-atlas",
       "npmScript": "validate:query-atlas",
       "entrypoint": "scripts/validate/query-atlas.mjs",
@@ -951,16 +942,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 106,
-      "id": "atlas-demand-units",
-      "npmScript": "validate:atlas-units",
-      "entrypoint": "scripts/validate/atlas-units.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "group": "growth-critical"
-    },
-    {
-      "order": 107,
+      "order": 105,
       "id": "no-internal-instruction-leak",
       "npmScript": "validate:no-instruction-leak",
       "entrypoint": "scripts/validators/validate_no_internal_instruction_leak.js",
@@ -969,7 +951,7 @@
       "group": "content-quality"
     },
     {
-      "order": 108,
+      "order": 106,
       "id": "no-empty-table-cells",
       "npmScript": "validate:no-empty-cells",
       "entrypoint": "scripts/validators/validate_no_empty_table_cells.js",
@@ -978,13 +960,40 @@
       "group": "content-quality"
     },
     {
-      "order": 109,
+      "order": 107,
       "id": "content-pattern-contract",
       "npmScript": "validate:content-pattern",
       "entrypoint": "scripts/validators/validate_content_pattern_contract.js",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
       "group": "content-quality"
+    },
+    {
+      "order": 108,
+      "id": "runtime-bindings",
+      "npmScript": "validate:runtime-bindings",
+      "entrypoint": "scripts/validators/validate-runtime-bindings.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "conversion-critical"
+    },
+    {
+      "order": 109,
+      "id": "sitemap-url-form",
+      "npmScript": "validate:sitemap-url-form",
+      "entrypoint": "scripts/validate/sitemap-url-form.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "release-critical"
+    },
+    {
+      "order": 110,
+      "id": "download-key-contract",
+      "npmScript": "validate:download-key-contract",
+      "entrypoint": "scripts/validate/download-key-contract.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "conversion-critical"
     }
   ]
 }
