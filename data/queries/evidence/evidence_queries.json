@@ -1,19 +1,18 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "2.0",
   "note": "Evidence-backed queries only. evidence_tier is required. T4 (synthetic fanout) is never stored here - it lives in data/authority_scale/fanout_100k as a hypothesis reserve and is not publishable.",
   "tiers": {
     "T1": "GSC-measured",
     "T2a": "Bing/Keyword Planner measured",
     "T2b": "Semrush modeled",
-    "T3": "real phrasing, no volume"
+    "T3": "real phrasing, no keyword-tool search_volume"
   },
-  "source": "portfolio-search-packet.zip / query_universe_T2b.json",
+  "source": "portfolio-search-packet.zip / query_universe_T2b.json; every search_volume re-confirmed by exact query-string join against the Semrush Portfolio Search Packet v2 and the blue-ocean keyword-compare packet (13/13 agree, 0 conflicts)",
   "queries": [
     {
       "query": "landlord reference letter",
       "evidence_tier": "T2b",
       "source_type": "semrush_keyword_magic",
-      "volume": 1600,
       "keyword_difficulty": 13,
       "weak_incumbent_score": 0.87,
       "intent": "transactional",
@@ -23,13 +22,20 @@
       "target_domain": "approvalprep.com",
       "cpc_usd": 0,
       "paid_competition": 0.48,
-      "competitor_ranking_url": "NO_DATA"
+      "competitor_ranking_url": "NO_DATA",
+      "search_volume": 1600,
+      "impressions_90d": null,
+      "demand_basis": "search_volume",
+      "search_volume_source": "semrush_keyword_compare (blue-ocean packet, 2026-08)",
+      "volume_sources": {
+        "semrush_keyword_compare (blue-ocean packet, 2026-08)": 1600
+      },
+      "volume_conflict": false
     },
     {
       "query": "rental verification form",
       "evidence_tier": "T2b",
       "source_type": "semrush_keyword_magic",
-      "volume": 1300,
       "keyword_difficulty": 13,
       "weak_incumbent_score": 0.87,
       "intent": "transactional",
@@ -39,13 +45,20 @@
       "target_domain": "approvalprep.com",
       "cpc_usd": 0,
       "paid_competition": 0.14,
-      "competitor_ranking_url": "NO_DATA"
+      "competitor_ranking_url": "NO_DATA",
+      "search_volume": 1300,
+      "impressions_90d": null,
+      "demand_basis": "search_volume",
+      "search_volume_source": "semrush_keyword_compare (blue-ocean packet, 2026-08)",
+      "volume_sources": {
+        "semrush_keyword_compare (blue-ocean packet, 2026-08)": 1300
+      },
+      "volume_conflict": false
     },
     {
       "query": "how to write a letter of explanation",
       "evidence_tier": "T2b",
       "source_type": "semrush_keyword_magic",
-      "volume": 70,
       "keyword_difficulty": 20,
       "weak_incumbent_score": 0.8,
       "intent": "transactional",
@@ -55,13 +68,20 @@
       "target_domain": "approvalprep.com",
       "cpc_usd": 0,
       "paid_competition": 0.01,
-      "competitor_ranking_url": "NO_DATA"
+      "competitor_ranking_url": "NO_DATA",
+      "search_volume": 70,
+      "impressions_90d": null,
+      "demand_basis": "search_volume",
+      "search_volume_source": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)",
+      "volume_sources": {
+        "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)": 70
+      },
+      "volume_conflict": false
     },
     {
       "query": "letter of explanation for mortgage",
       "evidence_tier": "T2b",
       "source_type": "semrush_keyword_magic",
-      "volume": 480,
       "keyword_difficulty": 23,
       "weak_incumbent_score": 0.77,
       "intent": "transactional",
@@ -71,13 +91,20 @@
       "target_domain": "approvalprep.com",
       "cpc_usd": 0,
       "paid_competition": 0.33,
-      "competitor_ranking_url": "NO_DATA"
+      "competitor_ranking_url": "NO_DATA",
+      "search_volume": 480,
+      "impressions_90d": null,
+      "demand_basis": "search_volume",
+      "search_volume_source": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)",
+      "volume_sources": {
+        "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)": 480
+      },
+      "volume_conflict": false
     },
     {
       "query": "rental application letter",
       "evidence_tier": "T2b",
       "source_type": "semrush_keyword_magic",
-      "volume": 90,
       "keyword_difficulty": 26,
       "weak_incumbent_score": 0.74,
       "intent": "commercial",
@@ -87,13 +114,20 @@
       "target_domain": "approvalprep.com",
       "cpc_usd": 0,
       "paid_competition": 0.06,
-      "competitor_ranking_url": "NO_DATA"
+      "competitor_ranking_url": "NO_DATA",
+      "search_volume": 90,
+      "impressions_90d": null,
+      "demand_basis": "search_volume",
+      "search_volume_source": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)",
+      "volume_sources": {
+        "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)": 90
+      },
+      "volume_conflict": false
     },
     {
       "query": "employment verification letter template",
       "evidence_tier": "T2b",
       "source_type": "semrush_keyword_magic",
-      "volume": 3600,
       "keyword_difficulty": 27,
       "weak_incumbent_score": 0.73,
       "intent": "transactional",
@@ -103,13 +137,20 @@
       "target_domain": "approvalprep.com",
       "cpc_usd": 1.62,
       "paid_competition": 0.69,
-      "competitor_ranking_url": "NO_DATA"
+      "competitor_ranking_url": "NO_DATA",
+      "search_volume": 3600,
+      "impressions_90d": null,
+      "demand_basis": "search_volume",
+      "search_volume_source": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)",
+      "volume_sources": {
+        "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)": 3600
+      },
+      "volume_conflict": false
     },
     {
       "query": "proof of employment letter",
       "evidence_tier": "T2b",
       "source_type": "semrush_keyword_magic",
-      "volume": 2900,
       "keyword_difficulty": 30,
       "weak_incumbent_score": 0.7,
       "intent": "transactional",
@@ -119,13 +160,20 @@
       "target_domain": "approvalprep.com",
       "cpc_usd": 1.46,
       "paid_competition": 0.68,
-      "competitor_ranking_url": "NO_DATA"
+      "competitor_ranking_url": "NO_DATA",
+      "search_volume": 2900,
+      "impressions_90d": null,
+      "demand_basis": "search_volume",
+      "search_volume_source": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)",
+      "volume_sources": {
+        "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)": 2900
+      },
+      "volume_conflict": false
     },
     {
       "query": "letter of explanation",
       "evidence_tier": "T2b",
       "source_type": "semrush_keyword_magic",
-      "volume": 1600,
       "keyword_difficulty": 30,
       "weak_incumbent_score": 0.7,
       "intent": "transactional",
@@ -135,13 +183,20 @@
       "target_domain": "approvalprep.com",
       "cpc_usd": 2.37,
       "paid_competition": 0.33,
-      "competitor_ranking_url": "NO_DATA"
+      "competitor_ranking_url": "NO_DATA",
+      "search_volume": 1600,
+      "impressions_90d": null,
+      "demand_basis": "search_volume",
+      "search_volume_source": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)",
+      "volume_sources": {
+        "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)": 1600
+      },
+      "volume_conflict": false
     },
     {
       "query": "goodwill letter credit",
       "evidence_tier": "T2b",
       "source_type": "semrush_keyword_magic",
-      "volume": 210,
       "keyword_difficulty": 31,
       "weak_incumbent_score": 0.69,
       "intent": "transactional",
@@ -151,13 +206,20 @@
       "target_domain": "approvalprep.com",
       "cpc_usd": 2.77,
       "paid_competition": 0.08,
-      "competitor_ranking_url": "NO_DATA"
+      "competitor_ranking_url": "NO_DATA",
+      "search_volume": 210,
+      "impressions_90d": null,
+      "demand_basis": "search_volume",
+      "search_volume_source": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)",
+      "volume_sources": {
+        "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)": 210
+      },
+      "volume_conflict": false
     },
     {
       "query": "employment verification form",
       "evidence_tier": "T2b",
       "source_type": "semrush_keyword_magic",
-      "volume": 4400,
       "keyword_difficulty": 32,
       "weak_incumbent_score": 0.68,
       "intent": "transactional",
@@ -167,13 +229,20 @@
       "target_domain": "approvalprep.com",
       "cpc_usd": 1.59,
       "paid_competition": 0.27,
-      "competitor_ranking_url": "NO_DATA"
+      "competitor_ranking_url": "NO_DATA",
+      "search_volume": 4400,
+      "impressions_90d": null,
+      "demand_basis": "search_volume",
+      "search_volume_source": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)",
+      "volume_sources": {
+        "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)": 4400
+      },
+      "volume_conflict": false
     },
     {
       "query": "employment verification letter",
       "evidence_tier": "T2b",
       "source_type": "semrush_keyword_magic",
-      "volume": 14800,
       "keyword_difficulty": 35,
       "weak_incumbent_score": 0.65,
       "intent": "transactional",
@@ -183,13 +252,21 @@
       "target_domain": "approvalprep.com",
       "cpc_usd": 1.65,
       "paid_competition": 0.65,
-      "competitor_ranking_url": "NO_DATA"
+      "competitor_ranking_url": "NO_DATA",
+      "search_volume": 14800,
+      "impressions_90d": null,
+      "demand_basis": "search_volume",
+      "search_volume_source": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)",
+      "volume_sources": {
+        "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)": 14800,
+        "semrush_keyword_compare (blue-ocean packet, 2026-08)": 14800
+      },
+      "volume_conflict": false
     },
     {
       "query": "letter of explanation template",
       "evidence_tier": "T2b",
       "source_type": "semrush_keyword_magic",
-      "volume": 590,
       "keyword_difficulty": 35,
       "weak_incumbent_score": 0.65,
       "intent": "transactional",
@@ -199,13 +276,20 @@
       "target_domain": "approvalprep.com",
       "cpc_usd": 1.92,
       "paid_competition": 0.03,
-      "competitor_ranking_url": "NO_DATA"
+      "competitor_ranking_url": "NO_DATA",
+      "search_volume": 590,
+      "impressions_90d": null,
+      "demand_basis": "search_volume",
+      "search_volume_source": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)",
+      "volume_sources": {
+        "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)": 590
+      },
+      "volume_conflict": false
     },
     {
       "query": "letter of explanation sample",
       "evidence_tier": "T2b",
       "source_type": "semrush_keyword_magic",
-      "volume": 260,
       "keyword_difficulty": 36,
       "weak_incumbent_score": 0.64,
       "intent": "transactional",
@@ -215,7 +299,23 @@
       "target_domain": "approvalprep.com",
       "cpc_usd": 1.92,
       "paid_competition": 0.03,
-      "competitor_ranking_url": "NO_DATA"
+      "competitor_ranking_url": "NO_DATA",
+      "search_volume": 260,
+      "impressions_90d": null,
+      "demand_basis": "search_volume",
+      "search_volume_source": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)",
+      "volume_sources": {
+        "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)": 260
+      },
+      "volume_conflict": false
     }
-  ]
+  ],
+  "unit_contract": {
+    "search_volume": "Monthly searches reported by a keyword tool. null when unknown.",
+    "impressions_90d": "This domain's own impressions over the measured GSC window (90 days). null when unknown.",
+    "demand_basis": "Which field rank_score used: search_volume | impressions_90d | none.",
+    "removed_field": "`volume` is removed. It previously held BOTH monthly search volume (semrush rows) and this domain's own 90d impressions (gsc rows), so rank_score compared incompatible units. A missing key throws; a wrong number does not.",
+    "never": "Do not sum or compare across units. Volumes from disagreeing packets are recorded in volume_sources with volume_conflict=true and are never averaged.",
+    "precedent": "Follows portfolio_demand.json (portfolio-demand-v1), which separated volume_mo from demand_signal/demand_signal_unit for this same defect."
+  }
 }

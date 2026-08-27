@@ -1,5 +1,5 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "2.0",
   "generated_from": "data/queries/evidence/evidence_queries.json + data/authority_scale/fanout_dimensions.json",
   "policy": "Full taxonomy coverage is an index, not a publishing queue. Pages may only be generated against evidence_tier T1-T3. T4 synthetic permutations are a hypothesis reserve consulted when a cluster has no evidence, and never publish on their own.",
   "evidence_weights": {
@@ -7,6 +7,29 @@
     "T2a": 0.8,
     "T2b": 0.6,
     "T3": 0.35
+  },
+  "rank_scoring": {
+    "formula": "rank_score = EVIDENCE_WEIGHT[evidence_tier] * max(demand_value, 1) * weak_incumbent_score",
+    "demand_value_by_band": {
+      "measured_search_volume": "search_volume (monthly searches from a keyword tool)",
+      "own_impressions_only": "impressions_90d (this domain's own impressions over 90 days)",
+      "unscored": "null - no demand evidence, rank_score is null"
+    },
+    "comparability": "rank_score is ONLY comparable within the same rank_band. The demand term carries a different unit per band, so a cross-band comparison is a unit error. Queries are ordered by band first, then by rank_score inside the band.",
+    "band_order": [
+      "measured_search_volume",
+      "own_impressions_only",
+      "unscored"
+    ],
+    "why": "Across the portfolio one field named `volume` held monthly search volume on semrush rows and this domain's own 90-day impressions on GSC rows, and rank_score was computed from it directly, so the two units were compared as peers. This repo has no GSC lane yet, so no row here was ever corrupted; the field is split and the score banded so the defect cannot appear the moment a GSC lane is added."
+  },
+  "unit_contract": {
+    "search_volume": "Monthly searches reported by a keyword tool. null when unknown.",
+    "impressions_90d": "This domain's own impressions over the measured 90-day GSC window. null when unknown.",
+    "demand_basis": "Which field rank_score used: search_volume | impressions_90d | none.",
+    "removed_field": "`volume` is removed. Across the portfolio it held BOTH monthly search volume (keyword-tool rows) and a domain's own 90d impressions (gsc rows). A missing key throws; a wrong number does not.",
+    "never": "Do not sum or compare across units. Disagreeing packet volumes are recorded in volume_sources with volume_conflict=true and are never averaged.",
+    "precedent": "Follows portfolio_demand.json (portfolio-demand-v1), which separated volume_mo from demand_signal/demand_signal_unit for this same defect."
   },
   "taxonomy": {
     "topics": 40,
@@ -69,7 +92,17 @@
       "query": "employment verification letter",
       "evidence_tier": "T2b",
       "source_type": "semrush_keyword_magic",
-      "volume": 14800,
+      "search_volume": 14800,
+      "impressions_90d": null,
+      "demand_basis": "search_volume",
+      "search_volume_source": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)",
+      "volume_sources": {
+        "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)": 14800,
+        "semrush_keyword_compare (blue-ocean packet, 2026-08)": 14800
+      },
+      "volume_conflict": false,
+      "kd_sources": null,
+      "kd_conflict": false,
       "keyword_difficulty": 35,
       "weak_incumbent_score": 0.65,
       "intent": "transactional",
@@ -85,13 +118,24 @@
         "semantic_cluster": "employment-verification"
       },
       "rank_score": 5772,
+      "rank_band": "measured_search_volume",
+      "rank_score_comparable_within": "measured_search_volume",
       "publishable": true
     },
     {
       "query": "employment verification form",
       "evidence_tier": "T2b",
       "source_type": "semrush_keyword_magic",
-      "volume": 4400,
+      "search_volume": 4400,
+      "impressions_90d": null,
+      "demand_basis": "search_volume",
+      "search_volume_source": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)",
+      "volume_sources": {
+        "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)": 4400
+      },
+      "volume_conflict": false,
+      "kd_sources": null,
+      "kd_conflict": false,
       "keyword_difficulty": 32,
       "weak_incumbent_score": 0.68,
       "intent": "transactional",
@@ -107,13 +151,24 @@
         "semantic_cluster": "employment-verification"
       },
       "rank_score": 1795.2,
+      "rank_band": "measured_search_volume",
+      "rank_score_comparable_within": "measured_search_volume",
       "publishable": true
     },
     {
       "query": "employment verification letter template",
       "evidence_tier": "T2b",
       "source_type": "semrush_keyword_magic",
-      "volume": 3600,
+      "search_volume": 3600,
+      "impressions_90d": null,
+      "demand_basis": "search_volume",
+      "search_volume_source": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)",
+      "volume_sources": {
+        "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)": 3600
+      },
+      "volume_conflict": false,
+      "kd_sources": null,
+      "kd_conflict": false,
       "keyword_difficulty": 27,
       "weak_incumbent_score": 0.73,
       "intent": "transactional",
@@ -129,13 +184,24 @@
         "semantic_cluster": "employment-verification"
       },
       "rank_score": 1576.8,
+      "rank_band": "measured_search_volume",
+      "rank_score_comparable_within": "measured_search_volume",
       "publishable": true
     },
     {
       "query": "proof of employment letter",
       "evidence_tier": "T2b",
       "source_type": "semrush_keyword_magic",
-      "volume": 2900,
+      "search_volume": 2900,
+      "impressions_90d": null,
+      "demand_basis": "search_volume",
+      "search_volume_source": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)",
+      "volume_sources": {
+        "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)": 2900
+      },
+      "volume_conflict": false,
+      "kd_sources": null,
+      "kd_conflict": false,
       "keyword_difficulty": 30,
       "weak_incumbent_score": 0.7,
       "intent": "transactional",
@@ -151,13 +217,24 @@
         "semantic_cluster": "proof-of-income"
       },
       "rank_score": 1218,
+      "rank_band": "measured_search_volume",
+      "rank_score_comparable_within": "measured_search_volume",
       "publishable": true
     },
     {
       "query": "landlord reference letter",
       "evidence_tier": "T2b",
       "source_type": "semrush_keyword_magic",
-      "volume": 1600,
+      "search_volume": 1600,
+      "impressions_90d": null,
+      "demand_basis": "search_volume",
+      "search_volume_source": "semrush_keyword_compare (blue-ocean packet, 2026-08)",
+      "volume_sources": {
+        "semrush_keyword_compare (blue-ocean packet, 2026-08)": 1600
+      },
+      "volume_conflict": false,
+      "kd_sources": null,
+      "kd_conflict": false,
       "keyword_difficulty": 13,
       "weak_incumbent_score": 0.87,
       "intent": "transactional",
@@ -173,13 +250,24 @@
         "semantic_cluster": "letter-of-explanation"
       },
       "rank_score": 835.2,
+      "rank_band": "measured_search_volume",
+      "rank_score_comparable_within": "measured_search_volume",
       "publishable": true
     },
     {
       "query": "rental verification form",
       "evidence_tier": "T2b",
       "source_type": "semrush_keyword_magic",
-      "volume": 1300,
+      "search_volume": 1300,
+      "impressions_90d": null,
+      "demand_basis": "search_volume",
+      "search_volume_source": "semrush_keyword_compare (blue-ocean packet, 2026-08)",
+      "volume_sources": {
+        "semrush_keyword_compare (blue-ocean packet, 2026-08)": 1300
+      },
+      "volume_conflict": false,
+      "kd_sources": null,
+      "kd_conflict": false,
       "keyword_difficulty": 13,
       "weak_incumbent_score": 0.87,
       "intent": "transactional",
@@ -195,13 +283,24 @@
         "semantic_cluster": "employment-verification"
       },
       "rank_score": 678.6,
+      "rank_band": "measured_search_volume",
+      "rank_score_comparable_within": "measured_search_volume",
       "publishable": true
     },
     {
       "query": "letter of explanation",
       "evidence_tier": "T2b",
       "source_type": "semrush_keyword_magic",
-      "volume": 1600,
+      "search_volume": 1600,
+      "impressions_90d": null,
+      "demand_basis": "search_volume",
+      "search_volume_source": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)",
+      "volume_sources": {
+        "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)": 1600
+      },
+      "volume_conflict": false,
+      "kd_sources": null,
+      "kd_conflict": false,
       "keyword_difficulty": 30,
       "weak_incumbent_score": 0.7,
       "intent": "transactional",
@@ -217,13 +316,24 @@
         "semantic_cluster": "letter-of-explanation"
       },
       "rank_score": 672,
+      "rank_band": "measured_search_volume",
+      "rank_score_comparable_within": "measured_search_volume",
       "publishable": true
     },
     {
       "query": "letter of explanation template",
       "evidence_tier": "T2b",
       "source_type": "semrush_keyword_magic",
-      "volume": 590,
+      "search_volume": 590,
+      "impressions_90d": null,
+      "demand_basis": "search_volume",
+      "search_volume_source": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)",
+      "volume_sources": {
+        "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)": 590
+      },
+      "volume_conflict": false,
+      "kd_sources": null,
+      "kd_conflict": false,
       "keyword_difficulty": 35,
       "weak_incumbent_score": 0.65,
       "intent": "transactional",
@@ -239,13 +349,24 @@
         "semantic_cluster": "letter-of-explanation"
       },
       "rank_score": 230.1,
+      "rank_band": "measured_search_volume",
+      "rank_score_comparable_within": "measured_search_volume",
       "publishable": true
     },
     {
       "query": "letter of explanation for mortgage",
       "evidence_tier": "T2b",
       "source_type": "semrush_keyword_magic",
-      "volume": 480,
+      "search_volume": 480,
+      "impressions_90d": null,
+      "demand_basis": "search_volume",
+      "search_volume_source": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)",
+      "volume_sources": {
+        "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)": 480
+      },
+      "volume_conflict": false,
+      "kd_sources": null,
+      "kd_conflict": false,
       "keyword_difficulty": 23,
       "weak_incumbent_score": 0.77,
       "intent": "transactional",
@@ -261,13 +382,24 @@
         "semantic_cluster": "letter-of-explanation"
       },
       "rank_score": 221.76,
+      "rank_band": "measured_search_volume",
+      "rank_score_comparable_within": "measured_search_volume",
       "publishable": true
     },
     {
       "query": "letter of explanation sample",
       "evidence_tier": "T2b",
       "source_type": "semrush_keyword_magic",
-      "volume": 260,
+      "search_volume": 260,
+      "impressions_90d": null,
+      "demand_basis": "search_volume",
+      "search_volume_source": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)",
+      "volume_sources": {
+        "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)": 260
+      },
+      "volume_conflict": false,
+      "kd_sources": null,
+      "kd_conflict": false,
       "keyword_difficulty": 36,
       "weak_incumbent_score": 0.64,
       "intent": "transactional",
@@ -283,13 +415,24 @@
         "semantic_cluster": "letter-of-explanation"
       },
       "rank_score": 99.84,
+      "rank_band": "measured_search_volume",
+      "rank_score_comparable_within": "measured_search_volume",
       "publishable": true
     },
     {
       "query": "goodwill letter credit",
       "evidence_tier": "T2b",
       "source_type": "semrush_keyword_magic",
-      "volume": 210,
+      "search_volume": 210,
+      "impressions_90d": null,
+      "demand_basis": "search_volume",
+      "search_volume_source": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)",
+      "volume_sources": {
+        "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)": 210
+      },
+      "volume_conflict": false,
+      "kd_sources": null,
+      "kd_conflict": false,
       "keyword_difficulty": 31,
       "weak_incumbent_score": 0.69,
       "intent": "transactional",
@@ -305,13 +448,24 @@
         "semantic_cluster": "letter-of-explanation"
       },
       "rank_score": 86.94,
+      "rank_band": "measured_search_volume",
+      "rank_score_comparable_within": "measured_search_volume",
       "publishable": true
     },
     {
       "query": "rental application letter",
       "evidence_tier": "T2b",
       "source_type": "semrush_keyword_magic",
-      "volume": 90,
+      "search_volume": 90,
+      "impressions_90d": null,
+      "demand_basis": "search_volume",
+      "search_volume_source": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)",
+      "volume_sources": {
+        "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)": 90
+      },
+      "volume_conflict": false,
+      "kd_sources": null,
+      "kd_conflict": false,
       "keyword_difficulty": 26,
       "weak_incumbent_score": 0.74,
       "intent": "commercial",
@@ -327,13 +481,24 @@
         "semantic_cluster": "rental-application-preparation"
       },
       "rank_score": 39.96,
+      "rank_band": "measured_search_volume",
+      "rank_score_comparable_within": "measured_search_volume",
       "publishable": true
     },
     {
       "query": "how to write a letter of explanation",
       "evidence_tier": "T2b",
       "source_type": "semrush_keyword_magic",
-      "volume": 70,
+      "search_volume": 70,
+      "impressions_90d": null,
+      "demand_basis": "search_volume",
+      "search_volume_source": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)",
+      "volume_sources": {
+        "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)": 70
+      },
+      "volume_conflict": false,
+      "kd_sources": null,
+      "kd_conflict": false,
       "keyword_difficulty": 20,
       "weak_incumbent_score": 0.8,
       "intent": "transactional",
@@ -349,6 +514,8 @@
         "semantic_cluster": "letter-of-explanation"
       },
       "rank_score": 33.6,
+      "rank_band": "measured_search_volume",
+      "rank_score_comparable_within": "measured_search_volume",
       "publishable": true
     }
   ]

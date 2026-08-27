@@ -1154,6 +1154,17 @@
       "group": "growth-critical"
     },
     {
+      "id": "atlas-demand-units",
+      "npmScript": "validate:atlas-units",
+      "entrypoint": "scripts/validate/atlas-units.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents rank_score comparing incompatible demand units - one field named `volume` held both monthly search volume (keyword-tool rows) and a domain's own 90-day GSC impressions, so the publishing queue could silently invert",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "Demand-unit contract on evidence_queries.json and query_atlas.json: search_volume vs impressions_90d, demand_basis, rank_band, and no source file reading the removed `volume` field"
+    },
+    {
       "id": "no-internal-instruction-leak",
       "npmScript": "validate:no-instruction-leak",
       "entrypoint": "scripts/validators/validate_no_internal_instruction_leak.js",

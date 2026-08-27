@@ -37,8 +37,11 @@ else {
     if (!PUBLISHABLE.has(q.evidence_tier)) {
       errors.push(`publishable entry on non-publishable tier ${q.evidence_tier}: ${q.query}`);
     }
-    if (!q.volume && q.evidence_tier !== 'T3') {
-      errors.push(`publishable entry with no volume on tier ${q.evidence_tier}: ${q.query}`);
+    // Demand must be present in ONE of the two explicit units. `volume` is gone on
+    // purpose: it used to hold either unit, so this check could pass on a number that
+    // meant the wrong thing.
+    if (q.demand_basis === 'none' && q.evidence_tier !== 'T3') {
+      errors.push(`publishable entry with no demand evidence on tier ${q.evidence_tier}: ${q.query}`);
     }
   }
   // The reserve must stay a reserve.

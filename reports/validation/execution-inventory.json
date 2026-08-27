@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "orchestratorSource": "_repo_validation_registry.json",
-  "validatorCount": 107,
-  "hardFailCount": 96,
+  "validatorCount": 108,
+  "hardFailCount": 97,
   "strongWarningCount": 11,
   "validators": [
     {
@@ -943,6 +943,15 @@
     },
     {
       "order": 105,
+      "id": "atlas-demand-units",
+      "npmScript": "validate:atlas-units",
+      "entrypoint": "scripts/validate/atlas-units.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "growth-critical"
+    },
+    {
+      "order": 106,
       "id": "no-internal-instruction-leak",
       "npmScript": "validate:no-instruction-leak",
       "entrypoint": "scripts/validators/validate_no_internal_instruction_leak.js",
@@ -951,7 +960,7 @@
       "group": "content-quality"
     },
     {
-      "order": 106,
+      "order": 107,
       "id": "no-empty-table-cells",
       "npmScript": "validate:no-empty-cells",
       "entrypoint": "scripts/validators/validate_no_empty_table_cells.js",
@@ -960,7 +969,7 @@
       "group": "content-quality"
     },
     {
-      "order": 107,
+      "order": 108,
       "id": "content-pattern-contract",
       "npmScript": "validate:content-pattern",
       "entrypoint": "scripts/validators/validate_content_pattern_contract.js",
