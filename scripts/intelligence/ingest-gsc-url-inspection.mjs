@@ -57,11 +57,17 @@ if (importFile) {
     // Recorded as a status the report can show, and the chain continues. Every
     // other error still throws, because those can be transient and are worth
     // failing on.
+    //
+    // The mode stays "unavailable" - one of the four modes the ledger validators
+    // already accept - rather than a new "unauthorized" mode. Inventing one meant
+    // two separate validators, each holding their own copy of the allowed list,
+    // both hard-failing the run. The distinction belongs in the status, which is
+    // the field that carries provider-specific outcomes.
     const unauthorized = /HTTP 403/.test(String(error.message || ""));
     const code = unauthorized ? "NOT_AUTHORIZED" : "SOURCE_ERROR";
-    writeJson(outputFile, { schemaVersion: "4.2.0", connectorId, mode: unauthorized ? "unauthorized" : "failed", siteUrl, fetchedAt: now(), rows, errors: [{ code, message: error.message }] });
-    appendRun(connectorId, code, { mode: unauthorized ? "unauthorized" : "live", reason: error.message, recordsImported: rows.length });
+    writeJson(outputFile, { schemaVersion: "4.2.0", connectorId, mode: unauthorized ? "unavailable" : "failed", siteUrl, fetchedAt: now(), rows, errors: [{ code, message: error.message }] });
+    appendRun(connectorId, code, { mode: unauthorized ? "unavailable" : "live", reason: error.message, recordsImported: rows.length });
     if (!unauthorized) throw error;
-    console.log(JSON.stringify({ connectorId, mode: "unauthorized", status: code, recordsImported: rows.length, reason: "service account is siteFullUser, not siteOwner - URL Inspection requires ownership" }, null, 2));
+    console.log(JSON.stringify({ connectorId, mode: "unavailable", status: code, recordsImported: rows.length, reason: "service account is siteFullUser, not siteOwner - URL Inspection requires ownership" }, null, 2));
   }
 }
