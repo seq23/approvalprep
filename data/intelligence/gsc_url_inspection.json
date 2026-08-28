@@ -2,13 +2,13 @@
   "schemaVersion": "4.2.0",
   "connectorId": "google_url_inspection",
   "mode": "unavailable",
-  "siteUrl": null,
-  "fetchedAt": null,
+  "siteUrl": "sc-domain:approvalprep.com",
+  "fetchedAt": "2026-08-28T04:07:17.014Z",
   "rows": [],
   "errors": [
     {
-      "code": "NOT_CONFIGURED",
-      "message": "Set GSC_SITE_URL and GSC_ACCESS_TOKEN, or provide GSC_URL_INSPECTION_IMPORT_FILE."
+      "code": "NOT_AUTHORIZED",
+      "message": "HTTP 403: {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"You do not own this site, or the inspected URL is not part of this property.\",\n    \"status\": \"PERMISSION_DENIED\"\n  }\n}\n"
     }
   ]
 }
