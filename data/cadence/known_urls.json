@@ -1,6 +1,6 @@
 {
   "generated_at": "2026-08-28",
-  "accepted_reason": "Reconciling the accepted baseline with what is already live on main: /letter-of-explanation-template/ and three /blog/what-should-i-gather-before-using-* pages were published and pushed by citation-os-daily run 33180922482 (commit 9aee4b5) on 2026-08-28, through a workflow that carried no cadence gate. They are serving, indexed in public/sitemap.xml and pass the full validator registry; the cap has no mechanism to unpublish them, and leaving them unrecorded holds every gated workflow red forever against a baseline no future run can advance. Recorded once, together with the fix that stops it recurring: every workflow that commits public/sitemap.xml now runs the gate, and both generators derive their limit from data/cadence/policy.json instead of their own ceilings.",
+  "accepted_reason": "scheduled-content-release run 33184592247 on 2026-08-28: cadence gate CLEAR and validate:all green; recording the released URL set as the baseline the cap applies from tomorrow.",
   "urls": [
     "https://approvalprep.com/",
     "https://approvalprep.com/609-dispute-letter/",
