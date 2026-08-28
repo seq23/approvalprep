@@ -45,6 +45,11 @@ jobs:
           GOOGLE_SEARCH_CONSOLE_SITE_URL: ${{ secrets.GSC_SITE_URL }}
           GSC_ACCESS_TOKEN: ${{ secrets.GSC_ACCESS_TOKEN }}
           GSC_SITE_URL: ${{ secrets.GSC_SITE_URL }}
+          # The access-token names above have never existed as secrets here, so the
+          # submitter fell back to DRY_RUN on every run. This is the credential the
+          # portfolio actually issues; the submitter now mints a webmasters-scoped
+          # token from it.
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
         run: |
           npm run seo:indexnow
           npm run seo:bing
