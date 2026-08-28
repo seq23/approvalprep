@@ -17,9 +17,6 @@ concurrency:
   group: approvalprep-main-writer
   cancel-in-progress: false
 
-env:
-  # across the portfolio at daily cadence. 3 still names the incumbents
-
 jobs:
   citation-os-weekly:
     runs-on: ubuntu-24.04
