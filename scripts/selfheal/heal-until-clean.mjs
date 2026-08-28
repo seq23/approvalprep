@@ -4,7 +4,7 @@
 // Why this exists
 // ---------------
 // This repo already owned every piece of a self-healing release except the loop
-// that connects them. `scripts/validate/run-all.mjs` runs all 106 registry
+// that connects them. `scripts/validate/run-all.mjs` runs all 112 registry
 // validators and stops at the first HARD_FAIL. Several repairs for exactly those
 // failures already exist in package.json (`validation:registry:sync`,
 // `content:self-heal-citation-os`, the `automation:self-heal-*` pair,
@@ -63,9 +63,44 @@ function readSummary() {
   }
 }
 
+// Named terminal outcomes.
+//
+// Rule 0 for this stage: it never exits 0 having done nothing silently. Either
+// it repaired something, or it names why it legitimately stopped. "Clean on the
+// first pass" is a real, common and legitimate outcome - but it is reported
+// under its own name (CLEAN_NO_REPAIR_NEEDED) so a reader can tell it apart
+// from CLEAN_AFTER_REPAIR, and so a lane that never once repairs anything is
+// visible as such in reports/validation/self-heal-loop.json rather than looking
+// like a working self-healer.
+//
+// NO_REPAIR_AVAILABLE is expected, not exceptional: only 4 of the 112 registry
+// validators declare a repairCommand, so most blocking failures have no
+// registered repair and the loop must say that in those words - it is neither a
+// pass nor a crash. It exits non-zero because the tree is genuinely not
+// publishable, and prints the blocking validator ids plus the repair coverage so
+// the outcome reads as a diagnosis rather than a stack trace.
+const OUTCOME = {
+  CLEAN_NO_REPAIR_NEEDED: 'CLEAN_NO_REPAIR_NEEDED',
+  CLEAN_AFTER_REPAIR: 'CLEAN_AFTER_REPAIR',
+  NO_REPAIR_AVAILABLE: 'NO_REPAIR_AVAILABLE',
+  REPAIR_RAN_STILL_BLOCKED: 'REPAIR_RAN_STILL_BLOCKED',
+  VALIDATION_FAILED_OUTSIDE_VALIDATORS: 'VALIDATION_FAILED_OUTSIDE_VALIDATORS',
+  MAX_ATTEMPTS_EXHAUSTED: 'MAX_ATTEMPTS_EXHAUSTED',
+  DRY_RUN_PLANNED: 'DRY_RUN_PLANNED',
+};
+
+const repairCoverage = {
+  validatorsInRegistry: (registry.validators || []).length,
+  validatorsDeclaringRepair: repairFor.size,
+  note: 'Most validators declare no repairCommand, so NO_REPAIR_AVAILABLE is a legitimate, expected stop rather than a defect in this loop.',
+};
+
 const attempts = [];
 let clean = false;
+let outcome = null;
+let lastBlocked = [];
 let lastWarnings = [];
+let repairsRun = 0;
 
 for (let attempt = 1; attempt <= MAX; attempt += 1) {
   const validate = run('npm run --silent validate:all');
@@ -74,9 +109,12 @@ for (let attempt = 1; attempt <= MAX; attempt += 1) {
   const blocked = (summary?.results || []).filter((r) => r.decision === 'BLOCK').map((r) => r.id);
   lastWarnings = (summary?.results || []).filter((r) => r.decision === 'WARN').map((r) => r.id);
 
+  lastBlocked = blocked;
+
   if (validate.code === 0) {
     attempts.push({ attempt, blocked: [], repaired: [], result: 'CLEAN' });
     clean = true;
+    outcome = repairsRun ? OUTCOME.CLEAN_AFTER_REPAIR : OUTCOME.CLEAN_NO_REPAIR_NEEDED;
     console.log(`[self-heal] clean on attempt ${attempt}${lastWarnings.length ? ` (${lastWarnings.length} non-blocking warning(s))` : ''}`);
     break;
   }
@@ -86,6 +124,7 @@ for (let attempt = 1; attempt <= MAX; attempt += 1) {
   if (!blocked.length) {
     console.error('[self-heal] validation failed without a BLOCK row in the summary; not a repairable validator failure');
     attempts.push({ attempt, blocked: [], repaired: [], result: 'VALIDATION_FAILED_OUTSIDE_VALIDATORS', exitCode: validate.code });
+    outcome = OUTCOME.VALIDATION_FAILED_OUTSIDE_VALIDATORS;
     break;
   }
 
@@ -98,6 +137,7 @@ for (let attempt = 1; attempt <= MAX; attempt += 1) {
     // Nothing would change, so another pass fails identically. Stop and say so
     // rather than burning attempts to reach the same place.
     attempts.push({ attempt, blocked, repaired: [], result: 'NO_REPAIR_AVAILABLE' });
+    outcome = repairsRun ? OUTCOME.REPAIR_RAN_STILL_BLOCKED : OUTCOME.NO_REPAIR_AVAILABLE;
     break;
   }
 
@@ -109,10 +149,16 @@ for (let attempt = 1; attempt <= MAX; attempt += 1) {
     const r = run(cmd);
     if (r.code !== 0) console.log(`  repair FAILED for ${id} (exit ${r.code})`);
     repaired.push({ id, cmd, code: r.code });
+    repairsRun += 1;
   }
   attempts.push({ attempt, blocked, repaired, result: 'REPAIRED_RETRYING' });
-  if (DRY) break;
+  if (DRY) { outcome = OUTCOME.DRY_RUN_PLANNED; break; }
 }
+
+// Falling out of the loop without an outcome means the last pass repaired
+// something and there were no attempts left to revalidate it. That is not a
+// pass and not a crash either; it is its own named stop.
+if (!outcome) outcome = OUTCOME.MAX_ATTEMPTS_EXHAUSTED;
 
 const report = {
   schemaVersion: '1.0.0',
@@ -123,6 +169,11 @@ const report = {
   dryRun: DRY,
   declaredRepairs: Object.fromEntries(repairFor),
   status: clean ? 'CLEAN' : 'NOT_CLEAN',
+  outcome,
+  repairsRun,
+  repairCoverage,
+  blockingAtStop: clean ? [] : lastBlocked,
+  unrepairableAtStop: clean ? [] : lastBlocked.filter((id) => !repairFor.has(id)),
   safeToPush: clean,
   nonBlockingWarnings: lastWarnings,
   attempts,
@@ -130,9 +181,26 @@ const report = {
 fs.mkdirSync(path.join(ROOT, 'reports/validation'), { recursive: true });
 fs.writeFileSync(path.join(ROOT, 'reports/validation/self-heal-loop.json'), `${JSON.stringify(report, null, 2)}\n`);
 
+// Every path through this stage ends on a named line. Nothing exits quietly.
+const summaryLine = `[self-heal] OUTCOME=${outcome} repairsRun=${repairsRun} attempts=${attempts.length} blocking=${report.blockingAtStop.length} repairCoverage=${repairCoverage.validatorsDeclaringRepair}/${repairCoverage.validatorsInRegistry}`;
+if (process.env.GITHUB_STEP_SUMMARY) {
+  try {
+    fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `### self-heal loop\n\n\`${summaryLine}\`\n\n${report.blockingAtStop.length ? `Blocking: ${report.blockingAtStop.join(', ')}\n` : ''}`);
+  } catch { /* a step summary is a convenience, never a reason to fail the run */ }
+}
+
 if (!clean) {
+  console.error(summaryLine);
+  if (outcome === OUTCOME.NO_REPAIR_AVAILABLE || outcome === OUTCOME.REPAIR_RAN_STILL_BLOCKED) {
+    // Say this in words. It is the expected shape of failure in this repo and
+    // must not be mistaken for the loop having broken.
+    console.error(`[self-heal] STOP: ${outcome} - the blocking validator(s) declare no repairCommand in _repo_validation_registry.json.`);
+    for (const id of report.unrepairableAtStop) console.error(`  unrepairable: ${id}`);
+    console.error(`  ${repairCoverage.validatorsDeclaringRepair} of ${repairCoverage.validatorsInRegistry} validators declare a repair, so this is a legitimate named stop, not a loop failure.`);
+  }
   console.error(`[self-heal] NOT CLEAN after ${attempts.length} attempt(s) - refusing to declare the tree publishable.`);
   console.error('  see reports/validation/self-heal-loop.json');
   process.exit(1);
 }
-console.log('[self-heal] safe to push');
+console.log(summaryLine);
+console.log(`[self-heal] safe to push (${outcome})`);
