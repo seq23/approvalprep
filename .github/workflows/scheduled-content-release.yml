@@ -32,9 +32,15 @@ jobs:
         run: npm ci --no-audit --no-fund
       - name: Apply delegated authority
         run: npm run governance:apply-authority -- --mode=${{ env.RUN_MODE || 'dry_run' }}
-      - name: Attempt self-heal
+      - name: Triage the delegated-authority queue (proposals only)
+        # This does not repair anything and no longer claims to. It matches
+        # contract-blocked routes against the approved rewrites and writes
+        # data/automation/self_heal_attempts.json, which
+        # validate:self-heal-progressions reads and the step below derives the
+        # final-block log from. The stage that actually applies a repair is
+        # "Self-heal until the release validates" further down.
         run: npm run automation:self-heal-attempt -- --mode=${{ env.RUN_MODE || 'dry_run' }}
-      - name: Revalidate after self-heal
+      - name: Derive block log and republication queue from proposals
         run: npm run automation:self-heal-revalidate
       - name: Build owner exception index
         run: npm run admin:build-owner-exceptions
@@ -69,8 +75,37 @@ jobs:
         # accepted baseline and never moves it. Advancing the baseline is the
         # separate step below, which runs only once this one has cleared.
         run: npm run cadence:gate
-      - name: Run the complete local release gate
-        run: npm run validate:all
+      - name: Self-heal until the release validates
+        # This replaces a bare `npm run validate:all` here, and it is the first
+        # workflow in the repo to run the real repair loop: before today
+        # `grep -rl selfheal .github/workflows/` returned nothing, so
+        # scripts/selfheal/heal-until-clean.mjs - a working
+        # validate -> repair -> re-validate -> retry loop with an npm script -
+        # was never executed by anything.
+        #
+        # It runs the full 112-validator registry chain. On a HARD_FAIL it looks
+        # up the failing validator's `repairCommand` in
+        # _repo_validation_registry.json, runs it, and re-validates. So a content
+        # failure that has a registered repair is now actually repaired and
+        # re-checked inside the release rather than just failing the run.
+        #
+        # It is not weaker than the gate it replaces: it exits non-zero unless
+        # `validate:all` itself exited zero on a real pass, so nothing publishes
+        # on a repair that did not take. Only 4 of the 112 validators declare a
+        # repairCommand, so most failures legitimately end at
+        # NO_REPAIR_AVAILABLE - which it prints by name, with the blocking
+        # validator ids, and exits non-zero on. That is a diagnosis, not a crash
+        # and not a silent pass.
+        run: npm run selfheal
+      - name: Rebuild and re-measure after any repair
+        # A repair can change published content, and both the build output and
+        # the cadence gate above were measured before it ran. Re-running the
+        # build and the (read-only) gate keeps dist/ and the cap honest about
+        # what is actually being shipped. It never advances the ledger; that is
+        # the --accept step below, which still runs only after this clears.
+        run: |
+          npm run build
+          npm run cadence:gate
       - name: Run safe automation boundary
         run: npm run automation:safe -- --mode=dry_run
       - name: Validate automation safety
