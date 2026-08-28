@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import fs from "node:fs";
-import { env, fetchJson, readJson, writeJson, appendRun, statusOnly, now, checkBudget } from "./_lib.mjs";
+import { env, fetchJson, readJson, writeJson, appendRun, statusOnly, now, checkBudget, gscAccessToken } from "./_lib.mjs";
 
 const connectorId = "google_url_inspection";
-const siteUrl = env("GSC_SITE_URL") || env("GOOGLE_SEARCH_CONSOLE_SITE_URL");
-const accessToken = env("GSC_ACCESS_TOKEN") || env("GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN");
+const siteUrl = env("GSC_SITE_URL") || env("GOOGLE_SEARCH_CONSOLE_SITE_URL") || "sc-domain:approvalprep.com";
+const accessToken = await gscAccessToken();
 const importFile = env("GSC_URL_INSPECTION_IMPORT_FILE");
 const baseUrl = (env("APPROVALPREP_SITE_URL") || siteUrl || "https://approvalprep.com").replace(/\/$/, "");
 const outputFile = "data/intelligence/gsc_url_inspection.json";

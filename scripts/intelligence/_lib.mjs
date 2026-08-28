@@ -32,3 +32,43 @@ export function checkBudget(connectorId, budgetFile="data/intelligence/provider_
   if(limits.weeklyCeiling!=null && weeklyCount>=limits.weeklyCeiling) return {allowed:false, reason:`weekly ceiling ${limits.weeklyCeiling} reached (${weeklyCount} live attempts in 7d)`};
   return {allowed:true, reason:"within_budget"};
 }
+
+// One place that turns the portfolio's service-account JSON into a Search Console
+// access token. Both GSC connectors accepted only a pre-minted GSC_ACCESS_TOKEN,
+// and the portfolio stopped issuing those - so both wrote NOT_CONFIGURED on every
+// run while the property held real data. Keeping this here rather than in each
+// connector means there is one implementation to keep correct, not two.
+export async function gscAccessToken() {
+  const direct = env("GSC_ACCESS_TOKEN") || env("GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN");
+  if (direct) return direct;
+  const raw = String(env("GSC_SERVICE_ACCOUNT_JSON") || "").trim();
+  if (!raw) return "";
+  let info;
+  try {
+    info = raw.startsWith("{") ? JSON.parse(raw) : JSON.parse(fs.readFileSync(raw, "utf8"));
+  } catch {
+    return "";
+  }
+  if (!info?.client_email || !info?.private_key) return "";
+  const b64 = (v) => Buffer.from(typeof v === "string" ? v : JSON.stringify(v)).toString("base64url");
+  const iat = Math.floor(Date.now() / 1000);
+  const unsigned = `${b64({ alg: "RS256", typ: "JWT" })}.${b64({
+    iss: info.client_email,
+    scope: "https://www.googleapis.com/auth/webmasters.readonly",
+    aud: "https://oauth2.googleapis.com/token",
+    iat,
+    exp: iat + 3600
+  })}`;
+  const signature = crypto.createSign("RSA-SHA256").update(unsigned).end()
+    .sign(String(info.private_key).replace(/\\n/g, "\n")).toString("base64url");
+  const res = await fetch("https://oauth2.googleapis.com/token", {
+    method: "POST",
+    headers: { "content-type": "application/x-www-form-urlencoded" },
+    body: new URLSearchParams({
+      grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
+      assertion: `${unsigned}.${signature}`
+    })
+  });
+  const json = await res.json().catch(() => ({}));
+  return json.access_token || "";
+}
