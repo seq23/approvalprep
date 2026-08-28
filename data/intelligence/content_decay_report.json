@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-08-24T12:28:13.194Z",
+  "generatedAt": "2026-08-28T22:32:54.426Z",
   "mode": "structural",
   "policy": "Lifecycle recommendations do not claim traffic, ranking, indexing, or conversion decay without live telemetry.",
   "items": [
@@ -579,6 +579,20 @@
       "ownerReviewRequired": false
     },
     {
+      "route": "/tools",
+      "title": "Free ApprovalPrep Document Checklists",
+      "risk": "low",
+      "pageFamily": "tools",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
       "route": "/tools/apartment-application-readiness-checklist",
       "title": "Apartment Application Readiness Checklist",
       "risk": "low",
@@ -663,6 +677,20 @@
       "ownerReviewRequired": false
     },
     {
+      "route": "/templates",
+      "title": "ApprovalPrep Letter Template Previews",
+      "risk": "low",
+      "pageFamily": "templates",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
       "route": "/templates/letters/address-history-explanation",
       "title": "Address History Explanation Letter Template",
       "risk": "medium",
@@ -723,6 +751,20 @@
       "title": "Self-Employed Proof of Income Template",
       "risk": "medium",
       "pageFamily": "templates",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/reports",
+      "title": "ApprovalPrep Public Reports",
+      "risk": "low",
+      "pageFamily": "public_reports",
       "recommendedAction": "refresh",
       "reasonCodes": [
         "no_live_performance_data_yet"
@@ -835,6 +877,174 @@
       "title": "Mortgage Gift Letter Explanation",
       "risk": "medium",
       "pageFamily": "mortgage",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/landlord-reference-letter",
+      "title": "Landlord Reference Letter",
+      "risk": "medium",
+      "pageFamily": "apartment_rental",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/rental-verification-form",
+      "title": "Rental Verification Form",
+      "risk": "medium",
+      "pageFamily": "apartment_rental",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/employment-verification-form",
+      "title": "Employment Verification Form",
+      "risk": "medium",
+      "pageFamily": "income_employment",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/employment-verification-letter-template",
+      "title": "Employment Verification Letter Template",
+      "risk": "medium",
+      "pageFamily": "income_employment",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/proof-of-employment-letter",
+      "title": "Proof of Employment Letter",
+      "risk": "medium",
+      "pageFamily": "income_employment",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/letter-of-explanation/template",
+      "title": "Letter of Explanation Template",
+      "risk": "medium",
+      "pageFamily": "letter_studio",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/letter-of-explanation/mortgage",
+      "title": "Letter of Explanation for a Mortgage",
+      "risk": "medium",
+      "pageFamily": "mortgage",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/letter-of-explanation/sample",
+      "title": "Letter of Explanation Sample",
+      "risk": "medium",
+      "pageFamily": "letter_studio",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/how-to-write-a-letter-of-explanation",
+      "title": "How to Write a Letter of Explanation",
+      "risk": "medium",
+      "pageFamily": "letter_studio",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/goodwill-letter-credit",
+      "title": "Goodwill Letter for Credit: Which Items It Can Reach",
+      "risk": "regulated",
+      "pageFamily": "credit_self_service",
+      "recommendedAction": "approval_required_refresh",
+      "reasonCodes": [
+        "regulated_or_credit_sensitive"
+      ],
+      "priorityScore": 90,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": true
+    },
+    {
+      "route": "/rental-application-letter",
+      "title": "Rental Application Letter",
+      "risk": "medium",
+      "pageFamily": "apartment_rental",
+      "recommendedAction": "refresh",
+      "reasonCodes": [
+        "no_live_performance_data_yet"
+      ],
+      "priorityScore": 55,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": false
+    },
+    {
+      "route": "/letter-of-explanation-template",
+      "title": "Letter Of Explanation Template",
+      "risk": "medium",
+      "pageFamily": "letter_studio",
       "recommendedAction": "refresh",
       "reasonCodes": [
         "no_live_performance_data_yet"

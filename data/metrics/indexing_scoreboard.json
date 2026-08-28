@@ -1,33 +1,33 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-08-24T12:28:13.639Z",
+  "generatedAt": "2026-08-28T22:32:54.845Z",
   "warning": "Manifest, sitemap, and submission counts do not prove search indexing. Live indexing requires provider data.",
   "sourceStates": [
     {
       "name": "gsc_url_inspection",
-      "mode": "unavailable",
-      "fetchedAt": null,
-      "live": false,
-      "note": "not live provider data; do not claim live performance"
+      "mode": "live",
+      "fetchedAt": "2026-08-28T22:32:47.854Z",
+      "live": true,
+      "note": "live provider data present"
     },
     {
       "name": "indexnow",
-      "mode": "unavailable",
+      "mode": "live",
       "fetchedAt": null,
-      "live": false,
-      "note": "not live provider data; do not claim live performance"
+      "live": true,
+      "note": "live provider data present"
     }
   ],
   "metrics": [
     {
       "label": "Public indexed routes in manifest",
-      "value": 60,
+      "value": 75,
       "source": "repo_static",
       "claimType": "structural"
     },
     {
       "label": "SEO submission registry rows",
-      "value": 63,
+      "value": 72,
       "source": "repo_static",
       "claimType": "structural"
     },
@@ -39,13 +39,13 @@
     },
     {
       "label": "GSC inspection rows",
-      "value": 0,
+      "value": 25,
       "source": "gsc_url_inspection",
-      "claimType": "unavailable"
+      "claimType": "live_provider"
     },
     {
       "label": "IndexNow intelligence receipts",
-      "value": 0,
+      "value": 6,
       "source": "indexnow",
       "claimType": "submission_receipt"
     }
