@@ -40,6 +40,11 @@ jobs:
           APPROVALPREP_SITE_URL: ${{ secrets.APPROVALPREP_SITE_URL }}
           GOOGLE_SEARCH_CONSOLE_SITE_URL: ${{ secrets.GOOGLE_SEARCH_CONSOLE_SITE_URL }}
           GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN: ${{ secrets.GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN }}
+          # The access-token secrets above have never existed on this repo, so the
+          # Search Console connectors resolved an empty token and wrote
+          # NOT_CONFIGURED on every run. This is the credential the portfolio
+          # actually issues, and the connectors now accept it.
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
           BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}
           BING_WEBMASTER_API_URL: ${{ secrets.BING_WEBMASTER_API_URL }}
           SERP_IMPORT_CSV: data/imports/serp.csv

@@ -1,10 +1,22 @@
 #!/usr/bin/env node
 import fs from "node:fs";
-import { env, fetchJson, writeJson, appendRun, statusOnly, now, checkBudget } from "./_lib.mjs";
+import { env, fetchJson, writeJson, appendRun, statusOnly, now, checkBudget, gscAccessToken } from "./_lib.mjs";
 
 const connectorId = "google_search_console_search_analytics";
-const siteUrl = env("GSC_SITE_URL") || env("GOOGLE_SEARCH_CONSOLE_SITE_URL");
-const accessToken = env("GSC_ACCESS_TOKEN") || env("GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN");
+// sc-domain:approvalprep.com is the verified Search Console property. It is the
+// default rather than a required secret because this connector reported
+// NOT_CONFIGURED for want of a site string it could always have derived.
+const siteUrl = env("GSC_SITE_URL") || env("GOOGLE_SEARCH_CONSOLE_SITE_URL") || "sc-domain:approvalprep.com";
+
+// This connector accepted only a pre-minted GSC_ACCESS_TOKEN, and the portfolio
+// stopped issuing those - the one credential still in use is a service-account
+// JSON. So the connector could not authenticate by any route available to it and
+// wrote NOT_CONFIGURED on every run, which is why approvalprep carried no
+// measured demand while its Search Console property held 90 days of data.
+// scripts/cadence/publish_headroom.mjs already reads the same JSON; this brings
+// the search-analytics path onto it.
+
+const accessToken = await gscAccessToken();
 const importFile = env("GSC_SEARCH_ANALYTICS_IMPORT_FILE");
 const outputFile = "data/intelligence/gsc_search_analytics.json";
 
@@ -28,8 +40,8 @@ if (importFile) {
   appendRun(connectorId, rows.length ? "COMPLETE" : "NO_DATA", { mode: "manual_import", recordsImported: rows.length });
   console.log(JSON.stringify({ connectorId, mode: "manual_import", status: rows.length ? "COMPLETE" : "NO_DATA", recordsImported: rows.length }, null, 2));
 } else if (!siteUrl || !accessToken) {
-  writeJson(outputFile, { schemaVersion: "4.2.0", connectorId, mode: "unavailable", siteUrl: siteUrl || null, fetchedAt: null, rows: [], errors: [{ code: "NOT_CONFIGURED", message: "Set GSC_SITE_URL and GSC_ACCESS_TOKEN, or provide GSC_SEARCH_ANALYTICS_IMPORT_FILE." }] });
-  statusOnly(connectorId, "NOT_CONFIGURED", "GSC_SITE_URL and GSC_ACCESS_TOKEN, or GSC_SEARCH_ANALYTICS_IMPORT_FILE, are required.");
+  writeJson(outputFile, { schemaVersion: "4.2.0", connectorId, mode: "unavailable", siteUrl: siteUrl || null, fetchedAt: null, rows: [], errors: [{ code: "NOT_CONFIGURED", message: "Set GSC_SERVICE_ACCOUNT_JSON (or GSC_ACCESS_TOKEN), or provide GSC_SEARCH_ANALYTICS_IMPORT_FILE." }] });
+  statusOnly(connectorId, "NOT_CONFIGURED", "GSC_SERVICE_ACCOUNT_JSON or GSC_ACCESS_TOKEN, or GSC_SEARCH_ANALYTICS_IMPORT_FILE, is required.");
 } else if (!checkBudget(connectorId).allowed) {
   // Budget-held: leave the last real snapshot in place rather than overwriting it with empty data.
   statusOnly(connectorId, "BUDGET_HELD", checkBudget(connectorId).reason);
