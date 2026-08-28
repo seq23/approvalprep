@@ -44,8 +44,24 @@ if (importFile) {
     appendRun(connectorId, rows.length ? "COMPLETE" : "NO_DATA", { mode: "live", recordsImported: rows.length });
     console.log(JSON.stringify({ connectorId, mode: "live", status: rows.length ? "COMPLETE" : "NO_DATA", recordsImported: rows.length }, null, 2));
   } catch (error) {
-    writeJson(outputFile, { schemaVersion: "4.2.0", connectorId, mode: "failed", siteUrl, fetchedAt: now(), rows, errors: [{ code: "SOURCE_ERROR", message: error.message }] });
-    appendRun(connectorId, "SOURCE_ERROR", { mode: "live", reason: error.message, recordsImported: rows.length });
-    throw error;
+    // A 403 here is an authorization fact, not a transient failure. URL Inspection
+    // requires site *ownership*; the shared service account is siteFullUser on this
+    // property, which is enough for search analytics and not for inspection. It
+    // will return "You do not own this site" on every future run too, so throwing
+    // buys nothing and costs a great deal: the connectors are chained with && in
+    // intelligence:free-ingest, so this exception aborted the run before the commit
+    // step and discarded the 14 rows the search-analytics connector had just
+    // fetched successfully. One permanently unauthorized provider was destroying
+    // every other provider's work on every run.
+    //
+    // Recorded as a status the report can show, and the chain continues. Every
+    // other error still throws, because those can be transient and are worth
+    // failing on.
+    const unauthorized = /HTTP 403/.test(String(error.message || ""));
+    const code = unauthorized ? "NOT_AUTHORIZED" : "SOURCE_ERROR";
+    writeJson(outputFile, { schemaVersion: "4.2.0", connectorId, mode: unauthorized ? "unauthorized" : "failed", siteUrl, fetchedAt: now(), rows, errors: [{ code, message: error.message }] });
+    appendRun(connectorId, code, { mode: unauthorized ? "unauthorized" : "live", reason: error.message, recordsImported: rows.length });
+    if (!unauthorized) throw error;
+    console.log(JSON.stringify({ connectorId, mode: "unauthorized", status: code, recordsImported: rows.length, reason: "service account is siteFullUser, not siteOwner - URL Inspection requires ownership" }, null, 2));
   }
 }
