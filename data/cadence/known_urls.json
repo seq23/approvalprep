@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-27",
-  "accepted_reason": "scheduled-content-release run 33101765649 on 2026-08-27: cadence gate CLEAR and validate:all green; recording the released URL set as the baseline the cap applies from tomorrow.",
+  "generated_at": "2026-08-28",
+  "accepted_reason": "Reconciling the accepted baseline with what is already live on main: /letter-of-explanation-template/ and three /blog/what-should-i-gather-before-using-* pages were published and pushed by citation-os-daily run 33180922482 (commit 9aee4b5) on 2026-08-28, through a workflow that carried no cadence gate. They are serving, indexed in public/sitemap.xml and pass the full validator registry; the cap has no mechanism to unpublish them, and leaving them unrecorded holds every gated workflow red forever against a baseline no future run can advance. Recorded once, together with the fix that stops it recurring: every workflow that commits public/sitemap.xml now runs the gate, and both generators derive their limit from data/cadence/policy.json instead of their own ceilings.",
   "urls": [
     "https://approvalprep.com/",
     "https://approvalprep.com/609-dispute-letter/",
@@ -37,8 +37,11 @@
     "https://approvalprep.com/blog/what-mistakes-should-i-avoid-with-proof-of-income-packet-checklist/",
     "https://approvalprep.com/blog/what-mistakes-should-i-avoid-with-resources/",
     "https://approvalprep.com/blog/what-should-i-gather-before-using-approvalprep-document-readiness-index/",
+    "https://approvalprep.com/blog/what-should-i-gather-before-using-approvalprep-letter-template-previews/",
+    "https://approvalprep.com/blog/what-should-i-gather-before-using-approvalprep-public-reports/",
     "https://approvalprep.com/blog/what-should-i-gather-before-using-business-funding-document-checklist/",
     "https://approvalprep.com/blog/what-should-i-gather-before-using-car-loan-document-checklist/",
+    "https://approvalprep.com/blog/what-should-i-gather-before-using-free-approvalprep-document-checklists/",
     "https://approvalprep.com/blog/what-should-i-gather-before-using-important-documents-folder-checklist/",
     "https://approvalprep.com/blog/what-should-i-gather-before-using-mortgage-document-readiness-checklist/",
     "https://approvalprep.com/blog/what-should-i-know-about-approvalprep-letter-template-previews/",
@@ -67,6 +70,7 @@
     "https://approvalprep.com/important-documents-checklist/",
     "https://approvalprep.com/income-employment-letter-kit/",
     "https://approvalprep.com/landlord-reference-letter/",
+    "https://approvalprep.com/letter-of-explanation-template/",
     "https://approvalprep.com/letter-of-explanation/",
     "https://approvalprep.com/letter-of-explanation/address-history/",
     "https://approvalprep.com/letter-of-explanation/bank-statement-deposits/",

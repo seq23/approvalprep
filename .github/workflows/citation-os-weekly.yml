@@ -56,6 +56,16 @@ jobs:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           CITATION_PROBE_MODE: grounded
         run: node scripts/llm_citation_probe.mjs --limit 25
+      - name: Cadence gate
+        # The weekly sequence stages data/routes, data/content and
+        # public/sitemap.xml, so it can move the published URL set even though it
+        # does not run the page factory. Same rule as the daily lane: anything
+        # that commits the sitemap to main is measured against
+        # data/cadence/policy.json before it ships.
+        #
+        # Read-only: the ledger moves only under --accept, which stays in
+        # scheduled-content-release.
+        run: npm run cadence:gate
       - name: Commit citation OS weekly outputs
         run: |
           git config user.name "github-actions[bot]"

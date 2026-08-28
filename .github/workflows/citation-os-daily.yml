@@ -35,6 +35,23 @@ jobs:
       - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
       - run: npm run citation-os:daily
+      - name: Cadence gate
+        # This workflow publishes. content:generate, content:generate-pages and
+        # seo:sitemap all run inside citation-os:daily, and the commit step below
+        # stages public/sitemap.xml, so the URL set this workflow ships is exactly
+        # the thing data/cadence/policy.json governs.
+        #
+        # It ran without this gate until 2026-08-28, when it committed four new
+        # URLs against a cap of two. The cap did not stop it - nothing here
+        # measured it - and the failure surfaced the next morning in
+        # scheduled-content-release, which does run the gate and was blocked by
+        # pages a different workflow had published. A cap enforced on one of the
+        # workflows that can publish is not a cap.
+        #
+        # Read-only: scripts/cadence_gate.cjs writes the ledger only under
+        # --accept, which is not passed here. scheduled-content-release remains
+        # the single workflow that advances the baseline.
+        run: npm run cadence:gate
       - name: Commit citation OS daily outputs
         run: |
           git config user.name "github-actions[bot]"

@@ -53,6 +53,17 @@ jobs:
         run: |
           npm run authority:yield:validate
           npm run validate:indexing-provider-ledgers
+      - name: Cadence gate
+        # This workflow regenerates public/sitemap.xml and commits it, so it can
+        # change the published URL set and is a publisher by the only definition
+        # that matters. Measuring it costs one node process and no dependencies -
+        # scripts/cadence_gate.cjs uses node builtins only - and it stops an
+        # over-cap URL set being submitted to IndexNow and Search Console and
+        # pushed to main for another workflow to fail on tomorrow.
+        #
+        # Read-only: the ledger moves only under --accept, which stays in
+        # scheduled-content-release.
+        run: npm run cadence:gate
       - name: Commit operational receipts only
         run: |
           git config user.name "approvalprep-indexing-bot"

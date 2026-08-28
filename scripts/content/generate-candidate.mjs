@@ -2,6 +2,7 @@
 import crypto from "node:crypto";
 import fs from "node:fs";
 import vm from "node:vm";
+import { clampToPublicationBudget } from "../lib/publication_budget.mjs";
 
 fs.mkdirSync("data/content", { recursive: true });
 
@@ -45,7 +46,18 @@ function asList(value, fallback) {
 const cadenceLimit = Number(cadence.cadence?.dailyShortAnswers?.targetPerDay || 3);
 const governorLimit = Number(governor.current_default_new_page_ceiling_per_day || 3);
 const requestedLimit = Number(process.env.CONTENT_RELEASE_LIMIT || Math.min(cadenceLimit, governorLimit));
-const releaseLimit = Math.max(0, Math.min(requestedLimit, cadenceLimit, governorLimit));
+// The three limits above are this generator's own risk tiers. None of them is
+// the number that is enforced: `npm run cadence:gate` blocks on
+// data/cadence/policy.json new_pages_per_week, and all three of these sit above
+// it. Publishing to a ceiling the gate will refuse produces a URL set that ships
+// through the ungated paths and then blocks the gated one every day afterwards,
+// because the ledger the gate measures against is only advanced by a run that
+// cleared it. Clamp to the remaining headroom under the enforced cap.
+const budgeted = clampToPublicationBudget(
+  Math.max(0, Math.min(requestedLimit, cadenceLimit, governorLimit)),
+  "content:generate",
+);
+const releaseLimit = budgeted.limit;
 const releaseId = `content-release-${releaseDate}`;
 const existingAnswers = Array.isArray(existingDocument.answers) ? existingDocument.answers : [];
 const existingRelease = (ledger.releases || []).find((item) => item.id === releaseId);
@@ -174,6 +186,7 @@ ledger.releases.push({
   status: selected.length ? "published_low_risk_answers" : "no_distinct_low_risk_inventory",
   pagesPublished: selected.length,
   dailySafetyCeiling: releaseLimit,
+  publicationBudget: { cadenceLimit, governorLimit, requestedLimit, appliedLimit: releaseLimit, capSource: "data/cadence/policy.json new_pages_per_week", ...budgeted.budget },
   riskLimit: "low",
   publishedIds: selected.map((item) => item.id),
   publishedRoutes: selected.map((item) => `/blog/${item.slug}`),
