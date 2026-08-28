@@ -24,7 +24,15 @@ export function checkBudget(connectorId, budgetFile="data/intelligence/provider_
   const limits=(readJson(budgetFile,{budgets:{}}).budgets||{})[connectorId];
   if(!limits) return {allowed:true, reason:"no_budget_defined"};
   const runs=readJson("data/intelligence/ingestion_runs.json",{runs:[]}).runs||[];
-  const attempts=runs.filter((r)=>r.connectorId===connectorId && r.status!=="BUDGET_HELD" && r.mode!=="manual_import" && r.mode!=="unavailable");
+  // Count only runs that actually reached the provider. This used to exclude
+  // mode "unavailable", but statusOnly() records NOT_CONFIGURED and BUDGET_HELD
+  // runs with no mode at all, so `r.mode !== "unavailable"` never matched them
+  // and every failed-to-configure run was charged against the live-request
+  // budget. approvalprep's Search Console connector spent five days' quota on
+  // runs that never opened a socket, and then held off the first run that could
+  // actually have worked. Live attempts - successes and provider errors alike -
+  // are the only ones written with mode "live", so that is the thing to count.
+  const attempts=runs.filter((r)=>r.connectorId===connectorId && r.mode==="live");
   const dayAgo=Date.now()-86400000, weekAgo=Date.now()-7*86400000;
   const dailyCount=attempts.filter((r)=>new Date(r.ranAt).getTime()>=dayAgo).length;
   const weeklyCount=attempts.filter((r)=>new Date(r.ranAt).getTime()>=weekAgo).length;
