@@ -32,6 +32,13 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+// OpenRouter bills the web plugin per REQUEST on the parallel engine, with 10
+// results included - measured at $0.00127 per call on this account, against
+// ~$0.04 on the default engine's per-result billing. Same url_citation schema,
+// so nothing downstream changes. Overridable if a deeper engine is ever wanted.
+const WEB_ENGINE = process.env.OPENROUTER_WEB_ENGINE || 'parallel';
+const WEB_MODE = process.env.OPENROUTER_WEB_MODE || 'turbo';
+
 
 const ROOT = process.cwd();
 const argv = process.argv.slice(2);
@@ -163,7 +170,7 @@ async function withTimeout(fn) {
 // observation the knowledge-mode call cannot produce, which only shows whether
 // the model memorised us during training.
 //
-// Declared as `plugins: [{ id: 'web', max_results: N }]` rather than the
+// Declared as `plugins: [{ id: 'web', engine: WEB_ENGINE, mode: WEB_MODE, max_results: N }]` rather than the
 // ":online" model suffix. Both are documented, but the explicit plugin is the
 // shape verified live against this key, and it is the one that lets max_results
 // be set - the suffix leaves the result count to the default, and a grounded run
@@ -188,7 +195,7 @@ async function askOpenRouter(query, model, grounded = false) {
     headers: { 'content-type': 'application/json', authorization: `Bearer ${orKey}` },
     body: JSON.stringify({
       model, temperature: 0, max_tokens: 400,
-      ...(grounded ? { plugins: [{ id: 'web', max_results: WEB_MAX_RESULTS }] } : {}),
+      ...(grounded ? { plugins: [{ id: 'web', engine: WEB_ENGINE, mode: WEB_MODE, max_results: WEB_MAX_RESULTS }] } : {}),
       messages: [{ role: 'user', content: query }],
     }),
   }));
