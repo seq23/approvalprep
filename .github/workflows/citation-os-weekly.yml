@@ -40,6 +40,12 @@ jobs:
           APPROVALPREP_SITE_URL: https://approvalprep.com
           GSC_SITE_URL: ${{ secrets.GSC_SITE_URL }}
           GSC_ACCESS_TOKEN: ${{ secrets.GSC_ACCESS_TOKEN }}
+          # Without this the connector takes its NOT_CONFIGURED branch, which
+          # OVERWRITES data/intelligence/gsc_search_analytics.json with rows: [] -
+          # and this workflow commits data/intelligence/*.json. The daily lane
+          # already passes it; the weekly lane would have deleted the only measured
+          # Search Console data this repo has ever held.
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
           BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}
           BING_WEBMASTER_API_URL: ${{ secrets.BING_WEBMASTER_API_URL }}
           INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }}

@@ -40,7 +40,10 @@ if (importFile) {
   appendRun(connectorId, rows.length ? "COMPLETE" : "NO_DATA", { mode: "manual_import", recordsImported: rows.length });
   console.log(JSON.stringify({ connectorId, mode: "manual_import", status: rows.length ? "COMPLETE" : "NO_DATA", recordsImported: rows.length }, null, 2));
 } else if (!siteUrl || !accessToken) {
-  writeJson(outputFile, { schemaVersion: "4.2.0", connectorId, mode: "unavailable", siteUrl: siteUrl || null, fetchedAt: null, rows: [], errors: [{ code: "NOT_CONFIGURED", message: "Set GSC_SERVICE_ACCOUNT_JSON (or GSC_ACCESS_TOKEN), or provide GSC_SEARCH_ANALYTICS_IMPORT_FILE." }] });
+  // Do NOT overwrite a good snapshot with an empty one. This branch used to write
+  // rows: [], and any caller that commits data/intelligence/*.json would then erase
+  // real measured demand simply by forgetting to pass a credential. The BUDGET_HELD
+  // branch below already preserves the last real snapshot; this one now matches it.
   statusOnly(connectorId, "NOT_CONFIGURED", "GSC_SERVICE_ACCOUNT_JSON or GSC_ACCESS_TOKEN, or GSC_SEARCH_ANALYTICS_IMPORT_FILE, is required.");
 } else if (!checkBudget(connectorId).allowed) {
   // Budget-held: leave the last real snapshot in place rather than overwriting it with empty data.
