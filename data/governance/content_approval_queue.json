@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-08-27T14:18:29.349Z",
+  "generatedAt": "2026-08-28T14:35:39.561Z",
   "policy": "data/governance/publication_policy.json",
   "items": [
     {
@@ -391,6 +391,58 @@
       "requiredAction": "false-dispute",
       "sourceFile": "data/routes/route_manifest.json",
       "sourceChecksum": "safeharbor-dd9e5ac589a264e7",
+      "ownerApprovalRequired": true
+    },
+    {
+      "contentId": "/landlord-reference-letter",
+      "type": "safe_harbor",
+      "title": "/landlord-reference-letter",
+      "path": "/landlord-reference-letter",
+      "risk": "medium",
+      "currentStatus": "blocked",
+      "reason": "BLOCKED_MISSING_DISCLOSURE",
+      "requiredAction": "self-service,no-guarantee,truthful-info,not-legal-credit-repair,supporting-documents",
+      "sourceFile": "data/routes/route_manifest.json",
+      "sourceChecksum": "safeharbor-3480eb79b9152ef4",
+      "ownerApprovalRequired": true
+    },
+    {
+      "contentId": "/letter-of-explanation/mortgage",
+      "type": "safe_harbor",
+      "title": "/letter-of-explanation/mortgage",
+      "path": "/letter-of-explanation/mortgage",
+      "risk": "medium",
+      "currentStatus": "blocked",
+      "reason": "BLOCKED_MISSING_DISCLOSURE",
+      "requiredAction": "self-service,no-guarantee,truthful-info,not-legal-credit-repair,supporting-documents",
+      "sourceFile": "data/routes/route_manifest.json",
+      "sourceChecksum": "safeharbor-73a407b6ea3402c2",
+      "ownerApprovalRequired": true
+    },
+    {
+      "contentId": "/goodwill-letter-credit",
+      "type": "safe_harbor",
+      "title": "/goodwill-letter-credit",
+      "path": "/goodwill-letter-credit",
+      "risk": "regulated",
+      "currentStatus": "blocked",
+      "reason": "BLOCKED_MISSING_DISCLOSURE",
+      "requiredAction": "self-service,no-guarantee,truthful-info,not-legal-credit-repair,supporting-documents",
+      "sourceFile": "data/routes/route_manifest.json",
+      "sourceChecksum": "safeharbor-33d9edca6be0b418",
+      "ownerApprovalRequired": true
+    },
+    {
+      "contentId": "/letter-of-explanation-for-mortgage",
+      "type": "safe_harbor",
+      "title": "/letter-of-explanation-for-mortgage",
+      "path": "/letter-of-explanation-for-mortgage",
+      "risk": "medium",
+      "currentStatus": "blocked",
+      "reason": "BLOCKED_PROHIBITED_CLAIM",
+      "requiredAction": "false-dispute",
+      "sourceFile": "data/routes/route_manifest.json",
+      "sourceChecksum": "safeharbor-97e514322a8d1466",
       "ownerApprovalRequired": true
     }
   ]

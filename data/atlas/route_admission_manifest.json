@@ -726,6 +726,33 @@
       "risk": "medium",
       "index": true,
       "minimum_queries": 5
+    },
+    {
+      "route": "/letter-of-explanation-template",
+      "family": "letter_studio",
+      "status": "ADMITTED_INDEXABLE",
+      "risk": "medium",
+      "index": true,
+      "minimum_queries": 5,
+      "source": "citation_os_self_heal"
+    },
+    {
+      "route": "/letter-of-explanation-for-mortgage",
+      "family": "letter_studio",
+      "status": "ADMITTED_NOINDEX",
+      "risk": "medium",
+      "index": false,
+      "minimum_queries": 0,
+      "source": "citation_os_self_heal"
+    },
+    {
+      "route": "/letter-of-explanation-sample",
+      "family": "letter_studio",
+      "status": "ADMITTED_NOINDEX",
+      "risk": "medium",
+      "index": false,
+      "minimum_queries": 0,
+      "source": "citation_os_self_heal"
     }
   ]
 }

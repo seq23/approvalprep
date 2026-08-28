@@ -1,15 +1,15 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-08-27T14:18:29.819Z",
+  "generatedAt": "2026-08-28T14:35:39.977Z",
   "status": "measurement_foundation",
   "warning": "Confirmed citations are not claimed here unless imported into an approved citation ledger. This scoreboard measures citation readiness and available provider telemetry only.",
   "sourceStates": [
     {
       "name": "gsc",
-      "mode": "unavailable",
-      "fetchedAt": null,
-      "live": false,
-      "note": "not live provider data; do not claim live performance"
+      "mode": "live",
+      "fetchedAt": "2026-08-28T04:07:16.603Z",
+      "live": true,
+      "note": "live provider data present"
     },
     {
       "name": "bing",
@@ -20,16 +20,16 @@
     },
     {
       "name": "indexnow",
-      "mode": "dry_run",
+      "mode": "live",
       "fetchedAt": null,
-      "live": false,
-      "note": "not live provider data; do not claim live performance"
+      "live": true,
+      "note": "live provider data present"
     }
   ],
   "metrics": [
     {
       "label": "Citation targets",
-      "value": 470,
+      "value": 557,
       "source": "repo_static",
       "claimType": "structural"
     },
@@ -59,9 +59,9 @@
     },
     {
       "label": "GSC live rows",
-      "value": 0,
+      "value": 14,
       "source": "gsc",
-      "claimType": "unavailable"
+      "claimType": "live_provider"
     },
     {
       "label": "Bing live rows",
@@ -71,7 +71,7 @@
     },
     {
       "label": "IndexNow receipts",
-      "value": 1,
+      "value": 3,
       "source": "indexnow",
       "claimType": "submission_receipt"
     }

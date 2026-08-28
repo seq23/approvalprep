@@ -1667,6 +1667,26 @@
         "purchase_evaluation"
       ],
       "status": "admitted_unique_intent_fanout"
+    },
+    {
+      "parent_id": "atlas_q_0426_letter_of_explanation_template_definition",
+      "route_owner": "/letter-of-explanation-template",
+      "page_family_id": "letter_studio",
+      "children": [
+        "atlas_q_0427_letter_of_explanation_template_checklist",
+        "atlas_q_0428_letter_of_explanation_template_how_to",
+        "atlas_q_0429_letter_of_explanation_template_mistakes",
+        "atlas_q_0430_letter_of_explanation_template_next_step"
+      ],
+      "child_count": 4,
+      "unique_intents": [
+        "checklist",
+        "how_to",
+        "mistakes",
+        "next_step"
+      ],
+      "status": "admitted_unique_intent_fanout",
+      "source": "citation_os_self_heal"
     }
   ]
 }

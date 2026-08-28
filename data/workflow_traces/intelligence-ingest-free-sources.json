@@ -26,7 +26,8 @@
     "BING_WEBMASTER_API_KEY",
     "BING_WEBMASTER_API_URL",
     "GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN",
-    "GOOGLE_SEARCH_CONSOLE_SITE_URL"
+    "GOOGLE_SEARCH_CONSOLE_SITE_URL",
+    "GSC_SERVICE_ACCOUNT_JSON"
   ],
   "npmScripts": [
     "intelligence:free-ingest",
@@ -52,6 +53,7 @@
     "validate:all",
     "validate:artifact",
     "validate:atlas",
+    "validate:atlas-units",
     "validate:atom-coverage-depth",
     "validate:atoms",
     "validate:authority-assets",
@@ -60,6 +62,7 @@
     "validate:backlink-honesty",
     "validate:blog-detail-pages",
     "validate:browserless-accessibility",
+    "validate:cadence-ledger-advance",
     "validate:citation-claims",
     "validate:citation-ledger",
     "validate:citation-opportunities",
@@ -81,6 +84,7 @@
     "validate:delegated-authority",
     "validate:discovery-surfaces",
     "validate:download-first-page-boundary",
+    "validate:download-key-contract",
     "validate:download-offering-coverage",
     "validate:download-safety",
     "validate:e2e-user-journey",
@@ -129,6 +133,7 @@
     "validate:required-disclosures",
     "validate:retest-lifecycle",
     "validate:routes",
+    "validate:runtime-bindings",
     "validate:runtime-product-admin",
     "validate:safe-harbor-autopublish",
     "validate:security",
@@ -137,6 +142,7 @@
     "validate:seo-surfaces",
     "validate:serp-import",
     "validate:setup-secrets",
+    "validate:sitemap-url-form",
     "validate:source-evidence-depth",
     "validate:source-required-claims",
     "validate:stripe-mode",
@@ -203,5 +209,5 @@
     }
   ],
   "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-  "traceId": "0cf173b81cd909b8"
+  "traceId": "18a37e2c5f6726e2"
 }
