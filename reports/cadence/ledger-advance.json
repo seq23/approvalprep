@@ -1,9 +1,21 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-08-27T18:06:41.064Z",
+  "generatedAt": "2026-08-28T15:14:22.690Z",
   "status": "PASS",
   "ledger": "data/cadence/known_urls.json",
   "publishingWorkflows": [
+    {
+      "workflow": "citation-os-daily.yml",
+      "advancesLedger": false
+    },
+    {
+      "workflow": "citation-os-weekly.yml",
+      "advancesLedger": false
+    },
+    {
+      "workflow": "indexing-submit.yml",
+      "advancesLedger": false
+    },
     {
       "workflow": "scheduled-content-release.yml",
       "advancesLedger": true
@@ -28,6 +40,30 @@
     },
     {
       "id": "cap_still_blocks_over_limit",
+      "status": "PASS"
+    },
+    {
+      "id": "budget_is_full_cap_when_nothing_is_new",
+      "status": "PASS"
+    },
+    {
+      "id": "budget_is_zero_when_the_cap_is_already_spent",
+      "status": "PASS"
+    },
+    {
+      "id": "budget_is_the_remainder_not_the_cap",
+      "status": "PASS"
+    },
+    {
+      "id": "budget_is_unconstrained_without_a_baseline",
+      "status": "PASS"
+    },
+    {
+      "id": "generate-candidate.mjs_consults_the_publication_budget",
+      "status": "PASS"
+    },
+    {
+      "id": "generate-page-candidates.mjs_consults_the_publication_budget",
       "status": "PASS"
     }
   ],

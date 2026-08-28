@@ -43,33 +43,53 @@ const errors = [];
 const workflowDir = ".github/workflows";
 const files = fs.readdirSync(workflowDir).filter((n) => /\.ya?ml$/.test(n)).sort();
 
-// A publishing workflow is one that both runs the gate and commits the result
-// back to main. Those are the only workflows that can - and must - advance the
-// ledger; validate.yml runs the gate and commits nothing, so it is exempt.
+// A publishing workflow is one that commits public/sitemap.xml back to main.
+// That is the definition on purpose, and it is the one thing this guard used to
+// get wrong: it identified publishers as workflows that ALREADY ran the cadence
+// gate and committed. A workflow that publishes without the gate was therefore
+// invisible to the guard whose whole job is to notice exactly that - the check
+// could only see the workflows that had already opted in.
+//
+// citation-os-daily.yml is what that cost. It runs content:generate,
+// content:generate-pages and seo:sitemap and commits public/sitemap.xml to main,
+// so it publishes as surely as scheduled-content-release.yml does, and it did so
+// with no cadence gate anywhere in it. On 2026-08-28 it shipped four new URLs
+// against a cap of two; the ledger never moved, and scheduled-content-release
+// went red the next morning for pages a different workflow had published.
+//
+// The published URL set is the thing being governed, and public/sitemap.xml is
+// the record of it, so committing that file is what makes a workflow a
+// publisher. validate.yml runs the gate and commits nothing, so it stays exempt.
 const publishers = [];
+const accepters = [];
 for (const file of files) {
   const raw = fs.readFileSync(path.join(workflowDir, file), "utf8");
   // Ordering is a property of the steps, not of the prose around them. Comment
   // lines are blanked rather than dropped so offsets still line up with the file.
   const text = raw.replace(/^\s*#.*$/gm, (line) => " ".repeat(line.length));
-  if (!/cadence:gate/.test(text)) continue;
-  const commits = /git\s+commit/.test(text) || /safe-push-main\.sh/.test(text);
-  if (!commits) continue;
+  const pushes = /git\s+commit/.test(text) || /safe-push-main\.sh/.test(text);
+  const publishesSitemap = /git\s+add[^\n]*public\/sitemap\.xml/.test(text);
+  if (!pushes || !publishesSitemap) continue;
 
   const acceptAt = text.search(/cadence:gate\s+--\s+--accept\b/);
   const checkAt = text.search(/run:\s*npm run cadence:gate\s*$/m);
-  const commitAt = text.search(/git\s+add\s+data\b/);
+  const commitAt = text.search(/git\s+add\b/);
   publishers.push({ workflow: file, acceptAt, checkAt, commitAt });
 
-  if (acceptAt === -1) {
+  // Every publisher must be measured. Without this the cap governs one of the
+  // three workflows that can change the published URL set.
+  if (checkAt === -1) {
     errors.push(
-      `${file}: runs the cadence gate and commits to main but never runs ` +
-      `\`npm run cadence:gate -- --accept\`. Nothing else writes ` +
-      `data/cadence/known_urls.json, so the baseline freezes and the weekly cap ` +
-      `turns into a ratchet that blocks this workflow permanently.`,
+      `${file}: commits public/sitemap.xml to main but never runs \`npm run cadence:gate\`. ` +
+      `The publication cap in data/cadence/policy.json is enforced nowhere else, so this ` +
+      `workflow can publish past it and the failure surfaces in whichever workflow does run the gate.`,
     );
-    continue;
+  } else if (commitAt !== -1 && checkAt > commitAt) {
+    errors.push(`${file}: the blocking cadence gate runs after the commit step, so an over-cap release is already staged by the time it is measured.`);
   }
+
+  if (acceptAt === -1) continue;
+  accepters.push(file);
   if (!/--accept[\s\S]{0,400}?--reason/.test(text)) {
     errors.push(`${file}: --accept is used without --reason; the ledger must record a decision, not a re-run.`);
   }
@@ -77,11 +97,17 @@ for (const file of files) {
     errors.push(`${file}: the --accept step runs before the blocking cadence gate, so an over-cap release would record itself as accepted.`);
   }
   if (commitAt !== -1 && acceptAt > commitAt) {
-    errors.push(`${file}: the --accept step runs after \`git add data\`, so the advanced ledger is never committed.`);
+    errors.push(`${file}: the --accept step runs after \`git add\`, so the advanced ledger is never committed.`);
   }
 }
 if (!publishers.length) {
-  errors.push("no workflow both runs the cadence gate and commits to main, so nothing advances data/cadence/known_urls.json.");
+  errors.push("no workflow commits public/sitemap.xml to main, so nothing publishes and nothing advances data/cadence/known_urls.json.");
+} else if (!accepters.length) {
+  errors.push(
+    "no publishing workflow runs `npm run cadence:gate -- --accept`. Nothing else writes " +
+    "data/cadence/known_urls.json, so the baseline freezes and the weekly cap turns into a " +
+    "ratchet that blocks every publisher permanently.",
+  );
 }
 
 /* ---------- part 2: what the gate actually does to the ledger ---------- */
@@ -143,6 +169,78 @@ try {
   scenario("ledger_behaviour_fixture", false, error.message);
 } finally {
   fs.rmSync(temp, { recursive: true, force: true });
+}
+
+/* ---------- part 3: the publishers are clamped to the enforced cap ---------- */
+
+// Gating every publisher stops an over-cap release from shipping. It does not
+// stop one from being generated - it just turns the overage into a red run
+// instead of a bad publish. scripts/lib/publication_budget.mjs is what keeps the
+// generators inside the cap in the first place, by deriving their limit from
+// data/cadence/policy.json rather than from one of the four private ceilings
+// that used to each hold their own copy of the number. Exercised for real, in a
+// temp tree, so a rewrite that quietly stops consulting the policy is caught.
+const budgetModule = path.join(root, "scripts/lib/publication_budget.mjs");
+const budgetTemp = fs.mkdtempSync(path.join(os.tmpdir(), "approvalprep-publication-budget-"));
+try {
+  const write = (rel, value) => {
+    fs.mkdirSync(path.join(budgetTemp, path.dirname(rel)), { recursive: true });
+    fs.writeFileSync(path.join(budgetTemp, rel), JSON.stringify(value));
+  };
+  const routes = ["/a", "/b", "/c", "/d"];
+  write("data/routes/route_manifest.json", { routes: routes.map((p) => ({ path: p, index: true, type: "public" })) });
+  write("data/content/generated_answers.json", { answers: [] });
+  write("data/reports/public_report_registry.json", { reports: [] });
+  write("data/cadence/policy.json", { new_pages_per_week: 2 });
+
+  const ask = () => {
+    const result = spawnSync(
+      "node",
+      ["--input-type=module", "-e", `import { publicationBudget } from ${JSON.stringify(budgetModule)}; console.log(JSON.stringify(publicationBudget()));`],
+      { cwd: budgetTemp, encoding: "utf8" },
+    );
+    if (result.status !== 0) throw new Error(`publication_budget failed: ${result.stderr}`);
+    return JSON.parse(result.stdout.trim().split("\n").pop());
+  };
+
+  // Baseline knows every route: the full cap is available.
+  write("data/cadence/known_urls.json", { urls: routes.map((p) => `https://approvalprep.com${p}/`) });
+  const clear = ask();
+  scenario("budget_is_full_cap_when_nothing_is_new", clear.remaining === 2,
+    `expected 2 of a cap of 2 to remain when no URL is new, got ${JSON.stringify(clear)}`);
+
+  // Three routes already published past the baseline: no headroom at all, and it
+  // must clamp at zero rather than going negative.
+  write("data/cadence/known_urls.json", { urls: ["https://approvalprep.com/a/"] });
+  const spent = ask();
+  scenario("budget_is_zero_when_the_cap_is_already_spent", spent.alreadyNew === 3 && spent.remaining === 0,
+    `expected 3 new URLs to leave 0 of a cap of 2, got ${JSON.stringify(spent)}`);
+
+  // Partly spent: the remainder is arithmetic, not a fresh allowance.
+  write("data/cadence/known_urls.json", { urls: ["https://approvalprep.com/a/", "https://approvalprep.com/b/", "https://approvalprep.com/c/"] });
+  const partial = ask();
+  scenario("budget_is_the_remainder_not_the_cap", partial.remaining === 1,
+    `expected 1 of a cap of 2 to remain with one URL already new, got ${JSON.stringify(partial)}`);
+
+  // No accepted baseline means the gate cannot block, so the budget imposes
+  // nothing and the generators keep their own ceilings.
+  fs.rmSync(path.join(budgetTemp, "data/cadence/known_urls.json"));
+  const unledgered = ask();
+  scenario("budget_is_unconstrained_without_a_baseline", unledgered.remaining === null,
+    `expected no constraint without a ledger, got ${JSON.stringify(unledgered)}`);
+} catch (error) {
+  scenario("publication_budget_fixture", false, error.message);
+} finally {
+  fs.rmSync(budgetTemp, { recursive: true, force: true });
+}
+
+// The generators have to actually ask. A limit that is computed and then not
+// applied is the same defect in a new place.
+for (const generator of ["scripts/content/generate-candidate.mjs", "scripts/content/generate-page-candidates.mjs"]) {
+  const src = fs.readFileSync(path.join(root, generator), "utf8");
+  scenario(`${path.basename(generator)}_consults_the_publication_budget`,
+    /clampToPublicationBudget\s*\(/.test(src) && /publication_budget\.mjs/.test(src),
+    `${generator} publishes new indexable URLs without clamping to scripts/lib/publication_budget.mjs, so its private ceiling can exceed data/cadence/policy.json again`);
 }
 
 const report = {

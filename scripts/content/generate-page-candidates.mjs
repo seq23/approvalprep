@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import fs from "node:fs";
 import { hasDemand, demandRecord, measuredVolume, allRecords } from "../lib/demand_gate.mjs";
+import { clampToPublicationBudget } from "../lib/publication_budget.mjs";
 
 const now = new Date().toISOString();
 const today = now.slice(0, 10);
@@ -20,7 +21,16 @@ const registeredQueries = new Set(registry.pages.map((page) => page.primaryQuery
 const velocityDecision = fs.existsSync("data/authority_scale/velocity_decision.json") ? readJson("data/authority_scale/velocity_decision.json") : {};
 // A safety cap on a bad run, not a number to reach. The loop below stops when
 // it runs out of demand-backed candidates, which is almost always first.
-const cap = Number(velocityDecision.recommended_new_url_ceiling_per_day || opportunities.dailyPublishCap || 3);
+//
+// Both of these numbers are this factory's own ceiling and both are 3, while the
+// cap that is actually enforced - data/cadence/policy.json new_pages_per_week,
+// applied by scripts/cadence_gate.cjs - is 2. So the factory is clamped to the
+// remaining headroom under the enforced cap as well as to its own tier. It runs
+// after `content:generate` inside citation-os:daily, and the budget is derived
+// from the route/answer registries rather than the on-disk sitemap, so what that
+// step has already published is counted here rather than spent twice.
+const ownCap = Number(velocityDecision.recommended_new_url_ceiling_per_day || opportunities.dailyPublishCap || 3);
+const { limit: cap, budget } = clampToPublicationBudget(ownCap, "content:generate-pages");
 
 // The demand gate, applied before anything else looks at an opportunity.
 // `page_opportunities.json` is hand-typed, so until now the only thing standing
@@ -212,6 +222,7 @@ ledger.releases.push({
   approvalRequired: blocked.length,
   blocked: blocked.length,
   refusedNoDemandRecord: withoutDemand.length,
+  publicationBudget: { ownCap, appliedCap: cap, capSource: "data/cadence/policy.json new_pages_per_week", ...budget },
   demandRecordsAvailable: allRecords().length,
   validationRequired: true
 });
