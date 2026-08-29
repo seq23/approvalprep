@@ -15,6 +15,17 @@
       "scope": "Core repo files, authority files, package identity"
     },
     {
+      "id": "workflow-yaml-parse",
+      "npmScript": "validate:workflow-yaml-parse",
+      "entrypoint": "scripts/validate/workflow-yaml-parse.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "an orphaned YAML key makes a workflow a 0-second startup failure with no log",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "Every .github/workflows/*.yml parses: no mapping key left with only comments under it"
+    },
+    {
       "id": "validation-registry",
       "npmScript": "validate:validation-registry",
       "entrypoint": "scripts/validate/validation-registry.mjs",
@@ -325,6 +336,17 @@
       "owner": "approvalprep-growth",
       "group": "growth-critical",
       "scope": "Content action decisions separate utility, compliance, and growth"
+    },
+    {
+      "id": "opportunity-score-provenance",
+      "npmScript": "validate:opportunity-score-provenance",
+      "entrypoint": "scripts/validate/opportunity-score-provenance.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "a heuristic score must not steer publishing while wearing a demand label",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "Provenance of the opportunity scores and of the growth-brief ranking basis"
     },
     {
       "id": "content-release",

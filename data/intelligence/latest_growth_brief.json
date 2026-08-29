@@ -1,160 +1,157 @@
 {
-  "schemaVersion": "4.1.0",
-  "generatedAt": "2026-08-28T22:32:54.269Z",
+  "schemaVersion": "4.2.0",
+  "generatedAt": "2026-08-29T20:57:03.747Z",
   "sourceStatus": [
     {
-      "id": "fe2e0e4f-e05c-4531-9d35-dc6fd09fbde5",
-      "connectorId": "page_action_recommendation",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-28T22:32:54.219Z",
-      "recordsImported": 5430
-    },
-    {
-      "id": "81033ff6-0259-497f-b7f2-938fb1107cb6",
-      "connectorId": "authority_requirement_analysis",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-28T22:32:54.160Z",
-      "recordsImported": 86
-    },
-    {
-      "id": "f50665f1-1ad9-4bc1-a4dc-c05eaebdc1a6",
-      "connectorId": "growth_maintenance_analysis",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-28T22:32:54.127Z",
-      "recordsImported": 86
-    },
-    {
-      "id": "6cb49cab-ff39-485f-97e6-0d1b48f333a4",
+      "id": "2d305e1d-d2c4-4012-b5d8-d1479669c70b",
       "connectorId": "content_opportunity_analysis",
       "status": "COMPLETE",
-      "ranAt": "2026-08-28T22:32:54.089Z",
+      "ranAt": "2026-08-29T20:57:03.658Z",
       "recordsImported": 5430
     },
     {
-      "id": "fa8a28f3-3400-43d2-b0b0-0e3b7596c0be",
+      "id": "9fb57f05-cf5a-4da3-9d0b-e726250e941f",
+      "connectorId": "growth_brief_generation",
+      "status": "COMPLETE",
+      "ranAt": "2026-08-29T20:56:53.133Z",
+      "recordsImported": 40
+    },
+    {
+      "id": "71a3704e-1901-45ad-a262-98741c257eaf",
+      "connectorId": "content_opportunity_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-08-29T20:56:53.035Z",
+      "recordsImported": 5430
+    },
+    {
+      "id": "2a554964-3247-4111-9e9e-dde3ce81270c",
+      "connectorId": "growth_brief_generation",
+      "status": "COMPLETE",
+      "ranAt": "2026-08-29T20:55:59.331Z",
+      "recordsImported": 40
+    },
+    {
+      "id": "60840054-edf5-492c-9c21-e4c556e13ed7",
+      "connectorId": "content_opportunity_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-08-29T20:55:59.233Z",
+      "recordsImported": 5430
+    },
+    {
+      "id": "6aa6a4d7-1d07-46f2-afe4-ef6deaacca0b",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-08-29T10:41:39.296Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "533dad60-bdba-4cf5-b889-32da07e546ce",
+      "connectorId": "indexnow",
+      "status": "NO_DATA",
+      "ranAt": "2026-08-29T10:41:39.117Z",
+      "mode": "live",
+      "recordsImported": 0,
+      "preparedUrlCount": 86
+    },
+    {
+      "id": "de747d52-e376-40f2-a8dc-f7b75168296d",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-08-29T10:19:02.012Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "d22e7728-7c6d-44a5-b8b1-ec5612c4af2e",
+      "connectorId": "indexnow",
+      "status": "NO_DATA",
+      "ranAt": "2026-08-29T10:19:01.899Z",
+      "mode": "live",
+      "recordsImported": 0,
+      "preparedUrlCount": 86
+    },
+    {
+      "id": "ac4a0c31-4012-4315-8445-bc5446cc6e0d",
       "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
-      "ranAt": "2026-08-28T22:32:52.537Z",
+      "ranAt": "2026-08-29T08:29:10.209Z",
       "recordsImported": 12
     },
     {
-      "id": "b751879a-db0a-4ef3-8157-5aad6494c9b7",
+      "id": "a0840e80-6176-40c9-bd16-ba42326b7c7a",
       "connectorId": "manual_social_signal_import",
       "status": "NO_DATA",
-      "ranAt": "2026-08-28T22:32:49.251Z",
+      "ranAt": "2026-08-29T08:29:07.462Z",
       "reason": "No social signal import found at data/imports/social-signals.json.",
       "recordsImported": 0
     },
     {
-      "id": "df744b21-af24-42a5-8aa1-0cc87ddcc612",
+      "id": "48159234-18a5-4c07-a02c-759637e49bc4",
       "connectorId": "manual_serp_csv",
       "status": "NO_DATA",
-      "ranAt": "2026-08-28T22:32:49.220Z",
+      "ranAt": "2026-08-29T08:29:07.325Z",
       "reason": "No SERP CSV found at data/imports/serp.csv.",
       "recordsImported": 0
     },
     {
-      "id": "1019f327-cec1-4d95-9504-59e46b59f618",
+      "id": "974189e3-b49f-4dda-89a5-e9ecb04fb833",
       "connectorId": "competitor_public_crawler",
       "status": "COMPLETE",
-      "ranAt": "2026-08-28T22:32:49.188Z",
+      "ranAt": "2026-08-29T08:29:07.147Z",
       "recordsImported": 2
     },
     {
-      "id": "5d1f8ef6-6a82-40fc-b93c-77ffdffa9a2a",
+      "id": "acc05890-53f7-4c76-a919-ab5a53b67d7a",
       "connectorId": "competitor_sitemap_discovery",
       "status": "COMPLETE",
-      "ranAt": "2026-08-28T22:32:48.785Z",
+      "ranAt": "2026-08-29T08:29:06.793Z",
       "recordsImported": 2
     },
     {
-      "id": "6475d3f0-1477-4f58-9cad-ebfeb99f115e",
+      "id": "5627e1fa-97a8-4624-b2a0-2d8ac4f43122",
       "connectorId": "owned_site_crawler",
       "status": "COMPLETE",
-      "ranAt": "2026-08-28T22:32:47.920Z",
+      "ranAt": "2026-08-29T08:29:06.332Z",
       "recordsImported": 91
     },
     {
-      "id": "155312db-b92a-4f0e-9088-32d7e07188fc",
+      "id": "0f3d8b29-1dfd-4330-a7e7-cd524eb2dbff",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-28T22:32:47.887Z",
+      "ranAt": "2026-08-29T08:29:06.194Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "d356cb24-b4bf-4a18-a03c-f847259b15c2",
+      "id": "19d6b938-e741-4bf5-84c9-74b6a2971972",
       "connectorId": "google_url_inspection",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-28T22:32:47.855Z",
-      "mode": "live",
-      "recordsImported": 25
+      "status": "BUDGET_HELD",
+      "ranAt": "2026-08-29T08:29:06.001Z",
+      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
+      "recordsImported": 0
     },
     {
-      "id": "8a8010b5-6762-47e1-992c-f25e5b3ad718",
+      "id": "ff918ac4-5057-4b21-8674-43256416d397",
       "connectorId": "google_search_console_search_analytics",
-      "status": "BUDGET_HELD",
-      "ranAt": "2026-08-28T22:30:08.507Z",
-      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
-      "recordsImported": 0
-    },
-    {
-      "id": "9d1514d8-9116-4007-809c-db30192744dd",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-28T16:25:32.524Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "a792b316-92da-4bc6-9435-6e6e6edd4695",
-      "connectorId": "indexnow",
-      "status": "NO_DATA",
-      "ranAt": "2026-08-28T16:25:32.346Z",
-      "mode": "live",
-      "recordsImported": 0,
-      "preparedUrlCount": 86
-    },
-    {
-      "id": "12780461-d5b5-4ed8-bec9-4e978a295bb5",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-28T15:21:01.614Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "269d6bc9-d263-4805-9e10-77611cd5df5b",
-      "connectorId": "indexnow",
-      "status": "NO_DATA",
-      "ranAt": "2026-08-28T15:21:01.454Z",
-      "mode": "live",
-      "recordsImported": 0,
-      "preparedUrlCount": 86
-    },
-    {
-      "id": "3a236e0c-5c0e-4bdb-8f8a-2c9a1c374457",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-28T14:36:16.222Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "86b699d9-cea1-403a-b9a7-7a0c0eeed1a7",
-      "connectorId": "indexnow",
-      "status": "BUDGET_HELD",
-      "ranAt": "2026-08-28T14:36:16.042Z",
-      "mode": "live",
-      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
-      "recordsImported": 0
-    },
-    {
-      "id": "c90af8cf-7903-4d41-b891-3441d48b9ad7",
-      "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
-      "ranAt": "2026-08-28T12:09:43.516Z",
-      "recordsImported": 12
+      "ranAt": "2026-08-29T08:29:05.707Z",
+      "mode": "live",
+      "recordsImported": 14
+    },
+    {
+      "id": "e6a4e1c7-5867-4207-9d33-d43dd14c24d3",
+      "connectorId": "retest_outcome_evaluator",
+      "status": "COMPLETE",
+      "ranAt": "2026-08-28T22:32:54.399Z",
+      "recordsImported": 0
+    },
+    {
+      "id": "6c0ffa7b-b091-4356-a383-a54055d39b3c",
+      "connectorId": "retest_queue_builder",
+      "status": "COMPLETE",
+      "ranAt": "2026-08-28T22:32:54.367Z",
+      "recordsImported": 0
     }
   ],
   "topContentOpportunities": [
@@ -176,7 +173,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-28T22:32:54.021Z"
+      "createdAt": "2026-08-29T20:57:03.593Z"
     },
     {
       "id": "brief_maxfanout_065005_f2ae6c7755",
@@ -196,7 +193,7 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-28T22:32:54.022Z"
+      "createdAt": "2026-08-29T20:57:03.593Z"
     },
     {
       "id": "brief_maxfanout_065016_5dffb2029c",
@@ -216,7 +213,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-28T22:32:54.022Z"
+      "createdAt": "2026-08-29T20:57:03.593Z"
     },
     {
       "id": "brief_maxfanout_065026_4f629f0750",
@@ -236,7 +233,7 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-28T22:32:54.023Z"
+      "createdAt": "2026-08-29T20:57:03.593Z"
     },
     {
       "id": "brief_maxfanout_065030_c15a9d29bf",
@@ -256,7 +253,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-28T22:32:54.023Z"
+      "createdAt": "2026-08-29T20:57:03.593Z"
     },
     {
       "id": "brief_maxfanout_065041_94a5ae89ab",
@@ -276,7 +273,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-28T22:32:54.023Z"
+      "createdAt": "2026-08-29T20:57:03.593Z"
     },
     {
       "id": "brief_maxfanout_065045_43ba3d8aa8",
@@ -296,7 +293,7 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-28T22:32:54.023Z"
+      "createdAt": "2026-08-29T20:57:03.593Z"
     },
     {
       "id": "brief_maxfanout_065056_ba8ccc7b76",
@@ -316,7 +313,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-28T22:32:54.023Z"
+      "createdAt": "2026-08-29T20:57:03.593Z"
     },
     {
       "id": "brief_maxfanout_065066_451687fcca",
@@ -336,7 +333,7 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-28T22:32:54.023Z"
+      "createdAt": "2026-08-29T20:57:03.593Z"
     },
     {
       "id": "brief_maxfanout_065070_8788bd83c2",
@@ -356,7 +353,7 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-28T22:32:54.023Z"
+      "createdAt": "2026-08-29T20:57:03.593Z"
     },
     {
       "id": "brief_maxfanout_065081_62a992eeeb",
@@ -376,7 +373,7 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-08-28T22:32:54.023Z"
+      "createdAt": "2026-08-29T20:57:03.593Z"
     },
     {
       "id": "brief_maxfanout_065083_bd4a7cc9fe",
@@ -396,7 +393,7 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-28T22:32:54.023Z"
+      "createdAt": "2026-08-29T20:57:03.593Z"
     },
     {
       "id": "brief_maxfanout_065084_67ba5b59e5",
@@ -416,7 +413,7 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-08-28T22:32:54.023Z"
+      "createdAt": "2026-08-29T20:57:03.594Z"
     },
     {
       "id": "brief_maxfanout_065085_7c0a6740ce",
@@ -436,7 +433,7 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-28T22:32:54.023Z"
+      "createdAt": "2026-08-29T20:57:03.594Z"
     },
     {
       "id": "brief_maxfanout_065090_b2f74b2d4d",
@@ -456,7 +453,7 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-28T22:32:54.023Z"
+      "createdAt": "2026-08-29T20:57:03.594Z"
     },
     {
       "id": "brief_maxfanout_065091_043cb4f31d",
@@ -476,7 +473,7 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-28T22:32:54.023Z"
+      "createdAt": "2026-08-29T20:57:03.594Z"
     },
     {
       "id": "brief_maxfanout_065092_257e7b6d93",
@@ -496,7 +493,7 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-28T22:32:54.023Z"
+      "createdAt": "2026-08-29T20:57:03.594Z"
     },
     {
       "id": "brief_maxfanout_065096_341067f791",
@@ -516,7 +513,7 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-08-28T22:32:54.024Z"
+      "createdAt": "2026-08-29T20:57:03.594Z"
     },
     {
       "id": "brief_maxfanout_065098_de1c688aad",
@@ -536,7 +533,7 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-08-28T22:32:54.024Z"
+      "createdAt": "2026-08-29T20:57:03.594Z"
     },
     {
       "id": "brief_maxfanout_065099_465d73c971",
@@ -556,9 +553,15 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-28T22:32:54.024Z"
+      "createdAt": "2026-08-29T20:57:03.594Z"
     }
   ],
+  "rankingBasis": {
+    "status": "DEMAND_UNMEASURED",
+    "rankedBy": "userUtilityScore only (heuristic regex keyword rules)",
+    "measuredBriefs": 0,
+    "note": "searchOpportunityScore is 0 on all 5430 briefs, so no measured demand entered this ranking. This shortlist is a usefulness heuristic and must not be read as demand."
+  },
   "topMaintenanceActions": [
     {
       "route": "/letter-writing-studio",

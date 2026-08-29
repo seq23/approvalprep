@@ -46,6 +46,14 @@
  * subject matter and consumes none of the refresh capacity the cap protects.
  */
 import fs from "node:fs";
+import { createRequire } from "node:module";
+
+// The gate is CommonJS, so the rolling-window arithmetic lives in a .cjs file and
+// is reached from here through createRequire. One implementation, two callers: if
+// the gate and this budget each carried their own idea of how much of the week is
+// left, that is the same "four registries of one quantity" defect this module was
+// written to end, reappearing one level up.
+const cadenceWindow = createRequire(import.meta.url)("./cadence_window.cjs");
 
 const SITE_ORIGIN = "https://approvalprep.com";
 
@@ -128,7 +136,20 @@ export function publicationBudget() {
     }
   };
   const alreadyNew = [...prospectiveUrls()].filter((url) => !known.has(url) && !isSectionIndex(url)).length;
-  return { cap, ledgerExists: true, alreadyNew, remaining: Math.max(0, cap - alreadyNew) };
+
+  // The remainder is the declared rate minus what the trailing window already
+  // holds minus what is new-but-unaccepted right now. Subtracting only the
+  // latter treated every daily --accept as the start of a fresh week.
+  const today = process.env.CADENCE_TODAY || new Date().toISOString().slice(0, 10);
+  const allowance = cadenceWindow.remainingAllowance({ cap, ledger, today, policy, alreadyNew });
+  return {
+    cap,
+    ledgerExists: true,
+    alreadyNew,
+    windowDays: allowance.windowDays,
+    spentInWindow: allowance.spentInWindow,
+    remaining: allowance.remaining,
+  };
 }
 
 /** Clamp a generator's own ceiling to what the enforced cap will actually accept. */

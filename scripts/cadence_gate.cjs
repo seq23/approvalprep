@@ -41,6 +41,7 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
+const cadenceWindow = require('./lib/cadence_window.cjs');
 
 const ROOT = process.cwd();
 const args = process.argv.slice(2);
@@ -113,10 +114,13 @@ if (ACCEPT && !ACCEPT_REASON) {
   process.exit(2);
 }
 let known = new Set();
+let ledgerDoc = null;
 let ledgerExists = fs.existsSync(ledgerPath);
 if (ledgerExists) {
-  try { known = new Set(JSON.parse(fs.readFileSync(ledgerPath, 'utf8')).urls || []); }
-  catch { ledgerExists = false; }
+  try {
+    ledgerDoc = JSON.parse(fs.readFileSync(ledgerPath, 'utf8'));
+    known = new Set(ledgerDoc.urls || []);
+  } catch { ledgerExists = false; ledgerDoc = null; }
 }
 const newUrls = [...urls.keys()].filter((u) => !known.has(u));
 
@@ -180,8 +184,34 @@ const ceiling = policy.refresh_capacity_per_week * Math.floor(policy.refresh_win
 const blocking = [];
 const warnings = [];
 
-if (ledgerExists && newPublications.length > policy.new_pages_per_week) {
-  blocking.push(`weekly_cap: ${newPublications.length} URLs are new since the last run, cap is ${policy.new_pages_per_week} per week`);
+// The cap is measured against a rolling window, not against the last reset.
+//
+// `--accept` runs at the end of every clear scheduled-content-release, and that
+// workflow is daily. Comparing "new since the last accept" to a per-WEEK cap
+// therefore handed out a fresh weekly allowance every morning: seven synthetic
+// daily accepts of two URLs each published fourteen URLs against a cap of two
+// and never blocked once. The ledger's append-only `history` is what makes the
+// week real; see scripts/lib/cadence_window.cjs.
+const allowance = cadenceWindow.remainingAllowance({
+  cap: policy.new_pages_per_week,
+  ledger: ledgerDoc,
+  today: report_date(),
+  policy,
+  alreadyNew: newPublications.length,
+});
+
+if (ledgerExists && allowance.overBy > 0) {
+  blocking.push(
+    `weekly_cap: ${newPublications.length} URL(s) are new since the last accepted baseline and ` +
+    `${allowance.spentInWindow} more were already admitted inside the trailing ${allowance.windowDays} days, ` +
+    `which is ${allowance.overBy} over the cap of ${policy.new_pages_per_week} per ${allowance.windowDays} days`,
+  );
+}
+if (ledgerExists && !Array.isArray(ledgerDoc && ledgerDoc.history)) {
+  warnings.push(
+    'cadence_window_unseeded: data/cadence/known_urls.json predates the rolling window and carries no history, ' +
+    'so the cap is still measured only against the accepted baseline. The next --accept seeds it.',
+  );
 }
 if (ledgerExists && newSectionIndexes.length) {
   warnings.push(`new_section_indexes: ${newSectionIndexes.length} navigation index route(s) are new since the last run and sit outside the publication cap (${newSectionIndexes.join(', ')})`);
@@ -225,6 +255,9 @@ const report = {
   new_section_indexes_since_last_run: ledgerExists ? newSectionIndexes : null,
   ledger_initialised: ledgerExists,
   maintainable_ceiling: ceiling,
+  cadence_window_days: allowance.windowDays,
+  spent_in_window: allowance.spentInWindow,
+  remaining_in_window: ledgerExists ? allowance.remaining : null,
   policy: { ...policy, _source: undefined },
   blocking,
   warnings,
@@ -241,9 +274,15 @@ const report = {
 // Recording an accepted URL set is now a separate, deliberate act: `--accept`.
 if (ACCEPT) {
   fs.mkdirSync(path.dirname(ledgerPath), { recursive: true });
+  // The history is what makes `new_pages_per_week` mean a week. Recording the
+  // count this accept admits - append-only, summed within a day, never rewritten
+  // inside the window - is the only thing stopping the next daily accept from
+  // handing out a fresh weekly allowance. Section indexes are excluded here for
+  // the same reason the cap ignores them above.
+  const history = cadenceWindow.recordAccept(ledgerDoc, report_date(), newPublications.length, policy);
   fs.writeFileSync(
     ledgerPath,
-    JSON.stringify({ generated_at: report_date(), accepted_reason: ACCEPT_REASON, urls: [...urls.keys()].sort() }, null, 2) + '\n',
+    JSON.stringify({ generated_at: report_date(), accepted_reason: ACCEPT_REASON, history, urls: [...urls.keys()].sort() }, null, 2) + '\n',
   );
   console.log(`CADENCE LEDGER ACCEPTED: ${urls.size} url(s) recorded as known. Reason: ${ACCEPT_REASON}`);
 }

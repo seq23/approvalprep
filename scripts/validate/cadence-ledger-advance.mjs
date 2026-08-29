@@ -171,6 +171,70 @@ try {
   fs.rmSync(temp, { recursive: true, force: true });
 }
 
+/* ---------- part 2b: the weekly cap actually measures a week ---------- */
+
+// `--accept` runs at the end of every clear scheduled-content-release, and that
+// workflow is on `cron: "7 10 * * *"`. Comparing "new since the last accept" to
+// a per-WEEK cap therefore handed out a full weekly allowance every morning.
+// Measured before the fix: seven synthetic daily accepts of two URLs each
+// published fourteen URLs against a cap of two, and the gate never blocked.
+//
+// The rolling window is what makes the week real. This drives the real gate
+// through seven simulated days with a simulated clock, which is the only way to
+// prove both that it closes and - just as important - that it REOPENS. A window
+// that never reopens is a lane pinned at zero wearing a better name.
+const windowTemp = fs.mkdtempSync(path.join(os.tmpdir(), "approvalprep-cadence-window-"));
+try {
+  fs.mkdirSync(path.join(windowTemp, "data/cadence"), { recursive: true });
+  fs.copyFileSync(path.join(root, "scripts/cadence_gate.cjs"), path.join(windowTemp, "cadence_gate.cjs"));
+  fs.mkdirSync(path.join(windowTemp, "lib"), { recursive: true });
+  fs.copyFileSync(path.join(root, "scripts/lib/cadence_window.cjs"), path.join(windowTemp, "lib/cadence_window.cjs"));
+  fs.writeFileSync(path.join(windowTemp, "data/cadence/policy.json"), JSON.stringify({
+    new_pages_per_week: 2, new_pages_window_days: 7, require_lastmod: true,
+    stale_tolerance_pct: 100, refresh_window_days: 91, refresh_capacity_per_week: 8,
+  }));
+
+  const day = (n) => `2026-09-${String(n).padStart(2, "0")}`;
+  const writeSitemap = (count, date) => fs.writeFileSync(path.join(windowTemp, "sitemap.xml"),
+    `<?xml version="1.0"?><urlset>${Array.from({ length: count }, (_, i) =>
+      `<url><loc>https://x.test/p${i + 1}</loc><lastmod>${date}</lastmod></url>`).join("")}</urlset>`);
+  const gate = (date, extra = []) => spawnSync("node", ["cadence_gate.cjs", ...extra],
+    { cwd: windowTemp, encoding: "utf8", env: { ...process.env, CADENCE_TODAY: date } });
+
+  // Seed a baseline on day 1 so the cap has something to measure against.
+  writeSitemap(1, day(1));
+  gate(day(1), ["--accept", "--reason", "fixture baseline"]);
+
+  // Days 2 and 3 spend the cap of 2, one URL each, each accepted.
+  let total = 1, blockedOn = null;
+  for (let d = 2; d <= 8 && blockedOn === null; d += 1) {
+    total += 1;
+    writeSitemap(total, day(d));
+    const run = gate(day(d));
+    if (run.status !== 0) { blockedOn = d; break; }
+    gate(day(d), ["--accept", "--reason", `fixture day ${d}`]);
+  }
+  scenario("weekly_cap_blocks_inside_the_window", blockedOn !== null && blockedOn <= 5,
+    `publishing one URL a day against a cap of 2 per 7 days should have blocked by day 5; it blocked on ${blockedOn === null ? "no day at all - the window is not being measured" : `day ${blockedOn}`}`);
+
+  // ...and the same tree, unchanged, must clear once the window rolls past the
+  // spend. A gate that blocks forever is not a rolling window.
+  const reopened = gate(day(20));
+  scenario("weekly_cap_reopens_when_the_window_rolls", reopened.status === 0,
+    `the identical tree still blocked on ${day(20)}, well past the 7-day window; the cap is pinned rather than rolling`);
+
+  // A re-run must never be able to shrink the window. Two accepts on one day sum.
+  const before = JSON.parse(fs.readFileSync(path.join(windowTemp, "data/cadence/known_urls.json"), "utf8"));
+  gate(day(4), ["--accept", "--reason", "fixture re-run"]);
+  const after = JSON.parse(fs.readFileSync(path.join(windowTemp, "data/cadence/known_urls.json"), "utf8"));
+  scenario("accept_history_is_append_only", Array.isArray(after.history) && after.history.length >= (before.history || []).length,
+    "a repeated --accept shrank or erased the ledger history; a re-run must not be able to hand back spent allowance");
+} catch (error) {
+  scenario("cadence_window_fixture", false, error.message);
+} finally {
+  fs.rmSync(windowTemp, { recursive: true, force: true });
+}
+
 /* ---------- part 3: the publishers are clamped to the enforced cap ---------- */
 
 // Gating every publisher stops an over-cap release from shipping. It does not

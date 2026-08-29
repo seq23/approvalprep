@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-08-29T15:31:00.688Z",
+  "generatedAt": "2026-08-29T20:59:57.555Z",
   "status": "PASS",
   "ledger": "data/cadence/known_urls.json",
   "publishingWorkflows": [
@@ -40,6 +40,18 @@
     },
     {
       "id": "cap_still_blocks_over_limit",
+      "status": "PASS"
+    },
+    {
+      "id": "weekly_cap_blocks_inside_the_window",
+      "status": "PASS"
+    },
+    {
+      "id": "weekly_cap_reopens_when_the_window_rolls",
+      "status": "PASS"
+    },
+    {
+      "id": "accept_history_is_append_only",
       "status": "PASS"
     },
     {
