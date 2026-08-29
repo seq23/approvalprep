@@ -233,4 +233,17 @@ writeJson("data/content/page_registry.json", registry);
 writeJson("data/release/release_ledger.json", ledger);
 fs.mkdirSync("data/workflow_traces", { recursive: true });
 writeJson("data/workflow_traces/page_factory_latest.json", { schemaVersion: "1.0.0", generatedAt: now, pagesPublished: selected.map((item) => item.path), approvalRequired: blocked.map((item) => item.path) });
+// Rule 0: a run that publishes nothing must say WHY, or an exhausted backlog is
+// indistinguishable from a broken factory. This is not hypothetical - the
+// opportunity list sat stale for two days advertising 9 uncovered rows worth
+// 12,600 searches/mo that had all already been built, and the only signal was a
+// bare published=0.
+if (!selected.length && !blocked.length) {
+  const reason = candidates.length === 0
+    ? (opportunities.opportunities || []).length === 0
+      ? 'no_uncovered_demand: every measured demand record already has a route. The backlog is exhausted, not broken.'
+      : 'all_opportunities_already_built: every row in page_opportunities.json already exists in the route manifest or page registry. Regenerate it with content:demand-opportunities.'
+    : 'candidates_present_but_none_selected';
+  console.log(`[content:generate-pages] NAMED STOP ${reason}`);
+}
 console.log(`[content:generate-pages] published=${selected.length} approvalRequired=${blocked.length}`);
