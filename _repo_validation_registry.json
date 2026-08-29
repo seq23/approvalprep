@@ -1251,6 +1251,17 @@
       "owner": "approvalprep-ops",
       "group": "conversion-critical",
       "scope": "functions/_runtime/asset-keys.js, functions/api/download-file.js, seed product keys, scripts/ops/r2-upload-assets.mjs"
+    },
+    {
+      "id": "script-callers",
+      "npmScript": "validate:script-callers",
+      "entrypoint": "scripts/validate/script-callers.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents scripts under scripts/ shipping with no caller - an unenforced rule that reads as a live one",
+      "owner": "approvalprep-ops",
+      "group": "ops-critical",
+      "scope": "Every tracked script under scripts/ is invoked by package.json, a workflow, a shell script, or an import"
     }
   ],
   "repairPolicy": "A validator may declare repairCommand only when that command repairs the same defect the validator detects. scripts/selfheal/heal-until-clean.mjs runs it on a blocking failure and re-validates."

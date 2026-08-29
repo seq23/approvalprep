@@ -248,7 +248,11 @@
     "validate:sitemap-url-form": "node scripts/validate/sitemap-url-form.mjs",
     "validate:download-key-contract": "node scripts/validate/download-key-contract.mjs",
     "content:demand-opportunities": "node scripts/content/build-demand-opportunities.mjs",
-    "validate:demand-backed-pages": "node scripts/validate/demand-backed-pages.mjs"
+    "validate:demand-backed-pages": "node scripts/validate/demand-backed-pages.mjs",
+    "validate:script-callers": "node scripts/validate/script-callers.mjs",
+    "analysis:link-graph": "node scripts/analysis/link_graph.cjs dist --list-orphans",
+    "analysis:duplication": "node scripts/analysis/main_dice_similarity.mjs",
+    "queries:score-discovery-gap": "node scripts/queries/score_discovery_gap.mjs"
   },
   "dependencies": {
     "astro": "^7.0.6",

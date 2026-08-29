@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "orchestratorSource": "_repo_validation_registry.json",
-  "validatorCount": 113,
-  "hardFailCount": 102,
+  "validatorCount": 114,
+  "hardFailCount": 103,
   "strongWarningCount": 11,
   "validators": [
     {
@@ -1021,6 +1021,15 @@
       "severity": "HARD_FAIL",
       "blocksRelease": true,
       "group": "conversion-critical"
+    },
+    {
+      "order": 114,
+      "id": "script-callers",
+      "npmScript": "validate:script-callers",
+      "entrypoint": "scripts/validate/script-callers.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "ops-critical"
     }
   ]
 }
