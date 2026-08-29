@@ -95,6 +95,7 @@
     "validate:notification-policy",
     "validate:offering-contracts",
     "validate:offering-visibility",
+    "validate:opportunity-score-provenance",
     "validate:orchestrator-self-test",
     "validate:owner-exceptions",
     "validate:page-action-safety",
@@ -121,7 +122,9 @@
     "validate:runtime-bindings",
     "validate:runtime-product-admin",
     "validate:safe-harbor-autopublish",
+    "validate:script-callers",
     "validate:security",
+    "validate:self-heal-honesty",
     "validate:self-heal-progressions",
     "validate:self-healing",
     "validate:seo-surfaces",
@@ -143,6 +146,7 @@
     "validate:workflow-main-writer-safety",
     "validate:workflow-trace",
     "validate:workflow-write-scopes",
+    "validate:workflow-yaml-parse",
     "workflows:trace"
   ],
   "missingNpmScripts": [],
@@ -182,5 +186,5 @@
     }
   ],
   "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-  "traceId": "5a2d53c11ff33a6d"
+  "traceId": "31b0945b65880ccc"
 }
