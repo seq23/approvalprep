@@ -1,10 +1,10 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-08-25T21:52:11.311Z",
+  "generatedAt": "2026-08-29T10:18:36.697Z",
   "validationCommand": "npm run validate:all",
   "registrySource": "_repo_validation_registry.json",
   "maxAttempts": 3,
-  "dryRun": true,
+  "dryRun": false,
   "declaredRepairs": {
     "validation-registry": "npm run validation:registry:sync",
     "atlas-query-fanout": "npm run content:self-heal-citation-os",
@@ -12,6 +12,15 @@
     "prohibited-claims": "npm run governance:safe-harbor-rewrite"
   },
   "status": "CLEAN",
+  "outcome": "CLEAN_NO_REPAIR_NEEDED",
+  "repairsRun": 0,
+  "repairCoverage": {
+    "validatorsInRegistry": 112,
+    "validatorsDeclaringRepair": 4,
+    "note": "Most validators declare no repairCommand, so NO_REPAIR_AVAILABLE is a legitimate, expected stop rather than a defect in this loop."
+  },
+  "blockingAtStop": [],
+  "unrepairableAtStop": [],
   "safeToPush": true,
   "nonBlockingWarnings": [],
   "attempts": [
