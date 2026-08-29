@@ -84,5 +84,14 @@ if (offenders.length) {
   console.error('  remedy: render the requested content, never the recommendation text that asked for it');
   process.exit(1);
 }
-if (!scanned) console.log('[no-internal-instruction-leak] OK but no built HTML found; run npm run build for a real check');
-else console.log(`[no-internal-instruction-leak] OK ${scanned} published pages`);
+// A validator that examined nothing has not passed; it has abstained. This is
+// HARD_FAIL and blocksRelease in _repo_validation_registry.json, and dist/ is
+// gitignored, so on a fresh checkout it walked zero pages and exited 0 - which
+// made it structurally incapable of ever failing on the pull_request and
+// push-to-main lanes. .github/workflows/validate.yml now builds before
+// validate:all; this refuses to paper over it if that ordering is ever undone.
+if (!scanned) {
+  console.error('[no-internal-instruction-leak] FAIL: zero built HTML pages examined. Run `npm run build` before this validator; a pass over nothing is not a pass.');
+  process.exit(1);
+}
+console.log(`[no-internal-instruction-leak] OK ${scanned} published pages`);

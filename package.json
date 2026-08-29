@@ -252,7 +252,9 @@
     "validate:script-callers": "node scripts/validate/script-callers.mjs",
     "analysis:link-graph": "node scripts/analysis/link_graph.cjs dist --list-orphans",
     "analysis:duplication": "node scripts/analysis/main_dice_similarity.mjs",
-    "queries:score-discovery-gap": "node scripts/queries/score_discovery_gap.mjs"
+    "queries:score-discovery-gap": "node scripts/queries/score_discovery_gap.mjs",
+    "validate:opportunity-score-provenance": "node scripts/validate/opportunity-score-provenance.mjs",
+    "validate:workflow-yaml-parse": "node scripts/validate/workflow-yaml-parse.mjs"
   },
   "dependencies": {
     "astro": "^7.0.6",
