@@ -1,4 +1,13 @@
 #!/usr/bin/env node
+// Inspect the frozen release corpus for duplicate keys, invalid published rows
+// and broken canonical redirects, and block the release when it finds any.
+//
+// Rule 0 / zero-item rule: an empty answer corpus is not a clean bill of
+// health. This stage used to print `[content:self-heal] OK answers=0` and exit
+// 0 when data/content/generated_answers.json carried no answers at all, which
+// is the same green a fully validated corpus gets - a wiped or half-written
+// corpus certified the release. Zero inspected answers is now a named hard stop
+// (BLOCKED_EMPTY_ANSWER_CORPUS), and every report records which guard ran.
 import fs from "node:fs";
 
 const file = "data/content/generated_answers.json";
@@ -33,9 +42,12 @@ const invalidRedirects = redirected.filter((answer) => {
 });
 fs.mkdirSync("reports", { recursive: true });
 const report = {
-  schemaVersion: "2.1.0",
+  schemaVersion: "2.2.0",
+  zeroItemGuard: "HARD_FAIL_ON_ZERO_INSPECTED",
   generatedAt: new Date().toISOString(),
-  status: duplicates.length || invalidReleaseAnswers.length || invalidRedirects.length ? "BLOCKED_INVALID_RELEASE_DATA" : "NO_SAFE_REPAIRS_NEEDED",
+  status: answers.length === 0
+    ? "BLOCKED_EMPTY_ANSWER_CORPUS"
+    : duplicates.length || invalidReleaseAnswers.length || invalidRedirects.length ? "BLOCKED_INVALID_RELEASE_DATA" : "NO_SAFE_REPAIRS_NEEDED",
   inspectedAnswers: answers.length,
   publishedAnswerCount: answers.filter((answer) => answer.status === "published_by_contract").length,
   redirectedAnswerCount: redirected.length,
@@ -47,6 +59,11 @@ const report = {
   invalidRedirectIds: invalidRedirects.map((item) => item.id).slice(0, 20)
 };
 fs.writeFileSync("reports/self-healing-log.json", JSON.stringify(report, null, 2) + "\n");
+if (answers.length === 0) {
+  console.error(JSON.stringify(report, null, 2));
+  console.error(`[content:self-heal] STOP: BLOCKED_EMPTY_ANSWER_CORPUS - ${file} carries no answers, so there is nothing to certify. Refusing to pass a release on an empty corpus.`);
+  process.exit(1);
+}
 if (duplicates.length || invalidReleaseAnswers.length || invalidRedirects.length) {
   console.error(JSON.stringify(report, null, 2));
   process.exit(1);

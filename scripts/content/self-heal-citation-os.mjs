@@ -1,23 +1,53 @@
 #!/usr/bin/env node
+// Repair Citation-OS consistency: admit missing routes, generate missing route
+// copy, queries, fanout parents, atoms and their usage/source mirrors.
+//
+// Rule 0: this stage never exits 0 having quietly done nothing, and it never
+// writes a success record it did not earn. It used to end on a bare
+// `[content:self-heal-citation-os] OK` and unconditionally stamp
+// data/workflow_traces/citation_os_self_heal_latest.json with
+// `status: SELF_HEALED_CITATION_OS_CONSISTENCY` - including on runs where it
+// changed zero bytes of zero files. Measured: on an already-clean tree the
+// script altered no data file and still recorded a heal. That is a success
+// record without a repair behind it, which is the one thing a self-heal ledger
+// must never contain.
+//
+// It now diffs every file it owns before and after, and ends on a named
+// outcome - SELF_HEALED_CITATION_OS_CONSISTENCY when something actually
+// changed, NO_CITATION_OS_REPAIR_NEEDED when nothing did - carrying the changed
+// file list and the repair counts that justify it. Both are legitimate; only
+// one of them is a repair.
 import fs from 'node:fs';
 const read = (p) => JSON.parse(fs.readFileSync(p,'utf8'));
-const write = (p,d) => fs.writeFileSync(p, JSON.stringify(d,null,2)+'\n');
+const serialize = (d) => JSON.stringify(d,null,2)+'\n';
+// Snapshot every managed file as it was on disk, so "changed" means the bytes
+// this run would write differ from the bytes that were already there - not
+// merely that the script touched the file.
+const before = new Map();
+const snapshot = (p,d) => { before.set(p, serialize(d)); return d; };
+const changedFiles = [];
+const write = (p,d) => {
+  const next = serialize(d);
+  if (before.has(p) && before.get(p) !== next) changedFiles.push(p);
+  fs.writeFileSync(p, next);
+};
+const repairs = { routesAdmitted:0, familiesAdded:0, routeCopyGenerated:0, queriesGenerated:0, fanoutParentsAdded:0, atomsAdded:0, atomUsageBackfilled:0, atomSourcesBackfilled:0 };
 const now = new Date().toISOString();
 const slug = (v) => String(v||'').toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'').slice(0,60) || 'approvalprep';
-const manifest = read('data/routes/route_manifest.json');
-const generated = read('data/content/generated_route_copy.json');
-const admissions = read('data/atlas/route_admission_manifest.json');
-const families = read('data/atlas/page_family_registry.json');
-const queries = read('data/atlas/query_universe.json');
-const matrix = read('data/atlas/query_matrix.json');
-const fanout = read('data/atlas/fanout_query_map.json');
-const atoms = read('data/atoms/answer_atoms.json');
-const usage = read('data/atoms/atom_usage_map.json');
-const sourceMap = read('data/atoms/atom_source_map.json');
-const targets = read('data/atoms/citation_targets.json');
+const manifest = snapshot('data/routes/route_manifest.json', read('data/routes/route_manifest.json'));
+const generated = snapshot('data/content/generated_route_copy.json', read('data/content/generated_route_copy.json'));
+const admissions = snapshot('data/atlas/route_admission_manifest.json', read('data/atlas/route_admission_manifest.json'));
+const families = snapshot('data/atlas/page_family_registry.json', read('data/atlas/page_family_registry.json'));
+const queries = snapshot('data/atlas/query_universe.json', read('data/atlas/query_universe.json'));
+const matrix = snapshot('data/atlas/query_matrix.json', read('data/atlas/query_matrix.json'));
+const fanout = snapshot('data/atlas/fanout_query_map.json', read('data/atlas/fanout_query_map.json'));
+const atoms = snapshot('data/atoms/answer_atoms.json', read('data/atoms/answer_atoms.json'));
+const usage = snapshot('data/atoms/atom_usage_map.json', read('data/atoms/atom_usage_map.json'));
+const sourceMap = snapshot('data/atoms/atom_source_map.json', read('data/atoms/atom_source_map.json'));
+const targets = snapshot('data/atoms/citation_targets.json', read('data/atoms/citation_targets.json'));
 const familyIds = new Set((families.pageFamilies||[]).map(f=>f.id));
 for (const id of ['tools','templates','public_reports']) {
-  if (!familyIds.has(id)) { families.pageFamilies.push({ id, label:id.replace('_',' '), riskDefault:id==='tools'?'low':'medium', description:`ApprovalPrep ${id.replace('_',' ')} citation surfaces.` }); familyIds.add(id); }
+  if (!familyIds.has(id)) { families.pageFamilies.push({ id, label:id.replace('_',' '), riskDefault:id==='tools'?'low':'medium', description:`ApprovalPrep ${id.replace('_',' ')} citation surfaces.` }); familyIds.add(id); repairs.familiesAdded++; }
 }
 function routeCopyFor(route){
   const title=route.title || route.path.split('/').filter(Boolean).join(' ').replace(/\b\w/g,m=>m.toUpperCase());
@@ -48,21 +78,21 @@ for (const route of manifest.routes.filter(r=>r.type!=='admin')) {
   if (route.path.startsWith('/reports/')) { route.primary_cta ||= 'Start free for $0'; route.secondary_cta ||= 'Compare paid kits'; route.allowed_cta_count ||= 'multiple'; route.nav ??= false; route.indexing ||= 'index'; route.conversion_role ||= 'authority'; route.search_role ||= 'rank'; route.citation_role ||= 'citation_surface'; route.source ||= 'batch8_authority_reports'; route.targetProductSku ||= 'complete-approvalprep-bundle'; }
   if (route.index && route.path !== '/') {
     const existing = generated.routes[route.path];
-    if (!existing || !existing.prepBrief?.length || !existing.primaryCta) generated.routes[route.path] = routeCopyFor(route);
+    if (!existing || !existing.prepBrief?.length || !existing.primaryCta) { generated.routes[route.path] = routeCopyFor(route); repairs.routeCopyGenerated++; }
   }
   if (!admittedRoutes.has(route.path)) {
     const fam = route.family || 'geo_surface';
-    if (!familyIds.has(fam)) { families.pageFamilies.push({id:fam,label:fam.replace(/_/g,' '),riskDefault:route.risk||'medium',description:`ApprovalPrep ${fam} surfaces.`}); familyIds.add(fam); }
+    if (!familyIds.has(fam)) { families.pageFamilies.push({id:fam,label:fam.replace(/_/g,' '),riskDefault:route.risk||'medium',description:`ApprovalPrep ${fam} surfaces.`}); familyIds.add(fam); repairs.familiesAdded++; }
     admissions.routes.push({route:route.path,family:fam,status:route.index?'ADMITTED_INDEXABLE':'ADMITTED_NOINDEX',risk:route.risk||'medium',index:!!route.index,minimum_queries:route.index?5:0,source:'citation_os_self_heal'});
-    admittedRoutes.add(route.path);
+    admittedRoutes.add(route.path); repairs.routesAdmitted++;
   }
   if (route.index) {
     const count = (queries.queries||[]).filter(q=>q.route_owner===route.path).length;
     if (count < 5) {
       const base = route.primaryQuery || route.title || route.path; const pref=slug(route.path);
       const intents=[['definition',base],['checklist',`${base} checklist`],['how_to',`how to prepare ${base}`],['mistakes',`${base} mistakes to avoid`],['next_step',`${base} next step`]];
-      const ids=[]; for (const [intent,text] of intents) { maxQ++; const qid=`atlas_q_${String(maxQ).padStart(4,'0')}_${pref}_${intent}`; ids.push(qid); queryIds.add(qid); queries.queries.push({query_id:qid,query_text:text,query_normalized:text.toLowerCase(),source_platform:'owned_query_atlas',source_type:'citation_os_self_heal',intent_class:intent,funnel_stage:intent==='next_step'?'decision':'consideration',entity_ids:['approvalprep'],pillar_id:route.family||'geo_surface',cluster_id:pref,page_family_id:route.family||'geo_surface',route_owner:route.path,atom_ids:[],claim_ids:['claim_self_service_boundary','claim_no_approval_guarantee'],source_ids:['approvalprep_owner_policy'],risk_level:route.risk||'medium',privacy_class:'public_query',allowed_use:'query_language_and_content_briefing',status:'ADMITTED_INDEXABLE',reviewed_by:'citation_os_self_heal',reviewed_at:now.slice(0,10)}); }
-      fanout.parent_queries.push({parent_id:ids[0],route_owner:route.path,page_family_id:route.family||'geo_surface',children:ids.slice(1),child_count:4,unique_intents:intents.slice(1).map(x=>x[0]),status:'admitted_unique_intent_fanout',source:'citation_os_self_heal'});
+      const ids=[]; for (const [intent,text] of intents) { maxQ++; const qid=`atlas_q_${String(maxQ).padStart(4,'0')}_${pref}_${intent}`; ids.push(qid); queryIds.add(qid); queries.queries.push({query_id:qid,query_text:text,query_normalized:text.toLowerCase(),source_platform:'owned_query_atlas',source_type:'citation_os_self_heal',intent_class:intent,funnel_stage:intent==='next_step'?'decision':'consideration',entity_ids:['approvalprep'],pillar_id:route.family||'geo_surface',cluster_id:pref,page_family_id:route.family||'geo_surface',route_owner:route.path,atom_ids:[],claim_ids:['claim_self_service_boundary','claim_no_approval_guarantee'],source_ids:['approvalprep_owner_policy'],risk_level:route.risk||'medium',privacy_class:'public_query',allowed_use:'query_language_and_content_briefing',status:'ADMITTED_INDEXABLE',reviewed_by:'citation_os_self_heal',reviewed_at:now.slice(0,10)}); repairs.queriesGenerated++; }
+      fanout.parent_queries.push({parent_id:ids[0],route_owner:route.path,page_family_id:route.family||'geo_surface',children:ids.slice(1),child_count:4,unique_intents:intents.slice(1).map(x=>x[0]),status:'admitted_unique_intent_fanout',source:'citation_os_self_heal'}); repairs.fanoutParentsAdded++;
     }
   }
 }
@@ -74,12 +104,28 @@ for (const [route,copy] of Object.entries(generated.routes||{})) {
     if (!text || existingAtomRouteType.has(`${route}|${type}`)) continue;
     let id=`atom_${slug(route)}_${type}`; let n=2; while(existingAtomIds.has(id)) id=`atom_${slug(route)}_${type}_${n++}`;
     atoms.atoms.push({atom_id:id,atom_type:type,title:`${copy.heading||route} ${type}`.slice(0,140),text,route_owner:route,uniqueness_key:`${slug(route)}-${type}-self-heal`,reuse_policy:'route scoped citation reuse',source_basis:'approvalprep_owner_policy',claim_ids:['claim_self_service_boundary','claim_no_approval_guarantee'],allowed_page_families:['brand_home','pricing','letter_studio','credit_self_service','credit','apartment_rental','rental','income_employment','auto','business','business_funding','mortgage','loan_prep','life_admin','moving','geo_surface','legal_trust','complete_bundle','checkout','download','tools','templates','public_reports'],forbidden_contexts:['guaranteed_approval','credit_repair_service_claim','fake_documents'],last_reviewed_at:now.slice(0,10)});
-    existingAtomIds.add(id); existingAtomRouteType.add(`${route}|${type}`); usage.usage.push({atom_id:id,routes:[route,'/llms-full.txt']}); sourceMap.mappings.push({atom_id:id,claim_ids:['claim_self_service_boundary','claim_no_approval_guarantee'],source_ids:['approvalprep_owner_policy']});
+    repairs.atomsAdded++; existingAtomIds.add(id); existingAtomRouteType.add(`${route}|${type}`); usage.usage.push({atom_id:id,routes:[route,'/llms-full.txt']}); sourceMap.mappings.push({atom_id:id,claim_ids:['claim_self_service_boundary','claim_no_approval_guarantee'],source_ids:['approvalprep_owner_policy']});
   }
 }
 const usageIds = new Set((usage.usage||[]).map(u=>u.atom_id)); const sourceIds = new Set((sourceMap.mappings||[]).map(m=>m.atom_id));
-for (const a of atoms.atoms||[]) { if (!usageIds.has(a.atom_id)) usage.usage.push({atom_id:a.atom_id,routes:[a.route_owner,'/llms-full.txt']}); if (!sourceIds.has(a.atom_id)) sourceMap.mappings.push({atom_id:a.atom_id,claim_ids:a.claim_ids||['claim_self_service_boundary'],source_ids:['approvalprep_owner_policy']}); }
+for (const a of atoms.atoms||[]) { if (!usageIds.has(a.atom_id)) { usage.usage.push({atom_id:a.atom_id,routes:[a.route_owner,'/llms-full.txt']}); repairs.atomUsageBackfilled++; } if (!sourceIds.has(a.atom_id)) { sourceMap.mappings.push({atom_id:a.atom_id,claim_ids:a.claim_ids||['claim_self_service_boundary'],source_ids:['approvalprep_owner_policy']}); repairs.atomSourcesBackfilled++; } }
 for (const t of targets.targets||[]) { t.route ||= String(t.url||'').replace('https://approvalprep.com','') || t.path || '/'; t.query ||= t.title || 'ApprovalPrep citation target'; t.telemetry_required_for_win_claim = true; }
 write('data/routes/route_manifest.json',manifest); write('data/content/generated_route_copy.json',generated); write('data/atlas/route_admission_manifest.json',admissions); write('data/atlas/page_family_registry.json',families); write('data/atlas/query_universe.json',queries); write('data/atlas/query_matrix.json',matrix); write('data/atlas/fanout_query_map.json',fanout); write('data/atoms/answer_atoms.json',atoms); write('data/atoms/atom_usage_map.json',usage); write('data/atoms/atom_source_map.json',sourceMap); write('data/atoms/citation_targets.json',targets);
-fs.mkdirSync('data/workflow_traces',{recursive:true}); write('data/workflow_traces/citation_os_self_heal_latest.json',{schemaVersion:'1.0.0',generatedAt:now,status:'SELF_HEALED_CITATION_OS_CONSISTENCY'});
-console.log('[content:self-heal-citation-os] OK');
+const repairsApplied = Object.values(repairs).reduce((a,b)=>a+b,0);
+// The trace is the only record downstream readers get, so it must not claim a
+// heal that did not happen. A run that changed nothing is a legitimate stop and
+// is named as one.
+const healed = repairsApplied > 0 || changedFiles.length > 0;
+const outcome = healed ? 'SELF_HEALED_CITATION_OS_CONSISTENCY' : 'NO_CITATION_OS_REPAIR_NEEDED';
+const reason = healed
+  ? `${repairsApplied} repair(s) applied across ${changedFiles.length} file(s)`
+  : `every managed Citation-OS file already satisfied the atlas contract; ${before.size} file(s) inspected and none changed`;
+fs.mkdirSync('data/workflow_traces',{recursive:true});
+fs.writeFileSync('data/workflow_traces/citation_os_self_heal_latest.json', JSON.stringify({
+  schemaVersion:'2.0.0', generatedAt:now,
+  status:outcome, outcome, reason,
+  repairsApplied, repairs,
+  filesInspected:before.size,
+  changedFiles:[...changedFiles].sort(),
+},null,2)+'\n');
+console.log(JSON.stringify({status:'CITATION_OS_SELF_HEAL_COMPLETE', outcome, reason, repairsApplied, changedFiles:[...changedFiles].sort()},null,2));
