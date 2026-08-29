@@ -450,6 +450,17 @@
       "repairRationale": "validate:self-heal-progressions fails when data/automation/self_heal_attempts.json or final_block_log.json is missing or malformed; attempt-self-heal.mjs writes the first from the live content queue and revalidate-after-self-heal.mjs derives the second from it. It does not supply the playbook, so a thin playbook remains an unrepairable failure by design."
     },
     {
+      "id": "self-heal-honesty",
+      "npmScript": "validate:self-heal-honesty",
+      "entrypoint": "scripts/validate/self-heal-honesty.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents the self-heal machinery recording repairs it did not make, certifying an empty corpus, or applying repairs the ledger never receives",
+      "owner": "approvalprep-ops",
+      "group": "ops-critical",
+      "scope": "Self-heal honesty: heal-trace claims, zero-item guard, applied-repair ledger"
+    },
+    {
       "id": "owner-exceptions",
       "npmScript": "validate:owner-exceptions",
       "entrypoint": "scripts/validate/owner-exceptions.mjs",

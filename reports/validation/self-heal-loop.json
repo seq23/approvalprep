@@ -1,6 +1,7 @@
 {
-  "schemaVersion": "1.0.0",
-  "generatedAt": "2026-08-29T10:18:36.697Z",
+  "schemaVersion": "1.1.0",
+  "runId": "selfheal_20260829153038_27769",
+  "generatedAt": "2026-08-29T15:31:02.645Z",
   "validationCommand": "npm run validate:all",
   "registrySource": "_repo_validation_registry.json",
   "maxAttempts": 3,
@@ -15,7 +16,7 @@
   "outcome": "CLEAN_NO_REPAIR_NEEDED",
   "repairsRun": 0,
   "repairCoverage": {
-    "validatorsInRegistry": 112,
+    "validatorsInRegistry": 113,
     "validatorsDeclaringRepair": 4,
     "note": "Most validators declare no repairCommand, so NO_REPAIR_AVAILABLE is a legitimate, expected stop rather than a defect in this loop."
   },
@@ -30,5 +31,8 @@
       "repaired": [],
       "result": "CLEAN"
     }
-  ]
+  ],
+  "ledgerEntryAppended": false,
+  "ledgerPath": "data/self_healing/self_heal_ledger.json",
+  "ledgerNote": "no repair ran, so no ledger entry was written - the ledger records repairs, not green runs"
 }

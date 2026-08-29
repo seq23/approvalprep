@@ -2,9 +2,9 @@
   "schemaVersion": "1.0.0",
   "validator": "content-pattern-contract",
   "spec": ".clarity/content-pattern-spec.json",
-  "generatedAt": "2026-08-27T18:36:16.153Z",
+  "generatedAt": "2026-08-29T15:31:02.088Z",
   "enforcement": "block",
-  "pagesChecked": 111,
+  "pagesChecked": 119,
   "status": "PASS",
   "blockingFailures": 0,
   "summary": [
@@ -46,15 +46,15 @@
     {
       "id": "comparison_table",
       "blocking": false,
-      "pagesMissing": 97,
-      "coveragePct": 12.6,
+      "pagesMissing": 105,
+      "coveragePct": 11.8,
       "why": "no comparison or cost table (agent request #2, 529 occurrences)"
     },
     {
       "id": "concrete_numbers",
       "blocking": false,
-      "pagesMissing": 5,
-      "coveragePct": 95.5,
+      "pagesMissing": 4,
+      "coveragePct": 96.6,
       "why": "no concrete cost or timeline figures (agent request #5, 365 occurrences)"
     },
     {
@@ -68,7 +68,7 @@
       "id": "faq",
       "blocking": false,
       "pagesMissing": 11,
-      "coveragePct": 90.1,
+      "coveragePct": 90.8,
       "why": "no FAQ block or FAQPage schema (agent request #9)"
     },
     {
@@ -82,21 +82,21 @@
       "id": "recommendation_summary",
       "blocking": false,
       "pagesMissing": 3,
-      "coveragePct": 97.3,
+      "coveragePct": 97.5,
       "why": "no recommendation summary - asked for on 913 of 913 agent recommendations, the single most requested block"
     },
     {
       "id": "definition_callout",
       "blocking": false,
-      "pagesMissing": 99,
-      "coveragePct": 10.8,
+      "pagesMissing": 107,
+      "coveragePct": 10.1,
       "why": "no definition callout (agent requested 196 times) - this is what an answer engine lifts for \"what is X\""
     },
     {
       "id": "trust_block",
       "blocking": false,
-      "pagesMissing": 72,
-      "coveragePct": 35.1,
+      "pagesMissing": 77,
+      "coveragePct": 35.3,
       "why": "no trust or authorship block (agent requested 215 times) - entity clarity is a citation factor"
     },
     {
@@ -123,7 +123,7 @@
     {
       "id": "prompt_template",
       "blocking": false,
-      "pagesMissing": 111,
+      "pagesMissing": 119,
       "coveragePct": 0,
       "why": "no copy-ready prompt - the artifact this audience actually reuses"
     }
@@ -156,14 +156,13 @@
       "dist/blog/what-mistakes-should-i-avoid-with-apartment-application-readiness-checklist/index.html",
       "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-document-readiness-index/index.html",
       "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-glossary/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-letter-template-previews/index.html",
       "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-methodology/index.html",
       "dist/blog/what-mistakes-should-i-avoid-with-business-funding-document-checklist/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-car-loan-document-checklist/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-important-documents-checklist/index.html"
+      "dist/blog/what-mistakes-should-i-avoid-with-car-loan-document-checklist/index.html"
     ],
     "concrete_numbers": [
       "dist/contact/index.html",
-      "dist/employment-verification-letter/index.html",
       "dist/letter-of-explanation/late-payment/index.html",
       "dist/not-a-credit-repair-company/index.html",
       "dist/refund-policy/index.html"
@@ -210,10 +209,10 @@
       "dist/blog/what-mistakes-should-i-avoid-with-apartment-application-readiness-checklist/index.html",
       "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-document-readiness-index/index.html",
       "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-glossary/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-letter-template-previews/index.html",
       "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-methodology/index.html",
       "dist/blog/what-mistakes-should-i-avoid-with-business-funding-document-checklist/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-car-loan-document-checklist/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-important-documents-checklist/index.html"
+      "dist/blog/what-mistakes-should-i-avoid-with-car-loan-document-checklist/index.html"
     ],
     "trust_block": [
       "dist/609-dispute-letter/index.html",
@@ -234,13 +233,13 @@
       "dist/blog/what-mistakes-should-i-avoid-with-apartment-application-readiness-checklist/index.html",
       "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-document-readiness-index/index.html",
       "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-glossary/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-letter-template-previews/index.html",
       "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-methodology/index.html",
       "dist/blog/what-mistakes-should-i-avoid-with-business-funding-document-checklist/index.html",
       "dist/blog/what-mistakes-should-i-avoid-with-car-loan-document-checklist/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-free-approvalprep-document-checklists/index.html",
       "dist/blog/what-mistakes-should-i-avoid-with-important-documents-checklist/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-important-documents-folder-checklist/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-mortgage-document-readiness-checklist/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-moving-checklist/index.html"
+      "dist/blog/what-mistakes-should-i-avoid-with-important-documents-folder-checklist/index.html"
     ],
     "source_block": [],
     "protocol": [],
@@ -267,10 +266,10 @@
       "dist/blog/what-mistakes-should-i-avoid-with-apartment-application-readiness-checklist/index.html",
       "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-document-readiness-index/index.html",
       "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-glossary/index.html",
+      "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-letter-template-previews/index.html",
       "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-methodology/index.html",
       "dist/blog/what-mistakes-should-i-avoid-with-business-funding-document-checklist/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-car-loan-document-checklist/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-important-documents-checklist/index.html"
+      "dist/blog/what-mistakes-should-i-avoid-with-car-loan-document-checklist/index.html"
     ]
   },
   "blockingBacklog": []

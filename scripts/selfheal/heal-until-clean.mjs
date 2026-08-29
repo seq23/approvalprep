@@ -95,6 +95,18 @@ const repairCoverage = {
   note: 'Most validators declare no repairCommand, so NO_REPAIR_AVAILABLE is a legitimate, expected stop rather than a defect in this loop.',
 };
 
+// data/self_healing/self_heal_ledger.json is the repo's named self-heal ledger
+// and, before this, nothing in the tree ever wrote a line into it: it sat at
+// `entries: []` from 2026-07-09 while this loop demonstrably applied real
+// repairs (registry mirror resync, safe-harbor rewrite, atlas admission and
+// query regeneration, automation-state rebuild). The only record was
+// reports/validation/self-heal-loop.json, which is overwritten every run and so
+// keeps no history at all. The ledger now records each run that actually ran a
+// repair - and only those, so it stays a record of repairs rather than a log of
+// green runs.
+const LEDGER_PATH = path.join(ROOT, 'data/self_healing/self_heal_ledger.json');
+const runId = `selfheal_${new Date().toISOString().replace(/[^0-9]/g, '').slice(0, 14)}_${process.pid}`;
+
 const attempts = [];
 let clean = false;
 let outcome = null;
@@ -160,8 +172,11 @@ for (let attempt = 1; attempt <= MAX; attempt += 1) {
 // pass and not a crash either; it is its own named stop.
 if (!outcome) outcome = OUTCOME.MAX_ATTEMPTS_EXHAUSTED;
 
+const appliedRepairs = attempts.flatMap((a) => (a.repaired || []).filter((r) => !r.dryRun).map((r) => ({ attempt: a.attempt, id: r.id, cmd: r.cmd, exitCode: r.code })));
+
 const report = {
-  schemaVersion: '1.0.0',
+  schemaVersion: '1.1.0',
+  runId,
   generatedAt: new Date().toISOString(),
   validationCommand: 'npm run validate:all',
   registrySource: '_repo_validation_registry.json',
@@ -178,6 +193,37 @@ const report = {
   nonBlockingWarnings: lastWarnings,
   attempts,
 };
+
+// Append to the ledger only when a repair actually ran. A clean pass earns no
+// ledger entry, and the report says which of the two happened rather than
+// leaving a reader to assume.
+let ledgerEntryAppended = false;
+if (appliedRepairs.length) {
+  const ledger = (() => {
+    try { return JSON.parse(fs.readFileSync(LEDGER_PATH, 'utf8')); }
+    catch { return { schemaVersion: '1.0.0', entries: [] }; }
+  })();
+  ledger.schemaVersion = '2.0.0';
+  ledger.generatedAt = new Date().toISOString();
+  ledger.entries = [...(ledger.entries || []), {
+    runId,
+    at: new Date().toISOString(),
+    outcome,
+    status: clean ? 'CLEAN' : 'NOT_CLEAN',
+    attempts: attempts.length,
+    repairs: appliedRepairs,
+    blockingAtStop: clean ? [] : lastBlocked,
+  }];
+  fs.mkdirSync(path.dirname(LEDGER_PATH), { recursive: true });
+  fs.writeFileSync(LEDGER_PATH, `${JSON.stringify(ledger, null, 2)}\n`);
+  ledgerEntryAppended = true;
+}
+report.ledgerEntryAppended = ledgerEntryAppended;
+report.ledgerPath = 'data/self_healing/self_heal_ledger.json';
+report.ledgerNote = ledgerEntryAppended
+  ? `${appliedRepairs.length} applied repair(s) recorded under runId ${runId}`
+  : 'no repair ran, so no ledger entry was written - the ledger records repairs, not green runs';
+
 fs.mkdirSync(path.join(ROOT, 'reports/validation'), { recursive: true });
 fs.writeFileSync(path.join(ROOT, 'reports/validation/self-heal-loop.json'), `${JSON.stringify(report, null, 2)}\n`);
 
