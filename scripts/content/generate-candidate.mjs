@@ -43,9 +43,18 @@ function asList(value, fallback) {
   return Array.isArray(value) && value.length ? value.slice(0, 6) : fallback;
 }
 
-const cadenceLimit = Number(cadence.cadence?.dailyShortAnswers?.targetPerDay || 3);
-const governorLimit = Number(governor.current_default_new_page_ceiling_per_day || 3);
-const requestedLimit = Number(process.env.CONTENT_RELEASE_LIMIT || Math.min(cadenceLimit, governorLimit));
+// `Number(x || 3)` read a declared ceiling of 0 as 3: a deliberate "publish
+// nothing today" setting in either registry was silently overridden by the
+// default. A throttle that cannot express zero is not a throttle. Read the
+// declared number when it is a usable number, and fall back only when it is
+// absent or unparseable.
+const declaredLimit = (value, fallback) => {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) && parsed >= 0 ? parsed : fallback;
+};
+const cadenceLimit = declaredLimit(cadence.cadence?.dailyShortAnswers?.targetPerDay, 3);
+const governorLimit = declaredLimit(governor.current_default_new_page_ceiling_per_day, 3);
+const requestedLimit = declaredLimit(process.env.CONTENT_RELEASE_LIMIT, Math.min(cadenceLimit, governorLimit));
 // The three limits above are this generator's own risk tiers. None of them is
 // the number that is enforced: `npm run cadence:gate` blocks on
 // data/cadence/policy.json new_pages_per_week, and all three of these sit above
@@ -173,6 +182,24 @@ for (const candidate of candidates) {
   existingIds.add(candidate.id);
 }
 
+// Zero published has two entirely different causes and they must not share a
+// label. `no_distinct_low_risk_inventory` means the backlog is exhausted - every
+// low-risk route/variant pair is already written. A publication budget of 0 means
+// the inventory is fine and the enforced weekly cap has simply been spent, which
+// is deliberate throttling, not exhaustion. Recording the cap-spent case as
+// exhaustion put a false reason in data/release/release_ledger.json every day the
+// cap bound, and left the exhaustion assertion in validate:content-release
+// passing on a condition it was not testing.
+const budgetExhausted = selected.length === 0 && releaseLimit === 0 && budgeted.budget.remaining === 0;
+if (budgetExhausted) {
+  console.log(
+    `[content:generate] NAMED STOP no_publication_budget: the enforced cap in data/cadence/policy.json ` +
+    `(new_pages_per_week=${budgeted.budget.cap}) has ${budgeted.budget.spentInWindow} publication(s) already ` +
+    `spent in the trailing ${budgeted.budget.windowDays}-day window and ${budgeted.budget.alreadyNew} new-but-unaccepted ` +
+    `URL(s) pending, so 0 may be published today. Inventory is not exhausted; the throttle is working as declared.`,
+  );
+}
+
 const answers = [...existingAnswers, ...selected];
 fs.writeFileSync(
   "data/content/generated_answers.json",
@@ -183,7 +210,7 @@ ledger.releases ||= [];
 ledger.releases.push({
   id: releaseId,
   date: releaseDate,
-  status: selected.length ? "published_low_risk_answers" : "no_distinct_low_risk_inventory",
+  status: selected.length ? "published_low_risk_answers" : budgetExhausted ? "no_publication_budget" : "no_distinct_low_risk_inventory",
   pagesPublished: selected.length,
   dailySafetyCeiling: releaseLimit,
   publicationBudget: { cadenceLimit, governorLimit, requestedLimit, appliedLimit: releaseLimit, capSource: "data/cadence/policy.json new_pages_per_week", ...budgeted.budget },
@@ -196,7 +223,7 @@ ledger.releases.push({
 fs.writeFileSync("data/release/release_ledger.json", JSON.stringify(ledger, null, 2) + "\n");
 
 console.log(JSON.stringify({
-  status: selected.length ? "PUBLISHED" : "NOOP_NO_DISTINCT_INVENTORY",
+  status: selected.length ? "PUBLISHED" : budgetExhausted ? "NOOP_PUBLICATION_BUDGET_EXHAUSTED" : "NOOP_NO_DISTINCT_INVENTORY",
   releaseId,
   releaseLimit,
   published: selected.length,
