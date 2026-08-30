@@ -1,0 +1,167 @@
+---
+/**
+ * Book companion pages.
+ *
+ * Seven ApprovalPrep books carry one of these URLs printed inside the EPUB. The
+ * path is baked into files already uploaded to Kindle, so it cannot be changed
+ * without re-publishing every book: the paths in
+ * data/content/amazon_book_landing_pages.json are fixed, and the guard
+ * scripts/validate/amazon-book-landing-pages.mjs asserts all seven still build.
+ *
+ * One page per book, matched to that book's single subject. A reader who has
+ * just finished the letter-of-explanation book must not land on a page selling
+ * seven different kits.
+ *
+ * The doctrine these pages carry, which is why they read the way they do: the
+ * book teaches the whole method and prints every template in full, and the paid
+ * kit is a time-saver on top of it. Nothing here may imply the book withheld
+ * something you have to buy back. That framing is what produces the one-star
+ * reviews that end the funnel.
+ *
+ * The /amazon/ prefix exists for attribution. AnalyticsEvent sends page_view
+ * and checkout_start with window.location.pathname, so each slug is recorded as
+ * its own path and the owner can see which book converts.
+ *
+ * These routes are registered index:false / ADMITTED_SUPPORT_NOINDEX. A reader
+ * arrives here by following a link printed in a book, never from a search
+ * result, so the pages need no search discovery to do their job - and indexing
+ * seven commercial near-duplicates of the organic guides they link to would put
+ * them in competition with those guides.
+ */
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import RecommendationSummary from "../../components/RecommendationSummary.astro";
+import FAQBlock from "../../components/FAQBlock.astro";
+import TrustAndBoundaryBand from "../../components/TrustAndBoundaryBand.astro";
+import WhatHappensAfterPurchase from "../../components/WhatHappensAfterPurchase.astro";
+import { articleSchema, breadcrumbSchema, faqSchema, howToSchema, canonicalUrl, productSchema } from "../../lib/schema";
+import { productForSku } from "../../data/content";
+import registry from "../../../data/content/amazon_book_landing_pages.json";
+
+export function getStaticPaths() {
+  return registry.pages.map((page) => ({ params: { slug: page.id }, props: { page } }));
+}
+
+const { page } = Astro.props;
+const canonical = canonicalUrl(page.path);
+// A page whose book has no companion kit gets no product and no checkout
+// button. Pointing a reader at a kit that does not cover their document is
+// worse than telling them nothing is for sale, so the registry carries
+// noProductReason and the page prints it.
+const product = page.sku ? productForSku(page.sku) : null;
+const schema = [
+  articleSchema({ title: page.title, description: page.description, url: canonical, datePublished: registry.generatedAt }),
+  breadcrumbSchema(page.path),
+  faqSchema(page.faq),
+  howToSchema({ name: page.protocol.heading, steps: page.protocol.steps }),
+  ...(product ? [productSchema({ name: product.name, description: product.customer_situation, url: canonicalUrl("/pricing"), price: product.priceLabel })] : [])
+];
+const trustSignals = ["No account required", "No saved customer documents", "No stored letter answers", "Self-service only", "Plain-language guidance"];
+---
+<BaseLayout title={`${page.title} - ApprovalPrep`} description={page.description} canonical={canonical} noindex={true} schema={schema}>
+  <section class="hero shell hero-split">
+    <div>
+      <p class="eyebrow">{page.eyebrow} — {page.book}</p>
+      <h1>{page.title}</h1>
+      <p class="lead" data-direct-answer="true">{page.directAnswer}</p>
+      <div class="hero-actions">
+        {product
+          ? <button class="button primary-button checkout-button" type="button" data-sku={page.sku}>{`Buy the ${product.name} — ${product.priceLabel}`}</button>
+          : <a class="button primary-button" href="/letter-writing-studio">Open the free Letter Studio</a>}
+        <a class="button secondary secondary-button" href="/pricing">Compare all kits</a>
+      </div>
+      <div class="trust-bar" aria-label="Trust signals">{trustSignals.map((signal) => <span>{signal}</span>)}</div>
+    </div>
+    <RecommendationSummary variant="panel" headline={page.recommendation.headline} statement={page.recommendation.statement} />
+  </section>
+
+  <section class="band"><div class="shell">
+    <article class="card citation-definition" data-content-block="definition_callout">
+      <p class="eyebrow">{page.definitionLabel}</p>
+      <p><strong>{page.definition}</strong></p>
+      <p>{page.definitionDetail}</p>
+    </article>
+  </div></section>
+
+  <section class="band"><div class="shell two">
+    <article>
+      <p class="eyebrow">Already yours</p>
+      <h2>{`What ${page.book} already gave you.`}</h2>
+      <p>Every one of these is in the book in full. Nothing was held back for a paid version, and you can finish this document today without spending anything.</p>
+      <ul class="compact-list">{page.bookGives.map((item) => <li>{item}</li>)}</ul>
+    </article>
+    {product ? (
+      <article class="card">
+        <p class="eyebrow">What the kit adds</p>
+        <h2>{`${product.name} — ${product.priceLabel}, paid once.`}</h2>
+        <p>The kit is a time-saver, not a missing chapter. It is the same material as files you fill in instead of retype.</p>
+        <ul class="compact-list">{page.kitAdds.map((item) => <li>{item}</li>)}</ul>
+        <button class="button primary-button checkout-button" type="button" data-sku={page.sku}>{`Buy the ${product.name} — ${product.priceLabel}`}</button>
+      </article>
+    ) : (
+      <article class="notice">
+        <strong>There is no kit for this one.</strong>
+        <p>{page.noProductReason}</p>
+      </article>
+    )}
+  </div></section>
+
+  {page.productGap && (
+    <section class="band"><div class="shell">
+      <article class="notice">
+        <strong>Before you buy, read this.</strong>
+        <p>{page.productGap}</p>
+      </article>
+    </div></section>
+  )}
+
+  <section class="band"><div class="shell" data-content-block="protocol">
+    <p class="eyebrow">The method, in short</p>
+    <h2>{page.protocol.heading}</h2>
+    <p class="supporting-copy">{page.protocol.intro}</p>
+    <ol class="steps-list">{page.protocol.steps.map((step, index) => <li><strong>{index + 1}.</strong> {step}</li>)}</ol>
+  </div></section>
+
+  <section class="band"><div class="shell">
+    <p class="eyebrow">Decision table</p>
+    <h2>{page.comparison.heading}</h2>
+    <p class="lead">{page.comparison.intro}</p>
+    <div class="table-wrap"><table class="comparison-table">
+      <thead><tr>{page.comparison.columns.map((column) => <th>{column}</th>)}</tr></thead>
+      <tbody>{page.comparison.rows.map((row) => <tr>{row.map((cell) => <td>{cell}</td>)}</tr>)}</tbody>
+    </table></div>
+  </div></section>
+
+  <FAQBlock faq={page.faq} />
+
+  <section class="band"><div class="shell" data-content-block="source_block">
+    <p class="eyebrow">Primary sources</p>
+    <h2>Check the current instructions yourself.</h2>
+    <div class="grid">{page.sources.map((source) => <a class="card" href={source.url} rel="noopener noreferrer"><h3>{source.label}</h3><p>Open official or primary source →</p></a>)}</div>
+  </div></section>
+
+  {product && <WhatHappensAfterPurchase />}
+
+  <section class="band"><div class="shell">
+    <p class="eyebrow">Keep preparing</p>
+    <h2>Free guides on this site for the same subject.</h2>
+    <div class="grid">{page.related.map((link) => <a class="card" href={link.href}><h3>{link.label}</h3><p>Read the free guide →</p></a>)}</div>
+    <p class="fine">Every ApprovalPrep book links to one page here. <a href="/amazon">See all the book companion pages</a>.</p>
+  </div></section>
+
+  <section class="final-cta shell" data-content-block="cta_callout">
+    <p class="eyebrow">Next step</p>
+    <h2>{product ? `Keep the editable version: ${product.name}.` : "The book is the whole product for this one."}</h2>
+    <p>{product
+      ? `Everything the book taught is yours already. The kit is ${product.priceLabel} paid once: a PDF guide plus editable DOCX files covering ${product.included_offerings.length} named documents, so you fill in blanks instead of retyping.`
+      : "There is no kit to sell you here. Use the letter printed in the book, ask your lender for their own form first, and keep your own copy of everything you send."}</p>
+    <div class="hero-actions">
+      {product
+        ? <button class="button primary-button checkout-button" type="button" data-sku={page.sku}>{`Buy the ${product.name} — ${product.priceLabel}`}</button>
+        : <a class="button primary-button" href="/letter-writing-studio">Open the free Letter Studio</a>}
+      <a class="button secondary secondary-button" href="/pricing">Compare all kits</a>
+    </div>
+  </section>
+
+  <TrustAndBoundaryBand />
+  <style>.steps-list{display:grid;gap:.8rem;padding:0;list-style:none}.steps-list li{padding:1rem;border:1px solid rgba(0,0,0,.12);border-radius:.75rem}</style>
+</BaseLayout>

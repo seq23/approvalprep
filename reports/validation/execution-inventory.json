@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "orchestratorSource": "_repo_validation_registry.json",
-  "validatorCount": 116,
-  "hardFailCount": 105,
+  "validatorCount": 117,
+  "hardFailCount": 106,
   "strongWarningCount": 11,
   "validators": [
     {
@@ -1048,6 +1048,15 @@
       "severity": "HARD_FAIL",
       "blocksRelease": true,
       "group": "ops-critical"
+    },
+    {
+      "order": 117,
+      "id": "amazon-book-landing-pages",
+      "npmScript": "validate:amazon-book-landing-pages",
+      "entrypoint": "scripts/validate/amazon-book-landing-pages.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "conversion-critical"
     }
   ]
 }
