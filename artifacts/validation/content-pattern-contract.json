@@ -2,9 +2,9 @@
   "schemaVersion": "1.0.0",
   "validator": "content-pattern-contract",
   "spec": ".clarity/content-pattern-spec.json",
-  "generatedAt": "2026-08-29T20:59:59.465Z",
+  "generatedAt": "2026-08-30T00:33:38.438Z",
   "enforcement": "block",
-  "pagesChecked": 119,
+  "pagesChecked": 127,
   "status": "PASS",
   "blockingFailures": 0,
   "summary": [
@@ -46,15 +46,15 @@
     {
       "id": "comparison_table",
       "blocking": false,
-      "pagesMissing": 105,
-      "coveragePct": 11.8,
+      "pagesMissing": 106,
+      "coveragePct": 16.5,
       "why": "no comparison or cost table (agent request #2, 529 occurrences)"
     },
     {
       "id": "concrete_numbers",
       "blocking": false,
       "pagesMissing": 4,
-      "coveragePct": 96.6,
+      "coveragePct": 96.9,
       "why": "no concrete cost or timeline figures (agent request #5, 365 occurrences)"
     },
     {
@@ -67,8 +67,8 @@
     {
       "id": "faq",
       "blocking": false,
-      "pagesMissing": 11,
-      "coveragePct": 90.8,
+      "pagesMissing": 12,
+      "coveragePct": 90.6,
       "why": "no FAQ block or FAQPage schema (agent request #9)"
     },
     {
@@ -82,21 +82,21 @@
       "id": "recommendation_summary",
       "blocking": false,
       "pagesMissing": 3,
-      "coveragePct": 97.5,
+      "coveragePct": 97.6,
       "why": "no recommendation summary - asked for on 913 of 913 agent recommendations, the single most requested block"
     },
     {
       "id": "definition_callout",
       "blocking": false,
-      "pagesMissing": 107,
-      "coveragePct": 10.1,
+      "pagesMissing": 108,
+      "coveragePct": 15,
       "why": "no definition callout (agent requested 196 times) - this is what an answer engine lifts for \"what is X\""
     },
     {
       "id": "trust_block",
       "blocking": false,
       "pagesMissing": 77,
-      "coveragePct": 35.3,
+      "coveragePct": 39.4,
       "why": "no trust or authorship block (agent requested 215 times) - entity clarity is a citation factor"
     },
     {
@@ -123,7 +123,7 @@
     {
       "id": "prompt_template",
       "blocking": false,
-      "pagesMissing": 119,
+      "pagesMissing": 127,
       "coveragePct": 0,
       "why": "no copy-ready prompt - the artifact this audience actually reuses"
     }
@@ -136,6 +136,7 @@
     "checklist": [],
     "comparison_table": [
       "dist/609-dispute-letter/index.html",
+      "dist/amazon/index.html",
       "dist/apartment-application/index.html",
       "dist/auto-loan-documents/index.html",
       "dist/auto-loan/income-verification/index.html",
@@ -158,8 +159,7 @@
       "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-glossary/index.html",
       "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-letter-template-previews/index.html",
       "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-methodology/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-business-funding-document-checklist/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-car-loan-document-checklist/index.html"
+      "dist/blog/what-mistakes-should-i-avoid-with-business-funding-document-checklist/index.html"
     ],
     "concrete_numbers": [
       "dist/contact/index.html",
@@ -169,6 +169,7 @@
     ],
     "named_sources": [],
     "faq": [
+      "dist/amazon/index.html",
       "dist/blog/index.html",
       "dist/contact/index.html",
       "dist/index.html",
@@ -189,6 +190,7 @@
     ],
     "definition_callout": [
       "dist/609-dispute-letter/index.html",
+      "dist/amazon/index.html",
       "dist/apartment-application/index.html",
       "dist/auto-loan-documents/index.html",
       "dist/auto-loan/income-verification/index.html",
@@ -211,8 +213,7 @@
       "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-glossary/index.html",
       "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-letter-template-previews/index.html",
       "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-methodology/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-business-funding-document-checklist/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-car-loan-document-checklist/index.html"
+      "dist/blog/what-mistakes-should-i-avoid-with-business-funding-document-checklist/index.html"
     ],
     "trust_block": [
       "dist/609-dispute-letter/index.html",
@@ -246,6 +247,14 @@
     "cta_callout": [],
     "prompt_template": [
       "dist/609-dispute-letter/index.html",
+      "dist/amazon/credit-dispute-letter/index.html",
+      "dist/amazon/employment-verification-letter/index.html",
+      "dist/amazon/gift-letter-down-payment/index.html",
+      "dist/amazon/index.html",
+      "dist/amazon/landlord-reference-letter/index.html",
+      "dist/amazon/letter-of-explanation/index.html",
+      "dist/amazon/proof-of-income-self-employed/index.html",
+      "dist/amazon/rental-application-packet/index.html",
       "dist/apartment-application/index.html",
       "dist/auto-loan-documents/index.html",
       "dist/auto-loan/income-verification/index.html",
@@ -261,15 +270,7 @@
       "dist/blog/how-should-i-prepare-for-moving-checklist/index.html",
       "dist/blog/how-should-i-prepare-for-pricing/index.html",
       "dist/blog/how-should-i-prepare-for-proof-of-income-packet-checklist/index.html",
-      "dist/blog/how-should-i-prepare-for-resources/index.html",
-      "dist/blog/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-apartment-application-readiness-checklist/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-document-readiness-index/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-glossary/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-letter-template-previews/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-approvalprep-methodology/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-business-funding-document-checklist/index.html",
-      "dist/blog/what-mistakes-should-i-avoid-with-car-loan-document-checklist/index.html"
+      "dist/blog/how-should-i-prepare-for-resources/index.html"
     ]
   },
   "blockingBacklog": []

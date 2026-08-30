@@ -165,6 +165,16 @@
       "label": "Public Reports",
       "riskDefault": "low",
       "description": "Generated family for public_reports."
+    },
+    {
+      "id": "book_companion",
+      "label": "Book companion",
+      "riskDefault": "low",
+      "status": "allowed_v2",
+      "admission_required": true,
+      "minimum_queries_per_indexed_route": 5,
+      "thin_fanout_allowed": false,
+      "description": "Destination pages for URLs printed inside the ApprovalPrep Kindle books. Reached by a reader following a link from the book rather than from search, so these routes are admitted noindex and carry no query fanout."
     }
   ]
 }

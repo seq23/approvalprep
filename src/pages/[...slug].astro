@@ -42,7 +42,7 @@ export function getStaticPaths() {
     ...demandCoverage.pages.map((page) => page.path)
   ]);
   return manifest.routes
-    .filter((route) => !dedicatedPaths.has(route.path) && !route.path.startsWith("/tools") && !route.path.startsWith("/templates") && !route.path.startsWith("/reports") && route.type !== "admin")
+    .filter((route) => !dedicatedPaths.has(route.path) && !route.path.startsWith("/tools") && !route.path.startsWith("/templates") && !route.path.startsWith("/reports") && !route.path.startsWith("/amazon") && route.type !== "admin")
     .map((route) => ({ params: { slug: route.path.slice(1) }, props: { route } }));
 }
 

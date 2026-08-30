@@ -1284,6 +1284,17 @@
       "owner": "approvalprep-ops",
       "group": "ops-critical",
       "scope": "Every tracked script under scripts/ is invoked by package.json, a workflow, a shell script, or an import"
+    },
+    {
+      "id": "amazon-book-landing-pages",
+      "npmScript": "validate:amazon-book-landing-pages",
+      "entrypoint": "scripts/validate/amazon-book-landing-pages.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents a shipped Kindle book pointing at a URL that does not build - the link is baked into the EPUB and cannot be corrected after publication, so a missing page strands every reader of that book permanently",
+      "owner": "approvalprep-ops",
+      "group": "conversion-critical",
+      "scope": "The seven /amazon/* book companion paths plus the /amazon index: registered, built, served 200, wired to a real Stripe SKU or declared as having no companion product, reachable from the index, and matching the recorded noindex posture"
     }
   ],
   "repairPolicy": "A validator may declare repairCommand only when that command repairs the same defect the validator detects. scripts/selfheal/heal-until-clean.mjs runs it on a blocking failure and re-validates."

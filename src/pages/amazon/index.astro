@@ -1,0 +1,74 @@
+---
+/**
+ * /amazon — the parent of the seven book companion pages.
+ *
+ * It exists for two reasons beyond being a landing surface. The breadcrumb
+ * trail in src/lib/schema.ts skips any path segment with no page behind it, so
+ * without this the seven children would have no /amazon crumb. And /amazon
+ * itself was a 404: a reader who types the URL from a book and drops the slug
+ * lands here rather than on an error page.
+ */
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import RecommendationSummary from "../../components/RecommendationSummary.astro";
+import TrustAndBoundaryBand from "../../components/TrustAndBoundaryBand.astro";
+import { canonicalUrl, webPageSchema, breadcrumbSchema, itemListSchema } from "../../lib/schema";
+import { productForSku } from "../../data/content";
+import registry from "../../../data/content/amazon_book_landing_pages.json";
+
+const canonical = canonicalUrl(registry.indexPath);
+const cards = registry.pages.map((page) => ({
+  ...page,
+  product: page.sku ? productForSku(page.sku) : null
+}));
+const schema = [
+  webPageSchema({ title: registry.indexTitle, description: registry.indexDescription, url: canonical }),
+  breadcrumbSchema(registry.indexPath),
+  itemListSchema({ name: registry.indexTitle, items: cards.map((card) => card.book) })
+];
+const trustSignals = ["No account required", "No saved customer documents", "Self-service only", "Plain-language guidance"];
+---
+<BaseLayout title={`${registry.indexTitle} - ApprovalPrep`} description={registry.indexDescription} canonical={canonical} noindex={true} schema={schema}>
+  <section class="hero shell hero-split">
+    <div>
+      <p class="eyebrow">Book companions</p>
+      <h1>ApprovalPrep book companion pages</h1>
+      <p class="lead" data-direct-answer="true">Every ApprovalPrep book ends with a link to one page on this site, matched to that book's subject. This is the list of those pages. Each book teaches its whole method and prints every template in full; the paid kit named on each page is the editable version, not a missing chapter.</p>
+      <div class="hero-actions">
+        <a class="button primary-button" href="/pricing">Compare all kits</a>
+        <a class="button secondary secondary-button" href="/letter-writing-studio">Open the free Letter Studio</a>
+      </div>
+      <div class="trust-bar" aria-label="Trust signals">{trustSignals.map((signal) => <span>{signal}</span>)}</div>
+    </div>
+    <RecommendationSummary
+      variant="panel"
+      headline="Go to your own book's page."
+      statement="Pick the book you just finished. Its page names the one kit that matches that document, or says plainly that no kit exists for it."
+    />
+  </section>
+
+  <section class="band"><div class="shell">
+    <p class="eyebrow">One page per book</p>
+    <h2>Find the book you just finished.</h2>
+    <div class="grid">
+      {cards.map((card) => (
+        <a class="card" href={card.path}>
+          <h3>{card.book}</h3>
+          <p>{card.recommendation.statement}</p>
+          <p class="fine">{card.product ? `Companion kit: ${card.product.name} — ${card.product.priceLabel}` : "No companion kit for this subject."}</p>
+        </a>
+      ))}
+    </div>
+  </div></section>
+
+  <section class="final-cta shell" data-content-block="cta_callout">
+    <p class="eyebrow">Next step</p>
+    <h2>The book is complete. The kit saves the retyping.</h2>
+    <p>Nothing was held back from any book for a paid version. Each kit is the same material as a PDF guide plus editable DOCX files, paid once, so you fill in blanks instead of retyping a template from a page. ApprovalPrep does not guarantee approval, deletion, correction, funding, housing, or any decision.</p>
+    <div class="hero-actions">
+      <a class="button primary-button" href="/pricing">Compare all kits</a>
+      <a class="button secondary secondary-button" href="/resources">Browse the free guides</a>
+    </div>
+  </section>
+
+  <TrustAndBoundaryBand />
+</BaseLayout>
