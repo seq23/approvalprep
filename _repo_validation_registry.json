@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "lastUpdatedAt": "2026-08-27T14:41:39.519091Z",
+  "lastUpdatedAt": "2026-08-30T12:49:15.022Z",
   "policy": "The root registry is the single execution authority. HARD_FAIL blocks immediately; STRONG_WARNING records and continues. The data/validation registry is generated from this file.",
   "validators": [
     {
@@ -358,6 +358,17 @@
       "owner": "approvalprep-growth",
       "group": "growth-critical",
       "scope": "Scheduled content generation, self-heal smoke execution, generated answer assets, and release ledger mutation contract"
+    },
+    {
+      "id": "release-fixture-isolation",
+      "npmScript": "validate:release-fixture-isolation",
+      "entrypoint": "scripts/validate/release-fixture-isolation.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "a release fixture that reads live cadence state turns a deliberate throttle into a red scheduled workflow, and one that fails through process.exit leaves the production answer corpus emptied on disk",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "validate:content-release survives a fully spent publication budget and restores production content/release state when it fails"
     },
     {
       "id": "maintenance-brief-integrity",
