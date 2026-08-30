@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-08-29T21:03:46.280Z",
+  "generatedAt": "2026-08-30T12:51:39.979Z",
   "policy": "data/governance/publication_policy.json",
   "items": [
     {
@@ -443,6 +443,32 @@
       "requiredAction": "false-dispute",
       "sourceFile": "data/routes/route_manifest.json",
       "sourceChecksum": "safeharbor-97e514322a8d1466",
+      "ownerApprovalRequired": true
+    },
+    {
+      "contentId": "/amazon/credit-dispute-letter",
+      "type": "safe_harbor",
+      "title": "/amazon/credit-dispute-letter",
+      "path": "/amazon/credit-dispute-letter",
+      "risk": "low",
+      "currentStatus": "blocked",
+      "reason": "BLOCKED_MISSING_DISCLOSURE",
+      "requiredAction": "self-service,no-guarantee,truthful-info,not-legal-credit-repair,supporting-documents",
+      "sourceFile": "data/routes/route_manifest.json",
+      "sourceChecksum": "safeharbor-219208eda71b488f",
+      "ownerApprovalRequired": true
+    },
+    {
+      "contentId": "/amazon/landlord-reference-letter",
+      "type": "safe_harbor",
+      "title": "/amazon/landlord-reference-letter",
+      "path": "/amazon/landlord-reference-letter",
+      "risk": "low",
+      "currentStatus": "blocked",
+      "reason": "BLOCKED_MISSING_DISCLOSURE",
+      "requiredAction": "self-service,no-guarantee,truthful-info,not-legal-credit-repair,supporting-documents",
+      "sourceFile": "data/routes/route_manifest.json",
+      "sourceChecksum": "safeharbor-eadf372cb179ab05",
       "ownerApprovalRequired": true
     }
   ]
