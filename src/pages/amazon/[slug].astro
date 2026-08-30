@@ -8,9 +8,21 @@
  * data/content/amazon_book_landing_pages.json are fixed, and the guard
  * scripts/validate/amazon-book-landing-pages.mjs asserts all seven still build.
  *
- * One page per book, matched to that book's single subject. A reader who has
+ * One page per book, matched to that book's single subject. Five of the seven
+ * name the one kit that contains that book's document, and a reader who has
  * just finished the letter-of-explanation book must not land on a page selling
  * seven different kits.
+ *
+ * The other two - gift-letter-down-payment and landlord-reference-letter - have
+ * no exact product, because neither document is one the reader fills in: the
+ * donor signs the gift letter and the landlord writes the reference. The owner
+ * decided those two point at the Complete ApprovalPrep Bundle rather than sell
+ * nothing. That decision is hers. What is not negotiable is the description: a
+ * page carrying `productGap` states the gap in the reader's own words before
+ * the button, repeats it in the kit list, the comparison table and the first
+ * FAQ, and never implies the product contains the template it does not contain.
+ * A false statement about what someone is buying produces the refund and the
+ * chargeback, which cost more than the sale that was missed by being honest.
  *
  * The doctrine these pages carry, which is why they read the way they do: the
  * book teaches the whole method and prints every template in full, and the paid
@@ -43,17 +55,28 @@ export function getStaticPaths() {
 
 const { page } = Astro.props;
 const canonical = canonicalUrl(page.path);
-// A page whose book has no companion kit gets no product and no checkout
-// button. Pointing a reader at a kit that does not cover their document is
-// worse than telling them nothing is for sale, so the registry carries
-// noProductReason and the page prints it.
-const product = page.sku ? productForSku(page.sku) : null;
+// Every book page is wired to a live SKU. Two of the seven are a partial match
+// - the book's own document is not a template anyone can sell you, because the
+// donor signs the gift letter and the landlord writes the reference - and those
+// two carry `productGap`. The page states that gap in the reader's own words
+// before the button, in the comparison table, in the kit list, and in the first
+// FAQ. Selling an adjacent product is a decision the owner made; describing it
+// as something it is not would be a false statement about what someone is
+// buying, and produces the refund that costs more than the missed sale. A page
+// with a productGap must never imply the product contains the missing template.
+const product = productForSku(page.sku);
+if (!product) throw new Error(`amazon book page ${page.path} has no product for sku ${page.sku}`);
+const kitAddsIntro = page.kitAddsIntro || "The kit is a time-saver, not a missing chapter. It is the same material as files you fill in instead of retype.";
+const finalCta = page.finalCta || {
+  heading: `Keep the editable version: ${product.name}.`,
+  body: `Everything the book taught is yours already. The kit is ${product.priceLabel} paid once: a PDF guide plus editable DOCX files covering ${product.included_offerings.length} named documents, so you fill in blanks instead of retyping.`
+};
 const schema = [
   articleSchema({ title: page.title, description: page.description, url: canonical, datePublished: registry.generatedAt }),
   breadcrumbSchema(page.path),
   faqSchema(page.faq),
   howToSchema({ name: page.protocol.heading, steps: page.protocol.steps }),
-  ...(product ? [productSchema({ name: product.name, description: product.customer_situation, url: canonicalUrl("/pricing"), price: product.priceLabel })] : [])
+  productSchema({ name: product.name, description: product.customer_situation, url: canonicalUrl("/pricing"), price: product.priceLabel })
 ];
 const trustSignals = ["No account required", "No saved customer documents", "No stored letter answers", "Self-service only", "Plain-language guidance"];
 ---
@@ -64,9 +87,7 @@ const trustSignals = ["No account required", "No saved customer documents", "No 
       <h1>{page.title}</h1>
       <p class="lead" data-direct-answer="true">{page.directAnswer}</p>
       <div class="hero-actions">
-        {product
-          ? <button class="button primary-button checkout-button" type="button" data-sku={page.sku}>{`Buy the ${product.name} — ${product.priceLabel}`}</button>
-          : <a class="button primary-button" href="/letter-writing-studio">Open the free Letter Studio</a>}
+        <button class="button primary-button checkout-button" type="button" data-sku={page.sku}>{`Buy the ${product.name} — ${product.priceLabel}`}</button>
         <a class="button secondary secondary-button" href="/pricing">Compare all kits</a>
       </div>
       <div class="trust-bar" aria-label="Trust signals">{trustSignals.map((signal) => <span>{signal}</span>)}</div>
@@ -89,25 +110,18 @@ const trustSignals = ["No account required", "No saved customer documents", "No 
       <p>Every one of these is in the book in full. Nothing was held back for a paid version, and you can finish this document today without spending anything.</p>
       <ul class="compact-list">{page.bookGives.map((item) => <li>{item}</li>)}</ul>
     </article>
-    {product ? (
-      <article class="card">
-        <p class="eyebrow">What the kit adds</p>
-        <h2>{`${product.name} — ${product.priceLabel}, paid once.`}</h2>
-        <p>The kit is a time-saver, not a missing chapter. It is the same material as files you fill in instead of retype.</p>
-        <ul class="compact-list">{page.kitAdds.map((item) => <li>{item}</li>)}</ul>
-        <button class="button primary-button checkout-button" type="button" data-sku={page.sku}>{`Buy the ${product.name} — ${product.priceLabel}`}</button>
-      </article>
-    ) : (
-      <article class="notice">
-        <strong>There is no kit for this one.</strong>
-        <p>{page.noProductReason}</p>
-      </article>
-    )}
+    <article class="card">
+      <p class="eyebrow">What the kit adds</p>
+      <h2>{`${product.name} — ${product.priceLabel}, paid once.`}</h2>
+      <p>{kitAddsIntro}</p>
+      <ul class="compact-list">{page.kitAdds.map((item) => <li>{item}</li>)}</ul>
+      <button class="button primary-button checkout-button" type="button" data-sku={page.sku}>{`Buy the ${product.name} — ${product.priceLabel}`}</button>
+    </article>
   </div></section>
 
   {page.productGap && (
     <section class="band"><div class="shell">
-      <article class="notice">
+      <article class="notice" data-product-gap="true">
         <strong>Before you buy, read this.</strong>
         <p>{page.productGap}</p>
       </article>
@@ -139,7 +153,7 @@ const trustSignals = ["No account required", "No saved customer documents", "No 
     <div class="grid">{page.sources.map((source) => <a class="card" href={source.url} rel="noopener noreferrer"><h3>{source.label}</h3><p>Open official or primary source →</p></a>)}</div>
   </div></section>
 
-  {product && <WhatHappensAfterPurchase />}
+  <WhatHappensAfterPurchase />
 
   <section class="band"><div class="shell">
     <p class="eyebrow">Keep preparing</p>
@@ -150,14 +164,10 @@ const trustSignals = ["No account required", "No saved customer documents", "No 
 
   <section class="final-cta shell" data-content-block="cta_callout">
     <p class="eyebrow">Next step</p>
-    <h2>{product ? `Keep the editable version: ${product.name}.` : "The book is the whole product for this one."}</h2>
-    <p>{product
-      ? `Everything the book taught is yours already. The kit is ${product.priceLabel} paid once: a PDF guide plus editable DOCX files covering ${product.included_offerings.length} named documents, so you fill in blanks instead of retyping.`
-      : "There is no kit to sell you here. Use the letter printed in the book, ask your lender for their own form first, and keep your own copy of everything you send."}</p>
+    <h2>{finalCta.heading}</h2>
+    <p>{finalCta.body}</p>
     <div class="hero-actions">
-      {product
-        ? <button class="button primary-button checkout-button" type="button" data-sku={page.sku}>{`Buy the ${product.name} — ${product.priceLabel}`}</button>
-        : <a class="button primary-button" href="/letter-writing-studio">Open the free Letter Studio</a>}
+      <button class="button primary-button checkout-button" type="button" data-sku={page.sku}>{`Buy the ${product.name} — ${product.priceLabel}`}</button>
       <a class="button secondary secondary-button" href="/pricing">Compare all kits</a>
     </div>
   </section>

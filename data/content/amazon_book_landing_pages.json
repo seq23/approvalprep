@@ -1,17 +1,16 @@
 {
   "schemaVersion": "1.0.0",
   "generatedAt": "2026-08-29",
-  "provenance": "Hand-written destination pages for the seven ApprovalPrep Kindle books. Each book carries one of these URLs printed inside the EPUB, so the path is fixed and cannot be changed after the book ships. One page per book, matched to that book's single subject.",
+  "provenance": "Hand-written destination pages for the seven ApprovalPrep Kindle books. Each book carries one of these URLs printed inside the EPUB, so the path is fixed and cannot be changed after the book ships. One page per book, matched to that book's single subject. Every page is wired to a live SKU; where the match is partial, `productGap` states the gap in the reader's own words before checkout and the page never claims the product contains a template it does not contain.",
   "indexPath": "/amazon",
   "indexTitle": "ApprovalPrep Book Companions",
-  "indexDescription": "Companion pages for the ApprovalPrep book series. Each book has one page here that matches its subject and names the editable kit that goes with it, if one exists.",
+  "indexDescription": "Companion pages for the ApprovalPrep book series. Each book has one page here that matches its subject and names the product that goes with it — and where that product does not contain the book's own document, the page says so before you buy.",
   "pages": [
     {
       "id": "employment-verification-letter",
       "path": "/amazon/employment-verification-letter",
       "book": "Employment Verification Letters",
       "sku": "income-employment-letter-kit",
-      "noProductReason": null,
       "productGap": null,
       "family": "book_companion",
       "eyebrow": "Book companion",
@@ -81,7 +80,6 @@
       "path": "/amazon/letter-of-explanation",
       "book": "Letters of Explanation",
       "sku": "letter-of-explanation",
-      "noProductReason": null,
       "productGap": null,
       "family": "book_companion",
       "eyebrow": "Book companion",
@@ -151,7 +149,6 @@
       "path": "/amazon/proof-of-income-self-employed",
       "book": "Proof of Income When You Work for Yourself",
       "sku": "income-employment-letter-kit",
-      "noProductReason": null,
       "productGap": null,
       "family": "book_companion",
       "eyebrow": "Book companion",
@@ -221,7 +218,6 @@
       "path": "/amazon/credit-dispute-letter",
       "book": "Credit Dispute Letters",
       "sku": "credit-letter-kit",
-      "noProductReason": null,
       "productGap": null,
       "family": "book_companion",
       "eyebrow": "Book companion",
@@ -291,7 +287,6 @@
       "path": "/amazon/rental-application-packet",
       "book": "The Rental Application Packet",
       "sku": "rental-application-kit",
-      "noProductReason": null,
       "productGap": null,
       "family": "book_companion",
       "eyebrow": "Book companion",
@@ -360,17 +355,16 @@
       "id": "landlord-reference-letter",
       "path": "/amazon/landlord-reference-letter",
       "book": "Landlord Reference Letters",
-      "sku": "rental-application-kit",
-      "noProductReason": null,
-      "productGap": "The Rental Application Kit does not contain a landlord reference letter template. The reference letter is written and signed by your landlord, not by you. What the kit contains is the request you send to the landlord, the packet the reference goes into, and the follow-up letter — the parts you write.",
+      "sku": "complete-approvalprep-bundle",
+      "productGap": "The Complete ApprovalPrep Bundle does not contain a landlord reference letter template, and neither does the Rental Application Kit inside it. The reference is written and signed by your landlord, not by you, so there is no form you fill in. What the bundle contains is everything on your side of it: the rental cover letter, the rental history explanation, the income explanation for renters, the employment verification request, the landlord follow-up letter, and the renter document packet the signed reference goes into.",
       "family": "book_companion",
       "eyebrow": "Book companion",
       "title": "Landlord Reference Letters: your companion page",
-      "description": "The companion page for the ApprovalPrep book on landlord reference letters. The book has every step and the full text of every template. This page names the kit that goes with it, and says plainly what that kit does not contain.",
-      "directAnswer": "A landlord reference letter is a signed statement from a current or former landlord about one tenancy: the address, the dates, the rent, the payment record, and whether they would rent to you again. The book you just read prints every template in full. The letter itself is written by your landlord, so the paid kit covers the parts you write, not the reference.",
+      "description": "The companion page for the ApprovalPrep book on landlord reference letters. The book has every step and the full text of every template. This page names the product that goes with it, and says plainly that no ApprovalPrep product contains a reference letter template.",
+      "directAnswer": "A landlord reference letter is a signed statement from a current or former landlord about one tenancy: the address, the dates, the rent, the payment record, and whether they would rent to you again. The book you just read prints every template in full. The letter itself is written by your landlord, so no ApprovalPrep product contains a template for it. The Complete ApprovalPrep Bundle, $249, covers the parts you do write — the request, the explanations, the cover letter, the follow-up, and the packet — as editable files.",
       "recommendation": {
-        "headline": "Write the request from the book. Read the kit note before you buy.",
-        "statement": "The reference letter comes from your landlord, so there is no template you fill in yourself. The book gives you the request to send and the draft to offer them. The Rental Application Kit is the packet the reference goes into — useful if you are building a full application, not if you only need the reference."
+        "headline": "Send the request from the book. Read the product note before you buy.",
+        "statement": "The reference comes from your landlord, so there is no template you fill in yourself and no kit contains one. The book gives you the request to send and the draft to offer them. The Complete ApprovalPrep Bundle is the rental packet plus six other kits — worth it if you are also explaining income, credit or employment. If a rental application is the only thing you are preparing, the Rental Application Kit on its own is $129."
       },
       "definitionLabel": "What it is",
       "definition": "A landlord reference letter is a signed statement from a current or former landlord describing one specific tenancy: the rental address, the dates, the rent amount, the payment record, and whether the landlord would rent to that tenant again.",
@@ -382,11 +376,13 @@
         "What to do when a corporate property manager will only confirm dates, rent, and balance.",
         "The fair-housing wording a landlord must avoid, and why it is a problem for them, not just for you."
       ],
+      "kitAddsIntro": "The bundle contains no landlord reference letter template — that letter is your landlord's to write. What it contains is every part of the application you write yourself, as files you fill in instead of retype.",
       "kitAdds": [
-        "The parts of the process you write yourself, as editable DOCX files: the employment verification request, the rental history explanation, the rental cover letter, and the landlord follow-up letter.",
-        "The rental application packet the signed reference goes into, pre-formatted.",
-        "A print-ready PDF guide to keep beside the files while you assemble.",
-        "The free browser Letter Studio, which drafts a first pass of the letters without saving anything."
+        "The parts of the process you write yourself, as editable DOCX files: the rental cover letter, the rental history explanation, the income explanation for renters, the employment verification request, and the landlord follow-up letter.",
+        "The renter document packet and the move-in document checklist the signed reference goes into, pre-formatted.",
+        "The other six kits in the same purchase — explanation, income and employment, credit, loan prep, business funding, and life admin — 50 named documents in total.",
+        "A print-ready PDF guide for each kit, plus the free browser Letter Studio, which drafts a first pass without saving anything.",
+        "No landlord reference letter template. That letter is your landlord's to write; the draft you can offer them is printed in full in the book."
       ],
       "protocol": {
         "heading": "The order the book teaches, in short",
@@ -400,21 +396,27 @@
         ]
       },
       "comparison": {
-        "heading": "Book, kit, or Studio",
+        "heading": "Book, kit, bundle, or Studio",
         "intro": "The reference itself is not something any of these can write for you. Here is what each one does cover.",
         "columns": ["What you use", "What it costs", "What it covers", "Best when"],
         "rows": [
           ["The book you just read", "Already yours", "The request, the offered draft, and the review checklist, printed in full", "You only need the reference and nothing else"],
-          ["Rental Application Kit", "$129, paid once", "The request, explanation and follow-up letters as editable files, plus the packet — but no reference letter template", "You are building the whole rental application, not just the reference"],
+          ["Rental Application Kit", "$129, paid once", "The request, explanation, cover and follow-up letters as editable files, plus the packet — but no reference letter template", "A rental application is the only thing you are preparing"],
+          ["Complete ApprovalPrep Bundle", "$249, paid once", "All seven kits, 50 named documents, including every rental letter above — still no reference letter template", "You are explaining income, credit, or employment as well"],
           ["Free Letter Writing Studio", "Free", "A first-pass draft of the request or the rental cover letter", "You want to send the request today"]
         ]
       },
       "faq": [
-        { "question": "Does the Rental Application Kit include a landlord reference letter template?", "answer": "No. The reference is written and signed by your landlord, so there is no template you fill in yourself. The kit covers the parts you do write: the request, the rental history explanation, the cover letter, the follow-up, and the packet the reference goes into. The draft you can offer your landlord is printed in full in the book." },
+        { "question": "Does the Complete ApprovalPrep Bundle include a landlord reference letter template?", "answer": "No, and neither does the Rental Application Kit inside it. The reference is written and signed by your landlord, so there is no template you fill in yourself. What you get is the parts you do write: the request, the rental history explanation, the cover letter, the follow-up, and the packet the reference goes into. The draft you can offer your landlord is printed in full in the book." },
+        { "question": "Should I buy the bundle or just the Rental Application Kit?", "answer": "Buy the $129 Rental Application Kit if a rental application is the only thing you are preparing — the rental material is identical in both. The $249 bundle is that same rental material plus six other kits, so it earns the difference only if you also have credit, income, employment, or loan paperwork to explain." },
         { "question": "Can I write the reference and have my landlord sign it?", "answer": "You can offer them a draft built from facts they can check, and many landlords prefer that. They must be free to correct it and to write the opinion sentence themselves." },
         { "question": "Does ApprovalPrep contact my landlord?", "answer": "No. ApprovalPrep is self-service. You review and send your own documents." },
         { "question": "Will a good reference get me the apartment?", "answer": "No page, book, or kit can say that. ApprovalPrep does not guarantee approval, deletion, correction, funding, housing, or any decision. It helps you prepare a clear, truthful record." }
       ],
+      "finalCta": {
+        "heading": "The reference is your landlord's to write. The rest of the packet is in the bundle.",
+        "body": "No ApprovalPrep product contains a landlord reference letter template. The Complete ApprovalPrep Bundle is $249 paid once: PDF guides plus editable DOCX files covering 50 named documents, including every rental letter and checklist you write yourself. If rental is all you need, the Rental Application Kit alone is $129."
+      },
       "sources": [
         { "label": "U.S. Department of Justice, Civil Rights Division — The Fair Housing Act", "url": "https://www.justice.gov/crt/fair-housing-act-1" },
         { "label": "Consumer Financial Protection Bureau — What is a tenant screening report?", "url": "https://www.consumerfinance.gov/ask-cfpb/what-is-a-tenant-screening-report-en-2102/" },
@@ -430,17 +432,16 @@
       "id": "gift-letter-down-payment",
       "path": "/amazon/gift-letter-down-payment",
       "book": "Gift Letters for a Down Payment",
-      "sku": null,
-      "noProductReason": "ApprovalPrep does not sell a gift letter kit. No product in the catalogue contains a gift letter template, and pointing you at a kit that does not cover your document would be worse than telling you this. The book is the complete product for this subject.",
-      "productGap": null,
+      "sku": "complete-approvalprep-bundle",
+      "productGap": "The Complete ApprovalPrep Bundle does not contain a gift letter template. No ApprovalPrep product does — the gift letter is printed in full in the book you just read, and it is signed by your donor, not by you. What the bundle covers for this file is the paperwork around the gift: the bank statement explanation letter you use when a lender asks about the deposit, the mortgage explanation letter, and the general application explanation letter, as editable DOCX files. Buy it for those, not for a gift letter template.",
       "family": "book_companion",
       "eyebrow": "Book companion",
       "title": "Gift Letters for a Down Payment: your companion page",
-      "description": "The companion page for the ApprovalPrep book on down payment gift letters. There is no paid gift letter kit, and this page says so. The book is the complete product for this subject.",
-      "directAnswer": "A down payment gift letter is a signed statement from the person giving you money for a home purchase, saying the money is a gift and not a loan, naming the amount, the date, and the relationship. There is no ApprovalPrep gift letter kit. The book you just read prints the full letter and the paper trail it needs, and it is complete on its own.",
+      "description": "The companion page for the ApprovalPrep book on down payment gift letters. The book prints the gift letter in full. No ApprovalPrep kit contains a gift letter template, and this page says so before naming the bundle that covers the paperwork around the gift.",
+      "directAnswer": "A down payment gift letter is a signed statement from the person giving you money for a home purchase, saying the money is a gift and not a loan, naming the amount, the date, and the relationship. The book you just read prints the full letter and the paper trail it needs, and it is complete on its own. No ApprovalPrep product contains a gift letter template. The Complete ApprovalPrep Bundle, $249, covers the letters around the gift instead: the bank statement explanation letter for the deposit, the mortgage explanation letter, and the rest of the library as editable files.",
       "recommendation": {
-        "headline": "Use the book. There is nothing to buy here.",
-        "statement": "ApprovalPrep sells no gift letter kit, so this page is not selling you one. The letter and the paper trail are printed in full in the book you just read. If your file also needs an explanation letter for a large deposit, that is a different document and there is a kit for it."
+        "headline": "Write the gift letter from the book. Read the bundle note before you buy.",
+        "statement": "The gift letter itself is printed in full in the book you already own, and no ApprovalPrep kit contains a template for it. The Complete ApprovalPrep Bundle is worth buying only if the rest of your file needs explaining too — the deposit, the mortgage, the credit or income questions. Ask your lender for their own gift letter form first either way."
       },
       "definitionLabel": "What it is",
       "definition": "A down payment gift letter is a signed statement from the person giving the money confirming that the funds are a gift with no expectation of repayment, naming the amount, the date, the donor, the recipient, and the relationship between them.",
@@ -452,7 +453,14 @@
         "Why a gift letter and a large-deposit explanation are two different documents, and when you need both.",
         "The mistakes that send the letter back, including unsigned donor copies and amounts that do not match the transfer."
       ],
-      "kitAdds": [],
+      "kitAddsIntro": "The bundle is not this book in editable form. It contains no gift letter template. It is the rest of the paperwork a lender asks about on the same file, as files you fill in instead of retype.",
+      "kitAdds": [
+        "The bank statement explanation letter — the one you use when a lender asks about the deposit the gift money made — as an editable DOCX file.",
+        "The mortgage explanation letter and the general application explanation letter, for the other questions raised on the same file.",
+        "The whole ApprovalPrep library in one purchase: the Letter of Explanation, Income + Employment, Credit, Rental Application, Loan Prep, Business Funding and Life Admin kits — 50 named documents in total.",
+        "A print-ready PDF guide for each kit, plus the free browser Letter Studio, which drafts a first pass without saving anything.",
+        "No gift letter template. That document is in the book, not in the bundle."
+      ],
       "protocol": {
         "heading": "The order the book teaches, in short",
         "intro": "This is the sequence from the book, compressed. The book has the reasoning and the full letter text; this is here so you can find your place again.",
@@ -465,21 +473,26 @@
         ]
       },
       "comparison": {
-        "heading": "What ApprovalPrep does and does not sell for this",
-        "intro": "Being straight about the gap: there is no gift letter kit. Here is what exists.",
+        "heading": "What ApprovalPrep sells for this, and what it does not",
+        "intro": "Being straight about the gap: no ApprovalPrep product contains a gift letter template. Here is what does exist.",
         "columns": ["What you use", "What it costs", "What it covers", "Best when"],
         "rows": [
           ["The book you just read", "Already yours", "The gift letter in full, plus the paper trail it needs", "This is the complete product for a gift letter"],
           ["Your lender's own gift letter form", "Free", "Whatever that lender requires, which takes priority", "Always ask for this before using any template"],
-          ["Letter of Explanation Kit", "$39, paid once", "A large deposit explanation letter, which is a different document from a gift letter", "Your file also has a deposit that needs explaining"]
+          ["Letter of Explanation Kit", "$39, paid once", "The bank statement explanation letter, used when a lender asks about a deposit — a different document from a gift letter", "The deposit is the only thing you need to explain"],
+          ["Complete ApprovalPrep Bundle", "$249, paid once", "All seven kits, 50 named documents, including the bank statement and mortgage explanation letters — still no gift letter template", "The rest of your file needs explaining too"]
         ]
       },
       "faq": [
-        { "question": "Is there a paid gift letter kit?", "answer": "No. ApprovalPrep does not sell one, and no kit in the catalogue contains a gift letter template. The book is the complete product for this subject." },
-        { "question": "Then why does this page exist?", "answer": "Because the book links here, and a link that goes nowhere is worse than a link that tells you the truth. This page confirms what the book covers and points you at the one related kit, which covers a different document." },
-        { "question": "Is a gift letter the same as a large deposit explanation?", "answer": "No. A gift letter says money was given and does not need to be repaid. A large deposit explanation says where an unexplained deposit came from. A file can need both." },
+        { "question": "Does the Complete ApprovalPrep Bundle include a gift letter template?", "answer": "No. No ApprovalPrep product contains one, and the bundle is not an exception. The gift letter is printed in full in the book you just read. What the bundle adds for this file is the paperwork around the gift: the bank statement explanation letter for the deposit, the mortgage explanation letter, and the rest of the library as editable files." },
+        { "question": "Then why does this page link to the bundle?", "answer": "Because most readers of this book have more than the gift letter to document — the deposit it created, the mortgage questions, the income or credit history behind them — and the bundle covers those parts. If the gift letter is genuinely all you need, the book already gave it to you and you should not buy anything." },
+        { "question": "Is a gift letter the same as a large deposit explanation?", "answer": "No. A gift letter says money was given and does not need to be repaid. A deposit explanation says where an unexplained deposit came from. A file can need both, and only the second one is in the bundle." },
         { "question": "Does ApprovalPrep contact my lender or the donor?", "answer": "No. ApprovalPrep is self-service. You review and send your own documents, and ApprovalPrep does not guarantee approval, deletion, correction, funding, housing, or any decision." }
       ],
+      "finalCta": {
+        "heading": "The gift letter is in the book. The bundle is for everything around it.",
+        "body": "The gift letter itself is yours already and no ApprovalPrep kit contains a template for it. The Complete ApprovalPrep Bundle is $249 paid once: PDF guides plus editable DOCX files covering 50 named documents, including the bank statement and mortgage explanation letters a lender is likely to ask for on the same file."
+      },
       "sources": [
         { "label": "Internal Revenue Service — Frequently Asked Questions on Gift Taxes", "url": "https://www.irs.gov/businesses/small-businesses-self-employed/frequently-asked-questions-on-gift-taxes" },
         { "label": "Fannie Mae — Selling Guide", "url": "https://selling-guide.fanniemae.com/" },

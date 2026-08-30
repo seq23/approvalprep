@@ -16,10 +16,11 @@ import { productForSku } from "../../data/content";
 import registry from "../../../data/content/amazon_book_landing_pages.json";
 
 const canonical = canonicalUrl(registry.indexPath);
-const cards = registry.pages.map((page) => ({
-  ...page,
-  product: page.sku ? productForSku(page.sku) : null
-}));
+const cards = registry.pages.map((page) => {
+  const product = productForSku(page.sku);
+  if (!product) throw new Error(`amazon book page ${page.path} has no product for sku ${page.sku}`);
+  return { ...page, product };
+});
 const schema = [
   webPageSchema({ title: registry.indexTitle, description: registry.indexDescription, url: canonical }),
   breadcrumbSchema(registry.indexPath),
@@ -42,7 +43,7 @@ const trustSignals = ["No account required", "No saved customer documents", "Sel
     <RecommendationSummary
       variant="panel"
       headline="Go to your own book's page."
-      statement="Pick the book you just finished. Its page names the one kit that matches that document, or says plainly that no kit exists for it."
+      statement="Pick the book you just finished. Its page names the product that goes with that document — and where that product does not contain the document itself, the page says so before you buy."
     />
   </section>
 
@@ -54,7 +55,7 @@ const trustSignals = ["No account required", "No saved customer documents", "Sel
         <a class="card" href={card.path}>
           <h3>{card.book}</h3>
           <p>{card.recommendation.statement}</p>
-          <p class="fine">{card.product ? `Companion kit: ${card.product.name} — ${card.product.priceLabel}` : "No companion kit for this subject."}</p>
+          <p class="fine">{`Companion product: ${card.product.name} — ${card.product.priceLabel}`}{card.productGap ? " — partial match, read the note on the page" : ""}</p>
         </a>
       ))}
     </div>

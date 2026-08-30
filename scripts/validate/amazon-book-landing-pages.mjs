@@ -25,13 +25,25 @@
  *      `stripe_enabled` and carries a `stripe_price_env`. A button wired to a
  *      SKU Stripe has never heard of is worse than no button.
  *
- *   3. A book with no companion product says so. `/amazon/gift-letter-down-payment`
- *      is registered `sku: null` because nothing in the catalogue contains a
- *      gift letter template. That page must carry NO checkout button and must
- *      print its `noProductReason`. Pointing a reader at a kit that does not
- *      cover their document is the specific failure this rule exists to stop,
- *      and the rule is symmetric: a page WITH a sku must carry a button, and a
- *      page WITHOUT one must not.
+ *   3. Every one of the seven is wired to a live SKU, and a page whose product
+ *      is only a partial match declares the gap. Two of the seven have no exact
+ *      product, because neither document is one the reader fills in: the donor
+ *      signs the gift letter and the landlord writes the reference. Those two
+ *      point at the Complete ApprovalPrep Bundle. That routing is the owner's
+ *      decision and this validator does not re-litigate it.
+ *
+ *      What it does enforce is the description. A page carrying `productGap`
+ *      must print that text in the built HTML, so the reader sees what the
+ *      product does not contain before the button rather than after the
+ *      charge. A false statement about what someone is buying produces the
+ *      refund and the chargeback, which cost more than the sale that honesty
+ *      would have lost.
+ *
+ *      This rule used to be symmetric: a page with `sku: null` had to carry no
+ *      button and print a `noProductReason`. No page is registered that way any
+ *      more, so that branch was removed rather than left as a rule nothing
+ *      exercises. The replacement is stronger, not weaker - `sku` is now
+ *      mandatory on all seven, so a page cannot quietly lose its purchase path.
  *
  *   4. Each page is reachable from the /amazon index and links back to it, so
  *      none of the eight is an orphan inside the site.
@@ -62,9 +74,11 @@
  *      counts are asserted at the end.
  *
  * Proving it fails: delete any one of dist/amazon/<slug>/index.html, or change
- * a registry `sku` to a SKU that is not in products.json, or add a checkout
- * button to the gift-letter page, or add one of these URLs to public/sitemap.xml,
- * and this exits 1 naming the path.
+ * a registry `sku` to a SKU that is not in products.json, or set that SKU to
+ * `draft` in data/products/seed_product_registry.json so checkout would reject
+ * it, or drop a `sku`, or delete a `productGap` sentence from a page that
+ * carries one, or add one of these URLs to public/sitemap.xml, and this exits 1
+ * naming the path.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -147,32 +161,41 @@ for (const routePath of ALL_PATHS) {
 /* ---------- purchase path ---------- */
 
 const skuPattern = /data-sku="([^"]+)"/g;
+// Rendered HTML escapes the em dashes and apostrophes the copy is written with,
+// so compare against the escaped form before asserting a sentence is on the page.
+const escapeHtml = (value) => value.replace(/&/g, "&#38;").replace(/</g, "&#60;").replace(/>/g, "&#62;").replace(/"/g, "&#34;");
+const onPage = (body, sentence) => body.includes(sentence) || body.includes(escapeHtml(sentence));
+
 let purchaseChecked = 0;
-let noProductChecked = 0;
+let gapChecked = 0;
 for (const page of registry.pages) {
   const body = html.get(page.path);
   if (!body) continue;
   const skus = new Set([...body.matchAll(skuPattern)].map((match) => match[1]).filter(Boolean));
 
-  if (page.sku) {
-    purchaseChecked += 1;
-    const product = productBySku.get(page.sku);
-    if (!product) { errors.push(`registry sku is not in data/products/products.json: ${page.path} -> ${page.sku}`); continue; }
-    if (product.stripe_enabled !== true) errors.push(`registry sku is not sellable through Stripe: ${page.path} -> ${page.sku}`);
-    if (!product.stripe_price_env) errors.push(`registry sku has no stripe_price_env: ${page.path} -> ${page.sku}`);
-    const sellable = sellableSlugs.get(page.sku);
-    if (!sellable) errors.push(`sku is not in the runtime seed catalogue, so checkout would reject it: ${page.path} -> ${page.sku}`);
-    else if (sellable.status !== "live" || sellable.visibility !== "public") errors.push(`sku is not live and public in the runtime catalogue: ${page.path} -> ${page.sku} (${sellable.status}/${sellable.visibility})`);
-    if (!skus.has(page.sku)) errors.push(`built page has no checkout button for its own sku: ${page.path} -> ${page.sku}`);
-    for (const rendered of skus) {
-      if (rendered !== page.sku) errors.push(`built page offers a sku that is not its companion product: ${page.path} -> ${rendered}`);
-    }
-    if (!body.includes("checkout-button")) errors.push(`built page has no checkout button at all: ${page.path}`);
-  } else {
-    noProductChecked += 1;
-    if (skus.size) errors.push(`page registered with no companion product still renders a checkout button: ${page.path} -> ${[...skus].join(", ")}`);
-    if (!page.noProductReason) errors.push(`page has no sku and no noProductReason: ${page.path}`);
-    else if (!body.includes(page.noProductReason.slice(0, 60))) errors.push(`page does not print its noProductReason: ${page.path}`);
+  // Every book page must reach checkout. There is no longer a no-product branch:
+  // a missing sku is a defect, not a supported state.
+  if (!page.sku) { errors.push(`book page has no sku, so it reaches no purchase path: ${page.path}`); continue; }
+  purchaseChecked += 1;
+  const product = productBySku.get(page.sku);
+  if (!product) { errors.push(`registry sku is not in data/products/products.json: ${page.path} -> ${page.sku}`); continue; }
+  if (product.stripe_enabled !== true) errors.push(`registry sku is not sellable through Stripe: ${page.path} -> ${page.sku}`);
+  if (!product.stripe_price_env) errors.push(`registry sku has no stripe_price_env: ${page.path} -> ${page.sku}`);
+  const sellable = sellableSlugs.get(page.sku);
+  if (!sellable) errors.push(`sku is not in the runtime seed catalogue, so checkout would reject it: ${page.path} -> ${page.sku}`);
+  else if (sellable.status !== "live" || sellable.visibility !== "public") errors.push(`sku is not live and public in the runtime catalogue: ${page.path} -> ${page.sku} (${sellable.status}/${sellable.visibility})`);
+  if (!skus.has(page.sku)) errors.push(`built page has no checkout button for its own sku: ${page.path} -> ${page.sku}`);
+  for (const rendered of skus) {
+    if (rendered !== page.sku) errors.push(`built page offers a sku that is not its companion product: ${page.path} -> ${rendered}`);
+  }
+  if (!body.includes("checkout-button")) errors.push(`built page has no checkout button at all: ${page.path}`);
+
+  // A partial match has to say so, in the built HTML, before the reader pays.
+  if (!page.productGap) continue;
+  gapChecked += 1;
+  if (!body.includes('data-product-gap="true"')) errors.push(`page declares a productGap but the built HTML has no gap notice: ${page.path}`);
+  for (const sentence of page.productGap.split(". ").map((part) => part.trim()).filter((part) => part.length > 30)) {
+    if (!onPage(body, sentence.replace(/\.$/, ""))) errors.push(`page does not print this productGap sentence: ${page.path} -> "${sentence.slice(0, 70)}..."`);
   }
 }
 
@@ -263,10 +286,16 @@ if (filesChecked !== ALL_PATHS.length) errors.push(`only ${filesChecked} of ${AL
 if (statuses.size !== ALL_PATHS.length) errors.push(`only ${statuses.size} of ${ALL_PATHS.length} pages were fetched`);
 if (postureChecked !== ALL_PATHS.length) errors.push(`only ${postureChecked} of ${ALL_PATHS.length} pages had their indexing posture checked`);
 if (linksChecked !== SHIPPED_BOOK_PATHS.length) errors.push(`the /amazon index links to only ${linksChecked} of ${SHIPPED_BOOK_PATHS.length} book pages`);
-if (purchaseChecked + noProductChecked !== SHIPPED_BOOK_PATHS.length) errors.push(`only ${purchaseChecked + noProductChecked} of ${SHIPPED_BOOK_PATHS.length} book pages had their purchase path checked`);
+if (purchaseChecked !== SHIPPED_BOOK_PATHS.length) errors.push(`only ${purchaseChecked} of ${SHIPPED_BOOK_PATHS.length} book pages had their purchase path checked`);
 if (purchaseChecked === 0) errors.push("no page was checked for a working purchase path, so this validator proved nothing about checkout");
+// The partial-match pages are the reason the honesty rule exists. If the registry
+// stops declaring any gap, this loop would silently assert nothing, so the count
+// is pinned to the registry rather than allowed to fall to zero unnoticed.
+const gapPages = registry.pages.filter((page) => page.productGap).length;
+if (gapChecked !== gapPages) errors.push(`only ${gapChecked} of ${gapPages} pages with a declared productGap had that gap checked in the built HTML`);
+if (gapPages === 0) errors.push("no page declares a productGap - if every companion product is now an exact match, delete this rule deliberately rather than leaving it unexercised");
 
 if (errors.length) fail(`[amazon-book-landing-pages] FAIL\n  - ${errors.join("\n  - ")}`);
 
 const wired = registry.pages.filter((page) => page.sku).length;
-console.log(`[amazon-book-landing-pages] OK books=${SHIPPED_BOOK_PATHS.length} pagesServed200=${statuses.size} wiredToStripe=${wired} noCompanionProduct=${noProductChecked} indexed=${EXPECT_INDEXED}`);
+console.log(`[amazon-book-landing-pages] OK books=${SHIPPED_BOOK_PATHS.length} pagesServed200=${statuses.size} wiredToStripe=${wired} liveInRuntimeCatalogue=${purchaseChecked} partialMatchGapsPrinted=${gapChecked} indexed=${EXPECT_INDEXED}`);
