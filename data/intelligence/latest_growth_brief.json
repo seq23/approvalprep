@@ -1,158 +1,165 @@
 {
   "schemaVersion": "4.2.0",
-  "generatedAt": "2026-08-29T21:03:45.783Z",
+  "generatedAt": "2026-08-31T12:40:20.168Z",
   "sourceStatus": [
     {
-      "id": "5b81c850-d80c-41f2-b62d-cbc9bbfca764",
+      "id": "9cd3ad6a-4783-40d7-88d4-a5aa95deaec7",
       "connectorId": "page_action_recommendation",
       "status": "COMPLETE",
-      "ranAt": "2026-08-29T21:03:45.726Z",
+      "ranAt": "2026-08-31T12:40:20.114Z",
       "recordsImported": 5430
     },
     {
-      "id": "c6ae4e3f-b319-4603-841e-7f6c108e79e5",
+      "id": "537453b3-fb52-430f-9538-4223baeb8851",
       "connectorId": "authority_requirement_analysis",
       "status": "COMPLETE",
-      "ranAt": "2026-08-29T21:03:45.661Z",
+      "ranAt": "2026-08-31T12:40:20.052Z",
       "recordsImported": 86
     },
     {
-      "id": "eadb6051-faa3-455d-8c7c-7746ec6d85c3",
+      "id": "a4f0cdc3-e29c-42c1-9a11-0511722c9c14",
       "connectorId": "growth_maintenance_analysis",
       "status": "COMPLETE",
-      "ranAt": "2026-08-29T21:03:45.625Z",
+      "ranAt": "2026-08-31T12:40:20.019Z",
       "recordsImported": 86
     },
     {
-      "id": "0e330c3b-64de-450b-8c9b-9668040889ba",
+      "id": "f0515f87-d1ed-4b2b-84ec-3805695dee32",
       "connectorId": "content_opportunity_analysis",
       "status": "COMPLETE",
-      "ranAt": "2026-08-29T21:03:45.587Z",
+      "ranAt": "2026-08-31T12:40:19.982Z",
       "recordsImported": 5430
     },
     {
-      "id": "0533c6a0-cdc5-4028-a497-4deeb3c31c1f",
+      "id": "0efab6cb-528c-4fda-ac49-fcddc74984c6",
       "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
-      "ranAt": "2026-08-29T21:03:43.982Z",
+      "ranAt": "2026-08-31T12:40:18.410Z",
       "recordsImported": 12
     },
     {
-      "id": "05574ece-5567-455e-9623-996b4c693633",
+      "id": "d361af9c-c0eb-4537-a37d-0d809a0f5323",
       "connectorId": "manual_social_signal_import",
       "status": "NO_DATA",
-      "ranAt": "2026-08-29T21:03:43.321Z",
+      "ranAt": "2026-08-31T12:40:14.683Z",
       "reason": "No social signal import found at data/imports/social-signals.json.",
       "recordsImported": 0
     },
     {
-      "id": "feb4d0cf-5046-4ecc-84dd-0c293ade17f4",
+      "id": "03eb811a-1c50-43fb-b5a4-86d64fe27e7c",
       "connectorId": "manual_serp_csv",
       "status": "NO_DATA",
-      "ranAt": "2026-08-29T21:03:43.287Z",
+      "ranAt": "2026-08-31T12:40:14.651Z",
       "reason": "No SERP CSV found at data/imports/serp.csv.",
       "recordsImported": 0
     },
     {
-      "id": "8a15aff4-f283-4239-84b7-f485f6a650c0",
+      "id": "ec786a8a-ad96-4f6f-b745-2964cdc342f7",
       "connectorId": "competitor_public_crawler",
       "status": "COMPLETE",
-      "ranAt": "2026-08-29T21:03:43.215Z",
+      "ranAt": "2026-08-31T12:40:14.619Z",
       "recordsImported": 2
     },
     {
-      "id": "18116455-6ea8-4489-b99a-03500716a4f0",
+      "id": "01cc7c1e-ef8a-4316-8633-05c6c07e7732",
       "connectorId": "competitor_sitemap_discovery",
       "status": "COMPLETE",
-      "ranAt": "2026-08-29T21:03:42.904Z",
+      "ranAt": "2026-08-31T12:40:14.230Z",
       "recordsImported": 2
     },
     {
-      "id": "536ed60f-32cd-49d4-9bbb-5d7dd0ff3d38",
+      "id": "a71c0f51-9e0d-4016-a55d-355ef28485dc",
       "connectorId": "owned_site_crawler",
       "status": "COMPLETE",
-      "ranAt": "2026-08-29T21:03:42.426Z",
-      "recordsImported": 91
+      "ranAt": "2026-08-31T12:40:13.309Z",
+      "recordsImported": 99
     },
     {
-      "id": "9b788ba7-0fb0-41d4-be93-8604751eaf1c",
+      "id": "5b028ee6-5d61-4013-ad49-c84837c849b0",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-29T21:03:42.389Z",
+      "ranAt": "2026-08-31T12:40:13.276Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "55ecaa98-8209-4f2f-a4ff-4af1a25b37f2",
+      "id": "8b7cebbd-0201-42be-9f15-6818c343bd1f",
       "connectorId": "google_url_inspection",
-      "status": "BUDGET_HELD",
-      "ranAt": "2026-08-29T21:03:42.354Z",
-      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
-      "recordsImported": 0
+      "status": "COMPLETE",
+      "ranAt": "2026-08-31T12:40:13.244Z",
+      "mode": "live",
+      "recordsImported": 25
     },
     {
-      "id": "48a9d489-9f38-4b7d-b1ab-d12b03345232",
+      "id": "ff819d9c-9309-4dee-8ce0-265f3513bc3c",
       "connectorId": "google_search_console_search_analytics",
       "status": "BUDGET_HELD",
-      "ranAt": "2026-08-29T21:03:42.149Z",
-      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
+      "ranAt": "2026-08-31T12:37:34.408Z",
+      "reason": "weekly ceiling 3 reached (3 live attempts in 7d)",
       "recordsImported": 0
     },
     {
-      "id": "11bacb74-7a45-4815-8612-4ab9cc580c51",
-      "connectorId": "growth_brief_generation",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-29T20:57:03.749Z",
-      "recordsImported": 40
-    },
-    {
-      "id": "2d305e1d-d2c4-4012-b5d8-d1479669c70b",
-      "connectorId": "content_opportunity_analysis",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-29T20:57:03.658Z",
-      "recordsImported": 5430
-    },
-    {
-      "id": "9fb57f05-cf5a-4da3-9d0b-e726250e941f",
-      "connectorId": "growth_brief_generation",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-29T20:56:53.133Z",
-      "recordsImported": 40
-    },
-    {
-      "id": "71a3704e-1901-45ad-a262-98741c257eaf",
-      "connectorId": "content_opportunity_analysis",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-29T20:56:53.035Z",
-      "recordsImported": 5430
-    },
-    {
-      "id": "2a554964-3247-4111-9e9e-dde3ce81270c",
-      "connectorId": "growth_brief_generation",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-29T20:55:59.331Z",
-      "recordsImported": 40
-    },
-    {
-      "id": "60840054-edf5-492c-9c21-e4c556e13ed7",
-      "connectorId": "content_opportunity_analysis",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-29T20:55:59.233Z",
-      "recordsImported": 5430
-    },
-    {
-      "id": "6aa6a4d7-1d07-46f2-afe4-ef6deaacca0b",
+      "id": "d3f0814e-abd6-4cc2-a112-2f816a9edee5",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-29T10:41:39.296Z",
+      "ranAt": "2026-08-31T10:42:42.886Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "1448be26-edb9-449e-8e74-764db8a16fdb",
+      "connectorId": "indexnow",
+      "status": "NO_DATA",
+      "ranAt": "2026-08-31T10:42:42.749Z",
+      "mode": "live",
+      "recordsImported": 0,
+      "preparedUrlCount": 86
+    },
+    {
+      "id": "1abb1afe-3c06-4d38-bb42-c94dac8f465c",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-08-31T10:23:51.535Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "b4d3e2a5-1cd8-4931-9c3f-fe6f214bd45a",
+      "connectorId": "indexnow",
+      "status": "NO_DATA",
+      "ranAt": "2026-08-31T10:23:51.367Z",
+      "mode": "live",
+      "recordsImported": 0,
+      "preparedUrlCount": 86
+    },
+    {
+      "id": "c213b4e6-390c-4f6f-8162-0cc7e3ddfb22",
+      "connectorId": "official_source_fetcher",
+      "status": "COMPLETE",
+      "ranAt": "2026-08-31T08:38:01.644Z",
+      "recordsImported": 12
+    },
+    {
+      "id": "40530026-fc12-4595-ba97-f96c2290a358",
+      "connectorId": "manual_social_signal_import",
+      "status": "NO_DATA",
+      "ranAt": "2026-08-31T08:37:58.221Z",
+      "reason": "No social signal import found at data/imports/social-signals.json.",
+      "recordsImported": 0
+    },
+    {
+      "id": "de90c7a4-2862-4caf-8aa2-1666ca95ca4a",
+      "connectorId": "manual_serp_csv",
+      "status": "NO_DATA",
+      "ranAt": "2026-08-31T08:37:58.079Z",
+      "reason": "No SERP CSV found at data/imports/serp.csv.",
       "recordsImported": 0
     }
   ],
   "topContentOpportunities": [
     {
-      "id": "brief_maxfanout_070001_9f7d50aff9",
-      "query": "what is letter of explanation for first time applicants with missing documents",
+      "id": "brief_maxfanout_080001_f34fc8de8d",
+      "query": "what is letter of explanation for families with missing documents",
       "route": null,
       "pageFamily": "letter-of-explanation",
       "searchOpportunityScore": 0,
@@ -168,11 +175,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-29T21:03:45.514Z"
+      "createdAt": "2026-08-31T12:40:19.908Z"
     },
     {
-      "id": "brief_maxfanout_070003_c80a2ec102",
-      "query": "what is rental application preparation for first time applicants with missing documents",
+      "id": "brief_maxfanout_080003_62fb5bfef0",
+      "query": "what is rental application preparation for families with missing documents",
       "route": null,
       "pageFamily": "rental-application-preparation",
       "searchOpportunityScore": 0,
@@ -188,11 +195,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-29T21:03:45.514Z"
+      "createdAt": "2026-08-31T12:40:19.908Z"
     },
     {
-      "id": "brief_maxfanout_070004_3810f0f287",
-      "query": "what is proof of income for first time applicants with missing documents",
+      "id": "brief_maxfanout_080004_82edc06070",
+      "query": "what is proof of income for families with missing documents",
       "route": null,
       "pageFamily": "proof-of-income",
       "searchOpportunityScore": 0,
@@ -208,11 +215,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-29T21:03:45.514Z"
+      "createdAt": "2026-08-31T12:40:19.908Z"
     },
     {
-      "id": "brief_maxfanout_070005_e05b3c6324",
-      "query": "what is self employed income documents for first time applicants with missing documents",
+      "id": "brief_maxfanout_080005_caa5e87c1a",
+      "query": "what is self employed income documents for families with missing documents",
       "route": null,
       "pageFamily": "self-employed-income-documents",
       "searchOpportunityScore": 0,
@@ -228,11 +235,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-29T21:03:45.514Z"
+      "createdAt": "2026-08-31T12:40:19.908Z"
     },
     {
-      "id": "brief_maxfanout_070010_c5e7a1a322",
-      "query": "what is credit report understanding for first time applicants with missing documents",
+      "id": "brief_maxfanout_080010_6ee3459c0e",
+      "query": "what is credit report understanding for families with missing documents",
       "route": null,
       "pageFamily": "credit-report-understanding",
       "searchOpportunityScore": 0,
@@ -248,11 +255,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-29T21:03:45.514Z"
+      "createdAt": "2026-08-31T12:40:19.910Z"
     },
     {
-      "id": "brief_maxfanout_070011_60feacab9c",
-      "query": "what is credit dispute self service for first time applicants with missing documents",
+      "id": "brief_maxfanout_080011_ec09229e08",
+      "query": "what is credit dispute self service for families with missing documents",
       "route": null,
       "pageFamily": "credit-dispute-self-service",
       "searchOpportunityScore": 0,
@@ -268,11 +275,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-29T21:03:45.514Z"
+      "createdAt": "2026-08-31T12:40:19.910Z"
     },
     {
-      "id": "brief_maxfanout_070012_3069dc74e2",
-      "query": "what is credit utilization for first time applicants with missing documents",
+      "id": "brief_maxfanout_080012_fb9c57a7d3",
+      "query": "what is credit utilization for families with missing documents",
       "route": null,
       "pageFamily": "credit-utilization",
       "searchOpportunityScore": 0,
@@ -288,11 +295,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-29T21:03:45.514Z"
+      "createdAt": "2026-08-31T12:40:19.910Z"
     },
     {
-      "id": "brief_maxfanout_070016_b35f9d9ee1",
-      "query": "what is gift letter explanation for first time applicants with missing documents",
+      "id": "brief_maxfanout_080016_5492967c23",
+      "query": "what is gift letter explanation for families with missing documents",
       "route": null,
       "pageFamily": "gift-letter-explanation",
       "searchOpportunityScore": 0,
@@ -308,11 +315,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-29T21:03:45.514Z"
+      "createdAt": "2026-08-31T12:40:19.910Z"
     },
     {
-      "id": "brief_maxfanout_070018_dd49743384",
-      "query": "what is address history explanation for first time applicants with missing documents",
+      "id": "brief_maxfanout_080018_b5f81bbdca",
+      "query": "what is address history explanation for families with missing documents",
       "route": null,
       "pageFamily": "address-history-explanation",
       "searchOpportunityScore": 0,
@@ -328,11 +335,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-29T21:03:45.515Z"
+      "createdAt": "2026-08-31T12:40:19.910Z"
     },
     {
-      "id": "brief_maxfanout_070019_06c9926074",
-      "query": "what is income change explanation for first time applicants with missing documents",
+      "id": "brief_maxfanout_080019_dcbd571a9d",
+      "query": "what is income change explanation for families with missing documents",
       "route": null,
       "pageFamily": "income-change-explanation",
       "searchOpportunityScore": 0,
@@ -348,11 +355,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-29T21:03:45.515Z"
+      "createdAt": "2026-08-31T12:40:19.910Z"
     },
     {
-      "id": "brief_maxfanout_070020_162b451398",
-      "query": "what is employment verification for first time applicants with missing documents",
+      "id": "brief_maxfanout_080020_485cdbcf1b",
+      "query": "what is employment verification for families with missing documents",
       "route": null,
       "pageFamily": "employment-verification",
       "searchOpportunityScore": 0,
@@ -368,11 +375,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-29T21:03:45.515Z"
+      "createdAt": "2026-08-31T12:40:19.910Z"
     },
     {
-      "id": "brief_maxfanout_070026_c3100ab597",
-      "query": "what is apartment application documents for first time applicants with missing documents",
+      "id": "brief_maxfanout_080026_ce3f04b5ea",
+      "query": "what is apartment application documents for families with missing documents",
       "route": null,
       "pageFamily": "apartment-application-documents",
       "searchOpportunityScore": 0,
@@ -388,11 +395,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-29T21:03:45.515Z"
+      "createdAt": "2026-08-31T12:40:19.910Z"
     },
     {
-      "id": "brief_maxfanout_070030_f43fae8f15",
-      "query": "what is document discrepancy explanation for first time applicants with missing documents",
+      "id": "brief_maxfanout_080030_ea950f3cf1",
+      "query": "what is document discrepancy explanation for families with missing documents",
       "route": null,
       "pageFamily": "document-discrepancy-explanation",
       "searchOpportunityScore": 0,
@@ -408,11 +415,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-29T21:03:45.515Z"
+      "createdAt": "2026-08-31T12:40:19.910Z"
     },
     {
-      "id": "brief_maxfanout_070034_c976d7b534",
-      "query": "what is income verification packet for first time applicants with missing documents",
+      "id": "brief_maxfanout_080034_bbb050a33b",
+      "query": "what is income verification packet for families with missing documents",
       "route": null,
       "pageFamily": "income-verification-packet",
       "searchOpportunityScore": 0,
@@ -428,11 +435,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-29T21:03:45.516Z"
+      "createdAt": "2026-08-31T12:40:19.910Z"
     },
     {
-      "id": "brief_maxfanout_070035_73191c24ab",
-      "query": "what is credit readiness education for first time applicants with missing documents",
+      "id": "brief_maxfanout_080035_b62c3c52ea",
+      "query": "what is credit readiness education for families with missing documents",
       "route": null,
       "pageFamily": "credit-readiness-education",
       "searchOpportunityScore": 0,
@@ -448,11 +455,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-29T21:03:45.516Z"
+      "createdAt": "2026-08-31T12:40:19.910Z"
     },
     {
-      "id": "brief_maxfanout_070037_0a93b37844",
-      "query": "what is rental screening preparation for first time applicants with missing documents",
+      "id": "brief_maxfanout_080037_e90cf34bb5",
+      "query": "what is rental screening preparation for families with missing documents",
       "route": null,
       "pageFamily": "rental-screening-preparation",
       "searchOpportunityScore": 0,
@@ -468,11 +475,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-29T21:03:45.516Z"
+      "createdAt": "2026-08-31T12:40:19.910Z"
     },
     {
-      "id": "brief_maxfanout_070041_8467a041ae",
-      "query": "how to prepare letter of explanation for first time applicants with missing documents",
+      "id": "brief_maxfanout_080041_d96e920396",
+      "query": "how to prepare letter of explanation for families with missing documents",
       "route": null,
       "pageFamily": "letter-of-explanation",
       "searchOpportunityScore": 0,
@@ -488,11 +495,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-29T21:03:45.516Z"
+      "createdAt": "2026-08-31T12:40:19.910Z"
     },
     {
-      "id": "brief_maxfanout_070043_6f2f4f591c",
-      "query": "how to prepare rental application preparation for first time applicants with missing documents",
+      "id": "brief_maxfanout_080043_3d49d0cf72",
+      "query": "how to prepare rental application preparation for families with missing documents",
       "route": null,
       "pageFamily": "rental-application-preparation",
       "searchOpportunityScore": 0,
@@ -508,11 +515,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-29T21:03:45.516Z"
+      "createdAt": "2026-08-31T12:40:19.910Z"
     },
     {
-      "id": "brief_maxfanout_070044_76f7c3d815",
-      "query": "how to prepare proof of income for first time applicants with missing documents",
+      "id": "brief_maxfanout_080044_ee63f8d2f2",
+      "query": "how to prepare proof of income for families with missing documents",
       "route": null,
       "pageFamily": "proof-of-income",
       "searchOpportunityScore": 0,
@@ -528,11 +535,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-29T21:03:45.516Z"
+      "createdAt": "2026-08-31T12:40:19.910Z"
     },
     {
-      "id": "brief_maxfanout_070045_9e3ce5743d",
-      "query": "how to prepare self employed income documents for first time applicants with missing documents",
+      "id": "brief_maxfanout_080045_bcbe750f43",
+      "query": "how to prepare self employed income documents for families with missing documents",
       "route": null,
       "pageFamily": "self-employed-income-documents",
       "searchOpportunityScore": 0,
@@ -548,7 +555,7 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-29T21:03:45.516Z"
+      "createdAt": "2026-08-31T12:40:19.910Z"
     }
   ],
   "rankingBasis": {
@@ -572,7 +579,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-29T21:03:45.622Z"
+      "createdAt": "2026-08-31T12:40:20.016Z"
     },
     {
       "route": "/resources",
@@ -588,7 +595,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-29T21:03:45.622Z"
+      "createdAt": "2026-08-31T12:40:20.016Z"
     },
     {
       "route": "/pricing",
@@ -604,7 +611,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-29T21:03:45.622Z"
+      "createdAt": "2026-08-31T12:40:20.016Z"
     },
     {
       "route": "/letter-of-explanation/eviction",
@@ -620,7 +627,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-29T21:03:45.623Z"
+      "createdAt": "2026-08-31T12:40:20.016Z"
     },
     {
       "route": "/letter-of-explanation/income",
@@ -636,7 +643,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-29T21:03:45.623Z"
+      "createdAt": "2026-08-31T12:40:20.016Z"
     },
     {
       "route": "/letter-of-explanation/employment-gap",
@@ -652,7 +659,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-29T21:03:45.623Z"
+      "createdAt": "2026-08-31T12:40:20.016Z"
     },
     {
       "route": "/employment-verification-letter",
@@ -668,7 +675,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-29T21:03:45.623Z"
+      "createdAt": "2026-08-31T12:40:20.016Z"
     },
     {
       "route": "/609-dispute-letter",
@@ -684,7 +691,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-29T21:03:45.623Z"
+      "createdAt": "2026-08-31T12:40:20.016Z"
     },
     {
       "route": "/goodwill-letter-to-remove-late-payment",
@@ -700,7 +707,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-29T21:03:45.623Z"
+      "createdAt": "2026-08-31T12:40:20.016Z"
     },
     {
       "route": "/letter-of-explanation/late-payment",
@@ -716,7 +723,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-29T21:03:45.623Z"
+      "createdAt": "2026-08-31T12:40:20.016Z"
     },
     {
       "route": "/letter-of-explanation/large-deposit",
@@ -732,7 +739,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-29T21:03:45.623Z"
+      "createdAt": "2026-08-31T12:40:20.016Z"
     },
     {
       "route": "/proof-of-income-letter",
@@ -748,7 +755,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-29T21:03:45.623Z"
+      "createdAt": "2026-08-31T12:40:20.016Z"
     },
     {
       "route": "/credit-dispute-letter",
@@ -764,7 +771,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-29T21:03:45.623Z"
+      "createdAt": "2026-08-31T12:40:20.016Z"
     },
     {
       "route": "/apartment-application",
@@ -780,7 +787,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-29T21:03:45.623Z"
+      "createdAt": "2026-08-31T12:40:20.016Z"
     },
     {
       "route": "/auto-loan-documents",
@@ -796,7 +803,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-29T21:03:45.623Z"
+      "createdAt": "2026-08-31T12:40:20.016Z"
     },
     {
       "route": "/car-loan-checklist",
@@ -812,7 +819,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-29T21:03:45.623Z"
+      "createdAt": "2026-08-31T12:40:20.016Z"
     },
     {
       "route": "/documents-needed-for-car-loan",
@@ -828,7 +835,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-29T21:03:45.623Z"
+      "createdAt": "2026-08-31T12:40:20.016Z"
     },
     {
       "route": "/business-loan-documents",
@@ -844,7 +851,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-29T21:03:45.623Z"
+      "createdAt": "2026-08-31T12:40:20.016Z"
     },
     {
       "route": "/mortgage-checklist",
@@ -860,7 +867,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-29T21:03:45.623Z"
+      "createdAt": "2026-08-31T12:40:20.016Z"
     },
     {
       "route": "/important-documents-checklist",
@@ -876,7 +883,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-29T21:03:45.623Z"
+      "createdAt": "2026-08-31T12:40:20.016Z"
     }
   ],
   "hardTruth": "Low ranking potential never blocks useful onsite content. It only changes indexing, priority, and authority strategy."
