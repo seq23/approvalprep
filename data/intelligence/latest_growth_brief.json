@@ -1,165 +1,164 @@
 {
   "schemaVersion": "4.2.0",
-  "generatedAt": "2026-08-31T12:40:20.168Z",
+  "generatedAt": "2026-09-01T10:46:33.896Z",
   "sourceStatus": [
+    {
+      "id": "0c5851c7-69dd-422f-88a8-cd55eb9315e5",
+      "connectorId": "authority_requirement_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-09-01T10:46:33.729Z",
+      "recordsImported": 86
+    },
+    {
+      "id": "18f82eff-ab85-4d7f-b6ba-02b428c87193",
+      "connectorId": "growth_maintenance_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-09-01T10:46:33.577Z",
+      "recordsImported": 86
+    },
+    {
+      "id": "b705dce6-5a96-449e-b2f6-252f38b6520d",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-09-01T10:44:07.786Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "a5e96e05-9572-4778-9f38-862c155d3d5c",
+      "connectorId": "indexnow",
+      "status": "NO_DATA",
+      "ranAt": "2026-09-01T10:44:07.620Z",
+      "mode": "live",
+      "recordsImported": 0,
+      "preparedUrlCount": 86
+    },
+    {
+      "id": "d3c94d9e-a5fb-42f6-9492-87979d94d335",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-09-01T10:26:12.425Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "b0e9d705-6667-4a10-8f9d-2d7b2365ff67",
+      "connectorId": "indexnow",
+      "status": "NO_DATA",
+      "ranAt": "2026-09-01T10:26:12.263Z",
+      "mode": "live",
+      "recordsImported": 0,
+      "preparedUrlCount": 86
+    },
+    {
+      "id": "cd9cfced-ab77-438c-bf66-5eb19b11a937",
+      "connectorId": "official_source_fetcher",
+      "status": "COMPLETE",
+      "ranAt": "2026-09-01T08:36:39.908Z",
+      "recordsImported": 12
+    },
+    {
+      "id": "850339aa-0676-4304-87bb-35278741f498",
+      "connectorId": "manual_social_signal_import",
+      "status": "NO_DATA",
+      "ranAt": "2026-09-01T08:36:37.778Z",
+      "reason": "No social signal import found at data/imports/social-signals.json.",
+      "recordsImported": 0
+    },
+    {
+      "id": "322edef7-5ede-4a15-b015-a516fd18b077",
+      "connectorId": "manual_serp_csv",
+      "status": "NO_DATA",
+      "ranAt": "2026-09-01T08:36:37.635Z",
+      "reason": "No SERP CSV found at data/imports/serp.csv.",
+      "recordsImported": 0
+    },
+    {
+      "id": "8603345b-8625-4087-9b71-af5b208fe99c",
+      "connectorId": "competitor_public_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-09-01T08:36:37.495Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "1df2d3f2-d2b8-4600-a319-81a8f06de911",
+      "connectorId": "competitor_sitemap_discovery",
+      "status": "COMPLETE",
+      "ranAt": "2026-09-01T08:36:37.019Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "e5ce637c-e93b-4f16-8100-20321c3f3f4e",
+      "connectorId": "owned_site_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-09-01T08:36:36.100Z",
+      "recordsImported": 99
+    },
+    {
+      "id": "ac643eda-cd48-4c85-bc0b-0fa6ca27b124",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-09-01T08:36:35.956Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "6bdba34d-b7a3-4769-bb40-f79e598eeec7",
+      "connectorId": "google_url_inspection",
+      "status": "BUDGET_HELD",
+      "ranAt": "2026-09-01T08:36:35.758Z",
+      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
+      "recordsImported": 0
+    },
+    {
+      "id": "a70340b5-2db2-4887-b935-834dca950095",
+      "connectorId": "google_search_console_search_analytics",
+      "status": "BUDGET_HELD",
+      "ranAt": "2026-09-01T08:36:35.510Z",
+      "reason": "weekly ceiling 3 reached (3 live attempts in 7d)",
+      "recordsImported": 0
+    },
+    {
+      "id": "b4b63592-5f4c-4eb2-ab12-4524c2640031",
+      "connectorId": "retest_outcome_evaluator",
+      "status": "COMPLETE",
+      "ranAt": "2026-08-31T12:40:20.296Z",
+      "recordsImported": 0
+    },
+    {
+      "id": "a8810041-c723-46e2-b6d4-ef50b66affb0",
+      "connectorId": "retest_queue_builder",
+      "status": "COMPLETE",
+      "ranAt": "2026-08-31T12:40:20.264Z",
+      "recordsImported": 0
+    },
+    {
+      "id": "5ca4065e-8e86-4648-a70c-49489c8c5793",
+      "connectorId": "cloudflare_crawler_logs",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-08-31T12:40:20.201Z",
+      "reason": "Cloudflare crawler ingestion requires Cloudflare credentials or a manual import file.",
+      "recordsImported": 0
+    },
+    {
+      "id": "fe94bf24-d002-43ca-bf1a-9cfb75645192",
+      "connectorId": "growth_brief_generation",
+      "status": "COMPLETE",
+      "ranAt": "2026-08-31T12:40:20.170Z",
+      "recordsImported": 40
+    },
     {
       "id": "9cd3ad6a-4783-40d7-88d4-a5aa95deaec7",
       "connectorId": "page_action_recommendation",
       "status": "COMPLETE",
       "ranAt": "2026-08-31T12:40:20.114Z",
       "recordsImported": 5430
-    },
-    {
-      "id": "537453b3-fb52-430f-9538-4223baeb8851",
-      "connectorId": "authority_requirement_analysis",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-31T12:40:20.052Z",
-      "recordsImported": 86
-    },
-    {
-      "id": "a4f0cdc3-e29c-42c1-9a11-0511722c9c14",
-      "connectorId": "growth_maintenance_analysis",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-31T12:40:20.019Z",
-      "recordsImported": 86
-    },
-    {
-      "id": "f0515f87-d1ed-4b2b-84ec-3805695dee32",
-      "connectorId": "content_opportunity_analysis",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-31T12:40:19.982Z",
-      "recordsImported": 5430
-    },
-    {
-      "id": "0efab6cb-528c-4fda-ac49-fcddc74984c6",
-      "connectorId": "official_source_fetcher",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-31T12:40:18.410Z",
-      "recordsImported": 12
-    },
-    {
-      "id": "d361af9c-c0eb-4537-a37d-0d809a0f5323",
-      "connectorId": "manual_social_signal_import",
-      "status": "NO_DATA",
-      "ranAt": "2026-08-31T12:40:14.683Z",
-      "reason": "No social signal import found at data/imports/social-signals.json.",
-      "recordsImported": 0
-    },
-    {
-      "id": "03eb811a-1c50-43fb-b5a4-86d64fe27e7c",
-      "connectorId": "manual_serp_csv",
-      "status": "NO_DATA",
-      "ranAt": "2026-08-31T12:40:14.651Z",
-      "reason": "No SERP CSV found at data/imports/serp.csv.",
-      "recordsImported": 0
-    },
-    {
-      "id": "ec786a8a-ad96-4f6f-b745-2964cdc342f7",
-      "connectorId": "competitor_public_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-31T12:40:14.619Z",
-      "recordsImported": 2
-    },
-    {
-      "id": "01cc7c1e-ef8a-4316-8633-05c6c07e7732",
-      "connectorId": "competitor_sitemap_discovery",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-31T12:40:14.230Z",
-      "recordsImported": 2
-    },
-    {
-      "id": "a71c0f51-9e0d-4016-a55d-355ef28485dc",
-      "connectorId": "owned_site_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-31T12:40:13.309Z",
-      "recordsImported": 99
-    },
-    {
-      "id": "5b028ee6-5d61-4013-ad49-c84837c849b0",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-31T12:40:13.276Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "8b7cebbd-0201-42be-9f15-6818c343bd1f",
-      "connectorId": "google_url_inspection",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-31T12:40:13.244Z",
-      "mode": "live",
-      "recordsImported": 25
-    },
-    {
-      "id": "ff819d9c-9309-4dee-8ce0-265f3513bc3c",
-      "connectorId": "google_search_console_search_analytics",
-      "status": "BUDGET_HELD",
-      "ranAt": "2026-08-31T12:37:34.408Z",
-      "reason": "weekly ceiling 3 reached (3 live attempts in 7d)",
-      "recordsImported": 0
-    },
-    {
-      "id": "d3f0814e-abd6-4cc2-a112-2f816a9edee5",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-31T10:42:42.886Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "1448be26-edb9-449e-8e74-764db8a16fdb",
-      "connectorId": "indexnow",
-      "status": "NO_DATA",
-      "ranAt": "2026-08-31T10:42:42.749Z",
-      "mode": "live",
-      "recordsImported": 0,
-      "preparedUrlCount": 86
-    },
-    {
-      "id": "1abb1afe-3c06-4d38-bb42-c94dac8f465c",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-31T10:23:51.535Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "b4d3e2a5-1cd8-4931-9c3f-fe6f214bd45a",
-      "connectorId": "indexnow",
-      "status": "NO_DATA",
-      "ranAt": "2026-08-31T10:23:51.367Z",
-      "mode": "live",
-      "recordsImported": 0,
-      "preparedUrlCount": 86
-    },
-    {
-      "id": "c213b4e6-390c-4f6f-8162-0cc7e3ddfb22",
-      "connectorId": "official_source_fetcher",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-31T08:38:01.644Z",
-      "recordsImported": 12
-    },
-    {
-      "id": "40530026-fc12-4595-ba97-f96c2290a358",
-      "connectorId": "manual_social_signal_import",
-      "status": "NO_DATA",
-      "ranAt": "2026-08-31T08:37:58.221Z",
-      "reason": "No social signal import found at data/imports/social-signals.json.",
-      "recordsImported": 0
-    },
-    {
-      "id": "de90c7a4-2862-4caf-8aa2-1666ca95ca4a",
-      "connectorId": "manual_serp_csv",
-      "status": "NO_DATA",
-      "ranAt": "2026-08-31T08:37:58.079Z",
-      "reason": "No SERP CSV found at data/imports/serp.csv.",
-      "recordsImported": 0
     }
   ],
   "topContentOpportunities": [
     {
-      "id": "brief_maxfanout_080001_f34fc8de8d",
-      "query": "what is letter of explanation for families with missing documents",
+      "id": "brief_maxfanout_085001_c62e1a61f3",
+      "query": "what is letter of explanation for renters with limited credit history",
       "route": null,
       "pageFamily": "letter-of-explanation",
       "searchOpportunityScore": 0,
@@ -167,59 +166,19 @@
       "competitorGapScore": 0,
       "userUtilityScore": 80,
       "productSupportScore": 80,
-      "complianceRiskScore": 20,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": false,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-31T12:40:19.908Z"
-    },
-    {
-      "id": "brief_maxfanout_080003_62fb5bfef0",
-      "query": "what is rental application preparation for families with missing documents",
-      "route": null,
-      "pageFamily": "rental-application-preparation",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 20,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": false,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-31T12:40:19.908Z"
-    },
-    {
-      "id": "brief_maxfanout_080004_82edc06070",
-      "query": "what is proof of income for families with missing documents",
-      "route": null,
-      "pageFamily": "proof-of-income",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
       "complianceRiskScore": 65,
       "authorityRequirementScore": 25,
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
+      "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-31T12:40:19.908Z"
+      "createdAt": "2026-09-01T09:34:25.985Z"
     },
     {
-      "id": "brief_maxfanout_080005_caa5e87c1a",
-      "query": "what is self employed income documents for families with missing documents",
+      "id": "brief_maxfanout_085005_59363abde0",
+      "query": "what is self employed income documents for renters with limited credit history",
       "route": null,
       "pageFamily": "self-employed-income-documents",
       "searchOpportunityScore": 0,
@@ -235,13 +194,13 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-31T12:40:19.908Z"
+      "createdAt": "2026-09-01T09:34:25.985Z"
     },
     {
-      "id": "brief_maxfanout_080010_6ee3459c0e",
-      "query": "what is credit report understanding for families with missing documents",
+      "id": "brief_maxfanout_085006_240b961b40",
+      "query": "what is auto loan documents for renters with limited credit history",
       "route": null,
-      "pageFamily": "credit-report-understanding",
+      "pageFamily": "auto-loan-documents",
       "searchOpportunityScore": 0,
       "citationOpportunityScore": 50,
       "competitorGapScore": 0,
@@ -255,13 +214,13 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-31T12:40:19.910Z"
+      "createdAt": "2026-09-01T09:34:25.987Z"
     },
     {
-      "id": "brief_maxfanout_080011_ec09229e08",
-      "query": "what is credit dispute self service for families with missing documents",
+      "id": "brief_maxfanout_085009_62c9f0f4de",
+      "query": "what is business loan documents for renters with limited credit history",
       "route": null,
-      "pageFamily": "credit-dispute-self-service",
+      "pageFamily": "business-loan-documents",
       "searchOpportunityScore": 0,
       "citationOpportunityScore": 50,
       "competitorGapScore": 0,
@@ -275,13 +234,13 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-31T12:40:19.910Z"
+      "createdAt": "2026-09-01T09:34:25.987Z"
     },
     {
-      "id": "brief_maxfanout_080012_fb9c57a7d3",
-      "query": "what is credit utilization for families with missing documents",
+      "id": "brief_maxfanout_085014_7606d6fc1b",
+      "query": "what is collections documentation for renters with limited credit history",
       "route": null,
-      "pageFamily": "credit-utilization",
+      "pageFamily": "collections-documentation",
       "searchOpportunityScore": 0,
       "citationOpportunityScore": 50,
       "competitorGapScore": 0,
@@ -292,14 +251,34 @@
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
+      "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-31T12:40:19.910Z"
+      "createdAt": "2026-09-01T09:34:25.987Z"
     },
     {
-      "id": "brief_maxfanout_080016_5492967c23",
-      "query": "what is gift letter explanation for families with missing documents",
+      "id": "brief_maxfanout_085015_1aa3e43a47",
+      "query": "what is debt documentation for renters with limited credit history",
+      "route": null,
+      "pageFamily": "debt-documentation",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-01T09:34:25.987Z"
+    },
+    {
+      "id": "brief_maxfanout_085016_cf614fc738",
+      "query": "what is gift letter explanation for renters with limited credit history",
       "route": null,
       "pageFamily": "gift-letter-explanation",
       "searchOpportunityScore": 0,
@@ -307,41 +286,61 @@
       "competitorGapScore": 0,
       "userUtilityScore": 80,
       "productSupportScore": 80,
-      "complianceRiskScore": 20,
+      "complianceRiskScore": 65,
       "authorityRequirementScore": 25,
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": false,
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-31T12:40:19.910Z"
+      "createdAt": "2026-09-01T09:34:25.987Z"
     },
     {
-      "id": "brief_maxfanout_080018_b5f81bbdca",
-      "query": "what is address history explanation for families with missing documents",
+      "id": "brief_maxfanout_085021_fed660b290",
+      "query": "what is source of funds documentation for renters with limited credit history",
       "route": null,
-      "pageFamily": "address-history-explanation",
+      "pageFamily": "source-of-funds-documentation",
       "searchOpportunityScore": 0,
       "citationOpportunityScore": 50,
       "competitorGapScore": 0,
       "userUtilityScore": 80,
       "productSupportScore": 30,
-      "complianceRiskScore": 20,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-01T09:34:25.987Z"
+    },
+    {
+      "id": "brief_maxfanout_085023_661bde1293",
+      "query": "what is underwriting document checklist for renters with limited credit history",
+      "route": null,
+      "pageFamily": "underwriting-document-checklist",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 80,
+      "complianceRiskScore": 65,
       "authorityRequirementScore": 25,
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
       "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": false,
+      "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-31T12:40:19.910Z"
+      "createdAt": "2026-09-01T09:34:25.987Z"
     },
     {
-      "id": "brief_maxfanout_080019_dcbd571a9d",
-      "query": "what is income change explanation for families with missing documents",
+      "id": "brief_maxfanout_085025_eb89f49431",
+      "query": "what is first time homebuyer documents for renters with limited credit history",
       "route": null,
-      "pageFamily": "income-change-explanation",
+      "pageFamily": "first-time-homebuyer-documents",
       "searchOpportunityScore": 0,
       "citationOpportunityScore": 50,
       "competitorGapScore": 0,
@@ -355,31 +354,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-31T12:40:19.910Z"
+      "createdAt": "2026-09-01T09:34:25.987Z"
     },
     {
-      "id": "brief_maxfanout_080020_485cdbcf1b",
-      "query": "what is employment verification for families with missing documents",
-      "route": null,
-      "pageFamily": "employment-verification",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-31T12:40:19.910Z"
-    },
-    {
-      "id": "brief_maxfanout_080026_ce3f04b5ea",
-      "query": "what is apartment application documents for families with missing documents",
+      "id": "brief_maxfanout_085026_49ca8ce42e",
+      "query": "what is apartment application documents for renters with limited credit history",
       "route": null,
       "pageFamily": "apartment-application-documents",
       "searchOpportunityScore": 0,
@@ -387,19 +366,59 @@
       "competitorGapScore": 0,
       "userUtilityScore": 80,
       "productSupportScore": 30,
-      "complianceRiskScore": 20,
+      "complianceRiskScore": 65,
       "authorityRequirementScore": 25,
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
       "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": false,
+      "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-31T12:40:19.910Z"
+      "createdAt": "2026-09-01T09:34:25.987Z"
     },
     {
-      "id": "brief_maxfanout_080030_ea950f3cf1",
-      "query": "what is document discrepancy explanation for families with missing documents",
+      "id": "brief_maxfanout_085027_b4346220c3",
+      "query": "what is LLC funding documents for renters with limited credit history",
+      "route": null,
+      "pageFamily": "llc-funding-documents",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "checklist_or_numbered_steps",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-01T09:34:25.987Z"
+    },
+    {
+      "id": "brief_maxfanout_085028_a9dcc4cb51",
+      "query": "what is financial document organization for renters with limited credit history",
+      "route": null,
+      "pageFamily": "financial-document-organization",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-01T09:34:25.987Z"
+    },
+    {
+      "id": "brief_maxfanout_085030_8aab01307e",
+      "query": "what is document discrepancy explanation for renters with limited credit history",
       "route": null,
       "pageFamily": "document-discrepancy-explanation",
       "searchOpportunityScore": 0,
@@ -407,21 +426,21 @@
       "competitorGapScore": 0,
       "userUtilityScore": 80,
       "productSupportScore": 30,
-      "complianceRiskScore": 20,
+      "complianceRiskScore": 65,
       "authorityRequirementScore": 25,
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": false,
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-31T12:40:19.910Z"
+      "createdAt": "2026-09-01T09:34:25.987Z"
     },
     {
-      "id": "brief_maxfanout_080034_bbb050a33b",
-      "query": "what is income verification packet for families with missing documents",
+      "id": "brief_maxfanout_085031_4ab12cd303",
+      "query": "what is identity and address documents for renters with limited credit history",
       "route": null,
-      "pageFamily": "income-verification-packet",
+      "pageFamily": "identity-and-address-documents",
       "searchOpportunityScore": 0,
       "citationOpportunityScore": 50,
       "competitorGapScore": 0,
@@ -435,93 +454,93 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-31T12:40:19.910Z"
+      "createdAt": "2026-09-01T09:34:25.987Z"
     },
     {
-      "id": "brief_maxfanout_080035_b62c3c52ea",
-      "query": "what is credit readiness education for families with missing documents",
+      "id": "brief_maxfanout_085032_3d8409dfa0",
+      "query": "what is supporting evidence checklist for renters with limited credit history",
       "route": null,
-      "pageFamily": "credit-readiness-education",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-31T12:40:19.910Z"
-    },
-    {
-      "id": "brief_maxfanout_080037_e90cf34bb5",
-      "query": "what is rental screening preparation for families with missing documents",
-      "route": null,
-      "pageFamily": "rental-screening-preparation",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 20,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": false,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-31T12:40:19.910Z"
-    },
-    {
-      "id": "brief_maxfanout_080041_d96e920396",
-      "query": "how to prepare letter of explanation for families with missing documents",
-      "route": null,
-      "pageFamily": "letter-of-explanation",
+      "pageFamily": "supporting-evidence-checklist",
       "searchOpportunityScore": 0,
       "citationOpportunityScore": 50,
       "competitorGapScore": 0,
       "userUtilityScore": 80,
       "productSupportScore": 80,
-      "complianceRiskScore": 20,
+      "complianceRiskScore": 65,
       "authorityRequirementScore": 25,
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
       "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": false,
+      "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-31T12:40:19.910Z"
+      "createdAt": "2026-09-01T09:34:25.987Z"
     },
     {
-      "id": "brief_maxfanout_080043_3d49d0cf72",
-      "query": "how to prepare rental application preparation for families with missing documents",
+      "id": "brief_maxfanout_085033_076927962e",
+      "query": "what is application cover letter for renters with limited credit history",
       "route": null,
-      "pageFamily": "rental-application-preparation",
+      "pageFamily": "application-cover-letter",
       "searchOpportunityScore": 0,
       "citationOpportunityScore": 50,
       "competitorGapScore": 0,
       "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 20,
+      "productSupportScore": 80,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-01T09:34:25.987Z"
+    },
+    {
+      "id": "brief_maxfanout_085038_a2239b1fba",
+      "query": "what is loan application checklist for renters with limited credit history",
+      "route": null,
+      "pageFamily": "loan-application-checklist",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 80,
+      "complianceRiskScore": 65,
       "authorityRequirementScore": 25,
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
       "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": false,
+      "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-31T12:40:19.910Z"
+      "createdAt": "2026-09-01T09:34:25.987Z"
     },
     {
-      "id": "brief_maxfanout_080044_ee63f8d2f2",
-      "query": "how to prepare proof of income for families with missing documents",
+      "id": "brief_maxfanout_085039_726fe5f847",
+      "query": "what is business funding checklist for renters with limited credit history",
       "route": null,
-      "pageFamily": "proof-of-income",
+      "pageFamily": "business-funding-checklist",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 80,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "checklist_or_numbered_steps",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-01T09:34:25.987Z"
+    },
+    {
+      "id": "brief_maxfanout_085040_c8be7c09ee",
+      "query": "what is consumer finance documentation for renters with limited credit history",
+      "route": null,
+      "pageFamily": "consumer-finance-documentation",
       "searchOpportunityScore": 0,
       "citationOpportunityScore": 50,
       "competitorGapScore": 0,
@@ -532,30 +551,10 @@
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
+      "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-31T12:40:19.910Z"
-    },
-    {
-      "id": "brief_maxfanout_080045_bcbe750f43",
-      "query": "how to prepare self employed income documents for families with missing documents",
-      "route": null,
-      "pageFamily": "self-employed-income-documents",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-08-31T12:40:19.910Z"
+      "createdAt": "2026-09-01T09:34:25.987Z"
     }
   ],
   "rankingBasis": {
@@ -579,7 +578,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-31T12:40:20.016Z"
+      "createdAt": "2026-09-01T10:46:33.574Z"
     },
     {
       "route": "/resources",
@@ -595,7 +594,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-31T12:40:20.016Z"
+      "createdAt": "2026-09-01T10:46:33.574Z"
     },
     {
       "route": "/pricing",
@@ -611,7 +610,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-31T12:40:20.016Z"
+      "createdAt": "2026-09-01T10:46:33.574Z"
     },
     {
       "route": "/letter-of-explanation/eviction",
@@ -627,7 +626,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-31T12:40:20.016Z"
+      "createdAt": "2026-09-01T10:46:33.575Z"
     },
     {
       "route": "/letter-of-explanation/income",
@@ -643,7 +642,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-31T12:40:20.016Z"
+      "createdAt": "2026-09-01T10:46:33.575Z"
     },
     {
       "route": "/letter-of-explanation/employment-gap",
@@ -659,7 +658,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-31T12:40:20.016Z"
+      "createdAt": "2026-09-01T10:46:33.575Z"
     },
     {
       "route": "/employment-verification-letter",
@@ -675,7 +674,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-31T12:40:20.016Z"
+      "createdAt": "2026-09-01T10:46:33.575Z"
     },
     {
       "route": "/609-dispute-letter",
@@ -691,7 +690,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-31T12:40:20.016Z"
+      "createdAt": "2026-09-01T10:46:33.575Z"
     },
     {
       "route": "/goodwill-letter-to-remove-late-payment",
@@ -707,7 +706,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-31T12:40:20.016Z"
+      "createdAt": "2026-09-01T10:46:33.575Z"
     },
     {
       "route": "/letter-of-explanation/late-payment",
@@ -723,7 +722,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-31T12:40:20.016Z"
+      "createdAt": "2026-09-01T10:46:33.575Z"
     },
     {
       "route": "/letter-of-explanation/large-deposit",
@@ -739,7 +738,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-31T12:40:20.016Z"
+      "createdAt": "2026-09-01T10:46:33.575Z"
     },
     {
       "route": "/proof-of-income-letter",
@@ -755,7 +754,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-31T12:40:20.016Z"
+      "createdAt": "2026-09-01T10:46:33.575Z"
     },
     {
       "route": "/credit-dispute-letter",
@@ -771,7 +770,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-08-31T12:40:20.016Z"
+      "createdAt": "2026-09-01T10:46:33.575Z"
     },
     {
       "route": "/apartment-application",
@@ -787,7 +786,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-31T12:40:20.016Z"
+      "createdAt": "2026-09-01T10:46:33.575Z"
     },
     {
       "route": "/auto-loan-documents",
@@ -803,7 +802,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-31T12:40:20.016Z"
+      "createdAt": "2026-09-01T10:46:33.575Z"
     },
     {
       "route": "/car-loan-checklist",
@@ -819,7 +818,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-31T12:40:20.016Z"
+      "createdAt": "2026-09-01T10:46:33.575Z"
     },
     {
       "route": "/documents-needed-for-car-loan",
@@ -835,7 +834,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-31T12:40:20.016Z"
+      "createdAt": "2026-09-01T10:46:33.575Z"
     },
     {
       "route": "/business-loan-documents",
@@ -851,7 +850,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-31T12:40:20.016Z"
+      "createdAt": "2026-09-01T10:46:33.575Z"
     },
     {
       "route": "/mortgage-checklist",
@@ -867,7 +866,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-31T12:40:20.016Z"
+      "createdAt": "2026-09-01T10:46:33.575Z"
     },
     {
       "route": "/important-documents-checklist",
@@ -883,7 +882,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-08-31T12:40:20.016Z"
+      "createdAt": "2026-09-01T10:46:33.575Z"
     }
   ],
   "hardTruth": "Low ranking potential never blocks useful onsite content. It only changes indexing, priority, and authority strategy."
