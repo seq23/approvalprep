@@ -11,7 +11,7 @@ for (const route of manifest.routes || []) {
   const rec = recByRoute.get(route.path) || {};
   needs.push({
     id: `need-${String(needs.length + 1).padStart(4,"0")}`,
-    targetUrl: `https://approvalprep.com${route.path}`,
+    targetUrl: `https://approvalprep.com${route.path.replace(/\/+$/, "")}/`,
     targetRoute: route.path,
     targetTitle: route.title,
     priority,

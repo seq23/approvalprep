@@ -3,7 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import RelatedContent from "../../components/RelatedContent.astro";
 import TrustAndBoundaryBand from "../../components/TrustAndBoundaryBand.astro";
 import RecommendationSummary from "../../components/RecommendationSummary.astro";
-import { articleSchema, breadcrumbSchema, itemListSchema, canonicalUrl } from "../../lib/schema";
+import { articleSchema, breadcrumbSchema, itemListSchema, canonicalUrl, internalHref } from "../../lib/schema";
 import registry from "../../../data/reports/public_report_registry.json";
 
 export function getStaticPaths() {
@@ -31,8 +31,8 @@ const remainingSections = (report.sections || []).filter((section) => section !=
       <h1>{report.title}</h1>
       <p class="lead">{report.summary}</p>
       <div class="hero-actions">
-        <a class="button primary-button" href="/resources">Browse resources</a>
-        <a class="button secondary-button" href={`/pricing#${report.targetProductSku}`}>Compare related kit</a>
+        <a class="button primary-button" href="/resources/">Browse resources</a>
+        <a class="button secondary-button" href={internalHref(`/pricing#${report.targetProductSku}`)}>Compare related kit</a>
       </div>
     </div>
     <aside class="hero-panel">

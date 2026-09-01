@@ -1,4 +1,5 @@
 ---
+import { internalHref } from "../lib/schema";
 // The professional boundary block. This is the on-page statement that
 // ApprovalPrep is not a lawyer or a licensed financial professional and is not
 // a substitute for one, plus a free authoritative resource for the situation
@@ -37,7 +38,7 @@ const copy = boundaryData.families[family] || boundaryData.families.general;
         <p class="fine">{copy.resourcesLabel}:</p>
         <ul class="boundary-resources">
           {copy.resources.map((resource) => (
-            <li><a href={resource.url} rel="noopener" target="_blank">{resource.label}</a></li>
+            <li><a href={internalHref(resource.url)} rel="noopener" target="_blank">{resource.label}</a></li>
           ))}
         </ul>
       </aside>

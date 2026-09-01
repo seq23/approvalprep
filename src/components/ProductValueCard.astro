@@ -1,4 +1,5 @@
 ---
+import { internalHref } from "../lib/schema";
 const { product } = Astro.props;
 ---
 <article class={`card product-card ${product.sku === "complete-approvalprep-bundle" ? "featured-product" : ""}`} id={product.sku}>
@@ -16,7 +17,7 @@ const { product } = Astro.props;
   {product.stripe_enabled ? (
     <button class="button primary-button checkout-button" type="button" data-sku={product.sku}>{product.cta_label}</button>
   ) : (
-    <a class="button primary-button" href={product.download ? `/download?sku=${product.sku}` : "/pricing"}>{product.cta_label}</a>
+    <a class="button primary-button" href={internalHref(product.download ? `/download?sku=${product.sku}` : "/pricing")}>{product.cta_label}</a>
   )}
   <p class="fine checkout-status" aria-live="polite"></p>
   <p class="fine">{product.risk_note}</p>

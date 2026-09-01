@@ -20,7 +20,7 @@ import HowItWorks from "./HowItWorks.astro";
 import UseCaseList from "./UseCaseList.astro";
 import FAQBlock from "./FAQBlock.astro";
 import TrustAndBoundaryBand from "./TrustAndBoundaryBand.astro";
-import { webPageSchema, itemListSchema, faqSchema } from "../lib/schema";
+import { webPageSchema, itemListSchema, faqSchema, internalHref, canonicalUrl } from "../lib/schema";
 
 const {
   path,
@@ -37,7 +37,7 @@ const {
 // so what the page shows and what the route declares cannot drift apart.
 const ctaLabel = copy.primaryCta;
 
-const canonical = `https://approvalprep.com${path}`;
+const canonical = canonicalUrl(path);
 const schema = [
   webPageSchema({ title: copy.heading, description: copy.lead, url: canonical }),
   itemListSchema({ name: entriesHeading, items: entries.map((entry) => entry.title) }),
@@ -51,8 +51,8 @@ const schema = [
       <h1>{copy.heading}</h1>
       <p class="lead">{copy.lead}</p>
       <div class="hero-actions">
-        <a class="button primary-button" href={ctaHref}>{ctaLabel}</a>
-        <a class="button secondary-button" href="/letter-writing-studio">{copy.secondaryCta}</a>
+        <a class="button primary-button" href={internalHref(ctaHref)}>{ctaLabel}</a>
+        <a class="button secondary-button" href="/letter-writing-studio/">{copy.secondaryCta}</a>
       </div>
     </div>
     <aside class="hero-panel">
@@ -72,7 +72,7 @@ const schema = [
     <p class="lead">{entriesLead}</p>
     <div class="resource-grid">
       {entries.map((entry) => (
-        <a class="card resource-card" href={entry.path}>
+        <a class="card resource-card" href={internalHref(entry.path)}>
           <span>{entry.label}</span>
           <h3>{entry.title}</h3>
           <p>{entry.summary}</p>

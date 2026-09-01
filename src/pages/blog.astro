@@ -1,4 +1,5 @@
 ---
+import { internalHref } from "../lib/schema";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import answersData from "../../data/content/generated_answers.json";
 import RecommendationSummary from "../components/RecommendationSummary.astro";
@@ -14,8 +15,8 @@ const slugify = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").repla
     <h1>Daily document-prep answers live here.</h1>
     <p class="lead">This is the public home for ApprovalPrep’s daily and cadenced publishing: short explainers, route-specific answers, preparation prompts, and self-service document guidance.</p>
     <div class="hero-actions">
-      <a class="button primary-button" href="/letter-writing-studio">Start free for $0</a>
-      <a class="button secondary-button" href="/resources">Browse all resources</a>
+      <a class="button primary-button" href="/letter-writing-studio/">Start free for $0</a>
+      <a class="button secondary-button" href="/resources/">Browse all resources</a>
     </div>
   </section>
   {/* recommendation_summary: this hub's own copy record in src/data/content.ts
@@ -38,7 +39,7 @@ const slugify = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").repla
           <p class="eyebrow">{item.riskLevel} risk</p>
           <h3>{item.title}</h3>
           <p>{item.answer}</p>
-          <div class="hero-actions"><a class="button primary-button" href={`/blog/${slugify(item.title)}`}>Read answer page</a><a class="button secondary-button" href={item.route}>Related page</a></div>
+          <div class="hero-actions"><a class="button primary-button" href={internalHref(`/blog/${slugify(item.title)}`)}>Read answer page</a><a class="button secondary-button" href={internalHref(item.route)}>Related page</a></div>
         </article>
       ))}
     </div>

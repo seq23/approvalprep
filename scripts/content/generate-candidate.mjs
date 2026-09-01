@@ -3,6 +3,7 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import vm from "node:vm";
 import { clampToPublicationBudget } from "../lib/publication_budget.mjs";
+import { isAnswerableRoute } from "./answer-eligibility.mjs";
 
 fs.mkdirSync("data/content", { recursive: true });
 
@@ -77,9 +78,23 @@ if (existingRelease) {
 }
 
 const routeCopy = loadRouteCopy();
+// `risk === "low"` and `index === true` say a route is safe to write about and
+// worth indexing. Neither says the route is something a person prepares for,
+// and every title here is a preparation question stamped onto route.title. That
+// gap produced "How should I prepare for Pricing?" and four more like it: a
+// question nobody asks, answered by a checklist unrelated to the page named.
+// isAnswerableRoute() closes it on the manifest's own page_intent field.
 const lowRiskRoutes = manifest.routes
   .filter((route) => route.type === "public" && route.index && route.path !== "/" && route.risk === "low")
+  .filter(isAnswerableRoute)
   .sort((a, b) => manifest.routes.indexOf(a) - manifest.routes.indexOf(b));
+
+// A generator that silently selects nothing publishes nothing and reports
+// success. If the manifest ever loses its page_intent values this must be loud.
+if (!lowRiskRoutes.length) {
+  console.error("[content:generate] FAIL no answerable route survived page_intent eligibility; refusing to run an empty generation");
+  process.exit(1);
+}
 
 const variants = [
   {

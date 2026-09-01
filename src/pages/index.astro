@@ -1,4 +1,5 @@
 ---
+import { internalHref } from "../lib/schema";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProductGrid from "../components/ProductGrid.astro";
 import BoundaryNotice from "../components/BoundaryNotice.astro";
@@ -22,7 +23,7 @@ import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComp
       <p class="eyebrow">DIY credit letters + approval paperwork</p>
       <h1>Self-service credit repair letters and approval-ready documents, without the high monthly fees.</h1>
       <p class="lead">ApprovalPrep gives you direct-download PDF and editable DOCX kits for credit report questions, goodwill letters, debt validation, rental applications, income proof, loan reviews, and explanation letters.</p>
-      <OutcomeCTA primary="Get DIY credit letters — $59" secondary="Compare all kits and prices" href="/pricing#credit-letter-kit" secondaryHref="/pricing" />
+      <OutcomeCTA primary="Get DIY credit letters — $59" secondary="Compare all kits and prices" href="/pricing/#credit-letter-kit" secondaryHref="/pricing" />
       <TrustBar signals={trustSignals} />
     </div>
     <aside class="hero-panel" aria-label="ApprovalPrep process">
@@ -35,8 +36,8 @@ import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComp
         <li>Pay once for the kit instead of starting an open-ended monthly service.</li>
       </ol>
       <div class="hero-actions">
-        <a class="button primary-button" href="/pricing">See kits from $39</a>
-        <a class="button secondary-button" href="/letter-writing-studio">Draft for $0 first</a>
+        <a class="button primary-button" href="/pricing/">See kits from $39</a>
+        <a class="button secondary-button" href="/letter-writing-studio/">Draft for $0 first</a>
       </div>
     </aside>
   </section>
@@ -66,7 +67,7 @@ import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComp
           <li>Download the PDF guide and editable DOCX file after Stripe verifies checkout.</li>
           <li>Open the DOCX, replace the placeholders with your true facts, review it, and send it yourself.</li>
         </ol>
-        <a class="button primary-button" href="/pricing">Compare kits</a>
+        <a class="button primary-button" href="/pricing/">Compare kits</a>
       </article>
       <article class="card path-choice-card">
         <span class="step-number">2</span>
@@ -76,7 +77,7 @@ import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComp
           <li>Answer guided prompts to prefill a first-pass draft locally in your browser.</li>
           <li>Copy the draft into your editable DOCX, review it, and send only what is true.</li>
         </ol>
-        <a class="button secondary-button" href="/letter-writing-studio">Try our Letter Studio - Free!</a>
+        <a class="button secondary-button" href="/letter-writing-studio/">Try our Letter Studio - Free!</a>
       </article>
     </div>
   </div></section>
@@ -86,7 +87,7 @@ import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComp
     <p class="lead">People do not shop for paperwork. They shop for the next approval that paperwork can protect. Start with the situation, then buy the direct-download kit that matches it.</p>
     <div class="decision-grid">
       {homepageChooser.map((item) => (
-        <a class="decision-card" href={item.href}>
+        <a class="decision-card" href={internalHref(item.href)}>
           <span>{item.product}</span>
           <h3>{item.title}</h3>
           <p>{item.copy}</p>
@@ -100,7 +101,7 @@ import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComp
     <p class="eyebrow">Compare kits</p>
     <h2>Not sure which one fits? Compare the common paths.</h2>
     <div class="table-wrap"><table class="comparison-table"><thead><tr><th>Product</th><th>Best for</th><th>Includes</th><th>Price</th></tr></thead><tbody>
-      {productComparison.map((row) => <tr><td><a href={row.href}>{row.product}</a></td><td>{row.bestFor}</td><td>{row.includes}</td><td><strong>{row.price}</strong></td></tr>)}
+      {productComparison.map((row) => <tr><td><a href={internalHref(row.href)}>{row.product}</a></td><td>{row.bestFor}</td><td>{row.includes}</td><td><strong>{row.price}</strong></td></tr>)}
     </tbody></table></div>
   </div></section>
   <section class="band"><div class="shell">
@@ -117,5 +118,5 @@ import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComp
   <section class="band"><div class="shell"><DataPrivacyNotice /></div></section>
   <section class="band"><div class="shell"><CreditBoundaryExplainer /></div></section>
   <section class="band"><div class="shell"><BoundaryNotice /></div></section>
-  <FinalCTA primary="Start free for $0" secondary="Compare all kits" href="/letter-writing-studio" secondaryHref="/pricing" />
+  <FinalCTA primary="Start free for $0" secondary="Compare all kits" href="/letter-writing-studio/" secondaryHref="/pricing" />
 </BaseLayout>

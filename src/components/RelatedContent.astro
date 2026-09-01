@@ -1,4 +1,5 @@
 ---
+import { internalHref } from "../lib/schema";
 import graph from "../../data/atlas/internal_link_graph.json";
 const { path = "", title = "Related ApprovalPrep resources" } = Astro.props;
 const record = graph.records.find((item) => item.path === path);
@@ -11,7 +12,7 @@ const links = (record?.links || []).slice(0, 5);
       <h2>{title}</h2>
       <div class="resource-grid related-content-grid">
         {links.map((link) => (
-          <a class="card resource-card" href={link.href}>
+          <a class="card resource-card" href={internalHref(link.href)}>
             <span>{link.reason.replaceAll("_", " ")}</span>
             <h3>{link.title}</h3>
             <p>{link.anchorText}</p>

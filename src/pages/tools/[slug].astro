@@ -4,7 +4,7 @@ import RelatedContent from "../../components/RelatedContent.astro";
 import TrustAndBoundaryBand from "../../components/TrustAndBoundaryBand.astro";
 import RecommendationSummary from "../../components/RecommendationSummary.astro";
 import RouteFaq from "../../components/RouteFaq.astro";
-import { webPageSchema, breadcrumbSchema, itemListSchema, faqSchema, canonicalUrl } from "../../lib/schema";
+import { webPageSchema, breadcrumbSchema, itemListSchema, faqSchema, canonicalUrl, internalHref } from "../../lib/schema";
 import { routeAnswers } from "../../lib/routeAnswers";
 import registry from "../../../data/tools/tool_registry.json";
 
@@ -34,8 +34,8 @@ const schema = [
       <h1>{tool.title}</h1>
       <p class="lead">{tool.summary}</p>
       <div class="hero-actions">
-        <a class="button primary-button" href="/letter-writing-studio">Start free for $0</a>
-        <a class="button secondary-button" href={`/pricing#${tool.targetProductSku}`}>Compare the matching kit</a>
+        <a class="button primary-button" href="/letter-writing-studio/">Start free for $0</a>
+        <a class="button secondary-button" href={internalHref(`/pricing#${tool.targetProductSku}`)}>Compare the matching kit</a>
       </div>
     </div>
     <aside class="hero-panel">

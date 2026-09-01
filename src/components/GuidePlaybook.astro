@@ -1,4 +1,5 @@
 ---
+import { internalHref } from "../lib/schema";
 const {
   copy,
   product,
@@ -16,8 +17,8 @@ const avoid = copy.commonMistakes?.length ? copy.commonMistakes : [];
       <h2>Use this page to decide what to write, what to attach, and what to avoid.</h2>
       <p class="lead">ApprovalPrep guides are meant to move you from uncertainty to a cleaner self-service packet. They are not legal, financial, lending, or credit repair advice.</p>
       <div class="hero-actions">
-        <a class="button primary-button" href={studioHref}>Start free for $0</a>
-        <a class="button secondary-button" href={ctaHref}>{product ? `View ${product.name} — ${product.priceLabel}` : "Compare kits and prices"}</a>
+        <a class="button primary-button" href={internalHref(studioHref)}>Start free for $0</a>
+        <a class="button secondary-button" href={internalHref(ctaHref)}>{product ? `View ${product.name} — ${product.priceLabel}` : "Compare kits and prices"}</a>
       </div>
     </div>
     <div class="guide-playbook-grid">

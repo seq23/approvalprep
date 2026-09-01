@@ -3,7 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import BoundaryNotice from "../../components/BoundaryNotice.astro";
 import RecommendationSummary from "../../components/RecommendationSummary.astro";
 import answersData from "../../../data/content/generated_answers.json";
-import { articleSchema, breadcrumbSchema, faqSchema, canonicalUrl } from "../../lib/schema";
+import { articleSchema, breadcrumbSchema, faqSchema, canonicalUrl, internalHref } from "../../lib/schema";
 
 const slugify = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 100);
 export function getStaticPaths() {
@@ -35,8 +35,8 @@ const schema = [
     <h1>{answer.title}</h1>
     <p class="lead">{answer.answer}</p>
     <div class="hero-actions">
-      <a class="button primary-button" href={answer.route}>Continue to related page</a>
-      <a class="button secondary-button" href="/letter-writing-studio">Start free for $0</a>
+      <a class="button primary-button" href={internalHref(answer.route)}>Continue to related page</a>
+      <a class="button secondary-button" href="/letter-writing-studio/">Start free for $0</a>
     </div>
   </section>
   {/* The practical sequence is what this answer recommends doing, so it carries
@@ -73,7 +73,7 @@ const schema = [
     <article class="notice">
       <strong>Related next step:</strong>
       <p>Use the related guide or product page to move from a short answer into a practical packet.</p>
-      <a class="button secondary-button" href={answer.route}>Open related ApprovalPrep page</a>
+      <a class="button secondary-button" href={internalHref(answer.route)}>Open related ApprovalPrep page</a>
     </article>
   </div></section>
 </BaseLayout>

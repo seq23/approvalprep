@@ -27,8 +27,11 @@ const manifest = readJson("data/routes/route_manifest.json");
 const sitemap = fs.readFileSync("public/sitemap.xml", "utf8");
 const robots = fs.readFileSync("public/robots.txt", "utf8");
 for (const route of manifest.routes.filter((item) => item.index)) {
-  const loc = `https://approvalprep.com${route.path === "/" ? "" : route.path}`;
-  if (!sitemap.includes(loc)) fail(`[seo] sitemap missing ${loc}`);
+  // The exact form the server answers 200 for. The slash-less form was a
+  // substring of the correct entry, so this assertion passed either way and
+  // could not have caught the redirect defect it looks like it covers.
+  const loc = `https://approvalprep.com${route.path.replace(/\/+$/, "")}/`;
+  if (!sitemap.includes(`<loc>${loc}</loc>`)) fail(`[seo] sitemap missing ${loc}`);
 }
 for (const token of ["Sitemap: https://approvalprep.com/sitemap.xml", "Disallow: /admin", "Disallow: /download"]) {
   if (!robots.includes(token)) fail(`[seo] robots missing ${token}`);
