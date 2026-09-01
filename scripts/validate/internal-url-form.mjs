@@ -129,6 +129,40 @@ for (const file of textSurfaces) {
   }
 }
 
+// --- What we hand to the indexing providers ------------------------------
+// The sitemap is not the only thing we submit. The IndexNow connector built its
+// URL list by concatenating route paths, so 155 URLs in its receipt history were
+// pushed to Bing and Yandex in the slash-less, 308-redirecting form. Historical
+// receipt entries are a record of what was sent and are left alone; the current
+// state - the latest receipt and the ledgers the connectors read - must name the
+// serving form.
+const submissionSurfaces = [
+  ['data/cadence/known_urls.json', (doc) => doc.urls || []],
+  ['data/seo/submission_registry.json', (doc) => JSON.stringify(doc).match(/https:\/\/approvalprep\.com[A-Za-z0-9\/._-]*/g) || []],
+  // preparedUrls, not urls/dryRunPreparedUrls: those are filtered by
+  // changed-only, and a connector emitting the redirecting form matches every
+  // historical entry, filters to empty, and would hand this check nothing to
+  // look at. Proved: with the defect reintroduced this surface yielded 0 URLs
+  // and passed. preparedUrls is populated on every receipt.
+  ['data/intelligence/indexnow_intelligence_receipts.json', (doc) => [
+    ...((doc.latest && doc.latest.preparedUrls) || []),
+    ...((doc.latest && doc.latest.urls) || []),
+  ]],
+];
+for (const [file, extract] of submissionSurfaces) {
+  if (!fs.existsSync(file)) continue;
+  let doc;
+  try { doc = JSON.parse(fs.readFileSync(file, 'utf8')); } catch { fail(`${file}: does not parse`); continue; }
+  const urlsFound = extract(doc);
+  // Per-surface Rule 0: a submission ledger that exists must name URLs. Zero
+  // means the shape changed underneath this check, not that everything is fine.
+  if (!urlsFound.length) {
+    fail(`${file}: exists but yielded no URLs to check, so this surface is being validated vacuously`);
+    continue;
+  }
+  for (const url of urlsFound) checkUrl(url, file, 'URL submitted to an indexing provider');
+}
+
 // --- _redirects: a 301 must land on the 200 form, not on another redirect ---
 // A path rule must also cover BOTH source forms. Pages matches _redirects
 // literally, and the URL Google has indexed for a retired page is the

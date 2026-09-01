@@ -26,17 +26,35 @@ const host = site.replace(/^https?:\/\//, "");
 const manifest = readJson("data/routes/route_manifest.json", { routes: [] });
 const previous = readJson("data/intelligence/indexnow_intelligence_receipts.json", { receipts: [] });
 const priorSubmitted = new Set((previous.receipts || []).flatMap((receipt) => receipt.urls || receipt.urlList || []).filter(Boolean));
+// The 200-serving form. Cloudflare Pages serves this build's directory output
+// as `/foo/` and 308-redirects `/foo`, so submitting the slash-less form asks
+// Bing and Yandex to fetch 86 redirects and tells them the canonical address is
+// one that immediately moves. 155 of the URLs in this connector's receipt
+// history were submitted in that form. Same rule as src/lib/schema.ts and
+// scripts/seo/generate-sitemap.mjs.
+//
+// Correcting the form also repairs the resubmission this connector owes after a
+// site-wide URL change: `changedOnly` compares against previously submitted
+// URLs, so every route now reads as changed and gets resubmitted once, in its
+// real address, without anyone having to disable the filter by hand.
+// `preparedUrls` is recorded on every receipt, whatever the changed-only filter
+// then does with it. Without it a receipt that submitted nothing says nothing
+// about the URL form it would have used - and that is precisely the case a
+// validator needs to see, because a connector emitting the redirecting form
+// matches every historical entry, filters its list to empty, and hands the
+// guard an empty loop to pass over.
+const servingUrl = (routePath) => `${site}${String(routePath).replace(/\/+$/, "")}/`;
 const urls = manifest.routes
   .filter((route) => route.index !== false && route.type !== "admin")
-  .map((route) => `${site}${route.path === "/" ? "" : route.path}`);
+  .map((route) => servingUrl(route.path));
 const changedOnly = (env("INDEXNOW_CHANGED_ONLY") || "true") !== "false";
 const urlList = changedOnly ? urls.filter((url) => !priorSubmitted.has(url)) : urls;
 
 if (!key) {
-  writeJson("data/intelligence/indexnow_intelligence_receipts.json", { schemaVersion: "4.2.0", mode: "unavailable", receipts: previous.receipts || [], latest: { submittedAt: null, preparedUrlCount: urls.length, submittedUrlCount: 0, status: "NOT_CONFIGURED", errors: [{ code: "NOT_CONFIGURED", message: "Set INDEXNOW_KEY to submit URLs." }] } });
+  writeJson("data/intelligence/indexnow_intelligence_receipts.json", { schemaVersion: "4.2.0", mode: "unavailable", receipts: previous.receipts || [], latest: { submittedAt: null, preparedUrlCount: urls.length, preparedUrls: urls.slice(0, 250), submittedUrlCount: 0, status: "NOT_CONFIGURED", errors: [{ code: "NOT_CONFIGURED", message: "Set INDEXNOW_KEY to submit URLs." }] } });
   statusOnly(connectorId, "NOT_CONFIGURED", "INDEXNOW_KEY is required for live submission.");
 } else {
-  const receipt = { submittedAt: now(), provider: "IndexNow", mode, host, keyLocation: `${site}/${key}.txt`, preparedUrlCount: urls.length, submittedUrlCount: mode === "live" ? urlList.length : 0, urls: mode === "live" ? urlList : [], dryRunPreparedUrls: mode === "live" ? [] : urlList.slice(0, 250), changedOnly, status: mode === "live" ? "READY" : "DRY_RUN", response: null, errors: [], claimsIndexed: false, rankingProof: false };
+  const receipt = { submittedAt: now(), provider: "IndexNow", mode, host, keyLocation: `${site}/${key}.txt`, preparedUrlCount: urls.length, preparedUrls: urls.slice(0, 250), submittedUrlCount: mode === "live" ? urlList.length : 0, urls: mode === "live" ? urlList : [], dryRunPreparedUrls: mode === "live" ? [] : urlList.slice(0, 250), changedOnly, status: mode === "live" ? "READY" : "DRY_RUN", response: null, errors: [], claimsIndexed: false, rankingProof: false };
   const budget = mode === "live" ? checkBudget(connectorId) : { allowed: true };
   if (mode === "live" && urlList.length && !budget.allowed) {
     receipt.status = "BUDGET_HELD";
