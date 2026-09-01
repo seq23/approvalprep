@@ -45,7 +45,7 @@ import RecommendationSummary from "../../components/RecommendationSummary.astro"
 import FAQBlock from "../../components/FAQBlock.astro";
 import TrustAndBoundaryBand from "../../components/TrustAndBoundaryBand.astro";
 import WhatHappensAfterPurchase from "../../components/WhatHappensAfterPurchase.astro";
-import { articleSchema, breadcrumbSchema, faqSchema, howToSchema, canonicalUrl, productSchema } from "../../lib/schema";
+import { articleSchema, breadcrumbSchema, faqSchema, howToSchema, canonicalUrl, productSchema, internalHref } from "../../lib/schema";
 import { productForSku } from "../../data/content";
 import registry from "../../../data/content/amazon_book_landing_pages.json";
 
@@ -88,7 +88,7 @@ const trustSignals = ["No account required", "No saved customer documents", "No 
       <p class="lead" data-direct-answer="true">{page.directAnswer}</p>
       <div class="hero-actions">
         <button class="button primary-button checkout-button" type="button" data-sku={page.sku}>{`Buy the ${product.name} — ${product.priceLabel}`}</button>
-        <a class="button secondary secondary-button" href="/pricing">Compare all kits</a>
+        <a class="button secondary secondary-button" href="/pricing/">Compare all kits</a>
       </div>
       <div class="trust-bar" aria-label="Trust signals">{trustSignals.map((signal) => <span>{signal}</span>)}</div>
     </div>
@@ -150,7 +150,7 @@ const trustSignals = ["No account required", "No saved customer documents", "No 
   <section class="band"><div class="shell" data-content-block="source_block">
     <p class="eyebrow">Primary sources</p>
     <h2>Check the current instructions yourself.</h2>
-    <div class="grid">{page.sources.map((source) => <a class="card" href={source.url} rel="noopener noreferrer"><h3>{source.label}</h3><p>Open official or primary source →</p></a>)}</div>
+    <div class="grid">{page.sources.map((source) => <a class="card" href={internalHref(source.url)} rel="noopener noreferrer"><h3>{source.label}</h3><p>Open official or primary source →</p></a>)}</div>
   </div></section>
 
   <WhatHappensAfterPurchase />
@@ -158,8 +158,8 @@ const trustSignals = ["No account required", "No saved customer documents", "No 
   <section class="band"><div class="shell">
     <p class="eyebrow">Keep preparing</p>
     <h2>Free guides on this site for the same subject.</h2>
-    <div class="grid">{page.related.map((link) => <a class="card" href={link.href}><h3>{link.label}</h3><p>Read the free guide →</p></a>)}</div>
-    <p class="fine">Every ApprovalPrep book links to one page here. <a href="/amazon">See all the book companion pages</a>.</p>
+    <div class="grid">{page.related.map((link) => <a class="card" href={internalHref(link.href)}><h3>{link.label}</h3><p>Read the free guide →</p></a>)}</div>
+    <p class="fine">Every ApprovalPrep book links to one page here. <a href="/amazon/">See all the book companion pages</a>.</p>
   </div></section>
 
   <section class="final-cta shell" data-content-block="cta_callout">
@@ -168,7 +168,7 @@ const trustSignals = ["No account required", "No saved customer documents", "No 
     <p>{finalCta.body}</p>
     <div class="hero-actions">
       <button class="button primary-button checkout-button" type="button" data-sku={page.sku}>{`Buy the ${product.name} — ${product.priceLabel}`}</button>
-      <a class="button secondary secondary-button" href="/pricing">Compare all kits</a>
+      <a class="button secondary secondary-button" href="/pricing/">Compare all kits</a>
     </div>
   </section>
 

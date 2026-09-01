@@ -8,7 +8,7 @@
 // BreadcrumbList of its own (tools, templates, reports, blog posts and the
 // authority guides pass one through BaseLayout's `schema` prop). One
 // BreadcrumbList per page, never two.
-import { breadcrumbTrail, breadcrumbSchema } from "../lib/schema";
+import { breadcrumbTrail, breadcrumbSchema, internalHref } from "../lib/schema";
 const { path = "", title = "", emitSchema = true } = Astro.props;
 const trail = breadcrumbTrail(path, title);
 ---
@@ -19,7 +19,7 @@ const trail = breadcrumbTrail(path, title);
         <li>
           {index === trail.length - 1
             ? <span aria-current="page">{crumb.name}</span>
-            : <a href={crumb.url}>{crumb.name}</a>}
+            : <a href={internalHref(crumb.url)}>{crumb.name}</a>}
         </li>
       ))}
     </ol>

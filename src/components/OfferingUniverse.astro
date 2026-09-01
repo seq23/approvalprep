@@ -1,4 +1,5 @@
 ---
+import { internalHref } from "../lib/schema";
 const { categories = [], variant = "full" } = Astro.props;
 const isSummary = variant === "summary";
 ---
@@ -25,7 +26,7 @@ const isSummary = variant === "summary";
           ))}
         </div>
       )}
-      <a class="button secondary-button" href={`/pricing#${category.product_sku}`}>See {category.product_name} pricing</a>
+      <a class="button secondary-button" href={internalHref(`/pricing#${category.product_sku}`)}>See {category.product_name} pricing</a>
     </article>
   ))}
 </div>

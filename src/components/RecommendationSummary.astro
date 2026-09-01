@@ -1,4 +1,5 @@
 ---
+import { internalHref } from "../lib/schema";
 /**
  * recommendation_summary block.
  *
@@ -53,6 +54,6 @@ const headingText = headline || "What this page recommends";
     {statement && <p class="recommendation-summary-statement">{statement}</p>}
     {detail && <p>{detail}</p>}
     {points.length > 0 && <List class="compact-list">{points.map((item) => <li>{item}</li>)}</List>}
-    {ctaHref && ctaLabel && <a class="button secondary-button" href={ctaHref}>{ctaLabel}</a>}
+    {ctaHref && ctaLabel && <a class="button secondary-button" href={internalHref(ctaHref)}>{ctaLabel}</a>}
   </Tag>
 )}

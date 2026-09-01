@@ -6,14 +6,42 @@ import reportRegistry from "../../data/reports/public_report_registry.json";
 export const SITE_ORIGIN = "https://approvalprep.com";
 
 // Cloudflare Pages serves this build's directory output (`foo/index.html`) as
-// `/foo/` with a 200 and 308-redirects `/foo`. Every public URL we publish -
-// canonical tags, og:url, breadcrumb items, sitemap entries - must therefore
-// name the trailing-slash form, or we point crawlers at a redirect. This is the
-// single rule; scripts/seo/generate-sitemap.mjs applies the same one.
+// `/foo/` with a 200 and 308-redirects `/foo`. Every URL this site emits - a
+// canonical tag, og:url, a breadcrumb item, a sitemap entry, an llms.txt line,
+// and every internal <a href> - must name the form the server answers 200 for,
+// or we hand a crawler a redirect.
+//
+// canonicalUrl() already covered the URLs we publish *to* crawlers. Nothing
+// covered the ones we *link* with, so every internal href named the redirecting
+// form and Google filed 123 destinations as "Page with redirect" instead of
+// indexing them: the site pointed the crawler at redirects with its own
+// navigation. internalHref() is that one rule, applied to hrefs.
+//
+// Route paths get the slash. Files must not: /robots.txt, /sitemap.xml,
+// /answers/index.json and /downloads/x.pdf are served at exactly those URLs and
+// /robots.txt/ is a 404. Off-site URLs, fragments, mailto: and tel: pass
+// through untouched, so this is safe to wrap around any href expression
+// whatever it turns out to hold. Query strings and fragments are preserved:
+// /pricing#kit -> /pricing/#kit.
+export const internalHref = (input: unknown): string => {
+  const value = typeof input === "string" ? input : String(input ?? "");
+  if (!value.startsWith("/") || value.startsWith("//")) return value;
+  const [beforeHash, ...hashRest] = value.split("#");
+  const hash = hashRest.length ? `#${hashRest.join("#")}` : "";
+  const [rawPath, ...queryRest] = beforeHash.split("?");
+  const query = queryRest.length ? `?${queryRest.join("?")}` : "";
+  const lastSegment = rawPath.split("/").pop() || "";
+  if (/\.[a-z0-9]+$/i.test(lastSegment)) return value;
+  const pathname = `${rawPath.replace(/\/+$/, "")}/`;
+  return `${pathname}${query}${hash}`;
+};
+
+// The absolute form of the same rule. scripts/seo/generate-sitemap.mjs and
+// scripts/validate/*.mjs apply it too; they cannot import a .ts module, so the
+// rule is restated there rather than diverging silently.
 export const canonicalUrl = (input: string) => {
   const url = new URL(String(input || "/"), SITE_ORIGIN);
-  const pathname = url.pathname.replace(/\/+$/, "");
-  return `${SITE_ORIGIN}${pathname}/${url.search}${url.hash}`;
+  return `${SITE_ORIGIN}${internalHref(url.pathname)}${url.search}${url.hash}`;
 };
 
 export const orgSchema = () => ({ "@context": "https://schema.org", "@type": "Organization", name: "ApprovalPrep", url: canonicalUrl("/") });

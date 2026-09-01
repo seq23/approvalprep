@@ -205,13 +205,15 @@ const indexHtml = html.get(INDEX_PATH);
 let linksChecked = 0;
 if (indexHtml) {
   for (const page of registry.pages) {
-    if (!indexHtml.includes(`href="${page.path}"`)) errors.push(`the /amazon index does not link to ${page.path}`);
+    // The trailing-slash form: Cloudflare Pages 308-redirects the slash-less
+    // one, so a link written without it points the crawler at a redirect.
+    if (!indexHtml.includes(`href="${page.path}/"`)) errors.push(`the /amazon index does not link to ${page.path}/`);
     else linksChecked += 1;
   }
 }
 for (const page of registry.pages) {
   const body = html.get(page.path);
-  if (body && !body.includes(`href="${INDEX_PATH}"`)) errors.push(`page does not link back to the /amazon index: ${page.path}`);
+  if (body && !body.includes(`href="${INDEX_PATH}/"`)) errors.push(`page does not link back to the /amazon index: ${page.path}`);
 }
 
 /* ---------- published-URL posture, asserted both ways ---------- */

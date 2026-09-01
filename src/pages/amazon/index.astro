@@ -11,7 +11,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import RecommendationSummary from "../../components/RecommendationSummary.astro";
 import TrustAndBoundaryBand from "../../components/TrustAndBoundaryBand.astro";
-import { canonicalUrl, webPageSchema, breadcrumbSchema, itemListSchema } from "../../lib/schema";
+import { canonicalUrl, webPageSchema, breadcrumbSchema, itemListSchema, internalHref } from "../../lib/schema";
 import { productForSku } from "../../data/content";
 import registry from "../../../data/content/amazon_book_landing_pages.json";
 
@@ -35,8 +35,8 @@ const trustSignals = ["No account required", "No saved customer documents", "Sel
       <h1>ApprovalPrep book companion pages</h1>
       <p class="lead" data-direct-answer="true">Every ApprovalPrep book ends with a link to one page on this site, matched to that book's subject. This is the list of those pages. Each book teaches its whole method and prints every template in full; the paid kit named on each page is the editable version, not a missing chapter.</p>
       <div class="hero-actions">
-        <a class="button primary-button" href="/pricing">Compare all kits</a>
-        <a class="button secondary secondary-button" href="/letter-writing-studio">Open the free Letter Studio</a>
+        <a class="button primary-button" href="/pricing/">Compare all kits</a>
+        <a class="button secondary secondary-button" href="/letter-writing-studio/">Open the free Letter Studio</a>
       </div>
       <div class="trust-bar" aria-label="Trust signals">{trustSignals.map((signal) => <span>{signal}</span>)}</div>
     </div>
@@ -52,7 +52,7 @@ const trustSignals = ["No account required", "No saved customer documents", "Sel
     <h2>Find the book you just finished.</h2>
     <div class="grid">
       {cards.map((card) => (
-        <a class="card" href={card.path}>
+        <a class="card" href={internalHref(card.path)}>
           <h3>{card.book}</h3>
           <p>{card.recommendation.statement}</p>
           <p class="fine">{`Companion product: ${card.product.name} — ${card.product.priceLabel}`}{card.productGap ? " — partial match, read the note on the page" : ""}</p>
@@ -66,8 +66,8 @@ const trustSignals = ["No account required", "No saved customer documents", "Sel
     <h2>The book is complete. The kit saves the retyping.</h2>
     <p>Nothing was held back from any book for a paid version. Each kit is the same material as a PDF guide plus editable DOCX files, paid once, so you fill in blanks instead of retyping a template from a page. ApprovalPrep does not guarantee approval, deletion, correction, funding, housing, or any decision.</p>
     <div class="hero-actions">
-      <a class="button primary-button" href="/pricing">Compare all kits</a>
-      <a class="button secondary secondary-button" href="/resources">Browse the free guides</a>
+      <a class="button primary-button" href="/pricing/">Compare all kits</a>
+      <a class="button secondary secondary-button" href="/resources/">Browse the free guides</a>
     </div>
   </section>
 

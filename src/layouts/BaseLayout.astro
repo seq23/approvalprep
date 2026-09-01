@@ -6,7 +6,7 @@ import StructuredData from "../components/StructuredData.astro";
 import AnalyticsEvent from "../components/AnalyticsEvent.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import ProfessionalBoundaryBlock from "../components/ProfessionalBoundaryBlock.astro";
-import { titleForPath, canonicalUrl } from "../lib/schema";
+import { titleForPath, canonicalUrl, internalHref } from "../lib/schema";
 import { navCta, primaryNav, secondaryNav } from "../data/navigation";
 const { title = "ApprovalPrep", description = "Self-service approval prep tools.", canonical = "https://approvalprep.com", noindex = false, showPrivacyNotice = true, schema = [] } = Astro.props;
 // Breadcrumbs belong to the layout so every surface gets the same trail from the
@@ -29,7 +29,7 @@ const canonicalHref = canonicalUrl(canonical);
     <title>{title}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex,follow" />}
-    <link rel="canonical" href={canonicalHref} />
+    <link rel="canonical" href={internalHref(canonicalHref)} />
     <meta property="og:site_name" content="ApprovalPrep" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
@@ -46,18 +46,18 @@ const canonicalHref = canonicalUrl(canonical);
       <div class="shell nav">
         <a class="brand" href="/">ApprovalPrep</a>
         <nav class="nav-links" aria-label="Primary">
-          {primaryNav.map((item) => item.href ? <a href={item.href}>{item.title}</a> : (
+          {primaryNav.map((item) => item.href ? <a href={internalHref(item.href)}>{item.title}</a> : (
             <details class="nav-menu">
               <summary>{item.title}</summary>
-              <div class="nav-menu-panel">{item.links.map(([href, label]) => <a href={href}>{label}</a>)}</div>
+              <div class="nav-menu-panel">{item.links.map(([href, label]) => <a href={internalHref(href)}>{label}</a>)}</div>
             </details>
           ))}
-          <a class="button nav-cta" href={navCta.href}>{navCta.label}</a>
+          <a class="button nav-cta" href={internalHref(navCta.href)}>{navCta.label}</a>
         </nav>
       </div>
       <nav class="secondary-nav shell" aria-label="Use cases">
         <span>Use cases</span>
-        {secondaryNav.map(([href, label]) => <a href={href}>{label}</a>)}
+        {secondaryNav.map(([href, label]) => <a href={internalHref(href)}>{label}</a>)}
       </nav>
     </header>
     <main>

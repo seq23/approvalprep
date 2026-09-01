@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { canonicalUrl } from "../lib/schema";
+import { canonicalUrl, internalHref } from "../lib/schema";
 import ProductGrid from "../components/ProductGrid.astro";
 import BoundaryNotice from "../components/BoundaryNotice.astro";
 import TrustBar from "../components/TrustBar.astro";
@@ -115,7 +115,7 @@ const childRoutes = manifest.routes
       <h1>{copy.heading}</h1>
       <p class="lead">{copy.lead}</p>
       {familyCopy?.promise && <p class="supporting-copy">{familyCopy.promise}</p>}
-      {!isLegal && !isDownload && <OutcomeCTA primary={primaryCtaWithPrice} secondary={copy.secondaryCta} href={ctaHref} secondaryHref="/pricing" primarySku={primarySku} />}
+      {!isLegal && !isDownload && <OutcomeCTA primary={primaryCtaWithPrice} secondary={copy.secondaryCta} href={internalHref(ctaHref)} secondaryHref="/pricing" primarySku={primarySku} />}
       <TrustBar signals={copy.trustSignals} />
     </div>
     {!isLegal && (
@@ -161,7 +161,7 @@ const childRoutes = manifest.routes
       <p class="lead">Each page below covers one situation end to end. Open the one that matches what you have been asked to explain.</p>
       <div class="resource-grid">
         {childRoutes.map((child) => (
-          <a class="card resource-card" href={child.path}>
+          <a class="card resource-card" href={internalHref(child.path)}>
             <span>{familyCopy?.label || route.family.replaceAll("_", " ")}</span>
             <h3>{child.heading}</h3>
             <p>{child.blurb}</p>
@@ -192,7 +192,7 @@ const childRoutes = manifest.routes
             <p class="eyebrow">$0 starting path</p>
             <h3>Not sure yet?</h3>
             <p>Use the free Letter Writing Studio first. It does not store your answers and helps you choose the right kit.</p>
-            <a class="button secondary-button" href="/letter-writing-studio">Start free for $0</a>
+            <a class="button secondary-button" href="/letter-writing-studio/">Start free for $0</a>
           </div>
         </div>
         <div class="pricing-model-grid">
@@ -216,7 +216,7 @@ const childRoutes = manifest.routes
         <p class="eyebrow">Compare kits</p>
         <h2>Compare by buyer situation.</h2>
         <div class="table-wrap"><table class="comparison-table"><thead><tr><th>Product</th><th>Best for</th><th>Includes</th><th>Price</th></tr></thead><tbody>
-          {productComparison.map((row) => <tr><td><a href={row.href}>{row.product}</a></td><td>{row.bestFor}</td><td>{row.includes}</td><td><strong>{row.price}</strong></td></tr>)}
+          {productComparison.map((row) => <tr><td><a href={internalHref(row.href)}>{row.product}</a></td><td>{row.bestFor}</td><td>{row.includes}</td><td><strong>{row.price}</strong></td></tr>)}
         </tbody></table></div>
       </div></section>
       <section class="band"><div class="shell"><p class="eyebrow">All included offerings</p><h2>50 named self-service tools organized into 8 paid checkout kits.</h2><p class="lead">This is the full universe of named use cases. The Complete Bundle includes the full library; the smaller kits include the tools for that specific situation.</p><OfferingUniverse categories={offeringCategories} /></div></section>
@@ -273,7 +273,7 @@ const childRoutes = manifest.routes
       renders it without ever placing it. The guides, checklists and kits it points at
       were therefore reachable only from the sitemap. */}
   <RelatedContent path={route.path} title={`Keep preparing after ${route.title}`} />
-  {!isLegal && <FinalCTA primary={primaryCtaWithPrice} secondary={copy.secondaryCta} href={ctaHref} secondaryHref="/pricing" primarySku={primarySku} />}
+  {!isLegal && <FinalCTA primary={primaryCtaWithPrice} secondary={copy.secondaryCta} href={internalHref(ctaHref)} secondaryHref="/pricing" primarySku={primarySku} />}
   <section class="band"><div class="shell">
     <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: copy.faq.map((item) => ({ "@type": "Question", name: item.question, acceptedAnswer: { "@type": "Answer", text: item.answer } })) })}></script>
     <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@type": "HowTo", name: route.title, step: copy.steps.map((step, index) => ({ "@type": "HowToStep", position: index + 1, text: step })) })}></script>

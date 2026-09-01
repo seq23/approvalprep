@@ -23,7 +23,12 @@ for (const answer of generated.answers) {
   }
   if (answer.status !== "published_by_contract" && answer.riskLevel === "regulated" && slugs.has(slug)) fail("[blog-detail-pages] regulated review answer got public slug " + slug);
 }
-if (redirected !== 42) fail(`[blog-detail-pages] expected 42 redirected duplicate records, got ${redirected}`);
+// Floor, not an exact count, for the same reason scripts/validate/redirect-map.mjs
+// uses one: consolidating another templated duplicate is normal maintenance and
+// must not fail the build, while silently losing a retirement - which would put
+// a nonsense page back in the index - is the real regression.
+const RETIRED_FLOOR = 42;
+if (redirected < RETIRED_FLOOR) fail(`[blog-detail-pages] retired duplicate records regressed below floor ${RETIRED_FLOOR}, got ${redirected}`);
 const blog = fs.readFileSync("src/pages/blog.astro", "utf8");
 if (!blog.includes("/blog/${slugify(item.title)}")) fail("[blog-detail-pages] blog hub does not link to detail pages");
 const detail = fs.readFileSync("src/pages/blog/[slug].astro", "utf8");

@@ -8,6 +8,7 @@ import generatedAnswers from "../../data/content/generated_answers.json";
 import toolRegistry from "../../data/tools/tool_registry.json";
 import templateRegistry from "../../data/templates/template_registry.json";
 import reportRegistry from "../../data/reports/public_report_registry.json";
+import { canonicalUrl } from "../lib/schema";
 
 export const GET: APIRoute = async () => new Response(`# ApprovalPrep Full LLM Index
 
@@ -24,7 +25,7 @@ ApprovalPrep is a self-service document-prep platform. It helps users prepare cl
 
 ## Products
 ${products.products.filter((product) => product.status === "active_paid").map((product) => `### ${product.name}
-Path: https://approvalprep.com/${product.sku}
+Path: ${canonicalUrl(`/${product.sku}`)}
 Price: ${product.priceLabel}
 Best for: ${product.customer_situation}
 Outcome: ${product.outcome}
@@ -33,28 +34,28 @@ Not for: ${(product.not_for || product.notFor || []).join("; ")}
 `).join("\n")}
 
 ## Routes
-${routes.routes.filter((route) => route.type !== "admin").map((route) => `- https://approvalprep.com${route.path} | ${route.title} | family=${route.family} | risk=${route.risk} | index=${route.index}`).join("\n")}
+${routes.routes.filter((route) => route.type !== "admin").map((route) => `- ${canonicalUrl(route.path)} | ${route.title} | family=${route.family} | risk=${route.risk} | index=${route.index}`).join("\n")}
 
 ## Answer Atoms
 ${atoms.atoms.map((atom) => `### ${atom.title}
 Atom: ${atom.atom_id}
 Type: ${atom.atom_type}
-Owner: https://approvalprep.com${atom.route_owner}
+Owner: ${canonicalUrl(atom.route_owner)}
 Text: ${atom.text}
 Claims: ${(atom.claim_ids || []).join(", ") || "none"}
 `).join("\n")}
 
 ## Published Blog Answer Pages
-${generatedAnswers.answers.filter((answer) => answer.status === "published_by_contract").map((answer) => `- https://approvalprep.com/blog/${answer.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 100)} | ${answer.title} | related=${answer.route} | risk=${answer.riskLevel}`).join("\n")}
+${generatedAnswers.answers.filter((answer) => answer.status === "published_by_contract").map((answer) => `- ${canonicalUrl(`/blog/${answer.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 100)}`)} | ${answer.title} | related=${answer.route} | risk=${answer.riskLevel}`).join("\n")}
 
 ## Free Tools
-${toolRegistry.tools.filter((tool) => tool.status === "published_by_contract").map((tool) => `- https://approvalprep.com${tool.path} | ${tool.title} | ${tool.primaryQuery} | product=${tool.targetProductSku}`).join("\n")}
+${toolRegistry.tools.filter((tool) => tool.status === "published_by_contract").map((tool) => `- ${canonicalUrl(tool.path)} | ${tool.title} | ${tool.primaryQuery} | product=${tool.targetProductSku}`).join("\n")}
 
 ## Template Previews
-${templateRegistry.templates.filter((template) => template.status === "published_by_contract").map((template) => `- https://approvalprep.com${template.path} | ${template.title} | ${template.primaryQuery} | product=${template.targetProductSku}`).join("\n")}
+${templateRegistry.templates.filter((template) => template.status === "published_by_contract").map((template) => `- ${canonicalUrl(template.path)} | ${template.title} | ${template.primaryQuery} | product=${template.targetProductSku}`).join("\n")}
 
 ## Public Reports
-${reportRegistry.reports.filter((report) => report.status === "published_by_contract").map((report) => `- https://approvalprep.com${report.path} | ${report.title} | ${report.primaryQuery} | sources=${(report.sourceIds || []).join(", ")}`).join("\n")}
+${reportRegistry.reports.filter((report) => report.status === "published_by_contract").map((report) => `- ${canonicalUrl(report.path)} | ${report.title} | ${report.primaryQuery} | sources=${(report.sourceIds || []).join(", ")}`).join("\n")}
 
 ## Claims
 ${claims.claims.map((claim) => `- ${claim.claim_id}: ${claim.claim_text} | risk=${claim.risk_class} | sources=${claim.source_ids.join(", ")}`).join("\n")}

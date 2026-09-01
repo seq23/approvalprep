@@ -1275,6 +1275,28 @@
       "scope": "dist/sitemap.xml and the canonical/og:url tags of every built indexable page"
     },
     {
+      "id": "internal-url-form",
+      "npmScript": "validate:internal-url-form",
+      "entrypoint": "scripts/validate/internal-url-form.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "every internal link omitting the trailing slash made Google follow the site's own navigation into 308s and file 123 destinations as 'Page with redirect' instead of indexing them; the sitemap and canonicals were already correct, so nothing existing could catch it",
+      "owner": "approvalprep-ops",
+      "group": "release-critical",
+      "scope": "Every URL the build emits: hrefs and JSON-LD url/item/@id in dist/*.html, the URLs in llms.txt, llms-full.txt, feed.xml and the JSON indexes, and the destinations in public/_redirects. Hard-fails when it examines zero URLs."
+    },
+    {
+      "id": "answer-page-subject",
+      "npmScript": "validate:answer-page-subject",
+      "entrypoint": "scripts/validate/answer-page-subject.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "the answer generator stamped a preparation question onto any low-risk route, publishing 'How should I prepare for Pricing?' and four more like it: a question nobody asks, answered by a checklist unrelated to the page named",
+      "owner": "approvalprep-growth",
+      "group": "citation-os-batch-1",
+      "scope": "Every published blog answer record names a route whose page_intent is an answerable subject and carries a question title; every retired record has a 301 behind it. Hard-fails when it examines zero records."
+    },
+    {
       "id": "download-key-contract",
       "npmScript": "validate:download-key-contract",
       "entrypoint": "scripts/validate/download-key-contract.mjs",
