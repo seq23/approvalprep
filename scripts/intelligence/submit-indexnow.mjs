@@ -58,6 +58,12 @@ if (!key) {
   const budget = mode === "live" ? checkBudget(connectorId) : { allowed: true };
   if (mode === "live" && urlList.length && !budget.allowed) {
     receipt.status = "BUDGET_HELD";
+    // Nothing was sent, so the receipt must not say otherwise. submittedUrlCount
+    // and urls are filled in before the budget check, and a held run was leaving
+    // them at the full prepared list - a receipt claiming 86 submissions that
+    // never opened a socket. preparedUrls still records what would have gone.
+    receipt.submittedUrlCount = 0;
+    receipt.urls = [];
     receipt.errors.push({ code: "BUDGET_HELD", message: budget.reason });
     appendRun(connectorId, "BUDGET_HELD", { mode, reason: budget.reason, recordsImported: 0 });
     writeJson("data/intelligence/indexnow_intelligence_receipts.json", { schemaVersion: "4.2.0", mode, receipts: [receipt, ...(previous.receipts || [])].slice(0, 100), latest: receipt });
