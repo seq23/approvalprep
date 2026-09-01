@@ -1,0 +1,21 @@
+/*
+  X-Content-Type-Options: nosniff
+
+# Lived at the repo root until 2026-09-01, which meant Cloudflare Pages never
+# saw it: pages_build_output_dir is `dist`, Astro copies `public/` into it, and
+# nothing copied a root-level file. Measured on the live origin at the time:
+# /_astro/*.css returned `cache-control: public, max-age=14400, must-revalidate`
+# - Pages' own 4-hour default - not the immutable rule below, and dist/_headers
+# did not exist. The X-Robots-Tag rules under it had never applied either.
+#
+# Those noindex rules are kept, with their premise corrected. The comment they
+# carried said Pages served the project from the repository root, so README.md,
+# AGENTS.md and package.json returned 200. That is no longer true - all three
+# return 404 now, because only dist/ is published - so the rules are insurance
+# against the output directory changing back, not a live fix.
+#
+# scripts/validate/seo-surfaces.mjs now hard-fails if dist/_headers is missing
+# or has lost the immutable rule, so this file cannot silently stop shipping.
+
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable

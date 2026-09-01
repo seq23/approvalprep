@@ -33,6 +33,20 @@ for (const route of manifest.routes.filter((item) => item.index)) {
   const loc = `https://approvalprep.com${route.path.replace(/\/+$/, "")}/`;
   if (!sitemap.includes(`<loc>${loc}</loc>`)) fail(`[seo] sitemap missing ${loc}`);
 }
+// _headers only reaches Cloudflare if it is inside the published output
+// directory. It lived at the repo root for six days and was never copied into
+// dist/, so the /_astro/* immutable rule added on 2026-08-26 had never applied:
+// the live origin was returning Pages' 4-hour default on content-hashed assets
+// that can never change. Assert the shipped artefact, not the source file.
+const headersPath = "dist/_headers";
+if (!exists(headersPath)) {
+  fail(`[seo] ${headersPath} is missing, so Cloudflare Pages never receives the header rules; _headers must live in public/ to be published`);
+} else {
+  const headers = fs.readFileSync(headersPath, "utf8");
+  if (!/^\/_astro\/\*$/m.test(headers)) fail("[seo] dist/_headers has lost its /_astro/* rule");
+  if (!/max-age=31536000,\s*immutable/i.test(headers)) fail("[seo] dist/_headers no longer marks content-hashed assets immutable");
+}
+
 for (const token of ["Sitemap: https://approvalprep.com/sitemap.xml", "Disallow: /admin", "Disallow: /download"]) {
   if (!robots.includes(token)) fail(`[seo] robots missing ${token}`);
 }
