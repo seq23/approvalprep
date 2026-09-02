@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "lastUpdatedAt": "2026-09-02T15:29:27.667Z",
+  "lastUpdatedAt": "2026-09-02T23:15:57.406Z",
   "policy": "The root registry is the single execution authority. HARD_FAIL blocks immediately; STRONG_WARNING records and continues. The data/validation registry is generated from this file.",
   "validators": [
     {
@@ -24,6 +24,17 @@
       "owner": "approvalprep-ops",
       "group": "ops-critical",
       "scope": "The position of the build stage in _repo_validation_registry.json, its severity and blocksRelease posture, and that its npm script still runs astro build"
+    },
+    {
+      "id": "pre-merge-lane-parity",
+      "npmScript": "validate:pre-merge-lane-parity",
+      "entrypoint": "scripts/validate/pre-merge-lane-parity.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "keeps the pull_request lane that authorises a merge in the same starting state as the scheduled lanes - it may not run a build step before validate:all. When it did, PR #23 merged green and turned citation-os-daily and intelligence-ingest-free-sources red every morning on an assertion the merge gate could not have failed.",
+      "owner": "approvalprep-ops",
+      "group": "ops-critical",
+      "scope": "Every .github/workflows/*.yml job that runs validate:all or selfheal: whether a pull_request-triggered job builds before it, that a pre-merge registry lane exists at all, that non-pull_request registry lanes exist to be predicted, and that the registry still builds at position 1"
     },
     {
       "id": "repo-structure",

@@ -259,6 +259,7 @@
     "validate:opportunity-score-provenance": "node scripts/validate/opportunity-score-provenance.mjs",
     "validate:workflow-yaml-parse": "node scripts/validate/workflow-yaml-parse.mjs",
     "validate:registry-build-order": "node scripts/validate/registry-build-order.mjs",
+    "validate:pre-merge-lane-parity": "node scripts/validate/pre-merge-lane-parity.mjs",
     "validate:amazon-book-landing-pages": "node scripts/validate/amazon-book-landing-pages.mjs"
   },
   "dependencies": {
@@ -267,6 +268,7 @@
     "zod": "^3.25.0"
   },
   "devDependencies": {
+    "js-yaml": "^4.3.0",
     "typescript": "^5.8.3",
     "wrangler": "^4.107.1"
   },
