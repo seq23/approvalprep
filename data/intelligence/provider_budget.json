@@ -2,13 +2,35 @@
   "schemaVersion": "1.0.0",
   "truth_boundary": "Ceilings bound request volume and near-zero operating cost. Ceilings are not targets. A BUDGET_HELD run is not a failed run and must never be reported as provider failure or ranking failure.",
   "budgets": {
-    "google_search_console_search_analytics": { "dailyCeiling": 1, "weeklyCeiling": 3 },
-    "google_url_inspection": { "dailyCeiling": 1, "weeklyCeiling": 2 },
-    "bing_webmaster": { "dailyCeiling": 1, "weeklyCeiling": 3 },
-    "competitor_public_crawler": { "dailyCeiling": 1, "weeklyCeiling": 2 },
-    "competitor_sitemap_discovery": { "dailyCeiling": 1, "weeklyCeiling": 2 },
-    "cloudflare_crawler_logs": { "dailyCeiling": 1, "weeklyCeiling": 7 },
-    "indexnow": { "dailyCeiling": 1, "weeklyCeiling": 7 }
+    "google_search_console_search_analytics": {
+      "dailyCeiling": 1,
+      "weeklyCeiling": 3
+    },
+    "google_url_inspection": {
+      "dailyCeiling": 1,
+      "weeklyCeiling": 2
+    },
+    "bing_webmaster": {
+      "dailyCeiling": 1,
+      "weeklyCeiling": 3
+    },
+    "competitor_public_crawler": {
+      "dailyCeiling": 1,
+      "weeklyCeiling": 2
+    },
+    "competitor_sitemap_discovery": {
+      "dailyCeiling": 1,
+      "weeklyCeiling": 2
+    },
+    "cloudflare_crawler_logs": {
+      "dailyCeiling": 1,
+      "weeklyCeiling": 7
+    },
+    "indexnow": {
+      "dailyCeiling": 3,
+      "weeklyCeiling": 16,
+      "_rationale": "Matched to the lane's real cadence, 2026-09-01. indexing-submit.yml fires on workflow_run after BOTH 'Scheduled Content Release' and 'Citation OS Daily', each daily \u2014 so the lane legitimately attempts ~2x/day, ~14x/week. The previous ceiling of 1/day and 7/week was exactly half that, so the lane was BUDGET_HELD roughly every other run by construction: 15 attempts in the 7 days to 2026-09-01, against a ceiling of 7. A permanently-held lane is an inert lane. 3/day and 16/week is the 2 automated runs plus one manual workflow_dispatch, and sits inside provider-cost-controls' envelope (<=5 daily, <=25 weekly). IndexNow has no per-call cost; this ceiling exists to avoid hammering the endpoint, not to control spend. If the triggering cadence changes, change this."
+    }
   },
   "lastUpdatedAt": "2026-08-08T00:00:00.000Z"
 }
