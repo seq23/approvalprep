@@ -1,8 +1,30 @@
 {
   "schemaVersion": "2.0.0",
-  "lastUpdatedAt": "2026-08-30T12:49:15.022Z",
+  "lastUpdatedAt": "2026-09-02T15:29:27.667Z",
   "policy": "The root registry is the single execution authority. HARD_FAIL blocks immediately; STRONG_WARNING records and continues. The data/validation registry is generated from this file.",
   "validators": [
+    {
+      "id": "build",
+      "npmScript": "build",
+      "entrypoint": "astro build",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents deploy-time compiler, route, and template failures, and produces the dist/ tree that every build-output validator in this registry measures. It runs first so no validator can be ordered ahead of the artefact it reads.",
+      "owner": "approvalprep-ops",
+      "group": "release-critical",
+      "scope": "Astro static build and Cloudflare Pages deploy artifact"
+    },
+    {
+      "id": "registry-build-order",
+      "npmScript": "validate:registry-build-order",
+      "entrypoint": "scripts/validate/registry-build-order.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents a validator that reads dist/ being ordered ahead of the build that writes it - the defect that made Citation OS Daily, Citation OS Weekly and Intelligence - Ingest Free Sources fail every scheduled run from 2026-09-02 while the Validate lane, which builds as a workflow step, stayed green",
+      "owner": "approvalprep-ops",
+      "group": "ops-critical",
+      "scope": "The position of the build stage in _repo_validation_registry.json, its severity and blocksRelease posture, and that its npm script still runs astro build"
+    },
     {
       "id": "repo-structure",
       "npmScript": "validate:repo",
@@ -668,17 +690,6 @@
       "owner": "approvalprep-products",
       "group": "release-critical",
       "scope": "Runtime product registry, admin mutation surface, Cloudflare bindings, and catalog fallback behavior"
-    },
-    {
-      "id": "build",
-      "npmScript": "build",
-      "entrypoint": "astro build",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents deploy-time compiler, route, and template failures",
-      "owner": "approvalprep-ops",
-      "group": "release-critical",
-      "scope": "Astro static build and Cloudflare Pages deploy artifact"
     },
     {
       "id": "stripe-mode",
