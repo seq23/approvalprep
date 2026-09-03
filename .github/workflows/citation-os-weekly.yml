@@ -62,6 +62,20 @@ jobs:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           CITATION_PROBE_MODE: grounded
         run: node scripts/llm_citation_probe.mjs --limit 25
+      - name: Refresh outbound link health
+        # scripts/validate/outbound-link-health.mjs is offline by design: it gates
+        # the build on a measured record so CI answers the same whatever a
+        # third-party origin is doing this minute. Something has to take that
+        # measurement, and it has to be here rather than in the validate lane.
+        #
+        # Without this step the 120-day freshness limit in that validator is a
+        # timer, not a guard: nothing would refresh the ledger and every lane
+        # would hard-fail four months from the last manual probe. The commit step
+        # below already stages data/citations/*.json, so the refreshed ledger
+        # lands on main the same way the rest of the weekly output does.
+        run: |
+          npm run build
+          npm run linkcheck:outbound
       - name: Cadence gate
         # The weekly sequence stages data/routes, data/content and
         # public/sitemap.xml, so it can move the published URL set even though it

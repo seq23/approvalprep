@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "lastUpdatedAt": "2026-09-02T23:15:57.406Z",
+  "lastUpdatedAt": "2026-09-03T03:03:02.854Z",
   "policy": "The root registry is the single execution authority. HARD_FAIL blocks immediately; STRONG_WARNING records and continues. The data/validation registry is generated from this file.",
   "validators": [
     {
@@ -1306,6 +1306,17 @@
       "owner": "approvalprep-ops",
       "group": "release-critical",
       "scope": "Every URL the build emits: hrefs and JSON-LD url/item/@id in dist/*.html, the URLs in llms.txt, llms-full.txt, feed.xml and the JSON indexes, and the destinations in public/_redirects. Hard-fails when it examines zero URLs."
+    },
+    {
+      "id": "outbound-link-health",
+      "npmScript": "validate:outbound-link-health",
+      "entrypoint": "scripts/validate/outbound-link-health.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "internal-url-form guaranteed every link the site makes to itself resolves 200, and nothing covered the links it makes to everyone else; a 2026-09-03 crawl found 11 pages linking into a 404 after HUD renamed form 52517.pdf and three Document Readiness Index source PDFs were withdrawn. Outbound URLs come out of checked-in JSON whose last_reviewed_at/accessDate fields are hand-set dates, not measured statuses, so a withdrawn source stayed linked indefinitely.",
+      "owner": "approvalprep-ops",
+      "group": "release-critical",
+      "scope": "Every outbound <a href> in dist/*.html, checked against the measured statuses in data/citations/outbound_link_health.json. Fails on a link the ledger marks dead, on a link the ledger has never measured, and on a ledger older than 120 days. Runs offline; the network measurement is npm run linkcheck:outbound. Hard-fails when it examines zero outbound links or the ledger is empty."
     },
     {
       "id": "answer-page-subject",

@@ -260,7 +260,9 @@
     "validate:workflow-yaml-parse": "node scripts/validate/workflow-yaml-parse.mjs",
     "validate:registry-build-order": "node scripts/validate/registry-build-order.mjs",
     "validate:pre-merge-lane-parity": "node scripts/validate/pre-merge-lane-parity.mjs",
-    "validate:amazon-book-landing-pages": "node scripts/validate/amazon-book-landing-pages.mjs"
+    "validate:amazon-book-landing-pages": "node scripts/validate/amazon-book-landing-pages.mjs",
+    "linkcheck:outbound": "node scripts/seo/probe-outbound-links.mjs",
+    "validate:outbound-link-health": "node scripts/validate/outbound-link-health.mjs"
   },
   "dependencies": {
     "astro": "^7.0.6",

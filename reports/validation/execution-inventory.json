@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "orchestratorSource": "_repo_validation_registry.json",
-  "validatorCount": 122,
-  "hardFailCount": 111,
+  "validatorCount": 123,
+  "hardFailCount": 112,
   "strongWarningCount": 11,
   "validators": [
     {
@@ -1069,6 +1069,15 @@
     },
     {
       "order": 119,
+      "id": "outbound-link-health",
+      "npmScript": "validate:outbound-link-health",
+      "entrypoint": "scripts/validate/outbound-link-health.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "release-critical"
+    },
+    {
+      "order": 120,
       "id": "answer-page-subject",
       "npmScript": "validate:answer-page-subject",
       "entrypoint": "scripts/validate/answer-page-subject.mjs",
@@ -1077,7 +1086,7 @@
       "group": "citation-os-batch-1"
     },
     {
-      "order": 120,
+      "order": 121,
       "id": "download-key-contract",
       "npmScript": "validate:download-key-contract",
       "entrypoint": "scripts/validate/download-key-contract.mjs",
@@ -1086,7 +1095,7 @@
       "group": "conversion-critical"
     },
     {
-      "order": 121,
+      "order": 122,
       "id": "script-callers",
       "npmScript": "validate:script-callers",
       "entrypoint": "scripts/validate/script-callers.mjs",
@@ -1095,7 +1104,7 @@
       "group": "ops-critical"
     },
     {
-      "order": 122,
+      "order": 123,
       "id": "amazon-book-landing-pages",
       "npmScript": "validate:amazon-book-landing-pages",
       "entrypoint": "scripts/validate/amazon-book-landing-pages.mjs",
