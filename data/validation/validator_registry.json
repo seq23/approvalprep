@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "lastUpdatedAt": "2026-09-03T03:03:02.854Z",
+  "lastUpdatedAt": "2026-09-03T23:14:57.300Z",
   "policy": "The root registry is the single execution authority. HARD_FAIL blocks immediately; STRONG_WARNING records and continues. The data/validation registry is generated from this file.",
   "validators": [
     {
@@ -226,6 +226,17 @@
       "owner": "approvalprep-growth",
       "group": "growth-critical",
       "scope": "Sitemap, robots, llms, answers, atom/query depth, provider receipts"
+    },
+    {
+      "id": "pages-header-publication",
+      "npmScript": "validate:pages-header-publication",
+      "entrypoint": "scripts/validate/pages-header-publication.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "asserts that the Cloudflare Pages header rules actually reach the published tree and actually match shipped files. seo-aeo-geo-surfaces asserts the TEXT of dist/_headers against a hardcoded path; this asserts behaviour - the published directory is the one wrangler.toml declares, its _headers is byte-identical to the tracked public/_headers rather than a stale build, and every rule matches at least one emitted file, so a correct-looking rule governing an empty path (the original 2026-08-26 defect, where /_astro/* shipped nothing for six days) cannot pass.",
+      "owner": "approvalprep-ops",
+      "group": "release-critical",
+      "scope": "wrangler.toml pages_build_output_dir, the tracked public/_headers source, the published <outDir>/_headers copy, every header rule pattern against the emitted file list, and immutable-cache coverage of every content-hashed asset"
     },
     {
       "id": "admin-dashboard",

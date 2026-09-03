@@ -47,7 +47,94 @@ function triggersOf(doc) {
   return Object.keys(on);
 }
 
-const RUNS_REGISTRY = /npm\s+run\s+(--silent\s+)?(validate:all|selfheal)\b/;
+// A lane reaches the registry whether it types `npm run validate:all` or calls
+// a wrapper that does. citation-os-daily and citation-os-weekly - two of the
+// four lanes this guard names above - run `npm run citation-os:daily`, which is
+// `node scripts/workflows/run-package-sequence.mjs daily`, whose sequence ends
+// in `validate:all`. Matching the literal string made this guard blind to the
+// exact lane whose 2026-09-02 red morning it was written about: it reported
+// scheduledRegistryLanes=3 when there were 5. A guard that cannot see the lane
+// it governs is not a guard.
+//
+// So resolve npm scripts transitively: seed with the registry entrypoints, then
+// close over `npm run X` references and over sequence runners - a node
+// entrypoint that declares named arrays of package-script names and is invoked
+// with one of those names as its argument.
+const REGISTRY_SCRIPTS = ['validate:all', 'selfheal'];
+
+function resolveReachingScripts() {
+  let scripts = {};
+  try {
+    scripts = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8')).scripts || {};
+  } catch (error) {
+    console.error(`[pre-merge-lane-parity] FAIL: cannot read package.json scripts: ${error.message}`);
+    process.exit(1);
+  }
+
+  const reaching = new Set(REGISTRY_SCRIPTS.filter((name) => name in scripts));
+  if (reaching.size === 0) {
+    console.error(
+      '[pre-merge-lane-parity] FAIL: package.json defines none of ' +
+        `${REGISTRY_SCRIPTS.join(', ')} - there is no registry entrypoint to compare lanes against`
+    );
+    process.exit(1);
+  }
+
+  // A script's stages: either the scripts it calls with `npm run`, or - when it
+  // is `node <runner> <sequence>` - the stage list that runner declares under
+  // that sequence name. Both are exact references to package-script names, so
+  // this cannot drag in an unrelated script that merely mentions one in prose.
+  const sequenceCache = new Map();
+  function sequencesOf(file) {
+    if (sequenceCache.has(file)) return sequenceCache.get(file);
+    const map = new Map();
+    let source = '';
+    try {
+      source = fs.readFileSync(path.join(root, file), 'utf8');
+    } catch {
+      source = '';
+    }
+    // `name: ['script:a','script:b']` - a declared, ordered list of stages.
+    for (const match of source.matchAll(/([A-Za-z_][A-Za-z0-9_]*)\s*:\s*\[([^\]]*)\]/g)) {
+      const entries = [...match[2].matchAll(/['"`]([^'"`]+)['"`]/g)].map((item) => item[1]);
+      if (entries.length && entries.every((entry) => entry in scripts)) map.set(match[1], entries);
+    }
+    sequenceCache.set(file, map);
+    return map;
+  }
+
+  function stagesOf(command) {
+    const stages = [];
+    for (const match of command.matchAll(/npm\s+run\s+(?:--silent\s+)?([A-Za-z0-9:._-]+)/g)) {
+      stages.push(match[1]);
+    }
+    for (const match of command.matchAll(/\bnode\s+(\S+\.(?:mjs|cjs|js))\s+([A-Za-z0-9:._-]+)/g)) {
+      const declared = sequencesOf(match[1]).get(match[2]);
+      if (declared) stages.push(...declared);
+    }
+    return stages;
+  }
+
+  let changed = true;
+  while (changed) {
+    changed = false;
+    for (const [name, command] of Object.entries(scripts)) {
+      if (reaching.has(name)) continue;
+      if (stagesOf(command).some((stage) => reaching.has(stage))) {
+        reaching.add(name);
+        changed = true;
+      }
+    }
+  }
+  return reaching;
+}
+
+const reachingScripts = resolveReachingScripts();
+const escaped = [...reachingScripts]
+  .map((name) => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))
+  .sort((a, b) => b.length - a.length)
+  .join('|');
+const RUNS_REGISTRY = new RegExp(`npm\\s+run\\s+(--silent\\s+)?(${escaped})(\\s|$|&|;|\\|)`, 'm');
 const RUNS_BUILD = /(npm\s+run\s+(--silent\s+)?build\b)|(\bastro\s+build\b)/;
 
 let files = [];
@@ -159,5 +246,7 @@ console.log(
     `preMergeRegistryJobs=${preMergeRegistryJobs.length} ` +
     `scheduledRegistryLanes=${scheduledRegistryLanes.length} ` +
     `reachValidateAllWithNoPriorBuild=${unbuilt.length} ` +
+    `registryEntrypointScripts=${[...reachingScripts].sort().join(',')} ` +
+    `scheduled=${scheduledRegistryLanes.map((lane) => `${path.basename(lane.file)}:${lane.jobName}${lane.buildBefore ? '(prebuilt)' : ''}`).join(',')} ` +
     `parity=${preMergeRegistryJobs.map((job) => `${path.basename(job.file)}:${job.jobName}`).join(',')}`
 );
