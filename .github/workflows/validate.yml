@@ -23,29 +23,36 @@ jobs:
       - name: Run fixture workflow trace
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
         run: npm run workflows:trace -- --workflow validate.yml
-      - name: Build the site the validators measure
-        # Built BEFORE validate:all, not after. Three HARD_FAIL,
-        # release-blocking validators in the registry - no-instruction-leak,
-        # no-empty-cells and content-pattern - walk the tree for built *.html,
-        # and dist/ is gitignored. On a fresh checkout they found zero pages and
-        # each printed "OK but no built HTML found" and exited 0, so on every
-        # pull_request and every push to main they were structurally incapable
-        # of failing. Measured: with dist/ removed, all three exited 0.
-        #
-        # This is the same reasoning the cadence gate step below already carries
-        # for the same reason; it was never applied to the validators.
-        run: npm run build
       - name: Run canonical severity-aware validator registry
+        # No `npm run build` step ahead of this. There used to be one, and it is
+        # the reason the 2026-09-02 daily failures were invisible until they
+        # reached production.
+        #
+        # The build is validator 1 inside the registry (see
+        # scripts/validate/registry-build-order.mjs), so validate:all now
+        # produces dist/ itself in every lane. A build step here would do the
+        # same work twice - but worse, it would put this lane in a state no
+        # scheduled lane is ever in. citation-os-daily, citation-os-weekly,
+        # intelligence-ingest-free-sources and artifact-validation all reach
+        # validate:all on a bare checkout with no dist/. When this lane
+        # pre-built and they did not, a green pull_request stopped predicting a
+        # green schedule: PR #23 added a hard dist/_headers assertion, passed
+        # here, and turned the scheduled lanes red every morning after.
+        #
+        # Held by validate:pre-merge-lane-parity: the lane that authorises a
+        # merge must reach validate:all in the same state the scheduled lanes do.
         run: npm run validate:all
       - name: Cadence gate
         # Blocks publishing faster than the library can be kept inside the
         # 91-day window where pages stay citable. Warnings, including
         # library_over_ceiling, are reported without failing the run.
         #
-        # Runs after the build on purpose. scripts/cadence_gate.cjs reads every
-        # sitemap*.xml it can find, and dist/ is gitignored - before the build
-        # the only sitemap in the tree is public/sitemap.xml, so the gate would
-        # be measuring a stale snapshot rather than what this branch produces.
+        # Runs after validate:all on purpose. scripts/cadence_gate.cjs reads
+        # every sitemap*.xml it can find, and dist/ is gitignored - until the
+        # build runs the only sitemap in the tree is public/sitemap.xml, so the
+        # gate would be measuring a stale snapshot rather than what this branch
+        # produces. The build is validator 1 of validate:all, so by this step
+        # dist/sitemap.xml exists.
         #
         # This step is read-only: scripts/cadence_gate.cjs writes
         # data/cadence/known_urls.json only under --accept, which is not passed
