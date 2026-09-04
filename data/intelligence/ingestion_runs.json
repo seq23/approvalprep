@@ -2,6 +2,23 @@
   "schemaVersion": "4.1.0",
   "runs": [
     {
+      "id": "7f48f430-8014-4717-80b3-f0dcd930865c",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-09-04T10:22:33.327Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "15ec4d5b-a3f8-4fe2-aa35-75c3cb66cc12",
+      "connectorId": "indexnow",
+      "status": "BUDGET_HELD",
+      "ranAt": "2026-09-04T10:22:33.147Z",
+      "mode": "live",
+      "reason": "weekly ceiling 16 reached (17 live attempts in 7d)",
+      "recordsImported": 0
+    },
+    {
       "id": "caf8c01a-36da-4b27-b845-8a93248d413d",
       "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
@@ -1906,21 +1923,6 @@
       "connectorId": "retest_outcome_evaluator",
       "status": "COMPLETE",
       "ranAt": "2026-08-24T12:28:13.165Z",
-      "recordsImported": 0
-    },
-    {
-      "id": "bfbdb55e-f798-4779-92fa-db8fb76fef17",
-      "connectorId": "retest_queue_builder",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-24T12:28:13.131Z",
-      "recordsImported": 0
-    },
-    {
-      "id": "b077c3d1-d7be-49ff-8044-cdfc084179f8",
-      "connectorId": "cloudflare_crawler_logs",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-08-24T12:28:13.058Z",
-      "reason": "Cloudflare crawler ingestion requires Cloudflare credentials or a manual import file.",
       "recordsImported": 0
     }
   ]
