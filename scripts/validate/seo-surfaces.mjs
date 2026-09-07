@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import fs from "node:fs";
-import { exists, fail, readJson } from "./_common.mjs";
+import { exists, fail, readJson, requireBuildOutput } from "./_common.mjs";
 
 const required = [
   "public/robots.txt",
@@ -38,13 +38,14 @@ for (const route of manifest.routes.filter((item) => item.index)) {
 // dist/, so the /_astro/* immutable rule added on 2026-08-26 had never applied:
 // the live origin was returning Pages' 4-hour default on content-hashed assets
 // that can never change. Assert the shipped artefact, not the source file.
-const headersPath = "dist/_headers";
+const publishedDirName = requireBuildOutput("seo-aeo-geo-surfaces");
+const headersPath = `${publishedDirName}/_headers`;
 if (!exists(headersPath)) {
   fail(`[seo] ${headersPath} is missing, so Cloudflare Pages never receives the header rules; _headers must live in public/ to be published`);
 } else {
   const headers = fs.readFileSync(headersPath, "utf8");
-  if (!/^\/_astro\/\*$/m.test(headers)) fail("[seo] dist/_headers has lost its /_astro/* rule");
-  if (!/max-age=31536000,\s*immutable/i.test(headers)) fail("[seo] dist/_headers no longer marks content-hashed assets immutable");
+  if (!/^\/_astro\/\*$/m.test(headers)) fail(`[seo] ${headersPath} has lost its /_astro/* rule`);
+  if (!/max-age=31536000,\s*immutable/i.test(headers)) fail(`[seo] ${headersPath} no longer marks content-hashed assets immutable`);
 }
 
 for (const token of ["Sitemap: https://approvalprep.com/sitemap.xml", "Disallow: /admin", "Disallow: /download"]) {

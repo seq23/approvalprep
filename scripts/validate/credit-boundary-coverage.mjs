@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import fs from "node:fs";
 import path from "node:path";
+import { requireBuildOutput } from "./_common.mjs";
 
 // --- Existing assertion, unchanged: the self-service credit boundary phrases -----
 // must survive in the boundary data, the footer, and the catch-all page template.
@@ -90,17 +91,25 @@ for (const route of [...routes, ...answers]) {
 }
 if (covered.length < 100) throw new Error(`[credit-boundary] only ${covered.length} routes resolved a boundary family; expected the full published surface`);
 
-// When a build is present, confirm the block really reached the HTML rather than
-// trusting that the layout wiring did its job.
+// Confirm the block really reached the HTML rather than trusting that the layout
+// wiring did its job.
+//
+// This sweep used to be wrapped in `if (fs.existsSync("dist"))`. On a bare
+// checkout it therefore did nothing and the validator still exited 0, printing
+// `builtPagesChecked=0` - the number that says it verified no page at all, in a
+// line whose first word is OK. With the build present the same sweep checks 118.
+// The build is validator 1 of the registry, so the tree is there in every lane
+// that runs it; requiring it turns a silent skip into a named failure.
+const DIST = requireBuildOutput("credit-boundary-coverage");
 let distChecked = 0;
-if (fs.existsSync("dist")) {
+{
   const walk = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
     const next = path.join(dir, e.name);
     return e.isDirectory() ? walk(next) : next.endsWith(".html") ? [next] : [];
   });
   const missing = [];
-  for (const file of walk("dist")) {
-    const route = "/" + path.relative("dist", file).replace(/index\.html$/, "").replace(/\/$/, "");
+  for (const file of walk(DIST)) {
+    const route = "/" + path.relative(DIST, file).replace(/index\.html$/, "").replace(/\/$/, "");
     const clean = route.replace(/\/+$/, "") || "/";
     // 404.html is assembled from the index shell by scripts/build_404.mjs and is
     // not a content page; /admin is an internal tool, excluded by the data file.
@@ -110,6 +119,7 @@ if (fs.existsSync("dist")) {
     else distChecked += 1;
   }
   if (missing.length) throw new Error(`[credit-boundary] ${missing.length} built page(s) missing the professional boundary block: ${missing.slice(0, 10).join(", ")}`);
+  if (distChecked === 0) throw new Error(`[credit-boundary] zero built pages carried the boundary block check in ${DIST}/ - the published tree is empty or entirely excluded, so this validator verified nothing`);
 }
 
 console.log(`[validate:credit-boundary] OK routes=${covered.length} builtPagesChecked=${distChecked} families=${familyNames.length}`);

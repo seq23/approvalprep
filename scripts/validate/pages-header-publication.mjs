@@ -32,6 +32,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { publishedDir } from './_common.mjs';
 
 const root = process.cwd();
 const failures = [];
@@ -70,7 +71,11 @@ try {
         'and _headers cannot be shipped from anywhere.'
     );
   } else {
-    outDir = match[1].replace(/^\.\//, '').replace(/\/+$/, '');
+    // The wrangler value is the source of truth; publishedDir() returns exactly
+    // it, and additionally honours APPROVALPREP_BUILD_OUTPUT_DIR so
+    // validate:build-output-contract can prove this validator refuses an absent
+    // published tree instead of assuming it would.
+    outDir = publishedDir();
   }
 } catch (error) {
   failures.push(`cannot read wrangler.toml: ${error.message}`);

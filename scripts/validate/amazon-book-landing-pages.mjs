@@ -83,7 +83,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import http from "node:http";
-import { readJson, fail, root } from "./_common.mjs";
+import { readJson, fail, root, requireBuildOutput } from "./_common.mjs";
 
 // Transcribed from the shipped EPUB files. Do not edit to match the code.
 const SHIPPED_BOOK_PATHS = [
@@ -144,8 +144,7 @@ for (const routePath of ALL_PATHS) {
 
 /* ---------- built output ---------- */
 
-const distDir = path.join(root, "dist");
-if (!fs.existsSync(distDir)) fail("[amazon-book-landing-pages] dist/ is missing - run `npm run build` before this validator, the way .github/workflows/validate.yml does");
+const distDir = path.join(root, requireBuildOutput("amazon-book-landing-pages"));
 
 const html = new Map();
 let filesChecked = 0;

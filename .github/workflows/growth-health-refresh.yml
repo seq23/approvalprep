@@ -15,12 +15,34 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
-        with: { node-version: 22.12.0 }
+        with:
+          node-version: 22.12.0
+          cache: npm
+      - name: Install locked dependencies
+        # This job had no install step at all. Every script it ran happened to be
+        # dependency-free, so nothing noticed until it needed to build.
+        run: npm ci --no-audit --no-fund
       - name: Run fixture workflow trace
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
         run: |
           npm run ux:browserless-report
           npm run workflows:trace -- --workflow growth-health-refresh.yml
+      - name: Build the publishable tree
+        # validate:seo-surfaces asserts the header rules in the PUBLISHED copy of
+        # _headers, because that is the only copy Cloudflare Pages ever receives.
+        # dist/ is gitignored, so it exists only where something builds it.
+        #
+        # Every other lane gets that build from the validator registry, where it
+        # is validator 1. This lane does not run the registry - it runs the one
+        # validator directly - so the registry's guarantee never reached it, and
+        # neither did the two guards written to enforce that guarantee, both of
+        # which key on `npm run validate:all` and skip any job without it. Being
+        # a Monday cron, it was the last lane still failing on PR #23's
+        # dist/_headers assertion, five days after that was declared fixed.
+        #
+        # Held by validate:build-output-contract, which keys on the validators
+        # rather than on the registry and so can see a direct invocation.
+        run: npm run build
       - run: npm run validate:seo-surfaces
 
       - name: Build growth health snapshot
