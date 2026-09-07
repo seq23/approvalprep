@@ -21,6 +21,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { hasDemand, allRecords } from '../lib/demand_gate.mjs';
+import { requireBuildOutput } from './_common.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const read = (rel) => JSON.parse(fs.readFileSync(path.join(ROOT, rel), 'utf8'));
@@ -34,26 +35,38 @@ const registry = read('data/content/page_registry.json');
 const routeCopy = read('data/content/generated_route_copy.json');
 
 // --- 1. every sitemap URL renders -------------------------------------------
-const sitemapRel = exists('dist/sitemap.xml') ? 'dist/sitemap.xml' : 'public/sitemap.xml';
+// This check is the whole reason the validator reads the built tree, and it used
+// to disappear without failing: `else if (!exists('dist'))` pushed a `note:` and
+// skipped, so on a bare checkout the validator printed OK having compared zero
+// sitemap URLs against zero built pages. That is the same shape of silence as a
+// missing assertion. The build is validator 1 of the registry, so dist/ is
+// present in every lane that runs it; a lane where it is absent is a broken lane
+// and must say so.
+const DIST = requireBuildOutput('demand-backed-pages');
+const sitemapRel = exists(`${DIST}/sitemap.xml`) ? `${DIST}/sitemap.xml` : 'public/sitemap.xml';
 if (!exists(sitemapRel)) {
-  notes.push('no sitemap on disk yet; run `npm run seo:sitemap` to produce one');
-} else if (!exists('dist')) {
-  notes.push('no dist/ on disk; sitemap-to-render parity not checked (run `npm run build` first)');
+  errors.push(`no sitemap at ${DIST}/sitemap.xml or public/sitemap.xml, so sitemap-to-render parity cannot be checked. Run \`npm run seo:sitemap\`.`);
 } else {
   const xml = fs.readFileSync(path.join(ROOT, sitemapRel), 'utf8');
   const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-  const missing = [];
-  for (const loc of locs) {
-    let p;
-    try { p = new URL(loc).pathname; } catch { p = loc; }
-    p = p.replace(/^\//, '').replace(/\/$/, '');
-    const candidates = p === '' ? ['dist/index.html'] : [`dist/${p}`, `dist/${p}.html`, `dist/${p}/index.html`];
-    if (!candidates.some(exists)) missing.push(`/${p}`);
-  }
-  if (missing.length) {
-    errors.push(`${missing.length} sitemap URL(s) have no built page, e.g. ${missing.slice(0, 5).join(', ')}`);
+  if (locs.length === 0) {
+    // An empty sitemap makes the loop below vacuous, and a vacuous loop reports
+    // the same "all render" as a healthy one.
+    errors.push(`${sitemapRel} contains zero <loc> entries; refusing to report sitemap parity over an empty URL set`);
   } else {
-    notes.push(`sitemap parity: ${locs.length} URLs, all render`);
+    const missing = [];
+    for (const loc of locs) {
+      let p;
+      try { p = new URL(loc).pathname; } catch { p = loc; }
+      p = p.replace(/^\//, '').replace(/\/$/, '');
+      const candidates = p === '' ? [`${DIST}/index.html`] : [`${DIST}/${p}`, `${DIST}/${p}.html`, `${DIST}/${p}/index.html`];
+      if (!candidates.some(exists)) missing.push(`/${p}`);
+    }
+    if (missing.length) {
+      errors.push(`${missing.length} sitemap URL(s) have no built page, e.g. ${missing.slice(0, 5).join(', ')}`);
+    } else {
+      notes.push(`sitemap parity: ${locs.length} URLs, all render`);
+    }
   }
 }
 

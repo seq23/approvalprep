@@ -7,8 +7,11 @@
 // set, and the gate would pass over exactly the links it exists to catch.
 import fs from 'node:fs';
 import path from 'node:path';
+import { publishedDir } from '../validate/_common.mjs';
 
-export const DIST = 'dist';
+// The published build output, resolved through the one shared contract rather
+// than hardcoded, so this lib and every validator agree on which tree they mean.
+export const DIST = publishedDir();
 export const LEDGER_PATH = 'data/citations/outbound_link_health.json';
 export const SITE_HOSTS = new Set(['approvalprep.com', 'www.approvalprep.com']);
 

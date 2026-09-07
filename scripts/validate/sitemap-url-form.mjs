@@ -16,17 +16,15 @@
 // file that actually exists, means one of them being wrong is now a failure.
 import fs from 'node:fs';
 import path from 'node:path';
+import { requireBuildOutput } from './_common.mjs';
 
 const failures = [];
 const fail = (msg) => failures.push(msg);
 
 const SITE_ORIGIN = 'https://approvalprep.com';
-const DIST = 'dist';
+const DIST = requireBuildOutput('sitemap-url-form');
 
-if (!fs.existsSync(path.join(DIST, 'index.html'))) {
-  console.error('[sitemap-url-form] dist/ is not built; run npm run build first');
-  process.exit(1);
-}
+
 
 const sitemapPath = fs.existsSync(path.join(DIST, 'sitemap.xml')) ? path.join(DIST, 'sitemap.xml') : 'public/sitemap.xml';
 const sitemap = fs.readFileSync(sitemapPath, 'utf8');

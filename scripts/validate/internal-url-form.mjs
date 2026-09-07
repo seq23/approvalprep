@@ -20,16 +20,14 @@
 // exists in dist/.
 import fs from 'node:fs';
 import path from 'node:path';
+import { requireBuildOutput } from './_common.mjs';
 
 const SITE_ORIGIN = 'https://approvalprep.com';
-const DIST = 'dist';
+const DIST = requireBuildOutput('internal-url-form');
 const failures = [];
 const fail = (msg) => failures.push(msg);
 
-if (!fs.existsSync(path.join(DIST, 'index.html'))) {
-  console.error('[internal-url-form] dist/ is not built; run npm run build first');
-  process.exit(1);
-}
+
 
 // The single rule, restated for .mjs (src/lib/schema.ts holds the .ts twin).
 // Route paths get a trailing slash. Anything whose last segment carries an

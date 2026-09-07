@@ -21,14 +21,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { collectOutboundLinks, readLedger, LEDGER_PATH, DIST } from '../lib/outbound-links.mjs';
+import { requireBuildOutput } from './_common.mjs';
 
 const MAX_LEDGER_AGE_DAYS = 120;
 const failures = [];
 
-if (!fs.existsSync(path.join(DIST, 'index.html'))) {
-  console.error('[outbound-link-health] dist/ is not built; run npm run build first');
-  process.exit(1);
-}
+requireBuildOutput('outbound-link-health');
 
 const ledger = readLedger();
 if (!ledger) {

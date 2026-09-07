@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "lastUpdatedAt": "2026-09-03T23:14:57.300Z",
+  "lastUpdatedAt": "2026-09-07T00:00:00.000Z",
   "policy": "The root registry is the single execution authority. HARD_FAIL blocks immediately; STRONG_WARNING records and continues. The data/validation registry is generated from this file.",
   "validators": [
     {
@@ -35,6 +35,17 @@
       "owner": "approvalprep-ops",
       "group": "ops-critical",
       "scope": "Every .github/workflows/*.yml job that runs validate:all or selfheal: whether a pull_request-triggered job builds before it, that a pre-merge registry lane exists at all, that non-pull_request registry lanes exist to be predicted, and that the registry still builds at position 1"
+    },
+    {
+      "id": "build-output-contract",
+      "npmScript": "validate:build-output-contract",
+      "entrypoint": "scripts/validate/build-output-contract.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "closes the two remaining ways a build-output validator can be meaningless. It finds every workflow step that runs one - including a direct invocation outside the registry, which is what registry-build-order and pre-merge-lane-parity both skip, and which left Growth Health Refresh failing on dist/_headers for a further week after that message was declared fixed - and it re-executes each such validator against an absent published tree every run, so a validator that skips instead of refusing cannot report a pass over zero built pages.",
+      "owner": "approvalprep-ops",
+      "group": "ops-critical",
+      "scope": "Every .github/workflows/*.yml step that runs a build-output validator or produces the published tree: that a producing step and a dependency install precede it unconditionally in the same job; and the measured absent-tree exit code of every registry validator importing requireBuildOutput/publishedDir from scripts/validate/_common.mjs"
     },
     {
       "id": "repo-structure",
@@ -226,6 +237,17 @@
       "owner": "approvalprep-growth",
       "group": "growth-critical",
       "scope": "Sitemap, robots, llms, answers, atom/query depth, provider receipts"
+    },
+    {
+      "id": "demand-backed-pages",
+      "npmScript": "validate:demand-backed-pages",
+      "entrypoint": "scripts/validate/demand-backed-pages.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents a sitemap URL nothing renders, an indexable route that is page-factory boilerplate with the query interpolated, and a factory route with no demand record behind it. It existed unregistered and was reachable only through `npm run validate`, which no workflow runs, so none of that was ever asserted in CI.",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "Sitemap-to-render parity against the published tree, page-factory template-filler duplication on indexable routes, and demand records for factory routes created after the gate"
     },
     {
       "id": "pages-header-publication",
