@@ -1,6 +1,6 @@
 {
   "schemaVersion": "4.4.0",
-  "generatedAt": "2026-09-07T12:40:20.662Z",
+  "generatedAt": "2026-09-08T10:43:05.247Z",
   "status": "COMPLETE_FIXTURE_TRACE",
   "workflowCount": 16,
   "manualReadyCount": 16,
@@ -143,6 +143,7 @@
         "validate:backlink-honesty",
         "validate:blog-detail-pages",
         "validate:browserless-accessibility",
+        "validate:build-output-contract",
         "validate:cadence-ledger-advance",
         "validate:citation-claims",
         "validate:citation-ledger",
@@ -163,6 +164,7 @@
         "validate:customer-next-steps",
         "validate:data-privacy",
         "validate:delegated-authority",
+        "validate:demand-backed-pages",
         "validate:discovery-surfaces",
         "validate:download-first-page-boundary",
         "validate:download-key-contract",
@@ -359,6 +361,7 @@
         "validate:backlink-honesty",
         "validate:blog-detail-pages",
         "validate:browserless-accessibility",
+        "validate:build-output-contract",
         "validate:cadence-ledger-advance",
         "validate:citation-claims",
         "validate:citation-ledger",
@@ -379,6 +382,7 @@
         "validate:customer-next-steps",
         "validate:data-privacy",
         "validate:delegated-authority",
+        "validate:demand-backed-pages",
         "validate:discovery-surfaces",
         "validate:download-first-page-boundary",
         "validate:download-key-contract",
@@ -617,6 +621,7 @@
         "validate:backlink-honesty",
         "validate:blog-detail-pages",
         "validate:browserless-accessibility",
+        "validate:build-output-contract",
         "validate:cadence-ledger-advance",
         "validate:citation-claims",
         "validate:citation-ledger",
@@ -637,6 +642,7 @@
         "validate:customer-next-steps",
         "validate:data-privacy",
         "validate:delegated-authority",
+        "validate:demand-backed-pages",
         "validate:discovery-surfaces",
         "validate:download-first-page-boundary",
         "validate:download-key-contract",
@@ -968,19 +974,21 @@
       "runnerPinned": true,
       "timeoutSet": true,
       "usesNpmInstall": false,
-      "usesNpmCi": false,
-      "buildsProject": false,
-      "requiresDependencyInstall": false,
-      "installDependencyReason": null,
+      "usesNpmCi": true,
+      "buildsProject": true,
+      "requiresDependencyInstall": true,
+      "installDependencyReason": "transitive:build",
       "dependencyInstallPolicyOk": true,
       "fixtureTraceInput": true,
       "secretRefs": [],
       "npmScripts": [
+        "build",
         "health:build-growth",
         "validate:growth-health",
         "validate:seo-surfaces"
       ],
       "transitiveNpmScripts": [
+        "build",
         "health:build-growth",
         "validate:growth-health",
         "validate:seo-surfaces"
@@ -1005,8 +1013,8 @@
         {
           "id": "transitive_dependency_install",
           "status": "PASS",
-          "requires_dependency_install": false,
-          "reason": null
+          "requires_dependency_install": true,
+          "reason": "transitive:build"
         },
         {
           "id": "pinned_runtime_and_timeout",
@@ -1022,7 +1030,7 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "b0cc34dbdf6af772"
+      "traceId": "c5cd9af27d52742a"
     },
     {
       "workflow": "growth-maintenance-analysis.yml",
@@ -1280,6 +1288,7 @@
         "validate:backlink-honesty",
         "validate:blog-detail-pages",
         "validate:browserless-accessibility",
+        "validate:build-output-contract",
         "validate:cadence-ledger-advance",
         "validate:citation-claims",
         "validate:citation-ledger",
@@ -1300,6 +1309,7 @@
         "validate:customer-next-steps",
         "validate:data-privacy",
         "validate:delegated-authority",
+        "validate:demand-backed-pages",
         "validate:discovery-surfaces",
         "validate:download-first-page-boundary",
         "validate:download-key-contract",
@@ -1840,6 +1850,7 @@
         "validate:backlink-honesty",
         "validate:blog-detail-pages",
         "validate:browserless-accessibility",
+        "validate:build-output-contract",
         "validate:cadence-ledger-advance",
         "validate:citation-claims",
         "validate:citation-ledger",
@@ -1860,6 +1871,7 @@
         "validate:customer-next-steps",
         "validate:data-privacy",
         "validate:delegated-authority",
+        "validate:demand-backed-pages",
         "validate:discovery-surfaces",
         "validate:download-first-page-boundary",
         "validate:download-key-contract",
