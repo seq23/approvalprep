@@ -2,6 +2,20 @@
   "schemaVersion": "4.1.0",
   "runs": [
     {
+      "id": "c73dbc39-0c14-41b8-bcf5-e3a5c8b8bb2d",
+      "connectorId": "competitor_public_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-09-09T07:40:08.870Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "ba3d3364-16fb-4f48-9a8a-01ec1adf3fbc",
+      "connectorId": "competitor_sitemap_discovery",
+      "status": "COMPLETE",
+      "ranAt": "2026-09-09T07:40:08.321Z",
+      "recordsImported": 2
+    },
+    {
       "id": "e0638d51-cf60-4831-b171-d59e8c7d2f60",
       "connectorId": "growth_brief_generation",
       "status": "COMPLETE",
@@ -1907,21 +1921,6 @@
       "ranAt": "2026-08-28T14:36:16.042Z",
       "mode": "live",
       "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
-      "recordsImported": 0
-    },
-    {
-      "id": "c90af8cf-7903-4d41-b891-3441d48b9ad7",
-      "connectorId": "official_source_fetcher",
-      "status": "COMPLETE",
-      "ranAt": "2026-08-28T12:09:43.516Z",
-      "recordsImported": 12
-    },
-    {
-      "id": "f6894f13-6348-407d-ae4b-51e1069441d6",
-      "connectorId": "manual_social_signal_import",
-      "status": "NO_DATA",
-      "ranAt": "2026-08-28T12:09:39.906Z",
-      "reason": "No social signal import found at data/imports/social-signals.json.",
       "recordsImported": 0
     }
   ]
