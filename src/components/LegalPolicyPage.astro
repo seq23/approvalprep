@@ -148,7 +148,15 @@ const policy = legalPolicies[route.path] || {
     <aside class="legal-policy-meta card">
       <p class="eyebrow">Policy page</p>
       <p><strong>Effective:</strong> {effectiveDate}</p>
-      <p><strong>Contact:</strong> <a href="mailto:info@approvalprep.com">info@approvalprep.com</a></p>
+      {/*
+        email_off / email_on are Cloudflare's documented opt-out from Email Address Obfuscation.
+        Without them the zone rewrites every address on this page into a link to
+        /cdn-cgi/l/email-protection - AND THAT PATH RETURNS 404. A visitor with JavaScript gets the
+        address back from the decoder; a crawler, and anyone without JS, gets a dead link where the
+        only support contact should be. Ahrefs counts it as the site's 404 page, its 4XX page, and
+        a page linking to a broken page, on every legal surface at once.
+      */}
+      <p><strong>Contact:</strong> <!--email_off--><a href="mailto:info@approvalprep.com">info@approvalprep.com</a><!--email_on--></p>
       <p class="fine">This page is general information about ApprovalPrep’s site and services. It is not legal advice.</p>
     </aside>
     <article class="legal-policy-body">
@@ -158,11 +166,11 @@ const policy = legalPolicies[route.path] || {
       <div class="legal-policy-grid">
         <div class="card">
           <h3>What this covers</h3>
-          <ul>{policy.covers.map((item) => <li>{item}</li>)}</ul>
+          <ul><!--email_off-->{policy.covers.map((item) => <li>{item}</li>)}<!--email_on--></ul>
         </div>
         <div class="card warning-card">
           <h3>Important limits</h3>
-          <ul>{policy.limits.map((item) => <li>{item}</li>)}</ul>
+          <ul><!--email_off-->{policy.limits.map((item) => <li>{item}</li>)}<!--email_on--></ul>
         </div>
       </div>
       <DataPrivacyNotice />
