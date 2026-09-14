@@ -1,170 +1,165 @@
 {
   "schemaVersion": "4.2.0",
-  "generatedAt": "2026-09-10T10:46:06.490Z",
+  "generatedAt": "2026-09-14T12:40:46.626Z",
   "sourceStatus": [
     {
-      "id": "efe1a014-c92a-48f8-93e7-dd05a07ee19d",
+      "id": "34b6236f-64a0-4c68-88f2-8f859d000c60",
+      "connectorId": "page_action_recommendation",
+      "status": "COMPLETE",
+      "ranAt": "2026-09-14T12:40:46.571Z",
+      "recordsImported": 5430
+    },
+    {
+      "id": "464acdb6-18f5-4fbf-94d0-f3346e4417c9",
       "connectorId": "authority_requirement_analysis",
       "status": "COMPLETE",
-      "ranAt": "2026-09-10T10:46:06.302Z",
+      "ranAt": "2026-09-14T12:40:46.506Z",
       "recordsImported": 86
     },
     {
-      "id": "4e4a5408-0e22-454d-8746-b9a6f49f09c5",
+      "id": "93e7dc64-6663-4da3-a2cb-c152c7388f2b",
       "connectorId": "growth_maintenance_analysis",
       "status": "COMPLETE",
-      "ranAt": "2026-09-10T10:46:06.141Z",
+      "ranAt": "2026-09-14T12:40:46.469Z",
       "recordsImported": 86
     },
     {
-      "id": "dc0c6b0f-4fc4-448e-861f-01ff754801ca",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-09-10T10:43:35.178Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
+      "id": "cd4490db-2720-4b63-8521-8c3ae82e0bdd",
+      "connectorId": "content_opportunity_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-09-14T12:40:46.432Z",
+      "recordsImported": 5430
     },
     {
-      "id": "39a292f0-e946-4e8d-9b44-41b8db936282",
-      "connectorId": "indexnow",
-      "status": "NO_DATA",
-      "ranAt": "2026-09-10T10:43:35.001Z",
-      "mode": "live",
-      "recordsImported": 0,
-      "preparedUrlCount": 86
-    },
-    {
-      "id": "14064d65-3216-4ac0-9c8e-af77a6534040",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-09-10T10:22:33.319Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "54916d8a-1a90-4c69-9d1b-cd8c1c559a2a",
-      "connectorId": "indexnow",
-      "status": "NO_DATA",
-      "ranAt": "2026-09-10T10:22:33.205Z",
-      "mode": "live",
-      "recordsImported": 0,
-      "preparedUrlCount": 86
-    },
-    {
-      "id": "27ff7192-bd35-4d70-b6da-eabb7e9f3160",
+      "id": "82a5244b-dedd-4f38-ba6a-35686dbdc30f",
       "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
-      "ranAt": "2026-09-10T08:35:26.873Z",
+      "ranAt": "2026-09-14T12:40:44.803Z",
       "recordsImported": 12
     },
     {
-      "id": "2fc3df01-f808-4531-ac7a-263dc23d667b",
+      "id": "5c4b9b47-aa90-4508-9c24-f4c7b4fbb7eb",
       "connectorId": "manual_social_signal_import",
       "status": "NO_DATA",
-      "ranAt": "2026-09-10T08:35:24.808Z",
+      "ranAt": "2026-09-14T12:40:42.202Z",
       "reason": "No social signal import found at data/imports/social-signals.json.",
       "recordsImported": 0
     },
     {
-      "id": "e3bb6563-6a62-49cd-be37-37ab153eedd2",
+      "id": "55f1ea27-28d5-4412-ab13-4ab61873d5a9",
       "connectorId": "manual_serp_csv",
       "status": "NO_DATA",
-      "ranAt": "2026-09-10T08:35:24.697Z",
+      "ranAt": "2026-09-14T12:40:42.168Z",
       "reason": "No SERP CSV found at data/imports/serp.csv.",
       "recordsImported": 0
     },
     {
-      "id": "e247ec29-1271-4748-83cb-b573f221e3fd",
+      "id": "7253daa2-ed2d-41df-946f-d80f37082532",
       "connectorId": "competitor_public_crawler",
       "status": "COMPLETE",
-      "ranAt": "2026-09-10T08:35:24.584Z",
+      "ranAt": "2026-09-14T12:40:42.132Z",
       "recordsImported": 2
     },
     {
-      "id": "c2035f65-dfa3-4e1c-9257-ec63855d97f0",
+      "id": "324f4280-6469-4ad9-a074-cff51c988c8c",
       "connectorId": "competitor_sitemap_discovery",
       "status": "COMPLETE",
-      "ranAt": "2026-09-10T08:35:24.241Z",
+      "ranAt": "2026-09-14T12:40:41.719Z",
       "recordsImported": 2
     },
     {
-      "id": "e5cb3767-8591-4d37-8353-4e7fb71ced70",
+      "id": "a064f031-1396-49cf-a6cd-7a3c53f5fed9",
       "connectorId": "owned_site_crawler",
       "status": "COMPLETE",
-      "ranAt": "2026-09-10T08:35:23.748Z",
+      "ranAt": "2026-09-14T12:40:40.403Z",
       "recordsImported": 99
     },
     {
-      "id": "a52423fd-51c2-4a04-b569-207c31d2d64e",
+      "id": "f8ce24a5-531f-495e-bdf7-84d17fefdb74",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-09-10T08:35:23.599Z",
+      "ranAt": "2026-09-14T12:40:40.367Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "30a3a055-7eab-458e-a534-474ab8705628",
+      "id": "122a0d25-ddfd-484e-a410-6bdf4f50d7be",
       "connectorId": "google_url_inspection",
-      "status": "NOT_AUTHORIZED",
-      "ranAt": "2026-09-10T08:35:23.464Z",
-      "mode": "unavailable",
-      "reason": "HTTP 403: {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"You do not own this site, or the inspected URL is not part of this property.\",\n    \"status\": \"PERMISSION_DENIED\"\n  }\n}\n",
-      "recordsImported": 0
+      "status": "COMPLETE",
+      "ranAt": "2026-09-14T12:40:40.333Z",
+      "mode": "live",
+      "recordsImported": 25
     },
     {
-      "id": "fa43975b-92e7-4057-ad77-0d1f25c5140c",
+      "id": "c1e2e1d6-9615-42c0-b833-5707eabd1bb2",
       "connectorId": "google_search_console_search_analytics",
       "status": "BUDGET_HELD",
-      "ranAt": "2026-09-10T08:35:23.044Z",
-      "reason": "weekly ceiling 3 reached (3 live attempts in 7d)",
+      "ranAt": "2026-09-14T12:37:52.903Z",
+      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
       "recordsImported": 0
     },
     {
-      "id": "9ffaa8d7-07d2-4946-b675-086e8d79744d",
+      "id": "740b315a-09fd-4636-8df2-b72274b92189",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-09-09T10:43:45.294Z",
+      "ranAt": "2026-09-14T10:44:19.250Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "b0c6c57e-8625-423a-b319-9736b89567e6",
+      "id": "2d007a21-9128-4ac8-9727-cb8ed48da507",
       "connectorId": "indexnow",
       "status": "NO_DATA",
-      "ranAt": "2026-09-09T10:43:45.142Z",
+      "ranAt": "2026-09-14T10:44:19.079Z",
       "mode": "live",
       "recordsImported": 0,
       "preparedUrlCount": 86
     },
     {
-      "id": "466fb08f-e805-4c95-b91f-e4d5e26f5c62",
+      "id": "1c85509d-f648-4dba-b350-5f740f180f71",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-09-09T10:22:37.401Z",
+      "ranAt": "2026-09-14T10:23:16.344Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "5f756d7b-2573-4c20-bd1d-38e4143dc58a",
+      "id": "9af6111f-053d-435b-a9d6-197ed5ec4316",
       "connectorId": "indexnow",
       "status": "NO_DATA",
-      "ranAt": "2026-09-09T10:22:37.229Z",
+      "ranAt": "2026-09-14T10:23:16.164Z",
       "mode": "live",
       "recordsImported": 0,
       "preparedUrlCount": 86
     },
     {
-      "id": "312c20af-f1a8-42d8-8a09-9e99f5f40047",
+      "id": "5ec9e621-01ff-403b-993b-0c599d64120f",
       "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
-      "ranAt": "2026-09-09T08:34:23.838Z",
+      "ranAt": "2026-09-14T08:39:32.789Z",
       "recordsImported": 12
+    },
+    {
+      "id": "10ef844a-909b-400c-b747-d719c9094074",
+      "connectorId": "manual_social_signal_import",
+      "status": "NO_DATA",
+      "ranAt": "2026-09-14T08:39:29.477Z",
+      "reason": "No social signal import found at data/imports/social-signals.json.",
+      "recordsImported": 0
+    },
+    {
+      "id": "e43abd53-25e8-4606-ad6a-379166dfd8ff",
+      "connectorId": "manual_serp_csv",
+      "status": "NO_DATA",
+      "ranAt": "2026-09-14T08:39:29.330Z",
+      "reason": "No SERP CSV found at data/imports/serp.csv.",
+      "recordsImported": 0
     }
   ],
   "topContentOpportunities": [
     {
-      "id": "brief_maxfanout_030001_d8325bd054",
-      "query": "what is letter of explanation for homebuyers self service",
+      "id": "brief_maxfanout_050001_888e31bfa5",
+      "query": "what is letter of explanation for gig workers before applying",
       "route": null,
       "pageFamily": "letter-of-explanation",
       "searchOpportunityScore": 0,
@@ -180,11 +175,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-10T09:34:04.291Z"
+      "createdAt": "2026-09-14T12:40:46.359Z"
     },
     {
-      "id": "brief_maxfanout_030005_eb6cd9bf5c",
-      "query": "what is self employed income documents for homebuyers self service",
+      "id": "brief_maxfanout_050005_0555773e27",
+      "query": "what is self employed income documents for gig workers before applying",
       "route": null,
       "pageFamily": "self-employed-income-documents",
       "searchOpportunityScore": 0,
@@ -200,11 +195,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-10T09:34:04.291Z"
+      "createdAt": "2026-09-14T12:40:46.359Z"
     },
     {
-      "id": "brief_maxfanout_030016_41f7387066",
-      "query": "what is gift letter explanation for homebuyers self service",
+      "id": "brief_maxfanout_050016_57520a87ec",
+      "query": "what is gift letter explanation for gig workers before applying",
       "route": null,
       "pageFamily": "gift-letter-explanation",
       "searchOpportunityScore": 0,
@@ -220,11 +215,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-10T09:34:04.293Z"
+      "createdAt": "2026-09-14T12:40:46.359Z"
     },
     {
-      "id": "brief_maxfanout_030026_2960b905aa",
-      "query": "what is apartment application documents for homebuyers self service",
+      "id": "brief_maxfanout_050026_ae42bd7e7b",
+      "query": "what is apartment application documents for gig workers before applying",
       "route": null,
       "pageFamily": "apartment-application-documents",
       "searchOpportunityScore": 0,
@@ -240,11 +235,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-10T09:34:04.293Z"
+      "createdAt": "2026-09-14T12:40:46.359Z"
     },
     {
-      "id": "brief_maxfanout_030030_39550269b8",
-      "query": "what is document discrepancy explanation for homebuyers self service",
+      "id": "brief_maxfanout_050030_5dbc435e23",
+      "query": "what is document discrepancy explanation for gig workers before applying",
       "route": null,
       "pageFamily": "document-discrepancy-explanation",
       "searchOpportunityScore": 0,
@@ -260,11 +255,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-10T09:34:04.293Z"
+      "createdAt": "2026-09-14T12:40:46.359Z"
     },
     {
-      "id": "brief_maxfanout_030041_87c3f700aa",
-      "query": "how to prepare letter of explanation for homebuyers self service",
+      "id": "brief_maxfanout_050041_9758505351",
+      "query": "how to prepare letter of explanation for gig workers before applying",
       "route": null,
       "pageFamily": "letter-of-explanation",
       "searchOpportunityScore": 0,
@@ -280,11 +275,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-10T09:34:04.293Z"
+      "createdAt": "2026-09-14T12:40:46.359Z"
     },
     {
-      "id": "brief_maxfanout_030045_8456d3bb08",
-      "query": "how to prepare self employed income documents for homebuyers self service",
+      "id": "brief_maxfanout_050045_93a036a765",
+      "query": "how to prepare self employed income documents for gig workers before applying",
       "route": null,
       "pageFamily": "self-employed-income-documents",
       "searchOpportunityScore": 0,
@@ -300,11 +295,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-10T09:34:04.293Z"
+      "createdAt": "2026-09-14T12:40:46.359Z"
     },
     {
-      "id": "brief_maxfanout_030056_e6a59fe5ae",
-      "query": "how to prepare gift letter explanation for homebuyers self service",
+      "id": "brief_maxfanout_050056_a41949d70f",
+      "query": "how to prepare gift letter explanation for gig workers before applying",
       "route": null,
       "pageFamily": "gift-letter-explanation",
       "searchOpportunityScore": 0,
@@ -320,11 +315,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-10T09:34:04.293Z"
+      "createdAt": "2026-09-14T12:40:46.359Z"
     },
     {
-      "id": "brief_maxfanout_030066_e1f42cbf97",
-      "query": "how to prepare apartment application documents for homebuyers self service",
+      "id": "brief_maxfanout_050066_4a9fd45c0a",
+      "query": "how to prepare apartment application documents for gig workers before applying",
       "route": null,
       "pageFamily": "apartment-application-documents",
       "searchOpportunityScore": 0,
@@ -340,11 +335,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-10T09:34:04.293Z"
+      "createdAt": "2026-09-14T12:40:46.360Z"
     },
     {
-      "id": "brief_maxfanout_030070_711561825e",
-      "query": "how to prepare document discrepancy explanation for homebuyers self service",
+      "id": "brief_maxfanout_050070_85421d482b",
+      "query": "how to prepare document discrepancy explanation for gig workers before applying",
       "route": null,
       "pageFamily": "document-discrepancy-explanation",
       "searchOpportunityScore": 0,
@@ -360,11 +355,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-10T09:34:04.293Z"
+      "createdAt": "2026-09-14T12:40:46.360Z"
     },
     {
-      "id": "brief_maxfanout_030081_6f20e02605",
-      "query": "letter of explanation checklist for homebuyers self service",
+      "id": "brief_maxfanout_050081_e5e8c0392c",
+      "query": "letter of explanation checklist for gig workers before applying",
       "route": null,
       "pageFamily": "letter-of-explanation",
       "searchOpportunityScore": 0,
@@ -380,11 +375,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-09-10T09:34:04.293Z"
+      "createdAt": "2026-09-14T12:40:46.361Z"
     },
     {
-      "id": "brief_maxfanout_030083_f28342094b",
-      "query": "rental application preparation checklist for homebuyers self service",
+      "id": "brief_maxfanout_050083_9ce6fee957",
+      "query": "rental application preparation checklist for gig workers before applying",
       "route": null,
       "pageFamily": "rental-application-preparation",
       "searchOpportunityScore": 0,
@@ -400,11 +395,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-10T09:34:04.293Z"
+      "createdAt": "2026-09-14T12:40:46.361Z"
     },
     {
-      "id": "brief_maxfanout_030084_ebb4fb135e",
-      "query": "proof of income checklist for homebuyers self service",
+      "id": "brief_maxfanout_050084_7a9c088cc4",
+      "query": "proof of income checklist for gig workers before applying",
       "route": null,
       "pageFamily": "proof-of-income",
       "searchOpportunityScore": 0,
@@ -420,11 +415,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-09-10T09:34:04.293Z"
+      "createdAt": "2026-09-14T12:40:46.361Z"
     },
     {
-      "id": "brief_maxfanout_030085_5ff338437c",
-      "query": "self employed income documents checklist for homebuyers self service",
+      "id": "brief_maxfanout_050085_d6fe0b40ff",
+      "query": "self employed income documents checklist for gig workers before applying",
       "route": null,
       "pageFamily": "self-employed-income-documents",
       "searchOpportunityScore": 0,
@@ -440,11 +435,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-10T09:34:04.293Z"
+      "createdAt": "2026-09-14T12:40:46.361Z"
     },
     {
-      "id": "brief_maxfanout_030090_2f54ca0736",
-      "query": "credit report understanding checklist for homebuyers self service",
+      "id": "brief_maxfanout_050090_5c3149815a",
+      "query": "credit report understanding checklist for gig workers before applying",
       "route": null,
       "pageFamily": "credit-report-understanding",
       "searchOpportunityScore": 0,
@@ -460,11 +455,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-10T09:34:04.293Z"
+      "createdAt": "2026-09-14T12:40:46.361Z"
     },
     {
-      "id": "brief_maxfanout_030091_b47a4d50d4",
-      "query": "credit dispute self service checklist for homebuyers",
+      "id": "brief_maxfanout_050091_3752caf938",
+      "query": "credit dispute self service checklist for gig workers before applying",
       "route": null,
       "pageFamily": "credit-dispute-self-service",
       "searchOpportunityScore": 0,
@@ -480,11 +475,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-10T09:34:04.293Z"
+      "createdAt": "2026-09-14T12:40:46.361Z"
     },
     {
-      "id": "brief_maxfanout_030092_3183e04a84",
-      "query": "credit utilization checklist for homebuyers self service",
+      "id": "brief_maxfanout_050092_c4e181d7a4",
+      "query": "credit utilization checklist for gig workers before applying",
       "route": null,
       "pageFamily": "credit-utilization",
       "searchOpportunityScore": 0,
@@ -500,11 +495,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-10T09:34:04.293Z"
+      "createdAt": "2026-09-14T12:40:46.361Z"
     },
     {
-      "id": "brief_maxfanout_030096_6fa37e642f",
-      "query": "gift letter explanation checklist for homebuyers self service",
+      "id": "brief_maxfanout_050096_4edba6595e",
+      "query": "gift letter explanation checklist for gig workers before applying",
       "route": null,
       "pageFamily": "gift-letter-explanation",
       "searchOpportunityScore": 0,
@@ -520,11 +515,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-09-10T09:34:04.293Z"
+      "createdAt": "2026-09-14T12:40:46.361Z"
     },
     {
-      "id": "brief_maxfanout_030098_337fa5e375",
-      "query": "address history explanation checklist for homebuyers self service",
+      "id": "brief_maxfanout_050098_af2a5b02a3",
+      "query": "address history explanation checklist for gig workers before applying",
       "route": null,
       "pageFamily": "address-history-explanation",
       "searchOpportunityScore": 0,
@@ -540,11 +535,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-09-10T09:34:04.293Z"
+      "createdAt": "2026-09-14T12:40:46.361Z"
     },
     {
-      "id": "brief_maxfanout_030099_adf0836132",
-      "query": "income change explanation checklist for homebuyers self service",
+      "id": "brief_maxfanout_050099_6d36d12567",
+      "query": "income change explanation checklist for gig workers before applying",
       "route": null,
       "pageFamily": "income-change-explanation",
       "searchOpportunityScore": 0,
@@ -560,7 +555,7 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-10T09:34:04.293Z"
+      "createdAt": "2026-09-14T12:40:46.361Z"
     }
   ],
   "rankingBasis": {
@@ -584,7 +579,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-10T10:46:06.138Z"
+      "createdAt": "2026-09-14T12:40:46.467Z"
     },
     {
       "route": "/resources",
@@ -600,7 +595,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-10T10:46:06.138Z"
+      "createdAt": "2026-09-14T12:40:46.467Z"
     },
     {
       "route": "/pricing",
@@ -616,7 +611,39 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-10T10:46:06.138Z"
+      "createdAt": "2026-09-14T12:40:46.467Z"
+    },
+    {
+      "route": "/letter-of-explanation",
+      "pageFamily": "letter_studio",
+      "currentQueryCoverage": 0,
+      "gscTrend": "NO_DATA",
+      "competitorDelta": "NO_COMPETITOR_STRUCTURE_GAP",
+      "recommendedFix": "add_internal_links_and_answer_atoms",
+      "expectedEffort": "medium",
+      "authorityRequirement": "low",
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "citationOpportunity": "medium",
+      "priorityScore": 55,
+      "safeToSelfHeal": true,
+      "adminReviewRequired": false,
+      "createdAt": "2026-09-14T12:40:46.467Z"
+    },
+    {
+      "route": "/letter-of-explanation/credit",
+      "pageFamily": "letter_studio",
+      "currentQueryCoverage": 0,
+      "gscTrend": "NO_DATA",
+      "competitorDelta": "NO_COMPETITOR_STRUCTURE_GAP",
+      "recommendedFix": "add_internal_links_and_answer_atoms",
+      "expectedEffort": "medium",
+      "authorityRequirement": "low",
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "citationOpportunity": "medium",
+      "priorityScore": 55,
+      "safeToSelfHeal": true,
+      "adminReviewRequired": true,
+      "createdAt": "2026-09-14T12:40:46.467Z"
     },
     {
       "route": "/letter-of-explanation/eviction",
@@ -632,7 +659,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-10T10:46:06.138Z"
+      "createdAt": "2026-09-14T12:40:46.467Z"
     },
     {
       "route": "/letter-of-explanation/income",
@@ -648,7 +675,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-09-10T10:46:06.138Z"
+      "createdAt": "2026-09-14T12:40:46.467Z"
     },
     {
       "route": "/letter-of-explanation/employment-gap",
@@ -664,7 +691,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-09-10T10:46:06.138Z"
+      "createdAt": "2026-09-14T12:40:46.467Z"
     },
     {
       "route": "/employment-verification-letter",
@@ -680,7 +707,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-09-10T10:46:06.138Z"
+      "createdAt": "2026-09-14T12:40:46.467Z"
     },
     {
       "route": "/609-dispute-letter",
@@ -696,7 +723,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-09-10T10:46:06.138Z"
+      "createdAt": "2026-09-14T12:40:46.467Z"
     },
     {
       "route": "/goodwill-letter-to-remove-late-payment",
@@ -712,7 +739,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-10T10:46:06.138Z"
+      "createdAt": "2026-09-14T12:40:46.467Z"
     },
     {
       "route": "/letter-of-explanation/late-payment",
@@ -728,7 +755,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-10T10:46:06.138Z"
+      "createdAt": "2026-09-14T12:40:46.467Z"
     },
     {
       "route": "/letter-of-explanation/large-deposit",
@@ -744,7 +771,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-10T10:46:06.138Z"
+      "createdAt": "2026-09-14T12:40:46.467Z"
     },
     {
       "route": "/proof-of-income-letter",
@@ -760,7 +787,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-09-10T10:46:06.138Z"
+      "createdAt": "2026-09-14T12:40:46.467Z"
     },
     {
       "route": "/credit-dispute-letter",
@@ -776,7 +803,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-09-10T10:46:06.138Z"
+      "createdAt": "2026-09-14T12:40:46.467Z"
     },
     {
       "route": "/apartment-application",
@@ -792,7 +819,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-10T10:46:06.138Z"
+      "createdAt": "2026-09-14T12:40:46.467Z"
     },
     {
       "route": "/auto-loan-documents",
@@ -808,7 +835,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-10T10:46:06.139Z"
+      "createdAt": "2026-09-14T12:40:46.467Z"
     },
     {
       "route": "/car-loan-checklist",
@@ -824,7 +851,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-10T10:46:06.139Z"
+      "createdAt": "2026-09-14T12:40:46.467Z"
     },
     {
       "route": "/documents-needed-for-car-loan",
@@ -840,7 +867,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-10T10:46:06.139Z"
+      "createdAt": "2026-09-14T12:40:46.467Z"
     },
     {
       "route": "/sba-loan-checklist",
@@ -856,39 +883,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-10T10:46:06.139Z"
-    },
-    {
-      "route": "/business-loan-documents",
-      "pageFamily": "business",
-      "currentQueryCoverage": 0,
-      "gscTrend": "NO_DATA",
-      "competitorDelta": "NO_COMPETITOR_STRUCTURE_GAP",
-      "recommendedFix": "add_internal_links_and_answer_atoms",
-      "expectedEffort": "medium",
-      "authorityRequirement": "low",
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "citationOpportunity": "low",
-      "priorityScore": 55,
-      "safeToSelfHeal": true,
-      "adminReviewRequired": false,
-      "createdAt": "2026-09-10T10:46:06.139Z"
-    },
-    {
-      "route": "/mortgage-checklist",
-      "pageFamily": "mortgage",
-      "currentQueryCoverage": 0,
-      "gscTrend": "NO_DATA",
-      "competitorDelta": "NO_COMPETITOR_STRUCTURE_GAP",
-      "recommendedFix": "add_internal_links_and_answer_atoms",
-      "expectedEffort": "medium",
-      "authorityRequirement": "low",
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "citationOpportunity": "medium",
-      "priorityScore": 55,
-      "safeToSelfHeal": true,
-      "adminReviewRequired": false,
-      "createdAt": "2026-09-10T10:46:06.139Z"
+      "createdAt": "2026-09-14T12:40:46.467Z"
     }
   ],
   "hardTruth": "Low ranking potential never blocks useful onsite content. It only changes indexing, priority, and authority strategy."
