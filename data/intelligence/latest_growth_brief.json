@@ -1,165 +1,164 @@
 {
   "schemaVersion": "4.2.0",
-  "generatedAt": "2026-09-14T12:40:46.626Z",
+  "generatedAt": "2026-09-15T10:46:23.388Z",
   "sourceStatus": [
+    {
+      "id": "34963e19-8654-4fe6-bec0-3f851136ee80",
+      "connectorId": "authority_requirement_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-09-15T10:46:23.208Z",
+      "recordsImported": 86
+    },
+    {
+      "id": "66b3b611-ecd5-44c8-8c04-e67142a396f3",
+      "connectorId": "growth_maintenance_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-09-15T10:46:23.048Z",
+      "recordsImported": 86
+    },
+    {
+      "id": "2c0fef43-b566-4528-a119-70b1f69fe58c",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-09-15T10:44:35.688Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "b168b376-0eea-43b5-86f3-eacb24477f53",
+      "connectorId": "indexnow",
+      "status": "NO_DATA",
+      "ranAt": "2026-09-15T10:44:35.516Z",
+      "mode": "live",
+      "recordsImported": 0,
+      "preparedUrlCount": 86
+    },
+    {
+      "id": "1a0c0076-11b5-4cec-8678-5e4bea26d0a3",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-09-15T10:23:18.096Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "d8af3668-9736-4dd0-85dc-48a9efc0ecc5",
+      "connectorId": "indexnow",
+      "status": "NO_DATA",
+      "ranAt": "2026-09-15T10:23:17.938Z",
+      "mode": "live",
+      "recordsImported": 0,
+      "preparedUrlCount": 86
+    },
+    {
+      "id": "fafdf444-aff5-4d03-a6f2-5316739b2f61",
+      "connectorId": "official_source_fetcher",
+      "status": "COMPLETE",
+      "ranAt": "2026-09-15T08:36:24.603Z",
+      "recordsImported": 12
+    },
+    {
+      "id": "1462e93c-a553-4152-a3e8-f695fd63a5f6",
+      "connectorId": "manual_social_signal_import",
+      "status": "NO_DATA",
+      "ranAt": "2026-09-15T08:36:23.805Z",
+      "reason": "No social signal import found at data/imports/social-signals.json.",
+      "recordsImported": 0
+    },
+    {
+      "id": "499c348b-9fb9-4c6d-8b2d-cdd52b8977c7",
+      "connectorId": "manual_serp_csv",
+      "status": "NO_DATA",
+      "ranAt": "2026-09-15T08:36:23.668Z",
+      "reason": "No SERP CSV found at data/imports/serp.csv.",
+      "recordsImported": 0
+    },
+    {
+      "id": "41c9f147-9ec2-4d9a-a56d-49c1d5af48f7",
+      "connectorId": "competitor_public_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-09-15T08:36:23.530Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "2ef205a9-48f3-42c5-89eb-7874b58ae6e6",
+      "connectorId": "competitor_sitemap_discovery",
+      "status": "COMPLETE",
+      "ranAt": "2026-09-15T08:36:22.998Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "99342db1-c762-400f-bce3-088ddc8c4ae2",
+      "connectorId": "owned_site_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-09-15T08:36:21.302Z",
+      "recordsImported": 99
+    },
+    {
+      "id": "bbc49f40-c42a-48b1-be3b-4aed0723768a",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-09-15T08:36:21.156Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "eeec378b-dd03-4fed-8294-e213fcd48c08",
+      "connectorId": "google_url_inspection",
+      "status": "BUDGET_HELD",
+      "ranAt": "2026-09-15T08:36:20.971Z",
+      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
+      "recordsImported": 0
+    },
+    {
+      "id": "f169a240-2db2-4d4a-ad97-f39757d5dbe6",
+      "connectorId": "google_search_console_search_analytics",
+      "status": "BUDGET_HELD",
+      "ranAt": "2026-09-15T08:36:20.683Z",
+      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
+      "recordsImported": 0
+    },
+    {
+      "id": "a15638b7-2ada-4dc2-beb3-384d9ea55586",
+      "connectorId": "retest_outcome_evaluator",
+      "status": "COMPLETE",
+      "ranAt": "2026-09-14T12:40:46.763Z",
+      "recordsImported": 0
+    },
+    {
+      "id": "148e59f4-2a4d-4346-b13b-18c3e950087e",
+      "connectorId": "retest_queue_builder",
+      "status": "COMPLETE",
+      "ranAt": "2026-09-14T12:40:46.728Z",
+      "recordsImported": 0
+    },
+    {
+      "id": "5d81a1ef-9d49-4b4c-bbd9-ed69a22b6ff6",
+      "connectorId": "cloudflare_crawler_logs",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-09-14T12:40:46.660Z",
+      "reason": "Cloudflare crawler ingestion requires Cloudflare credentials or a manual import file.",
+      "recordsImported": 0
+    },
+    {
+      "id": "a4255e67-3119-4577-93e8-f62cd52153f6",
+      "connectorId": "growth_brief_generation",
+      "status": "COMPLETE",
+      "ranAt": "2026-09-14T12:40:46.629Z",
+      "recordsImported": 40
+    },
     {
       "id": "34b6236f-64a0-4c68-88f2-8f859d000c60",
       "connectorId": "page_action_recommendation",
       "status": "COMPLETE",
       "ranAt": "2026-09-14T12:40:46.571Z",
       "recordsImported": 5430
-    },
-    {
-      "id": "464acdb6-18f5-4fbf-94d0-f3346e4417c9",
-      "connectorId": "authority_requirement_analysis",
-      "status": "COMPLETE",
-      "ranAt": "2026-09-14T12:40:46.506Z",
-      "recordsImported": 86
-    },
-    {
-      "id": "93e7dc64-6663-4da3-a2cb-c152c7388f2b",
-      "connectorId": "growth_maintenance_analysis",
-      "status": "COMPLETE",
-      "ranAt": "2026-09-14T12:40:46.469Z",
-      "recordsImported": 86
-    },
-    {
-      "id": "cd4490db-2720-4b63-8521-8c3ae82e0bdd",
-      "connectorId": "content_opportunity_analysis",
-      "status": "COMPLETE",
-      "ranAt": "2026-09-14T12:40:46.432Z",
-      "recordsImported": 5430
-    },
-    {
-      "id": "82a5244b-dedd-4f38-ba6a-35686dbdc30f",
-      "connectorId": "official_source_fetcher",
-      "status": "COMPLETE",
-      "ranAt": "2026-09-14T12:40:44.803Z",
-      "recordsImported": 12
-    },
-    {
-      "id": "5c4b9b47-aa90-4508-9c24-f4c7b4fbb7eb",
-      "connectorId": "manual_social_signal_import",
-      "status": "NO_DATA",
-      "ranAt": "2026-09-14T12:40:42.202Z",
-      "reason": "No social signal import found at data/imports/social-signals.json.",
-      "recordsImported": 0
-    },
-    {
-      "id": "55f1ea27-28d5-4412-ab13-4ab61873d5a9",
-      "connectorId": "manual_serp_csv",
-      "status": "NO_DATA",
-      "ranAt": "2026-09-14T12:40:42.168Z",
-      "reason": "No SERP CSV found at data/imports/serp.csv.",
-      "recordsImported": 0
-    },
-    {
-      "id": "7253daa2-ed2d-41df-946f-d80f37082532",
-      "connectorId": "competitor_public_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-09-14T12:40:42.132Z",
-      "recordsImported": 2
-    },
-    {
-      "id": "324f4280-6469-4ad9-a074-cff51c988c8c",
-      "connectorId": "competitor_sitemap_discovery",
-      "status": "COMPLETE",
-      "ranAt": "2026-09-14T12:40:41.719Z",
-      "recordsImported": 2
-    },
-    {
-      "id": "a064f031-1396-49cf-a6cd-7a3c53f5fed9",
-      "connectorId": "owned_site_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-09-14T12:40:40.403Z",
-      "recordsImported": 99
-    },
-    {
-      "id": "f8ce24a5-531f-495e-bdf7-84d17fefdb74",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-09-14T12:40:40.367Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "122a0d25-ddfd-484e-a410-6bdf4f50d7be",
-      "connectorId": "google_url_inspection",
-      "status": "COMPLETE",
-      "ranAt": "2026-09-14T12:40:40.333Z",
-      "mode": "live",
-      "recordsImported": 25
-    },
-    {
-      "id": "c1e2e1d6-9615-42c0-b833-5707eabd1bb2",
-      "connectorId": "google_search_console_search_analytics",
-      "status": "BUDGET_HELD",
-      "ranAt": "2026-09-14T12:37:52.903Z",
-      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
-      "recordsImported": 0
-    },
-    {
-      "id": "740b315a-09fd-4636-8df2-b72274b92189",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-09-14T10:44:19.250Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "2d007a21-9128-4ac8-9727-cb8ed48da507",
-      "connectorId": "indexnow",
-      "status": "NO_DATA",
-      "ranAt": "2026-09-14T10:44:19.079Z",
-      "mode": "live",
-      "recordsImported": 0,
-      "preparedUrlCount": 86
-    },
-    {
-      "id": "1c85509d-f648-4dba-b350-5f740f180f71",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-09-14T10:23:16.344Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "9af6111f-053d-435b-a9d6-197ed5ec4316",
-      "connectorId": "indexnow",
-      "status": "NO_DATA",
-      "ranAt": "2026-09-14T10:23:16.164Z",
-      "mode": "live",
-      "recordsImported": 0,
-      "preparedUrlCount": 86
-    },
-    {
-      "id": "5ec9e621-01ff-403b-993b-0c599d64120f",
-      "connectorId": "official_source_fetcher",
-      "status": "COMPLETE",
-      "ranAt": "2026-09-14T08:39:32.789Z",
-      "recordsImported": 12
-    },
-    {
-      "id": "10ef844a-909b-400c-b747-d719c9094074",
-      "connectorId": "manual_social_signal_import",
-      "status": "NO_DATA",
-      "ranAt": "2026-09-14T08:39:29.477Z",
-      "reason": "No social signal import found at data/imports/social-signals.json.",
-      "recordsImported": 0
-    },
-    {
-      "id": "e43abd53-25e8-4606-ad6a-379166dfd8ff",
-      "connectorId": "manual_serp_csv",
-      "status": "NO_DATA",
-      "ranAt": "2026-09-14T08:39:29.330Z",
-      "reason": "No SERP CSV found at data/imports/serp.csv.",
-      "recordsImported": 0
     }
   ],
   "topContentOpportunities": [
     {
-      "id": "brief_maxfanout_050001_888e31bfa5",
-      "query": "what is letter of explanation for gig workers before applying",
+      "id": "brief_maxfanout_055001_46008a3cfc",
+      "query": "what is letter of explanation for people with document gaps before applying",
       "route": null,
       "pageFamily": "letter-of-explanation",
       "searchOpportunityScore": 0,
@@ -175,258 +174,58 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-14T12:40:46.359Z"
+      "createdAt": "2026-09-15T09:37:28.364Z"
     },
     {
-      "id": "brief_maxfanout_050005_0555773e27",
-      "query": "what is self employed income documents for gig workers before applying",
-      "route": null,
-      "pageFamily": "self-employed-income-documents",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-14T12:40:46.359Z"
-    },
-    {
-      "id": "brief_maxfanout_050016_57520a87ec",
-      "query": "what is gift letter explanation for gig workers before applying",
-      "route": null,
-      "pageFamily": "gift-letter-explanation",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 80,
-      "complianceRiskScore": 20,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
-      "adminReviewRequired": false,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-14T12:40:46.359Z"
-    },
-    {
-      "id": "brief_maxfanout_050026_ae42bd7e7b",
-      "query": "what is apartment application documents for gig workers before applying",
-      "route": null,
-      "pageFamily": "apartment-application-documents",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 20,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": false,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-14T12:40:46.359Z"
-    },
-    {
-      "id": "brief_maxfanout_050030_5dbc435e23",
-      "query": "what is document discrepancy explanation for gig workers before applying",
-      "route": null,
-      "pageFamily": "document-discrepancy-explanation",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 20,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
-      "adminReviewRequired": false,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-14T12:40:46.359Z"
-    },
-    {
-      "id": "brief_maxfanout_050041_9758505351",
-      "query": "how to prepare letter of explanation for gig workers before applying",
-      "route": null,
-      "pageFamily": "letter-of-explanation",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 80,
-      "complianceRiskScore": 20,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
-      "adminReviewRequired": false,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-14T12:40:46.359Z"
-    },
-    {
-      "id": "brief_maxfanout_050045_93a036a765",
-      "query": "how to prepare self employed income documents for gig workers before applying",
-      "route": null,
-      "pageFamily": "self-employed-income-documents",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-14T12:40:46.359Z"
-    },
-    {
-      "id": "brief_maxfanout_050056_a41949d70f",
-      "query": "how to prepare gift letter explanation for gig workers before applying",
-      "route": null,
-      "pageFamily": "gift-letter-explanation",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 80,
-      "complianceRiskScore": 20,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
-      "adminReviewRequired": false,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-14T12:40:46.359Z"
-    },
-    {
-      "id": "brief_maxfanout_050066_4a9fd45c0a",
-      "query": "how to prepare apartment application documents for gig workers before applying",
-      "route": null,
-      "pageFamily": "apartment-application-documents",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 20,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": false,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-14T12:40:46.360Z"
-    },
-    {
-      "id": "brief_maxfanout_050070_85421d482b",
-      "query": "how to prepare document discrepancy explanation for gig workers before applying",
-      "route": null,
-      "pageFamily": "document-discrepancy-explanation",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 20,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
-      "adminReviewRequired": false,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-14T12:40:46.360Z"
-    },
-    {
-      "id": "brief_maxfanout_050081_e5e8c0392c",
-      "query": "letter of explanation checklist for gig workers before applying",
-      "route": null,
-      "pageFamily": "letter-of-explanation",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 80,
-      "complianceRiskScore": 20,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "improve_existing_page",
-      "admissionStatus": "indexable_utility_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": false,
-      "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-09-14T12:40:46.361Z"
-    },
-    {
-      "id": "brief_maxfanout_050083_9ce6fee957",
-      "query": "rental application preparation checklist for gig workers before applying",
+      "id": "brief_maxfanout_055003_d40ce19728",
+      "query": "what is rental application preparation for people with document gaps before applying",
       "route": null,
       "pageFamily": "rental-application-preparation",
       "searchOpportunityScore": 0,
       "citationOpportunityScore": 50,
       "competitorGapScore": 0,
       "userUtilityScore": 80,
-      "productSupportScore": 80,
+      "productSupportScore": 30,
       "complianceRiskScore": 20,
       "authorityRequirementScore": 25,
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
+      "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-14T12:40:46.361Z"
+      "createdAt": "2026-09-15T09:37:28.364Z"
     },
     {
-      "id": "brief_maxfanout_050084_7a9c088cc4",
-      "query": "proof of income checklist for gig workers before applying",
+      "id": "brief_maxfanout_055004_fa9ea82700",
+      "query": "what is proof of income for people with document gaps before applying",
       "route": null,
       "pageFamily": "proof-of-income",
       "searchOpportunityScore": 0,
       "citationOpportunityScore": 50,
       "competitorGapScore": 0,
       "userUtilityScore": 80,
-      "productSupportScore": 80,
+      "productSupportScore": 30,
       "complianceRiskScore": 65,
       "authorityRequirementScore": 25,
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "improve_existing_page",
-      "admissionStatus": "indexable_utility_page",
-      "bestFormat": "checklist_or_numbered_steps",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
-      "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-09-14T12:40:46.361Z"
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-15T09:37:28.364Z"
     },
     {
-      "id": "brief_maxfanout_050085_d6fe0b40ff",
-      "query": "self employed income documents checklist for gig workers before applying",
+      "id": "brief_maxfanout_055005_ab64bdba65",
+      "query": "what is self employed income documents for people with document gaps before applying",
       "route": null,
       "pageFamily": "self-employed-income-documents",
       "searchOpportunityScore": 0,
       "citationOpportunityScore": 50,
       "competitorGapScore": 0,
       "userUtilityScore": 80,
-      "productSupportScore": 80,
+      "productSupportScore": 30,
       "complianceRiskScore": 65,
       "authorityRequirementScore": 25,
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
@@ -435,71 +234,71 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-14T12:40:46.361Z"
+      "createdAt": "2026-09-15T09:37:28.364Z"
     },
     {
-      "id": "brief_maxfanout_050090_5c3149815a",
-      "query": "credit report understanding checklist for gig workers before applying",
+      "id": "brief_maxfanout_055010_4626bf99df",
+      "query": "what is credit report understanding for people with document gaps before applying",
       "route": null,
       "pageFamily": "credit-report-understanding",
       "searchOpportunityScore": 0,
       "citationOpportunityScore": 50,
       "competitorGapScore": 0,
       "userUtilityScore": 80,
-      "productSupportScore": 80,
+      "productSupportScore": 30,
       "complianceRiskScore": 65,
       "authorityRequirementScore": 25,
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
+      "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-14T12:40:46.361Z"
+      "createdAt": "2026-09-15T09:37:28.365Z"
     },
     {
-      "id": "brief_maxfanout_050091_3752caf938",
-      "query": "credit dispute self service checklist for gig workers before applying",
+      "id": "brief_maxfanout_055011_8741f1efa5",
+      "query": "what is credit dispute self service for people with document gaps before applying",
       "route": null,
       "pageFamily": "credit-dispute-self-service",
       "searchOpportunityScore": 0,
       "citationOpportunityScore": 50,
       "competitorGapScore": 0,
       "userUtilityScore": 80,
-      "productSupportScore": 80,
+      "productSupportScore": 30,
       "complianceRiskScore": 65,
       "authorityRequirementScore": 25,
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
+      "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-14T12:40:46.361Z"
+      "createdAt": "2026-09-15T09:37:28.365Z"
     },
     {
-      "id": "brief_maxfanout_050092_c4e181d7a4",
-      "query": "credit utilization checklist for gig workers before applying",
+      "id": "brief_maxfanout_055012_25ab70f031",
+      "query": "what is credit utilization for people with document gaps before applying",
       "route": null,
       "pageFamily": "credit-utilization",
       "searchOpportunityScore": 0,
       "citationOpportunityScore": 50,
       "competitorGapScore": 0,
       "userUtilityScore": 80,
-      "productSupportScore": 80,
+      "productSupportScore": 30,
       "complianceRiskScore": 65,
       "authorityRequirementScore": 25,
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
+      "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-14T12:40:46.361Z"
+      "createdAt": "2026-09-15T09:37:28.365Z"
     },
     {
-      "id": "brief_maxfanout_050096_4edba6595e",
-      "query": "gift letter explanation checklist for gig workers before applying",
+      "id": "brief_maxfanout_055016_240a5b531f",
+      "query": "what is gift letter explanation for people with document gaps before applying",
       "route": null,
       "pageFamily": "gift-letter-explanation",
       "searchOpportunityScore": 0,
@@ -510,18 +309,178 @@
       "complianceRiskScore": 20,
       "authorityRequirementScore": 25,
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "improve_existing_page",
-      "admissionStatus": "indexable_utility_page",
-      "bestFormat": "checklist_or_numbered_steps",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
-      "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-09-14T12:40:46.361Z"
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-15T09:37:28.365Z"
     },
     {
-      "id": "brief_maxfanout_050098_af2a5b02a3",
-      "query": "address history explanation checklist for gig workers before applying",
+      "id": "brief_maxfanout_055018_5e4c003b32",
+      "query": "what is address history explanation for people with document gaps before applying",
       "route": null,
       "pageFamily": "address-history-explanation",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 20,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": false,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-15T09:37:28.365Z"
+    },
+    {
+      "id": "brief_maxfanout_055019_e4c6fe612b",
+      "query": "what is income change explanation for people with document gaps before applying",
+      "route": null,
+      "pageFamily": "income-change-explanation",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-15T09:37:28.365Z"
+    },
+    {
+      "id": "brief_maxfanout_055020_81577e3f47",
+      "query": "what is employment verification for people with document gaps before applying",
+      "route": null,
+      "pageFamily": "employment-verification",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-15T09:37:28.365Z"
+    },
+    {
+      "id": "brief_maxfanout_055026_1ac8a68485",
+      "query": "what is apartment application documents for people with document gaps before applying",
+      "route": null,
+      "pageFamily": "apartment-application-documents",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 20,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "checklist_or_numbered_steps",
+      "adminReviewRequired": false,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-15T09:37:28.365Z"
+    },
+    {
+      "id": "brief_maxfanout_055030_475627f5ba",
+      "query": "what is document discrepancy explanation for people with document gaps before applying",
+      "route": null,
+      "pageFamily": "document-discrepancy-explanation",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 20,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": false,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-15T09:37:28.365Z"
+    },
+    {
+      "id": "brief_maxfanout_055034_e361991207",
+      "query": "what is income verification packet for people with document gaps before applying",
+      "route": null,
+      "pageFamily": "income-verification-packet",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-15T09:37:28.365Z"
+    },
+    {
+      "id": "brief_maxfanout_055035_95bec3ef99",
+      "query": "what is credit readiness education for people with document gaps before applying",
+      "route": null,
+      "pageFamily": "credit-readiness-education",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-15T09:37:28.365Z"
+    },
+    {
+      "id": "brief_maxfanout_055037_c2e822af9f",
+      "query": "what is rental screening preparation for people with document gaps before applying",
+      "route": null,
+      "pageFamily": "rental-screening-preparation",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 20,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": false,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-15T09:37:28.365Z"
+    },
+    {
+      "id": "brief_maxfanout_055041_c7eafc9039",
+      "query": "how to prepare letter of explanation for people with document gaps before applying",
+      "route": null,
+      "pageFamily": "letter-of-explanation",
       "searchOpportunityScore": 0,
       "citationOpportunityScore": 50,
       "competitorGapScore": 0,
@@ -530,23 +489,63 @@
       "complianceRiskScore": 20,
       "authorityRequirementScore": 25,
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "improve_existing_page",
-      "admissionStatus": "indexable_utility_page",
-      "bestFormat": "checklist_or_numbered_steps",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
-      "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-09-14T12:40:46.361Z"
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-15T09:37:28.365Z"
     },
     {
-      "id": "brief_maxfanout_050099_6d36d12567",
-      "query": "income change explanation checklist for gig workers before applying",
+      "id": "brief_maxfanout_055043_8e84f83ebc",
+      "query": "how to prepare rental application preparation for people with document gaps before applying",
       "route": null,
-      "pageFamily": "income-change-explanation",
+      "pageFamily": "rental-application-preparation",
       "searchOpportunityScore": 0,
       "citationOpportunityScore": 50,
       "competitorGapScore": 0,
       "userUtilityScore": 80,
-      "productSupportScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 20,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": false,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-15T09:37:28.365Z"
+    },
+    {
+      "id": "brief_maxfanout_055044_c5c3379332",
+      "query": "how to prepare proof of income for people with document gaps before applying",
+      "route": null,
+      "pageFamily": "proof-of-income",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-15T09:37:28.365Z"
+    },
+    {
+      "id": "brief_maxfanout_055045_97012d2631",
+      "query": "how to prepare self employed income documents for people with document gaps before applying",
+      "route": null,
+      "pageFamily": "self-employed-income-documents",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
       "complianceRiskScore": 65,
       "authorityRequirementScore": 25,
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
@@ -555,7 +554,7 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-14T12:40:46.361Z"
+      "createdAt": "2026-09-15T09:37:28.365Z"
     }
   ],
   "rankingBasis": {
@@ -579,7 +578,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-14T12:40:46.467Z"
+      "createdAt": "2026-09-15T10:46:23.046Z"
     },
     {
       "route": "/resources",
@@ -595,7 +594,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-14T12:40:46.467Z"
+      "createdAt": "2026-09-15T10:46:23.046Z"
     },
     {
       "route": "/pricing",
@@ -611,7 +610,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-14T12:40:46.467Z"
+      "createdAt": "2026-09-15T10:46:23.046Z"
     },
     {
       "route": "/letter-of-explanation",
@@ -627,7 +626,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-14T12:40:46.467Z"
+      "createdAt": "2026-09-15T10:46:23.046Z"
     },
     {
       "route": "/letter-of-explanation/credit",
@@ -643,7 +642,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-09-14T12:40:46.467Z"
+      "createdAt": "2026-09-15T10:46:23.046Z"
     },
     {
       "route": "/letter-of-explanation/eviction",
@@ -659,7 +658,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-14T12:40:46.467Z"
+      "createdAt": "2026-09-15T10:46:23.046Z"
     },
     {
       "route": "/letter-of-explanation/income",
@@ -675,7 +674,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-09-14T12:40:46.467Z"
+      "createdAt": "2026-09-15T10:46:23.046Z"
     },
     {
       "route": "/letter-of-explanation/employment-gap",
@@ -691,7 +690,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-09-14T12:40:46.467Z"
+      "createdAt": "2026-09-15T10:46:23.046Z"
     },
     {
       "route": "/employment-verification-letter",
@@ -707,7 +706,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-09-14T12:40:46.467Z"
+      "createdAt": "2026-09-15T10:46:23.046Z"
     },
     {
       "route": "/609-dispute-letter",
@@ -723,7 +722,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-09-14T12:40:46.467Z"
+      "createdAt": "2026-09-15T10:46:23.046Z"
     },
     {
       "route": "/goodwill-letter-to-remove-late-payment",
@@ -739,7 +738,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-14T12:40:46.467Z"
+      "createdAt": "2026-09-15T10:46:23.046Z"
     },
     {
       "route": "/letter-of-explanation/late-payment",
@@ -755,7 +754,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-14T12:40:46.467Z"
+      "createdAt": "2026-09-15T10:46:23.046Z"
     },
     {
       "route": "/letter-of-explanation/large-deposit",
@@ -771,7 +770,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-14T12:40:46.467Z"
+      "createdAt": "2026-09-15T10:46:23.046Z"
     },
     {
       "route": "/proof-of-income-letter",
@@ -787,7 +786,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-09-14T12:40:46.467Z"
+      "createdAt": "2026-09-15T10:46:23.046Z"
     },
     {
       "route": "/credit-dispute-letter",
@@ -803,7 +802,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-09-14T12:40:46.467Z"
+      "createdAt": "2026-09-15T10:46:23.046Z"
     },
     {
       "route": "/apartment-application",
@@ -819,7 +818,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-14T12:40:46.467Z"
+      "createdAt": "2026-09-15T10:46:23.046Z"
     },
     {
       "route": "/auto-loan-documents",
@@ -835,7 +834,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-14T12:40:46.467Z"
+      "createdAt": "2026-09-15T10:46:23.046Z"
     },
     {
       "route": "/car-loan-checklist",
@@ -851,7 +850,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-14T12:40:46.467Z"
+      "createdAt": "2026-09-15T10:46:23.046Z"
     },
     {
       "route": "/documents-needed-for-car-loan",
@@ -867,7 +866,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-14T12:40:46.467Z"
+      "createdAt": "2026-09-15T10:46:23.046Z"
     },
     {
       "route": "/sba-loan-checklist",
@@ -883,7 +882,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-14T12:40:46.467Z"
+      "createdAt": "2026-09-15T10:46:23.046Z"
     }
   ],
   "hardTruth": "Low ranking potential never blocks useful onsite content. It only changes indexing, priority, and authority strategy."
