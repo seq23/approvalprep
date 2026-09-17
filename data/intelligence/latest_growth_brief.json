@@ -1,164 +1,170 @@
 {
   "schemaVersion": "4.2.0",
-  "generatedAt": "2026-09-15T10:46:23.388Z",
+  "generatedAt": "2026-09-17T10:47:09.117Z",
   "sourceStatus": [
     {
-      "id": "34963e19-8654-4fe6-bec0-3f851136ee80",
+      "id": "d33eedfa-31ce-4739-b418-e2721dbd851a",
       "connectorId": "authority_requirement_analysis",
       "status": "COMPLETE",
-      "ranAt": "2026-09-15T10:46:23.208Z",
+      "ranAt": "2026-09-17T10:47:08.948Z",
       "recordsImported": 86
     },
     {
-      "id": "66b3b611-ecd5-44c8-8c04-e67142a396f3",
+      "id": "0d5b93c5-1a5d-400e-94ba-819b40b761c1",
       "connectorId": "growth_maintenance_analysis",
       "status": "COMPLETE",
-      "ranAt": "2026-09-15T10:46:23.048Z",
+      "ranAt": "2026-09-17T10:47:08.780Z",
       "recordsImported": 86
     },
     {
-      "id": "2c0fef43-b566-4528-a119-70b1f69fe58c",
+      "id": "25a43cd8-7330-4b89-9af8-003bdb67d994",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-09-15T10:44:35.688Z",
+      "ranAt": "2026-09-17T10:45:11.139Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "b168b376-0eea-43b5-86f3-eacb24477f53",
+      "id": "30426176-4c47-4b84-9374-5539b8bd9968",
       "connectorId": "indexnow",
       "status": "NO_DATA",
-      "ranAt": "2026-09-15T10:44:35.516Z",
+      "ranAt": "2026-09-17T10:45:10.974Z",
       "mode": "live",
       "recordsImported": 0,
       "preparedUrlCount": 86
     },
     {
-      "id": "1a0c0076-11b5-4cec-8678-5e4bea26d0a3",
+      "id": "2263d161-276c-4c7d-8ef7-37d73eb2e94f",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-09-15T10:23:18.096Z",
+      "ranAt": "2026-09-17T10:23:18.251Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "d8af3668-9736-4dd0-85dc-48a9efc0ecc5",
+      "id": "b4b849e7-ba53-4ae9-b25f-3ab2cde5478d",
       "connectorId": "indexnow",
       "status": "NO_DATA",
-      "ranAt": "2026-09-15T10:23:17.938Z",
+      "ranAt": "2026-09-17T10:23:18.078Z",
       "mode": "live",
       "recordsImported": 0,
       "preparedUrlCount": 86
     },
     {
-      "id": "fafdf444-aff5-4d03-a6f2-5316739b2f61",
+      "id": "bdf0a98a-1d1d-46ae-a922-015a3e58386e",
       "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
-      "ranAt": "2026-09-15T08:36:24.603Z",
+      "ranAt": "2026-09-17T08:36:03.808Z",
       "recordsImported": 12
     },
     {
-      "id": "1462e93c-a553-4152-a3e8-f695fd63a5f6",
+      "id": "39d91498-06bd-47fc-b16e-85ab003ec505",
       "connectorId": "manual_social_signal_import",
       "status": "NO_DATA",
-      "ranAt": "2026-09-15T08:36:23.805Z",
+      "ranAt": "2026-09-17T08:35:59.632Z",
       "reason": "No social signal import found at data/imports/social-signals.json.",
       "recordsImported": 0
     },
     {
-      "id": "499c348b-9fb9-4c6d-8b2d-cdd52b8977c7",
+      "id": "2ac6aac0-cf35-4243-84cb-0b9b83c106d8",
       "connectorId": "manual_serp_csv",
       "status": "NO_DATA",
-      "ranAt": "2026-09-15T08:36:23.668Z",
+      "ranAt": "2026-09-17T08:35:59.521Z",
       "reason": "No SERP CSV found at data/imports/serp.csv.",
       "recordsImported": 0
     },
     {
-      "id": "41c9f147-9ec2-4d9a-a56d-49c1d5af48f7",
+      "id": "dccbe19a-8b6c-45e7-bf03-a11d57e023f4",
       "connectorId": "competitor_public_crawler",
       "status": "COMPLETE",
-      "ranAt": "2026-09-15T08:36:23.530Z",
+      "ranAt": "2026-09-17T08:35:59.411Z",
       "recordsImported": 2
     },
     {
-      "id": "2ef205a9-48f3-42c5-89eb-7874b58ae6e6",
+      "id": "10cb8f82-7061-4c53-af3e-42ee237755ea",
       "connectorId": "competitor_sitemap_discovery",
       "status": "COMPLETE",
-      "ranAt": "2026-09-15T08:36:22.998Z",
+      "ranAt": "2026-09-17T08:35:58.999Z",
       "recordsImported": 2
     },
     {
-      "id": "99342db1-c762-400f-bce3-088ddc8c4ae2",
+      "id": "20fe1cb7-4af7-4e7c-9eff-5f7ab0bddf7f",
       "connectorId": "owned_site_crawler",
       "status": "COMPLETE",
-      "ranAt": "2026-09-15T08:36:21.302Z",
+      "ranAt": "2026-09-17T08:35:58.038Z",
       "recordsImported": 99
     },
     {
-      "id": "bbc49f40-c42a-48b1-be3b-4aed0723768a",
+      "id": "ccb143b6-9ca2-49a8-bf33-8d4595c2caff",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-09-15T08:36:21.156Z",
+      "ranAt": "2026-09-17T08:35:57.920Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "eeec378b-dd03-4fed-8294-e213fcd48c08",
+      "id": "32b00dd0-bccf-4229-9509-a83465aa8893",
       "connectorId": "google_url_inspection",
-      "status": "BUDGET_HELD",
-      "ranAt": "2026-09-15T08:36:20.971Z",
-      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
+      "status": "NOT_AUTHORIZED",
+      "ranAt": "2026-09-17T08:35:57.712Z",
+      "mode": "unavailable",
+      "reason": "HTTP 403: {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"You do not own this site, or the inspected URL is not part of this property.\",\n    \"status\": \"PERMISSION_DENIED\"\n  }\n}\n",
       "recordsImported": 0
     },
     {
-      "id": "f169a240-2db2-4d4a-ad97-f39757d5dbe6",
+      "id": "42a5d751-3e15-4bd6-ae9a-564acb833aba",
       "connectorId": "google_search_console_search_analytics",
       "status": "BUDGET_HELD",
-      "ranAt": "2026-09-15T08:36:20.683Z",
-      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
+      "ranAt": "2026-09-17T08:35:57.168Z",
+      "reason": "weekly ceiling 3 reached (3 live attempts in 7d)",
       "recordsImported": 0
     },
     {
-      "id": "a15638b7-2ada-4dc2-beb3-384d9ea55586",
-      "connectorId": "retest_outcome_evaluator",
-      "status": "COMPLETE",
-      "ranAt": "2026-09-14T12:40:46.763Z",
-      "recordsImported": 0
-    },
-    {
-      "id": "148e59f4-2a4d-4346-b13b-18c3e950087e",
-      "connectorId": "retest_queue_builder",
-      "status": "COMPLETE",
-      "ranAt": "2026-09-14T12:40:46.728Z",
-      "recordsImported": 0
-    },
-    {
-      "id": "5d81a1ef-9d49-4b4c-bbd9-ed69a22b6ff6",
-      "connectorId": "cloudflare_crawler_logs",
+      "id": "6f029a31-ca10-46a2-b0f5-3106852d9da1",
+      "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-09-14T12:40:46.660Z",
-      "reason": "Cloudflare crawler ingestion requires Cloudflare credentials or a manual import file.",
+      "ranAt": "2026-09-16T10:44:42.768Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "a4255e67-3119-4577-93e8-f62cd52153f6",
-      "connectorId": "growth_brief_generation",
-      "status": "COMPLETE",
-      "ranAt": "2026-09-14T12:40:46.629Z",
-      "recordsImported": 40
+      "id": "92f8f3bb-f41d-4c34-a6e3-88086fc75300",
+      "connectorId": "indexnow",
+      "status": "NO_DATA",
+      "ranAt": "2026-09-16T10:44:42.606Z",
+      "mode": "live",
+      "recordsImported": 0,
+      "preparedUrlCount": 86
     },
     {
-      "id": "34b6236f-64a0-4c68-88f2-8f859d000c60",
-      "connectorId": "page_action_recommendation",
+      "id": "d4efcfa0-2b42-4a39-92b5-eaed65c5823b",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-09-16T10:23:25.874Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "84921259-ef15-4e26-9fb0-1192389c55c2",
+      "connectorId": "indexnow",
+      "status": "NO_DATA",
+      "ranAt": "2026-09-16T10:23:25.763Z",
+      "mode": "live",
+      "recordsImported": 0,
+      "preparedUrlCount": 86
+    },
+    {
+      "id": "99079d1f-dabd-4c97-a3f8-9dc660213204",
+      "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
-      "ranAt": "2026-09-14T12:40:46.571Z",
-      "recordsImported": 5430
+      "ranAt": "2026-09-16T08:37:04.827Z",
+      "recordsImported": 12
     }
   ],
   "topContentOpportunities": [
     {
-      "id": "brief_maxfanout_055001_46008a3cfc",
-      "query": "what is letter of explanation for people with document gaps before applying",
+      "id": "brief_maxfanout_065001_79d56dbb44",
+      "query": "what is letter of explanation for independent contractors after a denial",
       "route": null,
       "pageFamily": "letter-of-explanation",
       "searchOpportunityScore": 0,
@@ -174,51 +180,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-15T09:37:28.364Z"
+      "createdAt": "2026-09-17T09:35:01.610Z"
     },
     {
-      "id": "brief_maxfanout_055003_d40ce19728",
-      "query": "what is rental application preparation for people with document gaps before applying",
-      "route": null,
-      "pageFamily": "rental-application-preparation",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 20,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
-      "adminReviewRequired": false,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-15T09:37:28.364Z"
-    },
-    {
-      "id": "brief_maxfanout_055004_fa9ea82700",
-      "query": "what is proof of income for people with document gaps before applying",
-      "route": null,
-      "pageFamily": "proof-of-income",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-15T09:37:28.364Z"
-    },
-    {
-      "id": "brief_maxfanout_055005_ab64bdba65",
-      "query": "what is self employed income documents for people with document gaps before applying",
+      "id": "brief_maxfanout_065005_f2ae6c7755",
+      "query": "what is self employed income documents for independent contractors after a denial",
       "route": null,
       "pageFamily": "self-employed-income-documents",
       "searchOpportunityScore": 0,
@@ -234,71 +200,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-15T09:37:28.364Z"
+      "createdAt": "2026-09-17T09:35:01.610Z"
     },
     {
-      "id": "brief_maxfanout_055010_4626bf99df",
-      "query": "what is credit report understanding for people with document gaps before applying",
-      "route": null,
-      "pageFamily": "credit-report-understanding",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-15T09:37:28.365Z"
-    },
-    {
-      "id": "brief_maxfanout_055011_8741f1efa5",
-      "query": "what is credit dispute self service for people with document gaps before applying",
-      "route": null,
-      "pageFamily": "credit-dispute-self-service",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-15T09:37:28.365Z"
-    },
-    {
-      "id": "brief_maxfanout_055012_25ab70f031",
-      "query": "what is credit utilization for people with document gaps before applying",
-      "route": null,
-      "pageFamily": "credit-utilization",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-15T09:37:28.365Z"
-    },
-    {
-      "id": "brief_maxfanout_055016_240a5b531f",
-      "query": "what is gift letter explanation for people with document gaps before applying",
+      "id": "brief_maxfanout_065016_5dffb2029c",
+      "query": "what is gift letter explanation for independent contractors after a denial",
       "route": null,
       "pageFamily": "gift-letter-explanation",
       "searchOpportunityScore": 0,
@@ -314,71 +220,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-15T09:37:28.365Z"
+      "createdAt": "2026-09-17T09:35:01.610Z"
     },
     {
-      "id": "brief_maxfanout_055018_5e4c003b32",
-      "query": "what is address history explanation for people with document gaps before applying",
-      "route": null,
-      "pageFamily": "address-history-explanation",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 20,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
-      "adminReviewRequired": false,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-15T09:37:28.365Z"
-    },
-    {
-      "id": "brief_maxfanout_055019_e4c6fe612b",
-      "query": "what is income change explanation for people with document gaps before applying",
-      "route": null,
-      "pageFamily": "income-change-explanation",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-15T09:37:28.365Z"
-    },
-    {
-      "id": "brief_maxfanout_055020_81577e3f47",
-      "query": "what is employment verification for people with document gaps before applying",
-      "route": null,
-      "pageFamily": "employment-verification",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-15T09:37:28.365Z"
-    },
-    {
-      "id": "brief_maxfanout_055026_1ac8a68485",
-      "query": "what is apartment application documents for people with document gaps before applying",
+      "id": "brief_maxfanout_065026_4f629f0750",
+      "query": "what is apartment application documents for independent contractors after a denial",
       "route": null,
       "pageFamily": "apartment-application-documents",
       "searchOpportunityScore": 0,
@@ -394,11 +240,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-15T09:37:28.365Z"
+      "createdAt": "2026-09-17T09:35:01.610Z"
     },
     {
-      "id": "brief_maxfanout_055030_475627f5ba",
-      "query": "what is document discrepancy explanation for people with document gaps before applying",
+      "id": "brief_maxfanout_065030_c15a9d29bf",
+      "query": "what is document discrepancy explanation for independent contractors after a denial",
       "route": null,
       "pageFamily": "document-discrepancy-explanation",
       "searchOpportunityScore": 0,
@@ -414,71 +260,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-15T09:37:28.365Z"
+      "createdAt": "2026-09-17T09:35:01.610Z"
     },
     {
-      "id": "brief_maxfanout_055034_e361991207",
-      "query": "what is income verification packet for people with document gaps before applying",
-      "route": null,
-      "pageFamily": "income-verification-packet",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-15T09:37:28.365Z"
-    },
-    {
-      "id": "brief_maxfanout_055035_95bec3ef99",
-      "query": "what is credit readiness education for people with document gaps before applying",
-      "route": null,
-      "pageFamily": "credit-readiness-education",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-15T09:37:28.365Z"
-    },
-    {
-      "id": "brief_maxfanout_055037_c2e822af9f",
-      "query": "what is rental screening preparation for people with document gaps before applying",
-      "route": null,
-      "pageFamily": "rental-screening-preparation",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 20,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
-      "adminReviewRequired": false,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-15T09:37:28.365Z"
-    },
-    {
-      "id": "brief_maxfanout_055041_c7eafc9039",
-      "query": "how to prepare letter of explanation for people with document gaps before applying",
+      "id": "brief_maxfanout_065041_94a5ae89ab",
+      "query": "how to prepare letter of explanation for independent contractors after a denial",
       "route": null,
       "pageFamily": "letter-of-explanation",
       "searchOpportunityScore": 0,
@@ -494,51 +280,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-15T09:37:28.365Z"
+      "createdAt": "2026-09-17T09:35:01.611Z"
     },
     {
-      "id": "brief_maxfanout_055043_8e84f83ebc",
-      "query": "how to prepare rental application preparation for people with document gaps before applying",
-      "route": null,
-      "pageFamily": "rental-application-preparation",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 20,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
-      "adminReviewRequired": false,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-15T09:37:28.365Z"
-    },
-    {
-      "id": "brief_maxfanout_055044_c5c3379332",
-      "query": "how to prepare proof of income for people with document gaps before applying",
-      "route": null,
-      "pageFamily": "proof-of-income",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-15T09:37:28.365Z"
-    },
-    {
-      "id": "brief_maxfanout_055045_97012d2631",
-      "query": "how to prepare self employed income documents for people with document gaps before applying",
+      "id": "brief_maxfanout_065045_43ba3d8aa8",
+      "query": "how to prepare self employed income documents for independent contractors after a denial",
       "route": null,
       "pageFamily": "self-employed-income-documents",
       "searchOpportunityScore": 0,
@@ -554,7 +300,267 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-15T09:37:28.365Z"
+      "createdAt": "2026-09-17T09:35:01.611Z"
+    },
+    {
+      "id": "brief_maxfanout_065056_ba8ccc7b76",
+      "query": "how to prepare gift letter explanation for independent contractors after a denial",
+      "route": null,
+      "pageFamily": "gift-letter-explanation",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 80,
+      "complianceRiskScore": 20,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": false,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-17T09:35:01.612Z"
+    },
+    {
+      "id": "brief_maxfanout_065066_451687fcca",
+      "query": "how to prepare apartment application documents for independent contractors after a denial",
+      "route": null,
+      "pageFamily": "apartment-application-documents",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 20,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "checklist_or_numbered_steps",
+      "adminReviewRequired": false,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-17T09:35:01.612Z"
+    },
+    {
+      "id": "brief_maxfanout_065070_8788bd83c2",
+      "query": "how to prepare document discrepancy explanation for independent contractors after a denial",
+      "route": null,
+      "pageFamily": "document-discrepancy-explanation",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 20,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": false,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-17T09:35:01.612Z"
+    },
+    {
+      "id": "brief_maxfanout_065081_62a992eeeb",
+      "query": "letter of explanation checklist for independent contractors after a denial",
+      "route": null,
+      "pageFamily": "letter-of-explanation",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 80,
+      "complianceRiskScore": 20,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "improve_existing_page",
+      "admissionStatus": "indexable_utility_page",
+      "bestFormat": "checklist_or_numbered_steps",
+      "adminReviewRequired": false,
+      "reason": "Existing route can satisfy intent with improvements.",
+      "createdAt": "2026-09-17T09:35:01.612Z"
+    },
+    {
+      "id": "brief_maxfanout_065083_bd4a7cc9fe",
+      "query": "rental application preparation checklist for independent contractors after a denial",
+      "route": null,
+      "pageFamily": "rental-application-preparation",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 80,
+      "complianceRiskScore": 20,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "checklist_or_numbered_steps",
+      "adminReviewRequired": false,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-17T09:35:01.612Z"
+    },
+    {
+      "id": "brief_maxfanout_065084_67ba5b59e5",
+      "query": "proof of income checklist for independent contractors after a denial",
+      "route": null,
+      "pageFamily": "proof-of-income",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 80,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "improve_existing_page",
+      "admissionStatus": "indexable_utility_page",
+      "bestFormat": "checklist_or_numbered_steps",
+      "adminReviewRequired": true,
+      "reason": "Existing route can satisfy intent with improvements.",
+      "createdAt": "2026-09-17T09:35:01.612Z"
+    },
+    {
+      "id": "brief_maxfanout_065085_7c0a6740ce",
+      "query": "self employed income documents checklist for independent contractors after a denial",
+      "route": null,
+      "pageFamily": "self-employed-income-documents",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 80,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "checklist_or_numbered_steps",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-17T09:35:01.612Z"
+    },
+    {
+      "id": "brief_maxfanout_065090_b2f74b2d4d",
+      "query": "credit report understanding checklist for independent contractors after a denial",
+      "route": null,
+      "pageFamily": "credit-report-understanding",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 80,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "checklist_or_numbered_steps",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-17T09:35:01.612Z"
+    },
+    {
+      "id": "brief_maxfanout_065091_043cb4f31d",
+      "query": "credit dispute self service checklist for independent contractors after a denial",
+      "route": null,
+      "pageFamily": "credit-dispute-self-service",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 80,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "checklist_or_numbered_steps",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-17T09:35:01.612Z"
+    },
+    {
+      "id": "brief_maxfanout_065092_257e7b6d93",
+      "query": "credit utilization checklist for independent contractors after a denial",
+      "route": null,
+      "pageFamily": "credit-utilization",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 80,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "checklist_or_numbered_steps",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-17T09:35:01.612Z"
+    },
+    {
+      "id": "brief_maxfanout_065096_341067f791",
+      "query": "gift letter explanation checklist for independent contractors after a denial",
+      "route": null,
+      "pageFamily": "gift-letter-explanation",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 80,
+      "complianceRiskScore": 20,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "improve_existing_page",
+      "admissionStatus": "indexable_utility_page",
+      "bestFormat": "checklist_or_numbered_steps",
+      "adminReviewRequired": false,
+      "reason": "Existing route can satisfy intent with improvements.",
+      "createdAt": "2026-09-17T09:35:01.612Z"
+    },
+    {
+      "id": "brief_maxfanout_065098_de1c688aad",
+      "query": "address history explanation checklist for independent contractors after a denial",
+      "route": null,
+      "pageFamily": "address-history-explanation",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 80,
+      "complianceRiskScore": 20,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "improve_existing_page",
+      "admissionStatus": "indexable_utility_page",
+      "bestFormat": "checklist_or_numbered_steps",
+      "adminReviewRequired": false,
+      "reason": "Existing route can satisfy intent with improvements.",
+      "createdAt": "2026-09-17T09:35:01.612Z"
+    },
+    {
+      "id": "brief_maxfanout_065099_465d73c971",
+      "query": "income change explanation checklist for independent contractors after a denial",
+      "route": null,
+      "pageFamily": "income-change-explanation",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 80,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "checklist_or_numbered_steps",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-09-17T09:35:01.612Z"
     }
   ],
   "rankingBasis": {
@@ -578,7 +584,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-15T10:46:23.046Z"
+      "createdAt": "2026-09-17T10:47:08.778Z"
     },
     {
       "route": "/resources",
@@ -594,7 +600,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-15T10:46:23.046Z"
+      "createdAt": "2026-09-17T10:47:08.778Z"
     },
     {
       "route": "/pricing",
@@ -610,7 +616,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-15T10:46:23.046Z"
+      "createdAt": "2026-09-17T10:47:08.778Z"
     },
     {
       "route": "/letter-of-explanation",
@@ -626,7 +632,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-15T10:46:23.046Z"
+      "createdAt": "2026-09-17T10:47:08.778Z"
     },
     {
       "route": "/letter-of-explanation/credit",
@@ -642,7 +648,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-09-15T10:46:23.046Z"
+      "createdAt": "2026-09-17T10:47:08.778Z"
     },
     {
       "route": "/letter-of-explanation/eviction",
@@ -658,7 +664,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-15T10:46:23.046Z"
+      "createdAt": "2026-09-17T10:47:08.778Z"
     },
     {
       "route": "/letter-of-explanation/income",
@@ -674,7 +680,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-09-15T10:46:23.046Z"
+      "createdAt": "2026-09-17T10:47:08.778Z"
     },
     {
       "route": "/letter-of-explanation/employment-gap",
@@ -690,7 +696,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-09-15T10:46:23.046Z"
+      "createdAt": "2026-09-17T10:47:08.778Z"
     },
     {
       "route": "/employment-verification-letter",
@@ -706,7 +712,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-09-15T10:46:23.046Z"
+      "createdAt": "2026-09-17T10:47:08.778Z"
     },
     {
       "route": "/609-dispute-letter",
@@ -722,7 +728,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-09-15T10:46:23.046Z"
+      "createdAt": "2026-09-17T10:47:08.778Z"
     },
     {
       "route": "/goodwill-letter-to-remove-late-payment",
@@ -738,7 +744,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-15T10:46:23.046Z"
+      "createdAt": "2026-09-17T10:47:08.778Z"
     },
     {
       "route": "/letter-of-explanation/late-payment",
@@ -754,7 +760,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-15T10:46:23.046Z"
+      "createdAt": "2026-09-17T10:47:08.778Z"
     },
     {
       "route": "/letter-of-explanation/large-deposit",
@@ -770,7 +776,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-15T10:46:23.046Z"
+      "createdAt": "2026-09-17T10:47:08.778Z"
     },
     {
       "route": "/proof-of-income-letter",
@@ -786,7 +792,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-09-15T10:46:23.046Z"
+      "createdAt": "2026-09-17T10:47:08.778Z"
     },
     {
       "route": "/credit-dispute-letter",
@@ -802,7 +808,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-09-15T10:46:23.046Z"
+      "createdAt": "2026-09-17T10:47:08.778Z"
     },
     {
       "route": "/apartment-application",
@@ -818,7 +824,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-15T10:46:23.046Z"
+      "createdAt": "2026-09-17T10:47:08.778Z"
     },
     {
       "route": "/auto-loan-documents",
@@ -834,7 +840,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-15T10:46:23.046Z"
+      "createdAt": "2026-09-17T10:47:08.778Z"
     },
     {
       "route": "/car-loan-checklist",
@@ -850,7 +856,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-15T10:46:23.046Z"
+      "createdAt": "2026-09-17T10:47:08.778Z"
     },
     {
       "route": "/documents-needed-for-car-loan",
@@ -866,7 +872,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-15T10:46:23.046Z"
+      "createdAt": "2026-09-17T10:47:08.778Z"
     },
     {
       "route": "/sba-loan-checklist",
@@ -882,7 +888,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-15T10:46:23.046Z"
+      "createdAt": "2026-09-17T10:47:08.778Z"
     }
   ],
   "hardTruth": "Low ranking potential never blocks useful onsite content. It only changes indexing, priority, and authority strategy."
