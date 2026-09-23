@@ -2,6 +2,23 @@
   "schemaVersion": "4.1.0",
   "runs": [
     {
+      "id": "ed6da7a4-e2e2-4472-be4c-17499012f26a",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-09-23T10:23:26.159Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "73339f6b-2898-49a4-aea1-1da4344ecd13",
+      "connectorId": "indexnow",
+      "status": "NO_DATA",
+      "ranAt": "2026-09-23T10:23:26.018Z",
+      "mode": "live",
+      "recordsImported": 0,
+      "preparedUrlCount": 86
+    },
+    {
       "id": "439f7c54-27de-4afd-87c5-3206b64b58fc",
       "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
@@ -1920,23 +1937,6 @@
       "connectorId": "indexnow",
       "status": "NO_DATA",
       "ranAt": "2026-09-08T10:43:48.851Z",
-      "mode": "live",
-      "recordsImported": 0,
-      "preparedUrlCount": 86
-    },
-    {
-      "id": "16bb3ee4-e731-4d70-8272-91c75cf92a8c",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-09-08T10:23:52.815Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "ee13302a-d6dd-46c5-894b-32c6b9b9f318",
-      "connectorId": "indexnow",
-      "status": "NO_DATA",
-      "ranAt": "2026-09-08T10:23:52.639Z",
       "mode": "live",
       "recordsImported": 0,
       "preparedUrlCount": 86
