@@ -2,6 +2,23 @@
   "schemaVersion": "4.1.0",
   "runs": [
     {
+      "id": "25a64c44-d6c4-4267-8562-6d646b9add43",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-09-24T10:45:28.890Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "f5c60aee-3f42-4942-8f51-5169f22783b7",
+      "connectorId": "indexnow",
+      "status": "NO_DATA",
+      "ranAt": "2026-09-24T10:45:28.727Z",
+      "mode": "live",
+      "recordsImported": 0,
+      "preparedUrlCount": 86
+    },
+    {
       "id": "5b8c129b-1b7a-4ede-8fdd-f88d141f6605",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
@@ -1929,22 +1946,6 @@
       "status": "COMPLETE",
       "ranAt": "2026-09-09T08:34:23.838Z",
       "recordsImported": 12
-    },
-    {
-      "id": "4af30f71-53a9-4232-b868-51a29d94816d",
-      "connectorId": "manual_social_signal_import",
-      "status": "NO_DATA",
-      "ranAt": "2026-09-09T08:34:21.410Z",
-      "reason": "No social signal import found at data/imports/social-signals.json.",
-      "recordsImported": 0
-    },
-    {
-      "id": "a519ec05-f1f0-4154-89ef-18d59cc1fb54",
-      "connectorId": "manual_serp_csv",
-      "status": "NO_DATA",
-      "ranAt": "2026-09-09T08:34:21.268Z",
-      "reason": "No SERP CSV found at data/imports/serp.csv.",
-      "recordsImported": 0
     }
   ]
 }
