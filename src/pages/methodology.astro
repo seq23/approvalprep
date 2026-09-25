@@ -9,7 +9,7 @@ import { routeAnswers } from "../lib/routeAnswers";
 // their own /blog/ pages. Same list feeds the block and the schema.
 const faq = routeAnswers("/methodology");
 ---
-<BaseLayout title="Methodology - ApprovalPrep" description="A clear explanation of how ApprovalPrep helps users prepare truthful self-service paperwork." canonical="https://approvalprep.com/methodology" schema={faq.length ? [faqSchema(faq.map((i) => ({ question: i.question, answer: i.answer })))] : []}>
+<BaseLayout title="Methodology: How ApprovalPrep Helps You Prepare Paperwork" description="How ApprovalPrep works in four steps: choose the situation, gather real support, write plainly, then review your paperwork and send it yourself." canonical="https://approvalprep.com/methodology" schema={faq.length ? [faqSchema(faq.map((i) => ({ question: i.question, answer: i.answer })))] : []}>
   <section class="hero shell methodology-hero">
     <p class="eyebrow">Methodology</p>
     <h1>How ApprovalPrep works.</h1>

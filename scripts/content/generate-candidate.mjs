@@ -110,7 +110,11 @@ const variants = [
   {
     id: "mistakes",
     title: (route) => `What mistakes should I avoid with ${route.title}?`,
-    lead: (copy, route) => `The biggest mistakes are unsupported claims, inconsistent dates or amounts, unnecessary personal detail, and sending documents without explaining why they matter. ${copy.shortAnswer || "Use the page as a preparation guide, not as a promise of approval."}`
+    // The first sentence names the route. src/pages/blog/[slug].astro builds the
+    // meta description from the opening sentences, and when this lead opened on a
+    // fixed sentence every "mistakes" answer shipped the same description (8 pages
+    // on 25 Sep 2026). scripts/validate/title-length.mjs fails a duplicate.
+    lead: (copy, route) => `The biggest ${route.title} mistakes: unsupported claims, mismatched dates or amounts, and unexplained attachments. ${copy.shortAnswer || "Use the page as a preparation guide, not as a promise of approval."}`
   },
   {
     id: "prepare",

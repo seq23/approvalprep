@@ -35,6 +35,8 @@ const {
 
 // The two CTA labels are the ones registered for this route in src/data/content.ts,
 // so what the page shows and what the route declares cannot drift apart.
+// copy.lead is the hero lead; copy.metaDescription, when set, is the 110-160
+// character search snippet (scripts/validate/title-length.mjs).
 const ctaLabel = copy.primaryCta;
 
 const canonical = canonicalUrl(path);
@@ -44,7 +46,7 @@ const schema = [
   faqSchema(copy.faq)
 ];
 ---
-<BaseLayout title={`${copy.heading} - ApprovalPrep`} description={copy.lead} canonical={canonical} schema={schema}>
+<BaseLayout title={`${copy.heading} - ApprovalPrep`} description={copy.metaDescription || copy.lead} canonical={canonical} schema={schema}>
   <section class="hero shell hero-split">
     <div>
       <p class="eyebrow">{eyebrow}</p>
