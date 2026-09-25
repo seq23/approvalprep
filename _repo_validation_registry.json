@@ -239,6 +239,17 @@
       "scope": "Sitemap, robots, llms, answers, atom/query depth, provider receipts"
     },
     {
+      "id": "title-length",
+      "npmScript": "validate:title-length",
+      "entrypoint": "scripts/validate/title-length.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents shipping a <title> over 70 characters or a duplicate title between indexable pages - Bing Webmaster Site Scan flagged 20 over-long titles on 25 Sep 2026 (blog answers and reports carrying the site suffix)",
+      "owner": "approvalprep-ops",
+      "group": "release-critical",
+      "scope": "Every built HTML page's <title> element in the published tree"
+    },
+    {
       "id": "demand-backed-pages",
       "npmScript": "validate:demand-backed-pages",
       "entrypoint": "scripts/validate/demand-backed-pages.mjs",

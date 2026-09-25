@@ -7,6 +7,7 @@ import AnalyticsEvent from "../components/AnalyticsEvent.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import ProfessionalBoundaryBlock from "../components/ProfessionalBoundaryBlock.astro";
 import { titleForPath, canonicalUrl, internalHref } from "../lib/schema";
+import { fitTitle } from "../lib/title";
 import { navCta, primaryNav, secondaryNav } from "../data/navigation";
 const { title = "ApprovalPrep", description = "Self-service approval prep tools.", canonical = "https://approvalprep.com", noindex = false, showPrivacyNotice = true, schema = [] } = Astro.props;
 // Breadcrumbs belong to the layout so every surface gets the same trail from the
@@ -20,13 +21,15 @@ const hasBreadcrumbSchema = (Array.isArray(schema) ? schema : []).some((entry) =
 // Normalising here rather than at each call site means a page cannot ship a
 // canonical that names the redirecting URL form, however it built the string.
 const canonicalHref = canonicalUrl(canonical);
+// Bing flags <title> over 70 characters; see src/lib/title.ts.
+const documentTitle = fitTitle(String(title));
 ---
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
+    <title>{documentTitle}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex,follow" />}
     <link rel="canonical" href={internalHref(canonicalHref)} />
