@@ -244,10 +244,10 @@
       "entrypoint": "scripts/validate/title-length.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
-      "blockReason": "prevents shipping a <title> over 70 characters or a duplicate title between indexable pages - Bing Webmaster Site Scan flagged 20 over-long titles on 25 Sep 2026 (blog answers and reports carrying the site suffix)",
+      "blockReason": "prevents shipping a <title> over 70 characters, an indexable page with a <title> under 30 characters, a missing meta description or one outside 110-160 characters, or a duplicate title or description between indexable pages - Bing Webmaster Site Scan flagged 20 over-long titles on 25 Sep 2026, and a crawl of the 106 sitemap URLs the same day found 11 short titles, 10 short and 64 long descriptions, and one description shared by 8 blog answers",
       "owner": "approvalprep-ops",
       "group": "release-critical",
-      "scope": "Every built HTML page's <title> element in the published tree"
+      "scope": "Every built HTML page's <title> element in the published tree, and every indexable page's <title> minimum and meta description"
     },
     {
       "id": "demand-backed-pages",

@@ -11,7 +11,7 @@ const copy = routeCopy["/resources"];
 // their own /blog/ pages. One list feeds both the block and the schema.
 const faq = routeAnswers("/resources");
 ---
-<BaseLayout title="Resources - ApprovalPrep" description="ApprovalPrep resources, guides, publishing updates, policies, and self-service document prep education." canonical="https://approvalprep.com/resources" schema={faq.length ? [faqSchema(faq.map((i) => ({ question: i.question, answer: i.answer })))] : []}>
+<BaseLayout title="ApprovalPrep Resources: Guides, Policies, and Glossary" description="Find ApprovalPrep guides, the daily blog, the methodology, the glossary, pricing, and every policy page, organized by the question you are trying to answer." canonical="https://approvalprep.com/resources" schema={faq.length ? [faqSchema(faq.map((i) => ({ question: i.question, answer: i.answer })))] : []}>
   <section class="hero shell">
     <p class="eyebrow">Resources</p>
     <h1>Find the guide, policy, or publishing stream that matches your question.</h1>

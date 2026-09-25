@@ -49,13 +49,29 @@ const familyIds = new Set((families.pageFamilies||[]).map(f=>f.id));
 for (const id of ['tools','templates','public_reports']) {
   if (!familyIds.has(id)) { families.pageFamilies.push({ id, label:id.replace('_',' '), riskDefault:id==='tools'?'low':'medium', description:`ApprovalPrep ${id.replace('_',' ')} citation surfaces.` }); familyIds.add(id); repairs.familiesAdded++; }
 }
+// The lead is also the page's meta description ([...slug].astro), which must be
+// 110-160 characters (scripts/validate/title-length.mjs). One fixed sentence
+// around the query overran the band on every long query - 64 pages shipped
+// descriptions over 160 on 25 Sep 2026 - so pick the fullest phrasing that
+// lands in band. A query no phrasing fits fails here, loudly, rather than
+// generating a lead the release gate would then refuse.
+function leadFor(q){
+  const forms=[
+    `Prepare ${q} with truthful facts, the documents that support each one, and a clear next step, then review everything and send it yourself.`,
+    `Prepare ${q} with truthful facts, supporting documents, and a clear next step you review and send yourself.`,
+    `Prepare ${q} with truthful facts and the documents that back them up.`,
+  ];
+  const fit=forms.find((text)=>text.length>=110&&text.length<=160);
+  if(!fit) throw new Error(`[content:self-heal-citation-os] no lead phrasing for "${q}" lands in 110-160 characters; give the route a shorter primaryQuery`);
+  return fit;
+}
 function routeCopyFor(route){
   const title=route.title || route.path.split('/').filter(Boolean).join(' ').replace(/\b\w/g,m=>m.toUpperCase());
   const q=route.primaryQuery || title.toLowerCase();
   const fam=String(route.family||'document prep').replace(/_/g,' ');
   return {
     heading:title,
-    lead:`Use this ApprovalPrep page to prepare ${q} with truthful facts, supporting documents, and a clear next step before you send anything yourself.`,
+    lead:leadFor(q),
     shortAnswer:`${title} is a self-service preparation page. It helps you organize what happened, what proof supports it, what to avoid saying, and which ApprovalPrep kit or free tool may help next. It does not create documents for you, contact reviewers, or guarantee any approval outcome.`,
     primaryCta:'Start free for $0', secondaryCta:'Compare paid kits',
     decisionContext:[`Use this page when the reviewer, application, lender, landlord, employer, or funding contact is asking for clarity around ${q}.`,'The best use of this page is to separate facts from assumptions, then match each important fact to a document, date, amount, name, address, or other support you actually have.','This is not a place to invent a better story. It is a place to make the truthful packet easier to read and easier to review.'],

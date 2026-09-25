@@ -15,6 +15,9 @@ const { page }=Astro.props;
 // for is emitted verbatim - so the structured data pointed every one of these
 // pages at a redirect. canonicalUrl() is the single source of truth for the
 // published URL form (src/lib/schema.ts); nothing here rebuilds it by hand.
+// page.description is the hero lead and runs long by design; the registry's
+// page.metaDescription is the 110-160 character search snippet
+// (scripts/validate/title-length.mjs).
 const canonical=canonicalUrl(page.path);
 const product=page.sku?productForSku(page.sku):null;
 const schema=[
@@ -26,7 +29,7 @@ const schema=[
   ...(product?[productSchema({name:product.name,description:product.customer_situation||page.description,url:canonicalUrl("/pricing"),price:product.priceLabel})]:[])
 ];
 ---
-<BaseLayout title={`${page.title} - ApprovalPrep`} description={page.description} canonical={canonical} schema={schema}>
+<BaseLayout title={`${page.title} - ApprovalPrep`} description={page.metaDescription || page.description} canonical={canonical} schema={schema}>
 <section class="hero shell hero-split"><div><p class="eyebrow">{page.eyebrow}</p><h1>{page.title}</h1><p class="lead">{page.description}</p><div class="hero-actions">{page.sku&&product?(<button class="button primary-button checkout-button" type="button" data-sku={page.sku}>{`Buy the ${product.name} — ${product.priceLabel}`}</button>):(<a class="button primary-button" href={internalHref(page.primaryHref)}>{page.primaryCta}</a>)}<a class="button secondary secondary-button" href={internalHref(page.secondaryHref)}>{page.secondaryCta}</a>{page.generator&&<a class="button secondary secondary-button" href="#generator">Jump to the free generator</a>}</div></div><RecommendationSummary variant="panel" headline="Prepare facts a reviewer can verify." statement={page.summary} /></section>
 {page.definition&&(
 <section class="band"><div class="shell"><article class="card citation-definition" data-content-block="definition_callout"><p class="eyebrow">{page.definitionLabel||"Definition"}</p><p><strong>{page.definition}</strong></p>{page.definitionDetail&&<p>{page.definitionDetail}</p>}</article></div></section>

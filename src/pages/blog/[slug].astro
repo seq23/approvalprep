@@ -13,11 +13,29 @@ export function getStaticPaths() {
 const { answer } = Astro.props;
 const slug = slugify(answer.title);
 const canonical = canonicalUrl(`/blog/${slug}`);
-// Cut on a word boundary. slice(0, 155) alone ended these mid-word - "increase
-// based on ac" - which is what a search result then shows.
-const description = answer.answer.length <= 155
-  ? answer.answer
-  : `${answer.answer.slice(0, 155).replace(/\s+\S*$/, "")}...`;
+// The meta description must be 110-160 characters (scripts/validate/title-length.mjs).
+// Prefer whole opening sentences that fit; only when no run of whole sentences
+// lands in that band, cut the answer on a word boundary - never mid-word, which
+// is what slice(0, 155) alone once shipped ("increase based on ac").
+const DESCRIPTION_MIN = 110;
+const DESCRIPTION_MAX = 160;
+const sentences = answer.answer.split(/(?<=[.?!])\s+/);
+let description = "";
+for (const sentence of sentences) {
+  const next = description ? `${description} ${sentence}` : sentence;
+  if (next.length > DESCRIPTION_MAX) break;
+  description = next;
+}
+if (description.length < DESCRIPTION_MIN) {
+  if (answer.answer.length <= DESCRIPTION_MAX) description = answer.answer;
+  else {
+    // End on a clause boundary when one leaves enough text, else a word boundary.
+    const head = answer.answer.slice(0, DESCRIPTION_MAX - 3);
+    const clause = head.lastIndexOf(", ");
+    const cut = clause >= DESCRIPTION_MIN ? head.slice(0, clause) : head.replace(/\s+\S*$/, "").replace(/[,;:]$/, "");
+    description = `${cut}...`;
+  }
+}
 const publishedAt = answer.publishedAt || answersData.generatedAt;
 // FAQPage describes what this page is rather than being bolted onto it: the
 // <h1> is the authored question and the lead paragraph directly beneath it is

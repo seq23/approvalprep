@@ -571,6 +571,7 @@ const manualRouteCopy = {
     "primaryCta": "Compare the paid kits",
     "secondaryCta": "Start free for $0",
     "heading": "Free ApprovalPrep Document Checklists",
+    "metaDescription": "Six free ApprovalPrep checklists for apartment applications, proof of income, business funding, mortgages, car loans, and your important documents.",
     "lead": "Six free checklists, one for each application situation ApprovalPrep publishes for: apartment applications, proof of income, small-business funding, mortgage documents, car loans, and the important-documents folder you keep for everything else.",
     "shortAnswer": "Open the checklist that matches the request you actually received, work through it using documents you already have, and only then decide whether a paid kit adds anything. Every checklist here is free, needs no account, and keeps nothing you type.",
     "decisionContext": [
@@ -639,6 +640,7 @@ const manualRouteCopy = {
     "primaryCta": "Get the editable kits",
     "secondaryCta": "Start free for $0",
     "heading": "ApprovalPrep Letter Template Previews",
+    "metaDescription": "Previews of five ApprovalPrep letters: address history, employment gap, bank deposits, a rental cover letter, and self-employed proof of income.",
     "lead": "Five public previews showing how each ApprovalPrep letter is structured: address history, employment gap, bank statement deposits, a rental application cover letter, and self-employed proof of income.",
     "shortAnswer": "Read the preview for the letter you need, use its structure to draft your own version in plain words, and buy the matching kit only if you want the editable PDF and DOCX files. The previews explain structure; the paid kits carry the files.",
     "decisionContext": [
@@ -707,6 +709,7 @@ const manualRouteCopy = {
     "primaryCta": "Compare the paid kits",
     "secondaryCta": "Start free for $0",
     "heading": "ApprovalPrep Public Reports",
+    "metaDescription": "Three ApprovalPrep public reports on what applicants are asked to produce: a checklist catalog, a rental prep report, and a business funding report.",
     "lead": "Three public reports on what applicants are actually asked to produce: a catalog of public application checklists, a rental application prep report, and a small-business funding document prep report.",
     "shortAnswer": "Each report states its own method, lists the sources it was built from, and says what it does not claim. Read the method first, then use the findings to decide what to gather before you apply.",
     "decisionContext": [
@@ -972,7 +975,8 @@ const manualRouteCopy = {
   },
   "/pricing": {
     "heading": "Pricing",
-    "lead": "Pricing helps you prepare for compare all kits with truthful details, organized supporting documents, and a clear next step before buyer decision becomes urgent.",
+    "metaTitle": "ApprovalPrep Pricing: Compare All Eight Document Prep Kits",
+    "lead": "Compare all eight ApprovalPrep kits side by side: what each one covers, which situations it fits, and when the free Studio or a free checklist is enough.",
     "shortAnswer": "Use this page when you need compare all kits and want a practical way to prepare before buyer decision. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Start my letter",
     "secondaryCta": "View product paths",
@@ -1064,7 +1068,7 @@ const manualRouteCopy = {
   },
   "/letter-of-explanation": {
     "heading": "Write a clear letter of explanation.",
-    "lead": "Letter of Explanation Generator helps you prepare for one clear explanation with truthful details, organized supporting documents, and a clear next step before gap or issue becomes urgent.",
+    "lead": "Write one clear letter of explanation for a credit, income, job gap, address, or deposit question, with the facts and proof a reviewer needs to close it.",
     "shortAnswer": "Use this page when you need one clear explanation and want a practical way to prepare before gap or issue. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Create my letter",
     "secondaryCta": "Compare kits",
@@ -1156,7 +1160,7 @@ const manualRouteCopy = {
   },
   "/letter-of-explanation/credit": {
     "heading": "Credit Letter of Explanation",
-    "lead": "Credit Letter of Explanation helps you prepare for credit context with truthful details, organized supporting documents, and a clear next step before not credit repair becomes urgent.",
+    "lead": "Explain a late payment, collection, or other credit item to a lender or landlord in a few factual sentences, backed by dates and documents you can show.",
     "shortAnswer": "Use this page when you need credit context and want a practical way to prepare before not credit repair. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Start my letter",
     "secondaryCta": "Compare kits",
@@ -1248,7 +1252,7 @@ const manualRouteCopy = {
   },
   "/letter-of-explanation/eviction": {
     "heading": "Eviction Letter of Explanation",
-    "lead": "Eviction Letter of Explanation helps you prepare for eviction context with truthful details, organized supporting documents, and a clear next step before housing review becomes urgent.",
+    "lead": "Explain a past eviction or rental dispute to a new landlord with a short, factual timeline, what has changed since, and the records behind each statement.",
     "shortAnswer": "Use this page when you need eviction context and want a practical way to prepare before housing review. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Start my letter",
     "secondaryCta": "Compare kits",
@@ -1340,7 +1344,7 @@ const manualRouteCopy = {
   },
   "/letter-of-explanation/income": {
     "heading": "Income Letter of Explanation",
-    "lead": "Income Letter of Explanation helps you prepare for income context with truthful details, organized supporting documents, and a clear next step before unusual deposits becomes urgent.",
+    "lead": "Explain unusual deposits or an irregular income to a lender or landlord: where the money came from, when, and which statements or pay records show it.",
     "shortAnswer": "Use this page when you need income context and want a practical way to prepare before unusual deposits. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Start my letter",
     "secondaryCta": "Compare kits",
@@ -1432,7 +1436,7 @@ const manualRouteCopy = {
   },
   "/letter-of-explanation/employment-gap": {
     "heading": "Employment Gap Letter of Explanation",
-    "lead": "Employment Gap Letter of Explanation helps you prepare for employment gap with truthful details, organized supporting documents, and a clear next step before timeline clarity becomes urgent.",
+    "lead": "Explain a gap in employment with the dates, the reason in one plain sentence, and what you did during it, so a lender or landlord can close the question.",
     "shortAnswer": "Use this page when you need employment gap and want a practical way to prepare before timeline clarity. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Start my letter",
     "secondaryCta": "Compare kits",
@@ -1616,7 +1620,7 @@ const manualRouteCopy = {
   },
   "/proof-of-income-letter": {
     "heading": "Proof of Income Letter",
-    "lead": "Proof of Income Letter helps you prepare for proof of income with truthful details, organized supporting documents, and a clear next step before income source clarity becomes urgent.",
+    "lead": "Prepare a proof of income letter that states who pays you, how much, and how often, with pay stubs, statements, or 1099s that match every number in it.",
     "shortAnswer": "Use this page when you need proof of income and want a practical way to prepare before income source clarity. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Get the income kit",
     "secondaryCta": "Compare kits",
@@ -1708,7 +1712,7 @@ const manualRouteCopy = {
   },
   "/credit-dispute-letter": {
     "heading": "Credit Dispute Letter Generator",
-    "lead": "Credit Dispute Letter Generator helps you prepare for DIY credit dispute with truthful details, organized supporting documents, and a clear next step before specific report item becomes urgent.",
+    "lead": "Draft your own credit report dispute letter naming the exact item, why it is inaccurate, and the proof you attach. You send it to the bureau yourself.",
     "shortAnswer": "Use this page when you need DIY credit dispute and want a practical way to prepare before specific report item. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Get the credit letter kit",
     "secondaryCta": "Compare kits",
@@ -1800,7 +1804,7 @@ const manualRouteCopy = {
   },
   "/apartment-application": {
     "heading": "Apartment Ready-to-Apply Kit",
-    "lead": "Apartment Ready-to-Apply Kit helps you prepare for rental packet with truthful details, organized supporting documents, and a clear next step before leasing office review becomes urgent.",
+    "lead": "Get an apartment application ready before you tour: ID, income proof, rental history, references, and a short cover letter, gathered into one packet.",
     "shortAnswer": "Use this page when you need rental packet and want a practical way to prepare before leasing office review. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Get the rental kit",
     "secondaryCta": "Compare kits",
@@ -1892,7 +1896,7 @@ const manualRouteCopy = {
   },
   "/rental-application-checklist": {
     "heading": "Rental Application Checklist",
-    "lead": "Rental Application Checklist helps you prepare for rental checklist with truthful details, organized supporting documents, and a clear next step before documents before touring becomes urgent.",
+    "lead": "A rental application checklist of what landlords usually ask for, from ID and pay stubs to bank statements and references, so nothing stalls your file.",
     "shortAnswer": "Use this page when you need rental checklist and want a practical way to prepare before documents before touring. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Get the checklist",
     "secondaryCta": "Compare kits",
@@ -1984,7 +1988,7 @@ const manualRouteCopy = {
   },
   "/how-to-get-approved-for-an-apartment": {
     "heading": "How to Get Approved for an Apartment",
-    "lead": "How to Get Approved for an Apartment helps you prepare for apartment approval preparation with truthful details, organized supporting documents, and a clear next step before screening readiness becomes urgent.",
+    "lead": "What landlords check on a rental application, income, rental history, credit, and references, and how to prepare each one honestly before you apply.",
     "shortAnswer": "Use this page when you need apartment approval preparation and want a practical way to prepare before screening readiness. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Build my packet",
     "secondaryCta": "Compare kits",
@@ -2076,7 +2080,7 @@ const manualRouteCopy = {
   },
   "/auto-loan-documents": {
     "heading": "Auto Loan Documents",
-    "lead": "Auto Loan Documents helps you prepare for auto loan documents with truthful details, organized supporting documents, and a clear next step before dealer finance desk becomes urgent.",
+    "lead": "The documents a dealer finance desk or auto lender usually asks for: ID, proof of income, proof of residence, insurance, and your trade-in paperwork.",
     "shortAnswer": "Use this page when you need auto loan documents and want a practical way to prepare before dealer finance desk. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Get the checklist",
     "secondaryCta": "Compare kits",
@@ -2168,7 +2172,7 @@ const manualRouteCopy = {
   },
   "/car-loan-checklist": {
     "heading": "Car Loan Checklist",
-    "lead": "Car Loan Checklist helps you prepare for car loan checklist with truthful details, organized supporting documents, and a clear next step before preapproval readiness becomes urgent.",
+    "lead": "A car loan checklist to work through before preapproval: identity, income, residence, insurance, and down payment records, gathered before the dealer asks.",
     "shortAnswer": "Use this page when you need car loan checklist and want a practical way to prepare before preapproval readiness. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Get the checklist",
     "secondaryCta": "Compare kits",
@@ -2260,7 +2264,7 @@ const manualRouteCopy = {
   },
   "/documents-needed-for-car-loan": {
     "heading": "Documents Needed for a Car Loan",
-    "lead": "Documents Needed for a Car Loan helps you prepare for car loan document list with truthful details, organized supporting documents, and a clear next step before lender request becomes urgent.",
+    "lead": "Which documents you need for a car loan, why a lender asks for each one, and what to bring if your income is irregular or you have recently moved.",
     "shortAnswer": "Use this page when you need car loan document list and want a practical way to prepare before lender request. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Get the checklist",
     "secondaryCta": "Compare kits",
@@ -2352,7 +2356,7 @@ const manualRouteCopy = {
   },
   "/sba-loan-checklist": {
     "heading": "SBA Loan Checklist",
-    "lead": "SBA Loan Checklist helps you prepare for SBA checklist with truthful details, organized supporting documents, and a clear next step before small business lender becomes urgent.",
+    "lead": "An SBA loan checklist for small business owners: tax returns, financial statements, a debt schedule, ownership records, and a use of funds explanation.",
     "shortAnswer": "Use this page when you need SBA checklist and want a practical way to prepare before small business lender. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Get the checklist",
     "secondaryCta": "Compare kits",
@@ -2444,7 +2448,7 @@ const manualRouteCopy = {
   },
   "/business-loan-documents": {
     "heading": "Business Loan Documents",
-    "lead": "Business Loan Documents helps you prepare for business loan documents with truthful details, organized supporting documents, and a clear next step before funding review becomes urgent.",
+    "lead": "The business loan documents lenders usually review, bank statements, tax returns, formation papers, and cash flow, and how to organize them first.",
     "shortAnswer": "Use this page when you need business loan documents and want a practical way to prepare before funding review. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Get the checklist",
     "secondaryCta": "Compare kits",
@@ -2536,7 +2540,7 @@ const manualRouteCopy = {
   },
   "/mortgage-checklist": {
     "heading": "Mortgage Checklist",
-    "lead": "Mortgage Checklist helps you prepare for mortgage checklist with truthful details, organized supporting documents, and a clear next step before underwriting readiness becomes urgent.",
+    "lead": "A mortgage checklist for underwriting: income, assets, debts, identity, and the explanation letters underwriters often request, ready before they ask.",
     "shortAnswer": "Use this page when you need mortgage checklist and want a practical way to prepare before underwriting readiness. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Get the checklist",
     "secondaryCta": "Compare kits",
@@ -2628,7 +2632,7 @@ const manualRouteCopy = {
   },
   "/mortgage-document-checklist": {
     "heading": "Mortgage Document Checklist",
-    "lead": "Mortgage Document Checklist helps you prepare for mortgage document checklist with truthful details, organized supporting documents, and a clear next step before loan file review becomes urgent.",
+    "lead": "The documents a mortgage loan file typically needs, from pay stubs and W-2s to bank statements and gift letters, grouped the way underwriters review them.",
     "shortAnswer": "Use this page when you need mortgage document checklist and want a practical way to prepare before loan file review. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Get the checklist",
     "secondaryCta": "Compare kits",
@@ -2720,7 +2724,7 @@ const manualRouteCopy = {
   },
   "/important-documents-checklist": {
     "heading": "Important Documents Checklist",
-    "lead": "Important Documents Checklist helps you prepare for important documents with truthful details, organized supporting documents, and a clear next step before life admin folder becomes urgent.",
+    "lead": "Which important documents to keep in one folder, identity, insurance, property, tax, and medical records, and how to find each one fast when asked.",
     "shortAnswer": "Use this page when you need important documents and want a practical way to prepare before life admin folder. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Get the checklist",
     "secondaryCta": "Compare kits",
@@ -2812,7 +2816,7 @@ const manualRouteCopy = {
   },
   "/moving-checklist": {
     "heading": "Moving Checklist",
-    "lead": "Moving Checklist helps you prepare for moving checklist with truthful details, organized supporting documents, and a clear next step before address and account changes becomes urgent.",
+    "lead": "A moving checklist for the paperwork side of a move: address changes, utility and account transfers, lease records, and proof of your new residence.",
     "shortAnswer": "Use this page when you need moving checklist and want a practical way to prepare before address and account changes. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Get the checklist",
     "secondaryCta": "Compare kits",
@@ -2904,7 +2908,7 @@ const manualRouteCopy = {
   },
   "/glossary": {
     "heading": "ApprovalPrep Glossary",
-    "lead": "ApprovalPrep Glossary helps you prepare for plain-language definitions with truthful details, organized supporting documents, and a clear next step before approval prep terms becomes urgent.",
+    "lead": "Plain-language definitions of the terms that come up in applications and underwriting, from letter of explanation to proof of income and verification.",
     "shortAnswer": "Use this page when you need plain-language definitions and want a practical way to prepare before approval prep terms. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Start my letter",
     "secondaryCta": "Compare kits",
@@ -3272,7 +3276,8 @@ const manualRouteCopy = {
   },
   "/privacy": {
     "heading": "Privacy Policy",
-    "lead": "Privacy Policy helps you prepare for privacy policy with truthful details, organized supporting documents, and a clear next step before document handling becomes urgent.",
+    "metaTitle": "Privacy Policy: How ApprovalPrep Handles Your Data",
+    "lead": "How ApprovalPrep handles your data: what is processed to run checkout and downloads, and why your letter answers, drafts, and uploads are never stored.",
     "shortAnswer": "This page explains the privacy policy boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
     "primaryCta": "Start my letter",
     "secondaryCta": "Compare kits",
@@ -3364,7 +3369,8 @@ const manualRouteCopy = {
   },
   "/terms": {
     "heading": "Terms of Use",
-    "lead": "Terms of Use helps you prepare for terms of use with truthful details, organized supporting documents, and a clear next step before site responsibilities becomes urgent.",
+    "metaTitle": "Terms of Use for ApprovalPrep Self-Service Tools",
+    "lead": "The terms for using ApprovalPrep: a self-service document prep site where you supply truthful facts, review your own materials, and send them yourself.",
     "shortAnswer": "This page explains the terms of use boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
     "primaryCta": "Start my letter",
     "secondaryCta": "Compare kits",
@@ -3456,7 +3462,8 @@ const manualRouteCopy = {
   },
   "/disclaimer": {
     "heading": "Disclaimer",
-    "lead": "Disclaimer helps you prepare for disclaimer with truthful details, organized supporting documents, and a clear next step before no professional advice becomes urgent.",
+    "metaTitle": "Disclaimer: ApprovalPrep Is Not Legal or Financial Advice",
+    "lead": "ApprovalPrep offers templates and general guidance, not legal, financial, tax, or credit repair advice. What that means for the letters you prepare.",
     "shortAnswer": "This page explains the disclaimer boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
     "primaryCta": "Start my letter",
     "secondaryCta": "Compare kits",
@@ -3548,7 +3555,8 @@ const manualRouteCopy = {
   },
   "/refund-policy": {
     "heading": "Refund Policy",
-    "lead": "Refund Policy helps you prepare for refund policy with truthful details, organized supporting documents, and a clear next step before digital download expectations becomes urgent.",
+    "metaTitle": "Refund Policy for ApprovalPrep Digital Kit Downloads",
+    "lead": "When ApprovalPrep refunds a digital kit: duplicate purchases, failed access, incorrect charges, or delivery problems, and how to send your order details.",
     "shortAnswer": "This page explains the refund policy boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
     "primaryCta": "Start my letter",
     "secondaryCta": "Compare kits",
@@ -3640,7 +3648,8 @@ const manualRouteCopy = {
   },
   "/security": {
     "heading": "Security",
-    "lead": "Security helps you prepare for security posture with truthful details, organized supporting documents, and a clear next step before private downloads becomes urgent.",
+    "metaTitle": "Security: How ApprovalPrep Protects Checkout and Downloads",
+    "lead": "How ApprovalPrep protects checkout and paid downloads, keeps data collection minimal, and never stores your letter answers, drafts, or uploaded files.",
     "shortAnswer": "This page explains the security posture boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
     "primaryCta": "Start my letter",
     "secondaryCta": "Compare kits",
@@ -3732,7 +3741,8 @@ const manualRouteCopy = {
   },
   "/accessibility": {
     "heading": "Accessibility",
-    "lead": "Accessibility helps you prepare for accessibility with truthful details, organized supporting documents, and a clear next step before plain language becomes urgent.",
+    "metaTitle": "Accessibility Statement for ApprovalPrep",
+    "lead": "ApprovalPrep's accessibility commitment: plain language, keyboard-friendly controls, readable contrast, responsive layouts, and how to report a barrier.",
     "shortAnswer": "This page explains the accessibility boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
     "primaryCta": "Start my letter",
     "secondaryCta": "Compare kits",
@@ -3916,7 +3926,7 @@ const manualRouteCopy = {
   },
   "/editorial-policy": {
     "heading": "Editorial Policy",
-    "lead": "Editorial Policy helps you prepare for editorial standards with truthful details, organized supporting documents, and a clear next step before truthful guidance becomes urgent.",
+    "lead": "How ApprovalPrep writes and reviews its guides: plain and truthful, no overstated outcomes, extra review on credit, legal, and lending topics.",
     "shortAnswer": "This page explains the editorial standards boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
     "primaryCta": "Start my letter",
     "secondaryCta": "Compare kits",
@@ -4008,7 +4018,8 @@ const manualRouteCopy = {
   },
   "/ai-use-policy": {
     "heading": "AI Use Policy",
-    "lead": "AI Use Policy helps you prepare for AI use policy with truthful details, organized supporting documents, and a clear next step before drafting assistance becomes urgent.",
+    "metaTitle": "AI Use Policy: Where ApprovalPrep Uses AI and Where It Does Not",
+    "lead": "Where ApprovalPrep uses software-assisted drafting and checks, why the free Letter Writing Studio needs no AI calls, and why you review every letter.",
     "shortAnswer": "This page explains the AI use policy boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
     "primaryCta": "Start my letter",
     "secondaryCta": "Compare kits",
@@ -4100,7 +4111,7 @@ const manualRouteCopy = {
   },
   "/credit-repair-disclaimer": {
     "heading": "Credit Repair Disclaimer",
-    "lead": "Credit Repair Disclaimer helps you prepare for credit repair disclaimer with truthful details, organized supporting documents, and a clear next step before DIY letters only becomes urgent.",
+    "lead": "ApprovalPrep sells do-it-yourself credit letters, not credit repair. You write and send each letter; nobody disputes items or contacts bureaus for you.",
     "shortAnswer": "This page explains the credit repair disclaimer boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
     "primaryCta": "Start my letter",
     "secondaryCta": "Compare kits",
@@ -4192,7 +4203,7 @@ const manualRouteCopy = {
   },
   "/not-a-credit-repair-company": {
     "heading": "Not a Credit Repair Company",
-    "lead": "Not a Credit Repair Company helps you prepare for not a credit repair company with truthful details, organized supporting documents, and a clear next step before no bureau contact becomes urgent.",
+    "lead": "ApprovalPrep is not a credit repair company. It never contacts credit bureaus or creditors for you; it sells letter kits you prepare and send yourself.",
     "shortAnswer": "This page explains the not a credit repair company boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
     "primaryCta": "Start my letter",
     "secondaryCta": "Compare kits",
@@ -4284,7 +4295,7 @@ const manualRouteCopy = {
   },
   "/income-employment-letter-kit": {
     "heading": "Income + Employment Letter Kit",
-    "lead": "Income + Employment Letter Kit helps you prepare for income employment kit with truthful details, organized supporting documents, and a clear next step before work and income explanations becomes urgent.",
+    "lead": "Letters for proving work and income: employment verification, proof of income, self-employment income, job change, and employment gap explanations.",
     "shortAnswer": "Use this page when you need income employment kit and want a practical way to prepare before work and income explanations. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Get the income kit",
     "secondaryCta": "Compare kits",
@@ -4376,7 +4387,7 @@ const manualRouteCopy = {
   },
   "/credit-letter-kit": {
     "heading": "Credit Letter Kit",
-    "lead": "Credit Letter Kit helps you prepare for credit letter kit with truthful details, organized supporting documents, and a clear next step before DIY credit letters becomes urgent.",
+    "lead": "Do-it-yourself credit letters: dispute, goodwill, debt validation, and bureau follow-up templates, plus a checklist for spotting credit report errors.",
     "shortAnswer": "Use this page when you need credit letter kit and want a practical way to prepare before DIY credit letters. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Get the credit letter kit",
     "secondaryCta": "Compare kits",
@@ -4468,7 +4479,7 @@ const manualRouteCopy = {
   },
   "/rental-application-kit": {
     "heading": "Rental Application Kit",
-    "lead": "Rental Application Kit helps you prepare for rental application kit with truthful details, organized supporting documents, and a clear next step before renter packet becomes urgent.",
+    "lead": "Everything for a rental application: a checklist, a cover letter, rental history and income explanations, and a renter document packet to hand over.",
     "shortAnswer": "Use this page when you need rental application kit and want a practical way to prepare before renter packet. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Get the rental kit",
     "secondaryCta": "Compare kits",
@@ -4560,7 +4571,7 @@ const manualRouteCopy = {
   },
   "/loan-prep-letter-kit": {
     "heading": "Loan Prep Letter Kit",
-    "lead": "Loan Prep Letter Kit helps you prepare for loan prep kit with truthful details, organized supporting documents, and a clear next step before funding review becomes urgent.",
+    "lead": "Explanation letters for auto, mortgage, and personal loans that cover income, credit, and bank statement questions, plus a loan document checklist.",
     "shortAnswer": "Use this page when you need loan prep kit and want a practical way to prepare before funding review. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Get the loan prep kit",
     "secondaryCta": "Compare kits",
@@ -4652,7 +4663,7 @@ const manualRouteCopy = {
   },
   "/business-funding-prep-kit": {
     "heading": "Business Funding Prep Kit",
-    "lead": "Business Funding Prep Kit helps you prepare for business funding kit with truthful details, organized supporting documents, and a clear next step before business lender packet becomes urgent.",
+    "lead": "Prepare for a business loan or SBA conversation: an SBA document checklist and letters for business income, cash flow, use of funds, and bank statements.",
     "shortAnswer": "Use this page when you need business funding kit and want a practical way to prepare before business lender packet. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Get the business funding kit",
     "secondaryCta": "Compare kits",
@@ -4744,7 +4755,7 @@ const manualRouteCopy = {
   },
   "/life-admin-letter-kit": {
     "heading": "Life Admin Letter Kit",
-    "lead": "Life Admin Letter Kit helps you prepare for life admin kit with truthful details, organized supporting documents, and a clear next step before everyday paperwork becomes urgent.",
+    "lead": "Letters for everyday paperwork: proof of residency, address verification, name changes, benefits, utility accounts, and general records requests.",
     "shortAnswer": "Use this page when you need life admin kit and want a practical way to prepare before everyday paperwork. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Create my letter",
     "secondaryCta": "Compare kits",
@@ -4836,7 +4847,7 @@ const manualRouteCopy = {
   },
   "/complete-approvalprep-bundle": {
     "heading": "Complete ApprovalPrep Bundle",
-    "lead": "Complete ApprovalPrep Bundle helps you prepare for complete bundle with truthful details, organized supporting documents, and a clear next step before multi-situation prep becomes urgent.",
+    "lead": "The complete ApprovalPrep library in one purchase: every letter, checklist, and template across credit, income, rental, loans, business, and life admin.",
     "shortAnswer": "Use this page when you need complete bundle and want a practical way to prepare before multi-situation prep. ApprovalPrep helps you organize the facts, choose the right supporting documents, avoid unsafe claims, and leave with a packet or next step you can review before sending yourself.",
     "primaryCta": "Get the complete bundle",
     "secondaryCta": "Compare kits",
