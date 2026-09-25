@@ -44,7 +44,26 @@ seed was written.
   "help getting approved for an apartment" (1 impression, position 92), which is not one of these five. Each of the
   five therefore measured 0 impressions.
 - **Keyword-tool lane** (`scripts/intelligence/ingest-bing-webmaster.mjs`, or Semrush for the existing records):
-  **named stop**. `data/intelligence/bing_webmaster.json` is `NOT_CONFIGURED`. No `BING_WEBMASTER_API_KEY` exists
-  in the credential vault or in this repo's GitHub secrets (the workflow `intelligence-ingest-free-sources.yml`
-  already reads it), and no Semrush key exists. When the key is added, measure each seed with Bing Keyword Research,
-  and add any seed whose volume is above zero to `measured_demand.json` with the measured figure, source and date.
+  the earlier named stop is cleared. The key is in the credential vault as `bing-webmaster-api-key` and in this repo's
+  GitHub secrets as `BING_WEBMASTER_API_KEY` (both set 2026-09-25), so `intelligence-ingest-free-sources.yml` now
+  reads a live key. The measurement is in the next section.
+
+## Bing keyword measurement, 2026-09-25
+
+Each seed was measured through the Bing Webmaster API `GetKeywordStats` (market `us`/`en-US`, and again with no market
+filter). The window is 25 weekly buckets, 2026-03-28..2026-09-19. The sum of weekly `Impressions` is the volume
+figure. As a control, `webinar` and `facebook` returned non-zero weekly rows in the same call shape. Two seeds were
+also measured in shorter form ("apartment application denied", "cosigner vs guarantor"). For "cosigner vs guarantor",
+the Keyword Research panel in the web UI agreed: Bing "doesn't have enough data".
+
+| query | Bing impressions, us (26 wk) | Bing impressions, all markets | owner_seed_policy (measured volume > 0) | queued |
+|---|---|---|---|---|
+| apartment application denied, what to do | **0** (short form also 0) | **0** | refused | no |
+| how to rent an apartment with bad credit | **0** | **0** | refused | no |
+| how to get an apartment after an eviction | **0** | **0** | refused | no |
+| do you need to make 3 times the rent | **0** | **0** | refused | no |
+| cosigner vs guarantor for an apartment | **0** (short form also 0) | **0** | refused | no |
+
+None of the five clears the policy, so `data/demand/measured_demand.json` and `data/content/page_opportunities.json`
+are unchanged. A 0 here means the phrasing is below Bing's reporting floor. It does not prove nobody searches for it.
+The route that remains is the owner seed.
