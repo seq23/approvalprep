@@ -239,6 +239,17 @@
       "scope": "Sitemap, robots, llms, answers, atom/query depth, provider receipts"
     },
     {
+      "id": "frozen-output-drift",
+      "npmScript": "validate:frozen-output-drift",
+      "entrypoint": "scripts/validate/frozen-output-drift.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents an edit to a frozen route in data/content/generated_route_copy.json that was not re-frozen - the scheduled release's authority:scale:restore silently reverts it. PR #38 rewrote the nine frozen routes' leads into the description band without re-freezing; restore put the 168-182 character leads back and Scheduled Content Release went red on 26 Sep 2026",
+      "owner": "approvalprep-ops",
+      "group": "release-critical",
+      "scope": "Every record in data/release/frozen_output_registry.json against its blob and the committed route copy"
+    },
+    {
       "id": "title-length",
       "npmScript": "validate:title-length",
       "entrypoint": "scripts/validate/title-length.mjs",
