@@ -1,170 +1,165 @@
 {
   "schemaVersion": "4.2.0",
-  "generatedAt": "2026-09-24T10:47:15.583Z",
+  "generatedAt": "2026-09-28T12:46:15.899Z",
   "sourceStatus": [
     {
-      "id": "626fcdcb-77cd-41c4-b822-1b5341809e24",
+      "id": "50b30782-70fd-4254-b05e-983155d2dea0",
+      "connectorId": "page_action_recommendation",
+      "status": "COMPLETE",
+      "ranAt": "2026-09-28T12:46:15.846Z",
+      "recordsImported": 5430
+    },
+    {
+      "id": "a32a1669-fb1f-446c-9476-bdf871ede753",
       "connectorId": "authority_requirement_analysis",
       "status": "COMPLETE",
-      "ranAt": "2026-09-24T10:47:15.389Z",
+      "ranAt": "2026-09-28T12:46:15.784Z",
       "recordsImported": 86
     },
     {
-      "id": "98c07977-59da-45e2-af3f-05b27f748d9f",
+      "id": "17d3f183-1742-4239-a11b-2c3ccf02497f",
       "connectorId": "growth_maintenance_analysis",
       "status": "COMPLETE",
-      "ranAt": "2026-09-24T10:47:15.225Z",
+      "ranAt": "2026-09-28T12:46:15.747Z",
       "recordsImported": 86
     },
     {
-      "id": "25a64c44-d6c4-4267-8562-6d646b9add43",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-09-24T10:45:28.890Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
+      "id": "e328f23d-566e-4c3d-971e-16bd984031f1",
+      "connectorId": "content_opportunity_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-09-28T12:46:15.710Z",
+      "recordsImported": 5430
     },
     {
-      "id": "f5c60aee-3f42-4942-8f51-5169f22783b7",
-      "connectorId": "indexnow",
-      "status": "NO_DATA",
-      "ranAt": "2026-09-24T10:45:28.727Z",
-      "mode": "live",
-      "recordsImported": 0,
-      "preparedUrlCount": 86
-    },
-    {
-      "id": "5b8c129b-1b7a-4ede-8fdd-f88d141f6605",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-09-24T10:23:46.624Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "60db7b81-7257-4a0a-8172-5d6743fc8472",
-      "connectorId": "indexnow",
-      "status": "NO_DATA",
-      "ranAt": "2026-09-24T10:23:46.450Z",
-      "mode": "live",
-      "recordsImported": 0,
-      "preparedUrlCount": 86
-    },
-    {
-      "id": "b5355407-be35-46b0-b600-4ea1f1872a73",
+      "id": "537e4974-6c60-488d-9f19-f6aa0bba08bb",
       "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
-      "ranAt": "2026-09-24T08:37:32.412Z",
+      "ranAt": "2026-09-28T12:46:14.110Z",
       "recordsImported": 12
     },
     {
-      "id": "47df39e0-02cf-4370-8387-74334c4f6d4d",
+      "id": "0645ae07-3002-4116-85e8-5bc9cca69f01",
       "connectorId": "manual_social_signal_import",
       "status": "NO_DATA",
-      "ranAt": "2026-09-24T08:37:29.971Z",
+      "ranAt": "2026-09-28T12:46:11.035Z",
       "reason": "No social signal import found at data/imports/social-signals.json.",
       "recordsImported": 0
     },
     {
-      "id": "462c54fe-8690-4fa5-8107-cf88851b5bed",
+      "id": "73fb5c53-efe1-42e3-9187-af0ccc10342a",
       "connectorId": "manual_serp_csv",
       "status": "NO_DATA",
-      "ranAt": "2026-09-24T08:37:29.880Z",
+      "ranAt": "2026-09-28T12:46:11.003Z",
       "reason": "No SERP CSV found at data/imports/serp.csv.",
       "recordsImported": 0
     },
     {
-      "id": "1a080dad-b1f4-4fe5-b3f3-68eb9771a0a6",
+      "id": "b93de696-0d09-46dc-a4a3-713bdc1a645b",
       "connectorId": "competitor_public_crawler",
       "status": "COMPLETE",
-      "ranAt": "2026-09-24T08:37:29.784Z",
+      "ranAt": "2026-09-28T12:46:10.970Z",
       "recordsImported": 2
     },
     {
-      "id": "e30133e9-ca4a-4532-85cf-1e4c8a8ce361",
+      "id": "0b6019a8-1981-4d53-b4a4-db5f42ded436",
       "connectorId": "competitor_sitemap_discovery",
       "status": "COMPLETE",
-      "ranAt": "2026-09-24T08:37:29.333Z",
+      "ranAt": "2026-09-28T12:46:10.615Z",
       "recordsImported": 2
     },
     {
-      "id": "01cbf9b5-37d7-48f0-a464-a26ab88d2dc6",
+      "id": "b3886415-705c-49be-a8b8-b6a31ebd04ec",
       "connectorId": "owned_site_crawler",
       "status": "COMPLETE",
-      "ranAt": "2026-09-24T08:37:27.939Z",
+      "ranAt": "2026-09-28T12:46:09.881Z",
       "recordsImported": 99
     },
     {
-      "id": "d2020313-3d76-4de3-a408-e10fae07b8bd",
+      "id": "9c33ce51-92bb-4be9-89b8-78c056ece02f",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-09-24T08:37:27.842Z",
+      "ranAt": "2026-09-28T12:46:09.847Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "7fcf1d48-bbef-486b-b973-3c9d3aff9304",
+      "id": "1dfb2024-447c-40d8-bc90-83de0541a780",
       "connectorId": "google_url_inspection",
-      "status": "NOT_AUTHORIZED",
-      "ranAt": "2026-09-24T08:37:27.743Z",
-      "mode": "unavailable",
-      "reason": "HTTP 403: {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"You do not own this site, or the inspected URL is not part of this property.\",\n    \"status\": \"PERMISSION_DENIED\"\n  }\n}\n",
-      "recordsImported": 0
+      "status": "COMPLETE",
+      "ranAt": "2026-09-28T12:46:09.814Z",
+      "mode": "live",
+      "recordsImported": 25
     },
     {
-      "id": "3cd8f007-5749-4094-a529-bfe06f80583f",
+      "id": "fe02c676-106b-4ecd-bea1-3f47aff502c0",
       "connectorId": "google_search_console_search_analytics",
-      "status": "BUDGET_HELD",
-      "ranAt": "2026-09-24T08:37:27.278Z",
-      "reason": "weekly ceiling 3 reached (3 live attempts in 7d)",
-      "recordsImported": 0
+      "status": "COMPLETE",
+      "ranAt": "2026-09-28T12:43:27.719Z",
+      "mode": "live",
+      "recordsImported": 3
     },
     {
-      "id": "942ed1d0-c409-414d-84e0-94b1a3c6c3f9",
+      "id": "29bfef36-38b5-44d0-bc42-f4d5d562d1cc",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-09-23T10:44:56.389Z",
+      "ranAt": "2026-09-28T10:47:13.932Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "1fdcce23-cbc0-4642-83af-fbd69a868171",
+      "id": "ebb00ab8-5b6b-4170-8a1f-4eba7eb503b5",
       "connectorId": "indexnow",
       "status": "NO_DATA",
-      "ranAt": "2026-09-23T10:44:56.227Z",
+      "ranAt": "2026-09-28T10:47:13.734Z",
       "mode": "live",
       "recordsImported": 0,
       "preparedUrlCount": 86
     },
     {
-      "id": "ed6da7a4-e2e2-4472-be4c-17499012f26a",
+      "id": "f11ceffd-ccae-4698-b8ff-d478c11a832e",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-09-23T10:23:26.159Z",
+      "ranAt": "2026-09-28T10:27:23.335Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "73339f6b-2898-49a4-aea1-1da4344ecd13",
+      "id": "7e7cb423-7775-42a7-8383-c5fa76cc6ee3",
       "connectorId": "indexnow",
       "status": "NO_DATA",
-      "ranAt": "2026-09-23T10:23:26.018Z",
+      "ranAt": "2026-09-28T10:27:23.172Z",
       "mode": "live",
       "recordsImported": 0,
       "preparedUrlCount": 86
     },
     {
-      "id": "439f7c54-27de-4afd-87c5-3206b64b58fc",
+      "id": "4bcd4d4c-1a16-4f10-abc8-16a801b7ee8d",
       "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
-      "ranAt": "2026-09-23T08:36:15.962Z",
+      "ranAt": "2026-09-28T08:47:05.658Z",
       "recordsImported": 12
+    },
+    {
+      "id": "43ef6492-d275-4fa2-a352-5aa2291de7cd",
+      "connectorId": "manual_social_signal_import",
+      "status": "NO_DATA",
+      "ranAt": "2026-09-28T08:47:03.006Z",
+      "reason": "No social signal import found at data/imports/social-signals.json.",
+      "recordsImported": 0
+    },
+    {
+      "id": "8d3c1326-3805-42b0-9186-5e71909c3dba",
+      "connectorId": "manual_serp_csv",
+      "status": "NO_DATA",
+      "ranAt": "2026-09-28T08:47:02.899Z",
+      "reason": "No SERP CSV found at data/imports/serp.csv.",
+      "recordsImported": 0
     }
   ],
   "topContentOpportunities": [
     {
-      "id": "brief_maxfanout_000001_0c0726eeb6",
-      "query": "what is letter of explanation for first time applicants beginner",
+      "id": "brief_maxfanout_020001_8d29e29e4c",
+      "query": "what is letter of explanation for mortgage applicants plain english",
       "route": null,
       "pageFamily": "letter-of-explanation",
       "searchOpportunityScore": 0,
@@ -180,11 +175,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-24T09:34:40.185Z"
+      "createdAt": "2026-09-28T12:46:15.639Z"
     },
     {
-      "id": "brief_maxfanout_000005_1135a41f99",
-      "query": "what is self employed income documents for first time applicants beginner",
+      "id": "brief_maxfanout_020005_4b5a9af56c",
+      "query": "what is self employed income documents for mortgage applicants plain english",
       "route": null,
       "pageFamily": "self-employed-income-documents",
       "searchOpportunityScore": 0,
@@ -200,11 +195,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-24T09:34:40.185Z"
+      "createdAt": "2026-09-28T12:46:15.639Z"
     },
     {
-      "id": "brief_maxfanout_000016_d7fc247bfe",
-      "query": "what is gift letter explanation for first time applicants beginner",
+      "id": "brief_maxfanout_020016_ca0a6934b6",
+      "query": "what is gift letter explanation for mortgage applicants plain english",
       "route": null,
       "pageFamily": "gift-letter-explanation",
       "searchOpportunityScore": 0,
@@ -220,11 +215,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-24T09:34:40.185Z"
+      "createdAt": "2026-09-28T12:46:15.639Z"
     },
     {
-      "id": "brief_maxfanout_000026_39d9900c3f",
-      "query": "what is apartment application documents for first time applicants beginner",
+      "id": "brief_maxfanout_020026_88a2b814e9",
+      "query": "what is apartment application documents for mortgage applicants plain english",
       "route": null,
       "pageFamily": "apartment-application-documents",
       "searchOpportunityScore": 0,
@@ -240,11 +235,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-24T09:34:40.185Z"
+      "createdAt": "2026-09-28T12:46:15.639Z"
     },
     {
-      "id": "brief_maxfanout_000030_7dff771417",
-      "query": "what is document discrepancy explanation for first time applicants beginner",
+      "id": "brief_maxfanout_020030_86fd39d09e",
+      "query": "what is document discrepancy explanation for mortgage applicants plain english",
       "route": null,
       "pageFamily": "document-discrepancy-explanation",
       "searchOpportunityScore": 0,
@@ -260,11 +255,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-24T09:34:40.185Z"
+      "createdAt": "2026-09-28T12:46:15.639Z"
     },
     {
-      "id": "brief_maxfanout_000041_fbf2564d52",
-      "query": "how to prepare letter of explanation for first time applicants beginner",
+      "id": "brief_maxfanout_020041_f9a35a7d0d",
+      "query": "how to prepare letter of explanation for mortgage applicants plain english",
       "route": null,
       "pageFamily": "letter-of-explanation",
       "searchOpportunityScore": 0,
@@ -280,11 +275,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-24T09:34:40.185Z"
+      "createdAt": "2026-09-28T12:46:15.639Z"
     },
     {
-      "id": "brief_maxfanout_000045_cf0524db5f",
-      "query": "how to prepare self employed income documents for first time applicants beginner",
+      "id": "brief_maxfanout_020045_45c01ce4db",
+      "query": "how to prepare self employed income documents for mortgage applicants plain english",
       "route": null,
       "pageFamily": "self-employed-income-documents",
       "searchOpportunityScore": 0,
@@ -300,11 +295,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-24T09:34:40.185Z"
+      "createdAt": "2026-09-28T12:46:15.639Z"
     },
     {
-      "id": "brief_maxfanout_000056_ac3da8e0c6",
-      "query": "how to prepare gift letter explanation for first time applicants beginner",
+      "id": "brief_maxfanout_020056_571308e382",
+      "query": "how to prepare gift letter explanation for mortgage applicants plain english",
       "route": null,
       "pageFamily": "gift-letter-explanation",
       "searchOpportunityScore": 0,
@@ -320,11 +315,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-24T09:34:40.185Z"
+      "createdAt": "2026-09-28T12:46:15.639Z"
     },
     {
-      "id": "brief_maxfanout_000066_605af99749",
-      "query": "how to prepare apartment application documents for first time applicants beginner",
+      "id": "brief_maxfanout_020066_e7ddf3dc05",
+      "query": "how to prepare apartment application documents for mortgage applicants plain english",
       "route": null,
       "pageFamily": "apartment-application-documents",
       "searchOpportunityScore": 0,
@@ -340,11 +335,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-24T09:34:40.185Z"
+      "createdAt": "2026-09-28T12:46:15.640Z"
     },
     {
-      "id": "brief_maxfanout_000070_914d431864",
-      "query": "how to prepare document discrepancy explanation for first time applicants beginner",
+      "id": "brief_maxfanout_020070_164596ae10",
+      "query": "how to prepare document discrepancy explanation for mortgage applicants plain english",
       "route": null,
       "pageFamily": "document-discrepancy-explanation",
       "searchOpportunityScore": 0,
@@ -360,11 +355,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-24T09:34:40.186Z"
+      "createdAt": "2026-09-28T12:46:15.640Z"
     },
     {
-      "id": "brief_maxfanout_000081_f0f47b2ec2",
-      "query": "letter of explanation checklist for first time applicants beginner",
+      "id": "brief_maxfanout_020081_c8e9c16840",
+      "query": "letter of explanation checklist for mortgage applicants plain english",
       "route": null,
       "pageFamily": "letter-of-explanation",
       "searchOpportunityScore": 0,
@@ -380,11 +375,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-09-24T09:34:40.186Z"
+      "createdAt": "2026-09-28T12:46:15.640Z"
     },
     {
-      "id": "brief_maxfanout_000083_822d464f79",
-      "query": "rental application preparation checklist for first time applicants beginner",
+      "id": "brief_maxfanout_020083_5dcf715f28",
+      "query": "rental application preparation checklist for mortgage applicants plain english",
       "route": null,
       "pageFamily": "rental-application-preparation",
       "searchOpportunityScore": 0,
@@ -400,11 +395,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-24T09:34:40.186Z"
+      "createdAt": "2026-09-28T12:46:15.640Z"
     },
     {
-      "id": "brief_maxfanout_000084_99337e8e54",
-      "query": "proof of income checklist for first time applicants beginner",
+      "id": "brief_maxfanout_020084_25d56386b8",
+      "query": "proof of income checklist for mortgage applicants plain english",
       "route": null,
       "pageFamily": "proof-of-income",
       "searchOpportunityScore": 0,
@@ -420,11 +415,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-09-24T09:34:40.186Z"
+      "createdAt": "2026-09-28T12:46:15.640Z"
     },
     {
-      "id": "brief_maxfanout_000085_cdf2f58222",
-      "query": "self employed income documents checklist for first time applicants beginner",
+      "id": "brief_maxfanout_020085_1d6114820c",
+      "query": "self employed income documents checklist for mortgage applicants plain english",
       "route": null,
       "pageFamily": "self-employed-income-documents",
       "searchOpportunityScore": 0,
@@ -440,11 +435,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-24T09:34:40.186Z"
+      "createdAt": "2026-09-28T12:46:15.640Z"
     },
     {
-      "id": "brief_maxfanout_000090_52d1196cf5",
-      "query": "credit report understanding checklist for first time applicants beginner",
+      "id": "brief_maxfanout_020090_62fa583210",
+      "query": "credit report understanding checklist for mortgage applicants plain english",
       "route": null,
       "pageFamily": "credit-report-understanding",
       "searchOpportunityScore": 0,
@@ -460,11 +455,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-24T09:34:40.186Z"
+      "createdAt": "2026-09-28T12:46:15.640Z"
     },
     {
-      "id": "brief_maxfanout_000091_5fa7a5f672",
-      "query": "credit dispute self service checklist for first time applicants beginner",
+      "id": "brief_maxfanout_020091_f7b379fbe7",
+      "query": "credit dispute self service checklist for mortgage applicants plain english",
       "route": null,
       "pageFamily": "credit-dispute-self-service",
       "searchOpportunityScore": 0,
@@ -480,11 +475,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-24T09:34:40.186Z"
+      "createdAt": "2026-09-28T12:46:15.640Z"
     },
     {
-      "id": "brief_maxfanout_000092_73373c766e",
-      "query": "credit utilization checklist for first time applicants beginner",
+      "id": "brief_maxfanout_020092_105bfbcd06",
+      "query": "credit utilization checklist for mortgage applicants plain english",
       "route": null,
       "pageFamily": "credit-utilization",
       "searchOpportunityScore": 0,
@@ -500,11 +495,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-24T09:34:40.186Z"
+      "createdAt": "2026-09-28T12:46:15.640Z"
     },
     {
-      "id": "brief_maxfanout_000096_241d93a96a",
-      "query": "gift letter explanation checklist for first time applicants beginner",
+      "id": "brief_maxfanout_020096_16cb2e7565",
+      "query": "gift letter explanation checklist for mortgage applicants plain english",
       "route": null,
       "pageFamily": "gift-letter-explanation",
       "searchOpportunityScore": 0,
@@ -520,11 +515,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-09-24T09:34:40.186Z"
+      "createdAt": "2026-09-28T12:46:15.640Z"
     },
     {
-      "id": "brief_maxfanout_000098_853735f71b",
-      "query": "address history explanation checklist for first time applicants beginner",
+      "id": "brief_maxfanout_020098_7d1893b618",
+      "query": "address history explanation checklist for mortgage applicants plain english",
       "route": null,
       "pageFamily": "address-history-explanation",
       "searchOpportunityScore": 0,
@@ -540,11 +535,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-09-24T09:34:40.186Z"
+      "createdAt": "2026-09-28T12:46:15.640Z"
     },
     {
-      "id": "brief_maxfanout_000099_3ad2a87a84",
-      "query": "income change explanation checklist for first time applicants beginner",
+      "id": "brief_maxfanout_020099_974b1c5a45",
+      "query": "income change explanation checklist for mortgage applicants plain english",
       "route": null,
       "pageFamily": "income-change-explanation",
       "searchOpportunityScore": 0,
@@ -560,7 +555,7 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-09-24T09:34:40.186Z"
+      "createdAt": "2026-09-28T12:46:15.640Z"
     }
   ],
   "rankingBasis": {
@@ -584,7 +579,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-24T10:47:15.223Z"
+      "createdAt": "2026-09-28T12:46:15.744Z"
     },
     {
       "route": "/resources",
@@ -600,7 +595,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-24T10:47:15.223Z"
+      "createdAt": "2026-09-28T12:46:15.744Z"
     },
     {
       "route": "/pricing",
@@ -616,7 +611,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-24T10:47:15.223Z"
+      "createdAt": "2026-09-28T12:46:15.744Z"
     },
     {
       "route": "/letter-of-explanation",
@@ -632,7 +627,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-24T10:47:15.223Z"
+      "createdAt": "2026-09-28T12:46:15.744Z"
     },
     {
       "route": "/letter-of-explanation/credit",
@@ -648,7 +643,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-09-24T10:47:15.223Z"
+      "createdAt": "2026-09-28T12:46:15.744Z"
     },
     {
       "route": "/letter-of-explanation/eviction",
@@ -664,7 +659,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-24T10:47:15.223Z"
+      "createdAt": "2026-09-28T12:46:15.744Z"
     },
     {
       "route": "/letter-of-explanation/income",
@@ -680,7 +675,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-09-24T10:47:15.223Z"
+      "createdAt": "2026-09-28T12:46:15.744Z"
     },
     {
       "route": "/letter-of-explanation/employment-gap",
@@ -696,7 +691,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-09-24T10:47:15.223Z"
+      "createdAt": "2026-09-28T12:46:15.744Z"
     },
     {
       "route": "/609-dispute-letter",
@@ -712,7 +707,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-09-24T10:47:15.223Z"
+      "createdAt": "2026-09-28T12:46:15.744Z"
     },
     {
       "route": "/goodwill-letter-to-remove-late-payment",
@@ -728,7 +723,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-24T10:47:15.223Z"
+      "createdAt": "2026-09-28T12:46:15.744Z"
     },
     {
       "route": "/letter-of-explanation/late-payment",
@@ -744,7 +739,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-24T10:47:15.223Z"
+      "createdAt": "2026-09-28T12:46:15.744Z"
     },
     {
       "route": "/letter-of-explanation/large-deposit",
@@ -760,7 +755,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-24T10:47:15.223Z"
+      "createdAt": "2026-09-28T12:46:15.744Z"
     },
     {
       "route": "/proof-of-income-letter",
@@ -776,7 +771,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-09-24T10:47:15.223Z"
+      "createdAt": "2026-09-28T12:46:15.744Z"
     },
     {
       "route": "/credit-dispute-letter",
@@ -792,7 +787,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-09-24T10:47:15.223Z"
+      "createdAt": "2026-09-28T12:46:15.744Z"
     },
     {
       "route": "/apartment-application",
@@ -808,7 +803,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-24T10:47:15.223Z"
+      "createdAt": "2026-09-28T12:46:15.744Z"
     },
     {
       "route": "/rental-application-checklist",
@@ -824,7 +819,23 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-24T10:47:15.223Z"
+      "createdAt": "2026-09-28T12:46:15.744Z"
+    },
+    {
+      "route": "/how-to-get-approved-for-an-apartment",
+      "pageFamily": "apartment_rental",
+      "currentQueryCoverage": 0,
+      "gscTrend": "NO_DATA",
+      "competitorDelta": "NO_COMPETITOR_STRUCTURE_GAP",
+      "recommendedFix": "add_internal_links_and_answer_atoms",
+      "expectedEffort": "medium",
+      "authorityRequirement": "low",
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "citationOpportunity": "low",
+      "priorityScore": 55,
+      "safeToSelfHeal": true,
+      "adminReviewRequired": false,
+      "createdAt": "2026-09-28T12:46:15.744Z"
     },
     {
       "route": "/auto-loan-documents",
@@ -840,7 +851,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-24T10:47:15.223Z"
+      "createdAt": "2026-09-28T12:46:15.744Z"
     },
     {
       "route": "/car-loan-checklist",
@@ -856,7 +867,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-24T10:47:15.223Z"
+      "createdAt": "2026-09-28T12:46:15.744Z"
     },
     {
       "route": "/documents-needed-for-car-loan",
@@ -872,23 +883,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-09-24T10:47:15.223Z"
-    },
-    {
-      "route": "/business-loan-documents",
-      "pageFamily": "business",
-      "currentQueryCoverage": 0,
-      "gscTrend": "NO_DATA",
-      "competitorDelta": "NO_COMPETITOR_STRUCTURE_GAP",
-      "recommendedFix": "add_internal_links_and_answer_atoms",
-      "expectedEffort": "medium",
-      "authorityRequirement": "low",
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "citationOpportunity": "low",
-      "priorityScore": 55,
-      "safeToSelfHeal": true,
-      "adminReviewRequired": false,
-      "createdAt": "2026-09-24T10:47:15.223Z"
+      "createdAt": "2026-09-28T12:46:15.744Z"
     }
   ],
   "hardTruth": "Low ranking potential never blocks useful onsite content. It only changes indexing, priority, and authority strategy."
