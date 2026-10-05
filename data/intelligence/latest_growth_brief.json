@@ -1,170 +1,165 @@
 {
   "schemaVersion": "4.2.0",
-  "generatedAt": "2026-10-01T10:49:30.008Z",
+  "generatedAt": "2026-10-05T12:45:12.206Z",
   "sourceStatus": [
     {
-      "id": "ce0a84f8-baac-472d-ae5c-d53756d69edd",
+      "id": "00766b02-03e6-4adb-9f57-b6eb3e547b64",
+      "connectorId": "page_action_recommendation",
+      "status": "COMPLETE",
+      "ranAt": "2026-10-05T12:45:12.159Z",
+      "recordsImported": 5430
+    },
+    {
+      "id": "dbf016ec-ccdc-436e-83cc-2c0869d5896d",
       "connectorId": "authority_requirement_analysis",
       "status": "COMPLETE",
-      "ranAt": "2026-10-01T10:49:29.644Z",
+      "ranAt": "2026-10-05T12:45:12.104Z",
       "recordsImported": 86
     },
     {
-      "id": "922fca02-e708-409e-b0c4-559df35067f1",
+      "id": "f9671613-b268-47ce-b0a0-9c1cf249e4c5",
       "connectorId": "growth_maintenance_analysis",
       "status": "COMPLETE",
-      "ranAt": "2026-10-01T10:49:29.288Z",
+      "ranAt": "2026-10-05T12:45:12.073Z",
       "recordsImported": 86
     },
     {
-      "id": "0f252efe-1895-4aeb-9913-89664b083dd3",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-10-01T10:46:52.472Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
+      "id": "fa084b18-3e3b-489f-bcec-3c3dba01022c",
+      "connectorId": "content_opportunity_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-10-05T12:45:12.041Z",
+      "recordsImported": 5430
     },
     {
-      "id": "7013bf19-b195-4f8a-98e1-207e1f0cefbe",
-      "connectorId": "indexnow",
-      "status": "NO_DATA",
-      "ranAt": "2026-10-01T10:46:52.331Z",
-      "mode": "live",
-      "recordsImported": 0,
-      "preparedUrlCount": 86
-    },
-    {
-      "id": "f94eeb89-8cdf-4ed5-91bc-0442ad0ed1d7",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-10-01T10:25:25.462Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "837bbf68-fcba-4d48-840e-26c744fc0396",
-      "connectorId": "indexnow",
-      "status": "NO_DATA",
-      "ranAt": "2026-10-01T10:25:25.114Z",
-      "mode": "live",
-      "recordsImported": 0,
-      "preparedUrlCount": 86
-    },
-    {
-      "id": "6884d63b-28f1-4df3-9a8b-279ec29e009c",
+      "id": "56a3fccc-0395-4350-926a-fe65befe2d9c",
       "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
-      "ranAt": "2026-10-01T08:40:56.043Z",
+      "ranAt": "2026-10-05T12:45:10.699Z",
       "recordsImported": 12
     },
     {
-      "id": "7b5b4682-de82-45b5-9378-3236d966fbb7",
+      "id": "82a0bc5e-b940-4a2f-a748-9fcc6b37e48f",
       "connectorId": "manual_social_signal_import",
       "status": "NO_DATA",
-      "ranAt": "2026-10-01T08:40:52.010Z",
+      "ranAt": "2026-10-05T12:45:05.353Z",
       "reason": "No social signal import found at data/imports/social-signals.json.",
       "recordsImported": 0
     },
     {
-      "id": "74c91f23-d55c-4c4a-827f-529cc31698f2",
+      "id": "fbbd3b9a-fe86-4dbf-ae20-87f0623b9365",
       "connectorId": "manual_serp_csv",
       "status": "NO_DATA",
-      "ranAt": "2026-10-01T08:40:51.921Z",
+      "ranAt": "2026-10-05T12:45:05.325Z",
       "reason": "No SERP CSV found at data/imports/serp.csv.",
       "recordsImported": 0
     },
     {
-      "id": "e3c80fa5-f9a7-4d49-813a-2bb5da05d7d6",
+      "id": "08d0c58b-89bf-473e-a424-903d41adaee4",
       "connectorId": "competitor_public_crawler",
       "status": "COMPLETE",
-      "ranAt": "2026-10-01T08:40:51.823Z",
+      "ranAt": "2026-10-05T12:45:05.296Z",
       "recordsImported": 2
     },
     {
-      "id": "241a9db1-6f9b-478e-9b83-077300c1b7b8",
+      "id": "ffb2a3fa-cceb-4bc2-aa57-f6271dc1c5a7",
       "connectorId": "competitor_sitemap_discovery",
       "status": "COMPLETE",
-      "ranAt": "2026-10-01T08:40:51.345Z",
+      "ranAt": "2026-10-05T12:45:04.865Z",
       "recordsImported": 2
     },
     {
-      "id": "f2fd030d-eefb-4749-9578-2938dfd9b773",
+      "id": "46f772fb-2aad-4b34-a01c-f68b88b8ea08",
       "connectorId": "owned_site_crawler",
       "status": "COMPLETE",
-      "ranAt": "2026-10-01T08:40:50.370Z",
+      "ranAt": "2026-10-05T12:45:04.123Z",
       "recordsImported": 99
     },
     {
-      "id": "12eeae90-598a-4fcb-9364-01e79a042f5f",
+      "id": "e4a17c6a-bd8a-47d1-b332-62cb9989fa9b",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-10-01T08:40:50.161Z",
+      "ranAt": "2026-10-05T12:45:04.092Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "57c704e7-f136-4e7a-982c-1b1554b9aca1",
+      "id": "b3f485b5-3ba2-44df-a3db-9018ccf631e0",
       "connectorId": "google_url_inspection",
-      "status": "NOT_AUTHORIZED",
-      "ranAt": "2026-10-01T08:40:49.972Z",
-      "mode": "unavailable",
-      "reason": "HTTP 403: {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"You do not own this site, or the inspected URL is not part of this property.\",\n    \"status\": \"PERMISSION_DENIED\"\n  }\n}\n",
-      "recordsImported": 0
+      "status": "COMPLETE",
+      "ranAt": "2026-10-05T12:45:04.064Z",
+      "mode": "live",
+      "recordsImported": 25
     },
     {
-      "id": "3f38fc33-91aa-44f4-82b9-ad48d26e733d",
+      "id": "4ea93e3b-ed84-4542-847a-f7278b1763f7",
       "connectorId": "google_search_console_search_analytics",
       "status": "BUDGET_HELD",
-      "ranAt": "2026-10-01T08:40:49.452Z",
+      "ranAt": "2026-10-05T12:42:21.198Z",
       "reason": "weekly ceiling 3 reached (3 live attempts in 7d)",
       "recordsImported": 0
     },
     {
-      "id": "ff037439-b8f8-4c07-8136-ef3ba0adf5a2",
+      "id": "59c91488-20e4-44ac-a17c-19cadaba9a63",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-09-30T10:47:23.550Z",
+      "ranAt": "2026-10-05T10:49:06.574Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "e4ad1b6a-a20b-407f-9309-2a52a416ffff",
+      "id": "2eeed429-2138-4e34-94f1-6fd0fc9cc2dd",
       "connectorId": "indexnow",
       "status": "NO_DATA",
-      "ranAt": "2026-09-30T10:47:23.414Z",
+      "ranAt": "2026-10-05T10:49:06.384Z",
       "mode": "live",
       "recordsImported": 0,
       "preparedUrlCount": 86
     },
     {
-      "id": "f11e5362-ec54-41af-b447-c38ded4386b9",
+      "id": "b1a2334a-526b-4a97-8476-a2e2d6fb42dc",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-09-30T10:25:16.395Z",
+      "ranAt": "2026-10-05T10:28:31.801Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "0adb1b01-037f-46d8-ad3f-648be6c70731",
+      "id": "5bae9829-d8c1-4c1c-be62-638429066f5e",
       "connectorId": "indexnow",
       "status": "NO_DATA",
-      "ranAt": "2026-09-30T10:25:16.228Z",
+      "ranAt": "2026-10-05T10:28:31.628Z",
       "mode": "live",
       "recordsImported": 0,
       "preparedUrlCount": 86
     },
     {
-      "id": "2301dc8a-9a8a-46d0-bc46-934e43b41df3",
+      "id": "a1b1ef6e-2d85-43c5-8a02-a9c5bd5bf50e",
       "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
-      "ranAt": "2026-09-30T08:40:05.797Z",
+      "ranAt": "2026-10-05T08:50:22.653Z",
       "recordsImported": 12
+    },
+    {
+      "id": "30e23ae5-ef65-479d-be9e-b327029c95b2",
+      "connectorId": "manual_social_signal_import",
+      "status": "NO_DATA",
+      "ranAt": "2026-10-05T08:50:19.302Z",
+      "reason": "No social signal import found at data/imports/social-signals.json.",
+      "recordsImported": 0
+    },
+    {
+      "id": "40ece47e-6c38-4bef-8246-5203ffa8d727",
+      "connectorId": "manual_serp_csv",
+      "status": "NO_DATA",
+      "ranAt": "2026-10-05T08:50:19.184Z",
+      "reason": "No SERP CSV found at data/imports/serp.csv.",
+      "recordsImported": 0
     }
   ],
   "topContentOpportunities": [
     {
-      "id": "brief_maxfanout_035001_ace023b0e3",
-      "query": "what is letter of explanation for consumers rebuilding credit self service",
+      "id": "brief_maxfanout_055001_46008a3cfc",
+      "query": "what is letter of explanation for people with document gaps before applying",
       "route": null,
       "pageFamily": "letter-of-explanation",
       "searchOpportunityScore": 0,
@@ -172,6 +167,46 @@
       "competitorGapScore": 0,
       "userUtilityScore": 80,
       "productSupportScore": 80,
+      "complianceRiskScore": 20,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": false,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-10-05T12:45:11.966Z"
+    },
+    {
+      "id": "brief_maxfanout_055003_d40ce19728",
+      "query": "what is rental application preparation for people with document gaps before applying",
+      "route": null,
+      "pageFamily": "rental-application-preparation",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 20,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": false,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-10-05T12:45:11.966Z"
+    },
+    {
+      "id": "brief_maxfanout_055004_fa9ea82700",
+      "query": "what is proof of income for people with document gaps before applying",
+      "route": null,
+      "pageFamily": "proof-of-income",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
       "complianceRiskScore": 65,
       "authorityRequirementScore": 25,
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
@@ -180,11 +215,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-01T09:38:04.213Z"
+      "createdAt": "2026-10-05T12:45:11.966Z"
     },
     {
-      "id": "brief_maxfanout_035005_84c0384e5e",
-      "query": "what is self employed income documents for consumers rebuilding credit self service",
+      "id": "brief_maxfanout_055005_ab64bdba65",
+      "query": "what is self employed income documents for people with document gaps before applying",
       "route": null,
       "pageFamily": "self-employed-income-documents",
       "searchOpportunityScore": 0,
@@ -200,53 +235,13 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-01T09:38:04.213Z"
+      "createdAt": "2026-10-05T12:45:11.966Z"
     },
     {
-      "id": "brief_maxfanout_035006_308f2104f7",
-      "query": "what is auto loan documents for consumers rebuilding credit self service",
+      "id": "brief_maxfanout_055010_4626bf99df",
+      "query": "what is credit report understanding for people with document gaps before applying",
       "route": null,
-      "pageFamily": "auto-loan-documents",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-01T09:38:04.213Z"
-    },
-    {
-      "id": "brief_maxfanout_035009_20d9942b60",
-      "query": "what is business loan documents for consumers rebuilding credit self service",
-      "route": null,
-      "pageFamily": "business-loan-documents",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-01T09:38:04.213Z"
-    },
-    {
-      "id": "brief_maxfanout_035014_4ca62007b0",
-      "query": "what is collections documentation for consumers rebuilding credit self service",
-      "route": null,
-      "pageFamily": "collections-documentation",
+      "pageFamily": "credit-report-understanding",
       "searchOpportunityScore": 0,
       "citationOpportunityScore": 50,
       "competitorGapScore": 0,
@@ -260,13 +255,13 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-01T09:38:04.213Z"
+      "createdAt": "2026-10-05T12:45:11.966Z"
     },
     {
-      "id": "brief_maxfanout_035015_7b319255a5",
-      "query": "what is debt documentation for consumers rebuilding credit self service",
+      "id": "brief_maxfanout_055011_8741f1efa5",
+      "query": "what is credit dispute self service for people with document gaps before applying",
       "route": null,
-      "pageFamily": "debt-documentation",
+      "pageFamily": "credit-dispute-self-service",
       "searchOpportunityScore": 0,
       "citationOpportunityScore": 50,
       "competitorGapScore": 0,
@@ -280,11 +275,31 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-01T09:38:04.213Z"
+      "createdAt": "2026-10-05T12:45:11.966Z"
     },
     {
-      "id": "brief_maxfanout_035016_4fe4d82c00",
-      "query": "what is gift letter explanation for consumers rebuilding credit self service",
+      "id": "brief_maxfanout_055012_25ab70f031",
+      "query": "what is credit utilization for people with document gaps before applying",
+      "route": null,
+      "pageFamily": "credit-utilization",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-10-05T12:45:11.966Z"
+    },
+    {
+      "id": "brief_maxfanout_055016_240a5b531f",
+      "query": "what is gift letter explanation for people with document gaps before applying",
       "route": null,
       "pageFamily": "gift-letter-explanation",
       "searchOpportunityScore": 0,
@@ -292,21 +307,41 @@
       "competitorGapScore": 0,
       "userUtilityScore": 80,
       "productSupportScore": 80,
-      "complianceRiskScore": 65,
+      "complianceRiskScore": 20,
       "authorityRequirementScore": 25,
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
       "bestFormat": "faq_or_section",
-      "adminReviewRequired": true,
+      "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-01T09:38:04.213Z"
+      "createdAt": "2026-10-05T12:45:11.966Z"
     },
     {
-      "id": "brief_maxfanout_035021_51dd70b5c4",
-      "query": "what is source of funds documentation for consumers rebuilding credit self service",
+      "id": "brief_maxfanout_055018_5e4c003b32",
+      "query": "what is address history explanation for people with document gaps before applying",
       "route": null,
-      "pageFamily": "source-of-funds-documentation",
+      "pageFamily": "address-history-explanation",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 20,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": false,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-10-05T12:45:11.966Z"
+    },
+    {
+      "id": "brief_maxfanout_055019_e4c6fe612b",
+      "query": "what is income change explanation for people with document gaps before applying",
+      "route": null,
+      "pageFamily": "income-change-explanation",
       "searchOpportunityScore": 0,
       "citationOpportunityScore": 50,
       "competitorGapScore": 0,
@@ -320,33 +355,13 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-01T09:38:04.213Z"
+      "createdAt": "2026-10-05T12:45:11.966Z"
     },
     {
-      "id": "brief_maxfanout_035023_d125853af4",
-      "query": "what is underwriting document checklist for consumers rebuilding credit self service",
+      "id": "brief_maxfanout_055020_81577e3f47",
+      "query": "what is employment verification for people with document gaps before applying",
       "route": null,
-      "pageFamily": "underwriting-document-checklist",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 80,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-01T09:38:04.213Z"
-    },
-    {
-      "id": "brief_maxfanout_035025_380b0fadbe",
-      "query": "what is first time homebuyer documents for consumers rebuilding credit self service",
-      "route": null,
-      "pageFamily": "first-time-homebuyer-documents",
+      "pageFamily": "employment-verification",
       "searchOpportunityScore": 0,
       "citationOpportunityScore": 50,
       "competitorGapScore": 0,
@@ -357,14 +372,14 @@
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
+      "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-01T09:38:04.213Z"
+      "createdAt": "2026-10-05T12:45:11.966Z"
     },
     {
-      "id": "brief_maxfanout_035026_c90dcbadaa",
-      "query": "what is apartment application documents for consumers rebuilding credit self service",
+      "id": "brief_maxfanout_055026_1ac8a68485",
+      "query": "what is apartment application documents for people with document gaps before applying",
       "route": null,
       "pageFamily": "apartment-application-documents",
       "searchOpportunityScore": 0,
@@ -372,59 +387,19 @@
       "competitorGapScore": 0,
       "userUtilityScore": 80,
       "productSupportScore": 30,
-      "complianceRiskScore": 65,
+      "complianceRiskScore": 20,
       "authorityRequirementScore": 25,
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
       "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": true,
+      "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-01T09:38:04.213Z"
+      "createdAt": "2026-10-05T12:45:11.966Z"
     },
     {
-      "id": "brief_maxfanout_035027_a7953806bb",
-      "query": "what is LLC funding documents for consumers rebuilding credit self service",
-      "route": null,
-      "pageFamily": "llc-funding-documents",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-01T09:38:04.213Z"
-    },
-    {
-      "id": "brief_maxfanout_035028_b56855afd8",
-      "query": "what is financial document organization for consumers rebuilding credit self service",
-      "route": null,
-      "pageFamily": "financial-document-organization",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-01T09:38:04.213Z"
-    },
-    {
-      "id": "brief_maxfanout_035030_47269d60d9",
-      "query": "what is document discrepancy explanation for consumers rebuilding credit self service",
+      "id": "brief_maxfanout_055030_475627f5ba",
+      "query": "what is document discrepancy explanation for people with document gaps before applying",
       "route": null,
       "pageFamily": "document-discrepancy-explanation",
       "searchOpportunityScore": 0,
@@ -432,121 +407,21 @@
       "competitorGapScore": 0,
       "userUtilityScore": 80,
       "productSupportScore": 30,
-      "complianceRiskScore": 65,
+      "complianceRiskScore": 20,
       "authorityRequirementScore": 25,
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
       "bestFormat": "faq_or_section",
-      "adminReviewRequired": true,
+      "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-01T09:38:04.213Z"
+      "createdAt": "2026-10-05T12:45:11.966Z"
     },
     {
-      "id": "brief_maxfanout_035031_cca9f83ced",
-      "query": "what is identity and address documents for consumers rebuilding credit self service",
+      "id": "brief_maxfanout_055034_e361991207",
+      "query": "what is income verification packet for people with document gaps before applying",
       "route": null,
-      "pageFamily": "identity-and-address-documents",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-01T09:38:04.213Z"
-    },
-    {
-      "id": "brief_maxfanout_035032_1677913638",
-      "query": "what is supporting evidence checklist for consumers rebuilding credit self service",
-      "route": null,
-      "pageFamily": "supporting-evidence-checklist",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 80,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-01T09:38:04.213Z"
-    },
-    {
-      "id": "brief_maxfanout_035033_285a7a0be9",
-      "query": "what is application cover letter for consumers rebuilding credit self service",
-      "route": null,
-      "pageFamily": "application-cover-letter",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 80,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-01T09:38:04.213Z"
-    },
-    {
-      "id": "brief_maxfanout_035038_6d30ad4000",
-      "query": "what is loan application checklist for consumers rebuilding credit self service",
-      "route": null,
-      "pageFamily": "loan-application-checklist",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 80,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-01T09:38:04.214Z"
-    },
-    {
-      "id": "brief_maxfanout_035039_1c2aee9a86",
-      "query": "what is business funding checklist for consumers rebuilding credit self service",
-      "route": null,
-      "pageFamily": "business-funding-checklist",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 80,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-01T09:38:04.214Z"
-    },
-    {
-      "id": "brief_maxfanout_035040_c2d6eb4453",
-      "query": "what is consumer finance documentation for consumers rebuilding credit self service",
-      "route": null,
-      "pageFamily": "consumer-finance-documentation",
+      "pageFamily": "income-verification-packet",
       "searchOpportunityScore": 0,
       "citationOpportunityScore": 50,
       "competitorGapScore": 0,
@@ -560,7 +435,127 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-01T09:38:04.214Z"
+      "createdAt": "2026-10-05T12:45:11.966Z"
+    },
+    {
+      "id": "brief_maxfanout_055035_95bec3ef99",
+      "query": "what is credit readiness education for people with document gaps before applying",
+      "route": null,
+      "pageFamily": "credit-readiness-education",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-10-05T12:45:11.966Z"
+    },
+    {
+      "id": "brief_maxfanout_055037_c2e822af9f",
+      "query": "what is rental screening preparation for people with document gaps before applying",
+      "route": null,
+      "pageFamily": "rental-screening-preparation",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 20,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": false,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-10-05T12:45:11.966Z"
+    },
+    {
+      "id": "brief_maxfanout_055041_c7eafc9039",
+      "query": "how to prepare letter of explanation for people with document gaps before applying",
+      "route": null,
+      "pageFamily": "letter-of-explanation",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 80,
+      "complianceRiskScore": 20,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": false,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-10-05T12:45:11.966Z"
+    },
+    {
+      "id": "brief_maxfanout_055043_8e84f83ebc",
+      "query": "how to prepare rental application preparation for people with document gaps before applying",
+      "route": null,
+      "pageFamily": "rental-application-preparation",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 20,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": false,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-10-05T12:45:11.966Z"
+    },
+    {
+      "id": "brief_maxfanout_055044_c5c3379332",
+      "query": "how to prepare proof of income for people with document gaps before applying",
+      "route": null,
+      "pageFamily": "proof-of-income",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-10-05T12:45:11.966Z"
+    },
+    {
+      "id": "brief_maxfanout_055045_97012d2631",
+      "query": "how to prepare self employed income documents for people with document gaps before applying",
+      "route": null,
+      "pageFamily": "self-employed-income-documents",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "checklist_or_numbered_steps",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-10-05T12:45:11.966Z"
     }
   ],
   "rankingBasis": {
@@ -584,7 +579,23 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-01T10:49:29.267Z"
+      "createdAt": "2026-10-05T12:45:12.071Z"
+    },
+    {
+      "route": "/blog",
+      "pageFamily": "geo_surface",
+      "currentQueryCoverage": 0,
+      "gscTrend": "NO_DATA",
+      "competitorDelta": "NO_COMPETITOR_STRUCTURE_GAP",
+      "recommendedFix": "add_internal_links_and_answer_atoms",
+      "expectedEffort": "medium",
+      "authorityRequirement": "low",
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "citationOpportunity": "low",
+      "priorityScore": 55,
+      "safeToSelfHeal": true,
+      "adminReviewRequired": false,
+      "createdAt": "2026-10-05T12:45:12.071Z"
     },
     {
       "route": "/resources",
@@ -600,7 +611,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-01T10:49:29.267Z"
+      "createdAt": "2026-10-05T12:45:12.071Z"
     },
     {
       "route": "/pricing",
@@ -616,7 +627,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-01T10:49:29.267Z"
+      "createdAt": "2026-10-05T12:45:12.071Z"
     },
     {
       "route": "/letter-of-explanation",
@@ -632,7 +643,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-01T10:49:29.267Z"
+      "createdAt": "2026-10-05T12:45:12.071Z"
     },
     {
       "route": "/letter-of-explanation/credit",
@@ -648,7 +659,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-10-01T10:49:29.267Z"
+      "createdAt": "2026-10-05T12:45:12.071Z"
     },
     {
       "route": "/letter-of-explanation/eviction",
@@ -664,7 +675,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-01T10:49:29.267Z"
+      "createdAt": "2026-10-05T12:45:12.071Z"
     },
     {
       "route": "/letter-of-explanation/income",
@@ -680,7 +691,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-10-01T10:49:29.267Z"
+      "createdAt": "2026-10-05T12:45:12.071Z"
     },
     {
       "route": "/letter-of-explanation/employment-gap",
@@ -696,7 +707,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-10-01T10:49:29.267Z"
+      "createdAt": "2026-10-05T12:45:12.071Z"
     },
     {
       "route": "/609-dispute-letter",
@@ -712,7 +723,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-10-01T10:49:29.267Z"
+      "createdAt": "2026-10-05T12:45:12.071Z"
     },
     {
       "route": "/goodwill-letter-to-remove-late-payment",
@@ -728,7 +739,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-01T10:49:29.267Z"
+      "createdAt": "2026-10-05T12:45:12.071Z"
     },
     {
       "route": "/letter-of-explanation/late-payment",
@@ -744,7 +755,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-01T10:49:29.267Z"
+      "createdAt": "2026-10-05T12:45:12.071Z"
     },
     {
       "route": "/letter-of-explanation/large-deposit",
@@ -760,7 +771,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-01T10:49:29.267Z"
+      "createdAt": "2026-10-05T12:45:12.071Z"
     },
     {
       "route": "/proof-of-income-letter",
@@ -776,7 +787,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-10-01T10:49:29.267Z"
+      "createdAt": "2026-10-05T12:45:12.071Z"
     },
     {
       "route": "/credit-dispute-letter",
@@ -792,7 +803,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-10-01T10:49:29.267Z"
+      "createdAt": "2026-10-05T12:45:12.071Z"
     },
     {
       "route": "/apartment-application",
@@ -808,7 +819,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-01T10:49:29.267Z"
+      "createdAt": "2026-10-05T12:45:12.071Z"
     },
     {
       "route": "/rental-application-checklist",
@@ -824,7 +835,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-01T10:49:29.267Z"
+      "createdAt": "2026-10-05T12:45:12.071Z"
     },
     {
       "route": "/how-to-get-approved-for-an-apartment",
@@ -840,7 +851,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-01T10:49:29.267Z"
+      "createdAt": "2026-10-05T12:45:12.071Z"
     },
     {
       "route": "/auto-loan-documents",
@@ -856,7 +867,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-01T10:49:29.267Z"
+      "createdAt": "2026-10-05T12:45:12.071Z"
     },
     {
       "route": "/car-loan-checklist",
@@ -872,23 +883,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-01T10:49:29.267Z"
-    },
-    {
-      "route": "/documents-needed-for-car-loan",
-      "pageFamily": "auto",
-      "currentQueryCoverage": 0,
-      "gscTrend": "NO_DATA",
-      "competitorDelta": "NO_COMPETITOR_STRUCTURE_GAP",
-      "recommendedFix": "add_internal_links_and_answer_atoms",
-      "expectedEffort": "medium",
-      "authorityRequirement": "low",
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "citationOpportunity": "low",
-      "priorityScore": 55,
-      "safeToSelfHeal": true,
-      "adminReviewRequired": false,
-      "createdAt": "2026-10-01T10:49:29.267Z"
+      "createdAt": "2026-10-05T12:45:12.071Z"
     }
   ],
   "hardTruth": "Low ranking potential never blocks useful onsite content. It only changes indexing, priority, and authority strategy."
