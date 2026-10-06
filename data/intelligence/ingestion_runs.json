@@ -2,6 +2,27 @@
   "schemaVersion": "4.1.0",
   "runs": [
     {
+      "id": "933f40c1-1247-4e19-8518-591573e08a3f",
+      "connectorId": "growth_brief_generation",
+      "status": "COMPLETE",
+      "ranAt": "2026-10-06T10:50:41.878Z",
+      "recordsImported": 40
+    },
+    {
+      "id": "1b84111b-c5ec-497e-8513-7641b95ab11c",
+      "connectorId": "authority_requirement_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-10-06T10:50:41.691Z",
+      "recordsImported": 86
+    },
+    {
+      "id": "eb5d9825-0d31-41d0-b402-e66ef721c029",
+      "connectorId": "growth_maintenance_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-10-06T10:50:41.522Z",
+      "recordsImported": 86
+    },
+    {
       "id": "0c6054d9-8f86-42bb-b19b-0c2492a8fadb",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
@@ -1918,28 +1939,6 @@
       "status": "COMPLETE",
       "ranAt": "2026-09-21T12:38:27.645Z",
       "recordsImported": 0
-    },
-    {
-      "id": "bbf7d5e8-7018-43e5-a935-24096f23c16b",
-      "connectorId": "cloudflare_crawler_logs",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-09-21T12:38:27.594Z",
-      "reason": "Cloudflare crawler ingestion requires Cloudflare credentials or a manual import file.",
-      "recordsImported": 0
-    },
-    {
-      "id": "a30a6acc-5886-40ec-b0cb-c513c7c20971",
-      "connectorId": "growth_brief_generation",
-      "status": "COMPLETE",
-      "ranAt": "2026-09-21T12:38:27.569Z",
-      "recordsImported": 40
-    },
-    {
-      "id": "b4101d6f-5c16-428b-88c6-fd659cc5af6b",
-      "connectorId": "page_action_recommendation",
-      "status": "COMPLETE",
-      "ranAt": "2026-09-21T12:38:27.523Z",
-      "recordsImported": 5430
     }
   ]
 }
