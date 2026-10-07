@@ -20,7 +20,7 @@ concurrency:
 jobs:
   citation-os-daily:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 5  # was 20; ~4x median 0.7m over 8 green runs
     steps:
       - uses: actions/checkout@v7
         with:

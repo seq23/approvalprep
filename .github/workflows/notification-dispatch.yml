@@ -22,7 +22,7 @@ concurrency:
 jobs:
   notification-dispatch:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 5  # was 20; ~4x median 0.2m over 8 green runs
     env:
       RUN_MODE: ${{ github.event.inputs.mode || 'dry_run' }}
       RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
