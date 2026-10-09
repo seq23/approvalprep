@@ -1,0 +1,55 @@
+{
+  "_comment": "The 10 highest-value pages (8 Oct 2026): the 3 URLs with Search Console impressions (sba-loan-checklist, employment-verification-letter, how-to-get-approved-for-an-apartment) plus the 7 strongest buyer-intent pages that map 1:1 to a kit. Each gets a direct answer and a checkout CTA to its matching kit, rendered by src/components/KitAnswer.astro. Prices come from data/products/products.json, never from this file.",
+  "pages": {
+    "/sba-loan-checklist": {
+      "sku": "business-funding-prep-kit",
+      "question": "What documents do you need for an SBA loan?",
+      "answer": "For an SBA 7(a) loan, lenders usually ask for: the SBA borrower information form (Form 1919), a personal financial statement (Form 413) for each owner of 20% or more, three years of business and personal federal tax returns, a year-to-date profit and loss statement and balance sheet, a schedule of business debts, ownership and licence documents, and a written use of funds. And yes, lenders usually ask for recent business bank statements too: they compare the deposits with the revenue on your tax returns, so be ready to explain any large or unusual deposit."
+    },
+    "/employment-verification-letter": {
+      "sku": "income-employment-letter-kit",
+      "question": "What is an employment verification letter?",
+      "answer": "An employment verification letter is a short, signed statement from your employer, usually HR or your manager, on company letterhead. It confirms your job title, start date and whether you work full or part time, and your pay if you authorize it. Landlords, lenders and agencies ask for one to confirm your income. You request the letter and your employer writes and signs it. Never write it as if it came from them."
+    },
+    "/how-to-get-approved-for-an-apartment": {
+      "sku": "rental-application-kit",
+      "question": "How do you get approved for an apartment?",
+      "answer": "Most landlords check three things: income (often a gross monthly income of about 2.5 to 3 times the rent), credit and rental history, and identity. To get approved, pull your own credit report first. Then have two recent pay stubs or an offer letter, two months of bank statements, photo ID and a past landlord's contact ready, plus a short letter explaining anything that will stand out, such as thin credit, a job change or a past late payment. Apartments have no formal pre-approval, but a complete packet on day one comes closest."
+    },
+    "/documents-needed-for-car-loan": {
+      "sku": "loan-prep-letter-kit",
+      "question": "What documents do you need for a car loan?",
+      "answer": "Lenders usually ask for a driver's licence, proof of income (recent pay stubs, or two years of tax returns if you are self-employed), proof of address (a utility bill or lease), proof of insurance before you drive away, and the vehicle details (purchase agreement or VIN), plus the title if you are trading a car in. If your credit or income history has a gap, a short explanation letter answers the question before the underwriter asks."
+    },
+    "/credit-dispute-letter": {
+      "sku": "credit-letter-kit",
+      "question": "How does a credit dispute letter work?",
+      "answer": "A credit dispute letter asks Equifax, Experian or TransUnion to investigate one specific item you believe is wrong. Under the Fair Credit Reporting Act the bureau generally has 30 days to investigate, and must correct or delete information it cannot verify. Name the account exactly, say what is wrong and why, attach copies (never originals) of your proof, and send it by certified mail so you have a date. Disputing accurate information will not remove it."
+    },
+    "/609-dispute-letter": {
+      "sku": "credit-letter-kit",
+      "question": "Does a 609 letter work?",
+      "answer": "A 609 letter cites Section 609 of the Fair Credit Reporting Act, which gives you the right to see the information in your credit file and where it came from. It is not a loophole: Section 609 does not make a bureau delete accurate accounts. Use it to get your file. If you find an error, dispute that item with proof under Section 611, which is the section that requires an investigation."
+    },
+    "/goodwill-letter-to-remove-late-payment": {
+      "sku": "credit-letter-kit",
+      "question": "Can a goodwill letter remove a late payment?",
+      "answer": "Sometimes. A goodwill letter asks the original creditor, not the credit bureau, to remove a late payment that was reported accurately, as a courtesy. Creditors do not have to agree, and some never do. It works best when the late payment was a one-off, you have paid on time since, and the account is in good standing. Keep it short: own the mistake, give the reason in one or two sentences, point to your on-time record, and ask for the specific month to be removed."
+    },
+    "/how-to-write-a-letter-of-explanation": {
+      "sku": "letter-of-explanation",
+      "question": "How do you write a letter of explanation?",
+      "answer": "A letter of explanation answers one question an underwriter or landlord asked, such as a large deposit, a credit inquiry, a gap in employment or a late payment. Keep it to a few short paragraphs. Date it, add your loan or application number, state the facts with dates and amounts, attach the proof, and sign it. Answer only what was asked: extra detail creates new questions."
+    },
+    "/proof-of-employment-letter": {
+      "sku": "income-employment-letter-kit",
+      "question": "What should a proof of employment letter include?",
+      "answer": "A proof of employment letter comes from your employer and should include: company letterhead, your full name, job title, start date, full-time or part-time status, and (if you authorize it) salary or hourly pay, plus the signer's name, title and contact details so the reader can verify it. If you are self-employed, use a CPA letter, your tax returns or 1099s, and bank statements instead."
+    },
+    "/rental-application-letter": {
+      "sku": "rental-application-kit",
+      "question": "When should you write a rental application letter?",
+      "answer": "Write one when something in your file will make a leasing agent pause, such as thin or damaged credit, a broken lease, an eviction, or income that is not a regular salary. In a few short paragraphs, say which unit you are applying for, explain the issue plainly with dates, show what is different now (steady income, savings, a co-signer, references), and list the documents you have attached. If your file is clean, you may not need a letter at all."
+    }
+  }
+}

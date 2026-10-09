@@ -1,0 +1,7 @@
+---
+// Visible byline for article-type pages. Reads the same file as the JSON-LD
+// author in src/lib/schema.ts (articleSchema), so the two always agree.
+import editorial from "../data/editorial.json";
+const { updated = "" } = Astro.props;
+---
+<p class="byline fine">By <a href={editorial.aboutPath} rel="author">{editorial.name}</a>, {editorial.relationship}.{updated ? ` Updated ${updated}.` : ""} Not legal or credit advice.</p>

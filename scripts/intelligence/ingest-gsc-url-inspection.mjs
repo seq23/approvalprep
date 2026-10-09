@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 import fs from "node:fs";
-import { env, fetchJson, readJson, writeJson, appendRun, statusOnly, now, checkBudget, gscAccessToken } from "./_lib.mjs";
+import { env, fetchJson, readJson, writeJson, appendRun, statusOnly, now, checkBudget, gscAccessToken, inspectionBaseUrl, inspectionUrlFor } from "./_lib.mjs";
 
 const connectorId = "google_url_inspection";
 const siteUrl = env("GSC_SITE_URL") || env("GOOGLE_SEARCH_CONSOLE_SITE_URL") || "sc-domain:approvalprep.com";
 const accessToken = await gscAccessToken();
 const importFile = env("GSC_URL_INSPECTION_IMPORT_FILE");
-const baseUrl = (env("APPROVALPREP_SITE_URL") || siteUrl || "https://approvalprep.com").replace(/\/$/, "");
+const baseUrl = inspectionBaseUrl(siteUrl, env("APPROVALPREP_SITE_URL"));
 const outputFile = "data/intelligence/gsc_url_inspection.json";
 
 function normalizeRows(raw) {
@@ -36,7 +36,7 @@ if (importFile) {
   const rows = [];
   try {
     for (const route of routes) {
-      const inspectionUrl = `${baseUrl}${route.path === "/" ? "" : route.path}`;
+      const inspectionUrl = inspectionUrlFor(baseUrl, route.path);
       const data = await fetchJson("https://searchconsole.googleapis.com/v1/urlInspection/index:inspect", { method: "POST", headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" }, body: JSON.stringify({ inspectionUrl, siteUrl }) });
       rows.push({ route: route.path, inspectionUrl, verdict: data.inspectionResult?.indexStatusResult?.verdict || "UNKNOWN", result: data.inspectionResult || data, importedAt: now() });
     }

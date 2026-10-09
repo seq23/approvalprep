@@ -13,4 +13,17 @@ const wrangler=fs.readFileSync('wrangler.toml','utf8');
 ['PRODUCTS_DB','PRODUCTS_KV','PRODUCT_ASSETS_R2'].forEach(s=>{if(!wrangler.includes(s)) fail(`wrangler missing ${s}`)});
 const catalog=fs.readFileSync('functions/_runtime/catalog.js','utf8');
 ['try {','catch','seedProducts().filter','return seedProducts().find'].forEach(s=>{if(!catalog.includes(s)) fail(`catalog missing runtime fallback ${s}`)});
+// One price per kit everywhere (8 Oct 2026 repricing). The displayed label
+// (data/products/products.json), the D1 seed and the runtime fallback seed
+// must agree, or checkout charges a different price than the page shows.
+const display=JSON.parse(fs.readFileSync('data/products/products.json','utf8')).products;
+const runtimeSrc=fs.readFileSync('functions/_runtime/seed-products.js','utf8');
+const runtimeSeed=JSON.parse(runtimeSrc.slice(runtimeSrc.indexOf('{'), runtimeSrc.lastIndexOf('}')+1));
+for(const p of seed.products){
+  const label=display.find(d=>d.sku===p.slug)?.priceLabel;
+  if(label!==`$${p.priceCents/100}`) fail(`${p.slug}: products.json shows ${label}, seed charges $${p.priceCents/100}`);
+  const r=runtimeSeed.products.find(x=>x.slug===p.slug);
+  if(!r||r.priceCents!==p.priceCents||r.stripeLivePriceId!==p.stripeLivePriceId||r.stripeTestPriceId!==p.stripeTestPriceId) fail(`${p.slug}: functions/_runtime/seed-products.js disagrees with seed_product_registry.json`);
+  if(p.priceCents>4900) fail(`${p.slug}: $${p.priceCents/100} is above the $49 ceiling set on 8 Oct 2026`);
+}
 console.log('PASS runtime-product-admin');

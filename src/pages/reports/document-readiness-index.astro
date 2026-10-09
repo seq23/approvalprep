@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Byline from "../../components/Byline.astro";
 import RelatedContent from "../../components/RelatedContent.astro";
 import TrustAndBoundaryBand from "../../components/TrustAndBoundaryBand.astro";
 import RecommendationSummary from "../../components/RecommendationSummary.astro";
@@ -23,7 +24,7 @@ const sourceTypes=Object.entries(findings.sourceTypeCounts); const categories=Ob
 const lead=(findings.findings||[]).find((f)=>!/boundary|limitation|does not|not claim/i.test(f.headline));
 ---
 <BaseLayout title={`${report.title} - ApprovalPrep`} description={report.summary} canonical={canonical} schema={schema}>
-<section class="hero shell hero-split"><div><p class="eyebrow">Original data asset</p><h1>{report.title}</h1><p class="lead">{report.summary}</p><div class="hero-actions"><a class="button primary-button" href={internalHref(report.downloadPath)} download>Download the 100-source CSV</a><a class="button secondary-button" href="#methodology">Read methodology</a></div></div><aside class="hero-panel"><p class="eyebrow">Evidence boundary</p><h2>Catalog first. Claim only what was coded.</h2><p>All 100 sources have URL and source metadata. Specific document-signal findings use only the {findings.deepCodedPrimarySources} primary sources marked deep reviewed.</p></aside></section>
+<section class="hero shell hero-split"><div><p class="eyebrow">Original data asset</p><h1>{report.title}</h1><p class="lead">{report.summary}</p><Byline /><div class="hero-actions"><a class="button primary-button" href={internalHref(report.downloadPath)} download>Download the 100-source CSV</a><a class="button secondary-button" href="#methodology">Read methodology</a></div></div><aside class="hero-panel"><p class="eyebrow">Evidence boundary</p><h2>Catalog first. Claim only what was coded.</h2><p>All 100 sources have URL and source metadata. Specific document-signal findings use only the {findings.deepCodedPrimarySources} primary sources marked deep reviewed.</p></aside></section>
 {lead && (<section class="band recommendation-summary-band"><div class="shell"><RecommendationSummary headline={lead.headline} statement={lead.interpretation} detail={lead.metric} ctaLabel="Download the 100-source CSV" ctaHref={report.downloadPath} /></div></section>)}
 <section class="band"><div class="shell"><p class="eyebrow">At a glance</p><div class="grid"><article class="card"><h2>{findings.sampleSize}</h2><p>public sources</p></article><article class="card"><h2>{Object.keys(findings.categoryCounts).length}</h2><p>application categories</p></article><article class="card"><h2>{findings.formatCounts.pdf}</h2><p>PDF sources</p></article><article class="card"><h2>{findings.deepCodedPrimarySources}</h2><p>deep-reviewed primary sources</p></article></div></div></section>
 <section class="band"><div class="shell"><p class="eyebrow">Findings</p><div class="grid">{findings.findings.map((f)=><article class="card"><h2>{f.headline}</h2><p><strong>{f.metric}</strong></p><p>{f.interpretation}</p></article>)}</div></div></section>

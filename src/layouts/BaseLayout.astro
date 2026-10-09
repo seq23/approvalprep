@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import SiteFooter from "../components/SiteFooter.astro";
+import CreditBuilderSlot from "../components/CreditBuilderSlot.astro";
 import DataPrivacyNotice from "../components/DataPrivacyNotice.astro";
 import StructuredData from "../components/StructuredData.astro";
 import AnalyticsEvent from "../components/AnalyticsEvent.astro";
@@ -67,6 +68,7 @@ const documentTitle = fitTitle(String(title));
       <Breadcrumbs path={currentPath} title={crumbTitle} emitSchema={!hasBreadcrumbSchema} />
       <slot />
       <ProfessionalBoundaryBlock path={currentPath} />
+      <CreditBuilderSlot path={currentPath} />
     </main>
     <AnalyticsEvent surface="approvalprep" />
 

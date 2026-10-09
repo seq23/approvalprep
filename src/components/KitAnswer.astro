@@ -1,0 +1,26 @@
+---
+// Direct answer + matching-kit checkout CTA for the priority pages listed in
+// data/content/priority_pages.json. Renders nothing on any other path.
+import priority from "../../data/content/priority_pages.json";
+import { productForSku } from "../data/content";
+const { path = "" } = Astro.props;
+const key = String(path).replace(/\/+$/, "") || "/";
+const entry = priority.pages[key];
+const product = entry ? productForSku(entry.sku) : null;
+---
+{entry && product && (
+  <section class="band kit-answer" data-priority-page={key}>
+    <div class="shell">
+      <article class="card">
+        <p class="eyebrow">Short answer</p>
+        <h2>{entry.question}</h2>
+        <p>{entry.answer}</p>
+        <div class="hero-actions">
+          <button class="button primary-button checkout-button" type="button" data-sku={entry.sku}>{`Get the ${product.name} — ${product.priceLabel}`}</button>
+          <a class="button secondary-button" href={`/pricing/#${entry.sku}`}>See what is in the kit</a>
+        </div>
+        <p class="fine">Paid once. Editable DOCX and PDF. Not legal or credit advice.</p>
+      </article>
+    </div>
+  </section>
+)}

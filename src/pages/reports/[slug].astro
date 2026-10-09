@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Byline from "../../components/Byline.astro";
 import RelatedContent from "../../components/RelatedContent.astro";
 import TrustAndBoundaryBand from "../../components/TrustAndBoundaryBand.astro";
 import RecommendationSummary from "../../components/RecommendationSummary.astro";
@@ -29,7 +30,7 @@ const remainingSections = (report.sections || []).filter((section) => section !=
     <div>
       <p class="eyebrow">Public report</p>
       <h1>{report.title}</h1>
-      <p class="lead">{report.summary}</p>
+      <p class="lead">{report.summary}</p><Byline />
       <div class="hero-actions">
         <a class="button primary-button" href="/resources/">Browse resources</a>
         <a class="button secondary-button" href={internalHref(`/pricing#${report.targetProductSku}`)}>Compare related kit</a>

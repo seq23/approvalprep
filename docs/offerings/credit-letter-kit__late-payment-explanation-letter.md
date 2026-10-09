@@ -2,7 +2,7 @@
 
 **Offering ID:** `credit-letter-kit__late-payment-explanation-letter`  
 **Bundled product:** Credit Letter Kit (`credit-letter-kit`)  
-**Price:** $59  
+**Price:** $19  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 

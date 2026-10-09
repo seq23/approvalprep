@@ -2,7 +2,7 @@
 
 **Offering ID:** `rental-application-kit__move-in-document-checklist`  
 **Bundled product:** Rental Application Kit (`rental-application-kit`)  
-**Price:** $129  
+**Price:** $29  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 

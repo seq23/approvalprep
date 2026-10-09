@@ -2,6 +2,7 @@ import routeManifest from "../../data/routes/route_manifest.json";
 import toolRegistry from "../../data/tools/tool_registry.json";
 import templateRegistry from "../../data/templates/template_registry.json";
 import reportRegistry from "../../data/reports/public_report_registry.json";
+import editorial from "../data/editorial.json";
 
 export const SITE_ORIGIN = "https://approvalprep.com";
 
@@ -44,6 +45,9 @@ export const canonicalUrl = (input: string) => {
   return `${SITE_ORIGIN}${internalHref(url.pathname)}${url.search}${url.hash}`;
 };
 
+// JSON-LD author for every Article. Same file as the visible Byline component.
+export const editorialAuthor = () => ({ "@type": "Organization", name: editorial.name, url: canonicalUrl(editorial.aboutPath), parentOrganization: { "@type": "Organization", name: editorial.parentName } });
+
 export const orgSchema = () => ({ "@context": "https://schema.org", "@type": "Organization", name: "ApprovalPrep", url: canonicalUrl("/") });
 
 export const webPageSchema = ({ title, description, url }: { title: string; description: string; url: string }) => ({
@@ -62,7 +66,7 @@ export const articleSchema = ({ title, description, url, datePublished }: { titl
   description,
   url,
   datePublished,
-  author: { "@type": "Organization", name: "ApprovalPrep" },
+  author: editorialAuthor(),
   publisher: { "@type": "Organization", name: "ApprovalPrep", url: "https://approvalprep.com" }
 });
 

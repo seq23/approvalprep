@@ -2,7 +2,7 @@
 
 **Offering ID:** `loan-prep-letter-kit__income-explanation-letter`  
 **Bundled product:** Loan Prep Letter Kit (`loan-prep-letter-kit`)  
-**Price:** $99  
+**Price:** $29  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 
