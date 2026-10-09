@@ -20,11 +20,11 @@ if (!dynamic.includes("primaryCtaWithPrice") || !dynamic.includes("50 named self
   throw new Error("Dynamic pricing/commercial pages must explain priced kit model and use price-aware CTAs");
 }
 const studio = fs.readFileSync("src/components/LetterStudio.astro", "utf8");
-if (!pricingDeck.includes("$39 direct download") || !studio.includes("You do not have to use the Studio to buy it")) {
-  throw new Error("Letter of Explanation Kit must be clearly sold as a direct $39 download, not a Studio-gated purchase");
+if (!pricingDeck.includes("$15 direct download") || !studio.includes("You do not have to use the Studio to buy it")) {
+  throw new Error("Letter of Explanation Kit must be clearly sold as a direct $15 download, not a Studio-gated purchase");
 }
 const home = fs.readFileSync("src/pages/index.astro", "utf8");
-for (const token of ["Self-service credit repair letters", "without the high monthly fees", "Get DIY credit letters — $59", "See kits from $39", "Buy one kit, get the related letters and checklists together"]) {
+for (const token of ["Self-service credit repair letters", "without the high monthly fees", "Get DIY credit letters — $19", "See kits from $15", "Buy one kit, get the related letters and checklists together"]) {
   if (!home.includes(token)) throw new Error(`Homepage missing conversion positioning: ${token}`);
 }
 if (home.includes("<strong>Boundary:</strong> no credit repair")) {

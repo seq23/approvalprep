@@ -80,3 +80,22 @@ export async function gscAccessToken() {
   const json = await res.json().catch(() => ({}));
   return json.access_token || "";
 }
+
+// URL Inspection needs a real https:// URL inside the property. A Domain
+// property's siteUrl is "sc-domain:approvalprep.com", which is NOT a URL
+// prefix: using it as the base produced "sc-domain:approvalprep.com/path" and
+// Google answered 403 "You do not own this site, or the inspected URL is not
+// part of this property" (every run until 8 Oct 2026), while Search Analytics
+// on the same credential worked. Guarded in scripts/validate/provider-integrations.mjs.
+export function inspectionBaseUrl(siteUrl, override = "") {
+  const explicit = String(override || "").trim();
+  if (/^https?:\/\//.test(explicit)) return explicit.replace(/\/+$/, "");
+  const site = String(siteUrl || "").trim();
+  if (site.startsWith("sc-domain:")) return `https://${site.slice("sc-domain:".length).replace(/\/+$/, "")}`;
+  if (/^https?:\/\//.test(site)) return site.replace(/\/+$/, "");
+  return "https://approvalprep.com";
+}
+export function inspectionUrlFor(baseUrl, path) {
+  if (!path || path === "/") return `${baseUrl}/`;
+  return `${baseUrl}${path.endsWith("/") || /\.[a-z0-9]+$/i.test(path) ? path : `${path}/`}`;
+}

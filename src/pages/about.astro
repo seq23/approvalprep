@@ -1,0 +1,60 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import editorial from "../data/editorial.json";
+import { canonicalUrl, editorialAuthor, faqSchema } from "../lib/schema";
+import { routeCopy } from "../data/content";
+
+// /about returned 404 until 8 Oct 2026. Every fact on this page comes from
+// src/data/editorial.json, the same file the visible byline and the JSON-LD
+// author read. No staff names, credentials or addresses are asserted here.
+const canonical = canonicalUrl("/about");
+const faq = routeCopy["/about"]?.faq || [];
+const schema = [{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  name: "About ApprovalPrep",
+  url: canonical,
+  publisher: editorialAuthor(),
+  mainEntity: { "@type": "Organization", name: "ApprovalPrep", url: canonicalUrl("/"), email: editorial.contactEmail, parentOrganization: editorialAuthor() }
+}, ...(faq.length ? [faqSchema(faq)] : [])];
+---
+<BaseLayout title="About ApprovalPrep: Who Publishes It and What It Does" description="ApprovalPrep is published by ApprovalPrep Editorial, a subsidiary of Spry Labs. Self-service letter and checklist kits; not legal or credit advice." canonical={canonical} schema={schema} showPrivacyNotice={false}>
+  <section class="hero shell">
+    <p class="eyebrow">About</p>
+    <h1>About ApprovalPrep.</h1>
+    <p class="lead">ApprovalPrep helps you write the letters and gather the documents that landlords, lenders, employers and credit bureaus ask for, in plain words, using your own true facts.</p>
+    <div class="hero-actions">
+      <a class="button primary-button" href="/letter-writing-studio/">Start a free letter</a>
+      <a class="button secondary-button" href="/pricing/">See kits from $15</a>
+    </div>
+  </section>
+  <section class="band"><div class="shell grid">
+    <article class="card">
+      <h2>Who publishes this site</h2>
+      <p>ApprovalPrep is written and maintained by <strong>{editorial.name}</strong>, {editorial.relationship}. Guides, templates and kits are reviewed against the primary sources linked on each page, and corrected when those sources change.</p>
+    </article>
+    <article class="card">
+      <h2>What ApprovalPrep does</h2>
+      <ul>
+        <li>Free browser-only letter drafts. Nothing you type is saved.</li>
+        <li>Paid kits from $15 to $49, paid once: editable DOCX and PDF letters, checklists and next steps.</li>
+        <li>You review everything and send it yourself.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <h2>What it does not do</h2>
+      <p>{editorial.adviceBoundary}</p>
+      <p>ApprovalPrep never contacts a landlord, lender, employer or credit bureau for you, never creates documents that are not true, and cannot promise an approval.</p>
+    </article>
+    <article class="card">
+      <h2>Contact</h2>
+      <p>Questions about a kit, a purchase or a download: <!--email_off--><a href={`mailto:${editorial.contactEmail}`}>{editorial.contactEmail}</a><!--email_on-->. See also the <a href="/editorial-policy/">editorial policy</a>, <a href="/methodology/">methodology</a> and <a href="/contact/">contact page</a>.</p>
+    </article>
+  </div></section>
+  {faq.length > 0 && (
+    <section class="band"><div class="shell">
+      <h2>Questions people ask about ApprovalPrep</h2>
+      {faq.map((item) => (<details class="card"><summary>{item.question}</summary><p>{item.answer}</p></details>))}
+    </div></section>
+  )}
+</BaseLayout>

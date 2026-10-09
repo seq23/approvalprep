@@ -4,7 +4,7 @@ The launch catalog covers 30+ self-service offerings through 8 consolidated Stri
 
 ## Letter of Explanation
 
-Price: $39
+Price: $15
 
 - credit explanation letter
 - income gap explanation letter
@@ -18,7 +18,7 @@ Price: $39
 
 ## Income + Employment Letter Kit
 
-Price: $59
+Price: $19
 
 - employment verification letter
 - proof of income letter
@@ -29,7 +29,7 @@ Price: $59
 
 ## Credit Letter Kit
 
-Price: $59
+Price: $19
 
 - credit dispute letter
 - late payment explanation letter
@@ -41,7 +41,7 @@ Price: $59
 
 ## Rental Application Kit
 
-Price: $129
+Price: $29
 
 - apartment application checklist
 - rental cover letter
@@ -55,7 +55,7 @@ Price: $129
 
 ## Loan Prep Letter Kit
 
-Price: $99
+Price: $29
 
 - auto loan explanation letter
 - mortgage explanation letter
@@ -68,7 +68,7 @@ Price: $99
 
 ## Business Funding Prep Kit
 
-Price: $149
+Price: $39
 
 - business loan explanation letter
 - SBA document checklist
@@ -81,7 +81,7 @@ Price: $149
 
 ## Life Admin Letter Kit
 
-Price: $79
+Price: $19
 
 - address verification letter
 - proof of residency letter
@@ -94,7 +94,7 @@ Price: $79
 
 ## Complete ApprovalPrep Bundle
 
-Price: $249
+Price: $49
 
 - credit explanation letter
 - income gap explanation letter

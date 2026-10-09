@@ -1,0 +1,25 @@
+---
+// "Build your credit" placement. Every word, link and page list comes from
+// src/data/affiliates.json; BaseLayout renders this once per page.
+import affiliates from "../data/affiliates.json";
+const { path = "" } = Astro.props;
+const show = affiliates.pages.includes(path);
+---
+{show && (
+  <section class="band credit-builder-slot" aria-label="Build your credit" data-affiliate-slot="credit-builder">
+    <div class="shell">
+      <p class="eyebrow">Build your credit</p>
+      <h2>{affiliates.heading}</h2>
+      <p>{affiliates.intro}</p>
+      <div class="grid">
+        {affiliates.partners.map((p) => (
+          <a class="card" href={p.url} rel={p.tracked ? "sponsored noopener" : "noopener"} target="_blank" data-affiliate={p.id}>
+            <h3>{p.name} →</h3>
+            <p>{p.blurb}</p>
+          </a>
+        ))}
+      </div>
+      <p class="fine">{affiliates.disclosure}</p>
+    </div>
+  </section>
+)}

@@ -2,7 +2,7 @@
 
 **Offering ID:** `complete-approvalprep-bundle__loan-document-checklist`  
 **Bundled product:** Complete ApprovalPrep Bundle (`complete-approvalprep-bundle`)  
-**Price:** $249  
+**Price:** $49  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 

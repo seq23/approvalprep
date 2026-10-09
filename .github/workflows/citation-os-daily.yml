@@ -7,8 +7,12 @@ on:
         description: "Manual fixture trace only; not production telemetry proof"
         required: false
         default: "true"
-  schedule:
-    - cron: "37 10 * * *"
+  # PAUSED 2026-10-08 (owner-approved): schedule disabled, workflow kept.
+  # Reason: ~82% of commits were automated daily content while Search Console
+  # showed 3 impressions / 0 clicks. Effort moved to improving the top pages.
+  # To resume, restore the two lines below.
+  # schedule:
+  #   - cron: "37 10 * * *"
 
 permissions:
   contents: write

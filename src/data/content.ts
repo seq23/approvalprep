@@ -25,45 +25,45 @@ export const whyApprovalPrep = ["Built for application pressure, not vague paper
 export const homepageChooser = [
   {
     "title": "I need a fast explanation letter",
-    "copy": "Use one $39 direct-download kit for credit, income, job gap, address history, late payment, bank statement, rental issue, life event, or general application explanations.",
+    "copy": "Use one $15 direct-download kit for credit, income, job gap, address history, late payment, bank statement, rental issue, life event, or general application explanations.",
     "href": "/letter-of-explanation",
     "product": "Letter of Explanation Kit",
-    "cta": "Buy the explanation kit — $39"
+    "cta": "Buy the explanation kit — $15"
   },
   {
     "title": "I want to get apartment-ready",
     "copy": "Build a cleaner rental packet before you apply: cover letter, income explanation, rental history explanation, landlord follow-up, and move-in document checklist.",
     "href": "/apartment-application",
     "product": "Rental Application Kit",
-    "cta": "Get the rental kit — $129"
+    "cta": "Get the rental kit — $29"
   },
   {
     "title": "I want self-service credit repair letters",
     "copy": "Prepare your own credit dispute, goodwill, late-payment, pay-for-delete request, debt-validation, credit-report-error checklist, and follow-up letters.",
     "href": "/credit-letter-kit",
     "product": "Credit Letter Kit",
-    "cta": "Get DIY credit letters — $59"
+    "cta": "Get DIY credit letters — $19"
   },
   {
     "title": "I need to prove income or explain work",
     "copy": "Prepare employment verification, proof-of-income, self-employment, job-change, employment-gap, and bank-statement explanation letters.",
     "href": "/income-employment-letter-kit",
     "product": "Income + Employment Letter Kit",
-    "cta": "Get the income kit — $59"
+    "cta": "Get the income kit — $19"
   },
   {
     "title": "I need to get loan-ready",
     "copy": "Organize auto, mortgage, personal-loan, income, credit, bank-statement, lender follow-up, and loan document checklist materials before review.",
     "href": "/loan-prep-letter-kit",
     "product": "Loan Prep Letter Kit",
-    "cta": "Get the loan prep kit — $99"
+    "cta": "Get the loan prep kit — $29"
   },
   {
     "title": "I want every current document kit",
     "copy": "Get the full direct-download library: credit letters, explanation letters, rental prep, income proof, loan prep, business funding, and life-admin paperwork.",
     "href": "/complete-approvalprep-bundle",
     "product": "Complete ApprovalPrep Bundle",
-    "cta": "Get the full bundle — $249"
+    "cta": "Get the full bundle — $49"
   }
 ];
 
@@ -72,35 +72,35 @@ export const productComparison = [
     "product": "Letter of Explanation",
     "bestFor": "One clear explanation letter",
     "includes": "Letter structure, prompts, examples, self-review checklist",
-    "price": "$39",
+    "price": "$15",
     "href": "/pricing#letter-of-explanation"
   },
   {
     "product": "Income + Employment Letter Kit",
     "bestFor": "Work, income, employment gaps, job changes",
     "includes": "Employment verification, proof of income, self-employment, gap letters",
-    "price": "$59",
+    "price": "$19",
     "href": "/pricing#income-employment-letter-kit"
   },
   {
     "product": "Credit Letter Kit",
     "bestFor": "DIY credit letters and follow-up",
     "includes": "Dispute, goodwill, late payment, validation, follow-up letters",
-    "price": "$59",
+    "price": "$19",
     "href": "/pricing#credit-letter-kit"
   },
   {
     "product": "Rental Application Kit",
     "bestFor": "Apartment and rental applications",
     "includes": "Rental checklist, cover letter, income/rental history explanations",
-    "price": "$129",
+    "price": "$29",
     "href": "/pricing#rental-application-kit"
   },
   {
     "product": "Complete ApprovalPrep Bundle",
     "bestFor": "The full self-service library",
     "includes": "Every current kit, checklist, guide, and letter packet",
-    "price": "$249",
+    "price": "$49",
     "href": "/pricing#complete-approvalprep-bundle"
   }
 ];
@@ -190,6 +190,10 @@ export const footerGroups = [
       [
         "/pricing",
         "Pricing"
+      ],
+      [
+        "/about",
+        "About"
       ],
       [
         "/methodology",
@@ -3921,6 +3925,90 @@ const manualRouteCopy = {
       "PDF + editable DOCX for paid kits",
       "Self-service only",
       "No fake document help"
+    ],
+    "noindexCtaAllowed": false
+  },
+  "/about": {
+    "heading": "About ApprovalPrep",
+    "lead": "Who publishes ApprovalPrep, what the kits do, what they never do, and how to reach a person about a purchase or download.",
+    "shortAnswer": "ApprovalPrep is published by ApprovalPrep Editorial, a subsidiary of Spry Labs. It sells self-service letter and checklist kits from $15 to $49 and offers free browser-only drafts. It is not a law firm, a lender, or a credit repair organization, and nothing on the site is legal or credit advice.",
+    "primaryCta": "Start my letter",
+    "secondaryCta": "Compare kits",
+    "decisionContext": [
+      "People reach this page when they are about to trust a site with a paperwork problem that matters: a rental application, a loan file, a credit report error, or an employer request. Before buying anything, it is reasonable to ask who is behind the site and what it will and will not do.",
+      "ApprovalPrep answers that plainly. It is a publication with a named editorial owner, a published method, a contact address that a person reads, and a boundary that does not move: you prepare and send your own documents, and no one here acts for you."
+    ],
+    "whoFor": [
+      "Renters, borrowers, and job applicants deciding whether to use a self-service kit.",
+      "People who want to know who wrote a guide before they rely on it.",
+      "Buyers checking how to get help with a purchase or a download that did not unlock.",
+      "Reviewers, journalists, and partners who need a clear statement of what ApprovalPrep is."
+    ],
+    "value": [
+      "A named publisher, ApprovalPrep Editorial, a subsidiary of Spry Labs, on every guide and in the page data.",
+      "Kit prices stated up front, paid once, with no subscription.",
+      "Free browser-only drafts that save nothing you type.",
+      "Guides checked against the primary sources linked on each page, and corrected when those sources change.",
+      "A boundary stated the same way everywhere: no legal advice, no credit repair, no third-party contact, no fake documents, no approval guarantee."
+    ],
+    "whatYouGet": [
+      "Editable DOCX and PDF letters, checklists, and next-step guides in each paid kit.",
+      "Free letter drafts in the browser before you pay anything.",
+      "Plain-language guides that answer the question a landlord, lender, or bureau actually asked.",
+      "Email support at info@approvalprep.com for purchases and downloads."
+    ],
+    "useCases": [
+      "You want to confirm a real organization stands behind the guide you are reading.",
+      "You bought a kit and the download link did not arrive or did not open.",
+      "You want to report an error in a guide so it can be corrected.",
+      "You need to know whether ApprovalPrep can contact a bureau or landlord for you. It cannot."
+    ],
+    "prepBrief": [
+      "For a purchase or download problem, have your receipt email and the kit name ready.",
+      "For a correction, include the page address and the source that shows the right information.",
+      "For advice about your own legal or credit situation, contact a licensed attorney, a HUD-approved housing counselor, or a nonprofit credit counselor instead."
+    ],
+    "commonMistakes": [
+      "Expecting ApprovalPrep to send letters, call a landlord, or dispute an item on your behalf. You send everything yourself.",
+      "Treating a guide as legal or credit advice. It is general information to help you prepare.",
+      "Paying a credit repair company for letters you can write and send yourself for free under the Fair Credit Reporting Act."
+    ],
+    "reviewChecklist": [
+      "Read the guide's primary sources before relying on a deadline or a rule.",
+      "Check that every fact in your letter is true and that you can prove it.",
+      "Keep copies of everything you send and the date you sent it.",
+      "Email info@approvalprep.com if a kit file is missing or will not open."
+    ],
+    "steps": [
+      "Read the free guide for your situation.",
+      "Draft a free letter in the browser if you want to start without paying.",
+      "Buy the matching kit if you want the editable DOCX and PDF set.",
+      "Review everything, then send it yourself."
+    ],
+    "faq": [
+      {
+        "question": "Who publishes ApprovalPrep?",
+        "answer": "ApprovalPrep Editorial, a subsidiary of Spry Labs, writes and maintains the site, its guides, and its kits."
+      },
+      {
+        "question": "Is ApprovalPrep a credit repair company or a law firm?",
+        "answer": "No. ApprovalPrep is a self-service document-prep publication. It does not give legal or credit advice, does not contact anyone for you, and cannot promise an approval."
+      },
+      {
+        "question": "How do I get help with a purchase or download?",
+        "answer": "Email info@approvalprep.com with your receipt email and the kit name. Downloads are tied to your Stripe receipt."
+      },
+      {
+        "question": "How much do the kits cost?",
+        "answer": "Single kits cost $15 to $39, and the complete set of all seven kits costs $49. You pay once; there is no subscription."
+      }
+    ],
+    "trustSignals": [
+      "Named publisher",
+      "Paid once",
+      "No account required",
+      "No stored letter answers",
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },

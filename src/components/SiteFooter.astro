@@ -1,6 +1,7 @@
 ---
 import { internalHref } from "../lib/schema";
 import { boundary, footerGroups } from "../data/content";
+import editorial from "../data/editorial.json";
 ---
 <footer class="site-footer">
   <div class="shell footer-shell">
@@ -20,7 +21,8 @@ import { boundary, footerGroups } from "../data/content";
       ))}
     </nav>
     <div class="footer-bottom">
-      <p class="fine">© {new Date().getFullYear()} ApprovalPrep. Self-service tools only.</p>
+      <p class="fine">© {new Date().getFullYear()} ApprovalPrep. Published by <a href={editorial.aboutPath}>{editorial.name}</a>, {editorial.relationship}. Contact: <!--email_off--><a href={`mailto:${editorial.contactEmail}`}>{editorial.contactEmail}</a><!--email_on-->.</p>
+      <p class="fine">{editorial.adviceBoundary}</p>
       <p class="fine">No credit repair. No legal or financial advice. No third-party contact. No fake documents. No approval guarantees.</p>
     </div>
   </div>

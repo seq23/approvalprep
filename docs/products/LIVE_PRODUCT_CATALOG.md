@@ -4,11 +4,11 @@ This is the VA-readable registry for the current launch catalog. Runtime source 
 
 | Product | Status | Price | Live Product ID | Live Price ID | Test Product ID | Test Price ID |
 |---|---:|---:|---|---|---|---|
-| Letter of Explanation | live | $39 | `prod_UqdtATftB2yyhn` | `price_1Tqwbn7iKsHkh2EwsEeJqhom` | `prod_UqeFLHEuXTZBge` | `price_1TqwxO7iKsHkh2EwH7YycDOa` |
-| Income + Employment Letter Kit | live | $59 | `prod_Uqdu68V5bIXBpR` | `price_1Tqwcf7iKsHkh2Ewin9rtH1I` | `prod_UqeGUR5zbp8RK4` | `price_1Tqwy07iKsHkh2EwOKsyo20R` |
-| Credit Letter Kit | live | $59 | `prod_UqduoMVvHQ5NM5` | `price_1Tqwd47iKsHkh2EwQuI0PbVi` | `prod_UqeGp6P4ypoWnN` | `price_1TqwyF7iKsHkh2Ewcb4waMHj` |
-| Rental Application Kit | live | $129 | `prod_UqdvQaRllVqNOe` | `price_1Tqwdz7iKsHkh2EwHb61ostg` | `prod_UqeHssYKwctiDZ` | `price_1TqwyV7iKsHkh2EwLGRYgwQ6` |
-| Loan Prep Letter Kit | live | $99 | `prod_UqdwrlMeqVtwb3` | `price_1TqweW7iKsHkh2EwcJiNFjoS` | `prod_UqeHFbrOewNuxv` | `price_1Tqwys7iKsHkh2EwIXBp3rZ7` |
-| Business Funding Prep Kit | live | $149 | `prod_UqdwUvPlGJxZBv` | `price_1Tqwf27iKsHkh2EwneJc4XR6` | `prod_UqeHZ9sPf0WjFt` | `price_1TqwzD7iKsHkh2EwM3tCUwbe` |
-| Life Admin Letter Kit | live | $79 | `prod_UqdybWG67EH31b` | `price_1TqwgJ7iKsHkh2EwKRLRE8AS` | `prod_UqeIaWxlVLsXcW` | `price_1TqwzU7iKsHkh2EwaNXEkY15` |
-| Complete ApprovalPrep Bundle | live | $249 | `prod_UqdyAAJiw5G73X` | `price_1Tqwgz7iKsHkh2EwbrGq7vX5` | `prod_UqeIbiATxOCOCl` | `price_1Tqwzn7iKsHkh2EwLD602Xsl` |
+| Letter of Explanation | live | $15 | `prod_UqdtATftB2yyhn` | `price_1UOV787iKsHkh2Ews3zubPYD` | `prod_UqeFLHEuXTZBge` | `price_1UOV797iKsHkh2EwScYlAIvi` |
+| Income + Employment Letter Kit | live | $19 | `prod_Uqdu68V5bIXBpR` | `price_1UOV7A7iKsHkh2Ewei41RvTI` | `prod_UqeGUR5zbp8RK4` | `price_1UOV7A7iKsHkh2EwcuHxcACY` |
+| Credit Letter Kit | live | $19 | `prod_UqduoMVvHQ5NM5` | `price_1UOV7B7iKsHkh2EwfPrY1AFE` | `prod_UqeGp6P4ypoWnN` | `price_1UOV7C7iKsHkh2EwZaALbzm3` |
+| Rental Application Kit | live | $29 | `prod_UqdvQaRllVqNOe` | `price_1UOV7C7iKsHkh2EwxF12bkFP` | `prod_UqeHssYKwctiDZ` | `price_1UOV7D7iKsHkh2Ew0cxmuzfM` |
+| Loan Prep Letter Kit | live | $29 | `prod_UqdwrlMeqVtwb3` | `price_1UOV7E7iKsHkh2Ewf5MpmjPs` | `prod_UqeHFbrOewNuxv` | `price_1UOV7E7iKsHkh2Ewox1HcNzL` |
+| Business Funding Prep Kit | live | $39 | `prod_UqdwUvPlGJxZBv` | `price_1UOV7F7iKsHkh2EwOpmGBslv` | `prod_UqeHZ9sPf0WjFt` | `price_1UOV7G7iKsHkh2EwdnLzF44z` |
+| Life Admin Letter Kit | live | $19 | `prod_UqdybWG67EH31b` | `price_1UOV7H7iKsHkh2Ew7YWtuJSN` | `prod_UqeIaWxlVLsXcW` | `price_1UOV7H7iKsHkh2Ewmw9Ow3Gu` |
+| Complete ApprovalPrep Bundle | live | $49 | `prod_UqdyAAJiw5G73X` | `price_1UOV7I7iKsHkh2EwZy2s6blj` | `prod_UqeIbiATxOCOCl` | `price_1UOV7J7iKsHkh2EwY9bw1x0C` |

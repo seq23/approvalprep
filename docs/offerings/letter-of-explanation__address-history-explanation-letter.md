@@ -2,7 +2,7 @@
 
 **Offering ID:** `letter-of-explanation__address-history-explanation-letter`  
 **Bundled product:** Letter of Explanation Kit (`letter-of-explanation`)  
-**Price:** $39  
+**Price:** $15  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 
@@ -46,7 +46,7 @@ First-page boundary requirements:
 ## Conversion And Search Contract
 
 - Search intent: address history explanation letter template
-- CTA label: Use the Letter of Explanation Kit — $39
+- CTA label: Use the Letter of Explanation Kit — $15
 - Customer situation: You need a self-service address history explanation letter you can prepare with truthful facts before you send your paperwork.
 
 ## Safety Boundary

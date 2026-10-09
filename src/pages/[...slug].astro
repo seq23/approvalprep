@@ -16,6 +16,8 @@ import DataPrivacyNotice from "../components/DataPrivacyNotice.astro";
 import OfferingUniverse from "../components/OfferingUniverse.astro";
 import IncludedOfferings from "../components/IncludedOfferings.astro";
 import PageCTAStack from "../components/PageCTAStack.astro";
+import KitAnswer from "../components/KitAnswer.astro";
+import priorityPages from "../../data/content/priority_pages.json";
 import ProblemAgitationFit from "../components/ProblemAgitationFit.astro";
 import WhatHappensAfterPurchase from "../components/WhatHappensAfterPurchase.astro";
 import TrustAndBoundaryBand from "../components/TrustAndBoundaryBand.astro";
@@ -36,7 +38,7 @@ export function getStaticPaths() {
   // getStaticPaths is hoisted and evaluated in isolation, so this has to live
   // inside it rather than at module scope.
   const dedicatedPaths = new Set([
-    "/", "/letter-writing-studio", "/resources", "/blog", "/contact", "/methodology",
+    "/", "/letter-writing-studio", "/resources", "/blog", "/contact", "/about", "/methodology",
     "/employment-verification-letter", "/609-dispute-letter", "/goodwill-letter-to-remove-late-payment",
     "/letter-of-explanation/late-payment", "/letter-of-explanation/large-deposit",
     ...demandCoverage.pages.map((page) => page.path)
@@ -69,8 +71,12 @@ const isGlossary = route.path === "/glossary";
 const isLegal = route.type === "legal";
 const isGuide = route.page_intent === "guide";
 const familyCopy = routeFamilyCopy[route.family] || routeFamilyCopy[route.risk === "regulated" ? "credit_self_service" : "letter_studio"];
+// A priority page (data/content/priority_pages.json) names its matching kit
+// explicitly and always leads with that kit's checkout.
+const priorityEntry = priorityPages.pages[route.path];
 const skuForRoute = (() => {
   const path = route.path;
+  if (priorityEntry) return priorityEntry.sku;
   if (path.includes("business") || path.includes("sba")) return "business-funding-prep-kit";
   if (path.includes("apartment") || path.includes("rental") || path.includes("approved-for-an-apartment")) return "rental-application-kit";
   if (path.includes("credit")) return "credit-letter-kit";
@@ -80,8 +86,8 @@ const skuForRoute = (() => {
   if (path.includes("complete-approvalprep-bundle")) return "complete-approvalprep-bundle";
   return "letter-of-explanation";
 })();
-const ctaHref = route.cta_policy === "purchase" ? `/pricing#${skuForRoute}` : (route.path.includes("apartment") || route.path.includes("rental") ? "/apartment-application" : "/letter-of-explanation");
-const primarySku = route.cta_policy === "purchase" ? skuForRoute : "";
+const ctaHref = (route.cta_policy === "purchase" || priorityEntry) ? `/pricing#${skuForRoute}` : (route.path.includes("apartment") || route.path.includes("rental") ? "/apartment-application" : "/letter-of-explanation");
+const primarySku = (route.cta_policy === "purchase" || priorityEntry) ? skuForRoute : "";
 const routeProduct = productForSku(skuForRoute);
 const routeOfferings = offeringsForSku(skuForRoute);
 const isCommercial = route.cta_policy === "purchase" || route.page_intent === "product";
@@ -153,6 +159,7 @@ const childRoutes = manifest.routes
       </div>
     )}
   </section>
+  <KitAnswer path={route.path} />
   {showRecommendation && (
     <section class="band recommendation-summary-band"><div class="shell">
       <RecommendationSummary statement={copy.shortAnswer} ctaLabel={primaryCtaWithPrice} ctaHref={ctaHref} />
@@ -200,7 +207,7 @@ const childRoutes = manifest.routes
           </div>
         </div>
         <div class="pricing-model-grid">
-          <article class="notice"><strong>How the offers work:</strong><p>Every paid product is a direct paid download. Pick one paid kit below; Stripe unlocks that kit's PDF guide and editable DOCX file. The named offerings listed inside each card are the tools covered by that kit. The $39 Letter of Explanation Kit includes all 9 explanation-letter templates listed in that card.</p></article>
+          <article class="notice"><strong>How the offers work:</strong><p>Every paid product is a direct paid download. Pick one paid kit below; Stripe unlocks that kit's PDF guide and editable DOCX file. The named offerings listed inside each card are the tools covered by that kit. The $15 Letter of Explanation Kit includes all 9 explanation-letter templates listed in that card.</p></article>
           <article class="notice"><strong>Not ready to buy?</strong><p>Start with the free $0 Studio. It helps you draft a first-pass letter and choose the right paid kit without storing your answers.</p></article>
         </div>
         <div class="card discount-card">

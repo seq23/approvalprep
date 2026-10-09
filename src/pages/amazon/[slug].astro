@@ -41,6 +41,7 @@
  * them in competition with those guides.
  */
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Byline from "../../components/Byline.astro";
 import RecommendationSummary from "../../components/RecommendationSummary.astro";
 import FAQBlock from "../../components/FAQBlock.astro";
 import TrustAndBoundaryBand from "../../components/TrustAndBoundaryBand.astro";
@@ -85,7 +86,7 @@ const trustSignals = ["No account required", "No saved customer documents", "No 
     <div>
       <p class="eyebrow">{page.eyebrow} — {page.book}</p>
       <h1>{page.title}</h1>
-      <p class="lead" data-direct-answer="true">{page.directAnswer}</p>
+      <p class="lead" data-direct-answer="true">{page.directAnswer}</p><Byline />
       <div class="hero-actions">
         <button class="button primary-button checkout-button" type="button" data-sku={page.sku}>{`Buy the ${product.name} — ${product.priceLabel}`}</button>
         <a class="button secondary secondary-button" href="/pricing/">Compare all kits</a>

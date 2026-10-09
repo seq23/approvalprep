@@ -6,20 +6,20 @@ Runtime delivery path: `/api/verify-download` verifies the Stripe session or pai
 
 | Product | Price | Offering rows in kit | PDF review file | DOCX review file | R2 keys |
 |---|---:|---:|---|---|---|
-| Letter of Explanation Kit | $39 | 9 | [PDF](../../seed-downloads/letter-of-explanation.pdf) | [DOCX](../../seed-downloads/letter-of-explanation.docx) | `downloads/letter-of-explanation.pdf`<br>`downloads/letter-of-explanation.docx` |
-| Income + Employment Letter Kit | $59 | 6 | [PDF](../../seed-downloads/income-employment-letter-kit.pdf) | [DOCX](../../seed-downloads/income-employment-letter-kit.docx) | `downloads/income-employment-letter-kit.pdf`<br>`downloads/income-employment-letter-kit.docx` |
-| Credit Letter Kit | $59 | 7 | [PDF](../../seed-downloads/credit-letter-kit.pdf) | [DOCX](../../seed-downloads/credit-letter-kit.docx) | `downloads/credit-letter-kit.pdf`<br>`downloads/credit-letter-kit.docx` |
-| Rental Application Kit | $129 | 9 | [PDF](../../seed-downloads/rental-application-kit.pdf) | [DOCX](../../seed-downloads/rental-application-kit.docx) | `downloads/rental-application-kit.pdf`<br>`downloads/rental-application-kit.docx` |
-| Loan Prep Letter Kit | $99 | 8 | [PDF](../../seed-downloads/loan-prep-letter-kit.pdf) | [DOCX](../../seed-downloads/loan-prep-letter-kit.docx) | `downloads/loan-prep-letter-kit.pdf`<br>`downloads/loan-prep-letter-kit.docx` |
-| Business Funding Prep Kit | $149 | 8 | [PDF](../../seed-downloads/business-funding-prep-kit.pdf) | [DOCX](../../seed-downloads/business-funding-prep-kit.docx) | `downloads/business-funding-prep-kit.pdf`<br>`downloads/business-funding-prep-kit.docx` |
-| Life Admin Letter Kit | $79 | 8 | [PDF](../../seed-downloads/life-admin-letter-kit.pdf) | [DOCX](../../seed-downloads/life-admin-letter-kit.docx) | `downloads/life-admin-letter-kit.pdf`<br>`downloads/life-admin-letter-kit.docx` |
-| Complete ApprovalPrep Bundle | $249 | 50 | [PDF](../../seed-downloads/complete-approvalprep-bundle.pdf) | [DOCX](../../seed-downloads/complete-approvalprep-bundle.docx) | `downloads/complete-approvalprep-bundle.pdf`<br>`downloads/complete-approvalprep-bundle.docx` |
+| Letter of Explanation Kit | $15 | 9 | [PDF](../../seed-downloads/letter-of-explanation.pdf) | [DOCX](../../seed-downloads/letter-of-explanation.docx) | `downloads/letter-of-explanation.pdf`<br>`downloads/letter-of-explanation.docx` |
+| Income + Employment Letter Kit | $19 | 6 | [PDF](../../seed-downloads/income-employment-letter-kit.pdf) | [DOCX](../../seed-downloads/income-employment-letter-kit.docx) | `downloads/income-employment-letter-kit.pdf`<br>`downloads/income-employment-letter-kit.docx` |
+| Credit Letter Kit | $19 | 7 | [PDF](../../seed-downloads/credit-letter-kit.pdf) | [DOCX](../../seed-downloads/credit-letter-kit.docx) | `downloads/credit-letter-kit.pdf`<br>`downloads/credit-letter-kit.docx` |
+| Rental Application Kit | $29 | 9 | [PDF](../../seed-downloads/rental-application-kit.pdf) | [DOCX](../../seed-downloads/rental-application-kit.docx) | `downloads/rental-application-kit.pdf`<br>`downloads/rental-application-kit.docx` |
+| Loan Prep Letter Kit | $29 | 8 | [PDF](../../seed-downloads/loan-prep-letter-kit.pdf) | [DOCX](../../seed-downloads/loan-prep-letter-kit.docx) | `downloads/loan-prep-letter-kit.pdf`<br>`downloads/loan-prep-letter-kit.docx` |
+| Business Funding Prep Kit | $39 | 8 | [PDF](../../seed-downloads/business-funding-prep-kit.pdf) | [DOCX](../../seed-downloads/business-funding-prep-kit.docx) | `downloads/business-funding-prep-kit.pdf`<br>`downloads/business-funding-prep-kit.docx` |
+| Life Admin Letter Kit | $19 | 8 | [PDF](../../seed-downloads/life-admin-letter-kit.pdf) | [DOCX](../../seed-downloads/life-admin-letter-kit.docx) | `downloads/life-admin-letter-kit.pdf`<br>`downloads/life-admin-letter-kit.docx` |
+| Complete ApprovalPrep Bundle | $49 | 50 | [PDF](../../seed-downloads/complete-approvalprep-bundle.pdf) | [DOCX](../../seed-downloads/complete-approvalprep-bundle.docx) | `downloads/complete-approvalprep-bundle.pdf`<br>`downloads/complete-approvalprep-bundle.docx` |
 
 ## Product Contents
 
 ### Letter of Explanation Kit (letter-of-explanation)
 
-- Checkout price: $39
+- Checkout price: $15
 - Downloaded files: `seed-downloads/letter-of-explanation.pdf` and `seed-downloads/letter-of-explanation.docx`
 - Production R2 keys: `downloads/letter-of-explanation.pdf`, `downloads/letter-of-explanation.docx`
 - Delivery model: direct_paid_download; Studio required: false
@@ -36,7 +36,7 @@ Runtime delivery path: `/api/verify-download` verifies the Stripe session or pai
 
 ### Income + Employment Letter Kit (income-employment-letter-kit)
 
-- Checkout price: $59
+- Checkout price: $19
 - Downloaded files: `seed-downloads/income-employment-letter-kit.pdf` and `seed-downloads/income-employment-letter-kit.docx`
 - Production R2 keys: `downloads/income-employment-letter-kit.pdf`, `downloads/income-employment-letter-kit.docx`
 - Delivery model: direct_paid_download; Studio required: false
@@ -50,7 +50,7 @@ Runtime delivery path: `/api/verify-download` verifies the Stripe session or pai
 
 ### Credit Letter Kit (credit-letter-kit)
 
-- Checkout price: $59
+- Checkout price: $19
 - Downloaded files: `seed-downloads/credit-letter-kit.pdf` and `seed-downloads/credit-letter-kit.docx`
 - Production R2 keys: `downloads/credit-letter-kit.pdf`, `downloads/credit-letter-kit.docx`
 - Delivery model: direct_paid_download; Studio required: false
@@ -65,7 +65,7 @@ Runtime delivery path: `/api/verify-download` verifies the Stripe session or pai
 
 ### Rental Application Kit (rental-application-kit)
 
-- Checkout price: $129
+- Checkout price: $29
 - Downloaded files: `seed-downloads/rental-application-kit.pdf` and `seed-downloads/rental-application-kit.docx`
 - Production R2 keys: `downloads/rental-application-kit.pdf`, `downloads/rental-application-kit.docx`
 - Delivery model: direct_paid_download; Studio required: false
@@ -82,7 +82,7 @@ Runtime delivery path: `/api/verify-download` verifies the Stripe session or pai
 
 ### Loan Prep Letter Kit (loan-prep-letter-kit)
 
-- Checkout price: $99
+- Checkout price: $29
 - Downloaded files: `seed-downloads/loan-prep-letter-kit.pdf` and `seed-downloads/loan-prep-letter-kit.docx`
 - Production R2 keys: `downloads/loan-prep-letter-kit.pdf`, `downloads/loan-prep-letter-kit.docx`
 - Delivery model: direct_paid_download; Studio required: false
@@ -98,7 +98,7 @@ Runtime delivery path: `/api/verify-download` verifies the Stripe session or pai
 
 ### Business Funding Prep Kit (business-funding-prep-kit)
 
-- Checkout price: $149
+- Checkout price: $39
 - Downloaded files: `seed-downloads/business-funding-prep-kit.pdf` and `seed-downloads/business-funding-prep-kit.docx`
 - Production R2 keys: `downloads/business-funding-prep-kit.pdf`, `downloads/business-funding-prep-kit.docx`
 - Delivery model: direct_paid_download; Studio required: false
@@ -114,7 +114,7 @@ Runtime delivery path: `/api/verify-download` verifies the Stripe session or pai
 
 ### Life Admin Letter Kit (life-admin-letter-kit)
 
-- Checkout price: $79
+- Checkout price: $19
 - Downloaded files: `seed-downloads/life-admin-letter-kit.pdf` and `seed-downloads/life-admin-letter-kit.docx`
 - Production R2 keys: `downloads/life-admin-letter-kit.pdf`, `downloads/life-admin-letter-kit.docx`
 - Delivery model: direct_paid_download; Studio required: false
@@ -130,7 +130,7 @@ Runtime delivery path: `/api/verify-download` verifies the Stripe session or pai
 
 ### Complete ApprovalPrep Bundle (complete-approvalprep-bundle)
 
-- Checkout price: $249
+- Checkout price: $49
 - Downloaded files: `seed-downloads/complete-approvalprep-bundle.pdf` and `seed-downloads/complete-approvalprep-bundle.docx`
 - Production R2 keys: `downloads/complete-approvalprep-bundle.pdf`, `downloads/complete-approvalprep-bundle.docx`
 - Delivery model: direct_paid_download; Studio required: false
