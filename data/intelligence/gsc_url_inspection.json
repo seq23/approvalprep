@@ -1,14 +1,926 @@
 {
   "schemaVersion": "4.2.0",
   "connectorId": "google_url_inspection",
-  "mode": "unavailable",
+  "mode": "live",
   "siteUrl": "sc-domain:approvalprep.com",
-  "fetchedAt": "2026-10-08T08:41:54.045Z",
-  "rows": [],
-  "errors": [
+  "fetchedAt": "2026-10-09T04:28:24.108Z",
+  "rows": [
     {
-      "code": "NOT_AUTHORIZED",
-      "message": "HTTP 403: {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"You do not own this site, or the inspected URL is not part of this property.\",\n    \"status\": \"PERMISSION_DENIED\"\n  }\n}\n"
+      "route": "/",
+      "inspectionUrl": "https://approvalprep.com/",
+      "verdict": "PASS",
+      "result": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:approvalprep.com&id=e4BrQY41Z01JkwgXC8RGqQ&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-10-02T14:56:12Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://approvalprep.com/",
+          "userCanonical": "https://approvalprep.com/",
+          "sitemap": [
+            "https://approvalprep.com/sitemap.xml"
+          ],
+          "referringUrls": [
+            "http://www.approvalprep.com/",
+            "https://employmentverificationletter.com/blog/what-should-i-know-about-auto-loan-documents/",
+            "http://www.letterofexplanation.com/",
+            "https://www.letterofexplanation.com/"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        }
+      },
+      "importedAt": "2026-10-09T04:25:53.842Z"
+    },
+    {
+      "route": "/letter-writing-studio",
+      "inspectionUrl": "https://approvalprep.com/letter-writing-studio/",
+      "verdict": "PASS",
+      "result": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:approvalprep.com&id=izMlqgNNeA6YTEpZQ9u1Gg&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-10-07T15:56:33Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://approvalprep.com/letter-writing-studio/",
+          "userCanonical": "https://approvalprep.com/letter-writing-studio/",
+          "sitemap": [
+            "https://approvalprep.com/sitemap.xml"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        },
+        "richResultsResult": {
+          "verdict": "PASS",
+          "detectedItems": [
+            {
+              "richResultType": "Breadcrumbs",
+              "items": [
+                {
+                  "name": "Unnamed item"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "importedAt": "2026-10-09T04:26:00.191Z"
+    },
+    {
+      "route": "/blog",
+      "inspectionUrl": "https://approvalprep.com/blog/",
+      "verdict": "PASS",
+      "result": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:approvalprep.com&id=R2aiaH823mE2AFQO5I34VQ&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-10-01T14:54:16Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://approvalprep.com/blog/",
+          "userCanonical": "https://approvalprep.com/blog/",
+          "sitemap": [
+            "https://approvalprep.com/sitemap.xml"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        },
+        "richResultsResult": {
+          "verdict": "PASS",
+          "detectedItems": [
+            {
+              "richResultType": "Breadcrumbs",
+              "items": [
+                {
+                  "name": "Unnamed item"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "importedAt": "2026-10-09T04:26:06.675Z"
+    },
+    {
+      "route": "/resources",
+      "inspectionUrl": "https://approvalprep.com/resources/",
+      "verdict": "PASS",
+      "result": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:approvalprep.com&id=oTTYxZFvQsf-1i52VTBxyA&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-09-26T15:26:21Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://approvalprep.com/resources/",
+          "userCanonical": "https://approvalprep.com/resources/",
+          "sitemap": [
+            "https://approvalprep.com/sitemap.xml"
+          ],
+          "referringUrls": [
+            "https://approvalprep.com/resources"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        },
+        "richResultsResult": {
+          "verdict": "PASS",
+          "detectedItems": [
+            {
+              "richResultType": "Breadcrumbs",
+              "items": [
+                {
+                  "name": "Unnamed item"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "importedAt": "2026-10-09T04:26:12.879Z"
+    },
+    {
+      "route": "/pricing",
+      "inspectionUrl": "https://approvalprep.com/pricing/",
+      "verdict": "PASS",
+      "result": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:approvalprep.com&id=NPMtU7bhMULkf0JOIZrcJA&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-09-28T17:21:04Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://approvalprep.com/pricing/",
+          "userCanonical": "https://approvalprep.com/pricing/",
+          "sitemap": [
+            "https://approvalprep.com/sitemap.xml"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        },
+        "richResultsResult": {
+          "verdict": "PASS",
+          "detectedItems": [
+            {
+              "richResultType": "Breadcrumbs",
+              "items": [
+                {
+                  "name": "Unnamed item"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "importedAt": "2026-10-09T04:26:18.975Z"
+    },
+    {
+      "route": "/letter-of-explanation",
+      "inspectionUrl": "https://approvalprep.com/letter-of-explanation/",
+      "verdict": "PASS",
+      "result": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:approvalprep.com&id=WgDm7wAuhL1_83hjA41DIg&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-09-29T21:45:39Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://approvalprep.com/letter-of-explanation/",
+          "userCanonical": "https://approvalprep.com/letter-of-explanation/",
+          "referringUrls": [
+            "https://approvalprep.com/letter-of-explanation"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        },
+        "richResultsResult": {
+          "verdict": "PASS",
+          "detectedItems": [
+            {
+              "richResultType": "Breadcrumbs",
+              "items": [
+                {
+                  "name": "Unnamed item"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "importedAt": "2026-10-09T04:26:25.293Z"
+    },
+    {
+      "route": "/letter-of-explanation/credit",
+      "inspectionUrl": "https://approvalprep.com/letter-of-explanation/credit/",
+      "verdict": "PASS",
+      "result": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:approvalprep.com&id=aqJx2g3P0fuCaq0XR4MKkg&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-07-28T04:47:18Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://approvalprep.com/letter-of-explanation/credit/",
+          "userCanonical": "https://approvalprep.com/letter-of-explanation/credit",
+          "sitemap": [
+            "https://approvalprep.com/sitemap.xml"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        }
+      },
+      "importedAt": "2026-10-09T04:26:31.520Z"
+    },
+    {
+      "route": "/letter-of-explanation/eviction",
+      "inspectionUrl": "https://approvalprep.com/letter-of-explanation/eviction/",
+      "verdict": "PASS",
+      "result": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:approvalprep.com&id=yziS5GiL7DNdY2I-K072WA&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-09-29T22:35:22Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://approvalprep.com/letter-of-explanation/eviction/",
+          "userCanonical": "https://approvalprep.com/letter-of-explanation/eviction/",
+          "sitemap": [
+            "https://approvalprep.com/sitemap.xml"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        },
+        "richResultsResult": {
+          "verdict": "PASS",
+          "detectedItems": [
+            {
+              "richResultType": "Breadcrumbs",
+              "items": [
+                {
+                  "name": "Unnamed item"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "importedAt": "2026-10-09T04:26:37.875Z"
+    },
+    {
+      "route": "/letter-of-explanation/income",
+      "inspectionUrl": "https://approvalprep.com/letter-of-explanation/income/",
+      "verdict": "PASS",
+      "result": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:approvalprep.com&id=Uav3dxTtrz1Cx6xPc08prQ&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-09-26T07:30:09Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://approvalprep.com/letter-of-explanation/income/",
+          "userCanonical": "https://approvalprep.com/letter-of-explanation/income/",
+          "sitemap": [
+            "https://approvalprep.com/sitemap.xml"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        },
+        "richResultsResult": {
+          "verdict": "PASS",
+          "detectedItems": [
+            {
+              "richResultType": "Breadcrumbs",
+              "items": [
+                {
+                  "name": "Unnamed item"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "importedAt": "2026-10-09T04:26:44.077Z"
+    },
+    {
+      "route": "/letter-of-explanation/employment-gap",
+      "inspectionUrl": "https://approvalprep.com/letter-of-explanation/employment-gap/",
+      "verdict": "PASS",
+      "result": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:approvalprep.com&id=iRXHfUcMqUDR33_34RMUUQ&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-09-21T12:23:14Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://approvalprep.com/letter-of-explanation/employment-gap/",
+          "userCanonical": "https://approvalprep.com/letter-of-explanation/employment-gap/",
+          "sitemap": [
+            "https://approvalprep.com/sitemap.xml"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        },
+        "richResultsResult": {
+          "verdict": "PASS",
+          "detectedItems": [
+            {
+              "richResultType": "Breadcrumbs",
+              "items": [
+                {
+                  "name": "Unnamed item"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "importedAt": "2026-10-09T04:26:50.282Z"
+    },
+    {
+      "route": "/employment-verification-letter",
+      "inspectionUrl": "https://approvalprep.com/employment-verification-letter/",
+      "verdict": "PASS",
+      "result": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:approvalprep.com&id=BwQeGSbA2IzTOOR5-g00gw&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-09-27T23:36:59Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://approvalprep.com/employment-verification-letter/",
+          "userCanonical": "https://approvalprep.com/employment-verification-letter/",
+          "sitemap": [
+            "https://approvalprep.com/sitemap.xml"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        },
+        "richResultsResult": {
+          "verdict": "PASS",
+          "detectedItems": [
+            {
+              "richResultType": "Breadcrumbs",
+              "items": [
+                {
+                  "name": "Unnamed item"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "importedAt": "2026-10-09T04:26:56.439Z"
+    },
+    {
+      "route": "/609-dispute-letter",
+      "inspectionUrl": "https://approvalprep.com/609-dispute-letter/",
+      "verdict": "NEUTRAL",
+      "result": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:approvalprep.com&id=butkfE-CmtoghsCpzB0sWw&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "NEUTRAL",
+          "coverageState": "Discovered - currently not indexed",
+          "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+          "indexingState": "INDEXING_STATE_UNSPECIFIED",
+          "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+          "sitemap": [
+            "https://approvalprep.com/sitemap.xml"
+          ],
+          "crawledAs": "CRAWLING_USER_AGENT_UNSPECIFIED"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        }
+      },
+      "importedAt": "2026-10-09T04:27:02.637Z"
+    },
+    {
+      "route": "/goodwill-letter-to-remove-late-payment",
+      "inspectionUrl": "https://approvalprep.com/goodwill-letter-to-remove-late-payment/",
+      "verdict": "PASS",
+      "result": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:approvalprep.com&id=SOKE5993Rb0kc2ZD_3ptAw&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-09-28T05:15:29Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://approvalprep.com/goodwill-letter-to-remove-late-payment/",
+          "userCanonical": "https://approvalprep.com/goodwill-letter-to-remove-late-payment/",
+          "sitemap": [
+            "https://approvalprep.com/sitemap.xml"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        },
+        "richResultsResult": {
+          "verdict": "PASS",
+          "detectedItems": [
+            {
+              "richResultType": "Breadcrumbs",
+              "items": [
+                {
+                  "name": "Unnamed item"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "importedAt": "2026-10-09T04:27:08.839Z"
+    },
+    {
+      "route": "/letter-of-explanation/late-payment",
+      "inspectionUrl": "https://approvalprep.com/letter-of-explanation/late-payment/",
+      "verdict": "NEUTRAL",
+      "result": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:approvalprep.com&id=TSJ4a0h2MrDmNRZnabeyCQ&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "NEUTRAL",
+          "coverageState": "Discovered - currently not indexed",
+          "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+          "indexingState": "INDEXING_STATE_UNSPECIFIED",
+          "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+          "sitemap": [
+            "https://approvalprep.com/sitemap.xml"
+          ],
+          "crawledAs": "CRAWLING_USER_AGENT_UNSPECIFIED"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        }
+      },
+      "importedAt": "2026-10-09T04:27:15.041Z"
+    },
+    {
+      "route": "/letter-of-explanation/large-deposit",
+      "inspectionUrl": "https://approvalprep.com/letter-of-explanation/large-deposit/",
+      "verdict": "NEUTRAL",
+      "result": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:approvalprep.com&id=wg6XSgIBA2uNmEFYwJWXgg&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "NEUTRAL",
+          "coverageState": "Discovered - currently not indexed",
+          "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+          "indexingState": "INDEXING_STATE_UNSPECIFIED",
+          "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+          "sitemap": [
+            "https://approvalprep.com/sitemap.xml"
+          ],
+          "crawledAs": "CRAWLING_USER_AGENT_UNSPECIFIED"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        }
+      },
+      "importedAt": "2026-10-09T04:27:21.169Z"
+    },
+    {
+      "route": "/proof-of-income-letter",
+      "inspectionUrl": "https://approvalprep.com/proof-of-income-letter/",
+      "verdict": "PASS",
+      "result": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:approvalprep.com&id=fMKQhddu-30wPVW8SfIBvA&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-09-25T14:32:05Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://approvalprep.com/proof-of-income-letter/",
+          "userCanonical": "https://approvalprep.com/proof-of-income-letter/",
+          "sitemap": [
+            "https://approvalprep.com/sitemap.xml"
+          ],
+          "referringUrls": [
+            "https://approvalprep.com/proof-of-income-letter"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        },
+        "richResultsResult": {
+          "verdict": "PASS",
+          "detectedItems": [
+            {
+              "richResultType": "Breadcrumbs",
+              "items": [
+                {
+                  "name": "Unnamed item"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "importedAt": "2026-10-09T04:27:27.523Z"
+    },
+    {
+      "route": "/credit-dispute-letter",
+      "inspectionUrl": "https://approvalprep.com/credit-dispute-letter/",
+      "verdict": "PASS",
+      "result": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:approvalprep.com&id=rRyfcj4YMQcn7X-k9FPsZQ&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-09-29T17:35:21Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://approvalprep.com/credit-dispute-letter/",
+          "userCanonical": "https://approvalprep.com/credit-dispute-letter/",
+          "sitemap": [
+            "https://approvalprep.com/sitemap.xml"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        },
+        "richResultsResult": {
+          "verdict": "PASS",
+          "detectedItems": [
+            {
+              "richResultType": "Breadcrumbs",
+              "items": [
+                {
+                  "name": "Unnamed item"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "importedAt": "2026-10-09T04:27:33.639Z"
+    },
+    {
+      "route": "/apartment-application",
+      "inspectionUrl": "https://approvalprep.com/apartment-application/",
+      "verdict": "PASS",
+      "result": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:approvalprep.com&id=q3d0RP9t5uniqHesgshaIA&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-10-07T17:11:33Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://approvalprep.com/apartment-application/",
+          "userCanonical": "https://approvalprep.com/apartment-application/",
+          "sitemap": [
+            "https://approvalprep.com/sitemap.xml"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        },
+        "richResultsResult": {
+          "verdict": "PASS",
+          "detectedItems": [
+            {
+              "richResultType": "Breadcrumbs",
+              "items": [
+                {
+                  "name": "Unnamed item"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "importedAt": "2026-10-09T04:27:39.957Z"
+    },
+    {
+      "route": "/rental-application-checklist",
+      "inspectionUrl": "https://approvalprep.com/rental-application-checklist/",
+      "verdict": "PASS",
+      "result": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:approvalprep.com&id=xrVbAg-3jggZbAZYheUGwg&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-09-30T03:35:25Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://approvalprep.com/rental-application-checklist/",
+          "userCanonical": "https://approvalprep.com/rental-application-checklist/",
+          "referringUrls": [
+            "https://approvalprep.com/rental-application-checklist"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        },
+        "richResultsResult": {
+          "verdict": "PASS",
+          "detectedItems": [
+            {
+              "richResultType": "Breadcrumbs",
+              "items": [
+                {
+                  "name": "Unnamed item"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "importedAt": "2026-10-09T04:27:46.389Z"
+    },
+    {
+      "route": "/how-to-get-approved-for-an-apartment",
+      "inspectionUrl": "https://approvalprep.com/how-to-get-approved-for-an-apartment/",
+      "verdict": "PASS",
+      "result": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:approvalprep.com&id=HA7p96a-echmKfqLekg7tQ&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-10-02T10:51:19Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://approvalprep.com/how-to-get-approved-for-an-apartment/",
+          "userCanonical": "https://approvalprep.com/how-to-get-approved-for-an-apartment/",
+          "sitemap": [
+            "https://approvalprep.com/sitemap.xml"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        },
+        "richResultsResult": {
+          "verdict": "PASS",
+          "detectedItems": [
+            {
+              "richResultType": "Breadcrumbs",
+              "items": [
+                {
+                  "name": "Unnamed item"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "importedAt": "2026-10-09T04:27:52.838Z"
+    },
+    {
+      "route": "/auto-loan-documents",
+      "inspectionUrl": "https://approvalprep.com/auto-loan-documents/",
+      "verdict": "PASS",
+      "result": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:approvalprep.com&id=pPjmLyCdpQ_L6TYRwx0Q4A&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-09-08T10:13:48Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://approvalprep.com/auto-loan-documents/",
+          "userCanonical": "https://approvalprep.com/auto-loan-documents/",
+          "sitemap": [
+            "https://approvalprep.com/sitemap.xml"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        },
+        "richResultsResult": {
+          "verdict": "PASS",
+          "detectedItems": [
+            {
+              "richResultType": "Breadcrumbs",
+              "items": [
+                {
+                  "name": "Unnamed item"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "importedAt": "2026-10-09T04:27:59.256Z"
+    },
+    {
+      "route": "/car-loan-checklist",
+      "inspectionUrl": "https://approvalprep.com/car-loan-checklist/",
+      "verdict": "PASS",
+      "result": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:approvalprep.com&id=woJ6e1N2jfIAVneAge6i9w&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-09-21T03:49:34Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://approvalprep.com/car-loan-checklist/",
+          "userCanonical": "https://approvalprep.com/car-loan-checklist/",
+          "referringUrls": [
+            "https://approvalprep.com/car-loan-checklist"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        },
+        "richResultsResult": {
+          "verdict": "PASS",
+          "detectedItems": [
+            {
+              "richResultType": "Breadcrumbs",
+              "items": [
+                {
+                  "name": "Unnamed item"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "importedAt": "2026-10-09T04:28:05.470Z"
+    },
+    {
+      "route": "/documents-needed-for-car-loan",
+      "inspectionUrl": "https://approvalprep.com/documents-needed-for-car-loan/",
+      "verdict": "PASS",
+      "result": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:approvalprep.com&id=RyKJyAMecZVVxNkr8mPLnA&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-09-28T06:25:42Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://approvalprep.com/documents-needed-for-car-loan/",
+          "userCanonical": "https://approvalprep.com/documents-needed-for-car-loan/",
+          "sitemap": [
+            "https://approvalprep.com/sitemap.xml"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        },
+        "richResultsResult": {
+          "verdict": "PASS",
+          "detectedItems": [
+            {
+              "richResultType": "Breadcrumbs",
+              "items": [
+                {
+                  "name": "Unnamed item"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "importedAt": "2026-10-09T04:28:11.685Z"
+    },
+    {
+      "route": "/sba-loan-checklist",
+      "inspectionUrl": "https://approvalprep.com/sba-loan-checklist/",
+      "verdict": "PASS",
+      "result": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:approvalprep.com&id=L-khangsEWd3p7v1nllVRA&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-10-02T11:41:18Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://approvalprep.com/sba-loan-checklist/",
+          "userCanonical": "https://approvalprep.com/sba-loan-checklist/",
+          "sitemap": [
+            "https://approvalprep.com/sitemap.xml"
+          ],
+          "referringUrls": [
+            "https://approvalprep.com/sba-loan-checklist"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        },
+        "richResultsResult": {
+          "verdict": "PASS",
+          "detectedItems": [
+            {
+              "richResultType": "Breadcrumbs",
+              "items": [
+                {
+                  "name": "Unnamed item"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "importedAt": "2026-10-09T04:28:17.911Z"
+    },
+    {
+      "route": "/business-loan-documents",
+      "inspectionUrl": "https://approvalprep.com/business-loan-documents/",
+      "verdict": "PASS",
+      "result": {
+        "inspectionResultLink": "https://search.google.com/search-console/inspect?resource_id=sc-domain:approvalprep.com&id=RflODPJPN3njoSJGpDL32w&utm_medium=link&utm_source=api",
+        "indexStatusResult": {
+          "verdict": "PASS",
+          "coverageState": "Submitted and indexed",
+          "robotsTxtState": "ALLOWED",
+          "indexingState": "INDEXING_ALLOWED",
+          "lastCrawlTime": "2026-09-26T20:45:15Z",
+          "pageFetchState": "SUCCESSFUL",
+          "googleCanonical": "https://approvalprep.com/business-loan-documents/",
+          "userCanonical": "https://approvalprep.com/business-loan-documents/",
+          "sitemap": [
+            "https://approvalprep.com/sitemap.xml"
+          ],
+          "crawledAs": "MOBILE"
+        },
+        "mobileUsabilityResult": {
+          "verdict": "VERDICT_UNSPECIFIED"
+        },
+        "richResultsResult": {
+          "verdict": "PASS",
+          "detectedItems": [
+            {
+              "richResultType": "Breadcrumbs",
+              "items": [
+                {
+                  "name": "Unnamed item"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "importedAt": "2026-10-09T04:28:24.108Z"
     }
-  ]
+  ],
+  "errors": []
 }
