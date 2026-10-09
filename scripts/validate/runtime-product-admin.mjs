@@ -26,4 +26,15 @@ for(const p of seed.products){
   if(!r||r.priceCents!==p.priceCents||r.stripeLivePriceId!==p.stripeLivePriceId||r.stripeTestPriceId!==p.stripeTestPriceId) fail(`${p.slug}: functions/_runtime/seed-products.js disagrees with seed_product_registry.json`);
   if(p.priceCents>4900) fail(`${p.slug}: $${p.priceCents/100} is above the $49 ceiling set on 8 Oct 2026`);
 }
-console.log('PASS runtime-product-admin');
+// ...and every surface a customer reads: the paid PDF/DOCX kit files, site
+// source and content data, Functions copy (emails), public/ and, when built, the
+// rendered pages with their JSON-LD. #41 left $39-$249 on the Amazon landing
+// pages because nothing here looked past the three seeds.
+const { sweepKitPrices, customerSurfaces } = await import('./_kit_price_surfaces.mjs');
+const { publishedDir } = await import('./_common.mjs');
+const surfaces = customerSurfaces({ buildDir: publishedDir() });
+const sweep = sweepKitPrices(seed.products, surfaces);
+if (sweep.downloadsRead < seed.products.length * 2) fail(`kit price sweep read ${sweep.downloadsRead} PDF/DOCX kit files, expected ${seed.products.length * 2}`);
+if (sweep.mentionsChecked === 0) fail('kit price sweep matched no kit price on any surface; the sweep is not reading what it governs');
+if (sweep.problems.length) fail(`kit price shown on a customer surface disagrees with the seed:\n  ${sweep.problems.slice(0, 40).join('\n  ')}`);
+console.log(`PASS runtime-product-admin (kit prices: ${sweep.mentionsChecked} mentions across ${sweep.filesRead} files, ${sweep.downloadsRead} kit downloads read)`);
