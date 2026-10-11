@@ -48,6 +48,31 @@ export const canonicalUrl = (input: string) => {
 // JSON-LD author for every Article. Same file as the visible Byline component.
 export const editorialAuthor = () => ({ "@type": "Organization", name: editorial.name, url: canonicalUrl(editorial.aboutPath), parentOrganization: { "@type": "Organization", name: editorial.parentName } });
 
+// The site-wide social share image (public/og.png, drawn by
+// scripts/seo/generate-brand-assets.py). BaseLayout puts it on every page;
+// scripts/validate/seo-hygiene.mjs checks the file's real dimensions match.
+export const OG_IMAGE = { url: `${SITE_ORIGIN}/og.png`, width: 1200, height: 630, alt: "ApprovalPrep: self-service letters and approval-ready documents" };
+
+export const websiteSchema = () => ({
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "ApprovalPrep",
+  url: canonicalUrl("/"),
+  inLanguage: "en-US",
+  publisher: { "@type": "Organization", name: "ApprovalPrep", url: canonicalUrl("/") }
+});
+
+/**
+ * WebPage whose speakable parts are named by CSS selectors. Each selector must
+ * match an element on the built page (scripts/validate/seo-hygiene.mjs, check
+ * `definition`), so a renamed id cannot leave the spec pointing at nothing.
+ */
+export const speakableWebPageSchema = ({ title, description, url, cssSelector }: { title: string; description: string; url: string; cssSelector: string[] }) => ({
+  ...webPageSchema({ title, description, url }),
+  isPartOf: { "@type": "WebSite", name: "ApprovalPrep", url: canonicalUrl("/") },
+  speakable: { "@type": "SpeakableSpecification", cssSelector }
+});
+
 export const orgSchema = () => ({ "@context": "https://schema.org", "@type": "Organization", name: "ApprovalPrep", url: canonicalUrl("/") });
 
 export const webPageSchema = ({ title, description, url }: { title: string; description: string; url: string }) => ({
@@ -140,5 +165,5 @@ export const productSchema = ({ name, description, url, price }: { name: string;
   name,
   description,
   url,
-  ...(price ? { offers: { "@type": "Offer", priceCurrency: "USD", price: price.replace(/[^0-9.]/g, "") } } : {})
+  ...(price ? { offers: { "@type": "Offer", priceCurrency: "USD", price: price.replace(/[^0-9.]/g, ""), availability: "https://schema.org/InStock", url }  } : {})
 });

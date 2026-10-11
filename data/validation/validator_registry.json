@@ -1416,6 +1416,72 @@
       "owner": "approvalprep-ops",
       "group": "conversion-critical",
       "scope": "The seven /amazon/* book companion paths plus the /amazon index: registered, built, served 200, wired to a real Stripe SKU or declared as having no companion product, reachable from the index, and matching the recorded noindex posture"
+    },
+    {
+      "id": "seo-hygiene-favicon",
+      "npmScript": "validate:seo-hygiene:favicon",
+      "entrypoint": "scripts/validate/seo-hygiene.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "Favicon set and manifest: measured missing on the live site 2026-10-11",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "favicon.ico 16/32/48, apple-touch-icon 180, manifest icons and the link tags on every built page"
+    },
+    {
+      "id": "seo-hygiene-og-image",
+      "npmScript": "validate:seo-hygiene:og-image",
+      "entrypoint": "scripts/validate/seo-hygiene.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "Social share image on every page: measured missing on the live site 2026-10-11",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "og.png is a real 1200x630 PNG; every page names it with matching og:image:width/height, twitter:card summary_large_image and twitter:image"
+    },
+    {
+      "id": "seo-hygiene-jsonld",
+      "npmScript": "validate:seo-hygiene:jsonld",
+      "entrypoint": "scripts/validate/seo-hygiene.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "JSON-LD types per page kind: measured missing on the live site 2026-10-11",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "Organization everywhere; WebSite + speakable WebPage on /; BreadcrumbList on inner sitemap pages; FAQPage only where its questions are visible; Product+Offer on kit pages with the price visible"
+    },
+    {
+      "id": "seo-hygiene-definition",
+      "npmScript": "validate:seo-hygiene:definition",
+      "entrypoint": "scripts/validate/seo-hygiene.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "Homepage definition paragraph: measured missing on the live site 2026-10-11",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "paragraph directly under the H1 starts 'ApprovalPrep is', 40-60 words, and every speakable cssSelector resolves"
+    },
+    {
+      "id": "seo-hygiene-indexability",
+      "npmScript": "validate:seo-hygiene:indexability",
+      "entrypoint": "scripts/validate/seo-hygiene.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "Legal pages noindex, content pages indexable and linked: measured missing on the live site 2026-10-11",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "legal/utility and thank-you pages noindex,follow and out of the sitemap; every sitemap URL indexable, self-canonical and reachable from / by links"
+    },
+    {
+      "id": "seo-hygiene-indexnow",
+      "npmScript": "validate:seo-hygiene:indexnow",
+      "entrypoint": "scripts/validate/seo-hygiene.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "IndexNow key file served: measured missing on the live site 2026-10-11",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "public/indexnow-key.txt is served at /<key>.txt and is the key the submitter reads"
     }
   ],
   "repairPolicy": "A validator may declare repairCommand only when that command repairs the same defect the validator detects. scripts/selfheal/heal-until-clean.mjs runs it on a blocking failure and re-validates.",
