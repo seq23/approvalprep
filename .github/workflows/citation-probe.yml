@@ -14,6 +14,10 @@ on:
         description: "This run costs money (paid model + web plugin). Must be true to run."
         type: boolean
         default: false
+      fixture_trace:
+        description: "Manual fixture trace only; not production telemetry proof"
+        required: false
+        default: "true"
       limit:
         description: "Number of queries to ask"
         required: false
