@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { canonicalUrl, internalHref } from "../lib/schema";
+import { canonicalUrl, internalHref, productSchema } from "../lib/schema";
 import ProductGrid from "../components/ProductGrid.astro";
 import BoundaryNotice from "../components/BoundaryNotice.astro";
 import TrustBar from "../components/TrustBar.astro";
@@ -91,6 +91,10 @@ const primarySku = (route.cta_policy === "purchase" || priorityEntry) ? skuForRo
 const routeProduct = productForSku(skuForRoute);
 const routeOfferings = offeringsForSku(skuForRoute);
 const isCommercial = route.cta_policy === "purchase" || route.page_intent === "product";
+const rendersGuideBody = !isDownload && !isGlossary && !isLegal;
+const kitProductSchema = route.page_intent === "product" && routeProduct?.priceLabel
+  ? productSchema({ name: routeProduct.name || routeProduct.product_name, description: route.description || copy.lead, url: canonical, price: routeProduct.priceLabel })
+  : null;
 const primaryCtaWithPrice = primarySku && routeProduct ? `Buy ${routeProduct.name} — ${routeProduct.priceLabel}` : copy.primaryCta;
 // recommendation_summary (.clarity/content-pattern-spec.json): the page's own
 // shortAnswer states what it recommends, and the hero CTA is the step it
@@ -231,6 +235,7 @@ const childRoutes = manifest.routes
         </tbody></table></div>
       </div></section>
       <section class="band"><div class="shell"><p class="eyebrow">All included offerings</p><h2>50 named self-service tools organized into 8 paid checkout kits.</h2><p class="lead">This is the full universe of named use cases. The Complete Bundle includes the full library; the smaller kits include the tools for that specific situation.</p><OfferingUniverse categories={offeringCategories} /></div></section>
+      <section class="band"><div class="shell"><FAQBlock faq={copy.faq} /></div></section>
     </>
   ) : isGlossary ? (
     <section class="band"><div class="shell grid">
@@ -285,8 +290,16 @@ const childRoutes = manifest.routes
       were therefore reachable only from the sitemap. */}
   <RelatedContent path={route.path} title={`Keep preparing after ${route.title}`} />
   {!isLegal && <FinalCTA primary={primaryCtaWithPrice} secondary={copy.secondaryCta} href={internalHref(ctaHref)} secondaryHref="/pricing" primarySku={primarySku} />}
-  <section class="band"><div class="shell">
+  {/* FAQPage and HowTo describe the FAQBlock and HowItWorks rendered in the guide
+      body above, so they ship only where that body renders (pricing renders the
+      FAQBlock but not HowItWorks, so it carries FAQPage only). Legal, glossary and
+      download pages used to carry both with nothing visible behind them, which
+      is structured data for content the page does not show. The kit pages
+      (page_intent "product") show a real price, so they carry Product + Offer
+      from the same product record that prices their CTA. */}
+  {(rendersGuideBody || isPricing) && <section class="band"><div class="shell">
     <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: copy.faq.map((item) => ({ "@type": "Question", name: item.question, acceptedAnswer: { "@type": "Answer", text: item.answer } })) })}></script>
-    <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@type": "HowTo", name: route.title, step: copy.steps.map((step, index) => ({ "@type": "HowToStep", position: index + 1, text: step })) })}></script>
-  </div></section>
+    {rendersGuideBody && <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@type": "HowTo", name: route.title, step: copy.steps.map((step, index) => ({ "@type": "HowToStep", position: index + 1, text: step })) })}></script>}
+    {kitProductSchema && <script type="application/ld+json" set:html={JSON.stringify(kitProductSchema)}></script>}
+  </div></section>}
 </BaseLayout>

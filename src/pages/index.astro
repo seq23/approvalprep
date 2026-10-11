@@ -1,5 +1,6 @@
 ---
-import { internalHref } from "../lib/schema";
+import { internalHref, canonicalUrl, websiteSchema, speakableWebPageSchema } from "../lib/schema";
+import DemandGuideLinks from "../components/DemandGuideLinks.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProductGrid from "../components/ProductGrid.astro";
 import BoundaryNotice from "../components/BoundaryNotice.astro";
@@ -16,13 +17,24 @@ import FreeStudioCTA from "../components/FreeStudioCTA.astro";
 import RecommendationSummary from "../components/RecommendationSummary.astro";
 import OfferingUniverse from "../components/OfferingUniverse.astro";
 import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComparison, offeringCategories } from "../data/content";
+const pageTitle = "ApprovalPrep - Self-Service Credit Repair Letters and Approval Prep";
+const pageDescription = "Download self-service credit repair letters, explanation letters, rental packets, income proof templates, and approval-prep document kits.";
+// The definition paragraph directly under the H1 is what an answer engine or a
+// voice assistant should read for "what is ApprovalPrep". The speakable selector
+// names it by id; scripts/validate/seo-hygiene.mjs (check `definition`) fails if
+// the id stops resolving, the paragraph stops starting "ApprovalPrep is", or it
+// leaves the 40-60 word band.
+const homeSchema = [
+  websiteSchema(),
+  speakableWebPageSchema({ title: pageTitle, description: pageDescription, url: canonicalUrl("/"), cssSelector: ["h1", "#what-is-approvalprep"] })
+];
 ---
-<BaseLayout title="ApprovalPrep - Self-Service Credit Repair Letters and Approval Prep" description="Download self-service credit repair letters, explanation letters, rental packets, income proof templates, and approval-prep document kits.">
+<BaseLayout title={pageTitle} description={pageDescription} schema={homeSchema}>
   <section class="hero hero-split shell">
     <div>
       <p class="eyebrow">DIY credit letters + approval paperwork</p>
       <h1>Self-service credit repair letters and approval-ready documents, without the high monthly fees.</h1>
-      <p class="lead">ApprovalPrep gives you direct-download PDF and editable DOCX kits for credit report questions, goodwill letters, debt validation, rental applications, income proof, loan reviews, and explanation letters.</p>
+      <p class="lead" id="what-is-approvalprep">ApprovalPrep is a self-service document prep site that sells one-time, direct-download kits of letters, checklists, and templates for credit report questions, goodwill letters, debt validation, rental applications, income proof, loan reviews, and letters of explanation. Each kit unlocks a PDF guide and an editable DOCX file; you fill in your true facts and send it yourself.</p>
       <OutcomeCTA primary="Get DIY credit letters — $19" secondary="Compare all kits and prices" href="/pricing/#credit-letter-kit" secondaryHref="/pricing" />
       <TrustBar signals={trustSignals} />
     </div>
@@ -96,6 +108,7 @@ import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComp
       ))}
     </div>
   </div></section>
+  <DemandGuideLinks all={true} eyebrow="Most-searched guides" heading="Start with the letter or form you were asked for." />
   <FreeStudioCTA />
   <section class="band"><div class="shell">
     <p class="eyebrow">Compare kits</p>

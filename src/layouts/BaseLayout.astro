@@ -7,7 +7,8 @@ import StructuredData from "../components/StructuredData.astro";
 import AnalyticsEvent from "../components/AnalyticsEvent.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import ProfessionalBoundaryBlock from "../components/ProfessionalBoundaryBlock.astro";
-import { titleForPath, canonicalUrl, internalHref } from "../lib/schema";
+import DemandGuideLinks from "../components/DemandGuideLinks.astro";
+import { titleForPath, canonicalUrl, internalHref, OG_IMAGE } from "../lib/schema";
 import { fitTitle } from "../lib/title";
 import { navCta, primaryNav, secondaryNav } from "../data/navigation";
 const { title = "ApprovalPrep", description = "Self-service approval prep tools.", canonical = "https://approvalprep.com", noindex = false, showPrivacyNotice = true, schema = [] } = Astro.props;
@@ -39,9 +40,19 @@ const documentTitle = fitTitle(String(title));
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalHref} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={OG_IMAGE.url} />
+    <meta property="og:image:width" content={String(OG_IMAGE.width)} />
+    <meta property="og:image:height" content={String(OG_IMAGE.height)} />
+    <meta property="og:image:alt" content={OG_IMAGE.alt} />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={OG_IMAGE.url} />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#0f766e" />
     <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@type": "Organization", name: "ApprovalPrep", url: "https://approvalprep.com" })}></script>
     <StructuredData schema={schema} />
   </head>
@@ -67,6 +78,7 @@ const documentTitle = fitTitle(String(title));
     <main>
       <Breadcrumbs path={currentPath} title={crumbTitle} emitSchema={!hasBreadcrumbSchema} />
       <slot />
+      {currentPath !== "/" && <DemandGuideLinks path={currentPath} />}
       <ProfessionalBoundaryBlock path={currentPath} />
       <CreditBuilderSlot path={currentPath} />
     </main>

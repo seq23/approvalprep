@@ -1,0 +1,31 @@
+---
+/**
+ * Links into the measured-demand guides (data/content/demand_coverage_pages.json).
+ *
+ * Each guide record names the pages that should link to it (`inboundFrom`) and
+ * the anchor text to use (`anchorText`), but until 2026-10-11 nothing read
+ * `inboundFrom`: eight of the eleven guides were in the sitemap with no path to
+ * them from the homepage. BaseLayout renders this on every page, so a guide is
+ * linked from each page it names, and the homepage passes `all` to list every
+ * guide. scripts/validate/seo-hygiene.mjs (check `linking`) fails the build if
+ * any sitemap URL is unreachable from / by links.
+ */
+import registry from "../../data/content/demand_coverage_pages.json";
+import { internalHref } from "../lib/schema";
+const { path = "", all = false, heading = "Related guides", eyebrow = "Keep reading" } = Astro.props;
+const norm = (value) => String(value || "").replace(/\/+$/, "") || "/";
+const current = norm(path);
+const guides = (registry.pages || []).filter((page) => norm(page.path) !== current
+  && (all || (page.inboundFrom || []).map(norm).includes(current)));
+---
+{guides.length > 0 && (
+  <section class="band demand-guide-links" data-content-block="demand-guides">
+    <div class="shell">
+      <p class="eyebrow">{eyebrow}</p>
+      <h2>{heading}</h2>
+      <ul class="compact-list">
+        {guides.map((page) => <li><a href={internalHref(page.path)}>{page.anchorText || page.title}</a></li>)}
+      </ul>
+    </div>
+  </section>
+)}

@@ -649,9 +649,9 @@
       "title": "Privacy Policy",
       "type": "legal",
       "family": "legal_trust",
-      "index": true,
+      "index": false,
       "risk": "low",
-      "indexing": "index",
+      "indexing": "noindex",
       "page_intent": "trust",
       "conversion_role": "trust",
       "cta_policy": "soft",
@@ -659,16 +659,17 @@
       "primary_cta": "Start my letter",
       "secondary_cta": "Build my packet",
       "search_role": "rank",
-      "citation_role": "support_surface"
+      "citation_role": "support_surface",
+      "noindex_reason": "legal/utility policy page: kept crawlable (noindex, follow) so it stops absorbing search impressions meant for the guides and kits (2026-10-11)"
     },
     {
       "path": "/terms",
       "title": "Terms of Use",
       "type": "legal",
       "family": "legal_trust",
-      "index": true,
+      "index": false,
       "risk": "low",
-      "indexing": "index",
+      "indexing": "noindex",
       "page_intent": "trust",
       "conversion_role": "trust",
       "cta_policy": "soft",
@@ -676,16 +677,17 @@
       "primary_cta": "Start my letter",
       "secondary_cta": "Build my packet",
       "search_role": "rank",
-      "citation_role": "support_surface"
+      "citation_role": "support_surface",
+      "noindex_reason": "legal/utility policy page: kept crawlable (noindex, follow) so it stops absorbing search impressions meant for the guides and kits (2026-10-11)"
     },
     {
       "path": "/disclaimer",
       "title": "Disclaimer",
       "type": "legal",
       "family": "legal_trust",
-      "index": true,
+      "index": false,
       "risk": "regulated",
-      "indexing": "index",
+      "indexing": "noindex",
       "page_intent": "trust",
       "conversion_role": "trust",
       "cta_policy": "soft",
@@ -697,16 +699,17 @@
       "safeHarborEligible": true,
       "safeHarborRiskReason": "regulated_path_or_family_pattern",
       "safeHarborDecision": "BLOCKED_PROHIBITED_CLAIM",
-      "safeHarborAuditId": "safeharbor-87498a65ad388c3e"
+      "safeHarborAuditId": "safeharbor-87498a65ad388c3e",
+      "noindex_reason": "legal/utility policy page: kept crawlable (noindex, follow) so it stops absorbing search impressions meant for the guides and kits (2026-10-11)"
     },
     {
       "path": "/refund-policy",
       "title": "Refund Policy",
       "type": "legal",
       "family": "legal_trust",
-      "index": true,
+      "index": false,
       "risk": "low",
-      "indexing": "index",
+      "indexing": "noindex",
       "page_intent": "utility",
       "conversion_role": "support",
       "cta_policy": "next_step",
@@ -714,16 +717,17 @@
       "primary_cta": "Start my letter",
       "secondary_cta": "Build my packet",
       "search_role": "rank",
-      "citation_role": "support_surface"
+      "citation_role": "support_surface",
+      "noindex_reason": "legal/utility policy page: kept crawlable (noindex, follow) so it stops absorbing search impressions meant for the guides and kits (2026-10-11)"
     },
     {
       "path": "/security",
       "title": "Security",
       "type": "legal",
       "family": "legal_trust",
-      "index": true,
+      "index": false,
       "risk": "low",
-      "indexing": "index",
+      "indexing": "noindex",
       "page_intent": "utility",
       "conversion_role": "support",
       "cta_policy": "next_step",
@@ -731,16 +735,17 @@
       "primary_cta": "Start my letter",
       "secondary_cta": "Build my packet",
       "search_role": "rank",
-      "citation_role": "support_surface"
+      "citation_role": "support_surface",
+      "noindex_reason": "legal/utility policy page: kept crawlable (noindex, follow) so it stops absorbing search impressions meant for the guides and kits (2026-10-11)"
     },
     {
       "path": "/accessibility",
       "title": "Accessibility",
       "type": "legal",
       "family": "legal_trust",
-      "index": true,
+      "index": false,
       "risk": "low",
-      "indexing": "index",
+      "indexing": "noindex",
       "page_intent": "utility",
       "conversion_role": "support",
       "cta_policy": "next_step",
@@ -748,7 +753,8 @@
       "primary_cta": "Start my letter",
       "secondary_cta": "Build my packet",
       "search_role": "rank",
-      "citation_role": "support_surface"
+      "citation_role": "support_surface",
+      "noindex_reason": "legal/utility policy page: kept crawlable (noindex, follow) so it stops absorbing search impressions meant for the guides and kits (2026-10-11)"
     },
     {
       "path": "/about",
@@ -823,9 +829,9 @@
       "title": "Credit Repair Disclaimer",
       "type": "legal",
       "family": "credit_self_service",
-      "index": true,
+      "index": false,
       "risk": "regulated",
-      "indexing": "index",
+      "indexing": "noindex",
       "page_intent": "trust",
       "conversion_role": "trust",
       "cta_policy": "soft",
@@ -837,7 +843,8 @@
       "safeHarborEligible": true,
       "safeHarborRiskReason": "regulated_path_or_family_pattern",
       "safeHarborDecision": "BLOCKED_PROHIBITED_CLAIM",
-      "safeHarborAuditId": "safeharbor-7a7c2a0746632417"
+      "safeHarborAuditId": "safeharbor-7a7c2a0746632417",
+      "noindex_reason": "legal/utility policy page: kept crawlable (noindex, follow) so it stops absorbing search impressions meant for the guides and kits (2026-10-11)"
     },
     {
       "path": "/not-a-credit-repair-company",
@@ -1816,11 +1823,11 @@
       "title": "Letter Of Explanation Template",
       "type": "public",
       "family": "letter_studio",
-      "index": true,
+      "index": false,
       "risk": "medium",
       "nav": false,
       "description": "Self-service preparation guide for letter of explanation template.",
-      "indexing": "index",
+      "indexing": "noindex",
       "page_intent": "guide",
       "conversion_role": "support",
       "cta_policy": "next_step",
@@ -1831,7 +1838,8 @@
       "citation_role": "citation_surface",
       "source": "page_factory",
       "targetProductSku": null,
-      "primaryQuery": "letter of explanation template"
+      "primaryQuery": "letter of explanation template",
+      "noindex_reason": "page-factory duplicate of /letter-of-explanation/template, the authored guide for the same query; its siblings -sample and -for-mortgage were already noindex (2026-10-11)"
     },
     {
       "path": "/letter-of-explanation-for-mortgage",
