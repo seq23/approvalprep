@@ -5,5 +5,11 @@
   "require_lastmod": true,
   "new_pages_per_week": 2,
   "refresh_capacity_per_week": 8,
-  "_why": "13 weeks is the point where pages become markedly more likely to lose AI citations, and recency is the strongest single correlate of being cited. The ceiling is refresh capacity times that window: publish faster than the library can be maintained and the tail ages out of citability."
+  "_why": "13 weeks is the point where pages become markedly more likely to lose AI citations, and recency is the strongest single correlate of being cited. The ceiling is refresh capacity times that window: publish faster than the library can be maintained and the tail ages out of citability.",
+  "new_page_publication": {
+    "frozen": true,
+    "frozen_at": "2026-10-09",
+    "release_rule": "measured_target_only",
+    "_why": "Search Console 11 Sep-8 Oct 2026: 10 impressions, 0 clicks, 3 queries, while ~82% of commits were automated daily answers to unmeasured phrasings. While frozen, content:generate publishes a page only when its query is a target in data/search_intelligence/target_query_set.json with a measured number (scripts/lib/publication_freeze.mjs); such a page publishes on the next cycle automatically. Read by validate:publication-freeze."
+  }
 }

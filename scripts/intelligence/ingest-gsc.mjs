@@ -56,7 +56,8 @@ if (importFile) {
     const url = `https://www.googleapis.com/webmasters/v3/sites/${encodeURIComponent(siteUrl)}/searchAnalytics/query`;
     const data = await fetchJson(url, { method: "POST", headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" }, body: JSON.stringify(body) });
     const rows = normalizeRows(data);
-    writeJson(outputFile, { schemaVersion: "4.2.0", connectorId, mode: "live", siteUrl, fetchedAt: now(), rows, errors: [] });
+    // The window is recorded so the target set can cite it next to each number.
+    writeJson(outputFile, { schemaVersion: "4.2.0", connectorId, mode: "live", siteUrl, fetchedAt: now(), window: { startDate: body.startDate, endDate: body.endDate, days: 28, dimensions: body.dimensions }, rows, errors: [] });
     appendRun(connectorId, rows.length ? "COMPLETE" : "NO_DATA", { mode: "live", recordsImported: rows.length });
     console.log(JSON.stringify({ connectorId, mode: "live", status: rows.length ? "COMPLETE" : "NO_DATA", recordsImported: rows.length }, null, 2));
   } catch (error) {

@@ -88,6 +88,11 @@ const skuForRoute = (() => {
 })();
 const ctaHref = (route.cta_policy === "purchase" || priorityEntry) ? `/pricing#${skuForRoute}` : (route.path.includes("apartment") || route.path.includes("rental") ? "/apartment-application" : "/letter-of-explanation");
 const primarySku = (route.cta_policy === "purchase" || priorityEntry) ? skuForRoute : "";
+// A priority page aligned to a measured Search Console query carries its own
+// title, H1 and query FAQ (data/content/priority_pages.json, validate:query-aligned-pages).
+const pageTitle = priorityEntry?.metaTitle || copy.metaTitle || `${route.title} - ApprovalPrep`;
+const pageHeading = priorityEntry?.h1 || copy.heading;
+const pageFaq = [...(priorityEntry?.query_faq || []), ...(copy.faq || [])];
 const routeProduct = productForSku(skuForRoute);
 const routeOfferings = offeringsForSku(skuForRoute);
 const isCommercial = route.cta_policy === "purchase" || route.page_intent === "product";
@@ -122,11 +127,11 @@ const childRoutes = manifest.routes
     name alone makes a <title> under 30 characters ("Privacy Policy - ApprovalPrep")
     carries a descriptive copy.metaTitle in src/data/content.ts instead.
     scripts/validate/title-length.mjs asserts both bands on the built page. */}
-<BaseLayout title={copy.metaTitle ||`${route.title} - ApprovalPrep`} description={copy.lead} canonical={canonical} noindex={!route.index}>
+<BaseLayout title={pageTitle} description={copy.lead} canonical={canonical} noindex={!route.index}>
   <section class={`hero shell ${isLegal ? "legal-hero" : "hero-split"}`}>
     <div>
       <p class="eyebrow">{familyCopy?.label || route.family.replaceAll("_", " ")}</p>
-      <h1>{copy.heading}</h1>
+      <h1>{pageHeading}</h1>
       <p class="lead">{copy.lead}</p>
       {familyCopy?.promise && <p class="supporting-copy">{familyCopy.promise}</p>}
       {!isLegal && !isDownload && <OutcomeCTA primary={primaryCtaWithPrice} secondary={copy.secondaryCta} href={internalHref(ctaHref)} secondaryHref="/pricing" primarySku={primarySku} />}
@@ -235,7 +240,7 @@ const childRoutes = manifest.routes
         </tbody></table></div>
       </div></section>
       <section class="band"><div class="shell"><p class="eyebrow">All included offerings</p><h2>50 named self-service tools organized into 8 paid checkout kits.</h2><p class="lead">This is the full universe of named use cases. The Complete Bundle includes the full library; the smaller kits include the tools for that specific situation.</p><OfferingUniverse categories={offeringCategories} /></div></section>
-      <section class="band"><div class="shell"><FAQBlock faq={copy.faq} /></div></section>
+      <section class="band"><div class="shell"><FAQBlock faq={pageFaq} /></div></section>
     </>
   ) : isGlossary ? (
     <section class="band"><div class="shell grid">
@@ -276,7 +281,7 @@ const childRoutes = manifest.routes
       <section class="band"><div class="shell"><HowItWorks steps={copy.steps} /></div></section>
       {copy.reviewChecklist && <section class="band"><div class="shell"><WhatYouGet title="Review before you send" items={copy.reviewChecklist} /></div></section>}
       <section class="band"><div class="shell"><UseCaseList items={copy.useCases} /></div></section>
-      <section class="band"><div class="shell"><FAQBlock faq={copy.faq} /></div></section>
+      <section class="band"><div class="shell"><FAQBlock faq={pageFaq} /></div></section>
       <section class="band"><div class="shell two"><div><h2>What this does not do</h2><p>It does not guarantee approval. It does not create fake documents. It does not contact anyone for you. It does not give legal or financial advice. It does not repair credit for you.</p></div><BoundaryNotice /></div></section>
       <section class="band"><div class="shell"><NextStepsExplainer /></div></section>
       <section class="band"><div class="shell"><DataPrivacyNotice /></div></section>
@@ -298,7 +303,7 @@ const childRoutes = manifest.routes
       (page_intent "product") show a real price, so they carry Product + Offer
       from the same product record that prices their CTA. */}
   {(rendersGuideBody || isPricing) && <section class="band"><div class="shell">
-    <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: copy.faq.map((item) => ({ "@type": "Question", name: item.question, acceptedAnswer: { "@type": "Answer", text: item.answer } })) })}></script>
+    <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: pageFaq.map((item) => ({ "@type": "Question", name: item.question, acceptedAnswer: { "@type": "Answer", text: item.answer } })) })}></script>
     {rendersGuideBody && <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@type": "HowTo", name: route.title, step: copy.steps.map((step, index) => ({ "@type": "HowToStep", position: index + 1, text: step })) })}></script>}
     {kitProductSchema && <script type="application/ld+json" set:html={JSON.stringify(kitProductSchema)}></script>}
   </div></section>}

@@ -4,6 +4,7 @@ import fs from "node:fs";
 import vm from "node:vm";
 import { clampToPublicationBudget } from "../lib/publication_budget.mjs";
 import { isAnswerableRoute } from "./answer-eligibility.mjs";
+import { loadFreeze, measuredTargets, freezeDecision, STOP_CODE } from "../lib/publication_freeze.mjs";
 
 fs.mkdirSync("data/content", { recursive: true });
 
@@ -185,9 +186,16 @@ for (const variant of variants) {
   }
 }
 
+// The publication freeze (data/cadence/policy.json new_page_publication): while
+// it is on, only a candidate whose own query is a measured target may publish.
+const freeze = loadFreeze();
+const targets = measuredTargets();
+const heldByFreeze = [];
 const selected = [];
 for (const candidate of candidates) {
   if (selected.length >= releaseLimit) break;
+  const decision = freezeDecision(candidate, freeze, targets);
+  if (!decision.allowed) { heldByFreeze.push(candidate.title); continue; }
   if (existingContentKeys.has(candidate.contentKey)) continue;
   if (existingTitles.has(candidate.title)) continue;
   if (existingSlugs.has(candidate.slug)) continue;
@@ -219,6 +227,15 @@ if (budgetExhausted) {
   );
 }
 
+const frozenHold = selected.length === 0 && heldByFreeze.length > 0;
+if (frozenHold) {
+  console.log(
+    `[content:generate] NAMED STOP ${STOP_CODE}: publication is frozen (data/cadence/policy.json new_page_publication, ` +
+    `since ${freeze.frozen_at}) and none of the ${heldByFreeze.length} candidate queries has a measured number in ` +
+    `data/search_intelligence/target_query_set.json. Each publishes automatically once its query is measured.`,
+  );
+}
+
 const answers = [...existingAnswers, ...selected];
 fs.writeFileSync(
   "data/content/generated_answers.json",
@@ -229,7 +246,8 @@ ledger.releases ||= [];
 ledger.releases.push({
   id: releaseId,
   date: releaseDate,
-  status: selected.length ? "published_low_risk_answers" : budgetExhausted ? "no_publication_budget" : "no_distinct_low_risk_inventory",
+  status: selected.length ? "published_low_risk_answers" : frozenHold ? "publication_frozen_unmeasured_demand" : budgetExhausted ? "no_publication_budget" : "no_distinct_low_risk_inventory",
+  publicationFreeze: { frozen: freeze?.frozen === true, frozenAt: freeze?.frozen_at || null, heldCount: heldByFreeze.length },
   pagesPublished: selected.length,
   dailySafetyCeiling: releaseLimit,
   publicationBudget: { cadenceLimit, governorLimit, requestedLimit, appliedLimit: releaseLimit, capSource: "data/cadence/policy.json new_pages_per_week", ...budgeted.budget },
@@ -242,7 +260,7 @@ ledger.releases.push({
 fs.writeFileSync("data/release/release_ledger.json", JSON.stringify(ledger, null, 2) + "\n");
 
 console.log(JSON.stringify({
-  status: selected.length ? "PUBLISHED" : budgetExhausted ? "NOOP_PUBLICATION_BUDGET_EXHAUSTED" : "NOOP_NO_DISTINCT_INVENTORY",
+  status: selected.length ? "PUBLISHED" : frozenHold ? "NOOP_PUBLICATION_FROZEN" : budgetExhausted ? "NOOP_PUBLICATION_BUDGET_EXHAUSTED" : "NOOP_NO_DISTINCT_INVENTORY",
   releaseId,
   releaseLimit,
   published: selected.length,

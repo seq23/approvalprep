@@ -1482,6 +1482,61 @@
       "owner": "approvalprep-growth",
       "group": "growth-critical",
       "scope": "public/indexnow-key.txt is served at /<key>.txt and is the key the submitter reads"
+    },
+    {
+      "id": "index-coverage",
+      "npmScript": "validate:index-coverage",
+      "entrypoint": "scripts/validate/index-coverage.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "Index state of the 99 sitemap URLs was never measured (11 Oct 2026: 10 impressions/28d); a stale or inconsistent coverage file would steer consolidation blind",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "data/search_intelligence/index_coverage.json and gsc_sitemaps.json fresh, sitemap-consistent, recounted, and refreshed by the daily cycle"
+    },
+    {
+      "id": "target-query-set",
+      "npmScript": "validate:target-query-set",
+      "entrypoint": "scripts/validate/target-query-set.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "14 queries with no measured number were steering content; every target must carry a source and a number",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "data/search_intelligence/target_query_set.json measured-only and current"
+    },
+    {
+      "id": "consolidation-candidates",
+      "npmScript": "validate:consolidation-candidates",
+      "entrypoint": "scripts/validate/consolidation-candidates.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "Thin zero-impression pages need a measured fold-into-hub ledger before any redirect ships",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "data/search_intelligence/consolidation_candidates.json current against dist, GSC and coverage; no redirect shipped"
+    },
+    {
+      "id": "publication-freeze",
+      "npmScript": "validate:publication-freeze",
+      "entrypoint": "scripts/validate/publication-freeze.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "Automatic content was paused by a commented-out cron that nothing checked; the freeze is now a flag the generator reads",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "data/cadence/policy.json new_page_publication, generator wiring, post-freeze release history, release schedule"
+    },
+    {
+      "id": "query-aligned-pages",
+      "npmScript": "validate:query-aligned-pages",
+      "entrypoint": "scripts/validate/query-aligned-pages.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "The 3 pages Search Console shows must answer the query it shows them for",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "Built title, H1, definition, FAQ JSON-LD and kit checkout on the GSC-impression pages"
     }
   ],
   "repairPolicy": "A validator may declare repairCommand only when that command repairs the same defect the validator detects. scripts/selfheal/heal-until-clean.mjs runs it on a blocking failure and re-validates."
