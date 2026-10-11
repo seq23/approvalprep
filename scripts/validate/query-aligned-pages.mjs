@@ -17,7 +17,7 @@ const errors = [];
 const fail = (m) => errors.push(m);
 const pri = JSON.parse(fs.readFileSync("data/content/priority_pages.json", "utf8")).pages;
 const targets = JSON.parse(fs.readFileSync("data/search_intelligence/target_query_set.json", "utf8")).targets || [];
-const gscQueries = new Set(targets.filter((t) => t.source === "gsc_search_analytics").map((t) => t.query_normalized));
+const gscQueries = new Set(targets.filter((t) => t.source === "gsc_search_analytics" || t.source === "gsc_search_analytics_history").map((t) => t.query_normalized));
 const decode = (s) => s.replace(/&#39;|&#x27;/g, "'").replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/<[^>]+>/g, "").trim();
 const words = (s) => new Set(String(s).toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter((w) => w.length > 3));
 const entries = Object.entries(pri).filter(([, e]) => e.target_query);
