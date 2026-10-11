@@ -46,7 +46,8 @@ export function checkBudget(connectorId, budgetFile="data/intelligence/provider_
 // and the portfolio stopped issuing those - so both wrote NOT_CONFIGURED on every
 // run while the property held real data. Keeping this here rather than in each
 // connector means there is one implementation to keep correct, not two.
-export async function gscAccessToken() {
+// scope defaults to read-only; sitemaps.submit needs the full webmasters scope.
+export async function gscAccessToken(scope = "https://www.googleapis.com/auth/webmasters.readonly") {
   const direct = env("GSC_ACCESS_TOKEN") || env("GOOGLE_SEARCH_CONSOLE_ACCESS_TOKEN");
   if (direct) return direct;
   const raw = String(env("GSC_SERVICE_ACCOUNT_JSON") || "").trim();
@@ -62,7 +63,7 @@ export async function gscAccessToken() {
   const iat = Math.floor(Date.now() / 1000);
   const unsigned = `${b64({ alg: "RS256", typ: "JWT" })}.${b64({
     iss: info.client_email,
-    scope: "https://www.googleapis.com/auth/webmasters.readonly",
+    scope,
     aud: "https://oauth2.googleapis.com/token",
     iat,
     exp: iat + 3600

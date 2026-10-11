@@ -12,6 +12,7 @@ const product = entry ? productForSku(entry.sku) : null;
   <section class="band kit-answer" data-priority-page={key}>
     <div class="shell">
       <article class="card">
+        {entry.definition && <><p class="eyebrow">Definition</p><p class="citation-definition" data-content-block="query-definition"><strong>{entry.definition}</strong></p></>}
         <p class="eyebrow">Short answer</p>
         <h2>{entry.question}</h2>
         <p>{entry.answer}</p>

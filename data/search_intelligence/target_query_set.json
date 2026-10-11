@@ -1,0 +1,382 @@
+{
+  "schema_version": "1.0",
+  "measurement_rule": "Every target carries a source and a positive measured number. Anything unmeasured is dropped with its reason, never kept with a null.",
+  "sources": [
+    "data/intelligence/gsc_search_analytics.json",
+    "data/demand/measured_demand.json",
+    "data/queries/evidence/evidence_queries.json"
+  ],
+  "gsc_window": "rolling 28 days",
+  "gsc_collected_at": "2026-10-10T08:36:00.067Z",
+  "target_count": 16,
+  "targets_by_source": {
+    "gsc_search_analytics": 3,
+    "measured_demand": 11,
+    "evidence_queries": 2
+  },
+  "truth_boundary": "A target is a query this site intends to answer. Its number is the measurement that admitted it, not evidence of ranking or indexing.",
+  "targets": [
+    {
+      "query": "does the sba check my bank statements",
+      "query_normalized": "does the sba check my bank statements",
+      "source": "gsc_search_analytics",
+      "measurement": {
+        "metric": "impressions_28d",
+        "value": 1,
+        "clicks": 0,
+        "position": 78,
+        "window": "rolling 28 days",
+        "collected_at": "2026-10-10T08:36:00.067Z"
+      },
+      "expected_owned_route": "/sba-loan-checklist",
+      "other_measurements": []
+    },
+    {
+      "query": "letter of verification of employment",
+      "query_normalized": "letter of verification of employment",
+      "source": "gsc_search_analytics",
+      "measurement": {
+        "metric": "impressions_28d",
+        "value": 1,
+        "clicks": 0,
+        "position": 84,
+        "window": "rolling 28 days",
+        "collected_at": "2026-10-10T08:36:00.067Z"
+      },
+      "expected_owned_route": "/employment-verification-letter",
+      "other_measurements": []
+    },
+    {
+      "query": "pre approval apartment",
+      "query_normalized": "pre approval apartment",
+      "source": "gsc_search_analytics",
+      "measurement": {
+        "metric": "impressions_28d",
+        "value": 1,
+        "clicks": 0,
+        "position": 100,
+        "window": "rolling 28 days",
+        "collected_at": "2026-10-10T08:36:00.067Z"
+      },
+      "expected_owned_route": "/how-to-get-approved-for-an-apartment",
+      "other_measurements": []
+    },
+    {
+      "query": "employment verification letter",
+      "query_normalized": "employment verification letter",
+      "source": "measured_demand",
+      "measurement": {
+        "metric": "search_volume_monthly_us",
+        "value": 14800,
+        "provider": "Semrush US database, live pull",
+        "pulled_at": "2026-08-24"
+      },
+      "expected_owned_route": "/employment-verification-letter",
+      "other_measurements": [
+        {
+          "source": "evidence_queries",
+          "metric": "search_volume_monthly_us",
+          "value": 14800,
+          "provider": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)"
+        }
+      ]
+    },
+    {
+      "query": "employment verification form",
+      "query_normalized": "employment verification form",
+      "source": "measured_demand",
+      "measurement": {
+        "metric": "search_volume_monthly_us",
+        "value": 4400,
+        "provider": "Semrush US database, live pull",
+        "pulled_at": "2026-08-24"
+      },
+      "expected_owned_route": "/employment-verification-form",
+      "other_measurements": [
+        {
+          "source": "evidence_queries",
+          "metric": "search_volume_monthly_us",
+          "value": 4400,
+          "provider": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)"
+        }
+      ]
+    },
+    {
+      "query": "employment verification letter template",
+      "query_normalized": "employment verification letter template",
+      "source": "measured_demand",
+      "measurement": {
+        "metric": "search_volume_monthly_us",
+        "value": 3600,
+        "provider": "Semrush US database, live pull",
+        "pulled_at": "2026-08-24"
+      },
+      "expected_owned_route": "/employment-verification-letter-template",
+      "other_measurements": [
+        {
+          "source": "evidence_queries",
+          "metric": "search_volume_monthly_us",
+          "value": 3600,
+          "provider": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)"
+        }
+      ]
+    },
+    {
+      "query": "proof of employment letter",
+      "query_normalized": "proof of employment letter",
+      "source": "measured_demand",
+      "measurement": {
+        "metric": "search_volume_monthly_us",
+        "value": 2900,
+        "provider": "Semrush US database, live pull",
+        "pulled_at": "2026-08-24"
+      },
+      "expected_owned_route": "/proof-of-employment-letter",
+      "other_measurements": [
+        {
+          "source": "evidence_queries",
+          "metric": "search_volume_monthly_us",
+          "value": 2900,
+          "provider": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)"
+        }
+      ]
+    },
+    {
+      "query": "letter of explanation",
+      "query_normalized": "letter of explanation",
+      "source": "measured_demand",
+      "measurement": {
+        "metric": "search_volume_monthly_us",
+        "value": 1600,
+        "provider": "Semrush US database, live pull",
+        "pulled_at": "2026-08-24"
+      },
+      "expected_owned_route": "/letter-of-explanation",
+      "other_measurements": [
+        {
+          "source": "evidence_queries",
+          "metric": "search_volume_monthly_us",
+          "value": 1600,
+          "provider": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)"
+        }
+      ]
+    },
+    {
+      "query": "letter of explanation template",
+      "query_normalized": "letter of explanation template",
+      "source": "measured_demand",
+      "measurement": {
+        "metric": "search_volume_monthly_us",
+        "value": 590,
+        "provider": "Semrush US database, live pull",
+        "pulled_at": "2026-08-24"
+      },
+      "expected_owned_route": "/letter-of-explanation/template",
+      "other_measurements": [
+        {
+          "source": "evidence_queries",
+          "metric": "search_volume_monthly_us",
+          "value": 590,
+          "provider": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)"
+        }
+      ]
+    },
+    {
+      "query": "letter of explanation for mortgage",
+      "query_normalized": "letter of explanation for mortgage",
+      "source": "measured_demand",
+      "measurement": {
+        "metric": "search_volume_monthly_us",
+        "value": 480,
+        "provider": "Semrush US database, live pull",
+        "pulled_at": "2026-08-24"
+      },
+      "expected_owned_route": "/letter-of-explanation/mortgage",
+      "other_measurements": [
+        {
+          "source": "evidence_queries",
+          "metric": "search_volume_monthly_us",
+          "value": 480,
+          "provider": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)"
+        }
+      ]
+    },
+    {
+      "query": "letter of explanation sample",
+      "query_normalized": "letter of explanation sample",
+      "source": "measured_demand",
+      "measurement": {
+        "metric": "search_volume_monthly_us",
+        "value": 260,
+        "provider": "Semrush US database, live pull",
+        "pulled_at": "2026-08-24"
+      },
+      "expected_owned_route": "/letter-of-explanation/sample",
+      "other_measurements": [
+        {
+          "source": "evidence_queries",
+          "metric": "search_volume_monthly_us",
+          "value": 260,
+          "provider": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)"
+        }
+      ]
+    },
+    {
+      "query": "goodwill letter credit",
+      "query_normalized": "goodwill letter credit",
+      "source": "measured_demand",
+      "measurement": {
+        "metric": "search_volume_monthly_us",
+        "value": 210,
+        "provider": "Semrush US database, live pull",
+        "pulled_at": "2026-08-24"
+      },
+      "expected_owned_route": "/goodwill-letter-credit",
+      "other_measurements": [
+        {
+          "source": "evidence_queries",
+          "metric": "search_volume_monthly_us",
+          "value": 210,
+          "provider": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)"
+        }
+      ]
+    },
+    {
+      "query": "rental application letter",
+      "query_normalized": "rental application letter",
+      "source": "measured_demand",
+      "measurement": {
+        "metric": "search_volume_monthly_us",
+        "value": 90,
+        "provider": "Semrush US database, live pull",
+        "pulled_at": "2026-08-24"
+      },
+      "expected_owned_route": "/rental-application-letter",
+      "other_measurements": [
+        {
+          "source": "evidence_queries",
+          "metric": "search_volume_monthly_us",
+          "value": 90,
+          "provider": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)"
+        }
+      ]
+    },
+    {
+      "query": "how to write a letter of explanation",
+      "query_normalized": "how to write a letter of explanation",
+      "source": "measured_demand",
+      "measurement": {
+        "metric": "search_volume_monthly_us",
+        "value": 70,
+        "provider": "Semrush US database, live pull",
+        "pulled_at": "2026-08-24"
+      },
+      "expected_owned_route": "/how-to-write-a-letter-of-explanation",
+      "other_measurements": [
+        {
+          "source": "evidence_queries",
+          "metric": "search_volume_monthly_us",
+          "value": 70,
+          "provider": "semrush_keyword_magic (Portfolio Search Packet v2, pulled 2026-08-24)"
+        }
+      ]
+    },
+    {
+      "query": "landlord reference letter",
+      "query_normalized": "landlord reference letter",
+      "source": "evidence_queries",
+      "measurement": {
+        "metric": "search_volume_monthly_us",
+        "value": 1600,
+        "provider": "semrush_keyword_compare (blue-ocean packet, 2026-08)"
+      },
+      "expected_owned_route": "/landlord-reference-letter",
+      "other_measurements": []
+    },
+    {
+      "query": "rental verification form",
+      "query_normalized": "rental verification form",
+      "source": "evidence_queries",
+      "measurement": {
+        "metric": "search_volume_monthly_us",
+        "value": 1300,
+        "provider": "semrush_keyword_compare (blue-ocean packet, 2026-08)"
+      },
+      "expected_owned_route": "/rental-verification-form",
+      "other_measurements": []
+    }
+  ],
+  "dropped_count": 14,
+  "dropped": [
+    {
+      "query": "document checklist for mortgage loan",
+      "source": "evidence_queries",
+      "reason": "search_volume is null: no measured number"
+    },
+    {
+      "query": "pre approval for apartment",
+      "source": "evidence_queries",
+      "reason": "search_volume is null: no measured number"
+    },
+    {
+      "query": "apartment pre approval",
+      "source": "evidence_queries",
+      "reason": "search_volume is null: no measured number"
+    },
+    {
+      "query": "credit explanation letter",
+      "source": "evidence_queries",
+      "reason": "search_volume is null: no measured number"
+    },
+    {
+      "query": "credit letter of explanation",
+      "source": "evidence_queries",
+      "reason": "search_volume is null: no measured number"
+    },
+    {
+      "query": "letter of explanation for credit",
+      "source": "evidence_queries",
+      "reason": "search_volume is null: no measured number"
+    },
+    {
+      "query": "mortgage compliance checklist",
+      "source": "evidence_queries",
+      "reason": "search_volume is null: no measured number"
+    },
+    {
+      "query": "mortgage loan checklist for documentation",
+      "source": "evidence_queries",
+      "reason": "search_volume is null: no measured number"
+    },
+    {
+      "query": "mortgage loan document checklist",
+      "source": "evidence_queries",
+      "reason": "search_volume is null: no measured number"
+    },
+    {
+      "query": "mortgage loan documentation checklist",
+      "source": "evidence_queries",
+      "reason": "search_volume is null: no measured number"
+    },
+    {
+      "query": "prepared documents",
+      "source": "evidence_queries",
+      "reason": "search_volume is null: no measured number"
+    },
+    {
+      "query": "rental application checklist",
+      "source": "evidence_queries",
+      "reason": "search_volume is null: no measured number"
+    },
+    {
+      "query": "sba file",
+      "source": "evidence_queries",
+      "reason": "search_volume is null: no measured number"
+    },
+    {
+      "query": "what is a credit letter of explanation",
+      "source": "evidence_queries",
+      "reason": "search_volume is null: no measured number"
+    }
+  ]
+}

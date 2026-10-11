@@ -17,7 +17,7 @@ concurrency:
 jobs:
   ingest:
     runs-on: ubuntu-24.04
-    timeout-minutes: 5  # was 20; ~4x median 0.9m over 8 green runs
+    timeout-minutes: 12  # was 5 (~4x median 0.9m); +build and 99 URL inspections
     steps:
       - uses: actions/checkout@v7
         with:
@@ -49,11 +49,27 @@ jobs:
           BING_WEBMASTER_API_URL: ${{ secrets.BING_WEBMASTER_API_URL }}
           SERP_IMPORT_CSV: data/imports/serp.csv
           SOCIAL_SIGNAL_IMPORT_JSON: data/imports/social-signals.json
+      - name: Index coverage, sitemap registration, measured targets
+        # URL Inspection for every sitemap URL (8 parallel, <=150/day) and a
+        # sitemaps.list record (submitted if missing), then the measured target
+        # set from the 28-day GSC rows just collected. Each writes a NAMED STOP
+        # rather than an empty success when Search Console refuses.
+        run: |
+          npm run search-intelligence:index-coverage
+          npm run search-intelligence:sitemaps
+          npm run search-intelligence:targets
+        env:
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+      - name: Build and record consolidation candidates
+        # Thinness is measured on the built page, so the build comes first.
+        run: |
+          npm run build
+          npm run search-intelligence:consolidation
       - run: npm run validate:all
       - name: Commit intelligence data
         run: |
           git config user.name "approvalprep-bot"
           git config user.email "hello@approvalprep.com"
-          git add data/intelligence
-          git diff --cached --quiet || git commit -m "Refresh free intelligence sources"
+          git add data/intelligence data/search_intelligence
+          git diff --cached --quiet || git commit -m "Refresh free intelligence sources and index coverage"
           bash scripts/workflows/safe-push-main.sh

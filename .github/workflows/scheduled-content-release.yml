@@ -1,11 +1,14 @@
 name: Scheduled Content Release
 on:
-  # PAUSED 2026-10-08 (owner-approved): schedule disabled, workflow kept.
-  # Reason: ~82% of commits were automated daily content while Search Console
-  # showed 3 impressions / 0 clicks. Effort moved to improving the top pages.
-  # To resume, restore the two lines below.
-  # schedule:
-  #   - cron: "7 10 * * *"
+  # Paused 2026-10-08 by a commented-out cron; since 2026-10-11 the pause is the
+  # flag data/cadence/policy.json new_page_publication (frozen: true), read by
+  # content:generate. While frozen only a page whose query has a measured number
+  # in data/search_intelligence/target_query_set.json publishes, so the schedule
+  # runs again and a measured page ships on its own. The commit step below only
+  # commits when a page was actually published, so a frozen day adds no commit.
+  # validate:publication-freeze checks the flag, the wiring and this schedule.
+  schedule:
+    - cron: "7 10 * * *"
   workflow_dispatch:
     inputs:
       fixture_trace:
@@ -142,6 +145,11 @@ jobs:
         run: |
           git config user.name "approvalprep-content-bot"
           git config user.email "actions@users.noreply.github.com"
+          # A frozen or no-op day publishes nothing: commit nothing.
+          if git diff --quiet -- data/content/generated_answers.json; then
+            echo "No page published this run (publication freeze or no budget); nothing to commit."
+            exit 0
+          fi
           git add data public/sitemap.xml
           if [ -d reports ]; then git add reports; fi
           git diff --cached --quiet || git commit -m "chore(content): scheduled content release"

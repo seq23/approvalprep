@@ -22,6 +22,21 @@ const reportBefore = fs.existsSync(reportPath) ? fs.readFileSync(reportPath, "ut
 const cadenceLedgerPath = "data/cadence/known_urls.json";
 const cadenceBefore = fs.existsSync(cadenceLedgerPath) ? fs.readFileSync(cadenceLedgerPath, "utf8") : null;
 
+// The publication freeze is exercised here too, because this is the fixture that
+// runs the real generator. Both of its inputs are production files, so they are
+// held and restored exactly like the ledger above.
+const policyPath = "data/cadence/policy.json";
+const policyBefore = fs.readFileSync(policyPath, "utf8");
+const targetsPath = "data/search_intelligence/target_query_set.json";
+const targetsBefore = fs.existsSync(targetsPath) ? fs.readFileSync(targetsPath, "utf8") : null;
+function setFreeze(frozen, targets) {
+  const policy = JSON.parse(policyBefore);
+  policy.new_page_publication = { ...(policy.new_page_publication || {}), frozen, frozen_at: policy.new_page_publication?.frozen_at || "2026-10-09", release_rule: "measured_target_only" };
+  fs.writeFileSync(policyPath, JSON.stringify(policy, null, 2) + "\n");
+  fs.mkdirSync("data/search_intelligence", { recursive: true });
+  fs.writeFileSync(targetsPath, JSON.stringify({ schema_version: "1.0", targets }, null, 2) + "\n");
+}
+
 let restored = false;
 function restore() {
   if (restored) return;
@@ -33,6 +48,9 @@ function restore() {
   else fs.writeFileSync(reportPath, reportBefore);
   if (cadenceBefore === null) fs.rmSync(cadenceLedgerPath, { force: true });
   else fs.writeFileSync(cadenceLedgerPath, cadenceBefore);
+  fs.writeFileSync(policyPath, policyBefore);
+  if (targetsBefore === null) fs.rmSync(targetsPath, { force: true });
+  else fs.writeFileSync(targetsPath, targetsBefore);
 }
 // fail() is process.exit(1), which does not run a `finally`. Every failing run of
 // this validator therefore used to leave production data/content/generated_answers.json
@@ -110,6 +128,9 @@ function saturateFixtureInventory() {
 try {
   // Positive-path fixture is isolated from production cumulative state.
   resetFixtureState();
+  // Release mechanics are measured with the freeze off; the freeze has its own
+  // passes below, which run against the same generator.
+  setFreeze(false, []);
   const positiveBudget = isolateCadenceLedger("positive-path");
   const positiveDate = "2099-12-31";
   run("scripts/content/generate-candidate.mjs", { CONTENT_RELEASE_DATE: positiveDate, CONTENT_RELEASE_LIMIT: "3" });
@@ -129,6 +150,29 @@ try {
   let releaseRows = (ledger.releases || []).filter((item) => item.id === `content-release-${positiveDate}`);
   if (releaseRows.length !== 1) fail(`[content-release] expected one idempotent fixture ledger row, found ${releaseRows.length}`);
 
+  // Publication freeze, frozen with no measured target: nothing publishes and the
+  // ledger names the stop. Frozen with the first candidate's query measured:
+  // exactly that page publishes. The second pass is the negative proof that the
+  // first is not vacuous.
+  const firstTitle = added[0]?.title;
+  resetFixtureState();
+  setFreeze(true, []);
+  isolateCadenceLedger("freeze-unmeasured");
+  const frozenDate = "2099-12-27";
+  run("scripts/content/generate-candidate.mjs", { CONTENT_RELEASE_DATE: frozenDate, CONTENT_RELEASE_LIMIT: "3" });
+  const frozenAdded = JSON.parse(fs.readFileSync(generatedPath, "utf8")).answers.filter((item) => item.releaseId === `content-release-${frozenDate}`);
+  const frozenRow = (JSON.parse(fs.readFileSync(ledgerPath, "utf8")).releases || []).find((item) => item.id === `content-release-${frozenDate}`);
+  if (frozenAdded.length !== 0) fail(`[content-release] publication freeze: ${frozenAdded.length} unmeasured page(s) published while frozen`);
+  if (frozenRow?.status !== "publication_frozen_unmeasured_demand" || !(frozenRow?.publicationFreeze?.heldCount > 0)) fail(`[content-release] publication freeze: ledger row did not name the freeze stop: ${JSON.stringify(frozenRow)}`);
+  resetFixtureState();
+  setFreeze(true, [{ query: firstTitle, source: "gsc_search_analytics", measurement: { metric: "impressions_28d", value: 1 } }]);
+  isolateCadenceLedger("freeze-measured");
+  const measuredDate = "2099-12-26";
+  run("scripts/content/generate-candidate.mjs", { CONTENT_RELEASE_DATE: measuredDate, CONTENT_RELEASE_LIMIT: "3" });
+  const measuredAdded = JSON.parse(fs.readFileSync(generatedPath, "utf8")).answers.filter((item) => item.releaseId === `content-release-${measuredDate}`);
+  if (measuredAdded.length !== 1 || measuredAdded[0].title !== firstTitle) fail(`[content-release] publication freeze: a measured query did not release exactly its own page (got ${JSON.stringify(measuredAdded.map((a) => a.title))})`);
+  setFreeze(false, []);
+
   // Inventory exhaustion is a valid Safe Harbor NOOP, not a release failure.
   const saturatedCount = saturateFixtureInventory();
   isolateCadenceLedger("inventory-exhaustion");
@@ -143,7 +187,7 @@ try {
   if (releaseRows[0].status !== "no_distinct_low_risk_inventory" || releaseRows[0].pagesPublished !== 0) fail("[content-release] inventory exhaustion did not resolve to governed NOOP");
 
   if (added.length < 1) fail("[content-release] fixture inspected zero published answers");
-  console.log(`[content-release] OK fixtureAdded=${added.length} idempotent=true saturatedInventory=${saturatedCount} exhaustion=NOOP cadenceIsolated=true fixtureRemainingAllowance=${positiveBudget.remaining}`);
+  console.log(`[content-release] OK fixtureAdded=${added.length} freezeHeld=${frozenRow.publicationFreeze.heldCount} freezeReleasedMeasured=1 idempotent=true saturatedInventory=${saturatedCount} exhaustion=NOOP cadenceIsolated=true fixtureRemainingAllowance=${positiveBudget.remaining}`);
 } finally {
   restore();
 }
