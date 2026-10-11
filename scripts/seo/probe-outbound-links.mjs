@@ -79,7 +79,18 @@ const classify = async (url) => {
   if (bot >= 200 && bot < 300) return { classification: 'live', httpStatus: bot, evidence: 'googlebot-ua' };
 
   const seen = [browser, bot].filter(Boolean);
+  // A 404 only means "this document was removed" when the origin itself is up.
+  // On 2026-10-11 every ftc.gov and consumer.ftc.gov URL - the home page
+  // included - answered 404, and four FTC sources were marked dead, which
+  // red-lined validate:outbound-link-health on every PR. A whole origin that
+  // 404s at its root is an outage, not a withdrawal: it is `unreachable`
+  // (suspected, never suppressing) until the root answers again.
   if (seen.some((s) => s === 404 || s === 410)) {
+    const origin = new URL(url).origin;
+    const root = await fetchStatus(origin + '/', BROWSER_UA);
+    if (!(root >= 200 && root < 400)) {
+      return { classification: 'unreachable', httpStatus: seen[0], evidence: `origin down: ${url} answered browser=${browser} googlebot=${bot} and the origin root ${origin}/ answered ${root || 'nothing'}` };
+    }
     return { classification: 'dead', httpStatus: seen.find((s) => s === 404 || s === 410), evidence: `browser=${browser} googlebot=${bot}` };
   }
   if (seen.some((s) => [401, 403, 429].includes(s))) {
