@@ -57,6 +57,7 @@
     "validate:cloudflare-crawler-intelligence",
     "validate:commercial-page-cta-depth",
     "validate:competitor-crawl",
+    "validate:consolidation-candidates",
     "validate:content-actions",
     "validate:content-approval-governance",
     "validate:content-lifecycle",
@@ -82,6 +83,7 @@
     "validate:final-readiness-ledger",
     "validate:frozen-output-drift",
     "validate:growth-health",
+    "validate:index-coverage",
     "validate:indexing-provider-ledgers",
     "validate:intelligence-connectors",
     "validate:intelligence-freshness",
@@ -119,6 +121,8 @@
     "validate:provider-integrations",
     "validate:public-page-depth",
     "validate:public-reports",
+    "validate:publication-freeze",
+    "validate:query-aligned-pages",
     "validate:query-atlas",
     "validate:redirect-map",
     "validate:registry-build-order",
@@ -137,6 +141,12 @@
     "validate:self-heal-honesty",
     "validate:self-heal-progressions",
     "validate:self-healing",
+    "validate:seo-hygiene:definition",
+    "validate:seo-hygiene:favicon",
+    "validate:seo-hygiene:indexability",
+    "validate:seo-hygiene:indexnow",
+    "validate:seo-hygiene:jsonld",
+    "validate:seo-hygiene:og-image",
     "validate:seo-surfaces",
     "validate:serp-import",
     "validate:setup-secrets",
@@ -145,6 +155,7 @@
     "validate:source-required-claims",
     "validate:stripe-mode",
     "validate:structured-data",
+    "validate:target-query-set",
     "validate:telemetry-claims",
     "validate:template-library",
     "validate:template-preview-safety",
@@ -158,6 +169,7 @@
     "validate:workflow-trace",
     "validate:workflow-write-scopes",
     "validate:workflow-yaml-parse",
+    "validate:zero-paid-llm",
     "workflows:trace"
   ],
   "missingNpmScripts": [],
@@ -197,5 +209,5 @@
     }
   ],
   "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-  "traceId": "8f52409e0d74e3c5"
+  "traceId": "c5537e93633057c5"
 }

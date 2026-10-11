@@ -1,14 +1,14 @@
 {
   "schemaVersion": "4.4.0",
-  "generatedAt": "2026-10-08T10:48:10.459Z",
+  "generatedAt": "2026-10-11T16:31:10.727Z",
   "status": "COMPLETE_FIXTURE_TRACE",
-  "workflowCount": 16,
-  "manualReadyCount": 16,
+  "workflowCount": 17,
+  "manualReadyCount": 17,
   "scheduledCount": 12,
   "pushTriggeredCount": 1,
   "pullRequestTriggeredCount": 2,
-  "mainWriterCount": 10,
-  "fauxScenarioCount": 126,
+  "mainWriterCount": 11,
+  "fauxScenarioCount": 135,
   "allManualReady": true,
   "allHaveFixtureTraceInput": true,
   "allUsePinnedRunner": true,
@@ -152,6 +152,7 @@
         "validate:cloudflare-crawler-intelligence",
         "validate:commercial-page-cta-depth",
         "validate:competitor-crawl",
+        "validate:consolidation-candidates",
         "validate:content-actions",
         "validate:content-approval-governance",
         "validate:content-lifecycle",
@@ -177,6 +178,7 @@
         "validate:final-readiness-ledger",
         "validate:frozen-output-drift",
         "validate:growth-health",
+        "validate:index-coverage",
         "validate:indexing-provider-ledgers",
         "validate:intelligence-connectors",
         "validate:intelligence-freshness",
@@ -214,6 +216,8 @@
         "validate:provider-integrations",
         "validate:public-page-depth",
         "validate:public-reports",
+        "validate:publication-freeze",
+        "validate:query-aligned-pages",
         "validate:query-atlas",
         "validate:redirect-map",
         "validate:registry-build-order",
@@ -232,6 +236,12 @@
         "validate:self-heal-honesty",
         "validate:self-heal-progressions",
         "validate:self-healing",
+        "validate:seo-hygiene:definition",
+        "validate:seo-hygiene:favicon",
+        "validate:seo-hygiene:indexability",
+        "validate:seo-hygiene:indexnow",
+        "validate:seo-hygiene:jsonld",
+        "validate:seo-hygiene:og-image",
         "validate:seo-surfaces",
         "validate:serp-import",
         "validate:setup-secrets",
@@ -240,6 +250,7 @@
         "validate:source-required-claims",
         "validate:stripe-mode",
         "validate:structured-data",
+        "validate:target-query-set",
         "validate:telemetry-claims",
         "validate:template-library",
         "validate:template-preview-safety",
@@ -253,6 +264,7 @@
         "validate:workflow-trace",
         "validate:workflow-write-scopes",
         "validate:workflow-yaml-parse",
+        "validate:zero-paid-llm",
         "workflows:trace"
       ],
       "missingNpmScripts": [],
@@ -372,6 +384,7 @@
         "validate:cloudflare-crawler-intelligence",
         "validate:commercial-page-cta-depth",
         "validate:competitor-crawl",
+        "validate:consolidation-candidates",
         "validate:content-actions",
         "validate:content-approval-governance",
         "validate:content-lifecycle",
@@ -397,6 +410,7 @@
         "validate:final-readiness-ledger",
         "validate:frozen-output-drift",
         "validate:growth-health",
+        "validate:index-coverage",
         "validate:indexing-provider-ledgers",
         "validate:intelligence-connectors",
         "validate:intelligence-freshness",
@@ -434,6 +448,8 @@
         "validate:provider-integrations",
         "validate:public-page-depth",
         "validate:public-reports",
+        "validate:publication-freeze",
+        "validate:query-aligned-pages",
         "validate:query-atlas",
         "validate:redirect-map",
         "validate:registry-build-order",
@@ -452,6 +468,12 @@
         "validate:self-heal-honesty",
         "validate:self-heal-progressions",
         "validate:self-healing",
+        "validate:seo-hygiene:definition",
+        "validate:seo-hygiene:favicon",
+        "validate:seo-hygiene:indexability",
+        "validate:seo-hygiene:indexnow",
+        "validate:seo-hygiene:jsonld",
+        "validate:seo-hygiene:og-image",
         "validate:seo-surfaces",
         "validate:serp-import",
         "validate:setup-secrets",
@@ -460,6 +482,7 @@
         "validate:source-required-claims",
         "validate:stripe-mode",
         "validate:structured-data",
+        "validate:target-query-set",
         "validate:telemetry-claims",
         "validate:template-library",
         "validate:template-preview-safety",
@@ -473,6 +496,7 @@
         "validate:workflow-trace",
         "validate:workflow-write-scopes",
         "validate:workflow-yaml-parse",
+        "validate:zero-paid-llm",
         "workflows:trace"
       ],
       "missingNpmScripts": [],
@@ -524,7 +548,7 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "92a413a10a70cf51"
+      "traceId": "5206fdeadba6fb59"
     },
     {
       "workflow": "citation-os-weekly.yml",
@@ -562,7 +586,8 @@
       ],
       "npmScripts": [
         "cadence:gate",
-        "citation-os:weekly"
+        "citation-os:weekly",
+        "llm:check"
       ],
       "transitiveNpmScripts": [
         "authority:scale:fanout",
@@ -605,6 +630,7 @@
         "intelligence:recommend-page-actions",
         "intelligence:retest-evaluate",
         "intelligence:retest-queue",
+        "llm:check",
         "metrics:citation-scoreboard",
         "metrics:crawler-scoreboard",
         "metrics:indexing-scoreboard",
@@ -634,6 +660,7 @@
         "validate:cloudflare-crawler-intelligence",
         "validate:commercial-page-cta-depth",
         "validate:competitor-crawl",
+        "validate:consolidation-candidates",
         "validate:content-actions",
         "validate:content-approval-governance",
         "validate:content-lifecycle",
@@ -659,6 +686,7 @@
         "validate:final-readiness-ledger",
         "validate:frozen-output-drift",
         "validate:growth-health",
+        "validate:index-coverage",
         "validate:indexing-provider-ledgers",
         "validate:intelligence-connectors",
         "validate:intelligence-freshness",
@@ -696,6 +724,8 @@
         "validate:provider-integrations",
         "validate:public-page-depth",
         "validate:public-reports",
+        "validate:publication-freeze",
+        "validate:query-aligned-pages",
         "validate:query-atlas",
         "validate:redirect-map",
         "validate:registry-build-order",
@@ -714,6 +744,12 @@
         "validate:self-heal-honesty",
         "validate:self-heal-progressions",
         "validate:self-healing",
+        "validate:seo-hygiene:definition",
+        "validate:seo-hygiene:favicon",
+        "validate:seo-hygiene:indexability",
+        "validate:seo-hygiene:indexnow",
+        "validate:seo-hygiene:jsonld",
+        "validate:seo-hygiene:og-image",
         "validate:seo-surfaces",
         "validate:serp-import",
         "validate:setup-secrets",
@@ -722,6 +758,7 @@
         "validate:source-required-claims",
         "validate:stripe-mode",
         "validate:structured-data",
+        "validate:target-query-set",
         "validate:telemetry-claims",
         "validate:template-library",
         "validate:template-preview-safety",
@@ -735,6 +772,7 @@
         "validate:workflow-trace",
         "validate:workflow-write-scopes",
         "validate:workflow-yaml-parse",
+        "validate:zero-paid-llm",
         "workflows:trace"
       ],
       "missingNpmScripts": [],
@@ -786,7 +824,85 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "674e0184bcd97000"
+      "traceId": "9d890b16d5608f5d"
+    },
+    {
+      "workflow": "citation-probe.yml",
+      "traceMode": "FIXTURE_TRACE_WITH_TRANSITIVE_PACKAGE_RESOLUTION_NOT_PRODUCTION_TELEMETRY",
+      "proof_type": "fixture",
+      "real_telemetry": false,
+      "may_be_used_for_growth_claims": false,
+      "manualReady": true,
+      "scheduled": false,
+      "pushTriggered": false,
+      "pullRequestTriggered": false,
+      "hasCheckout": true,
+      "hasNodeSetup": true,
+      "nodeVersionOk": true,
+      "runnerPinned": true,
+      "timeoutSet": true,
+      "usesNpmInstall": false,
+      "usesNpmCi": false,
+      "buildsProject": false,
+      "requiresDependencyInstall": false,
+      "installDependencyReason": null,
+      "dependencyInstallPolicyOk": true,
+      "fixtureTraceInput": true,
+      "secretRefs": [
+        "OPENROUTER_API_KEY"
+      ],
+      "npmScripts": [],
+      "transitiveNpmScripts": [],
+      "missingNpmScripts": [],
+      "expectedDataTouches": [],
+      "mainWriter": true,
+      "sharedWriterConcurrency": true,
+      "fullMainCheckout": true,
+      "preparesLatestMain": true,
+      "safePushHelper": true,
+      "directUnsafePush": false,
+      "fauxScenarios": [
+        {
+          "id": "manual_fixture_dispatch",
+          "status": "PASS"
+        },
+        {
+          "id": "known_command_resolution",
+          "status": "PASS"
+        },
+        {
+          "id": "transitive_dependency_install",
+          "status": "PASS",
+          "requires_dependency_install": false,
+          "reason": null
+        },
+        {
+          "id": "pinned_runtime_and_timeout",
+          "status": "PASS"
+        },
+        {
+          "id": "secret_boundary",
+          "status": "PROVIDER_GATED_NO_FAKE_SUCCESS"
+        },
+        {
+          "id": "latest_main_before_generation",
+          "status": "PASS"
+        },
+        {
+          "id": "no_change_commit_path",
+          "status": "PASS"
+        },
+        {
+          "id": "remote_advance_rebase_retry",
+          "status": "PASS"
+        },
+        {
+          "id": "conflict_blocks_without_force",
+          "status": "PASS"
+        }
+      ],
+      "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
+      "traceId": "f16a37518a6920a7"
     },
     {
       "workflow": "competitor-watch-refresh.yml",
@@ -1303,6 +1419,7 @@
         "validate:cloudflare-crawler-intelligence",
         "validate:commercial-page-cta-depth",
         "validate:competitor-crawl",
+        "validate:consolidation-candidates",
         "validate:content-actions",
         "validate:content-approval-governance",
         "validate:content-lifecycle",
@@ -1328,6 +1445,7 @@
         "validate:final-readiness-ledger",
         "validate:frozen-output-drift",
         "validate:growth-health",
+        "validate:index-coverage",
         "validate:indexing-provider-ledgers",
         "validate:intelligence-connectors",
         "validate:intelligence-freshness",
@@ -1365,6 +1483,8 @@
         "validate:provider-integrations",
         "validate:public-page-depth",
         "validate:public-reports",
+        "validate:publication-freeze",
+        "validate:query-aligned-pages",
         "validate:query-atlas",
         "validate:redirect-map",
         "validate:registry-build-order",
@@ -1383,6 +1503,12 @@
         "validate:self-heal-honesty",
         "validate:self-heal-progressions",
         "validate:self-healing",
+        "validate:seo-hygiene:definition",
+        "validate:seo-hygiene:favicon",
+        "validate:seo-hygiene:indexability",
+        "validate:seo-hygiene:indexnow",
+        "validate:seo-hygiene:jsonld",
+        "validate:seo-hygiene:og-image",
         "validate:seo-surfaces",
         "validate:serp-import",
         "validate:setup-secrets",
@@ -1391,6 +1517,7 @@
         "validate:source-required-claims",
         "validate:stripe-mode",
         "validate:structured-data",
+        "validate:target-query-set",
         "validate:telemetry-claims",
         "validate:template-library",
         "validate:template-preview-safety",
@@ -1404,6 +1531,7 @@
         "validate:workflow-trace",
         "validate:workflow-write-scopes",
         "validate:workflow-yaml-parse",
+        "validate:zero-paid-llm",
         "workflows:trace"
       ],
       "missingNpmScripts": [],
@@ -1455,7 +1583,7 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "eb82deb06e6edbdf"
+      "traceId": "b36ea7c9492ce24a"
     },
     {
       "workflow": "notification-dispatch.yml",
@@ -1807,7 +1935,7 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "597e9a4be290e4e9"
+      "traceId": "b81f854175f915d9"
     },
     {
       "workflow": "validate.yml",
@@ -1867,6 +1995,7 @@
         "validate:cloudflare-crawler-intelligence",
         "validate:commercial-page-cta-depth",
         "validate:competitor-crawl",
+        "validate:consolidation-candidates",
         "validate:content-actions",
         "validate:content-approval-governance",
         "validate:content-lifecycle",
@@ -1892,6 +2021,7 @@
         "validate:final-readiness-ledger",
         "validate:frozen-output-drift",
         "validate:growth-health",
+        "validate:index-coverage",
         "validate:indexing-provider-ledgers",
         "validate:intelligence-connectors",
         "validate:intelligence-freshness",
@@ -1929,6 +2059,8 @@
         "validate:provider-integrations",
         "validate:public-page-depth",
         "validate:public-reports",
+        "validate:publication-freeze",
+        "validate:query-aligned-pages",
         "validate:query-atlas",
         "validate:redirect-map",
         "validate:registry-build-order",
@@ -1947,6 +2079,12 @@
         "validate:self-heal-honesty",
         "validate:self-heal-progressions",
         "validate:self-healing",
+        "validate:seo-hygiene:definition",
+        "validate:seo-hygiene:favicon",
+        "validate:seo-hygiene:indexability",
+        "validate:seo-hygiene:indexnow",
+        "validate:seo-hygiene:jsonld",
+        "validate:seo-hygiene:og-image",
         "validate:seo-surfaces",
         "validate:serp-import",
         "validate:setup-secrets",
@@ -1955,6 +2093,7 @@
         "validate:source-required-claims",
         "validate:stripe-mode",
         "validate:structured-data",
+        "validate:target-query-set",
         "validate:telemetry-claims",
         "validate:template-library",
         "validate:template-preview-safety",
@@ -1968,6 +2107,7 @@
         "validate:workflow-trace",
         "validate:workflow-write-scopes",
         "validate:workflow-yaml-parse",
+        "validate:zero-paid-llm",
         "workflows:trace"
       ],
       "missingNpmScripts": [],
@@ -2007,7 +2147,7 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "8f52409e0d74e3c5"
+      "traceId": "c5537e93633057c5"
     },
     {
       "workflow": "weekly-growth-ops.yml",

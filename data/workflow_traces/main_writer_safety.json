@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-10-08T10:48:30.566Z",
+  "generatedAt": "2026-10-11T16:31:23.952Z",
   "status": "PASS",
-  "writerWorkflowCount": 10,
+  "writerWorkflowCount": 11,
   "sharedConcurrencyGroup": "approvalprep-main-writer",
   "writers": [
     {
@@ -16,6 +16,15 @@
     },
     {
       "workflow": "citation-os-weekly.yml",
+      "sharedConcurrency": true,
+      "cancelInProgressFalse": true,
+      "fullCheckout": true,
+      "preparesLatestMain": true,
+      "safePush": true,
+      "directPush": false
+    },
+    {
+      "workflow": "citation-probe.yml",
       "sharedConcurrency": true,
       "cancelInProgressFalse": true,
       "fullCheckout": true,
