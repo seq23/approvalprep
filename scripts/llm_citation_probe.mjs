@@ -32,6 +32,10 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { refuseUnlessPaidConfirmed } from './llm/free_router.mjs';
+
+// Paid lane, off by owner policy (11 Oct 2026). Dispatch-only behind confirm_paid.
+refuseUnlessPaidConfirmed('citation probe (scripts/llm_citation_probe.mjs)');
 // OpenRouter bills the web plugin per REQUEST on the parallel engine, with 10
 // results included - measured at $0.00127 per call on this account, against
 // ~$0.04 on the default engine's per-result billing. Same url_citation schema,

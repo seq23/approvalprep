@@ -70,6 +70,17 @@
       "scope": "Every .github/workflows/*.yml parses: no mapping key left with only comments under it"
     },
     {
+      "id": "zero-paid-llm",
+      "npmScript": "validate:zero-paid-llm",
+      "entrypoint": "scripts/llm/validate_zero_paid_llm.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "owner policy 2026-10-11 'nothing should be paid': a paid model call on a schedule, a paid model in the routing list, or a router that falls back to paid spends money nobody approved",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "config/llm_routing.json is $0-only with a snapshot date; no provider call outside scripts/llm/free_router.mjs or a declared paid lane; no scheduled workflow reaches a paid lane; paid lanes dispatch-only behind confirm_paid; router behaviour under a stubbed provider"
+    },
+    {
       "id": "validation-registry",
       "npmScript": "validate:validation-registry",
       "entrypoint": "scripts/validate/validation-registry.mjs",

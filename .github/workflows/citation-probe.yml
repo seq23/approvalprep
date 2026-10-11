@@ -1,0 +1,69 @@
+name: Paid Citation Probe
+
+# Paid lane, off by owner policy (11 Oct 2026: "nothing should be paid").
+# It asks a paid model with the OpenRouter web plugin (billed per call) whether
+# answer engines cite this site. It used to run every Monday inside
+# citation-os-weekly.yml; it now has no schedule and runs only when a human
+# dispatches it with confirm_paid=true. Any other dispatch is a named stop.
+# Guarded by scripts/llm/validate_zero_paid_llm.mjs (npm run validate:zero-paid-llm).
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_paid:
+        description: "This run costs money (paid model + web plugin). Must be true to run."
+        type: boolean
+        default: false
+      limit:
+        description: "Number of queries to ask"
+        required: false
+        default: "25"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: approvalprep-main-writer
+  cancel-in-progress: false
+
+jobs:
+  citation-probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Refuse unless confirm_paid (named stop)
+        if: ${{ !inputs.confirm_paid }}
+        run: echo "NAMED STOP PAID_LANE_REFUSED - the citation probe is disabled by owner policy (11 Oct 2026). Re-dispatch with confirm_paid=true to run it once."
+
+      - uses: actions/checkout@v7
+        if: ${{ inputs.confirm_paid }}
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Synchronize latest main
+        if: ${{ inputs.confirm_paid }}
+        run: bash scripts/workflows/prepare-main-writer.sh
+
+      - uses: actions/setup-node@v7
+        if: ${{ inputs.confirm_paid }}
+        with:
+          node-version: 22.12.0
+
+      - name: Observe whether answer engines cite us
+        if: ${{ inputs.confirm_paid }}
+        env:
+          CONFIRM_PAID: ${{ inputs.confirm_paid }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          CITATION_PROBE_MODE: grounded
+          PROBE_LIMIT: ${{ inputs.limit }}
+        run: node scripts/llm_citation_probe.mjs --limit "$PROBE_LIMIT"
+
+      - name: Commit the observation
+        if: ${{ inputs.confirm_paid }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/signals/llm_citation_observations.json
+          git diff --cached --quiet || git commit -m "chore(citation-os): record dispatched citation probe"
+          bash scripts/workflows/safe-push-main.sh
