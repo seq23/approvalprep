@@ -7,30 +7,30 @@
     "data/queries/evidence/evidence_queries.json",
     "data/search_intelligence/gsc_query_history.json"
   ],
-  "gsc_window": "2026-09-13..2026-10-11",
-  "gsc_collected_at": "2026-10-11T14:05:48.993Z",
-  "target_count": 16,
+  "gsc_window": "2026-09-15..2026-10-13",
+  "gsc_collected_at": "2026-10-13T08:46:04.029Z",
+  "target_count": 17,
   "targets_by_source": {
     "gsc_search_analytics": 2,
-    "gsc_search_analytics_history": 1,
+    "gsc_search_analytics_history": 2,
     "measured_demand": 11,
     "evidence_queries": 2
   },
   "truth_boundary": "A target is a query this site intends to answer. Its number is the measurement that admitted it, not evidence of ranking or indexing.",
   "targets": [
     {
-      "query": "does the sba check my bank statements",
-      "query_normalized": "does the sba check my bank statements",
+      "query": "how to get approved for apartment",
+      "query_normalized": "how to get approved for apartment",
       "source": "gsc_search_analytics",
       "measurement": {
         "metric": "impressions_28d",
         "value": 1,
         "clicks": 0,
-        "position": 78,
-        "window": "2026-09-13..2026-10-11",
-        "collected_at": "2026-10-11T14:05:48.993Z"
+        "position": 98,
+        "window": "2026-09-15..2026-10-13",
+        "collected_at": "2026-10-13T08:46:04.029Z"
       },
-      "expected_owned_route": "/sba-loan-checklist",
+      "expected_owned_route": "/how-to-get-approved-for-an-apartment",
       "other_measurements": []
     },
     {
@@ -42,10 +42,25 @@
         "value": 1,
         "clicks": 0,
         "position": 100,
+        "window": "2026-09-15..2026-10-13",
+        "collected_at": "2026-10-13T08:46:04.029Z"
+      },
+      "expected_owned_route": "/how-to-get-approved-for-an-apartment",
+      "other_measurements": []
+    },
+    {
+      "query": "does the sba check my bank statements",
+      "query_normalized": "does the sba check my bank statements",
+      "source": "gsc_search_analytics_history",
+      "measurement": {
+        "metric": "impressions_28d",
+        "value": 1,
+        "clicks": 0,
+        "position": 78,
         "window": "2026-09-13..2026-10-11",
         "collected_at": "2026-10-11T14:05:48.993Z"
       },
-      "expected_owned_route": "/how-to-get-approved-for-an-apartment",
+      "expected_owned_route": "/sba-loan-checklist",
       "other_measurements": []
     },
     {
