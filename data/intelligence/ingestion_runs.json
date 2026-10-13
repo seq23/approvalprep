@@ -2,6 +2,23 @@
   "schemaVersion": "4.1.0",
   "runs": [
     {
+      "id": "1a2f1247-6e0e-4b15-a999-baf0488f2b1b",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-10-13T10:27:31.028Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "d9d8cb38-1070-4df3-9abb-2f49a40aa322",
+      "connectorId": "indexnow",
+      "status": "NO_DATA",
+      "ranAt": "2026-10-13T10:27:30.856Z",
+      "mode": "live",
+      "recordsImported": 0,
+      "preparedUrlCount": 79
+    },
+    {
       "id": "e3eeecf7-0b6b-4bf5-91ed-7caf86032cf8",
       "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
@@ -1892,23 +1909,6 @@
       "status": "NOT_CONFIGURED",
       "ranAt": "2026-10-01T08:40:50.161Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "57c704e7-f136-4e7a-982c-1b1554b9aca1",
-      "connectorId": "google_url_inspection",
-      "status": "NOT_AUTHORIZED",
-      "ranAt": "2026-10-01T08:40:49.972Z",
-      "mode": "unavailable",
-      "reason": "HTTP 403: {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"You do not own this site, or the inspected URL is not part of this property.\",\n    \"status\": \"PERMISSION_DENIED\"\n  }\n}\n",
-      "recordsImported": 0
-    },
-    {
-      "id": "3f38fc33-91aa-44f4-82b9-ad48d26e733d",
-      "connectorId": "google_search_console_search_analytics",
-      "status": "BUDGET_HELD",
-      "ranAt": "2026-10-01T08:40:49.452Z",
-      "reason": "weekly ceiling 3 reached (3 live attempts in 7d)",
       "recordsImported": 0
     }
   ]
