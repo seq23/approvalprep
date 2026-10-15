@@ -2,6 +2,27 @@
   "schemaVersion": "4.1.0",
   "runs": [
     {
+      "id": "339226b2-c3fb-4b44-9e5a-25c29ab5d809",
+      "connectorId": "growth_brief_generation",
+      "status": "COMPLETE",
+      "ranAt": "2026-10-15T10:48:51.980Z",
+      "recordsImported": 40
+    },
+    {
+      "id": "16f2d674-54b2-4e12-ac08-09ad81b5c1bf",
+      "connectorId": "authority_requirement_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-10-15T10:48:51.793Z",
+      "recordsImported": 79
+    },
+    {
+      "id": "4987c8fc-0565-4b38-a918-be3f44cfce68",
+      "connectorId": "growth_maintenance_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-10-15T10:48:51.628Z",
+      "recordsImported": 79
+    },
+    {
       "id": "dd052aae-3d0d-48a6-8ab1-974cf31213f0",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
@@ -1880,31 +1901,6 @@
       "status": "COMPLETE",
       "ranAt": "2026-10-03T08:35:05.435Z",
       "recordsImported": 99
-    },
-    {
-      "id": "4b795305-55c3-47bb-8ed7-07b50ddf4413",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-10-03T08:35:05.294Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "3319d46d-ebf5-4056-b0a4-f15a239acb41",
-      "connectorId": "google_url_inspection",
-      "status": "NOT_AUTHORIZED",
-      "ranAt": "2026-10-03T08:35:05.154Z",
-      "mode": "unavailable",
-      "reason": "HTTP 403: {\n  \"error\": {\n    \"code\": 403,\n    \"message\": \"You do not own this site, or the inspected URL is not part of this property.\",\n    \"status\": \"PERMISSION_DENIED\"\n  }\n}\n",
-      "recordsImported": 0
-    },
-    {
-      "id": "fc86ef8f-29c0-4c82-bf63-7e8a8be274f3",
-      "connectorId": "google_search_console_search_analytics",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-03T08:35:04.761Z",
-      "mode": "live",
-      "recordsImported": 3
     }
   ]
 }
