@@ -32,7 +32,7 @@ const schema=[
   faqSchema(pageFaq),
   howToSchema({name:`How to prepare ${page.title}`,steps:page.steps}),
   itemListSchema({name:`${page.title} fields`,items:page.fields}),
-  ...(product?[productSchema({name:product.name,description:product.customer_situation||page.description,url:canonicalUrl("/pricing"),price:product.priceLabel})]:[])
+  ...(product?[productSchema({product:{sku:page.sku,name:product.name,priceLabel:product.priceLabel,image:product.image},description:product.customer_situation||page.description,url:canonicalUrl("/pricing")})]:[])
 ];
 ---
 <BaseLayout title={aligned.metaTitle||`${page.title} - ApprovalPrep`} description={page.metaDescription || page.description} canonical={canonical} schema={schema}>

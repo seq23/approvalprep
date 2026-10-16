@@ -77,7 +77,7 @@ const schema = [
   breadcrumbSchema(page.path),
   faqSchema(page.faq),
   howToSchema({ name: page.protocol.heading, steps: page.protocol.steps }),
-  productSchema({ name: product.name, description: product.customer_situation, url: canonicalUrl("/pricing"), price: product.priceLabel })
+  productSchema({ product, description: product.customer_situation, url: canonicalUrl("/pricing") })
 ];
 const trustSignals = ["No account required", "No saved customer documents", "No stored letter answers", "Self-service only", "Plain-language guidance"];
 ---

@@ -89,7 +89,7 @@ const routeOfferings = offeringsForSku(skuForRoute);
 const isCommercial = route.cta_policy === "purchase" || route.page_intent === "product";
 const rendersGuideBody = !isDownload && !isGlossary && !isLegal;
 const kitProductSchema = route.page_intent === "product" && routeProduct?.priceLabel
-  ? productSchema({ name: routeProduct.name || routeProduct.product_name, description: route.description || copy.lead, url: canonical, price: routeProduct.priceLabel })
+  ? productSchema({ product: { sku: skuForRoute, name: routeProduct.name || routeProduct.product_name, priceLabel: routeProduct.priceLabel, image: routeProduct.image }, description: route.description || copy.lead, url: canonical })
   : null;
 const primaryCtaWithPrice = primarySku && routeProduct ? `Buy ${routeProduct.name} — ${routeProduct.priceLabel}` : copy.primaryCta;
 // recommendation_summary (.clarity/content-pattern-spec.json): the page's own
