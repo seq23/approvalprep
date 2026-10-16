@@ -1548,6 +1548,17 @@
       "owner": "approvalprep-growth",
       "group": "growth-critical",
       "scope": "Built title, H1, definition, FAQ JSON-LD and kit checkout on the GSC-impression pages"
+    },
+    {
+      "id": "kit-page-sells-its-own-kit",
+      "npmScript": "validate:kit-page-sells-its-own-kit",
+      "entrypoint": "scripts/validate/kit-page-sells-its-own-kit.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "A kit's own page must sell that kit; a wrong buy button charges the buyer for the wrong product",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "skuForRoute() run against every active_paid kit path in the route manifest"
     }
   ],
   "repairPolicy": "A validator may declare repairCommand only when that command repairs the same defect the validator detects. scripts/selfheal/heal-until-clean.mjs runs it on a blocking failure and re-validates.",
