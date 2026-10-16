@@ -1,8 +1,16 @@
 {
-  "weeks": [],
-  "updatedAt": "2026-10-16T15:22:57.792Z",
-  "state": "NAMED_STOP",
-  "stop": "PINTEREST_METRICS_UNAVAILABLE",
-  "reason": "CLOUDFLARE_API_TOKEN / CLOUDFLARE_ACCOUNT_ID are not set here, so D1 conversion_events (the page-view log with utm params) cannot be read. Add both as repository secrets (a token with D1 read on the approvalprep account).",
-  "source": "d1:conversion_events"
+  "_comment": "Weekly Pinterest visits per pin variant from D1 conversion_events (page_view rows with utm_source=pinterest). Written by scripts/pinterest/measure.mjs.",
+  "updatedAt": "2026-10-16T15:36:07.037Z",
+  "state": "MEASURED",
+  "source": "d1:conversion_events",
+  "weeks": [
+    {
+      "weekEnding": "2026-10-16",
+      "since": "2026-10-09T15:36:07.037Z",
+      "allPageViews": 30,
+      "pinterestViews": 0,
+      "byVariant": {},
+      "byPage": {}
+    }
+  ]
 }
