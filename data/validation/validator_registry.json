@@ -1559,6 +1559,17 @@
       "owner": "approvalprep-growth",
       "group": "growth-critical",
       "scope": "skuForRoute() run against every active_paid kit path in the route manifest"
+    },
+    {
+      "id": "pinterest-launch",
+      "npmScript": "validate:pinterest-launch",
+      "entrypoint": "scripts/validate/pinterest-launch.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "The Pinterest domain claim and the /pinfeed.xml RSS feed are what Pinterest reads; a lost meta tag unclaims the domain and a broken feed stops every pin",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "Built dist/: homepage p:domain_verify meta, /pinfeed.xml well-formed RSS 2.0 with >= 8 items, every link and 1000x1500 image on-site and emitted, every paid kit and the three Plan B guides present"
     }
   ],
   "repairPolicy": "A validator may declare repairCommand only when that command repairs the same defect the validator detects. scripts/selfheal/heal-until-clean.mjs runs it on a blocking failure and re-validates.",

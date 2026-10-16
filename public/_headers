@@ -19,3 +19,8 @@
 
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
+
+# Pinterest RSS feed (data/pinterest/pinfeed.json). Pages would serve .xml as
+# application/xml; Pinterest expects an RSS content type.
+/pinfeed.xml
+  Content-Type: application/rss+xml; charset=utf-8
