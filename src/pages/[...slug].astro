@@ -18,6 +18,8 @@ import IncludedOfferings from "../components/IncludedOfferings.astro";
 import PageCTAStack from "../components/PageCTAStack.astro";
 import KitAnswer from "../components/KitAnswer.astro";
 import priorityPages from "../../data/content/priority_pages.json";
+import productsData from "../../data/products/products.json";
+import { skuForRoute as skuForRouteOf, paidSkusFrom } from "../lib/skuForRoute.mjs";
 import ProblemAgitationFit from "../components/ProblemAgitationFit.astro";
 import WhatHappensAfterPurchase from "../components/WhatHappensAfterPurchase.astro";
 import TrustAndBoundaryBand from "../components/TrustAndBoundaryBand.astro";
@@ -74,18 +76,7 @@ const familyCopy = routeFamilyCopy[route.family] || routeFamilyCopy[route.risk =
 // A priority page (data/content/priority_pages.json) names its matching kit
 // explicitly and always leads with that kit's checkout.
 const priorityEntry = priorityPages.pages[route.path];
-const skuForRoute = (() => {
-  const path = route.path;
-  if (priorityEntry) return priorityEntry.sku;
-  if (path.includes("business") || path.includes("sba")) return "business-funding-prep-kit";
-  if (path.includes("apartment") || path.includes("rental") || path.includes("approved-for-an-apartment")) return "rental-application-kit";
-  if (path.includes("credit")) return "credit-letter-kit";
-  if (path.includes("employment") || path.includes("income")) return "income-employment-letter-kit";
-  if (path.includes("auto-loan") || path.includes("car-loan") || path.includes("mortgage") || path.includes("loan")) return "loan-prep-letter-kit";
-  if (path.includes("moving") || path.includes("important-documents")) return "life-admin-letter-kit";
-  if (path.includes("complete-approvalprep-bundle")) return "complete-approvalprep-bundle";
-  return "letter-of-explanation";
-})();
+const skuForRoute = skuForRouteOf(route.path, { priorityEntry, paidSkus: paidSkusFrom(productsData) });
 const ctaHref = (route.cta_policy === "purchase" || priorityEntry) ? `/pricing#${skuForRoute}` : (route.path.includes("apartment") || route.path.includes("rental") ? "/apartment-application" : "/letter-of-explanation");
 const primarySku = (route.cta_policy === "purchase" || priorityEntry) ? skuForRoute : "";
 // A priority page aligned to a measured Search Console query carries its own

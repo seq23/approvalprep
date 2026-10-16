@@ -285,7 +285,8 @@
     "validate:publication-freeze": "node scripts/validate/publication-freeze.mjs",
     "validate:query-aligned-pages": "node scripts/validate/query-aligned-pages.mjs",
     "llm:check": "node scripts/llm/free_router.mjs --check --ping",
-    "validate:zero-paid-llm": "node scripts/llm/validate_zero_paid_llm.mjs"
+    "validate:zero-paid-llm": "node scripts/llm/validate_zero_paid_llm.mjs",
+    "validate:kit-page-sells-its-own-kit": "node scripts/validate/kit-page-sells-its-own-kit.mjs"
   },
   "dependencies": {
     "astro": "^7.0.6",
