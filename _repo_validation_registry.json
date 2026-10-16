@@ -1570,6 +1570,17 @@
       "owner": "approvalprep-growth",
       "group": "growth-critical",
       "scope": "Built dist/: homepage p:domain_verify meta, /pinfeed.xml well-formed RSS 2.0 with >= 8 items, every link and 1000x1500 image on-site and emitted, every paid kit and the three Plan B guides present"
+    },
+    {
+      "id": "pinterest-drip",
+      "npmScript": "validate:pinterest-drip",
+      "entrypoint": "scripts/validate/pinterest-drip.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "The daily Pinterest drip is what keeps fresh pins reaching the board; a broken queue, a missing image or a feed that shows the wrong day stops or corrupts every pin",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "data/pinterest/queue.json schema and copy rules, schedule (PINS_PER_DAY, no gaps, no page on consecutive days), on-site utm links incl. utm_content, dist/pins/<id>.png 1000x1500, feed exact at fixed America/Chicago clocks, refill threshold and batch, request-time Pages Function wiring"
     }
   ],
   "repairPolicy": "A validator may declare repairCommand only when that command repairs the same defect the validator detects. scripts/selfheal/heal-until-clean.mjs runs it on a blocking failure and re-validates."

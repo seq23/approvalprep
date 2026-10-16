@@ -1,0 +1,64 @@
+name: Pinterest Refill
+# Daily Pinterest drip (owner-approved 16 Oct 2026). The feed itself needs no
+# deploy: functions/pinfeed.xml.js filters data/pinterest/queue.json by release
+# date at request time. This job only keeps the queue stocked: when fewer than
+# REFILL_THRESHOLD variants are unreleased it appends the next batch ($0 template
+# copy, scripts/pinterest/variants.mjs), builds, runs the drip and launch
+# validators, and pushes the queue to main; Cloudflare Pages deploys it and builds
+# the new pin images. A stocked day writes nothing and commits nothing.
+on:
+  schedule:
+    - cron: "5 11 * * *"   # ~06:05 CT
+  workflow_dispatch:
+    inputs:
+      fixture_trace:
+        description: "Run fixture workflow data trace only"
+        required: false
+        default: "false"
+permissions:
+  contents: write
+concurrency:
+  group: approvalprep-main-writer
+  cancel-in-progress: false
+jobs:
+  refill:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Synchronize latest main
+        run: bash scripts/workflows/prepare-main-writer.sh
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22.12.0
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Run fixture workflow trace
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
+        run: npm run workflows:trace -- --workflow pinterest-refill.yml
+      - name: Refill the queue if fewer than the threshold remain
+        run: npm run pinterest:refill
+      - name: Build and validate only when the queue changed
+        run: |
+          if git diff --quiet -- data/pinterest/queue.json; then
+            echo "Queue stocked; nothing to build or commit."
+            exit 0
+          fi
+          npm run build
+          npm run validate:pinterest-drip
+          npm run validate:pinterest-launch
+      - name: Commit and publish the refilled queue
+        run: |
+          git config user.name "approvalprep-content-bot"
+          git config user.email "actions@users.noreply.github.com"
+          if git diff --quiet -- data/pinterest/queue.json; then
+            echo "Queue stocked; nothing to commit."
+            exit 0
+          fi
+          git add data/pinterest/queue.json
+          git commit -m "chore(pinterest): refill the daily pin queue"
+          bash scripts/workflows/safe-push-main.sh
