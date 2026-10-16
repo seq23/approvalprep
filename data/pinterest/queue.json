@@ -1,0 +1,1332 @@
+{
+  "_comment": "Daily Pinterest drip (owner-approved 16 Oct 2026). Each item is one pin VARIANT of a kit/guide page: its own headline, angle, layout and palette, its own 1000x1500 image (dist/pins/<id>.png, built by scripts/build_pin_images.mjs from the page's kit preview art), and a releaseDate (America/Chicago). /pinfeed.xml (functions/pinfeed.xml.js, request time) shows the 11 launch items in pinfeed.json plus every item with releaseDate <= today, newest MAX_FEED_ITEMS. PINS_PER_DAY is the one knob for the drip rate. scripts/pinterest/refill_queue.mjs appends the next batch when fewer than REFILL_THRESHOLD remain unreleased (daily, .github/workflows/pinterest-refill.yml). Guarded by validate:pinterest-drip.",
+  "config": {
+    "PINS_PER_DAY": 1,
+    "FIRST_RELEASE_DATE": "2026-10-17",
+    "TIMEZONE": "America/Chicago",
+    "MAX_FEED_ITEMS": 50,
+    "REFILL_THRESHOLD": 14
+  },
+  "items": [
+    {
+      "id": "letter-of-explanation-v1",
+      "slug": "letter-of-explanation",
+      "path": "/letter-of-explanation/",
+      "kind": "kit",
+      "imageSku": "letter-of-explanation",
+      "angle": "problem-first",
+      "layout": "band-top",
+      "palette": "teal",
+      "headline": "Lender asking you to explain a credit gap?",
+      "subhead": "Templates for 9 explanation-letter situations",
+      "bullets": [
+        "9 editable DOCX letters",
+        "PDF writing guide",
+        "Self-review checklist"
+      ],
+      "title": "Lender asking you to explain a credit gap? | Letter of Explanation Kit",
+      "description": "Templates for 9 explanation-letter situations. Letter of explanation templates for credit, income gaps, employment gaps, address history, late payments, bank statements and life events. A PDF guide plus editable DOCX letters you fill in yourself. Self-service: we never contact anyone for you or promise approval.",
+      "releaseDate": "2026-10-17"
+    },
+    {
+      "id": "income-employment-letter-kit-v1",
+      "slug": "income-employment-letter-kit",
+      "path": "/income-employment-letter-kit/",
+      "kind": "kit",
+      "imageSku": "income-employment-letter-kit",
+      "angle": "problem-first",
+      "layout": "checklist",
+      "palette": "navy",
+      "headline": "Landlord or lender wants proof of income?",
+      "subhead": "Letters that explain your work and income",
+      "bullets": [
+        "Employment verification",
+        "Proof of income",
+        "Job change or gap letter"
+      ],
+      "title": "Landlord or lender wants proof of income? | Income + Employment Letter Kit",
+      "description": "Letters that explain your work and income. Employment verification, proof of income, self-employment income, job change and employment gap letters in one self-service kit. Fill in the templates yourself and attach your real documents. Editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-10-18"
+    },
+    {
+      "id": "credit-letter-kit-v1",
+      "slug": "credit-letter-kit",
+      "path": "/credit-letter-kit/",
+      "kind": "kit",
+      "imageSku": "credit-letter-kit",
+      "angle": "problem-first",
+      "layout": "split",
+      "palette": "plum",
+      "headline": "Spotted a possible error on your credit report?",
+      "subhead": "Dispute and follow-up letter templates",
+      "bullets": [
+        "Credit dispute letter",
+        "Goodwill letter",
+        "Debt validation letter"
+      ],
+      "title": "Spotted a possible error on your credit report? | Credit Letter Kit",
+      "description": "Dispute and follow-up letter templates. DIY credit letter templates for possible report errors, goodwill requests, late payments, debt validation and follow-up. You write and send the letters yourself. Not credit repair and no promised results. Editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-10-19"
+    },
+    {
+      "id": "rental-application-kit-v1",
+      "slug": "rental-application-kit",
+      "path": "/rental-application-kit/",
+      "kind": "kit",
+      "imageSku": "rental-application-kit",
+      "angle": "problem-first",
+      "layout": "art-top",
+      "palette": "forest",
+      "headline": "Apartment application stuck on paperwork?",
+      "subhead": "Get your packet complete before you apply",
+      "bullets": [
+        "Proof of income checklist",
+        "Rental history letter",
+        "Rental cover letter"
+      ],
+      "title": "Apartment application stuck on paperwork? | Rental Application Kit",
+      "description": "Get your packet complete before you apply. Get your apartment application packet complete before you apply: a rental checklist, cover letter guidance, and letters for rental history, income and employment questions. Self-service, editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-10-20"
+    },
+    {
+      "id": "loan-prep-letter-kit-v1",
+      "slug": "loan-prep-letter-kit",
+      "path": "/loan-prep-letter-kit/",
+      "kind": "kit",
+      "imageSku": "loan-prep-letter-kit",
+      "angle": "problem-first",
+      "layout": "card",
+      "palette": "brick",
+      "headline": "Lender asking about your bank statements?",
+      "subhead": "A bank statement explanation letter template",
+      "bullets": [
+        "Income explanation",
+        "Credit explanation",
+        "Bank statement explanation"
+      ],
+      "title": "Lender asking about your bank statements? | Loan Prep Letter Kit",
+      "description": "A bank statement explanation letter template. Letters and checklists to prepare before an auto loan, personal loan or mortgage review: explain credit history, income, job changes and bank statement questions clearly. Self-service; we are not a lender and never promise approval.",
+      "releaseDate": "2026-10-21"
+    },
+    {
+      "id": "business-funding-prep-kit-v1",
+      "slug": "business-funding-prep-kit",
+      "path": "/business-funding-prep-kit/",
+      "kind": "kit",
+      "imageSku": "business-funding-prep-kit",
+      "angle": "problem-first",
+      "layout": "band-top",
+      "palette": "slate",
+      "headline": "Lender questions about your cash flow?",
+      "subhead": "A cash flow explanation letter template",
+      "bullets": [
+        "SBA document checklist",
+        "Use of funds explanation",
+        "Cash flow explanation"
+      ],
+      "title": "Lender questions about your cash flow? | Business Funding Prep Kit",
+      "description": "A cash flow explanation letter template. Organize business documents, explain income and bank activity, describe use of funds and prepare lender follow-up letters. For business loan and SBA prep. Self-service; not a lender, broker or accountant. Editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-10-22"
+    },
+    {
+      "id": "life-admin-letter-kit-v1",
+      "slug": "life-admin-letter-kit",
+      "path": "/life-admin-letter-kit/",
+      "kind": "kit",
+      "imageSku": "life-admin-letter-kit",
+      "angle": "problem-first",
+      "layout": "checklist",
+      "palette": "teal",
+      "headline": "Need proof of address or residency?",
+      "subhead": "Address and residency letter templates",
+      "bullets": [
+        "Address verification letter",
+        "Proof of residency letter",
+        "Records request letter"
+      ],
+      "title": "Need proof of address or residency? | Life Admin Letter Kit",
+      "description": "Address and residency letter templates. Simple letters and checklists for everyday paperwork: address history, residency, identity details, account issues and document requests to a school, employer, landlord or agency. Self-service, editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-10-23"
+    },
+    {
+      "id": "complete-approvalprep-bundle-v1",
+      "slug": "complete-approvalprep-bundle",
+      "path": "/complete-approvalprep-bundle/",
+      "kind": "kit",
+      "imageSku": "complete-approvalprep-bundle",
+      "angle": "problem-first",
+      "layout": "split",
+      "palette": "navy",
+      "headline": "Renting and borrowing at the same time?",
+      "subhead": "Rental, loan and income letters in one download",
+      "bullets": [
+        "Rental and loan kits",
+        "Credit and income letters",
+        "Business and life admin"
+      ],
+      "title": "Renting and borrowing at the same time? | Complete ApprovalPrep Bundle",
+      "description": "Rental, loan and income letters in one download. Every ApprovalPrep kit in one download: rental application, credit letters, income and employment proof, loan prep, business funding prep and everyday paperwork letters. Self-service templates and checklists; you prepare and send your own.",
+      "releaseDate": "2026-10-24"
+    },
+    {
+      "id": "employment-verification-letter-v1",
+      "slug": "employment-verification-letter",
+      "path": "/employment-verification-letter/",
+      "kind": "guide",
+      "imageSku": "income-employment-letter-kit",
+      "angle": "problem-first",
+      "layout": "art-top",
+      "palette": "plum",
+      "headline": "Landlord asked for employment verification?",
+      "subhead": "What the letter should include",
+      "bullets": [
+        "Job title and start date",
+        "Employer contact details",
+        "Signature and date"
+      ],
+      "title": "Landlord asked for employment verification? | Employment Verification Letter Guide",
+      "description": "What the letter should include. What an employment verification letter should include, the employer and employee versions, and a checklist of the fields a landlord or lender reviewer may need. A plain guide with a free template.",
+      "releaseDate": "2026-10-25"
+    },
+    {
+      "id": "sba-loan-checklist-v1",
+      "slug": "sba-loan-checklist",
+      "path": "/sba-loan-checklist/",
+      "kind": "guide",
+      "imageSku": "business-funding-prep-kit",
+      "angle": "problem-first",
+      "layout": "card",
+      "palette": "forest",
+      "headline": "Applying for an SBA loan? Start here",
+      "subhead": "The documents lenders typically ask for",
+      "bullets": [
+        "Tax returns",
+        "Financial statements",
+        "Use of funds"
+      ],
+      "title": "Applying for an SBA loan? Start here | SBA Loan Checklist",
+      "description": "The documents lenders typically ask for. The documents an SBA lender typically asks for — tax returns, financial statements, business plan, debt schedule, ownership and use of funds — as a checklist you can work through before you apply.",
+      "releaseDate": "2026-10-26"
+    },
+    {
+      "id": "how-to-get-approved-for-an-apartment-v1",
+      "slug": "how-to-get-approved-for-an-apartment",
+      "path": "/how-to-get-approved-for-an-apartment/",
+      "kind": "guide",
+      "imageSku": "rental-application-kit",
+      "angle": "problem-first",
+      "layout": "band-top",
+      "palette": "brick",
+      "headline": "Worried about your rental application?",
+      "subhead": "What landlords check, and how to prepare",
+      "bullets": [
+        "Income",
+        "Rental history",
+        "Credit and references"
+      ],
+      "title": "Worried about your rental application? | Apartment Approval Guide",
+      "description": "What landlords check, and how to prepare. What landlords check on a rental application — income, rental history, credit and references — and how to prepare each one honestly before you apply. A plain checklist-style guide.",
+      "releaseDate": "2026-10-27"
+    },
+    {
+      "id": "letter-of-explanation-v2",
+      "slug": "letter-of-explanation",
+      "path": "/letter-of-explanation/",
+      "kind": "kit",
+      "imageSku": "letter-of-explanation",
+      "angle": "checklist-first",
+      "layout": "art-top",
+      "palette": "navy",
+      "headline": "Letter of explanation checklist",
+      "subhead": "Say what happened, attach proof, review, send",
+      "bullets": [
+        "9 editable DOCX letters",
+        "PDF writing guide",
+        "Self-review checklist"
+      ],
+      "title": "Letter of explanation checklist | Letter of Explanation Kit",
+      "description": "Say what happened, attach proof, review, send. Letter of explanation templates for credit, income gaps, employment gaps, address history, late payments, bank statements and life events. A PDF guide plus editable DOCX letters you fill in yourself. Self-service: we never contact anyone for you or promise approval.",
+      "releaseDate": "2026-10-28"
+    },
+    {
+      "id": "income-employment-letter-kit-v2",
+      "slug": "income-employment-letter-kit",
+      "path": "/income-employment-letter-kit/",
+      "kind": "kit",
+      "imageSku": "income-employment-letter-kit",
+      "angle": "checklist-first",
+      "layout": "card",
+      "palette": "plum",
+      "headline": "Proof of income letter checklist",
+      "subhead": "Verification, income and job-change letters",
+      "bullets": [
+        "Employment verification",
+        "Proof of income",
+        "Job change or gap letter"
+      ],
+      "title": "Proof of income letter checklist | Income + Employment Letter Kit",
+      "description": "Verification, income and job-change letters. Employment verification, proof of income, self-employment income, job change and employment gap letters in one self-service kit. Fill in the templates yourself and attach your real documents. Editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-10-29"
+    },
+    {
+      "id": "credit-letter-kit-v2",
+      "slug": "credit-letter-kit",
+      "path": "/credit-letter-kit/",
+      "kind": "kit",
+      "imageSku": "credit-letter-kit",
+      "angle": "checklist-first",
+      "layout": "band-top",
+      "palette": "forest",
+      "headline": "Credit report error checklist",
+      "subhead": "Plus dispute, goodwill and validation letters",
+      "bullets": [
+        "Credit dispute letter",
+        "Goodwill letter",
+        "Debt validation letter"
+      ],
+      "title": "Credit report error checklist | Credit Letter Kit",
+      "description": "Plus dispute, goodwill and validation letters. DIY credit letter templates for possible report errors, goodwill requests, late payments, debt validation and follow-up. You write and send the letters yourself. Not credit repair and no promised results. Editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-10-30"
+    },
+    {
+      "id": "rental-application-kit-v2",
+      "slug": "rental-application-kit",
+      "path": "/rental-application-kit/",
+      "kind": "kit",
+      "imageSku": "rental-application-kit",
+      "angle": "checklist-first",
+      "layout": "checklist",
+      "palette": "brick",
+      "headline": "Apartment application checklist",
+      "subhead": "Income, rental history and cover letter",
+      "bullets": [
+        "Proof of income checklist",
+        "Rental history letter",
+        "Rental cover letter"
+      ],
+      "title": "Apartment application checklist | Rental Application Kit",
+      "description": "Income, rental history and cover letter. Get your apartment application packet complete before you apply: a rental checklist, cover letter guidance, and letters for rental history, income and employment questions. Self-service, editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-10-31"
+    },
+    {
+      "id": "loan-prep-letter-kit-v2",
+      "slug": "loan-prep-letter-kit",
+      "path": "/loan-prep-letter-kit/",
+      "kind": "kit",
+      "imageSku": "loan-prep-letter-kit",
+      "angle": "checklist-first",
+      "layout": "split",
+      "palette": "slate",
+      "headline": "Loan document checklist",
+      "subhead": "Plus the letters lenders ask for",
+      "bullets": [
+        "Income explanation",
+        "Credit explanation",
+        "Bank statement explanation"
+      ],
+      "title": "Loan document checklist | Loan Prep Letter Kit",
+      "description": "Plus the letters lenders ask for. Letters and checklists to prepare before an auto loan, personal loan or mortgage review: explain credit history, income, job changes and bank statement questions clearly. Self-service; we are not a lender and never promise approval.",
+      "releaseDate": "2026-11-01"
+    },
+    {
+      "id": "business-funding-prep-kit-v2",
+      "slug": "business-funding-prep-kit",
+      "path": "/business-funding-prep-kit/",
+      "kind": "kit",
+      "imageSku": "business-funding-prep-kit",
+      "angle": "checklist-first",
+      "layout": "art-top",
+      "palette": "teal",
+      "headline": "SBA document checklist",
+      "subhead": "Plus letters for lender review",
+      "bullets": [
+        "SBA document checklist",
+        "Use of funds explanation",
+        "Cash flow explanation"
+      ],
+      "title": "SBA document checklist | Business Funding Prep Kit",
+      "description": "Plus letters for lender review. Organize business documents, explain income and bank activity, describe use of funds and prepare lender follow-up letters. For business loan and SBA prep. Self-service; not a lender, broker or accountant. Editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-11-02"
+    },
+    {
+      "id": "life-admin-letter-kit-v2",
+      "slug": "life-admin-letter-kit",
+      "path": "/life-admin-letter-kit/",
+      "kind": "kit",
+      "imageSku": "life-admin-letter-kit",
+      "angle": "checklist-first",
+      "layout": "card",
+      "palette": "navy",
+      "headline": "Everyday paperwork checklist",
+      "subhead": "Address, identity and records letters",
+      "bullets": [
+        "Address verification letter",
+        "Proof of residency letter",
+        "Records request letter"
+      ],
+      "title": "Everyday paperwork checklist | Life Admin Letter Kit",
+      "description": "Address, identity and records letters. Simple letters and checklists for everyday paperwork: address history, residency, identity details, account issues and document requests to a school, employer, landlord or agency. Self-service, editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-11-03"
+    },
+    {
+      "id": "complete-approvalprep-bundle-v2",
+      "slug": "complete-approvalprep-bundle",
+      "path": "/complete-approvalprep-bundle/",
+      "kind": "kit",
+      "imageSku": "complete-approvalprep-bundle",
+      "angle": "checklist-first",
+      "layout": "band-top",
+      "palette": "plum",
+      "headline": "Every ApprovalPrep kit in one download",
+      "subhead": "Templates and checklists for every kit",
+      "bullets": [
+        "Rental and loan kits",
+        "Credit and income letters",
+        "Business and life admin"
+      ],
+      "title": "Every ApprovalPrep kit in one download | Complete ApprovalPrep Bundle",
+      "description": "Templates and checklists for every kit. Every ApprovalPrep kit in one download: rental application, credit letters, income and employment proof, loan prep, business funding prep and everyday paperwork letters. Self-service templates and checklists; you prepare and send your own.",
+      "releaseDate": "2026-11-04"
+    },
+    {
+      "id": "employment-verification-letter-v2",
+      "slug": "employment-verification-letter",
+      "path": "/employment-verification-letter/",
+      "kind": "guide",
+      "imageSku": "income-employment-letter-kit",
+      "angle": "checklist-first",
+      "layout": "checklist",
+      "palette": "forest",
+      "headline": "Employment verification letter checklist",
+      "subhead": "The fields a reviewer may need",
+      "bullets": [
+        "Job title and start date",
+        "Employer contact details",
+        "Signature and date"
+      ],
+      "title": "Employment verification letter checklist | Employment Verification Letter Guide",
+      "description": "The fields a reviewer may need. What an employment verification letter should include, the employer and employee versions, and a checklist of the fields a landlord or lender reviewer may need. A plain guide with a free template.",
+      "releaseDate": "2026-11-05"
+    },
+    {
+      "id": "sba-loan-checklist-v2",
+      "slug": "sba-loan-checklist",
+      "path": "/sba-loan-checklist/",
+      "kind": "guide",
+      "imageSku": "business-funding-prep-kit",
+      "angle": "checklist-first",
+      "layout": "split",
+      "palette": "brick",
+      "headline": "SBA loan document checklist",
+      "subhead": "Work through it before you apply",
+      "bullets": [
+        "Tax returns",
+        "Financial statements",
+        "Use of funds"
+      ],
+      "title": "SBA loan document checklist | SBA Loan Checklist",
+      "description": "Work through it before you apply. The documents an SBA lender typically asks for — tax returns, financial statements, business plan, debt schedule, ownership and use of funds — as a checklist you can work through before you apply.",
+      "releaseDate": "2026-11-06"
+    },
+    {
+      "id": "how-to-get-approved-for-an-apartment-v2",
+      "slug": "how-to-get-approved-for-an-apartment",
+      "path": "/how-to-get-approved-for-an-apartment/",
+      "kind": "guide",
+      "imageSku": "rental-application-kit",
+      "angle": "checklist-first",
+      "layout": "art-top",
+      "palette": "slate",
+      "headline": "What landlords check on an application",
+      "subhead": "Income, rental history, credit, references",
+      "bullets": [
+        "Income",
+        "Rental history",
+        "Credit and references"
+      ],
+      "title": "What landlords check on an application | Apartment Approval Guide",
+      "description": "Income, rental history, credit, references. What landlords check on a rental application — income, rental history, credit and references — and how to prepare each one honestly before you apply. A plain checklist-style guide.",
+      "releaseDate": "2026-11-07"
+    },
+    {
+      "id": "letter-of-explanation-v3",
+      "slug": "letter-of-explanation",
+      "path": "/letter-of-explanation/",
+      "kind": "kit",
+      "imageSku": "letter-of-explanation",
+      "angle": "deadline-first",
+      "layout": "checklist",
+      "palette": "plum",
+      "headline": "Need a letter of explanation this week?",
+      "subhead": "Pick the template, fill it in yourself, send it",
+      "bullets": [
+        "9 editable DOCX letters",
+        "PDF writing guide",
+        "Self-review checklist"
+      ],
+      "title": "Need a letter of explanation this week? | Letter of Explanation Kit",
+      "description": "Pick the template, fill it in yourself, send it. Letter of explanation templates for credit, income gaps, employment gaps, address history, late payments, bank statements and life events. A PDF guide plus editable DOCX letters you fill in yourself. Self-service: we never contact anyone for you or promise approval.",
+      "releaseDate": "2026-11-08"
+    },
+    {
+      "id": "income-employment-letter-kit-v3",
+      "slug": "income-employment-letter-kit",
+      "path": "/income-employment-letter-kit/",
+      "kind": "kit",
+      "imageSku": "income-employment-letter-kit",
+      "angle": "deadline-first",
+      "layout": "split",
+      "palette": "forest",
+      "headline": "Application due? Get your income letters ready",
+      "subhead": "Fill in the templates, attach real documents",
+      "bullets": [
+        "Employment verification",
+        "Proof of income",
+        "Job change or gap letter"
+      ],
+      "title": "Application due? Get your income letters ready | Income + Employment Letter Kit",
+      "description": "Fill in the templates, attach real documents. Employment verification, proof of income, self-employment income, job change and employment gap letters in one self-service kit. Fill in the templates yourself and attach your real documents. Editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-11-09"
+    },
+    {
+      "id": "credit-letter-kit-v3",
+      "slug": "credit-letter-kit",
+      "path": "/credit-letter-kit/",
+      "kind": "kit",
+      "imageSku": "credit-letter-kit",
+      "angle": "deadline-first",
+      "layout": "art-top",
+      "palette": "brick",
+      "headline": "Applying soon? Sort your credit letters first",
+      "subhead": "Templates you write and send yourself",
+      "bullets": [
+        "Credit dispute letter",
+        "Goodwill letter",
+        "Debt validation letter"
+      ],
+      "title": "Applying soon? Sort your credit letters first | Credit Letter Kit",
+      "description": "Templates you write and send yourself. DIY credit letter templates for possible report errors, goodwill requests, late payments, debt validation and follow-up. You write and send the letters yourself. Not credit repair and no promised results. Editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-11-10"
+    },
+    {
+      "id": "rental-application-kit-v3",
+      "slug": "rental-application-kit",
+      "path": "/rental-application-kit/",
+      "kind": "kit",
+      "imageSku": "rental-application-kit",
+      "angle": "deadline-first",
+      "layout": "card",
+      "palette": "slate",
+      "headline": "Viewing this weekend? Have your packet ready",
+      "subhead": "Letters and checklists for renters",
+      "bullets": [
+        "Proof of income checklist",
+        "Rental history letter",
+        "Rental cover letter"
+      ],
+      "title": "Viewing this weekend? Have your packet ready | Rental Application Kit",
+      "description": "Letters and checklists for renters. Get your apartment application packet complete before you apply: a rental checklist, cover letter guidance, and letters for rental history, income and employment questions. Self-service, editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-11-11"
+    },
+    {
+      "id": "loan-prep-letter-kit-v3",
+      "slug": "loan-prep-letter-kit",
+      "path": "/loan-prep-letter-kit/",
+      "kind": "kit",
+      "imageSku": "loan-prep-letter-kit",
+      "angle": "deadline-first",
+      "layout": "band-top",
+      "palette": "teal",
+      "headline": "Car loan this week? Prep your letters now",
+      "subhead": "An auto loan explanation letter template",
+      "bullets": [
+        "Income explanation",
+        "Credit explanation",
+        "Bank statement explanation"
+      ],
+      "title": "Car loan this week? Prep your letters now | Loan Prep Letter Kit",
+      "description": "An auto loan explanation letter template. Letters and checklists to prepare before an auto loan, personal loan or mortgage review: explain credit history, income, job changes and bank statement questions clearly. Self-service; we are not a lender and never promise approval.",
+      "releaseDate": "2026-11-12"
+    },
+    {
+      "id": "business-funding-prep-kit-v3",
+      "slug": "business-funding-prep-kit",
+      "path": "/business-funding-prep-kit/",
+      "kind": "kit",
+      "imageSku": "business-funding-prep-kit",
+      "angle": "deadline-first",
+      "layout": "checklist",
+      "palette": "navy",
+      "headline": "SBA application soon? Organize documents now",
+      "subhead": "Checklists and letters for business funding",
+      "bullets": [
+        "SBA document checklist",
+        "Use of funds explanation",
+        "Cash flow explanation"
+      ],
+      "title": "SBA application soon? Organize documents now | Business Funding Prep Kit",
+      "description": "Checklists and letters for business funding. Organize business documents, explain income and bank activity, describe use of funds and prepare lender follow-up letters. For business loan and SBA prep. Self-service; not a lender, broker or accountant. Editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-11-13"
+    },
+    {
+      "id": "life-admin-letter-kit-v3",
+      "slug": "life-admin-letter-kit",
+      "path": "/life-admin-letter-kit/",
+      "kind": "kit",
+      "imageSku": "life-admin-letter-kit",
+      "angle": "deadline-first",
+      "layout": "split",
+      "palette": "plum",
+      "headline": "Form due? Send your records request today",
+      "subhead": "A general records request letter template",
+      "bullets": [
+        "Address verification letter",
+        "Proof of residency letter",
+        "Records request letter"
+      ],
+      "title": "Form due? Send your records request today | Life Admin Letter Kit",
+      "description": "A general records request letter template. Simple letters and checklists for everyday paperwork: address history, residency, identity details, account issues and document requests to a school, employer, landlord or agency. Self-service, editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-11-14"
+    },
+    {
+      "id": "complete-approvalprep-bundle-v3",
+      "slug": "complete-approvalprep-bundle",
+      "path": "/complete-approvalprep-bundle/",
+      "kind": "kit",
+      "imageSku": "complete-approvalprep-bundle",
+      "angle": "deadline-first",
+      "layout": "art-top",
+      "palette": "forest",
+      "headline": "Lots of paperwork due? Get every template at once",
+      "subhead": "One library of letters and checklists",
+      "bullets": [
+        "Rental and loan kits",
+        "Credit and income letters",
+        "Business and life admin"
+      ],
+      "title": "Lots of paperwork due? Get every template at once | Complete ApprovalPrep Bundle",
+      "description": "One library of letters and checklists. Every ApprovalPrep kit in one download: rental application, credit letters, income and employment proof, loan prep, business funding prep and everyday paperwork letters. Self-service templates and checklists; you prepare and send your own.",
+      "releaseDate": "2026-11-15"
+    },
+    {
+      "id": "employment-verification-letter-v3",
+      "slug": "employment-verification-letter",
+      "path": "/employment-verification-letter/",
+      "kind": "guide",
+      "imageSku": "income-employment-letter-kit",
+      "angle": "deadline-first",
+      "layout": "card",
+      "palette": "brick",
+      "headline": "Need a verification letter fast? Free template",
+      "subhead": "Employer and employee versions",
+      "bullets": [
+        "Job title and start date",
+        "Employer contact details",
+        "Signature and date"
+      ],
+      "title": "Need a verification letter fast? Free template | Employment Verification Letter Guide",
+      "description": "Employer and employee versions. What an employment verification letter should include, the employer and employee versions, and a checklist of the fields a landlord or lender reviewer may need. A plain guide with a free template.",
+      "releaseDate": "2026-11-16"
+    },
+    {
+      "id": "sba-loan-checklist-v3",
+      "slug": "sba-loan-checklist",
+      "path": "/sba-loan-checklist/",
+      "kind": "guide",
+      "imageSku": "business-funding-prep-kit",
+      "angle": "deadline-first",
+      "layout": "band-top",
+      "palette": "slate",
+      "headline": "SBA lender meeting soon? Gather these first",
+      "subhead": "Tax returns, statements, plan and more",
+      "bullets": [
+        "Tax returns",
+        "Financial statements",
+        "Use of funds"
+      ],
+      "title": "SBA lender meeting soon? Gather these first | SBA Loan Checklist",
+      "description": "Tax returns, statements, plan and more. The documents an SBA lender typically asks for — tax returns, financial statements, business plan, debt schedule, ownership and use of funds — as a checklist you can work through before you apply.",
+      "releaseDate": "2026-11-17"
+    },
+    {
+      "id": "how-to-get-approved-for-an-apartment-v3",
+      "slug": "how-to-get-approved-for-an-apartment",
+      "path": "/how-to-get-approved-for-an-apartment/",
+      "kind": "guide",
+      "imageSku": "rental-application-kit",
+      "angle": "deadline-first",
+      "layout": "checklist",
+      "palette": "teal",
+      "headline": "Applying this week? Prepare these four things",
+      "subhead": "A checklist-style guide for renters",
+      "bullets": [
+        "Income",
+        "Rental history",
+        "Credit and references"
+      ],
+      "title": "Applying this week? Prepare these four things | Apartment Approval Guide",
+      "description": "A checklist-style guide for renters. What landlords check on a rental application — income, rental history, credit and references — and how to prepare each one honestly before you apply. A plain checklist-style guide.",
+      "releaseDate": "2026-11-18"
+    },
+    {
+      "id": "letter-of-explanation-v4",
+      "slug": "letter-of-explanation",
+      "path": "/letter-of-explanation/",
+      "kind": "kit",
+      "imageSku": "letter-of-explanation",
+      "angle": "whats-inside",
+      "layout": "card",
+      "palette": "forest",
+      "headline": "What's in the Letter of Explanation Kit",
+      "subhead": "Editable DOCX letters plus a PDF guide",
+      "bullets": [
+        "9 editable DOCX letters",
+        "PDF writing guide",
+        "Self-review checklist"
+      ],
+      "title": "What's in the Letter of Explanation Kit | Letter of Explanation Kit",
+      "description": "Editable DOCX letters plus a PDF guide. Letter of explanation templates for credit, income gaps, employment gaps, address history, late payments, bank statements and life events. A PDF guide plus editable DOCX letters you fill in yourself. Self-service: we never contact anyone for you or promise approval.",
+      "releaseDate": "2026-11-19"
+    },
+    {
+      "id": "income-employment-letter-kit-v4",
+      "slug": "income-employment-letter-kit",
+      "path": "/income-employment-letter-kit/",
+      "kind": "kit",
+      "imageSku": "income-employment-letter-kit",
+      "angle": "whats-inside",
+      "layout": "band-top",
+      "palette": "brick",
+      "headline": "Six income and employment letter templates",
+      "subhead": "Including a bank statement explanation",
+      "bullets": [
+        "Employment verification",
+        "Proof of income",
+        "Job change or gap letter"
+      ],
+      "title": "Six income and employment letter templates | Income + Employment Letter Kit",
+      "description": "Including a bank statement explanation. Employment verification, proof of income, self-employment income, job change and employment gap letters in one self-service kit. Fill in the templates yourself and attach your real documents. Editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-11-20"
+    },
+    {
+      "id": "credit-letter-kit-v4",
+      "slug": "credit-letter-kit",
+      "path": "/credit-letter-kit/",
+      "kind": "kit",
+      "imageSku": "credit-letter-kit",
+      "angle": "whats-inside",
+      "layout": "checklist",
+      "palette": "slate",
+      "headline": "Credit letters from dispute to follow-up",
+      "subhead": "Seven templates and checklists in one kit",
+      "bullets": [
+        "Credit dispute letter",
+        "Goodwill letter",
+        "Debt validation letter"
+      ],
+      "title": "Credit letters from dispute to follow-up | Credit Letter Kit",
+      "description": "Seven templates and checklists in one kit. DIY credit letter templates for possible report errors, goodwill requests, late payments, debt validation and follow-up. You write and send the letters yourself. Not credit repair and no promised results. Editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-11-21"
+    },
+    {
+      "id": "rental-application-kit-v4",
+      "slug": "rental-application-kit",
+      "path": "/rental-application-kit/",
+      "kind": "kit",
+      "imageSku": "rental-application-kit",
+      "angle": "whats-inside",
+      "layout": "split",
+      "palette": "teal",
+      "headline": "Nine rental letters and checklists",
+      "subhead": "From cover letter to move-in documents",
+      "bullets": [
+        "Proof of income checklist",
+        "Rental history letter",
+        "Rental cover letter"
+      ],
+      "title": "Nine rental letters and checklists | Rental Application Kit",
+      "description": "From cover letter to move-in documents. Get your apartment application packet complete before you apply: a rental checklist, cover letter guidance, and letters for rental history, income and employment questions. Self-service, editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-11-22"
+    },
+    {
+      "id": "loan-prep-letter-kit-v4",
+      "slug": "loan-prep-letter-kit",
+      "path": "/loan-prep-letter-kit/",
+      "kind": "kit",
+      "imageSku": "loan-prep-letter-kit",
+      "angle": "whats-inside",
+      "layout": "art-top",
+      "palette": "navy",
+      "headline": "Letters for auto, personal and mortgage loans",
+      "subhead": "Explanation letters plus a lender follow-up",
+      "bullets": [
+        "Income explanation",
+        "Credit explanation",
+        "Bank statement explanation"
+      ],
+      "title": "Letters for auto, personal and mortgage loans | Loan Prep Letter Kit",
+      "description": "Explanation letters plus a lender follow-up. Letters and checklists to prepare before an auto loan, personal loan or mortgage review: explain credit history, income, job changes and bank statement questions clearly. Self-service; we are not a lender and never promise approval.",
+      "releaseDate": "2026-11-23"
+    },
+    {
+      "id": "business-funding-prep-kit-v4",
+      "slug": "business-funding-prep-kit",
+      "path": "/business-funding-prep-kit/",
+      "kind": "kit",
+      "imageSku": "business-funding-prep-kit",
+      "angle": "whats-inside",
+      "layout": "card",
+      "palette": "plum",
+      "headline": "Eight business funding letters and checklists",
+      "subhead": "From use of funds to lender follow-up",
+      "bullets": [
+        "SBA document checklist",
+        "Use of funds explanation",
+        "Cash flow explanation"
+      ],
+      "title": "Eight business funding letters and checklists | Business Funding Prep Kit",
+      "description": "From use of funds to lender follow-up. Organize business documents, explain income and bank activity, describe use of funds and prepare lender follow-up letters. For business loan and SBA prep. Self-service; not a lender, broker or accountant. Editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-11-24"
+    },
+    {
+      "id": "life-admin-letter-kit-v4",
+      "slug": "life-admin-letter-kit",
+      "path": "/life-admin-letter-kit/",
+      "kind": "kit",
+      "imageSku": "life-admin-letter-kit",
+      "angle": "whats-inside",
+      "layout": "band-top",
+      "palette": "forest",
+      "headline": "Eight everyday paperwork letters",
+      "subhead": "Address, residency, identity and accounts",
+      "bullets": [
+        "Address verification letter",
+        "Proof of residency letter",
+        "Records request letter"
+      ],
+      "title": "Eight everyday paperwork letters | Life Admin Letter Kit",
+      "description": "Address, residency, identity and accounts. Simple letters and checklists for everyday paperwork: address history, residency, identity details, account issues and document requests to a school, employer, landlord or agency. Self-service, editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-11-25"
+    },
+    {
+      "id": "complete-approvalprep-bundle-v4",
+      "slug": "complete-approvalprep-bundle",
+      "path": "/complete-approvalprep-bundle/",
+      "kind": "kit",
+      "imageSku": "complete-approvalprep-bundle",
+      "angle": "whats-inside",
+      "layout": "checklist",
+      "palette": "brick",
+      "headline": "Seven kits, one download",
+      "subhead": "Letter of explanation to life admin",
+      "bullets": [
+        "Rental and loan kits",
+        "Credit and income letters",
+        "Business and life admin"
+      ],
+      "title": "Seven kits, one download | Complete ApprovalPrep Bundle",
+      "description": "Letter of explanation to life admin. Every ApprovalPrep kit in one download: rental application, credit letters, income and employment proof, loan prep, business funding prep and everyday paperwork letters. Self-service templates and checklists; you prepare and send your own.",
+      "releaseDate": "2026-11-26"
+    },
+    {
+      "id": "employment-verification-letter-v4",
+      "slug": "employment-verification-letter",
+      "path": "/employment-verification-letter/",
+      "kind": "guide",
+      "imageSku": "income-employment-letter-kit",
+      "angle": "whats-inside",
+      "layout": "split",
+      "palette": "slate",
+      "headline": "Free employment verification letter template",
+      "subhead": "Plus a field-by-field checklist",
+      "bullets": [
+        "Job title and start date",
+        "Employer contact details",
+        "Signature and date"
+      ],
+      "title": "Free employment verification letter template | Employment Verification Letter Guide",
+      "description": "Plus a field-by-field checklist. What an employment verification letter should include, the employer and employee versions, and a checklist of the fields a landlord or lender reviewer may need. A plain guide with a free template.",
+      "releaseDate": "2026-11-27"
+    },
+    {
+      "id": "sba-loan-checklist-v4",
+      "slug": "sba-loan-checklist",
+      "path": "/sba-loan-checklist/",
+      "kind": "guide",
+      "imageSku": "business-funding-prep-kit",
+      "angle": "whats-inside",
+      "layout": "art-top",
+      "palette": "teal",
+      "headline": "Documents SBA lenders typically ask for",
+      "subhead": "As a checklist you can work through",
+      "bullets": [
+        "Tax returns",
+        "Financial statements",
+        "Use of funds"
+      ],
+      "title": "Documents SBA lenders typically ask for | SBA Loan Checklist",
+      "description": "As a checklist you can work through. The documents an SBA lender typically asks for — tax returns, financial statements, business plan, debt schedule, ownership and use of funds — as a checklist you can work through before you apply.",
+      "releaseDate": "2026-11-28"
+    },
+    {
+      "id": "how-to-get-approved-for-an-apartment-v4",
+      "slug": "how-to-get-approved-for-an-apartment",
+      "path": "/how-to-get-approved-for-an-apartment/",
+      "kind": "guide",
+      "imageSku": "rental-application-kit",
+      "angle": "whats-inside",
+      "layout": "card",
+      "palette": "navy",
+      "headline": "A plain apartment application checklist",
+      "subhead": "Prepare each item honestly before you apply",
+      "bullets": [
+        "Income",
+        "Rental history",
+        "Credit and references"
+      ],
+      "title": "A plain apartment application checklist | Apartment Approval Guide",
+      "description": "Prepare each item honestly before you apply. What landlords check on a rental application — income, rental history, credit and references — and how to prepare each one honestly before you apply. A plain checklist-style guide.",
+      "releaseDate": "2026-11-29"
+    },
+    {
+      "id": "letter-of-explanation-v5",
+      "slug": "letter-of-explanation",
+      "path": "/letter-of-explanation/",
+      "kind": "kit",
+      "imageSku": "letter-of-explanation",
+      "angle": "question-first",
+      "layout": "split",
+      "palette": "brick",
+      "headline": "What goes in a letter of explanation?",
+      "subhead": "Fill-in prompts and examples for each situation",
+      "bullets": [
+        "9 editable DOCX letters",
+        "PDF writing guide",
+        "Self-review checklist"
+      ],
+      "title": "What goes in a letter of explanation? | Letter of Explanation Kit",
+      "description": "Fill-in prompts and examples for each situation. Letter of explanation templates for credit, income gaps, employment gaps, address history, late payments, bank statements and life events. A PDF guide plus editable DOCX letters you fill in yourself. Self-service: we never contact anyone for you or promise approval.",
+      "releaseDate": "2026-11-30"
+    },
+    {
+      "id": "income-employment-letter-kit-v5",
+      "slug": "income-employment-letter-kit",
+      "path": "/income-employment-letter-kit/",
+      "kind": "kit",
+      "imageSku": "income-employment-letter-kit",
+      "angle": "question-first",
+      "layout": "art-top",
+      "palette": "slate",
+      "headline": "Self-employed? Show your income in writing",
+      "subhead": "A self-employment income letter template",
+      "bullets": [
+        "Employment verification",
+        "Proof of income",
+        "Job change or gap letter"
+      ],
+      "title": "Self-employed? Show your income in writing | Income + Employment Letter Kit",
+      "description": "A self-employment income letter template. Employment verification, proof of income, self-employment income, job change and employment gap letters in one self-service kit. Fill in the templates yourself and attach your real documents. Editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-12-01"
+    },
+    {
+      "id": "credit-letter-kit-v5",
+      "slug": "credit-letter-kit",
+      "path": "/credit-letter-kit/",
+      "kind": "kit",
+      "imageSku": "credit-letter-kit",
+      "angle": "question-first",
+      "layout": "card",
+      "palette": "teal",
+      "headline": "What is a goodwill letter for a late payment?",
+      "subhead": "A goodwill letter template, ready to fill in",
+      "bullets": [
+        "Credit dispute letter",
+        "Goodwill letter",
+        "Debt validation letter"
+      ],
+      "title": "What is a goodwill letter for a late payment? | Credit Letter Kit",
+      "description": "A goodwill letter template, ready to fill in. DIY credit letter templates for possible report errors, goodwill requests, late payments, debt validation and follow-up. You write and send the letters yourself. Not credit repair and no promised results. Editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-12-02"
+    },
+    {
+      "id": "rental-application-kit-v5",
+      "slug": "rental-application-kit",
+      "path": "/rental-application-kit/",
+      "kind": "kit",
+      "imageSku": "rental-application-kit",
+      "angle": "question-first",
+      "layout": "band-top",
+      "palette": "navy",
+      "headline": "What goes in a renter document packet?",
+      "subhead": "A packet checklist plus letter templates",
+      "bullets": [
+        "Proof of income checklist",
+        "Rental history letter",
+        "Rental cover letter"
+      ],
+      "title": "What goes in a renter document packet? | Rental Application Kit",
+      "description": "A packet checklist plus letter templates. Get your apartment application packet complete before you apply: a rental checklist, cover letter guidance, and letters for rental history, income and employment questions. Self-service, editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-12-03"
+    },
+    {
+      "id": "loan-prep-letter-kit-v5",
+      "slug": "loan-prep-letter-kit",
+      "path": "/loan-prep-letter-kit/",
+      "kind": "kit",
+      "imageSku": "loan-prep-letter-kit",
+      "angle": "question-first",
+      "layout": "checklist",
+      "palette": "plum",
+      "headline": "What might a lender ask you to explain?",
+      "subhead": "Credit, income, job changes and bank activity",
+      "bullets": [
+        "Income explanation",
+        "Credit explanation",
+        "Bank statement explanation"
+      ],
+      "title": "What might a lender ask you to explain? | Loan Prep Letter Kit",
+      "description": "Credit, income, job changes and bank activity. Letters and checklists to prepare before an auto loan, personal loan or mortgage review: explain credit history, income, job changes and bank statement questions clearly. Self-service; we are not a lender and never promise approval.",
+      "releaseDate": "2026-12-04"
+    },
+    {
+      "id": "business-funding-prep-kit-v5",
+      "slug": "business-funding-prep-kit",
+      "path": "/business-funding-prep-kit/",
+      "kind": "kit",
+      "imageSku": "business-funding-prep-kit",
+      "angle": "question-first",
+      "layout": "split",
+      "palette": "forest",
+      "headline": "How do you explain use of funds to a lender?",
+      "subhead": "A use of funds explanation template",
+      "bullets": [
+        "SBA document checklist",
+        "Use of funds explanation",
+        "Cash flow explanation"
+      ],
+      "title": "How do you explain use of funds to a lender? | Business Funding Prep Kit",
+      "description": "A use of funds explanation template. Organize business documents, explain income and bank activity, describe use of funds and prepare lender follow-up letters. For business loan and SBA prep. Self-service; not a lender, broker or accountant. Editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-12-05"
+    },
+    {
+      "id": "life-admin-letter-kit-v5",
+      "slug": "life-admin-letter-kit",
+      "path": "/life-admin-letter-kit/",
+      "kind": "kit",
+      "imageSku": "life-admin-letter-kit",
+      "angle": "question-first",
+      "layout": "art-top",
+      "palette": "brick",
+      "headline": "How do you request records from a school or employer?",
+      "subhead": "A school and employer request letter",
+      "bullets": [
+        "Address verification letter",
+        "Proof of residency letter",
+        "Records request letter"
+      ],
+      "title": "How do you request records from a school or employer? | Life Admin Letter Kit",
+      "description": "A school and employer request letter. Simple letters and checklists for everyday paperwork: address history, residency, identity details, account issues and document requests to a school, employer, landlord or agency. Self-service, editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-12-06"
+    },
+    {
+      "id": "complete-approvalprep-bundle-v5",
+      "slug": "complete-approvalprep-bundle",
+      "path": "/complete-approvalprep-bundle/",
+      "kind": "kit",
+      "imageSku": "complete-approvalprep-bundle",
+      "angle": "question-first",
+      "layout": "card",
+      "palette": "slate",
+      "headline": "Not sure which letter you need?",
+      "subhead": "Every kit's templates in one library",
+      "bullets": [
+        "Rental and loan kits",
+        "Credit and income letters",
+        "Business and life admin"
+      ],
+      "title": "Not sure which letter you need? | Complete ApprovalPrep Bundle",
+      "description": "Every kit's templates in one library. Every ApprovalPrep kit in one download: rental application, credit letters, income and employment proof, loan prep, business funding prep and everyday paperwork letters. Self-service templates and checklists; you prepare and send your own.",
+      "releaseDate": "2026-12-07"
+    },
+    {
+      "id": "employment-verification-letter-v5",
+      "slug": "employment-verification-letter",
+      "path": "/employment-verification-letter/",
+      "kind": "guide",
+      "imageSku": "income-employment-letter-kit",
+      "angle": "question-first",
+      "layout": "band-top",
+      "palette": "teal",
+      "headline": "What goes in an employment verification letter?",
+      "subhead": "A plain guide with a free template",
+      "bullets": [
+        "Job title and start date",
+        "Employer contact details",
+        "Signature and date"
+      ],
+      "title": "What goes in an employment verification letter? | Employment Verification Letter Guide",
+      "description": "A plain guide with a free template. What an employment verification letter should include, the employer and employee versions, and a checklist of the fields a landlord or lender reviewer may need. A plain guide with a free template.",
+      "releaseDate": "2026-12-08"
+    },
+    {
+      "id": "sba-loan-checklist-v5",
+      "slug": "sba-loan-checklist",
+      "path": "/sba-loan-checklist/",
+      "kind": "guide",
+      "imageSku": "business-funding-prep-kit",
+      "angle": "question-first",
+      "layout": "checklist",
+      "palette": "navy",
+      "headline": "What documents do you need for an SBA loan?",
+      "subhead": "A plain checklist guide",
+      "bullets": [
+        "Tax returns",
+        "Financial statements",
+        "Use of funds"
+      ],
+      "title": "What documents do you need for an SBA loan? | SBA Loan Checklist",
+      "description": "A plain checklist guide. The documents an SBA lender typically asks for — tax returns, financial statements, business plan, debt schedule, ownership and use of funds — as a checklist you can work through before you apply.",
+      "releaseDate": "2026-12-09"
+    },
+    {
+      "id": "how-to-get-approved-for-an-apartment-v5",
+      "slug": "how-to-get-approved-for-an-apartment",
+      "path": "/how-to-get-approved-for-an-apartment/",
+      "kind": "guide",
+      "imageSku": "rental-application-kit",
+      "angle": "question-first",
+      "layout": "split",
+      "palette": "plum",
+      "headline": "How do you get approved for an apartment?",
+      "subhead": "What landlords check, one item at a time",
+      "bullets": [
+        "Income",
+        "Rental history",
+        "Credit and references"
+      ],
+      "title": "How do you get approved for an apartment? | Apartment Approval Guide",
+      "description": "What landlords check, one item at a time. What landlords check on a rental application — income, rental history, credit and references — and how to prepare each one honestly before you apply. A plain checklist-style guide.",
+      "releaseDate": "2026-12-10"
+    },
+    {
+      "id": "letter-of-explanation-v6",
+      "slug": "letter-of-explanation",
+      "path": "/letter-of-explanation/",
+      "kind": "kit",
+      "imageSku": "letter-of-explanation",
+      "angle": "self-service",
+      "layout": "band-top",
+      "palette": "slate",
+      "headline": "Write your own letter of explanation",
+      "subhead": "Self-service templates; you stay in control",
+      "bullets": [
+        "9 editable DOCX letters",
+        "PDF writing guide",
+        "Self-review checklist"
+      ],
+      "title": "Write your own letter of explanation | Letter of Explanation Kit",
+      "description": "Self-service templates; you stay in control. Letter of explanation templates for credit, income gaps, employment gaps, address history, late payments, bank statements and life events. A PDF guide plus editable DOCX letters you fill in yourself. Self-service: we never contact anyone for you or promise approval.",
+      "releaseDate": "2026-12-11"
+    },
+    {
+      "id": "income-employment-letter-kit-v6",
+      "slug": "income-employment-letter-kit",
+      "path": "/income-employment-letter-kit/",
+      "kind": "kit",
+      "imageSku": "income-employment-letter-kit",
+      "angle": "self-service",
+      "layout": "checklist",
+      "palette": "teal",
+      "headline": "Fill in your own employment letters",
+      "subhead": "Editable DOCX plus a PDF guide",
+      "bullets": [
+        "Employment verification",
+        "Proof of income",
+        "Job change or gap letter"
+      ],
+      "title": "Fill in your own employment letters | Income + Employment Letter Kit",
+      "description": "Editable DOCX plus a PDF guide. Employment verification, proof of income, self-employment income, job change and employment gap letters in one self-service kit. Fill in the templates yourself and attach your real documents. Editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-12-12"
+    },
+    {
+      "id": "credit-letter-kit-v6",
+      "slug": "credit-letter-kit",
+      "path": "/credit-letter-kit/",
+      "kind": "kit",
+      "imageSku": "credit-letter-kit",
+      "angle": "self-service",
+      "layout": "split",
+      "palette": "navy",
+      "headline": "DIY credit letters you write and send",
+      "subhead": "Not credit repair; no promised results",
+      "bullets": [
+        "Credit dispute letter",
+        "Goodwill letter",
+        "Debt validation letter"
+      ],
+      "title": "DIY credit letters you write and send | Credit Letter Kit",
+      "description": "Not credit repair; no promised results. DIY credit letter templates for possible report errors, goodwill requests, late payments, debt validation and follow-up. You write and send the letters yourself. Not credit repair and no promised results. Editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-12-13"
+    },
+    {
+      "id": "rental-application-kit-v6",
+      "slug": "rental-application-kit",
+      "path": "/rental-application-kit/",
+      "kind": "kit",
+      "imageSku": "rental-application-kit",
+      "angle": "self-service",
+      "layout": "art-top",
+      "palette": "plum",
+      "headline": "Build your own rental application packet",
+      "subhead": "Editable DOCX plus a PDF guide",
+      "bullets": [
+        "Proof of income checklist",
+        "Rental history letter",
+        "Rental cover letter"
+      ],
+      "title": "Build your own rental application packet | Rental Application Kit",
+      "description": "Editable DOCX plus a PDF guide. Get your apartment application packet complete before you apply: a rental checklist, cover letter guidance, and letters for rental history, income and employment questions. Self-service, editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-12-14"
+    },
+    {
+      "id": "loan-prep-letter-kit-v6",
+      "slug": "loan-prep-letter-kit",
+      "path": "/loan-prep-letter-kit/",
+      "kind": "kit",
+      "imageSku": "loan-prep-letter-kit",
+      "angle": "self-service",
+      "layout": "card",
+      "palette": "forest",
+      "headline": "Prepare your own loan explanation letters",
+      "subhead": "Self-service; we are not a lender",
+      "bullets": [
+        "Income explanation",
+        "Credit explanation",
+        "Bank statement explanation"
+      ],
+      "title": "Prepare your own loan explanation letters | Loan Prep Letter Kit",
+      "description": "Self-service; we are not a lender. Letters and checklists to prepare before an auto loan, personal loan or mortgage review: explain credit history, income, job changes and bank statement questions clearly. Self-service; we are not a lender and never promise approval.",
+      "releaseDate": "2026-12-15"
+    },
+    {
+      "id": "business-funding-prep-kit-v6",
+      "slug": "business-funding-prep-kit",
+      "path": "/business-funding-prep-kit/",
+      "kind": "kit",
+      "imageSku": "business-funding-prep-kit",
+      "angle": "self-service",
+      "layout": "band-top",
+      "palette": "brick",
+      "headline": "Prep your own business loan paperwork",
+      "subhead": "Self-service; not a lender, broker or accountant",
+      "bullets": [
+        "SBA document checklist",
+        "Use of funds explanation",
+        "Cash flow explanation"
+      ],
+      "title": "Prep your own business loan paperwork | Business Funding Prep Kit",
+      "description": "Self-service; not a lender, broker or accountant. Organize business documents, explain income and bank activity, describe use of funds and prepare lender follow-up letters. For business loan and SBA prep. Self-service; not a lender, broker or accountant. Editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-12-16"
+    },
+    {
+      "id": "life-admin-letter-kit-v6",
+      "slug": "life-admin-letter-kit",
+      "path": "/life-admin-letter-kit/",
+      "kind": "kit",
+      "imageSku": "life-admin-letter-kit",
+      "angle": "self-service",
+      "layout": "checklist",
+      "palette": "slate",
+      "headline": "Write your own address and records letters",
+      "subhead": "Editable DOCX plus a PDF guide",
+      "bullets": [
+        "Address verification letter",
+        "Proof of residency letter",
+        "Records request letter"
+      ],
+      "title": "Write your own address and records letters | Life Admin Letter Kit",
+      "description": "Editable DOCX plus a PDF guide. Simple letters and checklists for everyday paperwork: address history, residency, identity details, account issues and document requests to a school, employer, landlord or agency. Self-service, editable DOCX plus a PDF guide.",
+      "releaseDate": "2026-12-17"
+    },
+    {
+      "id": "complete-approvalprep-bundle-v6",
+      "slug": "complete-approvalprep-bundle",
+      "path": "/complete-approvalprep-bundle/",
+      "kind": "kit",
+      "imageSku": "complete-approvalprep-bundle",
+      "angle": "self-service",
+      "layout": "split",
+      "palette": "teal",
+      "headline": "Your own library of letter templates",
+      "subhead": "You prepare and send your own letters",
+      "bullets": [
+        "Rental and loan kits",
+        "Credit and income letters",
+        "Business and life admin"
+      ],
+      "title": "Your own library of letter templates | Complete ApprovalPrep Bundle",
+      "description": "You prepare and send your own letters. Every ApprovalPrep kit in one download: rental application, credit letters, income and employment proof, loan prep, business funding prep and everyday paperwork letters. Self-service templates and checklists; you prepare and send your own.",
+      "releaseDate": "2026-12-18"
+    },
+    {
+      "id": "employment-verification-letter-v6",
+      "slug": "employment-verification-letter",
+      "path": "/employment-verification-letter/",
+      "kind": "guide",
+      "imageSku": "income-employment-letter-kit",
+      "angle": "self-service",
+      "layout": "art-top",
+      "palette": "navy",
+      "headline": "Employer or employee version: which one?",
+      "subhead": "Both versions explained",
+      "bullets": [
+        "Job title and start date",
+        "Employer contact details",
+        "Signature and date"
+      ],
+      "title": "Employer or employee version: which one? | Employment Verification Letter Guide",
+      "description": "Both versions explained. What an employment verification letter should include, the employer and employee versions, and a checklist of the fields a landlord or lender reviewer may need. A plain guide with a free template.",
+      "releaseDate": "2026-12-19"
+    },
+    {
+      "id": "sba-loan-checklist-v6",
+      "slug": "sba-loan-checklist",
+      "path": "/sba-loan-checklist/",
+      "kind": "guide",
+      "imageSku": "business-funding-prep-kit",
+      "angle": "self-service",
+      "layout": "card",
+      "palette": "plum",
+      "headline": "Work through the SBA checklist yourself",
+      "subhead": "Before you apply",
+      "bullets": [
+        "Tax returns",
+        "Financial statements",
+        "Use of funds"
+      ],
+      "title": "Work through the SBA checklist yourself | SBA Loan Checklist",
+      "description": "Before you apply. The documents an SBA lender typically asks for — tax returns, financial statements, business plan, debt schedule, ownership and use of funds — as a checklist you can work through before you apply.",
+      "releaseDate": "2026-12-20"
+    },
+    {
+      "id": "how-to-get-approved-for-an-apartment-v6",
+      "slug": "how-to-get-approved-for-an-apartment",
+      "path": "/how-to-get-approved-for-an-apartment/",
+      "kind": "guide",
+      "imageSku": "rental-application-kit",
+      "angle": "self-service",
+      "layout": "band-top",
+      "palette": "forest",
+      "headline": "Prepare your rental application honestly",
+      "subhead": "A checklist-style guide",
+      "bullets": [
+        "Income",
+        "Rental history",
+        "Credit and references"
+      ],
+      "title": "Prepare your rental application honestly | Apartment Approval Guide",
+      "description": "A checklist-style guide. What landlords check on a rental application — income, rental history, credit and references — and how to prepare each one honestly before you apply. A plain checklist-style guide.",
+      "releaseDate": "2026-12-21"
+    }
+  ]
+}

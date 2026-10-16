@@ -1,34 +1,28 @@
-// Pinterest RSS feed: one source for the feed endpoint, the pin image endpoint
-// and the validator (scripts/validate/pinterest-launch.mjs).
+// Pinterest RSS feed, Node side: file loaders plus the pure core in
+// pinfeed-core.mjs (shared with the request-time Pages Function
+// functions/pinfeed.xml.js). Read by the feed endpoint, the pin image build step,
+// the refill script and the validators (pinterest-launch, pinterest-drip).
 import fs from "node:fs";
 import path from "node:path";
+import { renderEntries } from "./pinfeed-core.mjs";
 
-export const SITE = "https://approvalprep.com";
-export const FEED_PATH = "/pinfeed.xml";
-export const PIN_WIDTH = 1000;
-export const PIN_HEIGHT = 1500;
+export * from "./pinfeed-core.mjs";
 
 export function loadPinfeed(root = process.cwd()) {
   return JSON.parse(fs.readFileSync(path.join(root, "data/pinterest/pinfeed.json"), "utf8"));
 }
 
-export const pinImagePath = (slug) => `/pins/${slug}.png`;
-export const previewImagePath = (sku) => `/assets/products/${sku}.png`;
-
-const esc = (v) => String(v).replace(/[<>&'"]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", "'": "&apos;", '"': "&quot;" }[c]));
-
-export function itemLink(feed, item) {
-  return `${SITE}${item.path}?${feed.utm}`;
+export const QUEUE_FILE = "data/pinterest/queue.json";
+export function loadQueue(root = process.cwd()) {
+  return JSON.parse(fs.readFileSync(path.join(root, QUEUE_FILE), "utf8"));
 }
 
+// Launch-only rendering (kept for callers that want the 11 launch items alone).
 export function renderPinfeed(feed) {
-  const items = feed.items.map((item) => {
-    const link = itemLink(feed, item);
-    const img = `${SITE}${pinImagePath(item.slug)}`;
-    return `<item><title>${esc(item.title)}</title><link>${esc(link)}</link><guid isPermaLink="false">approvalprep-pin-${esc(item.slug)}</guid><pubDate>${new Date(item.pubDate).toUTCString()}</pubDate><description>${esc(item.description)}</description><enclosure url="${esc(img)}" length="0" type="image/png"/><media:content url="${esc(img)}" medium="image" type="image/png" width="${PIN_WIDTH}" height="${PIN_HEIGHT}"/></item>`;
-  }).join("");
-  const latest = feed.items.map((i) => new Date(i.pubDate).getTime()).reduce((a, b) => Math.max(a, b), 0);
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>${esc(feed.channel.title)}</title><link>${SITE}/</link><description>${esc(feed.channel.description)}</description><language>en-us</language><lastBuildDate>${new Date(latest).toUTCString()}</lastBuildDate><atom:link href="${SITE}${FEED_PATH}" rel="self" type="application/rss+xml"/>${items}</channel></rss>\n`;
+  return renderEntries(feed, feed.items.map((i) => ({
+    guid: `approvalprep-pin-${i.slug}`, title: i.title, description: i.description,
+    link: `https://approvalprep.com${i.path}?${feed.utm}`, image: `https://approvalprep.com/pins/${i.slug}.png`, pubDate: i.pubDate,
+  })));
 }
 
 // Title wrap for the pin header: greedy, by character budget.

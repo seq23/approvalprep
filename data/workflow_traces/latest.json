@@ -1,14 +1,14 @@
 {
   "schemaVersion": "4.4.0",
-  "generatedAt": "2026-10-12T12:59:59.261Z",
+  "generatedAt": "2026-10-16T15:24:04.313Z",
   "status": "COMPLETE_FIXTURE_TRACE",
-  "workflowCount": 17,
-  "manualReadyCount": 17,
-  "scheduledCount": 12,
+  "workflowCount": 19,
+  "manualReadyCount": 19,
+  "scheduledCount": 14,
   "pushTriggeredCount": 1,
   "pullRequestTriggeredCount": 2,
-  "mainWriterCount": 11,
-  "fauxScenarioCount": 135,
+  "mainWriterCount": 13,
+  "fauxScenarioCount": 153,
   "allManualReady": true,
   "allHaveFixtureTraceInput": true,
   "allUsePinnedRunner": true,
@@ -184,6 +184,7 @@
         "validate:intelligence-freshness",
         "validate:internal-link-graph",
         "validate:internal-url-form",
+        "validate:kit-page-sells-its-own-kit",
         "validate:legal",
         "validate:letter-studio",
         "validate:location-source-coverage",
@@ -205,6 +206,8 @@
         "validate:page-factory",
         "validate:pages-header-publication",
         "validate:payment-download",
+        "validate:pinterest-drip",
+        "validate:pinterest-launch",
         "validate:plain-language",
         "validate:plain-language-grade",
         "validate:pre-merge-lane-parity",
@@ -416,6 +419,7 @@
         "validate:intelligence-freshness",
         "validate:internal-link-graph",
         "validate:internal-url-form",
+        "validate:kit-page-sells-its-own-kit",
         "validate:legal",
         "validate:letter-studio",
         "validate:location-source-coverage",
@@ -437,6 +441,8 @@
         "validate:page-factory",
         "validate:pages-header-publication",
         "validate:payment-download",
+        "validate:pinterest-drip",
+        "validate:pinterest-launch",
         "validate:plain-language",
         "validate:plain-language-grade",
         "validate:pre-merge-lane-parity",
@@ -692,6 +698,7 @@
         "validate:intelligence-freshness",
         "validate:internal-link-graph",
         "validate:internal-url-form",
+        "validate:kit-page-sells-its-own-kit",
         "validate:legal",
         "validate:letter-studio",
         "validate:location-source-coverage",
@@ -713,6 +720,8 @@
         "validate:page-factory",
         "validate:pages-header-publication",
         "validate:payment-download",
+        "validate:pinterest-drip",
+        "validate:pinterest-launch",
         "validate:plain-language",
         "validate:plain-language-grade",
         "validate:pre-merge-lane-parity",
@@ -1451,6 +1460,7 @@
         "validate:intelligence-freshness",
         "validate:internal-link-graph",
         "validate:internal-url-form",
+        "validate:kit-page-sells-its-own-kit",
         "validate:legal",
         "validate:letter-studio",
         "validate:location-source-coverage",
@@ -1472,6 +1482,8 @@
         "validate:page-factory",
         "validate:pages-header-publication",
         "validate:payment-download",
+        "validate:pinterest-drip",
+        "validate:pinterest-launch",
         "validate:plain-language",
         "validate:plain-language-grade",
         "validate:pre-merge-lane-parity",
@@ -1770,6 +1782,173 @@
       "traceId": "f0a452d8f990a05b"
     },
     {
+      "workflow": "pinterest-metrics.yml",
+      "traceMode": "FIXTURE_TRACE_WITH_TRANSITIVE_PACKAGE_RESOLUTION_NOT_PRODUCTION_TELEMETRY",
+      "proof_type": "fixture",
+      "real_telemetry": false,
+      "may_be_used_for_growth_claims": false,
+      "manualReady": true,
+      "scheduled": true,
+      "pushTriggered": false,
+      "pullRequestTriggered": false,
+      "hasCheckout": true,
+      "hasNodeSetup": true,
+      "nodeVersionOk": true,
+      "runnerPinned": true,
+      "timeoutSet": true,
+      "usesNpmInstall": false,
+      "usesNpmCi": true,
+      "buildsProject": false,
+      "requiresDependencyInstall": false,
+      "installDependencyReason": null,
+      "dependencyInstallPolicyOk": true,
+      "fixtureTraceInput": true,
+      "secretRefs": [
+        "CLOUDFLARE_ACCOUNT_ID",
+        "CLOUDFLARE_API_TOKEN"
+      ],
+      "npmScripts": [
+        "pinterest:metrics",
+        "workflows:trace"
+      ],
+      "transitiveNpmScripts": [
+        "pinterest:metrics",
+        "workflows:trace"
+      ],
+      "missingNpmScripts": [],
+      "expectedDataTouches": [],
+      "mainWriter": true,
+      "sharedWriterConcurrency": true,
+      "fullMainCheckout": true,
+      "preparesLatestMain": true,
+      "safePushHelper": true,
+      "directUnsafePush": false,
+      "fauxScenarios": [
+        {
+          "id": "manual_fixture_dispatch",
+          "status": "PASS"
+        },
+        {
+          "id": "known_command_resolution",
+          "status": "PASS"
+        },
+        {
+          "id": "transitive_dependency_install",
+          "status": "PASS",
+          "requires_dependency_install": false,
+          "reason": null
+        },
+        {
+          "id": "pinned_runtime_and_timeout",
+          "status": "PASS"
+        },
+        {
+          "id": "secret_boundary",
+          "status": "PROVIDER_GATED_NO_FAKE_SUCCESS"
+        },
+        {
+          "id": "latest_main_before_generation",
+          "status": "PASS"
+        },
+        {
+          "id": "no_change_commit_path",
+          "status": "PASS"
+        },
+        {
+          "id": "remote_advance_rebase_retry",
+          "status": "PASS"
+        },
+        {
+          "id": "conflict_blocks_without_force",
+          "status": "PASS"
+        }
+      ],
+      "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
+      "traceId": "7d4113077fb6f455"
+    },
+    {
+      "workflow": "pinterest-refill.yml",
+      "traceMode": "FIXTURE_TRACE_WITH_TRANSITIVE_PACKAGE_RESOLUTION_NOT_PRODUCTION_TELEMETRY",
+      "proof_type": "fixture",
+      "real_telemetry": false,
+      "may_be_used_for_growth_claims": false,
+      "manualReady": true,
+      "scheduled": true,
+      "pushTriggered": false,
+      "pullRequestTriggered": false,
+      "hasCheckout": true,
+      "hasNodeSetup": true,
+      "nodeVersionOk": true,
+      "runnerPinned": true,
+      "timeoutSet": true,
+      "usesNpmInstall": false,
+      "usesNpmCi": true,
+      "buildsProject": false,
+      "requiresDependencyInstall": false,
+      "installDependencyReason": null,
+      "dependencyInstallPolicyOk": true,
+      "fixtureTraceInput": true,
+      "secretRefs": [],
+      "npmScripts": [
+        "pinterest:refill",
+        "workflows:trace"
+      ],
+      "transitiveNpmScripts": [
+        "pinterest:refill",
+        "workflows:trace"
+      ],
+      "missingNpmScripts": [],
+      "expectedDataTouches": [],
+      "mainWriter": true,
+      "sharedWriterConcurrency": true,
+      "fullMainCheckout": true,
+      "preparesLatestMain": true,
+      "safePushHelper": true,
+      "directUnsafePush": false,
+      "fauxScenarios": [
+        {
+          "id": "manual_fixture_dispatch",
+          "status": "PASS"
+        },
+        {
+          "id": "known_command_resolution",
+          "status": "PASS"
+        },
+        {
+          "id": "transitive_dependency_install",
+          "status": "PASS",
+          "requires_dependency_install": false,
+          "reason": null
+        },
+        {
+          "id": "pinned_runtime_and_timeout",
+          "status": "PASS"
+        },
+        {
+          "id": "secret_boundary",
+          "status": "NOT_APPLICABLE"
+        },
+        {
+          "id": "latest_main_before_generation",
+          "status": "PASS"
+        },
+        {
+          "id": "no_change_commit_path",
+          "status": "PASS"
+        },
+        {
+          "id": "remote_advance_rebase_retry",
+          "status": "PASS"
+        },
+        {
+          "id": "conflict_blocks_without_force",
+          "status": "PASS"
+        }
+      ],
+      "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
+      "traceId": "19e0eb6d8adb7d19"
+    },
+    {
       "workflow": "release-report.yml",
       "traceMode": "FIXTURE_TRACE_WITH_TRANSITIVE_PACKAGE_RESOLUTION_NOT_PRODUCTION_TELEMETRY",
       "proof_type": "fixture",
@@ -2027,6 +2206,7 @@
         "validate:intelligence-freshness",
         "validate:internal-link-graph",
         "validate:internal-url-form",
+        "validate:kit-page-sells-its-own-kit",
         "validate:legal",
         "validate:letter-studio",
         "validate:location-source-coverage",
@@ -2048,6 +2228,8 @@
         "validate:page-factory",
         "validate:pages-header-publication",
         "validate:payment-download",
+        "validate:pinterest-drip",
+        "validate:pinterest-launch",
         "validate:plain-language",
         "validate:plain-language-grade",
         "validate:pre-merge-lane-parity",

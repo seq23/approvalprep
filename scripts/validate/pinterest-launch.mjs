@@ -85,14 +85,18 @@ for (const [i, it] of items.entries()) {
   }
 }
 
-// 3. Coverage: every paid kit and the three Plan B guides.
+// 3. Coverage: every paid kit and the three Plan B guides, in the feed or in the
+// daily drip queue (data/pinterest/queue.json). Once the drip passes 50 items the
+// launch items roll out of the newest-50 window; the pages stay covered by their
+// queued variants. A new kit with neither fails here: run npm run pinterest:refill -- --force.
+for (const v of JSON.parse(fs.readFileSync("data/pinterest/queue.json", "utf8")).items || []) linkedPaths.add(v.path.replace(/\/+$/, ""));
 const products = JSON.parse(fs.readFileSync("data/products/products.json", "utf8"));
 const priority = Object.keys(JSON.parse(fs.readFileSync("data/content/priority_pages.json", "utf8")).pages || {});
 const planB = ["/employment-verification-letter", "/sba-loan-checklist", "/how-to-get-approved-for-an-apartment"];
 for (const p of planB) if (!priority.includes(p)) fail(`Plan B guide ${p} no longer in priority_pages.json - update this validator`);
 const kits = paidSkusFrom(products);
 if (kits.length === 0) fail("no active_paid kits found");
-for (const sku of kits) if (!linkedPaths.has(`/${sku}`)) fail(`kit /${sku}/ missing from the feed`);
+for (const sku of kits) if (!linkedPaths.has(`/${sku}`)) fail(`kit /${sku}/ missing from the feed and the drip queue`);
 for (const p of planB) if (!linkedPaths.has(p)) fail(`Plan B guide ${p}/ missing from the feed`);
 
 // 4. Content type rule.
