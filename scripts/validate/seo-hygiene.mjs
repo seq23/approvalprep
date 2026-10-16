@@ -10,7 +10,9 @@
  *   jsonld        JSON-LD types per page kind: Organization everywhere; WebSite +
  *                 speakable WebPage on /; BreadcrumbList on every inner sitemap
  *                 page; FAQPage wherever an FAQ block renders and nowhere its
- *                 questions are not visible; Product + Offer on kit pages with
+ *                 questions are not visible; Product + Offer on kit pages, every Product with
+ *                 image, brand, a known kit sku and offers.price/USD equal to
+ *                 data/products/products.json (no review/aggregateRating), and
  *                 the price visible on the page
  *   definition    the homepage paragraph directly under the H1 starts
  *                 "ApprovalPrep is", runs 40-60 words, and every speakable
@@ -151,7 +153,12 @@ const checks = {
     const productPaths = manifest.routes.filter((r) => r.page_intent === "product" && r.index).map((r) => norm(r.path));
     if (!productPaths.length) fail("[jsonld] no indexable product routes found in the manifest");
     const sitemap = new Set(sitemapUrls());
+    // The kit price data every Product offer must match ($15/$19/$29/$39/$49).
+    const catalog = JSON.parse(fs.readFileSync(path.join(ROOT, "data/products/products.json"), "utf8"));
+    const kitPrices = new Map(catalog.products.filter((x) => x.status === "active_paid" && x.stripe_enabled).map((x) => [x.sku, String(x.priceLabel || "").replace(/[^0-9.]/g, "")]));
+    if (!kitPrices.size) fail("[jsonld] no paid kits in data/products/products.json");
     let n = 0;
+    let productNodes = 0;
     for (const [p, html] of all) {
       const nodes = jsonld(html, p);
       const top = topTypes(html, p);
@@ -171,7 +178,19 @@ const checks = {
         for (const q of faq.mainEntity || []) if (!text.includes(squash(q.name))) fail(`[jsonld] ${p}: FAQPage question not visible on the page: "${squash(q.name).slice(0, 70)}"`);
       }
       for (const product of nodes.filter((x) => x["@type"] === "Product")) {
-        for (const offer of [].concat(product.offers || [])) {
+        productNodes++;
+        const kit = kitPrices.get(product.sku);
+        const offers = [].concat(product.offers || []);
+        if (!kit) fail(`[jsonld] ${p}: Product "${product.name}" sku "${product.sku}" is not a paid kit in data/products/products.json`);
+        if (!product.image) fail(`[jsonld] ${p}: Product "${product.name}" has no image (Merchant listings requires one)`);
+        if (!product.brand?.name) fail(`[jsonld] ${p}: Product "${product.name}" has no brand`);
+        if (product.review || product.aggregateRating) fail(`[jsonld] ${p}: Product "${product.name}" carries review/aggregateRating; there are none to cite`);
+        if (!offers.length) fail(`[jsonld] ${p}: Product "${product.name}" has no offers`);
+        for (const offer of offers) {
+          if (offer.priceCurrency !== "USD") fail(`[jsonld] ${p}: Product "${product.name}" offer priceCurrency is "${offer.priceCurrency}", not USD`);
+          if (kit && String(offer.price) !== kit) fail(`[jsonld] ${p}: Product "${product.name}" offer price ${offer.price} != kit price data ${kit}`);
+        }
+        for (const offer of offers) {
           const price = String(offer.price || "").replace(/\.0+$/, "");
           if (!price || !text.includes(`$${price}`)) fail(`[jsonld] ${p}: Product offer price $${price} is not shown on the page`);
         }
@@ -179,6 +198,7 @@ const checks = {
       if (productPaths.includes(p) && !nodes.some((x) => x["@type"] === "Product" && x.offers)) fail(`[jsonld] ${p}: kit page has no Product with Offer`);
       n++;
     }
+    if (!productNodes) fail("[jsonld] no Product nodes in the built site");
     return n;
   },
   definition(all) {

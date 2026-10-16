@@ -159,11 +159,23 @@ export const itemListSchema = ({ name, items }: { name: string; items: string[] 
   itemListElement: items.map((item, index) => ({ "@type": "ListItem", position: index + 1, name: item }))
 });
 
-export const productSchema = ({ name, description, url, price }: { name: string; description: string; url: string; price?: string }) => ({
-  "@context": "https://schema.org",
-  "@type": "Product",
-  name,
-  description,
-  url,
-  ...(price ? { offers: { "@type": "Offer", priceCurrency: "USD", price: price.replace(/[^0-9.]/g, ""), availability: "https://schema.org/InStock", url }  } : {})
-});
+// Product rich result (Google Merchant listings + Product snippets): every node
+// carries image, brand, sku and a real Offer priced from data/products/products.json.
+// No review or aggregateRating is ever emitted: there are none to cite.
+// Guarded by validate:seo-hygiene:jsonld (price must equal the kit price data).
+type ProductInput = { sku: string; name: string; priceLabel: string; image?: string };
+export const productSchema = ({ product, description, url }: { product: ProductInput; description: string; url: string }) => {
+  const price = String(product.priceLabel || "").replace(/[^0-9.]/g, "");
+  if (!product.sku || !price) throw new Error(`productSchema: ${product.name || "product"} has no sku or price`);
+  return {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description,
+    sku: product.sku,
+    url,
+    image: product.image ? `${SITE_ORIGIN}${product.image}` : OG_IMAGE.url,
+    brand: { "@type": "Brand", name: "ApprovalPrep" },
+    offers: { "@type": "Offer", priceCurrency: "USD", price, availability: "https://schema.org/InStock", url }
+  };
+};
