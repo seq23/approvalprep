@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "orchestratorSource": "_repo_validation_registry.json",
-  "validatorCount": 140,
-  "hardFailCount": 129,
+  "validatorCount": 143,
+  "hardFailCount": 132,
   "strongWarningCount": 11,
   "validators": [
     {
@@ -1261,6 +1261,33 @@
       "id": "query-aligned-pages",
       "npmScript": "validate:query-aligned-pages",
       "entrypoint": "scripts/validate/query-aligned-pages.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "growth-critical"
+    },
+    {
+      "order": 141,
+      "id": "kit-page-sells-its-own-kit",
+      "npmScript": "validate:kit-page-sells-its-own-kit",
+      "entrypoint": "scripts/validate/kit-page-sells-its-own-kit.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "growth-critical"
+    },
+    {
+      "order": 142,
+      "id": "pinterest-launch",
+      "npmScript": "validate:pinterest-launch",
+      "entrypoint": "scripts/validate/pinterest-launch.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "growth-critical"
+    },
+    {
+      "order": 143,
+      "id": "pinterest-drip",
+      "npmScript": "validate:pinterest-drip",
+      "entrypoint": "scripts/validate/pinterest-drip.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
       "group": "growth-critical"
