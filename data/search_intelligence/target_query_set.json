@@ -7,17 +7,47 @@
     "data/queries/evidence/evidence_queries.json",
     "data/search_intelligence/gsc_query_history.json"
   ],
-  "gsc_window": "2026-09-15..2026-10-13",
-  "gsc_collected_at": "2026-10-13T08:46:04.029Z",
-  "target_count": 17,
+  "gsc_window": "2026-09-20..2026-10-18",
+  "gsc_collected_at": "2026-10-18T08:32:24.245Z",
+  "target_count": 23,
   "targets_by_source": {
-    "gsc_search_analytics": 2,
+    "gsc_search_analytics": 8,
     "gsc_search_analytics_history": 2,
     "measured_demand": 11,
     "evidence_queries": 2
   },
   "truth_boundary": "A target is a query this site intends to answer. Its number is the measurement that admitted it, not evidence of ranking or indexing.",
   "targets": [
+    {
+      "query": "mortgage loan documents checklist",
+      "query_normalized": "mortgage loan documents checklist",
+      "source": "gsc_search_analytics",
+      "measurement": {
+        "metric": "impressions_28d",
+        "value": 4,
+        "clicks": 0,
+        "position": 96.25,
+        "window": "2026-09-20..2026-10-18",
+        "collected_at": "2026-10-18T08:32:24.245Z"
+      },
+      "expected_owned_route": "/mortgage-document-checklist",
+      "other_measurements": []
+    },
+    {
+      "query": "pre approved renter",
+      "query_normalized": "pre approved renter",
+      "source": "gsc_search_analytics",
+      "measurement": {
+        "metric": "impressions_28d",
+        "value": 2,
+        "clicks": 0,
+        "position": 70.5,
+        "window": "2026-09-20..2026-10-18",
+        "collected_at": "2026-10-18T08:32:24.245Z"
+      },
+      "expected_owned_route": "/how-to-get-approved-for-an-apartment",
+      "other_measurements": []
+    },
     {
       "query": "how to get approved for apartment",
       "query_normalized": "how to get approved for apartment",
@@ -27,10 +57,55 @@
         "value": 1,
         "clicks": 0,
         "position": 98,
-        "window": "2026-09-15..2026-10-13",
-        "collected_at": "2026-10-13T08:46:04.029Z"
+        "window": "2026-09-20..2026-10-18",
+        "collected_at": "2026-10-18T08:32:24.245Z"
       },
       "expected_owned_route": "/how-to-get-approved-for-an-apartment",
+      "other_measurements": []
+    },
+    {
+      "query": "how to get approved for tlo",
+      "query_normalized": "how to get approved for tlo",
+      "source": "gsc_search_analytics",
+      "measurement": {
+        "metric": "impressions_28d",
+        "value": 1,
+        "clicks": 0,
+        "position": 86,
+        "window": "2026-09-20..2026-10-18",
+        "collected_at": "2026-10-18T08:32:24.245Z"
+      },
+      "expected_owned_route": "/resources",
+      "other_measurements": []
+    },
+    {
+      "query": "letter verifying employment",
+      "query_normalized": "letter verifying employment",
+      "source": "gsc_search_analytics",
+      "measurement": {
+        "metric": "impressions_28d",
+        "value": 1,
+        "clicks": 0,
+        "position": 91,
+        "window": "2026-09-20..2026-10-18",
+        "collected_at": "2026-10-18T08:32:24.245Z"
+      },
+      "expected_owned_route": "/employment-verification-letter",
+      "other_measurements": []
+    },
+    {
+      "query": "mortgage loans documents checklist",
+      "query_normalized": "mortgage loans documents checklist",
+      "source": "gsc_search_analytics",
+      "measurement": {
+        "metric": "impressions_28d",
+        "value": 1,
+        "clicks": 0,
+        "position": 97,
+        "window": "2026-09-20..2026-10-18",
+        "collected_at": "2026-10-18T08:32:24.245Z"
+      },
+      "expected_owned_route": "/mortgage-document-checklist",
       "other_measurements": []
     },
     {
@@ -42,10 +117,25 @@
         "value": 1,
         "clicks": 0,
         "position": 100,
-        "window": "2026-09-15..2026-10-13",
-        "collected_at": "2026-10-13T08:46:04.029Z"
+        "window": "2026-09-20..2026-10-18",
+        "collected_at": "2026-10-18T08:32:24.245Z"
       },
       "expected_owned_route": "/how-to-get-approved-for-an-apartment",
+      "other_measurements": []
+    },
+    {
+      "query": "us mortgage document checklist",
+      "query_normalized": "us mortgage document checklist",
+      "source": "gsc_search_analytics",
+      "measurement": {
+        "metric": "impressions_28d",
+        "value": 1,
+        "clicks": 0,
+        "position": 78,
+        "window": "2026-09-20..2026-10-18",
+        "collected_at": "2026-10-18T08:32:24.245Z"
+      },
+      "expected_owned_route": "/mortgage-document-checklist",
       "other_measurements": []
     },
     {
