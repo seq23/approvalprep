@@ -1528,6 +1528,17 @@
       "scope": "data/search_intelligence/consolidation_candidates.json current against dist, GSC and coverage; no redirect shipped"
     },
     {
+      "id": "derived-ledger-lanes",
+      "npmScript": "validate:derived-ledger-lanes",
+      "entrypoint": "scripts/validate/derived-ledger-lanes.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "19 Oct 2026: Citation OS Weekly ingested a new Search Console row and validated without re-deriving the target set, so main went red on a stale ledger",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "every sequence re-derives search-intelligence ledgers before validate:all; every Search Console ingesting workflow re-derives after ingest and commits the derived ledgers"
+    },
+    {
       "id": "publication-freeze",
       "npmScript": "validate:publication-freeze",
       "entrypoint": "scripts/validate/publication-freeze.mjs",
