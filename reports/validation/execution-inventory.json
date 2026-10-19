@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "orchestratorSource": "_repo_validation_registry.json",
-  "validatorCount": 143,
-  "hardFailCount": 132,
+  "validatorCount": 144,
+  "hardFailCount": 133,
   "strongWarningCount": 11,
   "validators": [
     {
@@ -1249,6 +1249,15 @@
     },
     {
       "order": 139,
+      "id": "derived-ledger-lanes",
+      "npmScript": "validate:derived-ledger-lanes",
+      "entrypoint": "scripts/validate/derived-ledger-lanes.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "growth-critical"
+    },
+    {
+      "order": 140,
       "id": "publication-freeze",
       "npmScript": "validate:publication-freeze",
       "entrypoint": "scripts/validate/publication-freeze.mjs",
@@ -1257,7 +1266,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 140,
+      "order": 141,
       "id": "query-aligned-pages",
       "npmScript": "validate:query-aligned-pages",
       "entrypoint": "scripts/validate/query-aligned-pages.mjs",
@@ -1266,7 +1275,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 141,
+      "order": 142,
       "id": "kit-page-sells-its-own-kit",
       "npmScript": "validate:kit-page-sells-its-own-kit",
       "entrypoint": "scripts/validate/kit-page-sells-its-own-kit.mjs",
@@ -1275,7 +1284,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 142,
+      "order": 143,
       "id": "pinterest-launch",
       "npmScript": "validate:pinterest-launch",
       "entrypoint": "scripts/validate/pinterest-launch.mjs",
@@ -1284,7 +1293,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 143,
+      "order": 144,
       "id": "pinterest-drip",
       "npmScript": "validate:pinterest-drip",
       "entrypoint": "scripts/validate/pinterest-drip.mjs",
