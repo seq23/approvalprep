@@ -1,6 +1,6 @@
 {
   "schemaVersion": "4.4.0",
-  "generatedAt": "2026-10-16T15:24:04.313Z",
+  "generatedAt": "2026-10-19T14:34:50.195Z",
   "status": "COMPLETE_FIXTURE_TRACE",
   "workflowCount": 19,
   "manualReadyCount": 19,
@@ -166,6 +166,7 @@
         "validate:data-privacy",
         "validate:delegated-authority",
         "validate:demand-backed-pages",
+        "validate:derived-ledger-lanes",
         "validate:discovery-surfaces",
         "validate:download-first-page-boundary",
         "validate:download-key-contract",
@@ -360,6 +361,7 @@
         "intelligence:internal-links",
         "metrics:citation-scoreboard",
         "metrics:content-velocity",
+        "search-intelligence:derive",
         "seo:sitemap",
         "ux:browserless-report",
         "validate:admin",
@@ -401,6 +403,7 @@
         "validate:data-privacy",
         "validate:delegated-authority",
         "validate:demand-backed-pages",
+        "validate:derived-ledger-lanes",
         "validate:discovery-surfaces",
         "validate:download-first-page-boundary",
         "validate:download-key-contract",
@@ -554,7 +557,7 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "5206fdeadba6fb59"
+      "traceId": "3e48779257f08c72"
     },
     {
       "workflow": "citation-os-weekly.yml",
@@ -640,6 +643,7 @@
         "metrics:citation-scoreboard",
         "metrics:crawler-scoreboard",
         "metrics:indexing-scoreboard",
+        "search-intelligence:derive",
         "ux:browserless-report",
         "validate:admin",
         "validate:admin-action-links",
@@ -680,6 +684,7 @@
         "validate:data-privacy",
         "validate:delegated-authority",
         "validate:demand-backed-pages",
+        "validate:derived-ledger-lanes",
         "validate:discovery-surfaces",
         "validate:download-first-page-boundary",
         "validate:download-key-contract",
@@ -833,7 +838,7 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "9d890b16d5608f5d"
+      "traceId": "d698c1bacc17da3e"
     },
     {
       "workflow": "citation-probe.yml",
@@ -1442,6 +1447,7 @@
         "validate:data-privacy",
         "validate:delegated-authority",
         "validate:demand-backed-pages",
+        "validate:derived-ledger-lanes",
         "validate:discovery-surfaces",
         "validate:download-first-page-boundary",
         "validate:download-key-contract",
@@ -2188,6 +2194,7 @@
         "validate:data-privacy",
         "validate:delegated-authority",
         "validate:demand-backed-pages",
+        "validate:derived-ledger-lanes",
         "validate:discovery-surfaces",
         "validate:download-first-page-boundary",
         "validate:download-key-contract",
@@ -2365,6 +2372,7 @@
         "intelligence:analyze",
         "intelligence:free-ingest",
         "notifications:build-queue",
+        "search-intelligence:derive",
         "strategy:update-citations"
       ],
       "transitiveNpmScripts": [
@@ -2394,6 +2402,7 @@
         "intelligence:official-sources",
         "intelligence:recommend-page-actions",
         "notifications:build-queue",
+        "search-intelligence:derive",
         "strategy:update-citations"
       ],
       "missingNpmScripts": [],
@@ -2433,7 +2442,7 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "b480e8edf5274df3"
+      "traceId": "c8ff16a9c741330f"
     }
   ]
 }
