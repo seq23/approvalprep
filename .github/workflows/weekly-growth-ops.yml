@@ -55,6 +55,11 @@ jobs:
         run: npm run intelligence:free-ingest
       - name: Analyze intelligence
         run: npm run intelligence:analyze
+      - name: Re-derive search intelligence ledgers
+        # free-ingest rewrites the 28-day Search Console rows; the target set and
+        # consolidation ledger are derived from them and validate:all fails both
+        # as stale until they are rebuilt (validate:derived-ledger-lanes).
+        run: npm run search-intelligence:derive
       - name: Update citation strategy
         run: npm run strategy:update-citations
       - name: Build growth health
