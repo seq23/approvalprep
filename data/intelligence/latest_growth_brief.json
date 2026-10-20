@@ -1,7 +1,135 @@
 {
   "schemaVersion": "4.2.0",
-  "generatedAt": "2026-10-19T14:34:49.481Z",
+  "generatedAt": "2026-10-20T10:48:17.985Z",
   "sourceStatus": [
+    {
+      "id": "3b114290-d1d3-4bbd-a006-69694ae14d2f",
+      "connectorId": "authority_requirement_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-10-20T10:48:17.801Z",
+      "recordsImported": 79
+    },
+    {
+      "id": "cb28d4d8-3df5-4475-85cd-f74867f6a66e",
+      "connectorId": "growth_maintenance_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-10-20T10:48:17.621Z",
+      "recordsImported": 79
+    },
+    {
+      "id": "7d9371e9-64cd-4c4f-9406-ae4cd772c2f2",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-10-19T16:57:04.111Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "7198c3b2-490c-4242-80a4-d523f6b1dd7a",
+      "connectorId": "indexnow",
+      "status": "NO_DATA",
+      "ranAt": "2026-10-19T16:57:03.992Z",
+      "mode": "live",
+      "recordsImported": 0,
+      "preparedUrlCount": 79
+    },
+    {
+      "id": "a5296a34-17c4-4a5c-9b73-4e1fa9a8b57e",
+      "connectorId": "official_source_fetcher",
+      "status": "COMPLETE",
+      "ranAt": "2026-10-19T15:42:01.101Z",
+      "recordsImported": 12
+    },
+    {
+      "id": "04170bb4-3ba4-4a4c-aee7-38fc85f815a0",
+      "connectorId": "manual_social_signal_import",
+      "status": "NO_DATA",
+      "ranAt": "2026-10-19T15:41:57.635Z",
+      "reason": "No social signal import found at data/imports/social-signals.json.",
+      "recordsImported": 0
+    },
+    {
+      "id": "9dca91a0-3b49-4749-945e-5d4100725c95",
+      "connectorId": "manual_serp_csv",
+      "status": "NO_DATA",
+      "ranAt": "2026-10-19T15:41:57.491Z",
+      "reason": "No SERP CSV found at data/imports/serp.csv.",
+      "recordsImported": 0
+    },
+    {
+      "id": "0172e029-af2b-4a47-9b3f-36564acfcd0b",
+      "connectorId": "competitor_public_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-10-19T15:41:57.349Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "4c6fa577-3898-44dd-8c31-804ebc76e85d",
+      "connectorId": "competitor_sitemap_discovery",
+      "status": "COMPLETE",
+      "ranAt": "2026-10-19T15:41:56.846Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "db6b5216-e4d4-4514-857a-db4e6c006105",
+      "connectorId": "owned_site_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-10-19T15:41:54.842Z",
+      "recordsImported": 100
+    },
+    {
+      "id": "8e41a0af-9bcc-4cf6-b051-787cbc676ef8",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-10-19T15:41:54.693Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "2e8a2b43-f8c0-4d3f-a39f-36d7750579ef",
+      "connectorId": "google_url_inspection",
+      "status": "BUDGET_HELD",
+      "ranAt": "2026-10-19T15:41:54.502Z",
+      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
+      "recordsImported": 0
+    },
+    {
+      "id": "62315da6-4a8e-484c-84f1-ae538de7f913",
+      "connectorId": "google_search_console_search_analytics",
+      "status": "BUDGET_HELD",
+      "ranAt": "2026-10-19T15:41:54.186Z",
+      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
+      "recordsImported": 0
+    },
+    {
+      "id": "c8b6d454-91fb-46d5-a117-9135390fefe0",
+      "connectorId": "retest_outcome_evaluator",
+      "status": "COMPLETE",
+      "ranAt": "2026-10-19T14:34:49.620Z",
+      "recordsImported": 0
+    },
+    {
+      "id": "6ea4babd-a003-4a8e-aaa1-5cf55c8c58fb",
+      "connectorId": "retest_queue_builder",
+      "status": "COMPLETE",
+      "ranAt": "2026-10-19T14:34:49.585Z",
+      "recordsImported": 0
+    },
+    {
+      "id": "b4fcac08-0b7c-4efe-a3fa-f4e6585dcc62",
+      "connectorId": "cloudflare_crawler_logs",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-10-19T14:34:49.517Z",
+      "reason": "Cloudflare crawler ingestion requires Cloudflare credentials or a manual import file.",
+      "recordsImported": 0
+    },
+    {
+      "id": "d3d45891-eb44-42d8-89d9-61351dcd5e22",
+      "connectorId": "growth_brief_generation",
+      "status": "COMPLETE",
+      "ranAt": "2026-10-19T14:34:49.483Z",
+      "recordsImported": 40
+    },
     {
       "id": "1292135d-79ab-4a4c-ac8f-ac8823945af3",
       "connectorId": "page_action_recommendation",
@@ -22,135 +150,6 @@
       "status": "COMPLETE",
       "ranAt": "2026-10-19T14:34:49.325Z",
       "recordsImported": 79
-    },
-    {
-      "id": "2d26e7dd-4c4e-46e6-a059-d020a4414c5e",
-      "connectorId": "content_opportunity_analysis",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-19T14:34:49.289Z",
-      "recordsImported": 5435
-    },
-    {
-      "id": "bf310a7c-a9fc-43c5-a580-b1e1a3d40745",
-      "connectorId": "official_source_fetcher",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-19T14:34:47.642Z",
-      "recordsImported": 12
-    },
-    {
-      "id": "51bb3eca-319e-4a4d-af56-6bdc723e7372",
-      "connectorId": "manual_social_signal_import",
-      "status": "NO_DATA",
-      "ranAt": "2026-10-19T14:34:46.608Z",
-      "reason": "No social signal import found at data/imports/social-signals.json.",
-      "recordsImported": 0
-    },
-    {
-      "id": "196e7ba6-d057-409b-bf85-b3cdb075a46d",
-      "connectorId": "manual_serp_csv",
-      "status": "NO_DATA",
-      "ranAt": "2026-10-19T14:34:46.575Z",
-      "reason": "No SERP CSV found at data/imports/serp.csv.",
-      "recordsImported": 0
-    },
-    {
-      "id": "6f76e4b4-a270-4424-8930-b7ada012def1",
-      "connectorId": "competitor_public_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-19T14:34:46.541Z",
-      "recordsImported": 2
-    },
-    {
-      "id": "1deebe91-ca04-4293-b688-767f35f8333c",
-      "connectorId": "competitor_sitemap_discovery",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-19T14:34:46.130Z",
-      "recordsImported": 2
-    },
-    {
-      "id": "97d08d0e-7211-45b5-a3e5-b87a3c5ff312",
-      "connectorId": "owned_site_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-19T14:34:44.873Z",
-      "recordsImported": 100
-    },
-    {
-      "id": "daefbe56-2067-4178-82c7-720f58aef723",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-10-19T14:34:44.838Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "f4abf8bf-635d-43f3-86b5-84afebf973d3",
-      "connectorId": "google_url_inspection",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-19T14:34:44.805Z",
-      "mode": "live",
-      "recordsImported": 25
-    },
-    {
-      "id": "9269c045-0bab-4973-b57e-2985ab0d7bca",
-      "connectorId": "google_search_console_search_analytics",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-19T14:32:00.883Z",
-      "mode": "live",
-      "recordsImported": 9
-    },
-    {
-      "id": "69dfce7e-1dcc-4a30-b76e-1b047125d528",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-10-18T10:20:13.558Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "fce69da3-87d9-4da1-9d1c-f6dd435d0615",
-      "connectorId": "indexnow",
-      "status": "NO_DATA",
-      "ranAt": "2026-10-18T10:20:13.421Z",
-      "mode": "live",
-      "recordsImported": 0,
-      "preparedUrlCount": 79
-    },
-    {
-      "id": "1352ae85-4cf5-4e32-8455-da2840d55b8c",
-      "connectorId": "official_source_fetcher",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-18T08:32:31.411Z",
-      "recordsImported": 12
-    },
-    {
-      "id": "f2e2ca7b-2444-4e3c-8661-5428e29d59b2",
-      "connectorId": "manual_social_signal_import",
-      "status": "NO_DATA",
-      "ranAt": "2026-10-18T08:32:26.734Z",
-      "reason": "No social signal import found at data/imports/social-signals.json.",
-      "recordsImported": 0
-    },
-    {
-      "id": "de3782c5-df80-4ee6-9c01-be535c4ea681",
-      "connectorId": "manual_serp_csv",
-      "status": "NO_DATA",
-      "ranAt": "2026-10-18T08:32:26.635Z",
-      "reason": "No SERP CSV found at data/imports/serp.csv.",
-      "recordsImported": 0
-    },
-    {
-      "id": "7bbdbce4-5990-4634-80a6-218f812fdc82",
-      "connectorId": "competitor_public_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-18T08:32:26.534Z",
-      "recordsImported": 2
-    },
-    {
-      "id": "e0036951-35ef-4329-8b5a-6e88e321eb72",
-      "connectorId": "competitor_sitemap_discovery",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-18T08:32:26.087Z",
-      "recordsImported": 2
     }
   ],
   "topContentOpportunities": [
@@ -576,7 +575,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-19T14:34:49.323Z"
+      "createdAt": "2026-10-20T10:48:17.618Z"
     },
     {
       "route": "/blog",
@@ -592,7 +591,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-19T14:34:49.323Z"
+      "createdAt": "2026-10-20T10:48:17.618Z"
     },
     {
       "route": "/pricing",
@@ -608,7 +607,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-19T14:34:49.323Z"
+      "createdAt": "2026-10-20T10:48:17.618Z"
     },
     {
       "route": "/letter-of-explanation",
@@ -624,7 +623,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-19T14:34:49.323Z"
+      "createdAt": "2026-10-20T10:48:17.618Z"
     },
     {
       "route": "/letter-of-explanation/credit",
@@ -640,7 +639,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-10-19T14:34:49.323Z"
+      "createdAt": "2026-10-20T10:48:17.618Z"
     },
     {
       "route": "/letter-of-explanation/eviction",
@@ -656,7 +655,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-19T14:34:49.323Z"
+      "createdAt": "2026-10-20T10:48:17.618Z"
     },
     {
       "route": "/letter-of-explanation/income",
@@ -672,7 +671,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-10-19T14:34:49.323Z"
+      "createdAt": "2026-10-20T10:48:17.618Z"
     },
     {
       "route": "/letter-of-explanation/employment-gap",
@@ -688,7 +687,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-10-19T14:34:49.323Z"
+      "createdAt": "2026-10-20T10:48:17.618Z"
     },
     {
       "route": "/609-dispute-letter",
@@ -704,7 +703,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-10-19T14:34:49.323Z"
+      "createdAt": "2026-10-20T10:48:17.618Z"
     },
     {
       "route": "/goodwill-letter-to-remove-late-payment",
@@ -720,7 +719,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-19T14:34:49.323Z"
+      "createdAt": "2026-10-20T10:48:17.618Z"
     },
     {
       "route": "/letter-of-explanation/late-payment",
@@ -736,7 +735,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-19T14:34:49.323Z"
+      "createdAt": "2026-10-20T10:48:17.618Z"
     },
     {
       "route": "/letter-of-explanation/large-deposit",
@@ -752,7 +751,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-19T14:34:49.323Z"
+      "createdAt": "2026-10-20T10:48:17.618Z"
     },
     {
       "route": "/proof-of-income-letter",
@@ -768,7 +767,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-10-19T14:34:49.323Z"
+      "createdAt": "2026-10-20T10:48:17.618Z"
     },
     {
       "route": "/credit-dispute-letter",
@@ -784,7 +783,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-10-19T14:34:49.323Z"
+      "createdAt": "2026-10-20T10:48:17.618Z"
     },
     {
       "route": "/apartment-application",
@@ -800,7 +799,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-19T14:34:49.323Z"
+      "createdAt": "2026-10-20T10:48:17.618Z"
     },
     {
       "route": "/rental-application-checklist",
@@ -816,7 +815,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-19T14:34:49.323Z"
+      "createdAt": "2026-10-20T10:48:17.618Z"
     },
     {
       "route": "/auto-loan-documents",
@@ -832,7 +831,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-19T14:34:49.323Z"
+      "createdAt": "2026-10-20T10:48:17.618Z"
     },
     {
       "route": "/car-loan-checklist",
@@ -848,7 +847,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-19T14:34:49.323Z"
+      "createdAt": "2026-10-20T10:48:17.618Z"
     },
     {
       "route": "/documents-needed-for-car-loan",
@@ -864,7 +863,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-19T14:34:49.323Z"
+      "createdAt": "2026-10-20T10:48:17.618Z"
     },
     {
       "route": "/sba-loan-checklist",
@@ -880,7 +879,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-19T14:34:49.323Z"
+      "createdAt": "2026-10-20T10:48:17.618Z"
     }
   ],
   "hardTruth": "Low ranking potential never blocks useful onsite content. It only changes indexing, priority, and authority strategy."
