@@ -1,161 +1,165 @@
 {
   "schemaVersion": "4.2.0",
-  "generatedAt": "2026-10-20T10:48:17.985Z",
+  "generatedAt": "2026-10-22T15:39:32.802Z",
   "sourceStatus": [
     {
-      "id": "3b114290-d1d3-4bbd-a006-69694ae14d2f",
+      "id": "317ec6ff-ddb7-460d-a507-67d5ae8e81b0",
       "connectorId": "authority_requirement_analysis",
       "status": "COMPLETE",
-      "ranAt": "2026-10-20T10:48:17.801Z",
+      "ranAt": "2026-10-22T15:39:32.673Z",
       "recordsImported": 79
     },
     {
-      "id": "cb28d4d8-3df5-4475-85cd-f74867f6a66e",
+      "id": "0432ddf4-80ac-4cc0-8771-bf803abe6730",
       "connectorId": "growth_maintenance_analysis",
       "status": "COMPLETE",
-      "ranAt": "2026-10-20T10:48:17.621Z",
+      "ranAt": "2026-10-22T15:39:32.564Z",
       "recordsImported": 79
     },
     {
-      "id": "7d9371e9-64cd-4c4f-9406-ae4cd772c2f2",
+      "id": "209e0fde-7cba-4588-aaaa-615dd7f27da1",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-10-19T16:57:04.111Z",
+      "ranAt": "2026-10-22T15:06:07.127Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "7198c3b2-490c-4242-80a4-d523f6b1dd7a",
+      "id": "d39f939d-45e1-445a-aaac-e4217ff46e1d",
       "connectorId": "indexnow",
       "status": "NO_DATA",
-      "ranAt": "2026-10-19T16:57:03.992Z",
+      "ranAt": "2026-10-22T15:06:06.964Z",
       "mode": "live",
       "recordsImported": 0,
       "preparedUrlCount": 79
     },
     {
-      "id": "a5296a34-17c4-4a5c-9b73-4e1fa9a8b57e",
+      "id": "5d4f4682-e347-4c06-927e-08140e667e23",
       "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
-      "ranAt": "2026-10-19T15:42:01.101Z",
+      "ranAt": "2026-10-22T13:51:28.124Z",
       "recordsImported": 12
     },
     {
-      "id": "04170bb4-3ba4-4a4c-aee7-38fc85f815a0",
+      "id": "c8305ca6-2e1e-42f2-aa82-9e9088c550f2",
       "connectorId": "manual_social_signal_import",
       "status": "NO_DATA",
-      "ranAt": "2026-10-19T15:41:57.635Z",
+      "ranAt": "2026-10-22T13:51:25.022Z",
       "reason": "No social signal import found at data/imports/social-signals.json.",
       "recordsImported": 0
     },
     {
-      "id": "9dca91a0-3b49-4749-945e-5d4100725c95",
+      "id": "dcb304e8-3aa6-40b9-84ee-782495e123b7",
       "connectorId": "manual_serp_csv",
       "status": "NO_DATA",
-      "ranAt": "2026-10-19T15:41:57.491Z",
+      "ranAt": "2026-10-22T13:51:24.880Z",
       "reason": "No SERP CSV found at data/imports/serp.csv.",
       "recordsImported": 0
     },
     {
-      "id": "0172e029-af2b-4a47-9b3f-36564acfcd0b",
+      "id": "1072319d-041d-4a34-8573-c4d260985949",
       "connectorId": "competitor_public_crawler",
       "status": "COMPLETE",
-      "ranAt": "2026-10-19T15:41:57.349Z",
+      "ranAt": "2026-10-22T13:51:24.735Z",
       "recordsImported": 2
     },
     {
-      "id": "4c6fa577-3898-44dd-8c31-804ebc76e85d",
+      "id": "bc235350-30de-4bc4-a3ac-7d0cdd6eb7ba",
       "connectorId": "competitor_sitemap_discovery",
       "status": "COMPLETE",
-      "ranAt": "2026-10-19T15:41:56.846Z",
+      "ranAt": "2026-10-22T13:51:24.181Z",
       "recordsImported": 2
     },
     {
-      "id": "db6b5216-e4d4-4514-857a-db4e6c006105",
+      "id": "1b3a71ba-7f50-4f65-a221-77e030ecd2d5",
       "connectorId": "owned_site_crawler",
       "status": "COMPLETE",
-      "ranAt": "2026-10-19T15:41:54.842Z",
+      "ranAt": "2026-10-22T13:51:23.188Z",
       "recordsImported": 100
     },
     {
-      "id": "8e41a0af-9bcc-4cf6-b051-787cbc676ef8",
+      "id": "0440cf22-cb0a-4346-a945-97f352c7005c",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-10-19T15:41:54.693Z",
+      "ranAt": "2026-10-22T13:51:23.042Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "2e8a2b43-f8c0-4d3f-a39f-36d7750579ef",
+      "id": "cf05ca4b-f5e3-4cd7-9f5e-614d6ebcffe8",
       "connectorId": "google_url_inspection",
       "status": "BUDGET_HELD",
-      "ranAt": "2026-10-19T15:41:54.502Z",
-      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
+      "ranAt": "2026-10-22T13:51:22.830Z",
+      "reason": "weekly ceiling 2 reached (2 live attempts in 7d)",
       "recordsImported": 0
     },
     {
-      "id": "62315da6-4a8e-484c-84f1-ae538de7f913",
+      "id": "bf112be7-2f1b-4810-930b-20c48355fdc7",
       "connectorId": "google_search_console_search_analytics",
       "status": "BUDGET_HELD",
-      "ranAt": "2026-10-19T15:41:54.186Z",
+      "ranAt": "2026-10-22T13:51:22.510Z",
       "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
       "recordsImported": 0
     },
     {
-      "id": "c8b6d454-91fb-46d5-a117-9135390fefe0",
-      "connectorId": "retest_outcome_evaluator",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-19T14:34:49.620Z",
-      "recordsImported": 0
-    },
-    {
-      "id": "6ea4babd-a003-4a8e-aaa1-5cf55c8c58fb",
-      "connectorId": "retest_queue_builder",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-19T14:34:49.585Z",
-      "recordsImported": 0
-    },
-    {
-      "id": "b4fcac08-0b7c-4efe-a3fa-f4e6585dcc62",
-      "connectorId": "cloudflare_crawler_logs",
+      "id": "bbfc03a8-a2f2-4790-9041-f4f21a13a9fa",
+      "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-10-19T14:34:49.517Z",
-      "reason": "Cloudflare crawler ingestion requires Cloudflare credentials or a manual import file.",
+      "ranAt": "2026-10-21T15:07:55.658Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "d3d45891-eb44-42d8-89d9-61351dcd5e22",
-      "connectorId": "growth_brief_generation",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-19T14:34:49.483Z",
-      "recordsImported": 40
+      "id": "bf0e5b20-8a41-4d89-9bd1-5203269a7c1e",
+      "connectorId": "indexnow",
+      "status": "NO_DATA",
+      "ranAt": "2026-10-21T15:07:55.517Z",
+      "mode": "live",
+      "recordsImported": 0,
+      "preparedUrlCount": 79
     },
     {
-      "id": "1292135d-79ab-4a4c-ac8f-ac8823945af3",
-      "connectorId": "page_action_recommendation",
+      "id": "99cb1ee5-8a27-4175-ac8e-244ad09232c8",
+      "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
-      "ranAt": "2026-10-19T14:34:49.424Z",
-      "recordsImported": 5435
+      "ranAt": "2026-10-21T13:52:53.840Z",
+      "recordsImported": 12
     },
     {
-      "id": "b140eec1-238a-4614-8234-d5e502501a09",
-      "connectorId": "authority_requirement_analysis",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-19T14:34:49.361Z",
-      "recordsImported": 79
+      "id": "6b7c8715-f906-4e0e-b515-9f5f1b8934b1",
+      "connectorId": "manual_social_signal_import",
+      "status": "NO_DATA",
+      "ranAt": "2026-10-21T13:52:52.411Z",
+      "reason": "No social signal import found at data/imports/social-signals.json.",
+      "recordsImported": 0
     },
     {
-      "id": "8f112489-1552-41b6-a6a0-682f0b34cd5c",
-      "connectorId": "growth_maintenance_analysis",
+      "id": "4ea3db93-0b41-4f32-835d-33ee8a67b8e8",
+      "connectorId": "manual_serp_csv",
+      "status": "NO_DATA",
+      "ranAt": "2026-10-21T13:52:52.324Z",
+      "reason": "No SERP CSV found at data/imports/serp.csv.",
+      "recordsImported": 0
+    },
+    {
+      "id": "999aa615-de13-4e40-901f-ba300021a066",
+      "connectorId": "competitor_public_crawler",
       "status": "COMPLETE",
-      "ranAt": "2026-10-19T14:34:49.325Z",
-      "recordsImported": 79
+      "ranAt": "2026-10-21T13:52:52.238Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "e294018c-0799-4b6f-adf6-6518f61a9bb3",
+      "connectorId": "competitor_sitemap_discovery",
+      "status": "COMPLETE",
+      "ranAt": "2026-10-21T13:52:51.794Z",
+      "recordsImported": 2
     }
   ],
   "topContentOpportunities": [
     {
-      "id": "brief_maxfanout_025001_05d1d94de3",
-      "query": "what is letter of explanation for young professionals plain english",
+      "id": "brief_maxfanout_040001_64b37ee0dd",
+      "query": "what is letter of explanation for entrepreneurs self service",
       "route": null,
       "pageFamily": "letter-of-explanation",
       "searchOpportunityScore": 0,
@@ -171,11 +175,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-19T14:34:49.220Z"
+      "createdAt": "2026-10-22T14:35:08.639Z"
     },
     {
-      "id": "brief_maxfanout_025005_78faaf2d0f",
-      "query": "what is self employed income documents for young professionals plain english",
+      "id": "brief_maxfanout_040005_5b08f3409c",
+      "query": "what is self employed income documents for entrepreneurs self service",
       "route": null,
       "pageFamily": "self-employed-income-documents",
       "searchOpportunityScore": 0,
@@ -191,11 +195,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-19T14:34:49.220Z"
+      "createdAt": "2026-10-22T14:35:08.639Z"
     },
     {
-      "id": "brief_maxfanout_025016_db297dacab",
-      "query": "what is gift letter explanation for young professionals plain english",
+      "id": "brief_maxfanout_040016_613d54b5aa",
+      "query": "what is gift letter explanation for entrepreneurs self service",
       "route": null,
       "pageFamily": "gift-letter-explanation",
       "searchOpportunityScore": 0,
@@ -211,11 +215,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-19T14:34:49.220Z"
+      "createdAt": "2026-10-22T14:35:08.639Z"
     },
     {
-      "id": "brief_maxfanout_025026_f1bb5c4151",
-      "query": "what is apartment application documents for young professionals plain english",
+      "id": "brief_maxfanout_040026_9aeb8ccce9",
+      "query": "what is apartment application documents for entrepreneurs self service",
       "route": null,
       "pageFamily": "apartment-application-documents",
       "searchOpportunityScore": 0,
@@ -231,11 +235,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-19T14:34:49.221Z"
+      "createdAt": "2026-10-22T14:35:08.639Z"
     },
     {
-      "id": "brief_maxfanout_025030_89e406c9ec",
-      "query": "what is document discrepancy explanation for young professionals plain english",
+      "id": "brief_maxfanout_040030_aafae229c6",
+      "query": "what is document discrepancy explanation for entrepreneurs self service",
       "route": null,
       "pageFamily": "document-discrepancy-explanation",
       "searchOpportunityScore": 0,
@@ -251,11 +255,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-19T14:34:49.221Z"
+      "createdAt": "2026-10-22T14:35:08.639Z"
     },
     {
-      "id": "brief_maxfanout_025041_b5cee9e814",
-      "query": "how to prepare letter of explanation for young professionals plain english",
+      "id": "brief_maxfanout_040041_7552352474",
+      "query": "how to prepare letter of explanation for entrepreneurs self service",
       "route": null,
       "pageFamily": "letter-of-explanation",
       "searchOpportunityScore": 0,
@@ -271,11 +275,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-19T14:34:49.221Z"
+      "createdAt": "2026-10-22T14:35:08.639Z"
     },
     {
-      "id": "brief_maxfanout_025045_e975fcd45f",
-      "query": "how to prepare self employed income documents for young professionals plain english",
+      "id": "brief_maxfanout_040045_441d0cb236",
+      "query": "how to prepare self employed income documents for entrepreneurs self service",
       "route": null,
       "pageFamily": "self-employed-income-documents",
       "searchOpportunityScore": 0,
@@ -291,11 +295,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-19T14:34:49.221Z"
+      "createdAt": "2026-10-22T14:35:08.641Z"
     },
     {
-      "id": "brief_maxfanout_025056_64522c405b",
-      "query": "how to prepare gift letter explanation for young professionals plain english",
+      "id": "brief_maxfanout_040056_6105dfce1d",
+      "query": "how to prepare gift letter explanation for entrepreneurs self service",
       "route": null,
       "pageFamily": "gift-letter-explanation",
       "searchOpportunityScore": 0,
@@ -311,11 +315,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-19T14:34:49.222Z"
+      "createdAt": "2026-10-22T14:35:08.641Z"
     },
     {
-      "id": "brief_maxfanout_025066_db728f23d9",
-      "query": "how to prepare apartment application documents for young professionals plain english",
+      "id": "brief_maxfanout_040066_7f90f66d2f",
+      "query": "how to prepare apartment application documents for entrepreneurs self service",
       "route": null,
       "pageFamily": "apartment-application-documents",
       "searchOpportunityScore": 0,
@@ -331,11 +335,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-19T14:34:49.222Z"
+      "createdAt": "2026-10-22T14:35:08.641Z"
     },
     {
-      "id": "brief_maxfanout_025070_e08c314ab1",
-      "query": "how to prepare document discrepancy explanation for young professionals plain english",
+      "id": "brief_maxfanout_040070_142ac3c6e3",
+      "query": "how to prepare document discrepancy explanation for entrepreneurs self service",
       "route": null,
       "pageFamily": "document-discrepancy-explanation",
       "searchOpportunityScore": 0,
@@ -351,11 +355,11 @@
       "bestFormat": "faq_or_section",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-19T14:34:49.222Z"
+      "createdAt": "2026-10-22T14:35:08.641Z"
     },
     {
-      "id": "brief_maxfanout_025081_9cefcfee91",
-      "query": "letter of explanation checklist for young professionals plain english",
+      "id": "brief_maxfanout_040081_191b0cce52",
+      "query": "letter of explanation checklist for entrepreneurs self service",
       "route": null,
       "pageFamily": "letter-of-explanation",
       "searchOpportunityScore": 0,
@@ -371,11 +375,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-10-19T14:34:49.222Z"
+      "createdAt": "2026-10-22T14:35:08.641Z"
     },
     {
-      "id": "brief_maxfanout_025083_586715b1b4",
-      "query": "rental application preparation checklist for young professionals plain english",
+      "id": "brief_maxfanout_040083_f6470dbf78",
+      "query": "rental application preparation checklist for entrepreneurs self service",
       "route": null,
       "pageFamily": "rental-application-preparation",
       "searchOpportunityScore": 0,
@@ -391,11 +395,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-19T14:34:49.223Z"
+      "createdAt": "2026-10-22T14:35:08.641Z"
     },
     {
-      "id": "brief_maxfanout_025084_ef7a0e4678",
-      "query": "proof of income checklist for young professionals plain english",
+      "id": "brief_maxfanout_040084_4f20c16bb1",
+      "query": "proof of income checklist for entrepreneurs self service",
       "route": null,
       "pageFamily": "proof-of-income",
       "searchOpportunityScore": 0,
@@ -411,11 +415,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-10-19T14:34:49.223Z"
+      "createdAt": "2026-10-22T14:35:08.641Z"
     },
     {
-      "id": "brief_maxfanout_025085_326dd4b47f",
-      "query": "self employed income documents checklist for young professionals plain english",
+      "id": "brief_maxfanout_040085_2018b99b28",
+      "query": "self employed income documents checklist for entrepreneurs self service",
       "route": null,
       "pageFamily": "self-employed-income-documents",
       "searchOpportunityScore": 0,
@@ -431,11 +435,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-19T14:34:49.223Z"
+      "createdAt": "2026-10-22T14:35:08.641Z"
     },
     {
-      "id": "brief_maxfanout_025090_721e744971",
-      "query": "credit report understanding checklist for young professionals plain english",
+      "id": "brief_maxfanout_040090_5196ff22d3",
+      "query": "credit report understanding checklist for entrepreneurs self service",
       "route": null,
       "pageFamily": "credit-report-understanding",
       "searchOpportunityScore": 0,
@@ -451,11 +455,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-19T14:34:49.223Z"
+      "createdAt": "2026-10-22T14:35:08.641Z"
     },
     {
-      "id": "brief_maxfanout_025091_1e90ad4b36",
-      "query": "credit dispute self service checklist for young professionals plain english",
+      "id": "brief_maxfanout_040091_7c74005876",
+      "query": "credit dispute self service checklist for entrepreneurs",
       "route": null,
       "pageFamily": "credit-dispute-self-service",
       "searchOpportunityScore": 0,
@@ -471,11 +475,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-19T14:34:49.223Z"
+      "createdAt": "2026-10-22T14:35:08.641Z"
     },
     {
-      "id": "brief_maxfanout_025092_8091e1acc5",
-      "query": "credit utilization checklist for young professionals plain english",
+      "id": "brief_maxfanout_040092_4b5cea6166",
+      "query": "credit utilization checklist for entrepreneurs self service",
       "route": null,
       "pageFamily": "credit-utilization",
       "searchOpportunityScore": 0,
@@ -491,11 +495,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-19T14:34:49.223Z"
+      "createdAt": "2026-10-22T14:35:08.641Z"
     },
     {
-      "id": "brief_maxfanout_025096_f3ff0fc576",
-      "query": "gift letter explanation checklist for young professionals plain english",
+      "id": "brief_maxfanout_040096_178b158750",
+      "query": "gift letter explanation checklist for entrepreneurs self service",
       "route": null,
       "pageFamily": "gift-letter-explanation",
       "searchOpportunityScore": 0,
@@ -511,11 +515,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-10-19T14:34:49.223Z"
+      "createdAt": "2026-10-22T14:35:08.641Z"
     },
     {
-      "id": "brief_maxfanout_025098_d933e795dc",
-      "query": "address history explanation checklist for young professionals plain english",
+      "id": "brief_maxfanout_040098_41d90ad274",
+      "query": "address history explanation checklist for entrepreneurs self service",
       "route": null,
       "pageFamily": "address-history-explanation",
       "searchOpportunityScore": 0,
@@ -531,11 +535,11 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": false,
       "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-10-19T14:34:49.223Z"
+      "createdAt": "2026-10-22T14:35:08.641Z"
     },
     {
-      "id": "brief_maxfanout_025099_b8f14f2825",
-      "query": "income change explanation checklist for young professionals plain english",
+      "id": "brief_maxfanout_040099_5e7efc4060",
+      "query": "income change explanation checklist for entrepreneurs self service",
       "route": null,
       "pageFamily": "income-change-explanation",
       "searchOpportunityScore": 0,
@@ -551,7 +555,7 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-10-19T14:34:49.223Z"
+      "createdAt": "2026-10-22T14:35:08.641Z"
     }
   ],
   "rankingBasis": {
@@ -575,7 +579,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-20T10:48:17.618Z"
+      "createdAt": "2026-10-22T15:39:32.562Z"
     },
     {
       "route": "/blog",
@@ -591,7 +595,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-20T10:48:17.618Z"
+      "createdAt": "2026-10-22T15:39:32.562Z"
     },
     {
       "route": "/pricing",
@@ -607,7 +611,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-20T10:48:17.618Z"
+      "createdAt": "2026-10-22T15:39:32.562Z"
     },
     {
       "route": "/letter-of-explanation",
@@ -623,7 +627,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-20T10:48:17.618Z"
+      "createdAt": "2026-10-22T15:39:32.562Z"
     },
     {
       "route": "/letter-of-explanation/credit",
@@ -639,7 +643,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-10-20T10:48:17.618Z"
+      "createdAt": "2026-10-22T15:39:32.562Z"
     },
     {
       "route": "/letter-of-explanation/eviction",
@@ -655,7 +659,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-20T10:48:17.618Z"
+      "createdAt": "2026-10-22T15:39:32.562Z"
     },
     {
       "route": "/letter-of-explanation/income",
@@ -671,7 +675,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-10-20T10:48:17.618Z"
+      "createdAt": "2026-10-22T15:39:32.562Z"
     },
     {
       "route": "/letter-of-explanation/employment-gap",
@@ -687,7 +691,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-10-20T10:48:17.618Z"
+      "createdAt": "2026-10-22T15:39:32.562Z"
     },
     {
       "route": "/609-dispute-letter",
@@ -703,7 +707,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-10-20T10:48:17.618Z"
+      "createdAt": "2026-10-22T15:39:32.562Z"
     },
     {
       "route": "/goodwill-letter-to-remove-late-payment",
@@ -719,7 +723,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-20T10:48:17.618Z"
+      "createdAt": "2026-10-22T15:39:32.562Z"
     },
     {
       "route": "/letter-of-explanation/late-payment",
@@ -735,7 +739,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-20T10:48:17.618Z"
+      "createdAt": "2026-10-22T15:39:32.562Z"
     },
     {
       "route": "/letter-of-explanation/large-deposit",
@@ -751,7 +755,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-20T10:48:17.618Z"
+      "createdAt": "2026-10-22T15:39:32.562Z"
     },
     {
       "route": "/proof-of-income-letter",
@@ -767,7 +771,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-10-20T10:48:17.618Z"
+      "createdAt": "2026-10-22T15:39:32.562Z"
     },
     {
       "route": "/credit-dispute-letter",
@@ -783,7 +787,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-10-20T10:48:17.618Z"
+      "createdAt": "2026-10-22T15:39:32.562Z"
     },
     {
       "route": "/apartment-application",
@@ -799,7 +803,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-20T10:48:17.618Z"
+      "createdAt": "2026-10-22T15:39:32.562Z"
     },
     {
       "route": "/rental-application-checklist",
@@ -815,7 +819,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-20T10:48:17.618Z"
+      "createdAt": "2026-10-22T15:39:32.562Z"
     },
     {
       "route": "/auto-loan-documents",
@@ -831,7 +835,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-20T10:48:17.618Z"
+      "createdAt": "2026-10-22T15:39:32.562Z"
     },
     {
       "route": "/car-loan-checklist",
@@ -847,7 +851,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-20T10:48:17.618Z"
+      "createdAt": "2026-10-22T15:39:32.562Z"
     },
     {
       "route": "/documents-needed-for-car-loan",
@@ -863,7 +867,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-20T10:48:17.618Z"
+      "createdAt": "2026-10-22T15:39:32.562Z"
     },
     {
       "route": "/sba-loan-checklist",
@@ -879,7 +883,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-10-20T10:48:17.618Z"
+      "createdAt": "2026-10-22T15:39:32.562Z"
     }
   ],
   "hardTruth": "Low ranking potential never blocks useful onsite content. It only changes indexing, priority, and authority strategy."
