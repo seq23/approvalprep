@@ -54,10 +54,18 @@ jobs:
         # sitemaps.list record (submitted if missing), then the measured target
         # set from the 28-day GSC rows just collected. Each writes a NAMED STOP
         # rather than an empty success when Search Console refuses.
+        #
+        # gsc-truth runs last and runs unconditionally: it joins the 28-day rows
+        # to the query history into data/search_intelligence/gsc_truth.json and
+        # records, in the committed file, whether today's collection happened.
+        # Before it existed a held connector left the last good snapshot in
+        # place and the log went green, so a lane collecting three days in seven
+        # looked exactly like one collecting daily.
         run: |
           npm run search-intelligence:index-coverage
           npm run search-intelligence:sitemaps
           npm run search-intelligence:targets
+          npm run search-intelligence:gsc-truth
         env:
           GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
       - name: Build and record consolidation candidates

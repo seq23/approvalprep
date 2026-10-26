@@ -5,13 +5,18 @@
 // ignores them. The page's own title (H1, og:title, breadcrumbs) is unchanged;
 // only the <title> element is fitted here, in the one layout every page uses.
 //
+// The band is 30-65 characters. Bing truncates past 70; Google's result line
+// and the Search Readiness checklist (item b1, 25 Oct 2026) stop at 65, and
+// three approvalprep.com titles - the homepage and two blog answers - were
+// 67-70. 65 is the tighter of the two limits, so it is the one enforced.
+//
 // Order: keep the full title when it fits; otherwise drop the site suffix; then,
 // if the subject alone is still too long, keep its head before ": " when that
 // head is a whole phrase of at least 30 characters. A title that cannot be fitted
 // this way fails the build rather than shipping an over-long title.
 // scripts/validate/title-length.mjs asserts the result on every built page.
 
-export const TITLE_MAX = 70;
+export const TITLE_MAX = 65;
 export const TITLE_HEAD_MIN = 30;
 const SUFFIX = /\s+-\s+ApprovalPrep(?:\s+Blog)?\s*$/;
 const SHORT_SUFFIX = " - ApprovalPrep";

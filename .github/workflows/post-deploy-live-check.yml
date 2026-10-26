@@ -1,0 +1,49 @@
+name: Post-deploy live check
+
+# What the edge serves, not what the build produced.
+#
+# Cloudflare Pages deploys this site from main on its own, so there is no deploy
+# job here to hang a dependency off: this runs shortly after the daily release
+# lanes have landed and deployed, and on demand. It makes no commit and needs no
+# secret - it only reads the public site.
+#
+# A red run means production is serving something the build did not: a crawl
+# file redirecting, a brand file 404ing, a measured URL answering 308, or the
+# homepage's entity graph missing at the edge. Fix it at source and land the fix;
+# nothing here retries past that.
+on:
+  workflow_dispatch:
+    inputs:
+      base_url:
+        description: "Origin to check (defaults to https://approvalprep.com)"
+        required: false
+        default: "https://approvalprep.com"
+  schedule:
+    # 14:40 UTC, after the daily ingest (08:17) and the scheduled release have
+    # landed on main and Cloudflare Pages has rebuilt from it.
+    - cron: "40 14 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: approvalprep-post-deploy-live-check
+  cancel-in-progress: true
+
+jobs:
+  live-check:
+    runs-on: ubuntu-24.04
+    # A fault detector, not a budget: the check makes ~30 sequential requests
+    # with one retry each, normally under a minute.
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22.12.0
+      - name: Check the live site
+        run: npm run ops:post-deploy-live-check -- --base "${BASE_URL}"
+        env:
+          BASE_URL: ${{ github.event.inputs.base_url || 'https://approvalprep.com' }}

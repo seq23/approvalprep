@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Every built page's <title> must be non-empty and at most 70 characters, and
+// Every built page's <title> must be non-empty and at most 65 characters, and
 // no two indexable pages may share one. Every indexable page's <title> must be
 // at least 30 characters, and its meta description must exist, be 110-160
 // characters, and be unique among indexable pages.
@@ -8,6 +8,11 @@
 // approvalprep.com pages: blog answers ("<question> - ApprovalPrep Blog") and
 // the reports ("<report title> - ApprovalPrep") ran past 70 characters. The fix
 // lives in src/lib/title.ts (fitTitle, applied in BaseLayout).
+//
+// The ceiling came down from 70 to 65 on 26 Oct 2026: the Search Readiness
+// checklist (item b1) bands the title at 30-65, and the live site had eleven
+// pages between 66 and 70 - the homepage among them. src/lib/title.ts holds the
+// same constant; this asserts the shipped HTML against it.
 //
 // A crawl of all 106 sitemap URLs the same day found the other side of the
 // band: 11 titles under 30 characters ("Contact - ApprovalPrep"), 10 meta
@@ -27,7 +32,7 @@ import { root, walk, fail, requireBuildOutput } from "./_common.mjs";
 
 const NAME = "title-length";
 const TITLE_MIN = 30;
-const TITLE_MAX = 70;
+const TITLE_MAX = 65;
 const DESCRIPTION_MIN = 110;
 const DESCRIPTION_MAX = 160;
 const outDir = requireBuildOutput(NAME);
