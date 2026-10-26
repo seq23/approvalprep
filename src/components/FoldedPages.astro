@@ -1,0 +1,42 @@
+---
+/**
+ * Content from thin report and template pages consolidated into this hub
+ * (data/search_intelligence/consolidation_candidates.json, brief 3 of
+ * 25 Oct 2026). Each retired page 301s here, so its authored text is rendered
+ * here verbatim rather than lost. Nothing is composed: headings, bodies and
+ * preview steps are the registry records' own fields. A hub with nothing folded
+ * into it renders nothing.
+ */
+import reportRegistry from "../../data/reports/public_report_registry.json";
+import templateRegistry from "../../data/templates/template_registry.json";
+import { internalHref } from "../lib/schema";
+const { path } = Astro.props;
+const folded = (item) => item.status === "consolidated_into_hub" && item.consolidatedInto === path;
+const reports = reportRegistry.reports.filter(folded);
+const templates = templateRegistry.templates.filter(folded);
+---
+{(reports.length > 0 || templates.length > 0) && (
+  <section class="band" data-content-block="folded-pages">
+    <div class="shell">
+      {reports.map((report) => (
+        <article class="copy-stack" data-folded-from={report.id}>
+          <p class="eyebrow">Prep report</p>
+          <h2>{report.title}</h2>
+          <p>{report.summary}</p>
+          {(report.sections || []).map((section) => (<><h3>{section.heading}</h3><p>{section.body}</p></>))}
+          {report.methodology && <p><em>{report.methodology}</em></p>}
+        </article>
+      ))}
+      {templates.map((template) => (
+        <article class="copy-stack" data-folded-from={template.id}>
+          <p class="eyebrow">Template guidance</p>
+          <h2>{template.title}</h2>
+          <p>{template.summary}</p>
+          <ol>{(template.safePreview || []).map((step) => <li>{step}</li>)}</ol>
+          <p>{template.paidBoundary}</p>
+          {template.targetProductSku && <a class="button secondary-button" href={internalHref(`/pricing#${template.targetProductSku}`)}>Get the editable kit</a>}
+        </article>
+      ))}
+    </div>
+  </section>
+)}

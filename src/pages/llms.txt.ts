@@ -23,7 +23,7 @@ ${coreRoutes.map((route) => `- ${canonicalUrl(route.path)} - ${route.title} - ${
 
 Free tools and template previews:
 ${toolRegistry.tools.slice(0, 6).map((tool) => `- ${canonicalUrl(tool.path)} - ${tool.title}`).join("\n")}
-${templateRegistry.templates.slice(0, 5).map((template) => `- ${canonicalUrl(template.path)} - ${template.title}`).join("\n")}
+${templateRegistry.templates.filter((template) => template.status === "published_by_contract").slice(0, 5).map((template) => `- ${canonicalUrl(template.path)} - ${template.title}`).join("\n")}
 
 Citation-ready answer atoms:
 ${atoms.atoms.slice(0, 12).map((atom) => `- ${atom.title}: ${atom.text}`).join("\n")}

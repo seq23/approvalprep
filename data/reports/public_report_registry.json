@@ -58,7 +58,7 @@
       "id": "apartment-application-prep-report",
       "path": "/reports/apartment-application-prep-report",
       "title": "Apartment Application Prep Report",
-      "status": "published_by_contract",
+      "status": "consolidated_into_hub",
       "risk": "medium",
       "primaryQuery": "apartment application preparation report",
       "summary": "A public report on the paperwork renters should organize before an apartment application: identity, income proof, rental history, and explanation letters.",
@@ -86,13 +86,15 @@
         "/rental-application-checklist",
         "/templates/rental/rental-application-cover-letter"
       ],
-      "targetProductSku": "rental-application-kit"
+      "targetProductSku": "rental-application-kit",
+      "consolidatedInto": "/how-to-get-approved-for-an-apartment",
+      "consolidatedAt": "2026-10-26"
     },
     {
       "id": "small-business-funding-document-prep-report",
       "path": "/reports/small-business-funding-document-prep-report",
       "title": "Small Business Funding Document Prep Report",
-      "status": "published_by_contract",
+      "status": "consolidated_into_hub",
       "risk": "medium",
       "primaryQuery": "business funding document preparation report",
       "summary": "A public report explaining the document-prep areas small businesses can organize before funding conversations.",
@@ -120,7 +122,9 @@
         "/sba-loan-checklist",
         "/tools/business-funding-document-checklist"
       ],
-      "targetProductSku": "business-funding-prep-kit"
+      "targetProductSku": "business-funding-prep-kit",
+      "consolidatedInto": "/business-loan-documents",
+      "consolidatedAt": "2026-10-26"
     }
   ]
 }

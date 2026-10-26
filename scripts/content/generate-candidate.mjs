@@ -88,6 +88,10 @@ const routeCopy = loadRouteCopy();
 const lowRiskRoutes = manifest.routes
   .filter((route) => route.type === "public" && route.index && route.path !== "/" && route.risk === "low")
   .filter(isAnswerableRoute)
+  // A hub that absorbed its thin /blog/ answers (foldedIntoHub) must not grow new
+  // ones: each would be another sub-600-word page on the same subject, the exact
+  // pattern the consolidation removed.
+  .filter((route) => !existingAnswers.some((answer) => answer.foldedIntoHub === true && answer.redirectTarget === route.path))
   .sort((a, b) => manifest.routes.indexOf(a) - manifest.routes.indexOf(b));
 
 // A generator that silently selects nothing publishes nothing and reports

@@ -16,6 +16,12 @@
  * `approval_required` records. Only `published_by_contract` is live content, and
  * surfacing either of the others would publish material the release contract has
  * not cleared.
+ *
+ * One exception: a retired record carrying `foldedIntoHub: true` was a thin
+ * /blog/ page consolidated into the hub it was written about (data/search_
+ * intelligence/consolidation_candidates.json). Its URL now 301s to that hub, so
+ * the hub is the only place its question and answer can live. It renders there
+ * with no "Read the full answer" link, because that link would be a redirect.
  */
 import answersData from "../../data/content/generated_answers.json";
 
@@ -32,10 +38,11 @@ const toSlug = (value: string) =>
 
 export function routeAnswers(route: string): RouteAnswer[] {
   return answersData.answers
-    .filter((a: any) => a.status === "published_by_contract" && a.route === route)
+    .filter((a: any) => (a.status === "published_by_contract" && a.route === route)
+      || (a.status === "redirected_to_canonical" && a.foldedIntoHub === true && a.redirectTarget === route))
     .map((a: any) => ({
       question: a.title,
       answer: a.answer,
-      href: `/blog/${toSlug(a.title)}`
+      href: a.status === "published_by_contract" ? `/blog/${toSlug(a.title)}` : ""
     }));
 }
