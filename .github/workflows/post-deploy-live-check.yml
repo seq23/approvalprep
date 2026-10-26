@@ -18,6 +18,10 @@ on:
         description: "Origin to check (defaults to https://approvalprep.com)"
         required: false
         default: "https://approvalprep.com"
+      fixture_trace:
+        description: "Run fixture workflow data trace only"
+        required: false
+        default: "false"
   schedule:
     # 14:40 UTC, after the daily ingest (08:17) and the scheduled release have
     # landed on main and Cloudflare Pages has rebuilt from it.
@@ -43,7 +47,11 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 22.12.0
+      - name: Run fixture workflow trace
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
+        run: npm run workflows:trace -- --workflow post-deploy-live-check.yml
       - name: Check the live site
+        if: ${{ github.event.inputs.fixture_trace != 'true' }}
         run: npm run ops:post-deploy-live-check -- --base "${BASE_URL}"
         env:
           BASE_URL: ${{ github.event.inputs.base_url || 'https://approvalprep.com' }}
