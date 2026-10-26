@@ -34,7 +34,7 @@ Not for: ${(product.not_for || product.notFor || []).join("; ")}
 `).join("\n")}
 
 ## Routes
-${routes.routes.filter((route) => route.type !== "admin").map((route) => `- ${canonicalUrl(route.path)} | ${route.title} | family=${route.family} | risk=${route.risk} | index=${route.index}`).join("\n")}
+${routes.routes.filter((route) => route.type !== "admin" && !route.consolidatedInto).map((route) => `- ${canonicalUrl(route.path)} | ${route.title} | family=${route.family} | risk=${route.risk} | index=${route.index}`).join("\n")}
 
 ## Answer Atoms
 ${atoms.atoms.map((atom) => `### ${atom.title}

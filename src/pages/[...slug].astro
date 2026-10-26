@@ -27,6 +27,8 @@ import PricingDeck from "../components/PricingDeck.astro";
 import GuidePlaybook from "../components/GuidePlaybook.astro";
 import LegalPolicyPage from "../components/LegalPolicyPage.astro";
 import RelatedContent from "../components/RelatedContent.astro";
+import FoldedPages from "../components/FoldedPages.astro";
+import { routeAnswers } from "../lib/routeAnswers";
 import RecommendationSummary from "../components/RecommendationSummary.astro";
 import manifest from "../../data/routes/route_manifest.json";
 import demandCoverage from "../../data/content/demand_coverage_pages.json";
@@ -83,7 +85,9 @@ const primarySku = (route.cta_policy === "purchase" || priorityEntry) ? skuForRo
 // title, H1 and query FAQ (data/content/priority_pages.json, validate:query-aligned-pages).
 const pageTitle = priorityEntry?.metaTitle || copy.metaTitle || `${route.title} - ApprovalPrep`;
 const pageHeading = priorityEntry?.h1 || copy.heading;
-const pageFaq = [...(priorityEntry?.query_faq || []), ...(copy.faq || [])];
+// Answers folded in from retired thin /blog/ pages (src/lib/routeAnswers.ts) join
+// the page's own FAQ, so the visible block and the FAQPage schema stay one list.
+const pageFaq = [...(priorityEntry?.query_faq || []), ...(copy.faq || []), ...routeAnswers(route.path).map(({ question, answer }) => ({ question, answer }))];
 const routeProduct = productForSku(skuForRoute);
 const routeOfferings = offeringsForSku(skuForRoute);
 const isCommercial = route.cta_policy === "purchase" || route.page_intent === "product";
@@ -284,6 +288,7 @@ const childRoutes = manifest.routes
       link set for every one of these routes, and this page imported the component that
       renders it without ever placing it. The guides, checklists and kits it points at
       were therefore reachable only from the sitemap. */}
+  <FoldedPages path={route.path} />
   <RelatedContent path={route.path} title={`Keep preparing after ${route.title}`} />
   {!isLegal && <FinalCTA primary={primaryCtaWithPrice} secondary={copy.secondaryCta} href={internalHref(ctaHref)} secondaryHref="/pricing" primarySku={primarySku} />}
   {/* FAQPage and HowTo describe the FAQBlock and HowItWorks rendered in the guide

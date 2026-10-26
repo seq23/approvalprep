@@ -1385,6 +1385,17 @@
       "scope": "Every URL the build emits: hrefs and JSON-LD url/item/@id in dist/*.html, the URLs in llms.txt, llms-full.txt, feed.xml and the JSON indexes, and the destinations in public/_redirects. Hard-fails when it examines zero URLs."
     },
     {
+      "id": "no-redirected-discovery-urls",
+      "npmScript": "validate:no-redirected-discovery-urls",
+      "entrypoint": "scripts/validate/no-redirected-discovery-urls.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "consolidation brief 3 301'd 27 thin pages into 14 hubs; a sitemap entry or Pinterest pin still naming one of those sources hands crawlers and pinners a redirect instead of the hub holding the content",
+      "owner": "approvalprep-ops",
+      "group": "release-critical",
+      "scope": "Every <loc> in public/sitemap.xml and every same-site path/url/link field in data/pinterest/queue.json and pinfeed.json, checked against the sources in data/routes/redirects.json. Hard-fails when it examines zero sitemap or Pinterest URLs."
+    },
+    {
       "id": "outbound-link-health",
       "npmScript": "validate:outbound-link-health",
       "entrypoint": "scripts/validate/outbound-link-health.mjs",

@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "orchestratorSource": "_repo_validation_registry.json",
-  "validatorCount": 146,
-  "hardFailCount": 135,
+  "validatorCount": 147,
+  "hardFailCount": 136,
   "strongWarningCount": 11,
   "validators": [
     {
@@ -1132,6 +1132,15 @@
     },
     {
       "order": 126,
+      "id": "no-redirected-discovery-urls",
+      "npmScript": "validate:no-redirected-discovery-urls",
+      "entrypoint": "scripts/validate/no-redirected-discovery-urls.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "release-critical"
+    },
+    {
+      "order": 127,
       "id": "outbound-link-health",
       "npmScript": "validate:outbound-link-health",
       "entrypoint": "scripts/validate/outbound-link-health.mjs",
@@ -1140,7 +1149,7 @@
       "group": "release-critical"
     },
     {
-      "order": 127,
+      "order": 128,
       "id": "answer-page-subject",
       "npmScript": "validate:answer-page-subject",
       "entrypoint": "scripts/validate/answer-page-subject.mjs",
@@ -1149,7 +1158,7 @@
       "group": "citation-os-batch-1"
     },
     {
-      "order": 128,
+      "order": 129,
       "id": "download-key-contract",
       "npmScript": "validate:download-key-contract",
       "entrypoint": "scripts/validate/download-key-contract.mjs",
@@ -1158,7 +1167,7 @@
       "group": "conversion-critical"
     },
     {
-      "order": 129,
+      "order": 130,
       "id": "script-callers",
       "npmScript": "validate:script-callers",
       "entrypoint": "scripts/validate/script-callers.mjs",
@@ -1167,7 +1176,7 @@
       "group": "ops-critical"
     },
     {
-      "order": 130,
+      "order": 131,
       "id": "amazon-book-landing-pages",
       "npmScript": "validate:amazon-book-landing-pages",
       "entrypoint": "scripts/validate/amazon-book-landing-pages.mjs",
@@ -1176,7 +1185,7 @@
       "group": "conversion-critical"
     },
     {
-      "order": 131,
+      "order": 132,
       "id": "seo-hygiene-favicon",
       "npmScript": "validate:seo-hygiene:favicon",
       "entrypoint": "scripts/validate/seo-hygiene.mjs",
@@ -1185,7 +1194,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 132,
+      "order": 133,
       "id": "seo-hygiene-og-image",
       "npmScript": "validate:seo-hygiene:og-image",
       "entrypoint": "scripts/validate/seo-hygiene.mjs",
@@ -1194,7 +1203,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 133,
+      "order": 134,
       "id": "seo-hygiene-jsonld",
       "npmScript": "validate:seo-hygiene:jsonld",
       "entrypoint": "scripts/validate/seo-hygiene.mjs",
@@ -1203,7 +1212,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 134,
+      "order": 135,
       "id": "seo-hygiene-definition",
       "npmScript": "validate:seo-hygiene:definition",
       "entrypoint": "scripts/validate/seo-hygiene.mjs",
@@ -1212,7 +1221,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 135,
+      "order": 136,
       "id": "seo-hygiene-indexability",
       "npmScript": "validate:seo-hygiene:indexability",
       "entrypoint": "scripts/validate/seo-hygiene.mjs",
@@ -1221,7 +1230,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 136,
+      "order": 137,
       "id": "seo-hygiene-indexnow",
       "npmScript": "validate:seo-hygiene:indexnow",
       "entrypoint": "scripts/validate/seo-hygiene.mjs",
@@ -1230,7 +1239,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 137,
+      "order": 138,
       "id": "index-coverage",
       "npmScript": "validate:index-coverage",
       "entrypoint": "scripts/validate/index-coverage.mjs",
@@ -1239,7 +1248,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 138,
+      "order": 139,
       "id": "target-query-set",
       "npmScript": "validate:target-query-set",
       "entrypoint": "scripts/validate/target-query-set.mjs",
@@ -1248,7 +1257,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 139,
+      "order": 140,
       "id": "gsc-truth",
       "npmScript": "validate:gsc-truth",
       "entrypoint": "scripts/validate/gsc-truth.mjs",
@@ -1257,7 +1266,7 @@
       "group": "ops-critical"
     },
     {
-      "order": 140,
+      "order": 141,
       "id": "consolidation-candidates",
       "npmScript": "validate:consolidation-candidates",
       "entrypoint": "scripts/validate/consolidation-candidates.mjs",
@@ -1266,7 +1275,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 141,
+      "order": 142,
       "id": "derived-ledger-lanes",
       "npmScript": "validate:derived-ledger-lanes",
       "entrypoint": "scripts/validate/derived-ledger-lanes.mjs",
@@ -1275,7 +1284,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 142,
+      "order": 143,
       "id": "publication-freeze",
       "npmScript": "validate:publication-freeze",
       "entrypoint": "scripts/validate/publication-freeze.mjs",
@@ -1284,7 +1293,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 143,
+      "order": 144,
       "id": "query-aligned-pages",
       "npmScript": "validate:query-aligned-pages",
       "entrypoint": "scripts/validate/query-aligned-pages.mjs",
@@ -1293,7 +1302,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 144,
+      "order": 145,
       "id": "kit-page-sells-its-own-kit",
       "npmScript": "validate:kit-page-sells-its-own-kit",
       "entrypoint": "scripts/validate/kit-page-sells-its-own-kit.mjs",
@@ -1302,7 +1311,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 145,
+      "order": 146,
       "id": "pinterest-launch",
       "npmScript": "validate:pinterest-launch",
       "entrypoint": "scripts/validate/pinterest-launch.mjs",
@@ -1311,7 +1320,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 146,
+      "order": 147,
       "id": "pinterest-drip",
       "npmScript": "validate:pinterest-drip",
       "entrypoint": "scripts/validate/pinterest-drip.mjs",

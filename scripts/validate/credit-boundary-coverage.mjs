@@ -89,7 +89,21 @@ for (const route of [...routes, ...answers]) {
   if (!data.families[family]) throw new Error(`[credit-boundary] route ${route} resolves to unknown boundary family '${family}'`);
   covered.push(route);
 }
-if (covered.length < 100) throw new Error(`[credit-boundary] only ${covered.length} routes resolved a boundary family; expected the full published surface`);
+// The floor used to be a fixed 100. Consolidation brief 3 (26 Oct 2026) folded
+// 20 thin /blog/ answers into their hubs, so the published surface honestly
+// shrank below it. A fixed number is the wrong pin either way: it passes when a
+// published page silently loses coverage as long as enough others remain. The
+// pins now are the surface itself: every URL in public/sitemap.xml must be a
+// resolved route here AND a built page carrying the block (checked below), and
+// the resolved set can never be smaller than the sitemap.
+const sitemapPaths = [...fs.readFileSync("public/sitemap.xml", "utf8").matchAll(/<loc>https:\/\/approvalprep\.com([^<]*)<\/loc>/g)]
+  .map((m) => m[1].replace(/\/+$/, "") || "/")
+  .filter((route) => !excluded.has(route));
+if (!sitemapPaths.length) throw new Error("[credit-boundary] public/sitemap.xml lists 0 URLs; nothing defines the published surface");
+const coveredSet = new Set(covered.map((route) => route.replace(/\/+$/, "") || "/"));
+const unresolved = sitemapPaths.filter((route) => !coveredSet.has(route));
+if (unresolved.length) throw new Error(`[credit-boundary] ${unresolved.length} sitemap URL(s) resolved no boundary family: ${unresolved.slice(0, 10).join(", ")}`);
+if (covered.length < sitemapPaths.length) throw new Error(`[credit-boundary] only ${covered.length} routes resolved a boundary family; the sitemap publishes ${sitemapPaths.length}`);
 
 // Confirm the block really reached the HTML rather than trusting that the layout
 // wiring did its job.
@@ -102,6 +116,7 @@ if (covered.length < 100) throw new Error(`[credit-boundary] only ${covered.leng
 // that runs it; requiring it turns a silent skip into a named failure.
 const DIST = requireBuildOutput("credit-boundary-coverage");
 let distChecked = 0;
+const builtWithBlock = new Set();
 {
   const walk = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
     const next = path.join(dir, e.name);
@@ -116,9 +131,11 @@ let distChecked = 0;
     if (excluded.has(clean) || clean === "/404.html") continue;
     const html = fs.readFileSync(file, "utf8");
     if (!html.includes("data-boundary-block")) missing.push(clean);
-    else distChecked += 1;
+    else { distChecked += 1; builtWithBlock.add(clean); }
   }
   if (missing.length) throw new Error(`[credit-boundary] ${missing.length} built page(s) missing the professional boundary block: ${missing.slice(0, 10).join(", ")}`);
+  const sitemapUnbuilt = sitemapPaths.filter((route) => !builtWithBlock.has(route));
+  if (sitemapUnbuilt.length) throw new Error(`[credit-boundary] ${sitemapUnbuilt.length} sitemap URL(s) have no built page carrying the boundary block: ${sitemapUnbuilt.slice(0, 10).join(", ")}`);
   if (distChecked === 0) throw new Error(`[credit-boundary] zero built pages carried the boundary block check in ${DIST}/ - the published tree is empty or entirely excluded, so this validator verified nothing`);
 }
 
