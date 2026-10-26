@@ -17,7 +17,10 @@ import FreeStudioCTA from "../components/FreeStudioCTA.astro";
 import RecommendationSummary from "../components/RecommendationSummary.astro";
 import OfferingUniverse from "../components/OfferingUniverse.astro";
 import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComparison, offeringCategories } from "../data/content";
-const pageTitle = "ApprovalPrep - Self-Service Credit Repair Letters and Approval Prep";
+// 65 characters is the ceiling (src/lib/title.ts): this ran 67 with the brand
+// twice over, once as the lead word and once inside the phrase. The query leads
+// now and the site name appears once, as the suffix every other page carries.
+const pageTitle = "Self-Service Credit Repair Letters - ApprovalPrep";
 const pageDescription = "Download self-service credit repair letters, explanation letters, rental packets, income proof templates, and approval-prep document kits.";
 // The definition paragraph directly under the H1 is what an answer engine or a
 // voice assistant should read for "what is ApprovalPrep". The speakable selector

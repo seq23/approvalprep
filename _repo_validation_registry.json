@@ -266,10 +266,21 @@
       "entrypoint": "scripts/validate/title-length.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
-      "blockReason": "prevents shipping a <title> over 70 characters, an indexable page with a <title> under 30 characters, a missing meta description or one outside 110-160 characters, or a duplicate title or description between indexable pages - Bing Webmaster Site Scan flagged 20 over-long titles on 25 Sep 2026, and a crawl of the 106 sitemap URLs the same day found 11 short titles, 10 short and 64 long descriptions, and one description shared by 8 blog answers",
+      "blockReason": "prevents shipping a <title> over 65 characters, an indexable page with a <title> under 30 characters, a missing meta description or one outside 110-160 characters, or a duplicate title or description between indexable pages - Bing Webmaster Site Scan flagged 20 over-long titles on 25 Sep 2026, and a crawl of the 106 sitemap URLs the same day found 11 short titles, 10 short and 64 long descriptions, and one description shared by 8 blog answers. The ceiling came down from 70 to 65 on 26 Oct 2026 when the Search Readiness checklist (item b1) found eleven live pages between 66 and 70 characters, the homepage among them",
       "owner": "approvalprep-ops",
       "group": "release-critical",
       "scope": "Every built HTML page's <title> element in the published tree, and every indexable page's <title> minimum and meta description"
+    },
+    {
+      "id": "schema-entity-graph",
+      "npmScript": "validate:schema-entity-graph",
+      "entrypoint": "scripts/validate/schema-entity-graph.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents shipping a page whose JSON-LD does not say what entity it belongs to: an Organization without logo and sameAs, a page with no WebPage node, or a homepage with no WebSite. The Search Readiness checklist crawled the live site on 25 Oct 2026 and found all thirteen sampled pages carrying an Organization with name and url only (item c1), and /contact/, /glossary/ and /reports/document-readiness-index/ carrying no WebPage at all (item c2). structured-data asserts that tokens appear in certain .astro sources, so it cannot see what a page ships and stayed green through both",
+      "owner": "approvalprep-ops",
+      "group": "release-critical",
+      "scope": "Every built HTML page's JSON-LD graph in the published tree, except the noindex 404.html: the first Organization node's name, url, logo and sameAs, the presence of a WebPage or a subtype of one, and WebSite on the homepage"
     },
     {
       "id": "demand-backed-pages",
@@ -1515,6 +1526,17 @@
       "owner": "approvalprep-growth",
       "group": "growth-critical",
       "scope": "data/search_intelligence/target_query_set.json measured-only and current"
+    },
+    {
+      "id": "gsc-truth",
+      "npmScript": "validate:gsc-truth",
+      "entrypoint": "scripts/validate/gsc-truth.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents the daily Search Console record going missing, losing its query history, or quietly stopping. The connector's weekly ceiling was 3 against a daily schedule, so it collected about three days in seven - eight times in the twenty days to 25 Oct 2026, with a five-day gap - and recorded BUDGET_HELD on the rest, which is not a failure and left every workflow green. Nothing read the gap, and the Search Readiness checklist (item e4) found no gsc_truth.json in the repo at all. This asserts the file, its shape, a non-empty history, the daily cron and the ceiling that lets it run",
+      "owner": "approvalprep-ops",
+      "group": "ops-critical",
+      "scope": "data/search_intelligence/gsc_truth.json and its two sources, the google_search_console_search_analytics ceilings in data/intelligence/provider_budget.json, and the daily cron and gsc-truth step in intelligence-ingest-free-sources.yml"
     },
     {
       "id": "consolidation-candidates",

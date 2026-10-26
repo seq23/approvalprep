@@ -8,7 +8,7 @@ import AnalyticsEvent from "../components/AnalyticsEvent.astro";
 import Breadcrumbs from "../components/Breadcrumbs.astro";
 import ProfessionalBoundaryBlock from "../components/ProfessionalBoundaryBlock.astro";
 import DemandGuideLinks from "../components/DemandGuideLinks.astro";
-import { titleForPath, canonicalUrl, internalHref, OG_IMAGE } from "../lib/schema";
+import { titleForPath, canonicalUrl, internalHref, OG_IMAGE, organizationNode } from "../lib/schema";
 import { fitTitle } from "../lib/title";
 import { navCta, primaryNav, secondaryNav } from "../data/navigation";
 const { title = "ApprovalPrep", description = "Self-service approval prep tools.", canonical = "https://approvalprep.com", noindex = false, showPrivacyNotice = true, schema = [] } = Astro.props;
@@ -20,6 +20,16 @@ const currentPath = Astro.url.pathname.replace(/\/+$/, "") || "/";
 const crumbTitle = titleForPath(currentPath) || String(title).replace(/\s*-\s*ApprovalPrep\s*$/, "");
 // A page that already publishes its own BreadcrumbList must not get a second one.
 const hasBreadcrumbSchema = (Array.isArray(schema) ? schema : []).some((entry) => entry && entry["@type"] === "BreadcrumbList");
+// Same rule for WebPage. The Search Readiness checklist (item c2, 25 Oct 2026)
+// found /contact/, /glossary/ and /reports/document-readiness-index/ shipping
+// no WebPage at all: each passes its own Article, ItemList or nothing, and the
+// page-to-site relationship an engine attributes with was simply absent. Rather
+// than add one node to three pages and wait for the fourth page to be written
+// without it, the layout every page goes through emits the WebPage, and stands
+// aside for a page that already publishes one or a subtype of one.
+const WEB_PAGE_TYPES = new Set(["WebPage", "AboutPage", "ContactPage", "FAQPage", "CollectionPage", "ItemPage", "ProfilePage", "SearchResultsPage", "QAPage", "CheckoutPage", "RealEstateListing"]);
+const schemaList = Array.isArray(schema) ? schema : schema ? [schema] : [];
+const hasWebPageSchema = schemaList.some((entry) => [].concat(entry?.["@type"] ?? []).some((t) => WEB_PAGE_TYPES.has(String(t))));
 // Normalising here rather than at each call site means a page cannot ship a
 // canonical that names the redirecting URL form, however it built the string.
 const canonicalHref = canonicalUrl(canonical);
@@ -54,7 +64,8 @@ const documentTitle = fitTitle(String(title));
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#0f766e" />
-    <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@type": "Organization", name: "ApprovalPrep", url: "https://approvalprep.com" })}></script>
+    <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", ...organizationNode() })}></script>
+    {!hasWebPageSchema && <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@type": "WebPage", name: documentTitle, description, url: canonicalHref, isPartOf: { "@type": "WebSite", name: "ApprovalPrep", url: canonicalUrl("/") }, publisher: organizationNode() })}></script>}
     <StructuredData schema={schema} />
   </head>
   <body>

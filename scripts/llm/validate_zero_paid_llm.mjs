@@ -222,6 +222,23 @@ if (policy) {
   notes.push(`router behaviour: 11 cases`);
 }
 
+// 7. The rule is written where the next agent reads it ------------------------
+// A policy enforced only by this file is a policy an agent meets after it has
+// already written the paid call. CLAUDE.md is the first file read in this
+// repository, so the rule lives there too - and is asserted here, because a
+// specification no code reads is a wish.
+const RULE_DOC = 'docs/cost/zero-paid-llm.md';
+const AGENT_DOC = 'CLAUDE.md';
+for (const f of [RULE_DOC, AGENT_DOC]) if (!fs.existsSync(path.join(ROOT, f))) errors.push(`rule: ${f} is missing`);
+if (fs.existsSync(path.join(ROOT, AGENT_DOC))) {
+  const claudeMd = fs.readFileSync(path.join(ROOT, AGENT_DOC), 'utf8');
+  if (!/nothing paid/i.test(claudeMd)) errors.push(`rule: ${AGENT_DOC} does not say "nothing paid"`);
+  if (!claudeMd.includes(RULE_DOC)) errors.push(`rule: ${AGENT_DOC} does not point at ${RULE_DOC}`);
+  if (!claudeMd.includes('free_router.mjs')) errors.push(`rule: ${AGENT_DOC} does not name the free router`);
+  if (!claudeMd.includes('validate:zero-paid-llm')) errors.push(`rule: ${AGENT_DOC} does not name the guard that enforces it`);
+  notes.push(`${AGENT_DOC} carries the rule, the doc, the router and this guard`);
+}
+
 if (errors.length) {
   console.error(`zero-paid-llm: FAIL (${errors.length})`);
   for (const e of errors) console.error(` - ${e}`);

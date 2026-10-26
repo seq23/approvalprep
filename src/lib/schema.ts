@@ -53,13 +53,33 @@ export const editorialAuthor = () => ({ "@type": "Organization", name: editorial
 // scripts/validate/seo-hygiene.mjs checks the file's real dimensions match.
 export const OG_IMAGE = { url: `${SITE_ORIGIN}/og.png`, width: 1200, height: 630, alt: "ApprovalPrep: self-service letters and approval-ready documents" };
 
+// The one ApprovalPrep Organization node. Every Organization this site emits -
+// the site-wide node in BaseLayout, orgSchema, and the `publisher` of every
+// WebPage, Article and WebSite - is this object, so an engine that reads any of
+// them reads the same entity.
+//
+// The Search Readiness checklist (item c1, 25 Oct 2026) found Organization on
+// all thirteen sampled pages carrying only name and url: no logo, no sameAs, so
+// nothing tied the pages to one citable thing. `logo` is public/icon-512.png,
+// the 512x512 brand mark seo-hygiene already measures. `sameAs` lists profiles
+// this business really owns and that really answer; add one only after it does.
+export const ORGANIZATION_SAME_AS = ["https://www.pinterest.com/approvalprep/"];
+
+export const organizationNode = () => ({
+  "@type": "Organization",
+  name: "ApprovalPrep",
+  url: canonicalUrl("/"),
+  logo: `${SITE_ORIGIN}/icon-512.png`,
+  sameAs: ORGANIZATION_SAME_AS
+});
+
 export const websiteSchema = () => ({
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "ApprovalPrep",
   url: canonicalUrl("/"),
   inLanguage: "en-US",
-  publisher: { "@type": "Organization", name: "ApprovalPrep", url: canonicalUrl("/") }
+  publisher: organizationNode()
 });
 
 /**
@@ -73,7 +93,7 @@ export const speakableWebPageSchema = ({ title, description, url, cssSelector }:
   speakable: { "@type": "SpeakableSpecification", cssSelector }
 });
 
-export const orgSchema = () => ({ "@context": "https://schema.org", "@type": "Organization", name: "ApprovalPrep", url: canonicalUrl("/") });
+export const orgSchema = () => ({ "@context": "https://schema.org", ...organizationNode() });
 
 export const webPageSchema = ({ title, description, url }: { title: string; description: string; url: string }) => ({
   "@context": "https://schema.org",
@@ -81,7 +101,7 @@ export const webPageSchema = ({ title, description, url }: { title: string; desc
   name: title,
   description,
   url,
-  publisher: { "@type": "Organization", name: "ApprovalPrep", url: "https://approvalprep.com" }
+  publisher: organizationNode()
 });
 
 export const articleSchema = ({ title, description, url, datePublished }: { title: string; description: string; url: string; datePublished?: string }) => ({
@@ -92,7 +112,7 @@ export const articleSchema = ({ title, description, url, datePublished }: { titl
   url,
   datePublished,
   author: editorialAuthor(),
-  publisher: { "@type": "Organization", name: "ApprovalPrep", url: "https://approvalprep.com" }
+  publisher: organizationNode()
 });
 
 export const faqSchema = (faq: Array<{ question: string; answer: string }>) => ({

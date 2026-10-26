@@ -1,14 +1,14 @@
 {
   "schemaVersion": "4.4.0",
-  "generatedAt": "2026-10-19T14:34:50.195Z",
+  "generatedAt": "2026-10-26T04:55:53.002Z",
   "status": "COMPLETE_FIXTURE_TRACE",
-  "workflowCount": 19,
-  "manualReadyCount": 19,
-  "scheduledCount": 14,
+  "workflowCount": 20,
+  "manualReadyCount": 20,
+  "scheduledCount": 15,
   "pushTriggeredCount": 1,
   "pullRequestTriggeredCount": 2,
   "mainWriterCount": 13,
-  "fauxScenarioCount": 153,
+  "fauxScenarioCount": 159,
   "allManualReady": true,
   "allHaveFixtureTraceInput": true,
   "allUsePinnedRunner": true,
@@ -179,6 +179,7 @@
         "validate:final-readiness-ledger",
         "validate:frozen-output-drift",
         "validate:growth-health",
+        "validate:gsc-truth",
         "validate:index-coverage",
         "validate:indexing-provider-ledgers",
         "validate:intelligence-connectors",
@@ -235,6 +236,7 @@
         "validate:runtime-bindings",
         "validate:runtime-product-admin",
         "validate:safe-harbor-autopublish",
+        "validate:schema-entity-graph",
         "validate:script-callers",
         "validate:security",
         "validate:self-heal-honesty",
@@ -416,6 +418,7 @@
         "validate:final-readiness-ledger",
         "validate:frozen-output-drift",
         "validate:growth-health",
+        "validate:gsc-truth",
         "validate:index-coverage",
         "validate:indexing-provider-ledgers",
         "validate:intelligence-connectors",
@@ -472,6 +475,7 @@
         "validate:runtime-bindings",
         "validate:runtime-product-admin",
         "validate:safe-harbor-autopublish",
+        "validate:schema-entity-graph",
         "validate:script-callers",
         "validate:security",
         "validate:self-heal-honesty",
@@ -697,6 +701,7 @@
         "validate:final-readiness-ledger",
         "validate:frozen-output-drift",
         "validate:growth-health",
+        "validate:gsc-truth",
         "validate:index-coverage",
         "validate:indexing-provider-ledgers",
         "validate:intelligence-connectors",
@@ -753,6 +758,7 @@
         "validate:runtime-bindings",
         "validate:runtime-product-admin",
         "validate:safe-harbor-autopublish",
+        "validate:schema-entity-graph",
         "validate:script-callers",
         "validate:security",
         "validate:self-heal-honesty",
@@ -1460,6 +1466,7 @@
         "validate:final-readiness-ledger",
         "validate:frozen-output-drift",
         "validate:growth-health",
+        "validate:gsc-truth",
         "validate:index-coverage",
         "validate:indexing-provider-ledgers",
         "validate:intelligence-connectors",
@@ -1516,6 +1523,7 @@
         "validate:runtime-bindings",
         "validate:runtime-product-admin",
         "validate:safe-harbor-autopublish",
+        "validate:schema-entity-graph",
         "validate:script-callers",
         "validate:security",
         "validate:self-heal-honesty",
@@ -1601,7 +1609,7 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "b36ea7c9492ce24a"
+      "traceId": "fe93d4a2c21fc7f0"
     },
     {
       "workflow": "notification-dispatch.yml",
@@ -1955,6 +1963,76 @@
       "traceId": "19e0eb6d8adb7d19"
     },
     {
+      "workflow": "post-deploy-live-check.yml",
+      "traceMode": "FIXTURE_TRACE_WITH_TRANSITIVE_PACKAGE_RESOLUTION_NOT_PRODUCTION_TELEMETRY",
+      "proof_type": "fixture",
+      "real_telemetry": false,
+      "may_be_used_for_growth_claims": false,
+      "manualReady": true,
+      "scheduled": true,
+      "pushTriggered": false,
+      "pullRequestTriggered": false,
+      "hasCheckout": true,
+      "hasNodeSetup": true,
+      "nodeVersionOk": true,
+      "runnerPinned": true,
+      "timeoutSet": true,
+      "usesNpmInstall": false,
+      "usesNpmCi": false,
+      "buildsProject": false,
+      "requiresDependencyInstall": false,
+      "installDependencyReason": null,
+      "dependencyInstallPolicyOk": true,
+      "fixtureTraceInput": true,
+      "secretRefs": [],
+      "npmScripts": [
+        "ops:post-deploy-live-check",
+        "workflows:trace"
+      ],
+      "transitiveNpmScripts": [
+        "ops:post-deploy-live-check",
+        "workflows:trace"
+      ],
+      "missingNpmScripts": [],
+      "expectedDataTouches": [],
+      "mainWriter": false,
+      "sharedWriterConcurrency": true,
+      "fullMainCheckout": true,
+      "preparesLatestMain": true,
+      "safePushHelper": true,
+      "directUnsafePush": false,
+      "fauxScenarios": [
+        {
+          "id": "manual_fixture_dispatch",
+          "status": "PASS"
+        },
+        {
+          "id": "known_command_resolution",
+          "status": "PASS"
+        },
+        {
+          "id": "transitive_dependency_install",
+          "status": "PASS",
+          "requires_dependency_install": false,
+          "reason": null
+        },
+        {
+          "id": "pinned_runtime_and_timeout",
+          "status": "PASS"
+        },
+        {
+          "id": "secret_boundary",
+          "status": "NOT_APPLICABLE"
+        },
+        {
+          "id": "no_direct_main_write",
+          "status": "PASS"
+        }
+      ],
+      "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
+      "traceId": "413227bccb4c83eb"
+    },
+    {
       "workflow": "release-report.yml",
       "traceMode": "FIXTURE_TRACE_WITH_TRANSITIVE_PACKAGE_RESOLUTION_NOT_PRODUCTION_TELEMETRY",
       "proof_type": "fixture",
@@ -2207,6 +2285,7 @@
         "validate:final-readiness-ledger",
         "validate:frozen-output-drift",
         "validate:growth-health",
+        "validate:gsc-truth",
         "validate:index-coverage",
         "validate:indexing-provider-ledgers",
         "validate:intelligence-connectors",
@@ -2263,6 +2342,7 @@
         "validate:runtime-bindings",
         "validate:runtime-product-admin",
         "validate:safe-harbor-autopublish",
+        "validate:schema-entity-graph",
         "validate:script-callers",
         "validate:security",
         "validate:self-heal-honesty",
