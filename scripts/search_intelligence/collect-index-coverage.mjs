@@ -76,6 +76,33 @@ function write(urls, byUrl, state, namedStop, inspectedThisRun, quotaLedger) {
   console.log(`index-coverage ${state}: ${urls.length} sitemap URLs - indexed ${b.indexed}, crawled-not-indexed ${b.crawled_not_indexed}, discovered-not-indexed ${b.discovered_not_indexed}, unknown-to-google ${b.unknown_to_google}, other ${b.other}, not inspected ${b.not_inspected} (${inspectedThisRun} inspected this run)`);
 }
 
+// A release adds URLs to the sitemap between two daily inspection runs. Before
+// 27 Oct 2026 every release that published a page then failed
+// validate:index-coverage ("URL set differs from the sitemap: missing 2") with
+// no repair registered, because only the daily cycle rewrote this file. The
+// release now reconciles it: a new sitemap URL gets an honest NOT_INSPECTED row
+// (the next daily cycle inspects it), a URL gone from the sitemap is dropped,
+// every inspected row is kept as it was, and collected_at is NOT advanced, so
+// the freshness check still measures the last real inspection run.
+export const RECONCILE_REASON = "published after the last inspection run; the next daily cycle inspects it";
+export function reconcileWithSitemap(doc, urls) {
+  const byUrl = Object.fromEntries((doc?.urls || []).map((r) => [r.url, r]));
+  const rows = urls.map((u) => byUrl[u] || notInspected(u, RECONCILE_REASON));
+  return { ...doc, sitemap_url_count: urls.length, summary: summarize(rows), urls: rows };
+}
+function reconcileMain() {
+  const urls = sitemapUrls();
+  if (!urls.length) { console.error(`index-coverage reconcile: ${SITEMAP} lists 0 URLs; refusing to reconcile against nothing.`); return 1; }
+  const previous = readJson(OUT, null);
+  if (!previous) { console.error(`index-coverage reconcile: ${OUT} is missing; the daily cycle writes it first.`); return 1; }
+  const next = reconcileWithSitemap(previous, urls);
+  const added = next.urls.filter((r) => r.not_inspected_reason === RECONCILE_REASON && !(previous.urls || []).some((p) => p.url === r.url)).length;
+  const dropped = (previous.urls || []).filter((r) => !urls.includes(r.url)).length;
+  writeJson(OUT, next);
+  console.log(`index-coverage reconcile: ${urls.length} sitemap URLs, ${added} added as NOT_INSPECTED, ${dropped} dropped, collected_at kept at ${next.collected_at}`);
+  return 0;
+}
+
 async function main() {
   const urls = sitemapUrls();
   if (!urls.length) { console.error(`index-coverage: ${SITEMAP} lists 0 URLs; nothing to inspect is a failure.`); return 1; }
@@ -150,4 +177,4 @@ async function main() {
   return 0;
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) process.exit(await main());
+if (import.meta.url === `file://${process.argv[1]}`) process.exit(process.argv.includes("--reconcile") ? reconcileMain() : await main());

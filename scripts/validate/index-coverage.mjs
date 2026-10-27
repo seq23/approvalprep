@@ -12,7 +12,7 @@
 //   7. the daily cycle (intelligence-ingest-free-sources.yml) no longer runs both
 //      collectors with the credential and commits data/search_intelligence.
 import fs from "node:fs";
-import { sitemapUrls, summarize, DAILY_CAP, OUT } from "../search_intelligence/collect-index-coverage.mjs";
+import { sitemapUrls, summarize, DAILY_CAP, OUT, reconcileWithSitemap, RECONCILE_REASON } from "../search_intelligence/collect-index-coverage.mjs";
 
 const MAX_AGE_DAYS = 4;
 const errors = [];
@@ -51,6 +51,23 @@ else {
   if (sm.state === "NAMED_STOP" && !/^NAMED STOP/.test(String(sm.named_stop || ""))) fail("sitemap NAMED_STOP carries no named_stop text");
   if (!(ageDays(sm.collected_at) <= MAX_AGE_DAYS)) fail(`sitemap record collected_at ${sm.collected_at} is older than ${MAX_AGE_DAYS} days`);
 }
+
+// 8. reconcile (run by content:release after seo:sitemap, and the registered
+//    repair): a sitemap URL added between inspection runs gets a NOT_INSPECTED
+//    row, a removed one is dropped, inspected rows and collected_at are kept.
+{
+  const inspected = { url: "https://x.test/a/", verdict: "PASS", coverageState: "Submitted and indexed", inspected_at: "2026-10-26T00:00:00Z" };
+  const fixture = { collected_at: "2026-10-26T00:00:00Z", state: "OK", urls: [inspected, { url: "https://x.test/gone/", coverageState: "NOT_INSPECTED", inspected_at: null }] };
+  const r = reconcileWithSitemap(fixture, ["https://x.test/a/", "https://x.test/new/"]);
+  if (r.urls.length !== 2 || r.sitemap_url_count !== 2) fail("reconcileWithSitemap did not match the sitemap URL set");
+  if (r.urls[0] !== inspected) fail("reconcileWithSitemap did not keep an inspected row as it was");
+  if (r.urls[1].coverageState !== "NOT_INSPECTED" || r.urls[1].not_inspected_reason !== RECONCILE_REASON) fail("reconcileWithSitemap did not add a new sitemap URL as NOT_INSPECTED");
+  if (r.urls.some((u) => u.url === "https://x.test/gone/")) fail("reconcileWithSitemap kept a URL gone from the sitemap");
+  if (r.collected_at !== fixture.collected_at) fail("reconcileWithSitemap advanced collected_at: freshness would no longer measure the last inspection run");
+  if (JSON.stringify(r.summary) !== JSON.stringify(summarize(r.urls))) fail("reconcileWithSitemap summary is not a recount of its rows");
+}
+const release = JSON.parse(fs.readFileSync("package.json", "utf8")).scripts || {};
+if (!/index-coverage:reconcile/.test(fs.readFileSync("scripts/content/run-scheduled-release.mjs", "utf8")) || !/--reconcile/.test(release["search-intelligence:index-coverage:reconcile"] || "")) fail("content:release no longer reconciles index coverage after the sitemap: every published page would fail this check");
 
 const wf = fs.readFileSync(".github/workflows/intelligence-ingest-free-sources.yml", "utf8");
 for (const needle of ["search-intelligence:index-coverage", "search-intelligence:sitemaps", "GSC_SERVICE_ACCOUNT_JSON", "git add data/intelligence data/search_intelligence"]) {

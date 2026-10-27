@@ -1536,7 +1536,8 @@
       "blockReason": "Index state of the 99 sitemap URLs was never measured (11 Oct 2026: 10 impressions/28d); a stale or inconsistent coverage file would steer consolidation blind",
       "owner": "approvalprep-growth",
       "group": "growth-critical",
-      "scope": "data/search_intelligence/index_coverage.json and gsc_sitemaps.json fresh, sitemap-consistent, recounted, and refreshed by the daily cycle"
+      "scope": "data/search_intelligence/index_coverage.json and gsc_sitemaps.json fresh, sitemap-consistent, recounted, and refreshed by the daily cycle",
+      "repairCommand": "npm run search-intelligence:index-coverage:reconcile"
     },
     {
       "id": "target-query-set",
@@ -1569,7 +1570,8 @@
       "blockReason": "Thin zero-impression pages need a measured fold-into-hub ledger before any redirect ships",
       "owner": "approvalprep-growth",
       "group": "growth-critical",
-      "scope": "data/search_intelligence/consolidation_candidates.json current against dist, GSC and coverage; no redirect shipped"
+      "scope": "data/search_intelligence/consolidation_candidates.json current against dist, GSC and coverage; no redirect shipped",
+      "repairCommand": "npm run search-intelligence:consolidation"
     },
     {
       "id": "derived-ledger-lanes",
