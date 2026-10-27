@@ -33,6 +33,9 @@ const policyPath = "data/cadence/policy.json";
 const policyBefore = fs.readFileSync(policyPath, "utf8");
 const targetsPath = "data/search_intelligence/target_query_set.json";
 const targetsBefore = fs.existsSync(targetsPath) ? fs.readFileSync(targetsPath, "utf8") : null;
+// The medium lane writes its measurement log on every generator run.
+const mediumLogPath = "data/release/medium_lane_log.json";
+const mediumLogBefore = fs.existsSync(mediumLogPath) ? fs.readFileSync(mediumLogPath, "utf8") : null;
 function setFreeze(frozen, targets) {
   const policy = JSON.parse(policyBefore);
   policy.new_page_publication = { ...(policy.new_page_publication || {}), frozen, frozen_at: policy.new_page_publication?.frozen_at || "2026-10-09", release_rule: "measured_target_only" };
@@ -56,6 +59,8 @@ function restore() {
   fs.writeFileSync(manifestPath, manifestBefore);
   if (targetsBefore === null) fs.rmSync(targetsPath, { force: true });
   else fs.writeFileSync(targetsPath, targetsBefore);
+  if (mediumLogBefore === null) fs.rmSync(mediumLogPath, { force: true });
+  else fs.writeFileSync(mediumLogPath, mediumLogBefore);
 }
 // fail() is process.exit(1), which does not run a `finally`. Every failing run of
 // this validator therefore used to leave production data/content/generated_answers.json
@@ -199,6 +204,41 @@ try {
   if (!foldedOut.includes("NAMED STOP NO_ELIGIBLE_ANSWER_ROUTES")) fail("[content-release] folded hubs: the run did not print the NO_ELIGIBLE_ANSWER_ROUTES named stop");
   if (foldedRow?.status !== "no_eligible_answer_routes" || foldedRow?.eligibilityStop?.foldedHubs !== answerableLow.length) fail(`[content-release] folded hubs: ledger row did not name the stop: ${JSON.stringify(foldedRow)}`);
 
+  // The medium lane, on the same folded-hub state and the same day: a same-day
+  // retry of a zero-page stop row must run (27 Oct 2026), a measured query on a
+  // medium route with a registered primary-source claim publishes exactly one
+  // gated, cited page, and a measured query on a regulated route publishes none.
+  const mediumRoute = "/employment-verification-letter";
+  const mediumQuery = "letter verifying employment";
+  setFreeze(true, [
+    { query: mediumQuery, expected_owned_route: mediumRoute, source: "gsc_search_analytics", measurement: { metric: "impressions_28d", value: 1 } },
+    { query: "goodwill letter credit", expected_owned_route: "/goodwill-letter-credit", source: "measured_demand", measurement: { metric: "search_volume_monthly_us", value: 210 } },
+  ]);
+  const mediumOut = run("scripts/content/generate-candidate.mjs", { CONTENT_RELEASE_DATE: foldedDate, CONTENT_RELEASE_LIMIT: "3" });
+  const mediumAdded = JSON.parse(fs.readFileSync(generatedPath, "utf8")).answers.filter((item) => item.releaseId === `content-release-${foldedDate}`);
+  const mediumRows = (JSON.parse(fs.readFileSync(ledgerPath, "utf8")).releases || []).filter((item) => item.id === `content-release-${foldedDate}`);
+  if (mediumRows.length !== 1) fail(`[content-release] medium lane: a same-day retry of a zero-page stop left ${mediumRows.length} ledger rows`);
+  if (mediumAdded.length !== 1 || mediumAdded[0].riskLevel !== "medium" || mediumAdded[0].route !== mediumRoute || mediumAdded[0].title !== "What should I know about letter verifying employment?" || mediumAdded[0].measuredQuery?.query !== mediumQuery) fail(`[content-release] medium lane: expected exactly the measured medium page, got ${JSON.stringify(mediumAdded.map((a) => [a.title, a.riskLevel, a.route]))}`);
+  if (!(mediumAdded[0]?.citations?.length > 0) || mediumAdded[0]?.gate?.passed !== true) fail("[content-release] medium lane: published page carries no citation or no passed gate");
+  if (mediumAdded.some((a) => a.route === "/goodwill-letter-credit")) fail("[content-release] medium lane: a regulated route published");
+  if (mediumRows[0]?.status !== "published_answers_with_medium_lane" || mediumRows[0]?.eligibilityStop !== null) fail(`[content-release] medium lane: ledger row wrong: ${JSON.stringify(mediumRows[0])}`);
+  if (mediumOut.includes("NAMED STOP NO_ELIGIBLE_ANSWER_ROUTES")) fail("[content-release] medium lane: the low-lane stop was announced although a page published");
+  const mediumLog = JSON.parse(fs.readFileSync(mediumLogPath, "utf8"));
+  if (!mediumLog.runs?.at(-1)?.published?.some((p) => p.route === mediumRoute) || !mediumLog.pages?.some((p) => p.route === mediumRoute && p.verdict === "measuring")) fail("[content-release] medium lane: the published page is not in data/release/medium_lane_log.json");
+  // self-heal.mjs certifies the gated medium page (the folded fixture rows carry
+  // no real redirects, so it is run on the medium page alone)...
+  const onlyMedium = JSON.parse(fs.readFileSync(generatedPath, "utf8"));
+  onlyMedium.answers = onlyMedium.answers.filter((a) => a.lane === "medium");
+  fs.writeFileSync(generatedPath, JSON.stringify(onlyMedium, null, 2) + "\n");
+  run("scripts/content/self-heal.mjs");
+  // ...and refuses the same page once its gate is not passed.
+  const ungated = JSON.parse(fs.readFileSync(generatedPath, "utf8"));
+  ungated.answers.find((a) => a.lane === "medium").gate.passed = false;
+  fs.writeFileSync(generatedPath, JSON.stringify(ungated, null, 2) + "\n");
+  const ungatedHeal = spawnSync(process.execPath, ["scripts/content/self-heal.mjs"], { stdio: "pipe", encoding: "utf8" });
+  if (ungatedHeal.status === 0) fail("[content-release] self-heal passed a medium page whose gate did not pass");
+  setFreeze(false, []);
+
   // Negative proof that the stop above did not swallow the guard it split from:
   // a manifest with no page_intent values is a broken input and must still fail.
   resetFixtureState();
@@ -224,7 +264,7 @@ try {
   if (releaseRows[0].status !== "no_distinct_low_risk_inventory" || releaseRows[0].pagesPublished !== 0) fail("[content-release] inventory exhaustion did not resolve to governed NOOP");
 
   if (added.length < 1) fail("[content-release] fixture inspected zero published answers");
-  console.log(`[content-release] OK fixtureAdded=${added.length} freezeHeld=${frozenRow.publicationFreeze.heldCount} freezeReleasedMeasured=1 idempotent=true saturatedInventory=${saturatedCount} exhaustion=NOOP foldedHubsStop=${answerableLow.length} noPageIntent=FAIL cadenceIsolated=true fixtureRemainingAllowance=${positiveBudget.remaining}`);
+  console.log(`[content-release] OK fixtureAdded=${added.length} freezeHeld=${frozenRow.publicationFreeze.heldCount} freezeReleasedMeasured=1 idempotent=true saturatedInventory=${saturatedCount} exhaustion=NOOP foldedHubsStop=${answerableLow.length} mediumLanePublished=1 regulatedHeld=true sameDayRetry=true noPageIntent=FAIL cadenceIsolated=true fixtureRemainingAllowance=${positiveBudget.remaining}`);
 } finally {
   restore();
 }

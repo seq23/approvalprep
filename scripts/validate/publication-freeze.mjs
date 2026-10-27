@@ -12,7 +12,7 @@
 //   5. scheduled-content-release.yml has no schedule: the flag would then govern a
 //      cycle that never runs, and a measured page would never publish by itself.
 import fs from "node:fs";
-import { loadFreeze, measuredTargets, freezeDecision, RELEASE_RULES, norm } from "../lib/publication_freeze.mjs";
+import { loadFreeze, measuredTargets, freezeDecision, RELEASE_RULES, norm, containsQuery } from "../lib/publication_freeze.mjs";
 
 const errors = [];
 const fail = (m) => errors.push(m);
@@ -31,6 +31,9 @@ const on = { frozen: true, frozen_at: "2026-10-09", release_rule: "measured_targ
 if (freezeDecision({ title: "Unmeasured question?" }, on, t).allowed) fail("freezeDecision allowed an unmeasured query while frozen");
 if (!freezeDecision({ title: "Measured question?" }, on, t).allowed) fail("freezeDecision held a measured query while frozen");
 if (!freezeDecision({ title: "Unmeasured question?" }, { ...on, frozen: false }, t).allowed) fail("freezeDecision held a page while unfrozen");
+if (!freezeDecision({ title: "What should I know about a measured question?", measuredQuery: { query: "measured question" } }, on, t).allowed) fail("freezeDecision held a medium page built around a measured query");
+if (freezeDecision({ title: "What should I know about something else?", measuredQuery: { query: "measured question" } }, on, t).allowed) fail("freezeDecision allowed a page whose title does not contain its declared measured query");
+if (freezeDecision({ title: "What should I know about unmeasured question?", measuredQuery: { query: "unmeasured question" } }, on, t).allowed) fail("freezeDecision allowed a declared query that is not measured");
 
 const targets = measuredTargets();
 const answers = JSON.parse(fs.readFileSync("data/content/generated_answers.json", "utf8")).answers || [];
@@ -42,7 +45,9 @@ for (const r of releases) {
   for (const id of r.publishedIds || []) {
     checked += 1;
     const a = byId.get(id);
-    if (!a || !targets.has(norm(a.title))) fail(`release ${r.id} published "${a?.title || id}" on or after frozen_at ${freeze.frozen_at} without a measured target`);
+    const declared = a?.measuredQuery?.query;
+    const measuredKey = declared && containsQuery(a.title, declared) ? norm(declared) : norm(a?.title);
+    if (!a || !targets.has(measuredKey)) fail(`release ${r.id} published "${a?.title || id}" on or after frozen_at ${freeze.frozen_at} without a measured target`);
   }
 }
 const wf = fs.readFileSync(".github/workflows/scheduled-content-release.yml", "utf8");

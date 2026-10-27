@@ -470,6 +470,17 @@
       "scope": "Scheduled content generation, self-heal smoke execution, generated answer assets, and release ledger mutation contract"
     },
     {
+      "id": "medium-lane",
+      "npmScript": "validate:medium-lane",
+      "entrypoint": "scripts/validate/medium-lane.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "The medium-risk answer lane publishes only gated, primary-source-cited pages born from measured queries; a gate, self-heal, rotation or cap that silently stops working would publish unsourced medium content or stall the release",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "scripts/lib/medium_lane.mjs gates, self-heal, cadence, measurement and rotation; published medium pages in data/content/generated_answers.json"
+    },
+    {
       "id": "release-fixture-isolation",
       "npmScript": "validate:release-fixture-isolation",
       "entrypoint": "scripts/validate/release-fixture-isolation.mjs",
