@@ -35,5 +35,5 @@ const provenance = {
   competitorGapScore: "NOT MEASURED: always 0; no competitor data source is wired",
   totalsAreNotDemand: "Summing these fields yields a score, never a search volume. Measured demand lives in data/demand/measured_demand.json and is read through scripts/lib/demand_gate.mjs.",
 };
-if (!measuredBriefs) console.log(`[content-opportunity-analysis] NAMED STOP DEMAND_UNMEASURED: ${briefs.length} briefs scored, 0 joined any of the ${gsc.length} measured Search Console row(s). These are heuristic scores, not demand.`);
+if (!measuredBriefs) console.log(`[content-opportunity-analysis] FALLBACK DEMAND_UNMEASURED: ${briefs.length} briefs scored, 0 joined any of the ${gsc.length} measured Search Console row(s). These are heuristic scores, not demand; the cycle continues on them (not a stop) and switches to measured demand on the first run where a brief joins a row.`);
 writeJson("data/intelligence/content_opportunity_briefs.json",{schemaVersion:"4.2.0",provenance,briefs}); appendRun(connectorId,briefs.length?"COMPLETE":"NO_DATA",{recordsImported:briefs.length}); console.log(JSON.stringify({connectorId,status:briefs.length?"COMPLETE":"NO_DATA",recordsImported:briefs.length},null,2));
