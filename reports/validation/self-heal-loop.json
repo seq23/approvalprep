@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.1.0",
-  "runId": "selfheal_20261027123114_2862",
-  "generatedAt": "2026-10-27T12:31:36.820Z",
+  "runId": "selfheal_20261027125813_2877",
+  "generatedAt": "2026-10-27T12:58:53.049Z",
   "validationCommand": "npm run validate:all",
   "registrySource": "_repo_validation_registry.json",
   "maxAttempts": 3,
@@ -10,14 +10,16 @@
     "validation-registry": "npm run validation:registry:sync",
     "atlas-query-fanout": "npm run content:self-heal-citation-os",
     "self-heal-progressions": "npm run automation:self-heal-attempt && npm run automation:self-heal-revalidate",
-    "prohibited-claims": "npm run governance:safe-harbor-rewrite"
+    "prohibited-claims": "npm run governance:safe-harbor-rewrite",
+    "index-coverage": "npm run search-intelligence:index-coverage:reconcile",
+    "consolidation-candidates": "npm run search-intelligence:consolidation"
   },
   "status": "CLEAN",
-  "outcome": "CLEAN_NO_REPAIR_NEEDED",
-  "repairsRun": 0,
+  "outcome": "CLEAN_AFTER_REPAIR",
+  "repairsRun": 1,
   "repairCoverage": {
-    "validatorsInRegistry": 147,
-    "validatorsDeclaringRepair": 4,
+    "validatorsInRegistry": 148,
+    "validatorsDeclaringRepair": 6,
     "note": "Most validators declare no repairCommand, so NO_REPAIR_AVAILABLE is a legitimate, expected stop rather than a defect in this loop."
   },
   "blockingAtStop": [],
@@ -27,12 +29,26 @@
   "attempts": [
     {
       "attempt": 1,
+      "blocked": [
+        "consolidation-candidates"
+      ],
+      "repaired": [
+        {
+          "id": "consolidation-candidates",
+          "cmd": "npm run search-intelligence:consolidation",
+          "code": 0
+        }
+      ],
+      "result": "REPAIRED_RETRYING"
+    },
+    {
+      "attempt": 2,
       "blocked": [],
       "repaired": [],
       "result": "CLEAN"
     }
   ],
-  "ledgerEntryAppended": false,
+  "ledgerEntryAppended": true,
   "ledgerPath": "data/self_healing/self_heal_ledger.json",
-  "ledgerNote": "no repair ran, so no ledger entry was written - the ledger records repairs, not green runs"
+  "ledgerNote": "1 applied repair(s) recorded under runId selfheal_20261027125813_2877"
 }

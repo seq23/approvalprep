@@ -6,7 +6,7 @@
   "state": "OK",
   "named_stop": null,
   "sitemap_source": "public/sitemap.xml",
-  "sitemap_url_count": 72,
+  "sitemap_url_count": 74,
   "inspected_this_run": 72,
   "quota": {
     "daily_cap": 150,
@@ -33,11 +33,13 @@
     "by_coverage_state": {
       "Crawled - currently not indexed": 3,
       "Discovered - currently not indexed": 20,
+      "NOT_INSPECTED": 2,
       "Submitted and indexed": 43,
       "URL is unknown to Google": 6
     },
     "by_verdict": {
       "NEUTRAL": 29,
+      "NONE": 2,
       "PASS": 43
     },
     "buckets": {
@@ -46,7 +48,7 @@
       "discovered_not_indexed": 20,
       "unknown_to_google": 6,
       "other": 0,
-      "not_inspected": 0
+      "not_inspected": 2
     }
   },
   "truth_boundary": "URL Inspection reports Google's index state for each URL at inspected_at. It is not a ranking or traffic measure; impressions come from data/intelligence/gsc_search_analytics.json.",
@@ -146,6 +148,24 @@
       "googleCanonical": "https://approvalprep.com/blog/",
       "userCanonical": "https://approvalprep.com/blog/",
       "inspected_at": "2026-10-27T08:39:08.646Z"
+    },
+    {
+      "url": "https://approvalprep.com/blog/what-should-i-know-about-a-mortgage-loan-documents-checklist/",
+      "verdict": null,
+      "coverageState": "NOT_INSPECTED",
+      "lastCrawlTime": null,
+      "indexingState": null,
+      "inspected_at": null,
+      "not_inspected_reason": "published after the last inspection run; the next daily cycle inspects it"
+    },
+    {
+      "url": "https://approvalprep.com/blog/what-should-i-know-about-letter-of-verification-of-employment/",
+      "verdict": null,
+      "coverageState": "NOT_INSPECTED",
+      "lastCrawlTime": null,
+      "indexingState": null,
+      "inspected_at": null,
+      "not_inspected_reason": "published after the last inspection run; the next daily cycle inspects it"
     },
     {
       "url": "https://approvalprep.com/business-funding-prep-kit/",
