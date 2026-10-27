@@ -10,6 +10,7 @@ const sequence = [
   "content:generate",
   "content:self-heal",
   "seo:sitemap",
+  "search-intelligence:index-coverage:reconcile",
   "authority:scale:freeze",
   "authority:scale:clear-scope",
   "authority:scale:validate",

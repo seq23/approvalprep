@@ -279,6 +279,7 @@
     "validation:registry:sync": "node scripts/validate/sync-validator-registry.mjs",
     "workflows:trace": "node scripts/workflows/trace-all.mjs",
     "search-intelligence:index-coverage": "node scripts/search_intelligence/collect-index-coverage.mjs",
+    "search-intelligence:index-coverage:reconcile": "node scripts/search_intelligence/collect-index-coverage.mjs --reconcile",
     "search-intelligence:sitemaps": "node scripts/search_intelligence/collect-gsc-sitemaps.mjs",
     "search-intelligence:targets": "node scripts/search_intelligence/build-target-query-set.mjs",
     "search-intelligence:consolidation": "node scripts/search_intelligence/build-consolidation-candidates.mjs",
