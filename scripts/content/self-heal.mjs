@@ -28,7 +28,15 @@ for (const field of ["id", "title", "slug", "contentKey", "contentHash"]) {
 }
 const invalidReleaseAnswers = answers.filter((answer) => {
   if (!String(answer.releaseId || "").startsWith("content-release-")) return false;
-  if (answer.status === "published_by_contract") return answer.riskLevel !== "low" || !answer.slug || !answer.contentHash;
+  // Low risk publishes by contract. Medium risk publishes only through the medium
+  // lane with its gate recorded as passed and at least one primary-source
+  // citation (scripts/lib/medium_lane.mjs). Regulated and high never publish here.
+  if (answer.status === "published_by_contract") {
+    const laneOk = answer.riskLevel === "low" ||
+      (answer.riskLevel === "medium" && answer.lane === "medium" && answer.gate?.passed === true && (answer.citations || []).length > 0 &&
+        answer.citations.every((c) => (c.sources || []).length > 0));
+    return !laneOk || !answer.slug || !answer.contentHash;
+  }
   if (answer.status === "redirected_to_canonical") {
     const source = `/blog/${answer.slug || slugify(answer.title || "")}`;
     return !answer.redirectTarget || redirectBySource.get(source) !== answer.redirectTarget;

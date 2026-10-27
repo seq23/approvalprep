@@ -80,6 +80,17 @@ const schema = [
       </article>
     </div></section>
   )}
+  {answer.citations?.length > 0 && (
+    <section class="band"><div class="shell">
+      <article class="card">
+        <p class="eyebrow">Sources</p>
+        <h2>Where each statement on this page comes from.</h2>
+        <ul>{answer.citations.map((citation) => (
+          <li>{citation.claimText} {citation.sources.map((source) => <a href={source.url} rel="noopener">{source.name}</a>)}</li>
+        ))}</ul>
+      </article>
+    </div></section>
+  )}
   <section class="band"><div class="shell two">
     <article class="card">
       <p class="eyebrow">Self-service boundary</p>

@@ -5,6 +5,7 @@ import vm from "node:vm";
 import { clampToPublicationBudget } from "../lib/publication_budget.mjs";
 import { isAnswerableRoute } from "./answer-eligibility.mjs";
 import { loadFreeze, measuredTargets, freezeDecision, STOP_CODE } from "../lib/publication_freeze.mjs";
+import { MEDIUM_LANE_CAP_PER_RELEASE, NO_IMPRESSION_WINDOW_DAYS, rankMediumTargets, runMediumLane, measureMediumPages, rotatedRoutes } from "../lib/medium_lane.mjs";
 
 fs.mkdirSync("data/content", { recursive: true });
 
@@ -73,10 +74,16 @@ const releaseId = `content-release-${releaseDate}`;
 const existingAnswers = Array.isArray(existingDocument.answers) ? existingDocument.answers : [];
 const existingRelease = (ledger.releases || []).find((item) => item.id === releaseId);
 
-if (existingRelease) {
+// A day that already published is done. A day that published nothing (a named
+// stop) is retried: on 27 Oct 2026 the 10:07 run recorded NO_ELIGIBLE_ANSWER_ROUTES,
+// and a same-day dispatch after the medium lane opened would otherwise have been
+// refused as "already released" with nothing released. The retry replaces the
+// zero row, so the ledger still holds one row per day.
+if (existingRelease && (existingRelease.pagesPublished || 0) > 0) {
   console.log(JSON.stringify({ status: "NOOP_ALREADY_RELEASED", releaseId, published: existingRelease.pagesPublished || 0 }, null, 2));
   process.exit(0);
 }
+if (existingRelease) ledger.releases = ledger.releases.filter((item) => item.id !== releaseId);
 
 const routeCopy = loadRouteCopy();
 // `risk === "low"` and `index === true` say a route is safe to write about and
@@ -127,15 +134,20 @@ if (!lowRiskRoutes.length) {
     measuredTargetRoutesByRisk: targetRisk,
   };
   const message =
-    `NAMED STOP ${NO_ELIGIBLE_STOP}: all ${eligibilityStop.answerableRoutes} answerable low-risk route(s) are hubs that ` +
+    `all ${eligibilityStop.answerableRoutes} answerable low-risk route(s) are hubs that ` +
     `absorbed their answers (foldedIntoHub in data/content/generated_answers.json), and the ` +
     `measured-demand routes in data/search_intelligence/target_query_set.json sit outside the low-risk lane ` +
     `(${JSON.stringify(targetRisk)}). Nothing is published today. It clears itself when a new low-risk ` +
     `guide/tool/template route that is not a folded hub enters data/routes/route_manifest.json.`;
-  console.log(`[content:generate] ${message}`);
+  eligibilityStop.message = message;
+}
+// The stop is announced after the medium lane has run (below): the low-risk lane
+// being empty is only a stop when the medium lane published nothing either.
+function announce(code, message) {
+  console.log(`[content:generate] NAMED STOP ${code}: ${message}`);
   if (process.env.GITHUB_ACTIONS === "true") {
-    console.log(`::warning title=${NO_ELIGIBLE_STOP}::${message}`);
-    if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `### Content release: ${NO_ELIGIBLE_STOP}\n\n${message}\n`);
+    console.log(`::warning title=${code}::${message}`);
+    if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `### Content release: ${code}\n\n${message}\n`);
   }
 }
 
@@ -251,6 +263,77 @@ for (const candidate of candidates) {
   existingIds.add(candidate.id);
 }
 
+// The medium-risk lane (scripts/lib/medium_lane.mjs). Born only from measured
+// queries, gated stricter than low risk, self-healing, capped at
+// MEDIUM_LANE_CAP_PER_RELEASE, at most one page per route, and never past the
+// enforced publication budget the low lane has not used.
+const readJson = (file, fallback) => (fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, "utf8")) : fallback);
+const mediumLogPath = "data/release/medium_lane_log.json";
+const mediumMeasurements = measureMediumPages({ answers: existingAnswers, gsc: readJson("data/intelligence/gsc_search_analytics.json", { rows: [] }), asOf: now });
+const mediumRotated = rotatedRoutes(mediumMeasurements);
+const mediumRanked = rankMediumTargets({
+  targets: readJson("data/search_intelligence/target_query_set.json", { targets: [] }).targets,
+  manifest,
+  foldedHubs,
+  isAnswerable: isAnswerableRoute,
+});
+const mediumCap = Math.max(0, Math.min(MEDIUM_LANE_CAP_PER_RELEASE, releaseLimit - selected.length));
+const isTaken = (c) => existingContentKeys.has(c.contentKey) || existingTitles.has(c.title) || existingSlugs.has(c.slug) || existingIds.has(c.id) ||
+  manifest.routes.some((route) => route.path === `/${c.slug}` || route.path === `/blog/${c.slug}`);
+const mediumLane = runMediumLane({
+  ranked: mediumRanked,
+  manifest,
+  routeCopy,
+  claims: readJson("data/citations/claim_registry.json", { claims: [] }).claims,
+  sources: readJson("data/citations/source_registry.json", { sources: [] }).sources,
+  allowlist: readJson("data/citations/source_domain_allowlist.json", { domains: [] }).domains,
+  asOf: now,
+  releaseDate,
+  releaseId,
+  cap: mediumCap,
+  rotated: mediumRotated,
+  isTaken,
+  admit: (candidate) => {
+    const decision = freezeDecision(candidate, freeze, targets);
+    return decision.allowed ? decision : { allowed: false, reason: decision.reason };
+  },
+});
+for (const candidate of mediumLane.selected) {
+  candidate.contentHash = stableHash({ title: candidate.title, route: candidate.route, answer: candidate.answer, steps: candidate.steps, checklist: candidate.checklist, commonMistakes: candidate.commonMistakes, citations: candidate.citations });
+  selected.push(candidate);
+  existingContentKeys.add(candidate.contentKey);
+  existingTitles.add(candidate.title);
+  existingSlugs.add(candidate.slug);
+  existingHashes.add(candidate.contentHash);
+  existingIds.add(candidate.id);
+}
+for (const s of mediumLane.skipped) console.log(`[content:generate] medium lane skipped ${s.route} ("${s.query}") after ${s.attempts} repair attempt(s): ${s.reason}`);
+for (const r of mediumLane.rotations) console.log(`[content:generate] medium lane rotated past ${r.route} ("${r.query}"): ${r.reason}`);
+for (const c of mediumLane.selected) if (c.gate.repairs.length) console.log(`[content:generate] medium lane healed ${c.route} ("${c.title}"): ${c.gate.repairs.join(", ")}`);
+const mediumStop = mediumLane.selected.length === 0 && mediumCap > 0 ? mediumLane.stop : null;
+const previousMediumLog = readJson(mediumLogPath, { runs: [] });
+fs.writeFileSync(mediumLogPath, JSON.stringify({
+  schemaVersion: "1.0.0",
+  updatedAt: now,
+  rule: "scripts/lib/medium_lane.mjs: medium pages publish from measured queries only, gated (primary-source citations, no uncited numbers, no approval promises, disclaimer), self-healed up to 3 attempts, max 2 per release; a route whose medium pages show no impressions after the window is rotated out; MEDIUM_LANE_NOTHING_HEALABLE only when nothing healable is left.",
+  noImpressionWindowDays: NO_IMPRESSION_WINDOW_DAYS,
+  windowWhy: "data/intelligence/gsc_search_analytics.json is a rolling 28-day Search Console window; a page is judged only after one full window and only by an import fetched at least 28 days after it published.",
+  pages: measureMediumPages({ answers: [...existingAnswers, ...mediumLane.selected], gsc: readJson("data/intelligence/gsc_search_analytics.json", { rows: [] }), asOf: now }),
+  rotatedRoutes: [...mediumRotated].map(([route, reason]) => ({ route, reason })),
+  runs: [...(previousMediumLog.runs || []).filter((run) => run.releaseId !== releaseId), {
+    releaseId,
+    date: releaseDate,
+    cap: mediumCap,
+    rankedTargets: mediumRanked.length,
+    published: mediumLane.selected.map((c) => ({ id: c.id, path: `/blog/${c.slug}`, route: c.route, query: c.measuredQuery.query, demand: c.measuredQuery, repairs: c.gate.repairs })),
+    skipped: mediumLane.skipped,
+    rotations: mediumLane.rotations,
+    stop: mediumStop,
+  }].slice(-60),
+}, null, 2) + "\n");
+if (mediumStop) announce(mediumStop.code, `${mediumStop.reason} (skipped=${mediumStop.skipped}, rotated=${mediumStop.rotated}; see ${mediumLogPath}). It clears itself on the next run where a route heals, gains a registered primary-source claim, or shows an impression.`);
+if (eligibilityStop && selected.length === 0) announce(NO_ELIGIBLE_STOP, eligibilityStop.message);
+
 // Zero published has two entirely different causes and they must not share a
 // label. `no_distinct_low_risk_inventory` means the backlog is exhausted - every
 // low-risk route/variant pair is already written. A publication budget of 0 means
@@ -288,13 +371,14 @@ ledger.releases ||= [];
 ledger.releases.push({
   id: releaseId,
   date: releaseDate,
-  status: selected.length ? "published_low_risk_answers" : eligibilityStop ? "no_eligible_answer_routes" : frozenHold ? "publication_frozen_unmeasured_demand" : budgetExhausted ? "no_publication_budget" : "no_distinct_low_risk_inventory",
-  eligibilityStop,
+  status: selected.length ? (selected.some((item) => item.lane === "medium") ? "published_answers_with_medium_lane" : "published_low_risk_answers") : eligibilityStop ? "no_eligible_answer_routes" : frozenHold ? "publication_frozen_unmeasured_demand" : budgetExhausted ? "no_publication_budget" : "no_distinct_low_risk_inventory",
+  eligibilityStop: eligibilityStop && selected.length === 0 ? eligibilityStop : null,
+  mediumLane: { cap: mediumCap, published: mediumLane.selected.length, skipped: mediumLane.skipped.length, rotated: mediumLane.rotations.length, stop: mediumStop },
   publicationFreeze: { frozen: freeze?.frozen === true, frozenAt: freeze?.frozen_at || null, heldCount: heldByFreeze.length },
   pagesPublished: selected.length,
   dailySafetyCeiling: releaseLimit,
   publicationBudget: { cadenceLimit, governorLimit, requestedLimit, appliedLimit: releaseLimit, capSource: "data/cadence/policy.json new_pages_per_week", ...budgeted.budget },
-  riskLimit: "low",
+  riskLimit: mediumCap > 0 ? "medium" : "low",
   publishedIds: selected.map((item) => item.id),
   publishedRoutes: selected.map((item) => `/blog/${item.slug}`),
   validationRequired: true,
