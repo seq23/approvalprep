@@ -70,6 +70,17 @@
       "scope": "Every .github/workflows/*.yml parses: no mapping key left with only comments under it"
     },
     {
+      "id": "workflow-deps-installed",
+      "npmScript": "validate:workflow-deps-installed",
+      "entrypoint": "scripts/validate/workflow-deps-installed.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "Weekly Growth Ops ran search-intelligence:derive (which builds with astro) without npm ci and was red from 26 Oct 2026 with exit 127",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": ".github/workflows/*.yml: every npm script that reaches a node_modules binary runs after npm ci"
+    },
+    {
       "id": "zero-paid-llm",
       "npmScript": "validate:zero-paid-llm",
       "entrypoint": "scripts/llm/validate_zero_paid_llm.mjs",

@@ -17,7 +17,7 @@ on:
 jobs:
   weekly-growth-ops:
     runs-on: ubuntu-24.04
-    timeout-minutes: 5  # was 20; ~4x median 0.3m over 8 green runs
+    timeout-minutes: 8  # ~4x the expected ~2m now that it installs and builds (was 5 at a 0.3m median with no install)
     permissions:
       contents: write
       pull-requests: write
@@ -28,6 +28,11 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 22.12.0
+      # search-intelligence:derive (added by #54) spawns `npm run build` (astro):
+      # without an install the job died with "astro: not found", exit 127, from
+      # 26 Oct 2026. validate:workflow-deps-installed keeps this from recurring.
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
       - name: Apply delegated authority
         run: npm run governance:apply-authority -- --mode=${{ env.RUN_MODE || 'dry_run' }}
       - name: Attempt self-heal

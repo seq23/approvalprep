@@ -85,6 +85,10 @@ if (growth) {
     if (!measured) {
       check("unmeasured_ranking_is_not_called_demand", !/searchOpportunityScore/.test(String(basis.rankedBy || "")),
         `growth brief says it ranked by "${basis.rankedBy}" while no brief carries measured demand; a 0 that sorts is a number driving behaviour while measuring nothing`);
+      // Unmeasured demand is a fallback, not a stop: the brief still ranks the
+      // briefs on the heuristic and the cycle keeps going (27 Oct 2026).
+      check("unmeasured_demand_still_ranks", briefs.length === 0 || (Array.isArray(growth.topContentOpportunities) && growth.topContentOpportunities.length > 0),
+        `demand is unmeasured and the growth brief ranked nothing from ${briefs.length} briefs; it must fall back to the heuristic ranking and continue`);
     }
   }
 }
