@@ -85,20 +85,58 @@ const routeCopy = loadRouteCopy();
 // gap produced "How should I prepare for Pricing?" and four more like it: a
 // question nobody asks, answered by a checklist unrelated to the page named.
 // isAnswerableRoute() closes it on the manifest's own page_intent field.
-const lowRiskRoutes = manifest.routes
-  .filter((route) => route.type === "public" && route.index && route.path !== "/" && route.risk === "low")
-  .filter(isAnswerableRoute)
-  // A hub that absorbed its thin /blog/ answers (foldedIntoHub) must not grow new
-  // ones: each would be another sub-600-word page on the same subject, the exact
-  // pattern the consolidation removed.
-  .filter((route) => !existingAnswers.some((answer) => answer.foldedIntoHub === true && answer.redirectTarget === route.path))
+const baseRoutes = manifest.routes
+  .filter((route) => route.type === "public" && route.index && route.path !== "/" && route.risk === "low");
+const answerableRoutes = baseRoutes.filter(isAnswerableRoute);
+// A hub that absorbed its thin /blog/ answers (foldedIntoHub) must not grow new
+// ones: each would be another sub-600-word page on the same subject, the exact
+// pattern the consolidation removed.
+const foldedHubs = new Set(existingAnswers.filter((answer) => answer.foldedIntoHub === true).map((answer) => answer.redirectTarget));
+const lowRiskRoutes = answerableRoutes
+  .filter((route) => !foldedHubs.has(route.path))
   .sort((a, b) => manifest.routes.indexOf(a) - manifest.routes.indexOf(b));
 
 // A generator that silently selects nothing publishes nothing and reports
-// success. If the manifest ever loses its page_intent values this must be loud.
-if (!lowRiskRoutes.length) {
+// success. If the manifest ever loses its page_intent values this must be loud:
+// that is a broken input, so it stays a hard failure.
+if (!answerableRoutes.length) {
   console.error("[content:generate] FAIL no answerable route survived page_intent eligibility; refusing to run an empty generation");
   process.exit(1);
+}
+
+// Answerable routes exist but every one is a hub that absorbed its answers
+// (#57, 26 Oct 2026, folded all 8). That is a deliberate consolidation, not a
+// broken input, and it used to share the hard failure above: the scheduled
+// release went red on 27 Oct 2026 with nothing wrong. It ends as the NAMED STOP
+// below instead: logged, annotated on the run page, and written to the ledger,
+// with the measured-demand routes and their risk so the reader sees why the
+// low-risk lane has nothing left to write about.
+const NO_ELIGIBLE_STOP = "NO_ELIGIBLE_ANSWER_ROUTES";
+let eligibilityStop = null;
+if (!lowRiskRoutes.length) {
+  const targetPaths = [...new Set([...measuredTargets().values()].map((target) => target.expected_owned_route).filter(Boolean))];
+  const targetRisk = {};
+  for (const path of targetPaths) {
+    const risk = manifest.routes.find((item) => item.path === path)?.risk || "unrouted";
+    targetRisk[risk] = (targetRisk[risk] || 0) + 1;
+  }
+  eligibilityStop = {
+    code: NO_ELIGIBLE_STOP,
+    answerableRoutes: answerableRoutes.length,
+    foldedHubs: answerableRoutes.filter((route) => foldedHubs.has(route.path)).length,
+    measuredTargetRoutesByRisk: targetRisk,
+  };
+  const message =
+    `NAMED STOP ${NO_ELIGIBLE_STOP}: all ${eligibilityStop.answerableRoutes} answerable low-risk route(s) are hubs that ` +
+    `absorbed their answers (foldedIntoHub in data/content/generated_answers.json), and the ` +
+    `measured-demand routes in data/search_intelligence/target_query_set.json sit outside the low-risk lane ` +
+    `(${JSON.stringify(targetRisk)}). Nothing is published today. It clears itself when a new low-risk ` +
+    `guide/tool/template route that is not a folded hub enters data/routes/route_manifest.json.`;
+  console.log(`[content:generate] ${message}`);
+  if (process.env.GITHUB_ACTIONS === "true") {
+    console.log(`::warning title=${NO_ELIGIBLE_STOP}::${message}`);
+    if (process.env.GITHUB_STEP_SUMMARY) fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `### Content release: ${NO_ELIGIBLE_STOP}\n\n${message}\n`);
+  }
 }
 
 const variants = [
@@ -250,7 +288,8 @@ ledger.releases ||= [];
 ledger.releases.push({
   id: releaseId,
   date: releaseDate,
-  status: selected.length ? "published_low_risk_answers" : frozenHold ? "publication_frozen_unmeasured_demand" : budgetExhausted ? "no_publication_budget" : "no_distinct_low_risk_inventory",
+  status: selected.length ? "published_low_risk_answers" : eligibilityStop ? "no_eligible_answer_routes" : frozenHold ? "publication_frozen_unmeasured_demand" : budgetExhausted ? "no_publication_budget" : "no_distinct_low_risk_inventory",
+  eligibilityStop,
   publicationFreeze: { frozen: freeze?.frozen === true, frozenAt: freeze?.frozen_at || null, heldCount: heldByFreeze.length },
   pagesPublished: selected.length,
   dailySafetyCeiling: releaseLimit,
@@ -264,7 +303,7 @@ ledger.releases.push({
 fs.writeFileSync("data/release/release_ledger.json", JSON.stringify(ledger, null, 2) + "\n");
 
 console.log(JSON.stringify({
-  status: selected.length ? "PUBLISHED" : frozenHold ? "NOOP_PUBLICATION_FROZEN" : budgetExhausted ? "NOOP_PUBLICATION_BUDGET_EXHAUSTED" : "NOOP_NO_DISTINCT_INVENTORY",
+  status: selected.length ? "PUBLISHED" : eligibilityStop ? `NAMED_STOP_${NO_ELIGIBLE_STOP}` : frozenHold ? "NOOP_PUBLICATION_FROZEN" : budgetExhausted ? "NOOP_PUBLICATION_BUDGET_EXHAUSTED" : "NOOP_NO_DISTINCT_INVENTORY",
   releaseId,
   releaseLimit,
   published: selected.length,

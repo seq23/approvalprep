@@ -3,6 +3,7 @@ import fs from "node:fs";
 import { spawnSync } from "node:child_process";
 import { fail } from "./_common.mjs";
 import { prospectiveUrls, publicationBudget } from "../lib/publication_budget.mjs";
+import { isAnswerableRoute } from "../content/answer-eligibility.mjs";
 
 const generatedPath = "data/content/generated_answers.json";
 const ledgerPath = "data/release/release_ledger.json";
@@ -25,6 +26,9 @@ const cadenceBefore = fs.existsSync(cadenceLedgerPath) ? fs.readFileSync(cadence
 // The publication freeze is exercised here too, because this is the fixture that
 // runs the real generator. Both of its inputs are production files, so they are
 // held and restored exactly like the ledger above.
+// The route manifest is mutated by the page_intent negative proof below.
+const manifestPath = "data/routes/route_manifest.json";
+const manifestBefore = fs.readFileSync(manifestPath, "utf8");
 const policyPath = "data/cadence/policy.json";
 const policyBefore = fs.readFileSync(policyPath, "utf8");
 const targetsPath = "data/search_intelligence/target_query_set.json";
@@ -49,6 +53,7 @@ function restore() {
   if (cadenceBefore === null) fs.rmSync(cadenceLedgerPath, { force: true });
   else fs.writeFileSync(cadenceLedgerPath, cadenceBefore);
   fs.writeFileSync(policyPath, policyBefore);
+  fs.writeFileSync(manifestPath, manifestBefore);
   if (targetsBefore === null) fs.rmSync(targetsPath, { force: true });
   else fs.writeFileSync(targetsPath, targetsBefore);
 }
@@ -173,6 +178,38 @@ try {
   if (measuredAdded.length !== 1 || measuredAdded[0].title !== firstTitle) fail(`[content-release] publication freeze: a measured query did not release exactly its own page (got ${JSON.stringify(measuredAdded.map((a) => a.title))})`);
   setFreeze(false, []);
 
+  // Every answerable low-risk route is a hub that absorbed its answers
+  // (foldedIntoHub). On 27 Oct 2026 this shared the page_intent hard failure and
+  // the scheduled release went red with nothing broken. It must be the named stop
+  // NO_ELIGIBLE_ANSWER_ROUTES: exit 0, nothing published, the stop in the log and
+  // in the ledger row.
+  resetFixtureState();
+  const answerableLow = JSON.parse(manifestBefore).routes.filter((route) => route.type === "public" && route.index && route.path !== "/" && route.risk === "low" && isAnswerableRoute(route));
+  if (!answerableLow.length) fail("[content-release] folded-hub fixture found zero answerable low-risk routes to fold");
+  fs.writeFileSync(generatedPath, JSON.stringify({ schemaVersion: "2.1.0", generatedAt: "2099-12-25T00:00:00.000Z", answers: answerableLow.map((route, i) => ({
+    id: `fixture-folded-${i}`, title: `Fixture folded ${i}`, slug: `fixture-folded-${i}`, route: route.path, riskLevel: "low",
+    status: "redirected_to_canonical", foldedIntoHub: true, redirectTarget: route.path, contentKey: `${route.path}::fixture`, contentHash: `fixture-folded-${i}`,
+  })) }, null, 2) + "\n");
+  isolateCadenceLedger("folded-hubs");
+  const foldedDate = "2099-12-25";
+  const foldedOut = run("scripts/content/generate-candidate.mjs", { CONTENT_RELEASE_DATE: foldedDate, CONTENT_RELEASE_LIMIT: "3" });
+  const foldedAdded = JSON.parse(fs.readFileSync(generatedPath, "utf8")).answers.filter((item) => item.releaseId === `content-release-${foldedDate}`);
+  const foldedRow = (JSON.parse(fs.readFileSync(ledgerPath, "utf8")).releases || []).find((item) => item.id === `content-release-${foldedDate}`);
+  if (foldedAdded.length !== 0) fail(`[content-release] folded hubs: ${foldedAdded.length} answer(s) grew on a hub that absorbed its own`);
+  if (!foldedOut.includes("NAMED STOP NO_ELIGIBLE_ANSWER_ROUTES")) fail("[content-release] folded hubs: the run did not print the NO_ELIGIBLE_ANSWER_ROUTES named stop");
+  if (foldedRow?.status !== "no_eligible_answer_routes" || foldedRow?.eligibilityStop?.foldedHubs !== answerableLow.length) fail(`[content-release] folded hubs: ledger row did not name the stop: ${JSON.stringify(foldedRow)}`);
+
+  // Negative proof that the stop above did not swallow the guard it split from:
+  // a manifest with no page_intent values is a broken input and must still fail.
+  resetFixtureState();
+  const stripped = JSON.parse(manifestBefore);
+  for (const route of stripped.routes) delete route.page_intent;
+  fs.writeFileSync(manifestPath, JSON.stringify(stripped, null, 2) + "\n");
+  isolateCadenceLedger("no-page-intent");
+  const broken = spawnSync(process.execPath, ["scripts/content/generate-candidate.mjs"], { stdio: "pipe", encoding: "utf8", env: { ...process.env, CONTENT_RELEASE_DATE: "2099-12-24", CONTENT_RELEASE_LIMIT: "3" } });
+  fs.writeFileSync(manifestPath, manifestBefore);
+  if (broken.status === 0 || !String(broken.stderr).includes("no answerable route survived page_intent eligibility")) fail(`[content-release] a manifest with no page_intent did not hard-fail (exit ${broken.status})`);
+
   // Inventory exhaustion is a valid Safe Harbor NOOP, not a release failure.
   const saturatedCount = saturateFixtureInventory();
   isolateCadenceLedger("inventory-exhaustion");
@@ -187,7 +224,7 @@ try {
   if (releaseRows[0].status !== "no_distinct_low_risk_inventory" || releaseRows[0].pagesPublished !== 0) fail("[content-release] inventory exhaustion did not resolve to governed NOOP");
 
   if (added.length < 1) fail("[content-release] fixture inspected zero published answers");
-  console.log(`[content-release] OK fixtureAdded=${added.length} freezeHeld=${frozenRow.publicationFreeze.heldCount} freezeReleasedMeasured=1 idempotent=true saturatedInventory=${saturatedCount} exhaustion=NOOP cadenceIsolated=true fixtureRemainingAllowance=${positiveBudget.remaining}`);
+  console.log(`[content-release] OK fixtureAdded=${added.length} freezeHeld=${frozenRow.publicationFreeze.heldCount} freezeReleasedMeasured=1 idempotent=true saturatedInventory=${saturatedCount} exhaustion=NOOP foldedHubsStop=${answerableLow.length} noPageIntent=FAIL cadenceIsolated=true fixtureRemainingAllowance=${positiveBudget.remaining}`);
 } finally {
   restore();
 }
