@@ -20,7 +20,7 @@ for (const file of walk(dir).filter((p) => p.endsWith('.html'))) {
       const url = new URL((m[1] ?? m[2]).replace(/&amp;/g, '&'), 'https://approvalprep.com/');
       return /^https?:$/.test(url.protocol) &&
         (/(^|\.)(gumroad\.com|stripe\.com|paypal\.com|lemonsqueezy\.com|square\.link|checkout\.shopify\.com)$/i.test(url.hostname) ||
-         /\/(checkout|cart|buy|order|book(ing)?)(\/|$)/i.test(url.pathname));
+         (url.hostname.replace(/^www\./, '') === 'approvalprep.com' && /\/(checkout|cart|buy|order|book(ing)?)(\/|$)/i.test(url.pathname)));
     } catch { return false; }
   });
   const loaded = /clarity\.ms\/tag\//i.test(html);

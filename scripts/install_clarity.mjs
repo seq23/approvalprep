@@ -62,7 +62,7 @@ function hasFormOrBuyLink(html) {
       const url = new URL((match[1] ?? match[2]).replace(/&amp;/g, '&'), 'https://approvalprep.com/');
       if (!/^https?:$/.test(url.protocol)) return false;
       return /(^|\.)(gumroad\.com|stripe\.com|paypal\.com|lemonsqueezy\.com|square\.link|checkout\.shopify\.com)$/i.test(url.hostname) ||
-        /\/(checkout|cart|buy|order|book(ing)?)(\/|$)/i.test(url.pathname);
+        (Object.hasOwn(projects, url.hostname.replace(/^www\./, '')) && /\/(checkout|cart|buy|order|book(ing)?)(\/|$)/i.test(url.pathname));
     } catch { return false; }
   });
 }
