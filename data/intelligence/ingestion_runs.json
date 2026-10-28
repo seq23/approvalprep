@@ -2,6 +2,20 @@
   "schemaVersion": "4.1.0",
   "runs": [
     {
+      "id": "2ed70306-b9c6-4895-97e1-9a1a34b2f924",
+      "connectorId": "competitor_public_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-10-28T14:18:20.415Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "e52df04e-b855-4b48-a6ad-7fdf6636a8d7",
+      "connectorId": "competitor_sitemap_discovery",
+      "status": "COMPLETE",
+      "ranAt": "2026-10-28T14:18:19.932Z",
+      "recordsImported": 2
+    },
+    {
       "id": "bac823a2-560d-4c32-9943-bb35139cd1b1",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
@@ -1885,23 +1899,6 @@
       "ranAt": "2026-10-12T12:57:13.258Z",
       "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
       "recordsImported": 0
-    },
-    {
-      "id": "0e290e70-63d4-49d7-abc6-55ffff3a54cf",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-10-12T10:30:07.350Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "89934c44-b3cd-43de-b554-2a515adf641d",
-      "connectorId": "indexnow",
-      "status": "NO_DATA",
-      "ranAt": "2026-10-12T10:30:07.220Z",
-      "mode": "live",
-      "recordsImported": 0,
-      "preparedUrlCount": 79
     }
   ]
 }
