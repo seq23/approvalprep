@@ -24,9 +24,9 @@ const styles = [
   ...(index.match(/<style[\s\S]*?<\/style>/gi) || []),
   ...(index.match(/<link[^>]+rel=["'](?:stylesheet|preconnect)["'][^>]*>/gi) || []),
 ].join('\n');
-const siteName = (index.match(/<title>([^<]*)<\/title>/i) || [, 'This site'])[1]
-  .split(/\s+[|—-]\s+/)[0]
-  .trim();
+// The homepage title describes its topic; og:site_name declares the brand.
+const siteNameTag = (index.match(/<meta\b[^>]*property=["']og:site_name["'][^>]*>/i) || [''])[0];
+const siteName = (siteNameTag.match(/\bcontent=["']([^"']+)["']/i) || [, 'ApprovalPrep'])[1].trim();
 // Reuse the site's own footer so the 404 carries the same legal/nav links every
 // other page does, rather than becoming a dead end.
 const footer = (index.match(/<footer[\s\S]*?<\/footer>/i) || [''])[0];

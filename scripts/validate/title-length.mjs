@@ -72,6 +72,7 @@ for (const file of pages) {
   const title = decode(match[1]);
   if (!title) failures.push(`${rel}: empty <title>`);
   else if (title.length > TITLE_MAX) failures.push(`${rel}: <title> is ${title.length} characters (max ${TITLE_MAX}): "${title}"`);
+  if (title && !/approvalprep/i.test(title)) failures.push(`${rel}: <title> does not name ApprovalPrep: "${title}"`);
   const noindex = /<meta\s+name=["']robots["'][^>]*noindex/i.test(html);
   if (noindex) continue;
   indexable++;
