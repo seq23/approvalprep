@@ -10,10 +10,10 @@
 // three approvalprep.com titles - the homepage and two blog answers - were
 // 67-70. 65 is the tighter of the two limits, so it is the one enforced.
 //
-// Order: keep the full title when it fits; otherwise drop the site suffix; then,
-// if the subject alone is still too long, keep its head before ": " when that
-// head is a whole phrase of at least 30 characters. A title that cannot be fitted
-// this way fails the build rather than shipping an over-long title.
+// Reserve space for the brand before fitting the subject. Dropping the suffix
+// to meet the length band made the goodwill guide fail Search Readiness b10.
+// Shorten a generated question or use its whole phrase before ": "; never drop
+// the brand. A subject without a short form must be fixed at its source.
 // scripts/validate/title-length.mjs asserts the result on every built page.
 
 export const TITLE_MAX = 65;
@@ -21,7 +21,7 @@ export const TITLE_HEAD_MIN = 30;
 const SUFFIX = /\s+-\s+ApprovalPrep(?:\s+Blog)?\s*$/;
 const SHORT_SUFFIX = " - ApprovalPrep";
 const QUESTION_SHORT_FORMS: Array<[RegExp, string]> = [
-  [/^What should I know about (.+?)\??$/, "What to know about "],
+  [/^What should I know about (.+?)\??$/, "About "],
   [/^What should I gather before using (.+?)\??$/, "What to gather for "],
   [/^What mistakes should I avoid with (.+?)\??$/, "Mistakes to avoid with "],
   [/^How should I prepare for (.+?)\??$/, "How to prepare for "],
@@ -29,10 +29,10 @@ const QUESTION_SHORT_FORMS: Array<[RegExp, string]> = [
 
 export function fitTitle(title: string): string {
   const full = String(title).trim();
-  if (full.length <= TITLE_MAX) return full;
+  if (/approvalprep/i.test(full) && full.length <= TITLE_MAX) return full;
   const subject = full.replace(SUFFIX, "").trim();
-  if (subject !== full && subject.length + SHORT_SUFFIX.length <= TITLE_MAX) return subject + SHORT_SUFFIX;
-  if (subject.length <= TITLE_MAX) return subject;
+  const subjectMax = TITLE_MAX - SHORT_SUFFIX.length;
+  if (subject.length <= subjectMax) return subject + SHORT_SUFFIX;
   // The blog answer generator (scripts/content/generate-candidate.mjs) phrases
   // every title as one of four questions. Published titles keep their slugs and
   // headings; only the <title> takes the short form of the same question.
@@ -40,11 +40,11 @@ export function fitTitle(title: string): string {
     const match = subject.match(pattern);
     if (match) {
       const shortened = `${short}${match[1]}`.trim();
-      if (shortened.length >= TITLE_HEAD_MIN && shortened.length <= TITLE_MAX) return shortened;
+      if (shortened.length + SHORT_SUFFIX.length >= TITLE_HEAD_MIN && shortened.length <= subjectMax) return shortened + SHORT_SUFFIX;
     }
   }
   const colon = subject.indexOf(": ");
-  if (colon >= TITLE_HEAD_MIN && colon <= TITLE_MAX) return subject.slice(0, colon).trim();
+  if (colon + SHORT_SUFFIX.length >= TITLE_HEAD_MIN && colon <= subjectMax) return subject.slice(0, colon).trim() + SHORT_SUFFIX;
   throw new Error(
     `fitTitle: "${full}" is ${full.length} characters and has no whole-phrase form within ${TITLE_MAX}. ` +
       "Give the page a shorter title at its source."

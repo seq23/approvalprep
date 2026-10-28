@@ -300,7 +300,8 @@
     "validate:pinterest-launch": "node scripts/validate/pinterest-launch.mjs",
     "validate:pinterest-drip": "node scripts/validate/pinterest-drip.mjs",
     "pinterest:refill": "node scripts/pinterest/refill_queue.mjs",
-    "pinterest:metrics": "node scripts/pinterest/measure.mjs"
+    "pinterest:metrics": "node scripts/pinterest/measure.mjs",
+    "validate:clarity-scope": "node scripts/validate/clarity-scope.mjs"
   },
   "dependencies": {
     "astro": "^7.0.6",
