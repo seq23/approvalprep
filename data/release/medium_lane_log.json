@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "updatedAt": "2026-10-27T12:58:09.009Z",
+  "updatedAt": "2026-10-28T10:16:51.653Z",
   "rule": "scripts/lib/medium_lane.mjs: medium pages publish from measured queries only, gated (primary-source citations, no uncited numbers, no approval promises, disclaimer), self-healed up to 3 attempts, max 2 per release; a route whose medium pages show no impressions after the window is rotated out; MEDIUM_LANE_NOTHING_HEALABLE only when nothing healable is left.",
   "noImpressionWindowDays": 28,
   "windowWhy": "data/intelligence/gsc_search_analytics.json is a rolling 28-day Search Console window; a page is judged only after one full window and only by an import fetched at least 28 days after it published.",
@@ -13,7 +13,7 @@
       "publishedAt": "2026-10-27T00:00:00.000Z",
       "impressions": 0,
       "clicks": 0,
-      "ageDays": 0,
+      "ageDays": 1,
       "verdict": "measuring"
     },
     {
@@ -24,7 +24,7 @@
       "publishedAt": "2026-10-27T00:00:00.000Z",
       "impressions": 0,
       "clicks": 0,
-      "ageDays": 0,
+      "ageDays": 1,
       "verdict": "measuring"
     }
   ],
@@ -97,6 +97,16 @@
           "reason": "no_cited_claim"
         }
       ],
+      "rotations": [],
+      "stop": null
+    },
+    {
+      "releaseId": "content-release-2026-10-28",
+      "date": "2026-10-28",
+      "cap": 0,
+      "rankedTargets": 13,
+      "published": [],
+      "skipped": [],
       "rotations": [],
       "stop": null
     }

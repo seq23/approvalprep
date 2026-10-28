@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.1.0",
-  "runId": "selfheal_20261027125813_2877",
-  "generatedAt": "2026-10-27T12:58:53.049Z",
+  "runId": "selfheal_20261028101656_3041",
+  "generatedAt": "2026-10-28T10:17:19.448Z",
   "validationCommand": "npm run validate:all",
   "registrySource": "_repo_validation_registry.json",
   "maxAttempts": 3,
@@ -15,10 +15,10 @@
     "consolidation-candidates": "npm run search-intelligence:consolidation"
   },
   "status": "CLEAN",
-  "outcome": "CLEAN_AFTER_REPAIR",
-  "repairsRun": 1,
+  "outcome": "CLEAN_NO_REPAIR_NEEDED",
+  "repairsRun": 0,
   "repairCoverage": {
-    "validatorsInRegistry": 148,
+    "validatorsInRegistry": 149,
     "validatorsDeclaringRepair": 6,
     "note": "Most validators declare no repairCommand, so NO_REPAIR_AVAILABLE is a legitimate, expected stop rather than a defect in this loop."
   },
@@ -29,26 +29,12 @@
   "attempts": [
     {
       "attempt": 1,
-      "blocked": [
-        "consolidation-candidates"
-      ],
-      "repaired": [
-        {
-          "id": "consolidation-candidates",
-          "cmd": "npm run search-intelligence:consolidation",
-          "code": 0
-        }
-      ],
-      "result": "REPAIRED_RETRYING"
-    },
-    {
-      "attempt": 2,
       "blocked": [],
       "repaired": [],
       "result": "CLEAN"
     }
   ],
-  "ledgerEntryAppended": true,
+  "ledgerEntryAppended": false,
   "ledgerPath": "data/self_healing/self_heal_ledger.json",
-  "ledgerNote": "1 applied repair(s) recorded under runId selfheal_20261027125813_2877"
+  "ledgerNote": "no repair ran, so no ledger entry was written - the ledger records repairs, not green runs"
 }
