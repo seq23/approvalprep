@@ -3779,6 +3779,54 @@
       "publishedRoutes": [],
       "validationRequired": true,
       "cumulativeAnswerCount": 88
+    },
+    {
+      "id": "content-release-2026-10-29",
+      "date": "2026-10-29",
+      "status": "no_eligible_answer_routes",
+      "eligibilityStop": {
+        "code": "NO_ELIGIBLE_ANSWER_ROUTES",
+        "answerableRoutes": 8,
+        "foldedHubs": 8,
+        "measuredTargetRoutesByRisk": {
+          "medium": 15,
+          "low": 1,
+          "regulated": 1
+        },
+        "message": "all 8 answerable low-risk route(s) are hubs that absorbed their answers (foldedIntoHub in data/content/generated_answers.json), and the measured-demand routes in data/search_intelligence/target_query_set.json sit outside the low-risk lane ({\"medium\":15,\"low\":1,\"regulated\":1}). Nothing is published today. It clears itself when a new low-risk guide/tool/template route that is not a folded hub enters data/routes/route_manifest.json."
+      },
+      "mediumLane": {
+        "cap": 0,
+        "published": 0,
+        "skipped": 0,
+        "rotated": 0,
+        "stop": null
+      },
+      "publicationFreeze": {
+        "frozen": true,
+        "frozenAt": "2026-10-09",
+        "heldCount": 0
+      },
+      "pagesPublished": 0,
+      "dailySafetyCeiling": 0,
+      "publicationBudget": {
+        "cadenceLimit": 3,
+        "governorLimit": 3,
+        "requestedLimit": 3,
+        "appliedLimit": 0,
+        "capSource": "data/cadence/policy.json new_pages_per_week",
+        "cap": 2,
+        "ledgerExists": true,
+        "alreadyNew": 0,
+        "windowDays": 7,
+        "spentInWindow": 2,
+        "remaining": 0
+      },
+      "riskLimit": "low",
+      "publishedIds": [],
+      "publishedRoutes": [],
+      "validationRequired": true,
+      "cumulativeAnswerCount": 88
     }
   ],
   "entries": [
