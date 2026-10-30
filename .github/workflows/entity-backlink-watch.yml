@@ -1,0 +1,71 @@
+name: Entity Backlink Watch
+
+# Weekly: is every outside profile in src/data/entity.json still real?
+#
+# scripts/ops/entity-backlink-watch.mjs fetches each sameAs and pending profile.
+# A profile that 404s twice leaves sameAs; a pending one that answers 200 and
+# names approvalprep.com joins it. Either change is rebuilt and re-validated
+# (validate:schema-entity-graph) before it is committed to main through the
+# safe main-writer path, so a heal that would break the entity graph never
+# lands. Missing link-backs and unclaimed profiles are printed as named stops in
+# the run summary; they need the owner's login and do not turn the run red.
+on:
+  schedule:
+    - cron: "23 10 * * 1"
+  workflow_dispatch:
+    inputs:
+      fixture_trace:
+        description: "Run fixture workflow data trace only"
+        required: false
+        default: "false"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: approvalprep-main-writer
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-24.04
+    # A fault detector, not a budget: a handful of fetches, plus a build only
+    # when a profile changed.
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Synchronize latest main
+        run: bash scripts/workflows/prepare-main-writer.sh
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22.12.0
+      - name: Run fixture workflow trace
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
+        run: npm run workflows:trace -- --workflow entity-backlink-watch.yml
+      - name: Check every profile and heal entity.json
+        if: ${{ github.event.inputs.fixture_trace != 'true' }}
+        run: npm run ops:entity-backlink-watch -- --apply --report reports/entity/entity-backlink-watch.json
+      - name: Rebuild and re-validate a healed entity
+        id: changed
+        if: ${{ github.event.inputs.fixture_trace != 'true' }}
+        run: |
+          if git diff --quiet -- src/data/entity.json; then
+            echo "entity.json unchanged; nothing to commit."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+          npm ci
+          npm run build
+          npm run validate:schema-entity-graph
+      - name: Commit the healed entity
+        if: ${{ steps.changed.outputs.changed == 'true' }}
+        run: |
+          git config user.name "approvalprep-entity-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add src/data/entity.json
+          git commit -m "chore(entity): weekly watch healed sameAs" -m "$(node -e 'const r=require("./reports/entity/entity-backlink-watch.json"); console.log(r.changes.join("\n"))')"
+          bash scripts/workflows/safe-push-main.sh

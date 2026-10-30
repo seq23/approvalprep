@@ -12,7 +12,8 @@
 //   - the crawl files: robots.txt, sitemap.xml, llms.txt, the IndexNow key;
 //   - the brand files: favicon.ico, the 32px and 512px icons, apple-touch-icon,
 //     site.webmanifest, og.png;
-//   - the homepage's JSON-LD: Organization (with logo and sameAs), WebPage,
+//   - the homepage's JSON-LD: Organization (with logo and sameAs, matching
+//     src/data/entity.json including its Spry Labs parent), WebPage,
 //     WebSite - the entity graph scripts/validate/schema-entity-graph.mjs
 //     asserts at build time, confirmed at the edge;
 //   - the measured URLs: every page Search Console has recorded an impression
@@ -128,7 +129,16 @@ if (home) {
   const typed = (re) => nodes.find((n) => [].concat(n["@type"] ?? []).some((t) => re.test(String(t))));
   const org = typed(/^Organization$/);
   if (!org) failures.push("homepage: no Organization in the served JSON-LD");
-  else for (const key of ["name", "url", "logo", "sameAs"]) if (!org[key] || (Array.isArray(org[key]) && !org[key].length)) failures.push(`homepage: served Organization lacks ${key}`);
+  else {
+    for (const key of ["name", "url", "logo", "sameAs"]) if (!org[key] || (Array.isArray(org[key]) && !org[key].length)) failures.push(`homepage: served Organization lacks ${key}`);
+    // The edge must serve the entity in src/data/entity.json - the file the
+    // weekly entity-backlink-watch keeps true - not an older build of it.
+    const entity = JSON.parse(fs.readFileSync(path.join(root, "src/data/entity.json"), "utf8"));
+    const norm = (v) => [].concat(v ?? []).map(String).sort().join(" ");
+    if (org["@id"] !== entity["@id"]) failures.push(`homepage: served Organization @id ${org["@id"]} is not ${entity["@id"]}`);
+    if (norm(org.sameAs) !== norm(entity.sameAs)) failures.push(`homepage: served sameAs [${norm(org.sameAs)}] differs from src/data/entity.json [${norm(entity.sameAs)}]`);
+    if (org.parentOrganization?.["@id"] !== entity.parentOrganization["@id"]) failures.push(`homepage: served Organization has no parentOrganization ${entity.parentOrganization["@id"]}`);
+  }
   if (!typed(/^WebSite$/)) failures.push("homepage: no WebSite in the served JSON-LD");
   if (!typed(/WebPage$|^(AboutPage|ContactPage|FAQPage|CollectionPage|ItemPage)$/)) failures.push("homepage: no WebPage in the served JSON-LD");
   notes.push(`homepage json-ld nodes=${nodes.length}`);
