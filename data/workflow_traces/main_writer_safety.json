@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-10-30T10:17:36.582Z",
+  "generatedAt": "2026-10-30T22:43:31.707Z",
   "status": "PASS",
-  "writerWorkflowCount": 13,
+  "writerWorkflowCount": 14,
   "sharedConcurrencyGroup": "approvalprep-main-writer",
   "writers": [
     {
@@ -43,6 +43,15 @@
     },
     {
       "workflow": "content-opportunity-analysis.yml",
+      "sharedConcurrency": true,
+      "cancelInProgressFalse": true,
+      "fullCheckout": true,
+      "preparesLatestMain": true,
+      "safePush": true,
+      "directPush": false
+    },
+    {
+      "workflow": "entity-backlink-watch.yml",
       "sharedConcurrency": true,
       "cancelInProgressFalse": true,
       "fullCheckout": true,

@@ -1,0 +1,24 @@
+{
+  "_comment": "The one ApprovalPrep entity. src/lib/schema.ts (organizationNode, editorialAuthor) builds every Organization the site emits from this file; scripts/validate/schema-entity-graph.mjs asserts every built page matches it; scripts/ops/entity-backlink-watch.mjs (weekly, .github/workflows/entity-backlink-watch.yml) re-checks every profile and edits this file itself. sameAs lists only profiles that exist and resolve now. A profile not yet claimed goes in profiles_pending and is promoted by the watch once it resolves. Never list a profile on approvalprep.com itself. Never add a person here.",
+  "@id": "https://approvalprep.com/#organization",
+  "name": "ApprovalPrep",
+  "url": "https://approvalprep.com/",
+  "logo": "https://approvalprep.com/icon-512.png",
+  "description": "Self-service letters, checklists and ready-to-apply packets for loan, rental and employment approvals.",
+  "sameAs": [
+    "https://www.pinterest.com/approvalprep/"
+  ],
+  "parentOrganization": {
+    "@id": "https://billionairehighperformancecoach.com/spry-labs#organization",
+    "name": "Spry Labs",
+    "url": "https://billionairehighperformancecoach.com/spry-labs"
+  },
+  "founder": null,
+  "profiles_pending": [
+    {
+      "platform": "LinkedIn",
+      "url": "https://www.linkedin.com/company/approvalprep/",
+      "owner_action": "Create the LinkedIn company page \"ApprovalPrep\" at this URL (her LinkedIn login) and set its website field to https://approvalprep.com/. The weekly watch promotes it into sameAs on its own once the page answers 200 and names approvalprep.com."
+    }
+  ]
+}

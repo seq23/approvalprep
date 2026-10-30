@@ -1,7 +1,17 @@
 ---
 // Visible byline for article-type pages. Reads the same file as the JSON-LD
 // author in src/lib/schema.ts (articleSchema), so the two always agree.
+//
+// Loan-document pages (src/data/reviewers.json loan_document_paths) also carry
+// the reviewer slot: a named reviewer once a real one has agreed in writing,
+// and until then the editorial desk, linked to how we verify. Never a
+// placeholder person. scripts/validate/reviewer-slot.mjs checks both states.
 import editorial from "../data/editorial.json";
+import { isLoanDocumentPath, listedReviewers } from "../lib/schema";
 const { updated = "" } = Astro.props;
+const reviewerSlot = isLoanDocumentPath(Astro.url.pathname);
+const named = reviewerSlot ? listedReviewers() : [];
 ---
-<p class="byline fine">By <a href={editorial.aboutPath} rel="author">{editorial.name}</a>, {editorial.relationship}.{updated ? ` Updated ${updated}.` : ""} Not legal or credit advice.</p>
+<p class="byline fine">By <a href={editorial.aboutPath} rel="author">{editorial.name}</a>, {editorial.relationship}.{updated ? ` Updated ${updated}.` : ""} Not legal or credit advice.{reviewerSlot && (named.length
+  ? <span data-reviewer-slot="named"> Reviewed by {named.map((person, i) => <>{i ? ", " : ""}<a href={person.url} rel="nofollow">{person.name}</a>, {person.credential}</>)}.</span>
+  : <span data-reviewer-slot="editorial-desk"> Reviewed by the editorial desk: <a href="/methodology/">how we verify</a>.</span>)}</p>

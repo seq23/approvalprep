@@ -3,6 +3,8 @@ import toolRegistry from "../../data/tools/tool_registry.json";
 import templateRegistry from "../../data/templates/template_registry.json";
 import reportRegistry from "../../data/reports/public_report_registry.json";
 import editorial from "../data/editorial.json";
+import entity from "../data/entity.json";
+import reviewers from "../data/reviewers.json";
 
 export const SITE_ORIGIN = "https://approvalprep.com";
 
@@ -46,7 +48,23 @@ export const canonicalUrl = (input: string) => {
 };
 
 // JSON-LD author for every Article. Same file as the visible Byline component.
-export const editorialAuthor = () => ({ "@type": "Organization", name: editorial.name, url: canonicalUrl(editorial.aboutPath), parentOrganization: { "@type": "Organization", name: editorial.parentName } });
+// The Spry Labs parent, by @id, so an engine joins ApprovalPrep to the one Spry
+// Labs entity on billionairehighperformancecoach.com/spry-labs rather than to a
+// second, unnamed "Spry Labs". src/data/entity.json is its one source.
+export const parentOrganizationNode = () => ({ "@type": "Organization", "@id": entity.parentOrganization["@id"], name: entity.parentOrganization.name, url: entity.parentOrganization.url });
+
+export const editorialAuthor = () => ({ "@type": "Organization", name: editorial.name, url: canonicalUrl(editorial.aboutPath), parentOrganization: parentOrganizationNode() });
+
+// Loan-document pages carry a named-reviewer slot (src/data/reviewers.json). It
+// ships empty and stays empty until a real reviewer has agreed in writing; until
+// then nothing is emitted and the visible byline names the editorial desk.
+const pathOf = (url: string) => internalHref(new URL(url, SITE_ORIGIN).pathname);
+export const isLoanDocumentPath = (url: string) => reviewers.loan_document_paths.includes(pathOf(url));
+export const listedReviewers = () => reviewers.reviewers as Array<{ name: string; credential: string; url: string }>;
+export const reviewedByFor = (url: string) =>
+  isLoanDocumentPath(url) && listedReviewers().length
+    ? listedReviewers().map((person) => ({ "@type": "Person", name: person.name, jobTitle: person.credential, url: person.url }))
+    : null;
 
 // The site-wide social share image (public/og.png, drawn by
 // scripts/seo/generate-brand-assets.py). BaseLayout puts it on every page;
@@ -63,14 +81,23 @@ export const OG_IMAGE = { url: `${SITE_ORIGIN}/og.png`, width: 1200, height: 630
 // nothing tied the pages to one citable thing. `logo` is public/icon-512.png,
 // the 512x512 brand mark seo-hygiene already measures. `sameAs` lists profiles
 // this business really owns and that really answer; add one only after it does.
-export const ORGANIZATION_SAME_AS = ["https://www.pinterest.com/approvalprep/"];
+//
+// Since 30 Oct 2026 (authority audit) every field comes from src/data/entity.json,
+// which also names the parent (Spry Labs, by @id) and the profiles still
+// pending. scripts/validate/schema-entity-graph.mjs fails any page whose
+// Organization drifts from that file; the weekly entity-backlink-watch removes
+// a profile that stops resolving and promotes a pending one that starts to.
+export const ORGANIZATION_SAME_AS: string[] = entity.sameAs;
 
 export const organizationNode = () => ({
   "@type": "Organization",
-  name: "ApprovalPrep",
+  "@id": entity["@id"],
+  name: entity.name,
   url: canonicalUrl("/"),
-  logo: `${SITE_ORIGIN}/icon-512.png`,
-  sameAs: ORGANIZATION_SAME_AS
+  logo: entity.logo,
+  description: entity.description,
+  sameAs: ORGANIZATION_SAME_AS,
+  parentOrganization: parentOrganizationNode()
 });
 
 export const websiteSchema = () => ({
@@ -112,7 +139,8 @@ export const articleSchema = ({ title, description, url, datePublished }: { titl
   url,
   datePublished,
   author: editorialAuthor(),
-  publisher: organizationNode()
+  publisher: organizationNode(),
+  ...(reviewedByFor(url) ? { mainEntityOfPage: { "@type": "WebPage", "@id": url, reviewedBy: reviewedByFor(url) } } : {})
 });
 
 export const faqSchema = (faq: Array<{ question: string; answer: string }>) => ({

@@ -299,10 +299,32 @@
       "entrypoint": "scripts/validate/schema-entity-graph.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
-      "blockReason": "prevents shipping a page whose JSON-LD does not say what entity it belongs to: an Organization without logo and sameAs, a page with no WebPage node, or a homepage with no WebSite. The Search Readiness checklist crawled the live site on 25 Oct 2026 and found all thirteen sampled pages carrying an Organization with name and url only (item c1), and /contact/, /glossary/ and /reports/document-readiness-index/ carrying no WebPage at all (item c2). structured-data asserts that tokens appear in certain .astro sources, so it cannot see what a page ships and stayed green through both",
+      "blockReason": "prevents shipping a page whose JSON-LD does not say what entity it belongs to: an Organization without logo and sameAs, a page with no WebPage node, or a homepage with no WebSite. The Search Readiness checklist crawled the live site on 25 Oct 2026 and found all thirteen sampled pages carrying an Organization with name and url only (item c1), and /contact/, /glossary/ and /reports/document-readiness-index/ carrying no WebPage at all (item c2). structured-data asserts that tokens appear in certain .astro sources, so it cannot see what a page ships and stayed green through both. Since 30 Oct 2026 (authority audit) it also prevents an Organization that drifts from src/data/entity.json (@id, name, logo, description, sameAs set, parentOrganization = the Spry Labs @id), any sameAs naming approvalprep.com itself, an Article author without the Spry Labs parent, and an entity.json whose sameAs is empty, self-referential or also pending",
       "owner": "approvalprep-ops",
       "group": "release-critical",
-      "scope": "Every built HTML page's JSON-LD graph in the published tree, except the noindex 404.html: the first Organization node's name, url, logo and sameAs, the presence of a WebPage or a subtype of one, and WebSite on the homepage"
+      "scope": "Every built HTML page's JSON-LD graph in the published tree, except the noindex 404.html: the first Organization node's name, url, logo and sameAs, the presence of a WebPage or a subtype of one, and WebSite on the homepage; src/data/entity.json itself; every node's sameAs host; every Article author's parentOrganization"
+    },
+    {
+      "id": "reviewer-slot",
+      "npmScript": "validate:reviewer-slot",
+      "entrypoint": "scripts/validate/reviewer-slot.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents a YMYL loan-document page from naming a reviewer who has not agreed in writing, or any page from carrying a JSON-LD Person not in src/data/reviewers.json, and prevents a listed loan-document page from losing its reviewer slot (the editorial-desk line linking /methodology/ while no reviewer exists). The authority audit of 30 Oct 2026 found ApprovalPrep organization-authored with no reviewer slot at all; a fabricated reviewer would be worse than none",
+      "owner": "approvalprep-ops",
+      "group": "release-critical",
+      "scope": "src/data/reviewers.json entries and consent records; every built page's JSON-LD Person nodes; every loan_document_paths page's visible byline and reviewedBy"
+    },
+    {
+      "id": "entity-backlink-watch",
+      "npmScript": "validate:entity-backlink-watch",
+      "entrypoint": "scripts/validate/entity-backlink-watch.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents the weekly entity watch from silently doing nothing or the wrong thing: removing a profile on a network error, adopting a pending profile that does not link back, passing a JS-rendered profile it cannot read, passing with zero profiles, or losing its schedule, its --apply, its re-validation before commit, or its safe main-writer push. The authority audit of 30 Oct 2026 found no repo checking that sameAs URLs still resolve and link back",
+      "owner": "approvalprep-ops",
+      "group": "release-critical",
+      "scope": "scripts/ops/entity-backlink-watch.mjs against eight fixture scenarios on a scratch entity.json, and .github/workflows/entity-backlink-watch.yml"
     },
     {
       "id": "demand-backed-pages",
