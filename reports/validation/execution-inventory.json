@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "orchestratorSource": "_repo_validation_registry.json",
-  "validatorCount": 150,
-  "hardFailCount": 139,
+  "validatorCount": 152,
+  "hardFailCount": 141,
   "strongWarningCount": 11,
   "validators": [
     {
@@ -250,6 +250,24 @@
     },
     {
       "order": 28,
+      "id": "reviewer-slot",
+      "npmScript": "validate:reviewer-slot",
+      "entrypoint": "scripts/validate/reviewer-slot.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "release-critical"
+    },
+    {
+      "order": 29,
+      "id": "entity-backlink-watch",
+      "npmScript": "validate:entity-backlink-watch",
+      "entrypoint": "scripts/validate/entity-backlink-watch.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "release-critical"
+    },
+    {
+      "order": 30,
       "id": "demand-backed-pages",
       "npmScript": "validate:demand-backed-pages",
       "entrypoint": "scripts/validate/demand-backed-pages.mjs",
@@ -258,7 +276,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 29,
+      "order": 31,
       "id": "pages-header-publication",
       "npmScript": "validate:pages-header-publication",
       "entrypoint": "scripts/validate/pages-header-publication.mjs",
@@ -267,7 +285,7 @@
       "group": "release-critical"
     },
     {
-      "order": 30,
+      "order": 32,
       "id": "admin-dashboard",
       "npmScript": "validate:admin",
       "entrypoint": "scripts/validate/admin.mjs",
@@ -276,7 +294,7 @@
       "group": "ops-critical"
     },
     {
-      "order": 31,
+      "order": 33,
       "id": "payment-download-boundary",
       "npmScript": "validate:payment-download",
       "entrypoint": "scripts/validate/payment-download.mjs",
@@ -285,7 +303,7 @@
       "group": "release-critical"
     },
     {
-      "order": 32,
+      "order": 34,
       "id": "setup-and-secrets",
       "npmScript": "env:audit",
       "entrypoint": "scripts/validate/setup-and-secrets.mjs",
@@ -294,7 +312,7 @@
       "group": "ops-critical"
     },
     {
-      "order": 33,
+      "order": 35,
       "id": "env-examples",
       "npmScript": "validate:env-examples",
       "entrypoint": "scripts/validate/env-examples.mjs",
@@ -303,7 +321,7 @@
       "group": "ops-critical"
     },
     {
-      "order": 34,
+      "order": 36,
       "id": "vault-schema",
       "npmScript": "validate:vault-schema",
       "entrypoint": "scripts/validate/vault-schema.mjs",
@@ -312,7 +330,7 @@
       "group": "ops-critical"
     },
     {
-      "order": 35,
+      "order": 37,
       "id": "security",
       "npmScript": "validate:security",
       "entrypoint": "scripts/validate/security.mjs",
@@ -321,7 +339,7 @@
       "group": "release-critical"
     },
     {
-      "order": 36,
+      "order": 38,
       "id": "source-connectors-real",
       "npmScript": "validate:intelligence-connectors",
       "entrypoint": "scripts/validate/source-connectors-real.mjs",
@@ -330,7 +348,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 37,
+      "order": 39,
       "id": "no-fake-intelligence-data",
       "npmScript": "validate:no-fake-intelligence",
       "entrypoint": "scripts/validate/no-fake-intelligence-data.mjs",
@@ -339,7 +357,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 38,
+      "order": 40,
       "id": "intelligence-source-freshness",
       "npmScript": "validate:intelligence-freshness",
       "entrypoint": "scripts/validate/intelligence-source-freshness.mjs",
@@ -348,7 +366,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 39,
+      "order": 41,
       "id": "competitor-crawl-policy",
       "npmScript": "validate:competitor-crawl",
       "entrypoint": "scripts/validate/competitor-crawl-policy.mjs",
@@ -357,7 +375,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 40,
+      "order": 42,
       "id": "serp-import-schema",
       "npmScript": "validate:serp-import",
       "entrypoint": "scripts/validate/serp-import-schema.mjs",
@@ -366,7 +384,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 41,
+      "order": 43,
       "id": "backlink-recommendation-honesty",
       "npmScript": "validate:backlink-honesty",
       "entrypoint": "scripts/validate/backlink-recommendation-honesty.mjs",
@@ -375,7 +393,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 42,
+      "order": 44,
       "id": "content-action-decision",
       "npmScript": "validate:content-actions",
       "entrypoint": "scripts/validate/content-action-decision.mjs",
@@ -384,7 +402,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 43,
+      "order": 45,
       "id": "opportunity-score-provenance",
       "npmScript": "validate:opportunity-score-provenance",
       "entrypoint": "scripts/validate/opportunity-score-provenance.mjs",
@@ -393,7 +411,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 44,
+      "order": 46,
       "id": "content-release",
       "npmScript": "validate:content-release",
       "entrypoint": "scripts/validate/content-release.mjs",
@@ -402,7 +420,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 45,
+      "order": 47,
       "id": "medium-lane",
       "npmScript": "validate:medium-lane",
       "entrypoint": "scripts/validate/medium-lane.mjs",
@@ -411,7 +429,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 46,
+      "order": 48,
       "id": "release-fixture-isolation",
       "npmScript": "validate:release-fixture-isolation",
       "entrypoint": "scripts/validate/release-fixture-isolation.mjs",
@@ -420,7 +438,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 47,
+      "order": 49,
       "id": "maintenance-brief-integrity",
       "npmScript": "validate:maintenance-briefs",
       "entrypoint": "scripts/validate/maintenance-brief-integrity.mjs",
@@ -429,7 +447,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 48,
+      "order": 50,
       "id": "citation-opportunity-integrity",
       "npmScript": "validate:citation-opportunities",
       "entrypoint": "scripts/validate/citation-opportunity-integrity.mjs",
@@ -438,7 +456,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 49,
+      "order": 51,
       "id": "workflow-data-trace",
       "npmScript": "validate:workflow-trace",
       "entrypoint": "scripts/validate/workflow-data-trace.mjs",
@@ -447,7 +465,7 @@
       "group": "ops-critical"
     },
     {
-      "order": 50,
+      "order": 52,
       "id": "setup-secrets",
       "npmScript": "validate:setup-secrets",
       "entrypoint": "scripts/validate/setup-and-secrets.mjs",
@@ -456,7 +474,7 @@
       "group": "ops-critical"
     },
     {
-      "order": 51,
+      "order": 53,
       "id": "admin-action-links",
       "npmScript": "validate:admin-action-links",
       "entrypoint": "scripts/validate/admin-action-links.mjs",
@@ -465,7 +483,7 @@
       "group": "ops-critical"
     },
     {
-      "order": 52,
+      "order": 54,
       "id": "citation-strategy",
       "npmScript": "validate:citation-strategy",
       "entrypoint": "scripts/validate/citation-strategy.mjs",
@@ -474,7 +492,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 53,
+      "order": 55,
       "id": "growth-health",
       "npmScript": "validate:growth-health",
       "entrypoint": "scripts/validate/growth-health.mjs",
@@ -483,7 +501,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 54,
+      "order": 56,
       "id": "automation-safety",
       "npmScript": "validate:automation-safety",
       "entrypoint": "scripts/validate/automation-safety.mjs",
@@ -492,7 +510,7 @@
       "group": "ops-critical"
     },
     {
-      "order": 55,
+      "order": 57,
       "id": "delegated-authority",
       "npmScript": "validate:delegated-authority",
       "entrypoint": "scripts/validate/delegated-authority.mjs",
@@ -501,7 +519,7 @@
       "group": "ops-critical"
     },
     {
-      "order": 56,
+      "order": 58,
       "id": "self-heal-progressions",
       "npmScript": "validate:self-heal-progressions",
       "entrypoint": "scripts/validate/self-heal-progressions.mjs",
@@ -510,7 +528,7 @@
       "group": "ops-critical"
     },
     {
-      "order": 57,
+      "order": 59,
       "id": "self-heal-honesty",
       "npmScript": "validate:self-heal-honesty",
       "entrypoint": "scripts/validate/self-heal-honesty.mjs",
@@ -519,7 +537,7 @@
       "group": "ops-critical"
     },
     {
-      "order": 58,
+      "order": 60,
       "id": "owner-exceptions",
       "npmScript": "validate:owner-exceptions",
       "entrypoint": "scripts/validate/owner-exceptions.mjs",
@@ -528,7 +546,7 @@
       "group": "ops-critical"
     },
     {
-      "order": 59,
+      "order": 61,
       "id": "notification-policy",
       "npmScript": "validate:notification-policy",
       "entrypoint": "scripts/validate/notification-policy.mjs",
@@ -537,7 +555,7 @@
       "group": "ops-critical"
     },
     {
-      "order": 60,
+      "order": 62,
       "id": "browserless-ux-report",
       "npmScript": "ux:browserless-report",
       "entrypoint": "scripts/ux/build-browserless-ux-report.mjs",
@@ -546,7 +564,7 @@
       "group": "ux-critical"
     },
     {
-      "order": 61,
+      "order": 63,
       "id": "ux-conversion",
       "npmScript": "validate:ux-conversion",
       "entrypoint": "scripts/validate/ux-conversion.mjs",
@@ -555,7 +573,7 @@
       "group": "ux-critical"
     },
     {
-      "order": 62,
+      "order": 64,
       "id": "public-page-depth",
       "npmScript": "validate:public-page-depth",
       "entrypoint": "scripts/validate/public-page-depth.mjs",
@@ -564,7 +582,7 @@
       "group": "ux-critical"
     },
     {
-      "order": 63,
+      "order": 65,
       "id": "cta-quality",
       "npmScript": "validate:cta-quality",
       "entrypoint": "scripts/validate/cta-quality.mjs",
@@ -573,7 +591,7 @@
       "group": "ux-critical"
     },
     {
-      "order": 64,
+      "order": 66,
       "id": "trust-signal-coverage",
       "npmScript": "validate:trust-signals",
       "entrypoint": "scripts/validate/trust-signal-coverage.mjs",
@@ -582,7 +600,7 @@
       "group": "ux-critical"
     },
     {
-      "order": 65,
+      "order": 67,
       "id": "browserless-accessibility",
       "npmScript": "validate:browserless-accessibility",
       "entrypoint": "scripts/validate/browserless-accessibility.mjs",
@@ -591,7 +609,7 @@
       "group": "ux-critical"
     },
     {
-      "order": 66,
+      "order": 68,
       "id": "mobile-ux",
       "npmScript": "validate:mobile-ux",
       "entrypoint": "scripts/validate/mobile-ux.mjs",
@@ -600,7 +618,7 @@
       "group": "ux-critical"
     },
     {
-      "order": 67,
+      "order": 69,
       "id": "plain-language-grade",
       "npmScript": "validate:plain-language-grade",
       "entrypoint": "scripts/validate/plain-language-grade.mjs",
@@ -609,7 +627,7 @@
       "group": "ux-critical"
     },
     {
-      "order": 68,
+      "order": 70,
       "id": "credit-boundary-coverage",
       "npmScript": "validate:credit-boundary",
       "entrypoint": "scripts/validate/credit-boundary-coverage.mjs",
@@ -618,7 +636,7 @@
       "group": "release-critical"
     },
     {
-      "order": 69,
+      "order": 71,
       "id": "customer-next-steps",
       "npmScript": "validate:customer-next-steps",
       "entrypoint": "scripts/validate/customer-next-steps.mjs",
@@ -627,7 +645,7 @@
       "group": "ux-critical"
     },
     {
-      "order": 70,
+      "order": 72,
       "id": "e2e-user-journey",
       "npmScript": "validate:e2e-user-journey",
       "entrypoint": "scripts/validate/e2e-user-journey.mjs",
@@ -636,7 +654,7 @@
       "group": "ux-critical"
     },
     {
-      "order": 71,
+      "order": 73,
       "id": "product-flow-e2e",
       "npmScript": "validate:product-flow-e2e",
       "entrypoint": "scripts/validate/product-flow-e2e.mjs",
@@ -645,7 +663,7 @@
       "group": "release-critical"
     },
     {
-      "order": 72,
+      "order": 74,
       "id": "product-model-v2",
       "npmScript": "validate:product-model",
       "entrypoint": "scripts/validate/product-model-v2.mjs",
@@ -654,7 +672,7 @@
       "group": "release-critical"
     },
     {
-      "order": 73,
+      "order": 75,
       "id": "runtime-product-admin",
       "npmScript": "validate:runtime-product-admin",
       "entrypoint": "scripts/validate/runtime-product-admin.mjs",
@@ -663,7 +681,7 @@
       "group": "release-critical"
     },
     {
-      "order": 74,
+      "order": 76,
       "id": "stripe-mode",
       "npmScript": "validate:stripe-mode",
       "entrypoint": "scripts/validate/stripe-mode.mjs",
@@ -672,7 +690,7 @@
       "group": "release-critical"
     },
     {
-      "order": 75,
+      "order": 77,
       "id": "offering-visibility",
       "npmScript": "validate:offering-visibility",
       "entrypoint": "scripts/validate/offering-visibility.mjs",
@@ -681,7 +699,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 76,
+      "order": 78,
       "id": "offering-contracts",
       "npmScript": "validate:offering-contracts",
       "entrypoint": "scripts/validate/offering-contracts.mjs",
@@ -690,7 +708,7 @@
       "group": "release-critical"
     },
     {
-      "order": 77,
+      "order": 79,
       "id": "letter-studio",
       "npmScript": "validate:letter-studio",
       "entrypoint": "scripts/validate/letter-studio.mjs",
@@ -699,7 +717,7 @@
       "group": "ux-critical"
     },
     {
-      "order": 78,
+      "order": 80,
       "id": "navigation-architecture",
       "npmScript": "validate:navigation-architecture",
       "entrypoint": "scripts/validate/navigation-architecture.mjs",
@@ -708,7 +726,7 @@
       "group": "ux-critical"
     },
     {
-      "order": 79,
+      "order": 81,
       "id": "commercial-page-cta-depth",
       "npmScript": "validate:commercial-page-cta-depth",
       "entrypoint": "scripts/validate/commercial-page-cta-depth.mjs",
@@ -717,7 +735,7 @@
       "group": "ux-critical"
     },
     {
-      "order": 80,
+      "order": 82,
       "id": "content-approval-governance",
       "npmScript": "validate:content-approval-governance",
       "entrypoint": "scripts/validate/content-approval-governance.mjs",
@@ -726,7 +744,7 @@
       "group": "governance-critical"
     },
     {
-      "order": 81,
+      "order": 83,
       "id": "artifact-validation",
       "npmScript": "validate:artifact",
       "entrypoint": "scripts/validate/artifact-validation.mjs",
@@ -735,7 +753,7 @@
       "group": "ops-critical"
     },
     {
-      "order": 82,
+      "order": 84,
       "id": "page-factory",
       "npmScript": "validate:page-factory",
       "entrypoint": "scripts/validate/page-factory.mjs",
@@ -744,7 +762,7 @@
       "group": "citation-os-batch-1"
     },
     {
-      "order": 83,
+      "order": 85,
       "id": "blog-detail-pages",
       "npmScript": "validate:blog-detail-pages",
       "entrypoint": "scripts/validate/blog-detail-pages.mjs",
@@ -753,7 +771,7 @@
       "group": "citation-os-batch-1"
     },
     {
-      "order": 84,
+      "order": 86,
       "id": "atom-coverage-depth",
       "npmScript": "validate:atom-coverage-depth",
       "entrypoint": "scripts/validate/atom-coverage-depth.mjs",
@@ -762,7 +780,7 @@
       "group": "citation-os-batch-1"
     },
     {
-      "order": 85,
+      "order": 87,
       "id": "discovery-surfaces",
       "npmScript": "validate:discovery-surfaces",
       "entrypoint": "scripts/validate/discovery-surfaces.mjs",
@@ -771,7 +789,7 @@
       "group": "citation-os-batch-1"
     },
     {
-      "order": 86,
+      "order": 88,
       "id": "structured-data",
       "npmScript": "validate:structured-data",
       "entrypoint": "scripts/validate/structured-data.mjs",
@@ -780,7 +798,7 @@
       "group": "citation-os-batch-1"
     },
     {
-      "order": 87,
+      "order": 89,
       "id": "internal-link-graph",
       "npmScript": "validate:internal-link-graph",
       "entrypoint": "scripts/validate/internal-link-graph.mjs",
@@ -789,7 +807,7 @@
       "group": "citation-os-batch-2"
     },
     {
-      "order": 88,
+      "order": 90,
       "id": "authority-assets",
       "npmScript": "validate:authority-assets",
       "entrypoint": "scripts/validate/authority-assets.mjs",
@@ -798,7 +816,7 @@
       "group": "citation-os-batch-2"
     },
     {
-      "order": 89,
+      "order": 91,
       "id": "template-library",
       "npmScript": "validate:template-library",
       "entrypoint": "scripts/validate/template-library.mjs",
@@ -807,7 +825,7 @@
       "group": "citation-os-batch-2"
     },
     {
-      "order": 90,
+      "order": 92,
       "id": "metrics-scoreboards",
       "npmScript": "validate:metrics-scoreboards",
       "entrypoint": "scripts/validate/metrics-scoreboards.mjs",
@@ -816,7 +834,7 @@
       "group": "measurement"
     },
     {
-      "order": 91,
+      "order": 93,
       "id": "provider-integrations",
       "npmScript": "validate:provider-integrations",
       "entrypoint": "scripts/validate/provider-integrations.mjs",
@@ -825,7 +843,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 92,
+      "order": 94,
       "id": "cloudflare-crawler-intelligence",
       "npmScript": "validate:cloudflare-crawler-intelligence",
       "entrypoint": "scripts/validate/cloudflare-crawler-intelligence.mjs",
@@ -834,7 +852,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 93,
+      "order": 95,
       "id": "indexing-provider-ledgers",
       "npmScript": "validate:indexing-provider-ledgers",
       "entrypoint": "scripts/validate/indexing-provider-ledgers.mjs",
@@ -843,7 +861,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 94,
+      "order": 96,
       "id": "citation-ledger",
       "npmScript": "validate:citation-ledger",
       "entrypoint": "scripts/validate/citation-ledger.mjs",
@@ -852,7 +870,7 @@
       "group": "citation-os"
     },
     {
-      "order": 95,
+      "order": 97,
       "id": "backlink-handoff",
       "npmScript": "validate:backlink-handoff",
       "entrypoint": "scripts/validate/backlink-handoff.mjs",
@@ -861,7 +879,7 @@
       "group": "citation-os"
     },
     {
-      "order": 96,
+      "order": 98,
       "id": "content-lifecycle",
       "npmScript": "validate:content-lifecycle",
       "entrypoint": "scripts/validate/content-lifecycle.mjs",
@@ -870,7 +888,7 @@
       "group": "growth-lifecycle"
     },
     {
-      "order": 97,
+      "order": 99,
       "id": "public-reports",
       "npmScript": "validate:public-reports",
       "entrypoint": "scripts/validate/public-reports.mjs",
@@ -879,7 +897,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 98,
+      "order": 100,
       "id": "repurposing",
       "npmScript": "validate:repurposing",
       "entrypoint": "scripts/validate/repurposing.mjs",
@@ -888,7 +906,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 99,
+      "order": 101,
       "id": "conversion-attribution",
       "npmScript": "validate:conversion-attribution",
       "entrypoint": "scripts/validate/conversion-attribution.mjs",
@@ -897,7 +915,7 @@
       "group": "conversion-critical"
     },
     {
-      "order": 100,
+      "order": 102,
       "id": "experiments",
       "npmScript": "validate:experiments",
       "entrypoint": "scripts/validate/experiments.mjs",
@@ -906,7 +924,7 @@
       "group": "conversion-critical"
     },
     {
-      "order": 101,
+      "order": 103,
       "id": "safe-harbor-autopublish",
       "npmScript": "validate:safe-harbor-autopublish",
       "entrypoint": "scripts/validate/safe-harbor-autopublish.mjs",
@@ -915,7 +933,7 @@
       "group": "phase-a-f"
     },
     {
-      "order": 102,
+      "order": 104,
       "id": "prohibited-claims",
       "npmScript": "validate:prohibited-claims",
       "entrypoint": "scripts/validate/prohibited-claims.mjs",
@@ -924,7 +942,7 @@
       "group": "phase-a-f"
     },
     {
-      "order": 103,
+      "order": 105,
       "id": "required-disclosures",
       "npmScript": "validate:required-disclosures",
       "entrypoint": "scripts/validate/required-disclosures.mjs",
@@ -933,7 +951,7 @@
       "group": "phase-a-f"
     },
     {
-      "order": 104,
+      "order": 106,
       "id": "source-required-claims",
       "npmScript": "validate:source-required-claims",
       "entrypoint": "scripts/validate/source-required-claims.mjs",
@@ -942,7 +960,7 @@
       "group": "phase-a-f"
     },
     {
-      "order": 105,
+      "order": 107,
       "id": "template-preview-safety",
       "npmScript": "validate:template-preview-safety",
       "entrypoint": "scripts/validate/template-preview-safety.mjs",
@@ -951,7 +969,7 @@
       "group": "phase-a-f"
     },
     {
-      "order": 106,
+      "order": 108,
       "id": "source-evidence-depth",
       "npmScript": "validate:source-evidence-depth",
       "entrypoint": "scripts/validate/source-evidence-depth.mjs",
@@ -960,7 +978,7 @@
       "group": "phase-a-f"
     },
     {
-      "order": 107,
+      "order": 109,
       "id": "location-source-coverage",
       "npmScript": "validate:location-source-coverage",
       "entrypoint": "scripts/validate/location-source-coverage.mjs",
@@ -969,7 +987,7 @@
       "group": "phase-a-f"
     },
     {
-      "order": 108,
+      "order": 110,
       "id": "regulated-template-previews",
       "npmScript": "validate:regulated-template-previews",
       "entrypoint": "scripts/validate/regulated-template-previews.mjs",
@@ -978,7 +996,7 @@
       "group": "phase-a-f"
     },
     {
-      "order": 109,
+      "order": 111,
       "id": "workflow-write-scopes",
       "npmScript": "validate:workflow-write-scopes",
       "entrypoint": "scripts/validate/workflow-write-scopes.mjs",
@@ -987,7 +1005,7 @@
       "group": "phase-a-f"
     },
     {
-      "order": 110,
+      "order": 112,
       "id": "self-healing",
       "npmScript": "validate:self-healing",
       "entrypoint": "scripts/validate/self-healing.mjs",
@@ -996,7 +1014,7 @@
       "group": "phase-a-f"
     },
     {
-      "order": 111,
+      "order": 113,
       "id": "conversion-privacy",
       "npmScript": "validate:conversion-privacy",
       "entrypoint": "scripts/validate/conversion-privacy.mjs",
@@ -1005,7 +1023,7 @@
       "group": "phase-a-f"
     },
     {
-      "order": 112,
+      "order": 114,
       "id": "experiment-safety",
       "npmScript": "validate:experiment-safety",
       "entrypoint": "scripts/validate/experiment-safety.mjs",
@@ -1014,7 +1032,7 @@
       "group": "phase-a-f"
     },
     {
-      "order": 113,
+      "order": 115,
       "id": "page-action-safety",
       "npmScript": "validate:page-action-safety",
       "entrypoint": "scripts/validate/page-action-safety.mjs",
@@ -1023,7 +1041,7 @@
       "group": "phase-a-f"
     },
     {
-      "order": 114,
+      "order": 116,
       "id": "final-readiness-ledger",
       "npmScript": "validate:final-readiness-ledger",
       "entrypoint": "scripts/validate/final-readiness-ledger.mjs",
@@ -1032,7 +1050,7 @@
       "group": "phase-a-f"
     },
     {
-      "order": 115,
+      "order": 117,
       "id": "validator-severity",
       "npmScript": "validate:validator-severity",
       "entrypoint": "scripts/validate/validator-severity.mjs",
@@ -1041,7 +1059,7 @@
       "group": "phase-a-f"
     },
     {
-      "order": 116,
+      "order": 118,
       "id": "workflow-main-writer-safety",
       "npmScript": "validate:workflow-main-writer-safety",
       "entrypoint": "scripts/validate/workflow-main-writer-safety.mjs",
@@ -1050,7 +1068,7 @@
       "group": "ops-critical"
     },
     {
-      "order": 117,
+      "order": 119,
       "id": "cadence-ledger-advance",
       "npmScript": "validate:cadence-ledger-advance",
       "entrypoint": "scripts/validate/cadence-ledger-advance.mjs",
@@ -1059,7 +1077,7 @@
       "group": "ops-critical"
     },
     {
-      "order": 118,
+      "order": 120,
       "id": "redirect-map",
       "npmScript": "validate:redirect-map",
       "entrypoint": "scripts/validate/redirect-map.mjs",
@@ -1068,7 +1086,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 119,
+      "order": 121,
       "id": "retest-lifecycle",
       "npmScript": "validate:retest-lifecycle",
       "entrypoint": "scripts/validate/retest-lifecycle.mjs",
@@ -1077,7 +1095,7 @@
       "group": "search-intelligence"
     },
     {
-      "order": 120,
+      "order": 122,
       "id": "provider-cost-controls",
       "npmScript": "validate:provider-cost-controls",
       "entrypoint": "scripts/validate/provider-cost-controls.mjs",
@@ -1086,7 +1104,7 @@
       "group": "search-intelligence"
     },
     {
-      "order": 121,
+      "order": 123,
       "id": "query-atlas",
       "npmScript": "validate:query-atlas",
       "entrypoint": "scripts/validate/query-atlas.mjs",
@@ -1095,7 +1113,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 122,
+      "order": 124,
       "id": "atlas-demand-units",
       "npmScript": "validate:atlas-units",
       "entrypoint": "scripts/validate/atlas-units.mjs",
@@ -1104,7 +1122,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 123,
+      "order": 125,
       "id": "no-internal-instruction-leak",
       "npmScript": "validate:no-instruction-leak",
       "entrypoint": "scripts/validators/validate_no_internal_instruction_leak.js",
@@ -1113,7 +1131,7 @@
       "group": "content-quality"
     },
     {
-      "order": 124,
+      "order": 126,
       "id": "no-empty-table-cells",
       "npmScript": "validate:no-empty-cells",
       "entrypoint": "scripts/validators/validate_no_empty_table_cells.js",
@@ -1122,7 +1140,7 @@
       "group": "content-quality"
     },
     {
-      "order": 125,
+      "order": 127,
       "id": "content-pattern-contract",
       "npmScript": "validate:content-pattern",
       "entrypoint": "scripts/validators/validate_content_pattern_contract.js",
@@ -1131,7 +1149,7 @@
       "group": "content-quality"
     },
     {
-      "order": 126,
+      "order": 128,
       "id": "runtime-bindings",
       "npmScript": "validate:runtime-bindings",
       "entrypoint": "scripts/validators/validate-runtime-bindings.mjs",
@@ -1140,7 +1158,7 @@
       "group": "conversion-critical"
     },
     {
-      "order": 127,
+      "order": 129,
       "id": "sitemap-url-form",
       "npmScript": "validate:sitemap-url-form",
       "entrypoint": "scripts/validate/sitemap-url-form.mjs",
@@ -1149,7 +1167,7 @@
       "group": "release-critical"
     },
     {
-      "order": 128,
+      "order": 130,
       "id": "internal-url-form",
       "npmScript": "validate:internal-url-form",
       "entrypoint": "scripts/validate/internal-url-form.mjs",
@@ -1158,7 +1176,7 @@
       "group": "release-critical"
     },
     {
-      "order": 129,
+      "order": 131,
       "id": "no-redirected-discovery-urls",
       "npmScript": "validate:no-redirected-discovery-urls",
       "entrypoint": "scripts/validate/no-redirected-discovery-urls.mjs",
@@ -1167,7 +1185,7 @@
       "group": "release-critical"
     },
     {
-      "order": 130,
+      "order": 132,
       "id": "outbound-link-health",
       "npmScript": "validate:outbound-link-health",
       "entrypoint": "scripts/validate/outbound-link-health.mjs",
@@ -1176,7 +1194,7 @@
       "group": "release-critical"
     },
     {
-      "order": 131,
+      "order": 133,
       "id": "answer-page-subject",
       "npmScript": "validate:answer-page-subject",
       "entrypoint": "scripts/validate/answer-page-subject.mjs",
@@ -1185,7 +1203,7 @@
       "group": "citation-os-batch-1"
     },
     {
-      "order": 132,
+      "order": 134,
       "id": "download-key-contract",
       "npmScript": "validate:download-key-contract",
       "entrypoint": "scripts/validate/download-key-contract.mjs",
@@ -1194,7 +1212,7 @@
       "group": "conversion-critical"
     },
     {
-      "order": 133,
+      "order": 135,
       "id": "script-callers",
       "npmScript": "validate:script-callers",
       "entrypoint": "scripts/validate/script-callers.mjs",
@@ -1203,7 +1221,7 @@
       "group": "ops-critical"
     },
     {
-      "order": 134,
+      "order": 136,
       "id": "amazon-book-landing-pages",
       "npmScript": "validate:amazon-book-landing-pages",
       "entrypoint": "scripts/validate/amazon-book-landing-pages.mjs",
@@ -1212,7 +1230,7 @@
       "group": "conversion-critical"
     },
     {
-      "order": 135,
+      "order": 137,
       "id": "seo-hygiene-favicon",
       "npmScript": "validate:seo-hygiene:favicon",
       "entrypoint": "scripts/validate/seo-hygiene.mjs",
@@ -1221,7 +1239,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 136,
+      "order": 138,
       "id": "seo-hygiene-og-image",
       "npmScript": "validate:seo-hygiene:og-image",
       "entrypoint": "scripts/validate/seo-hygiene.mjs",
@@ -1230,7 +1248,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 137,
+      "order": 139,
       "id": "seo-hygiene-jsonld",
       "npmScript": "validate:seo-hygiene:jsonld",
       "entrypoint": "scripts/validate/seo-hygiene.mjs",
@@ -1239,7 +1257,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 138,
+      "order": 140,
       "id": "seo-hygiene-definition",
       "npmScript": "validate:seo-hygiene:definition",
       "entrypoint": "scripts/validate/seo-hygiene.mjs",
@@ -1248,7 +1266,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 139,
+      "order": 141,
       "id": "seo-hygiene-indexability",
       "npmScript": "validate:seo-hygiene:indexability",
       "entrypoint": "scripts/validate/seo-hygiene.mjs",
@@ -1257,7 +1275,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 140,
+      "order": 142,
       "id": "seo-hygiene-indexnow",
       "npmScript": "validate:seo-hygiene:indexnow",
       "entrypoint": "scripts/validate/seo-hygiene.mjs",
@@ -1266,7 +1284,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 141,
+      "order": 143,
       "id": "index-coverage",
       "npmScript": "validate:index-coverage",
       "entrypoint": "scripts/validate/index-coverage.mjs",
@@ -1275,7 +1293,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 142,
+      "order": 144,
       "id": "target-query-set",
       "npmScript": "validate:target-query-set",
       "entrypoint": "scripts/validate/target-query-set.mjs",
@@ -1284,7 +1302,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 143,
+      "order": 145,
       "id": "gsc-truth",
       "npmScript": "validate:gsc-truth",
       "entrypoint": "scripts/validate/gsc-truth.mjs",
@@ -1293,7 +1311,7 @@
       "group": "ops-critical"
     },
     {
-      "order": 144,
+      "order": 146,
       "id": "consolidation-candidates",
       "npmScript": "validate:consolidation-candidates",
       "entrypoint": "scripts/validate/consolidation-candidates.mjs",
@@ -1302,7 +1320,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 145,
+      "order": 147,
       "id": "derived-ledger-lanes",
       "npmScript": "validate:derived-ledger-lanes",
       "entrypoint": "scripts/validate/derived-ledger-lanes.mjs",
@@ -1311,7 +1329,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 146,
+      "order": 148,
       "id": "publication-freeze",
       "npmScript": "validate:publication-freeze",
       "entrypoint": "scripts/validate/publication-freeze.mjs",
@@ -1320,7 +1338,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 147,
+      "order": 149,
       "id": "query-aligned-pages",
       "npmScript": "validate:query-aligned-pages",
       "entrypoint": "scripts/validate/query-aligned-pages.mjs",
@@ -1329,7 +1347,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 148,
+      "order": 150,
       "id": "kit-page-sells-its-own-kit",
       "npmScript": "validate:kit-page-sells-its-own-kit",
       "entrypoint": "scripts/validate/kit-page-sells-its-own-kit.mjs",
@@ -1338,7 +1356,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 149,
+      "order": 151,
       "id": "pinterest-launch",
       "npmScript": "validate:pinterest-launch",
       "entrypoint": "scripts/validate/pinterest-launch.mjs",
@@ -1347,7 +1365,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 150,
+      "order": 152,
       "id": "pinterest-drip",
       "npmScript": "validate:pinterest-drip",
       "entrypoint": "scripts/validate/pinterest-drip.mjs",
