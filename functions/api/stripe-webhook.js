@@ -1,4 +1,5 @@
 import { json } from '../_runtime/responses.js';
+import { recordPurchase } from '../_runtime/nurture.js';
 async function hmacHex(secret, payload){
   const key=await crypto.subtle.importKey('raw',new TextEncoder().encode(secret),{name:'HMAC',hash:'SHA-256'},false,['sign']);
   const sig=await crypto.subtle.sign('HMAC',key,new TextEncoder().encode(payload));
@@ -36,6 +37,15 @@ export async function onRequestPost({ request, env }){
   if(!verified.ok) return json({ok:false,error:verified.error},400);
   const event=JSON.parse(raw);
   if(!event?.type) return json({ok:false,error:'INVALID_EVENT'},400);
-  if(event.type==='checkout.session.completed') await recordCheckout(env,event.data.object);
+  if(event.type==='checkout.session.completed'){
+    const session=event.data.object;
+    await recordCheckout(env,session);
+    // Stops the sample series for this buyer (kept as a hash only) and schedules the ONE
+    // review ask with Resend; the address is never written to D1 (functions/_runtime/nurture.js).
+    if(session.payment_status==='paid'){
+      try { await recordPurchase(env, session.customer_details?.email || session.customer_email, session.metadata?.product_name); }
+      catch(e){ console.error(JSON.stringify({event:'RECORD_PURCHASE_FAILED',error:String(e?.message||e)})); }
+    }
+  }
   return json({ok:true,received:true});
 }

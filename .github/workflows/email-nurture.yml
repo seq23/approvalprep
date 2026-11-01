@@ -1,0 +1,25 @@
+name: Email nurture tick
+# Free sample -> email -> paid, and the one review ask (functions/_runtime/nurture.js).
+# Cloudflare Pages has no cron, so this calls the site's /api/nurture-run three times a day
+# (the series is one email per 3 days, so a few hours of lag cost nothing).
+# The endpoint sends only what is due; a missing key answers 503 with a NAMED STOP and
+# this run fails, so a stopped series is a red run, never a silent one.
+on:
+  schedule:
+    - cron: "17 8,13,18 * * *"
+      timezone: America/Chicago
+  workflow_dispatch:
+permissions: {}
+concurrency:
+  group: email-nurture
+  cancel-in-progress: false
+jobs:
+  tick:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - name: Send what is due
+        run: |
+          code=$(curl -sS -o body.json -w '%{http_code}' -X POST https://approvalprep.com/api/nurture-run)
+          cat body.json; echo
+          test "$code" = "200"

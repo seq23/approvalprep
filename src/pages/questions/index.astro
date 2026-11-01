@@ -6,6 +6,7 @@
 // publishes, the hub is noindex and says so.
 import fs from "node:fs";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import SampleSignup from "../../components/SampleSignup.astro";
 const book = fs.existsSync("data/search-loop/pages.json")
   ? JSON.parse(fs.readFileSync("data/search-loop/pages.json", "utf8"))
   : { pages: [] };
@@ -32,4 +33,5 @@ const pages = (book.pages || [])
     )}
     <p><a class="button primary-button" href="/pricing/">Choose your kit</a></p>
   </div></section>
+  <SampleSignup />
 </BaseLayout>

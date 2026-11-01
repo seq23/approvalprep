@@ -1341,6 +1341,17 @@
       "owner": "approvalprep-ops",
       "group": "growth-critical",
       "scope": "every live workflow cron vs the docs/SCHEDULE.md table (cron and America/Chicago timezone), weekly-growth-ops.yml and growth-health-refresh.yml kept unscheduled with workflow_dispatch, spry-weekly-summary.yml on Wednesday with self-check and artifact upload"
+    },
+    {
+      "id": "email-nurture",
+      "npmScript": "validate:email-nurture",
+      "entrypoint": "scripts/validate/email-nurture.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "marketing email without unsubscribe or mailing address, more than one email per 3 days, or emailing after purchase/unsubscribe breaks CAN-SPAM and the Growth playbook email rules",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "functions/_runtime/nurture.js: sample series, 3-day gap, stop on purchase/unsubscribe, one review ask, buyer address deleted after the ask, named stop on missing key"
     }
   ],
   "repairPolicy": "A validator may declare repairCommand only when that command repairs the same defect the validator detects. scripts/selfheal/heal-until-clean.mjs runs it on a blocking failure and re-validates.",

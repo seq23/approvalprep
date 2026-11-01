@@ -1,0 +1,45 @@
+---
+// Free sample -> email -> paid (functions/_runtime/nurture.js). Two real pages of the Letter
+// of Explanation Kit for a typed-in address. Once the address is in, the page shows the PDF
+// link as well, so nobody waits on an email.
+import { CONSENT_TEXT } from "../../functions/_runtime/nurture.js";
+interface Props { heading?: string }
+const { heading = "Get a free letter of explanation sample" } = Astro.props;
+---
+<section class="band sample-signup-band" data-sample-signup><div class="shell">
+  <div class="card sample-signup">
+    <p class="eyebrow">Free sample</p>
+    <h2>{heading}</h2>
+    <p>The rules to read first and the fill-in letter frame from the Letter of Explanation Kit, as a 2-page PDF.</p>
+    <form data-sample-form novalidate>
+      <label>Email address
+        <input type="email" name="email" required autocomplete="email" placeholder="you@example.com" />
+      </label>
+      <input type="text" name="company" tabindex="-1" autocomplete="off" hidden aria-hidden="true" />
+      <label class="sample-consent"><input type="checkbox" name="consent" /> <span>{CONSENT_TEXT}</span></label>
+      <p class="fine" role="alert" data-sample-error></p>
+      <button class="button" type="submit">Email me the free sample</button>
+      <p class="fine">Every email has a one-click unsubscribe link. See the <a href="/privacy/">privacy page</a>.</p>
+    </form>
+    <p class="notice" data-sample-done hidden>Sent. You can also <a href="/samples/letter-of-explanation-sample.pdf">open the sample now</a>.</p>
+  </div>
+</div></section>
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>("[data-sample-signup]")) {
+    const form = root.querySelector<HTMLFormElement>("[data-sample-form]");
+    const error = root.querySelector<HTMLElement>("[data-sample-error]");
+    const done = root.querySelector<HTMLElement>("[data-sample-done]");
+    form?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      if (error) error.textContent = "";
+      if (!data.get("consent")) { if (error) error.textContent = "Please tick the box so we can email the sample."; return; }
+      try {
+        const res = await fetch("/api/sample", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ email: data.get("email"), consent: true, company: data.get("company") || undefined }) });
+        const body = await res.json().catch(() => ({}));
+        if (!res.ok || !body.ok) { if (error) error.textContent = body.error || "Something went wrong. Please try again."; return; }
+        form.hidden = true; if (done) done.hidden = false;
+      } catch { if (error) error.textContent = "Could not reach the server. Please try again."; }
+    });
+  }
+</script>
