@@ -1682,6 +1682,17 @@
       "owner": "approvalprep-growth",
       "group": "growth-critical",
       "scope": "data/pinterest/queue.json schema and copy rules, schedule (PINS_PER_DAY, no gaps, no page on consecutive days), on-site utm links incl. utm_content, dist/pins/<id>.png 1000x1500, feed exact at fixed America/Chicago clocks, refill threshold and batch, request-time Pages Function wiring"
+    },
+    {
+      "id": "schedule-truth",
+      "npmScript": "validate:schedule-truth",
+      "entrypoint": "scripts/validate/schedule-truth.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "docs/SCHEDULE.md and the Boss OS Schedule are read as the truth about what fires; a listed job that does not run, a job that runs unlisted, or a retired do-nothing job quietly rescheduled makes that page lie",
+      "owner": "approvalprep-ops",
+      "group": "growth-critical",
+      "scope": "every live workflow cron vs the docs/SCHEDULE.md table (cron and America/Chicago timezone), weekly-growth-ops.yml and growth-health-refresh.yml kept unscheduled with workflow_dispatch, spry-weekly-summary.yml on Wednesday with self-check and artifact upload"
     }
   ],
   "repairPolicy": "A validator may declare repairCommand only when that command repairs the same defect the validator detects. scripts/selfheal/heal-until-clean.mjs runs it on a blocking failure and re-validates."

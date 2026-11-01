@@ -7,12 +7,10 @@ schedule); see the notes below for what moved.
 
 | Job | Workflow | When | Cron |
 |---|---|---|---|
-| Citation OS Daily | `citation-os-daily.yml` | every day 10:37 UTC | `37 10 * * *` |
 | Citation OS Weekly | `citation-os-weekly.yml` | Sat 05:40 CT | `40 5 * * 6` |
 | Intelligence - Competitor Watch Refresh | `competitor-watch-refresh.yml` | Sat 06:20 CT | `20 6 * * 6` |
 | Intelligence - Content Opportunity Analysis | `content-opportunity-analysis.yml` | Mon–Fri 04:27 CT | `27 4 * * 1-5` |
 | Entity Backlink Watch | `entity-backlink-watch.yml` | Sat 04:00 CT | `0 4 * * 6` |
-| Growth Health Refresh | `growth-health-refresh.yml` | Sat 05:20 CT | `20 5 * * 6` |
 | Intelligence - Growth Maintenance Analysis | `growth-maintenance-analysis.yml` | Tue, Thu 05:43 CT | `43 5 * * 2,4` |
 | Intelligence - Ingest Free Sources | `intelligence-ingest-free-sources.yml` | every day 03:17 CT | `17 3 * * *` |
 | Notification Dispatch | `notification-dispatch.yml` | Fri 09:29 CT | `29 9 * * 5` |
@@ -21,7 +19,15 @@ schedule); see the notes below for what moved.
 | Pinterest Refill | `pinterest-refill.yml` | every day 06:05 CT | `5 6 * * *` |
 | Post-deploy live check | `post-deploy-live-check.yml` | every day 09:40 CT | `40 9 * * *` |
 | Scheduled Content Release | `scheduled-content-release.yml` | every day 05:07 CT | `7 5 * * *` |
-| Weekly Growth Ops | `weekly-growth-ops.yml` | Sat 04:40 CT | `40 4 * * 6` |
+| Spry Labs weekly summary | `spry-weekly-summary.yml` | Wed 07:48 CT | `48 7 * * 3` |
+
+## Not on a schedule (hand dispatch only)
+
+- **Citation OS Daily** (`citation-os-daily.yml`): paused 8 Oct 2026; its cron line is commented out.
+- **Weekly Growth Ops** (`weekly-growth-ops.yml`) and **Growth Health Refresh** (`growth-health-refresh.yml`):
+  retired from the schedule 1 Nov 2026 because they produced no real output (a dry run whose output was
+  thrown away; fixed panel scores saved nowhere). `validate:schedule-truth` keeps them unscheduled and
+  keeps this table equal to the workflows.
 
 ## Weekly windows
 
@@ -35,3 +41,6 @@ schedule); see the notes below for what moved.
   04:20, Weekly Growth Ops 04:40, Growth Health Refresh 05:20, Citation OS Weekly 05:40, Pinterest
   Metrics 06:00. Competitor Watch Refresh moved Wednesday → Saturday 06:20.
 - Every other job keeps the Central time it ran at all summer.
+- Later the same day: Weekly Growth Ops and Growth Health Refresh lost their schedules (retired, above), and
+  the Spry Labs weekly summary joined Wednesday 07:48 CT, after the other five side businesses (07:03–07:43),
+  so ApprovalPrep has its own section in the 08:15 "Spry Labs weekly" email.
