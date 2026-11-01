@@ -1,0 +1,55 @@
+name: Spry Labs weekly summary
+# ApprovalPrep's section of the ONE "Spry Labs weekly" email (owner, 1 Nov 2026).
+# Wednesdays 07:48 CT, staggered after the other five side businesses (07:03-07:43).
+# scripts/spry/spry-weekly-summary.mjs reads what this repo already records (paid
+# downloads and checkouts from D1, Search Console clicks, Pinterest visits, pages
+# published and waiting for a refresh) and writes spry-weekly-summary.json, uploaded
+# as the artifact `spry-weekly-summary`. Boss OS reads it at 08:15 CT and words it.
+# A number that cannot be read is a "not read: reason" line, never a zero; nothing
+# read at all is a NAMED STOP. No email, no commit, no deploy from here.
+on:
+  schedule:
+    - cron: "48 7 * * 3"  # Wednesdays 07:48 CT
+      timezone: America/Chicago
+  workflow_dispatch:
+    inputs:
+      fixture_trace:
+        description: "Run fixture workflow data trace only"
+        required: false
+        default: "false"
+permissions:
+  contents: read
+concurrency:
+  group: spry-weekly-summary
+  cancel-in-progress: false
+jobs:
+  summary:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22.12.0
+          cache: npm
+      - name: Install locked dependencies
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
+        run: npm ci --no-audit --no-fund
+      - name: Run fixture workflow trace
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
+        run: npm run workflows:trace -- --workflow spry-weekly-summary.yml
+      - name: Self-check the summary before trusting it
+        run: node scripts/spry/spry-weekly-summary.mjs --self-check
+      - name: Write the week for Boss OS
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: node scripts/spry/spry-weekly-summary.mjs spry-weekly-summary.json
+      - name: Upload the summary for Boss OS
+        uses: actions/upload-artifact@v4
+        with:
+          name: spry-weekly-summary
+          path: spry-weekly-summary.json
+          if-no-files-found: error
+          retention-days: 30
