@@ -11,7 +11,8 @@ name: Entity Backlink Watch
 # the run summary; they need the owner's login and do not turn the run red.
 on:
   schedule:
-    - cron: "23 10 * * 1"
+    - cron: "0 4 * * 6"  # America/Chicago, all year
+      timezone: America/Chicago
   workflow_dispatch:
     inputs:
       fixture_trace:

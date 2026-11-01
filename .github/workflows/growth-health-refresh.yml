@@ -7,7 +7,8 @@ on:
         required: false
         default: "false"
   schedule:
-    - cron: "33 11 * * 1"
+    - cron: "20 5 * * 6"  # America/Chicago, all year
+      timezone: America/Chicago
 jobs:
   growth:
     runs-on: ubuntu-24.04

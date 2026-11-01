@@ -174,7 +174,7 @@ try {
 /* ---------- part 2b: the weekly cap actually measures a week ---------- */
 
 // `--accept` runs at the end of every clear scheduled-content-release, and that
-// workflow is on `cron: "7 10 * * *"`. Comparing "new since the last accept" to
+// workflow is on `cron: "7 5 * * *"` (CT). Comparing "new since the last accept" to
 // a per-WEEK cap therefore handed out a full weekly allowance every morning.
 // Measured before the fix: seven synthetic daily accepts of two URLs each
 // published fourteen URLs against a cap of two, and the gate never blocked.

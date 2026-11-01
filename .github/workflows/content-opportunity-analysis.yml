@@ -7,7 +7,8 @@ on:
         required: false
         default: "false"
   schedule:
-    - cron: "27 9 * * 1-5"
+    - cron: "27 4 * * 1-5"  # America/Chicago, all year
+      timezone: America/Chicago
 permissions:
   contents: write
 concurrency:

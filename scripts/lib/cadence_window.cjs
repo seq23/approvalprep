@@ -8,7 +8,7 @@
  * The gate counted URLs that were not in `data/cadence/known_urls.json` and
  * compared that count to `new_pages_per_week`. The ledger is advanced by
  * `cadence:gate --accept`, which runs at the end of every clear
- * `scheduled-content-release` run - and that workflow is on `cron: "7 10 * * *"`,
+ * `scheduled-content-release` run - and that workflow is on `cron: "7 5 * * *"` (America/Chicago),
  * once a day. So the baseline reset daily while the cap it was measured against
  * was written per week: a full weekly allowance was handed out every morning.
  *

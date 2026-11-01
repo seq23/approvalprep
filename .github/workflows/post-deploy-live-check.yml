@@ -23,9 +23,10 @@ on:
         required: false
         default: "false"
   schedule:
-    # 14:40 UTC, after the daily ingest (08:17) and the scheduled release have
+    # 09:40 CT, after the daily ingest (03:17 CT) and the scheduled release have
     # landed on main and Cloudflare Pages has rebuilt from it.
-    - cron: "40 14 * * *"
+    - cron: "40 9 * * *"  # America/Chicago, all year
+      timezone: America/Chicago
 
 permissions:
   contents: read

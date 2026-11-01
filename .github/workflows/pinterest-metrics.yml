@@ -4,7 +4,8 @@ name: Pinterest Metrics
 # data/pinterest/metrics.json and the run summary, never invented numbers.
 on:
   schedule:
-    - cron: "20 12 * * 1"   # Mondays ~07:20 CT
+    - cron: "0 6 * * 6"  # Saturdays 06:00 CT
+      timezone: America/Chicago
   workflow_dispatch:
     inputs:
       fixture_trace:
