@@ -25,7 +25,7 @@
     "automation:self-heal-attempt": "node scripts/automation/attempt-self-heal.mjs",
     "automation:self-heal-revalidate": "node scripts/automation/revalidate-after-self-heal.mjs",
     "baseline": "node scripts/baseline.mjs",
-    "build": "astro build && PAGES_OUT_DIR=dist node scripts/build_404.mjs && node scripts/install_clarity.mjs && node scripts/build_pin_images.mjs",
+    "build": "astro build && PAGES_OUT_DIR=dist node scripts/build_404.mjs && node scripts/install_clarity.mjs && node scripts/build_pin_images.mjs && node scripts/search-loop/fold-pages.mjs",
     "cadence:gate": "node scripts/cadence_gate.cjs",
     "cadence:headroom": "node scripts/cadence/publish_headroom.mjs",
     "citation-handoff:all": "npm run citations:import && npm run citations:score && npm run citations:watchlist && npm run handoff:backlinks",
@@ -305,7 +305,9 @@
     "validate:pinterest-drip": "node scripts/validate/pinterest-drip.mjs",
     "pinterest:refill": "node scripts/pinterest/refill_queue.mjs",
     "pinterest:metrics": "node scripts/pinterest/measure.mjs",
-    "validate:clarity-scope": "node scripts/validate/clarity-scope.mjs"
+    "validate:clarity-scope": "node scripts/validate/clarity-scope.mjs",
+    "search-loop:fold": "node scripts/search-loop/fold-pages.mjs",
+    "search-loop:sync-topics": "node scripts/search-loop/sync-topics.mjs"
   },
   "dependencies": {
     "astro": "^7.0.6",

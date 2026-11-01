@@ -18,6 +18,18 @@ const urls = new Set();
 for (const route of manifest.routes.filter((route) => route.index && route.type !== "admin")) urls.add(canonicalUrl(route.path));
 for (const answer of generated.answers.filter((item) => item.status === "published_by_contract")) urls.add(canonicalUrl(`/blog/${slugify(answer.title)}`));
 for (const report of reports.reports.filter((item) => item.status === "published_by_contract")) urls.add(canonicalUrl(report.path));
+// Search loop pages (seq23/search-loop): every live page in its ledger, dated by
+// the day it was published or last strengthened - a per-page date, not a set date.
+const searchLoopBook = fs.existsSync("data/search-loop/pages.json")
+  ? JSON.parse(fs.readFileSync("data/search-loop/pages.json", "utf8")).pages || []
+  : [];
+const searchLoopDate = new Map();
+for (const page of searchLoopBook.filter((item) => item.status === "live" && fs.existsSync(item.rel))) {
+  const url = canonicalUrl(page.route);
+  urls.add(url);
+  searchLoopDate.set(url, page.strengthen?.at || page.published_at || "");
+}
+if (searchLoopDate.size) urls.add(canonicalUrl("/questions/"));
 // /llms.txt, /feed.xml, /content-index.json and friends are still served; they
 // are machine-readable feeds, not indexable pages, and a sitemap lists pages.
 // These URLs come from data records rather than files, and none of the records
@@ -39,7 +51,8 @@ const sourceDate = {
   blog: commitDate("data/content/generated_answers.json"),
   report: commitDate("data/reports/public_report_registry.json"),
 };
-const dateFor = (url) => (url.includes("/blog/") ? sourceDate.blog
+const dateFor = (url) => (searchLoopDate.has(url) ? searchLoopDate.get(url)
+  : url.includes("/blog/") ? sourceDate.blog
   : reports.reports.some((r) => url === canonicalUrl(r.path)) ? sourceDate.report
   : sourceDate.route);
 const body = [...urls].sort().map((url) => {

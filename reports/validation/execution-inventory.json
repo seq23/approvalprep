@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "orchestratorSource": "_repo_validation_registry.json",
-  "validatorCount": 152,
-  "hardFailCount": 141,
+  "validatorCount": 153,
+  "hardFailCount": 142,
   "strongWarningCount": 11,
   "validators": [
     {
@@ -1369,6 +1369,15 @@
       "id": "pinterest-drip",
       "npmScript": "validate:pinterest-drip",
       "entrypoint": "scripts/validate/pinterest-drip.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "growth-critical"
+    },
+    {
+      "order": 153,
+      "id": "schedule-truth",
+      "npmScript": "validate:schedule-truth",
+      "entrypoint": "scripts/validate/schedule-truth.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
       "group": "growth-critical"

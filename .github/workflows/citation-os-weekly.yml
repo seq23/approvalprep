@@ -86,7 +86,7 @@ jobs:
         # data/cadence/policy.json before it ships.
         #
         # Read-only: the ledger moves only under --accept, which stays in
-        # scheduled-content-release.
+        # the Search Loop post-build (scripts/search-loop/post_build.sh).
         run: npm run cadence:gate
       - name: Commit citation OS weekly outputs
         # data/authority_scale/retest_*.json is staged here because this lane is

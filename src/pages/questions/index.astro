@@ -1,0 +1,35 @@
+---
+// The hub for the search loop's pages (seq23/search-loop, adopted 1 Nov 2026).
+// The engine writes each page to questions/<slug>/index.html and records it in
+// data/search-loop/pages.json; the build folds the files into dist/ and this hub
+// lists every live one, so no engine page is an orphan. Until the first page
+// publishes, the hub is noindex and says so.
+import fs from "node:fs";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+const book = fs.existsSync("data/search-loop/pages.json")
+  ? JSON.parse(fs.readFileSync("data/search-loop/pages.json", "utf8"))
+  : { pages: [] };
+const pages = (book.pages || [])
+  .filter((p) => p.status === "live" && fs.existsSync(p.rel))
+  .map((p) => {
+    const html = fs.readFileSync(p.rel, "utf8");
+    const h1 = (html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i) || [])[1] || p.query;
+    return { route: p.route, h1: h1.replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&#39;/g, "'").replace(/&quot;/g, '"'), published: p.published_at };
+  })
+  .sort((a, b) => (a.published < b.published ? 1 : a.published > b.published ? -1 : a.h1.localeCompare(b.h1)));
+---
+<BaseLayout title="Paperwork Questions, Answered Plainly | ApprovalPrep" description="Short, sourced answers to the paperwork questions people ask before a mortgage, rental, loan, job or credit application, each with what to prepare next." canonical="https://approvalprep.com/questions/" noindex={pages.length === 0}>
+  <section class="hero shell">
+    <p class="eyebrow">Questions</p>
+    <h1>Paperwork questions, answered plainly.</h1>
+    <p class="lead">Each answer starts with the short version, shows its sources, and ends with what to prepare next.</p>
+  </section>
+  <section class="band"><div class="shell">
+    {pages.length ? (
+      <ul class="link-list">{pages.map((p) => <li><a href={p.route}>{p.h1}</a></li>)}</ul>
+    ) : (
+      <p>The first answers publish here soon. Until then, the <a href="/resources/">resource hub</a> lists every guide.</p>
+    )}
+    <p><a class="button primary-button" href="/pricing/">Choose your kit</a></p>
+  </div></section>
+</BaseLayout>

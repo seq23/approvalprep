@@ -36,10 +36,15 @@ jobs:
       - run: npm run intelligence:recommend-page-actions
       - run: npm run validate:content-actions
       - run: npm run validate:citation-opportunities
+      - name: Feed the registry into the search loop's finder
+        # citation_opportunity_registry.json is the finder input for the search loop
+        # (Search Loop workflow, seq23/search-loop): the subjects with open
+        # opportunities become its autocomplete seeds in search-loop.config.json.
+        run: npm run search-loop:sync-topics
       - name: Commit opportunity briefs
         run: |
           git config user.name "approvalprep-bot"
           git config user.email "hello@approvalprep.com"
-          git add data/intelligence/content_opportunity_briefs.json data/intelligence/citation_opportunity_registry.json
+          git add data/intelligence/content_opportunity_briefs.json data/intelligence/citation_opportunity_registry.json search-loop.config.json
           git diff --cached --quiet || git commit -m "Update content opportunity intelligence"
           bash scripts/workflows/safe-push-main.sh

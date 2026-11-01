@@ -18,7 +18,7 @@ schedule); see the notes below for what moved.
 | Pinterest Metrics | `pinterest-metrics.yml` | Sat 06:00 CT | `0 6 * * 6` |
 | Pinterest Refill | `pinterest-refill.yml` | every day 06:05 CT | `5 6 * * *` |
 | Post-deploy live check | `post-deploy-live-check.yml` | every day 09:40 CT | `40 9 * * *` |
-| Scheduled Content Release | `scheduled-content-release.yml` | every day 05:07 CT | `7 5 * * *` |
+| Search Loop | `search-loop.yml` | every day 05:07 CT | `7 5 * * *` |
 | Spry Labs weekly summary | `spry-weekly-summary.yml` | Wed 07:48 CT | `48 7 * * 3` |
 
 ## Not on a schedule (hand dispatch only)
@@ -28,6 +28,19 @@ schedule); see the notes below for what moved.
   retired from the schedule 1 Nov 2026 because they produced no real output (a dry run whose output was
   thrown away; fixed panel scores saved nowhere). `validate:schedule-truth` keeps them unscheduled and
   keeps this table equal to the workflows.
+
+## Search loop (1 Nov 2026)
+
+- **Search Loop** (`search-loop.yml`) calls the shared engine `seq23/search-loop@v1` daily in the old
+  release slot: FIND weekly, BUILD daily (gated `/questions/` pages, published straight away, pace 10/day
+  rising to 30), CHECK + REPAIR (strengthen, undo, merge) and the `search-loop-week` report artifact.
+- **Scheduled Content Release** (`scheduled-content-release.yml`) is retired and deleted: it was the
+  frozen release lane, and the search loop replaces it. Its dry-run delegated-authority / self-heal /
+  notification-queue steps are also gone from Page Refresh Queue and Growth Maintenance Analysis; they
+  committed and repaired nothing. The engine's repair is the real one.
+- Content Opportunity Analysis now feeds `citation_opportunity_registry.json` into the engine's topic
+  seeds (`npm run search-loop:sync-topics`). Ingest Free Sources keeps measuring; Page Refresh Queue keeps
+  the refresh queue the Spry Labs weekly summary reads.
 
 ## Weekly windows
 

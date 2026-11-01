@@ -53,8 +53,8 @@ jobs:
         # workflows that can publish is not a cap.
         #
         # Read-only: scripts/cadence_gate.cjs writes the ledger only under
-        # --accept, which is not passed here. scheduled-content-release remains
-        # the single workflow that advances the baseline.
+        # --accept, which is not passed here. The Search Loop post-build
+        # (scripts/search-loop/post_build.sh) is what advances the baseline.
         run: npm run cadence:gate
       - name: Commit citation OS daily outputs
         run: |

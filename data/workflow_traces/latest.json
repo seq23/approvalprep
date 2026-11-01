@@ -1,14 +1,14 @@
 {
   "schemaVersion": "4.4.0",
-  "generatedAt": "2026-10-30T22:39:50.685Z",
+  "generatedAt": "2026-11-01T13:35:00.900Z",
   "status": "COMPLETE_FIXTURE_TRACE",
-  "workflowCount": 21,
-  "manualReadyCount": 21,
-  "scheduledCount": 16,
+  "workflowCount": 22,
+  "manualReadyCount": 22,
+  "scheduledCount": 15,
   "pushTriggeredCount": 1,
   "pullRequestTriggeredCount": 2,
   "mainWriterCount": 14,
-  "fauxScenarioCount": 168,
+  "fauxScenarioCount": 174,
   "allManualReady": true,
   "allHaveFixtureTraceInput": true,
   "allUsePinnedRunner": true,
@@ -241,6 +241,7 @@
         "validate:runtime-bindings",
         "validate:runtime-product-admin",
         "validate:safe-harbor-autopublish",
+        "validate:schedule-truth",
         "validate:schema-entity-graph",
         "validate:script-callers",
         "validate:security",
@@ -486,6 +487,7 @@
         "validate:runtime-bindings",
         "validate:runtime-product-admin",
         "validate:safe-harbor-autopublish",
+        "validate:schedule-truth",
         "validate:schema-entity-graph",
         "validate:script-callers",
         "validate:security",
@@ -573,7 +575,7 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "3e48779257f08c72"
+      "traceId": "6f28d06cc0f05356"
     },
     {
       "workflow": "citation-os-weekly.yml",
@@ -775,6 +777,7 @@
         "validate:runtime-bindings",
         "validate:runtime-product-admin",
         "validate:safe-harbor-autopublish",
+        "validate:schedule-truth",
         "validate:schema-entity-graph",
         "validate:script-callers",
         "validate:security",
@@ -862,7 +865,7 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "d698c1bacc17da3e"
+      "traceId": "e98724f4cfc2a89f"
     },
     {
       "workflow": "citation-probe.yml",
@@ -1026,7 +1029,7 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "55b021644c3e97ef"
+      "traceId": "ade61ed8c3ad839a"
     },
     {
       "workflow": "content-opportunity-analysis.yml",
@@ -1054,6 +1057,7 @@
       "npmScripts": [
         "intelligence:content-opportunities",
         "intelligence:recommend-page-actions",
+        "search-loop:sync-topics",
         "validate:citation-opportunities",
         "validate:content-actions",
         "workflows:trace"
@@ -1063,6 +1067,7 @@
         "authority:scale:fanout-window",
         "intelligence:content-opportunities",
         "intelligence:recommend-page-actions",
+        "search-loop:sync-topics",
         "validate:citation-opportunities",
         "validate:content-actions",
         "workflows:trace"
@@ -1116,7 +1121,7 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "184de8cd9082064c"
+      "traceId": "aa02aeb77dd4af72"
     },
     {
       "workflow": "entity-backlink-watch.yml",
@@ -1198,7 +1203,7 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "10935ee594563bb8"
+      "traceId": "2ae0cfeb36331408"
     },
     {
       "workflow": "growth-health-refresh.yml",
@@ -1207,7 +1212,7 @@
       "real_telemetry": false,
       "may_be_used_for_growth_claims": false,
       "manualReady": true,
-      "scheduled": true,
+      "scheduled": false,
       "pushTriggered": false,
       "pullRequestTriggered": false,
       "hasCheckout": true,
@@ -1272,7 +1277,7 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "83457c36cf51c892"
+      "traceId": "0c5724394d6becfa"
     },
     {
       "workflow": "growth-maintenance-analysis.yml",
@@ -1298,27 +1303,17 @@
       "fixtureTraceInput": true,
       "secretRefs": [],
       "npmScripts": [
-        "admin:build-owner-exceptions",
-        "automation:self-heal-attempt",
-        "automation:self-heal-revalidate",
-        "governance:apply-authority",
         "intelligence:authority",
         "intelligence:growth-brief",
         "intelligence:growth-maintenance",
-        "notifications:build-queue",
         "validate:backlink-honesty",
         "validate:maintenance-briefs",
         "workflows:trace"
       ],
       "transitiveNpmScripts": [
-        "admin:build-owner-exceptions",
-        "automation:self-heal-attempt",
-        "automation:self-heal-revalidate",
-        "governance:apply-authority",
         "intelligence:authority",
         "intelligence:growth-brief",
         "intelligence:growth-maintenance",
-        "notifications:build-queue",
         "validate:backlink-honesty",
         "validate:maintenance-briefs",
         "workflows:trace"
@@ -1372,7 +1367,7 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "937d0e15defd3c3d"
+      "traceId": "8b6667e9bad249b4"
     },
     {
       "workflow": "indexing-submit.yml",
@@ -1463,7 +1458,7 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "c5e5c4d818172e08"
+      "traceId": "26b0d098c2e566b2"
     },
     {
       "workflow": "intelligence-ingest-free-sources.yml",
@@ -1628,6 +1623,7 @@
         "validate:runtime-bindings",
         "validate:runtime-product-admin",
         "validate:safe-harbor-autopublish",
+        "validate:schedule-truth",
         "validate:schema-entity-graph",
         "validate:script-callers",
         "validate:security",
@@ -1715,7 +1711,7 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "fe93d4a2c21fc7f0"
+      "traceId": "14846a02fd2e5a52"
     },
     {
       "workflow": "notification-dispatch.yml",
@@ -1803,7 +1799,7 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "7b11d32da089c8c8"
+      "traceId": "5a3119c156afaeb9"
     },
     {
       "workflow": "page-refresh-queue.yml",
@@ -1829,23 +1825,13 @@
       "fixtureTraceInput": true,
       "secretRefs": [],
       "npmScripts": [
-        "admin:build-owner-exceptions",
-        "automation:self-heal-attempt",
-        "automation:self-heal-revalidate",
-        "governance:apply-authority",
         "intelligence:growth-maintenance",
-        "notifications:build-queue",
         "validate:automation-safety",
         "validate:maintenance-briefs",
         "workflows:trace"
       ],
       "transitiveNpmScripts": [
-        "admin:build-owner-exceptions",
-        "automation:self-heal-attempt",
-        "automation:self-heal-revalidate",
-        "governance:apply-authority",
         "intelligence:growth-maintenance",
-        "notifications:build-queue",
         "validate:automation-safety",
         "validate:maintenance-briefs",
         "workflows:trace"
@@ -1899,7 +1885,7 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "f0a452d8f990a05b"
+      "traceId": "6515b3eecfe1464a"
     },
     {
       "workflow": "pinterest-metrics.yml",
@@ -1984,7 +1970,7 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "7d4113077fb6f455"
+      "traceId": "94fb199426cc4901"
     },
     {
       "workflow": "pinterest-refill.yml",
@@ -2066,7 +2052,7 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "19e0eb6d8adb7d19"
+      "traceId": "0b373512e2b7a42c"
     },
     {
       "workflow": "post-deploy-live-check.yml",
@@ -2136,7 +2122,7 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "413227bccb4c83eb"
+      "traceId": "b871173878bf08d6"
     },
     {
       "workflow": "release-report.yml",
@@ -2207,7 +2193,7 @@
       "traceId": "b3d93de43068de1e"
     },
     {
-      "workflow": "scheduled-content-release.yml",
+      "workflow": "search-loop.yml",
       "traceMode": "FIXTURE_TRACE_WITH_TRANSITIVE_PACKAGE_RESOLUTION_NOT_PRODUCTION_TELEMETRY",
       "proof_type": "fixture",
       "real_telemetry": false,
@@ -2216,8 +2202,8 @@
       "scheduled": true,
       "pushTriggered": false,
       "pullRequestTriggered": false,
-      "hasCheckout": true,
-      "hasNodeSetup": true,
+      "hasCheckout": false,
+      "hasNodeSetup": false,
       "nodeVersionOk": true,
       "runnerPinned": true,
       "timeoutSet": true,
@@ -2228,35 +2214,28 @@
       "installDependencyReason": "transitive:build",
       "dependencyInstallPolicyOk": true,
       "fixtureTraceInput": true,
-      "secretRefs": [],
+      "secretRefs": [
+        "BING_WEBMASTER_API_KEY",
+        "CLOUDFLARE_API_TOKEN",
+        "GSC_SERVICE_ACCOUNT_JSON",
+        "OPENROUTER_API_KEY"
+      ],
       "npmScripts": [
-        "admin:build-owner-exceptions",
-        "automation:safe",
-        "automation:self-heal-attempt",
-        "automation:self-heal-revalidate",
         "build",
         "cadence:gate",
-        "content:release",
-        "governance:apply-authority",
-        "notifications:build-queue",
-        "selfheal",
-        "validate:automation-safety"
+        "routes:redirects",
+        "seo:sitemap"
       ],
       "transitiveNpmScripts": [
-        "admin:build-owner-exceptions",
-        "automation:safe",
-        "automation:self-heal-attempt",
-        "automation:self-heal-revalidate",
         "build",
         "cadence:gate",
-        "content:release",
-        "governance:apply-authority",
-        "notifications:build-queue",
-        "selfheal",
-        "validate:automation-safety"
+        "routes:redirects",
+        "seo:sitemap"
       ],
       "missingNpmScripts": [],
-      "expectedDataTouches": [],
+      "expectedDataTouches": [
+        "data/routes/redirects.json"
+      ],
       "mainWriter": true,
       "sharedWriterConcurrency": true,
       "fullMainCheckout": true,
@@ -2284,7 +2263,7 @@
         },
         {
           "id": "secret_boundary",
-          "status": "NOT_APPLICABLE"
+          "status": "PROVIDER_GATED_NO_FAKE_SUCCESS"
         },
         {
           "id": "latest_main_before_generation",
@@ -2304,7 +2283,78 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "b81f854175f915d9"
+      "traceId": "300ad8b631c89913"
+    },
+    {
+      "workflow": "spry-weekly-summary.yml",
+      "traceMode": "FIXTURE_TRACE_WITH_TRANSITIVE_PACKAGE_RESOLUTION_NOT_PRODUCTION_TELEMETRY",
+      "proof_type": "fixture",
+      "real_telemetry": false,
+      "may_be_used_for_growth_claims": false,
+      "manualReady": true,
+      "scheduled": true,
+      "pushTriggered": false,
+      "pullRequestTriggered": false,
+      "hasCheckout": true,
+      "hasNodeSetup": true,
+      "nodeVersionOk": true,
+      "runnerPinned": true,
+      "timeoutSet": true,
+      "usesNpmInstall": false,
+      "usesNpmCi": true,
+      "buildsProject": false,
+      "requiresDependencyInstall": false,
+      "installDependencyReason": null,
+      "dependencyInstallPolicyOk": true,
+      "fixtureTraceInput": true,
+      "secretRefs": [
+        "CLOUDFLARE_ACCOUNT_ID",
+        "CLOUDFLARE_API_TOKEN"
+      ],
+      "npmScripts": [
+        "workflows:trace"
+      ],
+      "transitiveNpmScripts": [
+        "workflows:trace"
+      ],
+      "missingNpmScripts": [],
+      "expectedDataTouches": [],
+      "mainWriter": false,
+      "sharedWriterConcurrency": true,
+      "fullMainCheckout": true,
+      "preparesLatestMain": true,
+      "safePushHelper": true,
+      "directUnsafePush": false,
+      "fauxScenarios": [
+        {
+          "id": "manual_fixture_dispatch",
+          "status": "PASS"
+        },
+        {
+          "id": "known_command_resolution",
+          "status": "PASS"
+        },
+        {
+          "id": "transitive_dependency_install",
+          "status": "PASS",
+          "requires_dependency_install": false,
+          "reason": null
+        },
+        {
+          "id": "pinned_runtime_and_timeout",
+          "status": "PASS"
+        },
+        {
+          "id": "secret_boundary",
+          "status": "PROVIDER_GATED_NO_FAKE_SUCCESS"
+        },
+        {
+          "id": "no_direct_main_write",
+          "status": "PASS"
+        }
+      ],
+      "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
+      "traceId": "3ee0f56db5498bfe"
     },
     {
       "workflow": "validate.yml",
@@ -2453,6 +2503,7 @@
         "validate:runtime-bindings",
         "validate:runtime-product-admin",
         "validate:safe-harbor-autopublish",
+        "validate:schedule-truth",
         "validate:schema-entity-graph",
         "validate:script-callers",
         "validate:security",
@@ -2528,7 +2579,7 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "c5537e93633057c5"
+      "traceId": "be26daf81907bee8"
     },
     {
       "workflow": "weekly-growth-ops.yml",
@@ -2537,7 +2588,7 @@
       "real_telemetry": false,
       "may_be_used_for_growth_claims": false,
       "manualReady": true,
-      "scheduled": true,
+      "scheduled": false,
       "pushTriggered": false,
       "pullRequestTriggered": false,
       "hasCheckout": true,
@@ -2634,7 +2685,7 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "c3dc1ba6a397f764"
+      "traceId": "018e24bfc658a6e6"
     }
   ]
 }

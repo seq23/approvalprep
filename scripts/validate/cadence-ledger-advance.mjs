@@ -66,7 +66,20 @@ for (const file of files) {
   const raw = fs.readFileSync(path.join(workflowDir, file), "utf8");
   // Ordering is a property of the steps, not of the prose around them. Comment
   // lines are blanked rather than dropped so offsets still line up with the file.
-  const text = raw.replace(/^\s*#.*$/gm, (line) => " ".repeat(line.length));
+  let text = raw.replace(/^\s*#.*$/gm, (line) => " ".repeat(line.length));
+  // A caller of the shared search loop (uses: seq23/search-loop/...) has no steps of
+  // its own: its publishing happens in the scripts it hands the engine, which run in
+  // this order - post_build_command, then commit_command. Fold those scripts in as
+  // steps, so the search loop is judged by exactly the rules every other publisher is.
+  if (/uses:\s*seq23\/search-loop\//.test(text)) {
+    for (const key of ["post_build_command", "commit_command"]) {
+      const m = text.match(new RegExp(`${key}:\\s*bash\\s+(\\S+)`));
+      if (!m) { errors.push(`${file}: search-loop caller has no \`${key}: bash <script>\`, so what it publishes cannot be checked.`); continue; }
+      if (!fs.existsSync(m[1])) { errors.push(`${file}: ${key} names ${m[1]}, which does not exist.`); continue; }
+      const script = fs.readFileSync(m[1], "utf8").replace(/^\s*#.*$/gm, "").split("\n").filter((l) => l.trim()).map((l) => `      run: ${l.trim()}`);
+      text += `\n${script.join("\n")}\n`;
+    }
+  }
   const pushes = /git\s+commit/.test(text) || /safe-push-main\.sh/.test(text);
   const publishesSitemap = /git\s+add[^\n]*public\/sitemap\.xml/.test(text);
   if (!pushes || !publishesSitemap) continue;

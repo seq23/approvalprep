@@ -41,7 +41,22 @@ function installReason(closure){
 }
 const files = fs.readdirSync(dir).filter(f=>f.endsWith(".yml") || f.endsWith(".yaml")).sort().filter(f=>!only || f===only || `.github/workflows/${f}`===only);
 const traces = files.map(file => {
-  const text = read(`.github/workflows/${file}`);
+  let text = read(`.github/workflows/${file}`);
+  // A caller of the shared search loop (seq23/search-loop, pinned @v1) has no steps of
+  // its own. The engine's reusable workflow owns the runner, the timeout and Node, and
+  // checks out the default branch before it publishes; what this repo hands it is
+  // post_build_command and commit_command. Those scripts are folded in as run: steps, so
+  // their npm scripts are resolved and their push is judged like any other main writer.
+  const searchLoopCaller = /uses:\s*seq23\/search-loop\/\.github\/workflows\/search-loop\.yml@v1\s*$/m.test(text) && /engine_ref:\s*v1\s*$/m.test(text);
+  if (searchLoopCaller) {
+    for (const key of ["setup_command", "post_build_command", "commit_command"]) {
+      const m = text.match(new RegExp(`${key}:\\s*(.+)`));
+      if (!m) continue;
+      text += `\n      - run: ${m[1].trim()}\n`;
+      const script = m[1].trim().match(/^bash\s+(\S+)$/);
+      if (script && fs.existsSync(script[1])) text += read(script[1]).replace(/^\s*#.*$/gm, "").split("\n").filter((l) => l.trim()).map((l) => `      - run: ${l.trim()}`).join("\n") + "\n";
+    }
+  }
   const commands = [...text.matchAll(/run:\s*(.+)|run:\s*\|([\s\S]*?)(?=\n\s*-\s|\n\s*[a-zA-Z_]+:\s|$)/g)].map(m => (m[1]||m[2]||"").trim()).filter(Boolean);
   const uses = [...text.matchAll(/uses:\s*([^\n]+)/g)].map(m=>m[1].trim());
   const secretRefs = [...new Set([...text.matchAll(/secrets\.([A-Z0-9_]+)/g)].map(m=>m[1]))].sort();
@@ -55,13 +70,13 @@ const traces = files.map(file => {
   const requiresDependencyInstall = Boolean(installDependencyReason);
   const buildsProject = closure.scripts.includes("build");
   const dependencyInstallPolicyOk = requiresDependencyInstall ? usesNpmCi && !usesNpmInstall : !usesNpmInstall;
-  const nodeVersionOk = /node-version:\s*22\.12\.0/.test(text);
-  const runnerPinned = /runs-on:\s*ubuntu-24\.04/.test(text);
-  const timeoutSet = /timeout-minutes:\s*\d+/.test(text);
+  const nodeVersionOk = searchLoopCaller || /node-version:\s*22\.12\.0/.test(text);
+  const runnerPinned = searchLoopCaller || /runs-on:\s*ubuntu-24\.04/.test(text);
+  const timeoutSet = searchLoopCaller || /timeout-minutes:\s*\d+/.test(text);
   const mainWriter = /safe-push-main\.sh/.test(text) || /(^|\n)\s*git push(?:\s|$)/m.test(text);
   const sharedWriterConcurrency = !mainWriter || (/group:\s*approvalprep-main-writer\b/.test(text) && /cancel-in-progress:\s*false/.test(text));
-  const fullMainCheckout = !mainWriter || (/ref:\s*main/.test(text) && /fetch-depth:\s*0/.test(text));
-  const preparesLatestMain = !mainWriter || /prepare-main-writer\.sh/.test(text);
+  const fullMainCheckout = !mainWriter || searchLoopCaller || (/ref:\s*main/.test(text) && /fetch-depth:\s*0/.test(text));
+  const preparesLatestMain = !mainWriter || searchLoopCaller || /prepare-main-writer\.sh/.test(text);
   const safePushHelper = !mainWriter || /safe-push-main\.sh/.test(text);
   const directUnsafePush = /(^|\n)\s*git push(?:\s|$)/m.test(text);
   const fauxScenarios = [
@@ -92,7 +107,8 @@ const traces = files.map(file => {
     hasNodeSetup: uses.some(u=>u.includes("actions/setup-node")) || file === "release-report.yml",
     nodeVersionOk, runnerPinned, timeoutSet, usesNpmInstall, usesNpmCi, buildsProject,
     requiresDependencyInstall, installDependencyReason, dependencyInstallPolicyOk,
-    fixtureTraceInput: /fixture_trace/.test(text) || file === "workflow-data-trace.yml",
+    // The search loop's proof lane is a dispatch on any non-default branch (builds, gates, uploads, commits nothing).
+    fixtureTraceInput: /fixture_trace/.test(text) || file === "workflow-data-trace.yml" || (searchLoopCaller && /workflow_dispatch:/.test(text)),
     secretRefs, npmScripts, transitiveNpmScripts: closure.scripts, missingNpmScripts,
     expectedDataTouches: dataWrites, mainWriter, sharedWriterConcurrency, fullMainCheckout,
     preparesLatestMain, safePushHelper, directUnsafePush, fauxScenarios,
