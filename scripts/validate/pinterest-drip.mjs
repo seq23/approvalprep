@@ -22,7 +22,8 @@
 // 8. the request-time Pages Function is not wired to both data files.
 import fs from "node:fs";
 import path from "node:path";
-import { SITE, loadPinfeed, loadQueue, chicagoDate, addDays, dueEntries, renderFeedAt, unreleasedCount, needsRefill, variantLink } from "../../src/lib/pinfeed.mjs";
+import { SITE, loadPinfeed, loadQueue, chicagoDate, addDays, dueEntries, renderFeedAt, renderBoardFeedAt, pinBoards, unreleasedCount, needsRefill, variantLink } from "../../src/lib/pinfeed.mjs";
+import { decidePace, applyFallback, applyPause } from "../pinterest/pace.mjs";
 import { LAYOUTS, PALETTES, ANGLES } from "../pinterest/variants.mjs";
 import { appendBatch, pinPages } from "../pinterest/refill_queue.mjs";
 
@@ -48,8 +49,8 @@ for (const v of items) {
   const label = v.id || JSON.stringify(v).slice(0, 60);
   if (!v.id || !v.slug || v.id !== `${v.slug}-v${v.id.split("-v").pop()}` || !/^\d+$/.test(v.id.split("-v").pop())) fail(`${label}: id must be <slug>-v<n>`);
   if (ids.has(v.id)) fail(`${label}: duplicate id`); ids.add(v.id);
-  if (!/^\/[a-z0-9-]+\/$/.test(v.path || "")) fail(`${label}: path must look like /page-slug/`);
-  if (!["kit", "guide"].includes(v.kind)) fail(`${label}: kind must be kit or guide`);
+  if (!/^\/(questions\/)?[a-z0-9-]+\/$/.test(v.path || "")) fail(`${label}: path must look like /page-slug/ or /questions/slug/`);
+  if (!["kit", "guide", "question"].includes(v.kind)) fail(`${label}: kind must be kit, guide or question`);
   if (!v.imageSku) fail(`${label}: no imageSku`);
   if (!ANGLES.includes(v.angle)) fail(`${label}: unknown angle ${v.angle}`);
   if (!LAYOUTS.includes(v.layout)) fail(`${label}: unknown layout ${v.layout}`);
@@ -147,6 +148,50 @@ if (lastDay) {
 const entry = dueEntries(feed, queue, new Date("2026-11-20T18:00:00Z")).find((e) => e.guid !== launchGuids[0] && !launchGuids.includes(e.guid));
 if (entry && !entry.link.includes("utm_content=")) fail("a drip entry's link lacks utm_content");
 
+// 6b. Topic boards (1 Nov 2026): what Pinterest is served is one feed per board. At
+// each clock every due pin is in exactly one board feed, and no topic-board feed
+// carries a pin released before the split (those were all published to the first board).
+const boards = pinBoards(JSON.parse(fs.readFileSync("data/pinterest/boards.json", "utf8")));
+for (const iso of ["2026-11-01T18:00:00Z", "2026-11-20T18:00:00Z"]) {
+  const now = new Date(iso);
+  const seen = new Map();
+  for (const b of boards.BOARDS) {
+    const got = guids(renderBoardFeedAt(feed, queue, boards, b, now));
+    if (got.length > cfg.MAX_FEED_ITEMS) fail(`${b.slug} feed at ${iso}: ${got.length} items > ${cfg.MAX_FEED_ITEMS}`);
+    for (const g of got) {
+      if (seen.has(g)) fail(`${g} is in two board feeds (${seen.get(g)}, ${b.slug}) at ${iso}`);
+      seen.set(g, b.slug);
+      const v = items.find((x) => `approvalprep-pin-${x.id}` === g);
+      if (b !== boards.MAIN_BOARD && (!v || v.releaseDate < boards.SPLIT_FROM || boards.boardFor(v.path, v.headline).slug !== b.slug)) fail(`${b.slug} feed at ${iso} carries ${g}, which is not its own post-split pin`);
+    }
+  }
+  const due = items.filter((v) => v.releaseDate <= chicagoDate(now));
+  if (due.length + feed.items.length <= cfg.MAX_FEED_ITEMS) for (const v of due) if (!seen.has(`approvalprep-pin-${v.id}`)) fail(`${v.id} is due at ${iso} but in no board feed`);
+}
+for (const b of boards.BOARDS.slice(1)) if (!boards.BOARDS.some((x) => x === b && b.feed.startsWith("/pinfeed/") && b.feed.endsWith(".xml"))) fail(`${b.slug}: feed must be /pinfeed/<board>.xml`);
+if (boards.boardFor("/questions/x/", "how to write a letter of explanation for a mortgage").slug !== "letter-of-explanation") fail("a letter-of-explanation question did not reach its board");
+
+// 6c. Stop rule (Growth playbook): 0 visits at 4 weeks -> new format; 8 -> pause, never delete.
+{
+  const wk = (d, v) => ({ weekEnding: d, pinterestViews: v });
+  const zeros = ["2026-11-07", "2026-11-14", "2026-11-21", "2026-11-28"].map((d) => wk(d, 0));
+  const q = JSON.parse(JSON.stringify(queue));
+  if (decidePace(q.config, { state: "MEASURED", weeks: zeros }, "2026-11-28").action !== "keep") fail("stop rule acted before 4 weeks");
+  if (decidePace(q.config, { state: "MEASURED", weeks: [...zeros.slice(0, 3), wk("2026-11-28", 1)] }, "2026-11-30").action !== "keep") fail("stop rule acted despite a visit");
+  if (decidePace(q.config, { state: "NAMED_STOP", weeks: zeros }, "2026-11-30").action !== "keep") fail("a named stop was read as zero visits");
+  const d1 = decidePace(q.config, { state: "MEASURED", weeks: zeros }, "2026-11-29");
+  if (d1.action !== "fallback") fail(`4 zero weeks gave ${d1.action}, want fallback`);
+  else {
+    applyFallback(q, "2026-11-29", d1.reason);
+    const more = ["2026-12-05", "2026-12-12", "2026-12-19", "2026-12-26"].map((d) => wk(d, 0));
+    const d2 = decidePace(q.config, { state: "MEASURED", weeks: [...zeros, ...more] }, "2026-12-27");
+    if (d2.action !== "pause") fail(`8 zero weeks gave ${d2.action}, want pause`);
+    const before = q.items.filter((v) => v.releaseDate <= "2026-12-27").length;
+    applyPause(q, "2026-12-27", d2.reason);
+    if (q.items.length !== before || q.items.some((v) => v.releaseDate > "2026-12-27")) fail("pause must keep every released pin and drop only future dates");
+  }
+}
+
 // 7. Refill rule.
 const clone = () => JSON.parse(JSON.stringify(queue));
 const sortedDays = [...new Set(items.map((v) => v.releaseDate))].sort();
@@ -176,7 +221,8 @@ if (liveLeft < 7) fail(`only ${liveLeft} unreleased pins left - the daily refill
 // 8. Request-time function wiring.
 const fn = fs.existsSync("functions/pinfeed.xml.js") ? fs.readFileSync("functions/pinfeed.xml.js", "utf8") : "";
 if (!fn) fail("functions/pinfeed.xml.js missing - the feed would only change on a deploy");
-else for (const needle of ["data/pinterest/pinfeed.json", "data/pinterest/queue.json", "renderFeedAt", "onRequestGet"]) if (!fn.includes(needle)) fail(`functions/pinfeed.xml.js lacks ${needle}`);
+else for (const needle of ["data/pinterest/pinfeed.json", "data/pinterest/queue.json", "renderBoardFeedAt", "onRequestGet"]) if (!fn.includes(needle)) fail(`functions/pinfeed.xml.js lacks ${needle}`);
+if (!fs.existsSync("functions/pinfeed/[board].js")) fail("functions/pinfeed/[board].js missing - the topic boards would have no feed");
 if (fs.existsSync(path.join(dist, "_routes.json"))) {
   const r = JSON.parse(fs.readFileSync(path.join(dist, "_routes.json"), "utf8"));
   if ((r.exclude || []).some((x) => x === "/pinfeed.xml" || x === "/*")) fail("dist/_routes.json excludes /pinfeed.xml from Functions");

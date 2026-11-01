@@ -12,9 +12,19 @@
 // the same page two days running. $0: template copy from variants.mjs, no model.
 // Run daily by .github/workflows/pinterest-refill.yml; the commit it pushes to main
 // deploys through Cloudflare Pages, which builds the new pin images.
+//
+// Also, every run (owner-approved 1 Nov 2026):
+//   - every live search-loop /questions/ page becomes a pin the day it is found
+//     (kind "question", the question itself as headline and title);
+//   - the Growth-playbook stop rule (pace.mjs): 0 visits at 4 weeks -> new format,
+//     8 weeks -> pause, never delete;
+//   --start-today  re-date every unreleased pin at PINS_PER_DAY from today, giving
+//                  the new topic boards with the most pins waiting today's open slots
+//                  (used once, 1 Nov 2026, when the pace went 1 -> 3 a day).
 import fs from "node:fs";
 import path from "node:path";
-import { loadPinfeed, loadQueue, QUEUE_FILE, chicagoDate, addDays, scheduleVariants, unreleasedCount, needsRefill, previewImagePath } from "../../src/lib/pinfeed.mjs";
+import { loadPinfeed, loadQueue, QUEUE_FILE, chicagoDate, addDays, scheduleVariants, unreleasedCount, needsRefill, previewImagePath, pinBoards } from "../../src/lib/pinfeed.mjs";
+import { applyFallback, applyPause, decidePace } from "./pace.mjs";
 import { paidSkusFrom } from "../../src/lib/skuForRoute.mjs";
 import { buildVariant, VARIANTS_PER_PAGE_PER_BATCH } from "./variants.mjs";
 
@@ -69,18 +79,81 @@ export function appendBatch(queue, pages, now = new Date()) {
   return scheduled;
 }
 
+/** Live search-loop question pages as pins (one each), not yet in the queue. */
+export function questionPins(queue, today) {
+  const ledger = fs.existsSync(path.join(root, "data/search-loop/pages.json")) ? readJson("data/search-loop/pages.json") : { pages: [] };
+  const have = new Set(queue.items.map((v) => v.id));
+  const out = [];
+  for (const p of ledger.pages || []) {
+    if (p?.status !== "live" || typeof p.route !== "string" || !p.route.startsWith("/questions/")) continue;
+    const slug = p.route.replace(/^\/questions\//, "").replace(/\/+$/, "");
+    const id = `q-${slug}-v1`;
+    if (have.has(id)) continue;
+    const file = path.join(root, "questions", slug, "index.html");
+    if (!fs.existsSync(file)) continue;
+    const meta = (fs.readFileSync(file, "utf8").match(/<meta\s+name="description"\s+content="([^"]*)"/i)?.[1] || "").replace(/&amp;/g, "&").replace(/&#39;|&apos;/g, "'").replace(/&quot;/g, '"').trim();
+    const q = String(p.query || slug.replace(/-/g, " ")).trim().replace(/\?*$/, "");
+    const question = `${q.charAt(0).toUpperCase()}${q.slice(1)}${/^(how|what|when|where|why|who|which|can|do|does|is|are|should|will)\b/i.test(q) ? "?" : ""}`;
+    if (!meta || question.length > 90) continue;
+    const n = [...slug].reduce((a, c) => a + c.charCodeAt(0), 0);
+    out.push({
+      id, slug: `q-${slug}`, path: `/questions/${slug}/`, kind: "question", imageSku: "complete-approvalprep-bundle",
+      angle: "question-first", layout: "band-top", palette: ["teal", "navy", "plum", "forest", "brick", "slate"][n % 6],
+      headline: question, subhead: "The short answer + what to prepare", bullets: ["Plain answer", "Sources", "Next steps"],
+      title: question.slice(0, 100), description: meta.slice(0, 440), releaseDate: today,
+    });
+  }
+  return out;
+}
+
 if (import.meta.url === `file://${process.argv[1]}`) {
   const args = new Set(process.argv.slice(2));
   const queue = loadQueue(root);
   const now = process.env.PINFEED_NOW ? new Date(process.env.PINFEED_NOW) : new Date();
-  const left = unreleasedCount(queue, now);
-  const due = needsRefill(queue, now);
+  const today = chicagoDate(now);
+  let changed = false;
   if (args.has("--check")) {
-    console.log(`[pinterest-refill] ${left} unreleased, threshold ${queue.config.REFILL_THRESHOLD}: ${due ? "REFILL DUE" : "stocked"}`);
+    console.log(`[pinterest-refill] ${unreleasedCount(queue, now)} unreleased, threshold ${queue.config.REFILL_THRESHOLD}: ${needsRefill(queue, now) ? "REFILL DUE" : "stocked"}`);
     process.exit(0);
   }
+  // The stop rule.
+  const metrics = fs.existsSync(path.join(root, "data/pinterest/metrics.json")) ? readJson("data/pinterest/metrics.json") : null;
+  const pace = decidePace(queue.config, metrics, today);
+  if (pace.action === "fallback") { applyFallback(queue, today, pace.reason); changed = true; console.log(`[pinterest-refill] PACE new format: ${pace.reason}`); }
+  if (pace.action === "pause") {
+    applyPause(queue, today, pace.reason); changed = true;
+    console.log(`NAMED STOP: PINTEREST_PAUSED - ${pace.reason}; no new pins released, published pins stay (Growth playbook: 8 weeks at 0 -> pause, never delete).`);
+    if (process.env.GITHUB_ACTIONS) console.log(`::warning title=PINTEREST_PAUSED::${pace.reason}`);
+  }
+  const paused = pace.action === "pause";
+  // --start-today: re-date the unreleased pins at the current pace from today.
+  if (args.has("--start-today")) {
+    const boards = pinBoards(readJson("data/pinterest/boards.json"));
+    const later = queue.items.filter((v) => v.releaseDate > today).sort((a, b) => (a.releaseDate < b.releaseDate ? -1 : a.releaseDate > b.releaseDate ? 1 : 0));
+    queue.items = queue.items.filter((v) => v.releaseDate <= today);
+    const onDay = (d) => queue.items.filter((v) => v.releaseDate === d);
+    const yesterday = new Set(onDay(addDays(today, -1)).map((v) => v.slug));
+    const waiting = (slug) => later.filter((v) => boards.boardFor(v.path).slug === slug).length;
+    const boardsToday = new Set(onDay(today).map((v) => boards.boardFor(v.path).slug));
+    for (const board of [...boards.BOARDS.slice(1)].sort((a, b) => waiting(b.slug) - waiting(a.slug))) {
+      if (onDay(today).length >= queue.config.PINS_PER_DAY) break;
+      if (boardsToday.has(board.slug)) continue;
+      const i = later.findIndex((v) => boards.boardFor(v.path).slug === board.slug && !yesterday.has(v.slug) && !onDay(today).some((t) => t.slug === v.slug));
+      if (i >= 0) { queue.items.push({ ...later.splice(i, 1)[0], releaseDate: today }); boardsToday.add(board.slug); }
+    }
+    const scheduled = scheduleVariants(later, { startDate: addDays(today, 1), perDay: Number(queue.config.PINS_PER_DAY), prevDaySlugs: onDay(today).map((v) => v.slug) });
+    queue.items.push(...scheduled);
+    changed = true;
+    console.log(`[pinterest-refill] re-dated ${scheduled.length} unreleased pins at ${queue.config.PINS_PER_DAY}/day from ${addDays(today, 1)}; today: ${onDay(today).map((v) => v.id).join(", ")}`);
+  }
+  // Question pages from the search loop.
+  const questions = paused ? [] : questionPins(queue, today);
+  if (questions.length) { queue.items.push(...questions); changed = true; console.log(`[pinterest-refill] question pins: ${questions.map((q) => q.path).join(", ")}`); }
+  const left = unreleasedCount(queue, now);
+  const due = !paused && needsRefill(queue, now);
   if (!due && !args.has("--force")) {
-    console.log(`[pinterest-refill] stocked: ${left} unreleased >= ${queue.config.REFILL_THRESHOLD}; nothing written`);
+    if (changed) fs.writeFileSync(path.join(root, QUEUE_FILE), JSON.stringify(queue, null, 2) + "\n");
+    console.log(`[pinterest-refill] stocked: ${left} unreleased >= ${queue.config.REFILL_THRESHOLD}; ${changed ? "queue updated" : "nothing written"}`);
     process.exit(0);
   }
   // --seed: the launch pages only (the first batch, 16 Oct 2026).

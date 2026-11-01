@@ -1,0 +1,21 @@
+{
+  "_comment": "Pinterest topic boards for approvalprep.com (owner-approved 1 Nov 2026). Pinterest auto-publish maps ONE RSS feed to ONE board, so each board has its own feed (src/lib/pinfeed-core.mjs pinBoards; functions/pinfeed.xml.js and functions/pinfeed/[board].js). A pin's board comes from its page path (paths, regexes) or, for a /questions/ page, from words in the question; anything unmatched goes to the first board. split_from: pins released before this day were all published to the first board's feed and stay there; the other feeds carry only pins released on or after it, so no pin is published twice. keywords: real Pinterest searches read from Pinterest's own search suggestions on 1 Nov 2026; a pin title that names none of its board's keywords is led with the first one.",
+  "split_from": "2026-11-01",
+  "keywords_read": "2026-11-01 Pinterest search typeahead",
+  "boards": [
+    { "slug": "approval-kits", "name": "Approval Kits & Checklists", "feed": "/pinfeed.xml",
+      "keywords": ["checklist", "letter template", "application"], "paths": [], "words": [] },
+    { "slug": "apartment-rental", "name": "Apartment & Rental Application Tips", "feed": "/pinfeed/apartment-rental.xml",
+      "keywords": ["apartment application", "rental application", "rental application form", "apartment application approved", "rental application cover letter"],
+      "paths": ["rental-application", "apartment"], "words": ["apartment", "rental", "rent", "landlord", "lease", "tenant"] },
+    { "slug": "letter-of-explanation", "name": "Letter of Explanation & Credit Letters", "feed": "/pinfeed/letter-of-explanation.xml",
+      "keywords": ["letter of explanation", "letter of explanation template", "letter of explanation sample", "explanation letter format", "credit report"],
+      "paths": ["letter-of-explanation", "credit-letter", "loan-prep"], "words": ["explanation", "credit", "mortgage", "lender", "underwriter", "late payment", "inquiry", "bankruptcy"] },
+    { "slug": "income-employment", "name": "Proof of Income & Employment Verification Letters", "feed": "/pinfeed/income-employment.xml",
+      "keywords": ["proof of income", "proof of income letter", "employment verification letter", "employment verification letter template", "proof of income self employed"],
+      "paths": ["income-employment", "employment-verification"], "words": ["income", "employment", "employer", "pay stub", "paystub", "self employed", "salary", "job"] },
+    { "slug": "small-business-loans", "name": "SBA & Small Business Loan Checklists", "feed": "/pinfeed/small-business-loans.xml",
+      "keywords": ["sba loan", "sba loan application", "small business loan", "small business loans how to get", "business funding"],
+      "paths": ["sba-loan", "business-funding"], "words": ["sba", "business loan", "small business", "business funding", "llc", "ein"] }
+  ]
+}

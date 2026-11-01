@@ -11,7 +11,8 @@
  *      started (D1 conversion_events `checkout_start`), last 7 days.
  *   2. Search: Google Search Console clicks and impressions, data/search_intelligence/gsc_truth.json
  *      (the rolling 28-day window the daily collector keeps).
- *   3. Pinterest: visits from pins, data/pinterest/metrics.json (Saturday's pinterest-metrics run).
+ *   3. Pinterest: new pins, visits from pins, checkouts and sales by pin visitors,
+ *      data/pinterest/metrics.json (Saturday's pinterest-metrics run).
  *   4. Pages: new pages published in the last 7 days (data/cadence/known_urls.json history) and the
  *      pages waiting in the refresh queue (data/intelligence/page_refresh_queue.json).
  *
@@ -64,7 +65,9 @@ export function pinterestLine(pin, now) {
   if (!w) return notRead("Pinterest", "the measurement holds no week");
   const at = Date.parse(pin.updatedAt ?? `${w.weekEnding}T12:00:00Z`);
   if (now - at > STALE_PINTEREST_DAYS * DAY) return notRead("Pinterest", `the newest measurement is from ${day(at)}`);
-  return { read: true, line: `Pinterest (week to ${day(`${w.weekEnding}T12:00:00Z`)}): ${plural(w.pinterestViews, "visit")} from pins, of ${plural(w.allPageViews, "page view")} in all.` };
+  const pins = w.pinsReleased != null ? `${plural(w.pinsReleased, "new pin")}, ` : "";
+  const sales = w.pinCheckouts != null && w.pinSales != null ? `; ${plural(w.pinCheckouts, "checkout")} started and ${plural(w.pinSales, "sale")} from pin visitors` : "";
+  return { read: true, line: `Pinterest (week to ${day(`${w.weekEnding}T12:00:00Z`)}): ${pins}${plural(w.pinterestViews, "visit")} from pins, of ${plural(w.allPageViews, "page view")} in all${sales}.` };
 }
 
 /** Pages line from known_urls.json history and the refresh queue. */
@@ -127,11 +130,11 @@ export function selfCheck() {
     now,
     sales: { paid: 2, checkouts: 5, pageViews: 40 },
     gsc: { collection: { status: "COLLECTED", source_fetched_at: "2026-11-04T09:00:00Z" }, window: { end_date: "2026-11-04" }, totals: { window_clicks: 3, window_impressions: 40 } },
-    pin: { state: "MEASURED", updatedAt: "2026-10-31T11:00:00Z", weeks: [{ weekEnding: "2026-10-31", pinterestViews: 1, allPageViews: 26 }] },
+    pin: { state: "MEASURED", updatedAt: "2026-10-31T11:00:00Z", weeks: [{ weekEnding: "2026-10-31", pinterestViews: 1, allPageViews: 26, pinsReleased: 21, pinCheckouts: 1, pinSales: 0 }] },
     known: { history: [{ date: "2026-11-02", added: 1 }, { date: "2026-10-20", added: 9 }] },
     queue: { items: [{}, {}] },
   });
-  const want = ["Sales: 2 paid downloads this week, 5 checkouts started.", "Search (Google, 28 days to Nov 4): 3 clicks, shown in results 40 times.", "Pinterest (week to Oct 31): 1 visit from pins, of 26 page views in all.", "Pages: 1 new page published this week; 2 pages waiting in the refresh queue."];
+  const want = ["Sales: 2 paid downloads this week, 5 checkouts started.", "Search (Google, 28 days to Nov 4): 3 clicks, shown in results 40 times.", "Pinterest (week to Oct 31): 21 new pins, 1 visit from pins, of 26 page views in all; 1 checkout started and 0 sales from pin visitors.", "Pages: 1 new page published this week; 2 pages waiting in the refresh queue."];
   if (full.schema !== SCHEMA || JSON.stringify(full.notes) !== JSON.stringify(want) || full.sites[0].state !== "fine") throw new Error(`self-check: lines are wrong: ${JSON.stringify(full.notes)}`);
   const part = buildSummary({ now, sales: { error: "the Cloudflare credentials are not set for this run" }, gsc: null, pin: { state: "NAMED_STOP", reason: "D1 read failed." }, known: { history: [{ date: "2026-11-03", added: 0 }] }, queue: null });
   if (!part.notes[0].includes("not read") || !part.notes[2].startsWith("Pinterest: not read: D1 read failed") || part.notes.some((l) => /\b0 (paid|click|visit)/.test(l)) || part.sites[0].state !== "watch") throw new Error(`self-check: an unread number became a zero or vanished: ${JSON.stringify(part.notes)}`);
