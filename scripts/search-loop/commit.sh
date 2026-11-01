@@ -12,8 +12,8 @@ if [ ! -f .search-loop-derived ] || [ "$(cat .search-loop-derived)" != "$now" ];
 fi
 git config user.name "approvalprep-search-loop"
 git config user.email "actions@users.noreply.github.com"
-git add questions data/search-loop data/routes/redirects.json public/_redirects public/sitemap.xml data/cadence \
-  data/citations/outbound_link_health.json data/search_intelligence/index_coverage.json data/search_intelligence/consolidation_candidates.json
+# Stage only paths that exist: questions/ is absent until the first page publishes.
+git add -- $(for p in questions data/search-loop data/routes/redirects.json public/_redirects public/sitemap.xml data/cadence data/citations/outbound_link_health.json data/search_intelligence/index_coverage.json data/search_intelligence/consolidation_candidates.json; do [ -e "$p" ] && echo "$p"; done)
 if git diff --cached --quiet; then echo "search-loop: nothing to commit"; exit 0; fi
 git commit -q -m "${COMMIT_MESSAGE:-search loop: daily pages, checks and ledger}"
 bash scripts/workflows/safe-push-main.sh
