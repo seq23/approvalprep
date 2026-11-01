@@ -38,7 +38,8 @@ const notRead = (what, reason) => ({ read: false, line: `${what}: not read: ${re
 /** Sales line from `{ paid, checkouts, pageViews }` or `{ error }`. */
 export function salesLine(sales) {
   if (!sales || sales.error) return notRead("Sales", sales?.error ?? "nothing was asked");
-  const paid = `${plural(sales.paid, "paid download")} this week`;
+  // The money line (Growth playbook build order 1): count AND revenue, never a buyer's name.
+  const paid = `${plural(sales.paid, "paid download")} this week${sales.cents == null ? "" : ` ($${(Number(sales.cents) / 100).toFixed(2)})`}`;
   // A checkout count of 0 from a tracker that logged no page views is not a measurement.
   const checkouts = sales.pageViews > 0 ? `, ${plural(sales.checkouts, "checkout")} started` : " (checkouts not read: the page-view tracker logged nothing this week)";
   return { read: true, line: `Sales: ${paid}${checkouts}.` };
@@ -115,6 +116,7 @@ async function readSales(now) {
   try {
     return {
       paid: await q("SELECT COUNT(*) AS n FROM download_entitlements WHERE payment_status = 'paid' AND revoked_at IS NULL AND created_at >= ?"),
+      cents: await q("SELECT COALESCE(SUM(amount_total), 0) AS n FROM download_entitlements WHERE payment_status = 'paid' AND revoked_at IS NULL AND created_at >= ?"),
       checkouts: await q("SELECT COUNT(*) AS n FROM conversion_events WHERE event = 'checkout_start' AND created_at >= ?"),
       pageViews: await q("SELECT COUNT(*) AS n FROM conversion_events WHERE event = 'page_view' AND created_at >= ?"),
     };
@@ -138,6 +140,7 @@ export function selfCheck() {
   if (full.schema !== SCHEMA || JSON.stringify(full.notes) !== JSON.stringify(want) || full.sites[0].state !== "fine") throw new Error(`self-check: lines are wrong: ${JSON.stringify(full.notes)}`);
   const part = buildSummary({ now, sales: { error: "the Cloudflare credentials are not set for this run" }, gsc: null, pin: { state: "NAMED_STOP", reason: "D1 read failed." }, known: { history: [{ date: "2026-11-03", added: 0 }] }, queue: null });
   if (!part.notes[0].includes("not read") || !part.notes[2].startsWith("Pinterest: not read: D1 read failed") || part.notes.some((l) => /\b0 (paid|click|visit)/.test(l)) || part.sites[0].state !== "watch") throw new Error(`self-check: an unread number became a zero or vanished: ${JSON.stringify(part.notes)}`);
+  if (!salesLine({ paid: 1, cents: 1500, checkouts: 2, pageViews: 9 }).line.startsWith("Sales: 1 paid download this week ($15.00)")) throw new Error("self-check: the money line lost its revenue");
   let refused = false;
   try { buildSummary({ now, sales: { error: "x" }, gsc: null, pin: null, known: null, queue: null }); } catch { refused = true; }
   if (!refused) throw new Error("self-check: a summary with nothing read was handed on (rule 0)");

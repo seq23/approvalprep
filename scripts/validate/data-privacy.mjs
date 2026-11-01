@@ -23,10 +23,16 @@ for (const file of ["src/components/DataPrivacyNotice.astro", "src/layouts/BaseL
   }
 }
 
+// The buyer's address may reach exactly one place: recordPurchase() in the webhook, which hashes
+// it and hands one scheduled review ask to Resend without writing it to D1 (proved by
+// scripts/validate/email-nurture.mjs). Any other use in entitlement code is a store risk.
 for (const file of ["functions/api/verify-download.js", "functions/api/stripe-webhook.js"]) {
   const text = fs.readFileSync(file, "utf8");
-  if (/customer_details\?\.email|session\.customer_email/.test(text)) fail(`[data-privacy] local entitlement code must not store Stripe customer email: ${file}`);
+  const uses = text.match(/customer_details\?\.email|session\.customer_email/g) || [];
+  const allowed = file.endsWith("stripe-webhook.js") ? (text.match(/recordPurchase\(env, session\.customer_details\?\.email \|\| session\.customer_email,/g) || []).length * 2 : 0;
+  if (uses.length > allowed) fail(`[data-privacy] local entitlement code must not store Stripe customer email: ${file}`);
 }
+if (/customer_email/.test(fs.readFileSync("functions/_runtime/nurture.js", "utf8"))) fail("[data-privacy] the email module must not touch customer_email columns");
 
 
 const trackEvent = fs.existsSync("functions/api/track-event.js") ? fs.readFileSync("functions/api/track-event.js", "utf8") : "";
@@ -52,7 +58,10 @@ const allowedOperational = [
   "functions/api/track-event.js",
   "functions/api/admin/",
   "functions/_runtime/admin.js",
-  "functions/_runtime/catalog.js"
+  "functions/_runtime/catalog.js",
+  // Typed-in sample sign-ups and hashes only; scripts/validate/email-nurture.mjs proves a
+  // buyer's address is never written.
+  "functions/_runtime/nurture.js"
 ];
 for (const file of walk("functions").filter((item) => item.endsWith(".js"))) {
   const text = fs.readFileSync(file, "utf8");

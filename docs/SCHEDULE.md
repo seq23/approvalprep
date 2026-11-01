@@ -7,6 +7,7 @@ schedule); see the notes below for what moved.
 
 | Job | Workflow | When | Cron |
 |---|---|---|---|
+| Email nurture tick (free sample series) | `email-nurture.yml` | every day 08:17, 13:17, 18:17 CT | `17 8,13,18 * * *` |
 | Citation OS Weekly | `citation-os-weekly.yml` | Sat 05:40 CT | `40 5 * * 6` |
 | Intelligence - Competitor Watch Refresh | `competitor-watch-refresh.yml` | Sat 06:20 CT | `20 6 * * 6` |
 | Intelligence - Content Opportunity Analysis | `content-opportunity-analysis.yml` | Mon–Fri 04:27 CT | `27 4 * * 1-5` |

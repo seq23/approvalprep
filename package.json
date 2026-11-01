@@ -275,7 +275,8 @@
     "validate:clarity-scope": "node scripts/validate/clarity-scope.mjs",
     "search-loop:fold": "node scripts/search-loop/fold-pages.mjs",
     "search-loop:sync-topics": "node scripts/search-loop/sync-topics.mjs",
-    "validate:seo-hygiene:definition": "node scripts/validate/seo-hygiene.mjs definition"
+    "validate:seo-hygiene:definition": "node scripts/validate/seo-hygiene.mjs definition",
+    "validate:email-nurture": "node --experimental-sqlite scripts/validate/email-nurture.mjs"
   },
   "dependencies": {
     "astro": "^7.0.6",
