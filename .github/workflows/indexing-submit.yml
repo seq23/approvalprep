@@ -8,7 +8,7 @@ on:
         default: "false"
   workflow_run:
     workflows:
-      - Scheduled Content Release
+      - Search Loop
       - Citation OS Daily
     branches: [main]
     types: [completed]
@@ -67,7 +67,7 @@ jobs:
         # pushed to main for another workflow to fail on tomorrow.
         #
         # Read-only: the ledger moves only under --accept, which stays in
-        # scheduled-content-release.
+        # the Search Loop post-build (scripts/search-loop/post_build.sh).
         run: npm run cadence:gate
       - name: Commit operational receipts only
         run: |

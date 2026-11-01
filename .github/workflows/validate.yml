@@ -65,6 +65,6 @@ jobs:
         # data/cadence/known_urls.json only under --accept, which is not passed
         # here, so the "new since last run" comparison is always against the
         # committed ledger - which is what makes it a real per-branch cap. The
-        # ledger is advanced by the one workflow that actually publishes,
-        # scheduled-content-release, in its explicit --accept step.
+        # ledger is advanced by the lane that actually publishes, the Search
+        # Loop post-build (scripts/search-loop/post_build.sh), in its --accept step.
         run: npm run cadence:gate

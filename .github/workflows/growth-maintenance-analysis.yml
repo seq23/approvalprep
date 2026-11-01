@@ -29,22 +29,10 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 22.12.0
-      - name: Apply delegated authority
-        run: npm run governance:apply-authority -- --mode=${{ env.RUN_MODE || 'dry_run' }}
-      - name: Attempt self-heal
-        run: npm run automation:self-heal-attempt -- --mode=${{ env.RUN_MODE || 'dry_run' }}
-      - name: Revalidate after self-heal
-        run: npm run automation:self-heal-revalidate
-      - name: Build owner exception index
-        run: npm run admin:build-owner-exceptions
-      - name: Build notification queue
-        run: npm run notifications:build-queue -- --mode=${{ env.RUN_MODE || 'dry_run' }}
-      - name: Validate delegated authority and notifications
-        run: |
-          npm run validate:delegated-authority
-          npm run validate:self-heal-progressions
-          npm run validate:owner-exceptions
-          npm run validate:notification-policy
+      # The delegated-authority / self-heal / notification-queue steps that stood here
+      # ran in dry_run, committed nothing and repaired nothing (removed 1 Nov 2026).
+      # Real repair of published pages is the search loop's CHECK + REPAIR stage
+      # (Search Loop workflow, seq23/search-loop): strengthen, undo, merge.
       - name: Run fixture workflow trace
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
         run: npm run workflows:trace -- --workflow growth-maintenance-analysis.yml

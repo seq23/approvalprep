@@ -19,6 +19,7 @@ export const primaryNav = [
     links: [
       ["/resources", "Resource hub"],
       ["/blog", "Blog"],
+      ["/questions", "Questions"],
       ["/methodology", "Methodology"],
       ["/glossary", "Glossary"],
       ["/privacy", "Privacy"],

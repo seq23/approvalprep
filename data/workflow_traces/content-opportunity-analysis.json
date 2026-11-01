@@ -25,6 +25,7 @@
   "npmScripts": [
     "intelligence:content-opportunities",
     "intelligence:recommend-page-actions",
+    "search-loop:sync-topics",
     "validate:citation-opportunities",
     "validate:content-actions",
     "workflows:trace"
@@ -34,6 +35,7 @@
     "authority:scale:fanout-window",
     "intelligence:content-opportunities",
     "intelligence:recommend-page-actions",
+    "search-loop:sync-topics",
     "validate:citation-opportunities",
     "validate:content-actions",
     "workflows:trace"
@@ -87,5 +89,5 @@
     }
   ],
   "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-  "traceId": "184de8cd9082064c"
+  "traceId": "aa02aeb77dd4af72"
 }

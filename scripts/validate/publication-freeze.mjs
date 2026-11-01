@@ -9,8 +9,12 @@
 //      measured one, or holds anything when unfrozen (direct unit proof);
 //   4. history: a release on or after frozen_at published a page whose query was not
 //      a measured target in data/search_intelligence/target_query_set.json;
-//   5. scheduled-content-release.yml has no schedule: the flag would then govern a
-//      cycle that never runs, and a measured page would never publish by itself.
+//   5. (since 1 Nov 2026) the scheduled publisher is the search loop, which publishes
+//      straight away and never reads this flag (owner ruling); the flag now governs only
+//      the hand-dispatched content:generate lane. Fails if search-loop.yml loses its
+//      schedule or a workflow schedules content:generate again behind the flag.
+//      (was: scheduled-content-release.yml has no schedule: the flag would then govern a
+//      cycle that never runs, and a measured page would never publish by itself.)
 import fs from "node:fs";
 import { loadFreeze, measuredTargets, freezeDecision, RELEASE_RULES, norm, containsQuery } from "../lib/publication_freeze.mjs";
 
@@ -50,8 +54,12 @@ for (const r of releases) {
     if (!a || !targets.has(measuredKey)) fail(`release ${r.id} published "${a?.title || id}" on or after frozen_at ${freeze.frozen_at} without a measured target`);
   }
 }
-const wf = fs.readFileSync(".github/workflows/scheduled-content-release.yml", "utf8");
-if (!/^\s+schedule:\s*\n\s+- cron:/m.test(wf)) fail("scheduled-content-release.yml has no schedule: the freeze flag governs a cycle that never runs");
+const wf = fs.readFileSync(".github/workflows/search-loop.yml", "utf8");
+if (!/^\s+schedule:\s*\n\s+- cron:/m.test(wf)) fail("search-loop.yml has no schedule: nothing publishes new pages on its own");
+for (const f of fs.readdirSync(".github/workflows")) {
+  const y = fs.readFileSync(`.github/workflows/${f}`, "utf8").replace(/^\s*#.*$/gm, "");
+  if (/^\s+schedule:\s*\n\s+- cron:/m.test(y) && /content:(release|generate)\b/.test(y)) fail(`${f} schedules content:generate/content:release; the search loop is the one scheduled publisher since 1 Nov 2026`);
+}
 
 if (errors.length) { console.error(`[publication-freeze] FAIL\n- ${errors.join("\n- ")}`); process.exit(1); }
 console.log(`[publication-freeze] OK frozen=${freeze.frozen} since=${freeze.frozen_at} rule=${freeze.release_rule} measuredTargets=${targets.size} postFreezePublicationsChecked=${checked}`);

@@ -3,13 +3,15 @@
   "high_value_window_days": 30,
   "stale_tolerance_pct": 20,
   "require_lastmod": true,
-  "new_pages_per_week": 2,
+  "new_pages_per_week": 210,
   "refresh_capacity_per_week": 8,
   "_why": "13 weeks is the point where pages become markedly more likely to lose AI citations, and recency is the strongest single correlate of being cited. The ceiling is refresh capacity times that window: publish faster than the library can be maintained and the tail ages out of citability.",
   "new_page_publication": {
     "frozen": true,
     "frozen_at": "2026-10-09",
     "release_rule": "measured_target_only",
-    "_why": "Search Console 11 Sep-8 Oct 2026: 10 impressions, 0 clicks, 3 queries, while ~82% of commits were automated daily answers to unmeasured phrasings. While frozen, content:generate publishes a page only when its query is a target in data/search_intelligence/target_query_set.json with a measured number (scripts/lib/publication_freeze.mjs); such a page publishes on the next cycle automatically. Read by validate:publication-freeze."
-  }
+    "_why": "Search Console 11 Sep-8 Oct 2026: 10 impressions, 0 clicks, 3 queries, while ~82% of commits were automated daily answers to unmeasured phrasings. While frozen, content:generate publishes a page only when its query is a target in data/search_intelligence/target_query_set.json with a measured number (scripts/lib/publication_freeze.mjs); such a page publishes on the next cycle automatically. Read by validate:publication-freeze.",
+    "_scope": "Governs only the legacy content:generate lane, which no schedule runs since 1 Nov 2026 (Scheduled Content Release retired). The search loop publishes straight away and does not read this flag."
+  },
+  "_why_new_pages_per_week": "Owner ruling 1 Nov 2026 (search growth loop on every selling site): new pages publish straight away at the search loop pace - 10/day rising +5/week to a cap of 30/day, halving when indexing falls. 210 = that cap x 7, so this gate is the backstop above the engine, not a second throttle (it was 2/week under the retired release lane)."
 }

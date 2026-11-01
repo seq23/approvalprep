@@ -1,0 +1,138 @@
+{
+  "schema": "search-loop-config-v1",
+  "site": "approvalprep.com",
+  "base_url": "https://approvalprep.com",
+  "site_name": "ApprovalPrep",
+  "publisher": {
+    "name": "ApprovalPrep",
+    "url": "https://approvalprep.com/about/"
+  },
+  "audience": "people preparing their own paperwork for a mortgage, apartment, loan, job or credit application: renters, first-time homebuyers, self-employed workers, small business owners and anyone asked for a letter of explanation, proof of income or a supporting document",
+  "voice": "neutral, factual and helpful; plain answers first; shows its sources; self-service document preparation, never legal, credit-repair or financial advice; never promises approval, a score change or removal of accurate information; never suggests disputing accurate items or misstating facts to a lender or landlord",
+  "topics": [
+    "letter of explanation",
+    "proof of employment letter",
+    "employment verification letter",
+    "rental application letter",
+    "landlord reference letter",
+    "goodwill letter",
+    "609 dispute letter",
+    "gift letter for mortgage",
+    "hardship letter",
+    "proof of income",
+    "apartment application documents",
+    "application denial preparation",
+    "approval readiness",
+    "bank statement deposits",
+    "business funding checklist",
+    "business funding preparation",
+    "car loan preparation",
+    "collections documentation",
+    "consumer finance documentation",
+    "credit dispute self service",
+    "credit readiness education",
+    "credit report understanding",
+    "credit utilization",
+    "debt documentation",
+    "document discrepancy explanation",
+    "employment verification",
+    "financial document organization",
+    "first time homebuyer documents",
+    "hard inquiries",
+    "identity and address documents"
+  ],
+  "find": {
+    "exclude_words": [
+      "free download",
+      "torrent",
+      "login",
+      "sign in",
+      "near me",
+      "attorney",
+      "lawyer"
+    ]
+  },
+  "action": {
+    "label": "Choose your kit: the PDF guide and editable letters, ready after checkout",
+    "url": "https://approvalprep.com/pricing/"
+  },
+  "allowed_link_targets": [
+    "https://approvalprep.com"
+  ],
+  "mode": "normal",
+  "pace": {
+    "start_per_day": 10,
+    "step_per_week": 5,
+    "cap": 30
+  },
+  "menu_pages_need_approval": false,
+  "health_gate": "none",
+  "protected_paths": [
+    "src",
+    "public",
+    "functions",
+    "templates",
+    "data/content",
+    "data/routes",
+    "docs",
+    "reports",
+    "artifacts",
+    "seed-downloads"
+  ],
+  "output": {
+    "dir": "questions",
+    "format": "dir-index",
+    "url_prefix": "/questions/",
+    "redirects": {
+      "file": "data/routes/redirects.json",
+      "format": "json-list",
+      "list_key": "redirects",
+      "source_field": "source",
+      "source_form": "route",
+      "target_field": "destination",
+      "extra": {
+        "statusCode": 301,
+        "preserveQuery": true,
+        "owner": "search_loop",
+        "reason": "search-loop merge: 90 days with no impressions, folded into a stronger page"
+      }
+    }
+  },
+  "template": {
+    "section_name": "Questions",
+    "stylesheets": [
+      "/assets/search-loop.css"
+    ],
+    "og_image": {
+      "url": "https://approvalprep.com/og.png",
+      "width": 1200,
+      "height": 630
+    },
+    "header_html": "<header class=\"site-header\"><div class=\"shell nav\"><a class=\"brand\" href=\"/\">ApprovalPrep</a><nav class=\"nav-links\" aria-label=\"Primary\"><a href=\"/questions/\">Questions</a><a href=\"/resources/\">Resources</a><a class=\"button nav-cta\" href=\"/pricing/\">Pricing</a></nav></div></header>",
+    "footer_html": "<footer class=\"site-footer\"><div class=\"shell footer-shell\"><p class=\"fine\">ApprovalPrep is self-service document preparation. It is not a law firm, a lender, a credit repair organization or a financial adviser, and no document guarantees approval.</p></div></footer>"
+  },
+  "related": {
+    "max_pages_per_new_page": 2,
+    "scan_dirs": [
+      "questions"
+    ],
+    "skip_dirs": []
+  },
+  "gsc": {
+    "site_url": "sc-domain:approvalprep.com"
+  },
+  "indexnow": {
+    "key": "530ed6184b81edbe75a6d52d6b6d7553b410879af0351254ea0ea478538eed1e",
+    "key_location": "https://approvalprep.com/530ed6184b81edbe75a6d52d6b6d7553b410879af0351254ea0ea478538eed1e.txt"
+  },
+  "analytics": {
+    "ai_referrals": "cloudflare",
+    "ai_bot_hits": "cloudflare",
+    "zone": "approvalprep.com"
+  },
+  "conversions": {
+    "source": "none"
+  },
+  "shares_audience_with": [],
+  "ledger_dir": "data/search-loop"
+}

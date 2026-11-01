@@ -81,9 +81,16 @@ const answers = JSON.parse(fs.readFileSync("data/content/generated_answers.json"
   .filter((a) => a.status === "published_by_contract")
   .map((a) => `/blog/${slugify(a.title)}`);
 
+// Search loop pages (seq23/search-loop): served inside the site shell, which carries
+// the boundary block (scripts/search-loop/fold-pages.mjs); the built-page check below
+// confirms it reached each one.
+const searchLoopRoutes = fs.existsSync("data/search-loop/pages.json")
+  ? (JSON.parse(fs.readFileSync("data/search-loop/pages.json", "utf8")).pages || []).filter((p) => p.status === "live").map((p) => p.route)
+  : [];
+if (searchLoopRoutes.length) searchLoopRoutes.push("/questions/");
 const excluded = new Set(data.excludedPaths || []);
 const covered = [];
-for (const route of [...routes, ...answers]) {
+for (const route of [...routes, ...answers, ...searchLoopRoutes]) {
   if (excluded.has(route.replace(/\/+$/, "") || "/")) continue;
   const family = familyForPath(route);
   if (!data.families[family]) throw new Error(`[credit-boundary] route ${route} resolves to unknown boundary family '${family}'`);
