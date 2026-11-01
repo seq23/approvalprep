@@ -57,6 +57,22 @@ try {
 }
 if (!totalViews) namedStop(`D1 conversion_events holds no page_view rows since ${since}: the tracker is not recording, so a Pinterest count of 0 would not be a measurement.`);
 
+// Checkouts started and paid checkouts seen by visitors who arrived from a pin
+// (src/components/AnalyticsEvent.astro tags `source` with "|pin:<id>").
+let pinCheckouts = 0, pinSales = 0;
+try {
+  for (const r of d1(`SELECT event, COUNT(*) AS n FROM conversion_events WHERE event IN ('checkout_start','checkout_success_seen') AND created_at >= '${since}' AND source LIKE '%|pin:%' GROUP BY event`)) {
+    if (r.event === "checkout_start") pinCheckouts = Number(r.n);
+    if (r.event === "checkout_success_seen") pinSales = Number(r.n);
+  }
+} catch (e) {
+  namedStop(`D1 read failed: ${e.message}`);
+}
+// Pins released in the window (queue release dates).
+const queueFile = "data/pinterest/queue.json";
+const queueItems = fs.existsSync(queueFile) ? JSON.parse(fs.readFileSync(queueFile, "utf8")).items || [] : [];
+const pinsReleased = queueItems.filter((v) => v.releaseDate >= since.slice(0, 10) && v.releaseDate <= now.toISOString().slice(0, 10)).length;
+
 const byVariant = {};
 const byPage = {};
 let total = 0;
@@ -68,7 +84,7 @@ for (const r of rows) {
   byPage[u.pathname] = (byPage[u.pathname] || 0) + Number(r.views);
   total += Number(r.views);
 }
-const week = { weekEnding: now.toISOString().slice(0, 10), since, allPageViews: totalViews, pinterestViews: total, byVariant, byPage };
+const week = { weekEnding: now.toISOString().slice(0, 10), since, allPageViews: totalViews, pinterestViews: total, pinsReleased, pinCheckouts, pinSales, byVariant, byPage };
 const weeks = [week, ...(prev.weeks || []).filter((w) => w.weekEnding !== week.weekEnding)].slice(0, 26);
 save({ _comment: "Weekly Pinterest visits per pin variant from D1 conversion_events (page_view rows with utm_source=pinterest). Written by scripts/pinterest/measure.mjs.", updatedAt: now.toISOString(), state: "MEASURED", source: "d1:conversion_events", weeks });
 const top = Object.entries(byVariant).sort((a, b) => b[1].views - a[1].views).slice(0, 5).map(([id, v]) => `${id} ${v.views}`).join(", ");

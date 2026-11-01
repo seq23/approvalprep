@@ -16,13 +16,32 @@ const { surface = 'site' } = Astro.props;
     const cleanPath = (value) => {
       try { const url = new URL(String(value || ''), window.location.origin); return url.pathname + url.search; } catch { return String(value || '').slice(0, 160); }
     };
+    // Pin visit -> checkout (owner-approved 1 Nov 2026): a visit from a pin
+    // (utm_source=pinterest) remembers the pin's id on this device for 30 days, and
+    // checkout_start / checkout_success_seen carry it in `source` as "<surface>|pin:<id>",
+    // so scripts/pinterest/measure.mjs can count checkouts and sales from pin visitors.
+    // Only the pin id is kept; nothing about the visitor.
+    const PIN_KEY = 'ap_pin';
+    const pinRef = (() => {
+      try {
+        const q = new URLSearchParams(window.location.search);
+        if ((q.get('utm_source') || '').toLowerCase() === 'pinterest') {
+          const id = (q.get('utm_content') || 'launch').replace(/[^a-zA-Z0-9_\-.:]/g, '').slice(0, 100) || 'launch';
+          localStorage.setItem(PIN_KEY, JSON.stringify({ id, at: Date.now() }));
+          return id;
+        }
+        const saved = JSON.parse(localStorage.getItem(PIN_KEY) || 'null');
+        if (saved && Date.now() - saved.at < 30 * 86400000) return saved.id;
+      } catch { /* storage blocked: no attribution */ }
+      return '';
+    })();
     const send = (event, extra = {}) => {
       if (!allowed.has(event)) return;
       const payload = {
         event,
         path: cleanPath(window.location.href),
         referrerPath: document.referrer ? cleanPath(document.referrer) : '',
-        source: surface,
+        source: pinRef && (event === 'checkout_start' || event === 'checkout_success_seen') ? `${surface}|pin:${pinRef}` : surface,
         ...extra
       };
       const body = JSON.stringify(payload);

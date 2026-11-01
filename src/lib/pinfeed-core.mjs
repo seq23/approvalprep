@@ -110,3 +110,71 @@ export function scheduleVariants(variants, { startDate, perDay = 1, prevDaySlugs
   }
   return out;
 }
+
+// Topic boards (owner-approved 1 Nov 2026): Pinterest maps one feed to one board, so
+// every board in data/pinterest/boards.json has its own feed (/pinfeed.xml is the
+// first board's) and every pin is in exactly one of them.
+export function pinBoards(config) {
+  const BOARDS = config.boards;
+  const SPLIT_FROM = config.split_from;
+  const MAIN_BOARD = BOARDS[0];
+  if (!BOARDS?.length || !/^\d{4}-\d{2}-\d{2}$/.test(SPLIT_FROM ?? "")) throw new Error("boards.json needs boards[] and split_from YYYY-MM-DD");
+  const rules = BOARDS.map((b) => ({ board: b, res: b.paths.map((p) => new RegExp(p)) }));
+  function boardFor(pagePath, text = "") {
+    if (!String(pagePath).startsWith("/questions/")) {
+      for (const { board, res } of rules) if (res.some((re) => re.test(pagePath))) return board;
+      return MAIN_BOARD;
+    }
+    const words = ` ${String(text).toLowerCase().replace(/[^a-z0-9 -]+/g, " ")} `;
+    for (const board of BOARDS.slice(1)) if (board.words.some((w) => words.includes(` ${w} `) || words.includes(` ${w}s `))) return board;
+    return MAIN_BOARD;
+  }
+  function inFeed(feedBoard, board, releaseDate) {
+    if (feedBoard.slug === MAIN_BOARD.slug) return board.slug === MAIN_BOARD.slug || String(releaseDate) < SPLIT_FROM;
+    return board.slug === feedBoard.slug && String(releaseDate) >= SPLIT_FROM;
+  }
+  const boardByFeedPath = (feedPath) => BOARDS.find((b) => b.feed === feedPath) ?? null;
+  return { BOARDS, SPLIT_FROM, MAIN_BOARD, boardFor, inFeed, boardByFeedPath };
+}
+
+const clipText = (t, max) => (t.length <= max ? t : `${t.slice(0, max - 1).replace(/\s+\S*$/, "")}…`);
+
+/** The pin title Pinterest indexes: led by a real search term when it names none of its board's. */
+export function pinTitle(title, board) {
+  const lower = String(title).toLowerCase();
+  if (board.keywords.some((k) => lower.includes(k))) return clipText(title, 100);
+  return clipText(`${board.keywords[0].replace(/^./, (c) => c.toUpperCase())}: ${title}`, 100);
+}
+
+/** The pin description, ending with what the click opens (a clear call to action). */
+export function pinDescription(description, kind) {
+  const cta = kind === "question" ? "Read the short answer and what to prepare next." : "See what is inside the kit before you buy.";
+  return `${clipText(String(description), 500 - cta.length - 1)} ${cta}`;
+}
+
+/** One board's feed at `now`: its released drip pins (and, for the first board, the launch items). */
+export function dueBoardEntries(feed, queue, boards, board, now = new Date()) {
+  const today = chicagoDate(now);
+  const max = Number(queue?.config?.MAX_FEED_ITEMS ?? 50);
+  const main = board.slug === boards.MAIN_BOARD.slug;
+  const launch = !main ? [] : (feed.items || []).map((i) => ({
+    guid: `approvalprep-pin-${i.slug}`, title: i.title, description: i.description,
+    link: itemLink(feed, i), image: `${SITE}${pinImagePath(i.slug)}`, pubDate: i.pubDate,
+  }));
+  const drip = (queue?.items || [])
+    .filter((v) => v.releaseDate <= today && boards.inFeed(board, boards.boardFor(v.path, v.headline), v.releaseDate))
+    .map((v) => ({
+      guid: `approvalprep-pin-${v.id}`, title: v.releaseDate >= boards.SPLIT_FROM ? pinTitle(v.title, board) : v.title,
+      description: v.releaseDate >= boards.SPLIT_FROM ? pinDescription(v.description, v.kind) : v.description,
+      link: variantLink(feed, v), image: `${SITE}${pinImagePath(v.id)}`, pubDate: variantPubDate(v.releaseDate),
+    }));
+  return [...drip, ...launch]
+    .sort((a, b) => Date.parse(b.pubDate) - Date.parse(a.pubDate) || (a.guid < b.guid ? -1 : 1))
+    .slice(0, max);
+}
+
+/** One board's whole feed as served at `now`. */
+export function renderBoardFeedAt(feed, queue, boards, board, now = new Date()) {
+  const xml = renderEntries(feed, dueBoardEntries(feed, queue, boards, board, now));
+  return board.slug === boards.MAIN_BOARD.slug ? xml : xml.replace(`href="${SITE}${FEED_PATH}"`, `href="${SITE}${board.feed}"`).replace(`<title>${esc(feed.channel.title)}</title>`, `<title>${esc(`ApprovalPrep: ${board.name}`)}</title>`);
+}

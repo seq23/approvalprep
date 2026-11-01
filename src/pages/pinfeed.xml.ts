@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
-import { loadPinfeed, loadQueue, renderFeedAt } from "../lib/pinfeed.mjs";
+import { loadPinfeed, loadQueue, pinBoards, renderBoardFeedAt } from "../lib/pinfeed.mjs";
+import boardsConfig from "../../data/pinterest/boards.json";
 
 // Pinterest RSS feed, static fallback rendered at build time. In production the
 // request-time Pages Function functions/pinfeed.xml.js answers /pinfeed.xml with
@@ -7,4 +8,4 @@ import { loadPinfeed, loadQueue, renderFeedAt } from "../lib/pinfeed.mjs";
 // release day (America/Chicago) with no deploy. Served as application/rss+xml by
 // the /pinfeed.xml rule in public/_headers.
 export const GET: APIRoute = async () =>
-  new Response(renderFeedAt(loadPinfeed(), loadQueue(), new Date()), { headers: { "content-type": "application/rss+xml; charset=utf-8" } });
+  new Response(renderBoardFeedAt(loadPinfeed(), loadQueue(), pinBoards(boardsConfig), pinBoards(boardsConfig).MAIN_BOARD, new Date()), { headers: { "content-type": "application/rss+xml; charset=utf-8" } });
