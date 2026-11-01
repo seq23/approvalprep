@@ -91,7 +91,12 @@ function scheduleErrors(list, perDay) {
   }
   return out;
 }
-scheduleErrors(items, cfg.PINS_PER_DAY).forEach(fail);
+// The board-split day (data/pinterest/boards.json split_from) may carry one pin per board:
+// Pinterest refuses to connect a feed with no items, and each new topic board's feed is
+// connected that day. Every other day keeps PINS_PER_DAY.
+const SPLIT_DAY = JSON.parse(fs.readFileSync("data/pinterest/boards.json", "utf8"));
+scheduleErrors(items, cfg.PINS_PER_DAY).filter((e) => !e.startsWith(`${SPLIT_DAY.split_from}: `) || !e.includes("> PINS_PER_DAY")).forEach(fail);
+if (items.filter((v) => v.releaseDate === SPLIT_DAY.split_from).length > SPLIT_DAY.boards.length) fail(`${SPLIT_DAY.split_from}: more pins than boards on the split day`);
 
 // 4 + 5. Links and images against the build.
 const pageExists = (p) => fs.existsSync(path.join(dist, p, "index.html"));
@@ -170,6 +175,8 @@ for (const iso of ["2026-11-01T18:00:00Z", "2026-11-20T18:00:00Z"]) {
 }
 for (const b of boards.BOARDS.slice(1)) if (!boards.BOARDS.some((x) => x === b && b.feed.startsWith("/pinfeed/") && b.feed.endsWith(".xml"))) fail(`${b.slug}: feed must be /pinfeed/<board>.xml`);
 if (boards.boardFor("/questions/x/", "how to write a letter of explanation for a mortgage").slug !== "letter-of-explanation") fail("a letter-of-explanation question did not reach its board");
+// Pinterest refuses to connect a feed with no items, so every topic board has a pin on the split day.
+for (const b of boards.BOARDS.slice(1)) if (!guids(renderBoardFeedAt(feed, queue, boards, b, new Date(`${boards.SPLIT_FROM}T18:00:00Z`))).length) fail(`${b.slug}: its feed is empty on ${boards.SPLIT_FROM}, so Pinterest cannot connect it`);
 
 // 6c. Stop rule (Growth playbook): 0 visits at 4 weeks -> new format; 8 -> pause, never delete.
 {
