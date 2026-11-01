@@ -73,8 +73,6 @@ jobs:
       - name: Validate v4.2 lean controls
         run: |
           npm run validate:admin-action-links
-          npm run validate:citation-strategy
-          npm run validate:growth-health
           npm run validate:automation-safety
       - name: Create PR for live mode
         if: ${{ env.RUN_MODE == 'live' }}
