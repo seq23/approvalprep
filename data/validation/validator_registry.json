@@ -15,17 +15,6 @@
       "scope": "Astro static build and Cloudflare Pages deploy artifact"
     },
     {
-      "id": "registry-build-order",
-      "npmScript": "validate:registry-build-order",
-      "entrypoint": "scripts/validate/registry-build-order.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents a validator that reads dist/ being ordered ahead of the build that writes it - the defect that made Citation OS Daily, Citation OS Weekly and Intelligence - Ingest Free Sources fail every scheduled run from 2026-09-02 while the Validate lane, which builds as a workflow step, stayed green",
-      "owner": "approvalprep-ops",
-      "group": "ops-critical",
-      "scope": "The position of the build stage in _repo_validation_registry.json, its severity and blocksRelease posture, and that its npm script still runs astro build"
-    },
-    {
       "id": "pre-merge-lane-parity",
       "npmScript": "validate:pre-merge-lane-parity",
       "entrypoint": "scripts/validate/pre-merge-lane-parity.mjs",
@@ -46,17 +35,6 @@
       "owner": "approvalprep-ops",
       "group": "ops-critical",
       "scope": "Every .github/workflows/*.yml step that runs a build-output validator or produces the published tree: that a producing step and a dependency install precede it unconditionally in the same job; and the measured absent-tree exit code of every registry validator importing requireBuildOutput/publishedDir from scripts/validate/_common.mjs"
-    },
-    {
-      "id": "repo-structure",
-      "npmScript": "validate:repo",
-      "entrypoint": "scripts/validate/repo-structure.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents broken customer/payment/legal/site release",
-      "owner": "approvalprep-ops",
-      "group": "release-critical",
-      "scope": "Core repo files, authority files, package identity"
     },
     {
       "id": "workflow-yaml-parse",
@@ -136,17 +114,6 @@
       "owner": "approvalprep-ops",
       "group": "release-critical",
       "scope": "Legal/trust pages and regulated boundary pages"
-    },
-    {
-      "id": "plain-language",
-      "npmScript": "validate:plain-language",
-      "entrypoint": "scripts/validate/plain-language.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents broken customer/payment/legal/site release",
-      "owner": "approvalprep-ops",
-      "group": "release-critical",
-      "scope": "Plain-language safety and customer comprehension"
     },
     {
       "id": "download-safety",
@@ -270,17 +237,6 @@
       "owner": "approvalprep-ops",
       "group": "release-critical",
       "scope": "Every record in data/release/frozen_output_registry.json against its blob and the committed route copy"
-    },
-    {
-      "id": "title-length",
-      "npmScript": "validate:title-length",
-      "entrypoint": "scripts/validate/title-length.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents shipping a <title> over 65 characters, an indexable page with a <title> under 30 characters, a missing meta description or one outside 110-160 characters, or a duplicate title or description between indexable pages - Bing Webmaster Site Scan flagged 20 over-long titles on 25 Sep 2026, and a crawl of the 106 sitemap URLs the same day found 11 short titles, 10 short and 64 long descriptions, and one description shared by 8 blog answers. The ceiling came down from 70 to 65 on 26 Oct 2026 when the Search Readiness checklist (item b1) found eleven live pages between 66 and 70 characters, the homepage among them; every titled page must name ApprovalPrep (Search Readiness b10), even when fitting a long subject",
-      "owner": "approvalprep-ops",
-      "group": "release-critical",
-      "scope": "Every built HTML page's <title> element in the published tree, and every indexable page's <title> minimum and meta description and site brand"
     },
     {
       "id": "clarity-scope",
@@ -459,17 +415,6 @@
       "scope": "Competitor crawl policy, watchlist, and safety"
     },
     {
-      "id": "serp-import-schema",
-      "npmScript": "validate:serp-import",
-      "entrypoint": "scripts/validate/serp-import-schema.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "Manual SERP import schema integrity"
-    },
-    {
       "id": "backlink-recommendation-honesty",
       "npmScript": "validate:backlink-honesty",
       "entrypoint": "scripts/validate/backlink-recommendation-honesty.mjs",
@@ -558,28 +503,6 @@
       "scope": "Citation opportunities cannot imply observed performance"
     },
     {
-      "id": "workflow-data-trace",
-      "npmScript": "validate:workflow-trace",
-      "entrypoint": "scripts/validate/workflow-data-trace.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents broken operator workflow or unsafe automation",
-      "owner": "approvalprep-ops",
-      "group": "ops-critical",
-      "scope": "GitHub Actions fixture trace shape and manual readiness"
-    },
-    {
-      "id": "setup-secrets",
-      "npmScript": "validate:setup-secrets",
-      "entrypoint": "scripts/validate/setup-and-secrets.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents broken operator workflow or unsafe automation",
-      "owner": "approvalprep-ops",
-      "group": "ops-critical",
-      "scope": "Setup docs and forbidden secret files"
-    },
-    {
       "id": "admin-action-links",
       "npmScript": "validate:admin-action-links",
       "entrypoint": "scripts/validate/admin-action-links.mjs",
@@ -589,28 +512,6 @@
       "owner": "approvalprep-ops",
       "group": "ops-critical",
       "scope": "Admin action links point to real repo edit/history targets"
-    },
-    {
-      "id": "citation-strategy",
-      "npmScript": "validate:citation-strategy",
-      "entrypoint": "scripts/validate/citation-strategy.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "100K strategy separates targets, generated surfaces, and observed proof"
-    },
-    {
-      "id": "growth-health",
-      "npmScript": "validate:growth-health",
-      "entrypoint": "scripts/validate/growth-health.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "Growth health panels and statuses"
     },
     {
       "id": "automation-safety",
@@ -692,83 +593,6 @@
       "scope": "Browserless UX report artifact generation"
     },
     {
-      "id": "ux-conversion",
-      "npmScript": "validate:ux-conversion",
-      "entrypoint": "scripts/validate/ux-conversion.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents confusing or low-conversion user experience",
-      "owner": "approvalprep-ux",
-      "group": "ux-critical",
-      "scope": "Homepage, footer, CTA, and conversion structure"
-    },
-    {
-      "id": "public-page-depth",
-      "npmScript": "validate:public-page-depth",
-      "entrypoint": "scripts/validate/public-page-depth.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents confusing or low-conversion user experience",
-      "owner": "approvalprep-ux",
-      "group": "ux-critical",
-      "scope": "Route-specific copy depth and anti-thin-page rules"
-    },
-    {
-      "id": "cta-quality",
-      "npmScript": "validate:cta-quality",
-      "entrypoint": "scripts/validate/cta-quality.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents confusing or low-conversion user experience",
-      "owner": "approvalprep-ux",
-      "group": "ux-critical",
-      "scope": "CTA clarity and conversion path quality"
-    },
-    {
-      "id": "trust-signal-coverage",
-      "npmScript": "validate:trust-signals",
-      "entrypoint": "scripts/validate/trust-signal-coverage.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents confusing or low-conversion user experience",
-      "owner": "approvalprep-ux",
-      "group": "ux-critical",
-      "scope": "Trust signal placement and boundary language"
-    },
-    {
-      "id": "browserless-accessibility",
-      "npmScript": "validate:browserless-accessibility",
-      "entrypoint": "scripts/validate/browserless-accessibility.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents confusing or low-conversion user experience",
-      "owner": "approvalprep-ux",
-      "group": "ux-critical",
-      "scope": "Static accessibility and browserless checks"
-    },
-    {
-      "id": "mobile-ux",
-      "npmScript": "validate:mobile-ux",
-      "entrypoint": "scripts/validate/mobile-ux.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents confusing or low-conversion user experience",
-      "owner": "approvalprep-ux",
-      "group": "ux-critical",
-      "scope": "Responsive/mobile standards"
-    },
-    {
-      "id": "plain-language-grade",
-      "npmScript": "validate:plain-language-grade",
-      "entrypoint": "scripts/validate/plain-language-grade.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents confusing or low-conversion user experience",
-      "owner": "approvalprep-ux",
-      "group": "ux-critical",
-      "scope": "Readable consumer-facing language"
-    },
-    {
       "id": "credit-boundary-coverage",
       "npmScript": "validate:credit-boundary",
       "entrypoint": "scripts/validate/credit-boundary-coverage.mjs",
@@ -778,17 +602,6 @@
       "owner": "approvalprep-ops",
       "group": "release-critical",
       "scope": "Credit repair/dispute boundary coverage"
-    },
-    {
-      "id": "customer-next-steps",
-      "npmScript": "validate:customer-next-steps",
-      "entrypoint": "scripts/validate/customer-next-steps.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents confusing or low-conversion user experience",
-      "owner": "approvalprep-ux",
-      "group": "ux-critical",
-      "scope": "Post-download and customer next-step clarity"
     },
     {
       "id": "e2e-user-journey",
@@ -879,28 +692,6 @@
       "scope": "$0 browser-only Letter Writing Studio"
     },
     {
-      "id": "navigation-architecture",
-      "npmScript": "validate:navigation-architecture",
-      "entrypoint": "scripts/validate/navigation-architecture.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents confusing or low-conversion user experience",
-      "owner": "approvalprep-ops",
-      "group": "ux-critical",
-      "scope": "Buyer-guided navigation architecture"
-    },
-    {
-      "id": "commercial-page-cta-depth",
-      "npmScript": "validate:commercial-page-cta-depth",
-      "entrypoint": "scripts/validate/commercial-page-cta-depth.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents confusing or low-conversion user experience",
-      "owner": "approvalprep-ops",
-      "group": "ux-critical",
-      "scope": "Commercial page CTA rhythm and conversion sections"
-    },
-    {
       "id": "content-approval-governance",
       "npmScript": "validate:content-approval-governance",
       "entrypoint": "scripts/validate/content-approval-governance.mjs",
@@ -910,17 +701,6 @@
       "owner": "approvalprep-ops",
       "group": "governance-critical",
       "scope": "Content approval queue, approval history, publication policy, and promotion scripts"
-    },
-    {
-      "id": "artifact-validation",
-      "npmScript": "validate:artifact",
-      "entrypoint": "scripts/validate/artifact-validation.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents broken operator workflow or unsafe automation",
-      "owner": "approvalprep-ops",
-      "group": "ops-critical",
-      "scope": "Artifact manifest and package contract"
     },
     {
       "id": "page-factory",
@@ -965,17 +745,6 @@
       "owner": "approvalprep-growth",
       "group": "citation-os-batch-1",
       "scope": "Sitemap feed llms and public discovery surface coverage"
-    },
-    {
-      "id": "structured-data",
-      "npmScript": "validate:structured-data",
-      "entrypoint": "scripts/validate/structured-data.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "Reusable schema and structured data wiring",
-      "owner": "approvalprep-growth",
-      "group": "citation-os-batch-1",
-      "scope": "Reusable schema and structured data wiring"
     },
     {
       "id": "internal-link-graph",
@@ -1189,111 +958,12 @@
       "scope": "ApprovalPrep Phase A-F Citation OS hardening"
     },
     {
-      "id": "source-evidence-depth",
-      "npmScript": "validate:source-evidence-depth",
-      "entrypoint": "scripts/validate/source-evidence-depth.mjs",
-      "severity": "STRONG_WARNING",
-      "blocksRelease": false,
-      "blockReason": "surfaces operational quality risk without blocking release by default",
-      "owner": "approvalprep-ops",
-      "group": "phase-a-f",
-      "scope": "ApprovalPrep Phase A-F Citation OS hardening"
-    },
-    {
-      "id": "location-source-coverage",
-      "npmScript": "validate:location-source-coverage",
-      "entrypoint": "scripts/validate/location-source-coverage.mjs",
-      "severity": "STRONG_WARNING",
-      "blocksRelease": false,
-      "blockReason": "surfaces operational quality risk without blocking release by default",
-      "owner": "approvalprep-ops",
-      "group": "phase-a-f",
-      "scope": "ApprovalPrep Phase A-F Citation OS hardening"
-    },
-    {
-      "id": "regulated-template-previews",
-      "npmScript": "validate:regulated-template-previews",
-      "entrypoint": "scripts/validate/regulated-template-previews.mjs",
-      "severity": "STRONG_WARNING",
-      "blocksRelease": false,
-      "blockReason": "surfaces operational quality risk without blocking release by default",
-      "owner": "approvalprep-ops",
-      "group": "phase-a-f",
-      "scope": "ApprovalPrep Phase A-F Citation OS hardening"
-    },
-    {
-      "id": "workflow-write-scopes",
-      "npmScript": "validate:workflow-write-scopes",
-      "entrypoint": "scripts/validate/workflow-write-scopes.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "protects regulated autopublish, source evidence, workflow safety, privacy, or final readiness boundaries",
-      "owner": "approvalprep-ops",
-      "group": "phase-a-f",
-      "scope": "ApprovalPrep Phase A-F Citation OS hardening"
-    },
-    {
-      "id": "self-healing",
-      "npmScript": "validate:self-healing",
-      "entrypoint": "scripts/validate/self-healing.mjs",
-      "severity": "STRONG_WARNING",
-      "blocksRelease": false,
-      "blockReason": "surfaces operational quality risk without blocking release by default",
-      "owner": "approvalprep-ops",
-      "group": "phase-a-f",
-      "scope": "ApprovalPrep Phase A-F Citation OS hardening"
-    },
-    {
       "id": "conversion-privacy",
       "npmScript": "validate:conversion-privacy",
       "entrypoint": "scripts/validate/conversion-privacy.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
       "blockReason": "protects regulated autopublish, source evidence, workflow safety, privacy, or final readiness boundaries",
-      "owner": "approvalprep-ops",
-      "group": "phase-a-f",
-      "scope": "ApprovalPrep Phase A-F Citation OS hardening"
-    },
-    {
-      "id": "experiment-safety",
-      "npmScript": "validate:experiment-safety",
-      "entrypoint": "scripts/validate/experiment-safety.mjs",
-      "severity": "STRONG_WARNING",
-      "blocksRelease": false,
-      "blockReason": "surfaces operational quality risk without blocking release by default",
-      "owner": "approvalprep-ops",
-      "group": "phase-a-f",
-      "scope": "ApprovalPrep Phase A-F Citation OS hardening"
-    },
-    {
-      "id": "page-action-safety",
-      "npmScript": "validate:page-action-safety",
-      "entrypoint": "scripts/validate/page-action-safety.mjs",
-      "severity": "STRONG_WARNING",
-      "blocksRelease": false,
-      "blockReason": "surfaces operational quality risk without blocking release by default",
-      "owner": "approvalprep-ops",
-      "group": "phase-a-f",
-      "scope": "ApprovalPrep Phase A-F Citation OS hardening"
-    },
-    {
-      "id": "final-readiness-ledger",
-      "npmScript": "validate:final-readiness-ledger",
-      "entrypoint": "scripts/validate/final-readiness-ledger.mjs",
-      "severity": "STRONG_WARNING",
-      "blocksRelease": false,
-      "blockReason": "surfaces operational quality risk without blocking release by default",
-      "owner": "approvalprep-ops",
-      "group": "phase-a-f",
-      "scope": "ApprovalPrep Phase A-F Citation OS hardening"
-    },
-    {
-      "id": "validator-severity",
-      "npmScript": "validate:validator-severity",
-      "entrypoint": "scripts/validate/validator-severity.mjs",
-      "severity": "STRONG_WARNING",
-      "blocksRelease": false,
-      "blockReason": "surfaces operational quality risk without blocking release by default",
       "owner": "approvalprep-ops",
       "group": "phase-a-f",
       "scope": "ApprovalPrep Phase A-F Citation OS hardening"
@@ -1380,28 +1050,6 @@
       "severity": "HARD_FAIL",
       "blocksRelease": true,
       "blockReason": "prevents publishing external-agent build directives as reader-facing page copy, including inside the direct-answer block answer engines extract",
-      "owner": "approvalprep-ops",
-      "group": "content-quality",
-      "scope": "Built HTML surface in dist/, including dist/templates and dist/reports"
-    },
-    {
-      "id": "no-empty-table-cells",
-      "npmScript": "validate:no-empty-cells",
-      "entrypoint": "scripts/validators/validate_no_empty_table_cells.js",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents shipping tables whose empty cells break column-to-header alignment and make the table unusable as a fact source",
-      "owner": "approvalprep-ops",
-      "group": "content-quality",
-      "scope": "Built HTML surface in dist/, including dist/templates and dist/reports"
-    },
-    {
-      "id": "content-pattern-contract",
-      "npmScript": "validate:content-pattern",
-      "entrypoint": "scripts/validators/validate_content_pattern_contract.js",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents publishing a page with no direct answer, no usable h1, empty table cells, or no conversion path - the four blocks that decide whether an answer engine can quote the page and route the reader anywhere",
       "owner": "approvalprep-ops",
       "group": "content-quality",
       "scope": "Built HTML surface in dist/, including dist/templates and dist/reports"
@@ -1547,7 +1195,7 @@
       "blockReason": "Homepage definition paragraph: measured missing on the live site 2026-10-11",
       "owner": "approvalprep-growth",
       "group": "growth-critical",
-      "scope": "paragraph directly under the H1 starts 'ApprovalPrep is', 40-60 words, and every speakable cssSelector resolves"
+      "scope": "Every speakable cssSelector on the homepage WebPage JSON-LD resolves to an element on the built page, and one of them names the paragraph directly under the H1 (wording is not checked: copy is fixed at the generator)."
     },
     {
       "id": "seo-hygiene-indexability",

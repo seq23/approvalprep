@@ -6,6 +6,16 @@ import { validateRegistryDefinition, decisionFor } from './orchestrator-lib.mjs'
 
 const root = process.cwd();
 const registry = JSON.parse(fs.readFileSync(path.join(root, '_repo_validation_registry.json'), 'utf8'));
+// The build is the first stage, HARD_FAIL and release-blocking, so no validator reads a dist/
+// this run did not produce. Enforced here, where the order is used (was registry-build-order).
+{
+  const first = registry.validators?.[0];
+  if (!registry.validators?.length) { console.error('[validate:all] FAIL zero validators in _repo_validation_registry.json'); process.exit(1); }
+  if (first.id !== 'build' || first.severity !== 'HARD_FAIL' || first.blocksRelease !== true) {
+    console.error(`[validate:all] FAIL the first registry entry must be "build" (HARD_FAIL, blocksRelease); found "${first.id}"`);
+    process.exit(1);
+  }
+}
 const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
 const definitionErrors = validateRegistryDefinition(registry, pkg, root);
 if (definitionErrors.length) {

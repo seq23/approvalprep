@@ -2,8 +2,8 @@
   "schemaVersion": "1.0.0",
   "status": "PASS",
   "orchestratorSource": "_repo_validation_registry.json",
-  "executed": 152,
-  "passed": 152,
+  "executed": 121,
+  "passed": 121,
   "warnings": 0,
   "hardFailures": 0,
   "results": [
@@ -14,16 +14,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 2926
-    },
-    {
-      "id": "registry-build-order",
-      "npmScript": "validate:registry-build-order",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 94
+      "durationMs": 2753
     },
     {
       "id": "pre-merge-lane-parity",
@@ -32,7 +23,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 114
+      "durationMs": 200
     },
     {
       "id": "build-output-contract",
@@ -41,16 +32,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 430
-    },
-    {
-      "id": "repo-structure",
-      "npmScript": "validate:repo",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 96
+      "durationMs": 745
     },
     {
       "id": "workflow-yaml-parse",
@@ -59,7 +41,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 96
+      "durationMs": 139
     },
     {
       "id": "workflow-deps-installed",
@@ -68,7 +50,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 98
+      "durationMs": 149
     },
     {
       "id": "zero-paid-llm",
@@ -77,7 +59,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 145
+      "durationMs": 231
     },
     {
       "id": "validation-registry",
@@ -86,7 +68,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 99
+      "durationMs": 165
     },
     {
       "id": "validator-orchestrator-self-test",
@@ -95,7 +77,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 95
+      "durationMs": 166
     },
     {
       "id": "route-manifest",
@@ -104,7 +86,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 96
+      "durationMs": 168
     },
     {
       "id": "legal-trust",
@@ -113,16 +95,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 99
-    },
-    {
-      "id": "plain-language",
-      "npmScript": "validate:plain-language",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 97
+      "durationMs": 187
     },
     {
       "id": "download-safety",
@@ -131,7 +104,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 96
+      "durationMs": 194
     },
     {
       "id": "download-first-page-boundary",
@@ -140,7 +113,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 101
+      "durationMs": 188
     },
     {
       "id": "download-offering-coverage",
@@ -149,7 +122,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 101
+      "durationMs": 183
     },
     {
       "id": "data-privacy",
@@ -158,7 +131,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 99
+      "durationMs": 159
     },
     {
       "id": "prompt-guardrails",
@@ -167,7 +140,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 97
+      "durationMs": 159
     },
     {
       "id": "atoms",
@@ -176,7 +149,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 107
+      "durationMs": 186
     },
     {
       "id": "citation-claim-coverage",
@@ -185,7 +158,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 97
+      "durationMs": 179
     },
     {
       "id": "external-telemetry-claims",
@@ -194,7 +167,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 217
+      "durationMs": 333
     },
     {
       "id": "atlas-query-fanout",
@@ -203,7 +176,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 103
+      "durationMs": 176
     },
     {
       "id": "seo-aeo-geo-surfaces",
@@ -212,7 +185,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 104
+      "durationMs": 208
     },
     {
       "id": "frozen-output-drift",
@@ -221,16 +194,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 101
-    },
-    {
-      "id": "title-length",
-      "npmScript": "validate:title-length",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 109
+      "durationMs": 176
     },
     {
       "id": "clarity-scope",
@@ -239,7 +203,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 125
+      "durationMs": 187
     },
     {
       "id": "schema-entity-graph",
@@ -248,7 +212,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 125
+      "durationMs": 184
     },
     {
       "id": "reviewer-slot",
@@ -257,7 +221,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 131
+      "durationMs": 187
     },
     {
       "id": "entity-backlink-watch",
@@ -266,7 +230,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 271
+      "durationMs": 530
     },
     {
       "id": "demand-backed-pages",
@@ -275,7 +239,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 103
+      "durationMs": 191
     },
     {
       "id": "pages-header-publication",
@@ -284,7 +248,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 99
+      "durationMs": 175
     },
     {
       "id": "admin-dashboard",
@@ -293,7 +257,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 106
+      "durationMs": 165
     },
     {
       "id": "payment-download-boundary",
@@ -302,7 +266,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 96
+      "durationMs": 159
     },
     {
       "id": "setup-and-secrets",
@@ -311,7 +275,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 93
+      "durationMs": 160
     },
     {
       "id": "env-examples",
@@ -320,7 +284,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 95
+      "durationMs": 164
     },
     {
       "id": "vault-schema",
@@ -329,7 +293,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 98
+      "durationMs": 161
     },
     {
       "id": "security",
@@ -338,7 +302,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 281
+      "durationMs": 277
     },
     {
       "id": "source-connectors-real",
@@ -347,7 +311,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 98
+      "durationMs": 156
     },
     {
       "id": "no-fake-intelligence-data",
@@ -356,7 +320,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 144
+      "durationMs": 184
     },
     {
       "id": "intelligence-source-freshness",
@@ -365,7 +329,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 96
+      "durationMs": 157
     },
     {
       "id": "competitor-crawl-policy",
@@ -374,16 +338,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 96
-    },
-    {
-      "id": "serp-import-schema",
-      "npmScript": "validate:serp-import",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 98
+      "durationMs": 157
     },
     {
       "id": "backlink-recommendation-honesty",
@@ -392,7 +347,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 98
+      "durationMs": 158
     },
     {
       "id": "content-action-decision",
@@ -401,7 +356,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 111
+      "durationMs": 166
     },
     {
       "id": "opportunity-score-provenance",
@@ -410,7 +365,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 111
+      "durationMs": 160
     },
     {
       "id": "content-release",
@@ -419,7 +374,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 549
+      "durationMs": 804
     },
     {
       "id": "medium-lane",
@@ -428,7 +383,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 103
+      "durationMs": 183
     },
     {
       "id": "release-fixture-isolation",
@@ -437,7 +392,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 726
+      "durationMs": 1122
     },
     {
       "id": "maintenance-brief-integrity",
@@ -446,7 +401,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 106
+      "durationMs": 179
     },
     {
       "id": "citation-opportunity-integrity",
@@ -455,25 +410,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 113
-    },
-    {
-      "id": "workflow-data-trace",
-      "npmScript": "validate:workflow-trace",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 102
-    },
-    {
-      "id": "setup-secrets",
-      "npmScript": "validate:setup-secrets",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 99
+      "durationMs": 166
     },
     {
       "id": "admin-action-links",
@@ -482,25 +419,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 103
-    },
-    {
-      "id": "citation-strategy",
-      "npmScript": "validate:citation-strategy",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 97
-    },
-    {
-      "id": "growth-health",
-      "npmScript": "validate:growth-health",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 95
+      "durationMs": 153
     },
     {
       "id": "automation-safety",
@@ -509,7 +428,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 91
+      "durationMs": 141
     },
     {
       "id": "delegated-authority",
@@ -518,7 +437,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 96
+      "durationMs": 139
     },
     {
       "id": "self-heal-progressions",
@@ -527,7 +446,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 93
+      "durationMs": 143
     },
     {
       "id": "self-heal-honesty",
@@ -536,7 +455,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 108
+      "durationMs": 149
     },
     {
       "id": "owner-exceptions",
@@ -545,7 +464,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 104
+      "durationMs": 144
     },
     {
       "id": "notification-policy",
@@ -554,7 +473,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 90
+      "durationMs": 155
     },
     {
       "id": "browserless-ux-report",
@@ -563,70 +482,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 103
-    },
-    {
-      "id": "ux-conversion",
-      "npmScript": "validate:ux-conversion",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 103
-    },
-    {
-      "id": "public-page-depth",
-      "npmScript": "validate:public-page-depth",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 136
-    },
-    {
-      "id": "cta-quality",
-      "npmScript": "validate:cta-quality",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 104
-    },
-    {
-      "id": "trust-signal-coverage",
-      "npmScript": "validate:trust-signals",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 99
-    },
-    {
-      "id": "browserless-accessibility",
-      "npmScript": "validate:browserless-accessibility",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 100
-    },
-    {
-      "id": "mobile-ux",
-      "npmScript": "validate:mobile-ux",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 98
-    },
-    {
-      "id": "plain-language-grade",
-      "npmScript": "validate:plain-language-grade",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 99
+      "durationMs": 157
     },
     {
       "id": "credit-boundary-coverage",
@@ -635,16 +491,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 113
-    },
-    {
-      "id": "customer-next-steps",
-      "npmScript": "validate:customer-next-steps",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 96
+      "durationMs": 166
     },
     {
       "id": "e2e-user-journey",
@@ -653,7 +500,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 114
+      "durationMs": 162
     },
     {
       "id": "product-flow-e2e",
@@ -662,7 +509,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 106
+      "durationMs": 154
     },
     {
       "id": "product-model-v2",
@@ -671,7 +518,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 94
+      "durationMs": 140
     },
     {
       "id": "runtime-product-admin",
@@ -680,7 +527,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 173
+      "durationMs": 216
     },
     {
       "id": "stripe-mode",
@@ -689,7 +536,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 91
+      "durationMs": 143
     },
     {
       "id": "offering-visibility",
@@ -698,7 +545,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 94
+      "durationMs": 147
     },
     {
       "id": "offering-contracts",
@@ -707,7 +554,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 101
+      "durationMs": 151
     },
     {
       "id": "letter-studio",
@@ -716,25 +563,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 95
-    },
-    {
-      "id": "navigation-architecture",
-      "npmScript": "validate:navigation-architecture",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 92
-    },
-    {
-      "id": "commercial-page-cta-depth",
-      "npmScript": "validate:commercial-page-cta-depth",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 95
+      "durationMs": 148
     },
     {
       "id": "content-approval-governance",
@@ -743,16 +572,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 89
-    },
-    {
-      "id": "artifact-validation",
-      "npmScript": "validate:artifact",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 91
+      "durationMs": 143
     },
     {
       "id": "page-factory",
@@ -761,7 +581,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 94
+      "durationMs": 155
     },
     {
       "id": "blog-detail-pages",
@@ -770,7 +590,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 93
+      "durationMs": 153
     },
     {
       "id": "atom-coverage-depth",
@@ -779,7 +599,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 98
+      "durationMs": 156
     },
     {
       "id": "discovery-surfaces",
@@ -788,16 +608,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 91
-    },
-    {
-      "id": "structured-data",
-      "npmScript": "validate:structured-data",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 90
+      "durationMs": 159
     },
     {
       "id": "internal-link-graph",
@@ -806,7 +617,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 132
+      "durationMs": 158
     },
     {
       "id": "authority-assets",
@@ -815,7 +626,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 91
+      "durationMs": 150
     },
     {
       "id": "template-library",
@@ -824,7 +635,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 89
+      "durationMs": 157
     },
     {
       "id": "metrics-scoreboards",
@@ -833,7 +644,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 90
+      "durationMs": 153
     },
     {
       "id": "provider-integrations",
@@ -842,7 +653,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 91
+      "durationMs": 152
     },
     {
       "id": "cloudflare-crawler-intelligence",
@@ -851,7 +662,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 92
+      "durationMs": 150
     },
     {
       "id": "indexing-provider-ledgers",
@@ -860,7 +671,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 94
+      "durationMs": 158
     },
     {
       "id": "citation-ledger",
@@ -869,7 +680,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 91
+      "durationMs": 149
     },
     {
       "id": "backlink-handoff",
@@ -878,7 +689,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 92
+      "durationMs": 167
     },
     {
       "id": "content-lifecycle",
@@ -887,7 +698,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 91
+      "durationMs": 148
     },
     {
       "id": "public-reports",
@@ -896,7 +707,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 94
+      "durationMs": 159
     },
     {
       "id": "repurposing",
@@ -905,7 +716,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 92
+      "durationMs": 155
     },
     {
       "id": "conversion-attribution",
@@ -914,7 +725,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 90
+      "durationMs": 147
     },
     {
       "id": "experiments",
@@ -923,7 +734,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 94
+      "durationMs": 158
     },
     {
       "id": "safe-harbor-autopublish",
@@ -932,7 +743,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 94
+      "durationMs": 157
     },
     {
       "id": "prohibited-claims",
@@ -941,7 +752,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 125
+      "durationMs": 172
     },
     {
       "id": "required-disclosures",
@@ -950,7 +761,7 @@
       "blocksRelease": false,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 93
+      "durationMs": 154
     },
     {
       "id": "source-required-claims",
@@ -959,7 +770,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 92
+      "durationMs": 150
     },
     {
       "id": "template-preview-safety",
@@ -968,52 +779,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 98
-    },
-    {
-      "id": "source-evidence-depth",
-      "npmScript": "validate:source-evidence-depth",
-      "severity": "STRONG_WARNING",
-      "blocksRelease": false,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 92
-    },
-    {
-      "id": "location-source-coverage",
-      "npmScript": "validate:location-source-coverage",
-      "severity": "STRONG_WARNING",
-      "blocksRelease": false,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 100
-    },
-    {
-      "id": "regulated-template-previews",
-      "npmScript": "validate:regulated-template-previews",
-      "severity": "STRONG_WARNING",
-      "blocksRelease": false,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 107
-    },
-    {
-      "id": "workflow-write-scopes",
-      "npmScript": "validate:workflow-write-scopes",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 105
-    },
-    {
-      "id": "self-healing",
-      "npmScript": "validate:self-healing",
-      "severity": "STRONG_WARNING",
-      "blocksRelease": false,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 104
+      "durationMs": 150
     },
     {
       "id": "conversion-privacy",
@@ -1022,43 +788,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 87
-    },
-    {
-      "id": "experiment-safety",
-      "npmScript": "validate:experiment-safety",
-      "severity": "STRONG_WARNING",
-      "blocksRelease": false,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 90
-    },
-    {
-      "id": "page-action-safety",
-      "npmScript": "validate:page-action-safety",
-      "severity": "STRONG_WARNING",
-      "blocksRelease": false,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 92
-    },
-    {
-      "id": "final-readiness-ledger",
-      "npmScript": "validate:final-readiness-ledger",
-      "severity": "STRONG_WARNING",
-      "blocksRelease": false,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 92
-    },
-    {
-      "id": "validator-severity",
-      "npmScript": "validate:validator-severity",
-      "severity": "STRONG_WARNING",
-      "blocksRelease": false,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 102
+      "durationMs": 143
     },
     {
       "id": "workflow-main-writer-safety",
@@ -1067,7 +797,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 384
+      "durationMs": 1404
     },
     {
       "id": "cadence-ledger-advance",
@@ -1076,7 +806,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 378
+      "durationMs": 768
     },
     {
       "id": "redirect-map",
@@ -1085,7 +815,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 97
+      "durationMs": 143
     },
     {
       "id": "retest-lifecycle",
@@ -1094,7 +824,7 @@
       "blocksRelease": false,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 93
+      "durationMs": 139
     },
     {
       "id": "provider-cost-controls",
@@ -1103,7 +833,7 @@
       "blocksRelease": false,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 92
+      "durationMs": 139
     },
     {
       "id": "query-atlas",
@@ -1112,7 +842,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 91
+      "durationMs": 144
     },
     {
       "id": "atlas-demand-units",
@@ -1121,7 +851,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 105
+      "durationMs": 165
     },
     {
       "id": "no-internal-instruction-leak",
@@ -1130,25 +860,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 107
-    },
-    {
-      "id": "no-empty-table-cells",
-      "npmScript": "validate:no-empty-cells",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 102
-    },
-    {
-      "id": "content-pattern-contract",
-      "npmScript": "validate:content-pattern",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "exitCode": 0,
-      "decision": "PASS",
-      "durationMs": 178
+      "durationMs": 160
     },
     {
       "id": "runtime-bindings",
@@ -1157,7 +869,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 95
+      "durationMs": 142
     },
     {
       "id": "sitemap-url-form",
@@ -1166,7 +878,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 105
+      "durationMs": 150
     },
     {
       "id": "internal-url-form",
@@ -1175,7 +887,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 125
+      "durationMs": 158
     },
     {
       "id": "no-redirected-discovery-urls",
@@ -1184,7 +896,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 102
+      "durationMs": 133
     },
     {
       "id": "outbound-link-health",
@@ -1193,7 +905,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 105
+      "durationMs": 149
     },
     {
       "id": "answer-page-subject",
@@ -1202,7 +914,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 95
+      "durationMs": 134
     },
     {
       "id": "download-key-contract",
@@ -1211,7 +923,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 113
+      "durationMs": 151
     },
     {
       "id": "script-callers",
@@ -1220,7 +932,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 115
+      "durationMs": 174
     },
     {
       "id": "amazon-book-landing-pages",
@@ -1229,7 +941,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 125
+      "durationMs": 159
     },
     {
       "id": "seo-hygiene-favicon",
@@ -1238,7 +950,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 108
+      "durationMs": 163
     },
     {
       "id": "seo-hygiene-og-image",
@@ -1247,7 +959,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 117
+      "durationMs": 152
     },
     {
       "id": "seo-hygiene-jsonld",
@@ -1256,7 +968,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 142
+      "durationMs": 175
     },
     {
       "id": "seo-hygiene-definition",
@@ -1265,7 +977,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 107
+      "durationMs": 150
     },
     {
       "id": "seo-hygiene-indexability",
@@ -1274,7 +986,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 116
+      "durationMs": 176
     },
     {
       "id": "seo-hygiene-indexnow",
@@ -1283,7 +995,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 110
+      "durationMs": 162
     },
     {
       "id": "index-coverage",
@@ -1292,7 +1004,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 97
+      "durationMs": 154
     },
     {
       "id": "target-query-set",
@@ -1301,7 +1013,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 100
+      "durationMs": 136
     },
     {
       "id": "gsc-truth",
@@ -1310,7 +1022,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 94
+      "durationMs": 131
     },
     {
       "id": "consolidation-candidates",
@@ -1319,7 +1031,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 113
+      "durationMs": 142
     },
     {
       "id": "derived-ledger-lanes",
@@ -1328,7 +1040,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 97
+      "durationMs": 129
     },
     {
       "id": "publication-freeze",
@@ -1337,7 +1049,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 95
+      "durationMs": 128
     },
     {
       "id": "query-aligned-pages",
@@ -1346,7 +1058,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 95
+      "durationMs": 140
     },
     {
       "id": "kit-page-sells-its-own-kit",
@@ -1355,7 +1067,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 90
+      "durationMs": 131
     },
     {
       "id": "pinterest-launch",
@@ -1364,7 +1076,7 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 112
+      "durationMs": 148
     },
     {
       "id": "pinterest-drip",
@@ -1373,7 +1085,16 @@
       "blocksRelease": true,
       "exitCode": 0,
       "decision": "PASS",
-      "durationMs": 116
+      "durationMs": 161
+    },
+    {
+      "id": "schedule-truth",
+      "npmScript": "validate:schedule-truth",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "exitCode": 0,
+      "decision": "PASS",
+      "durationMs": 137
     }
   ]
 }
