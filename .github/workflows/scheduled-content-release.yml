@@ -8,7 +8,8 @@ on:
   # commits when a page was actually published, so a frozen day adds no commit.
   # validate:publication-freeze checks the flag, the wiring and this schedule.
   schedule:
-    - cron: "7 10 * * *"
+    - cron: "7 5 * * *"  # America/Chicago, all year
+      timezone: America/Chicago
   workflow_dispatch:
     inputs:
       fixture_trace:

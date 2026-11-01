@@ -8,8 +8,8 @@ Workflow: `.github/workflows/scheduled-content-release.yml`
 
 Schedule:
 
-- Cron: `17 10 * * *`
-- Central daylight time: approximately 5:17 AM
+- Cron: `7 5 * * *` with `timezone: America/Chicago`
+- 5:07 AM Central, all year (the clock change no longer moves it)
 
 What it does:
 

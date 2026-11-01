@@ -6,7 +6,7 @@ Owner policy, 11 Oct 2026: "nothing should be paid … cut the probes and make t
 
 | Call site | Ran from | How often | Model | What it did |
 |---|---|---|---|---|
-| `scripts/llm_citation_probe.mjs` | `citation-os-weekly.yml` step "Observe whether answer engines cite us" | Every Monday, 12:17 UTC, 25 queries | `openai/gpt-4o-mini` + OpenRouter web plugin (parallel/turbo, about $0.00127 per call measured) | Citation probe: asked whether answer engines cite this site. Observes/scores the loop's own output. |
+| `scripts/llm_citation_probe.mjs` | `citation-os-weekly.yml` step "Observe whether answer engines cite us" | Every Saturday, 05:40 CT, 25 queries | `openai/gpt-4o-mini` + OpenRouter web plugin (parallel/turbo, about $0.00127 per call measured) | Citation probe: asked whether answer engines cite this site. Observes/scores the loop's own output. |
 
 No content generation, rewriting, classification or outreach in this repo calls a model. The page factory, the atom expansion and self-heal are all deterministic. `citation-os-daily.yml` has no schedule; its cron is commented out.
 

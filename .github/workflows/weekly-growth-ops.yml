@@ -2,7 +2,8 @@ name: Weekly Growth Ops
 
 on:
   schedule:
-    - cron: "11 11 * * 1"
+    - cron: "40 4 * * 6"  # America/Chicago, all year
+      timezone: America/Chicago
   workflow_dispatch:
     inputs:
       fixture_trace:

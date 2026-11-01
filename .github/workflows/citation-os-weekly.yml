@@ -8,7 +8,8 @@ on:
         required: false
         default: "true"
   schedule:
-    - cron: "17 12 * * 1"
+    - cron: "40 5 * * 6"  # America/Chicago, all year
+      timezone: America/Chicago
 
 permissions:
   contents: write
