@@ -3,6 +3,10 @@
 The repository's full authority chain is in `AGENTS.md` and `REPO_IDENTITY.md`. This file holds
 the rules an agent must not get wrong, with the code that enforces each one named beside it.
 
+## Company brain
+
+Read `~/Brains/spry.md` before any work (business facts, priorities, voice, settled decisions). New business facts go to the brain via Boss OS, not into this repo or memory. Repo how-tos stay in `docs/`.
+
 ## Nothing paid
 
 **Nothing paid.** No model call, search call or provider call in this repository may cost money.
