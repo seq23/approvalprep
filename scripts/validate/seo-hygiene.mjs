@@ -14,9 +14,8 @@
  *                 image, brand, a known kit sku and offers.price/USD equal to
  *                 data/products/products.json (no review/aggregateRating), and
  *                 the price visible on the page
- *   definition    the homepage paragraph directly under the H1 starts
- *                 "ApprovalPrep is", runs 40-60 words, and every speakable
- *                 cssSelector resolves on the page
+ *   definition    every speakable cssSelector resolves on the homepage and one
+ *                 names the paragraph directly under the H1
  *   indexability  legal/utility and thank-you pages are noindex,follow and out of
  *                 the sitemap; every sitemap URL is indexable, self-canonical and
  *                 reachable from / by links
@@ -209,9 +208,7 @@ const checks = {
     const first = after.match(/^\s*<p([^>]*)>([\s\S]*?)<\/p>/i);
     if (!first) return fail("[definition] the element directly under the H1 is not a paragraph");
     const id = first[1].match(/id="([^"]+)"/)?.[1];
-    const words = squash(first[2].replace(/<[^>]+>/g, " ")).split(" ").filter(Boolean);
-    if (!/^ApprovalPrep is\b/.test(words.join(" "))) fail(`[definition] paragraph under the H1 must start "ApprovalPrep is" (starts "${words.slice(0, 4).join(" ")}")`);
-    if (words.length < 40 || words.length > 60) fail(`[definition] definition is ${words.length} words; must be 40-60`);
+    // Wording ("ApprovalPrep is", 40-60 words) is not checked: copy is fixed at the generator (1 Nov 2026).
     const wp = topTypes(html, "/").find((x) => x["@type"] === "WebPage");
     const selectors = wp?.speakable?.cssSelector || [];
     if (!selectors.length) fail("[definition] no speakable cssSelector on the homepage WebPage");

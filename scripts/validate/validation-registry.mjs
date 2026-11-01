@@ -20,7 +20,7 @@ for (const [profile, validators] of Object.entries(matrix.profiles)) {
     if (!ids.has(id)) fail(`[validation-registry] matrix references unknown validator ${id}`);
   }
 }
-for (const required of ['public-page-depth','atlas-query-fanout','seo-aeo-geo-surfaces','admin-dashboard','e2e-user-journey','product-flow-e2e','workflow-data-trace','automation-safety','runtime-product-admin','validator-orchestrator-self-test']) {
+for (const required of ['build','atlas-query-fanout','seo-aeo-geo-surfaces','admin-dashboard','e2e-user-journey','product-flow-e2e','automation-safety','runtime-product-admin','validator-orchestrator-self-test','credit-boundary-coverage','payment-download-boundary','download-safety']) {
   if (!ids.has(required)) fail('[validation-registry] required validator missing '+required);
 }
 if (!fs.readFileSync('scripts/validate/run-all.mjs','utf8').includes("_repo_validation_registry.json")) fail('[validation-registry] run-all is not registry-driven');

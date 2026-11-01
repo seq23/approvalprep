@@ -168,7 +168,7 @@ const variants = [
     // The first sentence names the route. src/pages/blog/[slug].astro builds the
     // meta description from the opening sentences, and when this lead opened on a
     // fixed sentence every "mistakes" answer shipped the same description (8 pages
-    // on 25 Sep 2026). scripts/validate/title-length.mjs fails a duplicate.
+    // on 25 Sep 2026). (title-length validator removed 1 Nov 2026: copy is fixed here, at the generator).
     lead: (copy, route) => `The biggest ${route.title} mistakes: unsupported claims, mismatched dates or amounts, and unexplained attachments. ${copy.shortAnswer || "Use the page as a preparation guide, not as a promise of approval."}`
   },
   {

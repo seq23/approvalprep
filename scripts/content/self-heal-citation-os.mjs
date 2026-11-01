@@ -50,7 +50,7 @@ for (const id of ['tools','templates','public_reports']) {
   if (!familyIds.has(id)) { families.pageFamilies.push({ id, label:id.replace('_',' '), riskDefault:id==='tools'?'low':'medium', description:`ApprovalPrep ${id.replace('_',' ')} citation surfaces.` }); familyIds.add(id); repairs.familiesAdded++; }
 }
 // The lead is also the page's meta description ([...slug].astro), which must be
-// 110-160 characters (scripts/validate/title-length.mjs). One fixed sentence
+// 110-160 characters (the generator owns this; the title-length blocker was removed 1 Nov 2026). One fixed sentence
 // around the query overran the band on every long query - 64 pages shipped
 // descriptions over 160 on 25 Sep 2026 - so pick the fullest phrasing that
 // lands in band. A query no phrasing fits fails here, loudly, rather than

@@ -121,7 +121,7 @@ const childRoutes = manifest.routes
 {/* copy.lead doubles as the meta description (110-160 characters). A route whose
     name alone makes a <title> under 30 characters ("Privacy Policy - ApprovalPrep")
     carries a descriptive copy.metaTitle in src/data/content.ts instead.
-    scripts/validate/title-length.mjs asserts both bands on the built page. */}
+    the generator fits both bands; no blocking validator (removed 1 Nov 2026). */}
 <BaseLayout title={pageTitle} description={copy.lead} canonical={canonical} noindex={!route.index}>
   <section class={`hero shell ${isLegal ? "legal-hero" : "hero-split"}`}>
     <div>

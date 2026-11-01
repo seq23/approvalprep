@@ -146,4 +146,13 @@ const builtWithBlock = new Set();
   if (distChecked === 0) throw new Error(`[credit-boundary] zero built pages carried the boundary block check in ${DIST}/ - the published tree is empty or entirely excluded, so this validator verified nothing`);
 }
 
+// The credit-generation guardrail prompt keeps the self-service boundary (moved here from
+// plain-language on 1 Nov 2026: a safety guardrail for model output, not a copy rule).
+{
+  const prompt = fs.readFileSync("prompts/system/credit_self_service_guardrails.md", "utf8");
+  for (const phrase of ["We do not fix your credit for you", "We do not contact credit bureaus"]) {
+    if (!prompt.includes(phrase)) throw new Error(`[credit-boundary] prompts/system/credit_self_service_guardrails.md lost its boundary: "${phrase}"`);
+  }
+}
+
 console.log(`[validate:credit-boundary] OK routes=${covered.length} builtPagesChecked=${distChecked} families=${familyNames.length}`);

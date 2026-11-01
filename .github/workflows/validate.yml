@@ -36,7 +36,7 @@ jobs:
         # reached production.
         #
         # The build is validator 1 inside the registry (see
-        # scripts/validate/registry-build-order.mjs), so validate:all now
+        # scripts/validate/run-all.mjs refuses a registry whose first entry is not build), so validate:all now
         # produces dist/ itself in every lane. A build step here would do the
         # same work twice - but worse, it would put this lane in a state no
         # scheduled lane is ever in. citation-os-daily, citation-os-weekly,
