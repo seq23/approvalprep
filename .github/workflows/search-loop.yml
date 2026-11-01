@@ -12,8 +12,6 @@ on:
   schedule:
     - cron: "7 5 * * *"  # America/Chicago, all year (the old release slot)
       timezone: America/Chicago
-  push:  # TEMP proof-run trigger, removed before merge
-    branches: [search-loop-adopt]
   workflow_dispatch:
     inputs:
       stage:
@@ -42,5 +40,6 @@ jobs:
     secrets:
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
       GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+      GSC_SITE_URL: ${{ secrets.GSC_SITE_URL }}
       BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
