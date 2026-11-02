@@ -1310,6 +1310,17 @@
       "scope": "skuForRoute() run against every active_paid kit path in the route manifest"
     },
     {
+      "id": "title-fit",
+      "npmScript": "validate:title-fit",
+      "entrypoint": "scripts/validate/title-fit.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "A long page title must never break the build: fitTitle trims it to 65 characters and keeps the ApprovalPrep brand (owner ruling 2 Nov 2026, over a length limit never fails). Fails only if the generator throws, drops the brand or returns an over-long title",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "src/lib/title.mjs fitTitle run over every route title in data/routes/route_manifest.json plus fixed long cases"
+    },
+    {
       "id": "pinterest-launch",
       "npmScript": "validate:pinterest-launch",
       "entrypoint": "scripts/validate/pinterest-launch.mjs",

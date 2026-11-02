@@ -33,7 +33,7 @@ const hasWebPageSchema = schemaList.some((entry) => [].concat(entry?.["@type"] ?
 // Normalising here rather than at each call site means a page cannot ship a
 // canonical that names the redirecting URL form, however it built the string.
 const canonicalHref = canonicalUrl(canonical);
-// Bing flags <title> over 70 characters; see src/lib/title.ts.
+// Bing flags <title> over 70 characters; see src/lib/title.mjs.
 const documentTitle = fitTitle(String(title));
 ---
 <!doctype html>
