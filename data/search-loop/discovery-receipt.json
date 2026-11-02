@@ -1,0 +1,51 @@
+{
+  "schema": "search-loop-discovery-v1",
+  "site": "approvalprep.com",
+  "week": "2026-W45",
+  "generated_at": "2026-11-02T11:15:29.085Z",
+  "paid_calls": 0,
+  "cost_usd": 0,
+  "hosts": {
+    "searchconsole.googleapis.com": {
+      "calls": 1,
+      "ok": 1,
+      "failed": 0,
+      "cost_usd": 0
+    },
+    "ssl.bing.com": {
+      "calls": 1,
+      "ok": 1,
+      "failed": 0,
+      "cost_usd": 0
+    },
+    "suggestqueries.google.com": {
+      "calls": 40,
+      "ok": 40,
+      "failed": 0,
+      "cost_usd": 0
+    },
+    "api.bing.com": {
+      "calls": 40,
+      "ok": 40,
+      "failed": 0,
+      "cost_usd": 0
+    }
+  },
+  "sources": {
+    "search_console": "ok: 13 rows",
+    "bing_webmaster": "ok: 11 rows",
+    "suggestqueries.google.com": "ok",
+    "api.bing.com": "ok",
+    "relevance_screen": "ok: kept 111 of 150 (free model)"
+  },
+  "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)",
+  "notes": [
+    "autocomplete stopped at its budget of 80 calls"
+  ],
+  "counts": {
+    "candidates": 158,
+    "targets": 111,
+    "strengthen_candidates": 0,
+    "dropped_shared_audience": 0
+  }
+}
