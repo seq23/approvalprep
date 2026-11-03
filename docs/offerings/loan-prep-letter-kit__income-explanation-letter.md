@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service income explanation letter you can prepare with truthful facts before you send your paperwork.
+Your pay is not a flat salary, so the figure on your documents needs context before it makes sense.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: income explanation letter template
 - CTA label: Use the Loan Prep Letter Kit
-- Customer situation: You need a self-service income explanation letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: Your pay is not a flat salary, so the figure on your documents needs context before it makes sense.
 
 ## Safety Boundary
 

@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service life event explanation letter you can prepare with truthful facts before you send your paperwork.
+A divorce, illness, bereavement or move changed your finances, and your file needs that context to make sense.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: life event explanation letter template
 - CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: You need a self-service life event explanation letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: A divorce, illness, bereavement or move changed your finances, and your file needs that context to make sense.
 
 ## Safety Boundary
 

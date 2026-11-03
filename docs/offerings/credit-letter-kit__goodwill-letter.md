@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service goodwill letter you can prepare with truthful facts before you send your paperwork.
+You paid late once, the account is current now, and you want to ask the creditor to reconsider the mark.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: goodwill letter template
 - CTA label: Use the Credit Letter Kit
-- Customer situation: You need a self-service goodwill letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: You paid late once, the account is current now, and you want to ask the creditor to reconsider the mark.
 
 ## Safety Boundary
 

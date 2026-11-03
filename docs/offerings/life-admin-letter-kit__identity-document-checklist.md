@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service identity document checklist you can prepare with truthful facts before you send your paperwork.
+You are pulling identity documents together and want to know what the office will accept.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: identity document checklist template
 - CTA label: Use the Life Admin Letter Kit
-- Customer situation: You need a self-service identity document checklist you can prepare with truthful facts before you send your paperwork.
+- Customer situation: You are pulling identity documents together and want to know what the office will accept.
 
 ## Safety Boundary
 

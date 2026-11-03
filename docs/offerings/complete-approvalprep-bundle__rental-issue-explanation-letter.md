@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service rental issue explanation letter you can prepare with truthful facts before you send your paperwork.
+Something in your rental past will surface during screening, and you would rather explain it in your own words first.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: rental issue explanation letter template
 - CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: You need a self-service rental issue explanation letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: Something in your rental past will surface during screening, and you would rather explain it in your own words first.
 
 ## Safety Boundary
 

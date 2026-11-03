@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service mortgage explanation letter you can prepare with truthful facts before you send your paperwork.
+Your mortgage underwriter has issued a condition asking you to explain something in writing.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: mortgage explanation letter template
 - CTA label: Use the Loan Prep Letter Kit
-- Customer situation: You need a self-service mortgage explanation letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: Your mortgage underwriter has issued a condition asking you to explain something in writing.
 
 ## Safety Boundary
 

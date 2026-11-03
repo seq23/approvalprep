@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service auto loan explanation letter you can prepare with truthful facts before you send your paperwork.
+You are financing a car and the dealer or lender has flagged something in your file that needs explaining.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: auto loan explanation letter template
 - CTA label: Use the Loan Prep Letter Kit
-- Customer situation: You need a self-service auto loan explanation letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: You are financing a car and the dealer or lender has flagged something in your file that needs explaining.
 
 ## Safety Boundary
 

@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service proof of income letter you can prepare with truthful facts before you send your paperwork.
+A reviewer wants your income stated plainly in a letter, not just inferred from a stack of documents.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: proof of income letter template
 - CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: You need a self-service proof of income letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: A reviewer wants your income stated plainly in a letter, not just inferred from a stack of documents.
 
 ## Safety Boundary
 

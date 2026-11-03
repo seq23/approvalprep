@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service credit bureau follow-up letter you can prepare with truthful facts before you send your paperwork.
+You filed a dispute, the waiting period has passed, and you need to follow up with a record of it.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: credit bureau follow-up letter template
 - CTA label: Use the Credit Letter Kit
-- Customer situation: You need a self-service credit bureau follow-up letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: You filed a dispute, the waiting period has passed, and you need to follow up with a record of it.
 
 ## Safety Boundary
 

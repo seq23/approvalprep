@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service employment gap explanation letter you can prepare with truthful facts before you send your paperwork.
+There is a break between two jobs on your history, and whoever reviews it will ask why.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: employment gap explanation letter template
 - CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: You need a self-service employment gap explanation letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: There is a break between two jobs on your history, and whoever reviews it will ask why.
 
 ## Safety Boundary
 

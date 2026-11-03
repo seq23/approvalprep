@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service self-employment income letter you can prepare with truthful facts before you send your paperwork.
+You work for yourself, so there is no HR department to confirm your income and you have to set it out yourself.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: self-employment income letter template
 - CTA label: Use the Income + Employment Letter Kit
-- Customer situation: You need a self-service self-employment income letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: You work for yourself, so there is no HR department to confirm your income and you have to set it out yourself.
 
 ## Safety Boundary
 

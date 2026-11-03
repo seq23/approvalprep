@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service business income explanation you can prepare with truthful facts before you send your paperwork.
+Your revenue moves month to month, and the figures need context a tax return does not give on its own.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: business income explanation template
 - CTA label: Use the Business Funding Prep Kit
-- Customer situation: You need a self-service business income explanation you can prepare with truthful facts before you send your paperwork.
+- Customer situation: Your revenue moves month to month, and the figures need context a tax return does not give on its own.
 
 ## Safety Boundary
 

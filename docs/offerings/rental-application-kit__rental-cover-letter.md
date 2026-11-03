@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service rental cover letter you can prepare with truthful facts before you send your paperwork.
+You want a landlord to read a short, human introduction to you alongside the application form.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: rental cover letter template
 - CTA label: Use the Rental Application Kit
-- Customer situation: You need a self-service rental cover letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: You want a landlord to read a short, human introduction to you alongside the application form.
 
 ## Safety Boundary
 

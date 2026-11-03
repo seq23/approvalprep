@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service debt validation letter you can prepare with truthful facts before you send your paperwork.
+A collector has contacted you about a debt, and you want it documented as yours before you go further.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: debt validation letter template
 - CTA label: Use the Credit Letter Kit
-- Customer situation: You need a self-service debt validation letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: A collector has contacted you about a debt, and you want it documented as yours before you go further.
 
 ## Safety Boundary
 

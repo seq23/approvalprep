@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service lender follow-up letter you can prepare with truthful facts before you send your paperwork.
+You sent the lender what they asked for and need a written nudge about where things stand.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: lender follow-up letter template
 - CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: You need a self-service lender follow-up letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: You sent the lender what they asked for and need a written nudge about where things stand.
 
 ## Safety Boundary
 

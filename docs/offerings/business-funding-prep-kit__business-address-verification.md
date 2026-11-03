@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service business address verification you can prepare with truthful facts before you send your paperwork.
+You need to confirm in writing where your business actually operates from.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: business address verification template
 - CTA label: Use the Business Funding Prep Kit
-- Customer situation: You need a self-service business address verification you can prepare with truthful facts before you send your paperwork.
+- Customer situation: You need to confirm in writing where your business actually operates from.
 
 ## Safety Boundary
 

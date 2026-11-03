@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service employment verification letter you can prepare with truthful facts before you send your paperwork.
+Someone needs written confirmation of where you work, in what role, and since when.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: employment verification letter template
 - CTA label: Use the Income + Employment Letter Kit
-- Customer situation: You need a self-service employment verification letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: Someone needs written confirmation of where you work, in what role, and since when.
 
 ## Safety Boundary
 
