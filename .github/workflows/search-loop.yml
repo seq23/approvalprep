@@ -44,7 +44,18 @@ jobs:
       BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}
       # $0 model lanes (engine v1.2.3): Gemini free tier (no-billing project), metered Workers AI
       # (usage read with the analytics token, model run with the Workers AI token; 600 neurons/day).
-      CLOUDFLARE_API_TOKEN: ${{ secrets.SEARCH_LOOP_CF_USAGE_TOKEN }}
+      #
+      # CLOUDFLARE_API_TOKEN does TWO jobs in the engine, and needs the scopes for both:
+      #   - Account Analytics:Read  - today's Workers AI neuron usage (src/llm.mjs workersUsedToday),
+      #     so the metered lane can fail closed instead of billing overage;
+      #   - Zone:Read + Zone Analytics:Read - AI-bot reads by user agent and AI-referral visits
+      #     (src/analytics.mjs cloudflareDay), which are checklist item f11.
+      # SEARCH_LOOP_CF_USAGE_TOKEN held only the account half, so every weekly report wrote
+      # "ai_visitors / ai_bot_hits: not read: Cloudflare analytics refused the query ... does not
+      # have permission 'com.cloudflare.api.account.zone.analytics.read'" and f11 failed every week
+      # from 1 Nov 2026. SEARCH_LOOP_CF_ANALYTICS_TOKEN holds both halves.
+      # Guard: npm run validate:search-loop-ai-measurement.
+      CLOUDFLARE_API_TOKEN: ${{ secrets.SEARCH_LOOP_CF_ANALYTICS_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.SEARCH_LOOP_CF_ACCOUNT_ID }}
       CLOUDFLARE_WORKERS_AI_TOKEN: ${{ secrets.SEARCH_LOOP_CF_WORKERS_AI_TOKEN }}
       GEMINI_API_KEY: ${{ secrets.SEARCH_LOOP_GEMINI_API_KEY }}
