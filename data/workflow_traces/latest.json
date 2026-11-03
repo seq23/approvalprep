@@ -1,14 +1,14 @@
 {
   "schemaVersion": "4.4.0",
-  "generatedAt": "2026-11-01T15:06:42.504Z",
+  "generatedAt": "2026-11-03T11:51:36.726Z",
   "status": "COMPLETE_FIXTURE_TRACE",
-  "workflowCount": 22,
-  "manualReadyCount": 22,
-  "scheduledCount": 15,
+  "workflowCount": 23,
+  "manualReadyCount": 23,
+  "scheduledCount": 16,
   "pushTriggeredCount": 1,
   "pullRequestTriggeredCount": 2,
   "mainWriterCount": 14,
-  "fauxScenarioCount": 174,
+  "fauxScenarioCount": 180,
   "allManualReady": true,
   "allHaveFixtureTraceInput": true,
   "allUsePinnedRunner": true,
@@ -167,6 +167,8 @@
         "validate:download-offering-coverage",
         "validate:download-safety",
         "validate:e2e-user-journey",
+        "validate:email-nurture",
+        "validate:endpoint-auth",
         "validate:entity-backlink-watch",
         "validate:env-examples",
         "validate:experiments",
@@ -214,6 +216,7 @@
         "validate:release-fixture-isolation",
         "validate:repurposing",
         "validate:required-disclosures",
+        "validate:resend-download-email",
         "validate:retest-lifecycle",
         "validate:reviewer-slot",
         "validate:routes",
@@ -240,6 +243,7 @@
         "validate:telemetry-claims",
         "validate:template-library",
         "validate:template-preview-safety",
+        "validate:title-fit",
         "validate:validation-registry",
         "validate:vault-schema",
         "validate:workflow-deps-installed",
@@ -381,6 +385,8 @@
         "validate:download-offering-coverage",
         "validate:download-safety",
         "validate:e2e-user-journey",
+        "validate:email-nurture",
+        "validate:endpoint-auth",
         "validate:entity-backlink-watch",
         "validate:env-examples",
         "validate:experiments",
@@ -428,6 +434,7 @@
         "validate:release-fixture-isolation",
         "validate:repurposing",
         "validate:required-disclosures",
+        "validate:resend-download-email",
         "validate:retest-lifecycle",
         "validate:reviewer-slot",
         "validate:routes",
@@ -454,6 +461,7 @@
         "validate:telemetry-claims",
         "validate:template-library",
         "validate:template-preview-safety",
+        "validate:title-fit",
         "validate:validation-registry",
         "validate:vault-schema",
         "validate:workflow-deps-installed",
@@ -639,6 +647,8 @@
         "validate:download-offering-coverage",
         "validate:download-safety",
         "validate:e2e-user-journey",
+        "validate:email-nurture",
+        "validate:endpoint-auth",
         "validate:entity-backlink-watch",
         "validate:env-examples",
         "validate:experiments",
@@ -686,6 +696,7 @@
         "validate:release-fixture-isolation",
         "validate:repurposing",
         "validate:required-disclosures",
+        "validate:resend-download-email",
         "validate:retest-lifecycle",
         "validate:reviewer-slot",
         "validate:routes",
@@ -712,6 +723,7 @@
         "validate:telemetry-claims",
         "validate:template-library",
         "validate:template-preview-safety",
+        "validate:title-fit",
         "validate:validation-registry",
         "validate:vault-schema",
         "validate:workflow-deps-installed",
@@ -1026,6 +1038,76 @@
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
       "traceId": "aa02aeb77dd4af72"
+    },
+    {
+      "workflow": "email-nurture.yml",
+      "traceMode": "FIXTURE_TRACE_WITH_TRANSITIVE_PACKAGE_RESOLUTION_NOT_PRODUCTION_TELEMETRY",
+      "proof_type": "fixture",
+      "real_telemetry": false,
+      "may_be_used_for_growth_claims": false,
+      "manualReady": true,
+      "scheduled": true,
+      "pushTriggered": false,
+      "pullRequestTriggered": false,
+      "hasCheckout": true,
+      "hasNodeSetup": true,
+      "nodeVersionOk": true,
+      "runnerPinned": true,
+      "timeoutSet": true,
+      "usesNpmInstall": false,
+      "usesNpmCi": true,
+      "buildsProject": false,
+      "requiresDependencyInstall": false,
+      "installDependencyReason": null,
+      "dependencyInstallPolicyOk": true,
+      "fixtureTraceInput": true,
+      "secretRefs": [
+        "NURTURE_RUN_SECRET"
+      ],
+      "npmScripts": [
+        "workflows:trace"
+      ],
+      "transitiveNpmScripts": [
+        "workflows:trace"
+      ],
+      "missingNpmScripts": [],
+      "expectedDataTouches": [],
+      "mainWriter": false,
+      "sharedWriterConcurrency": true,
+      "fullMainCheckout": true,
+      "preparesLatestMain": true,
+      "safePushHelper": true,
+      "directUnsafePush": false,
+      "fauxScenarios": [
+        {
+          "id": "manual_fixture_dispatch",
+          "status": "PASS"
+        },
+        {
+          "id": "known_command_resolution",
+          "status": "PASS"
+        },
+        {
+          "id": "transitive_dependency_install",
+          "status": "PASS",
+          "requires_dependency_install": false,
+          "reason": null
+        },
+        {
+          "id": "pinned_runtime_and_timeout",
+          "status": "PASS"
+        },
+        {
+          "id": "secret_boundary",
+          "status": "PROVIDER_GATED_NO_FAKE_SUCCESS"
+        },
+        {
+          "id": "no_direct_main_write",
+          "status": "PASS"
+        }
+      ],
+      "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
+      "traceId": "93c87a3b186984e5"
     },
     {
       "workflow": "entity-backlink-watch.yml",
@@ -1451,6 +1533,8 @@
         "validate:download-offering-coverage",
         "validate:download-safety",
         "validate:e2e-user-journey",
+        "validate:email-nurture",
+        "validate:endpoint-auth",
         "validate:entity-backlink-watch",
         "validate:env-examples",
         "validate:experiments",
@@ -1498,6 +1582,7 @@
         "validate:release-fixture-isolation",
         "validate:repurposing",
         "validate:required-disclosures",
+        "validate:resend-download-email",
         "validate:retest-lifecycle",
         "validate:reviewer-slot",
         "validate:routes",
@@ -1524,6 +1609,7 @@
         "validate:telemetry-claims",
         "validate:template-library",
         "validate:template-preview-safety",
+        "validate:title-fit",
         "validate:validation-registry",
         "validate:vault-schema",
         "validate:workflow-deps-installed",
@@ -2086,10 +2172,13 @@
       "fixtureTraceInput": true,
       "secretRefs": [
         "BING_WEBMASTER_API_KEY",
-        "CLOUDFLARE_API_TOKEN",
         "GSC_SERVICE_ACCOUNT_JSON",
         "GSC_SITE_URL",
-        "OPENROUTER_API_KEY"
+        "OPENROUTER_API_KEY",
+        "SEARCH_LOOP_CF_ACCOUNT_ID",
+        "SEARCH_LOOP_CF_USAGE_TOKEN",
+        "SEARCH_LOOP_CF_WORKERS_AI_TOKEN",
+        "SEARCH_LOOP_GEMINI_API_KEY"
       ],
       "npmScripts": [
         "cadence:gate",
@@ -2153,7 +2242,7 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "e56de98cf5e910d5"
+      "traceId": "9bda62f304606e88"
     },
     {
       "workflow": "spry-weekly-summary.yml",
@@ -2299,6 +2388,8 @@
         "validate:download-offering-coverage",
         "validate:download-safety",
         "validate:e2e-user-journey",
+        "validate:email-nurture",
+        "validate:endpoint-auth",
         "validate:entity-backlink-watch",
         "validate:env-examples",
         "validate:experiments",
@@ -2346,6 +2437,7 @@
         "validate:release-fixture-isolation",
         "validate:repurposing",
         "validate:required-disclosures",
+        "validate:resend-download-email",
         "validate:retest-lifecycle",
         "validate:reviewer-slot",
         "validate:routes",
@@ -2372,6 +2464,7 @@
         "validate:telemetry-claims",
         "validate:template-library",
         "validate:template-preview-safety",
+        "validate:title-fit",
         "validate:validation-registry",
         "validate:vault-schema",
         "validate:workflow-deps-installed",

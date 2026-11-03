@@ -23,10 +23,13 @@
   "fixtureTraceInput": true,
   "secretRefs": [
     "BING_WEBMASTER_API_KEY",
-    "CLOUDFLARE_API_TOKEN",
     "GSC_SERVICE_ACCOUNT_JSON",
     "GSC_SITE_URL",
-    "OPENROUTER_API_KEY"
+    "OPENROUTER_API_KEY",
+    "SEARCH_LOOP_CF_ACCOUNT_ID",
+    "SEARCH_LOOP_CF_USAGE_TOKEN",
+    "SEARCH_LOOP_CF_WORKERS_AI_TOKEN",
+    "SEARCH_LOOP_GEMINI_API_KEY"
   ],
   "npmScripts": [
     "cadence:gate",
@@ -90,5 +93,5 @@
     }
   ],
   "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-  "traceId": "e56de98cf5e910d5"
+  "traceId": "9bda62f304606e88"
 }

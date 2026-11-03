@@ -3,6 +3,7 @@ name: Email nurture tick
 # so this calls the site's /api/nurture-run three times a day (the series is one email per
 # 3 days, so a few hours of lag cost nothing). The endpoint sends only what is due; a missing
 # key answers 503 with a NAMED STOP and this run fails, so a stopped series is never silent.
+# The call carries the NURTURE_RUN_SECRET bearer; without it the endpoint answers 401.
 on:
   schedule:
     - cron: "17 8,13,18 * * *"
@@ -36,7 +37,10 @@ jobs:
         run: npm run workflows:trace -- --workflow email-nurture.yml
       - name: Send what is due
         if: ${{ !(github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true') }}
+        env:
+          NURTURE_RUN_SECRET: ${{ secrets.NURTURE_RUN_SECRET }}
         run: |
-          code=$(curl -sS -o body.json -w '%{http_code}' -X POST https://approvalprep.com/api/nurture-run)
+          if [ -z "$NURTURE_RUN_SECRET" ]; then echo "NAMED STOP [NO_NURTURE_RUN_SECRET] the NURTURE_RUN_SECRET Actions secret is not set"; exit 1; fi
+          code=$(curl -sS -o body.json -w '%{http_code}' -X POST -H "Authorization: Bearer $NURTURE_RUN_SECRET" https://approvalprep.com/api/nurture-run)
           cat body.json; echo
           test "$code" = "200"
