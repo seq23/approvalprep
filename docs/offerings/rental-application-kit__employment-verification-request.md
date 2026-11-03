@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service employment verification request you can prepare with truthful facts before you send your paperwork.
+You need to ask your employer, in writing, for the confirmation letter a reviewer has requested.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: employment verification request template
 - CTA label: Use the Rental Application Kit
-- Customer situation: You need a self-service employment verification request you can prepare with truthful facts before you send your paperwork.
+- Customer situation: You need to ask your employer, in writing, for the confirmation letter a reviewer has requested.
 
 ## Safety Boundary
 

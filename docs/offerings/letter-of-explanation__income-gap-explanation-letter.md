@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service income gap explanation letter you can prepare with truthful facts before you send your paperwork.
+Your income dipped for a stretch, and the reviewer wants that period explained rather than left blank.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: income gap explanation letter template
 - CTA label: Use the Letter of Explanation Kit — $15
-- Customer situation: You need a self-service income gap explanation letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: Your income dipped for a stretch, and the reviewer wants that period explained rather than left blank.
 
 ## Safety Boundary
 

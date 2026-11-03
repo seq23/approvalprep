@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service personal loan explanation letter you can prepare with truthful facts before you send your paperwork.
+A personal loan application asks why you need the money, or what happened earlier in your credit history.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: personal loan explanation letter template
 - CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: You need a self-service personal loan explanation letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: A personal loan application asks why you need the money, or what happened earlier in your credit history.
 
 ## Safety Boundary
 

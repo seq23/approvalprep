@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service school/employer request letter you can prepare with truthful facts before you send your paperwork.
+You need records or confirmation from a school or an employer, and you have to ask for them in writing.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: school/employer request letter template
 - CTA label: Use the Life Admin Letter Kit
-- Customer situation: You need a self-service school/employer request letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: You need records or confirmation from a school or an employer, and you have to ask for them in writing.
 
 ## Safety Boundary
 

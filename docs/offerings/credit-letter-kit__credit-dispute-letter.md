@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service credit dispute letter you can prepare with truthful facts before you send your paperwork.
+You found an entry on your credit report you believe is wrong and want to challenge it in writing.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: credit dispute letter template
 - CTA label: Use the Credit Letter Kit
-- Customer situation: You need a self-service credit dispute letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: You found an entry on your credit report you believe is wrong and want to challenge it in writing.
 
 ## Safety Boundary
 

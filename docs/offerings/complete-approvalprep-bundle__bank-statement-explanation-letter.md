@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service bank statement explanation letter you can prepare with truthful facts before you send your paperwork.
+A deposit, transfer or balance swing on your statements looks unusual to a reviewer, and they want it accounted for.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: bank statement explanation letter template
 - CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: You need a self-service bank statement explanation letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: A deposit, transfer or balance swing on your statements looks unusual to a reviewer, and they want it accounted for.
 
 ## Safety Boundary
 

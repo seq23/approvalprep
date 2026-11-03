@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service general application explanation letter you can prepare with truthful facts before you send your paperwork.
+An application asks you for an explanation and gives you a blank box with no guidance on what belongs in it.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: general application explanation letter template
 - CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: You need a self-service general application explanation letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: An application asks you for an explanation and gives you a blank box with no guidance on what belongs in it.
 
 ## Safety Boundary
 

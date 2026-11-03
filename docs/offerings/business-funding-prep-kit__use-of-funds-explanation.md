@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service use of funds explanation you can prepare with truthful facts before you send your paperwork.
+A lender wants to know exactly what you intend to do with the money.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: use of funds explanation template
 - CTA label: Use the Business Funding Prep Kit
-- Customer situation: You need a self-service use of funds explanation you can prepare with truthful facts before you send your paperwork.
+- Customer situation: A lender wants to know exactly what you intend to do with the money.
 
 ## Safety Boundary
 

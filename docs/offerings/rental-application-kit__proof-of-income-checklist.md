@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service proof of income checklist you can prepare with truthful facts before you send your paperwork.
+You have been asked to prove your income and are not certain which documents actually count.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: proof of income checklist template
 - CTA label: Use the Rental Application Kit
-- Customer situation: You need a self-service proof of income checklist you can prepare with truthful facts before you send your paperwork.
+- Customer situation: You have been asked to prove your income and are not certain which documents actually count.
 
 ## Safety Boundary
 

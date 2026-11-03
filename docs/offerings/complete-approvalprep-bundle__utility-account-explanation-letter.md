@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service utility/account explanation letter you can prepare with truthful facts before you send your paperwork.
+An account of yours has a disputed charge or a lapse, and the company wants it explained.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: utility/account explanation letter template
 - CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: You need a self-service utility/account explanation letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: An account of yours has a disputed charge or a lapse, and the company wants it explained.
 
 ## Safety Boundary
 

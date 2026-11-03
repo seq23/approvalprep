@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service proof of residency letter you can prepare with truthful facts before you send your paperwork.
+A school, agency or office has asked you to prove that you live where you say you live.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: proof of residency letter template
 - CTA label: Use the Life Admin Letter Kit
-- Customer situation: You need a self-service proof of residency letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: A school, agency or office has asked you to prove that you live where you say you live.
 
 ## Safety Boundary
 

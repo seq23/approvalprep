@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service general records request letter you can prepare with truthful facts before you send your paperwork.
+You need a copy of your own records from an organization and want to ask properly the first time.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: general records request letter template
 - CTA label: Use the Life Admin Letter Kit
-- Customer situation: You need a self-service general records request letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: You need a copy of your own records from an organization and want to ask properly the first time.
 
 ## Safety Boundary
 

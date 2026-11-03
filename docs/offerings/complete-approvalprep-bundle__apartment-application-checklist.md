@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service apartment application checklist you can prepare with truthful facts before you send your paperwork.
+You are applying for an apartment and want every item the landlord asks for ready before you hand it in.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: apartment application checklist template
 - CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: You need a self-service apartment application checklist you can prepare with truthful facts before you send your paperwork.
+- Customer situation: You are applying for an apartment and want every item the landlord asks for ready before you hand it in.
 
 ## Safety Boundary
 

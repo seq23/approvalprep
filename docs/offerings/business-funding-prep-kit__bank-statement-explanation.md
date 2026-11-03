@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service bank statement explanation you can prepare with truthful facts before you send your paperwork.
+A line on your business statements needs accounting for before a reviewer draws their own conclusion.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: bank statement explanation template
 - CTA label: Use the Business Funding Prep Kit
-- Customer situation: You need a self-service bank statement explanation you can prepare with truthful facts before you send your paperwork.
+- Customer situation: A line on your business statements needs accounting for before a reviewer draws their own conclusion.
 
 ## Safety Boundary
 

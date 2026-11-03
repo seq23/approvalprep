@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service late payment explanation letter you can prepare with truthful facts before you send your paperwork.
+One or more payments landed late, and the circumstances need to be in writing for whoever is looking.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: late payment explanation letter template
 - CTA label: Use the Letter of Explanation Kit — $15
-- Customer situation: You need a self-service late payment explanation letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: One or more payments landed late, and the circumstances need to be in writing for whoever is looking.
 
 ## Safety Boundary
 

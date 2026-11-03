@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service address history explanation letter you can prepare with truthful facts before you send your paperwork.
+Your addresses over recent years do not line up neatly, so you have been asked to account for the moves.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: address history explanation letter template
 - CTA label: Use the Letter of Explanation Kit — $15
-- Customer situation: You need a self-service address history explanation letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: Your addresses over recent years do not line up neatly, so you have been asked to account for the moves.
 
 ## Safety Boundary
 

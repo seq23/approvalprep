@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service income explanation for renters you can prepare with truthful facts before you send your paperwork.
+Your income arrives irregularly or from several places, and the landlord's form leaves nowhere to say so.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: income explanation for renters template
 - CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: You need a self-service income explanation for renters you can prepare with truthful facts before you send your paperwork.
+- Customer situation: Your income arrives irregularly or from several places, and the landlord's form leaves nowhere to say so.
 
 ## Safety Boundary
 

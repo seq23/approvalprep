@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service credit report error checklist you can prepare with truthful facts before you send your paperwork.
+You are reading your credit report line by line and need a way to track everything that looks wrong.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: credit report error checklist template
 - CTA label: Use the Credit Letter Kit
-- Customer situation: You need a self-service credit report error checklist you can prepare with truthful facts before you send your paperwork.
+- Customer situation: You are reading your credit report line by line and need a way to track everything that looks wrong.
 
 ## Safety Boundary
 

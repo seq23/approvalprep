@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service renter document packet you can prepare with truthful facts before you send your paperwork.
+You are applying for several places at once and want one organized packet to send each time.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: renter document packet template
 - CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: You need a self-service renter document packet you can prepare with truthful facts before you send your paperwork.
+- Customer situation: You are applying for several places at once and want one organized packet to send each time.
 
 ## Safety Boundary
 

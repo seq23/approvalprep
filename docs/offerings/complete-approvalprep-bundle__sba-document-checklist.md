@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service SBA document checklist you can prepare with truthful facts before you send your paperwork.
+You are preparing an SBA application and need to track the long list of documents it calls for.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: SBA document checklist template
 - CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: You need a self-service SBA document checklist you can prepare with truthful facts before you send your paperwork.
+- Customer situation: You are preparing an SBA application and need to track the long list of documents it calls for.
 
 ## Safety Boundary
 

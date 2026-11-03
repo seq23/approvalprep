@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service benefits explanation letter you can prepare with truthful facts before you send your paperwork.
+A benefits office has asked you to explain a change in your circumstances.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: benefits explanation letter template
 - CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: You need a self-service benefits explanation letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: A benefits office has asked you to explain a change in your circumstances.
 
 ## Safety Boundary
 

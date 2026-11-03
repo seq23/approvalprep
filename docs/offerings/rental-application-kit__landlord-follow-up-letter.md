@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service landlord follow-up letter you can prepare with truthful facts before you send your paperwork.
+You applied and have heard nothing back, and you want to check in without becoming a nuisance.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: landlord follow-up letter template
 - CTA label: Use the Rental Application Kit
-- Customer situation: You need a self-service landlord follow-up letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: You applied and have heard nothing back, and you want to check in without becoming a nuisance.
 
 ## Safety Boundary
 

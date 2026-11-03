@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service rental history explanation you can prepare with truthful facts before you send your paperwork.
+Your rental record has a gap or a rough patch that a new landlord is going to ask about.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: rental history explanation template
 - CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: You need a self-service rental history explanation you can prepare with truthful facts before you send your paperwork.
+- Customer situation: Your rental record has a gap or a rough patch that a new landlord is going to ask about.
 
 ## Safety Boundary
 

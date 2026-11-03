@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service business loan explanation letter you can prepare with truthful facts before you send your paperwork.
+A lender reviewing your business wants a written account of a dip, a debt or a change in the numbers.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: business loan explanation letter template
 - CTA label: Use the Business Funding Prep Kit
-- Customer situation: You need a self-service business loan explanation letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: A lender reviewing your business wants a written account of a dip, a debt or a change in the numbers.
 
 ## Safety Boundary
 

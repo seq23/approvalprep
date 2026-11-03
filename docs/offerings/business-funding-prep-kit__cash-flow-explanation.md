@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service cash flow explanation you can prepare with truthful facts before you send your paperwork.
+Money comes in and goes out on a cycle no lender would work out from the statements alone.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: cash flow explanation template
 - CTA label: Use the Business Funding Prep Kit
-- Customer situation: You need a self-service cash flow explanation you can prepare with truthful facts before you send your paperwork.
+- Customer situation: Money comes in and goes out on a cycle no lender would work out from the statements alone.
 
 ## Safety Boundary
 

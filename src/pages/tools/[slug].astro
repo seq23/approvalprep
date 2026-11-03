@@ -46,10 +46,17 @@ const schema = [
     </aside>
   </section>
   {/* The checklist section is what this page recommends, so it carries the
-      recommendation_summary marking instead of being restated above it. */}
+      recommendation_summary marking instead of being restated above it.
+
+      The headline is the question this section answers, built from the tool's own
+      primaryQuery, because page shape item b3 wants H2s phrased as the questions
+      people ask. It was the fixed sentence "Prepare these items before you draft
+      or send anything.", which left every tool page with no question heading at
+      all (Search Readiness quality sample, 3 Nov 2026). Using primaryQuery keeps
+      the heading specific to the page rather than one more shared slot. */}
   <section class="band recommendation-summary-band"><div class="shell">
     <RecommendationSummary
-      headline="Prepare these items before you draft or send anything."
+      headline={`What belongs on your ${tool.primaryQuery}?`}
       points={tool.checklist}
       ordered={true}
       ctaLabel="Compare the matching kit"

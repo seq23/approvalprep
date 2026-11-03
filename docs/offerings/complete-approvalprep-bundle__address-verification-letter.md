@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need a self-service address verification letter you can prepare with truthful facts before you send your paperwork.
+An office needs written confirmation of where you live, and a utility bill on its own is not enough.
 
 ## How Purchase Works
 
@@ -47,7 +47,7 @@ First-page boundary requirements:
 
 - Search intent: address verification letter template
 - CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: You need a self-service address verification letter you can prepare with truthful facts before you send your paperwork.
+- Customer situation: An office needs written confirmation of where you live, and a utility bill on its own is not enough.
 
 ## Safety Boundary
 
