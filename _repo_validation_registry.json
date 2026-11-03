@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "lastUpdatedAt": "2026-09-07T00:00:00.000Z",
+  "lastUpdatedAt": "2026-11-03T00:00:00.000Z",
   "policy": "The root registry is the single execution authority. HARD_FAIL blocks immediately; STRONG_WARNING records and continues. The data/validation registry is generated from this file.",
   "validators": [
     {
@@ -57,6 +57,17 @@
       "owner": "approvalprep-growth",
       "group": "growth-critical",
       "scope": ".github/workflows/*.yml: every npm script that reaches a node_modules binary runs after npm ci"
+    },
+    {
+      "id": "search-loop-ai-measurement",
+      "npmScript": "validate:search-loop-ai-measurement",
+      "entrypoint": "scripts/validate/search-loop-ai-measurement.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "the weekly search-loop report wrote AI-referral visits and AI-bot reads as \"not read\" every week from 1 Nov 2026, because the caller passed SEARCH_LOOP_CF_USAGE_TOKEN - a token with Account Analytics:Read but not zone Analytics:Read - so Cloudflare refused both queries the engine runs and Search Readiness item f11 failed with nothing in the repository able to notice. The only lever here is which secret the caller hands the engine, a YAML mapping no test read.",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": ".github/workflows/search-loop.yml: that it calls the shared engine and passes CLOUDFLARE_ACCOUNT_ID and an analytics-capable CLOUDFLARE_API_TOKEN secret (a token proven to lack zone Analytics:Read is refused by name); and, whenever an analytics token is in the environment, that the zone AI-bot query and the account Web Analytics referral query the engine runs still answer"
     },
     {
       "id": "zero-paid-llm",
