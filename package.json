@@ -278,6 +278,7 @@
     "validate:seo-hygiene:definition": "node scripts/validate/seo-hygiene.mjs definition",
     "validate:email-nurture": "node --experimental-sqlite scripts/validate/email-nurture.mjs",
     "validate:resend-download-email": "node --experimental-sqlite scripts/validate/resend-download-email.mjs",
+    "validate:endpoint-auth": "node --experimental-sqlite scripts/validate/endpoint-auth.mjs",
     "validate:title-fit": "node scripts/validate/title-fit.mjs"
   },
   "dependencies": {

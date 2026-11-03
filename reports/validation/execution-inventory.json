@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "orchestratorSource": "_repo_validation_registry.json",
-  "validatorCount": 121,
-  "hardFailCount": 118,
+  "validatorCount": 125,
+  "hardFailCount": 122,
   "strongWarningCount": 3,
   "validators": [
     {
@@ -1069,6 +1069,15 @@
     },
     {
       "order": 119,
+      "id": "title-fit",
+      "npmScript": "validate:title-fit",
+      "entrypoint": "scripts/validate/title-fit.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "growth-critical"
+    },
+    {
+      "order": 120,
       "id": "pinterest-launch",
       "npmScript": "validate:pinterest-launch",
       "entrypoint": "scripts/validate/pinterest-launch.mjs",
@@ -1077,7 +1086,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 120,
+      "order": 121,
       "id": "pinterest-drip",
       "npmScript": "validate:pinterest-drip",
       "entrypoint": "scripts/validate/pinterest-drip.mjs",
@@ -1086,10 +1095,37 @@
       "group": "growth-critical"
     },
     {
-      "order": 121,
+      "order": 122,
       "id": "schedule-truth",
       "npmScript": "validate:schedule-truth",
       "entrypoint": "scripts/validate/schedule-truth.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "growth-critical"
+    },
+    {
+      "order": 123,
+      "id": "email-nurture",
+      "npmScript": "validate:email-nurture",
+      "entrypoint": "scripts/validate/email-nurture.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "growth-critical"
+    },
+    {
+      "order": 124,
+      "id": "resend-download-email",
+      "npmScript": "validate:resend-download-email",
+      "entrypoint": "scripts/validate/resend-download-email.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "growth-critical"
+    },
+    {
+      "order": 125,
+      "id": "endpoint-auth",
+      "npmScript": "validate:endpoint-auth",
+      "entrypoint": "scripts/validate/endpoint-auth.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
       "group": "growth-critical"

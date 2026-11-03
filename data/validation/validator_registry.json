@@ -1374,6 +1374,17 @@
       "owner": "approvalprep-ops",
       "group": "growth-critical",
       "scope": "functions/_runtime/resend-download.js and functions/api/sample.js: paid-order lookup, stored recipient and server-built link only, no enumeration, per-order/per-IP/global limits"
+    },
+    {
+      "id": "endpoint-auth",
+      "npmScript": "validate:endpoint-auth",
+      "entrypoint": "scripts/validate/endpoint-auth.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "an unauthenticated nurture trigger lets anyone force email runs, and an admin password with no failed-attempt limit can be guessed without end",
+      "owner": "approvalprep-ops",
+      "group": "growth-critical",
+      "scope": "functions/api/nurture-run.js (CI bearer NURTURE_RUN_SECRET, named stop when unset) and functions/_runtime/admin-lockout.js via /api/admin/login and the x-admin-password header (10 wrong per IP per 15 min)"
     }
   ],
   "repairPolicy": "A validator may declare repairCommand only when that command repairs the same defect the validator detects. scripts/selfheal/heal-until-clean.mjs runs it on a blocking failure and re-validates.",
