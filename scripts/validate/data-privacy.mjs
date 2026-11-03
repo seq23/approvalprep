@@ -55,6 +55,8 @@ if (/body:\s*JSON\.stringify\(\{[^}]*answer|body:\s*JSON\.stringify\(\{[^}]*docu
 
 const allowedOperational = [
   "functions/api/resend-download-email.js",
+  // Hashed rate-limit counters only (bucket names carry SHA-256 hashes, never an IP or address).
+  "functions/_runtime/rate-limit.js",
   "functions/api/track-event.js",
   "functions/api/admin/",
   "functions/_runtime/admin.js",

@@ -1363,6 +1363,17 @@
       "owner": "approvalprep-growth",
       "group": "growth-critical",
       "scope": "functions/_runtime/nurture.js: sample series, 3-day gap, stop on purchase/unsubscribe, one review ask, buyer address deleted after the ask, named stop on missing key"
+    },
+    {
+      "id": "resend-download-email",
+      "npmScript": "validate:resend-download-email",
+      "entrypoint": "scripts/validate/resend-download-email.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "an email endpoint that sends to any address with caller-chosen links is an open relay: phishing from the ApprovalPrep domain and lost sending reputation",
+      "owner": "approvalprep-ops",
+      "group": "growth-critical",
+      "scope": "functions/_runtime/resend-download.js and functions/api/sample.js: paid-order lookup, stored recipient and server-built link only, no enumeration, per-order/per-IP/global limits"
     }
   ],
   "repairPolicy": "A validator may declare repairCommand only when that command repairs the same defect the validator detects. scripts/selfheal/heal-until-clean.mjs runs it on a blocking failure and re-validates.",
