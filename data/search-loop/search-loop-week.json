@@ -2,18 +2,18 @@
   "schema": "search-loop-week-v1",
   "week": "2026-W45",
   "site": "approvalprep.com",
-  "generated_at": "2026-11-03T11:15:21.663Z",
+  "generated_at": "2026-11-04T11:16:21.762Z",
   "state": "running",
-  "published": 20,
+  "published": 22,
   "indexed": "not read: no page old enough to inspect yet (14 days)",
   "pace": 10,
-  "ai_visitors": "not read: Cloudflare analytics refused the query: Actor 'com.cloudflare.api.token.41e529d327189bfdaddbbb3744b16778' does not have permission 'com.cloudflare.api.account.z",
-  "ai_bot_hits": "not read: Cloudflare analytics refused the query: Actor 'com.cloudflare.api.token.41e529d327189bfdaddbbb3744b16778' does not have permission 'com.cloudflare.api.account.z",
+  "ai_visitors": 0,
+  "ai_bot_hits": 159,
   "conversions": "not read: no conversion source configured for this site (form fills / checkouts)",
   "wins": 0,
   "undone": 0,
   "merged": 0,
-  "held_by_cap": 0,
+  "held_by_cap": 8,
   "redirected": [
     {
       "query": "letter verifying employment",
@@ -176,18 +176,98 @@
       "strengthen": "https://approvalprep.com/questions/mortgage-loan-documents-list/",
       "matched_by": "high token overlap (0.60 >= 0.6)",
       "at": "2026-11-03"
+    },
+    {
+      "query": "home loan documents list",
+      "strengthen": "https://approvalprep.com/questions/list-of-documents-needed-for-home-loan-application/",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "at": "2026-11-04"
+    },
+    {
+      "query": "us mortgage documents list",
+      "strengthen": "https://approvalprep.com/questions/mortgage-loan-documents-list/",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-04"
+    },
+    {
+      "query": "your mortgage application checklist",
+      "strengthen": "https://approvalprep.com/questions/mortgage-checklist/",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "at": "2026-11-04"
+    },
+    {
+      "query": "home loan required documents list",
+      "strengthen": "https://approvalprep.com/questions/documents-required-for-home-mortgage-loan/",
+      "matched_by": "high token overlap (0.67 >= 0.6)",
+      "at": "2026-11-04"
+    },
+    {
+      "query": "loan closing documents checklist",
+      "strengthen": "https://approvalprep.com/questions/mortgage-loan-documents-checklist/",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-04"
+    },
+    {
+      "query": "mortgage loan approval checklist",
+      "strengthen": "https://approvalprep.com/questions/mortgage-loan-documents-checklist/",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-04"
+    },
+    {
+      "query": "complete your mortgage documents checklist",
+      "strengthen": "https://approvalprep.com/questions/mortgage-checklist/",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-04"
+    },
+    {
+      "query": "va mortgage document checklist",
+      "strengthen": "https://approvalprep.com/questions/mortgage-loan-documents-checklist/",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-04"
+    },
+    {
+      "query": "document for mortgage loan",
+      "strengthen": "https://approvalprep.com/questions/mortgage-loan-documents-checklist/",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-04"
     }
   ],
   "cap": {
     "max_live_pages": 22,
-    "live": 20,
-    "room": 2,
+    "live": 22,
+    "room": 0,
     "why": "up from 20 to 22: Google impressions 49 in the last 28 days beat 10 in the 28 before"
   },
   "notes": [
-    "cap: up from 20 to 22: Google impressions 49 in the last 28 days beat 10 in the 28 before",
-    "BUILD distinct gate: 27 search(es) had the same intent as an existing page and became strengthen briefs, not new pages (pages.json \"redirected\")",
-    "BUILD gate notes (not blocking): 6 published page(s) are outside a length or style aim; each is listed under gate_notes in pages.json"
+    "BUILD held by the cap: 22 live engine page(s), cap 22 (up from 20 to 22: Google impressions 49 in the last 28 days beat 10 in the 28 before); 8 more page(s) today would have gone over it, those searches stay queued",
+    "BUILD distinct gate: 9 search(es) had the same intent as an existing page and became strengthen briefs, not new pages (pages.json \"redirected\")",
+    "BUILD gate notes (not blocking): 1 published page(s) are outside a length or style aim; each is listed under gate_notes in pages.json"
   ],
-  "run_url": "https://github.com/seq23/approvalprep/actions/runs/41625974533"
+  "lanes": {
+    "ratio": {
+      "can_be_one": 2,
+      "striking": 1
+    },
+    "can_be_one": {
+      "pages": 0,
+      "measured": 0,
+      "top3": 0,
+      "hit_rate": "not read: no page in this lane has reached its 2-week check yet"
+    },
+    "striking": {
+      "pages": 22,
+      "measured": 0,
+      "top3": 0,
+      "hit_rate": "not read: no page in this lane has reached its 2-week check yet"
+    },
+    "weights": {
+      "neighbour": 35,
+      "unanswered": 30,
+      "weak_top10": 40,
+      "demand": 10
+    },
+    "weight_changes": [],
+    "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
+  },
+  "run_url": "https://github.com/seq23/approvalprep/actions/runs/41819744486"
 }
