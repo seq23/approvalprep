@@ -4,9 +4,9 @@
   "measuredBy": "scripts/seo/probe-outbound-links.mjs",
   "note": "Measured HTTP status of every outbound <a href> in dist/. `dead` suppresses the hyperlink at render time; nothing else does.",
   "counts": {
-    "live": 118,
+    "live": 119,
     "dead": 4,
-    "unreachable": 7,
+    "unreachable": 6,
     "crawler_blocked": 18
   },
   "links": [
@@ -152,12 +152,12 @@
       "emittedAsLink": true
     },
     {
-      "url": "https://en.wikipedia.org/wiki/Mortgage_ underwriting",
-      "classification": "unreachable",
-      "httpStatus": 0,
-      "evidence": "no response; origin root https://en.wikipedia.org/ answered 200",
-      "checkedAt": "2026-11-04T11:18:45.194Z",
-      "firstSeenAt": "2026-11-04T11:18:45.194Z",
+      "url": "https://en.wikipedia.org/wiki/Mortgage_underwriting",
+      "classification": "live",
+      "httpStatus": 200,
+      "evidence": "browser-ua",
+      "checkedAt": "2026-11-05T10:07:19.631Z",
+      "firstSeenAt": "2026-11-05T10:07:19.631Z",
       "citedBy": [
         "/questions/mortgage-pre-approval-documents-checklist/"
       ],
