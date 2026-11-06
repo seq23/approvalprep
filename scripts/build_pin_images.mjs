@@ -54,23 +54,36 @@ async function launchPin(item) {
   await sharp(svgDoc(body, CREAM)).composite([{ input: await art(src, PIN_WIDTH, 750), top: 450, left: 0 }]).png().toFile(path.join(outDir, `${item.slug}.png`));
 }
 
+// What each layout prints, per text role: wrap width (chars), max lines, font size (px at
+// 1000 wide), and the fill/ground pair. scripts/pinterest/quality.mjs reads this to refuse a
+// pin whose text is cut off or unreadable at a 236px-wide phone thumbnail.
+export const TEXT_SPEC = {
+  "band-top": { headline: { chars: 20, lines: 4, size: 68, fill: "#ffffff", ground: "dark" }, subhead: { chars: 30, lines: 2, size: 44, fill: "dark", ground: "light" } },
+  "art-top": { headline: { chars: 20, lines: 4, size: 68, fill: "#ffffff", ground: "dark" }, subhead: { chars: 30, lines: 2, size: 44, fill: "#ffffff", ground: "dark" } },
+  checklist: { headline: { chars: 22, lines: 3, size: 62, fill: "#ffffff", ground: "dark" }, bullets: { chars: 30, lines: 1, size: 44, fill: INK, ground: "light" } },
+  card: { headline: { chars: 18, lines: 4, size: 70, fill: INK, ground: "light" } },
+  split: { headline: { chars: 19, lines: 4, size: 70, fill: "dark", ground: "light" }, subhead: { chars: 32, lines: 2, size: 44, fill: INK, ground: "light" } },
+};
+export { PALETTES };
+const T = TEXT_SPEC;
+
 // Five layouts; each returns { body, bg, composite: [{w,h,top,left}] }.
 const LAYOUTS = {
   // Headline in a dark band on top, art below, footer.
   "band-top": (v, p) => {
-    const hl = wrapTitle(v.headline, 20, 4), sub = wrapTitle(v.subhead, 34, 2);
-    return { bg: p.light, art: { w: 1000, h: 750, top: 470, left: 0 }, body: `<rect width="100%" height="470" fill="${p.dark}"/>${lines(hl, 500, (400 - hl.length * 78) / 2 + 70, 78, { size: 68 })}${lines(sub, 500, 1290, 46, { size: 36, weight: 600, fill: p.dark })}${text(500, 1430, "approvalprep.com", { size: 40, weight: 400, fill: INK })}` };
+    const hl = wrapTitle(v.headline, 20, 4), sub = wrapTitle(v.subhead, T["band-top"].subhead.chars, 2);
+    return { bg: p.light, art: { w: 1000, h: 750, top: 470, left: 0 }, body: `<rect width="100%" height="470" fill="${p.dark}"/>${lines(hl, 500, (400 - hl.length * 78) / 2 + 70, 78, { size: 68 })}${lines(sub, 500, 1290, 54, { size: T["band-top"].subhead.size, weight: 600, fill: p.dark })}${text(500, 1430, "approvalprep.com", { size: 40, weight: 400, fill: INK })}` };
   },
   // Art on top, headline on a dark field below.
   "art-top": (v, p) => {
-    const hl = wrapTitle(v.headline, 20, 4), sub = wrapTitle(v.subhead, 34, 2);
-    return { bg: p.dark, art: { w: 1000, h: 750, top: 0, left: 0 }, body: `<rect y="750" width="100%" height="10" fill="${p.accent}"/>${lines(hl, 500, 850 + (4 - hl.length) * 30, 78, { size: 68 })}${lines(sub, 500, 1290 - (sub.length - 1) * 23, 46, { size: 36, weight: 400, fill: "#ffffff" })}${text(500, 1440, "approvalprep.com", { size: 38, weight: 700, fill: p.accent })}` };
+    const hl = wrapTitle(v.headline, 20, 4), sub = wrapTitle(v.subhead, T["art-top"].subhead.chars, 2);
+    return { bg: p.dark, art: { w: 1000, h: 750, top: 0, left: 0 }, body: `<rect y="750" width="100%" height="10" fill="${p.accent}"/>${lines(hl, 500, 850 + (4 - hl.length) * 30, 78, { size: 68 })}${lines(sub, 500, 1300 - (sub.length - 1) * 27, 54, { size: T["art-top"].subhead.size, weight: 400, fill: "#ffffff" })}${text(500, 1440, "approvalprep.com", { size: 38, weight: 700, fill: p.accent })}` };
   },
   // Headline, then a three-item checklist, then the art.
   checklist: (v, p) => {
     const hl = wrapTitle(v.headline, 22, 3);
     const items = (v.bullets || []).slice(0, 3);
-    const rows = items.map((b, i) => `<rect x="90" y="${438 + i * 92}" width="52" height="52" rx="8" fill="#ffffff" stroke="${p.dark}" stroke-width="5"/><path d="M101 ${466 + i * 92} l12 12 l22 -26" stroke="${p.accent}" stroke-width="8" fill="none" stroke-linecap="round"/>${text(170, 477 + i * 92, b, { size: 42, weight: 600, fill: INK, anchor: "start" })}`).join("");
+    const rows = items.map((b, i) => `<rect x="90" y="${438 + i * 92}" width="52" height="52" rx="8" fill="#ffffff" stroke="${p.dark}" stroke-width="5"/><path d="M101 ${466 + i * 92} l12 12 l22 -26" stroke="${p.accent}" stroke-width="8" fill="none" stroke-linecap="round"/>${text(170, 477 + i * 92, b, { size: T.checklist.bullets.size, weight: 600, fill: INK, anchor: "start" })}`).join("");
     return { bg: p.light, art: { w: 840, h: 630, top: 740, left: 80 }, body: `<rect width="100%" height="380" fill="${p.dark}"/>${lines(hl, 500, (380 - hl.length * 76) / 2 + 62, 76, { size: 62 })}${rows}<rect x="70" y="720" width="860" height="670" fill="${p.dark}" rx="18"/>${text(500, 1450, "approvalprep.com", { size: 40, weight: 400, fill: INK })}` };
   },
   // Dark field with a white card holding the headline, art inset below.
@@ -80,20 +93,23 @@ const LAYOUTS = {
   },
   // Left accent bar, left-aligned headline, art in the lower half.
   split: (v, p) => {
-    const hl = wrapTitle(v.headline, 19, 4), sub = wrapTitle(v.subhead, 36, 2);
-    return { bg: p.light, art: { w: 880, h: 660, top: 700, left: 120 }, body: `<rect width="70" height="100%" fill="${p.dark}"/><rect x="70" width="16" height="100%" fill="${p.accent}"/>${lines(hl, 130, 150, 84, { size: 70, fill: p.dark, anchor: "start" })}${lines(sub, 130, 150 + hl.length * 84 + 30, 46, { size: 36, weight: 400, fill: INK, anchor: "start" })}${text(130, 1440, "approvalprep.com", { size: 40, weight: 700, fill: p.dark, anchor: "start" })}` };
+    const hl = wrapTitle(v.headline, 19, 4), sub = wrapTitle(v.subhead, T.split.subhead.chars, 2);
+    return { bg: p.light, art: { w: 880, h: 660, top: 700, left: 120 }, body: `<rect width="70" height="100%" fill="${p.dark}"/><rect x="70" width="16" height="100%" fill="${p.accent}"/>${lines(hl, 130, 150, 84, { size: 70, fill: p.dark, anchor: "start" })}${lines(sub, 130, 150 + hl.length * 84 + 30, 54, { size: T.split.subhead.size, weight: 400, fill: INK, anchor: "start" })}${text(130, 1440, "approvalprep.com", { size: 40, weight: 700, fill: p.dark, anchor: "start" })}` };
   },
 };
 
-async function variantPin(v) {
+/** The PNG bytes of one variant pin (also used by the refill's quality gate). */
+export async function renderVariant(v) {
   const layout = LAYOUTS[v.layout], p = PALETTES[v.palette];
-  if (!layout || !p) { console.error(`[build-pin-images] FAIL ${v.id}: unknown layout ${v.layout} or palette ${v.palette}`); process.exit(1); }
+  if (!layout || !p) throw new Error(`[build-pin-images] FAIL ${v.id}: unknown layout ${v.layout} or palette ${v.palette}`);
   const src = srcFor(v.imageSku, v.id);
   const spec = layout(v, p);
   const a = spec.art;
-  await sharp(svgDoc(spec.body, spec.bg)).composite([{ input: await art(src, a.w, a.h), top: a.top, left: a.left }]).png().toFile(path.join(outDir, `${v.id}.png`));
+  return sharp(svgDoc(spec.body, spec.bg)).composite([{ input: await art(src, a.w, a.h), top: a.top, left: a.left }]).png().toBuffer();
 }
+async function variantPin(v) { fs.writeFileSync(path.join(outDir, `${v.id}.png`), await renderVariant(v)); }
 
+if (import.meta.url === `file://${process.argv[1]}`) {
 const feed = loadPinfeed();
 const queue = loadQueue();
 if (!feed.items.length) { console.error("[build-pin-images] FAIL no items in data/pinterest/pinfeed.json"); process.exit(1); }
@@ -104,3 +120,4 @@ const pending = [...queue.items];
 const workers = Array.from({ length: 4 }, async () => { while (pending.length) await variantPin(pending.shift()); });
 await Promise.all(workers);
 console.log(`[build-pin-images] OK ${feed.items.length} launch pins + ${queue.items.length} variant pins in ${outDir}`);
+}

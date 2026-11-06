@@ -27,6 +27,7 @@ import { loadPinfeed, loadQueue, QUEUE_FILE, chicagoDate, addDays, scheduleVaria
 import { applyFallback, applyPause, decidePace } from "./pace.mjs";
 import { paidSkusFrom } from "../../src/lib/skuForRoute.mjs";
 import { buildVariant, VARIANTS_PER_PAGE_PER_BATCH } from "./variants.mjs";
+import { gateQueue } from "./quality.mjs";
 
 const root = process.cwd();
 const readJson = (f) => JSON.parse(fs.readFileSync(path.join(root, f), "utf8"));
@@ -55,6 +56,14 @@ export function pinPages() {
     const firstSentences = String(entry.answer || "").split(/(?<=\.)\s+/).slice(0, 2).join(" ");
     pages.push({ slug: key.replace(/^\//, ""), path: `${key}/`, kind: "guide", imageSku: entry.sku, question: entry.question, baseDescription: firstSentences });
     seen.add(key);
+  }
+  // The page's own search words (the quality gate checks headlines against them): what the
+  // page says it is for, from the same data files the page is built from.
+  const prio = readJson("data/content/priority_pages.json").pages || {};
+  for (const pg of pages) {
+    const prod = products.find((x) => (x.sku || x.slug || x.id) === pg.slug) || products.find((x) => (x.sku || x.slug || x.id) === pg.imageSku && pg.kind === "kit") || {};
+    const g = prio[pg.path.replace(/\/+$/, "")] || prio[pg.path] || {};
+    pg.searchText = [pg.slug, pg.name, pg.question, pg.baseDescription, prod.name, prod.customer_situation, prod.outcome, ...(prod.includes || []), g.target_query, g.question, g.h1, g.metaTitle].filter(Boolean).join(" ");
   }
   return pages;
 }
@@ -106,6 +115,32 @@ export function questionPins(queue, today) {
   return out;
 }
 
+/**
+ * Run the pin quality gate (scripts/pinterest/quality.mjs) over every unreleased pin. A pin
+ * that cannot be made good is dropped; the pins after it are re-dated so the schedule keeps
+ * no gaps, and the gate runs again on the new order (at most 3 passes).
+ */
+export async function gateAndReschedule(queue, today) {
+  const pages = new Map(pinPages().map((p) => [p.slug, p]));
+  const all = { reworked: [], held: [] };
+  for (let pass = 0; pass < 3; pass++) {
+    const r = await gateQueue(queue, today, { pageFor: (v) => pages.get(v.slug) || null });
+    all.reworked.push(...r.reworked); all.held.push(...r.held);
+    if (!r.held.length) break;
+    const later = queue.items.filter((v) => v.releaseDate > today).sort((a, b) => (a.releaseDate < b.releaseDate ? -1 : a.releaseDate > b.releaseDate ? 1 : 0));
+    queue.items = queue.items.filter((v) => v.releaseDate <= today);
+    const prev = queue.items.filter((v) => v.releaseDate === today).map((v) => v.slug);
+    queue.items.push(...scheduleVariants(later, { startDate: addDays(today, 1), perDay: Number(queue.config.PINS_PER_DAY), prevDaySlugs: prev }));
+  }
+  for (const w of all.reworked) console.log(`[pin-quality] reworked ${w.id}: ${w.from} -> ${w.to} (${w.reason})`);
+  if (all.held.length) {
+    const note = `${all.held.length} pin(s) held, no version passed the quality gate: ${all.held.map((h) => `${h.id} (${h.reason})`).join("; ")}`;
+    console.log(`PIN_QUALITY_HOLD: ${note}`);
+    if (process.env.GITHUB_ACTIONS) console.log(`::warning title=PIN_QUALITY_HOLD::${note}`);
+  }
+  return all;
+}
+
 if (import.meta.url === `file://${process.argv[1]}`) {
   const args = new Set(process.argv.slice(2));
   const queue = loadQueue(root);
@@ -150,6 +185,10 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const questions = paused ? [] : questionPins(queue, today);
   if (questions.length) { queue.items.push(...questions); changed = true; console.log(`[pinterest-refill] question pins: ${questions.map((q) => q.path).join(", ")}`); }
   const left = unreleasedCount(queue, now);
+  {
+    const g = await gateAndReschedule(queue, today);
+    if (g.reworked.length || g.held.length) changed = true;
+  }
   const due = !paused && needsRefill(queue, now);
   if (!due && !args.has("--force")) {
     if (changed) fs.writeFileSync(path.join(root, QUEUE_FILE), JSON.stringify(queue, null, 2) + "\n");
@@ -161,6 +200,10 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   if (!pages.length) { console.error("[pinterest-refill] FAIL no pages to pin"); process.exit(1); }
   const added = appendBatch(queue, pages, now);
   if (!added.length) { console.error("[pinterest-refill] FAIL refill due but no variants generated"); process.exit(1); }
+  const addedIds = new Set(added.map((v) => v.id));
+  await gateAndReschedule(queue, today);
+  const kept = queue.items.filter((v) => addedIds.has(v.id));
+  if (!kept.length) { console.error("NAMED STOP: PIN_QUALITY_HOLD - a refill was due but every new pin failed the quality gate; nothing scheduled (see the reasons above)."); process.exit(1); }
   fs.writeFileSync(path.join(root, QUEUE_FILE), JSON.stringify(queue, null, 2) + "\n");
-  console.log(`[pinterest-refill] OK appended ${added.length} variants for ${pages.length} pages, ${added[0].releaseDate} to ${added.at(-1).releaseDate}; ${unreleasedCount(queue, now)} unreleased`);
+  console.log(`[pinterest-refill] OK appended ${kept.length} of ${added.length} variants (quality gate) for ${pages.length} pages, ${kept[0].releaseDate} to ${kept.at(-1).releaseDate}; ${unreleasedCount(queue, now)} unreleased`);
 }
