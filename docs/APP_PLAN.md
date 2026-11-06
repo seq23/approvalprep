@@ -24,13 +24,19 @@ upload, no analytics, no server, no AI call.
 | Id | Screen | Route |
 |---|---|---|
 | S1 | Start | `app/index.tsx` |
-| S2 | Write a letter (tab) | `app/(tabs)/letters.tsx` |
-| S3 | Questions | `app/letter/[kind].tsx` |
-| S4 | Your letter | `app/letter/draft.tsx` |
-| S5 | Mark as sent (bottom sheet) | `app/letter/sent.tsx` |
-| S6 | My letters (tab) | `app/(tabs)/mine.tsx` |
-| S7 | Credit Letter Kit | `app/unlock.tsx` |
-| S8 | More (tab) | `app/(tabs)/more.tsx` |
+| S2 | Write a letter (tab) | `app/(tabs)/letters/index.tsx` |
+| S3 | Questions | `app/(tabs)/letters/[kind].tsx` |
+| S4 | Your letter | `app/(tabs)/letters/draft.tsx` |
+| S5 | Mark as sent (sheet, "✕ Close") | `app/(tabs)/letters/sent.tsx` |
+| S6 | My letters (tab) | `app/(tabs)/mine/index.tsx` |
+| S7 | Credit Letter Kit | `app/(tabs)/letters/unlock.tsx` |
+| S8 | More (tab) | `app/(tabs)/more/index.tsx` |
+
+Navigation (make-it-calm section 7): `src/screens.ts` is the one map. Each tab has its own
+stack, so sub-screens and sheets keep the three tabs visible and tapping the current tab
+returns to its root; headers name the screen and show "← Back" (sheets "✕ Close");
+Android back and Escape go back the same way. `tests/nav.test.ts` checks every screen
+reaches Write a letter in one tap, Back stays inside its tab, and nothing is orphaned.
 
 ## Seeing each build
 

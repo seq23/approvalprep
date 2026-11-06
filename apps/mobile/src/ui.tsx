@@ -3,20 +3,26 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { color, radius, space, tap, type } from './theme';
 import { SELF_HELP_LINE } from './copy';
+import { byRoute } from './screens';
+import { useBackKeys } from './nav';
 
 // Every screen is a <Screen>: paper ground, phone margin, and the R-ADV-13 self-help line last.
 // The line cannot be switched off; tests/self-help.test.ts fails if a screen skips <Screen>.
-export function Screen({ title, label, children }: { title: string; label?: string; children?: ReactNode }) {
-  return (
-    <SafeAreaView style={s.safe} edges={['top']}>
-      <ScrollView contentContainerStyle={s.body}>
-        {label ? <Text style={type.label}>{label}</Text> : null}
-        <Text style={type.title} accessibilityRole="header">{title}</Text>
-        {children}
-        <Text style={[type.sub, s.selfHelp]} testID="self-help-line">{SELF_HELP_LINE}</Text>
-      </ScrollView>
-    </SafeAreaView>
+// route: the screen's place in src/screens.ts. Inside a tab the stack header carries its
+// name and "← Back" / "✕ Close" (src/nav.tsx), so the screen starts under it; Android back
+// and Escape go back the same way.
+export function Screen({ route, title, label, children }: { route: string; title: string; label?: string; children?: ReactNode }) {
+  const spec = byRoute(route);
+  useBackKeys(route);
+  const body = (
+    <ScrollView contentContainerStyle={s.body}>
+      {label ? <Text style={type.label}>{label}</Text> : null}
+      <Text style={type.title} accessibilityRole="header">{title}</Text>
+      {children}
+      <Text style={[type.sub, s.selfHelp]} testID="self-help-line">{SELF_HELP_LINE}</Text>
+    </ScrollView>
   );
+  return spec.tab ? <View style={s.safe}>{body}</View> : <SafeAreaView style={s.safe} edges={['top']}>{body}</SafeAreaView>;
 }
 
 export function Button({ label, onPress, primary }: { label: string; onPress?: () => void; primary?: boolean }) {
