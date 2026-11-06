@@ -1,12 +1,11 @@
 ---
-import { internalHref, canonicalUrl, websiteSchema, speakableWebPageSchema } from "../lib/schema";
+import { internalHref, canonicalUrl, websiteSchema, speakableWebPageSchema, faqSchema } from "../lib/schema";
 import DemandGuideLinks from "../components/DemandGuideLinks.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ProductGrid from "../components/ProductGrid.astro";
 import BoundaryNotice from "../components/BoundaryNotice.astro";
 import TrustBar from "../components/TrustBar.astro";
 import HowItWorks from "../components/HowItWorks.astro";
-import OutcomeCTA from "../components/OutcomeCTA.astro";
 import UseCaseList from "../components/UseCaseList.astro";
 import WhatYouGet from "../components/WhatYouGet.astro";
 import FinalCTA from "../components/FinalCTA.astro";
@@ -21,7 +20,18 @@ import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComp
 // twice over, once as the lead word and once inside the phrase. The query leads
 // now and the site name appears once, as the suffix every other page carries.
 const pageTitle = "Self-Service Credit Repair Letters - ApprovalPrep";
-const pageDescription = "Download self-service credit repair letters, explanation letters, rental packets, income proof templates, and approval-prep document kits.";
+const pageDescription = "Download self-service credit repair letters, explanation letters, rental packets, income proof templates, and approval-prep document kits. The DIY alternative to monthly credit repair.";
+// Added 6 Nov 2026 (search and blue-ocean decision, https://claude.ai/artifact/JxZbRkaRbZfZrKEJpUMV6Y):
+// the homepage had no FAQ. Every answer keeps to risk R-ADV-13: self-help only, no
+// promise to remove items or change a score, accurate information stays. The one
+// competitor price carries its source and the date it was read.
+const CREDIT_SAINT_READ = "6 November 2026";
+const homeFaq = [
+  { question: "Is ApprovalPrep a credit repair company?", answer: "No. ApprovalPrep sells self-help letter templates. You write, review and send every letter yourself. We do not contact credit bureaus or creditors for you, and we do not act on your behalf." },
+  { question: "Can I dispute my credit report myself for free?", answer: "Yes. You can dispute an error directly with the credit bureau and with the business that reported it. Federal law (the Fair Credit Reporting Act) requires the bureau to investigate your dispute free of charge. Our kits give you the letter wording and the steps; the free Letter Studio lets you draft a first version before you pay anything." },
+  { question: "What does a credit repair company cost?", answer: `Credit Saint's own website listed plans from $79.99 to $139.99 a month, plus a first-work fee of $99 to $195, when we read it on ${CREDIT_SAINT_READ}. The ApprovalPrep Credit Letter Kit is $19, paid once.` },
+  { question: "Will these letters remove items or raise my score?", answer: "We cannot promise that, and no template can. A letter is a request. Credit bureaus must look into a dispute, and information that is wrong or cannot be verified must be corrected or removed, but accurate information usually stays on your report." }
+];
 // The definition paragraph directly under the H1 is what an answer engine or a
 // voice assistant should read for "what is ApprovalPrep". The speakable selector
 // names it by id; scripts/validate/seo-hygiene.mjs (check `definition`) fails if
@@ -29,16 +39,30 @@ const pageDescription = "Download self-service credit repair letters, explanatio
 // leaves the 40-60 word band.
 const homeSchema = [
   websiteSchema(),
-  speakableWebPageSchema({ title: pageTitle, description: pageDescription, url: canonicalUrl("/"), cssSelector: ["h1", "#what-is-approvalprep"] })
+  speakableWebPageSchema({ title: pageTitle, description: pageDescription, url: canonicalUrl("/"), cssSelector: ["h1", "#what-is-approvalprep"] }),
+  faqSchema(homeFaq)
 ];
 ---
 <BaseLayout title={pageTitle} description={pageDescription} schema={homeSchema}>
   <section class="hero hero-split shell">
     <div>
       <p class="eyebrow">DIY credit letters + approval paperwork</p>
-      <h1>Self-service credit repair letters and approval-ready documents, without the high monthly fees.</h1>
+      <h1>Self-service credit repair letters and approval-ready documents, <span class="ap-hl">without the high monthly fees.</span></h1>
       <p class="lead" id="what-is-approvalprep">ApprovalPrep is a self-service document prep site that sells one-time, direct-download kits of letters, checklists, and templates for credit report questions, goodwill letters, debt validation, rental applications, income proof, loan reviews, and letters of explanation. Each kit unlocks a PDF guide and an editable DOCX file; you fill in your true facts and send it yourself.</p>
-      <OutcomeCTA primary="Get DIY credit letters — $19" secondary="Compare all kits and prices" href="/pricing/#credit-letter-kit" secondaryHref="/pricing" />
+      <p class="supporting-copy ap-alt-line">The do-it-yourself alternative to a monthly credit repair company: draft free, buy the letters once, send them yourself.</p>
+      <div class="hero-actions ap-hero-actions">
+        <a class="button primary-button" href={internalHref("/letter-writing-studio/")}>Draft free in the Letter Studio</a>
+        <p class="ap-free-note">No account, no upload, no stored answers, and no payment.</p>
+        <a class="button secondary secondary-button" href={internalHref("/pricing/#credit-letter-kit")}>Get DIY credit letters — $19</a>
+        <a class="ap-textlink" href={internalHref("/pricing")}>Compare all kits and prices</a>
+      </div>
+      <div class="ap-sheet" role="img" aria-label="Example: the first lines of a dispute letter drafted in the Letter Studio">
+        <p class="eyebrow">Example · your letter, first draft</p>
+        <p>I am writing to dispute one item on my credit report.</p>
+        <p><span class="ap-hl">[Account name] shows a 30-day late payment for [month and year].</span></p>
+        <p>My records show it was paid on time. A copy is attached.</p>
+      </div>
+      <p class="ap-selfhelp">Self-help templates. Not legal or financial advice. We do not contact bureaus or creditors for you.</p>
       <TrustBar signals={trustSignals} />
     </div>
     <aside class="hero-panel" aria-label="ApprovalPrep process">
@@ -56,6 +80,17 @@ const homeSchema = [
       </div>
     </aside>
   </section>
+
+  <section class="band ap-compare" id="company-or-yourself"><div class="shell">
+    <p class="eyebrow">Before you sign up for a monthly plan</p>
+    <h2>A credit repair company or doing it yourself?</h2>
+    <div class="table-wrap"><table class="comparison-table ap-labelled"><thead><tr><th></th><th>Monthly credit repair company</th><th>Do it yourself with ApprovalPrep</th></tr></thead><tbody>
+      <tr><th scope="row">What you pay</th><td data-label="Credit repair company">Credit Saint: $79.99 to $139.99 a month, plus a $99 to $195 first-work fee (<a href="https://www.creditsaint.com/" rel="nofollow noopener" target="_blank">its own site</a>, read {CREDIT_SAINT_READ}).</td><td data-label="Do it yourself">$19 once for the Credit Letter Kit. Drafting in the Letter Studio is free.</td></tr>
+      <tr><th scope="row">Who sends the letters</th><td data-label="Credit repair company">The company, on your behalf.</td><td data-label="Do it yourself">You do. We never contact bureaus or creditors for you.</td></tr>
+      <tr><th scope="row">What the law says</th><td data-label="Credit repair company">The Credit Repair Organizations Act bars a credit repair company from charging you before the promised work is done (<a href="https://www.law.cornell.edu/uscode/text/15/1679b" rel="noopener" target="_blank">15 U.S.C. 1679b</a>).</td><td data-label="Do it yourself">Disputing an error is free: the credit bureau must investigate it free of charge (<a href="https://www.law.cornell.edu/uscode/text/15/1681i" rel="noopener" target="_blank">15 U.S.C. 1681i</a>).</td></tr>
+    </tbody></table></div>
+    <p class="fine">Read more: <a href={internalHref("/not-a-credit-repair-company")}>why ApprovalPrep is not a credit repair company</a>. The full cost comparison page is <span class="ap-tag">planned</span>.</p>
+  </div></section>
 
   {/* The hero's supporting line already stated what the site recommends doing.
       It is folded into the recommendation_summary block here rather than
@@ -112,12 +147,15 @@ const homeSchema = [
     </div>
   </div></section>
   <DemandGuideLinks all={true} eyebrow="Most-searched guides" heading="Start with the letter or form you were asked for." />
+  <section class="ap-planned shell" aria-label="Guides being written">
+    <p class="fine">Being written next <span class="ap-tag">planned</span>: debt validation letter · pay for delete letter · how to remove late payments from a credit report · how to remove hard inquiries.</p>
+  </section>
   <FreeStudioCTA />
   <section class="band"><div class="shell">
     <p class="eyebrow">Compare kits</p>
     <h2>Not sure which one fits? Compare the common paths.</h2>
     <div class="table-wrap"><table class="comparison-table"><thead><tr><th>Product</th><th>Best for</th><th>Includes</th><th>Price</th></tr></thead><tbody>
-      {productComparison.map((row) => <tr><td><a href={internalHref(row.href)}>{row.product}</a></td><td>{row.bestFor}</td><td>{row.includes}</td><td><strong>{row.price}</strong></td></tr>)}
+      {productComparison.map((row) => <tr><td data-label="Product"><a href={internalHref(row.href)}>{row.product}</a></td><td data-label="Best for">{row.bestFor}</td><td data-label="Includes">{row.includes}</td><td data-label="Price"><strong>{row.price}</strong></td></tr>)}
     </tbody></table></div>
   </div></section>
   <section class="band"><div class="shell">
@@ -134,5 +172,11 @@ const homeSchema = [
   <section class="band"><div class="shell"><DataPrivacyNotice /></div></section>
   <section class="band"><div class="shell"><CreditBoundaryExplainer /></div></section>
   <section class="band"><div class="shell"><BoundaryNotice /></div></section>
+  <section class="band" id="faq" data-content-block="faq"><div class="shell">
+    <p class="eyebrow">Questions</p>
+    <h2>Questions about doing it yourself</h2>
+    <div class="ap-faq">{homeFaq.map((item) => <article class="card"><h3>{item.question}</h3><p>{item.answer}</p></article>)}</div>
+    <p class="ap-selfhelp">Self-help templates. Not legal or financial advice. We do not contact bureaus or creditors for you.</p>
+  </div></section>
   <FinalCTA primary="Start free for $0" secondary="Compare all kits" href="/letter-writing-studio/" secondaryHref="/pricing" />
 </BaseLayout>
