@@ -1396,6 +1396,17 @@
       "owner": "approvalprep-ops",
       "group": "growth-critical",
       "scope": "functions/api/nurture-run.js (CI bearer NURTURE_RUN_SECRET, named stop when unset) and functions/_runtime/admin-lockout.js via /api/admin/login and the x-admin-password header (10 wrong per IP per 15 min)"
+    },
+    {
+      "id": "phone-no-sideways-scroll",
+      "npmScript": "validate:phone-no-sideways-scroll",
+      "entrypoint": "scripts/validate/phone-no-sideways-scroll.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "every built page renders at 390px with no sideways scroll and nothing flush against the screen edge (6 Nov 2026: homepage 459px, /pricing/ 446px, breadcrumb and use-case row at x=0, hidden by overflow-x:hidden)",
+      "owner": "approvalprep-growth",
+      "group": "ux-critical",
+      "scope": "Chromium at 390x844 over every dist/sitemap.xml page"
     }
   ],
   "repairPolicy": "A validator may declare repairCommand only when that command repairs the same defect the validator detects. scripts/selfheal/heal-until-clean.mjs runs it on a blocking failure and re-validates."
