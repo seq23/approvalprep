@@ -40,4 +40,4 @@ export const secondaryNav = [
   ["/complete-approvalprep-bundle", "Full document library"]
 ];
 
-export const navCta = { href: "/letter-writing-studio", label: "Draft free in the Letter Studio" };
+export const navCta = { href: "/letter-writing-studio", label: "Try our Letter Studio - Free!" };
