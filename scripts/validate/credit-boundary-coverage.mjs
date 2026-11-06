@@ -122,6 +122,12 @@ if (covered.length < sitemapPaths.length) throw new Error(`[credit-boundary] onl
 // The build is validator 1 of the registry, so the tree is there in every lane
 // that runs it; requiring it turns a silent skip into a named failure.
 const DIST = requireBuildOutput("credit-boundary-coverage");
+// Risk rule R-ADV-13 (risk brain, 3 Nov 2026): every credit page carries this exact
+// line (Credit Repair Organizations Act / FTC TSR self-help boundary). It ships from
+// the shared footer, so every built page must carry it verbatim. Found missing on the
+// live homepage and /credit-letter-kit/ on 6 Nov 2026.
+const R_ADV_13_LINE = "Self-help templates. Not legal or financial advice. We do not contact bureaus or creditors for you.";
+const missingRAdv13 = [];
 let distChecked = 0;
 const builtWithBlock = new Set();
 {
@@ -137,9 +143,14 @@ const builtWithBlock = new Set();
     // not a content page; /admin is an internal tool, excluded by the data file.
     if (excluded.has(clean) || clean === "/404.html") continue;
     const html = fs.readFileSync(file, "utf8");
+    if (!html.includes(R_ADV_13_LINE)) missingRAdv13.push(clean);
     if (!html.includes("data-boundary-block")) missing.push(clean);
     else { distChecked += 1; builtWithBlock.add(clean); }
   }
+  for (const named of ["/", "/credit-letter-kit", "/letter-writing-studio", "/609-dispute-letter", "/goodwill-letter-credit"]) {
+    if (!builtWithBlock.has(named)) throw new Error(`[credit-boundary] R-ADV-13 sweep did not reach ${named}; the credit pages it must cover were not built or were excluded`);
+  }
+  if (missingRAdv13.length) throw new Error(`[credit-boundary] ${missingRAdv13.length} built page(s) missing the R-ADV-13 line "${R_ADV_13_LINE}": ${missingRAdv13.slice(0, 10).join(", ")}`);
   if (missing.length) throw new Error(`[credit-boundary] ${missing.length} built page(s) missing the professional boundary block: ${missing.slice(0, 10).join(", ")}`);
   const sitemapUnbuilt = sitemapPaths.filter((route) => !builtWithBlock.has(route));
   if (sitemapUnbuilt.length) throw new Error(`[credit-boundary] ${sitemapUnbuilt.length} sitemap URL(s) have no built page carrying the boundary block: ${sitemapUnbuilt.slice(0, 10).join(", ")}`);
@@ -155,4 +166,4 @@ const builtWithBlock = new Set();
   }
 }
 
-console.log(`[validate:credit-boundary] OK routes=${covered.length} builtPagesChecked=${distChecked} families=${familyNames.length}`);
+console.log(`[validate:credit-boundary] OK routes=${covered.length} builtPagesChecked=${distChecked} rAdv13Pages=${distChecked} families=${familyNames.length}`);
