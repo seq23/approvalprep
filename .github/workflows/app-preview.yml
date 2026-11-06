@@ -1,0 +1,75 @@
+# THE APP PREVIEW (docs/APP_PLAN.md, "Seeing each build"): builds the ApprovalPrep phone app
+# (apps/mobile) as an Android APK and puts it on Appetize, so the owner taps through every build
+# in a browser before anyone pays. No store account, no signing key, nothing paid (debug-signed
+# APK on a free GitHub-hosted runner of this public repo). Copied from seq23/keepmyproof's
+# preview.yml; Android instead of the iOS simulator because this repo's workflow contract
+# (scripts/workflows/trace-all.mjs) pins every workflow to ubuntu-24.04 and Node 22.12.0.
+# Never touches the website: it only reads apps/mobile, and nothing here builds or deploys dist/.
+name: App preview
+on:
+  workflow_dispatch:
+    inputs:
+      fixture_trace:
+        description: "Run fixture workflow data trace only"
+        required: false
+        default: "false"
+  push:
+    branches: [main]
+    paths: ['apps/mobile/**', '.github/workflows/app-preview.yml']
+  pull_request:
+    paths: ['apps/mobile/**', '.github/workflows/app-preview.yml']
+permissions:
+  contents: read
+concurrency:
+  group: app-preview-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  preview:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    defaults:
+      run:
+        working-directory: apps/mobile
+    env:
+      EXPO_NO_TELEMETRY: '1'
+      CI: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.12.0
+          cache: npm
+          cache-dependency-path: apps/mobile/package-lock.json
+      - run: npm ci --no-audit --no-fund
+      - name: Typecheck and app tests (R-ADV-13 self-help line, store limits)
+        run: npx tsc --noEmit && npx tsx --test tests/*.test.ts
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Generate the Android project
+        run: npx expo prebuild --platform android --no-install > prebuild.log 2>&1 || { tail -40 prebuild.log; exit 1; }
+      - name: Build the APK
+        run: |
+          cd android && ./gradlew assembleRelease --no-daemon -PreactNativeArchitectures=x86_64,arm64-v8a > ../gradle.log 2>&1 \
+            || { grep -E 'error:|FAILURE|What went wrong' -A3 ../gradle.log | head -60; exit 1; }
+          cd .. && apk=android/app/build/outputs/apk/release/app-release.apk
+          test -s "$apk" || { echo "NAMED STOP [PREVIEW_NO_APP] $apk was not built"; exit 1; }
+          cp "$apk" ApprovalPrep-preview.apk
+          echo "Android preview build: $(du -h ApprovalPrep-preview.apk | cut -f1), attached as **approvalprep-preview-apk**." >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: app-build-logs
+          path: apps/mobile/*.log
+          retention-days: 7
+      - uses: actions/upload-artifact@v4
+        with:
+          name: approvalprep-preview-apk
+          path: apps/mobile/ApprovalPrep-preview.apk
+          retention-days: 30
+      - name: Put the build on Appetize
+        env:
+          APPETIZE_API_TOKEN: ${{ secrets.APPETIZE_API_TOKEN }}
+          APPETIZE_PUBLIC_KEY: ${{ vars.APPROVALPREP_APPETIZE_PUBLIC_KEY }}
+        run: scripts/preview/appetize.sh ApprovalPrep-preview.apk
