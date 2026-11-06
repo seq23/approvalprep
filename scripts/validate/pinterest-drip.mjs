@@ -19,13 +19,19 @@
 //    batch must cover every page, continue the variant numbering and keep the
 //    no-consecutive-page rule across the batch boundary; the live queue must not be
 //    starved (< 7 unreleased = the daily refill has been failing for a week);
-// 8. the request-time Pages Function is not wired to both data files.
+// 8. the request-time Pages Function is not wired to both data files;
+// 9. the pin quality gate (scripts/pinterest/quality.mjs) is off: an unreleased built pin
+//    looks like one released just before it, has a headline without its page's search
+//    words, or text cut off / unreadable at a 236px thumbnail; or the gate's own fixtures
+//    (a re-coloured near-duplicate, "Finalize & Hand Off", an overlong headline) pass.
 import fs from "node:fs";
 import path from "node:path";
 import { SITE, loadPinfeed, loadQueue, chicagoDate, addDays, dueEntries, renderFeedAt, renderBoardFeedAt, pinBoards, unreleasedCount, needsRefill, variantLink } from "../../src/lib/pinfeed.mjs";
 import { decidePace, applyFallback, applyPause } from "../pinterest/pace.mjs";
 import { LAYOUTS, PALETTES, ANGLES } from "../pinterest/variants.mjs";
 import { appendBatch, pinPages } from "../pinterest/refill_queue.mjs";
+import { dHash, distance, headlineIssue, thumbnailIssue, gateQueue, auditQueue, MIN_DISTANCE } from "../pinterest/quality.mjs";
+import { renderVariant } from "../build_pin_images.mjs";
 
 const errors = [];
 const fail = (m) => errors.push(m);
@@ -211,8 +217,10 @@ const sortedDays = [...new Set(items.map((v) => v.releaseDate))].sort();
 const T = cfg.REFILL_THRESHOLD;
 if (sortedDays.length > T + 1) {
   // A clock at which exactly T unreleased remain, and one at which T-1 remain.
-  const perDay = cfg.PINS_PER_DAY;
-  const dayWithTLeft = sortedDays[sortedDays.length - 1 - Math.ceil(T / perDay)];
+  // The latest day after which at least T pins remain (the last day may be short when the
+  // quality gate held a pin, so count rather than assume PINS_PER_DAY on every day).
+  const after = (d) => items.filter((v) => v.releaseDate > d).length;
+  const dayWithTLeft = [...sortedDays].reverse().find((d) => after(d) >= T);
   const atT = new Date(`${dayWithTLeft}T18:00:00Z`);
   const atTminus = new Date(`${addDays(dayWithTLeft, 1)}T18:00:00Z`);
   if (unreleasedCount(queue, atT) < T) fail(`refill fixture: expected >= ${T} unreleased at ${dayWithTLeft}`);
@@ -248,6 +256,41 @@ if (fs.existsSync(path.join(dist, "_routes.json"))) {
   if ((r.exclude || []).some((x) => x === "/pinfeed.xml" || x === "/*")) fail("dist/_routes.json excludes /pinfeed.xml from Functions");
 }
 
+// 9. Pin quality gate: fixtures first (the gate must catch each failure), then every unreleased built pin.
+{
+  const pagesBySlug = new Map(pinPages().map((p) => [p.slug, p]));
+  const pageFor = (v) => pagesBySlug.get(v.slug) || null;
+  const base = items.find((v) => v.kind === "kit" && pageFor(v));
+  if (!base) fail("quality fixture: no kit pin to test the gate with");
+  else {
+    const h0 = await dHash(await renderVariant(base));
+    const recoloured = { ...base, palette: PALETTES.find((p) => p !== base.palette) };
+    const relaid = { ...base, layout: LAYOUTS.find((l) => l !== base.layout) };
+    if (distance(h0, await dHash(await renderVariant(base))) !== 0) fail("quality fixture: the same pin must hash identically");
+    const dRe = distance(h0, await dHash(await renderVariant(recoloured)));
+    if (dRe >= MIN_DISTANCE) fail(`quality fixture: a re-coloured copy of ${base.id} is ${dRe} bits away, the gate (>= ${MIN_DISTANCE}) would let a near-duplicate through`);
+    const dLay = distance(h0, await dHash(await renderVariant(relaid)));
+    if (dLay < MIN_DISTANCE) fail(`quality fixture: a different layout of ${base.id} is only ${dLay} bits away, the gate would refuse every real variant`);
+    if (!headlineIssue({ ...base, headline: "Finalize & Hand Off" }, pageFor(base))) fail('quality fixture: vague headline "Finalize & Hand Off" passed');
+    if (headlineIssue(base, pageFor(base))) fail(`quality fixture: ${base.id} real headline refused: ${headlineIssue(base, pageFor(base))}`);
+    if (!thumbnailIssue({ ...base, layout: "checklist", headline: "How to write a letter of explanation, explained in plain language" })) fail("quality fixture: a headline cut off at 3 lines passed");
+    // The gate reworks a near-duplicate and holds a pin it cannot fix.
+    const q = { config: cfg, items: [{ ...base, id: "fx-a-v1", releaseDate: "2030-01-01" }, { ...recoloured, id: "fx-a-v2", releaseDate: "2030-01-02" }, { ...base, id: "fx-q-v1", kind: "question", headline: "Finalize & Hand Off", releaseDate: "2030-01-03" }] };
+    const r = await gateQueue(q, "2030-01-01", { pageFor });
+    const v2 = q.items.find((v) => v.id === "fx-a-v2");
+    if (!v2 || !r.reworked.some((w) => w.id === "fx-a-v2")) fail("quality fixture: the gate did not rework a near-duplicate pin");
+    else if (distance(h0, await dHash(await renderVariant(v2))) < MIN_DISTANCE) fail("quality fixture: the reworked pin is still a near-duplicate");
+    if (!r.held.some((h) => h.id === "fx-q-v1") || q.items.some((v) => v.id === "fx-q-v1")) fail("quality fixture: an unfixable vague pin was kept instead of held");
+  }
+  const builtPin = async (v) => fs.readFileSync(path.join(dist, "pins", `${v.id}.png`));
+  const unreleased = items.filter((v) => v.releaseDate > chicagoDate(new Date()));
+  if (!unreleased.length) fail("quality gate: zero unreleased pins to check");
+  else if (fs.existsSync(path.join(dist, "pins"))) {
+    const bad = await auditQueue(queue, chicagoDate(new Date()), { pageFor, render: builtPin });
+    bad.forEach((b) => fail(`quality gate: ${b} - run npm run pinterest:refill (it reworks or holds such pins)`));
+  }
+}
+
 if (errors.length) { console.error(`[pinterest-drip] FAIL\n- ${errors.slice(0, 40).join("\n- ")}${errors.length > 40 ? `\n- ... ${errors.length - 40} more` : ""}`); process.exit(1); }
 const pages = new Set(items.map((v) => v.slug)).size;
-console.log(`[pinterest-drip] OK ${items.length} variants for ${pages} pages, ${cfg.PINS_PER_DAY}/day ${items[0]?.releaseDate}..${lastDay}, ${liveLeft} unreleased; no page on consecutive days; every image 1000x1500; feed exact at fixed clocks; refill flips at ${T}`);
+console.log(`[pinterest-drip] OK ${items.length} variants for ${pages} pages, ${cfg.PINS_PER_DAY}/day ${items[0]?.releaseDate}..${lastDay}, ${liveLeft} unreleased; no page on consecutive days; every image 1000x1500; feed exact at fixed clocks; refill flips at ${T}; every unreleased pin passes the quality gate`);

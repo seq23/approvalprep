@@ -190,6 +190,8 @@ export function derivedCopy(page) {
       H("whats-inside", `Read this first: ${topic.toLowerCase()}`, "A plain-language guide"),
       H("situation-first", `Save this: ${topic.toLowerCase()}`, "Plain answers you can come back to"),
       H("deadline-first", `Short on time? ${topic}, in brief`, "The short answer up front"),
+      H("problem-first", `Stuck on ${topic.toLowerCase()}?`, "A plain-language guide"),
+      H("question-first", `${topic}? Start here`, "The short answer up front"),
     ];
     return { name: clip(topic, 40), bullets: ["The short answer", "The details", "What to do next"], lines, derived: true };
   }
@@ -207,26 +209,32 @@ export function derivedCopy(page) {
 }
 
 /** The n-th variant (1-based) for a page. */
+export const copyFor = (page) => PAGE_COPY[page.slug] || derivedCopy(page);
+
+/** The copy fields a headline line sets on a variant (the quality gate swaps lines with it). */
+export function lineFields(page, line) {
+  const copy = copyFor(page);
+  return {
+    angle: line.angle,
+    headline: line.headline,
+    subhead: line.sub,
+    bullets: copy.bullets,
+    title: clip(`${line.headline} | ${copy.name}`, 100),
+    description: clip(`${line.sub}. ${page.baseDescription || ""}`.replace(/\.\.\s/, ". ").trim(), 500),
+  };
+}
+
 export function buildVariant(page, n, pageIndex) {
-  const copy = PAGE_COPY[page.slug] || derivedCopy(page);
+  const copy = copyFor(page);
   const line = copy.lines[(n - 1) % copy.lines.length];
-  const layout = LAYOUTS[(n - 1 + 2 * pageIndex) % LAYOUTS.length];
-  const palette = PALETTES[(n - 1 + pageIndex) % PALETTES.length];
-  const title = clip(`${line.headline} | ${copy.name}`, 100);
-  const description = clip(`${line.sub}. ${page.baseDescription || ""}`.replace(/\.\.\s/, ". ").trim(), 500);
   return {
     id: `${page.slug}-v${n}`,
     slug: page.slug,
     path: page.path,
     kind: page.kind,
     imageSku: page.imageSku,
-    angle: line.angle,
-    layout,
-    palette,
-    headline: line.headline,
-    subhead: line.sub,
-    bullets: copy.bullets,
-    title,
-    description,
+    layout: LAYOUTS[(n - 1 + 2 * pageIndex) % LAYOUTS.length],
+    palette: PALETTES[(n - 1 + pageIndex) % PALETTES.length],
+    ...lineFields(page, line),
   };
 }
