@@ -74,10 +74,14 @@ Run `npm run check` in `apps/mobile` after each task; the App preview run must s
    after day 30; ✓ with a time when an answer is logged; an empty-state line.
    Accept: tests for the count and each row's sub line; no red on the list.
 8. **The kit purchase.** react-native-purchases in KeepMyProof's provider shape: a mock provider in
-   the preview (`REVENUECAT_KEY_MISSING` on Buy), one non-consumable `ap_credit_kit`, price from the
-   store only, Restore purchase. Create nothing in RevenueCat or a store.
-   Accept: kit letters open only with the entitlement; the free letter and My letters never lock;
-   no price string outside the mock.
+   the preview (`REVENUECAT_KEY_MISSING` on Buy), one non-consumable product **`ap_credit_kit` at
+   $19.99, paid once (approved 6 Nov 2026)**, the shown price read from the store, Restore purchase.
+   **Switched OFF:** `KIT_SALES_ENABLED = false` in `apps/mobile/src/kit.ts`; Buy returns the named
+   stop `STORE_ACCOUNTS_NOT_READY` until the company store accounts and RevenueCat exist (she signs
+   up for those herself). Create nothing in RevenueCat or a store.
+   Accept: `tests/kit.test.ts` (product id, price, switch off, named stop); kit letters open only
+   with the entitlement; the free letter and My letters never lock; no price string outside the
+   mock and `kit.ts`.
 9. **More.** Links to /privacy/, /not-a-credit-repair-company/, /terms/, /refund-policy/, /contact/;
    "Delete all my letters" apart, asking once.
    Accept: every link answers 200; delete-all asks "Yes, delete" or "Keep" first.
@@ -91,9 +95,11 @@ Run `npm run check` in `apps/mobile` after each task; the App preview run must s
     the bundle id is the placeholder, the preview flag is set or the purchases key is missing.
     Accept: a test per named stop. No agent runs a production build or submits.
 
-## What needs her
+## Her rulings
 
-- **The in-app kit price.** Suggested $19.99 once (the website sells it for $19). Her call.
-- **The store account.** Suggested: the company accounts (Redwood Reserve Holdings LLC) after the
-  D-U-N-S number (w/c 9 Nov), because Apple's guideline 5.1.1(ix) expects financial-field apps from a
-  legal entity. The bundle id `com.approvalprep.app` is a placeholder until then.
+- **In-app Credit Letter Kit: $19.99, paid once. Approved 6 Nov 2026.** Product id `ap_credit_kit`.
+- **Store accounts: the company accounts (Redwood Reserve Holdings LLC), after the D-U-N-S number.
+  Approved 6 Nov 2026.** Why: Apple's guideline 5.1.1(ix) expects financial-field apps from a legal
+  entity. The bundle id `com.approvalprep.app` stays a placeholder until then.
+- She signs up for the store accounts and RevenueCat herself; until then sales stay off
+  (`STORE_ACCOUNTS_NOT_READY`).
