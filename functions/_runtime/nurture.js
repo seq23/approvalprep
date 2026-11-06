@@ -19,7 +19,7 @@
 // what is due, and every send is claimed first-time-only in email_sends, so extra calls are
 // harmless.
 
-export const MAILING_ADDRESS = '3055 Lombard St #471024, San Francisco, CA 94147';
+export const MAILING_ADDRESS = '2055 Lombard St #471024, San Francisco, CA 94147';
 export const SITE = 'https://approvalprep.com';
 export const DEFAULT_FROM = 'ApprovalPrep <hello@approvalprep.com>';
 export const REPLY_TO = 'hello@approvalprep.com';
