@@ -143,6 +143,7 @@
     "validate": "npm run validate:all && npm run validate:demand-backed-pages",
     "validate:admin": "node scripts/validate/admin.mjs",
     "validate:admin-action-links": "node scripts/validate/admin-action-links.mjs",
+    "validate:phone-no-sideways-scroll": "node scripts/validate/phone-no-sideways-scroll.mjs",
     "validate:all": "node scripts/validate/run-all.mjs",
     "validate:amazon-book-landing-pages": "node scripts/validate/amazon-book-landing-pages.mjs",
     "validate:answer-page-subject": "node scripts/validate/answer-page-subject.mjs",
@@ -289,6 +290,7 @@
   },
   "devDependencies": {
     "js-yaml": "^4.3.0",
+    "playwright": "^1.62.1",
     "typescript": "^5.8.3",
     "wrangler": "^4.107.1"
   },

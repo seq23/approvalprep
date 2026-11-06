@@ -279,3 +279,18 @@ button:disabled { opacity: .7; cursor: wait; transform: none; }
 .recommendation-summary .compact-list { margin: 4px 0; }
 .recommendation-summary .button { justify-self: start; margin-top: 4px; }
 .recommendation-summary-band { background: #fff; }
+
+/* Phone layout repairs (6 Nov 2026, found at 390 px; guarded by
+   scripts/validate/phone-no-sideways-scroll.mjs).
+   1. The one-column phone rule for these grids sits in the 740 px block above, but
+      their 4-column rules come later in this file, so the 4 columns won on phones:
+      the homepage ran 459 px wide and /pricing/ 446 px, hidden only by
+      html { overflow-x: hidden } (iOS Safari still pans it sideways).
+   2. .breadcrumb-list { margin: 0 } cancelled .shell's auto margins, so the trail
+      sat flush against the screen edge on every page; the phone rule
+      .secondary-nav { width: 100% } did the same to the "Use cases" row. */
+@media (max-width: 740px) {
+  .offering-summary-grid, .pricing-deck, .pricing-header, .pricing-model-grid, .studio-grid { grid-template-columns: 1fr; }
+  .secondary-nav.shell { width: min(100% - 24px, 1120px); }
+}
+.breadcrumb-list.shell { margin: 0 auto; }
