@@ -412,4 +412,33 @@ details summary { min-height: 44px; }
   .offering-summary-grid, .pricing-deck, .pricing-header, .pricing-model-grid, .studio-grid { grid-template-columns: 1fr; }
   .secondary-nav.shell { width: min(100% - 24px, 1120px); }
 }
+/* Phone header (hostile review, 390 px): one compact row of menu items under the
+   logo instead of a tall stack, so the H1 starts inside the first screen. */
+@media (max-width: 740px) {
+  .nav { gap: 4px 12px; padding: 10px 0 8px; }
+  .nav-links { display: flex; flex-wrap: wrap; gap: 0 18px; width: 100%; }
+  .nav-links a, .nav-menu summary { min-height: 44px; padding: 0; }
+  .nav-menu { width: auto; }
+  .nav-menu summary { width: auto; min-height: 44px; }
+  .nav-menu summary::after { content: " \25BE"; font-size: .8em; }
+  .nav-menu[open] { width: 100%; order: 9; }
+  .nav-menu-panel { position: static; width: 100%; margin: 0 0 8px; }
+  .nav-cta { width: 100%; margin-top: 4px; }
+  .secondary-nav.shell { width: min(100% - 24px, 1120px); margin: 0 auto; padding: 0 0 10px; }
+}
+/* The phone one-column rule for these grids sat above their 4-column rule in this
+   file, so the 4 columns won on phones and the page ran 459 px wide, hidden only
+   by html { overflow-x: hidden } (found 6 Nov 2026 at 390 px). */
+@media (max-width: 740px) {
+  .offering-summary-grid, .pricing-deck, .pricing-header, .pricing-model-grid, .resource-grid, .studio-grid { grid-template-columns: 1fr; }
+  .hero { padding-top: 20px; }
+}
+@media (min-width: 741px) and (max-width: 1060px) {
+  .offering-summary-grid, .pricing-deck { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.supporting-copy.ap-alt-line { font-weight: 700; }
+/* One signal button per screen: the hero panel's own primary reads as secondary. */
+.hero-panel .primary-button { background: var(--paper-raised); color: var(--carbon); border: 2px solid var(--carbon); }
+.hero-panel .primary-button:hover { background: var(--color-soft); }
+/* .breadcrumb-list { margin: 0 } cancelled the shell's auto margins: the trail sat flush to the screen edge. */
 .breadcrumb-list.shell { margin: 0 auto; }
