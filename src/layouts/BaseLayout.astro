@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import SiteFooter from "../components/SiteFooter.astro";
+import Wordmark from "../components/Wordmark.astro";
 import CreditBuilderSlot from "../components/CreditBuilderSlot.astro";
 import DataPrivacyNotice from "../components/DataPrivacyNotice.astro";
 import StructuredData from "../components/StructuredData.astro";
@@ -59,11 +60,15 @@ const documentTitle = fitTitle(String(title));
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={OG_IMAGE.url} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <meta name="theme-color" content="#0f766e" />
+    <meta name="theme-color" content="#F7F3EA" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,700..800&family=Atkinson+Hyperlegible+Next:wght@400;700&family=IBM+Plex+Mono:wght@500&display=swap" />
     <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", ...organizationNode() })}></script>
     {!hasWebPageSchema && <script type="application/ld+json" set:html={JSON.stringify({ "@context": "https://schema.org", "@type": "WebPage", name: documentTitle, description, url: canonicalHref, isPartOf: { "@type": "WebSite", name: "ApprovalPrep", url: canonicalUrl("/") }, publisher: organizationNode() })}></script>}
     <StructuredData schema={schema} />
@@ -71,7 +76,7 @@ const documentTitle = fitTitle(String(title));
   <body>
     <header class="site-header">
       <div class="shell nav">
-        <a class="brand" href="/">ApprovalPrep</a>
+        <Wordmark />
         <nav class="nav-links" aria-label="Primary">
           {primaryNav.map((item) => item.href ? <a href={internalHref(item.href)}>{item.title}</a> : (
             <details class="nav-menu">
