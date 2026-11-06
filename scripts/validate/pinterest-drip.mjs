@@ -94,9 +94,15 @@ function scheduleErrors(list, perDay) {
 // The board-split day (data/pinterest/boards.json split_from) may carry one pin per board:
 // Pinterest refuses to connect a feed with no items, and each new topic board's feed is
 // connected that day. Every other day keeps PINS_PER_DAY.
+// The same rule applies to the live queue and to a simulated refill of it (a refill keeps every
+// released pin, so the split day is still in the list).
 const SPLIT_DAY = JSON.parse(fs.readFileSync("data/pinterest/boards.json", "utf8"));
-scheduleErrors(items, cfg.PINS_PER_DAY).filter((e) => !e.startsWith(`${SPLIT_DAY.split_from}: `) || !e.includes("> PINS_PER_DAY")).forEach(fail);
-if (items.filter((v) => v.releaseDate === SPLIT_DAY.split_from).length > SPLIT_DAY.boards.length) fail(`${SPLIT_DAY.split_from}: more pins than boards on the split day`);
+function queueScheduleErrors(list, perDay) {
+  const out = scheduleErrors(list, perDay).filter((e) => !e.startsWith(`${SPLIT_DAY.split_from}: `) || !e.includes("> PINS_PER_DAY"));
+  if (list.filter((v) => v.releaseDate === SPLIT_DAY.split_from).length > SPLIT_DAY.boards.length) out.push(`${SPLIT_DAY.split_from}: more pins than boards on the split day`);
+  return out;
+}
+queueScheduleErrors(items, cfg.PINS_PER_DAY).forEach(fail);
 
 // 4 + 5. Links and images against the build.
 const pageExists = (p) => fs.existsSync(path.join(dist, p, "index.html"));
@@ -219,7 +225,14 @@ if (sortedDays.length > T + 1) {
   for (const p of pages) if (!coveredPages.has(p.slug)) fail(`refill batch skipped page ${p.slug}`);
   if (added.length && added[0].releaseDate !== addDays(lastDay, 1)) fail(`refill batch starts ${added[0]?.releaseDate}, want the day after the last queued release ${addDays(lastDay, 1)}`);
   const allIds = new Set(); for (const v of q2.items) { if (allIds.has(v.id)) fail(`refill batch reused id ${v.id}`); allIds.add(v.id); }
-  scheduleErrors(q2.items, cfg.PINS_PER_DAY).forEach((e) => fail(`after a refill: ${e}`));
+  queueScheduleErrors(q2.items, cfg.PINS_PER_DAY).forEach((e) => fail(`after a refill: ${e}`));
+  // The split-day allowance is one pin per board, never more, and only on that day.
+  const overSplit = clone(); const sd = overSplit.items.filter((v) => v.releaseDate === SPLIT_DAY.split_from);
+  if (sd.length) { for (let i = sd.length; i <= SPLIT_DAY.boards.length; i++) overSplit.items.push({ ...sd[0], id: `${sd[0].slug}-v9${i}`, slug: `x-split-${i}` }); }
+  if (sd.length && !queueScheduleErrors(overSplit.items, cfg.PINS_PER_DAY).some((e) => e.includes("more pins than boards"))) fail("schedule rule: a split day with more pins than boards was not caught");
+  const overDay = clone(); const d0 = overDay.items.find((v) => v.releaseDate !== SPLIT_DAY.split_from);
+  for (let i = 0; i < cfg.PINS_PER_DAY; i++) overDay.items.push({ ...d0, id: `${d0.slug}-v8${i}`, slug: `x-day-${i}` });
+  if (!queueScheduleErrors(overDay.items, cfg.PINS_PER_DAY).some((e) => e.startsWith(`${d0.releaseDate}: `) && e.includes("> PINS_PER_DAY"))) fail(`schedule rule: ${d0.releaseDate} over PINS_PER_DAY was not caught`);
   for (const v of added) for (const k of ["title", "description"]) if (PRICE.test(v[k]) || v[k].length > (k === "title" ? 100 : 500)) fail(`refill ${v.id}: ${k} breaks the copy rules`);
 }
 const liveLeft = unreleasedCount(queue, new Date());
