@@ -120,7 +120,10 @@ for (const [slug, vs] of bySlug) {
 }
 
 // 3. Schedule: per-day cap, no gap, no page on consecutive days.
-function scheduleErrors(list, perDay) {
+// An approval hold (config.APPROVAL since -> released_at) releases nothing on purpose, so its
+// days are the one allowed gap; any other empty day still fails.
+const holdWindow = (approval) => (approval?.since && approval?.released_at ? { from: approval.since, to: approval.released_at } : null);
+function scheduleErrors(list, perDay, hold = null) {
   const out = [];
   const byDay = new Map();
   for (const v of list) { if (!byDay.has(v.releaseDate)) byDay.set(v.releaseDate, []); byDay.get(v.releaseDate).push(v.slug); }
@@ -134,6 +137,7 @@ function scheduleErrors(list, perDay) {
         // An empty day is allowed only when every page released later was blocked that day:
         // released the day before, or already at SPREAD_MAX in the SPREAD_DAYS window.
         for (let g = addDays(days[i - 1], 1); g < d; g = addDays(g, 1)) {
+          if (hold && g >= hold.from && g <= hold.to) continue;
           const laterSlugs = new Set(list.filter((v) => v.releaseDate > g).map((v) => v.slug));
           const free = [...laterSlugs].filter((slug) => !(byDay.get(addDays(g, -1)) || []).includes(slug) && list.filter((v) => v.slug === slug && v.releaseDate > addDays(g, -SPREAD_DAYS) && v.releaseDate < g).length < SPREAD_MAX);
           if (free.length) out.push(`schedule gap on ${g} while ${free.slice(0, 3).join(", ")} could have been released`);
@@ -149,8 +153,8 @@ function scheduleErrors(list, perDay) {
 // The same rule applies to the live queue and to a simulated refill of it (a refill keeps every
 // released pin, so the split day is still in the list).
 const SPLIT_DAY = JSON.parse(fs.readFileSync("data/pinterest/boards.json", "utf8"));
-function queueScheduleErrors(list, perDay) {
-  const out = scheduleErrors(list, perDay).filter((e) => !e.startsWith(`${SPLIT_DAY.split_from}: `) || !e.includes("> PINS_PER_DAY"));
+function queueScheduleErrors(list, perDay, hold = holdWindow(queue.config.APPROVAL)) {
+  const out = scheduleErrors(list, perDay, hold).filter((e) => !e.startsWith(`${SPLIT_DAY.split_from}: `) || !e.includes("> PINS_PER_DAY"));
   if (list.filter((v) => v.releaseDate === SPLIT_DAY.split_from).length > SPLIT_DAY.boards.length) out.push(`${SPLIT_DAY.split_from}: more pins than boards on the split day`);
   return out;
 }
@@ -169,12 +173,21 @@ function spreadErrors(list) {
 }
 spreadErrors(items).forEach(fail);
 {
+  // The hold allowance covers only the hold's own days.
+  const gap = [{ slug: "fxa", releaseDate: "2031-02-01" }, { slug: "fxb", releaseDate: "2031-02-03" }, { slug: "fxa", releaseDate: "2031-02-05" }];
+  const gapErr = (h) => scheduleErrors(gap, 3, h).filter((e) => e.startsWith("schedule gap"));
+  if (gapErr({ from: "2031-02-01", to: "2031-02-04" }).length) fail(`hold fixture: a gap inside the approval hold was refused: ${gapErr({ from: "2031-02-01", to: "2031-02-04" })[0]}`);
+  if (gapErr(null).length !== 2) fail("hold fixture: gaps with no approval hold were not caught");
+  if (gapErr({ from: "2031-02-01", to: "2031-02-02" }).length !== 1) fail("hold fixture: a gap after the hold ended was not caught");
+  if (holdWindow({ state: "held", since: "2031-02-01" })) fail("hold fixture: a hold with no release date excused a gap");
+}
+{
   // The scheduler keeps the rule even when one page has most of the pins left.
   const fx = [...Array.from({ length: 8 }, (_, i) => ({ id: `fxa-v${i + 1}`, slug: "fxa" })), ...Array.from({ length: 3 }, (_, i) => ({ id: `fxb-v${i + 1}`, slug: "fxb" }))];
   const sch = scheduleVariants(fx, { startDate: "2031-01-01", perDay: 3 });
   if (sch.length !== fx.length) fail(`spread fixture: scheduler placed ${sch.length} of ${fx.length}`);
   if (spreadErrors(sch).length) fail(`spread fixture: ${spreadErrors(sch)[0]}`);
-  if (queueScheduleErrors(sch, 3).length) fail(`spread fixture: ${queueScheduleErrors(sch, 3)[0]}`);
+  if (queueScheduleErrors(sch, 3, null).length) fail(`spread fixture: ${queueScheduleErrors(sch, 3, null)[0]}`);
   const crowded = [{ slug: "fxa", releaseDate: "2031-01-01" }, { slug: "fxa", releaseDate: "2031-01-03" }, { slug: "fxa", releaseDate: "2031-01-05" }];
   if (!spreadErrors(crowded).length) fail("spread fixture: three pins of one page in 5 days passed");
 }
