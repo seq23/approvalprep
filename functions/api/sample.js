@@ -1,5 +1,5 @@
 import { json } from '../_runtime/responses.js';
-import { normalizeEmail, signUpForSample } from '../_runtime/nurture.js';
+import { normalizeEmail, sendFailureStop, signUpForSample } from '../_runtime/nurture.js';
 import { DAY, HOUR, clientIp, sha256, withinLimit } from '../_runtime/rate-limit.js';
 
 // The sample goes to any typed-in address, so sends are capped: 5 an hour per IP, 100 a day overall.
@@ -22,7 +22,11 @@ export async function onRequestPost({ request, env }, fetchImpl = fetch) {
   }
   const magnet = body.magnet === 'credit-starter' ? 'credit-starter' : 'loe';
   const sent = await signUpForSample(env, email, fetchImpl, magnet);
-  if (sent.status === 'STOPPED') console.error(JSON.stringify({ event: 'SAMPLE_NOT_SENT', stop: sent.stop }));
-  return json({ ok: true, emailed: sent.status === 'SENT' || sent.status === 'ALREADY' });
+  const emailed = sent.status === 'SENT' || sent.status === 'ALREADY';
+  // Not emailed is said, never hidden: the page tells the visitor plainly, and the stop is logged by
+  // name. The claim was released, so the next nurture tick retries it and goes red if it fails again.
+  const stop = emailed || sent.status === 'OPTED_OUT' ? null : (sent.stop ?? sendFailureStop(1));
+  if (stop) console.error(JSON.stringify({ event: 'SAMPLE_NOT_SENT', stop }));
+  return json({ ok: true, emailed, ...(stop ? { stop } : {}) });
 }
 export async function onRequestGet() { return json({ ok: false, error: 'POST_REQUIRED' }, 405); }

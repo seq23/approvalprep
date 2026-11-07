@@ -22,6 +22,7 @@ const { heading = "Get a free letter of explanation sample" } = Astro.props;
       <p class="fine">Every email has a one-click unsubscribe link. See the <a href="/privacy/">privacy page</a>.</p>
     </form>
     <p class="notice" data-sample-done hidden>Sent. You can also <a href="/samples/letter-of-explanation-sample.pdf">open the sample now</a>.</p>
+    <p class="notice warning-card" role="alert" data-sample-unsent hidden>The email did not send, so it is not in your inbox. <a href="/samples/letter-of-explanation-sample.pdf">Open the sample now</a>; we have been told and will fix it.</p>
   </div>
 </div></section>
 <script>
@@ -38,7 +39,9 @@ const { heading = "Get a free letter of explanation sample" } = Astro.props;
         const res = await fetch("/api/sample", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ email: data.get("email"), consent: true, company: data.get("company") || undefined }) });
         const body = await res.json().catch(() => ({}));
         if (!res.ok || !body.ok) { if (error) error.textContent = body.error || "Something went wrong. Please try again."; return; }
-        form.hidden = true; if (done) done.hidden = false;
+        form.hidden = true;
+        const shown = body.emailed === true ? done : root.querySelector<HTMLElement>("[data-sample-unsent]");
+        if (shown) shown.hidden = false;
       } catch { if (error) error.textContent = "Could not reach the server. Please try again."; }
     });
   }

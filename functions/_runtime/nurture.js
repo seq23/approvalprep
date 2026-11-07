@@ -222,6 +222,10 @@ export function dueStep(steps, sentKinds, lastSentAt, now) {
   return next;
 }
 
+/** The last Resend refusal in this isolate, named for the stop line. */
+let lastSendFailure = null;
+export const sendFailureStop = (n) => `NAMED STOP [RESEND_SEND_FAILED] ${n} email(s) not sent (${lastSendFailure ?? 'unknown error'}); check RESEND_API_KEY and the sending domain on the approvalprep Pages project`;
+
 async function sendOnce(env, email, hash, step, fetchImpl, scheduledAt = null) {
   const db = env.PRODUCTS_DB;
   const claim = await db.prepare('INSERT OR IGNORE INTO email_sends (email_hash, kind) VALUES (?, ?)').bind(hash, step.kind).run();
@@ -240,7 +244,10 @@ async function sendOnce(env, email, hash, step, fetchImpl, scheduledAt = null) {
   const body = await res.json().catch(() => ({}));
   if (!res.ok) {
     await db.prepare('DELETE FROM email_sends WHERE email_hash = ? AND kind = ?').bind(hash, step.kind).run(); // retry next run
-    console.error(JSON.stringify({ event: 'NURTURE_SEND_FAILED', kind: step.kind, status: res.status }));
+    // Rule 0 (7 Nov 2026: every send had failed with Resend 401 while the site said "on its way"):
+    // the failure is named, with Resend's own words, so the run can go red on it.
+    lastSendFailure = `Resend HTTP ${res.status}${body?.message ? `: ${String(body.message).slice(0, 160)}` : ''}`;
+    console.error(JSON.stringify({ event: 'NURTURE_SEND_FAILED', kind: step.kind, status: res.status, message: body?.message ?? null }));
     return 'FAILED';
   }
   await db.prepare('UPDATE email_sends SET provider_message_id = ? WHERE email_hash = ? AND kind = ?').bind(body.id ?? null, hash, step.kind).run();
@@ -302,16 +309,20 @@ export async function runNurture(env, now = Date.now(), fetchImpl = fetch) {
     byHash.set(s.email_hash, e);
   }
   const prices = await livePrices(db);
-  let sent = 0;
+  let sent = 0; let failed = 0;
   for (const r of (await db.prepare('SELECT email, source FROM email_signups ORDER BY created_at').bind().all()).results ?? []) {
     if (sent >= MAX_PER_RUN) break;
     const hash = await emailHash(r.email);
     if (optouts.has(hash) || buyers.has(hash)) continue; // stop on unsubscribe or purchase
     const e = byHash.get(hash) ?? { kinds: new Set(), last: null };
     const step = dueStep(sequenceFor(r.source, prices), e.kinds, e.last, now);
-    if (step && (await sendOnce(env, r.email, hash, step, fetchImpl)) === 'SENT') { sent++; e.kinds.add(step.kind); e.last = now; byHash.set(hash, e); }
+    if (!step) continue;
+    const result = await sendOnce(env, r.email, hash, step, fetchImpl);
+    if (result === 'SENT') { sent++; e.kinds.add(step.kind); e.last = now; byHash.set(hash, e); }
+    else if (result === 'FAILED') failed++;
   }
-  return { stop: null, sent };
+  // A run where any due email failed is a named stop (the tick answers 503 and the workflow goes red).
+  return { stop: failed ? sendFailureStop(failed) : null, sent, failed };
 }
 
 /** Unsubscribe: record the opt-out by hash. */
