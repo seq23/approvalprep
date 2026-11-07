@@ -28,6 +28,7 @@ import GuidePlaybook from "../components/GuidePlaybook.astro";
 import LegalPolicyPage from "../components/LegalPolicyPage.astro";
 import RelatedContent from "../components/RelatedContent.astro";
 import SampleSignup from "../components/SampleSignup.astro";
+import CreditStarterSignup from "../components/CreditStarterSignup.astro";
 import AfterPurchase from "../components/AfterPurchase.astro";
 import FoldedPages from "../components/FoldedPages.astro";
 import { routeAnswers } from "../lib/routeAnswers";
@@ -142,6 +143,7 @@ const childRoutes = manifest.routes
       </aside>
     )}
     {isCredit && <div class="hero-boundary"><CreditBoundaryExplainer /></div>}
+    {isCredit && !isLegal && !isDownload && <CreditStarterSignup inline />}
     {isDownload && (
       <div class="checkout-success-hero" aria-label="Checkout success confirmation">
         <div class="success-badge" aria-hidden="true">✓</div>
@@ -292,7 +294,7 @@ const childRoutes = manifest.routes
       renders it without ever placing it. The guides, checklists and kits it points at
       were therefore reachable only from the sitemap. */}
   <FoldedPages path={route.path} />
-  {!isLegal && !isDownload && <SampleSignup />}
+  {!isLegal && !isDownload && !isCredit && <SampleSignup />}
   <RelatedContent path={route.path} title={`Keep preparing after ${route.title}`} />
   {!isLegal && <FinalCTA primary={primaryCtaWithPrice} secondary={copy.secondaryCta} href={internalHref(ctaHref)} secondaryHref="/pricing" primarySku={primarySku} />}
   {/* FAQPage and HowTo describe the FAQBlock and HowItWorks rendered in the guide

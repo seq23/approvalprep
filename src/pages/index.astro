@@ -13,6 +13,7 @@ import CreditBoundaryExplainer from "../components/CreditBoundaryExplainer.astro
 import NextStepsExplainer from "../components/NextStepsExplainer.astro";
 import DataPrivacyNotice from "../components/DataPrivacyNotice.astro";
 import FreeStudioCTA from "../components/FreeStudioCTA.astro";
+import CreditStarterSignup from "../components/CreditStarterSignup.astro";
 import RecommendationSummary from "../components/RecommendationSummary.astro";
 import OfferingUniverse from "../components/OfferingUniverse.astro";
 import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComparison, offeringCategories } from "../data/content";
@@ -58,6 +59,14 @@ const homeSchema = [
         <a class="button secondary secondary-button" href={internalHref("/pricing/#credit-letter-kit")}>Get DIY credit letters — $19</a>
         <a class="ap-textlink" href={internalHref("/pricing")}>Compare all kits and prices</a>
       </div>
+      {/* Three reasons row (her yes, 7 Nov 2026: "2 yes"; her words of 3 Nov). Each opens a page that exists. */}
+      <div class="ap-reasons" aria-label="Which one sounds like you?">
+        <p class="eyebrow">Which one sounds like you?</p>
+        <a class="ap-reason" href={internalHref("/not-a-credit-repair-company/")}><strong>Tired of credit repair scams?</strong><span>What a company may not charge you before the work is done, and what you can do free. Open ›</span></a>
+        <a class="ap-reason" href="#company-or-yourself"><strong>Credit repair costs too much?</strong><span>Credit Saint: $79.99 to $139.99 a month (its own site, read 6 November 2026). The Credit Letter Kit: $19 once. Open ›</span></a>
+        <a class="ap-reason" href={internalHref("/complete-approvalprep-bundle/")}><strong>Rather do it yourself?</strong><span>Download the bundle: letters, checklists and a PDF guide. You send them yourself. Open ›</span></a>
+      </div>
+      <CreditStarterSignup inline />
       <div class="ap-sheet" role="img" aria-label="Example: the first lines of a dispute letter drafted in the Letter Studio">
         <p class="eyebrow">Example · your letter, first draft</p>
         <p>I am writing to dispute one item on my credit report.</p>

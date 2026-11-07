@@ -26,6 +26,65 @@ export const REPLY_TO = 'hello@approvalprep.com';
 export const SAMPLE_URL = `${SITE}/samples/letter-of-explanation-sample.pdf`;
 export const SAMPLE_SOURCE = 'sample:letter-of-explanation';
 export const CONSENT_TEXT = 'Email me the free sample, then a few short emails about the ApprovalPrep kits (one every few days at most). I can unsubscribe at any time.';
+// The free credit starter (her yes, 7 Nov 2026: "1A yes"): "Before you pay a credit repair
+// company", a checklist + one dispute letter frame, shown on the page at once and emailed.
+// Its own short series (cs0-cs2), chosen by the signup's source; self-help only (R-ADV-13).
+export const STARTER_SOURCE = 'starter:credit-repair';
+export const STARTER_CONSENT_TEXT = 'Email me the free starter, then a few short emails about the ApprovalPrep kits (one every few days at most). I can unsubscribe at any time.';
+export const STARTER_CHECKLIST = [
+  'Get your credit reports free at annualcreditreport.com, the only official site for free reports.',
+  'Disputing an error is free: the credit bureau must investigate it at no charge (15 U.S.C. 1681i).',
+  'A credit repair company may not charge you before the promised work is done (15 U.S.C. 1679b).',
+  'Accurate information can lawfully stay on your report (most negative items for up to 7 years, 15 U.S.C. 1681c), whatever a company charges.',
+  'Use the letter frame below for one error at a time, attach a copy of your proof, and keep a copy of what you send.'
+];
+export const STARTER_LETTER = [
+  '[Your name] · [Your address] · [Date]',
+  '[Credit bureau name and its dispute address]',
+  'I am writing to dispute one item on my credit report. [Account name, last 4 digits] shows [what the report says]. This is wrong because [what is true]. A copy of [your proof] is attached.',
+  'Please investigate this item and correct it or remove it if it cannot be verified, and send me the results.',
+  '[Your signature]'
+];
+export const SELF_HELP_LINE = 'Self-help templates. Not legal or financial advice. We do not contact bureaus or creditors for you.';
+
+/** The credit starter series: the starter at once, then two kit emails, one every 3 days. */
+export function starterSequence(prices = {}) {
+  return [
+    {
+      kind: 'cs0', subject: 'Your free credit repair starter',
+      heading: 'Before you pay a credit repair company',
+      paragraphs: [
+        ...STARTER_CHECKLIST.map((line, i) => `${i + 1}. ${line}`),
+        'Your dispute letter frame (fill in the brackets with your true facts):',
+        ...STARTER_LETTER,
+        `You fill it in and you send it yourself. ${SELF_HELP_LINE}`
+      ],
+      cta: { label: 'Draft it free in the Letter Studio', url: `${SITE}/letter-writing-studio/` }
+    },
+    {
+      kind: 'cs1', subject: 'Every credit letter, ready to fill in',
+      heading: `The Credit Letter Kit${price(prices, 'credit-letter-kit')}`,
+      paragraphs: [
+        'The starter covers one error. The Credit Letter Kit has templates for a dispute, a goodwill request, a debt validation request and a follow-up to the bureau, plus a credit report error checklist.',
+        `Paid once, no monthly fee. You write and send them yourself; nothing is promised about what a bureau or creditor decides. ${SELF_HELP_LINE}`
+      ],
+      cta: { label: 'See the Credit Letter Kit', url: `${SITE}/credit-letter-kit/` }
+    },
+    {
+      kind: 'cs2', subject: 'Every ApprovalPrep kit in one download',
+      heading: `The Complete ApprovalPrep Bundle${price(prices, 'complete-approvalprep-bundle')}`,
+      paragraphs: [
+        'The bundle has every kit: credit letters, letters of explanation, income and employment, rental, loan prep, business funding and life admin.',
+        'It suits anyone facing more than one application this year. This is the last email in this short series.'
+      ],
+      cta: { label: 'See the Complete Bundle', url: `${SITE}/pricing/` }
+    }
+  ];
+}
+
+/** Which series an address gets, from the source it signed up with. */
+export const sequenceFor = (source, prices = {}) => (source === STARTER_SOURCE ? starterSequence(prices) : sequence(prices));
+
 export const DAYS_BETWEEN = 3;
 // Resend schedules at most 72 hours ahead; 71 hours keeps a margin.
 export const REVIEW_ASK_AFTER_HOURS = 71;
@@ -134,7 +193,7 @@ const esc = (v) => String(v).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&
 
 /** One email, html + text, both with the unsubscribe link and the mailing address. */
 export function renderEmail(step, unsubscribe) {
-  const footer = 'You are getting this because you asked for a free sample or bought from ApprovalPrep.';
+  const footer = 'You are getting this because you asked for a free sample or starter, or bought from ApprovalPrep.';
   const html = `<div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;color:#1f2933;line-height:1.55"><h1 style="font-size:22px">${esc(step.heading)}</h1>${step.paragraphs.map((p) => `<p>${esc(p)}</p>`).join('')}${step.cta ? `<p><a href="${esc(step.cta.url)}" style="display:inline-block;background:#1f2933;color:#fff;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:700">${esc(step.cta.label)}</a></p>` : ''}<hr style="border:none;border-top:1px solid #ddd;margin:28px 0 12px"><p style="font-size:12px;color:#777">${esc(footer)} <a href="${esc(unsubscribe)}">Unsubscribe</a> (one click).<br>ApprovalPrep, ${esc(MAILING_ADDRESS)}</p></div>`;
   const text = `${step.heading}\n\n${step.paragraphs.join('\n\n')}${step.cta ? `\n\n${step.cta.label}: ${step.cta.url}` : ''}\n\n--\n${footer}\nUnsubscribe (one click): ${unsubscribe}\nApprovalPrep, ${MAILING_ADDRESS}\n`;
   return { html, text };
@@ -159,7 +218,7 @@ const parseSql = (v) => Date.parse(`${String(v).replace(' ', 'T')}Z`);
 export function dueStep(steps, sentKinds, lastSentAt, now) {
   const next = steps.find((s) => !sentKinds.has(s.kind));
   if (!next) return null;
-  if (next.kind !== 'seq0' && lastSentAt != null && now - lastSentAt < DAYS_BETWEEN * DAY) return null;
+  if (next.kind !== 'seq0' && next.kind !== 'cs0' && lastSentAt != null && now - lastSentAt < DAYS_BETWEEN * DAY) return null;
   return next;
 }
 
@@ -195,17 +254,18 @@ async function livePrices(db) {
   } catch { return {}; }
 }
 
-/** Store a typed-in sign-up and send the sample at once. */
-export async function signUpForSample(env, email, fetchImpl = fetch) {
+/** Store a typed-in sign-up and send the free item at once (magnet: 'loe' sample or 'credit-starter'). */
+export async function signUpForSample(env, email, fetchImpl = fetch, magnet = 'loe') {
+  const starter = magnet === 'credit-starter';
   const stop = nurtureStop(env);
   if (stop && !env?.PRODUCTS_DB) return { status: 'STOPPED', stop };
   const db = env.PRODUCTS_DB;
   await ensureTables(db);
-  await db.prepare('INSERT INTO email_signups (email, consent_text, source) VALUES (?, ?, ?) ON CONFLICT(email) DO NOTHING').bind(email, CONSENT_TEXT, SAMPLE_SOURCE).run();
+  await db.prepare('INSERT INTO email_signups (email, consent_text, source) VALUES (?, ?, ?) ON CONFLICT(email) DO NOTHING').bind(email, starter ? STARTER_CONSENT_TEXT : CONSENT_TEXT, starter ? STARTER_SOURCE : SAMPLE_SOURCE).run();
   if (stop) return { status: 'STOPPED', stop };
   const hash = await emailHash(email);
   if (await db.prepare('SELECT 1 FROM email_optouts WHERE email_hash = ?').bind(hash).first()) return { status: 'OPTED_OUT' };
-  return { status: await sendOnce(env, email, hash, sequence()[0], fetchImpl) };
+  return { status: await sendOnce(env, email, hash, (starter ? starterSequence() : sequence())[0], fetchImpl) };
 }
 
 /**
@@ -241,14 +301,14 @@ export async function runNurture(env, now = Date.now(), fetchImpl = fetch) {
     e.kinds.add(s.kind); e.last = Math.max(e.last ?? 0, parseSql(s.sent_at));
     byHash.set(s.email_hash, e);
   }
-  const steps = sequence(await livePrices(db));
+  const prices = await livePrices(db);
   let sent = 0;
-  for (const r of (await db.prepare('SELECT email FROM email_signups ORDER BY created_at').bind().all()).results ?? []) {
+  for (const r of (await db.prepare('SELECT email, source FROM email_signups ORDER BY created_at').bind().all()).results ?? []) {
     if (sent >= MAX_PER_RUN) break;
     const hash = await emailHash(r.email);
     if (optouts.has(hash) || buyers.has(hash)) continue; // stop on unsubscribe or purchase
     const e = byHash.get(hash) ?? { kinds: new Set(), last: null };
-    const step = dueStep(steps, e.kinds, e.last, now);
+    const step = dueStep(sequenceFor(r.source, prices), e.kinds, e.last, now);
     if (step && (await sendOnce(env, r.email, hash, step, fetchImpl)) === 'SENT') { sent++; e.kinds.add(step.kind); e.last = now; byHash.set(hash, e); }
   }
   return { stop: null, sent };
