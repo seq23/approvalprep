@@ -88,7 +88,11 @@ export function needsRefill(queue, now = new Date()) {
  * each day takes the pages with the most variants left, skipping yesterday's.
  * Returns a new array in release order.
  */
-export function scheduleVariants(variants, { startDate, perDay = 1, prevDaySlugs = [] }) {
+// Spread rule (6 Nov 2026 Pinterest review: one page had up to 9 queued pins and the 609 letter
+// ran again and again): at most SPREAD_MAX pins of one page in any SPREAD_DAYS-day window.
+export const SPREAD_MAX = 2;
+export const SPREAD_DAYS = 7;
+export function scheduleVariants(variants, { startDate, perDay = 1, prevDaySlugs = [], history = [] }) {
   const byPage = new Map();
   for (const v of variants) {
     if (!byPage.has(v.slug)) byPage.set(v.slug, []);
@@ -98,13 +102,21 @@ export function scheduleVariants(variants, { startDate, perDay = 1, prevDaySlugs
   const out = [];
   let yesterday = new Set(prevDaySlugs);
   let day = startDate;
+  // history: pins already dated (slug + releaseDate) that count toward the spread window.
+  const placed = history.map((v) => ({ slug: v.slug, releaseDate: v.releaseDate }));
+  const inWindow = (slug, d) => placed.filter((p) => p.slug === slug && p.releaseDate > addDays(d, -SPREAD_DAYS) && p.releaseDate <= d).length;
+  let idle = 0;
   while ([...byPage.values()].some((l) => l.length)) {
     const candidates = order
-      .filter((s) => byPage.get(s).length && !yesterday.has(s))
+      .filter((s) => byPage.get(s).length && !yesterday.has(s) && inWindow(s, day) < SPREAD_MAX)
       .sort((a, b) => byPage.get(b).length - byPage.get(a).length || order.indexOf(a) - order.indexOf(b));
-    if (!candidates.length) throw new Error(`scheduleVariants: cannot place a variant on ${day} without repeating a page from the day before (pages left: ${order.filter((s) => byPage.get(s).length).join(", ")})`);
+    // A day every page left is blocked on (by yesterday or the spread rule) stays empty:
+    // fewer pins, never a page crowded. SPREAD_DAYS empty days in a row cannot happen unless
+    // the rule is broken, so that throws.
+    if (!candidates.length && ++idle > SPREAD_DAYS) throw new Error(`scheduleVariants: nothing placeable for ${SPREAD_DAYS} days from ${day} (pages left: ${order.filter((s) => byPage.get(s).length).join(", ")})`);
+    if (candidates.length) idle = 0;
     const picked = candidates.slice(0, perDay);
-    for (const s of picked) out.push({ ...byPage.get(s).shift(), releaseDate: day });
+    for (const s of picked) { out.push({ ...byPage.get(s).shift(), releaseDate: day }); placed.push({ slug: s, releaseDate: day }); }
     yesterday = new Set(picked);
     day = addDays(day, 1);
   }
@@ -164,8 +176,9 @@ export function dueBoardEntries(feed, queue, boards, board, now = new Date()) {
   const drip = (queue?.items || [])
     .filter((v) => v.releaseDate <= today && boards.inFeed(board, boards.boardFor(v.path, v.headline), v.releaseDate))
     .map((v) => ({
-      guid: `approvalprep-pin-${v.id}`, title: v.releaseDate >= boards.SPLIT_FROM ? pinTitle(v.title, board) : v.title,
-      description: v.releaseDate >= boards.SPLIT_FROM ? pinDescription(v.description, v.kind) : v.description,
+      // Paper pins carry a gated, search-led title and a finished description: used as written.
+      guid: `approvalprep-pin-${v.id}`, title: v.format === "paper" || v.releaseDate < boards.SPLIT_FROM ? v.title : pinTitle(v.title, board),
+      description: v.format === "paper" || v.releaseDate < boards.SPLIT_FROM ? v.description : pinDescription(v.description, v.kind),
       link: variantLink(feed, v), image: `${SITE}${pinImagePath(v.id)}`, pubDate: variantPubDate(v.releaseDate),
     }));
   return [...drip, ...launch]

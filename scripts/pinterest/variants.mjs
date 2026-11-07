@@ -10,9 +10,19 @@
 // Each headline carries an ANGLE; the image treatment (LAYOUTS x PALETTES) rotates
 // independently, so every variant differs in headline, angle and look.
 
-export const LAYOUTS = ["band-top", "art-top", "checklist", "card", "split"];
-export const PALETTES = ["teal", "navy", "plum", "forest", "brick", "slate"];
-export const ANGLES = ["problem-first", "checklist-first", "deadline-first", "whats-inside", "question-first", "self-service", "mistake-first", "situation-first"];
+import fs from "node:fs";
+import path from "node:path";
+import { PAPER_LAYOUTS, FORMAT_OF, ACCENTS } from "./paper_layouts.mjs";
+import { PIN_COPY } from "./pin_copy.mjs";
+import { pinBoards } from "../../src/lib/pinfeed-core.mjs";
+
+// LEGACY_* draw the kit's product box (scripts/build_pin_images.mjs). They stay only so the
+// pins already released keep their images; the quality gate refuses them on any new pin.
+export const LEGACY_LAYOUTS = ["band-top", "art-top", "checklist", "card", "split"];
+export const LEGACY_PALETTES = ["teal", "navy", "plum", "forest", "brick", "slate"];
+export const LAYOUTS = [...LEGACY_LAYOUTS, ...PAPER_LAYOUTS];
+export const PALETTES = [...LEGACY_PALETTES, ...Object.keys(ACCENTS)];
+export const ANGLES = ["problem-first", "checklist-first", "deadline-first", "whats-inside", "question-first", "self-service", "mistake-first", "situation-first", "letter-first", "list-first", "photo-first"];
 export const VARIANTS_PER_PAGE_PER_BATCH = 6;
 
 const H = (angle, headline, sub) => ({ angle, headline, sub });
@@ -224,7 +234,68 @@ export function lineFields(page, line) {
   };
 }
 
-export function buildVariant(page, n, pageIndex) {
+let boardsCache = null;
+export const boards = () => (boardsCache ||= pinBoards(JSON.parse(fs.readFileSync(path.join(process.cwd(), "data/pinterest/boards.json"), "utf8"))));
+const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+
+/** Paper-format copy for a page with no PIN_COPY entry: only the page's own name and includes. Null when it has too little to show. */
+export function derivedPaperCopy(page) {
+  if (page.kind !== "kit") return null;
+  const items = (page.includes || []).map((b) => cap(String(b).trim())).filter((b) => b.length <= 40).slice(0, 8);
+  if (items.length < 5) return null;
+  const base = String(page.name || titleCase(page.slug)).replace(/\s*(kit|bundle)$/i, "").trim();
+  const phrase = `${base} template`.toLowerCase();
+  return {
+    link: "kit", derived: true, phrases: [phrase],
+    headlines: [`${titleCase(base)} Templates`, `${titleCase(base)} Template Checklist`],
+    titles: [`${cap(phrase)}s: what to fill in`, `${cap(phrase)} checklist`, `${cap(phrase)}s by situation`, `${cap(phrase)}s you send yourself`, `${cap(phrase)}: what each one covers`, `${cap(phrase)}s before you apply`],
+    description: clip(`${cap(base)} templates: ${items.join(", ").toLowerCase()}. You fill them in and send them yourself.`, 480),
+    letters: [], checklist: items,
+  };
+}
+export const paperCopyFor = (page) => PIN_COPY[page.slug] || derivedPaperCopy(page);
+
+/** Every distinct look a page's paper pin can take, in rotation order. Each card (a letter, or
+ * the checklist) brings its own headlines and titles, so image and title always match. */
+export function paperSlots(page) {
+  const copy = paperCopyFor(page);
+  if (!copy) return [];
+  const cards = [];
+  if ((copy.checklist || []).length >= 5) cards.push({ fmt: "list", items: copy.checklist.slice(0, 8), headlines: copy.listHeadlines || copy.headlines, titles: copy.listTitles || copy.titles });
+  (copy.letters || []).forEach((l, i) => cards.push({ fmt: "letter", letter: { re: l.re, greeting: l.greeting, body: l.body }, headlines: l.headlines || [copy.headlines[i % copy.headlines.length], ...copy.headlines.filter((_, j) => j !== i % copy.headlines.length)], titles: l.titles || copy.titles }));
+  const per = cards.map((c) => PAPER_LAYOUTS.filter((l) => FORMAT_OF[l] === c.fmt).flatMap((layout) => c.headlines.map((headline) => ({ layout, headline, titles: c.titles, letter: c.letter, items: c.items }))));
+  // Round-robin across cards, alternating layouts within each.
+  const out = [];
+  for (let k = 0; per.some((p) => k < p.length); k++) for (const p of per) if (k < p.length) out.push(p[Math.floor(k / 2) + (k % 2) * Math.ceil(p.length / 2)] || p[k]);
+  return [...new Map(out.map((x) => [`${x.layout}|${x.headline}|${x.letter?.re || ""}`, x])).values()];
+}
+
+/** The copy and look fields of a paper pin (title index and slot chosen separately, so the gate can swap either). */
+export function paperFields(page, titleIndex, slot) {
+  const copy = paperCopyFor(page);
+  const board = boards().boardFor(page.path, slot.headline);
+  const cta = copy.link === "kit" ? "See the full template and what to fill in." : "Read the guide for the full checklist.";
+  const titles = slot.titles || copy.titles;
+  const f = {
+    format: "paper", angle: FORMAT_OF[slot.layout] === "letter" ? "letter-first" : "list-first", layout: slot.layout, palette: board.accent,
+    headline: slot.headline, subhead: FORMAT_OF[slot.layout] === "letter" ? slot.letter.re : slot.items[0],
+    title: clip(titles[titleIndex % titles.length], 100),
+    description: clip(`${copy.description} ${cta}`, 500),
+  };
+  if (slot.letter) f.letter = slot.letter;
+  if (slot.items) f.items = slot.items;
+  return f;
+}
+
+/** The n-th paper pin (1-based) for a page, or null when the page has nothing to show. */
+export function buildPaperVariant(page, n) {
+  const slots = paperSlots(page);
+  if (!slots.length) return null;
+  return { id: `${page.slug}-v${n}`, slug: page.slug, path: page.path, kind: page.kind, imageSku: page.imageSku, ...paperFields(page, n - 1, slots[(n - 1) % slots.length]) };
+}
+
+/** Legacy product-box variant (kept for the record of released pins; never scheduled again). */
+export function buildLegacyVariant(page, n, pageIndex) {
   const copy = copyFor(page);
   const line = copy.lines[(n - 1) % copy.lines.length];
   return {
@@ -233,8 +304,11 @@ export function buildVariant(page, n, pageIndex) {
     path: page.path,
     kind: page.kind,
     imageSku: page.imageSku,
-    layout: LAYOUTS[(n - 1 + 2 * pageIndex) % LAYOUTS.length],
-    palette: PALETTES[(n - 1 + pageIndex) % PALETTES.length],
+    layout: LEGACY_LAYOUTS[(n - 1 + 2 * pageIndex) % LEGACY_LAYOUTS.length],
+    palette: LEGACY_PALETTES[(n - 1 + pageIndex) % LEGACY_PALETTES.length],
     ...lineFields(page, line),
   };
 }
+
+/** What the refill schedules: always the paper format. */
+export const buildVariant = (page, n) => buildPaperVariant(page, n);

@@ -21,12 +21,18 @@
 //   --start-today  re-date every unreleased pin at PINS_PER_DAY from today, giving
 //                  the new topic boards with the most pins waiting today's open slots
 //                  (used once, 1 Nov 2026, when the pace went 1 -> 3 a day).
+//
+// Approval hold (6 Nov 2026): while config.APPROVAL.state is "held", every unreleased pin
+// is moved to queue.held (no release date; no feed shows it), new question pins go there too,
+// and no batch is appended, so nothing new posts before the owner's yes. The held pins are
+// redrawn and gated like any other. releaseHeld() (scripts/pinterest/release_held.mjs, or the
+// workflow input release_held) dates them from tomorrow and ends the hold.
 import fs from "node:fs";
 import path from "node:path";
 import { loadPinfeed, loadQueue, QUEUE_FILE, chicagoDate, addDays, scheduleVariants, unreleasedCount, needsRefill, previewImagePath, pinBoards } from "../../src/lib/pinfeed.mjs";
 import { applyFallback, applyPause, decidePace } from "./pace.mjs";
 import { paidSkusFrom } from "../../src/lib/skuForRoute.mjs";
-import { buildVariant, VARIANTS_PER_PAGE_PER_BATCH } from "./variants.mjs";
+import { buildVariant, VARIANTS_PER_PAGE_PER_BATCH, boards as pinBoardsCfg } from "./variants.mjs";
 import { gateQueue } from "./quality.mjs";
 
 const root = process.cwd();
@@ -81,9 +87,9 @@ export function appendBatch(queue, pages, now = new Date()) {
   pages.forEach((page, pageIndex) => {
     const used = items.filter((v) => v.slug === page.slug).map((v) => Number(v.id.split("-v").pop()));
     const next = used.length ? Math.max(...used) + 1 : 1;
-    for (let n = next; n < next + VARIANTS_PER_PAGE_PER_BATCH; n++) fresh.push(buildVariant(page, n, pageIndex));
+    for (let n = next; n < next + VARIANTS_PER_PAGE_PER_BATCH; n++) { const v = buildVariant(page, n, pageIndex); if (v) fresh.push(v); }
   });
-  const scheduled = scheduleVariants(fresh, { startDate, perDay, prevDaySlugs });
+  const scheduled = scheduleVariants(fresh, { startDate, perDay, prevDaySlugs, history: items });
   items.push(...scheduled);
   return scheduled;
 }
@@ -100,15 +106,26 @@ export function questionPins(queue, today) {
     if (have.has(id)) continue;
     const file = path.join(root, "questions", slug, "index.html");
     if (!fs.existsSync(file)) continue;
-    const meta = (fs.readFileSync(file, "utf8").match(/<meta\s+name="description"\s+content="([^"]*)"/i)?.[1] || "").replace(/&amp;/g, "&").replace(/&#39;|&apos;/g, "'").replace(/&quot;/g, '"').trim();
+    const html = fs.readFileSync(file, "utf8");
+    // Either attribute order: the search-loop pages write content= before name= (until 6 Nov
+    // 2026 this only matched name-first, so no question page ever became a pin).
+    const metaTag = html.match(/<meta\b[^>]*\bname="description"[^>]*>/i)?.[0] || "";
+    const meta = (metaTag.match(/\bcontent="([^"]*)"/i)?.[1] || "").replace(/&amp;/g, "&").replace(/&#39;|&apos;/g, "'").replace(/&quot;/g, '"').trim();
     const q = String(p.query || slug.replace(/-/g, " ")).trim().replace(/\?*$/, "");
     const question = `${q.charAt(0).toUpperCase()}${q.slice(1)}${/^(how|what|when|where|why|who|which|can|do|does|is|are|should|will)\b/i.test(q) ? "?" : ""}`;
     if (!meta || question.length > 90) continue;
-    const n = [...slug].reduce((a, c) => a + c.charCodeAt(0), 0);
+    // Paper format: the page's own checklist lines (its list items), 5 to 8 of them; a page
+    // with fewer has nothing to show on a pin and is skipped (named below).
+    const main = html.match(/<main[\s\S]*?<\/main>/i)?.[0] || html;
+    const items = [...main.matchAll(/<li[^>]*>([\s\S]*?)<\/li>/gi)].map((m) => m[1].replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&#39;|&apos;/g, "'").replace(/\s+/g, " ").trim()).filter((x) => x.length >= 4 && x.length <= 40);
+    if (items.length < 5) { console.log(`[pinterest-refill] QUESTION_PIN_SKIPPED ${p.route}: ${items.length} short checklist lines on the page, 5 needed`); continue; }
+    const board = pinBoardsCfg().boardFor(`/questions/${slug}/`, q);
+    const phrase = q.charAt(0).toUpperCase() + q.slice(1);
+    const headline = phrase.split(/\s+/).length <= 7 ? phrase.replace(/\b\w/g, (c) => c.toUpperCase()) : phrase.split(/\s+/).slice(0, 7).join(" ");
     out.push({
-      id, slug: `q-${slug}`, path: `/questions/${slug}/`, kind: "question", imageSku: "complete-approvalprep-bundle",
-      angle: "question-first", layout: "band-top", palette: ["teal", "navy", "plum", "forest", "brick", "slate"][n % 6],
-      headline: question, subhead: "The short answer + what to prepare", bullets: ["Plain answer", "Sources", "Next steps"],
+      id, slug: `q-${slug}`, path: `/questions/${slug}/`, kind: "question", imageSku: "complete-approvalprep-bundle", format: "paper",
+      angle: "list-first", layout: "paper-list", palette: board.accent, phrases: [q.toLowerCase()],
+      headline, subhead: items[0], items: items.slice(0, 8),
       title: question.slice(0, 100), description: meta.slice(0, 440), releaseDate: today,
     });
   }
@@ -130,7 +147,7 @@ export async function gateAndReschedule(queue, today) {
     const later = queue.items.filter((v) => v.releaseDate > today).sort((a, b) => (a.releaseDate < b.releaseDate ? -1 : a.releaseDate > b.releaseDate ? 1 : 0));
     queue.items = queue.items.filter((v) => v.releaseDate <= today);
     const prev = queue.items.filter((v) => v.releaseDate === today).map((v) => v.slug);
-    queue.items.push(...scheduleVariants(later, { startDate: addDays(today, 1), perDay: Number(queue.config.PINS_PER_DAY), prevDaySlugs: prev }));
+    queue.items.push(...scheduleVariants(later, { startDate: addDays(today, 1), perDay: Number(queue.config.PINS_PER_DAY), prevDaySlugs: prev, history: queue.items }));
   }
   for (const w of all.reworked) console.log(`[pin-quality] reworked ${w.id}: ${w.from} -> ${w.to} (${w.reason})`);
   if (all.held.length) {
@@ -139,6 +156,29 @@ export async function gateAndReschedule(queue, today) {
     if (process.env.GITHUB_ACTIONS) console.log(`::warning title=PIN_QUALITY_HOLD::${note}`);
   }
   return all;
+}
+
+export const isHeld = (queue) => queue?.config?.APPROVAL?.state === "held";
+
+/** Approval hold: every unreleased pin leaves the schedule into queue.held. Returns how many moved. */
+export function holdUnreleased(queue, today) {
+  const later = queue.items.filter((v) => v.releaseDate > today);
+  queue.items = queue.items.filter((v) => v.releaseDate <= today);
+  queue.held = [...(queue.held || []), ...later.map((v) => ({ ...v, releaseDate: null }))];
+  return later.length;
+}
+
+/** The owner's yes: date every held pin from tomorrow (PINS_PER_DAY, spread rule) and end the hold. */
+export function releaseHeld(queue, today) {
+  const held = queue.held || [];
+  const later = queue.items.filter((v) => v.releaseDate > today);
+  queue.items = queue.items.filter((v) => v.releaseDate <= today);
+  const prev = queue.items.filter((v) => v.releaseDate === today).map((v) => v.slug);
+  const scheduled = scheduleVariants([...later, ...held.map((v) => ({ ...v, releaseDate: null }))], { startDate: addDays(today, 1), perDay: Number(queue.config.PINS_PER_DAY), prevDaySlugs: prev, history: queue.items });
+  queue.items.push(...scheduled);
+  queue.held = [];
+  queue.config.APPROVAL = { ...(queue.config.APPROVAL || {}), state: "released", released_at: today };
+  return scheduled;
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
@@ -176,18 +216,28 @@ if (import.meta.url === `file://${process.argv[1]}`) {
       const i = later.findIndex((v) => boards.boardFor(v.path).slug === board.slug && !yesterday.has(v.slug) && !onDay(today).some((t) => t.slug === v.slug));
       if (i >= 0) { queue.items.push({ ...later.splice(i, 1)[0], releaseDate: today }); boardsToday.add(board.slug); }
     }
-    const scheduled = scheduleVariants(later, { startDate: addDays(today, 1), perDay: Number(queue.config.PINS_PER_DAY), prevDaySlugs: onDay(today).map((v) => v.slug) });
+    const scheduled = scheduleVariants(later, { startDate: addDays(today, 1), perDay: Number(queue.config.PINS_PER_DAY), prevDaySlugs: onDay(today).map((v) => v.slug), history: queue.items });
     queue.items.push(...scheduled);
     changed = true;
     console.log(`[pinterest-refill] re-dated ${scheduled.length} unreleased pins at ${queue.config.PINS_PER_DAY}/day from ${addDays(today, 1)}; today: ${onDay(today).map((v) => v.id).join(", ")}`);
   }
-  // Question pages from the search loop.
+  // Approval hold: nothing unreleased stays scheduled until the owner's yes.
+  const holding = isHeld(queue);
+  if (holding) { const moved = holdUnreleased(queue, today); if (moved) { changed = true; console.log(`[pinterest-refill] held ${moved} unreleased pin(s) for approval`); } }
+  // Question pages from the search loop (held too while the hold is on).
   const questions = paused ? [] : questionPins(queue, today);
-  if (questions.length) { queue.items.push(...questions); changed = true; console.log(`[pinterest-refill] question pins: ${questions.map((q) => q.path).join(", ")}`); }
+  if (questions.length) { (holding ? (queue.held ||= []) : queue.items).push(...questions.map((q) => (holding ? { ...q, releaseDate: null } : q))); changed = true; console.log(`[pinterest-refill] question pins${holding ? " (held)" : ""}: ${questions.map((q) => q.path).join(", ")}`); }
   const left = unreleasedCount(queue, now);
   {
     const g = await gateAndReschedule(queue, today);
     if (g.reworked.length || g.held.length) changed = true;
+  }
+  if (holding) {
+    fs.writeFileSync(path.join(root, QUEUE_FILE), JSON.stringify(queue, null, 2) + "\n");
+    const note = `${(queue.held || []).length} redrawn pin(s) wait for the owner's approval (${queue.config.APPROVAL.sample || "sample page"}); no pin is scheduled and no batch is added until then. Release: gh workflow run pinterest-refill.yml -R seq23/approvalprep -f release_held=true`;
+    console.log(`HELD_FOR_APPROVAL: ${note}`);
+    if (process.env.GITHUB_ACTIONS) console.log(`::notice title=HELD_FOR_APPROVAL::${note}`);
+    process.exit(0);
   }
   const due = !paused && needsRefill(queue, now);
   if (!due && !args.has("--force")) {

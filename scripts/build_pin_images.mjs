@@ -13,6 +13,7 @@ import fs from "node:fs";
 import path from "node:path";
 import sharp from "sharp";
 import { loadPinfeed, loadQueue, previewImagePath, wrapTitle, PIN_WIDTH, PIN_HEIGHT } from "../src/lib/pinfeed.mjs";
+import { isPaper, renderPaper } from "./pinterest/paper_layouts.mjs";
 
 const outDir = path.join(process.env.PAGES_OUT_DIR || "dist", "pins");
 const TEAL = "#10766e";
@@ -100,6 +101,8 @@ const LAYOUTS = {
 
 /** The PNG bytes of one variant pin (also used by the refill's quality gate). */
 export async function renderVariant(v) {
+  // Paper format (6 Nov 2026): the letter or checklist itself, never the product box.
+  if (isPaper(v)) return renderPaper(v);
   const layout = LAYOUTS[v.layout], p = PALETTES[v.palette];
   if (!layout || !p) throw new Error(`[build-pin-images] FAIL ${v.id}: unknown layout ${v.layout} or palette ${v.palette}`);
   const src = srcFor(v.imageSku, v.id);
@@ -113,11 +116,14 @@ if (import.meta.url === `file://${process.argv[1]}`) {
 const feed = loadPinfeed();
 const queue = loadQueue();
 if (!feed.items.length) { console.error("[build-pin-images] FAIL no items in data/pinterest/pinfeed.json"); process.exit(1); }
-if (!queue.items.length) { console.error("[build-pin-images] FAIL no variants in data/pinterest/queue.json"); process.exit(1); }
+if (!queue.items.length && !(queue.held || []).length) { console.error("[build-pin-images] FAIL no variants in data/pinterest/queue.json"); process.exit(1); }
 fs.mkdirSync(outDir, { recursive: true });
 for (const item of feed.items) await launchPin(item);
-const pending = [...queue.items];
+// Held pins (waiting for the owner's yes, data/pinterest/queue.json "held") get their images
+// too, so the sample page and the release day need no rebuild.
+const allPins = [...queue.items, ...(queue.held || [])];
+const pending = [...allPins];
 const workers = Array.from({ length: 4 }, async () => { while (pending.length) await variantPin(pending.shift()); });
 await Promise.all(workers);
-console.log(`[build-pin-images] OK ${feed.items.length} launch pins + ${queue.items.length} variant pins in ${outDir}`);
+console.log(`[build-pin-images] OK ${feed.items.length} launch pins + ${queue.items.length} variant pins + ${(queue.held || []).length} held pins in ${outDir}`);
 }

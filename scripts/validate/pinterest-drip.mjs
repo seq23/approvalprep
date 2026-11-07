@@ -23,23 +23,37 @@
 // 9. the pin quality gate (scripts/pinterest/quality.mjs) is off: an unreleased built pin
 //    looks like one released just before it, has a headline without its page's search
 //    words, or text cut off / unreadable at a 236px thumbnail; or the gate's own fixtures
-//    (a re-coloured near-duplicate, "Finalize & Hand Off", an overlong headline) pass.
+//    (a re-coloured near-duplicate, "Finalize & Hand Off", an overlong headline) pass;
+// 10. paper format (6 Nov 2026 review): a new pin shows the product box, carries a sales word
+//    or price, a "| Kit name" / "Save this:" / non-search title, a kit link without a template,
+//    a colour other than its board's one accent, or a photo without a free licence, credit,
+//    1000px width and no watermark; or more than 2 pins of one page in any 7 days;
+// 11. approval hold: a held pin is in any feed, lacks its image, or releasing the hold would
+//    break any rule above (every schedule, refill and quality check runs on the released plan);
+// 12. a guide page a pin links to is not og:type article; the weekly visit count would skip
+//    days (measure_window.mjs windowStart).
 import fs from "node:fs";
 import path from "node:path";
 import { SITE, loadPinfeed, loadQueue, chicagoDate, addDays, dueEntries, renderFeedAt, renderBoardFeedAt, pinBoards, unreleasedCount, needsRefill, variantLink } from "../../src/lib/pinfeed.mjs";
 import { decidePace, applyFallback, applyPause } from "../pinterest/pace.mjs";
 import { LAYOUTS, PALETTES, ANGLES } from "../pinterest/variants.mjs";
-import { appendBatch, pinPages } from "../pinterest/refill_queue.mjs";
-import { dHash, distance, headlineIssue, thumbnailIssue, gateQueue, auditQueue, MIN_DISTANCE } from "../pinterest/quality.mjs";
+import { appendBatch, pinPages, releaseHeld, isHeld } from "../pinterest/refill_queue.mjs";
+import { dHash, distance, headlineIssue, thumbnailIssue, gateQueue, auditQueue, MIN_DISTANCE, pinIssue, photoIssue } from "../pinterest/quality.mjs";
+import { SPREAD_MAX, SPREAD_DAYS, scheduleVariants } from "../../src/lib/pinfeed-core.mjs";
+import { windowStart } from "../pinterest/measure_window.mjs";
+import sharp from "sharp";
+import os from "node:os";
 import { renderVariant } from "../build_pin_images.mjs";
 
 const errors = [];
 const fail = (m) => errors.push(m);
 const dist = path.resolve(process.env.PAGES_OUT_DIR || "dist");
 const feed = loadPinfeed();
-const queue = loadQueue();
+const rawQueue = loadQueue();
+let queue = rawQueue;
 const cfg = queue.config || {};
-const items = queue.items || [];
+let items = queue.items || [];
+const held = rawQueue.held || [];
 const YMD = /^\d{4}-\d{2}-\d{2}$/;
 const PRICE = /\$\s?\d|\b\d+(\.\d\d)?\s?(usd|dollars)\b/i;
 
@@ -69,6 +83,26 @@ for (const v of items) {
   else if (v.releaseDate < cfg.FIRST_RELEASE_DATE) fail(`${label}: releaseDate ${v.releaseDate} before FIRST_RELEASE_DATE`);
 }
 
+// 11. Approval hold. Held pins: unique ids, paper format, no release date, in no feed at any clock.
+for (const v of held) {
+  if (ids.has(v.id)) fail(`${v.id}: duplicate id (held)`); ids.add(v.id);
+  if (v.releaseDate !== null) fail(`${v.id}: a held pin must have releaseDate null`);
+  if (v.format !== "paper") fail(`${v.id}: held pin is not paper format`);
+  for (const k of ["headline", "title", "description"]) if (!String(v[k] || "").trim()) fail(`${v.id}: empty ${k}`);
+}
+if (isHeld(rawQueue) && rawQueue.items.some((v) => v.releaseDate > chicagoDate(new Date()))) fail("APPROVAL hold is on but pins are still scheduled after today; run npm run pinterest:refill");
+if (held.length) {
+  const bc = pinBoards(JSON.parse(fs.readFileSync("data/pinterest/boards.json", "utf8")));
+  const heldGuids = new Set(held.map((v) => `approvalprep-pin-${v.id}`));
+  for (const iso of [new Date().toISOString(), "2027-06-01T18:00:00Z"]) for (const b of bc.BOARDS) for (const m of renderBoardFeedAt(feed, rawQueue, bc, b, new Date(iso)).matchAll(/<guid isPermaLink="false">([^<]+)<\/guid>/g)) if (heldGuids.has(m[1])) fail(`held pin ${m[1]} is in the ${b.slug} feed at ${iso}`);
+  // Every check below runs on the queue the release command would write.
+  queue = JSON.parse(JSON.stringify(rawQueue));
+  releaseHeld(queue, chicagoDate(new Date()));
+  if (queue.held.length || queue.config.APPROVAL.state !== "released") fail("releaseHeld left pins held");
+  items = queue.items;
+  console.log(`[pinterest-drip] ${held.length} held pins: checking the released plan (${items.filter((v) => v.releaseDate > chicagoDate(new Date())).length} scheduled)`);
+}
+
 // 2. Variants per page, and each one distinct.
 const bySlug = new Map();
 for (const v of items) { if (!bySlug.has(v.slug)) bySlug.set(v.slug, []); bySlug.get(v.slug).push(v); }
@@ -76,8 +110,13 @@ for (const l of feed.items) if ((bySlug.get(l.slug) || []).length < 5) fail(`lau
 for (const [slug, vs] of bySlug) {
   const looks = new Set();
   for (const v of vs) { const k = `${v.headline}|${v.layout}|${v.palette}`; if (looks.has(k)) fail(`${slug}: two variants share headline + layout + palette (${k})`); looks.add(k); }
-  const firstSix = vs.filter((v) => Number(v.id.split("-v").pop()) <= 6).map((v) => v.headline);
-  if (new Set(firstSix).size !== firstSix.length) fail(`${slug}: the first batch repeats a headline`);
+  // A batch of six never repeats its words: the image headline (product-box pins) or the
+  // indexed title (paper pins, whose headline is the searched phrase itself).
+  for (const [lo, hi] of [[1, 6], [7, 12], [13, 18]]) {
+    const batch = vs.filter((v) => { const n = Number(v.id.split("-v").pop()); return n >= lo && n <= hi; });
+    const keys = batch.map((v) => (v.format === "paper" ? `t:${v.title}` : `h:${v.headline}`));
+    if (lo === 1 || batch.every((v) => v.format === "paper")) if (new Set(keys).size !== keys.length) fail(`${slug}: batch ${lo}-${hi} repeats a ${batch[0]?.format === "paper" ? "title" : "headline"}`);
+  }
 }
 
 // 3. Schedule: per-day cap, no gap, no page on consecutive days.
@@ -91,8 +130,15 @@ function scheduleErrors(list, perDay) {
     if (s.length > perDay) out.push(`${d}: ${s.length} pins > PINS_PER_DAY ${perDay}`);
     if (new Set(s).size !== s.length) out.push(`${d}: the same page twice in one day`);
     if (i > 0) {
-      if (addDays(days[i - 1], 1) !== d) out.push(`schedule gap between ${days[i - 1]} and ${d}`);
-      else for (const slug of s) if (byDay.get(days[i - 1]).includes(slug)) out.push(`${slug} released on consecutive days ${days[i - 1]} and ${d}`);
+      if (addDays(days[i - 1], 1) !== d) {
+        // An empty day is allowed only when every page released later was blocked that day:
+        // released the day before, or already at SPREAD_MAX in the SPREAD_DAYS window.
+        for (let g = addDays(days[i - 1], 1); g < d; g = addDays(g, 1)) {
+          const laterSlugs = new Set(list.filter((v) => v.releaseDate > g).map((v) => v.slug));
+          const free = [...laterSlugs].filter((slug) => !(byDay.get(addDays(g, -1)) || []).includes(slug) && list.filter((v) => v.slug === slug && v.releaseDate > addDays(g, -SPREAD_DAYS) && v.releaseDate < g).length < SPREAD_MAX);
+          if (free.length) out.push(`schedule gap on ${g} while ${free.slice(0, 3).join(", ")} could have been released`);
+        }
+      } else for (const slug of s) if (byDay.get(days[i - 1]).includes(slug)) out.push(`${slug} released on consecutive days ${days[i - 1]} and ${d}`);
     }
   }
   return out;
@@ -109,6 +155,29 @@ function queueScheduleErrors(list, perDay) {
   return out;
 }
 queueScheduleErrors(items, cfg.PINS_PER_DAY).forEach(fail);
+// 10. Spread: at most SPREAD_MAX pins of one page in any SPREAD_DAYS days, for every pin
+// scheduled from the rule's first day (released pins before it are history, not re-dated).
+const SPREAD_FROM = "2026-11-07";
+function spreadErrors(list) {
+  const out = [];
+  for (const v of list) {
+    if (v.releaseDate < SPREAD_FROM) continue;
+    const n = list.filter((x) => x.slug === v.slug && x.releaseDate > addDays(v.releaseDate, -SPREAD_DAYS) && x.releaseDate <= v.releaseDate).length;
+    if (n > SPREAD_MAX) out.push(`${v.slug}: ${n} pins in the ${SPREAD_DAYS} days to ${v.releaseDate} (max ${SPREAD_MAX})`);
+  }
+  return [...new Set(out)];
+}
+spreadErrors(items).forEach(fail);
+{
+  // The scheduler keeps the rule even when one page has most of the pins left.
+  const fx = [...Array.from({ length: 8 }, (_, i) => ({ id: `fxa-v${i + 1}`, slug: "fxa" })), ...Array.from({ length: 3 }, (_, i) => ({ id: `fxb-v${i + 1}`, slug: "fxb" }))];
+  const sch = scheduleVariants(fx, { startDate: "2031-01-01", perDay: 3 });
+  if (sch.length !== fx.length) fail(`spread fixture: scheduler placed ${sch.length} of ${fx.length}`);
+  if (spreadErrors(sch).length) fail(`spread fixture: ${spreadErrors(sch)[0]}`);
+  if (queueScheduleErrors(sch, 3).length) fail(`spread fixture: ${queueScheduleErrors(sch, 3)[0]}`);
+  const crowded = [{ slug: "fxa", releaseDate: "2031-01-01" }, { slug: "fxa", releaseDate: "2031-01-03" }, { slug: "fxa", releaseDate: "2031-01-05" }];
+  if (!spreadErrors(crowded).length) fail("spread fixture: three pins of one page in 5 days passed");
+}
 
 // 4 + 5. Links and images against the build.
 const pageExists = (p) => fs.existsSync(path.join(dist, p, "index.html"));
@@ -275,20 +344,77 @@ if (fs.existsSync(path.join(dist, "_routes.json"))) {
     if (headlineIssue(base, pageFor(base))) fail(`quality fixture: ${base.id} real headline refused: ${headlineIssue(base, pageFor(base))}`);
     if (!thumbnailIssue({ ...base, layout: "checklist", headline: "How to write a letter of explanation, explained in plain language" })) fail("quality fixture: a headline cut off at 3 lines passed");
     // The gate reworks a near-duplicate and holds a pin it cannot fix.
-    const q = { config: cfg, items: [{ ...base, id: "fx-a-v1", releaseDate: "2030-01-01" }, { ...recoloured, id: "fx-a-v2", releaseDate: "2030-01-02" }, { ...base, id: "fx-q-v1", kind: "question", headline: "Finalize & Hand Off", releaseDate: "2030-01-03" }] };
+    const q = { config: cfg, items: [{ ...base, id: "fx-a-v1", releaseDate: "2030-01-01" }, { ...recoloured, id: "fx-a-v2", releaseDate: "2030-01-02" }, { ...base, id: "fx-q-v1", slug: "fx-q", kind: "question", headline: "Finalize & Hand Off", releaseDate: "2030-01-03" }] };
     const r = await gateQueue(q, "2030-01-01", { pageFor });
     const v2 = q.items.find((v) => v.id === "fx-a-v2");
     if (!v2 || !r.reworked.some((w) => w.id === "fx-a-v2")) fail("quality fixture: the gate did not rework a near-duplicate pin");
     else if (distance(h0, await dHash(await renderVariant(v2))) < MIN_DISTANCE) fail("quality fixture: the reworked pin is still a near-duplicate");
     if (!r.held.some((h) => h.id === "fx-q-v1") || q.items.some((v) => v.id === "fx-q-v1")) fail("quality fixture: an unfixable vague pin was kept instead of held");
   }
-  const builtPin = async (v) => fs.readFileSync(path.join(dist, "pins", `${v.id}.png`));
+  // A missing image is already its own failure (section 5); hash a fresh render instead of crashing.
+  const builtPin = async (v) => { const f = path.join(dist, "pins", `${v.id}.png`); return fs.existsSync(f) ? fs.readFileSync(f) : renderVariant(v); };
   const unreleased = items.filter((v) => v.releaseDate > chicagoDate(new Date()));
   if (!unreleased.length) fail("quality gate: zero unreleased pins to check");
   else if (fs.existsSync(path.join(dist, "pins"))) {
     const bad = await auditQueue(queue, chicagoDate(new Date()), { pageFor, render: builtPin });
     bad.forEach((b) => fail(`quality gate: ${b} - run npm run pinterest:refill (it reworks or holds such pins)`));
   }
+}
+
+// 10. Paper-format gate fixtures: each refusal must fire, and a real paper pin must pass.
+{
+  const pagesBySlug = new Map(pinPages().map((p) => [p.slug, p]));
+  const pageFor = (v) => pagesBySlug.get(v.slug) || null;
+  const paper = items.filter((v) => v.format === "paper" && pageFor(v));
+  const kitPin = paper.find((v) => v.kind === "kit");
+  if (!kitPin) fail("paper fixture: no paper kit pin to test the gate with");
+  else {
+    const page = pageFor(kitPin);
+    const must = async (label, v) => { if (!(await pinIssue(v, page))) fail(`paper fixture: ${label} passed the gate`); };
+    if (await pinIssue(kitPin, page)) fail(`paper fixture: real pin ${kitPin.id} refused: ${await pinIssue(kitPin, page)}`);
+    await must("the product box layout", { ...kitPin, layout: "band-top" });
+    await must('"instant download" on the image', { ...kitPin, headline: `${kitPin.headline} instant download` });
+    await must("a price in the description", { ...kitPin, description: `${kitPin.description} Only $19.` });
+    await must('"kit" in the title', { ...kitPin, title: `${kitPin.title} kit` });
+    await must('a "| Kit name" title', { ...kitPin, title: `${kitPin.title} | Credit Letter Kit` });
+    await must('a "Save this:" title', { ...kitPin, title: `Save this: ${kitPin.title}` });
+    await must("a question-only title", { ...kitPin, title: "Viewing this weekend? Have your packet ready" });
+    await must("a kit pin naming no template", { ...kitPin, title: allowedTitleWithout(kitPin.title) });
+    await must("another board's accent", { ...kitPin, palette: kitPin.palette === "orange" ? "green" : "orange" });
+    await must("4 checklist lines", { ...kitPin, layout: "paper-list", items: ["One", "Two", "Three", "Four"], letter: undefined });
+  }
+  function allowedTitleWithout(t) { return t.replace(/\btemplates?\b/gi, "letter").replace(/\s+/g, " "); }
+  // Photos: free licence, credited, >= 1000px, no watermark.
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "ap-photo-"));
+  await sharp({ create: { width: 1200, height: 900, channels: 3, background: "#ccbbaa" } }).jpeg().toFile(path.join(dir, "ok.jpg"));
+  await sharp({ create: { width: 800, height: 900, channels: 3, background: "#ccbbaa" } }).jpeg().toFile(path.join(dir, "small.jpg"));
+  const good = { file: "ok.jpg", licence: "unsplash", source_url: "https://unsplash.com/photos/abc", photographer: "A Person", photographer_url: "https://unsplash.com/@a", watermark: false };
+  const pv = { layout: "photo-band", photo: "ok.jpg" };
+  if (await photoIssue(pv, { photos: [good] }, dir)) fail(`photo fixture: a good photo refused: ${await photoIssue(pv, { photos: [good] }, dir)}`);
+  for (const [label, entry, file] of [["Unsplash+", { ...good, source_url: "https://plus.unsplash.com/premium_photo-1" }], ["an unknown licence", { ...good, licence: "shutterstock" }], ["no photographer", { ...good, photographer: "" }], ["an unchecked watermark", { ...good, watermark: null }], ["an 800px photo", { ...good, file: "small.jpg" }, "small.jpg"]])
+    if (!(await photoIssue({ ...pv, photo: file || "ok.jpg" }, { photos: [entry] }, dir))) fail(`photo fixture: ${label} passed`);
+  fs.rmSync(dir, { recursive: true, force: true });
+  for (const p of JSON.parse(fs.readFileSync("data/pinterest/photos.json", "utf8")).photos || []) { const i = await photoIssue({ layout: "photo-band", photo: p.file }); if (i) fail(`data/pinterest/photos.json: ${i}`); }
+}
+
+// 12a. Guide pages a pin links to are articles to Pinterest.
+{
+  const guidePaths = [...new Set([...items, ...held].filter((v) => v.kind === "guide" || v.kind === "question").map((v) => v.path))];
+  if (!guidePaths.length) fail("og fixture: no guide pins to check");
+  for (const gp of guidePaths) {
+    const f = path.join(dist, gp, "index.html");
+    if (!fs.existsSync(f)) continue;
+    const og = fs.readFileSync(f, "utf8").match(/<meta[^>]*property="og:type"[^>]*>/i)?.[0] || "";
+    if (!/content="article"/.test(og)) fail(`${gp}: og:type is not article, so its pins show less detail`);
+  }
+}
+// 12b. The weekly visit count covers every day since the last count.
+{
+  const now = new Date("2026-11-07T12:00:00Z");
+  const lastMonday = { weeks: [{ weekEnding: "2026-10-26", since: "2026-10-19T11:00:00.000Z" }] };
+  if (windowStart(lastMonday, now) !== "2026-10-26T11:00:00.000Z") fail(`measure window: after a Monday count the Saturday count starts ${windowStart(lastMonday, now)}, want 2026-10-26T11:00:00.000Z (27-30 Oct must be counted)`);
+  if (windowStart({ weeks: [{ since: "2026-10-31T11:00:00.000Z", until: "2026-11-07T11:00:00.000Z" }] }, new Date("2026-11-14T11:00:00Z")) !== "2026-11-07T11:00:00.000Z") fail("measure window: does not start where the last count ended");
+  if (windowStart({ weeks: [] }, now) !== new Date(now.getTime() - 7 * 86400000).toISOString()) fail("measure window: first count is not 7 days");
 }
 
 if (errors.length) { console.error(`[pinterest-drip] FAIL\n- ${errors.slice(0, 40).join("\n- ")}${errors.length > 40 ? `\n- ... ${errors.length - 40} more` : ""}`); process.exit(1); }
