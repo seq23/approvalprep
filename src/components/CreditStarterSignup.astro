@@ -23,7 +23,8 @@ const { inline = false } = Astro.props;
       <p class="fine">It opens here as soon as you press the button. Every email has a one-click unsubscribe link. See the <a href="/privacy/">privacy page</a>.</p>
     </form>
     <div data-starter-done hidden>
-      <p class="notice" role="status">Here is your starter. A copy is on its way to your inbox.</p>
+      <p class="notice" role="status" data-starter-sent>Here is your starter. A copy is on its way to your inbox.</p>
+      <p class="notice warning-card" role="alert" data-starter-unsent hidden>Here is your starter. The email copy did not send, so it is not in your inbox: save or print this page. We have been told and will fix it.</p>
       <ol class="compact-list">{STARTER_CHECKLIST.map((line) => <li>{line}</li>)}</ol>
       <h3>Your dispute letter frame</h3>
       <div class="ap-sheet">{STARTER_LETTER.map((line) => <p>{line}</p>)}</div>
@@ -47,6 +48,7 @@ const { inline = false } = Astro.props;
         const body = await res.json().catch(() => ({}));
         if (!res.ok || !body.ok) { if (error) error.textContent = body.error || "Something went wrong. Please try again."; return; }
         form.hidden = true; if (done) done.hidden = false;
+        if (body.emailed !== true) { root.querySelector<HTMLElement>("[data-starter-sent]")?.setAttribute("hidden", ""); root.querySelector<HTMLElement>("[data-starter-unsent]")?.removeAttribute("hidden"); }
       } catch { if (error) error.textContent = "Could not reach the server. Please try again."; }
     });
   }

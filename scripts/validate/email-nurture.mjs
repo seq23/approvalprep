@@ -86,6 +86,23 @@ const envFor = (db) => ({ PRODUCTS_DB: db, RESEND_API_KEY: 'k', DOWNLOAD_SIGNING
   if (!/\$19/.test(sent[1].html)) fail('the Credit Letter Kit email does not carry the live D1 price');
   if (/\b(fix|repair|raise|boost) (your )?(credit|score)\b/i.test(sent.map((m) => m.text).join(' '))) fail('a starter email promises to fix, repair or raise credit (R-ADV-13)');
 }
+// 2c. Rule 0 (7 Nov 2026: Resend refused every send with 401 while the page said "on its way" and
+// every tick was green). A refused send is a named stop on the run and emailed:false at the endpoint.
+{
+  const db = fakeD1(); const env = envFor(db);
+  const refuse = async () => new Response(JSON.stringify({ statusCode: 401, message: 'API key is invalid' }), { status: 401 });
+  const signed = await signUpForSample(env, 'r@example.com', refuse, 'credit-starter');
+  if (signed.status !== 'FAILED') fail(`a refused starter send reported ${signed.status}, want FAILED`);
+  const run = await runNurture(env, Date.now() + DAY, refuse);
+  if (!/^NAMED STOP \[RESEND_SEND_FAILED\] 1 email\(s\) not sent \(Resend HTTP 401: API key is invalid\)/.test(run.stop ?? '')) fail(`a refused send did not stop the run by name: ${run.stop}`);
+  if (run.sent !== 0) fail('a refused send was counted as sent');
+  const { onRequestPost } = await import('../../functions/api/sample.js');
+  const req = new Request('https://approvalprep.com/api/sample', { method: 'POST', headers: { 'content-type': 'application/json', 'cf-connecting-ip': '203.0.113.9' }, body: JSON.stringify({ email: 'r2@example.com', consent: true, magnet: 'credit-starter' }) });
+  const body = await (await onRequestPost({ request: req, env: envFor(fakeD1()) }, refuse)).json();
+  if (body.emailed !== false || !/RESEND_SEND_FAILED/.test(body.stop ?? '')) fail(`the sample endpoint hid a failed send: ${JSON.stringify(body)}`);
+  const ok = await runNurture(envFor(fakeD1()), Date.now(), resend().fetchImpl);
+  if (ok.stop !== null) fail('a run with nothing failing was stopped');
+}
 // 3. A missing key is a named stop, not a silent pass.
 {
   const run = await runNurture({ PRODUCTS_DB: fakeD1() }, Date.now(), resend().fetchImpl);
@@ -93,4 +110,4 @@ const envFor = (db) => ({ PRODUCTS_DB: db, RESEND_API_KEY: 'k', DOWNLOAD_SIGNING
 }
 const link = await unsubscribeUrl('s', await emailHash('x@example.com'));
 if (!renderEmail(sequence()[0], link).text.includes(link)) fail('rendered email lost its unsubscribe link');
-console.log('[email-nurture] PASS (series, 3-day gap, stop on purchase/unsubscribe, one scheduled review ask, buyer address never stored, credit starter series, named stop)');
+console.log('[email-nurture] PASS (series, 3-day gap, stop on purchase/unsubscribe, one scheduled review ask, buyer address never stored, credit starter series, a refused send is a named stop, named stop)');
