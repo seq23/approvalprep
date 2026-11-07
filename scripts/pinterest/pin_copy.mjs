@@ -1,0 +1,383 @@
+// Pin copy, paper format (6 Nov 2026 Pinterest review: every queued pin showed the same
+// product box and a "| Kit name" title, so none of them looked like the pins people save).
+//
+// Each page's pins show the useful thing itself: the opening of a sample letter, or 5 to 8
+// checklist lines in large type, under a title that starts with what people search.
+// $0: hand-written, each line checked against the page it links to (no prices, no outcome
+// promises, nothing the page does not say). Rules enforced by scripts/pinterest/quality.mjs:
+//   - phrases: the searched phrases a title may start with (the board's own Pinterest
+//     searches in data/pinterest/boards.json count too);
+//   - titles: at least 6 per page (a batch of six never repeats a title);
+//   - headlines: the words printed big on the image (7 words at most);
+//   - letters: { re, greeting, body[] } with [brackets] where the reader fills in;
+//   - checklist: 5 to 8 short lines.
+// A page with no entry here (a new kit or guide) gets derivedPaperCopy() in variants.mjs,
+// which only restates the page's own name, search query and includes list.
+
+const L = (re, greeting, ...body) => ({ re, greeting, body });
+// A letter (or the checklist) on a page that covers several letters names its own headlines
+// and titles, so the image, the title and the letter always match.
+const T = (letter, headlines, titles) => ({ ...letter, headlines, titles });
+const CREDIT_LINE = "Self-help templates. Not legal or financial advice. We do not contact bureaus or creditors for you.";
+
+export const PIN_COPY = {
+  "letter-of-explanation": {
+    link: "kit",
+    phrases: ["letter of explanation template", "letter of explanation sample"],
+    headlines: ["Letter of Explanation Template", "Letter of Explanation Sample", "Letter of Explanation: What to Write"],
+    titles: [
+      "Letter of explanation template for a late payment",
+      "Letter of explanation template: the opening lines to copy",
+      "Letter of explanation template for a gap in income",
+      "Letter of explanation template: what to say and attach",
+      "Letter of explanation template for a mortgage underwriter",
+      "Letter of explanation template for an address change",
+    ],
+    description: "The opening of a letter of explanation template, with the facts a reviewer looks for: what happened, the dates, how it was resolved and the proof you attach. Fill it in yourself and keep it to one page.",
+    letters: [
+      L("Re: Late payment on [account], [month, year]", "Dear Underwriter,", "I am writing to explain the late payment on my [account name] in [month, year].", "It was late because [one plain sentence: what happened].", "It was resolved on [date], and every payment since has been on time.", "I have attached [document] as proof."),
+      L("Re: Gap in income, [month] to [month, year]", "Dear Loan Officer,", "I am writing to explain the gap in my income from [start date] to [end date].", "During that time I was [one plain sentence: what you were doing].", "I returned to work at [employer] on [date], and my pay stubs are attached."),
+    ],
+    checklist: ["Say what happened in one line", "Give the start and end dates", "State only what you can prove", "Say how it was resolved", "Attach proof for each fact", "Keep it to one page", "Sign and date it"],
+  },
+  "how-to-write-a-letter-of-explanation": {
+    link: "guide",
+    phrases: ["how to write a letter of explanation", "letter of explanation"],
+    headlines: ["How to Write a Letter of Explanation", "Letter of Explanation: What to Include", "Letter of Explanation, Step by Step"],
+    titles: [
+      "How to write a letter of explanation: 6 things to include",
+      "How to write a letter of explanation, step by step",
+      "Letter of explanation: what to include, in order",
+      "How to write a letter of explanation in one page",
+      "Letter of explanation: the facts an underwriter looks for",
+      "How to write a letter of explanation without oversharing",
+    ],
+    description: "How to write a letter of explanation: what happened in one sentence, the dates, the plain cause, where things stand today and the exact figures. A plain guide with a sample opening.",
+    letters: [
+      L("Re: Gap in employment, [month, year] to [month, year]", "Dear Underwriter,", "I am writing to explain the gap in my employment between [start date] and [end date].", "I left [employer] on [date] because [plain cause].", "I started at [new employer] on [date], and my offer letter is attached."),
+    ],
+    checklist: ["What happened, in one sentence", "The date it started and ended", "The plain cause you can support", "Where things stand today", "The exact figures, unrounded", "Anyone else involved"],
+  },
+  "income-employment-letter-kit": {
+    link: "kit",
+    phrases: ["proof of income letter", "employment verification letter template", "proof of income self employed"],
+    headlines: ["Proof of Income Letter Template", "Proof of Income, Self-Employed", "Employment Verification Letter Template"],
+    titles: [
+      "Proof of income letter template for renters",
+      "Proof of income self employed: a letter template",
+      "Employment verification letter template, employer version",
+      "Proof of income letter template: what to fill in",
+      "Proof of income letter template for a job change",
+      "Employment verification letter template for a new job",
+    ],
+    description: "A proof of income letter template with the lines a landlord or lender reads first: who you are, where the income comes from, how much and since when, and the records attached.",
+    letters: [
+      T(L("Re: Proof of income for [your name]", "To whom it may concern,", "This letter confirms that I, [your name], earn [gross monthly income] from [income source].", "I have worked as [job or business] since [start date].", "Attached are [pay stubs or bank statements] for [months]."),
+        ["Proof of Income Letter Template", "Proof of Income, Self-Employed"],
+        ["Proof of income letter template for renters", "Proof of income self employed: a letter template", "Proof of income letter template: what to fill in"]),
+      T(L("Re: Employment verification for [employee name]", "To whom it may concern,", "This letter confirms that [employee name] has worked at [company legal name] since [start date].", "[Employee name] works full-time as a [job title].", "For questions, contact [name, title] at [phone or email]."),
+        ["Employment Verification Letter Template"],
+        ["Employment verification letter template, employer version", "Employment verification letter template for a new job", "Employment verification letter template: the fields"]),
+    ],
+    listHeadlines: ["Proof of Income Letter Template", "Proof of Income Letter Checklist"],
+    listTitles: ["Proof of income letter template: what to fill in", "Proof of income letter template for renters", "Proof of income letter template for a job change"],
+    checklist: ["Your full legal name", "Income source and start date", "Gross pay and how often", "Year-to-date income", "Copies of pay stubs", "A contact who can verify", "Signature and date"],
+  },
+  "employment-verification-letter": {
+    link: "guide",
+    phrases: ["employment verification letter", "letter of verification of employment"],
+    headlines: ["Employment Verification Letter", "Employment Verification Letter Checklist", "Letter of Verification of Employment"],
+    titles: [
+      "Employment verification letter: what it must include",
+      "Employment verification letter: a sample opening",
+      "Employment verification letter: employer vs employee version",
+      "Employment verification letter checklist for landlords",
+      "Letter of verification of employment: the fields to fill",
+      "Employment verification letter: when pay belongs in it",
+    ],
+    description: "What an employment verification letter includes: the employee's legal name, the employer and a contact, the job title, the start date and current status. Pay only when the employee authorizes it. A plain guide with a free template.",
+    letters: [
+      L("Re: Employment verification for [employee name]", "To whom it may concern,", "This letter confirms that [employee name] has been employed by [company legal name] since [start date].", "[Employee name] currently works full-time as a [job title].", "For questions, contact [name, title] at [phone or email]."),
+    ],
+    checklist: ["Employee legal name", "Employer name and contact", "Job title or position", "Employment start date", "Current employment status", "End date, if any", "Pay, only if authorized"],
+  },
+  "proof-of-employment-letter": {
+    link: "guide",
+    phrases: ["proof of employment letter", "employment verification letter"],
+    headlines: ["Proof of Employment Letter", "Proof of Employment Letter Checklist", "Proof of Employment: What to Include"],
+    titles: [
+      "Proof of employment letter: what to include",
+      "Proof of employment letter: a sample opening",
+      "Proof of employment letter checklist for a rental",
+      "Proof of employment letter: the six details reviewers check",
+      "Employment verification letter or proof of employment letter?",
+      "Proof of employment letter for a mortgage application",
+    ],
+    description: "What a proof of employment letter should include: your legal name as payroll has it, the employer's legal name, job title and hire date, current status, and gross pay when it is asked for.",
+    letters: [
+      L("Re: Proof of employment for [employee name]", "To whom it may concern,", "[Company legal name] confirms that [employee name] was hired on [date] as a [job title].", "As of [today's date], [employee name] is a current [full-time or part-time] employee.", "Gross pay is [amount] per [pay period]."),
+    ],
+    checklist: ["Legal name as payroll has it", "Employer's legal name", "Job title and hire date", "Current status as of today", "Gross pay and pay frequency", "Year-to-date gross pay"],
+  },
+  "credit-letter-kit": {
+    link: "kit",
+    phrases: ["credit dispute letter template", "goodwill letter template", "debt validation letter template", "credit report"],
+    headlines: ["Credit Dispute Letter Template", "Goodwill Letter Template", "Debt Validation Letter Template"],
+    titles: [
+      "Credit dispute letter template for a report error",
+      "Goodwill letter template for a late payment",
+      "Debt validation letter template to send a collector",
+      "Credit report error checklist and dispute letter template",
+      "Credit dispute letter template you mail yourself",
+      "Goodwill letter template: the opening lines",
+    ],
+    description: `Credit letter templates you fill in and send yourself: a dispute letter for one specific error, a goodwill letter about a late payment and a debt validation request. Disputing accurate information will not remove it. ${CREDIT_LINE}`,
+    letters: [
+      T(L("Re: Dispute of [account name], report [number]", "Dear [Credit bureau],", "I am writing to dispute one item on my credit report.", "[Account name] is reported as [what it says], but it is [what is accurate].", "I have enclosed a copy of [document] that shows this.", "Please investigate and correct this item."),
+        ["Credit Dispute Letter Template"],
+        ["Credit dispute letter template for a report error", "Credit dispute letter template you mail yourself", "Credit dispute letter template: the opening lines"]),
+      T(L("Re: Account ending [last 4 digits]", "Dear [Creditor] customer care,", "I am writing about the late payment reported for [month, year].", "It happened because [brief, true reason], and I have paid on time since [date].", "I am asking you to consider a goodwill adjustment to how that payment is reported."),
+        ["Goodwill Letter Template"],
+        ["Goodwill letter template for a late payment", "Goodwill letter template: the opening lines", "Goodwill letter template for one late payment"]),
+      T(L("Re: Account [number]", "Dear [Collection agency],", "I am writing in response to your [letter or call] dated [date].", "Please send validation of this debt, including the amount and the name of the original creditor."),
+        ["Debt Validation Letter Template"],
+        ["Debt validation letter template to send a collector", "Debt validation letter template: what to ask for", "Debt validation letter template after a collection call"]),
+    ],
+    listHeadlines: ["Credit Report Error Checklist", "Credit Dispute Letter Checklist"],
+    listTitles: ["Credit report error checklist and dispute letter template", "Credit dispute letter template checklist before you mail it", "Credit report error checklist with a dispute letter template"],
+    checklist: ["Your name and current address", "The account, named exactly", "The specific error", "Proof that shows it", "Copies, never originals", "The date you mailed it", "A follow-up date"],
+  },
+  "credit-dispute-letter": {
+    link: "guide",
+    phrases: ["credit dispute letter", "credit report"],
+    headlines: ["Credit Dispute Letter", "Credit Dispute Letter: How It Works", "Credit Dispute Letter Checklist"],
+    titles: [
+      "Credit dispute letter: how it works, step by step",
+      "Credit dispute letter: what to send with it",
+      "Credit dispute letter: a sample opening",
+      "Credit report error: the credit dispute letter steps",
+      "Credit dispute letter checklist before you mail it",
+      "Credit dispute letter: one item, the proof, certified mail",
+    ],
+    description: `How a credit dispute letter works: it asks the credit bureau to investigate one specific item you believe is wrong. Name the account exactly, say what is wrong, attach copies of your proof and send it yourself. Disputing accurate information will not remove it. ${CREDIT_LINE}`,
+    letters: [
+      L("Re: Dispute of [account name]", "Dear [Equifax, Experian or TransUnion],", "I am writing to dispute one item on my credit report, confirmation number [number].", "[Account name] shows [what it says]. This is wrong because [reason].", "Copies of [proof] are enclosed."),
+    ],
+    checklist: ["Get your free credit reports", "Circle the exact error", "Gather proof for that item", "Write one clear dispute letter", "Attach copies, never originals", "Send it by certified mail", "Note the date you sent it"],
+  },
+  "609-dispute-letter": {
+    link: "guide",
+    phrases: ["609 letter template", "609 dispute letter", "609 letter"],
+    headlines: ["609 Letter Template", "609 Dispute Letter: What It Does", "609 Letter Checklist"],
+    titles: [
+      "609 letter template: what Section 609 actually covers",
+      "609 dispute letter: what to include",
+      "609 letter: what it can and cannot do",
+      "609 dispute letter: a sample opening",
+      "609 letter template checklist before you send it",
+      "609 dispute letter vs a regular credit dispute letter",
+    ],
+    description: `A 609 letter cites Section 609 of the Fair Credit Reporting Act, which gives you the right to ask a credit bureau for the information in your file and its sources. It does not make accurate items disappear. What to include and what Section 609 does not do. ${CREDIT_LINE}`,
+    letters: [
+      L("Re: Request under FCRA Section 609", "Dear [Credit reporting company],", "Under Section 609 of the Fair Credit Reporting Act, I am requesting the information in my credit file.", "Please include the sources of the information for [account name].", "Copies of my ID and proof of address are enclosed."),
+    ],
+    checklist: ["Your full name and address", "Which credit bureau", "Report number, if any", "The item you are asking about", "The exact error or request", "ID and address copies"],
+  },
+  "goodwill-letter-to-remove-late-payment": {
+    link: "guide",
+    phrases: ["goodwill letter", "goodwill letter template", "goodwill letter for late payment"],
+    headlines: ["Goodwill Letter for a Late Payment", "Goodwill Letter: What to Include", "Goodwill Letter Sample Opening"],
+    titles: [
+      "Goodwill letter for a late payment: what to include",
+      "Goodwill letter template: the opening lines",
+      "Goodwill letter: when it can help and when it cannot",
+      "Goodwill letter for late payment: a short sample",
+      "Goodwill letter checklist before you send it",
+      "Goodwill letter to a creditor: keep it brief and true",
+    ],
+    description: `A goodwill letter asks a creditor to consider changing how one late payment is reported. It is a request, not a right, and it works best for a single late payment on an account in good standing. What to include. ${CREDIT_LINE}`,
+    letters: [
+      L("Re: Account ending [last 4 digits]", "Dear [Creditor] customer care,", "I am writing about the [30-day] late payment reported for [month, year].", "It happened because [brief, true reason].", "I have paid on time every month since [date], and I would be grateful if you would consider a goodwill adjustment."),
+    ],
+    checklist: ["Your name and contact details", "Creditor and account number", "Date of the late payment", "A brief, true explanation", "Your on-time history since", "What you changed"],
+  },
+  "rental-application-kit": {
+    link: "kit",
+    phrases: ["apartment application checklist", "rental application cover letter", "rental application"],
+    headlines: ["Apartment Application Checklist", "Rental Application Cover Letter", "Rental Application Letter Template"],
+    titles: [
+      "Apartment application checklist template for your packet",
+      "Rental application cover letter template",
+      "Rental application letter template for a rental history gap",
+      "Apartment application checklist and cover letter template",
+      "Rental application cover letter template for a first apartment",
+      "Rental application template: income explanation letter",
+    ],
+    description: "An apartment application checklist and rental cover letter template: photo ID, proof of income, bank statements, rental history and references in one packet before the viewing.",
+    letters: [
+      L("Re: Application for [address, unit]", "Dear [Landlord or property manager],", "I am applying for [unit] and would like to move in on [date].", "I earn [monthly income] as a [job] at [employer], and proof is attached.", "I have rented at [address] since [year]; my landlord can be reached at [contact]."),
+    ],
+    checklist: ["Photo ID", "Recent pay stubs or offer letter", "Two months of bank statements", "Rental history and landlord contact", "References lined up", "A short cover letter", "Notes on anything that stands out"],
+  },
+  "how-to-get-approved-for-an-apartment": {
+    link: "guide",
+    phrases: ["apartment application tips", "how to get approved for an apartment", "apartment application"],
+    headlines: ["Apartment Application Tips", "How to Get Approved for an Apartment", "Apartment Application: Bring These"],
+    titles: [
+      "Apartment application tips: what landlords check",
+      "How to get approved for an apartment: what to prepare",
+      "Apartment application tips for first-time renters",
+      "Apartment application checklist: have these on day one",
+      "How to get approved for an apartment with thin credit",
+      "Apartment application tips: income, credit, history, ID",
+    ],
+    description: "How to get approved for an apartment: most landlords check income (often about 2.5 to 3 times the rent), credit and rental history, and identity. Have pay stubs, bank statements, photo ID and a past landlord's contact ready on day one.",
+    letters: [
+      L("Re: Application for [address, unit]", "Dear [Property manager],", "I am applying for [unit]. My credit report shows [issue] from [year].", "It was resolved on [date], and I have paid rent on time since.", "My pay stubs and a reference from [landlord] are attached."),
+    ],
+    checklist: ["Pull your own credit report", "Two recent pay stubs", "Two months of bank statements", "Photo ID", "A past landlord's contact", "A short letter for anything unusual"],
+  },
+  "rental-application-letter": {
+    link: "guide",
+    phrases: ["rental application letter", "rental application cover letter"],
+    headlines: ["Rental Application Letter", "Rental Application Cover Letter", "Rental Application Letter Checklist"],
+    titles: [
+      "Rental application letter: when to write one",
+      "Rental application cover letter: a sample opening",
+      "Rental application letter checklist: what to include",
+      "Rental application letter for a past late payment",
+      "Rental application cover letter for low credit",
+      "Rental application letter: keep it to the facts",
+    ],
+    description: "When to write a rental application letter and what goes in it: the property and unit, your gross monthly income, the issue in plain words, when it was resolved, your rental history and any co-signer.",
+    letters: [
+      L("Re: Application for [address, unit]", "Dear [Landlord],", "I am applying for [unit]. I want to explain [the issue] before you review my application.", "It happened in [year] because [plain cause], and it was resolved on [date].", "I earn [monthly income], and my pay stubs are attached."),
+    ],
+    checklist: ["Property address and unit", "Gross monthly income", "The issue, in plain words", "When it was resolved", "Your rental history", "Co-signer details, if any"],
+  },
+  "loan-prep-letter-kit": {
+    link: "kit",
+    phrases: ["letter of explanation template", "bank statement explanation letter", "mortgage explanation letter"],
+    headlines: ["Letter of Explanation Template", "Bank Statement Explanation Letter", "Mortgage Explanation Letter"],
+    titles: [
+      "Letter of explanation template for a large deposit",
+      "Bank statement explanation letter template",
+      "Mortgage explanation letter template for a job change",
+      "Letter of explanation template for a car loan",
+      "Bank statement explanation letter template for a mortgage",
+      "Letter of explanation template for a personal loan",
+    ],
+    description: "Loan explanation letter templates for the questions lenders ask: a large deposit, a job change, a gap in income or a credit item. Fill in your own facts and attach the record that shows each one.",
+    letters: [
+      T(L("Re: Deposit of [amount] on [date]", "Dear Underwriter,", "I am writing to explain the deposit of [amount] into my [bank] account on [date].", "The money came from [source].", "I have attached [record] that shows where it came from."),
+        ["Bank Statement Explanation Letter", "Letter of Explanation Template"],
+        ["Letter of explanation template for a large deposit", "Bank statement explanation letter template", "Bank statement explanation letter template for a mortgage"]),
+      T(L("Re: Change of employer, [month, year]", "Dear Underwriter,", "I changed jobs on [date], from [old employer] to [new employer].", "My new role is [job title] at [salary or pay rate].", "My offer letter and first pay stub are attached."),
+        ["Mortgage Explanation Letter"],
+        ["Mortgage explanation letter template for a job change", "Letter of explanation template for a new job before closing", "Mortgage explanation letter template: the opening lines"]),
+    ],
+    listHeadlines: ["Loan Document Checklist", "Loan Documents to Gather"],
+    listTitles: ["Letter of explanation template and loan document checklist", "Letter of explanation template for a car loan", "Letter of explanation template for a personal loan"],
+    checklist: ["Pay stubs, last 30 days", "W-2s or tax returns", "Two months of bank statements", "Photo ID", "A letter for any large deposit", "A letter for any job change"],
+  },
+  "documents-needed-for-car-loan": {
+    link: "guide",
+    phrases: ["documents needed for a car loan", "car loan documents checklist", "car loan checklist"],
+    headlines: ["Documents Needed for a Car Loan", "Car Loan Documents Checklist", "Car Loan Checklist"],
+    titles: [
+      "Documents needed for a car loan: the checklist",
+      "Car loan documents checklist before you apply",
+      "Documents needed for a car loan if you are self-employed",
+      "Car loan checklist: bring these to the dealership",
+      "Documents needed for a car loan after a move",
+      "Car loan documents checklist: license, income, address, insurance",
+    ],
+    description: "Documents needed for a car loan: a driver's license, proof of income (recent pay stubs, or two years of tax returns if self-employed), proof of address, proof of insurance and the vehicle details, plus the title for a trade-in.",
+    letters: [
+      L("Re: Auto loan application, [your name]", "Dear [Lender],", "I am writing to explain [the gap in my income or credit] from [month, year].", "It happened because [plain cause], and it was resolved on [date].", "[Record] is attached."),
+    ],
+    checklist: ["Driver's license", "Recent pay stubs", "Proof of address", "Proof of insurance", "Vehicle purchase agreement or VIN", "Trade-in title, if any"],
+  },
+  "business-funding-prep-kit": {
+    link: "kit",
+    phrases: ["sba loan checklist", "small business loan", "business funding", "use of funds letter template"],
+    headlines: ["Use of Funds Letter Template", "SBA Loan Checklist", "Small Business Loan Letter Template"],
+    titles: [
+      "Use of funds letter template for an SBA loan",
+      "SBA loan checklist and use of funds letter template",
+      "Small business loan letter template: cash flow explanation",
+      "Business funding letter templates for lender questions",
+      "Small business loan template: bank statement explanation",
+      "SBA loan checklist template for business owners",
+    ],
+    description: "Business loan letter templates and an SBA document checklist: a use of funds explanation, a cash flow explanation, a business bank statement explanation and a lender follow-up letter. You prepare and send them yourself.",
+    letters: [
+      T(L("Re: Use of funds, [business name]", "Dear [Lender] loan officer,", "[Business name] is requesting [loan amount] to [purpose].", "We will use the funds as follows: [item and amount], [item and amount].", "Our quotes and current statements are attached."),
+        ["Use of Funds Letter Template"],
+        ["Use of funds letter template for an SBA loan", "Use of funds letter template: the opening lines", "Small business loan template: use of funds letter"]),
+      T(L("Re: Cash flow, [month] to [month, year]", "Dear [Lender] loan officer,", "Our revenue dipped in [months] because [plain cause].", "It recovered in [month], and our bank statements for [period] are attached."),
+        ["Cash Flow Explanation Letter"],
+        ["Small business loan letter template: cash flow explanation", "Business funding letter template for a slow quarter", "Small business loan template: bank statement explanation"]),
+    ],
+    listHeadlines: ["SBA Loan Checklist", "SBA Loan Documents to Gather"],
+    listTitles: ["SBA loan checklist and use of funds letter template", "SBA loan checklist template for business owners", "Business funding letter templates and SBA checklist"],
+    checklist: ["Business and personal tax returns", "Profit and loss statement", "Balance sheet", "Business bank statements", "Schedule of business debts", "Ownership and license papers", "A written use of funds"],
+  },
+  "sba-loan-checklist": {
+    link: "guide",
+    phrases: ["sba loan checklist", "sba loan documents checklist", "sba loan application", "sba loan"],
+    headlines: ["SBA Loan Checklist", "SBA Loan Documents Checklist", "SBA Loan Application Checklist", "SBA Loan: Documents to Gather", "SBA 7(a) Loan Checklist"],
+    titles: [
+      "SBA loan checklist: documents lenders typically ask for",
+      "SBA loan documents checklist on one page",
+      "SBA loan checklist: does the SBA check bank statements?",
+      "SBA loan application checklist for first-time applicants",
+      "SBA loan checklist: tax returns, statements and use of funds",
+      "SBA loan documents checklist for a 7(a) loan",
+    ],
+    description: "An SBA loan checklist: the borrower form, a personal financial statement for each owner of 20% or more, business and personal tax returns, a profit and loss statement and balance sheet, a debt schedule, ownership papers and a written use of funds.",
+    letters: [],
+    checklist: ["SBA Form 1919", "Personal financial statement", "Business and personal tax returns", "Profit and loss statement", "Balance sheet", "Schedule of business debts", "Ownership and license papers", "A written use of funds"],
+  },
+  "life-admin-letter-kit": {
+    link: "kit",
+    phrases: ["proof of residency letter template", "proof of address letter template", "letter template"],
+    headlines: ["Proof of Residency Letter Template", "Proof of Address Letter Template", "Records Request Letter Template"],
+    titles: [
+      "Proof of residency letter template from a landlord or host",
+      "Proof of address letter template",
+      "Letter template to request records from a school or employer",
+      "Proof of residency letter template for school enrollment",
+      "Letter template to explain a name or address mismatch",
+      "Proof of address letter template when bills are not in your name",
+    ],
+    description: "Everyday paperwork letter templates: proof of residency, address verification, a name or address explanation and a records request to a school or employer. You fill them in and send them yourself.",
+    letters: [
+      T(L("Re: Proof of residency for [resident name]", "To whom it may concern,", "This letter confirms that [resident name] has lived at [address] since [date].", "I am the [landlord or homeowner] at this address.", "I can be reached at [phone or email]."),
+        ["Proof of Residency Letter Template", "Proof of Address Letter Template"],
+        ["Proof of residency letter template from a landlord or host", "Proof of residency letter template for school enrollment", "Proof of address letter template when bills are not in your name"]),
+      T(L("Re: Records request for [your name]", "Dear [Records office],", "I am requesting a copy of my [records] from [dates].", "My name at the time was [name], and my [student or employee] number was [number]."),
+        ["Records Request Letter Template"],
+        ["Letter template to request records from a school or employer", "Letter template for a records request", "Letter template to request school records"]),
+    ],
+    listHeadlines: ["Proof of Address Checklist", "Proof of Residency Checklist"],
+    listTitles: ["Proof of address letter template and checklist", "Proof of residency letter template: what counts as proof", "Proof of address letter template"],
+    checklist: ["A utility bill", "A lease or mortgage statement", "A bank statement", "A pay stub with your address", "Government mail", "A proof of residency letter"],
+  },
+  "complete-approvalprep-bundle": {
+    link: "kit",
+    phrases: ["letter template", "application checklist"],
+    headlines: ["Application Letter Templates", "Rental and Loan Letter Templates", "Letter Templates for Applications", "Rental, Loan and Credit Letters", "Application Letters by Situation"],
+    titles: [
+      "Letter templates for renting, loans and credit",
+      "Letter template for every application step",
+      "Letter templates by situation: which one you need",
+      "Application checklist templates: the letter each step asks for",
+      "Letter templates for apartment and loan applications",
+      "Letter templates for a move and a new loan",
+    ],
+    description: "Which letter template fits which situation: a rental cover letter, a letter of explanation, a credit dispute letter, a goodwill letter, an employment letter, a use of funds letter and a proof of address letter.",
+    letters: [],
+    checklist: ["Renting: rental cover letter", "Mortgage: letter of explanation", "Credit error: dispute letter", "Late payment: goodwill letter", "New job: employment letter", "Business loan: use of funds", "Moving: proof of address"],
+  },
+};
