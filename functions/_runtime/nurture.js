@@ -21,7 +21,8 @@
 
 export const MAILING_ADDRESS = '2055 Lombard St #471024, San Francisco, CA 94147';
 export const SITE = 'https://approvalprep.com';
-export const DEFAULT_FROM = 'ApprovalPrep <hello@approvalprep.com>';
+// Resend sends from the mail. subdomain (the root domain's DKIM is a null record), 7 Nov 2026.
+export const DEFAULT_FROM = 'ApprovalPrep <hello@mail.approvalprep.com>';
 export const REPLY_TO = 'hello@approvalprep.com';
 export const SAMPLE_URL = `${SITE}/samples/letter-of-explanation-sample.pdf`;
 export const SAMPLE_SOURCE = 'sample:letter-of-explanation';
