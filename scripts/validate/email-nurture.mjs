@@ -6,7 +6,7 @@
 // a buyer is asked for a review twice, or a buyer's address is written to D1.
 // Hard-fails on zero emails examined (rule 0).
 import { DatabaseSync } from 'node:sqlite';
-import { MAILING_ADDRESS, emailHash, optOut, recordPurchase, renderEmail, runNurture, sequence, signUpForSample, unsubscribeUrl, verifyUnsubscribe } from '../../functions/_runtime/nurture.js';
+import { MAILING_ADDRESS, emailHash, optOut, recordPurchase, renderEmail, runNurture, sequence, signUpForSample, starterSequence, STARTER_SOURCE, unsubscribeUrl, verifyUnsubscribe } from '../../functions/_runtime/nurture.js';
 
 const DAY = 86_400_000;
 const fail = (m) => { console.error(`[email-nurture] FAIL ${m}`); process.exit(1); };
@@ -70,6 +70,22 @@ const envFor = (db) => ({ PRODUCTS_DB: db, RESEND_API_KEY: 'k', DOWNLOAD_SIGNING
   }
   if ((await signUpForSample(env, 'gone@example.com', fetchImpl)).status !== 'OPTED_OUT') fail('an opted-out address got the sample again');
 }
+// 2b. The free credit starter (her yes 7 Nov 2026): its own series, the starter at once, then one
+// email per 3 days, self-help line in every credit email, and the sample series never mixed in.
+{
+  const db = fakeD1(); const { sent, fetchImpl } = resend(); const env = envFor(db);
+  db.raw.exec("INSERT INTO products VALUES ('credit-letter-kit', 1900, 'live')");
+  await signUpForSample(env, 'c@example.com', fetchImpl, 'credit-starter');
+  if (sent.length !== 1 || sent[0].subject !== starterSequence()[0].subject) fail(`the starter sign-up sent ${JSON.stringify(sent.map((m) => m.subject))}`);
+  if (db.raw.prepare('SELECT source FROM email_signups WHERE email = ?').get('c@example.com')?.source !== STARTER_SOURCE) fail('the starter sign-up was not stored with its own source');
+  for (let h = 1; h <= 30 * 24; h += 6) await runNurture(env, Date.now() + h * 3_600_000, fetchImpl);
+  const want = starterSequence().map((x) => x.subject);
+  if (JSON.stringify(sent.map((m) => m.subject)) !== JSON.stringify(want)) fail(`starter series sent ${JSON.stringify(sent.map((m) => m.subject))}`);
+  for (const m of sent.slice(0, 2)) if (!m.text.includes('We do not contact bureaus or creditors for you')) fail(`"${m.subject}" has no self-help line (R-ADV-13)`);
+  for (const m of sent) if (!m.text.includes(MAILING_ADDRESS) || m.headers['List-Unsubscribe-Post'] !== 'List-Unsubscribe=One-Click') fail(`"${m.subject}" lacks the address or one-click unsubscribe`);
+  if (!/\$19/.test(sent[1].html)) fail('the Credit Letter Kit email does not carry the live D1 price');
+  if (/\b(fix|repair|raise|boost) (your )?(credit|score)\b/i.test(sent.map((m) => m.text).join(' '))) fail('a starter email promises to fix, repair or raise credit (R-ADV-13)');
+}
 // 3. A missing key is a named stop, not a silent pass.
 {
   const run = await runNurture({ PRODUCTS_DB: fakeD1() }, Date.now(), resend().fetchImpl);
@@ -77,4 +93,4 @@ const envFor = (db) => ({ PRODUCTS_DB: db, RESEND_API_KEY: 'k', DOWNLOAD_SIGNING
 }
 const link = await unsubscribeUrl('s', await emailHash('x@example.com'));
 if (!renderEmail(sequence()[0], link).text.includes(link)) fail('rendered email lost its unsubscribe link');
-console.log('[email-nurture] PASS (series, 3-day gap, stop on purchase/unsubscribe, one scheduled review ask, buyer address never stored, named stop)');
+console.log('[email-nurture] PASS (series, 3-day gap, stop on purchase/unsubscribe, one scheduled review ask, buyer address never stored, credit starter series, named stop)');

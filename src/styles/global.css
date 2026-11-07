@@ -442,3 +442,14 @@ details summary { min-height: 44px; }
 .hero-panel .primary-button:hover { background: var(--color-soft); }
 /* .breadcrumb-list { margin: 0 } cancelled the shell's auto margins: the trail sat flush to the screen edge. */
 .breadcrumb-list.shell { margin: 0 auto; }
+
+/* Three reasons row (her yes 7 Nov 2026) and the free credit starter */
+.ap-reasons { display: grid; gap: var(--space-2); margin-top: var(--space-5); max-width: 560px; }
+.ap-reason { display: block; background: var(--paper-raised); border: 1px solid var(--rule); border-radius: var(--radius-md); padding: 12px 14px; color: inherit; text-decoration: none; min-height: 44px; }
+.ap-reason strong { display: block; font-family: var(--font-heading, inherit); font-weight: 800; font-size: 16px; line-height: 1.25; }
+.ap-reason span { display: block; font-size: 14px; line-height: 1.45; margin-top: 2px; overflow-wrap: anywhere; }
+.starter-signup .ap-sheet { max-width: none; }
+/* Consent tick: the global input rule made it a full-width 44px box (live on the sample form too). The whole label is the tap target. */
+.sample-consent { display: flex; gap: 10px; align-items: flex-start; min-height: 44px; cursor: pointer; }
+.sample-consent input[type="checkbox"] { flex: 0 0 22px; width: 22px; height: 22px; min-height: 0; padding: 0; margin: 2px 0 0; }
+.starter-inline { margin-top: var(--space-5); max-width: 560px; }
