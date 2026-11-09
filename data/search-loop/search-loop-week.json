@@ -1,14 +1,14 @@
 {
   "schema": "search-loop-week-v1",
-  "week": "2026-W45",
+  "week": "2026-W46",
   "site": "approvalprep.com",
-  "generated_at": "2026-11-08T11:12:20.046Z",
+  "generated_at": "2026-11-09T11:14:51.402Z",
   "state": "running",
-  "published": 22,
+  "published": 13,
   "indexed": "not read: no page old enough to inspect yet (14 days)",
   "pace": 10,
   "ai_visitors": 0,
-  "ai_bot_hits": 340,
+  "ai_bot_hits": 381,
   "conversions": "not read: no conversion source configured for this site (form fills / checkouts)",
   "wins": 0,
   "undone": 0,
@@ -230,16 +230,44 @@
       "strengthen": "https://approvalprep.com/questions/mortgage-loan-documents-checklist/",
       "matched_by": "high token overlap (0.75 >= 0.6)",
       "at": "2026-11-04"
+    },
+    {
+      "query": "what documents does mortgage lender need",
+      "strengthen": "https://approvalprep.com/questions/what-documents-do-mortgage-lenders-require/",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-09"
+    },
+    {
+      "query": "how to write a letter to credit bureau",
+      "strengthen": "https://approvalprep.com/questions/how-to-send-letters-to-credit-bureaus/",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-09"
+    },
+    {
+      "query": "get approved for apartment with bad credit",
+      "strengthen": "https://approvalprep.com/questions/how-to-get-approved-for-loan-with-bad-credit/",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-09"
     }
   ],
   "cap": {
-    "max_live_pages": 22,
-    "live": 22,
-    "room": 0,
-    "why": "up from 20 to 22: Google impressions 49 in the last 28 days beat 10 in the 28 before"
+    "max_live_pages": 25,
+    "live": 23,
+    "room": 2,
+    "why": "up from 22 to 25: Google impressions 55 in the last 28 days beat 10 in the 28 before"
   },
   "notes": [
-    "BUILD held by the cap: 22 live engine page(s), cap 22 (up from 20 to 22: Google impressions 49 in the last 28 days beat 10 in the 28 before); 10 more page(s) today would have gone over it, those searches stay queued"
+    "cap: up from 22 to 25: Google impressions 55 in the last 28 days beat 10 in the 28 before",
+    "BUILD distinct gate: 3 search(es) had the same intent as an existing page and became strengthen briefs, not new pages (pages.json \"redirected\")",
+    "BUILD gate notes (not blocking): 1 published page(s) are outside a length or style aim; each is listed under gate_notes in pages.json",
+    "IndexNow: 1 new page(s) not live yet; submitted when they answer 200",
+    "reshape of /questions/how-to-write-an-employment-verification-letter/ left as it was: facts: needs at least 2 distinct sources whose URLs answered 200 (found 1); shape: the body needs at least one list or table (give one section \"bullets\")",
+    "reshape of /questions/letter-verifying-employment-sample/ left as it was: shape: the body needs at least one list or table (give one section \"bullets\"); d2: a how-to page has no numbered steps",
+    "reshape of /questions/how-to-get-approved-for-apartment-self-employed/ left as it was: shape: the body needs at least one list or table (give one section \"bullets\"); d2: a how-to page has no numbered steps",
+    "reshape of /questions/how-to-get-approved-for-apartment-with-no-rental-history/ left as it was: shape: the body needs at least one list or table (give one section \"bullets\"); d2: a how-to page has no numbered steps",
+    "reshape of /questions/how-to-get-approved-for-apartment-with-no-job/ left as it was: facts: needs at least 2 distinct sources whose URLs answered 200 (found 1); shape: the body needs at least one list or table (give one section \"bullets\")",
+    "reshape of /questions/how-to-get-approved-for-apartment-with-low-credit-score/ left as it was: facts: needs at least 2 distinct sources whose URLs answered 200 (found 1); shape: the body needs at least one list or table (give one section \"bullets\")",
+    "reshape of /questions/how-to-get-approved-for-loan-with-bad-credit/ left as it was: facts: needs at least 2 distinct sources whose URLs answered 200 (found 1); shape: the body needs at least one list or table (give one section \"bullets\")"
   ],
   "lanes": {
     "ratio": {
@@ -253,7 +281,7 @@
       "hit_rate": "not read: no page in this lane has reached its 2-week check yet"
     },
     "striking": {
-      "pages": 22,
+      "pages": 23,
       "measured": 0,
       "top3": 0,
       "hit_rate": "not read: no page in this lane has reached its 2-week check yet"
@@ -265,7 +293,7 @@
       "demand": 10
     },
     "weight_changes": [],
-    "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
+    "competition": "ok: 15 top-10 read(s) via brave"
   },
-  "run_url": "https://github.com/seq23/approvalprep/actions/runs/42474688737"
+  "run_url": "https://github.com/seq23/approvalprep/actions/runs/42607435255"
 }

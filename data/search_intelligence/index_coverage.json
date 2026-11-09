@@ -6,7 +6,7 @@
   "state": "OK",
   "named_stop": null,
   "sitemap_source": "public/sitemap.xml",
-  "sitemap_url_count": 97,
+  "sitemap_url_count": 98,
   "inspected_this_run": 97,
   "quota": {
     "daily_cap": 150,
@@ -33,11 +33,13 @@
     "by_coverage_state": {
       "Crawled - currently not indexed": 4,
       "Discovered - currently not indexed": 37,
+      "NOT_INSPECTED": 1,
       "Submitted and indexed": 46,
       "URL is unknown to Google": 10
     },
     "by_verdict": {
       "NEUTRAL": 51,
+      "NONE": 1,
       "PASS": 46
     },
     "buckets": {
@@ -46,7 +48,7 @@
       "discovered_not_indexed": 37,
       "unknown_to_google": 10,
       "other": 0,
-      "not_inspected": 0
+      "not_inspected": 1
     }
   },
   "truth_boundary": "URL Inspection reports Google's index state for each URL at inspected_at. It is not a ranking or traffic measure; impressions come from data/intelligence/gsc_search_analytics.json.",
@@ -842,6 +844,15 @@
       "googleCanonical": null,
       "userCanonical": null,
       "inspected_at": "2026-11-09T09:26:09.075Z"
+    },
+    {
+      "url": "https://approvalprep.com/questions/how-to-send-letters-to-credit-bureaus/",
+      "verdict": null,
+      "coverageState": "NOT_INSPECTED",
+      "lastCrawlTime": null,
+      "indexingState": null,
+      "inspected_at": null,
+      "not_inspected_reason": "published after the last inspection run; the next daily cycle inspects it"
     },
     {
       "url": "https://approvalprep.com/questions/how-to-write-an-employment-verification-letter/",

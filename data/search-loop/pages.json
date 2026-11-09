@@ -25,7 +25,8 @@
       "linked_from": [],
       "checks": {},
       "extra_queries": [
-        "what documents do mortgage lenders ask for"
+        "what documents do mortgage lenders ask for",
+        "what documents does mortgage lender need"
       ],
       "indexnow_at": "2026-11-03"
     },
@@ -60,7 +61,17 @@
         "how to request employment verification letter",
         "how to type an employment verification letter"
       ],
-      "indexnow_at": "2026-11-03"
+      "indexnow_at": "2026-11-03",
+      "reshaped": {
+        "v": 1,
+        "at": "2026-11-09",
+        "fixed": [],
+        "left": [
+          "facts: needs at least 2 distinct sources whose URLs answered 200 (found 1)",
+          "shape: the body needs at least one list or table (give one section \"bullets\")",
+          "d2: a how-to page has no numbered steps"
+        ]
+      }
     },
     {
       "slug": "mortgage-loan-documents-checklist",
@@ -188,7 +199,16 @@
         "letter verifying employment",
         "what is authorization letter to verify employment"
       ],
-      "indexnow_at": "2026-11-03"
+      "indexnow_at": "2026-11-03",
+      "reshaped": {
+        "v": 1,
+        "at": "2026-11-09",
+        "fixed": [],
+        "left": [
+          "shape: the body needs at least one list or table (give one section \"bullets\")",
+          "d2: a how-to page has no numbered steps"
+        ]
+      }
     },
     {
       "slug": "what-documents-need-for-mortgage-loan",
@@ -238,7 +258,16 @@
       ],
       "linked_from": [],
       "checks": {},
-      "indexnow_at": "2026-11-03"
+      "indexnow_at": "2026-11-03",
+      "reshaped": {
+        "v": 1,
+        "at": "2026-11-09",
+        "fixed": [],
+        "left": [
+          "shape: the body needs at least one list or table (give one section \"bullets\")",
+          "d2: a how-to page has no numbered steps"
+        ]
+      }
     },
     {
       "slug": "how-to-get-approved-for-apartment-with-no-rental-history",
@@ -263,7 +292,16 @@
       ],
       "linked_from": [],
       "checks": {},
-      "indexnow_at": "2026-11-03"
+      "indexnow_at": "2026-11-03",
+      "reshaped": {
+        "v": 1,
+        "at": "2026-11-09",
+        "fixed": [],
+        "left": [
+          "shape: the body needs at least one list or table (give one section \"bullets\")",
+          "d2: a how-to page has no numbered steps"
+        ]
+      }
     },
     {
       "slug": "how-to-get-approved-for-apartment-with-no-job",
@@ -287,7 +325,17 @@
       ],
       "linked_from": [],
       "checks": {},
-      "indexnow_at": "2026-11-03"
+      "indexnow_at": "2026-11-03",
+      "reshaped": {
+        "v": 1,
+        "at": "2026-11-09",
+        "fixed": [],
+        "left": [
+          "facts: needs at least 2 distinct sources whose URLs answered 200 (found 1)",
+          "shape: the body needs at least one list or table (give one section \"bullets\")",
+          "d2: a how-to page has no numbered steps"
+        ]
+      }
     },
     {
       "slug": "how-to-get-approved-for-apartment-with-low-credit-score",
@@ -324,7 +372,18 @@
         }
       ],
       "checks": {},
-      "indexnow_at": "2026-11-04"
+      "indexnow_at": "2026-11-04",
+      "reshaped": {
+        "v": 1,
+        "at": "2026-11-09",
+        "fixed": [],
+        "left": [
+          "facts: needs at least 2 distinct sources whose URLs answered 200 (found 1)",
+          "shape: the body needs at least one list or table (give one section \"bullets\")",
+          "d2: a how-to page has no numbered steps",
+          "filler: \"how to get approved for an apartment with\" appears 5 times"
+        ]
+      }
     },
     {
       "slug": "what-does-a-verification-of-employment-letter-look-like",
@@ -538,7 +597,20 @@
         "b5 FAQ answer is 35 words (aim 40-60): \"Does a cosigner need good credit for my loan appli\"",
         "b5 FAQ answer is 36 words (aim 40-60): \"Will disputing accurate negative items improve my \""
       ],
-      "indexnow_at": "2026-11-04"
+      "indexnow_at": "2026-11-04",
+      "extra_queries": [
+        "get approved for apartment with bad credit"
+      ],
+      "reshaped": {
+        "v": 1,
+        "at": "2026-11-09",
+        "fixed": [],
+        "left": [
+          "facts: needs at least 2 distinct sources whose URLs answered 200 (found 1)",
+          "shape: the body needs at least one list or table (give one section \"bullets\")",
+          "d2: a how-to page has no numbered steps"
+        ]
+      }
     },
     {
       "slug": "what-paperwork-is-needed-for-a-mortgage",
@@ -787,6 +859,63 @@
         "b5 FAQ answer is 38 words (aim 40-60): \"Can I use cryptocurrency as a down payment source?\""
       ],
       "indexnow_at": "2026-11-05"
+    },
+    {
+      "slug": "how-to-send-letters-to-credit-bureaus",
+      "query": "how to send letters to credit bureaus",
+      "lane": "striking",
+      "score": 45,
+      "scores": {
+        "striking": 45,
+        "can_be_one": 13.2
+      },
+      "reasons": [
+        "autocomplete demand (google/bing)",
+        "can-be-#1 evidence too thin (13.2 < 15)"
+      ],
+      "signals": {
+        "words": 7,
+        "question": true,
+        "google_suggest": true,
+        "bing_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0.08,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 1,
+            "off_target_national": 0,
+            "thin_or_old": 0,
+            "exact_answer": 1
+          },
+          "reasons": [
+            "top 10: 0 directories, 1 forums, 0 off-target national, 0 thin or old, 1 answer the exact question"
+          ]
+        }
+      },
+      "rel": "questions/how-to-send-letters-to-credit-bureaus/index.html",
+      "route": "/questions/how-to-send-letters-to-credit-bureaus/",
+      "url": "https://approvalprep.com/questions/how-to-send-letters-to-credit-bureaus/",
+      "published_at": "2026-11-09",
+      "status": "live",
+      "hash": "3cc2313c1699a7ae9e59f26b8de1409ac1bf70d814d15c83739e664dc6fcb036",
+      "model": "free-route",
+      "facts": [
+        "https://www.govinfo.gov/content/pkg/USCODE-2021-title15/html/USCODE-2021-title15-chap41-subchapIII.htm",
+        "https://en.wikipedia.org/wiki/Equifax"
+      ],
+      "linked_from": [],
+      "checks": {},
+      "gate_notes": [
+        "b5 FAQ answer is 37 words (aim 40-60): \"Do I need to pay anything to mail my dispute lette\"",
+        "b5 FAQ answer is 32 words (aim 40-60): \"Should I mail my original documents to the bureaus\"",
+        "b5 FAQ answer is 37 words (aim 40-60): \"How long do credit bureaus take to reply?\"",
+        "b5 FAQ answer is 35 words (aim 40-60): \"Can I dispute information with multiple agencies a\""
+      ],
+      "extra_queries": [
+        "how to write a letter to credit bureau"
+      ]
     }
   ],
   "dropped": [
@@ -894,6 +1023,73 @@
       "at": "2026-11-04",
       "reason": [
         "the answer was not the JSON object asked for, with every key filled"
+      ]
+    },
+    {
+      "query": "what to bring to an apartment application",
+      "at": "2026-11-09",
+      "gate": 2,
+      "reason": [
+        "b5 FAQ answer is 26 words (aim 40-60): \"How many pay stubs do I need for an apartment appl\"",
+        "b5 FAQ answer is 23 words (aim 40-60): \"What if I do not make three times the rent in inco\"",
+        "b5 FAQ answer is 23 words (aim 40-60): \"Do apartment applications require a credit check f\"",
+        "b5 FAQ answer is 23 words (aim 40-60): \"Can I apply for an apartment with bad credit?\"",
+        "facts: needs at least 2 distinct sources whose URLs answered 200 (found 1)"
+      ]
+    },
+    {
+      "query": "credit letters to remove collections",
+      "at": "2026-11-09",
+      "gate": 2,
+      "reason": [
+        "b5 FAQ answer is 26 words (aim 40-60): \"How long does the credit bureau take to investigat\"",
+        "b5 FAQ answer is 26 words (aim 40-60): \"Should I dispute accurate collection accounts?\"",
+        "b5 FAQ answer is 24 words (aim 40-60): \"Can I dispute collections online instead of mailin\"",
+        "b5 FAQ answer is 23 words (aim 40-60): \"What if the collection agency ignores my validatio\"",
+        "facts: needs at least 2 distinct sources whose URLs answered 200 (found 0)"
+      ]
+    },
+    {
+      "query": "goodwill letter for late payment removal template",
+      "at": "2026-11-09",
+      "gate": 2,
+      "reason": [
+        "facts: needs at least 2 distinct sources whose URLs answered 200 (found 1)"
+      ]
+    },
+    {
+      "query": "credit letters",
+      "at": "2026-11-09",
+      "gate": 2,
+      "reason": [
+        "b5 FAQ answer is 23 words (aim 40-60): \"Can I dispute accurate information?\"",
+        "b5 FAQ answer is 26 words (aim 40-60): \"How long do bureaus take to reply?\"",
+        "b5 FAQ answer is 21 words (aim 40-60): \"Should I call or mail my dispute?\"",
+        "facts: needs at least 2 distinct sources whose URLs answered 200 (found 1)"
+      ]
+    },
+    {
+      "query": "what is a goodwill credit adjustment",
+      "at": "2026-11-09",
+      "gate": 2,
+      "reason": [
+        "b5 FAQ answer is 29 words (aim 40-60): \"How long does a goodwill adjustment take to proces\""
+      ]
+    },
+    {
+      "query": "goodwill letter for late payments",
+      "at": "2026-11-09",
+      "gate": 2,
+      "reason": [
+        "facts: needs at least 2 distinct sources whose URLs answered 200 (found 1)"
+      ]
+    },
+    {
+      "query": "goodwill letter for late payment removal",
+      "at": "2026-11-09",
+      "gate": 2,
+      "reason": [
+        "facts: needs at least 2 distinct sources whose URLs answered 200 (found 1)"
       ]
     }
   ],
@@ -1256,6 +1452,36 @@
       "kind": "engine",
       "matched_by": "high token overlap (0.75 >= 0.6)",
       "matched_text": "mortgage loan documents checklist",
+      "stage": "search"
+    },
+    {
+      "query": "what documents does mortgage lender need",
+      "at": "2026-11-09",
+      "url": "https://approvalprep.com/questions/what-documents-do-mortgage-lenders-require/",
+      "route": "/questions/what-documents-do-mortgage-lenders-require/",
+      "kind": "engine",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "matched_text": "what documents do mortgage lenders require",
+      "stage": "search"
+    },
+    {
+      "query": "how to write a letter to credit bureau",
+      "at": "2026-11-09",
+      "url": "https://approvalprep.com/questions/how-to-send-letters-to-credit-bureaus/",
+      "route": "/questions/how-to-send-letters-to-credit-bureaus/",
+      "kind": "engine",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "matched_text": "how to send letters to credit bureaus",
+      "stage": "search"
+    },
+    {
+      "query": "get approved for apartment with bad credit",
+      "at": "2026-11-09",
+      "url": "https://approvalprep.com/questions/how-to-get-approved-for-loan-with-bad-credit/",
+      "route": "/questions/how-to-get-approved-for-loan-with-bad-credit/",
+      "kind": "engine",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "matched_text": "how to get approved for loan with bad credit",
       "stage": "search"
     }
   ]

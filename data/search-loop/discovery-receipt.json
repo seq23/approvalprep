@@ -1,8 +1,8 @@
 {
   "schema": "search-loop-discovery-v1",
   "site": "approvalprep.com",
-  "week": "2026-W45",
-  "generated_at": "2026-11-02T11:15:29.085Z",
+  "week": "2026-W46",
+  "generated_at": "2026-11-09T11:14:51.402Z",
   "paid_calls": 0,
   "cost_usd": 0,
   "hosts": {
@@ -29,23 +29,45 @@
       "ok": 40,
       "failed": 0,
       "cost_usd": 0
+    },
+    "api.search.brave.com": {
+      "calls": 15,
+      "ok": 15,
+      "failed": 0,
+      "cost_usd": 0
     }
   },
   "sources": {
-    "search_console": "ok: 13 rows",
-    "bing_webmaster": "ok: 11 rows",
+    "search_console": "ok: 16 rows",
+    "bing_webmaster": "ok: 12 rows",
+    "easy_wins": "ok: 0 easy win(s) in Search Console",
     "suggestqueries.google.com": "ok",
     "api.bing.com": "ok",
-    "relevance_screen": "ok: kept 111 of 150 (free model)"
+    "relevance_screen": "ok: kept 66 of 148 (free model)",
+    "top10": "ok: 15 top-10 read(s) via brave"
   },
-  "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)",
   "notes": [
     "autocomplete stopped at its budget of 80 calls"
   ],
+  "competition": "ok: 15 top-10 read(s) via brave",
+  "lanes": {
+    "ratio": {
+      "can_be_one": 2,
+      "striking": 1
+    },
+    "can_be_one": 3,
+    "striking": 63,
+    "weights": {
+      "neighbour": 35,
+      "unanswered": 30,
+      "weak_top10": 40,
+      "demand": 10
+    }
+  },
   "counts": {
-    "candidates": 158,
-    "targets": 111,
-    "strengthen_candidates": 0,
+    "candidates": 176,
+    "targets": 66,
+    "strengthen_candidates": 13,
     "dropped_shared_audience": 0
   }
 }

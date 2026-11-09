@@ -1,16 +1,176 @@
 {
   "schema": "search-loop-targets-v1",
   "site": "approvalprep.com",
-  "week": "2026-W45",
-  "generated_at": "2026-11-02T11:15:29.085Z",
+  "week": "2026-W46",
+  "generated_at": "2026-11-09T11:14:51.402Z",
   "sources": {
-    "search_console": "ok: 13 rows",
-    "bing_webmaster": "ok: 11 rows",
+    "search_console": "ok: 16 rows",
+    "bing_webmaster": "ok: 12 rows",
+    "easy_wins": "ok: 0 easy win(s) in Search Console",
     "suggestqueries.google.com": "ok",
     "api.bing.com": "ok",
-    "relevance_screen": "ok: kept 111 of 150 (free model)"
+    "relevance_screen": "ok: kept 66 of 148 (free model)",
+    "top10": "ok: 15 top-10 read(s) via brave"
   },
   "targets": [
+    {
+      "query": "what to bring to an apartment application",
+      "variants": [],
+      "signals": {
+        "words": 7,
+        "question": true,
+        "google_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0.38,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 2,
+            "off_target_national": 0,
+            "thin_or_old": 3,
+            "exact_answer": 0
+          },
+          "reasons": [
+            "top 10: 0 directories, 2 forums, 0 off-target national, 3 thin or old, 0 answer the exact question"
+          ]
+        }
+      },
+      "scores": {
+        "striking": 30,
+        "can_be_one": 25.2
+      },
+      "score": 25.2,
+      "kind": "new",
+      "lane": "can_be_one",
+      "reasons": [
+        "weak top 10 (0.38): 0 directories, 2 forums, 0 off-target national, 3 thin or old, 0 answer the exact question",
+        "people search it (autocomplete or impressions)"
+      ]
+    },
+    {
+      "query": "credit letters",
+      "variants": [
+        "letters of credit explained",
+        "letters of credit definition",
+        "letters of credit",
+        "what is credit letters",
+        "what is letters of credit",
+        "what is a credit letter",
+        "should i improve letter of credit",
+        "how to get letter of credit",
+        "tips letter of credit"
+      ],
+      "signals": {
+        "words": 2,
+        "question": false,
+        "gsc_position": 22,
+        "gsc_impressions": 1,
+        "gsc_page": "https://approvalprep.com/credit-letter-kit/",
+        "google_suggest": true,
+        "bing_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 0,
+            "off_target_national": 0,
+            "thin_or_old": 4,
+            "exact_answer": 10
+          },
+          "reasons": [
+            "top 10: 0 directories, 0 forums, 0 off-target national, 4 thin or old, 10 answer the exact question"
+          ]
+        }
+      },
+      "scores": {
+        "striking": 48.5,
+        "can_be_one": 0
+      },
+      "score": 48.5,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "already ranks 22 in Search Console (1 impressions)",
+        "can-be-#1 evidence too thin (0 < 15)"
+      ]
+    },
+    {
+      "query": "credit letters to remove collections",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "bing_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0.15,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 1,
+            "off_target_national": 0,
+            "thin_or_old": 1,
+            "exact_answer": 4
+          },
+          "reasons": [
+            "top 10: 0 directories, 1 forums, 0 off-target national, 1 thin or old, 4 answer the exact question"
+          ]
+        }
+      },
+      "scores": {
+        "striking": 40,
+        "can_be_one": 16
+      },
+      "score": 16,
+      "kind": "new",
+      "lane": "can_be_one",
+      "reasons": [
+        "weak top 10 (0.15): 0 directories, 1 forums, 0 off-target national, 1 thin or old, 4 answer the exact question",
+        "people search it (autocomplete or impressions)"
+      ]
+    },
+    {
+      "query": "goodwill letter for late payment removal template",
+      "variants": [
+        "goodwill late payment removal letter template"
+      ],
+      "signals": {
+        "words": 7,
+        "question": false,
+        "google_suggest": true,
+        "bing_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0.15,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 0,
+            "off_target_national": 0,
+            "thin_or_old": 1,
+            "exact_answer": 0
+          },
+          "reasons": [
+            "top 10: 0 directories, 0 forums, 0 off-target national, 1 thin or old, 0 answer the exact question"
+          ]
+        }
+      },
+      "scores": {
+        "striking": 40,
+        "can_be_one": 16
+      },
+      "score": 16,
+      "kind": "new",
+      "lane": "can_be_one",
+      "reasons": [
+        "weak top 10 (0.15): 0 directories, 0 forums, 0 off-target national, 1 thin or old, 0 answer the exact question",
+        "people search it (autocomplete or impressions)"
+      ]
+    },
     {
       "query": "what documents does mortgage lender need",
       "variants": [
@@ -21,103 +181,1458 @@
         "question": true,
         "google_suggest": true,
         "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
+        "top10": {
+          "provider": "brave",
+          "weakness": 0.08,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 1,
+            "off_target_national": 0,
+            "thin_or_old": 0,
+            "exact_answer": 0
+          },
+          "reasons": [
+            "top 10: 0 directories, 1 forums, 0 off-target national, 0 thin or old, 0 answer the exact question"
+          ]
+        }
+      },
+      "scores": {
+        "striking": 45,
+        "can_be_one": 13.2
       },
       "score": 45,
-      "kind": "new"
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)",
+        "can-be-#1 evidence too thin (13.2 < 15)"
+      ]
     },
     {
-      "query": "what documents do mortgage lenders require",
+      "query": "how to send letters to credit bureaus",
       "variants": [],
-      "signals": {
-        "words": 6,
-        "question": true,
-        "google_suggest": true,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 45,
-      "kind": "new"
-    },
-    {
-      "query": "how to get approved for apartment with bad credit",
-      "variants": [
-        "how to get approved for apartment bad credit"
-      ],
-      "signals": {
-        "words": 9,
-        "question": true,
-        "google_suggest": true,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 45,
-      "kind": "new"
-    },
-    {
-      "query": "how to get employment verification letter",
-      "variants": [
-        "what is letter of employment verification",
-        "employment of verification letter",
-        "employment verification letter meaning",
-        "what is a verification of employment letter",
-        "letter verification of employment"
-      ],
-      "signals": {
-        "words": 6,
-        "question": true,
-        "google_suggest": true,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 45,
-      "kind": "new"
-    },
-    {
-      "query": "how to write an employment verification letter",
-      "variants": [
-        "how to write employment verification letter",
-        "how to write a employment verification letter"
-      ],
       "signals": {
         "words": 7,
         "question": true,
         "google_suggest": true,
         "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
+        "top10": {
+          "provider": "brave",
+          "weakness": 0.08,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 1,
+            "off_target_national": 0,
+            "thin_or_old": 0,
+            "exact_answer": 1
+          },
+          "reasons": [
+            "top 10: 0 directories, 1 forums, 0 off-target national, 0 thin or old, 1 answer the exact question"
+          ]
+        }
+      },
+      "scores": {
+        "striking": 45,
+        "can_be_one": 13.2
       },
       "score": 45,
-      "kind": "new"
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)",
+        "can-be-#1 evidence too thin (13.2 < 15)"
+      ]
     },
     {
-      "query": "mortgage loan documents checklist",
+      "query": "how to write a letter to credit bureau",
       "variants": [
-        "mortgage loan document checklist"
+        "how to write letter to credit bureau",
+        "letters to write to credit bureau"
       ],
+      "signals": {
+        "words": 8,
+        "question": true,
+        "google_suggest": true,
+        "bing_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0.08,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 0,
+            "off_target_national": 0,
+            "thin_or_old": 1,
+            "exact_answer": 2
+          },
+          "reasons": [
+            "top 10: 0 directories, 0 forums, 0 off-target national, 1 thin or old, 2 answer the exact question"
+          ]
+        }
+      },
+      "scores": {
+        "striking": 45,
+        "can_be_one": 13.2
+      },
+      "score": 45,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)",
+        "can-be-#1 evidence too thin (13.2 < 15)"
+      ]
+    },
+    {
+      "query": "what is a goodwill credit adjustment",
+      "variants": [
+        "what is a goodwill adjustment credit"
+      ],
+      "signals": {
+        "words": 6,
+        "question": true,
+        "bing_suggest": true,
+        "google_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 0,
+            "off_target_national": 0,
+            "thin_or_old": 0,
+            "exact_answer": 5
+          },
+          "reasons": [
+            "top 10: 0 directories, 0 forums, 0 off-target national, 0 thin or old, 5 answer the exact question"
+          ]
+        }
+      },
+      "scores": {
+        "striking": 45,
+        "can_be_one": 0
+      },
+      "score": 45,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)",
+        "can-be-#1 evidence too thin (0 < 15)"
+      ]
+    },
+    {
+      "query": "get approved for apartment with bad credit",
+      "variants": [
+        "how to get approved for apartment with bad credit",
+        "how to get approved for apartment bad credit",
+        "can you get approved for apartment with bad credit",
+        "best way to get approved for apartment with bad credit"
+      ],
+      "signals": {
+        "words": 7,
+        "question": false,
+        "google_suggest": true,
+        "bing_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0.08,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 1,
+            "off_target_national": 0,
+            "thin_or_old": 0,
+            "exact_answer": 2
+          },
+          "reasons": [
+            "top 10: 0 directories, 1 forums, 0 off-target national, 0 thin or old, 2 answer the exact question"
+          ]
+        }
+      },
+      "scores": {
+        "striking": 40,
+        "can_be_one": 13.2
+      },
+      "score": 40,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)",
+        "can-be-#1 evidence too thin (13.2 < 15)"
+      ]
+    },
+    {
+      "query": "goodwill letter for late payments",
+      "variants": [
+        "late payment goodwill letter"
+      ],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "bing_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 0,
+            "off_target_national": 0,
+            "thin_or_old": 0,
+            "exact_answer": 4
+          },
+          "reasons": [
+            "top 10: 0 directories, 0 forums, 0 off-target national, 0 thin or old, 4 answer the exact question"
+          ]
+        }
+      },
+      "scores": {
+        "striking": 40,
+        "can_be_one": 0
+      },
+      "score": 40,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)",
+        "can-be-#1 evidence too thin (0 < 15)"
+      ]
+    },
+    {
+      "query": "goodwill letter for late payment removal",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "google_suggest": true,
+        "bing_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 0,
+            "off_target_national": 0,
+            "thin_or_old": 0,
+            "exact_answer": 1
+          },
+          "reasons": [
+            "top 10: 0 directories, 0 forums, 0 off-target national, 0 thin or old, 1 answer the exact question"
+          ]
+        }
+      },
+      "scores": {
+        "striking": 40,
+        "can_be_one": 0
+      },
+      "score": 40,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)",
+        "can-be-#1 evidence too thin (0 < 15)"
+      ]
+    },
+    {
+      "query": "goodwill letter for late payment template",
+      "variants": [
+        "goodwill letter template for late payments"
+      ],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "google_suggest": true,
+        "bing_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0.08,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 0,
+            "off_target_national": 0,
+            "thin_or_old": 1,
+            "exact_answer": 3
+          },
+          "reasons": [
+            "top 10: 0 directories, 0 forums, 0 off-target national, 1 thin or old, 3 answer the exact question"
+          ]
+        }
+      },
+      "scores": {
+        "striking": 40,
+        "can_be_one": 13.2
+      },
+      "score": 40,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)",
+        "can-be-#1 evidence too thin (13.2 < 15)"
+      ]
+    },
+    {
+      "query": "mortgage paperwork checklist",
+      "variants": [],
+      "signals": {
+        "words": 3,
+        "question": false,
+        "google_suggest": true,
+        "bing_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 0,
+            "off_target_national": 0,
+            "thin_or_old": 0,
+            "exact_answer": 0
+          },
+          "reasons": [
+            "top 10: 0 directories, 0 forums, 0 off-target national, 0 thin or old, 0 answer the exact question"
+          ]
+        }
+      },
+      "scores": {
+        "striking": 30,
+        "can_be_one": 0
+      },
+      "score": 30,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)",
+        "can-be-#1 evidence too thin (0 < 15)"
+      ]
+    },
+    {
+      "query": "credit dispute letters",
+      "variants": [
+        "credit letters of dispute"
+      ],
+      "signals": {
+        "words": 3,
+        "question": false,
+        "google_suggest": true,
+        "bing_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 0,
+            "off_target_national": 0,
+            "thin_or_old": 0,
+            "exact_answer": 5
+          },
+          "reasons": [
+            "top 10: 0 directories, 0 forums, 0 off-target national, 0 thin or old, 5 answer the exact question"
+          ]
+        }
+      },
+      "scores": {
+        "striking": 30,
+        "can_be_one": 0
+      },
+      "score": 30,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)",
+        "can-be-#1 evidence too thin (0 < 15)"
+      ]
+    },
+    {
+      "query": "what is a credit letter of explanation",
+      "variants": [],
+      "signals": {
+        "words": 7,
+        "question": true,
+        "google_suggest": true,
+        "top10": {
+          "provider": "brave",
+          "weakness": 0,
+          "counts": {
+            "results": 10,
+            "directories": 0,
+            "forums": 0,
+            "off_target_national": 0,
+            "thin_or_old": 0,
+            "exact_answer": 0
+          },
+          "reasons": [
+            "top 10: 0 directories, 0 forums, 0 off-target national, 0 thin or old, 0 answer the exact question"
+          ]
+        }
+      },
+      "scores": {
+        "striking": 30,
+        "can_be_one": 0
+      },
+      "score": 30,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)",
+        "can-be-#1 evidence too thin (0 < 15)"
+      ]
+    },
+    {
+      "query": "how to write a goodwill letter for late payment",
+      "variants": [],
+      "signals": {
+        "words": 9,
+        "question": true,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 30,
+        "can_be_one": 0
+      },
+      "score": 30,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "mortgage loan documents checklist pdf",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "home loan documents checklist pdf",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "what documents do mortgage lenders ask for",
+      "variants": [],
+      "signals": {
+        "words": 7,
+        "question": true,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "mortgage document checklist pdf",
+      "variants": [],
       "signals": {
         "words": 4,
         "question": false,
         "google_suggest": true,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
+        "top10": "not read: outside this run's top-10 budget"
       },
-      "score": 40,
-      "kind": "new"
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
     },
     {
-      "query": "home loan documents checklist",
-      "variants": [
-        "home loan checklist document"
-      ],
+      "query": "approval for apartment with bad credit",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "what do apartment applications ask for",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": true,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "credit dispute letters that work",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "how to send credit dispute letters",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": true,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "how to write dispute credit letters",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": true,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "how to write credit bureau dispute letters",
+      "variants": [],
+      "signals": {
+        "words": 7,
+        "question": true,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "goodwill letter for late payment example",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "goodwill letter for late payments capital one",
+      "variants": [],
+      "signals": {
+        "words": 7,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "goodwill adjustment letter for late payments",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "goodwill letter for late mortgage payment",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "do goodwill letters work for late payments",
+      "variants": [],
+      "signals": {
+        "words": 7,
+        "question": true,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "sample goodwill letter to remove late payments",
+      "variants": [],
+      "signals": {
+        "words": 7,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
+      },
+      "score": 25,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "mortgage loan documents checklist 2024",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "mortgage loan underwriter checklist document",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "required mortgage loan document checklist",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "housing loan documents checklist",
+      "variants": [],
       "signals": {
         "words": 4,
         "question": false,
-        "google_suggest": true,
         "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
+        "top10": "not read: outside this run's top-10 budget"
       },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "contractor mortgage documents checklist",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "documents needed for a mortgage loan",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "mortgage loan apply checklist",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "list of documents for mortgage application",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "us mortgage documents list",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "home loan required documents list",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "loan closing documents checklist",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "mortgage loan approval checklist",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "commercial loan document checklist",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "commercial loan documentation checklist",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "va mortgage document checklist",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "documents needed for mortgage",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "documents needed to apply for mortgage loan",
+      "variants": [],
+      "signals": {
+        "words": 7,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "documents needed when applying for a mortgage",
+      "variants": [],
+      "signals": {
+        "words": 7,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "mortgage home purchase checklist",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "home mortgage requirements checklist",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "submitting mortgage application checklist",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "pre approval rental application",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "pre approval letter to landlord",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "advice for first time renters",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "approval letter for apartment",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "waiting for apartment application approval",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "conditionally approved apartment application",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "writing letters to credit bureaus",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "goodwill letter to remove late payments",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "goodwill letter remove late payments template",
+      "variants": [],
+      "signals": {
+        "words": 6,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "goodwill adjustment letter template",
+      "variants": [],
+      "signals": {
+        "words": 4,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "goodwill adjustment letter to creditor",
+      "variants": [],
+      "signals": {
+        "words": 5,
+        "question": false,
+        "bing_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
+      },
+      "score": 20,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "credit repair letters",
+      "variants": [],
+      "signals": {
+        "words": 3,
+        "question": false,
+        "google_suggest": true,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 15,
+        "can_be_one": 0
+      },
+      "score": 15,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    },
+    {
+      "query": "adddress history explanation for a loan example",
+      "variants": [],
+      "signals": {
+        "words": 7,
+        "question": false,
+        "bing_impressions": 1,
+        "bing_position": 10,
+        "top10": "not read: outside this run's top-10 budget"
+      },
+      "scores": {
+        "striking": 13,
+        "can_be_one": 0
+      },
+      "score": 13,
+      "kind": "new",
+      "lane": "striking",
+      "reasons": [
+        "autocomplete demand (google/bing)"
+      ]
+    }
+  ],
+  "strengthen": [
+    {
+      "query": "get approved for apartment with bad credit",
+      "page": "/questions/how-to-get-approved-for-loan-with-bad-credit/",
+      "url": "https://approvalprep.com/questions/how-to-get-approved-for-loan-with-bad-credit/",
       "score": 40,
-      "kind": "new"
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-09"
+    },
+    {
+      "query": "how to write a letter to credit bureau",
+      "page": "/questions/how-to-send-letters-to-credit-bureaus/",
+      "url": "https://approvalprep.com/questions/how-to-send-letters-to-credit-bureaus/",
+      "score": 45,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-09"
+    },
+    {
+      "query": "what documents does mortgage lender need",
+      "page": "/questions/what-documents-do-mortgage-lenders-require/",
+      "url": "https://approvalprep.com/questions/what-documents-do-mortgage-lenders-require/",
+      "score": 45,
+      "from": "distinct-gate",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-09"
     },
     {
       "query": "mortgage loan documents required",
@@ -128,259 +1643,31 @@
         "words": 4,
         "question": false,
         "google_suggest": true,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
+        "bing_suggest": true
+      },
+      "scores": {
+        "striking": 40,
+        "can_be_one": 0
       },
       "score": 40,
-      "kind": "new"
+      "page": "/questions/documents-required-for-home-mortgage-loan/"
     },
     {
-      "query": "mortgage loan documents list",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "google_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 40,
-      "kind": "new"
-    },
-    {
-      "query": "mortgage application document checklist",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "google_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 40,
-      "kind": "new"
-    },
-    {
-      "query": "letter verifying employment sample",
+      "query": "what is approved credit for an apartment",
       "variants": [
-        "sample letter verifying employment",
-        "letter to verify employment sample",
-        "sample letter to verify employment"
+        "credit to be approved for apartment"
       ],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "google_suggest": true,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 40,
-      "kind": "new"
-    },
-    {
-      "query": "write a letter verifying employment",
-      "variants": [
-        "how to write a letter verifying employment"
-      ],
-      "signals": {
-        "words": 5,
-        "question": false,
-        "bing_suggest": true,
-        "google_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 40,
-      "kind": "new"
-    },
-    {
-      "query": "mortgage checklist for self employed",
-      "variants": [],
-      "signals": {
-        "words": 5,
-        "question": false,
-        "google_suggest": true,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 40,
-      "kind": "new"
-    },
-    {
-      "query": "what documents need for mortgage loan",
-      "variants": [],
-      "signals": {
-        "words": 6,
-        "question": true,
-        "google_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 30,
-      "kind": "new"
-    },
-    {
-      "query": "how to get approved for apartment self employed",
-      "variants": [],
-      "signals": {
-        "words": 8,
-        "question": true,
-        "google_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 30,
-      "kind": "new"
-    },
-    {
-      "query": "how to get approved for apartment with no rental history",
-      "variants": [],
-      "signals": {
-        "words": 10,
-        "question": true,
-        "google_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 30,
-      "kind": "new"
-    },
-    {
-      "query": "how to get approved for apartment with no credit",
-      "variants": [],
-      "signals": {
-        "words": 9,
-        "question": true,
-        "google_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 30,
-      "kind": "new"
-    },
-    {
-      "query": "how to get approved for apartment with no job",
-      "variants": [],
-      "signals": {
-        "words": 9,
-        "question": true,
-        "google_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 30,
-      "kind": "new"
-    },
-    {
-      "query": "how to get approved for apartment with low credit score",
-      "variants": [],
-      "signals": {
-        "words": 10,
-        "question": true,
-        "google_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 30,
-      "kind": "new"
-    },
-    {
-      "query": "letter verifying employment",
-      "variants": [
-        "how to verify employment letter",
-        "verifying employment letter",
-        "letter to verify employment"
-      ],
-      "signals": {
-        "words": 3,
-        "question": false,
-        "google_suggest": true,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 30,
-      "kind": "new"
-    },
-    {
-      "query": "how to write letter confirming employment",
-      "variants": [],
-      "signals": {
-        "words": 6,
-        "question": true,
-        "google_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 30,
-      "kind": "new"
-    },
-    {
-      "query": "what is authorization letter to verify employment",
-      "variants": [],
       "signals": {
         "words": 7,
         "question": true,
-        "google_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
+        "google_suggest": true
+      },
+      "scores": {
+        "striking": 30,
+        "can_be_one": 0
       },
       "score": 30,
-      "kind": "new"
-    },
-    {
-      "query": "why do you need employment verification letter",
-      "variants": [],
-      "signals": {
-        "words": 7,
-        "question": true,
-        "google_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 30,
-      "kind": "new"
-    },
-    {
-      "query": "what does a verification of employment letter look like",
-      "variants": [],
-      "signals": {
-        "words": 9,
-        "question": true,
-        "google_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 30,
-      "kind": "new"
-    },
-    {
-      "query": "mortgage checklist",
-      "variants": [
-        "what is a mortgage checklist"
-      ],
-      "signals": {
-        "words": 2,
-        "question": false,
-        "google_suggest": true,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 30,
-      "kind": "new"
-    },
-    {
-      "query": "mortgage checklist template",
-      "variants": [],
-      "signals": {
-        "words": 3,
-        "question": false,
-        "google_suggest": true,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 30,
-      "kind": "new"
-    },
-    {
-      "query": "mortgage loan documents checklist pdf",
-      "variants": [],
-      "signals": {
-        "words": 5,
-        "question": false,
-        "google_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 25,
-      "kind": "new"
+      "page": "/questions/how-to-get-approved-for-apartment-with-low-credit-score/"
     },
     {
       "query": "mortgage loan application checklist",
@@ -388,23 +1675,14 @@
       "signals": {
         "words": 4,
         "question": false,
-        "google_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
+        "google_suggest": true
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
       },
       "score": 25,
-      "kind": "new"
-    },
-    {
-      "query": "home loan documents checklist pdf",
-      "variants": [],
-      "signals": {
-        "words": 5,
-        "question": false,
-        "google_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 25,
-      "kind": "new"
+      "page": "/questions/home-loan-documents-checklist/"
     },
     {
       "query": "home loan application checklist",
@@ -412,11 +1690,14 @@
       "signals": {
         "words": 4,
         "question": false,
-        "google_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
+        "google_suggest": true
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
       },
       "score": 25,
-      "kind": "new"
+      "page": "/questions/home-loan-documents-checklist/"
     },
     {
       "query": "home loan documents required",
@@ -427,289 +1708,29 @@
       "signals": {
         "words": 4,
         "question": false,
-        "google_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
+        "google_suggest": true
+      },
+      "scores": {
+        "striking": 25,
+        "can_be_one": 0
       },
       "score": 25,
-      "kind": "new"
+      "page": "/questions/documents-required-for-home-mortgage-loan/"
     },
     {
-      "query": "home loan documents required for self employed",
-      "variants": [],
-      "signals": {
-        "words": 7,
-        "question": false,
-        "google_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 25,
-      "kind": "new"
-    },
-    {
-      "query": "home loan list of documents letter",
-      "variants": [],
-      "signals": {
-        "words": 6,
-        "question": false,
-        "google_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 25,
-      "kind": "new"
-    },
-    {
-      "query": "list of documents needed for home loan application",
-      "variants": [],
-      "signals": {
-        "words": 8,
-        "question": false,
-        "google_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 25,
-      "kind": "new"
-    },
-    {
-      "query": "what documents do mortgage lenders ask for",
-      "variants": [],
-      "signals": {
-        "words": 7,
-        "question": true,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 25,
-      "kind": "new"
-    },
-    {
-      "query": "how to get approved for loan with bad credit",
-      "variants": [],
-      "signals": {
-        "words": 9,
-        "question": true,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 25,
-      "kind": "new"
-    },
-    {
-      "query": "mortgage document checklist pdf",
+      "query": "mortgage application document checklist",
       "variants": [],
       "signals": {
         "words": 4,
         "question": false,
-        "google_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
+        "bing_suggest": true
       },
-      "score": 25,
-      "kind": "new"
-    },
-    {
-      "query": "what paperwork is needed for a mortgage",
-      "variants": [],
-      "signals": {
-        "words": 7,
-        "question": true,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 25,
-      "kind": "new"
-    },
-    {
-      "query": "letter confirming employment template",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "google_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 25,
-      "kind": "new"
-    },
-    {
-      "query": "letter confirming employment example",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "google_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 25,
-      "kind": "new"
-    },
-    {
-      "query": "how to make an employment verification letter",
-      "variants": [
-        "how to make a employment verification letter"
-      ],
-      "signals": {
-        "words": 7,
-        "question": true,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 25,
-      "kind": "new"
-    },
-    {
-      "query": "what is an employer verification letter",
-      "variants": [],
-      "signals": {
-        "words": 6,
-        "question": true,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 25,
-      "kind": "new"
-    },
-    {
-      "query": "how to obtain employment verification letter",
-      "variants": [],
-      "signals": {
-        "words": 6,
-        "question": true,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 25,
-      "kind": "new"
-    },
-    {
-      "query": "how to request employment verification letter",
-      "variants": [],
-      "signals": {
-        "words": 6,
-        "question": true,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 25,
-      "kind": "new"
-    },
-    {
-      "query": "how to type an employment verification letter",
-      "variants": [],
-      "signals": {
-        "words": 7,
-        "question": true,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 25,
-      "kind": "new"
-    },
-    {
-      "query": "home mortgage documentation checklist",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "google_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 25,
-      "kind": "new"
-    },
-    {
-      "query": "mortgage refinance document checklist",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "google_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 25,
-      "kind": "new"
-    },
-    {
-      "query": "mortgage loan documents checklist 2024",
-      "variants": [],
-      "signals": {
-        "words": 5,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
       },
       "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "required mortgage loan document checklist",
-      "variants": [],
-      "signals": {
-        "words": 5,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "housing loan documents checklist",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "contractor mortgage documents checklist",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "mortgage loan processing checklist template",
-      "variants": [],
-      "signals": {
-        "words": 5,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "documents needed for a mortgage loan",
-      "variants": [],
-      "signals": {
-        "words": 6,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "mortgage loan apply checklist",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
+      "page": "/questions/home-loan-documents-checklist/"
     },
     {
       "query": "mortgage loan processing checklist",
@@ -719,11 +1740,14 @@
       "signals": {
         "words": 4,
         "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
+        "bing_suggest": true
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
       },
       "score": 20,
-      "kind": "new"
+      "page": "/questions/mortgage-loan-processing-checklist-template/"
     },
     {
       "query": "home mortgage loan application checklist",
@@ -731,35 +1755,14 @@
       "signals": {
         "words": 5,
         "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
+        "bing_suggest": true
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
       },
       "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "list of documents for mortgage application",
-      "variants": [],
-      "signals": {
-        "words": 6,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "documents required for home mortgage loan",
-      "variants": [],
-      "signals": {
-        "words": 6,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
+      "page": "/questions/home-loan-documents-checklist/"
     },
     {
       "query": "home loan documents list",
@@ -767,23 +1770,14 @@
       "signals": {
         "words": 4,
         "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
+        "bing_suggest": true
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
       },
       "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "us mortgage documents list",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
+      "page": "/questions/list-of-documents-needed-for-home-loan-application/"
     },
     {
       "query": "your mortgage application checklist",
@@ -791,83 +1785,14 @@
       "signals": {
         "words": 4,
         "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
+        "bing_suggest": true
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
       },
       "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "home loan required documents list",
-      "variants": [],
-      "signals": {
-        "words": 5,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "loan closing documents checklist",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "mortgage loan approval checklist",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "checklist of loan requirements",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "complete your mortgage documents checklist",
-      "variants": [],
-      "signals": {
-        "words": 5,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "va mortgage document checklist",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
+      "page": "/questions/home-loan-documents-checklist/"
     },
     {
       "query": "document for mortgage loan",
@@ -875,47 +1800,14 @@
       "signals": {
         "words": 4,
         "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
+        "bing_suggest": true
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
       },
       "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "mortgage processing checklist pdf",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "mortgage pre approval documents checklist",
-      "variants": [],
-      "signals": {
-        "words": 5,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "documents needed for mortgage",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
+      "page": "/questions/documents-required-for-home-mortgage-loan/"
     },
     {
       "query": "required documents to get a mortgage",
@@ -925,133 +1817,14 @@
       "signals": {
         "words": 6,
         "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
+        "bing_suggest": true
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
       },
       "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "documents needed to apply for mortgage loan",
-      "variants": [],
-      "signals": {
-        "words": 7,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "documents needed when applying for a mortgage",
-      "variants": [],
-      "signals": {
-        "words": 7,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "mortgage home purchase checklist",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "home mortgage requirements checklist",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "submitting mortgage application checklist",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "home mortgage review checklist",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "mortgage online application checklist",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "quick mortgage application checklist",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "your mortgage closing checklist",
-      "variants": [
-        "mortgage checklist for closing"
-      ],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "mortgage apply online checklist",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
+      "page": "/questions/documents-required-for-home-mortgage-loan/"
     },
     {
       "query": "mortgage approval steps checklist",
@@ -1059,675 +1832,14 @@
       "signals": {
         "words": 4,
         "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
+        "bing_suggest": true
+      },
+      "scores": {
+        "striking": 20,
+        "can_be_one": 0
       },
       "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "complete your mortgage closing checklist",
-      "variants": [],
-      "signals": {
-        "words": 5,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "pre approval rental application",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "pre approved rent applications",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "pre approval for rental property",
-      "variants": [],
-      "signals": {
-        "words": 5,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "pre approval letter to landlord",
-      "variants": [],
-      "signals": {
-        "words": 5,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "pre approved mortgage on a rental property",
-      "variants": [],
-      "signals": {
-        "words": 7,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "pre approved apartments rent",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "rental pre screening application",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "first time renter tips",
-      "variants": [
-        "tips for first time renters"
-      ],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "advice for first time renters",
-      "variants": [],
-      "signals": {
-        "words": 5,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "sba personal financial statement",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "letter verifying employment template",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "letter verifying employment hours",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "letter from employer verifying employment",
-      "variants": [],
-      "signals": {
-        "words": 5,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "example letter verifying employment",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "cpa letter verifying self employment sample",
-      "variants": [],
-      "signals": {
-        "words": 6,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "letter from cpa verifying self employment",
-      "variants": [],
-      "signals": {
-        "words": 6,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "employment verification letter from employer",
-      "variants": [],
-      "signals": {
-        "words": 5,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "job verification letter from employer",
-      "variants": [],
-      "signals": {
-        "words": 5,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "reasons for employment verification",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "employee job verification letter",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "writing an employment verification letter",
-      "variants": [],
-      "signals": {
-        "words": 5,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "employment verification letter with sample",
-      "variants": [],
-      "signals": {
-        "words": 5,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "mortgage checklist for refinancing",
-      "variants": [],
-      "signals": {
-        "words": 4,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "mortgage checklist for pre approval",
-      "variants": [],
-      "signals": {
-        "words": 5,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "mortgage checklist for first time buyers",
-      "variants": [],
-      "signals": {
-        "words": 6,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "preparing to buy a house checklist",
-      "variants": [],
-      "signals": {
-        "words": 6,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    },
-    {
-      "query": "preparing to buy a home checklist",
-      "variants": [],
-      "signals": {
-        "words": 6,
-        "question": false,
-        "bing_suggest": true,
-        "competition": "not read: no free, ToS-safe competition signal (SERP scraping is not used)"
-      },
-      "score": 20,
-      "kind": "new"
-    }
-  ],
-  "strengthen": [
-    {
-      "query": "document for mortgage loan",
-      "page": "/questions/mortgage-loan-documents-checklist/",
-      "url": "https://approvalprep.com/questions/mortgage-loan-documents-checklist/",
-      "score": 20,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.75 >= 0.6)",
-      "at": "2026-11-04"
-    },
-    {
-      "query": "va mortgage document checklist",
-      "page": "/questions/mortgage-loan-documents-checklist/",
-      "url": "https://approvalprep.com/questions/mortgage-loan-documents-checklist/",
-      "score": 20,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-04"
-    },
-    {
-      "query": "complete your mortgage documents checklist",
-      "page": "/questions/mortgage-checklist/",
-      "url": "https://approvalprep.com/questions/mortgage-checklist/",
-      "score": 20,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.75 >= 0.6)",
-      "at": "2026-11-04"
-    },
-    {
-      "query": "mortgage loan approval checklist",
-      "page": "/questions/mortgage-loan-documents-checklist/",
-      "url": "https://approvalprep.com/questions/mortgage-loan-documents-checklist/",
-      "score": 20,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-04"
-    },
-    {
-      "query": "loan closing documents checklist",
-      "page": "/questions/mortgage-loan-documents-checklist/",
-      "url": "https://approvalprep.com/questions/mortgage-loan-documents-checklist/",
-      "score": 20,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-04"
-    },
-    {
-      "query": "home loan required documents list",
-      "page": "/questions/documents-required-for-home-mortgage-loan/",
-      "url": "https://approvalprep.com/questions/documents-required-for-home-mortgage-loan/",
-      "score": 20,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.67 >= 0.6)",
-      "at": "2026-11-04"
-    },
-    {
-      "query": "your mortgage application checklist",
-      "page": "/questions/mortgage-checklist/",
-      "url": "https://approvalprep.com/questions/mortgage-checklist/",
-      "score": 20,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.67 >= 0.6)",
-      "at": "2026-11-04"
-    },
-    {
-      "query": "us mortgage documents list",
-      "page": "/questions/mortgage-loan-documents-list/",
-      "url": "https://approvalprep.com/questions/mortgage-loan-documents-list/",
-      "score": 20,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.75 >= 0.6)",
-      "at": "2026-11-04"
-    },
-    {
-      "query": "home loan documents list",
-      "page": "/questions/list-of-documents-needed-for-home-loan-application/",
-      "url": "https://approvalprep.com/questions/list-of-documents-needed-for-home-loan-application/",
-      "score": 20,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.67 >= 0.6)",
-      "at": "2026-11-04"
-    },
-    {
-      "query": "list of documents for mortgage application",
-      "page": "/questions/mortgage-loan-documents-list/",
-      "url": "https://approvalprep.com/questions/mortgage-loan-documents-list/",
-      "score": 20,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-03"
-    },
-    {
-      "query": "home mortgage loan application checklist",
-      "page": "/questions/home-loan-documents-checklist/",
-      "url": "https://approvalprep.com/questions/home-loan-documents-checklist/",
-      "score": 20,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.83 >= 0.6)",
-      "at": "2026-11-03"
-    },
-    {
-      "query": "mortgage loan processing checklist",
-      "page": "/questions/mortgage-loan-processing-checklist-template/",
-      "url": "https://approvalprep.com/questions/mortgage-loan-processing-checklist-template/",
-      "score": 20,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.80 >= 0.6)",
-      "at": "2026-11-03"
-    },
-    {
-      "query": "mortgage loan apply checklist",
-      "page": "/questions/mortgage-loan-documents-checklist/",
-      "url": "https://approvalprep.com/questions/mortgage-loan-documents-checklist/",
-      "score": 20,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-03"
-    },
-    {
-      "query": "documents needed for a mortgage loan",
-      "page": "/questions/mortgage-loan-documents-checklist/",
-      "url": "https://approvalprep.com/questions/mortgage-loan-documents-checklist/",
-      "score": 20,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-03"
-    },
-    {
-      "query": "contractor mortgage documents checklist",
-      "page": "/questions/mortgage-loan-documents-checklist/",
-      "url": "https://approvalprep.com/questions/mortgage-loan-documents-checklist/",
-      "score": 20,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-03"
-    },
-    {
-      "query": "housing loan documents checklist",
-      "page": "/questions/mortgage-loan-documents-checklist/",
-      "url": "https://approvalprep.com/questions/mortgage-loan-documents-checklist/",
-      "score": 20,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-03"
-    },
-    {
-      "query": "required mortgage loan document checklist",
-      "page": "/questions/mortgage-loan-documents-checklist/",
-      "url": "https://approvalprep.com/questions/mortgage-loan-documents-checklist/",
-      "score": 20,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.80 >= 0.6)",
-      "at": "2026-11-03"
-    },
-    {
-      "query": "mortgage loan documents checklist 2024",
-      "page": "/questions/mortgage-loan-documents-checklist/",
-      "url": "https://approvalprep.com/questions/mortgage-loan-documents-checklist/",
-      "score": 20,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.80 >= 0.6)",
-      "at": "2026-11-03"
-    },
-    {
-      "query": "mortgage refinance document checklist",
-      "page": "/questions/mortgage-loan-documents-checklist/",
-      "url": "https://approvalprep.com/questions/mortgage-loan-documents-checklist/",
-      "score": 25,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-03"
-    },
-    {
-      "query": "how to type an employment verification letter",
-      "page": "/questions/how-to-write-an-employment-verification-letter/",
-      "url": "https://approvalprep.com/questions/how-to-write-an-employment-verification-letter/",
-      "score": 25,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-03"
-    },
-    {
-      "query": "how to request employment verification letter",
-      "page": "/questions/how-to-write-an-employment-verification-letter/",
-      "url": "https://approvalprep.com/questions/how-to-write-an-employment-verification-letter/",
-      "score": 25,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-03"
-    },
-    {
-      "query": "how to obtain employment verification letter",
-      "page": "/questions/how-to-write-an-employment-verification-letter/",
-      "url": "https://approvalprep.com/questions/how-to-write-an-employment-verification-letter/",
-      "score": 25,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-03"
-    },
-    {
-      "query": "how to make an employment verification letter",
-      "page": "/questions/how-to-write-an-employment-verification-letter/",
-      "url": "https://approvalprep.com/questions/how-to-write-an-employment-verification-letter/",
-      "score": 25,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-03"
-    },
-    {
-      "query": "letter confirming employment example",
-      "page": "/questions/letter-confirming-employment-template/",
-      "url": "https://approvalprep.com/questions/letter-confirming-employment-template/",
-      "score": 25,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-03"
-    },
-    {
-      "query": "mortgage document checklist pdf",
-      "page": "/questions/mortgage-loan-documents-checklist/",
-      "url": "https://approvalprep.com/questions/mortgage-loan-documents-checklist/",
-      "score": 25,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-03"
-    },
-    {
-      "query": "what documents do mortgage lenders ask for",
-      "page": "/questions/what-documents-do-mortgage-lenders-require/",
-      "url": "https://approvalprep.com/questions/what-documents-do-mortgage-lenders-require/",
-      "score": 25,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-03"
-    },
-    {
-      "query": "home loan documents required",
-      "page": "/questions/home-loan-documents-checklist/",
-      "url": "https://approvalprep.com/questions/home-loan-documents-checklist/",
-      "score": 25,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-03"
-    },
-    {
-      "query": "home loan application checklist",
-      "page": "/questions/home-loan-documents-checklist/",
-      "url": "https://approvalprep.com/questions/home-loan-documents-checklist/",
-      "score": 25,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.67 >= 0.6)",
-      "at": "2026-11-03"
-    },
-    {
-      "query": "home loan documents checklist pdf",
-      "page": "/questions/home-loan-documents-checklist/",
-      "url": "https://approvalprep.com/questions/home-loan-documents-checklist/",
-      "score": 25,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.80 >= 0.6)",
-      "at": "2026-11-03"
-    },
-    {
-      "query": "mortgage loan application checklist",
-      "page": "/questions/home-loan-documents-checklist/",
-      "url": "https://approvalprep.com/questions/home-loan-documents-checklist/",
-      "score": 25,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.67 >= 0.6)",
-      "at": "2026-11-03"
-    },
-    {
-      "query": "mortgage loan documents checklist pdf",
-      "page": "/questions/mortgage-loan-documents-checklist/",
-      "url": "https://approvalprep.com/questions/mortgage-loan-documents-checklist/",
-      "score": 25,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.80 >= 0.6)",
-      "at": "2026-11-03"
-    },
-    {
-      "query": "mortgage checklist template",
-      "page": "/questions/mortgage-checklist/",
-      "url": "https://approvalprep.com/questions/mortgage-checklist/",
-      "score": 30,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.67 >= 0.6)",
-      "at": "2026-11-03"
-    },
-    {
-      "query": "why do you need employment verification letter",
-      "page": "/questions/how-to-write-an-employment-verification-letter/",
-      "url": "https://approvalprep.com/questions/how-to-write-an-employment-verification-letter/",
-      "score": 30,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-03"
-    },
-    {
-      "query": "what is authorization letter to verify employment",
-      "page": "/questions/letter-verifying-employment-sample/",
-      "url": "https://approvalprep.com/questions/letter-verifying-employment-sample/",
-      "score": 30,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-03"
-    },
-    {
-      "query": "how to write letter confirming employment",
-      "page": "/questions/how-to-write-an-employment-verification-letter/",
-      "url": "https://approvalprep.com/questions/how-to-write-an-employment-verification-letter/",
-      "score": 30,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-03"
-    },
-    {
-      "query": "letter verifying employment",
-      "page": "/questions/letter-verifying-employment-sample/",
-      "url": "https://approvalprep.com/questions/letter-verifying-employment-sample/",
-      "score": 30,
-      "from": "distinct-gate",
-      "matched_by": "high token overlap (0.75 >= 0.6)",
-      "at": "2026-11-03"
+      "page": "/questions/mortgage-pre-approval-documents-checklist/"
     }
   ]
 }
