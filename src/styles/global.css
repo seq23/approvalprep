@@ -453,3 +453,22 @@ details summary { min-height: 44px; }
 .sample-consent { display: flex; gap: 10px; align-items: flex-start; min-height: 44px; cursor: pointer; }
 .sample-consent input[type="checkbox"] { flex: 0 0 22px; width: 22px; height: 22px; min-height: 0; padding: 0; margin: 2px 0 0; }
 .starter-inline { margin-top: var(--space-5); max-width: 560px; }
+
+/* Hostile review 10 Nov 2026: things to tap are at least 44px tall, errors are not grey, the phone header is short. */
+.footer-links a { min-height: 44px; }
+.footer-bottom a { display: inline-block; padding-block: 12px; margin-block: -12px; }
+.sample-consent input[type="checkbox"] { flex: 0 0 28px; width: 28px; height: 28px; margin: 0; accent-color: var(--carbon); }
+.sample-consent { align-items: center; }
+[data-starter-error], [data-sample-error], .fine[role="alert"] { color: var(--stop); font-weight: 700; }
+[data-starter-error]:empty, [data-sample-error]:empty, .fine[role="alert"]:empty { display: none; }
+.ap-tag, td[data-label]::before { font-size: 12px; }
+.ap-settle { margin: 0; }
+.home-more > summary { cursor: pointer; padding-block: 18px; font-weight: 700; min-height: 44px; list-style: none; display: flex; align-items: center; gap: 8px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.home-more > summary::-webkit-details-marker { display: none; }
+.home-more > summary::after { content: "▾"; }
+.home-more[open] > summary::after { content: "▴"; }
+.checkout-status:empty { display: none; }
+@media (max-width: 740px) {
+  .site-header .secondary-nav { display: none; }
+  .site-header .nav-cta { min-height: 44px; padding: 8px 12px; }
+}

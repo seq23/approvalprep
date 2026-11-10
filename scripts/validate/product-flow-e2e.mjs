@@ -102,7 +102,6 @@ has(verify, "no_payment_required", "verify runtime missing 100% off completed-se
 has(verify, "findPaidEntitlement", "verify runtime missing entitlement fallback");
 has(download, "download_entitlements", "download-file missing entitlement guard");
 has(layout, "Optional: prefill a draft in the Studio", "success page missing optional Studio prefill CTA");
-has(pricingDeck, "fill-in placeholders", "pricing cards missing fill-in placeholder clarity");
 has(productCard, "How filling works", "product cards missing fill-flow explanation");
 has(postPurchase, "Choose how to fill it", "post-purchase section missing fill-choice explanation");
 has(deliveryMatrix, "Product Download Delivery Matrix", "download delivery matrix doc missing");

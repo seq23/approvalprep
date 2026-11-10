@@ -51,7 +51,7 @@ const dynamicPage = fs.readFileSync("src/pages/[...slug].astro", "utf8");
 const studioPage = fs.readFileSync("src/pages/letter-writing-studio.astro", "utf8");
 const studioComponent = fs.readFileSync("src/components/LetterStudio.astro", "utf8");
 const footer = fs.readFileSync("src/components/SiteFooter.astro", "utf8");
-for (const token of ["Start free for $0", "Choose by pressure point", "Compare all kits and prices", "FreeStudioCTA", "OfferingUniverse", "FinalCTA"]) {
+for (const token of ["Choose by pressure point", "Compare all kits and prices", "FreeStudioCTA", "OfferingUniverse", "FinalCTA"]) {
   if (!indexPage.includes(token)) failures.push(`homepage missing journey token ${token}`);
 }
 for (const token of ["Decision context", "What to prepare first", "Review before you send", "IncludedOfferings", "FinalCTA"]) {

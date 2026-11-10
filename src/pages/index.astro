@@ -52,6 +52,7 @@ const homeSchema = [
       <p class="eyebrow">DIY credit letters + approval paperwork</p>
       <h1>Self-service credit repair letters and approval-ready documents, <span class="ap-hl">without the high monthly fees.</span></h1>
       <p class="lead" id="what-is-approvalprep">ApprovalPrep is a self-service document prep site that sells one-time, direct-download kits of letters, checklists, and templates for credit report questions, goodwill letters, debt validation, rental applications, income proof, loan reviews, and letters of explanation. Each kit unlocks a PDF guide and an editable DOCX file; you fill in your true facts and send it yourself.</p>
+      <p class="supporting-copy ap-settle"><strong>You write and send the letters yourself. ApprovalPrep is not a credit repair company.</strong></p>
       <p class="supporting-copy ap-alt-line">The do-it-yourself alternative to a monthly credit repair company: draft free, buy the letters once, send them yourself.</p>
       <div class="hero-actions ap-hero-actions">
         <a class="button primary-button" href={internalHref("/letter-writing-studio/")}>Draft free in the Letter Studio</a>
@@ -87,7 +88,7 @@ const homeSchema = [
       </ol>
       <div class="hero-actions">
         <a class="button primary-button" href="/pricing/">See kits from $15</a>
-        <a class="button secondary-button" href="/letter-writing-studio/">Draft for $0 first</a>
+        <a class="button secondary-button" href="/letter-writing-studio/">Draft free in the Letter Studio</a>
       </div>
     </aside>
   </section>
@@ -103,6 +104,10 @@ const homeSchema = [
     <p class="fine">Read more: <a href={internalHref("/not-a-credit-repair-company")}>why ApprovalPrep is not a credit repair company</a>. The full cost comparison page is <span class="ap-tag">planned</span>.</p>
   </div></section>
 
+  <section class="band"><div class="shell"><p class="eyebrow">Products</p><h2>Choose the kit that matches the application pressure.</h2><ProductGrid /></div></section>
+  <DemandGuideLinks all={true} eyebrow="Most-searched guides" heading="Start with the letter or form you were asked for." />
+  <details class="home-more" data-home-more>
+    <summary class="shell"><span>How it works, what is in each kit, and how your information is handled</span></summary>
   {/* The hero's supporting line already stated what the site recommends doing.
       It is folded into the recommendation_summary block here rather than
       published in both places. */}
@@ -138,7 +143,7 @@ const homeSchema = [
           <li>Answer guided prompts to prefill a first-pass draft locally in your browser.</li>
           <li>Copy the draft into your editable DOCX, review it, and send only what is true.</li>
         </ol>
-        <a class="button secondary-button" href="/letter-writing-studio/">Try our Letter Studio - Free!</a>
+        <a class="button secondary-button" href="/letter-writing-studio/">Draft free in the Letter Studio</a>
       </article>
     </div>
   </div></section>
@@ -157,10 +162,6 @@ const homeSchema = [
       ))}
     </div>
   </div></section>
-  <DemandGuideLinks all={true} eyebrow="Most-searched guides" heading="Start with the letter or form you were asked for." />
-  <section class="ap-planned shell" aria-label="Guides being written">
-    <p class="fine">Being written next <span class="ap-tag">planned</span>: debt validation letter · pay for delete letter · how to remove late payments from a credit report · how to remove hard inquiries.</p>
-  </section>
   <FreeStudioCTA />
   <section class="band"><div class="shell">
     <p class="eyebrow">Compare kits</p>
@@ -175,12 +176,12 @@ const homeSchema = [
     <p class="lead">The offer is intentionally simple: you do not buy every letter one by one. Each paid kit bundles the letters, checklists, examples, and next steps for that paperwork lane, then unlocks as PDF + editable DOCX after checkout.</p>
     <OfferingUniverse categories={offeringCategories} variant="summary" />
   </div></section>
-  <section class="band"><div class="shell"><p class="eyebrow">Products</p><h2>Choose the kit that matches the application pressure.</h2><ProductGrid /></div></section>
   <section class="band"><div class="shell"><HowItWorks steps={howItWorks} /></div></section>
   <section class="band"><div class="shell"><WhatYouGet title="Why ApprovalPrep" items={whyApprovalPrep} /></div></section>
   <section class="band"><div class="shell"><UseCaseList items={["You want self-service credit repair letters or credit explanation paperwork you can prepare and send yourself.", "You want to get apartment-ready, job-ready, loan-ready, or funding-ready before a reviewer asks for more documents.", "You want a lower-cost paperwork kit instead of an open-ended service, while keeping control of what you send and when."]} /></div></section>
   <section class="band"><div class="shell"><NextStepsExplainer /></div></section>
   <section class="band"><div class="shell"><DataPrivacyNotice /></div></section>
+  </details>
   <section class="band"><div class="shell"><CreditBoundaryExplainer /></div></section>
   <section class="band"><div class="shell"><BoundaryNotice /></div></section>
   <section class="band" id="faq" data-content-block="faq"><div class="shell">
@@ -189,5 +190,14 @@ const homeSchema = [
     <div class="ap-faq">{homeFaq.map((item) => <article class="card"><h3>{item.question}</h3><p>{item.answer}</p></article>)}</div>
     <p class="ap-selfhelp">Self-help templates. Not legal or financial advice. We do not contact bureaus or creditors for you.</p>
   </div></section>
-  <FinalCTA primary="Start free for $0" secondary="Compare all kits" href="/letter-writing-studio/" secondaryHref="/pricing" />
+  <FinalCTA primary="Draft free in the Letter Studio" secondary="Compare all kits" href="/letter-writing-studio/" secondaryHref="/pricing" />
+<script>
+  // A link to a section inside the folded part opens the fold first.
+  const openFold = () => {
+    const target = location.hash.length > 1 ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null;
+    const fold = target?.closest("details[data-home-more]") as HTMLDetailsElement | null;
+    if (fold && !fold.open) { fold.open = true; target!.scrollIntoView(); }
+  };
+  addEventListener("hashchange", openFold); openFold();
+</script>
 </BaseLayout>

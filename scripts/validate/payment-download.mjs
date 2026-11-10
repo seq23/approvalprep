@@ -40,7 +40,17 @@ const webhook = fs.readFileSync(path.join(root, "functions/api/stripe-webhook.js
 if (!webhook.includes("stripe-signature") || !webhook.includes("STRIPE_WEBHOOK_SECRET")) fail("[payment] Stripe webhook must verify signatures");
 const layout = fs.readFileSync(path.join(root, "src/layouts/BaseLayout.astro"), "utf8");
 if (!layout.includes("Return to pricing and complete checkout") || !layout.includes("until Stripe confirms this session as paid")) fail("[payment] checkout success UI must explain unconfirmed sessions and send customers back to checkout or support");
-if (!layout.includes("discount_code")) fail("[payment] checkout JS must submit discount_code when present");
+// Buy buttons: the promo code is sent, and coming Back from Stripe leaves the button ready again.
+{
+  const { beginCheckout, restoreCheckoutButtons, OPENING_LABEL } = await import("../../src/lib/checkoutButtons.mjs");
+  if (!fs.readFileSync(path.join(root, "src/lib/checkoutButtons.mjs"), "utf8").includes("discount_code")) fail("[payment] checkout JS must submit discount_code when present");
+  if (!layout.includes("initCheckoutButtons")) fail("[payment] the layout must start the Buy buttons");
+  const button = { dataset: {}, textContent: "Buy Credit Letter Kit — $19", disabled: false };
+  beginCheckout(button); beginCheckout(button);
+  if (!button.disabled || button.textContent !== OPENING_LABEL) fail("[payment] a pressed Buy button must show it is opening the payment page");
+  restoreCheckoutButtons([button]);
+  if (button.disabled || button.textContent !== "Buy Credit Letter Kit — $19" || "label" in button.dataset) fail("[payment] back from Stripe must restore the Buy button");
+}
 if (!layout.includes("Optional: prefill a draft in the Studio") || !layout.includes("Download editable Word document")) fail("[payment] verified checkout UI must offer both direct template download and optional browser-only prefill path");
 const slugPage = fs.readFileSync(path.join(root, "src/pages/[...slug].astro"), "utf8");
 if (!slugPage.includes("If Stripe has not confirmed this checkout session as paid") || !slugPage.includes("download the blank/editable templates")) fail("[payment] checkout success page must explain paid-download versus optional prefill choice");

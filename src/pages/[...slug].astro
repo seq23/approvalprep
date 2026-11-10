@@ -60,7 +60,7 @@ const copy = routeCopy[route.path] || {
   heading: route.title,
   lead: "Use this page to understand what to prepare, what to send, and what ApprovalPrep does not do.",
   shortAnswer: "ApprovalPrep gives you a plain next step. You stay in control.",
-  primaryCta: route.primary_cta || "Start my letter",
+  primaryCta: route.primary_cta || "See the kits and prices",
   secondaryCta: route.secondary_cta || "Build my packet",
   whoFor: ["People who want to prepare before they apply."],
   value: ["Plain-language guidance."],
@@ -206,13 +206,13 @@ const childRoutes = manifest.routes
           <div>
             <p class="eyebrow">Pricing first</p>
             <h2>Choose the kit that matches the paperwork pressure.</h2>
-            <p class="lead">ApprovalPrep has 8 checkout products covering 50 named self-service tools, templates, checklists, and letter types. You do not buy 50 separate files; you choose the kit that contains the paperwork you need, or the Complete Bundle for the full library.</p>
+            <p class="lead">ApprovalPrep sells 8 kits. Between them they hold 50 letters, templates and checklists. You do not buy 50 separate files; you choose the kit that contains the paperwork you need, or the Complete Bundle for the full library.</p>
           </div>
           <div class="card pricing-start-free">
             <p class="eyebrow">$0 starting path</p>
             <h3>Not sure yet?</h3>
             <p>Use the free Letter Writing Studio first. It does not store your answers and helps you choose the right kit.</p>
-            <a class="button secondary-button" href="/letter-writing-studio/">Start free for $0</a>
+            <a class="button secondary-button" href="/letter-writing-studio/">Draft free in the Letter Studio</a>
           </div>
         </div>
         <div class="pricing-model-grid">
@@ -239,7 +239,7 @@ const childRoutes = manifest.routes
           {productComparison.map((row) => <tr><td><a href={internalHref(row.href)}>{row.product}</a></td><td>{row.bestFor}</td><td>{row.includes}</td><td><strong>{row.price}</strong></td></tr>)}
         </tbody></table></div>
       </div></section>
-      <section class="band"><div class="shell"><p class="eyebrow">All included offerings</p><h2>50 named self-service tools organized into 8 paid checkout kits.</h2><p class="lead">This is the full universe of named use cases. The Complete Bundle includes the full library; the smaller kits include the tools for that specific situation.</p><OfferingUniverse categories={offeringCategories} /></div></section>
+      <details class="home-more"><summary class="shell"><span>Every letter and checklist, by kit</span></summary><section class="band"><div class="shell"><p class="eyebrow">All included offerings</p><h2>Every letter and checklist, by kit.</h2><p class="lead">This is the full universe of named use cases. The Complete Bundle includes the full library; the smaller kits include the tools for that specific situation.</p><OfferingUniverse categories={offeringCategories} /></div></section></details>
       {pageFaq.length > 0 && <section class="band"><div class="shell"><FAQBlock faq={pageFaq} /></div></section>}
     </>
   ) : isGlossary ? (
@@ -256,7 +256,7 @@ const childRoutes = manifest.routes
           now folded into the recommendation_summary block above the fold rather
           than published twice. */}
       {isGuide && <GuidePlaybook copy={copy} product={routeProduct} ctaHref={ctaHref} />}
-      {isCommercial && <PageCTAStack primary={primaryCtaWithPrice} secondary="Start free for $0 first" sku={primarySku} secondaryHref="/letter-writing-studio" />}
+      {isCommercial && <PageCTAStack primary={primaryCtaWithPrice} secondary="Draft free in the Letter Studio" sku={primarySku} secondaryHref="/letter-writing-studio" />}
       {isCommercial && <ProblemAgitationFit title="Make the situation easier to review." items={[
         {title:"The pressure", copy:"A reviewer is asking for clarity, proof, or context. Sending scattered facts can create more questions."},
         {title:"The better move", copy:"Prepare a clear explanation, attach real supporting documents, and keep a copy trail."},
