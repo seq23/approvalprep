@@ -47,7 +47,7 @@ export function getStaticPaths() {
   const dedicatedPaths = new Set([
     "/", "/letter-writing-studio", "/resources", "/blog", "/contact", "/about", "/methodology",
     "/employment-verification-letter", "/609-dispute-letter", "/goodwill-letter-to-remove-late-payment",
-    "/letter-of-explanation/late-payment", "/letter-of-explanation/large-deposit",
+    "/letter-of-explanation/late-payment", "/letter-of-explanation/large-deposit", "/the-bureau-answered",
     ...demandCoverage.pages.map((page) => page.path)
   ]);
   return manifest.routes

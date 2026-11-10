@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import LetterStudio from "../components/LetterStudio.astro";
+import ThreeWaysToDispute from "../components/ThreeWaysToDispute.astro";
 import FreeStudioCTA from "../components/FreeStudioCTA.astro";
 import TrustAndBoundaryBand from "../components/TrustAndBoundaryBand.astro";
 import RecommendationSummary from "../components/RecommendationSummary.astro";
@@ -11,9 +12,11 @@ const copy = routeCopy["/letter-writing-studio"];
   <section class="hero shell studio-hero">
     <p class="eyebrow">Free Letter Writing Studio</p>
     <h1>Draft a clearer explanation letter before you buy a kit.</h1>
+    <p class="supporting-copy studio-plain"><strong>No account. Nothing stored on our side. Nothing to renew.</strong></p>
     <p class="lead">Free. Pick your situation, answer a few questions and get a first-pass letter in proper letter form. A credit report dispute letter comes addressed to the bureau and saves as a PDF.</p>
   </section>
   <section class="band studio-band" id="studio"><div class="shell"><LetterStudio /></div></section>
+  <ThreeWaysToDispute />
   {/* recommendation_summary: this page's own copy record in src/data/content.ts
       states what it recommends. Nothing here is composed for the block. */}
   <section class="band recommendation-summary-band"><div class="shell">

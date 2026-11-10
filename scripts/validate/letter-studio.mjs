@@ -9,7 +9,7 @@
 //  5. The dispute PDF is a valid two-page file: the letter, then "Before you mail".
 import fs from "node:fs";
 import { fail, readJson } from "./_common.mjs";
-import { studioSituations, bureaus, buildLetter, ANSWER_WINDOW, BEFORE_YOU_MAIL } from "../../src/lib/letterStudioCore.mjs";
+import { studioSituations, bureaus, buildLetter, ANSWER_WINDOW, BEFORE_YOU_MAIL, answerDueDate, buildAnswerDueIcs, parseDay } from "../../src/lib/letterStudioCore.mjs";
 import { buildLetterPdf } from "../../src/lib/letterPdf.mjs";
 import { kitMoments } from "../../src/lib/kitMoments.mjs";
 
@@ -67,7 +67,18 @@ for (const b of bureaus) {
   if (!l.text.includes("Capital one, ending 4471") || !l.text.includes("60 days late in March 2026")) fail(`[letter-studio] ${b.id}: the disputed item is not identified`);
   if (l.enclosures.length !== 3 || !/credit report with the item circled/.test(l.enclosures[0])) fail(`[letter-studio] ${b.id}: enclosures not listed`);
 }
-if (!/^https:\/\//.test(ANSWER_WINDOW.source.url) || !/30 days/.test(ANSWER_WINDOW.text)) fail("[letter-studio] the 30-day answer window must cite its source");
+if (!/^https:\/\//.test(ANSWER_WINDOW.source.url) || !/^https:\/\//.test(ANSWER_WINDOW.law.url) || !/30 days/.test(ANSWER_WINDOW.text)) fail("[letter-studio] the 30-day answer window must cite its sources");
+// Day 30 is a date worked out in the browser: mailed Fri 6 Nov 2026 -> due Sun 6 Dec 2026; the
+// calendar file carries that date and no account detail.
+{
+  const mailed = parseDay("2026-11-06");
+  const due = answerDueDate(mailed);
+  if (due.getFullYear() !== 2026 || due.getMonth() !== 11 || due.getDate() !== 6) fail("[letter-studio] answer-due date is not the mailing date plus 30 days");
+  if (answerDueDate(parseDay("2027-01-31")).getMonth() !== 2) fail("[letter-studio] answer-due date breaks across a month end");
+  const ics = buildAnswerDueIcs({ mailedOn: mailed, bureauName: "Experian", now: new Date(Date.UTC(2026, 10, 10)) });
+  if (!ics.startsWith("BEGIN:VCALENDAR\r\n") || !ics.includes("DTSTART;VALUE=DATE:20261206\r\n") || !ics.includes("DTEND;VALUE=DATE:20261207\r\n") || !ics.trimEnd().endsWith("END:VCALENDAR")) fail("[letter-studio] calendar file is not a valid one-day event on the due date");
+  if (/4471|capital one|jordan/i.test(ics)) fail("[letter-studio] the calendar file must not carry her account or name");
+}
 
 const pdf = Buffer.from(buildLetterPdf(buildLetter(disputes[0].id, full, { today }), { footer: "x", sheet: { title: "Before you mail", lines: BEFORE_YOU_MAIL } })).toString("latin1");
 if (!pdf.startsWith("%PDF-1.4") || !pdf.trimEnd().endsWith("%%EOF") || !/\/Count 2\b/.test(pdf)) fail("[letter-studio] dispute PDF is not a valid two-page file");
