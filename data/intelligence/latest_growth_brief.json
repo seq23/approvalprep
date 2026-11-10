@@ -1,160 +1,165 @@
 {
   "schemaVersion": "4.2.0",
-  "generatedAt": "2026-11-07T12:56:31.719Z",
+  "generatedAt": "2026-11-10T11:46:05.785Z",
   "sourceStatus": [
     {
-      "id": "3d87eec5-e95e-4020-ada4-5e34a9652dfc",
-      "connectorId": "page_action_recommendation",
-      "status": "COMPLETE",
-      "ranAt": "2026-11-07T12:56:31.671Z",
-      "recordsImported": 5435
-    },
-    {
-      "id": "c04fc82b-7b26-4042-a4ce-5851422a0caf",
+      "id": "d5088dcd-50f8-4296-98ac-997ea5593fad",
       "connectorId": "authority_requirement_analysis",
       "status": "COMPLETE",
-      "ranAt": "2026-11-07T12:56:31.617Z",
+      "ranAt": "2026-11-10T11:46:05.601Z",
       "recordsImported": 72
     },
     {
-      "id": "436decdd-4896-4183-9502-2f67bb2c5aad",
+      "id": "d5f90ca6-1b8f-44f6-8d64-d42b476b38ea",
       "connectorId": "growth_maintenance_analysis",
       "status": "COMPLETE",
-      "ranAt": "2026-11-07T12:56:31.588Z",
+      "ranAt": "2026-11-10T11:46:05.452Z",
       "recordsImported": 72
     },
     {
-      "id": "e64a8b38-947e-4889-a03f-1c6e43addcc0",
-      "connectorId": "content_opportunity_analysis",
-      "status": "COMPLETE",
-      "ranAt": "2026-11-07T12:56:31.557Z",
-      "recordsImported": 5435
-    },
-    {
-      "id": "88c8a108-267b-47c3-8e26-0c0fb7ffaaf2",
-      "connectorId": "official_source_fetcher",
-      "status": "COMPLETE",
-      "ranAt": "2026-11-07T12:56:30.238Z",
-      "recordsImported": 12
-    },
-    {
-      "id": "76b530aa-96da-4b37-ab86-68f24865a95c",
-      "connectorId": "manual_social_signal_import",
-      "status": "NO_DATA",
-      "ranAt": "2026-11-07T12:56:26.976Z",
-      "reason": "No social signal import found at data/imports/social-signals.json.",
-      "recordsImported": 0
-    },
-    {
-      "id": "eda33928-d416-4032-971f-f1f139c1fc19",
-      "connectorId": "manual_serp_csv",
-      "status": "NO_DATA",
-      "ranAt": "2026-11-07T12:56:26.950Z",
-      "reason": "No SERP CSV found at data/imports/serp.csv.",
-      "recordsImported": 0
-    },
-    {
-      "id": "c8be7840-2169-4d79-9708-a0003da6712e",
-      "connectorId": "competitor_public_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-11-07T12:56:26.922Z",
-      "recordsImported": 2
-    },
-    {
-      "id": "f8e79f83-0953-48dd-b4c0-2b958d29ef5e",
-      "connectorId": "competitor_sitemap_discovery",
-      "status": "COMPLETE",
-      "ranAt": "2026-11-07T12:56:26.341Z",
-      "recordsImported": 2
-    },
-    {
-      "id": "a4d70a8c-da0f-4b2a-8c28-e533b34a9475",
-      "connectorId": "owned_site_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-11-07T12:56:25.559Z",
-      "recordsImported": 100
-    },
-    {
-      "id": "ba11e39e-58ef-4a53-a699-a05e870b17b6",
+      "id": "d9700717-f9ba-485b-9014-e444c2c9be96",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
-      "ranAt": "2026-11-07T12:56:25.530Z",
+      "ranAt": "2026-11-10T11:17:35.997Z",
       "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
       "recordsImported": 0
     },
     {
-      "id": "8f4901c2-c14b-48c5-9e18-2b3ba23cac17",
+      "id": "b89b121a-4e6e-4ab1-b42b-c8ff559b2dd5",
+      "connectorId": "indexnow",
+      "status": "NO_DATA",
+      "ranAt": "2026-11-10T11:17:35.818Z",
+      "mode": "live",
+      "recordsImported": 0,
+      "preparedUrlCount": 72
+    },
+    {
+      "id": "5232fa23-2cdb-48d4-82ae-c57d2d586295",
+      "connectorId": "official_source_fetcher",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-10T09:22:33.479Z",
+      "recordsImported": 12
+    },
+    {
+      "id": "5596b64b-aa80-4cfa-b891-53d93c625b08",
+      "connectorId": "manual_social_signal_import",
+      "status": "NO_DATA",
+      "ranAt": "2026-11-10T09:22:30.814Z",
+      "reason": "No social signal import found at data/imports/social-signals.json.",
+      "recordsImported": 0
+    },
+    {
+      "id": "7e1b2764-1ef4-4fb7-ae88-b292b34e3cc8",
+      "connectorId": "manual_serp_csv",
+      "status": "NO_DATA",
+      "ranAt": "2026-11-10T09:22:30.715Z",
+      "reason": "No SERP CSV found at data/imports/serp.csv.",
+      "recordsImported": 0
+    },
+    {
+      "id": "93938e16-8e06-4a74-8ce8-25a11e99bfaf",
+      "connectorId": "competitor_public_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-10T09:22:30.615Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "781c17e8-689b-4cc9-a8b6-df15beba6db5",
+      "connectorId": "competitor_sitemap_discovery",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-10T09:22:30.179Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "b7c4594e-c974-4184-9ab4-a419c455751b",
+      "connectorId": "owned_site_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-10T09:22:28.839Z",
+      "recordsImported": 100
+    },
+    {
+      "id": "168e5c32-8365-4d41-8961-f52a1577609b",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-11-10T09:22:28.740Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "dd43847d-55e2-4f52-95f7-065eef4dc7ca",
       "connectorId": "google_url_inspection",
       "status": "BUDGET_HELD",
-      "ranAt": "2026-11-07T12:56:25.502Z",
-      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
+      "ranAt": "2026-11-10T09:22:28.607Z",
+      "reason": "weekly ceiling 2 reached (2 live attempts in 7d)",
       "recordsImported": 0
     },
     {
-      "id": "b40554ec-2adb-4715-b46a-18642defd9a0",
+      "id": "5432a8ce-7c33-4739-8a9d-aee8eb68d187",
       "connectorId": "google_search_console_search_analytics",
       "status": "BUDGET_HELD",
-      "ranAt": "2026-11-07T12:56:25.368Z",
+      "ranAt": "2026-11-10T09:22:28.384Z",
       "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
       "recordsImported": 0
     },
     {
-      "id": "95bf9232-b206-4852-9488-627153572579",
+      "id": "8385aad1-8dd9-4625-ad1c-1c7d0a503c27",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-11-09T11:18:39.385Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "a516ed5d-cbd9-488b-b66a-88e807a660da",
+      "connectorId": "indexnow",
+      "status": "NO_DATA",
+      "ranAt": "2026-11-09T11:18:39.243Z",
+      "mode": "live",
+      "recordsImported": 0,
+      "preparedUrlCount": 72
+    },
+    {
+      "id": "53644f9c-e7ac-45c0-ad70-826df19b14e9",
       "connectorId": "official_source_fetcher",
       "status": "COMPLETE",
-      "ranAt": "2026-11-07T12:53:42.405Z",
+      "ranAt": "2026-11-09T09:25:42.950Z",
       "recordsImported": 12
     },
     {
-      "id": "b3386ac2-9a65-4a0d-90a3-c3683f63b4f4",
+      "id": "02f3e969-ffa4-471e-b566-c37b486f43b3",
       "connectorId": "manual_social_signal_import",
       "status": "NO_DATA",
-      "ranAt": "2026-11-07T12:53:39.290Z",
+      "ranAt": "2026-11-09T09:25:39.465Z",
       "reason": "No social signal import found at data/imports/social-signals.json.",
       "recordsImported": 0
     },
     {
-      "id": "ca7ccd60-3416-43ed-938f-5f0d6b53f392",
+      "id": "abacc444-fe5b-44eb-ab1a-cfabba308297",
       "connectorId": "manual_serp_csv",
       "status": "NO_DATA",
-      "ranAt": "2026-11-07T12:53:39.179Z",
+      "ranAt": "2026-11-09T09:25:39.363Z",
       "reason": "No SERP CSV found at data/imports/serp.csv.",
       "recordsImported": 0
     },
     {
-      "id": "c97be5b0-fe66-4f3c-9263-4780d3f826c6",
+      "id": "e5de2ed3-63f8-4d12-bdef-79b8951cd93f",
       "connectorId": "competitor_public_crawler",
       "status": "COMPLETE",
-      "ranAt": "2026-11-07T12:53:39.067Z",
+      "ranAt": "2026-11-09T09:25:39.262Z",
       "recordsImported": 2
     },
     {
-      "id": "67c8b494-d62a-48c9-935b-94be9d35e40d",
+      "id": "95d64840-9d35-4bcd-a0f0-bc1d8180476f",
       "connectorId": "competitor_sitemap_discovery",
       "status": "COMPLETE",
-      "ranAt": "2026-11-07T12:53:38.585Z",
+      "ranAt": "2026-11-09T09:25:38.670Z",
       "recordsImported": 2
-    },
-    {
-      "id": "7ef2ce55-040e-4dc9-ae3f-5b5222d83376",
-      "connectorId": "owned_site_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-11-07T12:53:37.779Z",
-      "recordsImported": 100
-    },
-    {
-      "id": "3b475af0-1199-44b4-adbd-658b46eefd15",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-11-07T12:53:37.662Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
     }
   ],
   "topContentOpportunities": [
     {
-      "id": "brief_maxfanout_020001_8d29e29e4c",
-      "query": "what is letter of explanation for mortgage applicants plain english",
+      "id": "brief_maxfanout_035001_ace023b0e3",
+      "query": "what is letter of explanation for consumers rebuilding credit self service",
       "route": null,
       "pageFamily": "letter-of-explanation",
       "searchOpportunityScore": 0,
@@ -162,19 +167,19 @@
       "competitorGapScore": 0,
       "userUtilityScore": 80,
       "productSupportScore": 80,
-      "complianceRiskScore": 20,
+      "complianceRiskScore": 65,
       "authorityRequirementScore": 25,
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
       "bestFormat": "faq_or_section",
-      "adminReviewRequired": false,
+      "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-11-07T12:56:31.494Z"
+      "createdAt": "2026-11-10T10:30:01.646Z"
     },
     {
-      "id": "brief_maxfanout_020005_4b5a9af56c",
-      "query": "what is self employed income documents for mortgage applicants plain english",
+      "id": "brief_maxfanout_035005_84c0384e5e",
+      "query": "what is self employed income documents for consumers rebuilding credit self service",
       "route": null,
       "pageFamily": "self-employed-income-documents",
       "searchOpportunityScore": 0,
@@ -190,11 +195,91 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-11-07T12:56:31.494Z"
+      "createdAt": "2026-11-10T10:30:01.646Z"
     },
     {
-      "id": "brief_maxfanout_020016_ca0a6934b6",
-      "query": "what is gift letter explanation for mortgage applicants plain english",
+      "id": "brief_maxfanout_035006_308f2104f7",
+      "query": "what is auto loan documents for consumers rebuilding credit self service",
+      "route": null,
+      "pageFamily": "auto-loan-documents",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "checklist_or_numbered_steps",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-11-10T10:30:01.646Z"
+    },
+    {
+      "id": "brief_maxfanout_035009_20d9942b60",
+      "query": "what is business loan documents for consumers rebuilding credit self service",
+      "route": null,
+      "pageFamily": "business-loan-documents",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "checklist_or_numbered_steps",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-11-10T10:30:01.646Z"
+    },
+    {
+      "id": "brief_maxfanout_035014_4ca62007b0",
+      "query": "what is collections documentation for consumers rebuilding credit self service",
+      "route": null,
+      "pageFamily": "collections-documentation",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-11-10T10:30:01.646Z"
+    },
+    {
+      "id": "brief_maxfanout_035015_7b319255a5",
+      "query": "what is debt documentation for consumers rebuilding credit self service",
+      "route": null,
+      "pageFamily": "debt-documentation",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-11-10T10:30:01.646Z"
+    },
+    {
+      "id": "brief_maxfanout_035016_4fe4d82c00",
+      "query": "what is gift letter explanation for consumers rebuilding credit self service",
       "route": null,
       "pageFamily": "gift-letter-explanation",
       "searchOpportunityScore": 0,
@@ -202,19 +287,79 @@
       "competitorGapScore": 0,
       "userUtilityScore": 80,
       "productSupportScore": 80,
-      "complianceRiskScore": 20,
+      "complianceRiskScore": 65,
       "authorityRequirementScore": 25,
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
       "bestFormat": "faq_or_section",
-      "adminReviewRequired": false,
+      "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-11-07T12:56:31.494Z"
+      "createdAt": "2026-11-10T10:30:01.646Z"
     },
     {
-      "id": "brief_maxfanout_020026_88a2b814e9",
-      "query": "what is apartment application documents for mortgage applicants plain english",
+      "id": "brief_maxfanout_035021_51dd70b5c4",
+      "query": "what is source of funds documentation for consumers rebuilding credit self service",
+      "route": null,
+      "pageFamily": "source-of-funds-documentation",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-11-10T10:30:01.646Z"
+    },
+    {
+      "id": "brief_maxfanout_035023_d125853af4",
+      "query": "what is underwriting document checklist for consumers rebuilding credit self service",
+      "route": null,
+      "pageFamily": "underwriting-document-checklist",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 80,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "checklist_or_numbered_steps",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-11-10T10:30:01.646Z"
+    },
+    {
+      "id": "brief_maxfanout_035025_380b0fadbe",
+      "query": "what is first time homebuyer documents for consumers rebuilding credit self service",
+      "route": null,
+      "pageFamily": "first-time-homebuyer-documents",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "checklist_or_numbered_steps",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-11-10T10:30:01.646Z"
+    },
+    {
+      "id": "brief_maxfanout_035026_c90dcbadaa",
+      "query": "what is apartment application documents for consumers rebuilding credit self service",
       "route": null,
       "pageFamily": "apartment-application-documents",
       "searchOpportunityScore": 0,
@@ -222,19 +367,59 @@
       "competitorGapScore": 0,
       "userUtilityScore": 80,
       "productSupportScore": 30,
-      "complianceRiskScore": 20,
+      "complianceRiskScore": 65,
       "authorityRequirementScore": 25,
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
       "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": false,
+      "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-11-07T12:56:31.495Z"
+      "createdAt": "2026-11-10T10:30:01.647Z"
     },
     {
-      "id": "brief_maxfanout_020030_86fd39d09e",
-      "query": "what is document discrepancy explanation for mortgage applicants plain english",
+      "id": "brief_maxfanout_035027_a7953806bb",
+      "query": "what is LLC funding documents for consumers rebuilding credit self service",
+      "route": null,
+      "pageFamily": "llc-funding-documents",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "checklist_or_numbered_steps",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-11-10T10:30:01.647Z"
+    },
+    {
+      "id": "brief_maxfanout_035028_b56855afd8",
+      "query": "what is financial document organization for consumers rebuilding credit self service",
+      "route": null,
+      "pageFamily": "financial-document-organization",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 30,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "faq_or_section",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-11-10T10:30:01.647Z"
+    },
+    {
+      "id": "brief_maxfanout_035030_47269d60d9",
+      "query": "what is document discrepancy explanation for consumers rebuilding credit self service",
       "route": null,
       "pageFamily": "document-discrepancy-explanation",
       "searchOpportunityScore": 0,
@@ -242,41 +427,21 @@
       "competitorGapScore": 0,
       "userUtilityScore": 80,
       "productSupportScore": 30,
-      "complianceRiskScore": 20,
+      "complianceRiskScore": 65,
       "authorityRequirementScore": 25,
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
       "bestFormat": "faq_or_section",
-      "adminReviewRequired": false,
+      "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-11-07T12:56:31.495Z"
+      "createdAt": "2026-11-10T10:30:01.647Z"
     },
     {
-      "id": "brief_maxfanout_020041_f9a35a7d0d",
-      "query": "how to prepare letter of explanation for mortgage applicants plain english",
+      "id": "brief_maxfanout_035031_cca9f83ced",
+      "query": "what is identity and address documents for consumers rebuilding credit self service",
       "route": null,
-      "pageFamily": "letter-of-explanation",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 80,
-      "complianceRiskScore": 20,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "faq_or_section",
-      "adminReviewRequired": false,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-11-07T12:56:31.495Z"
-    },
-    {
-      "id": "brief_maxfanout_020045_45c01ce4db",
-      "query": "how to prepare self employed income documents for mortgage applicants plain english",
-      "route": null,
-      "pageFamily": "self-employed-income-documents",
+      "pageFamily": "identity-and-address-documents",
       "searchOpportunityScore": 0,
       "citationOpportunityScore": 50,
       "competitorGapScore": 0,
@@ -290,267 +455,107 @@
       "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-11-07T12:56:31.495Z"
+      "createdAt": "2026-11-10T10:30:01.647Z"
     },
     {
-      "id": "brief_maxfanout_020056_571308e382",
-      "query": "how to prepare gift letter explanation for mortgage applicants plain english",
+      "id": "brief_maxfanout_035032_1677913638",
+      "query": "what is supporting evidence checklist for consumers rebuilding credit self service",
       "route": null,
-      "pageFamily": "gift-letter-explanation",
+      "pageFamily": "supporting-evidence-checklist",
       "searchOpportunityScore": 0,
       "citationOpportunityScore": 50,
       "competitorGapScore": 0,
       "userUtilityScore": 80,
       "productSupportScore": 80,
-      "complianceRiskScore": 20,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "checklist_or_numbered_steps",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-11-10T10:30:01.647Z"
+    },
+    {
+      "id": "brief_maxfanout_035033_285a7a0be9",
+      "query": "what is application cover letter for consumers rebuilding credit self service",
+      "route": null,
+      "pageFamily": "application-cover-letter",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 80,
+      "complianceRiskScore": 65,
       "authorityRequirementScore": 25,
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
       "bestFormat": "faq_or_section",
-      "adminReviewRequired": false,
+      "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-11-07T12:56:31.495Z"
+      "createdAt": "2026-11-10T10:30:01.647Z"
     },
     {
-      "id": "brief_maxfanout_020066_e7ddf3dc05",
-      "query": "how to prepare apartment application documents for mortgage applicants plain english",
+      "id": "brief_maxfanout_035038_6d30ad4000",
+      "query": "what is loan application checklist for consumers rebuilding credit self service",
       "route": null,
-      "pageFamily": "apartment-application-documents",
+      "pageFamily": "loan-application-checklist",
       "searchOpportunityScore": 0,
       "citationOpportunityScore": 50,
       "competitorGapScore": 0,
       "userUtilityScore": 80,
-      "productSupportScore": 30,
-      "complianceRiskScore": 20,
+      "productSupportScore": 80,
+      "complianceRiskScore": 65,
       "authorityRequirementScore": 25,
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
       "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": false,
+      "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-11-07T12:56:31.495Z"
+      "createdAt": "2026-11-10T10:30:01.647Z"
     },
     {
-      "id": "brief_maxfanout_020070_164596ae10",
-      "query": "how to prepare document discrepancy explanation for mortgage applicants plain english",
+      "id": "brief_maxfanout_035039_1c2aee9a86",
+      "query": "what is business funding checklist for consumers rebuilding credit self service",
       "route": null,
-      "pageFamily": "document-discrepancy-explanation",
+      "pageFamily": "business-funding-checklist",
+      "searchOpportunityScore": 0,
+      "citationOpportunityScore": 50,
+      "competitorGapScore": 0,
+      "userUtilityScore": 80,
+      "productSupportScore": 80,
+      "complianceRiskScore": 65,
+      "authorityRequirementScore": 25,
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "recommendedAction": "build_or_add_utility_content",
+      "admissionStatus": "indexable_growth_page",
+      "bestFormat": "checklist_or_numbered_steps",
+      "adminReviewRequired": true,
+      "reason": "Useful to onsite visitors even if search upside is limited.",
+      "createdAt": "2026-11-10T10:30:01.647Z"
+    },
+    {
+      "id": "brief_maxfanout_035040_c2d6eb4453",
+      "query": "what is consumer finance documentation for consumers rebuilding credit self service",
+      "route": null,
+      "pageFamily": "consumer-finance-documentation",
       "searchOpportunityScore": 0,
       "citationOpportunityScore": 50,
       "competitorGapScore": 0,
       "userUtilityScore": 80,
       "productSupportScore": 30,
-      "complianceRiskScore": 20,
+      "complianceRiskScore": 65,
       "authorityRequirementScore": 25,
       "backlinkRequirement": "NO_BACKLINK_NEEDED",
       "recommendedAction": "build_or_add_utility_content",
       "admissionStatus": "indexable_growth_page",
       "bestFormat": "faq_or_section",
-      "adminReviewRequired": false,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-11-07T12:56:31.495Z"
-    },
-    {
-      "id": "brief_maxfanout_020081_c8e9c16840",
-      "query": "letter of explanation checklist for mortgage applicants plain english",
-      "route": null,
-      "pageFamily": "letter-of-explanation",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 80,
-      "complianceRiskScore": 20,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "improve_existing_page",
-      "admissionStatus": "indexable_utility_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": false,
-      "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-11-07T12:56:31.495Z"
-    },
-    {
-      "id": "brief_maxfanout_020083_5dcf715f28",
-      "query": "rental application preparation checklist for mortgage applicants plain english",
-      "route": null,
-      "pageFamily": "rental-application-preparation",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 80,
-      "complianceRiskScore": 20,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": false,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-11-07T12:56:31.495Z"
-    },
-    {
-      "id": "brief_maxfanout_020084_25d56386b8",
-      "query": "proof of income checklist for mortgage applicants plain english",
-      "route": null,
-      "pageFamily": "proof-of-income",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 80,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "improve_existing_page",
-      "admissionStatus": "indexable_utility_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": true,
-      "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-11-07T12:56:31.495Z"
-    },
-    {
-      "id": "brief_maxfanout_020085_1d6114820c",
-      "query": "self employed income documents checklist for mortgage applicants plain english",
-      "route": null,
-      "pageFamily": "self-employed-income-documents",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 80,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
       "adminReviewRequired": true,
       "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-11-07T12:56:31.495Z"
-    },
-    {
-      "id": "brief_maxfanout_020090_62fa583210",
-      "query": "credit report understanding checklist for mortgage applicants plain english",
-      "route": null,
-      "pageFamily": "credit-report-understanding",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 80,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-11-07T12:56:31.495Z"
-    },
-    {
-      "id": "brief_maxfanout_020091_f7b379fbe7",
-      "query": "credit dispute self service checklist for mortgage applicants plain english",
-      "route": null,
-      "pageFamily": "credit-dispute-self-service",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 80,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-11-07T12:56:31.495Z"
-    },
-    {
-      "id": "brief_maxfanout_020092_105bfbcd06",
-      "query": "credit utilization checklist for mortgage applicants plain english",
-      "route": null,
-      "pageFamily": "credit-utilization",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 80,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-11-07T12:56:31.495Z"
-    },
-    {
-      "id": "brief_maxfanout_020096_16cb2e7565",
-      "query": "gift letter explanation checklist for mortgage applicants plain english",
-      "route": null,
-      "pageFamily": "gift-letter-explanation",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 80,
-      "complianceRiskScore": 20,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "improve_existing_page",
-      "admissionStatus": "indexable_utility_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": false,
-      "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-11-07T12:56:31.495Z"
-    },
-    {
-      "id": "brief_maxfanout_020098_7d1893b618",
-      "query": "address history explanation checklist for mortgage applicants plain english",
-      "route": null,
-      "pageFamily": "address-history-explanation",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 80,
-      "complianceRiskScore": 20,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "improve_existing_page",
-      "admissionStatus": "indexable_utility_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": false,
-      "reason": "Existing route can satisfy intent with improvements.",
-      "createdAt": "2026-11-07T12:56:31.495Z"
-    },
-    {
-      "id": "brief_maxfanout_020099_974b1c5a45",
-      "query": "income change explanation checklist for mortgage applicants plain english",
-      "route": null,
-      "pageFamily": "income-change-explanation",
-      "searchOpportunityScore": 0,
-      "citationOpportunityScore": 50,
-      "competitorGapScore": 0,
-      "userUtilityScore": 80,
-      "productSupportScore": 80,
-      "complianceRiskScore": 65,
-      "authorityRequirementScore": 25,
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "recommendedAction": "build_or_add_utility_content",
-      "admissionStatus": "indexable_growth_page",
-      "bestFormat": "checklist_or_numbered_steps",
-      "adminReviewRequired": true,
-      "reason": "Useful to onsite visitors even if search upside is limited.",
-      "createdAt": "2026-11-07T12:56:31.495Z"
+      "createdAt": "2026-11-10T10:30:01.648Z"
     }
   ],
   "rankingBasis": {
@@ -574,7 +579,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-11-07T12:56:31.586Z"
+      "createdAt": "2026-11-10T11:46:05.450Z"
     },
     {
       "route": "/blog",
@@ -590,7 +595,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-11-07T12:56:31.586Z"
+      "createdAt": "2026-11-10T11:46:05.450Z"
     },
     {
       "route": "/pricing",
@@ -606,7 +611,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-11-07T12:56:31.586Z"
+      "createdAt": "2026-11-10T11:46:05.450Z"
     },
     {
       "route": "/letter-of-explanation",
@@ -622,7 +627,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-11-07T12:56:31.586Z"
+      "createdAt": "2026-11-10T11:46:05.450Z"
     },
     {
       "route": "/letter-of-explanation/credit",
@@ -638,7 +643,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-11-07T12:56:31.586Z"
+      "createdAt": "2026-11-10T11:46:05.450Z"
     },
     {
       "route": "/letter-of-explanation/eviction",
@@ -654,7 +659,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-11-07T12:56:31.586Z"
+      "createdAt": "2026-11-10T11:46:05.450Z"
     },
     {
       "route": "/letter-of-explanation/income",
@@ -670,7 +675,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-11-07T12:56:31.586Z"
+      "createdAt": "2026-11-10T11:46:05.450Z"
     },
     {
       "route": "/letter-of-explanation/employment-gap",
@@ -686,7 +691,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-11-07T12:56:31.586Z"
+      "createdAt": "2026-11-10T11:46:05.450Z"
     },
     {
       "route": "/609-dispute-letter",
@@ -702,23 +707,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-11-07T12:56:31.586Z"
-    },
-    {
-      "route": "/goodwill-letter-to-remove-late-payment",
-      "pageFamily": "credit_self_service",
-      "currentQueryCoverage": 0,
-      "gscTrend": "NO_DATA",
-      "competitorDelta": "NO_COMPETITOR_STRUCTURE_GAP",
-      "recommendedFix": "add_internal_links_and_answer_atoms",
-      "expectedEffort": "medium",
-      "authorityRequirement": "low",
-      "backlinkRequirement": "NO_BACKLINK_NEEDED",
-      "citationOpportunity": "medium",
-      "priorityScore": 55,
-      "safeToSelfHeal": true,
-      "adminReviewRequired": false,
-      "createdAt": "2026-11-07T12:56:31.586Z"
+      "createdAt": "2026-11-10T11:46:05.450Z"
     },
     {
       "route": "/letter-of-explanation/late-payment",
@@ -734,7 +723,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-11-07T12:56:31.586Z"
+      "createdAt": "2026-11-10T11:46:05.450Z"
     },
     {
       "route": "/letter-of-explanation/large-deposit",
@@ -750,7 +739,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-11-07T12:56:31.586Z"
+      "createdAt": "2026-11-10T11:46:05.450Z"
     },
     {
       "route": "/proof-of-income-letter",
@@ -766,7 +755,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-11-07T12:56:31.586Z"
+      "createdAt": "2026-11-10T11:46:05.450Z"
     },
     {
       "route": "/credit-dispute-letter",
@@ -782,7 +771,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": true,
-      "createdAt": "2026-11-07T12:56:31.586Z"
+      "createdAt": "2026-11-10T11:46:05.450Z"
     },
     {
       "route": "/apartment-application",
@@ -798,7 +787,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-11-07T12:56:31.586Z"
+      "createdAt": "2026-11-10T11:46:05.450Z"
     },
     {
       "route": "/rental-application-checklist",
@@ -814,7 +803,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-11-07T12:56:31.586Z"
+      "createdAt": "2026-11-10T11:46:05.450Z"
     },
     {
       "route": "/auto-loan-documents",
@@ -830,7 +819,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-11-07T12:56:31.586Z"
+      "createdAt": "2026-11-10T11:46:05.450Z"
     },
     {
       "route": "/car-loan-checklist",
@@ -846,7 +835,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-11-07T12:56:31.586Z"
+      "createdAt": "2026-11-10T11:46:05.450Z"
     },
     {
       "route": "/documents-needed-for-car-loan",
@@ -862,7 +851,7 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-11-07T12:56:31.586Z"
+      "createdAt": "2026-11-10T11:46:05.450Z"
     },
     {
       "route": "/business-loan-documents",
@@ -878,7 +867,23 @@
       "priorityScore": 55,
       "safeToSelfHeal": true,
       "adminReviewRequired": false,
-      "createdAt": "2026-11-07T12:56:31.586Z"
+      "createdAt": "2026-11-10T11:46:05.450Z"
+    },
+    {
+      "route": "/mortgage-checklist",
+      "pageFamily": "mortgage",
+      "currentQueryCoverage": 0,
+      "gscTrend": "NO_DATA",
+      "competitorDelta": "NO_COMPETITOR_STRUCTURE_GAP",
+      "recommendedFix": "add_internal_links_and_answer_atoms",
+      "expectedEffort": "medium",
+      "authorityRequirement": "low",
+      "backlinkRequirement": "NO_BACKLINK_NEEDED",
+      "citationOpportunity": "medium",
+      "priorityScore": 55,
+      "safeToSelfHeal": true,
+      "adminReviewRequired": false,
+      "createdAt": "2026-11-10T11:46:05.450Z"
     }
   ],
   "hardTruth": "Low ranking potential never blocks useful onsite content. It only changes indexing, priority, and authority strategy."
