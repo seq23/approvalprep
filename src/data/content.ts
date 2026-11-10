@@ -266,14 +266,6 @@ export const footerGroups = [
         "Blog"
       ],
       [
-        "/llms.txt",
-        "llms.txt"
-      ],
-      [
-        "/llms-full.txt",
-        "llms-full.txt"
-      ],
-      [
         "/sitemap.xml",
         "Sitemap"
       ]
@@ -573,7 +565,7 @@ const manualRouteCopy = {
   // and previously had nothing at the prefix itself.
   "/tools": {
     "primaryCta": "Compare the paid kits",
-    "secondaryCta": "Start free for $0",
+    "secondaryCta": "Draft free in the Letter Studio",
     "heading": "Free ApprovalPrep Document Checklists",
     "metaDescription": "Six free ApprovalPrep checklists for apartment applications, proof of income, business funding, mortgages, car loans, and your important documents.",
     "lead": "Six free checklists, one for each application situation ApprovalPrep publishes for: apartment applications, proof of income, small-business funding, mortgage documents, car loans, and the important-documents folder you keep for everything else.",
@@ -642,7 +634,7 @@ const manualRouteCopy = {
   },
   "/templates": {
     "primaryCta": "Get the editable kits",
-    "secondaryCta": "Start free for $0",
+    "secondaryCta": "Draft free in the Letter Studio",
     "heading": "ApprovalPrep Letter Template Previews",
     "metaDescription": "Previews of five ApprovalPrep letters: address history, employment gap, bank deposits, a rental cover letter, and self-employed proof of income.",
     "lead": "Five public previews showing how each ApprovalPrep letter is structured: address history, employment gap, bank statement deposits, a rental application cover letter, and self-employed proof of income.",
@@ -711,7 +703,7 @@ const manualRouteCopy = {
   },
   "/reports": {
     "primaryCta": "Compare the paid kits",
-    "secondaryCta": "Start free for $0",
+    "secondaryCta": "Draft free in the Letter Studio",
     "heading": "ApprovalPrep Public Reports",
     "metaDescription": "Three ApprovalPrep public reports on what applicants are asked to produce: a checklist catalog, a rental prep report, and a business funding report.",
     "lead": "Three public reports on what applicants are actually asked to produce: a catalog of public application checklists, a rental application prep report, and a small-business funding document prep report.",
@@ -783,7 +775,7 @@ const manualRouteCopy = {
     "lead": "ApprovalPrep resources help users find guides, policies, publishing updates, glossary definitions, privacy boundaries, and product paths without guessing where the next piece of content lives.",
     "shortAnswer": "The Resources hub is the organizing layer for ApprovalPrep education. It points users to the blog, methodology, glossary, legal policies, pricing, and the free Studio while keeping the self-service boundary visible.",
     "primaryCta": "Read the publishing hub",
-    "secondaryCta": "Start free for $0",
+    "secondaryCta": "Draft free in the Letter Studio",
     "decisionContext": [
       "A resource section should not be a pile of footer links. It should explain where the content engine publishes, where users can learn the method, where policies live, and where buyers can return when they are ready to choose a kit.",
       "ApprovalPrep uses Resources as the public map for evergreen guides, daily answer assets, policy pages, and user education. That gives people a recovery path when they are not ready to buy yet, and gives future publishing a visible home."
@@ -849,7 +841,7 @@ const manualRouteCopy = {
     "heading": "ApprovalPrep Blog",
     "lead": "The ApprovalPrep Blog is the public home for daily and cadenced document-prep publishing: short answers, route-specific explainers, and practical self-service guidance.",
     "shortAnswer": "The Blog answers the question of where ongoing content goes. Published answer assets live here, point back to relevant product or guide pages, and keep users moving toward the right next step.",
-    "primaryCta": "Start free for $0",
+    "primaryCta": "Draft free in the Letter Studio",
     "secondaryCta": "Browse resources",
     "decisionContext": [
       "A content engine without a public publishing surface creates hidden work. The answers may exist in JSON, LLM files, or internal reports, but users cannot browse them and search engines cannot treat them as a coherent editorial body.",
@@ -916,7 +908,7 @@ const manualRouteCopy = {
     "heading": "Free Letter Writing Studio",
     "lead": "Draft a first-pass explanation letter for $0 before you buy anything. No account, no upload, no stored answers, and no payment required.",
     "shortAnswer": "The Studio is a free browser-only drafting tool. It helps you organize messy facts, create a first-pass draft, and choose the paid kit that fits your situation. ApprovalPrep does not store your answers or send anything for you.",
-    "primaryCta": "Start for $0",
+    "primaryCta": "Draft free in the Letter Studio",
     "secondaryCta": "Compare paid kits",
     "decisionContext": [
       "Most people do not start with a product name. They start with pressure: a landlord asked a question, a lender wants an explanation, a credit issue needs careful wording, or an office needs a clear note.",
@@ -982,7 +974,7 @@ const manualRouteCopy = {
     "metaTitle": "ApprovalPrep Pricing: Compare All Eight Document Prep Kits",
     "lead": "Compare all eight ApprovalPrep kits side by side: what each one covers, which situations it fits, and when the free Studio or a free checklist is enough.",
     "shortAnswer": "Eight kits, each a one-time purchase with no subscription: pick the one that matches the paperwork in front of you, or the bundle if you are facing several at once. Compare kits by the document you actually have to produce this month, not by item count; every kit downloads as both a PDF guide and an editable DOCX.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "View product paths",
     "steps": [
       "Clarify the request or situation.",
@@ -1034,7 +1026,7 @@ const manualRouteCopy = {
     "heading": "Credit Letter of Explanation",
     "lead": "Explain a late payment, collection, or other credit item to a lender or landlord in a few factual sentences, backed by dates and documents you can show.",
     "shortAnswer": "A credit explanation letter accounts for a specific entry on your credit report: what happened, when, and where the account stands today. Pull the report first and quote the entry exactly as it appears, including the creditor name and the date, so the reviewer can match your letter to the line.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
     "whoFor": [
       "An underwriter asked you to explain a late payment, collection, charge-off or new inquiry on your credit report.",
@@ -1084,7 +1076,7 @@ const manualRouteCopy = {
     "heading": "Eviction Letter of Explanation",
     "lead": "Explain a past eviction or rental dispute to a new landlord with a short, factual timeline, what has changed since, and the records behind each statement.",
     "shortAnswer": "An eviction explanation letter tells a prospective landlord what happened, how it was resolved, and what your housing record has looked like since. Have the case outcome, any settlement or payment record, and references from the tenancies that followed ready to attach.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
     "whoFor": [
       "A landlord or property manager found an eviction filing or judgment on a tenant screening report.",
@@ -1130,7 +1122,7 @@ const manualRouteCopy = {
     "heading": "Income Letter of Explanation",
     "lead": "Explain unusual deposits or an irregular income to a lender or landlord: where the money came from, when, and which statements or pay records show it.",
     "shortAnswer": "An income explanation letter accounts for deposits, gaps or swings in your income that your statements show but do not explain. Tie each unusual deposit to its source and have the paperwork behind it: a sale, a gift, a reimbursement, a bonus, a transfer between your own accounts.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
     "whoFor": [
       "A lender or landlord asked why your income changed, dropped, or does not match last year's tax return.",
@@ -1176,7 +1168,7 @@ const manualRouteCopy = {
     "heading": "Employment Gap Letter of Explanation",
     "lead": "Explain a gap in employment with the dates, the reason in one plain sentence, and what you did during it, so a lender or landlord can close the question.",
     "shortAnswer": "An employment gap letter sets out when you were out of work, why, and what your current role and income are. Fix the start and end dates of the gap against your own records before you write, and say plainly what you were doing during it.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
     "whoFor": [
       "A mortgage underwriter asked about a gap in your work history, often any gap longer than a month or two.",
@@ -1865,7 +1857,7 @@ const manualRouteCopy = {
     "heading": "ApprovalPrep Glossary",
     "lead": "Plain-language definitions of the terms that come up in applications and underwriting, from letter of explanation to proof of income and verification.",
     "shortAnswer": "These are the terms reviewers, lenders and leasing offices use, written out in plain language. Look a term up when it appears in a request, so you answer what was actually asked rather than what it sounded like.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
     "steps": [
       "Clarify the request or situation.",
@@ -1891,7 +1883,7 @@ const manualRouteCopy = {
     "heading": "ApprovalPrep Methodology",
     "lead": "ApprovalPrep Methodology helps you prepare for ApprovalPrep method with truthful details, organized supporting documents, and a clear next step before truthful document preparation becomes urgent.",
     "shortAnswer": "ApprovalPrep works from one rule: organize true facts and your own documents, and send them yourself. Every kit follows the same order, which is clarify the request, gather proof, draft, check, and keep a copy.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
     "steps": [
       "Clarify the request or situation.",
@@ -1917,7 +1909,7 @@ const manualRouteCopy = {
     "heading": "Checkout Success",
     "lead": "Checkout Success helps you prepare for payment confirmation with truthful details, organized supporting documents, and a clear next step before protected delivery becomes urgent.",
     "shortAnswer": "Your payment has gone through and your files are ready on this page. Download both the PDF guide and the editable DOCX now, and save them somewhere you will find them again.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
     "steps": [
       "Clarify the request or situation.",
@@ -1942,7 +1934,7 @@ const manualRouteCopy = {
     "heading": "Download",
     "lead": "Download helps you prepare for verified download with truthful details, organized supporting documents, and a clear next step before private file access becomes urgent.",
     "shortAnswer": "This is where a verified purchase collects its files. Use the same email address you bought with, and the page will show what your purchase includes.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
     "steps": [
       "Clarify the request or situation.",
@@ -1968,7 +1960,7 @@ const manualRouteCopy = {
     "metaTitle": "Privacy Policy: How ApprovalPrep Handles Your Data",
     "lead": "How ApprovalPrep handles your data: what is processed to run checkout and downloads, and why your letter answers, drafts, and uploads are never stored.",
     "shortAnswer": "This page explains the privacy policy boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
     "steps": [
       "Clarify the request or situation.",
@@ -1994,7 +1986,7 @@ const manualRouteCopy = {
     "metaTitle": "Terms of Use for ApprovalPrep Self-Service Tools",
     "lead": "The terms for using ApprovalPrep: a self-service document prep site where you supply truthful facts, review your own materials, and send them yourself.",
     "shortAnswer": "This page explains the terms of use boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
     "steps": [
       "Clarify the request or situation.",
@@ -2020,7 +2012,7 @@ const manualRouteCopy = {
     "metaTitle": "Disclaimer: ApprovalPrep Is Not Legal or Financial Advice",
     "lead": "ApprovalPrep offers templates and general guidance, not legal, financial, tax, or credit repair advice. What that means for the letters you prepare.",
     "shortAnswer": "This page explains the disclaimer boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
     "steps": [
       "Review the relevant credit report or account record.",
@@ -2050,7 +2042,7 @@ const manualRouteCopy = {
     "metaTitle": "Refund Policy for ApprovalPrep Digital Kit Downloads",
     "lead": "When ApprovalPrep refunds a digital kit: duplicate purchases, failed access, incorrect charges, or delivery problems, and how to send your order details.",
     "shortAnswer": "This page explains the refund policy boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
     "steps": [
       "Clarify the request or situation.",
@@ -2076,7 +2068,7 @@ const manualRouteCopy = {
     "metaTitle": "Security: How ApprovalPrep Protects Checkout and Downloads",
     "lead": "How ApprovalPrep protects checkout and paid downloads, keeps data collection minimal, and never stores your letter answers, drafts, or uploaded files.",
     "shortAnswer": "This page explains the security posture boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
     "steps": [
       "Clarify the request or situation.",
@@ -2102,7 +2094,7 @@ const manualRouteCopy = {
     "metaTitle": "Accessibility Statement for ApprovalPrep",
     "lead": "ApprovalPrep's accessibility commitment: plain language, keyboard-friendly controls, readable contrast, responsive layouts, and how to report a barrier.",
     "shortAnswer": "This page explains the accessibility boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
     "steps": [
       "Clarify the request or situation.",
@@ -2127,7 +2119,7 @@ const manualRouteCopy = {
     "heading": "Contact",
     "lead": "Contact helps you prepare for contact options with truthful details, organized supporting documents, and a clear next step before support boundaries becomes urgent.",
     "shortAnswer": "This page explains the contact options boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
     "steps": [
       "Clarify the request or situation.",
@@ -2153,7 +2145,7 @@ const manualRouteCopy = {
     "heading": "About ApprovalPrep",
     "lead": "Who publishes ApprovalPrep, what the kits do, what they never do, and how to reach a person about a purchase or download.",
     "shortAnswer": "ApprovalPrep is published by ApprovalPrep Editorial, a subsidiary of Spry Labs. It sells self-service letter and checklist kits from $15 to $49 and offers free browser-only drafts. It is not a law firm, a lender, or a credit repair organization, and nothing on the site is legal or credit advice.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
     "decisionContext": [
       "People reach this page when they are about to trust a site with a paperwork problem that matters: a rental application, a loan file, a credit report error, or an employer request. Before buying anything, it is reasonable to ask who is behind the site and what it will and will not do.",
@@ -2237,7 +2229,7 @@ const manualRouteCopy = {
     "heading": "Editorial Policy",
     "lead": "How ApprovalPrep writes and reviews its guides: plain and truthful, no overstated outcomes, extra review on credit, legal, and lending topics.",
     "shortAnswer": "This page explains the editorial standards boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
     "steps": [
       "Clarify the request or situation.",
@@ -2264,7 +2256,7 @@ const manualRouteCopy = {
     "metaTitle": "AI Use Policy: Where ApprovalPrep Uses AI and Where It Does Not",
     "lead": "Where ApprovalPrep uses software-assisted drafting and checks, why the free Letter Writing Studio needs no AI calls, and why you review every letter.",
     "shortAnswer": "This page explains the AI use policy boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
     "steps": [
       "Clarify the request or situation.",
@@ -2289,7 +2281,7 @@ const manualRouteCopy = {
     "heading": "Credit Repair Disclaimer",
     "lead": "ApprovalPrep sells do-it-yourself credit letters, not credit repair. You write and send each letter; nobody disputes items or contacts bureaus for you.",
     "shortAnswer": "This page explains the credit repair disclaimer boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
     "steps": [
       "Review the relevant credit report or account record.",
@@ -2318,7 +2310,7 @@ const manualRouteCopy = {
     "heading": "Not a Credit Repair Company",
     "lead": "ApprovalPrep is not a credit repair company. It never contacts credit bureaus or creditors for you; it sells letter kits you prepare and send yourself.",
     "shortAnswer": "This page explains the not a credit repair company boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
     "steps": [
       "Review the relevant credit report or account record.",

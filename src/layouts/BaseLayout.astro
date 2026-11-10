@@ -92,7 +92,7 @@ const documentTitle = fitTitle(String(title));
               <div class="nav-menu-panel">{item.links.map(([href, label]) => <a href={internalHref(href)}>{label}</a>)}</div>
             </details>
           ))}
-          <a class="button nav-cta" href={internalHref(navCta.href)}>{navCta.label}</a>
+          {currentPath !== navCta.href && <a class="button nav-cta" href={internalHref(navCta.href)}>{navCta.label}</a>}
         </nav>
       </div>
       <nav class="secondary-nav shell" aria-label="Use cases">
@@ -195,41 +195,11 @@ const documentTitle = fitTitle(String(title));
             }
           }
         });
-        document.addEventListener("click", async (event) => {
-          const button = event.target.closest(".checkout-button[data-sku]");
-          if (!button) return;
-          const scope = button.closest(".product-card, .final-cta, .hero, section") || document;
-          let status = scope.querySelector(".checkout-status");
-          if (!status) {
-            status = document.createElement("p");
-            status.className = "fine checkout-status";
-            status.setAttribute("aria-live", "polite");
-            button.insertAdjacentElement("afterend", status);
-          }
-          const original = button.textContent;
-          button.disabled = true;
-          button.textContent = "Starting checkout...";
-            status.textContent = "Opening secure Stripe checkout. We only send the product SKU and optional discount code to start checkout, not your letter answers or personal document contents.";
-          const discountInput = document.querySelector("[data-discount-code]");
-          const discount_code = String(discountInput?.value || "").trim();
-          try {
-            const response = await fetch("/api/create-checkout-session", {
-              method: "POST",
-              headers: { "content-type": "application/json" },
-              body: JSON.stringify({ sku: button.dataset.sku, discount_code })
-            });
-            const payload = await response.json().catch(() => ({}));
-            if (!response.ok || !payload.checkoutUrl) {
-              throw new Error(payload.message || payload.error || "Checkout is not configured yet.");
-            }
-            window.location.href = payload.checkoutUrl;
-          } catch (error) {
-            status.textContent = error.message || "Checkout could not start. Please try again.";
-            button.disabled = false;
-            button.textContent = original;
-          }
-        });
       }
+    </script>
+    <script>
+      import { initCheckoutButtons } from "../lib/checkoutButtons.mjs";
+      initCheckoutButtons();
     </script>
     {showPrivacyNotice && <DataPrivacyNotice compact={true} />}
     <SiteFooter />
