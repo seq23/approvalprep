@@ -162,7 +162,6 @@
     "validate:kpi-truth": "node scripts/authority_scale/validate_kpi_truth.mjs",
     "validate:legal": "node scripts/validate/legal-trust.mjs",
     "validate:letter-studio": "node scripts/validate/letter-studio.mjs",
-    "validate:no-fake-intelligence": "node scripts/validate/no-fake-intelligence-data.mjs",
     "validate:no-instruction-leak": "node scripts/validators/validate_no_internal_instruction_leak.js",
     "validate:notification-policy": "node scripts/validate/notification-policy.mjs",
     "validate:offering-contracts": "node scripts/validate/offering-contracts.mjs",
@@ -211,7 +210,11 @@
     "validate:email-nurture": "node --experimental-sqlite scripts/validate/email-nurture.mjs",
     "validate:resend-download-email": "node --experimental-sqlite scripts/validate/resend-download-email.mjs",
     "validate:endpoint-auth": "node --experimental-sqlite scripts/validate/endpoint-auth.mjs",
-    "pinterest:release-held": "node scripts/pinterest/release_held.mjs"
+    "pinterest:release-held": "node scripts/pinterest/release_held.mjs",
+    "validate:medium-lane": "node scripts/validate/medium-lane.mjs",
+    "validate:seo-hygiene:jsonld": "node scripts/validate/seo-hygiene.mjs jsonld",
+    "validate:backlink-handoff": "node scripts/validate/backlink-handoff.mjs",
+    "validate:outbound-link-health": "node scripts/validate/outbound-link-health.mjs"
   },
   "dependencies": {
     "astro": "^7.0.6",

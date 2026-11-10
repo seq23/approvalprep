@@ -246,15 +246,16 @@
       "scope": "Secret leakage and unsafe phrase scan"
     },
     {
-      "id": "no-fake-intelligence-data",
-      "npmScript": "validate:no-fake-intelligence",
-      "entrypoint": "scripts/validate/no-fake-intelligence-data.mjs",
+      "id": "medium-lane",
+      "npmScript": "validate:medium-lane",
+      "entrypoint": "scripts/validate/medium-lane.mjs",
       "severity": "HARD_FAIL",
       "blocksRelease": true,
-      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
+      "blockReason": "The medium-risk answer lane publishes only gated, primary-source-cited pages born from measured queries; a gate, self-heal, rotation or cap that silently stops working would publish unsourced medium content or stall the release",
       "owner": "approvalprep-growth",
       "group": "growth-critical",
-      "scope": "No fake ranking/citation/competitor telemetry"
+      "scope": "PART (items 1, 2, 5): the gate blocks regulated routes, unsourced/non-primary/stale claims, uncited or invented fees, approval promises and missing disclaimers; self-heal repairs a repairable page and refuses an unrepairable one; every published medium page is re-gated",
+      "restored": "hostile review 10 Nov 2026"
     },
     {
       "id": "automation-safety",
@@ -398,6 +399,18 @@
       "owner": "approvalprep-ops",
       "group": "governance-critical",
       "scope": "Content approval queue, approval history, publication policy, and promotion scripts"
+    },
+    {
+      "id": "backlink-handoff",
+      "npmScript": "validate:backlink-handoff",
+      "entrypoint": "scripts/validate/backlink-handoff.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents fake citation/backlink claims and unsafe handoff exports",
+      "owner": "approvalprep-growth",
+      "group": "citation-os",
+      "scope": "PART: safeCitationSnippet never says \"guaranteed approval\" or \"credit repair service\"; every need carries doNotUseClaims",
+      "restored": "hostile review 10 Nov 2026"
     },
     {
       "id": "public-reports",
@@ -545,6 +558,18 @@
       "scope": "functions/**, src/**/*.astro inline scripts, wrangler.toml bindings and vars"
     },
     {
+      "id": "outbound-link-health",
+      "npmScript": "validate:outbound-link-health",
+      "entrypoint": "scripts/validate/outbound-link-health.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "internal-url-form guaranteed every link the site makes to itself resolves 200, and nothing covered the links it makes to everyone else; a 2026-09-03 crawl found 11 pages linking into a 404 after HUD renamed form 52517.pdf and three Document Readiness Index source PDFs were withdrawn. Outbound URLs come out of checked-in JSON whose last_reviewed_at/accessDate fields are hand-set dates, not measured statuses, so a withdrawn source stayed linked indefinitely.",
+      "owner": "approvalprep-ops",
+      "group": "release-critical",
+      "scope": "Every outbound <a href> in dist/*.html, checked against the measured statuses in data/citations/outbound_link_health.json. Fails on a link the ledger marks dead, on a link the ledger has never measured, and on a ledger older than 120 days. Runs offline; the network measurement is npm run linkcheck:outbound. Hard-fails when it examines zero outbound links or the ledger is empty.",
+      "restored": "hostile review 10 Nov 2026"
+    },
+    {
       "id": "download-key-contract",
       "npmScript": "validate:download-key-contract",
       "entrypoint": "scripts/validate/download-key-contract.mjs",
@@ -565,6 +590,18 @@
       "owner": "approvalprep-ops",
       "group": "conversion-critical",
       "scope": "The seven /amazon/* book companion paths plus the /amazon index: registered, built, served 200, wired to a real Stripe SKU or declared as having no companion product, reachable from the index, and matching the recorded noindex posture"
+    },
+    {
+      "id": "seo-hygiene-jsonld",
+      "npmScript": "validate:seo-hygiene:jsonld",
+      "entrypoint": "scripts/validate/seo-hygiene.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "JSON-LD types per page kind: measured missing on the live site 2026-10-11",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "PART: every Product offers.price equals data/products/products.json and is visible on the page; no Product carries review or aggregateRating",
+      "restored": "hostile review 10 Nov 2026"
     },
     {
       "id": "publication-freeze",
