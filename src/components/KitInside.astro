@@ -1,0 +1,52 @@
+---
+// What is inside a kit, shown the way she will need it: grouped by the moment, leading with what
+// comes after the free first letter, with one filled sample page where one exists. Reads the same
+// checked list as the Letter Studio's hand-off (src/lib/kitMoments.mjs), so free -> paid is one
+// path in the same words. The catalog's safety boundary is printed once, at the foot.
+import { kitMoments, inEveryKit, kitSamples } from "../data/letterStudio";
+const { product, offerings = [], sku = "" } = Astro.props;
+const kit = kitMoments[sku];
+const sample = kitSamples[sku];
+const name = product?.name || product?.product_name || "This kit";
+const boundaries = [...new Set(offerings.map((offering) => offering?.riskBoundary).filter(Boolean))];
+---
+{kit && (
+  <section class="band kit-inside" id="inside-the-kit"><div class="shell">
+    <p class="eyebrow">Inside the kit</p>
+    <h2>{`What is inside the ${name}?`}</h2>
+    <p class="lead"><strong>{kit.promise}</strong> One purchase{product?.priceLabel ? ` of ${product.priceLabel}` : ""}, paid once. It downloads as a PDF guide and an editable Word file.</p>
+    <div class="kit-moments">
+      {kit.moments.map((m) => (
+        <article class="card">
+          <p class="eyebrow">When</p>
+          <h3>{m.when}</h3>
+          <ul class="compact-list">{m.items.map((item) => <li>{item.charAt(0).toUpperCase() + item.slice(1)}</li>)}</ul>
+        </article>
+      ))}
+      <article class="card">
+        <p class="eyebrow">In every kit</p>
+        <h3>The working pages</h3>
+        <ul class="compact-list">{inEveryKit.map((item) => <li>{item}</li>)}</ul>
+      </article>
+    </div>
+    {kit.alsoIncluded.length > 0 && <p class="fine">Also included: {kit.alsoIncluded.join(", ")}. The free <a href="/letter-writing-studio/">Letter Studio</a> already writes that one for you.</p>}
+    {sample && (
+      <div class="kit-sample">
+        <h3>{`A page from the kit: ${sample.title}`}</h3>
+        <div class="ap-sheet kit-sample-sheet">
+          <p class="kit-sample-note"><span class="ap-hl">{sample.note}</span></p>
+          {sample.lines.map(([label, value]) => label ? <p><span class="kit-sample-label">{label}</span> {value}</p> : <p>{value}</p>)}
+        </div>
+        <p class="fine">The kit gives you the blank version of this page for each letter. You fill in your own true facts and send it yourself. A bureau or creditor decides what it does.</p>
+      </div>
+    )}
+    {boundaries.map((boundary) => <p class="fine">{boundary}</p>)}
+  </div></section>
+)}
+<style>
+  .kit-moments { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 18px 0; }
+  .kit-sample { margin-top: 24px; }
+  .kit-sample-sheet { max-width: 640px; }
+  .kit-sample-label { display: block; font-family: var(--font-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--carbon-muted); }
+  .kit-sample-note { border-bottom: 0 !important; }
+</style>

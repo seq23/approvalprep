@@ -17,7 +17,7 @@ export const kitMoments = {
     alsoIncluded: ["credit dispute letter"]
   },
   "letter-of-explanation": {
-    promise: "A letter written for your exact situation.",
+    promise: "The explanation letters, by situation.",
     moments: [
       { when: "Credit or a late payment", items: ["credit explanation letter", "late payment explanation letter"] },
       { when: "Work or income", items: ["income gap explanation letter", "employment gap explanation letter"] },
@@ -72,3 +72,44 @@ export const kitMoments = {
     alsoIncluded: []
   }
 };
+
+// In every kit file, beside the named letters (read from the live kit files, 10 Nov 2026).
+export const inEveryKit = [
+  "A fill-in letter template with a blank for each fact",
+  "A self-review checklist to run before you send",
+  "A what-to-attach list",
+  "Step-by-step instructions, as a PDF guide and an editable Word file"
+];
+
+// One page of the Credit Letter Kit, filled in as a sample. Every detail is made up. The page shown
+// is the kit's own fill-in letter template; nothing else from the paid file is in this repository.
+export const kitSamples = {
+  "credit-letter-kit": {
+    title: "Credit bureau follow-up letter, filled in",
+    note: "Sample page. Every name, date and detail is made up.",
+    lines: [
+      ["Date", "December 9, 2026"],
+      ["To", "Experian, P.O. Box 4500, Allen, TX 75013"],
+      ["Re", "My dispute mailed November 6, 2026"],
+      ["", "Hello,"],
+      ["", "I am writing about an item on my credit report or credit file."],
+      ["What item are you writing about?", "Capital One account ending 4471, shown as 60 days late in March 2026."],
+      ["Why do you believe it is wrong or needs review?", "I disputed this item by certified mail. Your office received my letter on November 9, 2026 and I have had no written answer."],
+      ["What proof do you have?", "The certified mail return receipt and a copy of my first letter."],
+      ["What exact action are you asking for?", "Please send me the written results of your investigation."],
+      ["Where should the reply be sent?", "Jordan Lee, 12 Oak St Apt 4, Memphis, TN 38104"],
+      ["The documents I am including are", "Copy of my first letter; copy of the return receipt."],
+      ["", "Thank you for reviewing this information. Please let me know if you need anything else from me."],
+      ["", "Sincerely, Jordan Lee"]
+    ]
+  }
+};
+
+/** A kit's contents with what comes after the free letter first and the free letter itself last. */
+export function orderedOfferings(sku, offerings = []) {
+  const kit = kitMoments[sku];
+  if (!kit) return offerings.map((name) => ({ name, also: false }));
+  const lead = kit.moments.flatMap((m) => m.items).filter((name) => offerings.includes(name));
+  const rest = offerings.filter((name) => !lead.includes(name) && !kit.alsoIncluded.includes(name));
+  return [...lead, ...rest].map((name) => ({ name, also: false })).concat(kit.alsoIncluded.filter((name) => offerings.includes(name)).map((name) => ({ name, also: true })));
+}

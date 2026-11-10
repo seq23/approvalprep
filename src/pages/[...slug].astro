@@ -15,6 +15,8 @@ import NextStepsExplainer from "../components/NextStepsExplainer.astro";
 import DataPrivacyNotice from "../components/DataPrivacyNotice.astro";
 import OfferingUniverse from "../components/OfferingUniverse.astro";
 import IncludedOfferings from "../components/IncludedOfferings.astro";
+import KitInside from "../components/KitInside.astro";
+import { kitMoments } from "../data/letterStudio";
 import PageCTAStack from "../components/PageCTAStack.astro";
 import KitAnswer from "../components/KitAnswer.astro";
 import priorityPages from "../../data/content/priority_pages.json";
@@ -277,7 +279,7 @@ const childRoutes = manifest.routes
       {copy.whoFor?.length > 0 && <section class="band"><div class="shell"><WhatYouGet title="Who this is for" items={copy.whoFor} /></div></section>}
       {copy.value?.length > 0 && <section class="band"><div class="shell"><WhatYouGet title="Product / Guide Value" items={copy.value} /></div></section>}
       {copy.whatYouGet?.length > 0 && <section class="band"><div class="shell"><WhatYouGet title="What you get" items={copy.whatYouGet} /></div></section>}
-      {isCommercial && <IncludedOfferings product={routeProduct} offerings={routeOfferings} />}
+      {isCommercial && (kitMoments[skuForRoute] ? <KitInside product={routeProduct} offerings={routeOfferings} sku={skuForRoute} /> : <IncludedOfferings product={routeProduct} offerings={routeOfferings} />)}
       {isCommercial && <WhatHappensAfterPurchase />}
       {copy.prepBrief && <section class="band"><div class="shell"><WhatYouGet title="What to prepare first" items={copy.prepBrief} /></div></section>}
       {familyCopy?.avoid && <section class="band"><div class="shell"><WhatYouGet title="Avoid these mistakes" items={familyCopy.avoid} /></div></section>}
@@ -286,12 +288,12 @@ const childRoutes = manifest.routes
       {copy.reviewChecklist && <section class="band"><div class="shell"><WhatYouGet title="Review before you send" items={copy.reviewChecklist} /></div></section>}
       {copy.useCases?.length > 0 && <section class="band"><div class="shell"><UseCaseList items={copy.useCases} /></div></section>}
       {pageFaq.length > 0 && <section class="band"><div class="shell"><FAQBlock faq={pageFaq} /></div></section>}
-      <section class="band"><div class="shell two"><div><h2>What this does not do</h2><p>It does not guarantee approval. It does not create fake documents. It does not contact anyone for you. It does not give legal or financial advice. It does not repair credit for you.</p></div><BoundaryNotice /></div></section>
+      {!isCommercial && (<section class="band"><div class="shell two"><div><h2>What this does not do</h2><p>It does not guarantee approval. It does not create fake documents. It does not contact anyone for you. It does not give legal or financial advice. It does not repair credit for you.</p></div><BoundaryNotice /></div></section>)}
       <section class="band"><div class="shell"><NextStepsExplainer /></div></section>
       {/* Compact: the privacy promise stays on every page; the full lists live once, on /privacy. */}
-      <section class="band"><div class="shell"><DataPrivacyNotice compact /></div></section>
+      {!isCommercial && <section class="band"><div class="shell"><DataPrivacyNotice compact /></div></section>}
       {isCommercial && <TrustAndBoundaryBand />}
-      <section class="band"><div class="shell"><WhatYouGet title="Why ApprovalPrep" items={["Plain steps", "Truthful templates only", "Clear next steps", "No fake document help"]} /></div></section>
+      {!isCommercial && <section class="band"><div class="shell"><WhatYouGet title="Why ApprovalPrep" items={["Plain steps", "Truthful templates only", "Clear next steps", "No fake document help"]} /></div></section>}
     </>
   )}
   {/* data/atlas/internal_link_graph.json already held a same-family / relevant-product

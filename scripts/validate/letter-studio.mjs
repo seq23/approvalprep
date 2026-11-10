@@ -11,7 +11,7 @@ import fs from "node:fs";
 import { fail, readJson } from "./_common.mjs";
 import { studioSituations, bureaus, buildLetter, ANSWER_WINDOW, BEFORE_YOU_MAIL, answerDueDate, buildAnswerDueIcs, parseDay } from "../../src/lib/letterStudioCore.mjs";
 import { buildLetterPdf } from "../../src/lib/letterPdf.mjs";
-import { kitMoments } from "../../src/lib/kitMoments.mjs";
+import { kitMoments, orderedOfferings } from "../../src/lib/kitMoments.mjs";
 
 const manifest = readJson("data/routes/route_manifest.json");
 const route = manifest.routes.find((item) => item.path === "/letter-writing-studio");
@@ -54,6 +54,13 @@ for (const [sku, kit] of Object.entries(kitMoments)) {
   for (const item of named) if (!held.includes(item)) fail(`[letter-studio] ${sku}: the page claims "${item}", which the kit does not hold`);
   for (const item of held) if (named.filter((n) => n === item).length !== 1) fail(`[letter-studio] ${sku}: "${item}" must be listed exactly once`);
   if (!kit.moments.length || kit.moments[0].items.some((i) => kit.alsoIncluded.includes(i))) fail(`[letter-studio] ${sku}: the kit must lead with what comes after the free letter`);
+}
+
+// A kit never lists first the letter she just got free.
+{
+  const held = products.find((p) => p.sku === "credit-letter-kit").included_offerings;
+  const listed = orderedOfferings("credit-letter-kit", held);
+  if (listed.length !== held.length || listed[0].name === "credit dispute letter" || !listed.at(-1).also || listed.at(-1).name !== "credit dispute letter") fail("[letter-studio] the credit kit must list the free dispute letter last, as also included");
 }
 
 const disputes = studioSituations.filter((s) => s.kind === "dispute");
