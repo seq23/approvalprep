@@ -101,6 +101,18 @@ Run `npm run check` in `apps/mobile` after each task; the App preview run must s
     the bundle id is the placeholder, the preview flag is set or the purchases key is missing.
     Accept: a test per named stop. No agent runs a production build or submits.
 
+## Hostile review fixes (10 Nov 2026)
+
+- **No other company's name or price inside the app** (S7 drew "Credit Saint, $79.99 to $139.99 a
+  month"): a price in a shipped build goes stale and cannot be corrected without a new release, and a
+  named competitor is a claim to defend. S7 says instead: "Credit repair companies usually charge
+  every month. This kit is paid once." Guard: the self-help test also fails on a company name or a
+  dollar amount other than the store's price in `src` copy.
+- **One purchase, every round:** the kit is bought once per person and covers every letter and every
+  dispute round after it; Restore brings it back on a new phone. Test in `tests/kit.test.ts`.
+- **Store category** (task 11, parked for the launch plan) is chosen for what the app is (Finance or
+  Productivity), never to avoid a review lane; 5.1.1(ix) applies by content, not category.
+
 ## Her rulings
 
 - **In-app Credit Letter Kit: $19.99, paid once. Approved 6 Nov 2026.** Product id `ap_credit_kit`.
