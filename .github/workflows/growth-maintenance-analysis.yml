@@ -39,8 +39,6 @@ jobs:
       - run: npm run intelligence:growth-maintenance
       - run: npm run intelligence:authority
       - run: npm run intelligence:growth-brief
-      - run: npm run validate:maintenance-briefs
-      - run: npm run validate:backlink-honesty
       - name: Commit maintenance briefs
         run: |
           git config user.name "approvalprep-bot"

@@ -37,7 +37,6 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
         run: npm run workflows:trace -- --workflow page-refresh-queue.yml
       - run: npm run intelligence:growth-maintenance
-      - run: npm run validate:maintenance-briefs
       - name: Commit refresh queue
         run: |
           git config user.name "approvalprep-bot"

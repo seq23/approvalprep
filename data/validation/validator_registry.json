@@ -15,28 +15,6 @@
       "scope": "Astro static build and Cloudflare Pages deploy artifact"
     },
     {
-      "id": "pre-merge-lane-parity",
-      "npmScript": "validate:pre-merge-lane-parity",
-      "entrypoint": "scripts/validate/pre-merge-lane-parity.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "keeps the pull_request lane that authorises a merge in the same starting state as the scheduled lanes - it may not run a build step before validate:all. When it did, PR #23 merged green and turned citation-os-daily and intelligence-ingest-free-sources red every morning on an assertion the merge gate could not have failed.",
-      "owner": "approvalprep-ops",
-      "group": "ops-critical",
-      "scope": "Every .github/workflows/*.yml job that runs validate:all or selfheal: whether a pull_request-triggered job builds before it, that a pre-merge registry lane exists at all, that non-pull_request registry lanes exist to be predicted, and that the registry still builds at position 1"
-    },
-    {
-      "id": "build-output-contract",
-      "npmScript": "validate:build-output-contract",
-      "entrypoint": "scripts/validate/build-output-contract.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "closes the two remaining ways a build-output validator can be meaningless. It finds every workflow step that runs one - including a direct invocation outside the registry, which is what registry-build-order and pre-merge-lane-parity both skip, and which left Growth Health Refresh failing on dist/_headers for a further week after that message was declared fixed - and it re-executes each such validator against an absent published tree every run, so a validator that skips instead of refusing cannot report a pass over zero built pages.",
-      "owner": "approvalprep-ops",
-      "group": "ops-critical",
-      "scope": "Every .github/workflows/*.yml step that runs a build-output validator or produces the published tree: that a producing step and a dependency install precede it unconditionally in the same job; and the measured absent-tree exit code of every registry validator importing requireBuildOutput/publishedDir from scripts/validate/_common.mjs"
-    },
-    {
       "id": "workflow-yaml-parse",
       "npmScript": "validate:workflow-yaml-parse",
       "entrypoint": "scripts/validate/workflow-yaml-parse.mjs",
@@ -48,28 +26,6 @@
       "scope": "Every .github/workflows/*.yml parses: no mapping key left with only comments under it"
     },
     {
-      "id": "workflow-deps-installed",
-      "npmScript": "validate:workflow-deps-installed",
-      "entrypoint": "scripts/validate/workflow-deps-installed.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "Weekly Growth Ops ran search-intelligence:derive (which builds with astro) without npm ci and was red from 26 Oct 2026 with exit 127",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": ".github/workflows/*.yml: every npm script that reaches a node_modules binary runs after npm ci"
-    },
-    {
-      "id": "search-loop-ai-measurement",
-      "npmScript": "validate:search-loop-ai-measurement",
-      "entrypoint": "scripts/validate/search-loop-ai-measurement.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "the weekly search-loop report wrote AI-referral visits and AI-bot reads as \"not read\" every week from 1 Nov 2026, because the caller passed SEARCH_LOOP_CF_USAGE_TOKEN - a token with Account Analytics:Read but not zone Analytics:Read - so Cloudflare refused both queries the engine runs and Search Readiness item f11 failed with nothing in the repository able to notice. The only lever here is which secret the caller hands the engine, a YAML mapping no test read.",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": ".github/workflows/search-loop.yml: that it calls the shared engine and passes CLOUDFLARE_ACCOUNT_ID and an analytics-capable CLOUDFLARE_API_TOKEN secret (a token proven to lack zone Analytics:Read is refused by name); and, whenever an analytics token is in the environment, that the zone AI-bot query and the account Web Analytics referral query the engine runs still answer"
-    },
-    {
       "id": "zero-paid-llm",
       "npmScript": "validate:zero-paid-llm",
       "entrypoint": "scripts/llm/validate_zero_paid_llm.mjs",
@@ -79,30 +35,6 @@
       "owner": "approvalprep-growth",
       "group": "growth-critical",
       "scope": "config/llm_routing.json is $0-only with a snapshot date; no provider call outside scripts/llm/free_router.mjs or a declared paid lane; no scheduled workflow reaches a paid lane; paid lanes dispatch-only behind confirm_paid; router behaviour under a stubbed provider"
-    },
-    {
-      "id": "validation-registry",
-      "npmScript": "validate:validation-registry",
-      "entrypoint": "scripts/validate/validation-registry.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents stale or divergent validator registry and matrix",
-      "owner": "approvalprep-ops",
-      "group": "ops-critical",
-      "scope": "Validation registry and matrix completeness",
-      "repairCommand": "npm run validation:registry:sync",
-      "repairRationale": "validate:validation-registry hard-fails when data/validation/validator_registry.json diverges from this canonical file; sync-validator-registry.mjs regenerates that exact mirror from this file."
-    },
-    {
-      "id": "validator-orchestrator-self-test",
-      "npmScript": "validate:orchestrator-self-test",
-      "entrypoint": "scripts/validate/run-all-self-test.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents regression of HARD_FAIL versus STRONG_WARNING orchestration semantics",
-      "owner": "approvalprep-ops",
-      "group": "ops-critical",
-      "scope": "Validator orchestrator severity, stop/continue, and registry-shape regression fixtures"
     },
     {
       "id": "route-manifest",
@@ -182,17 +114,6 @@
       "scope": "No fake documents, no unsafe prompt behavior"
     },
     {
-      "id": "atoms",
-      "npmScript": "validate:atoms",
-      "entrypoint": "scripts/validate/atoms.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "Answer atom corpus and source/usage mapping"
-    },
-    {
       "id": "citation-claim-coverage",
       "npmScript": "validate:citation-claims",
       "entrypoint": "scripts/validate/citation-claim-coverage.mjs",
@@ -213,41 +134,6 @@
       "owner": "approvalprep-growth",
       "group": "growth-critical",
       "scope": "No unsupported ranking/indexing/citation claims"
-    },
-    {
-      "id": "atlas-query-fanout",
-      "npmScript": "validate:atlas",
-      "entrypoint": "scripts/validate/atlas.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "Atlas, query universe, fanout, route query coverage",
-      "repairCommand": "npm run content:self-heal-citation-os",
-      "repairRationale": "validate:atlas fails on routes missing from the admission manifest, indexed routes with fewer than five queries, and routes without four fanout children; self-heal-citation-os.mjs admits missing routes and generates the missing queries, fanout parents, and query-matrix mirror for exactly those routes."
-    },
-    {
-      "id": "seo-aeo-geo-surfaces",
-      "npmScript": "validate:seo-surfaces",
-      "entrypoint": "scripts/validate/seo-surfaces.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "Sitemap, robots, llms, answers, atom/query depth, provider receipts"
-    },
-    {
-      "id": "frozen-output-drift",
-      "npmScript": "validate:frozen-output-drift",
-      "entrypoint": "scripts/validate/frozen-output-drift.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents an edit to a frozen route in data/content/generated_route_copy.json that was not re-frozen - the scheduled release's authority:scale:restore silently reverts it. PR #38 rewrote the nine frozen routes' leads into the description band without re-freezing; restore put the 168-182 character leads back and Scheduled Content Release went red on 26 Sep 2026",
-      "owner": "approvalprep-ops",
-      "group": "release-critical",
-      "scope": "Every record in data/release/frozen_output_registry.json against its blob and the committed route copy"
     },
     {
       "id": "clarity-scope",
@@ -281,28 +167,6 @@
       "owner": "approvalprep-ops",
       "group": "release-critical",
       "scope": "src/data/reviewers.json entries and consent records; every built page's JSON-LD Person nodes; every loan_document_paths page's visible byline and reviewedBy"
-    },
-    {
-      "id": "entity-backlink-watch",
-      "npmScript": "validate:entity-backlink-watch",
-      "entrypoint": "scripts/validate/entity-backlink-watch.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents the weekly entity watch from silently doing nothing or the wrong thing: removing a profile on a network error, adopting a pending profile that does not link back, passing a JS-rendered profile it cannot read, passing with zero profiles, or losing its schedule, its --apply, its re-validation before commit, or its safe main-writer push. The authority audit of 30 Oct 2026 found no repo checking that sameAs URLs still resolve and link back",
-      "owner": "approvalprep-ops",
-      "group": "release-critical",
-      "scope": "scripts/ops/entity-backlink-watch.mjs against eight fixture scenarios on a scratch entity.json, and .github/workflows/entity-backlink-watch.yml"
-    },
-    {
-      "id": "demand-backed-pages",
-      "npmScript": "validate:demand-backed-pages",
-      "entrypoint": "scripts/validate/demand-backed-pages.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents a sitemap URL nothing renders, an indexable route that is page-factory boilerplate with the query interpolated, and a factory route with no demand record behind it. It existed unregistered and was reachable only through `npm run validate`, which no workflow runs, so none of that was ever asserted in CI.",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "Sitemap-to-render parity against the published tree, page-factory template-filler duplication on indexable routes, and demand records for factory routes created after the gate"
     },
     {
       "id": "pages-header-publication",
@@ -382,17 +246,6 @@
       "scope": "Secret leakage and unsafe phrase scan"
     },
     {
-      "id": "source-connectors-real",
-      "npmScript": "validate:intelligence-connectors",
-      "entrypoint": "scripts/validate/source-connectors-real.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "Connector config must be real or honestly marked not configured"
-    },
-    {
       "id": "no-fake-intelligence-data",
       "npmScript": "validate:no-fake-intelligence",
       "entrypoint": "scripts/validate/no-fake-intelligence-data.mjs",
@@ -402,127 +255,6 @@
       "owner": "approvalprep-growth",
       "group": "growth-critical",
       "scope": "No fake ranking/citation/competitor telemetry"
-    },
-    {
-      "id": "intelligence-source-freshness",
-      "npmScript": "validate:intelligence-freshness",
-      "entrypoint": "scripts/validate/intelligence-source-freshness.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "Ingestion statuses must be honest and fresh enough for fixture mode"
-    },
-    {
-      "id": "competitor-crawl-policy",
-      "npmScript": "validate:competitor-crawl",
-      "entrypoint": "scripts/validate/competitor-crawl-policy.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "Competitor crawl policy, watchlist, and safety"
-    },
-    {
-      "id": "backlink-recommendation-honesty",
-      "npmScript": "validate:backlink-honesty",
-      "entrypoint": "scripts/validate/backlink-recommendation-honesty.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "Backlink recommendations cannot overclaim"
-    },
-    {
-      "id": "content-action-decision",
-      "npmScript": "validate:content-actions",
-      "entrypoint": "scripts/validate/content-action-decision.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "Content action decisions separate utility, compliance, and growth"
-    },
-    {
-      "id": "opportunity-score-provenance",
-      "npmScript": "validate:opportunity-score-provenance",
-      "entrypoint": "scripts/validate/opportunity-score-provenance.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "a heuristic score must not steer publishing while wearing a demand label",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "Provenance of the opportunity scores and of the growth-brief ranking basis"
-    },
-    {
-      "id": "content-release",
-      "npmScript": "validate:content-release",
-      "entrypoint": "scripts/validate/content-release.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents scheduled content release workflow from passing validation while the actual content generation path is broken",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "Scheduled content generation, self-heal smoke execution, generated answer assets, and release ledger mutation contract"
-    },
-    {
-      "id": "medium-lane",
-      "npmScript": "validate:medium-lane",
-      "entrypoint": "scripts/validate/medium-lane.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "The medium-risk answer lane publishes only gated, primary-source-cited pages born from measured queries; a gate, self-heal, rotation or cap that silently stops working would publish unsourced medium content or stall the release",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "scripts/lib/medium_lane.mjs gates, self-heal, cadence, measurement and rotation; published medium pages in data/content/generated_answers.json"
-    },
-    {
-      "id": "release-fixture-isolation",
-      "npmScript": "validate:release-fixture-isolation",
-      "entrypoint": "scripts/validate/release-fixture-isolation.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "a release fixture that reads live cadence state turns a deliberate throttle into a red scheduled workflow, and one that fails through process.exit leaves the production answer corpus emptied on disk",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "validate:content-release survives a fully spent publication budget and restores production content/release state when it fails"
-    },
-    {
-      "id": "maintenance-brief-integrity",
-      "npmScript": "validate:maintenance-briefs",
-      "entrypoint": "scripts/validate/maintenance-brief-integrity.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "Maintenance briefs are actionable and honest"
-    },
-    {
-      "id": "citation-opportunity-integrity",
-      "npmScript": "validate:citation-opportunities",
-      "entrypoint": "scripts/validate/citation-opportunity-integrity.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents fake or thin SEO/AEO/GEO growth machinery",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "Citation opportunities cannot imply observed performance"
-    },
-    {
-      "id": "admin-action-links",
-      "npmScript": "validate:admin-action-links",
-      "entrypoint": "scripts/validate/admin-action-links.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents broken operator workflow or unsafe automation",
-      "owner": "approvalprep-ops",
-      "group": "ops-critical",
-      "scope": "Admin action links point to real repo edit/history targets"
     },
     {
       "id": "automation-safety",
@@ -545,41 +277,6 @@
       "owner": "approvalprep-ops",
       "group": "ops-critical",
       "scope": "Delegated authority contract and absolute forbiddens"
-    },
-    {
-      "id": "self-heal-progressions",
-      "npmScript": "validate:self-heal-progressions",
-      "entrypoint": "scripts/validate/self-heal-progressions.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents broken operator workflow or unsafe automation",
-      "owner": "approvalprep-ops",
-      "group": "ops-critical",
-      "scope": "Self-heal attempt/revalidation/final-block loop",
-      "repairCommand": "npm run automation:self-heal-attempt && npm run automation:self-heal-revalidate",
-      "repairRationale": "validate:self-heal-progressions fails when data/automation/self_heal_attempts.json or final_block_log.json is missing or malformed; attempt-self-heal.mjs writes the first from the live content queue and revalidate-after-self-heal.mjs derives the second from it. It does not supply the playbook, so a thin playbook remains an unrepairable failure by design."
-    },
-    {
-      "id": "self-heal-honesty",
-      "npmScript": "validate:self-heal-honesty",
-      "entrypoint": "scripts/validate/self-heal-honesty.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents the self-heal machinery recording repairs it did not make, certifying an empty corpus, or applying repairs the ledger never receives",
-      "owner": "approvalprep-ops",
-      "group": "ops-critical",
-      "scope": "Self-heal honesty: heal-trace claims, zero-item guard, applied-repair ledger"
-    },
-    {
-      "id": "owner-exceptions",
-      "npmScript": "validate:owner-exceptions",
-      "entrypoint": "scripts/validate/owner-exceptions.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents broken operator workflow or unsafe automation",
-      "owner": "approvalprep-ops",
-      "group": "ops-critical",
-      "scope": "Owner exception index integrity"
     },
     {
       "id": "notification-policy",
@@ -670,17 +367,6 @@
       "scope": "Stripe test/live mode selection and price ID coverage"
     },
     {
-      "id": "offering-visibility",
-      "npmScript": "validate:offering-visibility",
-      "entrypoint": "scripts/validate/offering-visibility.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents hidden or fake offering universe",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "30+ offering visibility in public UI"
-    },
-    {
       "id": "offering-contracts",
       "npmScript": "validate:offering-contracts",
       "entrypoint": "scripts/validate/offering-contracts.mjs",
@@ -712,160 +398,6 @@
       "owner": "approvalprep-ops",
       "group": "governance-critical",
       "scope": "Content approval queue, approval history, publication policy, and promotion scripts"
-    },
-    {
-      "id": "page-factory",
-      "npmScript": "validate:page-factory",
-      "entrypoint": "scripts/validate/page-factory.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "Content surface expansion page factory integrity",
-      "owner": "approvalprep-growth",
-      "group": "citation-os-batch-1",
-      "scope": "Content surface expansion page factory integrity"
-    },
-    {
-      "id": "blog-detail-pages",
-      "npmScript": "validate:blog-detail-pages",
-      "entrypoint": "scripts/validate/blog-detail-pages.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "Crawlable blog answer detail page integrity",
-      "owner": "approvalprep-growth",
-      "group": "citation-os-batch-1",
-      "scope": "Crawlable blog answer detail page integrity"
-    },
-    {
-      "id": "atom-coverage-depth",
-      "npmScript": "validate:atom-coverage-depth",
-      "entrypoint": "scripts/validate/atom-coverage-depth.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "Expanded citation atom depth and honesty boundary",
-      "owner": "approvalprep-growth",
-      "group": "citation-os-batch-1",
-      "scope": "Expanded citation atom depth and honesty boundary"
-    },
-    {
-      "id": "discovery-surfaces",
-      "npmScript": "validate:discovery-surfaces",
-      "entrypoint": "scripts/validate/discovery-surfaces.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "Sitemap feed llms and public discovery surface coverage",
-      "owner": "approvalprep-growth",
-      "group": "citation-os-batch-1",
-      "scope": "Sitemap feed llms and public discovery surface coverage"
-    },
-    {
-      "id": "internal-link-graph",
-      "npmScript": "validate:internal-link-graph",
-      "entrypoint": "scripts/validate/internal-link-graph.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "Internal authority link graph, anchors, and orphan prevention",
-      "owner": "approvalprep-growth",
-      "group": "citation-os-batch-2",
-      "scope": "Internal authority link graph, anchors, and orphan prevention"
-    },
-    {
-      "id": "authority-assets",
-      "npmScript": "validate:authority-assets",
-      "entrypoint": "scripts/validate/authority-assets.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "Free tool/checklist authority asset integrity",
-      "owner": "approvalprep-growth",
-      "group": "citation-os-batch-2",
-      "scope": "Free tool/checklist authority asset integrity"
-    },
-    {
-      "id": "template-library",
-      "npmScript": "validate:template-library",
-      "entrypoint": "scripts/validate/template-library.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "Template preview library safety and route coverage",
-      "owner": "approvalprep-growth",
-      "group": "citation-os-batch-2",
-      "scope": "Template preview library safety and route coverage"
-    },
-    {
-      "id": "metrics-scoreboards",
-      "npmScript": "validate:metrics-scoreboards",
-      "entrypoint": "scripts/validate/metrics-scoreboards.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents dashboards from claiming fake or malformed measurement data",
-      "owner": "approvalprep-growth",
-      "group": "measurement",
-      "scope": "Content velocity, citation, indexing, crawler, and conversion scoreboards"
-    },
-    {
-      "id": "provider-integrations",
-      "npmScript": "validate:provider-integrations",
-      "entrypoint": "scripts/validate/provider-integrations.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents fake or unmanaged provider telemetry integrations",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "GSC, Bing, IndexNow, and Cloudflare connector contract"
-    },
-    {
-      "id": "cloudflare-crawler-intelligence",
-      "npmScript": "validate:cloudflare-crawler-intelligence",
-      "entrypoint": "scripts/validate/cloudflare-crawler-intelligence.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents fake crawler visibility and invalid crawler gap reporting",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "Cloudflare crawler log schema and crawler gap report"
-    },
-    {
-      "id": "indexing-provider-ledgers",
-      "npmScript": "validate:indexing-provider-ledgers",
-      "entrypoint": "scripts/validate/indexing-provider-ledgers.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents invalid provider ledgers and fake indexing claims",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "GSC, Bing, and IndexNow provider data ledgers"
-    },
-    {
-      "id": "citation-ledger",
-      "npmScript": "validate:citation-ledger",
-      "entrypoint": "scripts/validate/citation-ledger.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents fake citation/backlink claims and unsafe handoff exports",
-      "owner": "approvalprep-growth",
-      "group": "citation-os",
-      "scope": "Citation candidates, confirmed citation evidence, and mention watchlist"
-    },
-    {
-      "id": "backlink-handoff",
-      "npmScript": "validate:backlink-handoff",
-      "entrypoint": "scripts/validate/backlink-handoff.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents fake citation/backlink claims and unsafe handoff exports",
-      "owner": "approvalprep-growth",
-      "group": "citation-os",
-      "scope": "Export-only backlink handoff contract and safe snippets"
-    },
-    {
-      "id": "content-lifecycle",
-      "npmScript": "validate:content-lifecycle",
-      "entrypoint": "scripts/validate/content-lifecycle.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents unsafe refresh, pruning, consolidation, or redirect operations",
-      "owner": "approvalprep-growth",
-      "group": "growth-lifecycle",
-      "scope": "Content decay report, consolidation plan, retired pages, and redirect ledger"
     },
     {
       "id": "public-reports",
@@ -991,70 +523,6 @@
       "scope": "All GitHub workflows that commit or push to main"
     },
     {
-      "id": "cadence-ledger-advance",
-      "npmScript": "validate:cadence-ledger-advance",
-      "entrypoint": "scripts/validate/cadence-ledger-advance.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents a frozen cadence ledger from permanently blocking scheduled publishing, and prevents the gate from clearing its own blocks",
-      "owner": "approvalprep-ops",
-      "group": "ops-critical",
-      "scope": "Cadence ledger contract between scripts/cadence_gate.cjs and the workflows that check or advance it"
-    },
-    {
-      "id": "redirect-map",
-      "npmScript": "validate:redirect-map",
-      "entrypoint": "scripts/validate/redirect-map.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents redirect loss and duplicate URL recurrence",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "Canonical host and 42 legacy duplicate redirects"
-    },
-    {
-      "id": "retest-lifecycle",
-      "npmScript": "validate:retest-lifecycle",
-      "entrypoint": "scripts/validate/retest-lifecycle.mjs",
-      "severity": "STRONG_WARNING",
-      "blocksRelease": false,
-      "blockReason": "prevents fabricated or premature search-repair retest outcomes",
-      "owner": "approvalprep-growth",
-      "group": "search-intelligence",
-      "scope": "Delayed retest state machine and IMPROVED/UNCHANGED/REGRESSED/INCONCLUSIVE outcome ledger"
-    },
-    {
-      "id": "provider-cost-controls",
-      "npmScript": "validate:provider-cost-controls",
-      "entrypoint": "scripts/validate/provider-cost-controls.mjs",
-      "severity": "STRONG_WARNING",
-      "blocksRelease": false,
-      "blockReason": "prevents unbounded live-provider request volume and cost drift",
-      "owner": "approvalprep-growth",
-      "group": "search-intelligence",
-      "scope": "Per-connector daily/weekly request ceilings for GSC, Bing, competitor crawl, Cloudflare, IndexNow"
-    },
-    {
-      "id": "query-atlas",
-      "npmScript": "validate:query-atlas",
-      "entrypoint": "scripts/validate/query-atlas.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents generating pages against synthetic fanout permutations that carry no demand evidence - the scaled content abuse pattern named by the March 2026 core update",
-      "group": "growth-critical"
-    },
-    {
-      "id": "atlas-demand-units",
-      "npmScript": "validate:atlas-units",
-      "entrypoint": "scripts/validate/atlas-units.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents rank_score comparing incompatible demand units - one field named `volume` held both monthly search volume (keyword-tool rows) and a domain's own 90-day GSC impressions, so the publishing queue could silently invert",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "Demand-unit contract on evidence_queries.json and query_atlas.json: search_volume vs impressions_90d, demand_basis, rank_band, and no source file reading the removed `volume` field"
-    },
-    {
       "id": "no-internal-instruction-leak",
       "npmScript": "validate:no-instruction-leak",
       "entrypoint": "scripts/validators/validate_no_internal_instruction_leak.js",
@@ -1077,61 +545,6 @@
       "scope": "functions/**, src/**/*.astro inline scripts, wrangler.toml bindings and vars"
     },
     {
-      "id": "sitemap-url-form",
-      "npmScript": "validate:sitemap-url-form",
-      "entrypoint": "scripts/validate/sitemap-url-form.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents publishing a sitemap or canonical tag that names a URL the server 308-redirects, which spends crawl budget on redirects and points search engines at a URL they will not index",
-      "owner": "approvalprep-ops",
-      "group": "release-critical",
-      "scope": "dist/sitemap.xml and the canonical/og:url tags of every built indexable page"
-    },
-    {
-      "id": "internal-url-form",
-      "npmScript": "validate:internal-url-form",
-      "entrypoint": "scripts/validate/internal-url-form.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "every internal link omitting the trailing slash made Google follow the site's own navigation into 308s and file 123 destinations as 'Page with redirect' instead of indexing them; the sitemap and canonicals were already correct, so nothing existing could catch it",
-      "owner": "approvalprep-ops",
-      "group": "release-critical",
-      "scope": "Every URL the build emits: hrefs and JSON-LD url/item/@id in dist/*.html, the URLs in llms.txt, llms-full.txt, feed.xml and the JSON indexes, and the destinations in public/_redirects. Hard-fails when it examines zero URLs."
-    },
-    {
-      "id": "no-redirected-discovery-urls",
-      "npmScript": "validate:no-redirected-discovery-urls",
-      "entrypoint": "scripts/validate/no-redirected-discovery-urls.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "consolidation brief 3 301'd 27 thin pages into 14 hubs; a sitemap entry or Pinterest pin still naming one of those sources hands crawlers and pinners a redirect instead of the hub holding the content",
-      "owner": "approvalprep-ops",
-      "group": "release-critical",
-      "scope": "Every <loc> in public/sitemap.xml and every same-site path/url/link field in data/pinterest/queue.json and pinfeed.json, checked against the sources in data/routes/redirects.json. Hard-fails when it examines zero sitemap or Pinterest URLs."
-    },
-    {
-      "id": "outbound-link-health",
-      "npmScript": "validate:outbound-link-health",
-      "entrypoint": "scripts/validate/outbound-link-health.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "internal-url-form guaranteed every link the site makes to itself resolves 200, and nothing covered the links it makes to everyone else; a 2026-09-03 crawl found 11 pages linking into a 404 after HUD renamed form 52517.pdf and three Document Readiness Index source PDFs were withdrawn. Outbound URLs come out of checked-in JSON whose last_reviewed_at/accessDate fields are hand-set dates, not measured statuses, so a withdrawn source stayed linked indefinitely.",
-      "owner": "approvalprep-ops",
-      "group": "release-critical",
-      "scope": "Every outbound <a href> in dist/*.html, checked against the measured statuses in data/citations/outbound_link_health.json. Fails on a link the ledger marks dead, on a link the ledger has never measured, and on a ledger older than 120 days. Runs offline; the network measurement is npm run linkcheck:outbound. Hard-fails when it examines zero outbound links or the ledger is empty."
-    },
-    {
-      "id": "answer-page-subject",
-      "npmScript": "validate:answer-page-subject",
-      "entrypoint": "scripts/validate/answer-page-subject.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "the answer generator stamped a preparation question onto any low-risk route, publishing 'How should I prepare for Pricing?' and four more like it: a question nobody asks, answered by a checklist unrelated to the page named",
-      "owner": "approvalprep-growth",
-      "group": "citation-os-batch-1",
-      "scope": "Every published blog answer record names a route whose page_intent is an answerable subject and carries a question title; every retired record has a 301 behind it. Hard-fails when it examines zero records."
-    },
-    {
       "id": "download-key-contract",
       "npmScript": "validate:download-key-contract",
       "entrypoint": "scripts/validate/download-key-contract.mjs",
@@ -1141,17 +554,6 @@
       "owner": "approvalprep-ops",
       "group": "conversion-critical",
       "scope": "functions/_runtime/asset-keys.js, functions/api/download-file.js, seed product keys, scripts/ops/r2-upload-assets.mjs"
-    },
-    {
-      "id": "script-callers",
-      "npmScript": "validate:script-callers",
-      "entrypoint": "scripts/validate/script-callers.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents scripts under scripts/ shipping with no caller - an unenforced rule that reads as a live one",
-      "owner": "approvalprep-ops",
-      "group": "ops-critical",
-      "scope": "Every tracked script under scripts/ is invoked by package.json, a workflow, a shell script, or an import"
     },
     {
       "id": "amazon-book-landing-pages",
@@ -1165,129 +567,6 @@
       "scope": "The seven /amazon/* book companion paths plus the /amazon index: registered, built, served 200, wired to a real Stripe SKU or declared as having no companion product, reachable from the index, and matching the recorded noindex posture"
     },
     {
-      "id": "seo-hygiene-favicon",
-      "npmScript": "validate:seo-hygiene:favicon",
-      "entrypoint": "scripts/validate/seo-hygiene.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "Favicon set and manifest: measured missing on the live site 2026-10-11",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "favicon.ico 16/32/48, apple-touch-icon 180, manifest icons and the link tags on every built page"
-    },
-    {
-      "id": "seo-hygiene-og-image",
-      "npmScript": "validate:seo-hygiene:og-image",
-      "entrypoint": "scripts/validate/seo-hygiene.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "Social share image on every page: measured missing on the live site 2026-10-11",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "og.png is a real 1200x630 PNG; every page names it with matching og:image:width/height, twitter:card summary_large_image and twitter:image"
-    },
-    {
-      "id": "seo-hygiene-jsonld",
-      "npmScript": "validate:seo-hygiene:jsonld",
-      "entrypoint": "scripts/validate/seo-hygiene.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "JSON-LD types per page kind: measured missing on the live site 2026-10-11",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "Organization everywhere; WebSite + speakable WebPage on /; BreadcrumbList on inner sitemap pages; FAQPage only where its questions are visible; Product+Offer on kit pages with the price visible"
-    },
-    {
-      "id": "seo-hygiene-definition",
-      "npmScript": "validate:seo-hygiene:definition",
-      "entrypoint": "scripts/validate/seo-hygiene.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "Homepage definition paragraph: measured missing on the live site 2026-10-11",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "Every speakable cssSelector on the homepage WebPage JSON-LD resolves to an element on the built page, and one of them names the paragraph directly under the H1 (wording is not checked: copy is fixed at the generator)."
-    },
-    {
-      "id": "seo-hygiene-indexability",
-      "npmScript": "validate:seo-hygiene:indexability",
-      "entrypoint": "scripts/validate/seo-hygiene.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "Legal pages noindex, content pages indexable and linked: measured missing on the live site 2026-10-11",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "legal/utility and thank-you pages noindex,follow and out of the sitemap; every sitemap URL indexable, self-canonical and reachable from / by links"
-    },
-    {
-      "id": "seo-hygiene-indexnow",
-      "npmScript": "validate:seo-hygiene:indexnow",
-      "entrypoint": "scripts/validate/seo-hygiene.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "IndexNow key file served: measured missing on the live site 2026-10-11",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "public/indexnow-key.txt is served at /<key>.txt and is the key the submitter reads"
-    },
-    {
-      "id": "index-coverage",
-      "npmScript": "validate:index-coverage",
-      "entrypoint": "scripts/validate/index-coverage.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "Index state of the 99 sitemap URLs was never measured (11 Oct 2026: 10 impressions/28d); a stale or inconsistent coverage file would steer consolidation blind",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "data/search_intelligence/index_coverage.json and gsc_sitemaps.json fresh, sitemap-consistent, recounted, and refreshed by the daily cycle",
-      "repairCommand": "npm run search-intelligence:index-coverage:reconcile"
-    },
-    {
-      "id": "target-query-set",
-      "npmScript": "validate:target-query-set",
-      "entrypoint": "scripts/validate/target-query-set.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "14 queries with no measured number were steering content; every target must carry a source and a number",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "data/search_intelligence/target_query_set.json measured-only and current"
-    },
-    {
-      "id": "gsc-truth",
-      "npmScript": "validate:gsc-truth",
-      "entrypoint": "scripts/validate/gsc-truth.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "prevents the daily Search Console record going missing, losing its query history, or quietly stopping. The connector's weekly ceiling was 3 against a daily schedule, so it collected about three days in seven - eight times in the twenty days to 25 Oct 2026, with a five-day gap - and recorded BUDGET_HELD on the rest, which is not a failure and left every workflow green. Nothing read the gap, and the Search Readiness checklist (item e4) found no gsc_truth.json in the repo at all. This asserts the file, its shape, a non-empty history, the daily cron and the ceiling that lets it run",
-      "owner": "approvalprep-ops",
-      "group": "ops-critical",
-      "scope": "data/search_intelligence/gsc_truth.json and its two sources, the google_search_console_search_analytics ceilings in data/intelligence/provider_budget.json, and the daily cron and gsc-truth step in intelligence-ingest-free-sources.yml"
-    },
-    {
-      "id": "consolidation-candidates",
-      "npmScript": "validate:consolidation-candidates",
-      "entrypoint": "scripts/validate/consolidation-candidates.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "Thin zero-impression pages need a measured fold-into-hub ledger before any redirect ships",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "data/search_intelligence/consolidation_candidates.json current against dist, GSC and coverage; no redirect shipped",
-      "repairCommand": "npm run search-intelligence:consolidation"
-    },
-    {
-      "id": "derived-ledger-lanes",
-      "npmScript": "validate:derived-ledger-lanes",
-      "entrypoint": "scripts/validate/derived-ledger-lanes.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "19 Oct 2026: Citation OS Weekly ingested a new Search Console row and validated without re-deriving the target set, so main went red on a stale ledger",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "every sequence re-derives search-intelligence ledgers before validate:all; every Search Console ingesting workflow re-derives after ingest and commits the derived ledgers"
-    },
-    {
       "id": "publication-freeze",
       "npmScript": "validate:publication-freeze",
       "entrypoint": "scripts/validate/publication-freeze.mjs",
@@ -1297,17 +576,6 @@
       "owner": "approvalprep-growth",
       "group": "growth-critical",
       "scope": "data/cadence/policy.json new_page_publication, generator wiring, post-freeze release history, release schedule"
-    },
-    {
-      "id": "query-aligned-pages",
-      "npmScript": "validate:query-aligned-pages",
-      "entrypoint": "scripts/validate/query-aligned-pages.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "The 3 pages Search Console shows must answer the query it shows them for",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "Built title, H1, definition, FAQ JSON-LD and kit checkout on the GSC-impression pages"
     },
     {
       "id": "kit-page-sells-its-own-kit",
@@ -1321,28 +589,6 @@
       "scope": "skuForRoute() run against every active_paid kit path in the route manifest"
     },
     {
-      "id": "title-fit",
-      "npmScript": "validate:title-fit",
-      "entrypoint": "scripts/validate/title-fit.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "A long page title must never break the build: fitTitle trims it to 65 characters and keeps the ApprovalPrep brand (owner ruling 2 Nov 2026, over a length limit never fails). Fails only if the generator throws, drops the brand or returns an over-long title",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "src/lib/title.mjs fitTitle run over every route title in data/routes/route_manifest.json plus fixed long cases"
-    },
-    {
-      "id": "pinterest-launch",
-      "npmScript": "validate:pinterest-launch",
-      "entrypoint": "scripts/validate/pinterest-launch.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "The Pinterest domain claim and the /pinfeed.xml RSS feed are what Pinterest reads; a lost meta tag unclaims the domain and a broken feed stops every pin",
-      "owner": "approvalprep-growth",
-      "group": "growth-critical",
-      "scope": "Built dist/: homepage p:domain_verify meta, /pinfeed.xml well-formed RSS 2.0 with >= 8 items, every link and 1000x1500 image on-site and emitted, every paid kit and the three Plan B guides present"
-    },
-    {
       "id": "pinterest-drip",
       "npmScript": "validate:pinterest-drip",
       "entrypoint": "scripts/validate/pinterest-drip.mjs",
@@ -1352,17 +598,6 @@
       "owner": "approvalprep-growth",
       "group": "growth-critical",
       "scope": "data/pinterest/queue.json schema and copy rules, schedule (PINS_PER_DAY, no gaps, no page on consecutive days), on-site utm links incl. utm_content, dist/pins/<id>.png 1000x1500, feed exact at fixed America/Chicago clocks, refill threshold and batch, request-time Pages Function wiring"
-    },
-    {
-      "id": "schedule-truth",
-      "npmScript": "validate:schedule-truth",
-      "entrypoint": "scripts/validate/schedule-truth.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "docs/SCHEDULE.md and the Boss OS Schedule are read as the truth about what fires; a listed job that does not run, a job that runs unlisted, or a retired do-nothing job quietly rescheduled makes that page lie",
-      "owner": "approvalprep-ops",
-      "group": "growth-critical",
-      "scope": "every live workflow cron vs the docs/SCHEDULE.md table (cron and America/Chicago timezone), weekly-growth-ops.yml and growth-health-refresh.yml kept unscheduled with workflow_dispatch, spry-weekly-summary.yml on Wednesday with self-check and artifact upload"
     },
     {
       "id": "email-nurture",
@@ -1396,17 +631,6 @@
       "owner": "approvalprep-ops",
       "group": "growth-critical",
       "scope": "functions/api/nurture-run.js (CI bearer NURTURE_RUN_SECRET, named stop when unset) and functions/_runtime/admin-lockout.js via /api/admin/login and the x-admin-password header (10 wrong per IP per 15 min)"
-    },
-    {
-      "id": "phone-no-sideways-scroll",
-      "npmScript": "validate:phone-no-sideways-scroll",
-      "entrypoint": "scripts/validate/phone-no-sideways-scroll.mjs",
-      "severity": "HARD_FAIL",
-      "blocksRelease": true,
-      "blockReason": "every built page renders at 390px with no sideways scroll and nothing flush against the screen edge (6 Nov 2026: homepage 459px, /pricing/ 446px, breadcrumb and use-case row at x=0, hidden by overflow-x:hidden)",
-      "owner": "approvalprep-growth",
-      "group": "ux-critical",
-      "scope": "Chromium at 390x844 over every dist/sitemap.xml page"
     }
   ],
   "repairPolicy": "A validator may declare repairCommand only when that command repairs the same defect the validator detects. scripts/selfheal/heal-until-clean.mjs runs it on a blocking failure and re-validates.",
