@@ -1,22 +1,22 @@
-# Lender Follow-up Letter
+# Settlement terms in writing letter
 
-**Offering ID:** `business-funding-prep-kit__lender-follow-up-letter`  
-**Bundled product:** Business Funding Prep Kit (`business-funding-prep-kit`)  
-**Price:** $39  
+**Offering ID:** `credit-letter-kit__settlement-terms-in-writing-letter`  
+**Bundled product:** Credit Letter Kit (`credit-letter-kit`)  
+**Price:** $19  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 
 ## What This Offering Is
 
-You sent the lender what they asked for and need a written nudge about where things stand.
+You are ready to settle a collection account and want the terms in writing before you pay.
 
 ## How Purchase Works
 
-This offering is included in the **Business Funding Prep Kit** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
+This offering is included in the **Credit Letter Kit** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
 
 ## Reviewable Files
 
-- R2 keys (private bucket; the kit files are not in this repository): `products/business-funding-prep-kit/business-funding-prep-kit.pdf`, `products/business-funding-prep-kit/business-funding-prep-kit.docx`
+- R2 keys (private bucket; the kit files are not in this repository): `products/credit-letter-kit/credit-letter-kit.pdf`, `products/credit-letter-kit/credit-letter-kit.docx`
 
 ## Contract Standard
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: lender follow-up letter template
-- CTA label: Use the Business Funding Prep Kit
-- Customer situation: You sent the lender what they asked for and need a written nudge about where things stand.
+- Search intent: settlement agreement in writing letter
+- CTA label: Use the Credit Letter Kit
+- Customer situation: You are ready to settle a collection account and want the terms in writing before you pay.
 
 ## Safety Boundary
 

@@ -1,22 +1,22 @@
-# Pay-for-delete Request Letter
+# Proof of residency letter (signed by the person you live with)
 
-**Offering ID:** `credit-letter-kit__pay-for-delete-request-letter`  
-**Bundled product:** Credit Letter Kit (`credit-letter-kit`)  
-**Price:** $19  
+**Offering ID:** `complete-approvalprep-bundle__proof-of-residency-letter-signed-by-the-person-you-live-with`  
+**Bundled product:** Complete ApprovalPrep Bundle (`complete-approvalprep-bundle`)  
+**Price:** $49  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 
 ## What This Offering Is
 
-You are ready to settle a collection account and want your request about the reporting put in writing.
+An office needs the person you live with to confirm in writing that you live there. This letter is written for that person to sign.
 
 ## How Purchase Works
 
-This offering is included in the **Credit Letter Kit** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
+This offering is included in the **Complete ApprovalPrep Bundle** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
 
 ## Reviewable Files
 
-- R2 keys (private bucket; the kit files are not in this repository): `products/credit-letter-kit/credit-letter-kit.pdf`, `products/credit-letter-kit/credit-letter-kit.docx`
+- R2 keys (private bucket; the kit files are not in this repository): `products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf`, `products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx`
 
 ## Contract Standard
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: pay-for-delete request letter template
-- CTA label: Use the Credit Letter Kit
-- Customer situation: You are ready to settle a collection account and want your request about the reporting put in writing.
+- Search intent: proof of residency letter template
+- CTA label: Use the Complete ApprovalPrep Bundle
+- Customer situation: An office needs the person you live with to confirm in writing that you live there. This letter is written for that person to sign.
 
 ## Safety Boundary
 

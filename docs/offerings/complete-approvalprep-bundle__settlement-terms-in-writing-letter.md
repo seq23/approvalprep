@@ -1,6 +1,6 @@
-# Gap In Employment Letter
+# Settlement terms in writing letter
 
-**Offering ID:** `complete-approvalprep-bundle__gap-in-employment-letter`  
+**Offering ID:** `complete-approvalprep-bundle__settlement-terms-in-writing-letter`  
 **Bundled product:** Complete ApprovalPrep Bundle (`complete-approvalprep-bundle`)  
 **Price:** $49  
 **Delivery model:** Direct paid download; Studio not required  
@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You were out of work for a period and need to say what you were doing during it.
+You are ready to settle a collection account and want the terms in writing before you pay.
 
 ## How Purchase Works
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: gap in employment letter template
+- Search intent: settlement agreement in writing letter
 - CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: You were out of work for a period and need to say what you were doing during it.
+- Customer situation: You are ready to settle a collection account and want the terms in writing before you pay.
 
 ## Safety Boundary
 

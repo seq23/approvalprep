@@ -1,6 +1,6 @@
-# Renter Document Packet
+# Mortgage explanation letter (credit inquiries and new accounts)
 
-**Offering ID:** `complete-approvalprep-bundle__renter-document-packet`  
+**Offering ID:** `complete-approvalprep-bundle__mortgage-explanation-letter-credit-inquiries-and-new-accounts`  
 **Bundled product:** Complete ApprovalPrep Bundle (`complete-approvalprep-bundle`)  
 **Price:** $49  
 **Delivery model:** Direct paid download; Studio not required  
@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You are applying for several places at once and want one organized packet to send each time.
+A mortgage lender asked you to explain recent credit inquiries or new accounts.
 
 ## How Purchase Works
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: renter document packet template
+- Search intent: mortgage explanation letter template
 - CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: You are applying for several places at once and want one organized packet to send each time.
+- Customer situation: A mortgage lender asked you to explain recent credit inquiries or new accounts.
 
 ## Safety Boundary
 

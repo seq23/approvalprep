@@ -1,22 +1,22 @@
-# Mortgage Explanation Letter
+# Direct dispute letter to the company that reported the item
 
-**Offering ID:** `loan-prep-letter-kit__mortgage-explanation-letter`  
-**Bundled product:** Loan Prep Letter Kit (`loan-prep-letter-kit`)  
-**Price:** $29  
+**Offering ID:** `credit-letter-kit__direct-dispute-letter-to-the-company-that-reported-the-item`  
+**Bundled product:** Credit Letter Kit (`credit-letter-kit`)  
+**Price:** $19  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 
 ## What This Offering Is
 
-Your mortgage underwriter has issued a condition asking you to explain something in writing.
+You want to send your proof to the company that reported the item.
 
 ## How Purchase Works
 
-This offering is included in the **Loan Prep Letter Kit** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
+This offering is included in the **Credit Letter Kit** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
 
 ## Reviewable Files
 
-- R2 keys (private bucket; the kit files are not in this repository): `products/loan-prep-letter-kit/loan-prep-letter-kit.pdf`, `products/loan-prep-letter-kit/loan-prep-letter-kit.docx`
+- R2 keys (private bucket; the kit files are not in this repository): `products/credit-letter-kit/credit-letter-kit.pdf`, `products/credit-letter-kit/credit-letter-kit.docx`
 
 ## Contract Standard
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: mortgage explanation letter template
-- CTA label: Use the Loan Prep Letter Kit
-- Customer situation: Your mortgage underwriter has issued a condition asking you to explain something in writing.
+- Search intent: dispute letter to creditor that reported the item
+- CTA label: Use the Credit Letter Kit
+- Customer situation: You want to send your proof to the company that reported the item.
 
 ## Safety Boundary
 

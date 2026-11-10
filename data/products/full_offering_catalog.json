@@ -18,6 +18,14 @@
           "searchIntent": "credit explanation letter template"
         },
         {
+          "name": "late payment explanation letter",
+          "customerSituation": "One or more payments landed late, and the circumstances need to be in writing for whoever is looking.",
+          "includedInSku": "letter-of-explanation",
+          "ctaLabel": "Use the Letter of Explanation Kit — $15",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "late payment explanation letter template"
+        },
+        {
           "name": "income gap explanation letter",
           "customerSituation": "Your income dipped for a stretch, and the reviewer wants that period explained rather than left blank.",
           "includedInSku": "letter-of-explanation",
@@ -50,14 +58,6 @@
           "searchIntent": "rental issue explanation letter template"
         },
         {
-          "name": "late payment explanation letter",
-          "customerSituation": "One or more payments landed late, and the circumstances need to be in writing for whoever is looking.",
-          "includedInSku": "letter-of-explanation",
-          "ctaLabel": "Use the Letter of Explanation Kit — $15",
-          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "late payment explanation letter template"
-        },
-        {
           "name": "bank statement explanation letter",
           "customerSituation": "A deposit, transfer or balance swing on your statements looks unusual to a reviewer, and they want it accounted for.",
           "includedInSku": "letter-of-explanation",
@@ -72,6 +72,14 @@
           "ctaLabel": "Use the Letter of Explanation Kit — $15",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
           "searchIntent": "life event explanation letter template"
+        },
+        {
+          "name": "sent and received log",
+          "customerSituation": "You want one page that records what you sent, to whom, when, and what came back.",
+          "includedInSku": "letter-of-explanation",
+          "ctaLabel": "Use the Letter of Explanation Kit — $15",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "sent and received log for letters"
         },
         {
           "name": "general application explanation letter",
@@ -90,8 +98,8 @@
       "price": 59,
       "offerings": [
         {
-          "name": "employment verification letter",
-          "customerSituation": "Someone needs written confirmation of where you work, in what role, and since when.",
+          "name": "employment verification letter (for your employer to sign)",
+          "customerSituation": "Someone needs written confirmation of where you work. This letter is written for your employer to sign.",
           "includedInSku": "income-employment-letter-kit",
           "ctaLabel": "Use the Income + Employment Letter Kit",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
@@ -114,6 +122,14 @@
           "searchIntent": "self-employment income letter template"
         },
         {
+          "name": "bank statement explanation letter",
+          "customerSituation": "A deposit, transfer or balance swing on your statements looks unusual to a reviewer, and they want it accounted for.",
+          "includedInSku": "income-employment-letter-kit",
+          "ctaLabel": "Use the Income + Employment Letter Kit",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "bank statement explanation letter template"
+        },
+        {
           "name": "job change letter",
           "customerSituation": "You have just changed employers, and the reviewer wants to know whether the new income is steady.",
           "includedInSku": "income-employment-letter-kit",
@@ -122,7 +138,7 @@
           "searchIntent": "job change letter template"
         },
         {
-          "name": "gap in employment letter",
+          "name": "employment gap explanation letter",
           "customerSituation": "You were out of work for a period and need to say what you were doing during it.",
           "includedInSku": "income-employment-letter-kit",
           "ctaLabel": "Use the Income + Employment Letter Kit",
@@ -130,12 +146,12 @@
           "searchIntent": "gap in employment letter template"
         },
         {
-          "name": "bank statement explanation letter",
-          "customerSituation": "A deposit, transfer or balance swing on your statements looks unusual to a reviewer, and they want it accounted for.",
+          "name": "sent and received log",
+          "customerSituation": "You want one page that records what you sent, to whom, when, and what came back.",
           "includedInSku": "income-employment-letter-kit",
           "ctaLabel": "Use the Income + Employment Letter Kit",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "bank statement explanation letter template"
+          "searchIntent": "sent and received log for letters"
         }
       ]
     },
@@ -146,60 +162,108 @@
       "price": 59,
       "offerings": [
         {
-          "name": "credit dispute letter",
-          "customerSituation": "You found an entry on your credit report you believe is wrong and want to challenge it in writing.",
+          "name": "credit bureau follow-up letter: no written results yet",
+          "customerSituation": "The answer window has passed and you have nothing in writing from the bureau.",
           "includedInSku": "credit-letter-kit",
           "ctaLabel": "Use the Credit Letter Kit",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "credit dispute letter template"
+          "searchIntent": "credit bureau follow-up letter no response"
         },
         {
-          "name": "late payment explanation letter",
-          "customerSituation": "One or more payments landed late, and the circumstances need to be in writing for whoever is looking.",
+          "name": "credit bureau follow-up letter: the bureau says the item was verified",
+          "customerSituation": "The bureau says the item was verified and you have new information or proof to send.",
           "includedInSku": "credit-letter-kit",
           "ctaLabel": "Use the Credit Letter Kit",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "late payment explanation letter template"
+          "searchIntent": "credit bureau verified dispute follow-up letter"
         },
         {
-          "name": "goodwill letter",
-          "customerSituation": "You paid late once, the account is current now, and you want to ask the creditor to reconsider the mark.",
+          "name": "credit bureau follow-up letter: corrected, but still not right",
+          "customerSituation": "The bureau changed the item, but the corrected entry is still not accurate.",
           "includedInSku": "credit-letter-kit",
           "ctaLabel": "Use the Credit Letter Kit",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "goodwill letter template"
+          "searchIntent": "credit report corrected still wrong letter"
         },
         {
-          "name": "pay-for-delete request letter",
-          "customerSituation": "You are ready to settle a collection account and want your request about the reporting put in writing.",
+          "name": "request to tell recent recipients about the correction",
+          "customerSituation": "The bureau corrected your report and you want it to tell those who recently received the old one.",
           "includedInSku": "credit-letter-kit",
           "ctaLabel": "Use the Credit Letter Kit",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "pay-for-delete request letter template"
+          "searchIntent": "notify recipients of credit report correction letter"
+        },
+        {
+          "name": "statement of dispute to add to my file",
+          "customerSituation": "The investigation did not resolve your dispute and you want your statement added to your file.",
+          "includedInSku": "credit-letter-kit",
+          "ctaLabel": "Use the Credit Letter Kit",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "statement of dispute credit report"
+        },
+        {
+          "name": "direct dispute letter to the company that reported the item",
+          "customerSituation": "You want to send your proof to the company that reported the item.",
+          "includedInSku": "credit-letter-kit",
+          "ctaLabel": "Use the Credit Letter Kit",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "dispute letter to creditor that reported the item"
         },
         {
           "name": "debt validation letter",
-          "customerSituation": "A collector has contacted you about a debt, and you want it documented as yours before you go further.",
+          "customerSituation": "A collector contacted you and you want the debt validated in writing.",
           "includedInSku": "credit-letter-kit",
           "ctaLabel": "Use the Credit Letter Kit",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
           "searchIntent": "debt validation letter template"
         },
         {
-          "name": "credit report error checklist",
-          "customerSituation": "You are reading your credit report line by line and need a way to track everything that looks wrong.",
+          "name": "settlement terms in writing letter",
+          "customerSituation": "You are ready to settle a collection account and want the terms in writing before you pay.",
           "includedInSku": "credit-letter-kit",
           "ctaLabel": "Use the Credit Letter Kit",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "credit report error checklist template"
+          "searchIntent": "settlement agreement in writing letter"
         },
         {
-          "name": "credit bureau follow-up letter",
-          "customerSituation": "You filed a dispute, the waiting period has passed, and you need to follow up with a record of it.",
+          "name": "goodwill letter",
+          "customerSituation": "The late payment was real and you want to ask the creditor for a courtesy.",
           "includedInSku": "credit-letter-kit",
           "ctaLabel": "Use the Credit Letter Kit",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "credit bureau follow-up letter template"
+          "searchIntent": "goodwill letter template"
+        },
+        {
+          "name": "late payment explanation letter",
+          "customerSituation": "You need to explain a real late payment to a lender or reviewer.",
+          "includedInSku": "credit-letter-kit",
+          "ctaLabel": "Use the Credit Letter Kit",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "late payment explanation letter"
+        },
+        {
+          "name": "credit report error checklist",
+          "customerSituation": "You want to check a credit report for errors before your next dispute.",
+          "includedInSku": "credit-letter-kit",
+          "ctaLabel": "Use the Credit Letter Kit",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "credit report error checklist"
+        },
+        {
+          "name": "mailing and record log",
+          "customerSituation": "You want one page that records what you sent, when, and what came back.",
+          "includedInSku": "credit-letter-kit",
+          "ctaLabel": "Use the Credit Letter Kit",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "credit dispute mailing log"
+        },
+        {
+          "name": "credit dispute letter",
+          "customerSituation": "You found an error on a credit report and want the first letter to the bureau.",
+          "includedInSku": "credit-letter-kit",
+          "ctaLabel": "Use the Credit Letter Kit",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "credit dispute letter template"
         }
       ]
     },
@@ -216,6 +280,22 @@
           "ctaLabel": "Use the Rental Application Kit",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
           "searchIntent": "apartment application checklist template"
+        },
+        {
+          "name": "proof of income checklist",
+          "customerSituation": "You have been asked to prove your income and are not certain which documents actually count.",
+          "includedInSku": "rental-application-kit",
+          "ctaLabel": "Use the Rental Application Kit",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "proof of income checklist template"
+        },
+        {
+          "name": "renter document packet: cover sheet and order",
+          "customerSituation": "You are applying for several places at once and want one organized packet to send each time.",
+          "includedInSku": "rental-application-kit",
+          "ctaLabel": "Use the Rental Application Kit",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "renter document packet template"
         },
         {
           "name": "rental cover letter",
@@ -242,20 +322,12 @@
           "searchIntent": "income explanation for renters template"
         },
         {
-          "name": "employment verification request",
+          "name": "employment verification request (to your employer)",
           "customerSituation": "You need to ask your employer, in writing, for the confirmation letter a reviewer has requested.",
           "includedInSku": "rental-application-kit",
           "ctaLabel": "Use the Rental Application Kit",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
           "searchIntent": "employment verification request template"
-        },
-        {
-          "name": "proof of income checklist",
-          "customerSituation": "You have been asked to prove your income and are not certain which documents actually count.",
-          "includedInSku": "rental-application-kit",
-          "ctaLabel": "Use the Rental Application Kit",
-          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "proof of income checklist template"
         },
         {
           "name": "landlord follow-up letter",
@@ -274,12 +346,12 @@
           "searchIntent": "move-in document checklist template"
         },
         {
-          "name": "renter document packet",
-          "customerSituation": "You are applying for several places at once and want one organized packet to send each time.",
+          "name": "sent and received log",
+          "customerSituation": "You want one page that records what you sent, to whom, when, and what came back.",
           "includedInSku": "rental-application-kit",
           "ctaLabel": "Use the Rental Application Kit",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "renter document packet template"
+          "searchIntent": "sent and received log for letters"
         }
       ]
     },
@@ -298,8 +370,8 @@
           "searchIntent": "auto loan explanation letter template"
         },
         {
-          "name": "mortgage explanation letter",
-          "customerSituation": "Your mortgage underwriter has issued a condition asking you to explain something in writing.",
+          "name": "mortgage explanation letter (credit inquiries and new accounts)",
+          "customerSituation": "A mortgage lender asked you to explain recent credit inquiries or new accounts.",
           "includedInSku": "loan-prep-letter-kit",
           "ctaLabel": "Use the Loan Prep Letter Kit",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
@@ -314,7 +386,7 @@
           "searchIntent": "personal loan explanation letter template"
         },
         {
-          "name": "income explanation letter",
+          "name": "income explanation letter (variable or changed income)",
           "customerSituation": "Your pay is not a flat salary, so the figure on your documents needs context before it makes sense.",
           "includedInSku": "loan-prep-letter-kit",
           "ctaLabel": "Use the Loan Prep Letter Kit",
@@ -352,6 +424,14 @@
           "ctaLabel": "Use the Loan Prep Letter Kit",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
           "searchIntent": "lender follow-up letter template"
+        },
+        {
+          "name": "sent and received log",
+          "customerSituation": "You want one page that records what you sent, to whom, when, and what came back.",
+          "includedInSku": "loan-prep-letter-kit",
+          "ctaLabel": "Use the Loan Prep Letter Kit",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "sent and received log for letters"
         }
       ]
     },
@@ -368,6 +448,14 @@
           "ctaLabel": "Use the Business Funding Prep Kit",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
           "searchIntent": "business loan explanation letter template"
+        },
+        {
+          "name": "use of funds explanation",
+          "customerSituation": "A lender wants to know exactly what you intend to do with the money.",
+          "includedInSku": "business-funding-prep-kit",
+          "ctaLabel": "Use the Business Funding Prep Kit",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "use of funds explanation template"
         },
         {
           "name": "SBA document checklist",
@@ -394,7 +482,7 @@
           "searchIntent": "cash flow explanation template"
         },
         {
-          "name": "bank statement explanation",
+          "name": "bank statement explanation (business account)",
           "customerSituation": "A line on your business statements needs accounting for before a reviewer draws their own conclusion.",
           "includedInSku": "business-funding-prep-kit",
           "ctaLabel": "Use the Business Funding Prep Kit",
@@ -410,20 +498,20 @@
           "searchIntent": "business address verification template"
         },
         {
-          "name": "use of funds explanation",
-          "customerSituation": "A lender wants to know exactly what you intend to do with the money.",
-          "includedInSku": "business-funding-prep-kit",
-          "ctaLabel": "Use the Business Funding Prep Kit",
-          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "use of funds explanation template"
-        },
-        {
-          "name": "lender follow-up letter",
+          "name": "lender follow-up letter (business application)",
           "customerSituation": "You sent the lender what they asked for and need a written nudge about where things stand.",
           "includedInSku": "business-funding-prep-kit",
           "ctaLabel": "Use the Business Funding Prep Kit",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
           "searchIntent": "lender follow-up letter template"
+        },
+        {
+          "name": "sent and received log",
+          "customerSituation": "You want one page that records what you sent, to whom, when, and what came back.",
+          "includedInSku": "business-funding-prep-kit",
+          "ctaLabel": "Use the Business Funding Prep Kit",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "sent and received log for letters"
         }
       ]
     },
@@ -442,8 +530,8 @@
           "searchIntent": "address verification letter template"
         },
         {
-          "name": "proof of residency letter",
-          "customerSituation": "A school, agency or office has asked you to prove that you live where you say you live.",
+          "name": "proof of residency letter (signed by the person you live with)",
+          "customerSituation": "An office needs the person you live with to confirm in writing that you live there. This letter is written for that person to sign.",
           "includedInSku": "life-admin-letter-kit",
           "ctaLabel": "Use the Life Admin Letter Kit",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
@@ -474,6 +562,14 @@
           "searchIntent": "school/employer request letter template"
         },
         {
+          "name": "general records request letter",
+          "customerSituation": "You need a copy of your own records from an organization and want to ask properly the first time.",
+          "includedInSku": "life-admin-letter-kit",
+          "ctaLabel": "Use the Life Admin Letter Kit",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "general records request letter template"
+        },
+        {
           "name": "benefits explanation letter",
           "customerSituation": "A benefits office has asked you to explain a change in your circumstances.",
           "includedInSku": "life-admin-letter-kit",
@@ -490,12 +586,12 @@
           "searchIntent": "utility/account explanation letter template"
         },
         {
-          "name": "general records request letter",
-          "customerSituation": "You need a copy of your own records from an organization and want to ask properly the first time.",
+          "name": "sent and received log",
+          "customerSituation": "You want one page that records what you sent, to whom, when, and what came back.",
           "includedInSku": "life-admin-letter-kit",
           "ctaLabel": "Use the Life Admin Letter Kit",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "general records request letter template"
+          "searchIntent": "sent and received log for letters"
         }
       ]
     },
@@ -505,6 +601,94 @@
       "stripe_price_env": "STRIPE_PRICE_COMPLETE_APPROVALPREP_BUNDLE",
       "price": 249,
       "offerings": [
+        {
+          "name": "credit bureau follow-up letter: no written results yet",
+          "customerSituation": "The answer window has passed and you have nothing in writing from the bureau.",
+          "includedInSku": "complete-approvalprep-bundle",
+          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "credit bureau follow-up letter no response"
+        },
+        {
+          "name": "credit bureau follow-up letter: the bureau says the item was verified",
+          "customerSituation": "The bureau says the item was verified and you have new information or proof to send.",
+          "includedInSku": "complete-approvalprep-bundle",
+          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "credit bureau verified dispute follow-up letter"
+        },
+        {
+          "name": "credit bureau follow-up letter: corrected, but still not right",
+          "customerSituation": "The bureau changed the item, but the corrected entry is still not accurate.",
+          "includedInSku": "complete-approvalprep-bundle",
+          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "credit report corrected still wrong letter"
+        },
+        {
+          "name": "request to tell recent recipients about the correction",
+          "customerSituation": "The bureau corrected your report and you want it to tell those who recently received the old one.",
+          "includedInSku": "complete-approvalprep-bundle",
+          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "notify recipients of credit report correction letter"
+        },
+        {
+          "name": "statement of dispute to add to my file",
+          "customerSituation": "The investigation did not resolve your dispute and you want your statement added to your file.",
+          "includedInSku": "complete-approvalprep-bundle",
+          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "statement of dispute credit report"
+        },
+        {
+          "name": "direct dispute letter to the company that reported the item",
+          "customerSituation": "You want to send your proof to the company that reported the item.",
+          "includedInSku": "complete-approvalprep-bundle",
+          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "dispute letter to creditor that reported the item"
+        },
+        {
+          "name": "debt validation letter",
+          "customerSituation": "A collector contacted you and you want the debt validated in writing.",
+          "includedInSku": "complete-approvalprep-bundle",
+          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "debt validation letter template"
+        },
+        {
+          "name": "settlement terms in writing letter",
+          "customerSituation": "You are ready to settle a collection account and want the terms in writing before you pay.",
+          "includedInSku": "complete-approvalprep-bundle",
+          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "settlement agreement in writing letter"
+        },
+        {
+          "name": "goodwill letter",
+          "customerSituation": "The late payment was real and you want to ask the creditor for a courtesy.",
+          "includedInSku": "complete-approvalprep-bundle",
+          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "goodwill letter template"
+        },
+        {
+          "name": "late payment explanation letter",
+          "customerSituation": "You need to explain a real late payment to a lender or reviewer.",
+          "includedInSku": "complete-approvalprep-bundle",
+          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "late payment explanation letter"
+        },
+        {
+          "name": "credit report error checklist",
+          "customerSituation": "You want to check a credit report for errors before your next dispute.",
+          "includedInSku": "complete-approvalprep-bundle",
+          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "credit report error checklist"
+        },
         {
           "name": "credit explanation letter",
           "customerSituation": "A lender has questions about something on your credit report and wants your own written account of what happened.",
@@ -546,14 +730,6 @@
           "searchIntent": "rental issue explanation letter template"
         },
         {
-          "name": "late payment explanation letter",
-          "customerSituation": "One or more payments landed late, and the circumstances need to be in writing for whoever is looking.",
-          "includedInSku": "complete-approvalprep-bundle",
-          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
-          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "late payment explanation letter template"
-        },
-        {
           "name": "bank statement explanation letter",
           "customerSituation": "A deposit, transfer or balance swing on your statements looks unusual to a reviewer, and they want it accounted for.",
           "includedInSku": "complete-approvalprep-bundle",
@@ -570,16 +746,8 @@
           "searchIntent": "life event explanation letter template"
         },
         {
-          "name": "general application explanation letter",
-          "customerSituation": "An application asks you for an explanation and gives you a blank box with no guidance on what belongs in it.",
-          "includedInSku": "complete-approvalprep-bundle",
-          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
-          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "general application explanation letter template"
-        },
-        {
-          "name": "employment verification letter",
-          "customerSituation": "Someone needs written confirmation of where you work, in what role, and since when.",
+          "name": "employment verification letter (for your employer to sign)",
+          "customerSituation": "Someone needs written confirmation of where you work. This letter is written for your employer to sign.",
           "includedInSku": "complete-approvalprep-bundle",
           "ctaLabel": "Use the Complete ApprovalPrep Bundle",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
@@ -610,68 +778,28 @@
           "searchIntent": "job change letter template"
         },
         {
-          "name": "gap in employment letter",
-          "customerSituation": "You were out of work for a period and need to say what you were doing during it.",
-          "includedInSku": "complete-approvalprep-bundle",
-          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
-          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "gap in employment letter template"
-        },
-        {
-          "name": "credit dispute letter",
-          "customerSituation": "You found an entry on your credit report you believe is wrong and want to challenge it in writing.",
-          "includedInSku": "complete-approvalprep-bundle",
-          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
-          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "credit dispute letter template"
-        },
-        {
-          "name": "goodwill letter",
-          "customerSituation": "You paid late once, the account is current now, and you want to ask the creditor to reconsider the mark.",
-          "includedInSku": "complete-approvalprep-bundle",
-          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
-          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "goodwill letter template"
-        },
-        {
-          "name": "pay-for-delete request letter",
-          "customerSituation": "You are ready to settle a collection account and want your request about the reporting put in writing.",
-          "includedInSku": "complete-approvalprep-bundle",
-          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
-          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "pay-for-delete request letter template"
-        },
-        {
-          "name": "debt validation letter",
-          "customerSituation": "A collector has contacted you about a debt, and you want it documented as yours before you go further.",
-          "includedInSku": "complete-approvalprep-bundle",
-          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
-          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "debt validation letter template"
-        },
-        {
-          "name": "credit report error checklist",
-          "customerSituation": "You are reading your credit report line by line and need a way to track everything that looks wrong.",
-          "includedInSku": "complete-approvalprep-bundle",
-          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
-          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "credit report error checklist template"
-        },
-        {
-          "name": "credit bureau follow-up letter",
-          "customerSituation": "You filed a dispute, the waiting period has passed, and you need to follow up with a record of it.",
-          "includedInSku": "complete-approvalprep-bundle",
-          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
-          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "credit bureau follow-up letter template"
-        },
-        {
           "name": "apartment application checklist",
           "customerSituation": "You are applying for an apartment and want every item the landlord asks for ready before you hand it in.",
           "includedInSku": "complete-approvalprep-bundle",
           "ctaLabel": "Use the Complete ApprovalPrep Bundle",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
           "searchIntent": "apartment application checklist template"
+        },
+        {
+          "name": "proof of income checklist",
+          "customerSituation": "You have been asked to prove your income and are not certain which documents actually count.",
+          "includedInSku": "complete-approvalprep-bundle",
+          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "proof of income checklist template"
+        },
+        {
+          "name": "renter document packet: cover sheet and order",
+          "customerSituation": "You are applying for several places at once and want one organized packet to send each time.",
+          "includedInSku": "complete-approvalprep-bundle",
+          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "renter document packet template"
         },
         {
           "name": "rental cover letter",
@@ -698,20 +826,12 @@
           "searchIntent": "income explanation for renters template"
         },
         {
-          "name": "employment verification request",
+          "name": "employment verification request (to your employer)",
           "customerSituation": "You need to ask your employer, in writing, for the confirmation letter a reviewer has requested.",
           "includedInSku": "complete-approvalprep-bundle",
           "ctaLabel": "Use the Complete ApprovalPrep Bundle",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
           "searchIntent": "employment verification request template"
-        },
-        {
-          "name": "proof of income checklist",
-          "customerSituation": "You have been asked to prove your income and are not certain which documents actually count.",
-          "includedInSku": "complete-approvalprep-bundle",
-          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
-          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "proof of income checklist template"
         },
         {
           "name": "landlord follow-up letter",
@@ -730,14 +850,6 @@
           "searchIntent": "move-in document checklist template"
         },
         {
-          "name": "renter document packet",
-          "customerSituation": "You are applying for several places at once and want one organized packet to send each time.",
-          "includedInSku": "complete-approvalprep-bundle",
-          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
-          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "renter document packet template"
-        },
-        {
           "name": "auto loan explanation letter",
           "customerSituation": "You are financing a car and the dealer or lender has flagged something in your file that needs explaining.",
           "includedInSku": "complete-approvalprep-bundle",
@@ -746,8 +858,8 @@
           "searchIntent": "auto loan explanation letter template"
         },
         {
-          "name": "mortgage explanation letter",
-          "customerSituation": "Your mortgage underwriter has issued a condition asking you to explain something in writing.",
+          "name": "mortgage explanation letter (credit inquiries and new accounts)",
+          "customerSituation": "A mortgage lender asked you to explain recent credit inquiries or new accounts.",
           "includedInSku": "complete-approvalprep-bundle",
           "ctaLabel": "Use the Complete ApprovalPrep Bundle",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
@@ -762,7 +874,7 @@
           "searchIntent": "personal loan explanation letter template"
         },
         {
-          "name": "income explanation letter",
+          "name": "income explanation letter (variable or changed income)",
           "customerSituation": "Your pay is not a flat salary, so the figure on your documents needs context before it makes sense.",
           "includedInSku": "complete-approvalprep-bundle",
           "ctaLabel": "Use the Complete ApprovalPrep Bundle",
@@ -794,6 +906,14 @@
           "searchIntent": "business loan explanation letter template"
         },
         {
+          "name": "use of funds explanation",
+          "customerSituation": "A lender wants to know exactly what you intend to do with the money.",
+          "includedInSku": "complete-approvalprep-bundle",
+          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "use of funds explanation template"
+        },
+        {
           "name": "SBA document checklist",
           "customerSituation": "You are preparing an SBA application and need to track the long list of documents it calls for.",
           "includedInSku": "complete-approvalprep-bundle",
@@ -818,7 +938,7 @@
           "searchIntent": "cash flow explanation template"
         },
         {
-          "name": "bank statement explanation",
+          "name": "bank statement explanation (business account)",
           "customerSituation": "A line on your business statements needs accounting for before a reviewer draws their own conclusion.",
           "includedInSku": "complete-approvalprep-bundle",
           "ctaLabel": "Use the Complete ApprovalPrep Bundle",
@@ -834,12 +954,12 @@
           "searchIntent": "business address verification template"
         },
         {
-          "name": "use of funds explanation",
-          "customerSituation": "A lender wants to know exactly what you intend to do with the money.",
+          "name": "lender follow-up letter (business application)",
+          "customerSituation": "You sent the lender what they asked for and need a written nudge about where things stand.",
           "includedInSku": "complete-approvalprep-bundle",
           "ctaLabel": "Use the Complete ApprovalPrep Bundle",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "use of funds explanation template"
+          "searchIntent": "lender follow-up letter template"
         },
         {
           "name": "address verification letter",
@@ -850,8 +970,8 @@
           "searchIntent": "address verification letter template"
         },
         {
-          "name": "proof of residency letter",
-          "customerSituation": "A school, agency or office has asked you to prove that you live where you say you live.",
+          "name": "proof of residency letter (signed by the person you live with)",
+          "customerSituation": "An office needs the person you live with to confirm in writing that you live there. This letter is written for that person to sign.",
           "includedInSku": "complete-approvalprep-bundle",
           "ctaLabel": "Use the Complete ApprovalPrep Bundle",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
@@ -882,6 +1002,14 @@
           "searchIntent": "school/employer request letter template"
         },
         {
+          "name": "general records request letter",
+          "customerSituation": "You need a copy of your own records from an organization and want to ask properly the first time.",
+          "includedInSku": "complete-approvalprep-bundle",
+          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "general records request letter template"
+        },
+        {
           "name": "benefits explanation letter",
           "customerSituation": "A benefits office has asked you to explain a change in your circumstances.",
           "includedInSku": "complete-approvalprep-bundle",
@@ -898,12 +1026,36 @@
           "searchIntent": "utility/account explanation letter template"
         },
         {
-          "name": "general records request letter",
-          "customerSituation": "You need a copy of your own records from an organization and want to ask properly the first time.",
+          "name": "mailing and record log",
+          "customerSituation": "You want one page that records what you sent, when, and what came back.",
           "includedInSku": "complete-approvalprep-bundle",
           "ctaLabel": "Use the Complete ApprovalPrep Bundle",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "general records request letter template"
+          "searchIntent": "credit dispute mailing log"
+        },
+        {
+          "name": "sent and received log",
+          "customerSituation": "You want one page that records what you sent, to whom, when, and what came back.",
+          "includedInSku": "complete-approvalprep-bundle",
+          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "sent and received log for letters"
+        },
+        {
+          "name": "credit dispute letter",
+          "customerSituation": "You found an error on a credit report and want the first letter to the bureau.",
+          "includedInSku": "complete-approvalprep-bundle",
+          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "credit dispute letter template"
+        },
+        {
+          "name": "general application explanation letter",
+          "customerSituation": "An application asks you for an explanation and gives you a blank box with no guidance on what belongs in it.",
+          "includedInSku": "complete-approvalprep-bundle",
+          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "general application explanation letter template"
         }
       ]
     }

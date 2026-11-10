@@ -1,22 +1,22 @@
-# Proof Of Residency Letter
+# Mortgage explanation letter (credit inquiries and new accounts)
 
-**Offering ID:** `life-admin-letter-kit__proof-of-residency-letter`  
-**Bundled product:** Life Admin Letter Kit (`life-admin-letter-kit`)  
-**Price:** $19  
+**Offering ID:** `loan-prep-letter-kit__mortgage-explanation-letter-credit-inquiries-and-new-accounts`  
+**Bundled product:** Loan Prep Letter Kit (`loan-prep-letter-kit`)  
+**Price:** $29  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 
 ## What This Offering Is
 
-A school, agency or office has asked you to prove that you live where you say you live.
+A mortgage lender asked you to explain recent credit inquiries or new accounts.
 
 ## How Purchase Works
 
-This offering is included in the **Life Admin Letter Kit** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
+This offering is included in the **Loan Prep Letter Kit** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
 
 ## Reviewable Files
 
-- R2 keys (private bucket; the kit files are not in this repository): `products/life-admin-letter-kit/life-admin-letter-kit.pdf`, `products/life-admin-letter-kit/life-admin-letter-kit.docx`
+- R2 keys (private bucket; the kit files are not in this repository): `products/loan-prep-letter-kit/loan-prep-letter-kit.pdf`, `products/loan-prep-letter-kit/loan-prep-letter-kit.docx`
 
 ## Contract Standard
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: proof of residency letter template
-- CTA label: Use the Life Admin Letter Kit
-- Customer situation: A school, agency or office has asked you to prove that you live where you say you live.
+- Search intent: mortgage explanation letter template
+- CTA label: Use the Loan Prep Letter Kit
+- Customer situation: A mortgage lender asked you to explain recent credit inquiries or new accounts.
 
 ## Safety Boundary
 

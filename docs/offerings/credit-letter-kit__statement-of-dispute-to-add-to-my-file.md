@@ -1,22 +1,22 @@
-# Bank Statement Explanation
+# Statement of dispute to add to my file
 
-**Offering ID:** `complete-approvalprep-bundle__bank-statement-explanation`  
-**Bundled product:** Complete ApprovalPrep Bundle (`complete-approvalprep-bundle`)  
-**Price:** $49  
+**Offering ID:** `credit-letter-kit__statement-of-dispute-to-add-to-my-file`  
+**Bundled product:** Credit Letter Kit (`credit-letter-kit`)  
+**Price:** $19  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 
 ## What This Offering Is
 
-A line on your business statements needs accounting for before a reviewer draws their own conclusion.
+The investigation did not resolve your dispute and you want your statement added to your file.
 
 ## How Purchase Works
 
-This offering is included in the **Complete ApprovalPrep Bundle** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
+This offering is included in the **Credit Letter Kit** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
 
 ## Reviewable Files
 
-- R2 keys (private bucket; the kit files are not in this repository): `products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf`, `products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx`
+- R2 keys (private bucket; the kit files are not in this repository): `products/credit-letter-kit/credit-letter-kit.pdf`, `products/credit-letter-kit/credit-letter-kit.docx`
 
 ## Contract Standard
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: bank statement explanation template
-- CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: A line on your business statements needs accounting for before a reviewer draws their own conclusion.
+- Search intent: statement of dispute credit report
+- CTA label: Use the Credit Letter Kit
+- Customer situation: The investigation did not resolve your dispute and you want your statement added to your file.
 
 ## Safety Boundary
 

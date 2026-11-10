@@ -1,4 +1,4 @@
-# Goodwill Letter
+# Goodwill letter
 
 **Offering ID:** `credit-letter-kit__goodwill-letter`  
 **Bundled product:** Credit Letter Kit (`credit-letter-kit`)  
@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You paid late once, the account is current now, and you want to ask the creditor to reconsider the mark.
+The late payment was real and you want to ask the creditor for a courtesy.
 
 ## How Purchase Works
 
@@ -45,7 +45,7 @@ First-page boundary requirements:
 
 - Search intent: goodwill letter template
 - CTA label: Use the Credit Letter Kit
-- Customer situation: You paid late once, the account is current now, and you want to ask the creditor to reconsider the mark.
+- Customer situation: The late payment was real and you want to ask the creditor for a courtesy.
 
 ## Safety Boundary
 

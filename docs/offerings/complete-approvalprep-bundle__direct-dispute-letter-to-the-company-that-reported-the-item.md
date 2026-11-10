@@ -1,6 +1,6 @@
-# Employment Verification Letter
+# Direct dispute letter to the company that reported the item
 
-**Offering ID:** `complete-approvalprep-bundle__employment-verification-letter`  
+**Offering ID:** `complete-approvalprep-bundle__direct-dispute-letter-to-the-company-that-reported-the-item`  
 **Bundled product:** Complete ApprovalPrep Bundle (`complete-approvalprep-bundle`)  
 **Price:** $49  
 **Delivery model:** Direct paid download; Studio not required  
@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-Someone needs written confirmation of where you work, in what role, and since when.
+You want to send your proof to the company that reported the item.
 
 ## How Purchase Works
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: employment verification letter template
+- Search intent: dispute letter to creditor that reported the item
 - CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: Someone needs written confirmation of where you work, in what role, and since when.
+- Customer situation: You want to send your proof to the company that reported the item.
 
 ## Safety Boundary
 

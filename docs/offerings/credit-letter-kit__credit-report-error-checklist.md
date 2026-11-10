@@ -1,4 +1,4 @@
-# Credit Report Error Checklist
+# Credit report error checklist
 
 **Offering ID:** `credit-letter-kit__credit-report-error-checklist`  
 **Bundled product:** Credit Letter Kit (`credit-letter-kit`)  
@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You are reading your credit report line by line and need a way to track everything that looks wrong.
+You want to check a credit report for errors before your next dispute.
 
 ## How Purchase Works
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: credit report error checklist template
+- Search intent: credit report error checklist
 - CTA label: Use the Credit Letter Kit
-- Customer situation: You are reading your credit report line by line and need a way to track everything that looks wrong.
+- Customer situation: You want to check a credit report for errors before your next dispute.
 
 ## Safety Boundary
 

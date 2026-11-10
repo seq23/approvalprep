@@ -1,22 +1,22 @@
-# Renter Document Packet
+# Lender follow-up letter (business application)
 
-**Offering ID:** `rental-application-kit__renter-document-packet`  
-**Bundled product:** Rental Application Kit (`rental-application-kit`)  
-**Price:** $29  
+**Offering ID:** `complete-approvalprep-bundle__lender-follow-up-letter-business-application`  
+**Bundled product:** Complete ApprovalPrep Bundle (`complete-approvalprep-bundle`)  
+**Price:** $49  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 
 ## What This Offering Is
 
-You are applying for several places at once and want one organized packet to send each time.
+You sent the lender what they asked for and need a written nudge about where things stand.
 
 ## How Purchase Works
 
-This offering is included in the **Rental Application Kit** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
+This offering is included in the **Complete ApprovalPrep Bundle** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
 
 ## Reviewable Files
 
-- R2 keys (private bucket; the kit files are not in this repository): `products/rental-application-kit/rental-application-kit.pdf`, `products/rental-application-kit/rental-application-kit.docx`
+- R2 keys (private bucket; the kit files are not in this repository): `products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf`, `products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx`
 
 ## Contract Standard
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: renter document packet template
-- CTA label: Use the Rental Application Kit
-- Customer situation: You are applying for several places at once and want one organized packet to send each time.
+- Search intent: lender follow-up letter template
+- CTA label: Use the Complete ApprovalPrep Bundle
+- Customer situation: You sent the lender what they asked for and need a written nudge about where things stand.
 
 ## Safety Boundary
 

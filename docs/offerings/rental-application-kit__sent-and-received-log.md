@@ -1,22 +1,22 @@
-# Pay-for-delete Request Letter
+# Sent and received log
 
-**Offering ID:** `complete-approvalprep-bundle__pay-for-delete-request-letter`  
-**Bundled product:** Complete ApprovalPrep Bundle (`complete-approvalprep-bundle`)  
-**Price:** $49  
+**Offering ID:** `rental-application-kit__sent-and-received-log`  
+**Bundled product:** Rental Application Kit (`rental-application-kit`)  
+**Price:** $29  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 
 ## What This Offering Is
 
-You are ready to settle a collection account and want your request about the reporting put in writing.
+You want one page that records what you sent, to whom, when, and what came back.
 
 ## How Purchase Works
 
-This offering is included in the **Complete ApprovalPrep Bundle** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
+This offering is included in the **Rental Application Kit** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
 
 ## Reviewable Files
 
-- R2 keys (private bucket; the kit files are not in this repository): `products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf`, `products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx`
+- R2 keys (private bucket; the kit files are not in this repository): `products/rental-application-kit/rental-application-kit.pdf`, `products/rental-application-kit/rental-application-kit.docx`
 
 ## Contract Standard
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: pay-for-delete request letter template
-- CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: You are ready to settle a collection account and want your request about the reporting put in writing.
+- Search intent: sent and received log for letters
+- CTA label: Use the Rental Application Kit
+- Customer situation: You want one page that records what you sent, to whom, when, and what came back.
 
 ## Safety Boundary
 

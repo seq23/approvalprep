@@ -1,22 +1,22 @@
-# Mortgage Explanation Letter
+# Request to tell recent recipients about the correction
 
-**Offering ID:** `complete-approvalprep-bundle__mortgage-explanation-letter`  
-**Bundled product:** Complete ApprovalPrep Bundle (`complete-approvalprep-bundle`)  
-**Price:** $49  
+**Offering ID:** `credit-letter-kit__request-to-tell-recent-recipients-about-the-correction`  
+**Bundled product:** Credit Letter Kit (`credit-letter-kit`)  
+**Price:** $19  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 
 ## What This Offering Is
 
-Your mortgage underwriter has issued a condition asking you to explain something in writing.
+The bureau corrected your report and you want it to tell those who recently received the old one.
 
 ## How Purchase Works
 
-This offering is included in the **Complete ApprovalPrep Bundle** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
+This offering is included in the **Credit Letter Kit** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
 
 ## Reviewable Files
 
-- R2 keys (private bucket; the kit files are not in this repository): `products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf`, `products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx`
+- R2 keys (private bucket; the kit files are not in this repository): `products/credit-letter-kit/credit-letter-kit.pdf`, `products/credit-letter-kit/credit-letter-kit.docx`
 
 ## Contract Standard
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: mortgage explanation letter template
-- CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: Your mortgage underwriter has issued a condition asking you to explain something in writing.
+- Search intent: notify recipients of credit report correction letter
+- CTA label: Use the Credit Letter Kit
+- Customer situation: The bureau corrected your report and you want it to tell those who recently received the old one.
 
 ## Safety Boundary
 

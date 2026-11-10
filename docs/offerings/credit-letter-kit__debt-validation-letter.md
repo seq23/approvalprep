@@ -1,4 +1,4 @@
-# Debt Validation Letter
+# Debt validation letter
 
 **Offering ID:** `credit-letter-kit__debt-validation-letter`  
 **Bundled product:** Credit Letter Kit (`credit-letter-kit`)  
@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-A collector has contacted you about a debt, and you want it documented as yours before you go further.
+A collector contacted you and you want the debt validated in writing.
 
 ## How Purchase Works
 
@@ -45,7 +45,7 @@ First-page boundary requirements:
 
 - Search intent: debt validation letter template
 - CTA label: Use the Credit Letter Kit
-- Customer situation: A collector has contacted you about a debt, and you want it documented as yours before you go further.
+- Customer situation: A collector contacted you and you want the debt validated in writing.
 
 ## Safety Boundary
 

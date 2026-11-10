@@ -1,22 +1,22 @@
-# Credit Bureau Follow-up Letter
+# Credit bureau follow-up letter: the bureau says the item was verified
 
-**Offering ID:** `complete-approvalprep-bundle__credit-bureau-follow-up-letter`  
-**Bundled product:** Complete ApprovalPrep Bundle (`complete-approvalprep-bundle`)  
-**Price:** $49  
+**Offering ID:** `credit-letter-kit__credit-bureau-follow-up-letter-the-bureau-says-the-item-was-verified`  
+**Bundled product:** Credit Letter Kit (`credit-letter-kit`)  
+**Price:** $19  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 
 ## What This Offering Is
 
-You filed a dispute, the waiting period has passed, and you need to follow up with a record of it.
+The bureau says the item was verified and you have new information or proof to send.
 
 ## How Purchase Works
 
-This offering is included in the **Complete ApprovalPrep Bundle** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
+This offering is included in the **Credit Letter Kit** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
 
 ## Reviewable Files
 
-- R2 keys (private bucket; the kit files are not in this repository): `products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf`, `products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx`
+- R2 keys (private bucket; the kit files are not in this repository): `products/credit-letter-kit/credit-letter-kit.pdf`, `products/credit-letter-kit/credit-letter-kit.docx`
 
 ## Contract Standard
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: credit bureau follow-up letter template
-- CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: You filed a dispute, the waiting period has passed, and you need to follow up with a record of it.
+- Search intent: credit bureau verified dispute follow-up letter
+- CTA label: Use the Credit Letter Kit
+- Customer situation: The bureau says the item was verified and you have new information or proof to send.
 
 ## Safety Boundary
 

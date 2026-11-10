@@ -1,22 +1,22 @@
-# Credit Bureau Follow-up Letter
+# Employment verification letter (for your employer to sign)
 
-**Offering ID:** `credit-letter-kit__credit-bureau-follow-up-letter`  
-**Bundled product:** Credit Letter Kit (`credit-letter-kit`)  
-**Price:** $19  
+**Offering ID:** `complete-approvalprep-bundle__employment-verification-letter-for-your-employer-to-sign`  
+**Bundled product:** Complete ApprovalPrep Bundle (`complete-approvalprep-bundle`)  
+**Price:** $49  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 
 ## What This Offering Is
 
-You filed a dispute, the waiting period has passed, and you need to follow up with a record of it.
+Someone needs written confirmation of where you work. This letter is written for your employer to sign.
 
 ## How Purchase Works
 
-This offering is included in the **Credit Letter Kit** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
+This offering is included in the **Complete ApprovalPrep Bundle** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
 
 ## Reviewable Files
 
-- R2 keys (private bucket; the kit files are not in this repository): `products/credit-letter-kit/credit-letter-kit.pdf`, `products/credit-letter-kit/credit-letter-kit.docx`
+- R2 keys (private bucket; the kit files are not in this repository): `products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf`, `products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx`
 
 ## Contract Standard
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: credit bureau follow-up letter template
-- CTA label: Use the Credit Letter Kit
-- Customer situation: You filed a dispute, the waiting period has passed, and you need to follow up with a record of it.
+- Search intent: employment verification letter template
+- CTA label: Use the Complete ApprovalPrep Bundle
+- Customer situation: Someone needs written confirmation of where you work. This letter is written for your employer to sign.
 
 ## Safety Boundary
 
