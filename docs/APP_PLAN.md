@@ -15,8 +15,11 @@ builds from. The page wins if the two ever differ.
 ## What it is
 
 A letter desk on the phone: draft a credit bureau dispute letter for free, save it as a PDF, mark it as
-sent, and get a reminder on day 30 when the bureau's answer is due (FTC). The Credit Letter Kit, paid
-once in the app, adds goodwill, debt validation, pay for delete and follow-up letters. No account, no
+sent. The Credit Letter Kit, paid once in the app, adds goodwill, debt validation, pay for delete and
+follow-up letters, and the tracking: mark as sent, the day count, the tracking number and a reminder on
+day 30 when the bureau's answer is due (FTC). Free: the dispute letter, its PDF and the list of saved
+letters (owner, 10 Nov 2026: "If the apps are sending reminders and all of that it should charge for
+that stuff"). No account, no
 upload, no analytics, no server, no AI call.
 
 ## Screens (route → plan id)
@@ -74,8 +77,9 @@ Run `npm run check` in `apps/mobile` after each task; the App preview run must s
    Accept: a PDF is made and shared in the preview; its footer is the self-help line.
 6. **Mark as sent and the reminder.** Today as the labelled default; method pull-down; optional
    tracking number; a local notification on day 30 (expo-notifications), permission asked here only.
+   Needs the kit entitlement; without it the sheet shows the kit (S7) instead.
    Accept: a pure-function test (Fri 6 Nov → Sun 6 Dec) and for the day count; nothing scheduled
-   without permission; a new date reschedules.
+   without permission or without the kit; a new date reschedules.
 7. **My letters.** Line 1 count ("3 letters · 1 answer to check"); one list; rows never move; gold
    after day 30; ✓ with a time when an answer is logged; an empty-state line.
    Accept: tests for the count and each row's sub line; no red on the list.
@@ -86,7 +90,8 @@ Run `npm run check` in `apps/mobile` after each task; the App preview run must s
    stop `STORE_ACCOUNTS_NOT_READY` until the company store accounts and RevenueCat exist (she signs
    up for those herself). Create nothing in RevenueCat or a store.
    Accept: `tests/kit.test.ts` (product id, price, switch off, named stop); kit letters open only
-   with the entitlement; the free letter and My letters never lock; no price string outside the
+   with the entitlement; mark as sent, the day count and the reminder open only with it; the free
+   letter, its PDF and the list of saved letters never lock; no price string outside the
    mock and `kit.ts`.
 9. **More.** Links to /privacy/, /not-a-credit-repair-company/, /terms/, /refund-policy/, /contact/;
    "Delete all my letters" apart, asking once.
