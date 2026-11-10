@@ -105,6 +105,20 @@ Run `npm run check` in `apps/mobile` after each task; the App preview run must s
 12. **Release gate** (copy KeepMyProof's `scripts/release-gate.mjs`): a production build stops while
     the bundle id is the placeholder, the preview flag is set or the purchases key is missing.
     Accept: a test per named stop. No agent runs a production build or submits.
+13. **The Letter of Explanation Kit (second kit; owner, 10 Nov 2026).** The website's Letter of
+    Explanation Kit as a second one-time in-app product, **`ap_explanation_kit` at $14.99, paid once**
+    (the site sells it for $15; the store's nearest step). Its nine letters are ported from this
+    repo's own wording (docs/offerings/letter-of-explanation__*.md): credit, income gap, employment
+    gap, address history, rental issue, late payment, bank statement, life event, general
+    application. Same question flow, PDF, My letters, mark as sent and reminder as the credit
+    letters; a new "For a landlord, lender or employer" group on S2. Switched off with the same
+    `KIT_SALES_ENABLED` / `STORE_ACCOUNTS_NOT_READY` stop; create nothing in a store.
+    Accept: a rendered-letter test per kind; the R-ADV-13 and honest-limit tests cover the nine;
+    the kits unlock independently (owning one never opens the other's letters); owning either kit
+    opens tracking and the reminder; the free dispute letter never locks; Restore brings back both.
+14. **Scorecard row** in Boss OS (result, day-30 and day-60 floors, version B from the plan page)
+    before the first store submission, carrying the price step (owner, 10 Nov 2026): at about 20
+    real ratings `ap_credit_kit` goes from $19.99 to $24.99 by a store price change.
 
 ## Hostile review fixes (10 Nov 2026; these win over the plan page)
 
@@ -113,6 +127,8 @@ Run `npm run check` in `apps/mobile` after each task; the App preview run must s
   named competitor is a claim to defend. S7 says instead: "Credit repair companies usually charge
   every month. This kit is paid once." Guard: the self-help test also fails on a company name or a
   dollar amount other than the store's price in `src` copy.
+- **No per-round pricing, ever** (owner, 10 Nov 2026): a new dispute round is the same job continuing,
+  and charging by stage of someone's dispute is the shape the Credit Repair Organizations Act targets.
 - **One purchase, every round:** the kit is bought once per person and covers every letter and every
   dispute round after it; Restore brings it back on a new phone. Test in `tests/kit.test.ts`.
 - **Store category** (task 11, parked for the launch plan) is chosen for what the app is (Finance or
