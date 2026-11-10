@@ -9,6 +9,8 @@ const {
 const gather = copy.prepBrief?.length ? copy.prepBrief : copy.whatYouGet || [];
 const review = copy.reviewChecklist?.length ? copy.reviewChecklist : copy.steps || [];
 const avoid = copy.commonMistakes?.length ? copy.commonMistakes : [];
+const useWhen = copy.whoFor || [];
+// A card renders only with items behind it: an empty "Avoid" card is a heading with nothing under it.
 ---
 <section class="band guide-playbook-band">
   <div class="shell guide-playbook">
@@ -22,26 +24,26 @@ const avoid = copy.commonMistakes?.length ? copy.commonMistakes : [];
       </div>
     </div>
     <div class="guide-playbook-grid">
-      <article class="card guide-playbook-card">
+      {useWhen.length > 0 && <article class="card guide-playbook-card">
         <span>1</span>
         <h3>Use this when</h3>
-        <ul>{(copy.whoFor || []).slice(0, 4).map((item) => <li>{item}</li>)}</ul>
-      </article>
-      <article class="card guide-playbook-card">
+        <ul>{useWhen.slice(0, 4).map((item) => <li>{item}</li>)}</ul>
+      </article>}
+      {gather.length > 0 && <article class="card guide-playbook-card">
         <span>2</span>
         <h3>Gather first</h3>
         <ul>{gather.slice(0, 5).map((item) => <li>{item}</li>)}</ul>
-      </article>
-      <article class="card guide-playbook-card">
+      </article>}
+      {review.length > 0 && <article class="card guide-playbook-card">
         <span>3</span>
         <h3>Review before sending</h3>
         <ul>{review.slice(0, 5).map((item) => <li>{item}</li>)}</ul>
-      </article>
-      <article class="card guide-playbook-card warning-card">
+      </article>}
+      {avoid.length > 0 && <article class="card guide-playbook-card warning-card">
         <span>!</span>
         <h3>Avoid</h3>
         <ul>{avoid.slice(0, 5).map((item) => <li>{item}</li>)}</ul>
-      </article>
+      </article>}
     </div>
   </div>
 </section>
