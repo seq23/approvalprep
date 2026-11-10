@@ -24,9 +24,9 @@ const boundaries = [...new Set(offerings.map((offering) => offering?.riskBoundar
         </article>
       ))}
       <article class="card">
-        <p class="eyebrow">In every kit</p>
+        <p class="eyebrow">With every letter</p>
         <h3>The working pages</h3>
-        <ul class="compact-list">{inEveryKit.map((item) => <li>{item}</li>)}</ul>
+        <ul class="compact-list">{(kit.working || inEveryKit).map((item) => <li>{item}</li>)}</ul>
       </article>
     </div>
     {kit.alsoIncluded.length > 0 && <p class="fine">Also included: {kit.alsoIncluded.join(", ")}. The free <a href="/letter-writing-studio/">Letter Studio</a> already writes that one for you.</p>}
@@ -35,9 +35,9 @@ const boundaries = [...new Set(offerings.map((offering) => offering?.riskBoundar
         <h3>{`A page from the kit: ${sample.title}`}</h3>
         <div class="ap-sheet kit-sample-sheet">
           <p class="kit-sample-note"><span class="ap-hl">{sample.note}</span></p>
-          {sample.lines.map(([label, value]) => label ? <p><span class="kit-sample-label">{label}</span> {value}</p> : <p>{value}</p>)}
+          <div class="kit-sample-letter">{sample.lines.join("\n")}</div>
         </div>
-        <p class="fine">The kit gives you the blank version of this page for each letter. You fill in your own true facts and send it yourself. A bureau or creditor decides what it does.</p>
+        <p class="fine">The kit gives you this letter with a [bracket] for each fact, and a filled example like this one under every letter. You fill in your own true facts and send it yourself. A bureau or creditor decides what it does.</p>
       </div>
     )}
     {boundaries.map((boundary) => <p class="fine">{boundary}</p>)}
@@ -49,4 +49,5 @@ const boundaries = [...new Set(offerings.map((offering) => offering?.riskBoundar
   .kit-sample-sheet { max-width: 640px; }
   .kit-sample-label { display: block; font-family: var(--font-mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--carbon-muted); }
   .kit-sample-note { border-bottom: 0 !important; }
+  .kit-sample-letter { white-space: pre-wrap; font-size: 15px; line-height: 1.6; padding-top: 8px; }
 </style>

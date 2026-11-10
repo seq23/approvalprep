@@ -1,4 +1,4 @@
-# Credit Dispute Letter
+# Credit dispute letter
 
 **Offering ID:** `credit-letter-kit__credit-dispute-letter`  
 **Bundled product:** Credit Letter Kit (`credit-letter-kit`)  
@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You found an entry on your credit report you believe is wrong and want to challenge it in writing.
+You found an error on a credit report and want the first letter to the bureau.
 
 ## How Purchase Works
 
@@ -45,7 +45,7 @@ First-page boundary requirements:
 
 - Search intent: credit dispute letter template
 - CTA label: Use the Credit Letter Kit
-- Customer situation: You found an entry on your credit report you believe is wrong and want to challenge it in writing.
+- Customer situation: You found an error on a credit report and want the first letter to the bureau.
 
 ## Safety Boundary
 

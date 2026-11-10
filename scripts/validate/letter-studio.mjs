@@ -54,6 +54,7 @@ for (const [sku, kit] of Object.entries(kitMoments)) {
   for (const item of named) if (!held.includes(item)) fail(`[letter-studio] ${sku}: the page claims "${item}", which the kit does not hold`);
   for (const item of held) if (named.filter((n) => n === item).length !== 1) fail(`[letter-studio] ${sku}: "${item}" must be listed exactly once`);
   if (!kit.moments.length || kit.moments[0].items.some((i) => kit.alsoIncluded.includes(i))) fail(`[letter-studio] ${sku}: the kit must lead with what comes after the free letter`);
+  for (const item of (kit.byAnswer || []).flatMap((a) => a.items)) if (!held.includes(item)) fail(`[letter-studio] ${sku}: "The bureau answered" names "${item}", which the kit does not hold`);
 }
 
 // A kit never lists first the letter she just got free.

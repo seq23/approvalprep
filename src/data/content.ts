@@ -39,7 +39,7 @@ export const homepageChooser = [
   },
   {
     "title": "I want self-service credit repair letters",
-    "copy": "Prepare your own credit dispute, goodwill, late-payment, pay-for-delete request, debt-validation, credit-report-error checklist, and follow-up letters.",
+    "copy": "The letters for after your first dispute: bureau follow-ups, a direct dispute to the company that reported the item, debt validation, settlement terms in writing, goodwill and late-payment letters, an error checklist and a mailing log.",
     "href": "/credit-letter-kit",
     "product": "Credit Letter Kit",
     "cta": "Get DIY credit letters — $19"

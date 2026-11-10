@@ -1,6 +1,6 @@
-# Credit Bureau Follow-up Letter
+# Statement of dispute to add to my file
 
-**Offering ID:** `credit-letter-kit__credit-bureau-follow-up-letter`  
+**Offering ID:** `credit-letter-kit__statement-of-dispute-to-add-to-my-file`  
 **Bundled product:** Credit Letter Kit (`credit-letter-kit`)  
 **Price:** $19  
 **Delivery model:** Direct paid download; Studio not required  
@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You filed a dispute, the waiting period has passed, and you need to follow up with a record of it.
+The investigation did not resolve your dispute and you want your statement added to your file.
 
 ## How Purchase Works
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: credit bureau follow-up letter template
+- Search intent: credit dispute letter template
 - CTA label: Use the Credit Letter Kit
-- Customer situation: You filed a dispute, the waiting period has passed, and you need to follow up with a record of it.
+- Customer situation: The investigation did not resolve your dispute and you want your statement added to your file.
 
 ## Safety Boundary
 

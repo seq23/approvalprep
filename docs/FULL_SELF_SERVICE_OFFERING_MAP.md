@@ -31,13 +31,19 @@ Price: $19
 
 Price: $19
 
-- credit dispute letter
-- late payment explanation letter
-- goodwill letter
-- pay-for-delete request letter
+- credit bureau follow-up letter: no written results yet
+- credit bureau follow-up letter: the bureau says the item was verified
+- credit bureau follow-up letter: corrected, but still not right
+- request to tell recent recipients about the correction
+- statement of dispute to add to my file
+- direct dispute letter to the company that reported the item
 - debt validation letter
+- settlement terms in writing letter
+- goodwill letter
+- late payment explanation letter
 - credit report error checklist
-- credit bureau follow-up letter
+- mailing and record log
+- credit dispute letter
 
 ## Rental Application Kit
 
@@ -112,7 +118,6 @@ Price: $49
 - gap in employment letter
 - credit dispute letter
 - goodwill letter
-- pay-for-delete request letter
 - debt validation letter
 - credit report error checklist
 - credit bureau follow-up letter

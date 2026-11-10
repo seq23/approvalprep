@@ -1,4 +1,4 @@
-# Late Payment Explanation Letter
+# Late payment explanation letter
 
 **Offering ID:** `credit-letter-kit__late-payment-explanation-letter`  
 **Bundled product:** Credit Letter Kit (`credit-letter-kit`)  
@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-One or more payments landed late, and the circumstances need to be in writing for whoever is looking.
+You need to explain a real late payment to a lender or reviewer.
 
 ## How Purchase Works
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: late payment explanation letter template
+- Search intent: credit dispute letter template
 - CTA label: Use the Credit Letter Kit
-- Customer situation: One or more payments landed late, and the circumstances need to be in writing for whoever is looking.
+- Customer situation: You need to explain a real late payment to a lender or reviewer.
 
 ## Safety Boundary
 

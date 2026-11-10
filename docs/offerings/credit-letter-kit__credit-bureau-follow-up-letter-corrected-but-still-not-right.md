@@ -1,6 +1,6 @@
-# Pay-for-delete Request Letter
+# Credit bureau follow-up letter: corrected, but still not right
 
-**Offering ID:** `credit-letter-kit__pay-for-delete-request-letter`  
+**Offering ID:** `credit-letter-kit__credit-bureau-follow-up-letter-corrected-but-still-not-right`  
 **Bundled product:** Credit Letter Kit (`credit-letter-kit`)  
 **Price:** $19  
 **Delivery model:** Direct paid download; Studio not required  
@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You are ready to settle a collection account and want your request about the reporting put in writing.
+The bureau changed the item, but the corrected entry is still not accurate.
 
 ## How Purchase Works
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: pay-for-delete request letter template
+- Search intent: credit dispute letter template
 - CTA label: Use the Credit Letter Kit
-- Customer situation: You are ready to settle a collection account and want your request about the reporting put in writing.
+- Customer situation: The bureau changed the item, but the corrected entry is still not accurate.
 
 ## Safety Boundary
 

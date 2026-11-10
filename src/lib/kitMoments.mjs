@@ -6,15 +6,31 @@
 // included_offerings); validate:letter-studio fails on a name the kit does not hold or an item
 // left out. The letter the Studio already writes free is listed last, as "also included".
 export const kitMoments = {
+  // Credit Letter Kit version 2 (live 10 Nov 2026): the kit's own sections and letter names.
   "credit-letter-kit": {
     promise: "Everything after the envelope is sealed.",
     moments: [
-      { when: "No answer by day 30, or the bureau says “verified”", items: ["credit bureau follow-up letter"] },
+      { when: "The bureau answered, or the deadline passed", items: ["credit bureau follow-up letter: no written results yet", "credit bureau follow-up letter: the bureau says the item was verified", "credit bureau follow-up letter: corrected, but still not right", "request to tell recent recipients about the correction", "statement of dispute to add to my file"] },
+      { when: "Taking your proof to the company that reported it", items: ["direct dispute letter to the company that reported the item"] },
+      { when: "A collector is involved", items: ["debt validation letter", "settlement terms in writing letter"] },
       { when: "The late payment was real", items: ["goodwill letter", "late payment explanation letter"] },
-      { when: "A collector is involved", items: ["debt validation letter", "pay-for-delete request letter"] },
-      { when: "Before your next dispute", items: ["credit report error checklist"] }
+      { when: "Before your next dispute", items: ["credit report error checklist", "mailing and record log"] }
     ],
-    alsoIncluded: ["credit dispute letter"]
+    alsoIncluded: ["credit dispute letter"],
+    // The kit's letter for each answer a bureau can give ("The bureau answered" page).
+    byAnswer: [
+      { answer: "Corrected or deleted", items: ["request to tell recent recipients about the correction", "credit bureau follow-up letter: corrected, but still not right"] },
+      { answer: "Verified, and you still believe it is wrong", items: ["statement of dispute to add to my file", "direct dispute letter to the company that reported the item", "credit bureau follow-up letter: the bureau says the item was verified"] },
+      { answer: "Verified, and the information is accurate", items: ["goodwill letter"] },
+      { answer: "No answer", items: ["credit bureau follow-up letter: no written results yet"] }
+    ],
+    working: [
+      "Three lines above every letter: when to use it, what it is not for, where to send it",
+      "A filled example under every letter",
+      "The clock, and what each answer means",
+      "Where to mail a dispute to each bureau, and the sources",
+      "A PDF guide and an editable Word file"
+    ]
   },
   "letter-of-explanation": {
     promise: "The explanation letters, by situation.",
@@ -73,7 +89,8 @@ export const kitMoments = {
   }
 };
 
-// In every kit file, beside the named letters (read from the live kit files, 10 Nov 2026).
+// In every version 1 kit file, beside the named letters (read from the live kit files, 10 Nov 2026).
+// A kit with its own `working` list (the version 2 credit kit) shows that instead.
 export const inEveryKit = [
   "A fill-in letter template with a blank for each fact",
   "A self-review checklist to run before you send",
@@ -81,26 +98,21 @@ export const inEveryKit = [
   "Step-by-step instructions, as a PDF guide and an editable Word file"
 ];
 
-// One page of the Credit Letter Kit, filled in as a sample. Every detail is made up. The page shown
-// is the kit's own fill-in letter template; nothing else from the paid file is in this repository.
+// One page of the Credit Letter Kit: the filled example the kit prints under its first letter. The
+// person, companies and numbers are made up. No other paid page is in this repository.
 export const kitSamples = {
   "credit-letter-kit": {
-    title: "Credit bureau follow-up letter, filled in",
-    note: "Sample page. Every name, date and detail is made up.",
+    title: "Credit bureau follow-up letter: no written results yet",
+    note: "Filled example. Sample only: the person, companies and numbers are made up.",
     lines: [
-      ["Date", "December 9, 2026"],
-      ["To", "Experian, P.O. Box 4500, Allen, TX 75013"],
-      ["Re", "My dispute mailed November 6, 2026"],
-      ["", "Hello,"],
-      ["", "I am writing about an item on my credit report or credit file."],
-      ["What item are you writing about?", "Capital One account ending 4471, shown as 60 days late in March 2026."],
-      ["Why do you believe it is wrong or needs review?", "I disputed this item by certified mail. Your office received my letter on November 9, 2026 and I have had no written answer."],
-      ["What proof do you have?", "The certified mail return receipt and a copy of my first letter."],
-      ["What exact action are you asking for?", "Please send me the written results of your investigation."],
-      ["Where should the reply be sent?", "Jordan Lee, 12 Oak St Apt 4, Memphis, TN 38104"],
-      ["The documents I am including are", "Copy of my first letter; copy of the return receipt."],
-      ["", "Thank you for reviewing this information. Please let me know if you need anything else from me."],
-      ["", "Sincerely, Jordan Lee"]
+      "Dana R. Whitfield", "418 Marlowe Street, Apt 2B", "Dayton, OH 45402", "", "March 16, 2026", "", "Experian", "P.O. Box 4500", "Allen, TX 75013", "",
+      "Re: No written results received. Northgate Card Services, account ending 4471", "", "To whom it may concern:", "",
+      "I mailed you a written dispute about the account named above on January 26, 2026. The certified mail return receipt shows that you received it on January 29, 2026. Copies of that letter and of the receipt are enclosed.", "",
+      "As of today I have not received the written results of your reinvestigation. The Fair Credit Reporting Act, at 15 U.S.C. 1681i(a), gives a consumer reporting agency 30 days from the day it receives a dispute to complete its reinvestigation, and five business days after it finishes to send the consumer written notice of the results.", "",
+      "Please send me the written results now, with a copy of the entry for this account as it stands after your reinvestigation. If the item could not be verified in the time allowed, please tell me what change was made to my file.", "",
+      "If your results have already been mailed, please send a second copy to the address at the top of this letter.", "",
+      "Sincerely,", "(signature)", "Dana R. Whitfield", "",
+      "Enclosures:", "- Copy of my dispute letter dated January 26, 2026", "- Copy of the certified mail receipt and return receipt"
     ]
   }
 };

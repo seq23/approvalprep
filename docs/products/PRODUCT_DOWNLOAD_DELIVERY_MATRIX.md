@@ -8,12 +8,12 @@ Runtime delivery path: `/api/verify-download` verifies the Stripe session or pai
 |---|---:|---:|---|
 | Letter of Explanation Kit | $15 | 9 | `products/letter-of-explanation/letter-of-explanation.pdf`<br>`products/letter-of-explanation/letter-of-explanation.docx` |
 | Income + Employment Letter Kit | $19 | 6 | `products/income-employment-letter-kit/income-employment-letter-kit.pdf`<br>`products/income-employment-letter-kit/income-employment-letter-kit.docx` |
-| Credit Letter Kit | $19 | 7 | `products/credit-letter-kit/credit-letter-kit.pdf`<br>`products/credit-letter-kit/credit-letter-kit.docx` |
+| Credit Letter Kit | $19 | 13 | `products/credit-letter-kit/credit-letter-kit.pdf`<br>`products/credit-letter-kit/credit-letter-kit.docx` |
 | Rental Application Kit | $29 | 9 | `products/rental-application-kit/rental-application-kit.pdf`<br>`products/rental-application-kit/rental-application-kit.docx` |
 | Loan Prep Letter Kit | $29 | 8 | `products/loan-prep-letter-kit/loan-prep-letter-kit.pdf`<br>`products/loan-prep-letter-kit/loan-prep-letter-kit.docx` |
 | Business Funding Prep Kit | $39 | 8 | `products/business-funding-prep-kit/business-funding-prep-kit.pdf`<br>`products/business-funding-prep-kit/business-funding-prep-kit.docx` |
 | Life Admin Letter Kit | $19 | 8 | `products/life-admin-letter-kit/life-admin-letter-kit.pdf`<br>`products/life-admin-letter-kit/life-admin-letter-kit.docx` |
-| Complete ApprovalPrep Bundle | $49 | 50 | `products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf`<br>`products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx` |
+| Complete ApprovalPrep Bundle | $49 | 49 | `products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf`<br>`products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx` |
 
 ## Product Contents
 
@@ -54,14 +54,20 @@ Runtime delivery path: `/api/verify-download` verifies the Stripe session or pai
 - Downloaded files (R2 keys): `products/credit-letter-kit/credit-letter-kit.pdf` and `products/credit-letter-kit/credit-letter-kit.docx`
 - Production R2 keys: `downloads/credit-letter-kit.pdf`, `downloads/credit-letter-kit.docx`
 - Delivery model: direct_paid_download; Studio required: false
-- Included offering rows (7):
-  - credit dispute letter
-  - late payment explanation letter
-  - goodwill letter
-  - pay-for-delete request letter
+- Included offering rows (13):
+  - credit bureau follow-up letter: no written results yet
+  - credit bureau follow-up letter: the bureau says the item was verified
+  - credit bureau follow-up letter: corrected, but still not right
+  - request to tell recent recipients about the correction
+  - statement of dispute to add to my file
+  - direct dispute letter to the company that reported the item
   - debt validation letter
+  - settlement terms in writing letter
+  - goodwill letter
+  - late payment explanation letter
   - credit report error checklist
-  - credit bureau follow-up letter
+  - mailing and record log
+  - credit dispute letter
 
 ### Rental Application Kit (rental-application-kit)
 
@@ -134,7 +140,7 @@ Runtime delivery path: `/api/verify-download` verifies the Stripe session or pai
 - Downloaded files (R2 keys): `products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf` and `products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx`
 - Production R2 keys: `downloads/complete-approvalprep-bundle.pdf`, `downloads/complete-approvalprep-bundle.docx`
 - Delivery model: direct_paid_download; Studio required: false
-- Included offering rows (50):
+- Included offering rows (49):
   - credit explanation letter
   - income gap explanation letter
   - employment gap explanation letter
@@ -151,7 +157,6 @@ Runtime delivery path: `/api/verify-download` verifies the Stripe session or pai
   - gap in employment letter
   - credit dispute letter
   - goodwill letter
-  - pay-for-delete request letter
   - debt validation letter
   - credit report error checklist
   - credit bureau follow-up letter

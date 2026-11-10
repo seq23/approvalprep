@@ -146,60 +146,108 @@
       "price": 59,
       "offerings": [
         {
-          "name": "credit dispute letter",
-          "customerSituation": "You found an entry on your credit report you believe is wrong and want to challenge it in writing.",
+          "name": "credit bureau follow-up letter: no written results yet",
+          "customerSituation": "The answer window has passed and you have nothing in writing from the bureau.",
           "includedInSku": "credit-letter-kit",
           "ctaLabel": "Use the Credit Letter Kit",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "credit dispute letter template"
+          "searchIntent": "credit bureau follow-up letter no response"
         },
         {
-          "name": "late payment explanation letter",
-          "customerSituation": "One or more payments landed late, and the circumstances need to be in writing for whoever is looking.",
+          "name": "credit bureau follow-up letter: the bureau says the item was verified",
+          "customerSituation": "The bureau says the item was verified and you have new information or proof to send.",
           "includedInSku": "credit-letter-kit",
           "ctaLabel": "Use the Credit Letter Kit",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "late payment explanation letter template"
+          "searchIntent": "credit bureau verified dispute follow-up letter"
         },
         {
-          "name": "goodwill letter",
-          "customerSituation": "You paid late once, the account is current now, and you want to ask the creditor to reconsider the mark.",
+          "name": "credit bureau follow-up letter: corrected, but still not right",
+          "customerSituation": "The bureau changed the item, but the corrected entry is still not accurate.",
           "includedInSku": "credit-letter-kit",
           "ctaLabel": "Use the Credit Letter Kit",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "goodwill letter template"
+          "searchIntent": "credit report corrected still wrong letter"
         },
         {
-          "name": "pay-for-delete request letter",
-          "customerSituation": "You are ready to settle a collection account and want your request about the reporting put in writing.",
+          "name": "request to tell recent recipients about the correction",
+          "customerSituation": "The bureau corrected your report and you want it to tell those who recently received the old one.",
           "includedInSku": "credit-letter-kit",
           "ctaLabel": "Use the Credit Letter Kit",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "pay-for-delete request letter template"
+          "searchIntent": "notify recipients of credit report correction letter"
+        },
+        {
+          "name": "statement of dispute to add to my file",
+          "customerSituation": "The investigation did not resolve your dispute and you want your statement added to your file.",
+          "includedInSku": "credit-letter-kit",
+          "ctaLabel": "Use the Credit Letter Kit",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "statement of dispute credit report"
+        },
+        {
+          "name": "direct dispute letter to the company that reported the item",
+          "customerSituation": "You want to send your proof to the company that reported the item.",
+          "includedInSku": "credit-letter-kit",
+          "ctaLabel": "Use the Credit Letter Kit",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "dispute letter to creditor that reported the item"
         },
         {
           "name": "debt validation letter",
-          "customerSituation": "A collector has contacted you about a debt, and you want it documented as yours before you go further.",
+          "customerSituation": "A collector contacted you and you want the debt validated in writing.",
           "includedInSku": "credit-letter-kit",
           "ctaLabel": "Use the Credit Letter Kit",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
           "searchIntent": "debt validation letter template"
         },
         {
-          "name": "credit report error checklist",
-          "customerSituation": "You are reading your credit report line by line and need a way to track everything that looks wrong.",
+          "name": "settlement terms in writing letter",
+          "customerSituation": "You are ready to settle a collection account and want the terms in writing before you pay.",
           "includedInSku": "credit-letter-kit",
           "ctaLabel": "Use the Credit Letter Kit",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "credit report error checklist template"
+          "searchIntent": "settlement agreement in writing letter"
         },
         {
-          "name": "credit bureau follow-up letter",
-          "customerSituation": "You filed a dispute, the waiting period has passed, and you need to follow up with a record of it.",
+          "name": "goodwill letter",
+          "customerSituation": "The late payment was real and you want to ask the creditor for a courtesy.",
           "includedInSku": "credit-letter-kit",
           "ctaLabel": "Use the Credit Letter Kit",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "credit bureau follow-up letter template"
+          "searchIntent": "goodwill letter template"
+        },
+        {
+          "name": "late payment explanation letter",
+          "customerSituation": "You need to explain a real late payment to a lender or reviewer.",
+          "includedInSku": "credit-letter-kit",
+          "ctaLabel": "Use the Credit Letter Kit",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "late payment explanation letter"
+        },
+        {
+          "name": "credit report error checklist",
+          "customerSituation": "You want to check a credit report for errors before your next dispute.",
+          "includedInSku": "credit-letter-kit",
+          "ctaLabel": "Use the Credit Letter Kit",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "credit report error checklist"
+        },
+        {
+          "name": "mailing and record log",
+          "customerSituation": "You want one page that records what you sent, when, and what came back.",
+          "includedInSku": "credit-letter-kit",
+          "ctaLabel": "Use the Credit Letter Kit",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "credit dispute mailing log"
+        },
+        {
+          "name": "credit dispute letter",
+          "customerSituation": "You found an error on a credit report and want the first letter to the bureau.",
+          "includedInSku": "credit-letter-kit",
+          "ctaLabel": "Use the Credit Letter Kit",
+          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+          "searchIntent": "credit dispute letter template"
         }
       ]
     },
@@ -632,14 +680,6 @@
           "ctaLabel": "Use the Complete ApprovalPrep Bundle",
           "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
           "searchIntent": "goodwill letter template"
-        },
-        {
-          "name": "pay-for-delete request letter",
-          "customerSituation": "You are ready to settle a collection account and want your request about the reporting put in writing.",
-          "includedInSku": "complete-approvalprep-bundle",
-          "ctaLabel": "Use the Complete ApprovalPrep Bundle",
-          "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-          "searchIntent": "pay-for-delete request letter template"
         },
         {
           "name": "debt validation letter",
