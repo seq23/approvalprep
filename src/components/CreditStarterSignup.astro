@@ -26,9 +26,10 @@ const { inline = false } = Astro.props;
       <p class="notice" role="status" data-starter-sent>Here is your starter. A copy is on its way to your inbox.</p>
       <p class="notice warning-card" role="alert" data-starter-unsent hidden>Here is your starter. The email copy did not send, so it is not in your inbox: save or print this page. We have been told and will fix it.</p>
       <ol class="compact-list">{STARTER_CHECKLIST.map((line) => <li>{line}</li>)}</ol>
-      <h3>Your dispute letter frame</h3>
+      <h3>Your dispute letter</h3>
+      <p class="fine">Fill in each bracket with your true facts, or let the free Letter Studio fill it in and save it as a PDF.</p>
       <div class="ap-sheet">{STARTER_LETTER.map((line) => <p>{line}</p>)}</div>
-      <div class="hero-actions"><a class="button primary-button" href="/letter-writing-studio/">Draft it free in the Letter Studio</a><a class="button secondary secondary-button" href="/credit-letter-kit/">See the Credit Letter Kit</a></div>
+      <div class="hero-actions"><a class="button primary-button" href="/letter-writing-studio/?situation=credit-dispute">Draft free in the Letter Studio</a><a class="button secondary secondary-button" href="/credit-letter-kit/">See the Credit Letter Kit</a></div>
     </div>
     <p class="ap-selfhelp">{SELF_HELP_LINE}</p>
   </div>

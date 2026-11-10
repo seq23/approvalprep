@@ -57,7 +57,7 @@ for (const token of ["Start free for $0", "Choose by pressure point", "Compare a
 for (const token of ["Decision context", "What to prepare first", "Review before you send", "IncludedOfferings", "FinalCTA"]) {
   if (!dynamicPage.includes(token)) failures.push(`dynamic page missing journey token ${token}`);
 }
-for (const token of ["Start for $0", "does not store", "LetterStudio", "paid kits"]) {
+for (const token of ["LetterStudio", "paid kits"]) {
   if (!studioPage.includes(token) && !studioComponent.includes(token)) failures.push(`studio page missing journey token ${token}`);
 }
 for (const token of ["Products", "Popular Guides", "Legal", "Resources"]) {

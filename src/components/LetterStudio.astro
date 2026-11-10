@@ -1,14 +1,23 @@
 ---
-import { studioBenefits, studioFields, studioSituations } from "../data/letterStudio";
+// The free Letter Studio. Everything runs in the reader's browser: the letter is built by
+// src/lib/letterStudioCore.mjs and the dispute letter's PDF by src/lib/letterPdf.mjs. No network
+// call, no upload; the draft is kept in this browser tab's sessionStorage so a reload does not
+// lose it. `data-no-session-recording` keeps the session recorder off this page
+// (scripts/install_clarity.mjs), so "nothing you type is sent to us" stays true.
+import { studioSituations, bureaus, SELF_HELP_LINE, TRUE_FACTS_LINE, BUREAU_ADDRESSES_CHECKED, ANSWER_WINDOW, BEFORE_YOU_MAIL } from "../data/letterStudio";
+const creditKit = productForSku("credit-letter-kit");
+const creditKitLabel = `${creditKit?.name || "Credit Letter Kit"} — ${creditKit?.priceLabel || "$19"}`;
+import { productForSku } from "../data/content";
+const kits = Object.fromEntries(studioSituations.map((s) => {
+  const product = productForSku(s.recommendationSku);
+  return [s.id, { name: product?.name || s.recommendationName, price: product?.priceLabel || "", sku: s.recommendationSku, adds: s.kitAdds }];
+}));
+const first = studioSituations[0];
 ---
-<section class="studio-shell" data-letter-studio>
-  <div class="notice data-privacy-notice">
-    <strong>$0 browser-only drafting tool.</strong>
-    <p>Your answers stay in your browser. ApprovalPrep does not store your letter answers, completed drafts, uploaded documents, or personal application details.</p>
-  </div>
+<section class="studio-shell" data-letter-studio data-no-session-recording data-kits={JSON.stringify(kits)}>
   <div class="studio-grid">
-    <form class="card studio-form">
-      <p class="eyebrow">Step 1</p>
+    <form class="card studio-form" novalidate>
+      <p class="eyebrow">Step 1 · Your facts</p>
       <h2>Choose the situation.</h2>
       <label>
         Situation
@@ -16,83 +25,247 @@ import { studioBenefits, studioFields, studioSituations } from "../data/letterSt
           {studioSituations.map((item) => <option value={item.id}>{item.label}</option>)}
         </select>
       </label>
-      <p class="fine" data-risk-note>{studioSituations[0].risk}</p>
-      <div class="studio-fields">
-        {studioFields.map(([name, label, placeholder]) => (
-          <label>
-            {label}
-            <textarea name={name} placeholder={placeholder}></textarea>
-          </label>
-        ))}
-      </div>
-      <div class="hero-actions">
-        <button class="button primary-button" type="button" data-generate-draft>Create first-pass draft</button>
-        <button class="button secondary-button" type="reset" data-reset-studio>Start over</button>
-      </div>
-      <p class="fine">This free tool uses static templates and local browser logic only. It is not AI, legal advice, credit repair, financial advice, or a promise of approval.</p>
+      <p class="fine">{TRUE_FACTS_LINE}</p>
+      <div class="studio-fields" data-fields></div>
+      <button class="button primary-button" type="submit" data-generate-draft>Write my letter</button>
+      <p class="fine">Nothing you type is sent to us. Your draft is kept in this browser tab only, so a reload does not lose it; it is gone when you close the tab or start over.</p>
+      <p class="studio-quiet"><button class="link-button" type="button" data-reset-studio>Start over</button><span data-undo hidden> Cleared. <button class="link-button" type="button" data-undo-reset>Undo ›</button></span></p>
     </form>
-    <aside class="card studio-preview">
-      <p class="eyebrow">Step 2</p>
-      <h2>Your first-pass draft</h2>
-      <pre data-draft-output>Choose a situation and answer the prompts to create a first-pass draft.</pre>
-      <div class="hero-actions">
-        <button class="button secondary-button" type="button" data-copy-draft>Copy draft</button>
-        <button class="button secondary-button" type="button" data-download-draft>Download TXT</button>
+    <aside class="card studio-preview" id="your-letter">
+      <p class="eyebrow">Step 2 · Your letter</p>
+      <h2>Your first-pass letter</h2>
+      <p class="studio-status" role="status" aria-live="polite" data-status>Answer the questions, then press “Write my letter ›”. Your letter appears here.</p>
+      <div class="ap-sheet letter-sheet" data-draft-output hidden></div>
+      <div class="hero-actions" data-letter-actions hidden>
+        <button class="button secondary-button" type="button" data-save-pdf hidden>Save as PDF</button>
+        <button class="button secondary-button" type="button" data-copy-draft>Copy letter</button>
+        <button class="button secondary-button" type="button" data-share-draft hidden>Share</button>
+        <button class="link-button" type="button" data-download-draft>Save as a text file</button>
+      </div>
+      <div class="notice" data-mail-steps hidden>
+        <strong>Before you mail it</strong>
+        <ol class="compact-list">
+          {BEFORE_YOU_MAIL.map((line) => <li>{line}</li>)}
+        </ol>
+        <p class="fine">The PDF carries this list as page 2. Mail addresses read {BUREAU_ADDRESSES_CHECKED} from <a href={bureaus[0].source.url} rel="noopener">Equifax</a>, <a href={bureaus[1].source.url} rel="noopener">Experian</a> and the <a href={bureaus[2].source.url} rel="noopener">FTC</a> (TransUnion).</p>
+      </div>
+      <div class="recommendation-card studio-timeline" data-timeline hidden>
+        <p class="eyebrow">What happens next</p>
+        <ol class="timeline-list">
+          <li><strong>Today</strong><span>Print it, sign it and mail it yourself with your proof.</span></li>
+          <li><strong>In about 30 days</strong><span>{ANSWER_WINDOW.text} <a href={ANSWER_WINDOW.source.url} rel="noopener">Source: FTC</a>. What the bureau decides is up to the bureau.</span></li>
+          <li><strong>Then, your next letter</strong><span>It depends on the answer: a follow-up to the bureau, a letter to the company that reported the item, or a goodwill letter if the late payment was accurate. Those letters are in the Credit Letter Kit, paid once.</span></li>
+        </ol>
+        <a class="button secondary-button" href="/pricing/#credit-letter-kit">{`See the ${creditKitLabel}`}</a>
       </div>
       <div class="recommendation-card" data-recommendation>
-        <p class="eyebrow">Recommended next step</p>
-        <h3>Letter of Explanation</h3>
-        <p>The free draft helps you start. The $15 paid kit is a direct download with a PDF guide and editable DOCX templates for 9 explanation-letter situations. You do not have to use the Studio to buy it.</p>
-        <a class="button primary-button" href="/pricing/#letter-of-explanation">Buy the kit — $15</a>
+        <p class="eyebrow">What the kit adds</p>
+        <h3>{`${kits[first.id].name} — ${kits[first.id].price}`}</h3>
+        <p>{first.kitAdds}</p>
+        <a class="button secondary-button" href={`/pricing/#${first.recommendationSku}`}>{`See the ${kits[first.id].name} — ${kits[first.id].price}`}</a>
       </div>
-      <ul class="compact-list">
-        {studioBenefits.map((item) => <li>{item}</li>)}
-      </ul>
+      <p class="ap-selfhelp">{SELF_HELP_LINE} This free tool uses fixed templates in your browser. It is not AI and not a promise of approval.</p>
     </aside>
   </div>
 </section>
 
-<script define:vars={{ studioSituations }}>
-  const root = document.querySelector("[data-letter-studio]");
+<script>
+  import { studioSituations, bureaus, buildLetter, situationById, BEFORE_YOU_MAIL, ANSWER_WINDOW } from "../lib/letterStudioCore.mjs";
+
+  const root = document.querySelector<HTMLElement>("[data-letter-studio]");
   if (root) {
-    const form = root.querySelector(".studio-form");
-    const output = root.querySelector("[data-draft-output]");
-    const risk = root.querySelector("[data-risk-note]");
-    const recommendation = root.querySelector("[data-recommendation]");
-    const situations = studioSituations;
-    const selected = () => situations.find((item) => item.id === form.situation.value) || situations[0];
-    const val = (name) => String(form.elements[name]?.value || "").trim();
-    const renderRecommendation = (situation) => {
-      recommendation.innerHTML = `<p class="eyebrow">Recommended next step</p><h3>${situation.recommendationName}</h3><p>The free draft helps you start. Paid kits are direct downloads with PDF guides, editable DOCX templates, examples, checklists, supporting document guidance, and review steps. The Studio is optional and not required to buy.</p><a class="button primary-button" href="/pricing/#${situation.recommendationSku}">See kit pricing</a>`;
-      risk.textContent = situation.risk;
+    const KEY = "ap-letter-studio";
+    const form = root.querySelector<HTMLFormElement>(".studio-form")!;
+    const fieldsBox = root.querySelector<HTMLElement>("[data-fields]")!;
+    const sheet = root.querySelector<HTMLElement>("[data-draft-output]")!;
+    const status = root.querySelector<HTMLElement>("[data-status]")!;
+    const actions = root.querySelector<HTMLElement>("[data-letter-actions]")!;
+    const pdfButton = root.querySelector<HTMLButtonElement>("[data-save-pdf]")!;
+    const shareButton = root.querySelector<HTMLButtonElement>("[data-share-draft]")!;
+    const mailSteps = root.querySelector<HTMLElement>("[data-mail-steps]")!;
+    const timeline = root.querySelector<HTMLElement>("[data-timeline]")!;
+    const recommendation = root.querySelector<HTMLElement>("[data-recommendation]")!;
+    const undo = root.querySelector<HTMLElement>("[data-undo]")!;
+    const select = form.elements.namedItem("situation") as HTMLSelectElement;
+    const kits = JSON.parse(root.dataset.kits || "{}");
+    const START = status.textContent || "";
+
+    type State = { situation: string; answers: Record<string, string>; drafted: boolean };
+    let state: State = { situation: studioSituations[0].id, answers: {}, drafted: false };
+    let letter: ReturnType<typeof buildLetter> | null = null;
+    let cleared: State | null = null;
+    let undoTimer = 0;
+
+    const save = () => { try { sessionStorage.setItem(KEY, JSON.stringify(state)); } catch { /* private mode: the page still works */ } };
+    const load = () => {
+      try {
+        const kept = JSON.parse(sessionStorage.getItem(KEY) || "null");
+        if (kept && typeof kept === "object") state = { situation: String(kept.situation || state.situation), answers: { ...(kept.answers || {}) }, drafted: Boolean(kept.drafted) };
+      } catch { /* nothing kept */ }
+      const asked = new URLSearchParams(location.search).get("situation");
+      if (asked && studioSituations.some((s) => s.id === asked) && !state.drafted && !Object.keys(state.answers).length) state.situation = asked;
+      if (!studioSituations.some((s) => s.id === state.situation)) state.situation = studioSituations[0].id;
     };
-    form.situation.addEventListener("change", () => renderRecommendation(selected()));
-    root.querySelector("[data-generate-draft]").addEventListener("click", () => {
-      const situation = selected();
-      const recipient = val("recipient") || "the reviewer";
-      const issue = val("issue") || "[briefly describe the issue]";
-      const dates = val("dates") || "[add relevant dates]";
-      const facts = val("facts") || "[add the key facts]";
-      const support = val("support") || "[list supporting documents]";
-      const changed = val("changed") || "[explain what changed or what happens next]";
-      const ask = val("ask") || "[state what you want the reviewer to understand]";
-      output.textContent = `To ${recipient},\n\n${situation.opener} ${issue}.\n\nThe relevant timeline is: ${dates}.\n\nThe key facts are: ${facts}.\n\nDocuments that may support this explanation include: ${support}.\n\nCurrent status or next step: ${changed}.\n\nI am sharing this so you can understand: ${ask}.\n\nThank you for reviewing this information.\n\n[Your name]`;
-      renderRecommendation(situation);
+
+    const el = <K extends keyof HTMLElementTagNameMap>(tag: K, props: Record<string, string> = {}, text = "") => {
+      const node = document.createElement(tag);
+      for (const [k, v] of Object.entries(props)) node.setAttribute(k, v);
+      if (text) node.textContent = text;
+      return node;
+    };
+
+    const say = (text: string, tone = "") => { status.textContent = text; status.dataset.tone = tone; };
+
+    const renderFields = () => {
+      const situation = situationById(state.situation);
+      fieldsBox.replaceChildren();
+      for (const field of situation.fields) {
+        const id = `studio-${field.name}`;
+        const label = el("label", { for: id }, field.label + (field.optional ? " (optional)" : ""));
+        let input: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+        if (field.kind === "bureau") {
+          input = el("select", { id, name: field.name });
+          input.append(el("option", { value: "" }, "Choose one"));
+          for (const b of bureaus) input.append(el("option", { value: b.id }, b.name));
+        } else if (field.kind === "long" || field.kind === "lines") {
+          input = el("textarea", { id, name: field.name, rows: field.kind === "lines" ? "2" : "4", autocomplete: field.autocomplete || "off" });
+        } else {
+          input = el("input", { id, name: field.name, type: "text", autocomplete: field.autocomplete || "off" });
+        }
+        input.value = state.answers[field.name] || "";
+        label.append(input);
+        if (field.hint) label.append(el("span", { class: "fine" }, field.hint));
+        fieldsBox.append(label);
+      }
+    };
+
+    const renderRecommendation = () => {
+      const kit = kits[state.situation];
+      if (!kit) return;
+      const title = kit.price ? `${kit.name} — ${kit.price}` : kit.name;
+      recommendation.replaceChildren(
+        el("p", { class: "eyebrow" }, "What the kit adds"),
+        el("h3", {}, title),
+        el("p", {}, kit.adds),
+        el("a", { class: "button secondary-button", href: `/pricing/#${kit.sku}` }, `See the ${title}`)
+      );
+    };
+
+    const renderLetter = () => {
+      const situation = situationById(state.situation);
+      const show = state.drafted;
+      sheet.hidden = !show; actions.hidden = !show;
+      pdfButton.hidden = !(show && situation.kind === "dispute");
+      mailSteps.hidden = !(show && situation.kind === "dispute");
+      timeline.hidden = mailSteps.hidden;
+      recommendation.hidden = !timeline.hidden;
+      shareButton.hidden = !(show && typeof navigator.share === "function");
+      if (!show) { letter = null; sheet.replaceChildren(); return; }
+      letter = buildLetter(state.situation, state.answers);
+      sheet.replaceChildren();
+      // A [bracket] is a fact still missing: mark it so it cannot be sent unnoticed.
+      for (const part of letter.text.split(/(\[[^\]\n]+\])/)) {
+        if (!part) continue;
+        sheet.append(/^\[[^\]]+\]$/.test(part) ? el("mark", { class: "ap-hl" }, part) : document.createTextNode(part));
+      }
+      say(letter.blanks.length
+        ? `Letter written. Still to fill in, marked in yellow: ${letter.blanks.join(", ")}.`
+        : "Letter written. Read it once for anything that is not accurate, then sign it and send it yourself.", letter.blanks.length ? "todo" : "done");
+    };
+
+    const hasAnswers = () => Object.entries(state.answers).some(([, v]) => String(v).trim());
+
+    form.addEventListener("input", (event) => {
+      const target = event.target as HTMLInputElement;
+      if (!target?.name || target.name === "situation") return;
+      state.answers[target.name] = target.value;
+      if (state.drafted) renderLetter();
+      save();
     });
-    root.querySelector("[data-copy-draft]").addEventListener("click", async () => {
-      await navigator.clipboard?.writeText(output.textContent || "");
+
+    select.addEventListener("change", () => {
+      const had = state.drafted;
+      state.situation = select.value; state.drafted = false;
+      renderFields(); renderRecommendation(); renderLetter();
+      say(had ? "Situation changed. Press “Write my letter ›” for the new letter." : START);
+      save();
     });
-    root.querySelector("[data-download-draft]").addEventListener("click", () => {
-      const blob = new Blob([output.textContent || ""], { type: "text/plain" });
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-      a.download = "approvalprep-first-pass-draft.txt";
-      a.click();
-      URL.revokeObjectURL(a.href);
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!hasAnswers()) { say("Nothing to write yet. Answer the questions above first: the letter is built from your facts.", "stop"); status.scrollIntoView({ block: "center", behavior: "smooth" }); return; }
+      state.drafted = true;
+      renderLetter(); save();
+      root.querySelector("#your-letter")?.scrollIntoView({ block: "start", behavior: "smooth" });
     });
-    root.querySelector("[data-reset-studio]").addEventListener("click", () => {
-      output.textContent = "Choose a situation and answer the prompts to create a first-pass draft.";
-      renderRecommendation(situations[0]);
+
+    root.querySelector("[data-copy-draft]")!.addEventListener("click", async () => {
+      if (!letter) return;
+      try { await navigator.clipboard.writeText(letter.text); say("Copied. Paste it into an email or a document.", "done"); }
+      catch { say("Your browser blocked the copy button. Press and hold the letter to select and copy it.", "stop"); }
     });
+
+    shareButton.addEventListener("click", async () => {
+      if (!letter) return;
+      try { await navigator.share({ title: letter.subject, text: letter.text }); } catch { /* she closed the share sheet */ }
+    });
+
+    const download = (blob: Blob, filename: string) => {
+      const link = el("a", { href: URL.createObjectURL(blob), download: filename });
+      document.body.append(link); link.click(); link.remove();
+      setTimeout(() => URL.revokeObjectURL(link.href), 4000);
+    };
+
+    root.querySelector("[data-download-draft]")!.addEventListener("click", () => {
+      if (!letter) return;
+      download(new Blob([letter.text], { type: "text/plain" }), "my-letter.txt");
+      say("Saved as a text file in your downloads.", "done");
+    });
+
+    pdfButton.addEventListener("click", async () => {
+      if (!letter) return;
+      const { buildLetterPdf, LETTER_PDF_FOOTER } = await import("../lib/letterPdf.mjs");
+      download(new Blob([buildLetterPdf(letter, { footer: LETTER_PDF_FOOTER, sheet: { title: "Before you mail", lines: BEFORE_YOU_MAIL, notes: [ANSWER_WINDOW.text + " Source: " + ANSWER_WINDOW.source.url, "What the bureau decides is up to the bureau. This letter asks for an investigation; it does not promise a result."] } })], { type: "application/pdf" }), "credit-report-dispute-letter.pdf");
+      say("Saved as a PDF in your downloads: your letter, then a “Before you mail” page. Print it, sign it and mail it yourself.", "done");
+    });
+
+    root.querySelector("[data-reset-studio]")!.addEventListener("click", () => {
+      if (!hasAnswers() && !state.drafted) return;
+      cleared = { situation: state.situation, answers: { ...state.answers }, drafted: state.drafted };
+      state = { situation: state.situation, answers: {}, drafted: false };
+      renderFields(); renderLetter(); say(START); save();
+      undo.hidden = false;
+      clearTimeout(undoTimer);
+      undoTimer = window.setTimeout(() => { undo.hidden = true; cleared = null; }, 12000);
+    });
+
+    root.querySelector("[data-undo-reset]")!.addEventListener("click", () => {
+      if (!cleared) return;
+      state = cleared; cleared = null; undo.hidden = true; clearTimeout(undoTimer);
+      renderFields(); renderRecommendation(); renderLetter(); save();
+    });
+
+    load();
+    select.value = state.situation;
+    renderFields(); renderRecommendation(); renderLetter();
   }
 </script>
+
+<style>
+  [data-letter-studio] [hidden] { display: none !important; }
+  .studio-form label { display: grid; gap: 6px; font-weight: 600; }
+  .studio-form input, .studio-form textarea, .studio-form select { width: 100%; min-height: 48px; padding: 10px 12px; font: inherit; font-weight: 400; font-size: 16px; color: var(--carbon); background: #fff; border: 1px solid var(--carbon-muted); border-radius: var(--radius-md); }
+  .studio-form textarea { resize: vertical; }
+  .studio-form :global(label .fine) { font-weight: 400; font-size: 14px; }
+  .studio-form .primary-button { width: 100%; min-height: 52px; }
+  .studio-quiet { margin: 0; }
+  .link-button { background: none; border: 0; padding: 12px 0; min-height: 44px; font: inherit; color: var(--signal-deep); text-decoration: underline; cursor: pointer; }
+  .letter-sheet { white-space: pre-wrap; overflow-wrap: anywhere; max-width: none; margin-top: 0; padding: 20px; font-size: 15px; line-height: 1.6; color: var(--carbon); }
+  .studio-status { margin: 0; font-size: 15px; color: var(--carbon); }
+  .studio-status[data-tone="stop"] { color: var(--stop); font-weight: 600; }
+  .studio-status[data-tone="done"] { color: var(--done); font-weight: 600; }
+  .studio-preview .hero-actions { align-items: center; }
+  .timeline-list { list-style: none; margin: 0 0 14px; padding: 0; display: grid; gap: 12px; }
+  .timeline-list li { display: grid; gap: 2px; padding-left: 14px; border-left: 3px solid var(--highlighter); }
+  .timeline-list span { font-size: 15px; }
+</style>
