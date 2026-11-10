@@ -1,6 +1,6 @@
-# Bank Statement Explanation
+# Lender follow-up letter (business application)
 
-**Offering ID:** `business-funding-prep-kit__bank-statement-explanation`  
+**Offering ID:** `business-funding-prep-kit__lender-follow-up-letter-business-application`  
 **Bundled product:** Business Funding Prep Kit (`business-funding-prep-kit`)  
 **Price:** $39  
 **Delivery model:** Direct paid download; Studio not required  
@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-A line on your business statements needs accounting for before a reviewer draws their own conclusion.
+You sent the lender what they asked for and need a written nudge about where things stand.
 
 ## How Purchase Works
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: bank statement explanation template
+- Search intent: lender follow-up letter template
 - CTA label: Use the Business Funding Prep Kit
-- Customer situation: A line on your business statements needs accounting for before a reviewer draws their own conclusion.
+- Customer situation: You sent the lender what they asked for and need a written nudge about where things stand.
 
 ## Safety Boundary
 

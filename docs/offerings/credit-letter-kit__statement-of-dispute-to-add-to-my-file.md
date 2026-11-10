@@ -43,7 +43,7 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: credit dispute letter template
+- Search intent: statement of dispute credit report
 - CTA label: Use the Credit Letter Kit
 - Customer situation: The investigation did not resolve your dispute and you want your statement added to your file.
 

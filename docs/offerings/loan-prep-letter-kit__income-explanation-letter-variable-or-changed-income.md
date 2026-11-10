@@ -1,22 +1,22 @@
-# Renter Document Packet
+# Income explanation letter (variable or changed income)
 
-**Offering ID:** `rental-application-kit__renter-document-packet`  
-**Bundled product:** Rental Application Kit (`rental-application-kit`)  
+**Offering ID:** `loan-prep-letter-kit__income-explanation-letter-variable-or-changed-income`  
+**Bundled product:** Loan Prep Letter Kit (`loan-prep-letter-kit`)  
 **Price:** $29  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 
 ## What This Offering Is
 
-You are applying for several places at once and want one organized packet to send each time.
+Your pay is not a flat salary, so the figure on your documents needs context before it makes sense.
 
 ## How Purchase Works
 
-This offering is included in the **Rental Application Kit** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
+This offering is included in the **Loan Prep Letter Kit** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
 
 ## Reviewable Files
 
-- R2 keys (private bucket; the kit files are not in this repository): `products/rental-application-kit/rental-application-kit.pdf`, `products/rental-application-kit/rental-application-kit.docx`
+- R2 keys (private bucket; the kit files are not in this repository): `products/loan-prep-letter-kit/loan-prep-letter-kit.pdf`, `products/loan-prep-letter-kit/loan-prep-letter-kit.docx`
 
 ## Contract Standard
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: renter document packet template
-- CTA label: Use the Rental Application Kit
-- Customer situation: You are applying for several places at once and want one organized packet to send each time.
+- Search intent: income explanation letter template
+- CTA label: Use the Loan Prep Letter Kit
+- Customer situation: Your pay is not a flat salary, so the figure on your documents needs context before it makes sense.
 
 ## Safety Boundary
 

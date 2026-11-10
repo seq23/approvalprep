@@ -1,6 +1,6 @@
-# Mortgage Explanation Letter
+# Mortgage explanation letter (credit inquiries and new accounts)
 
-**Offering ID:** `complete-approvalprep-bundle__mortgage-explanation-letter`  
+**Offering ID:** `complete-approvalprep-bundle__mortgage-explanation-letter-credit-inquiries-and-new-accounts`  
 **Bundled product:** Complete ApprovalPrep Bundle (`complete-approvalprep-bundle`)  
 **Price:** $49  
 **Delivery model:** Direct paid download; Studio not required  
@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-Your mortgage underwriter has issued a condition asking you to explain something in writing.
+A mortgage lender asked you to explain recent credit inquiries or new accounts.
 
 ## How Purchase Works
 
@@ -45,7 +45,7 @@ First-page boundary requirements:
 
 - Search intent: mortgage explanation letter template
 - CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: Your mortgage underwriter has issued a condition asking you to explain something in writing.
+- Customer situation: A mortgage lender asked you to explain recent credit inquiries or new accounts.
 
 ## Safety Boundary
 

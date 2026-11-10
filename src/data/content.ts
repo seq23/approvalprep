@@ -71,21 +71,21 @@ export const productComparison = [
   {
     "product": "Letter of Explanation",
     "bestFor": "One clear explanation letter",
-    "includes": "Letter structure, prompts, examples, self-review checklist",
+    "includes": "Nine explanation letters by situation, a filled example under each, a sent and received log",
     "price": "$15",
     "href": "/pricing#letter-of-explanation"
   },
   {
     "product": "Income + Employment Letter Kit",
     "bestFor": "Work, income, employment gaps, job changes",
-    "includes": "Employment verification, proof of income, self-employment, gap letters",
+    "includes": "Employment verification for your employer to sign, proof of income, self-employment, job change and gap letters",
     "price": "$19",
     "href": "/pricing#income-employment-letter-kit"
   },
   {
     "product": "Credit Letter Kit",
     "bestFor": "DIY credit letters and follow-up",
-    "includes": "Dispute, goodwill, late payment, validation, follow-up letters",
+    "includes": "Three bureau follow-ups, direct dispute, validation, settlement terms, goodwill, late payment, checklist, log",
     "price": "$19",
     "href": "/pricing#credit-letter-kit"
   },

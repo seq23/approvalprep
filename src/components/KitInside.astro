@@ -37,7 +37,7 @@ const boundaries = [...new Set(offerings.map((offering) => offering?.riskBoundar
           <p class="kit-sample-note"><span class="ap-hl">{sample.note}</span></p>
           <div class="kit-sample-letter">{sample.lines.join("\n")}</div>
         </div>
-        <p class="fine">The kit gives you this letter with a [bracket] for each fact, and a filled example like this one under every letter. You fill in your own true facts and send it yourself. A bureau or creditor decides what it does.</p>
+        <p class="fine">The kit gives you this letter with a [bracket] for each fact, and a filled example like this one under every letter. You fill in your own true facts and send it yourself. Whoever receives it decides what they do.</p>
       </div>
     )}
     {boundaries.map((boundary) => <p class="fine">{boundary}</p>)}

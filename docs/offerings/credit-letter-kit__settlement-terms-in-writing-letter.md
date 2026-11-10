@@ -43,7 +43,7 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: credit dispute letter template
+- Search intent: settlement agreement in writing letter
 - CTA label: Use the Credit Letter Kit
 - Customer situation: You are ready to settle a collection account and want the terms in writing before you pay.
 

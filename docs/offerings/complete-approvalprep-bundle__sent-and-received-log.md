@@ -1,6 +1,6 @@
-# Employment Verification Request
+# Sent and received log
 
-**Offering ID:** `complete-approvalprep-bundle__employment-verification-request`  
+**Offering ID:** `complete-approvalprep-bundle__sent-and-received-log`  
 **Bundled product:** Complete ApprovalPrep Bundle (`complete-approvalprep-bundle`)  
 **Price:** $49  
 **Delivery model:** Direct paid download; Studio not required  
@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You need to ask your employer, in writing, for the confirmation letter a reviewer has requested.
+You want one page that records what you sent, to whom, when, and what came back.
 
 ## How Purchase Works
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: employment verification request template
+- Search intent: sent and received log for letters
 - CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: You need to ask your employer, in writing, for the confirmation letter a reviewer has requested.
+- Customer situation: You want one page that records what you sent, to whom, when, and what came back.
 
 ## Safety Boundary
 

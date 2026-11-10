@@ -43,7 +43,7 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: credit dispute letter template
+- Search intent: credit report corrected still wrong letter
 - CTA label: Use the Credit Letter Kit
 - Customer situation: The bureau changed the item, but the corrected entry is still not accurate.
 

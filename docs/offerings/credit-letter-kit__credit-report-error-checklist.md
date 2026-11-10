@@ -43,7 +43,7 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: credit dispute letter template
+- Search intent: credit report error checklist
 - CTA label: Use the Credit Letter Kit
 - Customer situation: You want to check a credit report for errors before your next dispute.
 

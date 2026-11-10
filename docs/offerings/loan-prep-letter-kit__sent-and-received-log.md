@@ -1,6 +1,6 @@
-# Mortgage Explanation Letter
+# Sent and received log
 
-**Offering ID:** `loan-prep-letter-kit__mortgage-explanation-letter`  
+**Offering ID:** `loan-prep-letter-kit__sent-and-received-log`  
 **Bundled product:** Loan Prep Letter Kit (`loan-prep-letter-kit`)  
 **Price:** $29  
 **Delivery model:** Direct paid download; Studio not required  
@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-Your mortgage underwriter has issued a condition asking you to explain something in writing.
+You want one page that records what you sent, to whom, when, and what came back.
 
 ## How Purchase Works
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: mortgage explanation letter template
+- Search intent: sent and received log for letters
 - CTA label: Use the Loan Prep Letter Kit
-- Customer situation: Your mortgage underwriter has issued a condition asking you to explain something in writing.
+- Customer situation: You want one page that records what you sent, to whom, when, and what came back.
 
 ## Safety Boundary
 

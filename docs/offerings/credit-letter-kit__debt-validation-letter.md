@@ -43,7 +43,7 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: credit dispute letter template
+- Search intent: debt validation letter template
 - CTA label: Use the Credit Letter Kit
 - Customer situation: A collector contacted you and you want the debt validated in writing.
 

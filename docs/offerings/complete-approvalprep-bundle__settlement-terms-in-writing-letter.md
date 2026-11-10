@@ -1,22 +1,22 @@
-# Proof Of Residency Letter
+# Settlement terms in writing letter
 
-**Offering ID:** `life-admin-letter-kit__proof-of-residency-letter`  
-**Bundled product:** Life Admin Letter Kit (`life-admin-letter-kit`)  
-**Price:** $19  
+**Offering ID:** `complete-approvalprep-bundle__settlement-terms-in-writing-letter`  
+**Bundled product:** Complete ApprovalPrep Bundle (`complete-approvalprep-bundle`)  
+**Price:** $49  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 
 ## What This Offering Is
 
-A school, agency or office has asked you to prove that you live where you say you live.
+You are ready to settle a collection account and want the terms in writing before you pay.
 
 ## How Purchase Works
 
-This offering is included in the **Life Admin Letter Kit** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
+This offering is included in the **Complete ApprovalPrep Bundle** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
 
 ## Reviewable Files
 
-- R2 keys (private bucket; the kit files are not in this repository): `products/life-admin-letter-kit/life-admin-letter-kit.pdf`, `products/life-admin-letter-kit/life-admin-letter-kit.docx`
+- R2 keys (private bucket; the kit files are not in this repository): `products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf`, `products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx`
 
 ## Contract Standard
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: proof of residency letter template
-- CTA label: Use the Life Admin Letter Kit
-- Customer situation: A school, agency or office has asked you to prove that you live where you say you live.
+- Search intent: settlement agreement in writing letter
+- CTA label: Use the Complete ApprovalPrep Bundle
+- Customer situation: You are ready to settle a collection account and want the terms in writing before you pay.
 
 ## Safety Boundary
 

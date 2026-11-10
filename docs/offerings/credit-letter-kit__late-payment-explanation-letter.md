@@ -43,7 +43,7 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: credit dispute letter template
+- Search intent: late payment explanation letter
 - CTA label: Use the Credit Letter Kit
 - Customer situation: You need to explain a real late payment to a lender or reviewer.
 

@@ -1,22 +1,22 @@
-# Lender Follow-up Letter
+# Mailing and record log
 
-**Offering ID:** `business-funding-prep-kit__lender-follow-up-letter`  
-**Bundled product:** Business Funding Prep Kit (`business-funding-prep-kit`)  
-**Price:** $39  
+**Offering ID:** `complete-approvalprep-bundle__mailing-and-record-log`  
+**Bundled product:** Complete ApprovalPrep Bundle (`complete-approvalprep-bundle`)  
+**Price:** $49  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 
 ## What This Offering Is
 
-You sent the lender what they asked for and need a written nudge about where things stand.
+You want one page that records what you sent, when, and what came back.
 
 ## How Purchase Works
 
-This offering is included in the **Business Funding Prep Kit** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
+This offering is included in the **Complete ApprovalPrep Bundle** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
 
 ## Reviewable Files
 
-- R2 keys (private bucket; the kit files are not in this repository): `products/business-funding-prep-kit/business-funding-prep-kit.pdf`, `products/business-funding-prep-kit/business-funding-prep-kit.docx`
+- R2 keys (private bucket; the kit files are not in this repository): `products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf`, `products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx`
 
 ## Contract Standard
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: lender follow-up letter template
-- CTA label: Use the Business Funding Prep Kit
-- Customer situation: You sent the lender what they asked for and need a written nudge about where things stand.
+- Search intent: credit dispute mailing log
+- CTA label: Use the Complete ApprovalPrep Bundle
+- Customer situation: You want one page that records what you sent, when, and what came back.
 
 ## Safety Boundary
 

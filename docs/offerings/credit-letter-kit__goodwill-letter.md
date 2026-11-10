@@ -43,7 +43,7 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: credit dispute letter template
+- Search intent: goodwill letter template
 - CTA label: Use the Credit Letter Kit
 - Customer situation: The late payment was real and you want to ask the creditor for a courtesy.
 

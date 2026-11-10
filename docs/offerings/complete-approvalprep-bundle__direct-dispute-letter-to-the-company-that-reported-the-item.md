@@ -1,6 +1,6 @@
-# Income Explanation Letter
+# Direct dispute letter to the company that reported the item
 
-**Offering ID:** `complete-approvalprep-bundle__income-explanation-letter`  
+**Offering ID:** `complete-approvalprep-bundle__direct-dispute-letter-to-the-company-that-reported-the-item`  
 **Bundled product:** Complete ApprovalPrep Bundle (`complete-approvalprep-bundle`)  
 **Price:** $49  
 **Delivery model:** Direct paid download; Studio not required  
@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-Your pay is not a flat salary, so the figure on your documents needs context before it makes sense.
+You want to send your proof to the company that reported the item.
 
 ## How Purchase Works
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: income explanation letter template
+- Search intent: dispute letter to creditor that reported the item
 - CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: Your pay is not a flat salary, so the figure on your documents needs context before it makes sense.
+- Customer situation: You want to send your proof to the company that reported the item.
 
 ## Safety Boundary
 

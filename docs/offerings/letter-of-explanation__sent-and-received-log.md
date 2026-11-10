@@ -1,22 +1,22 @@
-# Credit Bureau Follow-up Letter
+# Sent and received log
 
-**Offering ID:** `complete-approvalprep-bundle__credit-bureau-follow-up-letter`  
-**Bundled product:** Complete ApprovalPrep Bundle (`complete-approvalprep-bundle`)  
-**Price:** $49  
+**Offering ID:** `letter-of-explanation__sent-and-received-log`  
+**Bundled product:** Letter of Explanation Kit (`letter-of-explanation`)  
+**Price:** $15  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 
 ## What This Offering Is
 
-You filed a dispute, the waiting period has passed, and you need to follow up with a record of it.
+You want one page that records what you sent, to whom, when, and what came back.
 
 ## How Purchase Works
 
-This offering is included in the **Complete ApprovalPrep Bundle** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
+This offering is included in the **Letter of Explanation Kit** paid kit. After verified Stripe checkout, the buyer unlocks the kit PDF guide and editable DOCX file. The free Letter Writing Studio is optional and is not required to buy, download, or use this paid kit.
 
 ## Reviewable Files
 
-- R2 keys (private bucket; the kit files are not in this repository): `products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf`, `products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx`
+- R2 keys (private bucket; the kit files are not in this repository): `products/letter-of-explanation/letter-of-explanation.pdf`, `products/letter-of-explanation/letter-of-explanation.docx`
 
 ## Contract Standard
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: credit bureau follow-up letter template
-- CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: You filed a dispute, the waiting period has passed, and you need to follow up with a record of it.
+- Search intent: sent and received log for letters
+- CTA label: Use the Letter of Explanation Kit — $15
+- Customer situation: You want one page that records what you sent, to whom, when, and what came back.
 
 ## Safety Boundary
 

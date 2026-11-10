@@ -43,7 +43,7 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: credit dispute letter template
+- Search intent: credit bureau follow-up letter no response
 - CTA label: Use the Credit Letter Kit
 - Customer situation: The answer window has passed and you have nothing in writing from the bureau.
 

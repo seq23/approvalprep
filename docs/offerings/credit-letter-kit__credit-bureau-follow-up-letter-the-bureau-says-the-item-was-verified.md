@@ -43,7 +43,7 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: credit dispute letter template
+- Search intent: credit bureau verified dispute follow-up letter
 - CTA label: Use the Credit Letter Kit
 - Customer situation: The bureau says the item was verified and you have new information or proof to send.
 

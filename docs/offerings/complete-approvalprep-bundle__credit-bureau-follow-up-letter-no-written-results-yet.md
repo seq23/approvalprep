@@ -1,6 +1,6 @@
-# Renter Document Packet
+# Credit bureau follow-up letter: no written results yet
 
-**Offering ID:** `complete-approvalprep-bundle__renter-document-packet`  
+**Offering ID:** `complete-approvalprep-bundle__credit-bureau-follow-up-letter-no-written-results-yet`  
 **Bundled product:** Complete ApprovalPrep Bundle (`complete-approvalprep-bundle`)  
 **Price:** $49  
 **Delivery model:** Direct paid download; Studio not required  
@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You are applying for several places at once and want one organized packet to send each time.
+The answer window has passed and you have nothing in writing from the bureau.
 
 ## How Purchase Works
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: renter document packet template
+- Search intent: credit bureau follow-up letter no response
 - CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: You are applying for several places at once and want one organized packet to send each time.
+- Customer situation: The answer window has passed and you have nothing in writing from the bureau.
 
 ## Safety Boundary
 

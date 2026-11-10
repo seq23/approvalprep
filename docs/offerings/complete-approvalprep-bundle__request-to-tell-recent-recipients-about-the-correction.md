@@ -1,6 +1,6 @@
-# Bank Statement Explanation
+# Request to tell recent recipients about the correction
 
-**Offering ID:** `complete-approvalprep-bundle__bank-statement-explanation`  
+**Offering ID:** `complete-approvalprep-bundle__request-to-tell-recent-recipients-about-the-correction`  
 **Bundled product:** Complete ApprovalPrep Bundle (`complete-approvalprep-bundle`)  
 **Price:** $49  
 **Delivery model:** Direct paid download; Studio not required  
@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-A line on your business statements needs accounting for before a reviewer draws their own conclusion.
+The bureau corrected your report and you want it to tell those who recently received the old one.
 
 ## How Purchase Works
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: bank statement explanation template
+- Search intent: notify recipients of credit report correction letter
 - CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: A line on your business statements needs accounting for before a reviewer draws their own conclusion.
+- Customer situation: The bureau corrected your report and you want it to tell those who recently received the old one.
 
 ## Safety Boundary
 

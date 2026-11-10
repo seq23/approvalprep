@@ -2,7 +2,7 @@
   "schemaVersion": "1.2.0",
   "generatedAt": "2026-07-09T14:20:30.903Z",
   "model": "105_product_offering_contracts_under_8_direct_paid_download_kits",
-  "offeringCount": 110,
+  "offeringCount": 124,
   "paidProductCount": 8,
   "reviewableAssetModel": "Each product-offering placement maps to its bundled paid kit PDF and DOCX. All paid products are direct paid downloads. The site does not sell each offering as a separate checkout product. The kit files are private (not in this repository); each placement names the R2 keys of its kit.",
   "contracts": [
@@ -26,6 +26,62 @@
       },
       "customerSituation": "A lender has questions about something on your credit report and wants your own written account of what happened.",
       "searchIntent": "credit explanation letter template",
+      "ctaLabel": "Use the Letter of Explanation Kit — $15",
+      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+      "standard": {
+        "status": "PASS_BY_STRUCTURAL_CONTRACT",
+        "requiredFormats": [
+          "pdf",
+          "docx"
+        ],
+        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
+        "requiredSafetyBoundaries": [
+          "true facts only",
+          "no fake documents",
+          "no third-party contact",
+          "no professional advice",
+          "no approval guarantee"
+        ],
+        "requiredDownloadSections": [
+          "Start Here",
+          "Before You Fill This In",
+          "Step-by-Step Instructions",
+          "Fill-In Template",
+          "Self-Review Checklist",
+          "What to Attach",
+          "What to Do Next",
+          "What ApprovalPrep Does Not Do"
+        ],
+        "firstPageRequires": [
+          "plain-language self-service boundary",
+          "not legal/financial/credit-repair/lending advice",
+          "no third-party contact",
+          "no fake documents",
+          "no promises or guarantees"
+        ]
+      },
+      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
+    },
+    {
+      "id": "letter-of-explanation__late-payment-explanation-letter",
+      "offeringName": "late payment explanation letter",
+      "offeringSlug": "late-payment-explanation-letter",
+      "productSku": "letter-of-explanation",
+      "productName": "Letter of Explanation Kit",
+      "priceLabel": "$15",
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "reviewDoc": "docs/offerings/letter-of-explanation__late-payment-explanation-letter.md",
+      "reviewableAssets": {
+        "pdf": "products/letter-of-explanation/letter-of-explanation.pdf",
+        "docx": "products/letter-of-explanation/letter-of-explanation.docx",
+        "r2Keys": [
+          "products/letter-of-explanation/letter-of-explanation.pdf",
+          "products/letter-of-explanation/letter-of-explanation.docx"
+        ]
+      },
+      "customerSituation": "One or more payments landed late, and the circumstances need to be in writing for whoever is looking.",
+      "searchIntent": "late payment explanation letter template",
       "ctaLabel": "Use the Letter of Explanation Kit — $15",
       "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
       "standard": {
@@ -287,62 +343,6 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
-      "id": "letter-of-explanation__late-payment-explanation-letter",
-      "offeringName": "late payment explanation letter",
-      "offeringSlug": "late-payment-explanation-letter",
-      "productSku": "letter-of-explanation",
-      "productName": "Letter of Explanation Kit",
-      "priceLabel": "$15",
-      "deliveryModel": "direct_paid_download",
-      "studioRequired": false,
-      "reviewDoc": "docs/offerings/letter-of-explanation__late-payment-explanation-letter.md",
-      "reviewableAssets": {
-        "pdf": "products/letter-of-explanation/letter-of-explanation.pdf",
-        "docx": "products/letter-of-explanation/letter-of-explanation.docx",
-        "r2Keys": [
-          "products/letter-of-explanation/letter-of-explanation.pdf",
-          "products/letter-of-explanation/letter-of-explanation.docx"
-        ]
-      },
-      "customerSituation": "One or more payments landed late, and the circumstances need to be in writing for whoever is looking.",
-      "searchIntent": "late payment explanation letter template",
-      "ctaLabel": "Use the Letter of Explanation Kit — $15",
-      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-      "standard": {
-        "status": "PASS_BY_STRUCTURAL_CONTRACT",
-        "requiredFormats": [
-          "pdf",
-          "docx"
-        ],
-        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
-        "requiredSafetyBoundaries": [
-          "true facts only",
-          "no fake documents",
-          "no third-party contact",
-          "no professional advice",
-          "no approval guarantee"
-        ],
-        "requiredDownloadSections": [
-          "Start Here",
-          "Before You Fill This In",
-          "Step-by-Step Instructions",
-          "Fill-In Template",
-          "Self-Review Checklist",
-          "What to Attach",
-          "What to Do Next",
-          "What ApprovalPrep Does Not Do"
-        ],
-        "firstPageRequires": [
-          "plain-language self-service boundary",
-          "not legal/financial/credit-repair/lending advice",
-          "no third-party contact",
-          "no fake documents",
-          "no promises or guarantees"
-        ]
-      },
-      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
-    },
-    {
       "id": "letter-of-explanation__bank-statement-explanation-letter",
       "offeringName": "bank statement explanation letter",
       "offeringSlug": "bank-statement-explanation-letter",
@@ -455,6 +455,62 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
+      "id": "letter-of-explanation__sent-and-received-log",
+      "offeringName": "sent and received log",
+      "offeringSlug": "sent-and-received-log",
+      "productSku": "letter-of-explanation",
+      "productName": "Letter of Explanation Kit",
+      "priceLabel": "$15",
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "reviewDoc": "docs/offerings/letter-of-explanation__sent-and-received-log.md",
+      "reviewableAssets": {
+        "pdf": "products/letter-of-explanation/letter-of-explanation.pdf",
+        "docx": "products/letter-of-explanation/letter-of-explanation.docx",
+        "r2Keys": [
+          "products/letter-of-explanation/letter-of-explanation.pdf",
+          "products/letter-of-explanation/letter-of-explanation.docx"
+        ]
+      },
+      "customerSituation": "You want one page that records what you sent, to whom, when, and what came back.",
+      "searchIntent": "sent and received log for letters",
+      "ctaLabel": "Use the Letter of Explanation Kit — $15",
+      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+      "standard": {
+        "status": "PASS_BY_STRUCTURAL_CONTRACT",
+        "requiredFormats": [
+          "pdf",
+          "docx"
+        ],
+        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
+        "requiredSafetyBoundaries": [
+          "true facts only",
+          "no fake documents",
+          "no third-party contact",
+          "no professional advice",
+          "no approval guarantee"
+        ],
+        "requiredDownloadSections": [
+          "Start Here",
+          "Before You Fill This In",
+          "Step-by-Step Instructions",
+          "Fill-In Template",
+          "Self-Review Checklist",
+          "What to Attach",
+          "What to Do Next",
+          "What ApprovalPrep Does Not Do"
+        ],
+        "firstPageRequires": [
+          "plain-language self-service boundary",
+          "not legal/financial/credit-repair/lending advice",
+          "no third-party contact",
+          "no fake documents",
+          "no promises or guarantees"
+        ]
+      },
+      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
+    },
+    {
       "id": "letter-of-explanation__general-application-explanation-letter",
       "offeringName": "general application explanation letter",
       "offeringSlug": "general-application-explanation-letter",
@@ -511,15 +567,15 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
-      "id": "income-employment-letter-kit__employment-verification-letter",
-      "offeringName": "employment verification letter",
-      "offeringSlug": "employment-verification-letter",
+      "id": "income-employment-letter-kit__employment-verification-letter-for-your-employer-to-sign",
+      "offeringName": "employment verification letter (for your employer to sign)",
+      "offeringSlug": "employment-verification-letter-for-your-employer-to-sign",
       "productSku": "income-employment-letter-kit",
       "productName": "Income + Employment Letter Kit",
       "priceLabel": "$19",
       "deliveryModel": "direct_paid_download",
       "studioRequired": false,
-      "reviewDoc": "docs/offerings/income-employment-letter-kit__employment-verification-letter.md",
+      "reviewDoc": "docs/offerings/income-employment-letter-kit__employment-verification-letter-for-your-employer-to-sign.md",
       "reviewableAssets": {
         "pdf": "products/income-employment-letter-kit/income-employment-letter-kit.pdf",
         "docx": "products/income-employment-letter-kit/income-employment-letter-kit.docx",
@@ -528,7 +584,7 @@
           "products/income-employment-letter-kit/income-employment-letter-kit.docx"
         ]
       },
-      "customerSituation": "Someone needs written confirmation of where you work, in what role, and since when.",
+      "customerSituation": "Someone needs written confirmation of where you work. This letter is written for your employer to sign.",
       "searchIntent": "employment verification letter template",
       "ctaLabel": "Use the Income + Employment Letter Kit",
       "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
@@ -679,6 +735,62 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
+      "id": "income-employment-letter-kit__bank-statement-explanation-letter",
+      "offeringName": "bank statement explanation letter",
+      "offeringSlug": "bank-statement-explanation-letter",
+      "productSku": "income-employment-letter-kit",
+      "productName": "Income + Employment Letter Kit",
+      "priceLabel": "$19",
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "reviewDoc": "docs/offerings/income-employment-letter-kit__bank-statement-explanation-letter.md",
+      "reviewableAssets": {
+        "pdf": "products/income-employment-letter-kit/income-employment-letter-kit.pdf",
+        "docx": "products/income-employment-letter-kit/income-employment-letter-kit.docx",
+        "r2Keys": [
+          "products/income-employment-letter-kit/income-employment-letter-kit.pdf",
+          "products/income-employment-letter-kit/income-employment-letter-kit.docx"
+        ]
+      },
+      "customerSituation": "A deposit, transfer or balance swing on your statements looks unusual to a reviewer, and they want it accounted for.",
+      "searchIntent": "bank statement explanation letter template",
+      "ctaLabel": "Use the Income + Employment Letter Kit",
+      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+      "standard": {
+        "status": "PASS_BY_STRUCTURAL_CONTRACT",
+        "requiredFormats": [
+          "pdf",
+          "docx"
+        ],
+        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
+        "requiredSafetyBoundaries": [
+          "true facts only",
+          "no fake documents",
+          "no third-party contact",
+          "no professional advice",
+          "no approval guarantee"
+        ],
+        "requiredDownloadSections": [
+          "Start Here",
+          "Before You Fill This In",
+          "Step-by-Step Instructions",
+          "Fill-In Template",
+          "Self-Review Checklist",
+          "What to Attach",
+          "What to Do Next",
+          "What ApprovalPrep Does Not Do"
+        ],
+        "firstPageRequires": [
+          "plain-language self-service boundary",
+          "not legal/financial/credit-repair/lending advice",
+          "no third-party contact",
+          "no fake documents",
+          "no promises or guarantees"
+        ]
+      },
+      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
+    },
+    {
       "id": "income-employment-letter-kit__job-change-letter",
       "offeringName": "job change letter",
       "offeringSlug": "job-change-letter",
@@ -735,15 +847,15 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
-      "id": "income-employment-letter-kit__gap-in-employment-letter",
-      "offeringName": "gap in employment letter",
-      "offeringSlug": "gap-in-employment-letter",
+      "id": "income-employment-letter-kit__employment-gap-explanation-letter",
+      "offeringName": "employment gap explanation letter",
+      "offeringSlug": "employment-gap-explanation-letter",
       "productSku": "income-employment-letter-kit",
       "productName": "Income + Employment Letter Kit",
       "priceLabel": "$19",
       "deliveryModel": "direct_paid_download",
       "studioRequired": false,
-      "reviewDoc": "docs/offerings/income-employment-letter-kit__gap-in-employment-letter.md",
+      "reviewDoc": "docs/offerings/income-employment-letter-kit__employment-gap-explanation-letter.md",
       "reviewableAssets": {
         "pdf": "products/income-employment-letter-kit/income-employment-letter-kit.pdf",
         "docx": "products/income-employment-letter-kit/income-employment-letter-kit.docx",
@@ -791,15 +903,15 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
-      "id": "income-employment-letter-kit__bank-statement-explanation-letter",
-      "offeringName": "bank statement explanation letter",
-      "offeringSlug": "bank-statement-explanation-letter",
+      "id": "income-employment-letter-kit__sent-and-received-log",
+      "offeringName": "sent and received log",
+      "offeringSlug": "sent-and-received-log",
       "productSku": "income-employment-letter-kit",
       "productName": "Income + Employment Letter Kit",
       "priceLabel": "$19",
       "deliveryModel": "direct_paid_download",
       "studioRequired": false,
-      "reviewDoc": "docs/offerings/income-employment-letter-kit__bank-statement-explanation-letter.md",
+      "reviewDoc": "docs/offerings/income-employment-letter-kit__sent-and-received-log.md",
       "reviewableAssets": {
         "pdf": "products/income-employment-letter-kit/income-employment-letter-kit.pdf",
         "docx": "products/income-employment-letter-kit/income-employment-letter-kit.docx",
@@ -808,8 +920,8 @@
           "products/income-employment-letter-kit/income-employment-letter-kit.docx"
         ]
       },
-      "customerSituation": "A deposit, transfer or balance swing on your statements looks unusual to a reviewer, and they want it accounted for.",
-      "searchIntent": "bank statement explanation letter template",
+      "customerSituation": "You want one page that records what you sent, to whom, when, and what came back.",
+      "searchIntent": "sent and received log for letters",
       "ctaLabel": "Use the Income + Employment Letter Kit",
       "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
       "standard": {
@@ -1631,6 +1743,118 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
+      "id": "rental-application-kit__proof-of-income-checklist",
+      "offeringName": "proof of income checklist",
+      "offeringSlug": "proof-of-income-checklist",
+      "productSku": "rental-application-kit",
+      "productName": "Rental Application Kit",
+      "priceLabel": "$29",
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "reviewDoc": "docs/offerings/rental-application-kit__proof-of-income-checklist.md",
+      "reviewableAssets": {
+        "pdf": "products/rental-application-kit/rental-application-kit.pdf",
+        "docx": "products/rental-application-kit/rental-application-kit.docx",
+        "r2Keys": [
+          "products/rental-application-kit/rental-application-kit.pdf",
+          "products/rental-application-kit/rental-application-kit.docx"
+        ]
+      },
+      "customerSituation": "You have been asked to prove your income and are not certain which documents actually count.",
+      "searchIntent": "proof of income checklist template",
+      "ctaLabel": "Use the Rental Application Kit",
+      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+      "standard": {
+        "status": "PASS_BY_STRUCTURAL_CONTRACT",
+        "requiredFormats": [
+          "pdf",
+          "docx"
+        ],
+        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
+        "requiredSafetyBoundaries": [
+          "true facts only",
+          "no fake documents",
+          "no third-party contact",
+          "no professional advice",
+          "no approval guarantee"
+        ],
+        "requiredDownloadSections": [
+          "Start Here",
+          "Before You Fill This In",
+          "Step-by-Step Instructions",
+          "Fill-In Template",
+          "Self-Review Checklist",
+          "What to Attach",
+          "What to Do Next",
+          "What ApprovalPrep Does Not Do"
+        ],
+        "firstPageRequires": [
+          "plain-language self-service boundary",
+          "not legal/financial/credit-repair/lending advice",
+          "no third-party contact",
+          "no fake documents",
+          "no promises or guarantees"
+        ]
+      },
+      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
+    },
+    {
+      "id": "rental-application-kit__renter-document-packet-cover-sheet-and-order",
+      "offeringName": "renter document packet: cover sheet and order",
+      "offeringSlug": "renter-document-packet-cover-sheet-and-order",
+      "productSku": "rental-application-kit",
+      "productName": "Rental Application Kit",
+      "priceLabel": "$29",
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "reviewDoc": "docs/offerings/rental-application-kit__renter-document-packet-cover-sheet-and-order.md",
+      "reviewableAssets": {
+        "pdf": "products/rental-application-kit/rental-application-kit.pdf",
+        "docx": "products/rental-application-kit/rental-application-kit.docx",
+        "r2Keys": [
+          "products/rental-application-kit/rental-application-kit.pdf",
+          "products/rental-application-kit/rental-application-kit.docx"
+        ]
+      },
+      "customerSituation": "You are applying for several places at once and want one organized packet to send each time.",
+      "searchIntent": "renter document packet template",
+      "ctaLabel": "Use the Rental Application Kit",
+      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+      "standard": {
+        "status": "PASS_BY_STRUCTURAL_CONTRACT",
+        "requiredFormats": [
+          "pdf",
+          "docx"
+        ],
+        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
+        "requiredSafetyBoundaries": [
+          "true facts only",
+          "no fake documents",
+          "no third-party contact",
+          "no professional advice",
+          "no approval guarantee"
+        ],
+        "requiredDownloadSections": [
+          "Start Here",
+          "Before You Fill This In",
+          "Step-by-Step Instructions",
+          "Fill-In Template",
+          "Self-Review Checklist",
+          "What to Attach",
+          "What to Do Next",
+          "What ApprovalPrep Does Not Do"
+        ],
+        "firstPageRequires": [
+          "plain-language self-service boundary",
+          "not legal/financial/credit-repair/lending advice",
+          "no third-party contact",
+          "no fake documents",
+          "no promises or guarantees"
+        ]
+      },
+      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
+    },
+    {
       "id": "rental-application-kit__rental-cover-letter",
       "offeringName": "rental cover letter",
       "offeringSlug": "rental-cover-letter",
@@ -1799,15 +2023,15 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
-      "id": "rental-application-kit__employment-verification-request",
-      "offeringName": "employment verification request",
-      "offeringSlug": "employment-verification-request",
+      "id": "rental-application-kit__employment-verification-request-to-your-employer",
+      "offeringName": "employment verification request (to your employer)",
+      "offeringSlug": "employment-verification-request-to-your-employer",
       "productSku": "rental-application-kit",
       "productName": "Rental Application Kit",
       "priceLabel": "$29",
       "deliveryModel": "direct_paid_download",
       "studioRequired": false,
-      "reviewDoc": "docs/offerings/rental-application-kit__employment-verification-request.md",
+      "reviewDoc": "docs/offerings/rental-application-kit__employment-verification-request-to-your-employer.md",
       "reviewableAssets": {
         "pdf": "products/rental-application-kit/rental-application-kit.pdf",
         "docx": "products/rental-application-kit/rental-application-kit.docx",
@@ -1818,62 +2042,6 @@
       },
       "customerSituation": "You need to ask your employer, in writing, for the confirmation letter a reviewer has requested.",
       "searchIntent": "employment verification request template",
-      "ctaLabel": "Use the Rental Application Kit",
-      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-      "standard": {
-        "status": "PASS_BY_STRUCTURAL_CONTRACT",
-        "requiredFormats": [
-          "pdf",
-          "docx"
-        ],
-        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
-        "requiredSafetyBoundaries": [
-          "true facts only",
-          "no fake documents",
-          "no third-party contact",
-          "no professional advice",
-          "no approval guarantee"
-        ],
-        "requiredDownloadSections": [
-          "Start Here",
-          "Before You Fill This In",
-          "Step-by-Step Instructions",
-          "Fill-In Template",
-          "Self-Review Checklist",
-          "What to Attach",
-          "What to Do Next",
-          "What ApprovalPrep Does Not Do"
-        ],
-        "firstPageRequires": [
-          "plain-language self-service boundary",
-          "not legal/financial/credit-repair/lending advice",
-          "no third-party contact",
-          "no fake documents",
-          "no promises or guarantees"
-        ]
-      },
-      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
-    },
-    {
-      "id": "rental-application-kit__proof-of-income-checklist",
-      "offeringName": "proof of income checklist",
-      "offeringSlug": "proof-of-income-checklist",
-      "productSku": "rental-application-kit",
-      "productName": "Rental Application Kit",
-      "priceLabel": "$29",
-      "deliveryModel": "direct_paid_download",
-      "studioRequired": false,
-      "reviewDoc": "docs/offerings/rental-application-kit__proof-of-income-checklist.md",
-      "reviewableAssets": {
-        "pdf": "products/rental-application-kit/rental-application-kit.pdf",
-        "docx": "products/rental-application-kit/rental-application-kit.docx",
-        "r2Keys": [
-          "products/rental-application-kit/rental-application-kit.pdf",
-          "products/rental-application-kit/rental-application-kit.docx"
-        ]
-      },
-      "customerSituation": "You have been asked to prove your income and are not certain which documents actually count.",
-      "searchIntent": "proof of income checklist template",
       "ctaLabel": "Use the Rental Application Kit",
       "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
       "standard": {
@@ -2023,15 +2191,15 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
-      "id": "rental-application-kit__renter-document-packet",
-      "offeringName": "renter document packet",
-      "offeringSlug": "renter-document-packet",
+      "id": "rental-application-kit__sent-and-received-log",
+      "offeringName": "sent and received log",
+      "offeringSlug": "sent-and-received-log",
       "productSku": "rental-application-kit",
       "productName": "Rental Application Kit",
       "priceLabel": "$29",
       "deliveryModel": "direct_paid_download",
       "studioRequired": false,
-      "reviewDoc": "docs/offerings/rental-application-kit__renter-document-packet.md",
+      "reviewDoc": "docs/offerings/rental-application-kit__sent-and-received-log.md",
       "reviewableAssets": {
         "pdf": "products/rental-application-kit/rental-application-kit.pdf",
         "docx": "products/rental-application-kit/rental-application-kit.docx",
@@ -2040,8 +2208,8 @@
           "products/rental-application-kit/rental-application-kit.docx"
         ]
       },
-      "customerSituation": "You are applying for several places at once and want one organized packet to send each time.",
-      "searchIntent": "renter document packet template",
+      "customerSituation": "You want one page that records what you sent, to whom, when, and what came back.",
+      "searchIntent": "sent and received log for letters",
       "ctaLabel": "Use the Rental Application Kit",
       "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
       "standard": {
@@ -2135,15 +2303,15 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
-      "id": "loan-prep-letter-kit__mortgage-explanation-letter",
-      "offeringName": "mortgage explanation letter",
-      "offeringSlug": "mortgage-explanation-letter",
+      "id": "loan-prep-letter-kit__mortgage-explanation-letter-credit-inquiries-and-new-accounts",
+      "offeringName": "mortgage explanation letter (credit inquiries and new accounts)",
+      "offeringSlug": "mortgage-explanation-letter-credit-inquiries-and-new-accounts",
       "productSku": "loan-prep-letter-kit",
       "productName": "Loan Prep Letter Kit",
       "priceLabel": "$29",
       "deliveryModel": "direct_paid_download",
       "studioRequired": false,
-      "reviewDoc": "docs/offerings/loan-prep-letter-kit__mortgage-explanation-letter.md",
+      "reviewDoc": "docs/offerings/loan-prep-letter-kit__mortgage-explanation-letter-credit-inquiries-and-new-accounts.md",
       "reviewableAssets": {
         "pdf": "products/loan-prep-letter-kit/loan-prep-letter-kit.pdf",
         "docx": "products/loan-prep-letter-kit/loan-prep-letter-kit.docx",
@@ -2152,7 +2320,7 @@
           "products/loan-prep-letter-kit/loan-prep-letter-kit.docx"
         ]
       },
-      "customerSituation": "Your mortgage underwriter has issued a condition asking you to explain something in writing.",
+      "customerSituation": "A mortgage lender asked you to explain recent credit inquiries or new accounts.",
       "searchIntent": "mortgage explanation letter template",
       "ctaLabel": "Use the Loan Prep Letter Kit",
       "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
@@ -2247,15 +2415,15 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
-      "id": "loan-prep-letter-kit__income-explanation-letter",
-      "offeringName": "income explanation letter",
-      "offeringSlug": "income-explanation-letter",
+      "id": "loan-prep-letter-kit__income-explanation-letter-variable-or-changed-income",
+      "offeringName": "income explanation letter (variable or changed income)",
+      "offeringSlug": "income-explanation-letter-variable-or-changed-income",
       "productSku": "loan-prep-letter-kit",
       "productName": "Loan Prep Letter Kit",
       "priceLabel": "$29",
       "deliveryModel": "direct_paid_download",
       "studioRequired": false,
-      "reviewDoc": "docs/offerings/loan-prep-letter-kit__income-explanation-letter.md",
+      "reviewDoc": "docs/offerings/loan-prep-letter-kit__income-explanation-letter-variable-or-changed-income.md",
       "reviewableAssets": {
         "pdf": "products/loan-prep-letter-kit/loan-prep-letter-kit.pdf",
         "docx": "products/loan-prep-letter-kit/loan-prep-letter-kit.docx",
@@ -2527,6 +2695,62 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
+      "id": "loan-prep-letter-kit__sent-and-received-log",
+      "offeringName": "sent and received log",
+      "offeringSlug": "sent-and-received-log",
+      "productSku": "loan-prep-letter-kit",
+      "productName": "Loan Prep Letter Kit",
+      "priceLabel": "$29",
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "reviewDoc": "docs/offerings/loan-prep-letter-kit__sent-and-received-log.md",
+      "reviewableAssets": {
+        "pdf": "products/loan-prep-letter-kit/loan-prep-letter-kit.pdf",
+        "docx": "products/loan-prep-letter-kit/loan-prep-letter-kit.docx",
+        "r2Keys": [
+          "products/loan-prep-letter-kit/loan-prep-letter-kit.pdf",
+          "products/loan-prep-letter-kit/loan-prep-letter-kit.docx"
+        ]
+      },
+      "customerSituation": "You want one page that records what you sent, to whom, when, and what came back.",
+      "searchIntent": "sent and received log for letters",
+      "ctaLabel": "Use the Loan Prep Letter Kit",
+      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+      "standard": {
+        "status": "PASS_BY_STRUCTURAL_CONTRACT",
+        "requiredFormats": [
+          "pdf",
+          "docx"
+        ],
+        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
+        "requiredSafetyBoundaries": [
+          "true facts only",
+          "no fake documents",
+          "no third-party contact",
+          "no professional advice",
+          "no approval guarantee"
+        ],
+        "requiredDownloadSections": [
+          "Start Here",
+          "Before You Fill This In",
+          "Step-by-Step Instructions",
+          "Fill-In Template",
+          "Self-Review Checklist",
+          "What to Attach",
+          "What to Do Next",
+          "What ApprovalPrep Does Not Do"
+        ],
+        "firstPageRequires": [
+          "plain-language self-service boundary",
+          "not legal/financial/credit-repair/lending advice",
+          "no third-party contact",
+          "no fake documents",
+          "no promises or guarantees"
+        ]
+      },
+      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
+    },
+    {
       "id": "business-funding-prep-kit__business-loan-explanation-letter",
       "offeringName": "business loan explanation letter",
       "offeringSlug": "business-loan-explanation-letter",
@@ -2546,6 +2770,62 @@
       },
       "customerSituation": "A lender reviewing your business wants a written account of a dip, a debt or a change in the numbers.",
       "searchIntent": "business loan explanation letter template",
+      "ctaLabel": "Use the Business Funding Prep Kit",
+      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+      "standard": {
+        "status": "PASS_BY_STRUCTURAL_CONTRACT",
+        "requiredFormats": [
+          "pdf",
+          "docx"
+        ],
+        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
+        "requiredSafetyBoundaries": [
+          "true facts only",
+          "no fake documents",
+          "no third-party contact",
+          "no professional advice",
+          "no approval guarantee"
+        ],
+        "requiredDownloadSections": [
+          "Start Here",
+          "Before You Fill This In",
+          "Step-by-Step Instructions",
+          "Fill-In Template",
+          "Self-Review Checklist",
+          "What to Attach",
+          "What to Do Next",
+          "What ApprovalPrep Does Not Do"
+        ],
+        "firstPageRequires": [
+          "plain-language self-service boundary",
+          "not legal/financial/credit-repair/lending advice",
+          "no third-party contact",
+          "no fake documents",
+          "no promises or guarantees"
+        ]
+      },
+      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
+    },
+    {
+      "id": "business-funding-prep-kit__use-of-funds-explanation",
+      "offeringName": "use of funds explanation",
+      "offeringSlug": "use-of-funds-explanation",
+      "productSku": "business-funding-prep-kit",
+      "productName": "Business Funding Prep Kit",
+      "priceLabel": "$39",
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "reviewDoc": "docs/offerings/business-funding-prep-kit__use-of-funds-explanation.md",
+      "reviewableAssets": {
+        "pdf": "products/business-funding-prep-kit/business-funding-prep-kit.pdf",
+        "docx": "products/business-funding-prep-kit/business-funding-prep-kit.docx",
+        "r2Keys": [
+          "products/business-funding-prep-kit/business-funding-prep-kit.pdf",
+          "products/business-funding-prep-kit/business-funding-prep-kit.docx"
+        ]
+      },
+      "customerSituation": "A lender wants to know exactly what you intend to do with the money.",
+      "searchIntent": "use of funds explanation template",
       "ctaLabel": "Use the Business Funding Prep Kit",
       "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
       "standard": {
@@ -2751,15 +3031,15 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
-      "id": "business-funding-prep-kit__bank-statement-explanation",
-      "offeringName": "bank statement explanation",
-      "offeringSlug": "bank-statement-explanation",
+      "id": "business-funding-prep-kit__bank-statement-explanation-business-account",
+      "offeringName": "bank statement explanation (business account)",
+      "offeringSlug": "bank-statement-explanation-business-account",
       "productSku": "business-funding-prep-kit",
       "productName": "Business Funding Prep Kit",
       "priceLabel": "$39",
       "deliveryModel": "direct_paid_download",
       "studioRequired": false,
-      "reviewDoc": "docs/offerings/business-funding-prep-kit__bank-statement-explanation.md",
+      "reviewDoc": "docs/offerings/business-funding-prep-kit__bank-statement-explanation-business-account.md",
       "reviewableAssets": {
         "pdf": "products/business-funding-prep-kit/business-funding-prep-kit.pdf",
         "docx": "products/business-funding-prep-kit/business-funding-prep-kit.docx",
@@ -2863,15 +3143,15 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
-      "id": "business-funding-prep-kit__use-of-funds-explanation",
-      "offeringName": "use of funds explanation",
-      "offeringSlug": "use-of-funds-explanation",
+      "id": "business-funding-prep-kit__lender-follow-up-letter-business-application",
+      "offeringName": "lender follow-up letter (business application)",
+      "offeringSlug": "lender-follow-up-letter-business-application",
       "productSku": "business-funding-prep-kit",
       "productName": "Business Funding Prep Kit",
       "priceLabel": "$39",
       "deliveryModel": "direct_paid_download",
       "studioRequired": false,
-      "reviewDoc": "docs/offerings/business-funding-prep-kit__use-of-funds-explanation.md",
+      "reviewDoc": "docs/offerings/business-funding-prep-kit__lender-follow-up-letter-business-application.md",
       "reviewableAssets": {
         "pdf": "products/business-funding-prep-kit/business-funding-prep-kit.pdf",
         "docx": "products/business-funding-prep-kit/business-funding-prep-kit.docx",
@@ -2880,8 +3160,8 @@
           "products/business-funding-prep-kit/business-funding-prep-kit.docx"
         ]
       },
-      "customerSituation": "A lender wants to know exactly what you intend to do with the money.",
-      "searchIntent": "use of funds explanation template",
+      "customerSituation": "You sent the lender what they asked for and need a written nudge about where things stand.",
+      "searchIntent": "lender follow-up letter template",
       "ctaLabel": "Use the Business Funding Prep Kit",
       "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
       "standard": {
@@ -2919,15 +3199,15 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
-      "id": "business-funding-prep-kit__lender-follow-up-letter",
-      "offeringName": "lender follow-up letter",
-      "offeringSlug": "lender-follow-up-letter",
+      "id": "business-funding-prep-kit__sent-and-received-log",
+      "offeringName": "sent and received log",
+      "offeringSlug": "sent-and-received-log",
       "productSku": "business-funding-prep-kit",
       "productName": "Business Funding Prep Kit",
       "priceLabel": "$39",
       "deliveryModel": "direct_paid_download",
       "studioRequired": false,
-      "reviewDoc": "docs/offerings/business-funding-prep-kit__lender-follow-up-letter.md",
+      "reviewDoc": "docs/offerings/business-funding-prep-kit__sent-and-received-log.md",
       "reviewableAssets": {
         "pdf": "products/business-funding-prep-kit/business-funding-prep-kit.pdf",
         "docx": "products/business-funding-prep-kit/business-funding-prep-kit.docx",
@@ -2936,8 +3216,8 @@
           "products/business-funding-prep-kit/business-funding-prep-kit.docx"
         ]
       },
-      "customerSituation": "You sent the lender what they asked for and need a written nudge about where things stand.",
-      "searchIntent": "lender follow-up letter template",
+      "customerSituation": "You want one page that records what you sent, to whom, when, and what came back.",
+      "searchIntent": "sent and received log for letters",
       "ctaLabel": "Use the Business Funding Prep Kit",
       "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
       "standard": {
@@ -3031,15 +3311,15 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
-      "id": "life-admin-letter-kit__proof-of-residency-letter",
-      "offeringName": "proof of residency letter",
-      "offeringSlug": "proof-of-residency-letter",
+      "id": "life-admin-letter-kit__proof-of-residency-letter-signed-by-the-person-you-live-with",
+      "offeringName": "proof of residency letter (signed by the person you live with)",
+      "offeringSlug": "proof-of-residency-letter-signed-by-the-person-you-live-with",
       "productSku": "life-admin-letter-kit",
       "productName": "Life Admin Letter Kit",
       "priceLabel": "$19",
       "deliveryModel": "direct_paid_download",
       "studioRequired": false,
-      "reviewDoc": "docs/offerings/life-admin-letter-kit__proof-of-residency-letter.md",
+      "reviewDoc": "docs/offerings/life-admin-letter-kit__proof-of-residency-letter-signed-by-the-person-you-live-with.md",
       "reviewableAssets": {
         "pdf": "products/life-admin-letter-kit/life-admin-letter-kit.pdf",
         "docx": "products/life-admin-letter-kit/life-admin-letter-kit.docx",
@@ -3048,7 +3328,7 @@
           "products/life-admin-letter-kit/life-admin-letter-kit.docx"
         ]
       },
-      "customerSituation": "A school, agency or office has asked you to prove that you live where you say you live.",
+      "customerSituation": "An office needs the person you live with to confirm in writing that you live there. This letter is written for that person to sign.",
       "searchIntent": "proof of residency letter template",
       "ctaLabel": "Use the Life Admin Letter Kit",
       "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
@@ -3255,6 +3535,62 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
+      "id": "life-admin-letter-kit__general-records-request-letter",
+      "offeringName": "general records request letter",
+      "offeringSlug": "general-records-request-letter",
+      "productSku": "life-admin-letter-kit",
+      "productName": "Life Admin Letter Kit",
+      "priceLabel": "$19",
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "reviewDoc": "docs/offerings/life-admin-letter-kit__general-records-request-letter.md",
+      "reviewableAssets": {
+        "pdf": "products/life-admin-letter-kit/life-admin-letter-kit.pdf",
+        "docx": "products/life-admin-letter-kit/life-admin-letter-kit.docx",
+        "r2Keys": [
+          "products/life-admin-letter-kit/life-admin-letter-kit.pdf",
+          "products/life-admin-letter-kit/life-admin-letter-kit.docx"
+        ]
+      },
+      "customerSituation": "You need a copy of your own records from an organization and want to ask properly the first time.",
+      "searchIntent": "general records request letter template",
+      "ctaLabel": "Use the Life Admin Letter Kit",
+      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+      "standard": {
+        "status": "PASS_BY_STRUCTURAL_CONTRACT",
+        "requiredFormats": [
+          "pdf",
+          "docx"
+        ],
+        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
+        "requiredSafetyBoundaries": [
+          "true facts only",
+          "no fake documents",
+          "no third-party contact",
+          "no professional advice",
+          "no approval guarantee"
+        ],
+        "requiredDownloadSections": [
+          "Start Here",
+          "Before You Fill This In",
+          "Step-by-Step Instructions",
+          "Fill-In Template",
+          "Self-Review Checklist",
+          "What to Attach",
+          "What to Do Next",
+          "What ApprovalPrep Does Not Do"
+        ],
+        "firstPageRequires": [
+          "plain-language self-service boundary",
+          "not legal/financial/credit-repair/lending advice",
+          "no third-party contact",
+          "no fake documents",
+          "no promises or guarantees"
+        ]
+      },
+      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
+    },
+    {
       "id": "life-admin-letter-kit__benefits-explanation-letter",
       "offeringName": "benefits explanation letter",
       "offeringSlug": "benefits-explanation-letter",
@@ -3367,15 +3703,15 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
-      "id": "life-admin-letter-kit__general-records-request-letter",
-      "offeringName": "general records request letter",
-      "offeringSlug": "general-records-request-letter",
+      "id": "life-admin-letter-kit__sent-and-received-log",
+      "offeringName": "sent and received log",
+      "offeringSlug": "sent-and-received-log",
       "productSku": "life-admin-letter-kit",
       "productName": "Life Admin Letter Kit",
       "priceLabel": "$19",
       "deliveryModel": "direct_paid_download",
       "studioRequired": false,
-      "reviewDoc": "docs/offerings/life-admin-letter-kit__general-records-request-letter.md",
+      "reviewDoc": "docs/offerings/life-admin-letter-kit__sent-and-received-log.md",
       "reviewableAssets": {
         "pdf": "products/life-admin-letter-kit/life-admin-letter-kit.pdf",
         "docx": "products/life-admin-letter-kit/life-admin-letter-kit.docx",
@@ -3384,9 +3720,625 @@
           "products/life-admin-letter-kit/life-admin-letter-kit.docx"
         ]
       },
-      "customerSituation": "You need a copy of your own records from an organization and want to ask properly the first time.",
-      "searchIntent": "general records request letter template",
+      "customerSituation": "You want one page that records what you sent, to whom, when, and what came back.",
+      "searchIntent": "sent and received log for letters",
       "ctaLabel": "Use the Life Admin Letter Kit",
+      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+      "standard": {
+        "status": "PASS_BY_STRUCTURAL_CONTRACT",
+        "requiredFormats": [
+          "pdf",
+          "docx"
+        ],
+        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
+        "requiredSafetyBoundaries": [
+          "true facts only",
+          "no fake documents",
+          "no third-party contact",
+          "no professional advice",
+          "no approval guarantee"
+        ],
+        "requiredDownloadSections": [
+          "Start Here",
+          "Before You Fill This In",
+          "Step-by-Step Instructions",
+          "Fill-In Template",
+          "Self-Review Checklist",
+          "What to Attach",
+          "What to Do Next",
+          "What ApprovalPrep Does Not Do"
+        ],
+        "firstPageRequires": [
+          "plain-language self-service boundary",
+          "not legal/financial/credit-repair/lending advice",
+          "no third-party contact",
+          "no fake documents",
+          "no promises or guarantees"
+        ]
+      },
+      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
+    },
+    {
+      "id": "complete-approvalprep-bundle__credit-bureau-follow-up-letter-no-written-results-yet",
+      "offeringName": "credit bureau follow-up letter: no written results yet",
+      "offeringSlug": "credit-bureau-follow-up-letter-no-written-results-yet",
+      "productSku": "complete-approvalprep-bundle",
+      "productName": "Complete ApprovalPrep Bundle",
+      "priceLabel": "$49",
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__credit-bureau-follow-up-letter-no-written-results-yet.md",
+      "reviewableAssets": {
+        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
+        "r2Keys": [
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
+        ]
+      },
+      "customerSituation": "The answer window has passed and you have nothing in writing from the bureau.",
+      "searchIntent": "credit bureau follow-up letter no response",
+      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+      "standard": {
+        "status": "PASS_BY_STRUCTURAL_CONTRACT",
+        "requiredFormats": [
+          "pdf",
+          "docx"
+        ],
+        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
+        "requiredSafetyBoundaries": [
+          "true facts only",
+          "no fake documents",
+          "no third-party contact",
+          "no professional advice",
+          "no approval guarantee"
+        ],
+        "requiredDownloadSections": [
+          "Start Here",
+          "Before You Fill This In",
+          "Step-by-Step Instructions",
+          "Fill-In Template",
+          "Self-Review Checklist",
+          "What to Attach",
+          "What to Do Next",
+          "What ApprovalPrep Does Not Do"
+        ],
+        "firstPageRequires": [
+          "plain-language self-service boundary",
+          "not legal/financial/credit-repair/lending advice",
+          "no third-party contact",
+          "no fake documents",
+          "no promises or guarantees"
+        ]
+      },
+      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
+    },
+    {
+      "id": "complete-approvalprep-bundle__credit-bureau-follow-up-letter-the-bureau-says-the-item-was-verified",
+      "offeringName": "credit bureau follow-up letter: the bureau says the item was verified",
+      "offeringSlug": "credit-bureau-follow-up-letter-the-bureau-says-the-item-was-verified",
+      "productSku": "complete-approvalprep-bundle",
+      "productName": "Complete ApprovalPrep Bundle",
+      "priceLabel": "$49",
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__credit-bureau-follow-up-letter-the-bureau-says-the-item-was-verified.md",
+      "reviewableAssets": {
+        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
+        "r2Keys": [
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
+        ]
+      },
+      "customerSituation": "The bureau says the item was verified and you have new information or proof to send.",
+      "searchIntent": "credit bureau verified dispute follow-up letter",
+      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+      "standard": {
+        "status": "PASS_BY_STRUCTURAL_CONTRACT",
+        "requiredFormats": [
+          "pdf",
+          "docx"
+        ],
+        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
+        "requiredSafetyBoundaries": [
+          "true facts only",
+          "no fake documents",
+          "no third-party contact",
+          "no professional advice",
+          "no approval guarantee"
+        ],
+        "requiredDownloadSections": [
+          "Start Here",
+          "Before You Fill This In",
+          "Step-by-Step Instructions",
+          "Fill-In Template",
+          "Self-Review Checklist",
+          "What to Attach",
+          "What to Do Next",
+          "What ApprovalPrep Does Not Do"
+        ],
+        "firstPageRequires": [
+          "plain-language self-service boundary",
+          "not legal/financial/credit-repair/lending advice",
+          "no third-party contact",
+          "no fake documents",
+          "no promises or guarantees"
+        ]
+      },
+      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
+    },
+    {
+      "id": "complete-approvalprep-bundle__credit-bureau-follow-up-letter-corrected-but-still-not-right",
+      "offeringName": "credit bureau follow-up letter: corrected, but still not right",
+      "offeringSlug": "credit-bureau-follow-up-letter-corrected-but-still-not-right",
+      "productSku": "complete-approvalprep-bundle",
+      "productName": "Complete ApprovalPrep Bundle",
+      "priceLabel": "$49",
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__credit-bureau-follow-up-letter-corrected-but-still-not-right.md",
+      "reviewableAssets": {
+        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
+        "r2Keys": [
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
+        ]
+      },
+      "customerSituation": "The bureau changed the item, but the corrected entry is still not accurate.",
+      "searchIntent": "credit report corrected still wrong letter",
+      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+      "standard": {
+        "status": "PASS_BY_STRUCTURAL_CONTRACT",
+        "requiredFormats": [
+          "pdf",
+          "docx"
+        ],
+        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
+        "requiredSafetyBoundaries": [
+          "true facts only",
+          "no fake documents",
+          "no third-party contact",
+          "no professional advice",
+          "no approval guarantee"
+        ],
+        "requiredDownloadSections": [
+          "Start Here",
+          "Before You Fill This In",
+          "Step-by-Step Instructions",
+          "Fill-In Template",
+          "Self-Review Checklist",
+          "What to Attach",
+          "What to Do Next",
+          "What ApprovalPrep Does Not Do"
+        ],
+        "firstPageRequires": [
+          "plain-language self-service boundary",
+          "not legal/financial/credit-repair/lending advice",
+          "no third-party contact",
+          "no fake documents",
+          "no promises or guarantees"
+        ]
+      },
+      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
+    },
+    {
+      "id": "complete-approvalprep-bundle__request-to-tell-recent-recipients-about-the-correction",
+      "offeringName": "request to tell recent recipients about the correction",
+      "offeringSlug": "request-to-tell-recent-recipients-about-the-correction",
+      "productSku": "complete-approvalprep-bundle",
+      "productName": "Complete ApprovalPrep Bundle",
+      "priceLabel": "$49",
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__request-to-tell-recent-recipients-about-the-correction.md",
+      "reviewableAssets": {
+        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
+        "r2Keys": [
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
+        ]
+      },
+      "customerSituation": "The bureau corrected your report and you want it to tell those who recently received the old one.",
+      "searchIntent": "notify recipients of credit report correction letter",
+      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+      "standard": {
+        "status": "PASS_BY_STRUCTURAL_CONTRACT",
+        "requiredFormats": [
+          "pdf",
+          "docx"
+        ],
+        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
+        "requiredSafetyBoundaries": [
+          "true facts only",
+          "no fake documents",
+          "no third-party contact",
+          "no professional advice",
+          "no approval guarantee"
+        ],
+        "requiredDownloadSections": [
+          "Start Here",
+          "Before You Fill This In",
+          "Step-by-Step Instructions",
+          "Fill-In Template",
+          "Self-Review Checklist",
+          "What to Attach",
+          "What to Do Next",
+          "What ApprovalPrep Does Not Do"
+        ],
+        "firstPageRequires": [
+          "plain-language self-service boundary",
+          "not legal/financial/credit-repair/lending advice",
+          "no third-party contact",
+          "no fake documents",
+          "no promises or guarantees"
+        ]
+      },
+      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
+    },
+    {
+      "id": "complete-approvalprep-bundle__statement-of-dispute-to-add-to-my-file",
+      "offeringName": "statement of dispute to add to my file",
+      "offeringSlug": "statement-of-dispute-to-add-to-my-file",
+      "productSku": "complete-approvalprep-bundle",
+      "productName": "Complete ApprovalPrep Bundle",
+      "priceLabel": "$49",
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__statement-of-dispute-to-add-to-my-file.md",
+      "reviewableAssets": {
+        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
+        "r2Keys": [
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
+        ]
+      },
+      "customerSituation": "The investigation did not resolve your dispute and you want your statement added to your file.",
+      "searchIntent": "statement of dispute credit report",
+      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+      "standard": {
+        "status": "PASS_BY_STRUCTURAL_CONTRACT",
+        "requiredFormats": [
+          "pdf",
+          "docx"
+        ],
+        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
+        "requiredSafetyBoundaries": [
+          "true facts only",
+          "no fake documents",
+          "no third-party contact",
+          "no professional advice",
+          "no approval guarantee"
+        ],
+        "requiredDownloadSections": [
+          "Start Here",
+          "Before You Fill This In",
+          "Step-by-Step Instructions",
+          "Fill-In Template",
+          "Self-Review Checklist",
+          "What to Attach",
+          "What to Do Next",
+          "What ApprovalPrep Does Not Do"
+        ],
+        "firstPageRequires": [
+          "plain-language self-service boundary",
+          "not legal/financial/credit-repair/lending advice",
+          "no third-party contact",
+          "no fake documents",
+          "no promises or guarantees"
+        ]
+      },
+      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
+    },
+    {
+      "id": "complete-approvalprep-bundle__direct-dispute-letter-to-the-company-that-reported-the-item",
+      "offeringName": "direct dispute letter to the company that reported the item",
+      "offeringSlug": "direct-dispute-letter-to-the-company-that-reported-the-item",
+      "productSku": "complete-approvalprep-bundle",
+      "productName": "Complete ApprovalPrep Bundle",
+      "priceLabel": "$49",
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__direct-dispute-letter-to-the-company-that-reported-the-item.md",
+      "reviewableAssets": {
+        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
+        "r2Keys": [
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
+        ]
+      },
+      "customerSituation": "You want to send your proof to the company that reported the item.",
+      "searchIntent": "dispute letter to creditor that reported the item",
+      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+      "standard": {
+        "status": "PASS_BY_STRUCTURAL_CONTRACT",
+        "requiredFormats": [
+          "pdf",
+          "docx"
+        ],
+        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
+        "requiredSafetyBoundaries": [
+          "true facts only",
+          "no fake documents",
+          "no third-party contact",
+          "no professional advice",
+          "no approval guarantee"
+        ],
+        "requiredDownloadSections": [
+          "Start Here",
+          "Before You Fill This In",
+          "Step-by-Step Instructions",
+          "Fill-In Template",
+          "Self-Review Checklist",
+          "What to Attach",
+          "What to Do Next",
+          "What ApprovalPrep Does Not Do"
+        ],
+        "firstPageRequires": [
+          "plain-language self-service boundary",
+          "not legal/financial/credit-repair/lending advice",
+          "no third-party contact",
+          "no fake documents",
+          "no promises or guarantees"
+        ]
+      },
+      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
+    },
+    {
+      "id": "complete-approvalprep-bundle__debt-validation-letter",
+      "offeringName": "debt validation letter",
+      "offeringSlug": "debt-validation-letter",
+      "productSku": "complete-approvalprep-bundle",
+      "productName": "Complete ApprovalPrep Bundle",
+      "priceLabel": "$49",
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__debt-validation-letter.md",
+      "reviewableAssets": {
+        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
+        "r2Keys": [
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
+        ]
+      },
+      "customerSituation": "A collector contacted you and you want the debt validated in writing.",
+      "searchIntent": "debt validation letter template",
+      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+      "standard": {
+        "status": "PASS_BY_STRUCTURAL_CONTRACT",
+        "requiredFormats": [
+          "pdf",
+          "docx"
+        ],
+        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
+        "requiredSafetyBoundaries": [
+          "true facts only",
+          "no fake documents",
+          "no third-party contact",
+          "no professional advice",
+          "no approval guarantee"
+        ],
+        "requiredDownloadSections": [
+          "Start Here",
+          "Before You Fill This In",
+          "Step-by-Step Instructions",
+          "Fill-In Template",
+          "Self-Review Checklist",
+          "What to Attach",
+          "What to Do Next",
+          "What ApprovalPrep Does Not Do"
+        ],
+        "firstPageRequires": [
+          "plain-language self-service boundary",
+          "not legal/financial/credit-repair/lending advice",
+          "no third-party contact",
+          "no fake documents",
+          "no promises or guarantees"
+        ]
+      },
+      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
+    },
+    {
+      "id": "complete-approvalprep-bundle__settlement-terms-in-writing-letter",
+      "offeringName": "settlement terms in writing letter",
+      "offeringSlug": "settlement-terms-in-writing-letter",
+      "productSku": "complete-approvalprep-bundle",
+      "productName": "Complete ApprovalPrep Bundle",
+      "priceLabel": "$49",
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__settlement-terms-in-writing-letter.md",
+      "reviewableAssets": {
+        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
+        "r2Keys": [
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
+        ]
+      },
+      "customerSituation": "You are ready to settle a collection account and want the terms in writing before you pay.",
+      "searchIntent": "settlement agreement in writing letter",
+      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+      "standard": {
+        "status": "PASS_BY_STRUCTURAL_CONTRACT",
+        "requiredFormats": [
+          "pdf",
+          "docx"
+        ],
+        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
+        "requiredSafetyBoundaries": [
+          "true facts only",
+          "no fake documents",
+          "no third-party contact",
+          "no professional advice",
+          "no approval guarantee"
+        ],
+        "requiredDownloadSections": [
+          "Start Here",
+          "Before You Fill This In",
+          "Step-by-Step Instructions",
+          "Fill-In Template",
+          "Self-Review Checklist",
+          "What to Attach",
+          "What to Do Next",
+          "What ApprovalPrep Does Not Do"
+        ],
+        "firstPageRequires": [
+          "plain-language self-service boundary",
+          "not legal/financial/credit-repair/lending advice",
+          "no third-party contact",
+          "no fake documents",
+          "no promises or guarantees"
+        ]
+      },
+      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
+    },
+    {
+      "id": "complete-approvalprep-bundle__goodwill-letter",
+      "offeringName": "goodwill letter",
+      "offeringSlug": "goodwill-letter",
+      "productSku": "complete-approvalprep-bundle",
+      "productName": "Complete ApprovalPrep Bundle",
+      "priceLabel": "$49",
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__goodwill-letter.md",
+      "reviewableAssets": {
+        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
+        "r2Keys": [
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
+        ]
+      },
+      "customerSituation": "The late payment was real and you want to ask the creditor for a courtesy.",
+      "searchIntent": "goodwill letter template",
+      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+      "standard": {
+        "status": "PASS_BY_STRUCTURAL_CONTRACT",
+        "requiredFormats": [
+          "pdf",
+          "docx"
+        ],
+        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
+        "requiredSafetyBoundaries": [
+          "true facts only",
+          "no fake documents",
+          "no third-party contact",
+          "no professional advice",
+          "no approval guarantee"
+        ],
+        "requiredDownloadSections": [
+          "Start Here",
+          "Before You Fill This In",
+          "Step-by-Step Instructions",
+          "Fill-In Template",
+          "Self-Review Checklist",
+          "What to Attach",
+          "What to Do Next",
+          "What ApprovalPrep Does Not Do"
+        ],
+        "firstPageRequires": [
+          "plain-language self-service boundary",
+          "not legal/financial/credit-repair/lending advice",
+          "no third-party contact",
+          "no fake documents",
+          "no promises or guarantees"
+        ]
+      },
+      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
+    },
+    {
+      "id": "complete-approvalprep-bundle__late-payment-explanation-letter",
+      "offeringName": "late payment explanation letter",
+      "offeringSlug": "late-payment-explanation-letter",
+      "productSku": "complete-approvalprep-bundle",
+      "productName": "Complete ApprovalPrep Bundle",
+      "priceLabel": "$49",
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__late-payment-explanation-letter.md",
+      "reviewableAssets": {
+        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
+        "r2Keys": [
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
+        ]
+      },
+      "customerSituation": "You need to explain a real late payment to a lender or reviewer.",
+      "searchIntent": "late payment explanation letter template",
+      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+      "standard": {
+        "status": "PASS_BY_STRUCTURAL_CONTRACT",
+        "requiredFormats": [
+          "pdf",
+          "docx"
+        ],
+        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
+        "requiredSafetyBoundaries": [
+          "true facts only",
+          "no fake documents",
+          "no third-party contact",
+          "no professional advice",
+          "no approval guarantee"
+        ],
+        "requiredDownloadSections": [
+          "Start Here",
+          "Before You Fill This In",
+          "Step-by-Step Instructions",
+          "Fill-In Template",
+          "Self-Review Checklist",
+          "What to Attach",
+          "What to Do Next",
+          "What ApprovalPrep Does Not Do"
+        ],
+        "firstPageRequires": [
+          "plain-language self-service boundary",
+          "not legal/financial/credit-repair/lending advice",
+          "no third-party contact",
+          "no fake documents",
+          "no promises or guarantees"
+        ]
+      },
+      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
+    },
+    {
+      "id": "complete-approvalprep-bundle__credit-report-error-checklist",
+      "offeringName": "credit report error checklist",
+      "offeringSlug": "credit-report-error-checklist",
+      "productSku": "complete-approvalprep-bundle",
+      "productName": "Complete ApprovalPrep Bundle",
+      "priceLabel": "$49",
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__credit-report-error-checklist.md",
+      "reviewableAssets": {
+        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
+        "r2Keys": [
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
+        ]
+      },
+      "customerSituation": "You want to check a credit report for errors before your next dispute.",
+      "searchIntent": "credit report error checklist template",
+      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
       "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
       "standard": {
         "status": "PASS_BY_STRUCTURAL_CONTRACT",
@@ -3703,62 +4655,6 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
-      "id": "complete-approvalprep-bundle__late-payment-explanation-letter",
-      "offeringName": "late payment explanation letter",
-      "offeringSlug": "late-payment-explanation-letter",
-      "productSku": "complete-approvalprep-bundle",
-      "productName": "Complete ApprovalPrep Bundle",
-      "priceLabel": "$49",
-      "deliveryModel": "direct_paid_download",
-      "studioRequired": false,
-      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__late-payment-explanation-letter.md",
-      "reviewableAssets": {
-        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
-        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
-        "r2Keys": [
-          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
-          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
-        ]
-      },
-      "customerSituation": "One or more payments landed late, and the circumstances need to be in writing for whoever is looking.",
-      "searchIntent": "late payment explanation letter template",
-      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
-      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-      "standard": {
-        "status": "PASS_BY_STRUCTURAL_CONTRACT",
-        "requiredFormats": [
-          "pdf",
-          "docx"
-        ],
-        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
-        "requiredSafetyBoundaries": [
-          "true facts only",
-          "no fake documents",
-          "no third-party contact",
-          "no professional advice",
-          "no approval guarantee"
-        ],
-        "requiredDownloadSections": [
-          "Start Here",
-          "Before You Fill This In",
-          "Step-by-Step Instructions",
-          "Fill-In Template",
-          "Self-Review Checklist",
-          "What to Attach",
-          "What to Do Next",
-          "What ApprovalPrep Does Not Do"
-        ],
-        "firstPageRequires": [
-          "plain-language self-service boundary",
-          "not legal/financial/credit-repair/lending advice",
-          "no third-party contact",
-          "no fake documents",
-          "no promises or guarantees"
-        ]
-      },
-      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
-    },
-    {
       "id": "complete-approvalprep-bundle__bank-statement-explanation-letter",
       "offeringName": "bank statement explanation letter",
       "offeringSlug": "bank-statement-explanation-letter",
@@ -3871,15 +4767,15 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
-      "id": "complete-approvalprep-bundle__general-application-explanation-letter",
-      "offeringName": "general application explanation letter",
-      "offeringSlug": "general-application-explanation-letter",
+      "id": "complete-approvalprep-bundle__employment-verification-letter-for-your-employer-to-sign",
+      "offeringName": "employment verification letter (for your employer to sign)",
+      "offeringSlug": "employment-verification-letter-for-your-employer-to-sign",
       "productSku": "complete-approvalprep-bundle",
       "productName": "Complete ApprovalPrep Bundle",
       "priceLabel": "$49",
       "deliveryModel": "direct_paid_download",
       "studioRequired": false,
-      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__general-application-explanation-letter.md",
+      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__employment-verification-letter-for-your-employer-to-sign.md",
       "reviewableAssets": {
         "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
         "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
@@ -3888,63 +4784,7 @@
           "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
         ]
       },
-      "customerSituation": "An application asks you for an explanation and gives you a blank box with no guidance on what belongs in it.",
-      "searchIntent": "general application explanation letter template",
-      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
-      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-      "standard": {
-        "status": "PASS_BY_STRUCTURAL_CONTRACT",
-        "requiredFormats": [
-          "pdf",
-          "docx"
-        ],
-        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
-        "requiredSafetyBoundaries": [
-          "true facts only",
-          "no fake documents",
-          "no third-party contact",
-          "no professional advice",
-          "no approval guarantee"
-        ],
-        "requiredDownloadSections": [
-          "Start Here",
-          "Before You Fill This In",
-          "Step-by-Step Instructions",
-          "Fill-In Template",
-          "Self-Review Checklist",
-          "What to Attach",
-          "What to Do Next",
-          "What ApprovalPrep Does Not Do"
-        ],
-        "firstPageRequires": [
-          "plain-language self-service boundary",
-          "not legal/financial/credit-repair/lending advice",
-          "no third-party contact",
-          "no fake documents",
-          "no promises or guarantees"
-        ]
-      },
-      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
-    },
-    {
-      "id": "complete-approvalprep-bundle__employment-verification-letter",
-      "offeringName": "employment verification letter",
-      "offeringSlug": "employment-verification-letter",
-      "productSku": "complete-approvalprep-bundle",
-      "productName": "Complete ApprovalPrep Bundle",
-      "priceLabel": "$49",
-      "deliveryModel": "direct_paid_download",
-      "studioRequired": false,
-      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__employment-verification-letter.md",
-      "reviewableAssets": {
-        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
-        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
-        "r2Keys": [
-          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
-          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
-        ]
-      },
-      "customerSituation": "Someone needs written confirmation of where you work, in what role, and since when.",
+      "customerSituation": "Someone needs written confirmation of where you work. This letter is written for your employer to sign.",
       "searchIntent": "employment verification letter template",
       "ctaLabel": "Use the Complete ApprovalPrep Bundle",
       "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
@@ -4151,342 +4991,6 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
-      "id": "complete-approvalprep-bundle__gap-in-employment-letter",
-      "offeringName": "gap in employment letter",
-      "offeringSlug": "gap-in-employment-letter",
-      "productSku": "complete-approvalprep-bundle",
-      "productName": "Complete ApprovalPrep Bundle",
-      "priceLabel": "$49",
-      "deliveryModel": "direct_paid_download",
-      "studioRequired": false,
-      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__gap-in-employment-letter.md",
-      "reviewableAssets": {
-        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
-        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
-        "r2Keys": [
-          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
-          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
-        ]
-      },
-      "customerSituation": "You were out of work for a period and need to say what you were doing during it.",
-      "searchIntent": "gap in employment letter template",
-      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
-      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-      "standard": {
-        "status": "PASS_BY_STRUCTURAL_CONTRACT",
-        "requiredFormats": [
-          "pdf",
-          "docx"
-        ],
-        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
-        "requiredSafetyBoundaries": [
-          "true facts only",
-          "no fake documents",
-          "no third-party contact",
-          "no professional advice",
-          "no approval guarantee"
-        ],
-        "requiredDownloadSections": [
-          "Start Here",
-          "Before You Fill This In",
-          "Step-by-Step Instructions",
-          "Fill-In Template",
-          "Self-Review Checklist",
-          "What to Attach",
-          "What to Do Next",
-          "What ApprovalPrep Does Not Do"
-        ],
-        "firstPageRequires": [
-          "plain-language self-service boundary",
-          "not legal/financial/credit-repair/lending advice",
-          "no third-party contact",
-          "no fake documents",
-          "no promises or guarantees"
-        ]
-      },
-      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
-    },
-    {
-      "id": "complete-approvalprep-bundle__credit-dispute-letter",
-      "offeringName": "credit dispute letter",
-      "offeringSlug": "credit-dispute-letter",
-      "productSku": "complete-approvalprep-bundle",
-      "productName": "Complete ApprovalPrep Bundle",
-      "priceLabel": "$49",
-      "deliveryModel": "direct_paid_download",
-      "studioRequired": false,
-      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__credit-dispute-letter.md",
-      "reviewableAssets": {
-        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
-        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
-        "r2Keys": [
-          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
-          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
-        ]
-      },
-      "customerSituation": "You found an entry on your credit report you believe is wrong and want to challenge it in writing.",
-      "searchIntent": "credit dispute letter template",
-      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
-      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-      "standard": {
-        "status": "PASS_BY_STRUCTURAL_CONTRACT",
-        "requiredFormats": [
-          "pdf",
-          "docx"
-        ],
-        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
-        "requiredSafetyBoundaries": [
-          "true facts only",
-          "no fake documents",
-          "no third-party contact",
-          "no professional advice",
-          "no approval guarantee"
-        ],
-        "requiredDownloadSections": [
-          "Start Here",
-          "Before You Fill This In",
-          "Step-by-Step Instructions",
-          "Fill-In Template",
-          "Self-Review Checklist",
-          "What to Attach",
-          "What to Do Next",
-          "What ApprovalPrep Does Not Do"
-        ],
-        "firstPageRequires": [
-          "plain-language self-service boundary",
-          "not legal/financial/credit-repair/lending advice",
-          "no third-party contact",
-          "no fake documents",
-          "no promises or guarantees"
-        ]
-      },
-      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
-    },
-    {
-      "id": "complete-approvalprep-bundle__goodwill-letter",
-      "offeringName": "goodwill letter",
-      "offeringSlug": "goodwill-letter",
-      "productSku": "complete-approvalprep-bundle",
-      "productName": "Complete ApprovalPrep Bundle",
-      "priceLabel": "$49",
-      "deliveryModel": "direct_paid_download",
-      "studioRequired": false,
-      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__goodwill-letter.md",
-      "reviewableAssets": {
-        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
-        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
-        "r2Keys": [
-          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
-          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
-        ]
-      },
-      "customerSituation": "You paid late once, the account is current now, and you want to ask the creditor to reconsider the mark.",
-      "searchIntent": "goodwill letter template",
-      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
-      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-      "standard": {
-        "status": "PASS_BY_STRUCTURAL_CONTRACT",
-        "requiredFormats": [
-          "pdf",
-          "docx"
-        ],
-        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
-        "requiredSafetyBoundaries": [
-          "true facts only",
-          "no fake documents",
-          "no third-party contact",
-          "no professional advice",
-          "no approval guarantee"
-        ],
-        "requiredDownloadSections": [
-          "Start Here",
-          "Before You Fill This In",
-          "Step-by-Step Instructions",
-          "Fill-In Template",
-          "Self-Review Checklist",
-          "What to Attach",
-          "What to Do Next",
-          "What ApprovalPrep Does Not Do"
-        ],
-        "firstPageRequires": [
-          "plain-language self-service boundary",
-          "not legal/financial/credit-repair/lending advice",
-          "no third-party contact",
-          "no fake documents",
-          "no promises or guarantees"
-        ]
-      },
-      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
-    },
-    {
-      "id": "complete-approvalprep-bundle__debt-validation-letter",
-      "offeringName": "debt validation letter",
-      "offeringSlug": "debt-validation-letter",
-      "productSku": "complete-approvalprep-bundle",
-      "productName": "Complete ApprovalPrep Bundle",
-      "priceLabel": "$49",
-      "deliveryModel": "direct_paid_download",
-      "studioRequired": false,
-      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__debt-validation-letter.md",
-      "reviewableAssets": {
-        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
-        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
-        "r2Keys": [
-          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
-          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
-        ]
-      },
-      "customerSituation": "A collector has contacted you about a debt, and you want it documented as yours before you go further.",
-      "searchIntent": "debt validation letter template",
-      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
-      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-      "standard": {
-        "status": "PASS_BY_STRUCTURAL_CONTRACT",
-        "requiredFormats": [
-          "pdf",
-          "docx"
-        ],
-        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
-        "requiredSafetyBoundaries": [
-          "true facts only",
-          "no fake documents",
-          "no third-party contact",
-          "no professional advice",
-          "no approval guarantee"
-        ],
-        "requiredDownloadSections": [
-          "Start Here",
-          "Before You Fill This In",
-          "Step-by-Step Instructions",
-          "Fill-In Template",
-          "Self-Review Checklist",
-          "What to Attach",
-          "What to Do Next",
-          "What ApprovalPrep Does Not Do"
-        ],
-        "firstPageRequires": [
-          "plain-language self-service boundary",
-          "not legal/financial/credit-repair/lending advice",
-          "no third-party contact",
-          "no fake documents",
-          "no promises or guarantees"
-        ]
-      },
-      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
-    },
-    {
-      "id": "complete-approvalprep-bundle__credit-report-error-checklist",
-      "offeringName": "credit report error checklist",
-      "offeringSlug": "credit-report-error-checklist",
-      "productSku": "complete-approvalprep-bundle",
-      "productName": "Complete ApprovalPrep Bundle",
-      "priceLabel": "$49",
-      "deliveryModel": "direct_paid_download",
-      "studioRequired": false,
-      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__credit-report-error-checklist.md",
-      "reviewableAssets": {
-        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
-        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
-        "r2Keys": [
-          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
-          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
-        ]
-      },
-      "customerSituation": "You are reading your credit report line by line and need a way to track everything that looks wrong.",
-      "searchIntent": "credit report error checklist template",
-      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
-      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-      "standard": {
-        "status": "PASS_BY_STRUCTURAL_CONTRACT",
-        "requiredFormats": [
-          "pdf",
-          "docx"
-        ],
-        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
-        "requiredSafetyBoundaries": [
-          "true facts only",
-          "no fake documents",
-          "no third-party contact",
-          "no professional advice",
-          "no approval guarantee"
-        ],
-        "requiredDownloadSections": [
-          "Start Here",
-          "Before You Fill This In",
-          "Step-by-Step Instructions",
-          "Fill-In Template",
-          "Self-Review Checklist",
-          "What to Attach",
-          "What to Do Next",
-          "What ApprovalPrep Does Not Do"
-        ],
-        "firstPageRequires": [
-          "plain-language self-service boundary",
-          "not legal/financial/credit-repair/lending advice",
-          "no third-party contact",
-          "no fake documents",
-          "no promises or guarantees"
-        ]
-      },
-      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
-    },
-    {
-      "id": "complete-approvalprep-bundle__credit-bureau-follow-up-letter",
-      "offeringName": "credit bureau follow-up letter",
-      "offeringSlug": "credit-bureau-follow-up-letter",
-      "productSku": "complete-approvalprep-bundle",
-      "productName": "Complete ApprovalPrep Bundle",
-      "priceLabel": "$49",
-      "deliveryModel": "direct_paid_download",
-      "studioRequired": false,
-      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__credit-bureau-follow-up-letter.md",
-      "reviewableAssets": {
-        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
-        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
-        "r2Keys": [
-          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
-          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
-        ]
-      },
-      "customerSituation": "You filed a dispute, the waiting period has passed, and you need to follow up with a record of it.",
-      "searchIntent": "credit bureau follow-up letter template",
-      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
-      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-      "standard": {
-        "status": "PASS_BY_STRUCTURAL_CONTRACT",
-        "requiredFormats": [
-          "pdf",
-          "docx"
-        ],
-        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
-        "requiredSafetyBoundaries": [
-          "true facts only",
-          "no fake documents",
-          "no third-party contact",
-          "no professional advice",
-          "no approval guarantee"
-        ],
-        "requiredDownloadSections": [
-          "Start Here",
-          "Before You Fill This In",
-          "Step-by-Step Instructions",
-          "Fill-In Template",
-          "Self-Review Checklist",
-          "What to Attach",
-          "What to Do Next",
-          "What ApprovalPrep Does Not Do"
-        ],
-        "firstPageRequires": [
-          "plain-language self-service boundary",
-          "not legal/financial/credit-repair/lending advice",
-          "no third-party contact",
-          "no fake documents",
-          "no promises or guarantees"
-        ]
-      },
-      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
-    },
-    {
       "id": "complete-approvalprep-bundle__apartment-application-checklist",
       "offeringName": "apartment application checklist",
       "offeringSlug": "apartment-application-checklist",
@@ -4506,6 +5010,118 @@
       },
       "customerSituation": "You are applying for an apartment and want every item the landlord asks for ready before you hand it in.",
       "searchIntent": "apartment application checklist template",
+      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+      "standard": {
+        "status": "PASS_BY_STRUCTURAL_CONTRACT",
+        "requiredFormats": [
+          "pdf",
+          "docx"
+        ],
+        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
+        "requiredSafetyBoundaries": [
+          "true facts only",
+          "no fake documents",
+          "no third-party contact",
+          "no professional advice",
+          "no approval guarantee"
+        ],
+        "requiredDownloadSections": [
+          "Start Here",
+          "Before You Fill This In",
+          "Step-by-Step Instructions",
+          "Fill-In Template",
+          "Self-Review Checklist",
+          "What to Attach",
+          "What to Do Next",
+          "What ApprovalPrep Does Not Do"
+        ],
+        "firstPageRequires": [
+          "plain-language self-service boundary",
+          "not legal/financial/credit-repair/lending advice",
+          "no third-party contact",
+          "no fake documents",
+          "no promises or guarantees"
+        ]
+      },
+      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
+    },
+    {
+      "id": "complete-approvalprep-bundle__proof-of-income-checklist",
+      "offeringName": "proof of income checklist",
+      "offeringSlug": "proof-of-income-checklist",
+      "productSku": "complete-approvalprep-bundle",
+      "productName": "Complete ApprovalPrep Bundle",
+      "priceLabel": "$49",
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__proof-of-income-checklist.md",
+      "reviewableAssets": {
+        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
+        "r2Keys": [
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
+        ]
+      },
+      "customerSituation": "You have been asked to prove your income and are not certain which documents actually count.",
+      "searchIntent": "proof of income checklist template",
+      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+      "standard": {
+        "status": "PASS_BY_STRUCTURAL_CONTRACT",
+        "requiredFormats": [
+          "pdf",
+          "docx"
+        ],
+        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
+        "requiredSafetyBoundaries": [
+          "true facts only",
+          "no fake documents",
+          "no third-party contact",
+          "no professional advice",
+          "no approval guarantee"
+        ],
+        "requiredDownloadSections": [
+          "Start Here",
+          "Before You Fill This In",
+          "Step-by-Step Instructions",
+          "Fill-In Template",
+          "Self-Review Checklist",
+          "What to Attach",
+          "What to Do Next",
+          "What ApprovalPrep Does Not Do"
+        ],
+        "firstPageRequires": [
+          "plain-language self-service boundary",
+          "not legal/financial/credit-repair/lending advice",
+          "no third-party contact",
+          "no fake documents",
+          "no promises or guarantees"
+        ]
+      },
+      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
+    },
+    {
+      "id": "complete-approvalprep-bundle__renter-document-packet-cover-sheet-and-order",
+      "offeringName": "renter document packet: cover sheet and order",
+      "offeringSlug": "renter-document-packet-cover-sheet-and-order",
+      "productSku": "complete-approvalprep-bundle",
+      "productName": "Complete ApprovalPrep Bundle",
+      "priceLabel": "$49",
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__renter-document-packet-cover-sheet-and-order.md",
+      "reviewableAssets": {
+        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
+        "r2Keys": [
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
+        ]
+      },
+      "customerSituation": "You are applying for several places at once and want one organized packet to send each time.",
+      "searchIntent": "renter document packet template",
       "ctaLabel": "Use the Complete ApprovalPrep Bundle",
       "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
       "standard": {
@@ -4711,15 +5327,15 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
-      "id": "complete-approvalprep-bundle__employment-verification-request",
-      "offeringName": "employment verification request",
-      "offeringSlug": "employment-verification-request",
+      "id": "complete-approvalprep-bundle__employment-verification-request-to-your-employer",
+      "offeringName": "employment verification request (to your employer)",
+      "offeringSlug": "employment-verification-request-to-your-employer",
       "productSku": "complete-approvalprep-bundle",
       "productName": "Complete ApprovalPrep Bundle",
       "priceLabel": "$49",
       "deliveryModel": "direct_paid_download",
       "studioRequired": false,
-      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__employment-verification-request.md",
+      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__employment-verification-request-to-your-employer.md",
       "reviewableAssets": {
         "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
         "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
@@ -4730,62 +5346,6 @@
       },
       "customerSituation": "You need to ask your employer, in writing, for the confirmation letter a reviewer has requested.",
       "searchIntent": "employment verification request template",
-      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
-      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-      "standard": {
-        "status": "PASS_BY_STRUCTURAL_CONTRACT",
-        "requiredFormats": [
-          "pdf",
-          "docx"
-        ],
-        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
-        "requiredSafetyBoundaries": [
-          "true facts only",
-          "no fake documents",
-          "no third-party contact",
-          "no professional advice",
-          "no approval guarantee"
-        ],
-        "requiredDownloadSections": [
-          "Start Here",
-          "Before You Fill This In",
-          "Step-by-Step Instructions",
-          "Fill-In Template",
-          "Self-Review Checklist",
-          "What to Attach",
-          "What to Do Next",
-          "What ApprovalPrep Does Not Do"
-        ],
-        "firstPageRequires": [
-          "plain-language self-service boundary",
-          "not legal/financial/credit-repair/lending advice",
-          "no third-party contact",
-          "no fake documents",
-          "no promises or guarantees"
-        ]
-      },
-      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
-    },
-    {
-      "id": "complete-approvalprep-bundle__proof-of-income-checklist",
-      "offeringName": "proof of income checklist",
-      "offeringSlug": "proof-of-income-checklist",
-      "productSku": "complete-approvalprep-bundle",
-      "productName": "Complete ApprovalPrep Bundle",
-      "priceLabel": "$49",
-      "deliveryModel": "direct_paid_download",
-      "studioRequired": false,
-      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__proof-of-income-checklist.md",
-      "reviewableAssets": {
-        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
-        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
-        "r2Keys": [
-          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
-          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
-        ]
-      },
-      "customerSituation": "You have been asked to prove your income and are not certain which documents actually count.",
-      "searchIntent": "proof of income checklist template",
       "ctaLabel": "Use the Complete ApprovalPrep Bundle",
       "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
       "standard": {
@@ -4935,62 +5495,6 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
-      "id": "complete-approvalprep-bundle__renter-document-packet",
-      "offeringName": "renter document packet",
-      "offeringSlug": "renter-document-packet",
-      "productSku": "complete-approvalprep-bundle",
-      "productName": "Complete ApprovalPrep Bundle",
-      "priceLabel": "$49",
-      "deliveryModel": "direct_paid_download",
-      "studioRequired": false,
-      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__renter-document-packet.md",
-      "reviewableAssets": {
-        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
-        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
-        "r2Keys": [
-          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
-          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
-        ]
-      },
-      "customerSituation": "You are applying for several places at once and want one organized packet to send each time.",
-      "searchIntent": "renter document packet template",
-      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
-      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
-      "standard": {
-        "status": "PASS_BY_STRUCTURAL_CONTRACT",
-        "requiredFormats": [
-          "pdf",
-          "docx"
-        ],
-        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
-        "requiredSafetyBoundaries": [
-          "true facts only",
-          "no fake documents",
-          "no third-party contact",
-          "no professional advice",
-          "no approval guarantee"
-        ],
-        "requiredDownloadSections": [
-          "Start Here",
-          "Before You Fill This In",
-          "Step-by-Step Instructions",
-          "Fill-In Template",
-          "Self-Review Checklist",
-          "What to Attach",
-          "What to Do Next",
-          "What ApprovalPrep Does Not Do"
-        ],
-        "firstPageRequires": [
-          "plain-language self-service boundary",
-          "not legal/financial/credit-repair/lending advice",
-          "no third-party contact",
-          "no fake documents",
-          "no promises or guarantees"
-        ]
-      },
-      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
-    },
-    {
       "id": "complete-approvalprep-bundle__auto-loan-explanation-letter",
       "offeringName": "auto loan explanation letter",
       "offeringSlug": "auto-loan-explanation-letter",
@@ -5047,15 +5551,15 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
-      "id": "complete-approvalprep-bundle__mortgage-explanation-letter",
-      "offeringName": "mortgage explanation letter",
-      "offeringSlug": "mortgage-explanation-letter",
+      "id": "complete-approvalprep-bundle__mortgage-explanation-letter-credit-inquiries-and-new-accounts",
+      "offeringName": "mortgage explanation letter (credit inquiries and new accounts)",
+      "offeringSlug": "mortgage-explanation-letter-credit-inquiries-and-new-accounts",
       "productSku": "complete-approvalprep-bundle",
       "productName": "Complete ApprovalPrep Bundle",
       "priceLabel": "$49",
       "deliveryModel": "direct_paid_download",
       "studioRequired": false,
-      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__mortgage-explanation-letter.md",
+      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__mortgage-explanation-letter-credit-inquiries-and-new-accounts.md",
       "reviewableAssets": {
         "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
         "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
@@ -5064,7 +5568,7 @@
           "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
         ]
       },
-      "customerSituation": "Your mortgage underwriter has issued a condition asking you to explain something in writing.",
+      "customerSituation": "A mortgage lender asked you to explain recent credit inquiries or new accounts.",
       "searchIntent": "mortgage explanation letter template",
       "ctaLabel": "Use the Complete ApprovalPrep Bundle",
       "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
@@ -5159,15 +5663,15 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
-      "id": "complete-approvalprep-bundle__income-explanation-letter",
-      "offeringName": "income explanation letter",
-      "offeringSlug": "income-explanation-letter",
+      "id": "complete-approvalprep-bundle__income-explanation-letter-variable-or-changed-income",
+      "offeringName": "income explanation letter (variable or changed income)",
+      "offeringSlug": "income-explanation-letter-variable-or-changed-income",
       "productSku": "complete-approvalprep-bundle",
       "productName": "Complete ApprovalPrep Bundle",
       "priceLabel": "$49",
       "deliveryModel": "direct_paid_download",
       "studioRequired": false,
-      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__income-explanation-letter.md",
+      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__income-explanation-letter-variable-or-changed-income.md",
       "reviewableAssets": {
         "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
         "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
@@ -5383,6 +5887,62 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
+      "id": "complete-approvalprep-bundle__use-of-funds-explanation",
+      "offeringName": "use of funds explanation",
+      "offeringSlug": "use-of-funds-explanation",
+      "productSku": "complete-approvalprep-bundle",
+      "productName": "Complete ApprovalPrep Bundle",
+      "priceLabel": "$49",
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__use-of-funds-explanation.md",
+      "reviewableAssets": {
+        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
+        "r2Keys": [
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
+        ]
+      },
+      "customerSituation": "A lender wants to know exactly what you intend to do with the money.",
+      "searchIntent": "use of funds explanation template",
+      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+      "standard": {
+        "status": "PASS_BY_STRUCTURAL_CONTRACT",
+        "requiredFormats": [
+          "pdf",
+          "docx"
+        ],
+        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
+        "requiredSafetyBoundaries": [
+          "true facts only",
+          "no fake documents",
+          "no third-party contact",
+          "no professional advice",
+          "no approval guarantee"
+        ],
+        "requiredDownloadSections": [
+          "Start Here",
+          "Before You Fill This In",
+          "Step-by-Step Instructions",
+          "Fill-In Template",
+          "Self-Review Checklist",
+          "What to Attach",
+          "What to Do Next",
+          "What ApprovalPrep Does Not Do"
+        ],
+        "firstPageRequires": [
+          "plain-language self-service boundary",
+          "not legal/financial/credit-repair/lending advice",
+          "no third-party contact",
+          "no fake documents",
+          "no promises or guarantees"
+        ]
+      },
+      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
+    },
+    {
       "id": "complete-approvalprep-bundle__sba-document-checklist",
       "offeringName": "SBA document checklist",
       "offeringSlug": "sba-document-checklist",
@@ -5551,15 +6111,15 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
-      "id": "complete-approvalprep-bundle__bank-statement-explanation",
-      "offeringName": "bank statement explanation",
-      "offeringSlug": "bank-statement-explanation",
+      "id": "complete-approvalprep-bundle__bank-statement-explanation-business-account",
+      "offeringName": "bank statement explanation (business account)",
+      "offeringSlug": "bank-statement-explanation-business-account",
       "productSku": "complete-approvalprep-bundle",
       "productName": "Complete ApprovalPrep Bundle",
       "priceLabel": "$49",
       "deliveryModel": "direct_paid_download",
       "studioRequired": false,
-      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__bank-statement-explanation.md",
+      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__bank-statement-explanation-business-account.md",
       "reviewableAssets": {
         "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
         "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
@@ -5663,15 +6223,15 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
-      "id": "complete-approvalprep-bundle__use-of-funds-explanation",
-      "offeringName": "use of funds explanation",
-      "offeringSlug": "use-of-funds-explanation",
+      "id": "complete-approvalprep-bundle__lender-follow-up-letter-business-application",
+      "offeringName": "lender follow-up letter (business application)",
+      "offeringSlug": "lender-follow-up-letter-business-application",
       "productSku": "complete-approvalprep-bundle",
       "productName": "Complete ApprovalPrep Bundle",
       "priceLabel": "$49",
       "deliveryModel": "direct_paid_download",
       "studioRequired": false,
-      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__use-of-funds-explanation.md",
+      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__lender-follow-up-letter-business-application.md",
       "reviewableAssets": {
         "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
         "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
@@ -5680,8 +6240,8 @@
           "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
         ]
       },
-      "customerSituation": "A lender wants to know exactly what you intend to do with the money.",
-      "searchIntent": "use of funds explanation template",
+      "customerSituation": "You sent the lender what they asked for and need a written nudge about where things stand.",
+      "searchIntent": "lender follow-up letter template",
       "ctaLabel": "Use the Complete ApprovalPrep Bundle",
       "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
       "standard": {
@@ -5775,15 +6335,15 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
-      "id": "complete-approvalprep-bundle__proof-of-residency-letter",
-      "offeringName": "proof of residency letter",
-      "offeringSlug": "proof-of-residency-letter",
+      "id": "complete-approvalprep-bundle__proof-of-residency-letter-signed-by-the-person-you-live-with",
+      "offeringName": "proof of residency letter (signed by the person you live with)",
+      "offeringSlug": "proof-of-residency-letter-signed-by-the-person-you-live-with",
       "productSku": "complete-approvalprep-bundle",
       "productName": "Complete ApprovalPrep Bundle",
       "priceLabel": "$49",
       "deliveryModel": "direct_paid_download",
       "studioRequired": false,
-      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__proof-of-residency-letter.md",
+      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__proof-of-residency-letter-signed-by-the-person-you-live-with.md",
       "reviewableAssets": {
         "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
         "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
@@ -5792,7 +6352,7 @@
           "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
         ]
       },
-      "customerSituation": "A school, agency or office has asked you to prove that you live where you say you live.",
+      "customerSituation": "An office needs the person you live with to confirm in writing that you live there. This letter is written for that person to sign.",
       "searchIntent": "proof of residency letter template",
       "ctaLabel": "Use the Complete ApprovalPrep Bundle",
       "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
@@ -5999,6 +6559,62 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
+      "id": "complete-approvalprep-bundle__general-records-request-letter",
+      "offeringName": "general records request letter",
+      "offeringSlug": "general-records-request-letter",
+      "productSku": "complete-approvalprep-bundle",
+      "productName": "Complete ApprovalPrep Bundle",
+      "priceLabel": "$49",
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__general-records-request-letter.md",
+      "reviewableAssets": {
+        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
+        "r2Keys": [
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
+        ]
+      },
+      "customerSituation": "You need a copy of your own records from an organization and want to ask properly the first time.",
+      "searchIntent": "general records request letter template",
+      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+      "standard": {
+        "status": "PASS_BY_STRUCTURAL_CONTRACT",
+        "requiredFormats": [
+          "pdf",
+          "docx"
+        ],
+        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
+        "requiredSafetyBoundaries": [
+          "true facts only",
+          "no fake documents",
+          "no third-party contact",
+          "no professional advice",
+          "no approval guarantee"
+        ],
+        "requiredDownloadSections": [
+          "Start Here",
+          "Before You Fill This In",
+          "Step-by-Step Instructions",
+          "Fill-In Template",
+          "Self-Review Checklist",
+          "What to Attach",
+          "What to Do Next",
+          "What ApprovalPrep Does Not Do"
+        ],
+        "firstPageRequires": [
+          "plain-language self-service boundary",
+          "not legal/financial/credit-repair/lending advice",
+          "no third-party contact",
+          "no fake documents",
+          "no promises or guarantees"
+        ]
+      },
+      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
+    },
+    {
       "id": "complete-approvalprep-bundle__benefits-explanation-letter",
       "offeringName": "benefits explanation letter",
       "offeringSlug": "benefits-explanation-letter",
@@ -6111,15 +6727,15 @@
       "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
     },
     {
-      "id": "complete-approvalprep-bundle__general-records-request-letter",
-      "offeringName": "general records request letter",
-      "offeringSlug": "general-records-request-letter",
+      "id": "complete-approvalprep-bundle__mailing-and-record-log",
+      "offeringName": "mailing and record log",
+      "offeringSlug": "mailing-and-record-log",
       "productSku": "complete-approvalprep-bundle",
       "productName": "Complete ApprovalPrep Bundle",
       "priceLabel": "$49",
       "deliveryModel": "direct_paid_download",
       "studioRequired": false,
-      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__general-records-request-letter.md",
+      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__mailing-and-record-log.md",
       "reviewableAssets": {
         "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
         "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
@@ -6128,8 +6744,176 @@
           "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
         ]
       },
-      "customerSituation": "You need a copy of your own records from an organization and want to ask properly the first time.",
-      "searchIntent": "general records request letter template",
+      "customerSituation": "You want one page that records what you sent, when, and what came back.",
+      "searchIntent": "credit dispute mailing log",
+      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+      "standard": {
+        "status": "PASS_BY_STRUCTURAL_CONTRACT",
+        "requiredFormats": [
+          "pdf",
+          "docx"
+        ],
+        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
+        "requiredSafetyBoundaries": [
+          "true facts only",
+          "no fake documents",
+          "no third-party contact",
+          "no professional advice",
+          "no approval guarantee"
+        ],
+        "requiredDownloadSections": [
+          "Start Here",
+          "Before You Fill This In",
+          "Step-by-Step Instructions",
+          "Fill-In Template",
+          "Self-Review Checklist",
+          "What to Attach",
+          "What to Do Next",
+          "What ApprovalPrep Does Not Do"
+        ],
+        "firstPageRequires": [
+          "plain-language self-service boundary",
+          "not legal/financial/credit-repair/lending advice",
+          "no third-party contact",
+          "no fake documents",
+          "no promises or guarantees"
+        ]
+      },
+      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
+    },
+    {
+      "id": "complete-approvalprep-bundle__sent-and-received-log",
+      "offeringName": "sent and received log",
+      "offeringSlug": "sent-and-received-log",
+      "productSku": "complete-approvalprep-bundle",
+      "productName": "Complete ApprovalPrep Bundle",
+      "priceLabel": "$49",
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__sent-and-received-log.md",
+      "reviewableAssets": {
+        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
+        "r2Keys": [
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
+        ]
+      },
+      "customerSituation": "You want one page that records what you sent, to whom, when, and what came back.",
+      "searchIntent": "sent and received log for letters",
+      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+      "standard": {
+        "status": "PASS_BY_STRUCTURAL_CONTRACT",
+        "requiredFormats": [
+          "pdf",
+          "docx"
+        ],
+        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
+        "requiredSafetyBoundaries": [
+          "true facts only",
+          "no fake documents",
+          "no third-party contact",
+          "no professional advice",
+          "no approval guarantee"
+        ],
+        "requiredDownloadSections": [
+          "Start Here",
+          "Before You Fill This In",
+          "Step-by-Step Instructions",
+          "Fill-In Template",
+          "Self-Review Checklist",
+          "What to Attach",
+          "What to Do Next",
+          "What ApprovalPrep Does Not Do"
+        ],
+        "firstPageRequires": [
+          "plain-language self-service boundary",
+          "not legal/financial/credit-repair/lending advice",
+          "no third-party contact",
+          "no fake documents",
+          "no promises or guarantees"
+        ]
+      },
+      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
+    },
+    {
+      "id": "complete-approvalprep-bundle__credit-dispute-letter",
+      "offeringName": "credit dispute letter",
+      "offeringSlug": "credit-dispute-letter",
+      "productSku": "complete-approvalprep-bundle",
+      "productName": "Complete ApprovalPrep Bundle",
+      "priceLabel": "$49",
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__credit-dispute-letter.md",
+      "reviewableAssets": {
+        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
+        "r2Keys": [
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
+        ]
+      },
+      "customerSituation": "You found an error on a credit report and want the first letter to the bureau.",
+      "searchIntent": "credit dispute letter template",
+      "ctaLabel": "Use the Complete ApprovalPrep Bundle",
+      "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
+      "standard": {
+        "status": "PASS_BY_STRUCTURAL_CONTRACT",
+        "requiredFormats": [
+          "pdf",
+          "docx"
+        ],
+        "requiredCustomerValue": "The offering must map to a named self-service customer situation and a concrete paid kit.",
+        "requiredSafetyBoundaries": [
+          "true facts only",
+          "no fake documents",
+          "no third-party contact",
+          "no professional advice",
+          "no approval guarantee"
+        ],
+        "requiredDownloadSections": [
+          "Start Here",
+          "Before You Fill This In",
+          "Step-by-Step Instructions",
+          "Fill-In Template",
+          "Self-Review Checklist",
+          "What to Attach",
+          "What to Do Next",
+          "What ApprovalPrep Does Not Do"
+        ],
+        "firstPageRequires": [
+          "plain-language self-service boundary",
+          "not legal/financial/credit-repair/lending advice",
+          "no third-party contact",
+          "no fake documents",
+          "no promises or guarantees"
+        ]
+      },
+      "proofBoundary": "This contract proves catalog, docs, asset, direct-download model, and boundary coverage. It does not prove a human has manually reviewed every word inside the generated PDF/DOCX after each future edit."
+    },
+    {
+      "id": "complete-approvalprep-bundle__general-application-explanation-letter",
+      "offeringName": "general application explanation letter",
+      "offeringSlug": "general-application-explanation-letter",
+      "productSku": "complete-approvalprep-bundle",
+      "productName": "Complete ApprovalPrep Bundle",
+      "priceLabel": "$49",
+      "deliveryModel": "direct_paid_download",
+      "studioRequired": false,
+      "reviewDoc": "docs/offerings/complete-approvalprep-bundle__general-application-explanation-letter.md",
+      "reviewableAssets": {
+        "pdf": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+        "docx": "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx",
+        "r2Keys": [
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf",
+          "products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx"
+        ]
+      },
+      "customerSituation": "An application asks you for an explanation and gives you a blank box with no guidance on what belongs in it.",
+      "searchIntent": "general application explanation letter template",
       "ctaLabel": "Use the Complete ApprovalPrep Bundle",
       "riskBoundary": "Use true facts only. ApprovalPrep does not create fake documents, contact third parties, or promise approval.",
       "standard": {

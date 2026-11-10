@@ -43,7 +43,7 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: credit dispute letter template
+- Search intent: credit dispute mailing log
 - CTA label: Use the Credit Letter Kit
 - Customer situation: You want one page that records what you sent, when, and what came back.
 

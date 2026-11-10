@@ -1,6 +1,6 @@
-# Gap In Employment Letter
+# Proof of residency letter (signed by the person you live with)
 
-**Offering ID:** `complete-approvalprep-bundle__gap-in-employment-letter`  
+**Offering ID:** `complete-approvalprep-bundle__proof-of-residency-letter-signed-by-the-person-you-live-with`  
 **Bundled product:** Complete ApprovalPrep Bundle (`complete-approvalprep-bundle`)  
 **Price:** $49  
 **Delivery model:** Direct paid download; Studio not required  
@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-You were out of work for a period and need to say what you were doing during it.
+An office needs the person you live with to confirm in writing that you live there. This letter is written for that person to sign.
 
 ## How Purchase Works
 
@@ -43,9 +43,9 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: gap in employment letter template
+- Search intent: proof of residency letter template
 - CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: You were out of work for a period and need to say what you were doing during it.
+- Customer situation: An office needs the person you live with to confirm in writing that you live there. This letter is written for that person to sign.
 
 ## Safety Boundary
 

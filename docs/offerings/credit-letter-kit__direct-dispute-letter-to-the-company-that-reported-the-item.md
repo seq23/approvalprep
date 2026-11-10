@@ -43,7 +43,7 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: credit dispute letter template
+- Search intent: dispute letter to creditor that reported the item
 - CTA label: Use the Credit Letter Kit
 - Customer situation: You want to send your proof to the company that reported the item.
 

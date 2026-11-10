@@ -1,6 +1,6 @@
-# Employment Verification Letter
+# Employment verification letter (for your employer to sign)
 
-**Offering ID:** `complete-approvalprep-bundle__employment-verification-letter`  
+**Offering ID:** `complete-approvalprep-bundle__employment-verification-letter-for-your-employer-to-sign`  
 **Bundled product:** Complete ApprovalPrep Bundle (`complete-approvalprep-bundle`)  
 **Price:** $49  
 **Delivery model:** Direct paid download; Studio not required  
@@ -8,7 +8,7 @@
 
 ## What This Offering Is
 
-Someone needs written confirmation of where you work, in what role, and since when.
+Someone needs written confirmation of where you work. This letter is written for your employer to sign.
 
 ## How Purchase Works
 
@@ -45,7 +45,7 @@ First-page boundary requirements:
 
 - Search intent: employment verification letter template
 - CTA label: Use the Complete ApprovalPrep Bundle
-- Customer situation: Someone needs written confirmation of where you work, in what role, and since when.
+- Customer situation: Someone needs written confirmation of where you work. This letter is written for your employer to sign.
 
 ## Safety Boundary
 

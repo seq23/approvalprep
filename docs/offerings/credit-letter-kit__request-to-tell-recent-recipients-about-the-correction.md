@@ -43,7 +43,7 @@ First-page boundary requirements:
 
 ## Conversion And Search Contract
 
-- Search intent: credit dispute letter template
+- Search intent: notify recipients of credit report correction letter
 - CTA label: Use the Credit Letter Kit
 - Customer situation: The bureau corrected your report and you want it to tell those who recently received the old one.
 
