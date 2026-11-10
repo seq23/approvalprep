@@ -72,6 +72,18 @@ Run `npm run check` in `apps/mobile` after each task; the App preview run must s
    repo; 4 to 6 questions each, one per screen; [brackets] for blanks; answers save as they type.
    Accept: a rendered-letter test per kind; the R-ADV-13 test covers the templates; question
    screens show `HONEST_LIMIT`; pay for delete says "They may say no."
+4b. **The free Letter Studio: the main free draw** (owner, 10 Nov 2026: yes to the website's free
+   product as the app's main attraction, and "make sure the free offering isn't making it not worth
+   buying anything"). The website's Studio on the phone: the same eight situations and openers from
+   `src/data/letterStudio.ts` (import it, never copy), a few prompts, one **first-pass draft** as plain
+   text to copy or share, and under it "What the kit adds ›" for that situation's kit.
+   **The free line, so the kits stay worth buying:** the Studio gives the first pass only, as the
+   website does: no situation-specific letter templates, no examples, no PDF letter sheet, no mark as
+   sent, no tracking, no reminder; those are the kits'. The free dispute letter keeps its PDF (the FTC
+   gives that letter away).
+   Accept: the Studio's situations equal the website's list; a test fails if any free Studio output
+   contains a sentence from a kit template; with no kit, a Studio draft offers copy and share only (no
+   PDF, no mark as sent); each situation's "What the kit adds" names its kit.
 5. **Your letter.** The sheet with the disputed line highlighted; Save as PDF (expo-print); Share or
    print (expo-sharing).
    Accept: a PDF is made and shared in the preview; its footer is the self-help line.
@@ -116,6 +128,17 @@ Run `npm run check` in `apps/mobile` after each task; the App preview run must s
     Accept: a rendered-letter test per kind; the R-ADV-13 and honest-limit tests cover the nine;
     the kits unlock independently (owning one never opens the other's letters); owning either kit
     opens tracking and the reminder; the free dispute letter never locks; Restore brings back both.
+13b. **The Complete ApprovalPrep Bundle in the app** (owner, 10 Nov 2026: "offer the more expensive
+    full bundle on app too"). **`ap_complete_bundle` at $49.99, paid once** (the website sells it for
+    $49): both in-app kits (credit letters and explanation letters, with tracking and reminders) plus
+    every website kit's PDF guide and editable DOCX templates (all 50 documents), downloaded from our
+    server after the store confirms, restorable, like Dream Wedding's printables. **`ap_bundle_upgrade`
+    at $29.99** for anyone who already owns a kit, so nobody pays twice ($19.99 + $29.99 = $49.98).
+    Offers are one pure function `offersFor` (as Dream Wedding): owns nothing → the bundle first
+    (better value), then the kit for the letter tapped; owns one kit → the other kit and the upgrade;
+    owns both kits → the upgrade; owns the bundle → nothing. Same switch and named stop as task 8.
+    Accept: `offersFor` tests for every case; bundle files download only after a confirmed purchase;
+    Restore brings back the bundle and its files; no price string outside `kit.ts` and the mock.
 14. **Scorecard row** in Boss OS (result, day-30 and day-60 floors, version B from the plan page)
     before the first store submission, carrying the price step (owner, 10 Nov 2026): at about 20
     real ratings `ap_credit_kit` goes from $19.99 to $24.99 by a store price change.
