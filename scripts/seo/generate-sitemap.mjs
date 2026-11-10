@@ -19,7 +19,9 @@ for (const route of manifest.routes.filter((route) => route.index && route.type 
 for (const answer of generated.answers.filter((item) => item.status === "published_by_contract")) urls.add(canonicalUrl(`/blog/${slugify(answer.title)}`));
 for (const report of reports.reports.filter((item) => item.status === "published_by_contract")) urls.add(canonicalUrl(report.path));
 // Search loop pages (seq23/search-loop): every live page in its ledger, dated by
-// the day it was published or last strengthened - a per-page date, not a set date.
+// the day its words last changed (published, modified_at - search-loop v1.10.0
+// sets it on every rewrite, refresh included - or strengthened): a per-page date,
+// never a check date (risk rule R-ADV-12).
 const searchLoopBook = fs.existsSync("data/search-loop/pages.json")
   ? JSON.parse(fs.readFileSync("data/search-loop/pages.json", "utf8")).pages || []
   : [];
@@ -27,7 +29,7 @@ const searchLoopDate = new Map();
 for (const page of searchLoopBook.filter((item) => item.status === "live" && fs.existsSync(item.rel))) {
   const url = canonicalUrl(page.route);
   urls.add(url);
-  searchLoopDate.set(url, page.strengthen?.at || page.published_at || "");
+  searchLoopDate.set(url, [page.published_at, page.modified_at, page.strengthen?.at].filter(Boolean).sort().at(-1) || "");
 }
 if (searchLoopDate.size) urls.add(canonicalUrl("/questions/"));
 // /llms.txt, /feed.xml, /content-index.json and friends are still served; they
