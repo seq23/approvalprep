@@ -147,7 +147,7 @@ const builtWithBlock = new Set();
     if (!html.includes("data-boundary-block")) missing.push(clean);
     else { distChecked += 1; builtWithBlock.add(clean); }
   }
-  for (const named of ["/", "/credit-letter-kit", "/letter-writing-studio", "/609-dispute-letter", "/goodwill-letter-credit"]) {
+  for (const named of ["/", "/credit-letter-kit", "/letter-writing-studio", "/609-dispute-letter", "/goodwill-letter-credit", "/the-bureau-answered"]) {
     if (!builtWithBlock.has(named)) throw new Error(`[credit-boundary] R-ADV-13 sweep did not reach ${named}; the credit pages it must cover were not built or were excluded`);
   }
   if (missingRAdv13.length) throw new Error(`[credit-boundary] ${missingRAdv13.length} built page(s) missing the R-ADV-13 line "${R_ADV_13_LINE}": ${missingRAdv13.slice(0, 10).join(", ")}`);
@@ -159,6 +159,32 @@ const builtWithBlock = new Set();
 
 // The credit-generation guardrail prompt keeps the self-service boundary (moved here from
 // plain-language on 1 Nov 2026: a safety guardrail for model output, not a copy rule).
+// The day-30 path (the Studio's dispute letter, its PDF page 2, and "The bureau answered") must
+// read as her own free step, never as a paid round: no repeat-dispute or act-for-you wording, no
+// recurring price, and exactly one paid product, the one-time credit kit.
+{
+  const core = await import("../../src/lib/letterStudioCore.mjs");
+  const text = (html) => html.replace(/<script\b[\s\S]*?<\/script>|<style\b[\s\S]*?<\/style>/gi, " ").replace(/<[^>]+>/g, " ");
+  const main = (file) => { const html = fs.readFileSync(path.join(DIST, file), "utf8"); return html.slice(html.indexOf("<main"), html.indexOf("</main>")); };
+  const answered = main("the-bureau-answered/index.html");
+  const studio = main("letter-writing-studio/index.html");
+  const pdfPage2 = [...core.BEFORE_YOU_MAIL, core.ANSWER_WINDOW.text].join(" ");
+  const banned = /round\s*(2|two)|next round|another round|keep disputing|until it is removed|until it(?:'|’)s removed|we follow up|we(?:'|’)ll follow up|on your behalf|subscription|per month|\/month|monthly plan|\\bper letter|\\bper round|guarantee/i;
+  for (const [name, body] of [["/the-bureau-answered", text(answered)], ["the Studio dispute path", text(studio.slice(studio.indexOf("data-letter-studio")))], ["the dispute PDF page 2", pdfPage2]]) {
+    const hit = body.match(banned);
+    if (hit) throw new Error(`[credit-boundary] ${name} reads as a paid round or a service: "${hit[0]}" (R-ADV-13)`);
+  }
+  if (!/accurate information can lawfully stay/i.test(text(answered))) throw new Error("[credit-boundary] /the-bureau-answered lost the honest off-ramp: accurate information stays on a report");
+  const skus = new Set([...answered.matchAll(/data-sku="([^"]+)"/g)].map((m) => m[1]));
+  const priced = new Set([...answered.matchAll(/href="\/pricing\/?#([^"]+)"/g)].map((m) => m[1]));
+  if (skus.size !== 1 || !skus.has("credit-letter-kit") || [...priced].some((s) => s !== "credit-letter-kit")) throw new Error(`[credit-boundary] the day-30 page must offer exactly one paid product, the credit kit; found ${[...skus, ...priced].join(", ") || "none"}`);
+  if ((answered.match(/data-sku=/g) || []).length !== 1) throw new Error("[credit-boundary] the day-30 page must offer the kit once");
+  const studioPriced = new Set([...studio.slice(studio.indexOf("data-timeline"), studio.indexOf("data-recommendation")).matchAll(/href="\/pricing\/?#([^"]+)"/g)].map((m) => m[1]));
+  if (studioPriced.size !== 1 || !studioPriced.has("credit-letter-kit")) throw new Error("[credit-boundary] the dispute letter's timeline must hand off to the one credit kit only");
+  const checkout = fs.readFileSync("functions/api/create-checkout-session.js", "utf8") + fs.readFileSync("functions/_runtime/stripe.js", "utf8");
+  if (!checkout.includes("params.set('mode','payment')") || /subscription|recurring/i.test(checkout)) throw new Error("[credit-boundary] checkout must be a one-time payment: no subscription or recurring mode");
+}
+
 {
   const prompt = fs.readFileSync("prompts/system/credit_self_service_guardrails.md", "utf8");
   for (const phrase of ["We do not fix your credit for you", "We do not contact credit bureaus"]) {

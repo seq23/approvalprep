@@ -16,9 +16,7 @@ This offering is included in the **Life Admin Letter Kit** paid kit. After verif
 
 ## Reviewable Files
 
-- PDF: [life-admin-letter-kit.pdf](../../seed-downloads/life-admin-letter-kit.pdf)
-- DOCX: [life-admin-letter-kit.docx](../../seed-downloads/life-admin-letter-kit.docx)
-- R2 production keys: `downloads/life-admin-letter-kit.pdf`, `downloads/life-admin-letter-kit.docx`
+- R2 keys (private bucket; the kit files are not in this repository): `products/life-admin-letter-kit/life-admin-letter-kit.pdf`, `products/life-admin-letter-kit/life-admin-letter-kit.docx`
 
 ## Contract Standard
 

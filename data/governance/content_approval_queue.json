@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-10-26T18:43:42.917Z",
+  "generatedAt": "2026-11-10T21:04:58.645Z",
   "policy": "data/governance/publication_policy.json",
   "items": [
     {
@@ -469,6 +469,19 @@
       "requiredAction": "self-service,no-guarantee,truthful-info,not-legal-credit-repair,supporting-documents",
       "sourceFile": "data/routes/route_manifest.json",
       "sourceChecksum": "safeharbor-eadf372cb179ab05",
+      "ownerApprovalRequired": true
+    },
+    {
+      "contentId": "/the-bureau-answered",
+      "type": "safe_harbor",
+      "title": "/the-bureau-answered",
+      "path": "/the-bureau-answered",
+      "risk": "regulated",
+      "currentStatus": "blocked",
+      "reason": "BLOCKED_MISSING_DISCLOSURE",
+      "requiredAction": "self-service,no-guarantee,truthful-info,not-legal-credit-repair,supporting-documents",
+      "sourceFile": "data/routes/route_manifest.json",
+      "sourceChecksum": "safeharbor-f828696b3d1742df",
       "ownerApprovalRequired": true
     }
   ]

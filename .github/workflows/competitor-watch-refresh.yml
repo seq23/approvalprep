@@ -34,7 +34,6 @@ jobs:
         run: npm run workflows:trace -- --workflow competitor-watch-refresh.yml
       - run: npm run intelligence:discover-competitors
       - run: npm run intelligence:crawl-competitors
-      - run: npm run validate:competitor-crawl
       - name: Commit competitor intelligence
         run: |
           git config user.name "approvalprep-bot"

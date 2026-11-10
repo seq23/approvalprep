@@ -1,38 +1,28 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import LetterStudio from "../components/LetterStudio.astro";
+import ThreeWaysToDispute from "../components/ThreeWaysToDispute.astro";
 import FreeStudioCTA from "../components/FreeStudioCTA.astro";
 import TrustAndBoundaryBand from "../components/TrustAndBoundaryBand.astro";
 import RecommendationSummary from "../components/RecommendationSummary.astro";
 import { routeCopy } from "../data/content";
 const copy = routeCopy["/letter-writing-studio"];
 ---
-<BaseLayout title="Free Letter Writing Studio - ApprovalPrep" description="Draft a first-pass explanation letter for $0. No account, no stored answers, no upload, and no payment required." canonical="https://approvalprep.com/letter-writing-studio">
-  <section class="hero hero-split shell">
-    <div>
-      <p class="eyebrow">Free Letter Writing Studio</p>
-      <h1>Draft a clearer explanation letter before you buy a kit.</h1>
-      <p class="lead">Start for $0. Choose your situation, answer guided prompts, create a first-pass draft, and see which ApprovalPrep kit fits your next step.</p>
-      <p class="supporting-copy">No account, no upload, no payment, no AI call, and no stored answers. The Studio runs in your browser using static templates and local logic.</p>
-      <div class="hero-actions"><a class="button primary-button" href="#studio">Start for $0</a><a class="button secondary-button" href="/pricing/">Compare paid kits</a></div>
-    </div>
-    <aside class="hero-panel">
-      <p class="eyebrow">What the paid kits add</p>
-      <ul class="compact-list">
-        <li>Editable DOCX templates</li>
-        <li>PDF guide and examples</li>
-        <li>Review checklists</li>
-        <li>Supporting document guidance</li>
-        <li>Situation-specific next steps</li>
-      </ul>
-    </aside>
+<BaseLayout title="Free Letter Writing Studio - ApprovalPrep" description="Draft a first-pass letter free: a credit report dispute letter addressed to the bureau, as a PDF, or an explanation letter. No account, no upload, nothing sent to us." canonical="https://approvalprep.com/letter-writing-studio">
+  <section class="hero shell studio-hero">
+    <p class="eyebrow">Free Letter Writing Studio</p>
+    <h1>Draft a clearer explanation letter before you buy a kit.</h1>
+    <p class="supporting-copy studio-plain"><strong>No account. Nothing stored on our side. Nothing to renew.</strong></p>
+    <p class="lead">Free. Pick your situation, answer a few questions and get a first-pass letter in proper letter form. A credit report dispute letter comes addressed to the bureau and saves as a PDF.</p>
   </section>
+  <section class="band studio-band" id="studio"><div class="shell"><LetterStudio /></div></section>
+  <ThreeWaysToDispute />
   {/* recommendation_summary: this page's own copy record in src/data/content.ts
       states what it recommends. Nothing here is composed for the block. */}
   <section class="band recommendation-summary-band"><div class="shell">
     <RecommendationSummary headline="The Studio is the starting point, not the whole product." statement={copy.shortAnswer} ctaLabel="Compare paid kits" ctaHref="/pricing" />
   </div></section>
-  <section class="band" id="studio"><div class="shell"><LetterStudio /></div></section>
   <TrustAndBoundaryBand />
   <FreeStudioCTA />
+<style>.studio-hero{padding-bottom:8px}.studio-band{padding-top:8px}</style>
 </BaseLayout>

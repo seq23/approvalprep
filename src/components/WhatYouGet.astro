@@ -2,7 +2,7 @@
 const { items = [], title = "What you get" } = Astro.props;
 ---
 <section class="section-block">
-  <p class="eyebrow">Product / Guide Value</p>
+  <p class="eyebrow">What you get</p>
   <h2>{title}</h2>
   <div class="grid">{items.map((item) => <article class="card"><p>{item}</p></article>)}</div>
 </section>

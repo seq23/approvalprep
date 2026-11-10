@@ -2,11 +2,12 @@
 import { internalHref } from "../lib/schema";
 import { boundary, footerGroups } from "../data/content";
 import editorial from "../data/editorial.json";
+import Wordmark from "./Wordmark.astro";
 ---
 <footer class="site-footer">
   <div class="shell footer-shell">
     <div class="footer-brand">
-      <a class="brand footer-logo" href="/">ApprovalPrep</a>
+      <Wordmark className="footer-logo" />
       <p>Self-service document prep for application letters, checklists, and paperwork packets. You prepare, review, download, and send your own materials.</p>
       <p class="fine">{boundary}</p>
     </div>

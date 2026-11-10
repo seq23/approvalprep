@@ -16,9 +16,7 @@ This offering is included in the **Income + Employment Letter Kit** paid kit. Af
 
 ## Reviewable Files
 
-- PDF: [income-employment-letter-kit.pdf](../../seed-downloads/income-employment-letter-kit.pdf)
-- DOCX: [income-employment-letter-kit.docx](../../seed-downloads/income-employment-letter-kit.docx)
-- R2 production keys: `downloads/income-employment-letter-kit.pdf`, `downloads/income-employment-letter-kit.docx`
+- R2 keys (private bucket; the kit files are not in this repository): `products/income-employment-letter-kit/income-employment-letter-kit.pdf`, `products/income-employment-letter-kit/income-employment-letter-kit.docx`
 
 ## Contract Standard
 

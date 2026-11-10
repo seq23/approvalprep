@@ -11,6 +11,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
+import { kitsDir, kitsDirPresent } from '../lib/kits-dir.mjs';
 
 // Prices that existed before 8 Oct 2026 and match no current kit. Next to a
 // kit word they are always wrong, whatever kit the sentence names.
@@ -130,7 +131,8 @@ function walk(dir, keep) {
 
 export function customerSurfaces({ buildDir } = {}) {
   const files = [];
-  for (const f of walk('seed-downloads', (p) => /\.(pdf|docx)$/.test(p))) files.push(f);
+  // The paid kit files are private (APPROVALPREP_KITS_DIR, scripts/lib/kits-dir.mjs).
+  if (kitsDirPresent()) for (const f of walk(kitsDir(), (p) => /\.(pdf|docx)$/.test(p))) files.push(f);
   for (const d of ['src', 'functions', 'public', 'templates', 'data/content', 'data/ux']) files.push(...walk(d, (p) => TEXT_EXT.test(p)));
   if (buildDir && fs.existsSync(buildDir)) files.push(...walk(buildDir, (p) => /\.(html|xml|txt|json)$/.test(p) && !p.includes('/_astro/')));
   return files;

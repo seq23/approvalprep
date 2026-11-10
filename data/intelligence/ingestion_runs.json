@@ -2,6 +2,506 @@
   "schemaVersion": "4.1.0",
   "runs": [
     {
+      "id": "7a61d5d6-d2df-4196-8a2c-c382418639ff",
+      "connectorId": "growth_brief_generation",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-10T11:46:05.787Z",
+      "recordsImported": 40
+    },
+    {
+      "id": "d5088dcd-50f8-4296-98ac-997ea5593fad",
+      "connectorId": "authority_requirement_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-10T11:46:05.601Z",
+      "recordsImported": 72
+    },
+    {
+      "id": "d5f90ca6-1b8f-44f6-8d64-d42b476b38ea",
+      "connectorId": "growth_maintenance_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-10T11:46:05.452Z",
+      "recordsImported": 72
+    },
+    {
+      "id": "d9700717-f9ba-485b-9014-e444c2c9be96",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-11-10T11:17:35.997Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "b89b121a-4e6e-4ab1-b42b-c8ff559b2dd5",
+      "connectorId": "indexnow",
+      "status": "NO_DATA",
+      "ranAt": "2026-11-10T11:17:35.818Z",
+      "mode": "live",
+      "recordsImported": 0,
+      "preparedUrlCount": 72
+    },
+    {
+      "id": "5232fa23-2cdb-48d4-82ae-c57d2d586295",
+      "connectorId": "official_source_fetcher",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-10T09:22:33.479Z",
+      "recordsImported": 12
+    },
+    {
+      "id": "5596b64b-aa80-4cfa-b891-53d93c625b08",
+      "connectorId": "manual_social_signal_import",
+      "status": "NO_DATA",
+      "ranAt": "2026-11-10T09:22:30.814Z",
+      "reason": "No social signal import found at data/imports/social-signals.json.",
+      "recordsImported": 0
+    },
+    {
+      "id": "7e1b2764-1ef4-4fb7-ae88-b292b34e3cc8",
+      "connectorId": "manual_serp_csv",
+      "status": "NO_DATA",
+      "ranAt": "2026-11-10T09:22:30.715Z",
+      "reason": "No SERP CSV found at data/imports/serp.csv.",
+      "recordsImported": 0
+    },
+    {
+      "id": "93938e16-8e06-4a74-8ce8-25a11e99bfaf",
+      "connectorId": "competitor_public_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-10T09:22:30.615Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "781c17e8-689b-4cc9-a8b6-df15beba6db5",
+      "connectorId": "competitor_sitemap_discovery",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-10T09:22:30.179Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "b7c4594e-c974-4184-9ab4-a419c455751b",
+      "connectorId": "owned_site_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-10T09:22:28.839Z",
+      "recordsImported": 100
+    },
+    {
+      "id": "168e5c32-8365-4d41-8961-f52a1577609b",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-11-10T09:22:28.740Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "dd43847d-55e2-4f52-95f7-065eef4dc7ca",
+      "connectorId": "google_url_inspection",
+      "status": "BUDGET_HELD",
+      "ranAt": "2026-11-10T09:22:28.607Z",
+      "reason": "weekly ceiling 2 reached (2 live attempts in 7d)",
+      "recordsImported": 0
+    },
+    {
+      "id": "5432a8ce-7c33-4739-8a9d-aee8eb68d187",
+      "connectorId": "google_search_console_search_analytics",
+      "status": "BUDGET_HELD",
+      "ranAt": "2026-11-10T09:22:28.384Z",
+      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
+      "recordsImported": 0
+    },
+    {
+      "id": "8385aad1-8dd9-4625-ad1c-1c7d0a503c27",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-11-09T11:18:39.385Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "a516ed5d-cbd9-488b-b66a-88e807a660da",
+      "connectorId": "indexnow",
+      "status": "NO_DATA",
+      "ranAt": "2026-11-09T11:18:39.243Z",
+      "mode": "live",
+      "recordsImported": 0,
+      "preparedUrlCount": 72
+    },
+    {
+      "id": "53644f9c-e7ac-45c0-ad70-826df19b14e9",
+      "connectorId": "official_source_fetcher",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-09T09:25:42.950Z",
+      "recordsImported": 12
+    },
+    {
+      "id": "02f3e969-ffa4-471e-b566-c37b486f43b3",
+      "connectorId": "manual_social_signal_import",
+      "status": "NO_DATA",
+      "ranAt": "2026-11-09T09:25:39.465Z",
+      "reason": "No social signal import found at data/imports/social-signals.json.",
+      "recordsImported": 0
+    },
+    {
+      "id": "abacc444-fe5b-44eb-ab1a-cfabba308297",
+      "connectorId": "manual_serp_csv",
+      "status": "NO_DATA",
+      "ranAt": "2026-11-09T09:25:39.363Z",
+      "reason": "No SERP CSV found at data/imports/serp.csv.",
+      "recordsImported": 0
+    },
+    {
+      "id": "e5de2ed3-63f8-4d12-bdef-79b8951cd93f",
+      "connectorId": "competitor_public_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-09T09:25:39.262Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "95d64840-9d35-4bcd-a0f0-bc1d8180476f",
+      "connectorId": "competitor_sitemap_discovery",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-09T09:25:38.670Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "b953b4a9-ac9e-4261-9a73-f12c0c50129a",
+      "connectorId": "owned_site_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-09T09:25:37.196Z",
+      "recordsImported": 100
+    },
+    {
+      "id": "5271cacb-86f5-416d-886e-11fa86c5391f",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-11-09T09:25:37.095Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "969e602c-a92c-4de3-9779-cf64fb9b0d70",
+      "connectorId": "google_url_inspection",
+      "status": "BUDGET_HELD",
+      "ranAt": "2026-11-09T09:25:36.963Z",
+      "reason": "weekly ceiling 2 reached (2 live attempts in 7d)",
+      "recordsImported": 0
+    },
+    {
+      "id": "87f6562a-1b63-4b74-9d28-a4b14a866ed0",
+      "connectorId": "google_search_console_search_analytics",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-09T09:25:36.730Z",
+      "mode": "live",
+      "recordsImported": 16
+    },
+    {
+      "id": "799a2d01-e1ed-4512-905e-416d7f8b269e",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-11-08T11:13:10.378Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "a7f9e04d-635e-454f-9c36-0e48a50f8ca8",
+      "connectorId": "indexnow",
+      "status": "NO_DATA",
+      "ranAt": "2026-11-08T11:13:10.220Z",
+      "mode": "live",
+      "recordsImported": 0,
+      "preparedUrlCount": 72
+    },
+    {
+      "id": "fdf46c6d-e229-47ea-8013-3e97c7ee81c1",
+      "connectorId": "official_source_fetcher",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-08T09:22:10.767Z",
+      "recordsImported": 12
+    },
+    {
+      "id": "901a2945-4e38-45e9-9741-2bd9943e81a8",
+      "connectorId": "manual_social_signal_import",
+      "status": "NO_DATA",
+      "ranAt": "2026-11-08T09:22:06.884Z",
+      "reason": "No social signal import found at data/imports/social-signals.json.",
+      "recordsImported": 0
+    },
+    {
+      "id": "79d53b3c-a6a1-4907-9d1e-aa65696b9108",
+      "connectorId": "manual_serp_csv",
+      "status": "NO_DATA",
+      "ranAt": "2026-11-08T09:22:06.768Z",
+      "reason": "No SERP CSV found at data/imports/serp.csv.",
+      "recordsImported": 0
+    },
+    {
+      "id": "a3669d02-0116-438c-8167-506b41897e10",
+      "connectorId": "competitor_public_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-08T09:22:06.654Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "fa97c7b5-f781-4801-ba02-e4f83813d7ce",
+      "connectorId": "competitor_sitemap_discovery",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-08T09:22:06.128Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "4957e61a-2d2d-4c19-b9ca-f1711cd074b7",
+      "connectorId": "owned_site_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-08T09:22:04.712Z",
+      "recordsImported": 100
+    },
+    {
+      "id": "2eff7160-5517-464e-a96e-137444f893f0",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-11-08T09:22:04.598Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "3a45e7c4-cee4-4f25-9377-23bcf2266113",
+      "connectorId": "google_url_inspection",
+      "status": "BUDGET_HELD",
+      "ranAt": "2026-11-08T09:22:04.451Z",
+      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
+      "recordsImported": 0
+    },
+    {
+      "id": "4f69dc25-9410-4b7a-ab26-5e616c6c17e8",
+      "connectorId": "google_search_console_search_analytics",
+      "status": "BUDGET_HELD",
+      "ranAt": "2026-11-08T09:22:04.200Z",
+      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
+      "recordsImported": 0
+    },
+    {
+      "id": "19d080c8-a5fc-4fbe-a5ca-05b876fa0743",
+      "connectorId": "retest_outcome_evaluator",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-07T12:56:31.831Z",
+      "recordsImported": 0
+    },
+    {
+      "id": "05774193-c8ba-4de4-aac2-6392fb352035",
+      "connectorId": "retest_queue_builder",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-07T12:56:31.804Z",
+      "recordsImported": 0
+    },
+    {
+      "id": "ddc3dfb7-14c6-4f00-8613-e4967209725f",
+      "connectorId": "cloudflare_crawler_logs",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-11-07T12:56:31.747Z",
+      "reason": "Cloudflare crawler ingestion requires Cloudflare credentials or a manual import file.",
+      "recordsImported": 0
+    },
+    {
+      "id": "260ae1e9-3304-480e-9feb-a31fe8a08ac2",
+      "connectorId": "growth_brief_generation",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-07T12:56:31.721Z",
+      "recordsImported": 40
+    },
+    {
+      "id": "3d87eec5-e95e-4020-ada4-5e34a9652dfc",
+      "connectorId": "page_action_recommendation",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-07T12:56:31.671Z",
+      "recordsImported": 5435
+    },
+    {
+      "id": "c04fc82b-7b26-4042-a4ce-5851422a0caf",
+      "connectorId": "authority_requirement_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-07T12:56:31.617Z",
+      "recordsImported": 72
+    },
+    {
+      "id": "436decdd-4896-4183-9502-2f67bb2c5aad",
+      "connectorId": "growth_maintenance_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-07T12:56:31.588Z",
+      "recordsImported": 72
+    },
+    {
+      "id": "e64a8b38-947e-4889-a03f-1c6e43addcc0",
+      "connectorId": "content_opportunity_analysis",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-07T12:56:31.557Z",
+      "recordsImported": 5435
+    },
+    {
+      "id": "88c8a108-267b-47c3-8e26-0c0fb7ffaaf2",
+      "connectorId": "official_source_fetcher",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-07T12:56:30.238Z",
+      "recordsImported": 12
+    },
+    {
+      "id": "76b530aa-96da-4b37-ab86-68f24865a95c",
+      "connectorId": "manual_social_signal_import",
+      "status": "NO_DATA",
+      "ranAt": "2026-11-07T12:56:26.976Z",
+      "reason": "No social signal import found at data/imports/social-signals.json.",
+      "recordsImported": 0
+    },
+    {
+      "id": "eda33928-d416-4032-971f-f1f139c1fc19",
+      "connectorId": "manual_serp_csv",
+      "status": "NO_DATA",
+      "ranAt": "2026-11-07T12:56:26.950Z",
+      "reason": "No SERP CSV found at data/imports/serp.csv.",
+      "recordsImported": 0
+    },
+    {
+      "id": "c8be7840-2169-4d79-9708-a0003da6712e",
+      "connectorId": "competitor_public_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-07T12:56:26.922Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "f8e79f83-0953-48dd-b4c0-2b958d29ef5e",
+      "connectorId": "competitor_sitemap_discovery",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-07T12:56:26.341Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "a4d70a8c-da0f-4b2a-8c28-e533b34a9475",
+      "connectorId": "owned_site_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-07T12:56:25.559Z",
+      "recordsImported": 100
+    },
+    {
+      "id": "ba11e39e-58ef-4a53-a699-a05e870b17b6",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-11-07T12:56:25.530Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "8f4901c2-c14b-48c5-9e18-2b3ba23cac17",
+      "connectorId": "google_url_inspection",
+      "status": "BUDGET_HELD",
+      "ranAt": "2026-11-07T12:56:25.502Z",
+      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
+      "recordsImported": 0
+    },
+    {
+      "id": "b40554ec-2adb-4715-b46a-18642defd9a0",
+      "connectorId": "google_search_console_search_analytics",
+      "status": "BUDGET_HELD",
+      "ranAt": "2026-11-07T12:56:25.368Z",
+      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
+      "recordsImported": 0
+    },
+    {
+      "id": "95bf9232-b206-4852-9488-627153572579",
+      "connectorId": "official_source_fetcher",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-07T12:53:42.405Z",
+      "recordsImported": 12
+    },
+    {
+      "id": "b3386ac2-9a65-4a0d-90a3-c3683f63b4f4",
+      "connectorId": "manual_social_signal_import",
+      "status": "NO_DATA",
+      "ranAt": "2026-11-07T12:53:39.290Z",
+      "reason": "No social signal import found at data/imports/social-signals.json.",
+      "recordsImported": 0
+    },
+    {
+      "id": "ca7ccd60-3416-43ed-938f-5f0d6b53f392",
+      "connectorId": "manual_serp_csv",
+      "status": "NO_DATA",
+      "ranAt": "2026-11-07T12:53:39.179Z",
+      "reason": "No SERP CSV found at data/imports/serp.csv.",
+      "recordsImported": 0
+    },
+    {
+      "id": "c97be5b0-fe66-4f3c-9263-4780d3f826c6",
+      "connectorId": "competitor_public_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-07T12:53:39.067Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "67c8b494-d62a-48c9-935b-94be9d35e40d",
+      "connectorId": "competitor_sitemap_discovery",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-07T12:53:38.585Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "7ef2ce55-040e-4dc9-ae3f-5b5222d83376",
+      "connectorId": "owned_site_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-07T12:53:37.779Z",
+      "recordsImported": 100
+    },
+    {
+      "id": "3b475af0-1199-44b4-adbd-658b46eefd15",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-11-07T12:53:37.662Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "d1896e1c-dfc5-400c-89f0-04ad52011c73",
+      "connectorId": "google_url_inspection",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-07T12:53:37.547Z",
+      "mode": "live",
+      "recordsImported": 25
+    },
+    {
+      "id": "51265042-21f7-4f4b-9552-537f542bdd41",
+      "connectorId": "google_search_console_search_analytics",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-07T12:51:02.576Z",
+      "mode": "live",
+      "recordsImported": 14
+    },
+    {
+      "id": "51a13b56-b17d-4b9e-82b4-6b9136b39956",
+      "connectorId": "competitor_public_crawler",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-07T12:25:32.672Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "6e6fa6f8-20f6-4f2d-8846-d1c03944acd6",
+      "connectorId": "competitor_sitemap_discovery",
+      "status": "COMPLETE",
+      "ranAt": "2026-11-07T12:25:32.071Z",
+      "recordsImported": 2
+    },
+    {
+      "id": "b8593acf-0d3c-4dfd-9c6d-2aaf100e71d3",
+      "connectorId": "bing_webmaster",
+      "status": "NOT_CONFIGURED",
+      "ranAt": "2026-11-07T11:12:48.228Z",
+      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
+      "recordsImported": 0
+    },
+    {
+      "id": "2bb01b9c-30bc-42a8-9af8-7570947dbbcb",
+      "connectorId": "indexnow",
+      "status": "NO_DATA",
+      "ranAt": "2026-11-07T11:12:48.118Z",
+      "mode": "live",
+      "recordsImported": 0,
+      "preparedUrlCount": 72
+    },
+    {
       "id": "5cfc78e9-9bfd-430c-84e6-724744417fdd",
       "connectorId": "bing_webmaster",
       "status": "NOT_CONFIGURED",
@@ -1406,511 +1906,6 @@
       "status": "COMPLETE",
       "ranAt": "2026-10-24T12:44:11.066Z",
       "recordsImported": 100
-    },
-    {
-      "id": "ff77cf73-b433-42a3-b9d2-c44c31a84bba",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-10-24T12:44:10.923Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "38a561a5-4fe6-4990-92dd-bc8666c192b5",
-      "connectorId": "google_url_inspection",
-      "status": "BUDGET_HELD",
-      "ranAt": "2026-10-24T12:44:10.781Z",
-      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
-      "recordsImported": 0
-    },
-    {
-      "id": "56dac679-e2d1-4935-9060-fc83ae7ffdae",
-      "connectorId": "google_search_console_search_analytics",
-      "status": "BUDGET_HELD",
-      "ranAt": "2026-10-24T12:44:10.371Z",
-      "reason": "weekly ceiling 3 reached (3 live attempts in 7d)",
-      "recordsImported": 0
-    },
-    {
-      "id": "886ba6d2-6208-473a-a506-7a3db62be586",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-10-23T14:56:41.924Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "a76c5ba7-7f2f-48db-bfb2-20856b7dab1a",
-      "connectorId": "indexnow",
-      "status": "NO_DATA",
-      "ranAt": "2026-10-23T14:56:41.552Z",
-      "mode": "live",
-      "recordsImported": 0,
-      "preparedUrlCount": 79
-    },
-    {
-      "id": "c28cca18-2677-4b9c-8540-fe0adbe11be5",
-      "connectorId": "official_source_fetcher",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-23T13:34:30.294Z",
-      "recordsImported": 12
-    },
-    {
-      "id": "7dc96d7d-683f-417e-908c-f3852d649dd0",
-      "connectorId": "manual_social_signal_import",
-      "status": "NO_DATA",
-      "ranAt": "2026-10-23T13:34:28.660Z",
-      "reason": "No social signal import found at data/imports/social-signals.json.",
-      "recordsImported": 0
-    },
-    {
-      "id": "1de79686-aac2-4b6e-bb1a-61de38b08074",
-      "connectorId": "manual_serp_csv",
-      "status": "NO_DATA",
-      "ranAt": "2026-10-23T13:34:28.519Z",
-      "reason": "No SERP CSV found at data/imports/serp.csv.",
-      "recordsImported": 0
-    },
-    {
-      "id": "c6b39f96-7a2e-4afe-9be0-abdf1ee3c4a8",
-      "connectorId": "competitor_public_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-23T13:34:28.378Z",
-      "recordsImported": 2
-    },
-    {
-      "id": "d97798a9-0f6c-44f3-b7db-ee6ef4b3a6ba",
-      "connectorId": "competitor_sitemap_discovery",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-23T13:34:27.861Z",
-      "recordsImported": 2
-    },
-    {
-      "id": "017b28ce-f92b-4004-abba-cd511016568b",
-      "connectorId": "owned_site_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-23T13:34:27.058Z",
-      "recordsImported": 100
-    },
-    {
-      "id": "d8132000-e84d-44e9-8e32-99a1abfa8b21",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-10-23T13:34:26.911Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "87c26659-1064-4e8c-9770-1ad59d04891c",
-      "connectorId": "google_url_inspection",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-23T13:34:26.769Z",
-      "mode": "live",
-      "recordsImported": 25
-    },
-    {
-      "id": "92e06a91-07a3-4503-b7cd-d01e4bcaabc0",
-      "connectorId": "google_search_console_search_analytics",
-      "status": "BUDGET_HELD",
-      "ranAt": "2026-10-23T13:31:47.248Z",
-      "reason": "weekly ceiling 3 reached (3 live attempts in 7d)",
-      "recordsImported": 0
-    },
-    {
-      "id": "8fef13d3-6f0a-404f-96bf-8eb7e672bf8a",
-      "connectorId": "growth_brief_generation",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-22T15:39:32.804Z",
-      "recordsImported": 40
-    },
-    {
-      "id": "317ec6ff-ddb7-460d-a507-67d5ae8e81b0",
-      "connectorId": "authority_requirement_analysis",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-22T15:39:32.673Z",
-      "recordsImported": 79
-    },
-    {
-      "id": "0432ddf4-80ac-4cc0-8771-bf803abe6730",
-      "connectorId": "growth_maintenance_analysis",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-22T15:39:32.564Z",
-      "recordsImported": 79
-    },
-    {
-      "id": "209e0fde-7cba-4588-aaaa-615dd7f27da1",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-10-22T15:06:07.127Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "d39f939d-45e1-445a-aaac-e4217ff46e1d",
-      "connectorId": "indexnow",
-      "status": "NO_DATA",
-      "ranAt": "2026-10-22T15:06:06.964Z",
-      "mode": "live",
-      "recordsImported": 0,
-      "preparedUrlCount": 79
-    },
-    {
-      "id": "5d4f4682-e347-4c06-927e-08140e667e23",
-      "connectorId": "official_source_fetcher",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-22T13:51:28.124Z",
-      "recordsImported": 12
-    },
-    {
-      "id": "c8305ca6-2e1e-42f2-aa82-9e9088c550f2",
-      "connectorId": "manual_social_signal_import",
-      "status": "NO_DATA",
-      "ranAt": "2026-10-22T13:51:25.022Z",
-      "reason": "No social signal import found at data/imports/social-signals.json.",
-      "recordsImported": 0
-    },
-    {
-      "id": "dcb304e8-3aa6-40b9-84ee-782495e123b7",
-      "connectorId": "manual_serp_csv",
-      "status": "NO_DATA",
-      "ranAt": "2026-10-22T13:51:24.880Z",
-      "reason": "No SERP CSV found at data/imports/serp.csv.",
-      "recordsImported": 0
-    },
-    {
-      "id": "1072319d-041d-4a34-8573-c4d260985949",
-      "connectorId": "competitor_public_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-22T13:51:24.735Z",
-      "recordsImported": 2
-    },
-    {
-      "id": "bc235350-30de-4bc4-a3ac-7d0cdd6eb7ba",
-      "connectorId": "competitor_sitemap_discovery",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-22T13:51:24.181Z",
-      "recordsImported": 2
-    },
-    {
-      "id": "1b3a71ba-7f50-4f65-a221-77e030ecd2d5",
-      "connectorId": "owned_site_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-22T13:51:23.188Z",
-      "recordsImported": 100
-    },
-    {
-      "id": "0440cf22-cb0a-4346-a945-97f352c7005c",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-10-22T13:51:23.042Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "cf05ca4b-f5e3-4cd7-9f5e-614d6ebcffe8",
-      "connectorId": "google_url_inspection",
-      "status": "BUDGET_HELD",
-      "ranAt": "2026-10-22T13:51:22.830Z",
-      "reason": "weekly ceiling 2 reached (2 live attempts in 7d)",
-      "recordsImported": 0
-    },
-    {
-      "id": "bf112be7-2f1b-4810-930b-20c48355fdc7",
-      "connectorId": "google_search_console_search_analytics",
-      "status": "BUDGET_HELD",
-      "ranAt": "2026-10-22T13:51:22.510Z",
-      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
-      "recordsImported": 0
-    },
-    {
-      "id": "bbfc03a8-a2f2-4790-9041-f4f21a13a9fa",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-10-21T15:07:55.658Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "bf0e5b20-8a41-4d89-9bd1-5203269a7c1e",
-      "connectorId": "indexnow",
-      "status": "NO_DATA",
-      "ranAt": "2026-10-21T15:07:55.517Z",
-      "mode": "live",
-      "recordsImported": 0,
-      "preparedUrlCount": 79
-    },
-    {
-      "id": "99cb1ee5-8a27-4175-ac8e-244ad09232c8",
-      "connectorId": "official_source_fetcher",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-21T13:52:53.840Z",
-      "recordsImported": 12
-    },
-    {
-      "id": "6b7c8715-f906-4e0e-b515-9f5f1b8934b1",
-      "connectorId": "manual_social_signal_import",
-      "status": "NO_DATA",
-      "ranAt": "2026-10-21T13:52:52.411Z",
-      "reason": "No social signal import found at data/imports/social-signals.json.",
-      "recordsImported": 0
-    },
-    {
-      "id": "4ea3db93-0b41-4f32-835d-33ee8a67b8e8",
-      "connectorId": "manual_serp_csv",
-      "status": "NO_DATA",
-      "ranAt": "2026-10-21T13:52:52.324Z",
-      "reason": "No SERP CSV found at data/imports/serp.csv.",
-      "recordsImported": 0
-    },
-    {
-      "id": "999aa615-de13-4e40-901f-ba300021a066",
-      "connectorId": "competitor_public_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-21T13:52:52.238Z",
-      "recordsImported": 2
-    },
-    {
-      "id": "e294018c-0799-4b6f-adf6-6518f61a9bb3",
-      "connectorId": "competitor_sitemap_discovery",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-21T13:52:51.794Z",
-      "recordsImported": 2
-    },
-    {
-      "id": "e66e1081-fd04-4bea-9023-f5fcae06774d",
-      "connectorId": "owned_site_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-21T13:52:50.227Z",
-      "recordsImported": 100
-    },
-    {
-      "id": "c67f67a3-d103-4e2d-b473-cd20a984c541",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-10-21T13:52:50.141Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "0c529912-c7ef-4888-8325-53db08e0496c",
-      "connectorId": "google_url_inspection",
-      "status": "BUDGET_HELD",
-      "ranAt": "2026-10-21T13:52:50.031Z",
-      "reason": "weekly ceiling 2 reached (2 live attempts in 7d)",
-      "recordsImported": 0
-    },
-    {
-      "id": "615a9e0d-a811-48d0-978c-83922e37c57b",
-      "connectorId": "google_search_console_search_analytics",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-21T13:52:49.814Z",
-      "mode": "live",
-      "recordsImported": 11
-    },
-    {
-      "id": "33960ebb-b408-4fde-be5c-26c361bead1c",
-      "connectorId": "competitor_public_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-21T07:45:13.042Z",
-      "recordsImported": 2
-    },
-    {
-      "id": "c8d70c28-48c2-490b-b2bc-b6b48707487f",
-      "connectorId": "competitor_sitemap_discovery",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-21T07:45:12.508Z",
-      "recordsImported": 2
-    },
-    {
-      "id": "ee69b1ce-8fc5-499c-b8fe-399b7d350d85",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-10-20T14:58:10.903Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "97128006-05e2-4800-aa7c-720a94eb37a4",
-      "connectorId": "indexnow",
-      "status": "NO_DATA",
-      "ranAt": "2026-10-20T14:58:10.725Z",
-      "mode": "live",
-      "recordsImported": 0,
-      "preparedUrlCount": 79
-    },
-    {
-      "id": "5bc93fad-51fd-4d8e-b3e0-aa45379ad4e0",
-      "connectorId": "official_source_fetcher",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-20T13:37:08.203Z",
-      "recordsImported": 12
-    },
-    {
-      "id": "68517687-21be-4799-83d3-eef2d9596520",
-      "connectorId": "manual_social_signal_import",
-      "status": "NO_DATA",
-      "ranAt": "2026-10-20T13:37:01.299Z",
-      "reason": "No social signal import found at data/imports/social-signals.json.",
-      "recordsImported": 0
-    },
-    {
-      "id": "4a19b0ae-5d3a-4427-a122-e55b18c2cc19",
-      "connectorId": "manual_serp_csv",
-      "status": "NO_DATA",
-      "ranAt": "2026-10-20T13:37:01.149Z",
-      "reason": "No SERP CSV found at data/imports/serp.csv.",
-      "recordsImported": 0
-    },
-    {
-      "id": "7d74fdd2-a239-4f1a-8f1b-af526900ae50",
-      "connectorId": "competitor_public_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-20T13:37:01.003Z",
-      "recordsImported": 2
-    },
-    {
-      "id": "bf70b115-4f9d-4fcc-83f1-5975d577ddb2",
-      "connectorId": "competitor_sitemap_discovery",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-20T13:37:00.432Z",
-      "recordsImported": 2
-    },
-    {
-      "id": "af848e0e-60f1-482d-810c-993a92a0a046",
-      "connectorId": "owned_site_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-20T13:36:58.989Z",
-      "recordsImported": 100
-    },
-    {
-      "id": "8f763227-ff76-430f-81a1-8858824d7061",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-10-20T13:36:58.829Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "1dbd3eb2-bd12-48be-8b21-068a1e020bab",
-      "connectorId": "google_url_inspection",
-      "status": "BUDGET_HELD",
-      "ranAt": "2026-10-20T13:36:58.655Z",
-      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
-      "recordsImported": 0
-    },
-    {
-      "id": "070347fd-5246-4d37-9b51-2aff5502b959",
-      "connectorId": "google_search_console_search_analytics",
-      "status": "BUDGET_HELD",
-      "ranAt": "2026-10-20T13:36:58.286Z",
-      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
-      "recordsImported": 0
-    },
-    {
-      "id": "0cf05512-8398-4266-8561-d7cd88a257b3",
-      "connectorId": "growth_brief_generation",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-20T10:48:17.988Z",
-      "recordsImported": 40
-    },
-    {
-      "id": "3b114290-d1d3-4bbd-a006-69694ae14d2f",
-      "connectorId": "authority_requirement_analysis",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-20T10:48:17.801Z",
-      "recordsImported": 79
-    },
-    {
-      "id": "cb28d4d8-3df5-4475-85cd-f74867f6a66e",
-      "connectorId": "growth_maintenance_analysis",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-20T10:48:17.621Z",
-      "recordsImported": 79
-    },
-    {
-      "id": "7d9371e9-64cd-4c4f-9406-ae4cd772c2f2",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-10-19T16:57:04.111Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "7198c3b2-490c-4242-80a4-d523f6b1dd7a",
-      "connectorId": "indexnow",
-      "status": "NO_DATA",
-      "ranAt": "2026-10-19T16:57:03.992Z",
-      "mode": "live",
-      "recordsImported": 0,
-      "preparedUrlCount": 79
-    },
-    {
-      "id": "a5296a34-17c4-4a5c-9b73-4e1fa9a8b57e",
-      "connectorId": "official_source_fetcher",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-19T15:42:01.101Z",
-      "recordsImported": 12
-    },
-    {
-      "id": "04170bb4-3ba4-4a4c-aee7-38fc85f815a0",
-      "connectorId": "manual_social_signal_import",
-      "status": "NO_DATA",
-      "ranAt": "2026-10-19T15:41:57.635Z",
-      "reason": "No social signal import found at data/imports/social-signals.json.",
-      "recordsImported": 0
-    },
-    {
-      "id": "9dca91a0-3b49-4749-945e-5d4100725c95",
-      "connectorId": "manual_serp_csv",
-      "status": "NO_DATA",
-      "ranAt": "2026-10-19T15:41:57.491Z",
-      "reason": "No SERP CSV found at data/imports/serp.csv.",
-      "recordsImported": 0
-    },
-    {
-      "id": "0172e029-af2b-4a47-9b3f-36564acfcd0b",
-      "connectorId": "competitor_public_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-19T15:41:57.349Z",
-      "recordsImported": 2
-    },
-    {
-      "id": "4c6fa577-3898-44dd-8c31-804ebc76e85d",
-      "connectorId": "competitor_sitemap_discovery",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-19T15:41:56.846Z",
-      "recordsImported": 2
-    },
-    {
-      "id": "db6b5216-e4d4-4514-857a-db4e6c006105",
-      "connectorId": "owned_site_crawler",
-      "status": "COMPLETE",
-      "ranAt": "2026-10-19T15:41:54.842Z",
-      "recordsImported": 100
-    },
-    {
-      "id": "8e41a0af-9bcc-4cf6-b051-787cbc676ef8",
-      "connectorId": "bing_webmaster",
-      "status": "NOT_CONFIGURED",
-      "ranAt": "2026-10-19T15:41:54.693Z",
-      "reason": "BING_WEBMASTER_API_KEY and BING_WEBMASTER_API_URL, or BING_WEBMASTER_IMPORT_FILE, are required.",
-      "recordsImported": 0
-    },
-    {
-      "id": "2e8a2b43-f8c0-4d3f-a39f-36d7750579ef",
-      "connectorId": "google_url_inspection",
-      "status": "BUDGET_HELD",
-      "ranAt": "2026-10-19T15:41:54.502Z",
-      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
-      "recordsImported": 0
-    },
-    {
-      "id": "62315da6-4a8e-484c-84f1-ae538de7f913",
-      "connectorId": "google_search_console_search_analytics",
-      "status": "BUDGET_HELD",
-      "ranAt": "2026-10-19T15:41:54.186Z",
-      "reason": "daily ceiling 1 reached (1 live attempts in 24h)",
-      "recordsImported": 0
     }
   ]
 }

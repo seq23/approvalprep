@@ -1,6 +1,6 @@
 {
   "schemaVersion": "4.4.0",
-  "generatedAt": "2026-11-03T15:50:59.401Z",
+  "generatedAt": "2026-11-07T12:56:32.287Z",
   "status": "COMPLETE_FIXTURE_TRACE",
   "workflowCount": 23,
   "manualReadyCount": 23,
@@ -199,6 +199,7 @@
         "validate:page-factory",
         "validate:pages-header-publication",
         "validate:payment-download",
+        "validate:phone-no-sideways-scroll",
         "validate:pinterest-drip",
         "validate:pinterest-launch",
         "validate:pre-merge-lane-parity",
@@ -418,6 +419,7 @@
         "validate:page-factory",
         "validate:pages-header-publication",
         "validate:payment-download",
+        "validate:phone-no-sideways-scroll",
         "validate:pinterest-drip",
         "validate:pinterest-launch",
         "validate:pre-merge-lane-parity",
@@ -681,6 +683,7 @@
         "validate:page-factory",
         "validate:pages-header-publication",
         "validate:payment-download",
+        "validate:phone-no-sideways-scroll",
         "validate:pinterest-drip",
         "validate:pinterest-launch",
         "validate:pre-merge-lane-parity",
@@ -1568,6 +1571,7 @@
         "validate:page-factory",
         "validate:pages-header-publication",
         "validate:payment-download",
+        "validate:phone-no-sideways-scroll",
         "validate:pinterest-drip",
         "validate:pinterest-launch",
         "validate:pre-merge-lane-parity",
@@ -1957,10 +1961,12 @@
       "secretRefs": [],
       "npmScripts": [
         "pinterest:refill",
+        "pinterest:release-held",
         "workflows:trace"
       ],
       "transitiveNpmScripts": [
         "pinterest:refill",
+        "pinterest:release-held",
         "workflows:trace"
       ],
       "missingNpmScripts": [],
@@ -2012,7 +2018,7 @@
         }
       ],
       "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-      "traceId": "0b373512e2b7a42c"
+      "traceId": "cac146c50e4ca1ee"
     },
     {
       "workflow": "post-deploy-live-check.yml",
@@ -2425,6 +2431,7 @@
         "validate:page-factory",
         "validate:pages-header-publication",
         "validate:payment-download",
+        "validate:phone-no-sideways-scroll",
         "validate:pinterest-drip",
         "validate:pinterest-launch",
         "validate:pre-merge-lane-parity",

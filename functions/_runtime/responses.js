@@ -1,5 +1,6 @@
+// Every API answer is personal or stateful (checkout, downloads, sign-ups): never cached.
 export function json(data, status = 200, headers = {}) {
-  return new Response(JSON.stringify(data), { status, headers: { 'content-type': 'application/json; charset=utf-8', ...headers } });
+  return new Response(JSON.stringify(data), { status, headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'private, no-store', ...headers } });
 }
 export function methodNotAllowed() { return json({ ok:false, error:'METHOD_NOT_ALLOWED' }, 405); }
 export async function readJson(request) { try { return await request.json(); } catch { return {}; } }

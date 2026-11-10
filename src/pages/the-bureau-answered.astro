@@ -1,0 +1,103 @@
+---
+// "The bureau answered": the day-30 step, as free information she acts on herself.
+// Design rules (owner + risk R-ADV-13, 10 Nov 2026): coming back is free; accurate information
+// stays on a report and a verified accurate item is not something to keep disputing; the Credit
+// Letter Kit is ONE one-time purchase offered once here, never a charge per letter or per answer;
+// we never act for her. validate:credit-boundary checks this page for those rules.
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Byline from "../components/Byline.astro";
+import ThreeWaysToDispute from "../components/ThreeWaysToDispute.astro";
+import { articleSchema, breadcrumbSchema, faqSchema, canonicalUrl } from "../lib/schema";
+import { productForSku } from "../data/content";
+import { ANSWER_WINDOW, kitMoments } from "../data/letterStudio";
+const path = "/the-bureau-answered";
+const canonical = canonicalUrl(path);
+const title = "The Credit Bureau Answered Your Dispute: What Next?";
+const description = "A credit bureau answers a dispute in one of three ways: corrected, verified, or silence. What each answer means and the free steps you can take yourself, with sources.";
+const kit = productForSku("credit-letter-kit");
+const kitLabel = `${kit?.name || "Credit Letter Kit"} — ${kit?.priceLabel || "$19"}`;
+const FTC = ANSWER_WINDOW.source.url;
+const CFPB = "https://www.consumerfinance.gov/ask-cfpb/how-do-i-dispute-an-error-on-my-credit-report-en-314/";
+const COMPLAINT = "https://www.consumerfinance.gov/complaint/";
+const faq = [
+  { question: "How long does a credit bureau have to answer a dispute?", answer: `${ANSWER_WINDOW.text} Count from the day the bureau received your letter, which is the date on a certified mail return receipt, not the day you posted it.` },
+  { question: "Do I have to pay anyone to take the next step?", answer: "No. Checking your corrected report, adding a statement of dispute, writing to the company that reported the item and sending a complaint to the Consumer Financial Protection Bureau are all free, and you can do each one yourself. A letter kit only saves you writing the letters from a blank page." },
+  { question: "Should I dispute the same item again if the bureau verified it?", answer: "Only if you have new information or new proof. A bureau may stop investigating a dispute it considers frivolous, and it must tell you so and give the reason. If the information is accurate, it can lawfully stay on your report until it ages off." },
+  { question: "When does accurate negative information come off a credit report?", answer: "A credit bureau can report most accurate negative information for seven years, and bankruptcy information for ten years, according to the FTC. Disputing does not shorten those periods for information that is correct." }
+];
+const schema = [articleSchema({ title, description, url: canonical, datePublished: "2026-11-10" }), breadcrumbSchema(path), faqSchema(faq)];
+const after = kitMoments["credit-letter-kit"];
+---
+<BaseLayout title={`${title} - ApprovalPrep`} description={description} canonical={canonical} schema={schema} ogType="article">
+  <section class="hero shell">
+    <p class="eyebrow">After you mail a dispute</p>
+    <h1>The credit bureau answered your dispute. Here is what you can do next.</h1>
+    <p class="lead" data-content-block="definition_callout">A dispute result is the written answer a credit bureau sends after it investigates an item you disputed. The item is corrected or deleted, it is verified as accurate, or no answer arrives. Each one has free next steps that you take yourself, and none of them needs a company to act for you.</p>
+    <Byline updated="2026-11-10" />
+  </section>
+  <section class="band"><div class="shell">
+    <h2>Quick answer</h2>
+    <p>Read the written result, then follow the matching step below: check the corrected report, add a statement or write to the company that reported the item, or ask the bureau for its overdue answer. Every step is free. If the information is accurate, it stays on your report until it ages off.</p>
+    <div class="table-wrap"><table class="comparison-table phone-cards"><thead><tr><th>The answer</th><th>What it means</th><th>What you can do yourself, free</th></tr></thead><tbody>
+      <tr><td data-label="The answer"><a href="#corrected">Corrected or deleted</a></td><td data-label="What it means">The bureau changed your report.</td><td data-label="What you can do yourself, free">Check the free copy it sends; check the other two bureaus; ask for correction notices.</td></tr>
+      <tr><td data-label="The answer"><a href="#verified">Verified as accurate</a></td><td data-label="What it means">The company that reported the item told the bureau it is correct.</td><td data-label="What you can do yourself, free">Add a statement of dispute; write to that company with your proof; complain to the CFPB. If it is accurate, stop there.</td></tr>
+      <tr><td data-label="The answer"><a href="#no-answer">No answer</a></td><td data-label="What it means">The answer window has passed with nothing in writing.</td><td data-label="What you can do yourself, free">Check the date it was received; write to the bureau asking for the results; complain to the CFPB.</td></tr>
+    </tbody></table></div>
+  </div></section>
+  <section class="band" id="corrected"><div class="shell">
+    <h2>What should I do if the bureau corrected or deleted the item?</h2>
+    <p>Check that the change is the one you asked for. The bureau must give you the results in writing, and when a dispute leads to a change it must also give you a free copy of your report (<a href={FTC} rel="noopener">FTC</a>).</p>
+    <ol class="compact-list">
+      <li>Read the free copy and confirm the item now shows correctly or is gone.</li>
+      <li>Look at your reports from the other two bureaus. A correction at one bureau does not change the others; dispute there only if the same error appears.</li>
+      <li>If you want, ask the bureau to send a notice of the correction to anyone who received your report in the past six months, or the past two years for employment (<a href={FTC} rel="noopener">FTC</a>).</li>
+      <li>Keep the result letter with your copy of the dispute.</li>
+    </ol>
+  </div></section>
+  <section class="band" id="verified"><div class="shell">
+    <h2>What can I do if the bureau says the item is verified?</h2>
+    <p>“Verified” means the company that reported the item told the bureau it is correct. What you can do depends on whether the item is in fact accurate.</p>
+    <h3>If you still believe it is wrong</h3>
+    <ol class="compact-list">
+      <li>Ask the bureau to include a statement of the dispute in your file and in future reports (<a href={FTC} rel="noopener">FTC</a>).</li>
+      <li>Write to the company that reported the item, with copies of your proof. If it finds the information inaccurate, it must tell the bureau to update or delete it (<a href={FTC} rel="noopener">FTC</a>; the <a href={CFPB} rel="noopener">CFPB</a> has a free sample letter).</li>
+      <li>Send a complaint to the Consumer Financial Protection Bureau. It is free: <a href={COMPLAINT} rel="noopener">consumerfinance.gov/complaint</a>.</li>
+      <li>Write to the bureau again only if you have new information or new proof. A bureau may stop investigating a dispute it considers frivolous, and must tell you so with the reason (<a href={FTC} rel="noopener">FTC</a>).</li>
+    </ol>
+    <h3>If the information is accurate</h3>
+    <p>Accurate information can lawfully stay on your report, and a verified, accurate item is not something to dispute again. A bureau can report most negative information for seven years and bankruptcy for ten (<a href={FTC} rel="noopener">FTC</a>). What you can do is ask the creditor for a courtesy: a goodwill letter asks, it does not require, and creditors do not have to agree.</p>
+  </div></section>
+  <section class="band" id="no-answer"><div class="shell">
+    <h2>What if the answer window passes with no answer?</h2>
+    <p>{ANSWER_WINDOW.text} (<a href={FTC} rel="noopener">FTC</a>; <a href={ANSWER_WINDOW.law.url} rel="noopener">{ANSWER_WINDOW.law.label}</a>.)</p>
+    <ol class="compact-list">
+      <li>Count from the day the bureau received your letter. That is the date on your certified mail return receipt.</li>
+      <li>Check your report: sometimes the item has changed and the letter is still in the post.</li>
+      <li>Write to the bureau, enclose a copy of your first letter and the receipt, and ask for the written results.</li>
+      <li>You can also send a free complaint to the CFPB: <a href={COMPLAINT} rel="noopener">consumerfinance.gov/complaint</a>.</li>
+    </ol>
+  </div></section>
+  <section class="band cta-callout" id="the-kit" data-credit-path-offer><div class="shell">
+    <p class="eyebrow">Optional · paid once</p>
+    <h2>Do I need to pay for any of this?</h2>
+    <p>No. Every step on this page is free. If you would rather not write the letters from a blank page, the {kit?.name || "Credit Letter Kit"} is one purchase of {kit?.priceLabel || "$19"}, paid once. It covers every letter after the first, however many answers you get: <strong>{after.promise.toLowerCase().replace(/\.$/, "")}</strong>.</p>
+    <ul class="compact-list">{after.moments.map((m) => <li>{`${m.when}: ${m.items.join(", ")}.`}</li>)}</ul>
+    <p>Already have the kit? You do not pay again: the follow-up and goodwill letters are in the Word file you downloaded.</p>
+    <div class="hero-actions"><button class="button primary-button checkout-button" type="button" data-sku="credit-letter-kit">{`Buy the ${kitLabel}`}</button><a class="button secondary secondary-button" href="/letter-writing-studio/?situation=credit-dispute">Draft free in the Letter Studio</a></div>
+    <p class="ap-selfhelp">Self-help templates. Not legal or financial advice. We do not contact bureaus or creditors for you. You write and send every letter yourself, and a bureau or creditor decides what it does.</p>
+  </div></section>
+  <ThreeWaysToDispute />
+  <section class="band" data-content-block="faq"><div class="shell">
+    <h2>Frequently asked questions</h2>
+    <div class="grid">{faq.map((item) => <article class="card"><h3>{item.question}</h3><p>{item.answer}</p></article>)}</div>
+  </div></section>
+  <section class="band"><div class="shell">
+    <p class="eyebrow">Sources</p>
+    <ul class="compact-list">
+      <li><a href={FTC} rel="noopener">FTC, Disputing Errors on Your Credit Reports</a> (April 2024; read 10 Nov 2026)</li>
+      <li><a href={CFPB} rel="noopener">CFPB, How do I dispute an error on my credit report?</a> (reviewed 2 Sep 2026; read 10 Nov 2026)</li>
+      <li><a href={ANSWER_WINDOW.law.url} rel="noopener">{ANSWER_WINDOW.law.label}</a>, the investigation period (read 10 Nov 2026)</li>
+    </ul>
+    <p class="fine">Published 10 Nov 2026 by the ApprovalPrep editorial desk. General information, not legal advice.</p>
+  </div></section>
+</BaseLayout>

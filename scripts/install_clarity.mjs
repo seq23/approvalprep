@@ -76,7 +76,9 @@ function walk(dir, depth) {
     const rel = path.relative(outDir, abs).replace(/\\/g, '/');
     if (skipFiles.has(rel) || skipFiles.has(entry.name)) { skipped += 1; continue; }
     const html = fs.readFileSync(abs, 'utf8');
-    if (!hasFormOrBuyLink(html)) {
+    // A page that promises "nothing you type is sent to us" (the Letter Studio, the free
+    // generators) opts out with data-no-session-recording: no recorder ever loads there.
+    if (/\bdata-no-session-recording\b/.test(html) || !hasFormOrBuyLink(html)) {
       const clean = html.replace(/<script\b[^>]*\bdata-clarity-loader\b[^>]*>[\s\S]*?<\/script>/gi, '');
       if (clean !== html) { fs.writeFileSync(abs, clean); removed += 1; }
       skipped += 1;

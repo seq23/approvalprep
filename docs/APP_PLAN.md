@@ -186,6 +186,32 @@ Run `npm run check` in `apps/mobile` after each task; the App preview run must s
 - **Store category** (task 11, parked for the launch plan) is chosen for what the app is (Finance or
   Productivity), never to avoid a review lane; 5.1.1(ix) applies by content, not category.
 
+## Day 30 is her step, never a paid round (owner + coordinator, 10 Nov 2026; these win over the plan page)
+
+- **The day count and the day-30 reminder stay inside the ONE-TIME kit entitlement**, as already ruled.
+  The app never sells a "round", a "follow-up" or a "next letter", never renews, stores no card and
+  has no auto-renewing product of any kind.
+- **The day-30 screen for someone who has not bought** shows the free information (what corrected /
+  verified / no answer mean and what she can do herself for free, same content as the website's
+  /the-bureau-answered/ page, with the off-ramp: accurate information stays on a report and a
+  verified accurate item is not something to dispute again) and offers the SAME single kit
+  (`ap_credit_kit`), once. A buyer who comes back is never shown a checkout for the credit path.
+- **The $14.99 Letter of Explanation Kit is a different situation's kit**, never a repeat or a
+  second stage of the credit path. It is not offered on the day-30 screen.
+- **Day 30 is a date the app shows**, worked out on the phone from the mailed date (the website
+  prints the same date and offers a calendar file). The free tier keeps the date on the saved
+  letter; the reminder that fires on that date is the paid part.
+- **Words that never appear:** "round 2", "next round", "keep disputing", "until it is removed",
+  "we follow up", "subscription". The app never mails, contacts a bureau, reads her report or tracks
+  her dispute on a server.
+- **Import, never copy:** the letters, the bureau mail addresses (each with a dated source), the
+  30-day window text and its sources, `answerDueDate`, the calendar-file builder and "what the kit
+  adds" all live in `src/lib/letterStudioCore.mjs` and `src/lib/kitMoments.mjs` (re-exported by
+  `src/data/letterStudio.ts`). Task 4b's "eight situations and openers" is now nine situations and
+  `buildLetter()`; the free dispute letter is the `credit-dispute` situation.
+  Accept: a test fails if the day-30 screen exposes a second product or a recurring price; the
+  self-help wording test also covers the day-30 screen.
+
 ## Her rulings
 
 - **In-app Credit Letter Kit: $19.99, paid once. Approved 6 Nov 2026.** Product id `ap_credit_kit`.

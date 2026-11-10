@@ -8,7 +8,7 @@ This is the operator test for checkout creation, success-page clarity, completed
 
 1. Checkout creation plus success-page UI proof.
    - Calls `/api/create-checkout-session` for each paid SKU.
-   - Runs both full-price checkout and `TEST100` discount checkout unless `LOCAL_E2E_SKIP_DISCOUNT=1`.
+   - Runs the full-price checkout. Runs a discount checkout only when `LOCAL_E2E_DISCOUNT_CODE` is set AND the site is in Stripe test mode (the full-price session id starts `cs_test_`). Against live Stripe the discount path is refused with `DISCOUNT_REFUSED_NOT_STRIPE_TEST_MODE`.
    - Confirms Stripe returns a `checkout.stripe.com` Checkout URL.
    - Confirms `/checkout/success` visibly says `Success! Your checkout is complete.` and includes the direct download choice plus the optional browser-only Studio prefill choice.
 
@@ -35,7 +35,7 @@ The script writes `reports/ops/local-checkout-download-e2e.json` with the exact 
 LOCAL_E2E_BASE_URL="https://approvalprep.com" npm run ops:local:checkout-download-e2e
 ```
 
-Pass condition: `PASS_CHECKOUT_CREATION_AND_SUCCESS_UI_ONLY`. That is not download proof. It means the site can create the full-price and discount Checkout Sessions and the success page has the right post-purchase choices.
+Pass condition: `PASS_CHECKOUT_CREATION_AND_SUCCESS_UI_ONLY`. That is not download proof. It means the site can create the full-price Checkout Sessions (and, in Stripe test mode with a code given, the discount ones) and the success page has the right post-purchase choices.
 
 ## Fixture Fulfillment Test Without Manual Checkout
 
@@ -66,17 +66,19 @@ LOCAL_E2E_PRODUCTS="letter-of-explanation" \
 npm run ops:local:checkout-download-e2e
 ```
 
-## Test The 100% Off Code
+## Test A Discount Code (Stripe test mode only)
 
-Create `TEST100` once in the same Stripe mode as the deployed site as an active 100% off promotion code. Then run:
+Never create a 100% off promotion code in live Stripe: anyone who learns it gets every kit free. No code is kept in this repo or shown on the site.
+
+To test the discount path, point the script at a deployment that uses Stripe **test** keys (a local `wrangler pages dev` with `sk_test_` keys, or a preview), create a promotion code in Stripe test mode, and pass it in:
 
 ```bash
-LOCAL_E2E_BASE_URL="https://approvalprep.com" \
-LOCAL_E2E_DISCOUNT_CODE="TEST100" \
+LOCAL_E2E_BASE_URL="http://localhost:8788" \
+LOCAL_E2E_DISCOUNT_CODE="<your test-mode code>" \
 npm run ops:local:checkout-download-e2e
 ```
 
-If `TEST100` is missing or inactive in the deployed Stripe mode, the script fails the discount checkout path.
+If the site answers with a live session (`cs_live_`), the script does not send the code and records `DISCOUNT_REFUSED_NOT_STRIPE_TEST_MODE`. The no-cost fulfillment path (a completed `no_payment_required` session unlocking the files) is proven without Stripe by the fixture test above.
 
 ## Boundary
 

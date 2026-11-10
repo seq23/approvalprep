@@ -16,7 +16,13 @@
 import fs from "node:fs";
 
 const CONFIG = "search-loop.config.json";
+// Credit-repair buyers first (her ruling 3 Nov 2026: the search pages target people about to
+// pay a monthly credit repair company; loop olp_m6jbamwwq5rbj46g).
 const CORE = [
+  "credit repair cost", "is credit repair worth it", "credit repair scams", "diy credit repair",
+  "credit repair company alternatives", "credit saint alternative", "the credit pros alternative",
+  "sky blue credit alternative", "dispute credit report yourself", "how to dispute a credit report error",
+  "do credit repair companies work", "credit repair vs doing it yourself",
   "letter of explanation", "proof of employment letter", "employment verification letter",
   "rental application letter", "landlord reference letter", "goodwill letter", "609 dispute letter",
   "gift letter for mortgage", "hardship letter", "proof of income",
