@@ -3,6 +3,11 @@ import fs from "node:fs";
 import path from "node:path";
 import zlib from "node:zlib";
 import { fail, readJson } from "./_common.mjs";
+import { productAssetKey } from "../../functions/_runtime/asset-keys.js";
+import { kitsMode, kitPath, CI_NOTE } from "../lib/kits-dir.mjs";
+
+// Kit files live in APPROVALPREP_KITS_DIR; in CI they are absent (contract mode).
+const kitFilesMode = kitsMode("product-flow-e2e");
 
 const products = readJson("data/products/products.json").products.filter((item) => item.status === "active_paid" && item.stripe_enabled);
 const offeringCatalog = readJson("data/products/full_offering_catalog.json");
@@ -123,23 +128,20 @@ for (const product of products) {
   if (product.sku === "complete-approvalprep-bundle" && (product.included_offerings.length < 30 || product.included_offerings.includes("all active self-service offerings"))) {
     issues.push("complete bundle must visibly list the included offering universe, not a vague one-row placeholder");
   }
-  if (!deliveryMatrix.includes(`seed-downloads/${product.sku}.pdf`) || !deliveryMatrix.includes(`seed-downloads/${product.sku}.docx`)) {
-    issues.push("download delivery matrix must list both PDF and DOCX review files");
-  }
-  if (!deliveryMatrix.includes(`downloads/${product.sku}.pdf`) || !deliveryMatrix.includes(`downloads/${product.sku}.docx`)) {
+  // The kit files are private (APPROVALPREP_KITS_DIR), so the matrix names the
+  // R2 key the uploader writes, never a repo path to the paid file.
+  if (!deliveryMatrix.includes(productAssetKey(product.sku, "pdf")) || !deliveryMatrix.includes(productAssetKey(product.sku, "docx"))) {
     issues.push("download delivery matrix must list both production R2 keys");
   }
-  if (!deliveryMatrix.includes(`../../seed-downloads/${product.sku}.pdf`) || !deliveryMatrix.includes(`../../seed-downloads/${product.sku}.docx`)) {
-    issues.push("download delivery matrix links must resolve from docs/products to seed-downloads");
-  }
+  if (deliveryMatrix.includes("seed-downloads/")) issues.push("download delivery matrix links a paid file path; the kits are not in this repository");
   const catalogCategory = offeringCatalog.categories.find((category) => category.product_sku === product.sku);
   if (!catalogCategory) issues.push("full offering catalog category missing");
   if (catalogCategory && catalogCategory.offerings.length < product.included_offerings.length) {
     issues.push("full offering catalog has fewer offerings than public product data");
   }
-  const docxPath = `seed-downloads/${product.sku}.docx`;
-  const docxText = fs.existsSync(docxPath) ? extractDocxText(docxPath) : "";
-  if (!docxText) issues.push("delivered DOCX text could not be read");
+  const docxPath = kitPath(product.sku, "docx");
+  const docxText = kitFilesMode === "files" && fs.existsSync(docxPath) ? extractDocxText(docxPath) : "";
+  if (kitFilesMode === "files" && !docxText) issues.push("delivered DOCX text could not be read");
   for (const offering of product.included_offerings || []) {
     if (docxText && !docxText.includes(normalize(offering))) {
       issues.push(`delivered DOCX missing included offering "${offering}"`);
@@ -200,4 +202,4 @@ fs.mkdirSync(path.join(process.cwd(), "reports/ux"), { recursive: true });
 fs.writeFileSync("reports/ux/product-flow-e2e-report.json", `${JSON.stringify(report, null, 2)}\n`);
 
 if (failures.length) fail(`[product-flow-e2e] ${failures.join("; ")}`);
-console.log(`[product-flow-e2e] OK products=${products.length} report=reports/ux/product-flow-e2e-report.json`);
+console.log(`[product-flow-e2e] OK products=${products.length} report=reports/ux/product-flow-e2e-report.json${kitFilesMode === "contract" ? `; ${CI_NOTE}` : ""}`);

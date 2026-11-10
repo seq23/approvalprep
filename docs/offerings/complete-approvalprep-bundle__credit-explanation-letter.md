@@ -16,9 +16,7 @@ This offering is included in the **Complete ApprovalPrep Bundle** paid kit. Afte
 
 ## Reviewable Files
 
-- PDF: [complete-approvalprep-bundle.pdf](../../seed-downloads/complete-approvalprep-bundle.pdf)
-- DOCX: [complete-approvalprep-bundle.docx](../../seed-downloads/complete-approvalprep-bundle.docx)
-- R2 production keys: `downloads/complete-approvalprep-bundle.pdf`, `downloads/complete-approvalprep-bundle.docx`
+- R2 keys (private bucket; the kit files are not in this repository): `products/complete-approvalprep-bundle/complete-approvalprep-bundle.pdf`, `products/complete-approvalprep-bundle/complete-approvalprep-bundle.docx`
 
 ## Contract Standard
 

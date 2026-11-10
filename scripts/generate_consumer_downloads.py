@@ -1,5 +1,5 @@
 from pathlib import Path
-import json, re, shutil
+import json, os, re, shutil, sys
 from docx import Document
 from docx.shared import Pt, Inches
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -12,8 +12,12 @@ from reportlab.lib import colors
 from reportlab.lib.units import inch
 
 ROOT = Path(__file__).resolve().parents[1]
-SEED_DOWNLOADS = ROOT/'seed-downloads'
-SEED_DOWNLOADS.mkdir(parents=True, exist_ok=True)
+# The paid kits are not in this public repository. They are written to
+# APPROVALPREP_KITS_DIR (default ~/.boss-os/approvalprep/kits), which
+# scripts/ops/r2-upload-assets.mjs uploads from after its safety gate.
+SEED_DOWNLOADS = Path(os.environ.get('APPROVALPREP_KITS_DIR') or Path.home()/'.boss-os'/'approvalprep'/'kits')
+if not SEED_DOWNLOADS.is_dir():
+    sys.exit(f'[KITS_DIR_MISSING] {SEED_DOWNLOADS} is not there. Set APPROVALPREP_KITS_DIR to the folder holding the paid kit files.')
 DOWNLOADS = SEED_DOWNLOADS
 
 # Remove consumer-hostile public markdown/text outputs. Keep source markdown under templates/prompts only.
@@ -311,7 +315,8 @@ for p in products:
       'files':[f'/api/download-file?type=pdf&session_id={{STRIPE_SESSION_ID}}',f'/api/download-file?type=docx&session_id={{STRIPE_SESSION_ID}}'],
       'firstPageRequires':['plain-language self-service boundary','not legal/financial/credit-repair/lending advice','no third-party contact','no fake documents','no promises or guarantees'],
       'requiredSections':COMMON_SECTIONS,
-      'r2Keys':[f'downloads/{p["sku"]}.pdf',f'downloads/{p["sku"]}.docx']
+      # The key rule in functions/_runtime/asset-keys.js (productAssetKey).
+      'r2Keys':[f'products/{p["sku"]}/{p["sku"]}.pdf',f'products/{p["sku"]}/{p["sku"]}.docx']
     })
 (ROOT/'data/products/download_manifest.json').write_text(json.dumps(manifest, indent=2))
 

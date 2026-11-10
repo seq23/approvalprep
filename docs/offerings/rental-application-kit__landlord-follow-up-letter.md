@@ -16,9 +16,7 @@ This offering is included in the **Rental Application Kit** paid kit. After veri
 
 ## Reviewable Files
 
-- PDF: [rental-application-kit.pdf](../../seed-downloads/rental-application-kit.pdf)
-- DOCX: [rental-application-kit.docx](../../seed-downloads/rental-application-kit.docx)
-- R2 production keys: `downloads/rental-application-kit.pdf`, `downloads/rental-application-kit.docx`
+- R2 keys (private bucket; the kit files are not in this repository): `products/rental-application-kit/rental-application-kit.pdf`, `products/rental-application-kit/rental-application-kit.docx`
 
 ## Contract Standard
 

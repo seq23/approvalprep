@@ -16,9 +16,7 @@ This offering is included in the **Letter of Explanation Kit** paid kit. After v
 
 ## Reviewable Files
 
-- PDF: [letter-of-explanation.pdf](../../seed-downloads/letter-of-explanation.pdf)
-- DOCX: [letter-of-explanation.docx](../../seed-downloads/letter-of-explanation.docx)
-- R2 production keys: `downloads/letter-of-explanation.pdf`, `downloads/letter-of-explanation.docx`
+- R2 keys (private bucket; the kit files are not in this repository): `products/letter-of-explanation/letter-of-explanation.pdf`, `products/letter-of-explanation/letter-of-explanation.docx`
 
 ## Contract Standard
 
