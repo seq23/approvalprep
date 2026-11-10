@@ -19,6 +19,7 @@ import fs from 'node:fs';
 import { productAssetKey, isProductAssetKey, DOWNLOAD_TYPES } from '../../functions/_runtime/asset-keys.js';
 import { onRequestGet as downloadFile } from '../../functions/api/download-file.js';
 import { seed } from '../../functions/_runtime/seed-products.js';
+import { kitsDir, kitsDirPresent } from '../lib/kits-dir.mjs';
 
 const failures = [];
 const fail = (msg) => failures.push(msg);
@@ -38,8 +39,10 @@ for (const product of liveProducts) {
 
 // 2. The bulk uploader's key for each local seed-download file must be the same
 //    key. This is the pair that has to agree: what gets written, what gets read.
-const seedDir = 'seed-downloads';
-if (fs.existsSync(seedDir)) {
+//    The files are private (APPROVALPREP_KITS_DIR); without them, step 1 and 3
+//    still pin every key, since the uploader derives its key from productAssetKey.
+const seedDir = kitsDir();
+if (kitsDirPresent(seedDir)) {
   for (const file of fs.readdirSync(seedDir).filter((f) => /\.(pdf|docx)$/i.test(f))) {
     const sku = file.replace(/\.(pdf|docx)$/i, '');
     const type = file.split('.').pop().toLowerCase();

@@ -35,12 +35,22 @@ const PARKED_DOMAIN_TARGET = new Map([
   ["www.employmentverificationletter.com", "/employment-verification-letter/"],
 ]);
 
+// A preview host must never be indexed: it duplicates the live site page for
+// page. Every response on a non-production host carries X-Robots-Tag: noindex.
+const withNoindex = async (next) => {
+  const response = await next();
+  const headers = new Headers(response.headers);
+  headers.set("X-Robots-Tag", "noindex, nofollow");
+  return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
+};
+
 export const onRequest = (context) => {
   const { request, next } = context;
   const url = new URL(request.url);
   const hostname = url.hostname.toLowerCase();
 
-  if (hostname === CANONICAL_HOST || isNonProductionHost(hostname)) return next();
+  if (hostname === CANONICAL_HOST) return next();
+  if (isNonProductionHost(hostname)) return withNoindex(next);
 
   // Redirecting a POST turns it into a GET, which would silently break a form
   // or an /api call aimed at the wrong host. Only navigations get moved.

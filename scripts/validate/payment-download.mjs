@@ -40,11 +40,41 @@ const webhook = fs.readFileSync(path.join(root, "functions/api/stripe-webhook.js
 if (!webhook.includes("stripe-signature") || !webhook.includes("STRIPE_WEBHOOK_SECRET")) fail("[payment] Stripe webhook must verify signatures");
 const layout = fs.readFileSync(path.join(root, "src/layouts/BaseLayout.astro"), "utf8");
 if (!layout.includes("Return to pricing and complete checkout") || !layout.includes("until Stripe confirms this session as paid")) fail("[payment] checkout success UI must explain unconfirmed sessions and send customers back to checkout or support");
-if (!layout.includes("discount_code")) fail("[payment] checkout JS must submit discount_code when present");
+// Buy buttons: the promo code is sent, and coming Back from Stripe leaves the button ready again.
+{
+  const { beginCheckout, restoreCheckoutButtons, OPENING_LABEL } = await import("../../src/lib/checkoutButtons.mjs");
+  if (!fs.readFileSync(path.join(root, "src/lib/checkoutButtons.mjs"), "utf8").includes("discount_code")) fail("[payment] checkout JS must submit discount_code when present");
+  if (!layout.includes("initCheckoutButtons")) fail("[payment] the layout must start the Buy buttons");
+  const button = { dataset: {}, textContent: "Buy Credit Letter Kit — $19", disabled: false };
+  beginCheckout(button); beginCheckout(button);
+  if (!button.disabled || button.textContent !== OPENING_LABEL) fail("[payment] a pressed Buy button must show it is opening the payment page");
+  restoreCheckoutButtons([button]);
+  if (button.disabled || button.textContent !== "Buy Credit Letter Kit — $19" || "label" in button.dataset) fail("[payment] back from Stripe must restore the Buy button");
+}
 if (!layout.includes("Optional: prefill a draft in the Studio") || !layout.includes("Download editable Word document")) fail("[payment] verified checkout UI must offer both direct template download and optional browser-only prefill path");
 const slugPage = fs.readFileSync(path.join(root, "src/pages/[...slug].astro"), "utf8");
 if (!slugPage.includes("If Stripe has not confirmed this checkout session as paid") || !slugPage.includes("download the blank/editable templates")) fail("[payment] checkout success page must explain paid-download versus optional prefill choice");
-if (!slugPage.includes("TEST100") || !slugPage.includes("data-discount-code")) fail("[payment] pricing page must expose discount code entry and TEST100 operator guidance");
+if (!slugPage.includes("data-discount-code")) fail("[payment] pricing page must keep the promo code field");
+// Money leak guard: no test or 100%-off code is ever printed to customers. Scans every source that
+// can reach a page or an API response, and the built site when it exists.
+{
+  const leak = /TEST100|test-mode|test mode fulfil/i;
+  const walk = (dir) => fs.existsSync(dir) ? fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => e.isDirectory() ? walk(path.join(dir, e.name)) : [path.join(dir, e.name)]) : [];
+  const sources = [...walk(path.join(root, "src")), ...walk(path.join(root, "functions")), ...walk(path.join(root, "public"))].filter((f) => /\.(astro|js|mjs|ts|json|md|mdx|html|txt)$/.test(f));
+  const built = walk(path.join(root, "dist")).filter((f) => f.endsWith(".html"));
+  if (sources.length < 20) fail("[payment] test-code leak guard read too few source files: " + sources.length);
+  for (const file of [...sources, ...built]) {
+    if (leak.test(fs.readFileSync(file, "utf8"))) fail("[payment] customer-visible test or 100%-off code text in " + path.relative(root, file));
+  }
+}
+// The checkout E2E must never run a discount code against live Stripe.
+{
+  const { discountCheckDecision } = await import("../ops/checkout-e2e-discount-guard.mjs");
+  if (discountCheckDecision({ code: "ANYCODE", fullPriceSessionId: "cs_live_abc" }).run !== false) fail("[payment] checkout E2E must refuse the discount path against live Stripe");
+  if (discountCheckDecision({ code: "ANYCODE", fullPriceSessionId: "" }).run !== false) fail("[payment] checkout E2E must refuse the discount path when the Stripe mode is unknown");
+  if (discountCheckDecision({ code: "", fullPriceSessionId: "cs_test_abc" }).run !== false) fail("[payment] checkout E2E must not invent a discount code");
+  if (discountCheckDecision({ code: "ANYCODE", fullPriceSessionId: "cs_test_abc" }).run !== true) fail("[payment] checkout E2E must still run the discount path in Stripe test mode");
+}
 
 const homepage = fs.readFileSync(path.join(root, "src/pages/index.astro"), "utf8");
 for (const token of ["After checkout, you choose", "Option A: Download now", "Option B: Use the free Studio", "replace the placeholders with your true facts"]) {
@@ -58,11 +88,11 @@ if (!smoke.includes("checkout_session_creation_only")) fail("[payment] Stripe sm
 const packageJson = fs.readFileSync(path.join(root, "package.json"), "utf8");
 if (!packageJson.includes("ops:local:checkout-download-e2e")) fail("[payment] package scripts must expose the local checkout/download E2E operator test");
 const localE2E = fs.readFileSync(path.join(root, "scripts/ops/local-checkout-download-e2e.mjs"), "utf8");
-for (const token of ["LOCAL_E2E_COMPLETED_SESSION_ID", "LOCAL_E2E_COMPLETED_SKU", "TEST100", "discount_code", "/api/verify-download", "/api/download-file", "PASS_COMPLETED_CHECKOUT_AND_PROTECTED_DOWNLOAD_PROOF", "PASS_CHECKOUT_CREATION_AND_SUCCESS_UI_ONLY", "LOCAL_E2E_FIXTURE_ONLY", "PASS_CHECKOUT_CREATION_SUCCESS_UI_AND_FIXTURE_FULFILLMENT", "reports/ops/local-checkout-download-e2e.json"]) {
+for (const token of ["LOCAL_E2E_COMPLETED_SESSION_ID", "LOCAL_E2E_COMPLETED_SKU", "discountCheckDecision", "discount_code", "/api/verify-download", "/api/download-file", "PASS_COMPLETED_CHECKOUT_AND_PROTECTED_DOWNLOAD_PROOF", "PASS_CHECKOUT_CREATION_AND_SUCCESS_UI_ONLY", "LOCAL_E2E_FIXTURE_ONLY", "PASS_CHECKOUT_CREATION_SUCCESS_UI_AND_FIXTURE_FULFILLMENT", "reports/ops/local-checkout-download-e2e.json"]) {
   if (!localE2E.includes(token)) fail("[payment] local checkout/download E2E script missing required proof token: " + token);
 }
 const localE2EDoc = fs.readFileSync(path.join(root, "docs/products/LOCAL_CHECKOUT_DOWNLOAD_E2E.md"), "utf8");
-for (const token of ["Checkout creation plus success-page UI proof", "Completed-session protected download proof", "Fixture fulfillment fallback proof", "LOCAL_E2E_FIXTURE_ONLY", "TEST100", "cs_test_", "That is not download proof"]) {
+for (const token of ["Checkout creation plus success-page UI proof", "Completed-session protected download proof", "Fixture fulfillment fallback proof", "LOCAL_E2E_FIXTURE_ONLY", "cs_test_", "That is not download proof"]) {
   if (!localE2EDoc.includes(token)) fail("[payment] local checkout/download E2E docs missing required operator guidance: " + token);
 }
 console.log("[payment] OK");

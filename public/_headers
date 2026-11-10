@@ -24,3 +24,31 @@
 # application/xml; Pinterest expects an RSS content type.
 /pinfeed.xml
   Content-Type: application/rss+xml; charset=utf-8
+
+# Caching (10 Nov 2026). Pages serve from Cloudflare's edge with no Function in front
+# (public/_routes.json sends only /api/* and the pin feeds to Functions). HTML keeps Pages' own
+# "max-age=0, must-revalidate": the browser re-checks with an ETag and gets a 304, so a deploy
+# shows at once. No /* cache rule on purpose: Pages joins repeated headers with a comma, which
+# would corrupt the immutable rule above.
+#
+# Files whose URL does not change when their content does: a day in the browser, served stale
+# for up to a week while the new copy is fetched.
+/assets/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/samples/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+/favicon.svg
+  Cache-Control: public, max-age=604800
+/og.png
+  Cache-Control: public, max-age=604800
+
+# Never cached: the page a buyer returns to from Stripe (its URL carries her checkout session).
+/checkout/*
+  Cache-Control: private, no-store
+
+# Preview hosts duplicate the live site page for page and must never be indexed. This was done by
+# the root middleware; pages no longer pass through it, so the rule lives here.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex, nofollow
+https://preview.approvalprep.com/*
+  X-Robots-Tag: noindex, nofollow

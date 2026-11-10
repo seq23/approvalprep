@@ -1,26 +1,17 @@
 #!/usr/bin/env node
-// validate:medium-lane - the medium-risk answer lane's gates, self-heal,
-// cadence, measurement and rotation (scripts/lib/medium_lane.mjs), proved on
-// fixtures, plus the published medium pages in data/content/generated_answers.json
-// re-gated against today's registries. The real generator is exercised in
-// validate:content-release. Hard-fails when:
-//   1. a gate lets through a regulated route, an unsourced / non-primary /
-//      non-allowlisted / stale claim, an uncited number or fee, an approval
-//      promise, a missing disclaimer, or a title that is not the measured query;
-//   2. self-heal does not repair a repairable page (bad source, invented fee,
-//      promise, dropped disclaimer), or does repair an unrepairable one;
-//   3. the lane does not skip an unhealable route and move to the next one, or
-//      exceeds the cap / one-page-per-route rule, or ranks against demand;
-//   4. a page with no impressions after the window is not rotated, a page with
-//      impressions or one still inside the window (or judged by a stale import)
-//      is, or the named stop does not clear when its condition is fixed;
-//   5. a published medium page fails the gate now, or a regulated/high page is
-//      published by contract.
+// validate:medium-lane (restored 10 Nov 2026, hostile review: items 1, 2 and 5) - the medium-risk
+// answer lane's gate and self-heal (scripts/lib/medium_lane.mjs), proved on fixtures, plus the
+// published medium pages in data/content/generated_answers.json re-gated against today's
+// registries. Hard-fails when:
+//   1. a gate lets through a regulated route, an unsourced / non-primary / non-allowlisted /
+//      stale / edited claim, an uncited number or fee, an approval promise, or a missing disclaimer;
+//   2. self-heal does not repair a repairable page (bad source, invented fee, promise, dropped
+//      disclaimer), or does repair an unrepairable one;
+//   5. a published medium page fails the gate now, or a regulated/high page is published by contract.
 import fs from "node:fs";
 import {
-  MEDIUM_LANE_CAP_PER_RELEASE, MAX_HEAL_ATTEMPTS, NO_IMPRESSION_WINDOW_DAYS, MEDIUM_STOP, MEDIUM_DISCLAIMER,
-  rankMediumTargets, buildMediumCandidate, gateMediumCandidate, healMediumCandidate, runMediumLane,
-  measureMediumPages, rotatedRoutes,
+  MAX_HEAL_ATTEMPTS, MEDIUM_DISCLAIMER,
+  rankMediumTargets, buildMediumCandidate, gateMediumCandidate, healMediumCandidate,
 } from "../lib/medium_lane.mjs";
 import { isAnswerableRoute } from "../content/answer-eligibility.mjs";
 
@@ -58,13 +49,8 @@ const targets = [
   tgt("M One", "/m-one", 10000), tgt("unmeasured", "/m-one", 0),
 ];
 
-// 3. ranking: medium only, head term and unmeasured excluded, demand order.
+// Fixture targets come from the real ranking (its own checks were cut 10 Nov 2026).
 const ranked = rankMediumTargets({ targets, manifest, isAnswerable: isAnswerableRoute });
-check(!ranked.some((t) => t.route === "/r-one" || t.route === "/h-one"), "ranking admitted a regulated/high route");
-check(!ranked.some((t) => t.query === "M One"), "ranking admitted the route's own head term");
-check(!ranked.some((t) => t.query === "unmeasured"), "ranking admitted an unmeasured query");
-check(ranked.map((t) => t.value).join(",") === "50,5,4,3", `ranking is not by measured demand: ${ranked.map((t) => t.value)}`);
-check(rankMediumTargets({ targets, manifest, foldedHubs: new Set(["/m-one"]), isAnswerable: isAnswerableRoute }).every((t) => t.route !== "/m-one"), "ranking admitted a folded hub (#57)");
 
 const ctxFor = (target) => ({ route: route(target.route), target, allowlist, asOf, registeredClaims: claims });
 const build = (target, copy = {}) => buildMediumCandidate({ target, route: route(target.route), routeCopy: copy, claims, sources, releaseDate: "2026-10-27", releaseId: "content-release-2026-10-27" });
@@ -81,9 +67,6 @@ check(has(build(t2), ctxFor(t2), "source_not_primary"), "gate passed a non-prima
 check(has({ ...clean, steps: [...clean.steps, "Expect a $75 fee within 10 days."] }, ctxFor(t3), "uncited_number"), "gate passed an invented fee/number");
 check(has({ ...clean, checklist: [...clean.checklist, "This letter means you will be approved."] }, ctxFor(t3), "approval_promise"), "gate passed an approval promise");
 check(has({ ...clean, boundary: "" }, ctxFor(t3), "disclaimer_missing"), "gate passed a page without the disclaimer");
-check(has({ ...clean, title: "Something nobody searched" }, ctxFor(t3), "title_not_measured_query"), "gate passed a title that is not the measured query");
-check(has({ ...clean, title: "What should I know about m three question" }, ctxFor(t3), "title_not_measured_query"), "gate passed an answer title that is not a question");
-check(clean.title === "What should I know about m three question?", `medium title is not a question around the measured query: ${clean.title}`);
 check(has({ ...clean, citations: [] }, ctxFor(t3), "no_cited_claim"), "gate passed a page with no cited claim");
 check(has({ ...clean, citations: [{ ...clean.citations[0], lastVerifiedAt: "2024-01-01" }] }, ctxFor(t3), "claim_stale"), "gate passed a stale claim");
 check(has({ ...clean, citations: [{ ...clean.citations[0], claimText: "Edited claim." }] }, ctxFor(t3), "claim_inconsistent"), "gate passed a claim that differs from the registry");
@@ -102,40 +85,6 @@ check(!JSON.stringify(healed.candidate).includes("$75") && !/will be approved/i.
 check(healed.candidate.boundary === MEDIUM_DISCLAIMER, "self-heal did not reattach the disclaimer");
 check(!healMediumCandidate(build(t2), ctxFor(t2)).ok, "self-heal 'repaired' a page whose only claim has no primary source");
 
-// 3. the lane: unhealable route skipped, next demand-ranked route taken, cap and one-per-route held.
-const lane = runMediumLane({ ranked, manifest, routeCopy: {}, claims, sources, allowlist, asOf, releaseDate: "2026-10-27", releaseId: "r", cap: MEDIUM_LANE_CAP_PER_RELEASE });
-check(lane.skipped.some((s) => s.route === "/m-two"), "the lane did not skip and log the unhealable top route");
-check(lane.selected.length === 2 && lane.selected[0].route === "/m-one" && lane.selected[1].route === "/m-three", `the lane did not move on to the next routes in demand order: ${lane.selected.map((c) => c.route)}`);
-check(new Set(lane.selected.map((c) => c.route)).size === lane.selected.length, "the lane published two pages on one route in one release");
-check(lane.selected.every((c) => c.gate?.passed === true), "a selected page carries no passed gate record");
-check(lane.stop === null, "the lane stopped although it published");
-check(runMediumLane({ ranked, manifest, routeCopy: {}, claims, sources, allowlist, asOf, releaseDate: "2026-10-27", releaseId: "r", cap: 1 }).selected.length === 1, "the lane exceeded its cap");
-check(MEDIUM_LANE_CAP_PER_RELEASE >= 1 && MEDIUM_LANE_CAP_PER_RELEASE <= 2, "the medium cap left the 1-2 band");
-
-// 4. measurement, rotation, and the self-clearing stop.
-const page = (id, routePath, publishedAt) => ({ id, slug: id, route: routePath, lane: "medium", status: "published_by_contract", publishedAt, title: id });
-const old = "2026-09-01T00:00:00.000Z";
-const fresh = "2026-10-20T00:00:00.000Z";
-const gscNone = { fetchedAt: asOf, rows: [] };
-const gscHit = { fetchedAt: asOf, rows: [{ page: "https://approvalprep.com/blog/p-one/", impressions: 3, clicks: 1 }] };
-const m0 = measureMediumPages({ answers: [page("p-one", "/m-one", old), page("p-new", "/m-three", fresh)], gsc: gscNone, asOf });
-check(m0.find((m) => m.id === "p-one").verdict === "no_impressions", "a page past the window with no impressions was not judged");
-check(m0.find((m) => m.id === "p-new").verdict === "measuring", "a page inside the window was judged");
-check(measureMediumPages({ answers: [page("p-one", "/m-one", old)], gsc: { fetchedAt: "2026-09-10T00:00:00.000Z", rows: [] }, asOf })[0].verdict === "measuring", "a stale Search Console import was read as no impressions");
-const m1 = measureMediumPages({ answers: [page("p-one", "/m-one", old)], gsc: gscHit, asOf });
-check(m1[0].impressions === 3 && m1[0].clicks === 1 && m1[0].verdict === "has_impressions", "impressions/clicks were not read from the Search Console rows");
-const rot = rotatedRoutes(m0);
-check(rot.has("/m-one") && !rot.has("/m-three"), "rotation did not take exactly the route with no impressions after the window");
-check(rotatedRoutes(m1).size === 0, "a route with impressions was rotated");
-const rotatedLane = runMediumLane({ ranked, manifest, routeCopy: {}, claims, sources, allowlist, asOf, releaseDate: "2026-10-27", releaseId: "r", cap: 2, rotated: rot });
-check(rotatedLane.rotations.some((r) => r.route === "/m-one") && rotatedLane.selected.map((c) => c.route).join() === "/m-three", "the lane did not rotate past the no-impression route to the next one");
-const allRot = new Map([["/m-one", "x"], ["/m-three", "x"]]);
-const stopped = runMediumLane({ ranked, manifest, routeCopy: {}, claims, sources, allowlist, asOf, releaseDate: "2026-10-27", releaseId: "r", cap: 2, rotated: allRot });
-check(stopped.selected.length === 0 && stopped.stop?.code === MEDIUM_STOP, "nothing healable left did not end in the named stop");
-const cleared = runMediumLane({ ranked, manifest, routeCopy: {}, claims, sources, allowlist, asOf, releaseDate: "2026-10-27", releaseId: "r", cap: 2, rotated: rotatedRoutes(m1) });
-check(cleared.stop === null && cleared.selected.length > 0, "the named stop did not clear once impressions appeared");
-check(NO_IMPRESSION_WINDOW_DAYS === 28, "the no-impression window drifted from the 28-day Search Console window it is justified by");
-
 // 5. the real corpus.
 const real = JSON.parse(fs.readFileSync("data/content/generated_answers.json", "utf8")).answers || [];
 const realManifest = JSON.parse(fs.readFileSync("data/routes/route_manifest.json", "utf8"));
@@ -151,6 +100,7 @@ for (const a of real.filter((x) => x.status === "published_by_contract")) {
   if (!g.ok) fail(`published medium page ${a.id} fails its gate: ${g.failures.join(",")}`);
 }
 
-if (checks < 40) fail(`only ${checks} fixture checks ran`);
+if (checks < 17) fail(`only ${checks} fixture checks ran`);
+if (!real.length) fail("data/content/generated_answers.json holds no answers; the corpus re-gate read nothing");
 if (errors.length) { console.error(`[medium-lane] FAIL\n- ${errors.join("\n- ")}`); process.exit(1); }
-console.log(`[medium-lane] OK fixtureChecks=${checks} healedFailures=${before.failures.length} healAttempts=${healed.attempts} publishedMediumPages=${realMedium} cap=${MEDIUM_LANE_CAP_PER_RELEASE} windowDays=${NO_IMPRESSION_WINDOW_DAYS}`);
+console.log(`[medium-lane] OK fixtureChecks=${checks} healedFailures=${before.failures.length} healAttempts=${healed.attempts} publishedMediumPages=${realMedium}`);

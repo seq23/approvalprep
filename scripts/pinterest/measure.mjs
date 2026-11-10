@@ -2,8 +2,8 @@
 // Weekly Pinterest measurement: visits per pin variant, from the analytics this
 // repo already records. Every page view posts to /api/track-event, which stores
 // path + query (utm params included) in D1 conversion_events (functions/api/
-// track-event.js, src/components/AnalyticsEvent.astro). This reads the last 7
-// days of page_view rows whose query carries utm_source=pinterest and counts them
+// track-event.js, src/components/AnalyticsEvent.astro). This reads every day since the last count (measure_window.mjs),
+// not a fixed 7 days, of page_view rows whose query carries utm_source=pinterest and counts them
 // per utm_content (= the variant id; launch pins carry no utm_content).
 //
 // Writes data/pinterest/metrics.json (newest week first, 26 kept). When D1 cannot
@@ -15,13 +15,14 @@
 import fs from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { windowStart } from "./measure_window.mjs";
 
 const OUT = "data/pinterest/metrics.json";
 const STOP = "PINTEREST_METRICS_UNAVAILABLE";
 const DB = "approvalprep-products";
 const now = process.env.PINFEED_NOW ? new Date(process.env.PINFEED_NOW) : new Date();
-const since = new Date(now.getTime() - 7 * 86400000).toISOString();
 const prev = fs.existsSync(OUT) ? JSON.parse(fs.readFileSync(OUT, "utf8")) : { weeks: [] };
+const since = windowStart(prev, now);
 
 function save(doc) {
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
@@ -84,7 +85,7 @@ for (const r of rows) {
   byPage[u.pathname] = (byPage[u.pathname] || 0) + Number(r.views);
   total += Number(r.views);
 }
-const week = { weekEnding: now.toISOString().slice(0, 10), since, allPageViews: totalViews, pinterestViews: total, pinsReleased, pinCheckouts, pinSales, byVariant, byPage };
+const week = { weekEnding: now.toISOString().slice(0, 10), since, until: now.toISOString(), allPageViews: totalViews, pinterestViews: total, pinsReleased, pinCheckouts, pinSales, byVariant, byPage };
 const weeks = [week, ...(prev.weeks || []).filter((w) => w.weekEnding !== week.weekEnding)].slice(0, 26);
 save({ _comment: "Weekly Pinterest visits per pin variant from D1 conversion_events (page_view rows with utm_source=pinterest). Written by scripts/pinterest/measure.mjs.", updatedAt: now.toISOString(), state: "MEASURED", source: "d1:conversion_events", weeks });
 const top = Object.entries(byVariant).sort((a, b) => b[1].views - a[1].views).slice(0, 5).map(([id, v]) => `${id} ${v.views}`).join(", ");

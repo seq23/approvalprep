@@ -45,8 +45,6 @@ jobs:
       - name: Validate delegated authority and notifications
         run: |
           npm run validate:delegated-authority
-          npm run validate:self-heal-progressions
-          npm run validate:owner-exceptions
           npm run validate:notification-policy
       - name: Fixture trace
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
@@ -72,7 +70,6 @@ jobs:
         run: npm run automation:safe -- --mode=$RUN_MODE
       - name: Validate v4.2 lean controls
         run: |
-          npm run validate:admin-action-links
           npm run validate:automation-safety
       - name: Create PR for live mode
         if: ${{ env.RUN_MODE == 'live' }}

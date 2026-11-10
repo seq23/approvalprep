@@ -1,37 +1,16 @@
 #!/usr/bin/env node
-import fs from "node:fs";
-import path from "node:path";
-import { run } from "./lib/exec.mjs";
-import { productAssetKey } from "../../functions/_runtime/asset-keys.js";
+// Uploads the paid kit files from APPROVALPREP_KITS_DIR (default
+// ~/.boss-os/approvalprep/kits; they are not in this public repository) to the
+// private R2 bucket buyers download from. Refuses with a named stop when the
+// folder is missing ([KITS_DIR_MISSING]) or any file fails the kit safety
+// checks ([KIT_FIRST_PAGE_UNSAFE]); see scripts/ops/lib/upload-kits.mjs.
+import { uploadKits, gateKitsForUpload } from "./lib/upload-kits.mjs";
 
 const bucketName = process.env.CLOUDFLARE_R2_BUCKET_NAME || "approvalprep-product-assets";
-const dir = process.env.APPROVALPREP_SEED_DOWNLOADS_DIR || "seed-downloads";
 
-if (!fs.existsSync(dir)) throw new Error(`${dir} missing`);
-
-const files = fs.readdirSync(dir)
-  .filter((file) => /\.(pdf|docx)$/i.test(file))
-  .sort();
-
-if (!files.length) throw new Error(`${dir} contains no PDF or DOCX files`);
-
-for (const file of files) {
-  const local = path.join(dir, file);
-  const sku = file.replace(/\.(pdf|docx)$/i, "");
-  // Same rule the runtime resolves and the admin uploader writes. This script
-  // already produced these keys, and the live bucket holds exactly them; it now
-  // derives them from the shared function so the three cannot drift apart.
-  const key = productAssetKey(sku, file.split(".").pop().toLowerCase());
-  run("npx", [
-    "wrangler",
-    "r2",
-    "object",
-    "put",
-    `${bucketName}/${key}`,
-    "--file",
-    local,
-    "--remote"
-  ]);
+if (process.argv.includes("--check")) {
+  // The gate alone, for a dry look before an upload. Uploads nothing.
+  gateKitsForUpload();
+} else {
+  uploadKits(bucketName);
 }
-
-console.log(`R2 product assets uploaded remotely: ${bucketName} files=${files.length}`);

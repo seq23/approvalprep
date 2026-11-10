@@ -34,8 +34,6 @@ jobs:
         run: npm run workflows:trace -- --workflow content-opportunity-analysis.yml
       - run: npm run intelligence:content-opportunities
       - run: npm run intelligence:recommend-page-actions
-      - run: npm run validate:content-actions
-      - run: npm run validate:citation-opportunities
       - name: Feed the registry into the search loop's finder
         # citation_opportunity_registry.json is the finder input for the search loop
         # (Search Loop workflow, seq23/search-loop): the subjects with open

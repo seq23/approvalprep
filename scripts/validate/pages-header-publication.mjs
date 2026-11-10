@@ -186,6 +186,30 @@ for (const rule of rules) {
   }
 }
 
+// 4b. Public pages must not invoke a Function. Without _routes.json the root middleware runs on
+//     every request, so each page view spends a Function invocation and cannot be served
+//     straight from the edge. Only the real API paths and the pin feeds may be routed.
+if (outDir) {
+  const routesPath = path.join(root, outDir, '_routes.json');
+  if (!fs.existsSync(routesPath)) {
+    failures.push(`${outDir}/_routes.json is missing, so every page request invokes a Function.`);
+  } else {
+    const include = JSON.parse(fs.readFileSync(routesPath, 'utf8')).include || [];
+    const allowed = /^\/(api\/\*|pinfeed\.xml|pinfeed\/\*)$/;
+    if (include.length === 0) failures.push('_routes.json includes nothing, so the API would stop working.');
+    for (const route of include) {
+      if (!allowed.test(route)) failures.push(`_routes.json routes "${route}" to a Function; only /api/* and the pin feeds may be.`);
+    }
+    const functionFiles = [];
+    const walkFn = (dir, prefix = '') => { for (const e of fs.readdirSync(path.join(root, dir), { withFileTypes: true })) { if (e.isDirectory()) { if (!e.name.startsWith('_')) walkFn(path.join(dir, e.name), `${prefix}/${e.name}`); } else if (!e.name.startsWith('_') && e.name.endsWith('.js')) functionFiles.push(`${prefix}/${e.name.replace(/\.js$/, '')}`); } };
+    walkFn('functions');
+    for (const fn of functionFiles) {
+      const reached = include.some((route) => matcher(route).test(fn.replace(/\/\[[^\]]+\]$/, '/x')));
+      if (!reached) failures.push(`functions${fn}.js is not reachable through _routes.json include.`);
+    }
+  }
+}
+
 // 5. Content-hashed assets must actually be covered by an immutable rule. This
 //    is the live caching behaviour the whole file exists for.
 if (publishedText !== null && outDir) {

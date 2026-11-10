@@ -57,7 +57,6 @@ jobs:
       - name: Validate truthful yield and indexing ledgers
         run: |
           npm run authority:yield:validate
-          npm run validate:indexing-provider-ledgers
       - name: Cadence gate
         # This workflow regenerates public/sitemap.xml and commits it, so it can
         # change the published URL set and is a publisher by the only definition

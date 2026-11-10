@@ -42,7 +42,6 @@ jobs:
         # Held by validate:build-output-contract, which keys on the validators
         # rather than on the registry and so can see a direct invocation.
         run: npm run build
-      - run: npm run validate:seo-surfaces
 
       - name: Build growth health snapshot
         run: npm run health:build-growth

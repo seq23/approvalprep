@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 import fs from "node:fs";
-import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { unlockVaultEnv, maskedSummary } from "./lib/env-loader.mjs";
 import { run } from "./lib/exec.mjs";
+import { gateKitsForUpload, uploadKits } from "./lib/upload-kits.mjs";
 
 function pushSecret(project, key, value) {
   console.log(`[ops] wrangler pages secret put ${key} --project-name ${project}`);
@@ -21,6 +21,9 @@ async function smoke(baseUrl) {
 }
 
 console.log("ApprovalPrep real deploy started.");
+// Kit safety gate first, before anything changes: a kit that fails it stops the
+// whole deploy ([KITS_DIR_MISSING] / [KIT_FIRST_PAGE_UNSAFE]).
+gateKitsForUpload();
 const { env } = await unlockVaultEnv({ real: true });
 console.log("Vault unlock: OK");
 console.log(JSON.stringify(maskedSummary(env), null, 2));
@@ -39,9 +42,6 @@ run("npx", ["wrangler", "d1", "migrations", "apply", env.CLOUDFLARE_D1_DATABASE_
 const seedSql = spawnSync("node", ["scripts/runtime/seed-product-registry.mjs"], { encoding: "utf8", shell: false });
 if (seedSql.status !== 0) throw new Error("Failed to generate product seed SQL");
 run("npx", ["wrangler", "d1", "execute", env.CLOUDFLARE_D1_DATABASE_NAME, "--remote", "--command", seedSql.stdout]);
-const downloads = "seed-downloads";
-for (const file of fs.readdirSync(downloads).filter((f) => /\.(pdf|docx)$/i.test(f))) {
-  run("npx", ["wrangler", "r2", "object", "put", `${env.CLOUDFLARE_R2_BUCKET_NAME}/downloads/${file}`, "--file", path.join(downloads, file)]);
-}
+uploadKits(env.CLOUDFLARE_R2_BUCKET_NAME);
 await smoke(env.POSTDEPLOY_BASE_URL);
 console.log("ApprovalPrep real deploy completed.");

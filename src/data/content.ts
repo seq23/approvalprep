@@ -266,14 +266,6 @@ export const footerGroups = [
         "Blog"
       ],
       [
-        "/llms.txt",
-        "llms.txt"
-      ],
-      [
-        "/llms-full.txt",
-        "llms-full.txt"
-      ],
-      [
         "/sitemap.xml",
         "Sitemap"
       ]
@@ -573,7 +565,7 @@ const manualRouteCopy = {
   // and previously had nothing at the prefix itself.
   "/tools": {
     "primaryCta": "Compare the paid kits",
-    "secondaryCta": "Start free for $0",
+    "secondaryCta": "Draft free in the Letter Studio",
     "heading": "Free ApprovalPrep Document Checklists",
     "metaDescription": "Six free ApprovalPrep checklists for apartment applications, proof of income, business funding, mortgages, car loans, and your important documents.",
     "lead": "Six free checklists, one for each application situation ApprovalPrep publishes for: apartment applications, proof of income, small-business funding, mortgage documents, car loans, and the important-documents folder you keep for everything else.",
@@ -642,7 +634,7 @@ const manualRouteCopy = {
   },
   "/templates": {
     "primaryCta": "Get the editable kits",
-    "secondaryCta": "Start free for $0",
+    "secondaryCta": "Draft free in the Letter Studio",
     "heading": "ApprovalPrep Letter Template Previews",
     "metaDescription": "Previews of five ApprovalPrep letters: address history, employment gap, bank deposits, a rental cover letter, and self-employed proof of income.",
     "lead": "Five public previews showing how each ApprovalPrep letter is structured: address history, employment gap, bank statement deposits, a rental application cover letter, and self-employed proof of income.",
@@ -711,7 +703,7 @@ const manualRouteCopy = {
   },
   "/reports": {
     "primaryCta": "Compare the paid kits",
-    "secondaryCta": "Start free for $0",
+    "secondaryCta": "Draft free in the Letter Studio",
     "heading": "ApprovalPrep Public Reports",
     "metaDescription": "Three ApprovalPrep public reports on what applicants are asked to produce: a checklist catalog, a rental prep report, and a business funding report.",
     "lead": "Three public reports on what applicants are actually asked to produce: a catalog of public application checklists, a rental application prep report, and a small-business funding document prep report.",
@@ -783,7 +775,7 @@ const manualRouteCopy = {
     "lead": "ApprovalPrep resources help users find guides, policies, publishing updates, glossary definitions, privacy boundaries, and product paths without guessing where the next piece of content lives.",
     "shortAnswer": "The Resources hub is the organizing layer for ApprovalPrep education. It points users to the blog, methodology, glossary, legal policies, pricing, and the free Studio while keeping the self-service boundary visible.",
     "primaryCta": "Read the publishing hub",
-    "secondaryCta": "Start free for $0",
+    "secondaryCta": "Draft free in the Letter Studio",
     "decisionContext": [
       "A resource section should not be a pile of footer links. It should explain where the content engine publishes, where users can learn the method, where policies live, and where buyers can return when they are ready to choose a kit.",
       "ApprovalPrep uses Resources as the public map for evergreen guides, daily answer assets, policy pages, and user education. That gives people a recovery path when they are not ready to buy yet, and gives future publishing a visible home."
@@ -849,7 +841,7 @@ const manualRouteCopy = {
     "heading": "ApprovalPrep Blog",
     "lead": "The ApprovalPrep Blog is the public home for daily and cadenced document-prep publishing: short answers, route-specific explainers, and practical self-service guidance.",
     "shortAnswer": "The Blog answers the question of where ongoing content goes. Published answer assets live here, point back to relevant product or guide pages, and keep users moving toward the right next step.",
-    "primaryCta": "Start free for $0",
+    "primaryCta": "Draft free in the Letter Studio",
     "secondaryCta": "Browse resources",
     "decisionContext": [
       "A content engine without a public publishing surface creates hidden work. The answers may exist in JSON, LLM files, or internal reports, but users cannot browse them and search engines cannot treat them as a coherent editorial body.",
@@ -916,7 +908,7 @@ const manualRouteCopy = {
     "heading": "Free Letter Writing Studio",
     "lead": "Draft a first-pass explanation letter for $0 before you buy anything. No account, no upload, no stored answers, and no payment required.",
     "shortAnswer": "The Studio is a free browser-only drafting tool. It helps you organize messy facts, create a first-pass draft, and choose the paid kit that fits your situation. ApprovalPrep does not store your answers or send anything for you.",
-    "primaryCta": "Start for $0",
+    "primaryCta": "Draft free in the Letter Studio",
     "secondaryCta": "Compare paid kits",
     "decisionContext": [
       "Most people do not start with a product name. They start with pressure: a landlord asked a question, a lender wants an explanation, a credit issue needs careful wording, or an office needs a clear note.",
@@ -982,59 +974,8 @@ const manualRouteCopy = {
     "metaTitle": "ApprovalPrep Pricing: Compare All Eight Document Prep Kits",
     "lead": "Compare all eight ApprovalPrep kits side by side: what each one covers, which situations it fits, and when the free Studio or a free checklist is enough.",
     "shortAnswer": "Eight kits, each a one-time purchase with no subscription: pick the one that matches the paperwork in front of you, or the bundle if you are facing several at once. Compare kits by the document you actually have to produce this month, not by item count; every kit downloads as both a PDF guide and an editable DOCX.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "View product paths",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
-    "whoFor": [
-      "People preparing for compare all kits before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants price confidence without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns buyer decision into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on price confidence: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for compare all kits.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with price confidence.",
-      "You know buyer decision may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
-    ],
-    "prepBrief": [
-      "Write down the exact question, concern, or document request connected to compare all kits.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
-    ],
-    "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
-    ],
     "steps": [
       "Clarify the request or situation.",
       "Gather real supporting documents.",
@@ -1044,22 +985,7 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee price confidence?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
+      { "question": "Is any kit a subscription?", "answer": "No. Each kit is a one-time payment for a PDF guide and an editable DOCX. Nothing renews, and ApprovalPrep does not charge you again." }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -1076,57 +1002,6 @@ const manualRouteCopy = {
     "shortAnswer": "A letter of explanation is a short, factual account of one event in your financial history, written for a reviewer who has asked you to account for it. Name the event, give its dates, say what changed and what is true now, and attach only the documents that support those specific statements.",
     "primaryCta": "Create my letter",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
-    "whoFor": [
-      "People preparing for one clear explanation before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants reviewer confidence without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns gap or issue into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on reviewer confidence: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for one clear explanation.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with reviewer confidence.",
-      "You know gap or issue may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
-    ],
-    "prepBrief": [
-      "Write down the exact question, concern, or document request connected to one clear explanation.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
-    ],
-    "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
-    ],
     "steps": [
       "Clarify the request or situation.",
       "Gather real supporting documents.",
@@ -1136,22 +1011,7 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee reviewer confidence?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
+      { "question": "Will a lender accept any letter of explanation I write?", "answer": "No letter guarantees acceptance. The underwriter decides, and ApprovalPrep does not contact your lender. The kit helps you answer the exact item they asked about, with proof attached." }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -1166,58 +1026,28 @@ const manualRouteCopy = {
     "heading": "Credit Letter of Explanation",
     "lead": "Explain a late payment, collection, or other credit item to a lender or landlord in a few factual sentences, backed by dates and documents you can show.",
     "shortAnswer": "A credit explanation letter accounts for a specific entry on your credit report: what happened, when, and where the account stands today. Pull the report first and quote the entry exactly as it appears, including the creditor name and the date, so the reviewer can match your letter to the line.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
     "whoFor": [
-      "People preparing for credit context before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Consumers who understand this is DIY paperwork help, not credit repair or bureau representation."
-    ],
-    "value": [
-      "Turns not credit repair into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on supporting facts: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for credit context.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with supporting facts.",
-      "You know not credit repair may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
+      "An underwriter asked you to explain a late payment, collection, charge-off or new inquiry on your credit report.",
+      "You have a credit item with a real cause (job loss, medical bills, a billing error) that has since been resolved or is being paid.",
+      "You are applying for a mortgage or apartment and expect the score or report to raise a question."
     ],
     "prepBrief": [
-      "Write down the exact question, concern, or document request connected to credit context.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "For credit matters, disputing accurate information as false or implying someone else is repairing credit for you."
+      "A current copy of the credit report with the exact item circled: creditor, account ending, date and amount.",
+      "Proof of the cause: a termination letter, hospital bill, divorce decree or dispute confirmation.",
+      "Proof it is handled now: a payoff letter, a payment plan, or twelve months of on-time statements.",
+      "The lender's written request, so you answer only the item they named."
     ],
     "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
+      "Each credit item you mention matches the report exactly: creditor name, dates and balance.",
+      "You state what caused it, what you did about it, and why it is unlikely to happen again, in that order.",
+      "Nothing in the letter blames the creditor or disputes the item unless you have filed a dispute."
+    ],
+    "commonMistakes": [
+      "Explaining items the lender did not ask about, which invites more questions.",
+      "Calling an item an error in an explanation letter instead of disputing it with the bureau.",
+      "Promising future behaviour with no proof of a change already made."
     ],
     "steps": [
       "Review the relevant credit report or account record.",
@@ -1228,18 +1058,6 @@ const manualRouteCopy = {
       "Send it yourself and keep proof of delivery."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee supporting facts?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
       {
         "question": "Is this credit repair?",
         "answer": "No. ApprovalPrep does not repair credit, contact bureaus, remove accurate items, or promise score improvement. It helps you prepare your own paperwork."
@@ -1258,58 +1076,28 @@ const manualRouteCopy = {
     "heading": "Eviction Letter of Explanation",
     "lead": "Explain a past eviction or rental dispute to a new landlord with a short, factual timeline, what has changed since, and the records behind each statement.",
     "shortAnswer": "An eviction explanation letter tells a prospective landlord what happened, how it was resolved, and what your housing record has looked like since. Have the case outcome, any settlement or payment record, and references from the tenancies that followed ready to attach.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
     "whoFor": [
-      "People preparing for eviction context before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants changed circumstances without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns housing review into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on changed circumstances: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for eviction context.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with changed circumstances.",
-      "You know housing review may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
+      "A landlord or property manager found an eviction filing or judgment on a tenant screening report.",
+      "Your eviction case was dismissed, settled or paid, and the record still shows up.",
+      "You were evicted because of a one-time event (a job loss, a medical crisis, a landlord sale) and have rented without trouble since."
     ],
     "prepBrief": [
-      "Write down the exact question, concern, or document request connected to eviction context.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
+      "The court case number, filing date and the outcome: dismissed, settled, judgment paid, or sealed.",
+      "Proof of payment or a satisfaction of judgment if money was owed.",
+      "Rent receipts, a ledger or a reference from every landlord since the eviction.",
+      "Current proof of income showing the new rent fits, such as recent pay stubs or an offer letter."
     ],
     "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
+      "The case outcome you state matches the court record word for word.",
+      "The letter says what happened, what has changed, and what proof is attached, in under one page.",
+      "You named a reference the landlord can actually reach, with their permission."
+    ],
+    "commonMistakes": [
+      "Leaving the eviction out and hoping the screening misses it; most tenant screening reports include court filings.",
+      "Writing a long account of the dispute with the old landlord instead of what has changed since.",
+      "Offering a larger deposit or prepaid rent you cannot afford, or that local law does not allow."
     ],
     "steps": [
       "Clarify the request or situation.",
@@ -1320,22 +1108,6 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee changed circumstances?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -1350,58 +1122,28 @@ const manualRouteCopy = {
     "heading": "Income Letter of Explanation",
     "lead": "Explain unusual deposits or an irregular income to a lender or landlord: where the money came from, when, and which statements or pay records show it.",
     "shortAnswer": "An income explanation letter accounts for deposits, gaps or swings in your income that your statements show but do not explain. Tie each unusual deposit to its source and have the paperwork behind it: a sale, a gift, a reimbursement, a bonus, a transfer between your own accounts.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
     "whoFor": [
-      "People preparing for income context before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants document support without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns unusual deposits into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on document support: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for income context.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with document support.",
-      "You know unusual deposits may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
+      "A lender or landlord asked why your income changed, dropped, or does not match last year's tax return.",
+      "You are paid by commission, bonus, tips or overtime and your monthly income moves around.",
+      "You recently changed jobs, went part-time, or returned to work and the pay history looks uneven."
     ],
     "prepBrief": [
-      "Write down the exact question, concern, or document request connected to income context.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
+      "The two most recent years of W-2s or tax returns and your latest pay stubs.",
+      "A written offer or employer letter for any new pay rate, schedule or position.",
+      "For variable pay, a year-to-date total and how bonus or commission is calculated.",
+      "The date the change started and whether it is permanent or temporary."
     ],
     "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
+      "Every income figure matches a document you are attaching.",
+      "You say plainly whether the change is permanent, and when the new figure started.",
+      "Temporary income (unemployment, a one-time bonus) is not presented as ongoing pay."
+    ],
+    "commonMistakes": [
+      "Rounding income up or averaging in a year that does not reflect current pay.",
+      "Explaining a drop without saying what the income is now.",
+      "Attaching bank deposits instead of the pay records the request asked for."
     ],
     "steps": [
       "Clarify the request or situation.",
@@ -1412,22 +1154,6 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee document support?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -1442,58 +1168,28 @@ const manualRouteCopy = {
     "heading": "Employment Gap Letter of Explanation",
     "lead": "Explain a gap in employment with the dates, the reason in one plain sentence, and what you did during it, so a lender or landlord can close the question.",
     "shortAnswer": "An employment gap letter sets out when you were out of work, why, and what your current role and income are. Fix the start and end dates of the gap against your own records before you write, and say plainly what you were doing during it.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
     "whoFor": [
-      "People preparing for employment gap before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants what changed without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns timeline clarity into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on what changed: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for employment gap.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with what changed.",
-      "You know timeline clarity may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
+      "A mortgage underwriter asked about a gap in your work history, often any gap longer than a month or two.",
+      "You took time off for caregiving, illness, school, a move or a layoff and are back at work now.",
+      "An employer's background check or a landlord's income check shows dates that do not line up."
     ],
     "prepBrief": [
-      "Write down the exact question, concern, or document request connected to employment gap.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
+      "Exact start and end dates for the job before and after the gap.",
+      "Proof of the reason where it exists: a school transcript, a layoff notice, a medical note that names no diagnosis.",
+      "Your current offer letter or recent pay stubs showing you are working now.",
+      "How you paid bills during the gap, if the lender asks: savings, a spouse's income, unemployment benefits."
     ],
     "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
+      "The dates in the letter match your application and your W-2s.",
+      "The reason takes one or two sentences, and the letter spends more words on your current job.",
+      "No private medical detail is included beyond what is needed to explain the dates."
+    ],
+    "commonMistakes": [
+      "Over-sharing medical or family details the lender does not need.",
+      "Leaving the current job out, when that is what the underwriter cares about most.",
+      "Giving different dates in the letter and on the loan application."
     ],
     "steps": [
       "Clarify the request or situation.",
@@ -1504,22 +1200,6 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee what changed?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -1536,56 +1216,26 @@ const manualRouteCopy = {
     "shortAnswer": "An employment verification letter is written by your employer to confirm your role, start date and pay to whoever has asked for it. Send your employer or HR team a draft with the details already filled in, and name who it should be addressed to and by when.",
     "primaryCta": "Get the income kit",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
     "whoFor": [
-      "People preparing for employment verification before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants no fake records without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns truthful work details into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on no fake records: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for employment verification.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with no fake records.",
-      "You know truthful work details may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
+      "A landlord, lender or agency asked you for a letter from your employer confirming your job.",
+      "You are the employer or HR contact and need a plain format to confirm an employee's role and pay.",
+      "You need the letter quickly and your HR team has no template."
     ],
     "prepBrief": [
-      "Write down the exact question, concern, or document request connected to employment verification.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
+      "The employee's legal name, job title, start date and employment status (full-time, part-time, contract).",
+      "Pay rate or salary, only if the employee has authorised sharing it.",
+      "The name, title and contact details of the person signing for the company.",
+      "Who the letter is addressed to and what exactly they asked to have confirmed."
     ],
     "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
+      "It is on company letterhead or from a company email, and signed by someone with authority to confirm employment.",
+      "It confirms only facts the company records show; no promises about future employment.",
+      "The employee has agreed to any salary figure being included."
+    ],
+    "commonMistakes": [
+      "The employee writing and signing the letter themselves; verifiers call the employer to check.",
+      "Including salary without the employee's consent.",
+      "Leaving off a phone number or email the verifier can use to confirm the letter."
     ],
     "steps": [
       "Clarify the request or situation.",
@@ -1596,22 +1246,7 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee no fake records?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
+      { "question": "Can I write my own employment verification letter?", "answer": "No. It has to come from your employer, and verifiers usually call the company to confirm it. ApprovalPrep gives the employer a format; it does not verify employment for anyone." }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -1628,57 +1263,6 @@ const manualRouteCopy = {
     "shortAnswer": "A proof of income letter states what you earn, from which sources, and how often, in a form a reviewer can read at a glance. Make the figure in the letter match the figure your stubs, statements or return actually show, and list each source separately.",
     "primaryCta": "Get the income kit",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
-    "whoFor": [
-      "People preparing for proof of income before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants reviewer-ready packet without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns income source clarity into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on reviewer-ready packet: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for proof of income.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with reviewer-ready packet.",
-      "You know income source clarity may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
-    ],
-    "prepBrief": [
-      "Write down the exact question, concern, or document request connected to proof of income.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
-    ],
-    "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
-    ],
     "steps": [
       "Clarify the request or situation.",
       "Gather real supporting documents.",
@@ -1688,22 +1272,7 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee reviewer-ready packet?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
+      { "question": "Is a proof of income letter enough on its own?", "answer": "Usually not. Most landlords and lenders also want pay stubs, tax returns or bank statements behind it. ApprovalPrep does not create or certify income records." }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -1720,57 +1289,6 @@ const manualRouteCopy = {
     "shortAnswer": "A credit dispute letter asks a bureau to investigate a specific entry you believe is inaccurate, and asks for the result in writing. Identify the account, say exactly what is wrong with it, and keep a dated copy of what you sent and how you sent it.",
     "primaryCta": "Get the credit letter kit",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
-    "whoFor": [
-      "People preparing for DIY credit dispute before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Consumers who understand this is DIY paperwork help, not credit repair or bureau representation."
-    ],
-    "value": [
-      "Turns specific report item into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on consumer recordkeeping: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for DIY credit dispute.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with consumer recordkeeping.",
-      "You know specific report item may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
-    ],
-    "prepBrief": [
-      "Write down the exact question, concern, or document request connected to DIY credit dispute.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "For credit matters, disputing accurate information as false or implying someone else is repairing credit for you."
-    ],
-    "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
-    ],
     "steps": [
       "Review the relevant credit report or account record.",
       "Identify the exact item, date, account, or issue.",
@@ -1780,18 +1298,6 @@ const manualRouteCopy = {
       "Send it yourself and keep proof of delivery."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee consumer recordkeeping?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
       {
         "question": "Is this credit repair?",
         "answer": "No. ApprovalPrep does not repair credit, contact bureaus, remove accurate items, or promise score improvement. It helps you prepare your own paperwork."
@@ -1812,57 +1318,6 @@ const manualRouteCopy = {
     "shortAnswer": "A rental application packet is the set of documents a leasing office asks for, assembled once so you can submit it the same day you view a place. Scan each item to a clearly named file and keep one folder you can send whole, so nothing is missing at the counter.",
     "primaryCta": "Get the rental kit",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
-    "whoFor": [
-      "People preparing for rental packet before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants application pressure without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns leasing office review into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on application pressure: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for rental packet.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with application pressure.",
-      "You know leasing office review may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
-    ],
-    "prepBrief": [
-      "Write down the exact question, concern, or document request connected to rental packet.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
-    ],
-    "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
-    ],
     "steps": [
       "Clarify the request or situation.",
       "Gather real supporting documents.",
@@ -1872,22 +1327,7 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee application pressure?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
+      { "question": "Can ApprovalPrep get me approved for an apartment?", "answer": "No. The landlord decides using their own screening criteria. ApprovalPrep helps you send a complete application; it does not contact landlords or screening companies." }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -1904,56 +1344,26 @@ const manualRouteCopy = {
     "shortAnswer": "This checklist is what to have in hand before you tour: identification, income, rental history, references and the fee. Work through it before the first viewing, not after an offer, because competitive units go to whoever can file completely first.",
     "primaryCta": "Get the checklist",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
     "whoFor": [
-      "People preparing for rental checklist before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants less back-and-forth without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns documents before touring into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on less back-and-forth: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for rental checklist.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with less back-and-forth.",
-      "You know documents before touring may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
+      "You are about to apply for an apartment and want every document ready before you tour.",
+      "You are competing for units that go fast and want to submit the same day.",
+      "You are applying with a roommate or co-signer and need everyone's papers in one place."
     ],
     "prepBrief": [
-      "Write down the exact question, concern, or document request connected to rental checklist.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
+      "A government photo ID for every adult applicant.",
+      "Proof of income: recent pay stubs, an offer letter, or benefit award letters.",
+      "Contact details for your current and previous landlords.",
+      "Your own copy of your credit report so nothing in the screening surprises you."
     ],
     "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
+      "Every adult on the lease has their own ID and income proof in the folder.",
+      "Your landlord references know they may be contacted.",
+      "You know the application fee and what it covers before you pay it."
+    ],
+    "commonMistakes": [
+      "Touring first and gathering documents after, then losing the unit to a ready applicant.",
+      "Paying application fees on several units at once without checking the screening criteria.",
+      "Forgetting the co-signer's documents, which can delay approval by days."
     ],
     "steps": [
       "Clarify the request or situation.",
@@ -1964,22 +1374,7 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee less back-and-forth?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
+      { "question": "Do I have to bring every item on this checklist?", "answer": "No. Bring what your landlord's application asks for. The checklist covers what is commonly requested so you are not caught short; it does not replace the landlord's own list." }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -1996,56 +1391,26 @@ const manualRouteCopy = {
     "shortAnswer": "Approval usually turns on three things a screener can verify: income against the rent, rental history, and what a credit and background check shows. Find out the office's income and score thresholds before applying, and prepare an explanation for anything a screening report will surface.",
     "primaryCta": "Build my packet",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
     "whoFor": [
-      "People preparing for apartment approval preparation before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants stronger renter packet without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns screening readiness into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on stronger renter packet: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for apartment approval preparation.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with stronger renter packet.",
-      "You know screening readiness may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
+      "You have been turned down for an apartment and want to know what to change before the next application.",
+      "Your credit, income or rental history is thin or has a mark on it.",
+      "You are a first-time renter with no landlord history."
     ],
     "prepBrief": [
-      "Write down the exact question, concern, or document request connected to apartment approval preparation.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
+      "The landlord's written screening criteria: income multiple, minimum credit score and history rules.",
+      "Proof your income meets the multiple, or a co-signer or guarantor who does.",
+      "A short explanation letter for any eviction, collection or gap the screening will show.",
+      "References from people who can speak to how you pay and live: a past landlord, employer or roommate."
     ],
     "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
+      "You meet the published criteria, or you have a guarantor, extra deposit or explanation ready for the one you miss.",
+      "Your explanation letter answers the specific mark on your report, not your whole history.",
+      "The application has no blank required fields."
+    ],
+    "commonMistakes": [
+      "Applying without reading the criteria, then paying a fee for a denial you could predict.",
+      "Hiding a known issue instead of addressing it in the application.",
+      "Using a guarantor who does not meet the landlord's guarantor requirements."
     ],
     "steps": [
       "Clarify the request or situation.",
@@ -2056,22 +1421,6 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee stronger renter packet?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -2088,56 +1437,26 @@ const manualRouteCopy = {
     "shortAnswer": "A dealer's finance desk will ask for identification, proof of income, proof of insurance and proof of address before it writes a contract. Bring originals or clear photographs of each, and know your trade-in's payoff figure before you sit down.",
     "primaryCta": "Get the checklist",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
     "whoFor": [
-      "People preparing for auto loan documents before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants income and identity proof without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns dealer finance desk into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on income and identity proof: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for auto loan documents.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with income and identity proof.",
-      "You know dealer finance desk may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
+      "You are financing a car through a dealer or bank and they asked for your paperwork.",
+      "You want to arrive at the dealership with your loan file ready instead of waiting on approval.",
+      "You are refinancing an existing auto loan."
     ],
     "prepBrief": [
-      "Write down the exact question, concern, or document request connected to auto loan documents.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
+      "A valid driver's license.",
+      "Proof of income: recent pay stubs, or tax returns if self-employed.",
+      "Proof of residence: a utility bill or lease in your name at your current address.",
+      "Proof of insurance, or the details of the policy you will put on the car."
     ],
     "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
+      "The address on your license, bill and application match, or you have proof of the new one.",
+      "You know the loan's APR, term and total cost, not only the monthly payment.",
+      "For a trade-in, you have the title or payoff letter."
+    ],
+    "commonMistakes": [
+      "Negotiating only the monthly payment while the loan term stretches the total cost.",
+      "Bringing an old utility bill that no longer matches your current address.",
+      "Forgetting the trade-in title or payoff amount, which stalls the deal."
     ],
     "steps": [
       "Clarify the request or situation.",
@@ -2148,22 +1467,7 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee income and identity proof?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
+      { "question": "Does ApprovalPrep arrange car financing?", "answer": "No. ApprovalPrep is not a lender or a broker. This page lists the documents lenders commonly ask for so you can apply with your file ready." }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -2180,56 +1484,26 @@ const manualRouteCopy = {
     "shortAnswer": "This checklist is what a lender wants to see before giving a preapproval you can take to a dealership. Get the preapproval before you shop, so you are negotiating the vehicle price rather than a monthly payment.",
     "primaryCta": "Get the checklist",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
     "whoFor": [
-      "People preparing for car loan checklist before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants documents before shopping without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns preapproval readiness into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on documents before shopping: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for car loan checklist.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with documents before shopping.",
-      "You know preapproval readiness may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
+      "You want a single checklist to tick off before you apply for a car loan.",
+      "You are buying from a private seller and need to arrange financing yourself.",
+      "You are a first-time buyer and do not know what lenders ask for."
     ],
     "prepBrief": [
-      "Write down the exact question, concern, or document request connected to car loan checklist.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
+      "Your credit report and score, checked before a lender pulls them.",
+      "A pre-approval quote from a bank or credit union to compare with dealer financing.",
+      "Your down payment in an account you can show a statement for.",
+      "For a private sale, the seller's title and a bill of sale."
     ],
     "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
+      "You compared at least one outside quote with the dealer's offer.",
+      "Your down payment and monthly payment fit your budget with insurance included.",
+      "Every box on the checklist has a document behind it, not a promise to bring it later."
+    ],
+    "commonMistakes": [
+      "Shopping for the car before knowing what you are approved to borrow.",
+      "Letting several lenders pull credit over many weeks instead of in one short window.",
+      "Skipping the outside quote and accepting the first financing offer."
     ],
     "steps": [
       "Clarify the request or situation.",
@@ -2240,22 +1514,7 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee documents before shopping?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
+      { "question": "Does checking my credit before applying lower my score?", "answer": "No. Checking your own credit report is a soft inquiry and does not affect your score. A lender's application usually is a hard inquiry." }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -2272,56 +1531,26 @@ const manualRouteCopy = {
     "shortAnswer": "The document list for a car loan is short: who you are, what you earn, where you live, and how the vehicle will be insured. Have a recent pay stub, your license, an insurance declaration page and a utility bill in one place before you apply.",
     "primaryCta": "Get the checklist",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
     "whoFor": [
-      "People preparing for car loan document list before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants fast response without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns lender request into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on fast response: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for car loan document list.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with fast response.",
-      "You know lender request may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
+      "A lender gave you a list of stipulations (proof of income, residence, references) and you need to clear them.",
+      "You are self-employed or paid in cash and need other ways to show income.",
+      "You are buying with a co-borrower and both of you need documents."
     ],
     "prepBrief": [
-      "Write down the exact question, concern, or document request connected to car loan document list.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
+      "The lender's exact stipulation list, so you answer each item.",
+      "For self-employment: the last two years of tax returns and recent bank statements.",
+      "Personal references with names and phone numbers, if the lender asks for them.",
+      "The co-borrower's ID and income proof, gathered the same way as yours."
     ],
     "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
+      "Every stipulation on the lender's list has a matching document.",
+      "Bank statements show every page, including blank ones, as lenders usually require.",
+      "References have agreed to take a call."
+    ],
+    "commonMistakes": [
+      "Sending documents one at a time, which restarts the review each time.",
+      "Cropping or editing bank statements, which lenders treat as altered documents.",
+      "Listing references who have not agreed to be contacted."
     ],
     "steps": [
       "Clarify the request or situation.",
@@ -2332,22 +1561,7 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee fast response?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
+      { "question": "Can I send edited or cropped bank statements?", "answer": "No. Lenders treat edited statements as altered documents. Send every page as your bank issued it. ApprovalPrep does not alter or create financial documents." }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -2364,56 +1578,26 @@ const manualRouteCopy = {
     "shortAnswer": "An SBA application asks for more paperwork than a conventional loan: business formation documents, financial statements, tax returns and a written use of funds. Assemble it as one indexed package, because lenders process complete files first and partial ones sit.",
     "primaryCta": "Get the checklist",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
     "whoFor": [
-      "People preparing for SBA checklist before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants owner and business records without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns small business lender into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on owner and business records: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for SBA checklist.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with owner and business records.",
-      "You know small business lender may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
+      "You are applying for an SBA 7(a) or 504 loan through a bank or credit union.",
+      "Your lender sent an SBA document list and you want to work through it in order.",
+      "You are buying a business or real estate with SBA financing."
     ],
     "prepBrief": [
-      "Write down the exact question, concern, or document request connected to SBA checklist.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
+      "SBA Form 1919 (borrower information) and a personal financial statement for each owner of 20% or more.",
+      "Business and personal tax returns, usually for the last three years.",
+      "Year-to-date profit and loss statement and balance sheet.",
+      "A business plan or use-of-funds summary, with projections for a new business."
     ],
     "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
+      "Every owner of 20% or more has signed their own forms and financial statement.",
+      "The figures on the tax returns, financial statements and application agree with each other.",
+      "Your use-of-funds summary adds up to the loan amount you are requesting."
+    ],
+    "commonMistakes": [
+      "Leaving out an owner who crosses the 20% line, which stops the file.",
+      "Submitting financial statements that do not reconcile with the tax returns.",
+      "Using an old version of an SBA form; check sba.gov for the current one."
     ],
     "steps": [
       "Clarify the request or situation.",
@@ -2424,22 +1608,7 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee owner and business records?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
+      { "question": "Is ApprovalPrep affiliated with the SBA?", "answer": "No. ApprovalPrep is not affiliated with the U.S. Small Business Administration or any lender, and does not submit applications. Current SBA forms are on sba.gov." }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -2456,56 +1625,26 @@ const manualRouteCopy = {
     "shortAnswer": "A business lender reviews your formation documents, bank statements, tax returns and current financials before it looks at the request itself. Have a profit and loss statement and balance sheet current through last month, and a short written note on what the money is for.",
     "primaryCta": "Get the checklist",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
     "whoFor": [
-      "People preparing for business loan documents before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants revenue and entity proof without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns funding review into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on revenue and entity proof: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for business loan documents.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with revenue and entity proof.",
-      "You know funding review may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
+      "You are applying for a bank loan, line of credit or equipment financing for your business.",
+      "A lender asked for a document package and you want it complete on the first submission.",
+      "Your business is young and you need to show the lender it can repay."
     ],
     "prepBrief": [
-      "Write down the exact question, concern, or document request connected to business loan documents.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
+      "Business formation documents: articles of organisation or incorporation, and your EIN letter.",
+      "Business bank statements, usually for the last several months.",
+      "Business and personal tax returns, and current financial statements.",
+      "Any existing debts: loan statements, leases and their monthly payments."
     ],
     "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
+      "The legal business name matches on every document.",
+      "Your debt schedule includes every current loan and lease payment.",
+      "Personal guarantee terms are read and understood before you sign."
+    ],
+    "commonMistakes": [
+      "Mixing personal and business accounts, which makes cash flow hard for a lender to read.",
+      "Leaving an existing loan off the debt schedule, which the lender will find anyway.",
+      "Applying with formation documents that list old owners or an old address."
     ],
     "steps": [
       "Clarify the request or situation.",
@@ -2516,22 +1655,7 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee revenue and entity proof?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
+      { "question": "Does ApprovalPrep review my business financials?", "answer": "No. ApprovalPrep does not review, prepare or certify financial statements. Use an accountant for that. This page helps you organise what a lender asks for." }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -2548,56 +1672,26 @@ const manualRouteCopy = {
     "shortAnswer": "Mortgage underwriting works from documents, not conversations: income, assets, debts and identity, each evidenced on paper. Gather two years of returns and W-2s, 30 days of pay stubs and two months of statements for every account in play.",
     "primaryCta": "Get the checklist",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
     "whoFor": [
-      "People preparing for mortgage checklist before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants income assets and explanations without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns underwriting readiness into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on income assets and explanations: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for mortgage checklist.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with income assets and explanations.",
-      "You know underwriting readiness may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
+      "You are getting pre-approved for a mortgage and want your file complete before you make an offer.",
+      "You are buying your first home and want to know what each document is for.",
+      "You are refinancing and the lender asked for a fresh document set."
     ],
     "prepBrief": [
-      "Write down the exact question, concern, or document request connected to mortgage checklist.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
+      "Two years of W-2s or tax returns, and pay stubs covering the last 30 days.",
+      "Two months of statements for every bank and investment account, all pages.",
+      "A gift letter and the donor's proof of funds, if family is helping with the down payment.",
+      "Explanation letters ready for any large deposit, credit item or job gap."
     ],
     "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
+      "Large deposits on your statements are traced to their source with paperwork.",
+      "You have not opened new credit or changed jobs since pre-approval without telling your lender.",
+      "All account statements are complete and not edited."
+    ],
+    "commonMistakes": [
+      "Moving money between accounts during the loan process without a paper trail.",
+      "Opening a new credit card or financing furniture before closing.",
+      "Sending screenshots instead of full statements."
     ],
     "steps": [
       "Clarify the request or situation.",
@@ -2608,22 +1702,7 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee income assets and explanations?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
+      { "question": "Can I move money between accounts during the mortgage process?", "answer": "You can, but every transfer needs a paper trail, and the underwriter will ask about it. ApprovalPrep does not give lending advice, so ask your loan officer before large moves." }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -2640,56 +1719,26 @@ const manualRouteCopy = {
     "shortAnswer": "This is the document list a loan file needs before an underwriter can clear it, item by item. Name every scan clearly and keep a copy of what you sent and on which date, because conditions often ask for the same item twice.",
     "primaryCta": "Get the checklist",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
     "whoFor": [
-      "People preparing for mortgage document checklist before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants missing-item prevention without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns loan file review into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on missing-item prevention: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for mortgage document checklist.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with missing-item prevention.",
-      "You know loan file review may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
+      "Your loan is in underwriting and the lender sent a list of conditions to clear.",
+      "You received a request for documents you have not heard of, such as a verification of rent.",
+      "You want to know which documents the underwriter asks for at each stage."
     ],
     "prepBrief": [
-      "Write down the exact question, concern, or document request connected to mortgage document checklist.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
+      "The underwriter's conditions list, with a due date for each item.",
+      "Verification of rent or twelve months of rent payments, if asked.",
+      "Homeowner's insurance quote or binder for the property.",
+      "Updated pay stubs and bank statements if the originals are now more than 30 to 60 days old."
     ],
     "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
+      "Each condition on the list has a matching document, labelled with the condition it clears.",
+      "Updated documents replace the old ones rather than repeat them.",
+      "Signatures and dates are on every form that asks for them."
+    ],
+    "commonMistakes": [
+      "Clearing conditions in pieces, which delays the closing date.",
+      "Sending outdated statements that the underwriter will ask for again.",
+      "Assuming a condition does not apply instead of answering it."
     ],
     "steps": [
       "Clarify the request or situation.",
@@ -2700,22 +1749,6 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee missing-item prevention?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -2732,56 +1765,26 @@ const manualRouteCopy = {
     "shortAnswer": "An important documents folder holds the records you will be asked for at short notice: identity, property, insurance and legal directives. Keep originals in one secure place, a scanned copy somewhere separate, and a single note of where each lives.",
     "primaryCta": "Get the checklist",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
     "whoFor": [
-      "People preparing for important documents before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants faster response without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns life admin folder into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on faster response: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for important documents.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with faster response.",
-      "You know life admin folder may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
+      "You want one organised place for the papers you need for every application.",
+      "You have had to hunt for a birth certificate or tax return in a hurry.",
+      "You are helping a parent or partner get their records in order."
     ],
     "prepBrief": [
-      "Write down the exact question, concern, or document request connected to important documents.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
+      "Identity: birth certificate, Social Security card, passport and driver's license.",
+      "Money: recent tax returns, pay stubs, bank and retirement account statements.",
+      "Home and car: lease or deed, titles, and insurance policies.",
+      "Health and legal: insurance cards, a will, powers of attorney and medical directives."
     ],
     "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
+      "Originals are stored securely and you work from copies.",
+      "Every document has an expiry date noted where one applies (ID, passport, insurance).",
+      "Someone you trust knows where the folder is."
+    ],
+    "commonMistakes": [
+      "Keeping originals and copies in the same place.",
+      "Letting an ID or passport expire just before you need it.",
+      "Storing scans in an unencrypted shared folder."
     ],
     "steps": [
       "Clarify the request or situation.",
@@ -2792,22 +1795,7 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee faster response?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
+      { "question": "Should I upload my documents to ApprovalPrep?", "answer": "No. ApprovalPrep does not store or ask for your documents. The checklist helps you organise originals and copies you keep yourself." }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -2824,56 +1812,26 @@ const manualRouteCopy = {
     "shortAnswer": "A move means changing your address on records that matter and transferring the accounts attached to the property. Work through identity records, utilities, insurance, banking and anything licensed, and set mail forwarding before the last day.",
     "primaryCta": "Get the checklist",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
     "whoFor": [
-      "People preparing for moving checklist before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants deadline control without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns address and account changes into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on deadline control: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for moving checklist.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with deadline control.",
-      "You know address and account changes may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
+      "You are moving and need your paperwork in order for a new lease, utilities and address changes.",
+      "You are moving to a new state and need to update your license, registration and voter registration.",
+      "You want your deposit back from the place you are leaving."
     ],
     "prepBrief": [
-      "Write down the exact question, concern, or document request connected to moving checklist.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
+      "Your current lease, with its notice period and move-out terms.",
+      "Move-in photos from the place you are leaving, to compare at move-out.",
+      "A list of accounts that need your new address: bank, employer, insurance, USPS forwarding.",
+      "The new lease and the utility accounts to open in your name."
     ],
     "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
+      "Your notice to the current landlord is in writing and within the lease's notice period.",
+      "You have dated move-out photos and a forwarding address for the deposit.",
+      "Your new address is updated with the post office, your employer and your bank."
+    ],
+    "commonMistakes": [
+      "Giving notice by text when the lease requires writing.",
+      "Leaving without photos, then having no proof against deposit deductions.",
+      "Forgetting to update the address on your license within your new state's deadline."
     ],
     "steps": [
       "Clarify the request or situation.",
@@ -2884,22 +1842,7 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee deadline control?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
+      { "question": "Does ApprovalPrep handle address changes for me?", "answer": "No. You file your USPS forwarding and update your bank, employer and license yourself. The checklist helps you remember each one; ApprovalPrep does not contact anyone for you." }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -2914,59 +1857,8 @@ const manualRouteCopy = {
     "heading": "ApprovalPrep Glossary",
     "lead": "Plain-language definitions of the terms that come up in applications and underwriting, from letter of explanation to proof of income and verification.",
     "shortAnswer": "These are the terms reviewers, lenders and leasing offices use, written out in plain language. Look a term up when it appears in a request, so you answer what was actually asked rather than what it sounded like.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
-    "whoFor": [
-      "People preparing for plain-language definitions before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants boundary clarity without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns approval prep terms into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on boundary clarity: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for plain-language definitions.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with boundary clarity.",
-      "You know approval prep terms may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
-    ],
-    "prepBrief": [
-      "Write down the exact question, concern, or document request connected to plain-language definitions.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
-    ],
-    "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
-    ],
     "steps": [
       "Clarify the request or situation.",
       "Gather real supporting documents.",
@@ -2976,22 +1868,7 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee boundary clarity?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
+      { "question": "Are these definitions legal advice?", "answer": "No. They are plain-language definitions of terms used on ApprovalPrep. They do not replace advice from a lawyer, lender or tax professional." }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -3006,59 +1883,8 @@ const manualRouteCopy = {
     "heading": "ApprovalPrep Methodology",
     "lead": "ApprovalPrep Methodology helps you prepare for ApprovalPrep method with truthful details, organized supporting documents, and a clear next step before truthful document preparation becomes urgent.",
     "shortAnswer": "ApprovalPrep works from one rule: organize true facts and your own documents, and send them yourself. Every kit follows the same order, which is clarify the request, gather proof, draft, check, and keep a copy.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
-    "whoFor": [
-      "People preparing for ApprovalPrep method before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants review before sending without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns truthful document preparation into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on review before sending: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for ApprovalPrep method.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with review before sending.",
-      "You know truthful document preparation may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
-    ],
-    "prepBrief": [
-      "Write down the exact question, concern, or document request connected to ApprovalPrep method.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
-    ],
-    "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
-    ],
     "steps": [
       "Clarify the request or situation.",
       "Gather real supporting documents.",
@@ -3068,22 +1894,7 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee review before sending?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
+      { "question": "Does ApprovalPrep use AI to write my letter?", "answer": "No. The Studio and kits use fixed templates and your own facts. ApprovalPrep does not generate letters with an AI model or store what you type." }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -3098,59 +1909,8 @@ const manualRouteCopy = {
     "heading": "Checkout Success",
     "lead": "Checkout Success helps you prepare for payment confirmation with truthful details, organized supporting documents, and a clear next step before protected delivery becomes urgent.",
     "shortAnswer": "Your payment has gone through and your files are ready on this page. Download both the PDF guide and the editable DOCX now, and save them somewhere you will find them again.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
-    "whoFor": [
-      "People preparing for payment confirmation before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants download verification without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns protected delivery into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on download verification: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for payment confirmation.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with download verification.",
-      "You know protected delivery may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
-    ],
-    "prepBrief": [
-      "Write down the exact question, concern, or document request connected to payment confirmation.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
-    ],
-    "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
-    ],
     "steps": [
       "Clarify the request or situation.",
       "Gather real supporting documents.",
@@ -3160,22 +1920,6 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee download verification?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -3190,59 +1934,8 @@ const manualRouteCopy = {
     "heading": "Download",
     "lead": "Download helps you prepare for verified download with truthful details, organized supporting documents, and a clear next step before private file access becomes urgent.",
     "shortAnswer": "This is where a verified purchase collects its files. Use the same email address you bought with, and the page will show what your purchase includes.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
-    "whoFor": [
-      "People preparing for verified download before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants PDF and DOCX delivery without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns private file access into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on PDF and DOCX delivery: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for verified download.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with PDF and DOCX delivery.",
-      "You know private file access may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
-    ],
-    "prepBrief": [
-      "Write down the exact question, concern, or document request connected to verified download.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
-    ],
-    "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
-    ],
     "steps": [
       "Clarify the request or situation.",
       "Gather real supporting documents.",
@@ -3252,22 +1945,6 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee PDF and DOCX delivery?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -3283,59 +1960,8 @@ const manualRouteCopy = {
     "metaTitle": "Privacy Policy: How ApprovalPrep Handles Your Data",
     "lead": "How ApprovalPrep handles your data: what is processed to run checkout and downloads, and why your letter answers, drafts, and uploads are never stored.",
     "shortAnswer": "This page explains the privacy policy boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
-    "whoFor": [
-      "People preparing for privacy policy before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants customer control without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns document handling into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on customer control: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for privacy policy.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with customer control.",
-      "You know document handling may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
-    ],
-    "prepBrief": [
-      "Write down the exact question, concern, or document request connected to privacy policy.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
-    ],
-    "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
-    ],
     "steps": [
       "Clarify the request or situation.",
       "Gather real supporting documents.",
@@ -3345,22 +1971,6 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee customer control?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -3376,59 +1986,8 @@ const manualRouteCopy = {
     "metaTitle": "Terms of Use for ApprovalPrep Self-Service Tools",
     "lead": "The terms for using ApprovalPrep: a self-service document prep site where you supply truthful facts, review your own materials, and send them yourself.",
     "shortAnswer": "This page explains the terms of use boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
-    "whoFor": [
-      "People preparing for terms of use before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants self-service boundary without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns site responsibilities into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on self-service boundary: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for terms of use.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with self-service boundary.",
-      "You know site responsibilities may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
-    ],
-    "prepBrief": [
-      "Write down the exact question, concern, or document request connected to terms of use.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
-    ],
-    "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
-    ],
     "steps": [
       "Clarify the request or situation.",
       "Gather real supporting documents.",
@@ -3438,22 +1997,6 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee self-service boundary?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -3469,59 +2012,8 @@ const manualRouteCopy = {
     "metaTitle": "Disclaimer: ApprovalPrep Is Not Legal or Financial Advice",
     "lead": "ApprovalPrep offers templates and general guidance, not legal, financial, tax, or credit repair advice. What that means for the letters you prepare.",
     "shortAnswer": "This page explains the disclaimer boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
-    "whoFor": [
-      "People preparing for disclaimer before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Consumers who understand this is DIY paperwork help, not credit repair or bureau representation."
-    ],
-    "value": [
-      "Turns no professional advice into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on no approval guarantee: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for disclaimer.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with no approval guarantee.",
-      "You know no professional advice may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
-    ],
-    "prepBrief": [
-      "Write down the exact question, concern, or document request connected to disclaimer.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "For credit matters, disputing accurate information as false or implying someone else is repairing credit for you."
-    ],
-    "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
-    ],
     "steps": [
       "Review the relevant credit report or account record.",
       "Identify the exact item, date, account, or issue.",
@@ -3531,18 +2023,6 @@ const manualRouteCopy = {
       "Send it yourself and keep proof of delivery."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee no approval guarantee?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
       {
         "question": "Is this credit repair?",
         "answer": "No. ApprovalPrep does not repair credit, contact bureaus, remove accurate items, or promise score improvement. It helps you prepare your own paperwork."
@@ -3562,59 +2042,8 @@ const manualRouteCopy = {
     "metaTitle": "Refund Policy for ApprovalPrep Digital Kit Downloads",
     "lead": "When ApprovalPrep refunds a digital kit: duplicate purchases, failed access, incorrect charges, or delivery problems, and how to send your order details.",
     "shortAnswer": "This page explains the refund policy boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
-    "whoFor": [
-      "People preparing for refund policy before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants purchase clarity without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns digital download expectations into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on purchase clarity: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for refund policy.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with purchase clarity.",
-      "You know digital download expectations may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
-    ],
-    "prepBrief": [
-      "Write down the exact question, concern, or document request connected to refund policy.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
-    ],
-    "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
-    ],
     "steps": [
       "Clarify the request or situation.",
       "Gather real supporting documents.",
@@ -3624,22 +2053,6 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee purchase clarity?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -3655,59 +2068,8 @@ const manualRouteCopy = {
     "metaTitle": "Security: How ApprovalPrep Protects Checkout and Downloads",
     "lead": "How ApprovalPrep protects checkout and paid downloads, keeps data collection minimal, and never stores your letter answers, drafts, or uploaded files.",
     "shortAnswer": "This page explains the security posture boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
-    "whoFor": [
-      "People preparing for security posture before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants limited document handling without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns private downloads into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on limited document handling: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for security posture.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with limited document handling.",
-      "You know private downloads may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
-    ],
-    "prepBrief": [
-      "Write down the exact question, concern, or document request connected to security posture.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
-    ],
-    "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
-    ],
     "steps": [
       "Clarify the request or situation.",
       "Gather real supporting documents.",
@@ -3717,22 +2079,6 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee limited document handling?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -3748,59 +2094,8 @@ const manualRouteCopy = {
     "metaTitle": "Accessibility Statement for ApprovalPrep",
     "lead": "ApprovalPrep's accessibility commitment: plain language, keyboard-friendly controls, readable contrast, responsive layouts, and how to report a barrier.",
     "shortAnswer": "This page explains the accessibility boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
-    "whoFor": [
-      "People preparing for accessibility before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants usable document prep without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns plain language into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on usable document prep: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for accessibility.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with usable document prep.",
-      "You know plain language may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
-    ],
-    "prepBrief": [
-      "Write down the exact question, concern, or document request connected to accessibility.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
-    ],
-    "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
-    ],
     "steps": [
       "Clarify the request or situation.",
       "Gather real supporting documents.",
@@ -3810,22 +2105,6 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee usable document prep?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -3840,59 +2119,8 @@ const manualRouteCopy = {
     "heading": "Contact",
     "lead": "Contact helps you prepare for contact options with truthful details, organized supporting documents, and a clear next step before support boundaries becomes urgent.",
     "shortAnswer": "This page explains the contact options boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
-    "whoFor": [
-      "People preparing for contact options before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants purchase or access questions without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns support boundaries into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on purchase or access questions: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for contact options.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with purchase or access questions.",
-      "You know support boundaries may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
-    ],
-    "prepBrief": [
-      "Write down the exact question, concern, or document request connected to contact options.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
-    ],
-    "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
-    ],
     "steps": [
       "Clarify the request or situation.",
       "Gather real supporting documents.",
@@ -3902,22 +2130,7 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee purchase or access questions?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
+      { "question": "Can I send you my documents for review?", "answer": "No. ApprovalPrep does not review personal documents or act on your behalf. Write for help with a purchase, a download or a correction to a page." }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -3932,7 +2145,7 @@ const manualRouteCopy = {
     "heading": "About ApprovalPrep",
     "lead": "Who publishes ApprovalPrep, what the kits do, what they never do, and how to reach a person about a purchase or download.",
     "shortAnswer": "ApprovalPrep is published by ApprovalPrep Editorial, a subsidiary of Spry Labs. It sells self-service letter and checklist kits from $15 to $49 and offers free browser-only drafts. It is not a law firm, a lender, or a credit repair organization, and nothing on the site is legal or credit advice.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
     "decisionContext": [
       "People reach this page when they are about to trust a site with a paperwork problem that matters: a rental application, a loan file, a credit report error, or an employer request. Before buying anything, it is reasonable to ask who is behind the site and what it will and will not do.",
@@ -4016,59 +2229,8 @@ const manualRouteCopy = {
     "heading": "Editorial Policy",
     "lead": "How ApprovalPrep writes and reviews its guides: plain and truthful, no overstated outcomes, extra review on credit, legal, and lending topics.",
     "shortAnswer": "This page explains the editorial standards boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
-    "whoFor": [
-      "People preparing for editorial standards before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants source-backed claims without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns truthful guidance into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on source-backed claims: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for editorial standards.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with source-backed claims.",
-      "You know truthful guidance may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
-    ],
-    "prepBrief": [
-      "Write down the exact question, concern, or document request connected to editorial standards.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
-    ],
-    "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
-    ],
     "steps": [
       "Clarify the request or situation.",
       "Gather real supporting documents.",
@@ -4078,22 +2240,7 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee source-backed claims?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
+      { "question": "Do ApprovalPrep guides promise an outcome?", "answer": "No. The editorial rule is that no guide promises an approval, a score change or a deleted record, because ApprovalPrep does not control those decisions." }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -4109,59 +2256,8 @@ const manualRouteCopy = {
     "metaTitle": "AI Use Policy: Where ApprovalPrep Uses AI and Where It Does Not",
     "lead": "Where ApprovalPrep uses software-assisted drafting and checks, why the free Letter Writing Studio needs no AI calls, and why you review every letter.",
     "shortAnswer": "This page explains the AI use policy boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
-    "whoFor": [
-      "People preparing for AI use policy before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants human review responsibility without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns drafting assistance into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on human review responsibility: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for AI use policy.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with human review responsibility.",
-      "You know drafting assistance may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
-    ],
-    "prepBrief": [
-      "Write down the exact question, concern, or document request connected to AI use policy.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
-    ],
-    "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
-    ],
     "steps": [
       "Clarify the request or situation.",
       "Gather real supporting documents.",
@@ -4171,22 +2267,6 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee human review responsibility?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -4201,59 +2281,8 @@ const manualRouteCopy = {
     "heading": "Credit Repair Disclaimer",
     "lead": "ApprovalPrep sells do-it-yourself credit letters, not credit repair. You write and send each letter; nobody disputes items or contacts bureaus for you.",
     "shortAnswer": "This page explains the credit repair disclaimer boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
-    "whoFor": [
-      "People preparing for credit repair disclaimer before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Consumers who understand this is DIY paperwork help, not credit repair or bureau representation."
-    ],
-    "value": [
-      "Turns DIY letters only into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on regulated boundary: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for credit repair disclaimer.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with regulated boundary.",
-      "You know DIY letters only may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
-    ],
-    "prepBrief": [
-      "Write down the exact question, concern, or document request connected to credit repair disclaimer.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "For credit matters, disputing accurate information as false or implying someone else is repairing credit for you."
-    ],
-    "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
-    ],
     "steps": [
       "Review the relevant credit report or account record.",
       "Identify the exact item, date, account, or issue.",
@@ -4263,18 +2292,6 @@ const manualRouteCopy = {
       "Send it yourself and keep proof of delivery."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee regulated boundary?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
       {
         "question": "Is this credit repair?",
         "answer": "No. ApprovalPrep does not repair credit, contact bureaus, remove accurate items, or promise score improvement. It helps you prepare your own paperwork."
@@ -4293,59 +2310,8 @@ const manualRouteCopy = {
     "heading": "Not a Credit Repair Company",
     "lead": "ApprovalPrep is not a credit repair company. It never contacts credit bureaus or creditors for you; it sells letter kits you prepare and send yourself.",
     "shortAnswer": "This page explains the not a credit repair company boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
-    "primaryCta": "Start my letter",
+    "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
-    "whoFor": [
-      "People preparing for not a credit repair company before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Consumers who understand this is DIY paperwork help, not credit repair or bureau representation."
-    ],
-    "value": [
-      "Turns no bureau contact into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on self-service credit prep: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for not a credit repair company.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with self-service credit prep.",
-      "You know no bureau contact may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
-    ],
-    "prepBrief": [
-      "Write down the exact question, concern, or document request connected to not a credit repair company.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "For credit matters, disputing accurate information as false or implying someone else is repairing credit for you."
-    ],
-    "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
-    ],
     "steps": [
       "Review the relevant credit report or account record.",
       "Identify the exact item, date, account, or issue.",
@@ -4355,18 +2321,6 @@ const manualRouteCopy = {
       "Send it yourself and keep proof of delivery."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee self-service credit prep?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
       {
         "question": "Is this credit repair?",
         "answer": "No. ApprovalPrep does not repair credit, contact bureaus, remove accurate items, or promise score improvement. It helps you prepare your own paperwork."
@@ -4387,57 +2341,6 @@ const manualRouteCopy = {
     "shortAnswer": "This kit covers the letters that evidence work and income: verification, proof of income, self-employment and job changes. Start from the letter the reviewer named, then use the kit's checklist to assemble what supports it.",
     "primaryCta": "Get the income kit",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
-    "whoFor": [
-      "People preparing for income employment kit before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants packet preparation without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns work and income explanations into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on packet preparation: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for income employment kit.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with packet preparation.",
-      "You know work and income explanations may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
-    ],
-    "prepBrief": [
-      "Write down the exact question, concern, or document request connected to income employment kit.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
-    ],
-    "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
-    ],
     "steps": [
       "Clarify the request or situation.",
       "Gather real supporting documents.",
@@ -4447,22 +2350,7 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee packet preparation?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
+      { "question": "Does this kit verify my employment?", "answer": "No. It gives you and your employer the letter formats; the employer signs and confirms. ApprovalPrep does not verify or certify employment or income." }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -4479,57 +2367,6 @@ const manualRouteCopy = {
     "shortAnswer": "This kit covers do-it-yourself credit correspondence: disputes, goodwill requests, validation and follow-ups. Read your report first, decide whether the entry is wrong or simply unflattering, and use the letter that matches.",
     "primaryCta": "Get the credit letter kit",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
-    "whoFor": [
-      "People preparing for credit letter kit before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Consumers who understand this is DIY paperwork help, not credit repair or bureau representation."
-    ],
-    "value": [
-      "Turns DIY credit letters into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on careful boundaries: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for credit letter kit.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with careful boundaries.",
-      "You know DIY credit letters may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
-    ],
-    "prepBrief": [
-      "Write down the exact question, concern, or document request connected to credit letter kit.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "For credit matters, disputing accurate information as false or implying someone else is repairing credit for you."
-    ],
-    "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
-    ],
     "steps": [
       "Review the relevant credit report or account record.",
       "Identify the exact item, date, account, or issue.",
@@ -4539,18 +2376,6 @@ const manualRouteCopy = {
       "Send it yourself and keep proof of delivery."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee careful boundaries?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
       {
         "question": "Is this credit repair?",
         "answer": "No. ApprovalPrep does not repair credit, contact bureaus, remove accurate items, or promise score improvement. It helps you prepare your own paperwork."
@@ -4571,57 +2396,6 @@ const manualRouteCopy = {
     "shortAnswer": "This kit assembles a renter's packet: the checklists, the cover letter and the explanations a leasing office may ask for. Build the packet once and reuse it, updating only the stubs and the property you are applying to.",
     "primaryCta": "Get the rental kit",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
-    "whoFor": [
-      "People preparing for rental application kit before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants leasing follow-up without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns renter packet into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on leasing follow-up: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for rental application kit.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with leasing follow-up.",
-      "You know renter packet may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
-    ],
-    "prepBrief": [
-      "Write down the exact question, concern, or document request connected to rental application kit.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
-    ],
-    "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
-    ],
     "steps": [
       "Clarify the request or situation.",
       "Gather real supporting documents.",
@@ -4631,22 +2405,7 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee leasing follow-up?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
+      { "question": "Does this kit include a background or credit check?", "answer": "No. ApprovalPrep does not run screening. Landlords order their own reports. The kit helps you prepare the documents and explanation letters that go with your application." }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -4663,57 +2422,6 @@ const manualRouteCopy = {
     "shortAnswer": "This kit covers the explanation letters a lender asks for mid-review, across mortgage, auto and personal loans. Match the letter to the condition as the lender worded it, and answer only that condition.",
     "primaryCta": "Get the loan prep kit",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
-    "whoFor": [
-      "People preparing for loan prep kit before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants document readiness without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns funding review into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on document readiness: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for loan prep kit.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with document readiness.",
-      "You know funding review may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
-    ],
-    "prepBrief": [
-      "Write down the exact question, concern, or document request connected to loan prep kit.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
-    ],
-    "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
-    ],
     "steps": [
       "Clarify the request or situation.",
       "Gather real supporting documents.",
@@ -4723,22 +2431,7 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee document readiness?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
+      { "question": "Will this kit get my loan approved?", "answer": "No. The lender decides. The kit helps you answer underwriting requests with clear letters and the right proof; ApprovalPrep does not contact lenders." }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -4755,57 +2448,6 @@ const manualRouteCopy = {
     "shortAnswer": "This kit prepares a business funding packet: the document checklist, the financial explanations and the use of funds note. Have twelve months of business statements and current financials ready before you write anything.",
     "primaryCta": "Get the business funding kit",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
-    "whoFor": [
-      "People preparing for business funding kit before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants owner explanation materials without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns business lender packet into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on owner explanation materials: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for business funding kit.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with owner explanation materials.",
-      "You know business lender packet may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
-    ],
-    "prepBrief": [
-      "Write down the exact question, concern, or document request connected to business funding kit.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
-    ],
-    "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
-    ],
     "steps": [
       "Clarify the request or situation.",
       "Gather real supporting documents.",
@@ -4815,22 +2457,7 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee owner explanation materials?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
+      { "question": "Does this kit apply for funding for me?", "answer": "No. ApprovalPrep does not submit applications or contact lenders. The kit helps you assemble your formation documents, financials and use-of-funds summary before you apply." }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -4847,57 +2474,6 @@ const manualRouteCopy = {
     "shortAnswer": "This kit covers everyday official paperwork: address and residency letters, identity checklists and records requests. Check what the office receiving it will actually accept, because requirements differ between agencies.",
     "primaryCta": "Create my letter",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
-    "whoFor": [
-      "People preparing for life admin kit before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants organized response without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns everyday paperwork into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on organized response: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for life admin kit.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with organized response.",
-      "You know everyday paperwork may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
-    ],
-    "prepBrief": [
-      "Write down the exact question, concern, or document request connected to life admin kit.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
-    ],
-    "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
-    ],
     "steps": [
       "Clarify the request or situation.",
       "Gather real supporting documents.",
@@ -4907,22 +2483,7 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee organized response?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
+      { "question": "Does ApprovalPrep send these letters for me?", "answer": "No. You review, sign and send every letter yourself. ApprovalPrep does not contact anyone on your behalf." }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",
@@ -4939,57 +2500,6 @@ const manualRouteCopy = {
     "shortAnswer": "The bundle is every kit on the site in one purchase, for people facing several applications at once. Start with the kit for the nearest deadline, then work outward; the bundle does not expire.",
     "primaryCta": "Get the complete bundle",
     "secondaryCta": "Compare kits",
-    "decisionContext": [
-      "Most people arrive here because a reviewer, landlord, lender, bureau, employer, office, or internal deadline has created paperwork pressure. The expensive mistake is not simply missing a template; it is sending scattered facts, unsupported claims, or documents that do not answer the question being asked.",
-      "The stronger move is to slow the situation down enough to prepare a clean explanation, match it with the right proof, and keep a copy trail. ApprovalPrep is built for that moment: practical, self-service, and careful about boundaries."
-    ],
-    "whoFor": [
-      "People preparing for complete bundle before a deadline or follow-up request gets stressful.",
-      "Applicants who want their facts, dates, and documents in one organized place.",
-      "People who will review and send their own materials instead of hiring a service to act for them.",
-      "Anyone who wants full document library without pretending preparation can guarantee approval."
-    ],
-    "value": [
-      "Turns multi-situation prep into a concrete preparation path instead of a vague worry.",
-      "Separates what you know, what you can document, and what you still need to gather.",
-      "Uses plain language so the final packet sounds like a real person, not a legal threat or generic internet form.",
-      "Builds in review prompts that reduce overclaiming, missing dates, and unsupported statements.",
-      "Keeps the decision-maker focused on full document library: clear facts, relevant documents, and a reasonable next step."
-    ],
-    "whatYouGet": [
-      "A page-specific preparation path for complete bundle.",
-      "Prompts for the facts a reviewer is likely to need.",
-      "Checklist-style guidance for documents, dates, and supporting proof.",
-      "Safety reminders about fake documents, guarantees, and third-party contact.",
-      "A next-step structure you can use before buying a kit or sending a completed packet."
-    ],
-    "useCases": [
-      "You were asked for more information and need to respond with full document library.",
-      "You know multi-situation prep may raise questions and want to prepare before it becomes a problem.",
-      "You need a truthful explanation but do not want to over-share, under-explain, or sound defensive.",
-      "You want a self-service workflow with clear boundaries and no account requirement."
-    ],
-    "prepBrief": [
-      "Write down the exact question, concern, or document request connected to complete bundle.",
-      "Gather proof before writing: IDs, statements, letters, pay records, leases, reports, receipts, or confirmations as applicable.",
-      "Create a timeline with dates and amounts so the explanation does not drift.",
-      "Decide what you are asking the reviewer to do next: consider, update, verify, accept, review, or follow up.",
-      "Save a copy of anything you send and note the date, method, and recipient."
-    ],
-    "commonMistakes": [
-      "Sending a long emotional story without the facts a reviewer needs.",
-      "Using a generic template that does not match the actual request.",
-      "Attaching documents without explaining why they matter.",
-      "Making promises, guarantees, or legal-sounding threats that do not fit the situation.",
-      "Waiting until the deadline to discover a missing document or unclear date."
-    ],
-    "reviewChecklist": [
-      "Does every statement use truthful, supportable facts?",
-      "Are dates, names, amounts, and account or property details checked?",
-      "Did you remove anything unnecessary, inflammatory, or unsupported?",
-      "Did you include only copies of supporting documents unless originals are required?",
-      "Do you understand that ApprovalPrep does not send the packet or guarantee the result?"
-    ],
     "steps": [
       "Clarify the request or situation.",
       "Gather real supporting documents.",
@@ -4999,22 +2509,6 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      {
-        "question": "Can ApprovalPrep guarantee full document library?",
-        "answer": "No. ApprovalPrep helps you prepare clearer materials. It does not control landlord, lender, employer, bureau, office, or reviewer decisions."
-      },
-      {
-        "question": "Does ApprovalPrep send documents for me?",
-        "answer": "No. ApprovalPrep is self-service. You review, download, and send your own materials."
-      },
-      {
-        "question": "Can I use this if my situation is complicated?",
-        "answer": "You can use it to organize facts and questions, but complicated legal, tax, lending, immigration, court, or regulated issues may require a qualified professional."
-      },
-      {
-        "question": "Can I change the template wording?",
-        "answer": "Yes. The point is to make the language truthful to your situation before you send anything."
-      }
     ],
     "trustSignals": [
       "Instant verified download when a kit is purchased",

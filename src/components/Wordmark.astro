@@ -1,0 +1,7 @@
+---
+// The ApprovalPrep logo (design system 6 Nov 2026): the ticked-checkbox mark
+// (signal box, carbon tick) and the live-type wordmark, "Prep" on highlighter.
+// Live type keeps the home link's anchor text exactly "ApprovalPrep".
+const { className = "" } = Astro.props;
+---
+<a class={`brand ap-wordmark ${className}`.trim()} href="/"><svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><rect x="2" y="2" width="60" height="60" rx="10" fill="#FF7A3D"></rect><path d="M15 33 L27 45 L49 19" fill="none" stroke="#1D1C21" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Approval<span class="ap-hl">Prep</span></span></a>

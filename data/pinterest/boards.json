@@ -3,19 +3,124 @@
   "split_from": "2026-11-01",
   "keywords_read": "2026-11-01 Pinterest search typeahead",
   "boards": [
-    { "slug": "approval-kits", "name": "Approval Kits & Checklists", "feed": "/pinfeed.xml",
-      "keywords": ["checklist", "letter template", "application"], "paths": [], "words": [] },
-    { "slug": "apartment-rental", "name": "Apartment & Rental Application Tips", "feed": "/pinfeed/apartment-rental.xml",
-      "keywords": ["apartment application", "rental application", "rental application form", "apartment application approved", "rental application cover letter"],
-      "paths": ["rental-application", "apartment"], "words": ["apartment", "rental", "rent", "landlord", "lease", "tenant"] },
-    { "slug": "letter-of-explanation", "name": "Letter of Explanation & Credit Letters", "feed": "/pinfeed/letter-of-explanation.xml",
-      "keywords": ["letter of explanation", "letter of explanation template", "letter of explanation sample", "explanation letter format", "credit report"],
-      "paths": ["letter-of-explanation", "credit-letter", "loan-prep"], "words": ["explanation", "credit", "mortgage", "lender", "underwriter", "late payment", "inquiry", "bankruptcy"] },
-    { "slug": "income-employment", "name": "Proof of Income & Employment Verification Letters", "feed": "/pinfeed/income-employment.xml",
-      "keywords": ["proof of income", "proof of income letter", "employment verification letter", "employment verification letter template", "proof of income self employed"],
-      "paths": ["income-employment", "employment-verification"], "words": ["income", "employment", "employer", "pay stub", "paystub", "self employed", "salary", "job"] },
-    { "slug": "small-business-loans", "name": "SBA & Small Business Loan Checklists", "feed": "/pinfeed/small-business-loans.xml",
-      "keywords": ["sba loan", "sba loan application", "small business loan", "small business loans how to get", "business funding"],
-      "paths": ["sba-loan", "business-funding"], "words": ["sba", "business loan", "small business", "business funding", "llc", "ein"] }
-  ]
+    {
+      "slug": "approval-kits",
+      "name": "Approval Kits & Checklists",
+      "feed": "/pinfeed.xml",
+      "keywords": [
+        "checklist",
+        "letter template",
+        "application"
+      ],
+      "paths": [],
+      "words": [],
+      "accent": "orange"
+    },
+    {
+      "slug": "apartment-rental",
+      "name": "Apartment & Rental Application Tips",
+      "feed": "/pinfeed/apartment-rental.xml",
+      "keywords": [
+        "apartment application",
+        "rental application",
+        "rental application form",
+        "apartment application approved",
+        "rental application cover letter"
+      ],
+      "paths": [
+        "rental-application",
+        "apartment"
+      ],
+      "words": [
+        "apartment",
+        "rental",
+        "rent",
+        "landlord",
+        "lease",
+        "tenant"
+      ],
+      "accent": "green"
+    },
+    {
+      "slug": "letter-of-explanation",
+      "name": "Letter of Explanation & Credit Letters",
+      "feed": "/pinfeed/letter-of-explanation.xml",
+      "keywords": [
+        "letter of explanation",
+        "letter of explanation template",
+        "letter of explanation sample",
+        "explanation letter format",
+        "credit report"
+      ],
+      "paths": [
+        "letter-of-explanation",
+        "credit-letter",
+        "loan-prep"
+      ],
+      "words": [
+        "explanation",
+        "credit",
+        "mortgage",
+        "lender",
+        "underwriter",
+        "late payment",
+        "inquiry",
+        "bankruptcy"
+      ],
+      "accent": "highlighter"
+    },
+    {
+      "slug": "income-employment",
+      "name": "Proof of Income & Employment Verification Letters",
+      "feed": "/pinfeed/income-employment.xml",
+      "keywords": [
+        "proof of income",
+        "proof of income letter",
+        "employment verification letter",
+        "employment verification letter template",
+        "proof of income self employed"
+      ],
+      "paths": [
+        "income-employment",
+        "employment-verification"
+      ],
+      "words": [
+        "income",
+        "employment",
+        "employer",
+        "pay stub",
+        "paystub",
+        "self employed",
+        "salary",
+        "job"
+      ],
+      "accent": "red"
+    },
+    {
+      "slug": "small-business-loans",
+      "name": "SBA & Small Business Loan Checklists",
+      "feed": "/pinfeed/small-business-loans.xml",
+      "keywords": [
+        "sba loan",
+        "sba loan application",
+        "small business loan",
+        "small business loans how to get",
+        "business funding"
+      ],
+      "paths": [
+        "sba-loan",
+        "business-funding"
+      ],
+      "words": [
+        "sba",
+        "business loan",
+        "small business",
+        "business funding",
+        "llc",
+        "ein"
+      ],
+      "accent": "ledger"
+    }
+  ],
+  "_accent_comment": "accent: the ONE accent colour a board's paper-format pins use (scripts/pinterest/paper_layouts.mjs ACCENTS; the pin quality gate refuses any other). Paper #F7F3EA and carbon text on every pin, from the approved ApprovalPrep palette; 'ledger' (#2B4A7A) is the one added colour, because five boards need five accents and the brand has four."
 }

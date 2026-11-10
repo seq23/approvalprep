@@ -15,7 +15,9 @@ const legalPolicies = {
       "After a purchase: the address Stripe reports is not stored by ApprovalPrep. It is used once to schedule one email, about three days later, asking whether the kit helped, and a one-way hash of it stops the sample emails. Replies are only ever shown with your permission."
     ],
     limits: [
-      "Stripe, Cloudflare, email, analytics, and other providers may process limited operational records under their own terms.",
+      "Stripe (payments), Cloudflare (hosting), Resend (email) and Microsoft Clarity (analytics) may process limited operational records under their own terms.",
+      "Microsoft Clarity records how visitors move through pages that have a sign-up form or a buy button (clicks, scrolling, the page viewed) and sets its own cookies (_clck, _clsk). It is switched off on the Letter Writing Studio and on every page with a free letter generator, so what you type there and the letter it makes are never recorded.",
+      "The Letter Writing Studio keeps your draft in your own browser tab so a reload does not lose it. It is not sent to ApprovalPrep and is gone when you close the tab or press Start over.",
       "Do not send sensitive documents by email unless you choose to do so and understand the risk.",
       "No website can promise perfect security, but ApprovalPrep keeps the public product designed around minimal data collection."
     ]
@@ -47,11 +49,12 @@ const legalPolicies = {
     ]
   },
   "/refund-policy": {
-    summary: "Digital products are delivered as downloadable self-service files. Refund handling should be clear, limited, and tied to access or fulfillment issues.",
+    summary: "Every kit is a digital download that unlocks as soon as you pay. We refund a purchase when something went wrong with the charge or the download. Once a kit has downloaded correctly it is not returnable, unless the law where you live says otherwise.",
     covers: [
-      "Refund requests for duplicate purchases, failed access, incorrect charges, or technical delivery problems.",
-      "How users can contact ApprovalPrep with order details when a paid download does not unlock as expected.",
-      "Why completed digital delivery may limit refund eligibility unless required by applicable law."
+      "We refund: a duplicate purchase, a wrong charge, or a kit that did not unlock or download and that we cannot get working for you.",
+      "How to ask: email info@approvalprep.com from the address you paid with. Include your Stripe receipt (or the date and amount) and one line on what went wrong.",
+      "What happens next: we first try to get your download working. If we cannot, or the charge was a mistake, the refund goes back to the card you paid with through Stripe.",
+      "We do not refund: a kit that downloaded correctly, including when a landlord, lender, employer, bureau or creditor did not give the answer you hoped for."
     ],
     limits: [
       "ApprovalPrep does not guarantee a third party will accept a packet or approve an application.",

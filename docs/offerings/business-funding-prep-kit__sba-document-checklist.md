@@ -16,9 +16,7 @@ This offering is included in the **Business Funding Prep Kit** paid kit. After v
 
 ## Reviewable Files
 
-- PDF: [business-funding-prep-kit.pdf](../../seed-downloads/business-funding-prep-kit.pdf)
-- DOCX: [business-funding-prep-kit.docx](../../seed-downloads/business-funding-prep-kit.docx)
-- R2 production keys: `downloads/business-funding-prep-kit.pdf`, `downloads/business-funding-prep-kit.docx`
+- R2 keys (private bucket; the kit files are not in this repository): `products/business-funding-prep-kit/business-funding-prep-kit.pdf`, `products/business-funding-prep-kit/business-funding-prep-kit.docx`
 
 ## Contract Standard
 

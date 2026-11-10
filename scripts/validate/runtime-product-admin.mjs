@@ -34,7 +34,12 @@ const { sweepKitPrices, customerSurfaces } = await import('./_kit_price_surfaces
 const { publishedDir } = await import('./_common.mjs');
 const surfaces = customerSurfaces({ buildDir: publishedDir() });
 const sweep = sweepKitPrices(seed.products, surfaces);
-if (sweep.downloadsRead < seed.products.length * 2) fail(`kit price sweep read ${sweep.downloadsRead} PDF/DOCX kit files, expected ${seed.products.length * 2}`);
+// The kit files are private (APPROVALPREP_KITS_DIR). In CI they are absent; the
+// same sweep runs on them at upload (scripts/ops/lib/upload-kits.mjs).
+const { kitsMode, CI_NOTE } = await import('../lib/kits-dir.mjs');
+const kitFilesMode = kitsMode('runtime-product-admin');
+if (kitFilesMode === 'files' && sweep.downloadsRead < seed.products.length * 2) fail(`kit price sweep read ${sweep.downloadsRead} PDF/DOCX kit files, expected ${seed.products.length * 2}`);
+if (kitFilesMode === 'contract') console.log(`runtime-product-admin: ${CI_NOTE}`);
 if (sweep.mentionsChecked === 0) fail('kit price sweep matched no kit price on any surface; the sweep is not reading what it governs');
 if (sweep.problems.length) fail(`kit price shown on a customer surface disagrees with the seed:\n  ${sweep.problems.slice(0, 40).join('\n  ')}`);
 console.log(`PASS runtime-product-admin (kit prices: ${sweep.mentionsChecked} mentions across ${sweep.filesRead} files, ${sweep.downloadsRead} kit downloads read)`);

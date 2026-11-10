@@ -1,0 +1,56 @@
+---
+// The free credit starter (her yes, 7 Nov 2026: "1A yes"): "Before you pay a credit repair
+// company". Email only; the starter opens on this page the moment the address is in, and the
+// same content is emailed (functions/_runtime/nurture.js starterSequence, cs0). Self-help only
+// (risk R-ADV-13): no score, removal or "fix your credit" promise.
+import { STARTER_CHECKLIST, STARTER_CONSENT_TEXT, STARTER_LETTER, SELF_HELP_LINE } from "../../functions/_runtime/nurture.js";
+interface Props { inline?: boolean }
+const { inline = false } = Astro.props;
+---
+<section class={inline ? "starter-inline" : "band starter-band"} data-starter-signup id="free-credit-starter"><div class={inline ? "" : "shell"}>
+  <div class="card sample-signup starter-signup">
+    <p class="eyebrow">Free · takes a minute</p>
+    <h2>Before you pay a credit repair company</h2>
+    <p>A 1-page checklist of what you can do yourself for $0, plus <span class="ap-hl">one dispute letter frame</span> for one error on your report.</p>
+    <form data-starter-form novalidate>
+      <label>Email address
+        <input type="email" name="email" required autocomplete="email" placeholder="you@example.com" />
+      </label>
+      <input type="text" name="company" tabindex="-1" autocomplete="off" hidden aria-hidden="true" />
+      <label class="sample-consent"><input type="checkbox" name="consent" /> <span>{STARTER_CONSENT_TEXT}</span></label>
+      <p class="fine" role="alert" data-starter-error></p>
+      <button class="button primary-button" type="submit">Email me the free starter ›</button>
+      <p class="fine">It opens here as soon as you press the button. Every email has a one-click unsubscribe link. See the <a href="/privacy/">privacy page</a>.</p>
+    </form>
+    <div data-starter-done hidden>
+      <p class="notice" role="status" data-starter-sent>Here is your starter. A copy is on its way to your inbox.</p>
+      <p class="notice warning-card" role="alert" data-starter-unsent hidden>Here is your starter. The email copy did not send, so it is not in your inbox: save or print this page. We have been told and will fix it.</p>
+      <ol class="compact-list">{STARTER_CHECKLIST.map((line) => <li>{line}</li>)}</ol>
+      <h3>Your dispute letter</h3>
+      <p class="fine">Fill in each bracket with your true facts, or let the free Letter Studio fill it in and save it as a PDF.</p>
+      <div class="ap-sheet">{STARTER_LETTER.map((line) => <p>{line}</p>)}</div>
+      <div class="hero-actions"><a class="button primary-button" href="/letter-writing-studio/?situation=credit-dispute">Draft free in the Letter Studio</a><a class="button secondary secondary-button" href="/credit-letter-kit/">See the Credit Letter Kit</a></div>
+    </div>
+    <p class="ap-selfhelp">{SELF_HELP_LINE}</p>
+  </div>
+</div></section>
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>("[data-starter-signup]")) {
+    const form = root.querySelector<HTMLFormElement>("[data-starter-form]");
+    const error = root.querySelector<HTMLElement>("[data-starter-error]");
+    const done = root.querySelector<HTMLElement>("[data-starter-done]");
+    form?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      if (error) error.textContent = "";
+      if (!data.get("consent")) { if (error) error.textContent = "Please tick the box so we can email the starter."; return; }
+      try {
+        const res = await fetch("/api/sample", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ email: data.get("email"), consent: true, magnet: "credit-starter", company: data.get("company") || undefined }) });
+        const body = await res.json().catch(() => ({}));
+        if (!res.ok || !body.ok) { if (error) error.textContent = body.error || "Something went wrong. Please try again."; return; }
+        form.hidden = true; if (done) done.hidden = false;
+        if (body.emailed !== true) { root.querySelector<HTMLElement>("[data-starter-sent]")?.setAttribute("hidden", ""); root.querySelector<HTMLElement>("[data-starter-unsent]")?.removeAttribute("hidden"); }
+      } catch { if (error) error.textContent = "Could not reach the server. Please try again."; }
+    });
+  }
+</script>

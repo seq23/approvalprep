@@ -38,6 +38,7 @@ jobs:
       post_build_command: bash scripts/search-loop/post_build.sh
       commit_command: bash scripts/search-loop/commit.sh
     secrets:
+      BOSS_OPEN_LOOPS_TOKEN: ${{ secrets.BOSS_OPEN_LOOPS_TOKEN }}  # named stops -> Boss OS Open Loops (search-loop v1.7.0)
       OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
       GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
       GSC_SITE_URL: ${{ secrets.GSC_SITE_URL }}
@@ -54,7 +55,7 @@ jobs:
       # "ai_visitors / ai_bot_hits: not read: Cloudflare analytics refused the query ... does not
       # have permission 'com.cloudflare.api.account.zone.analytics.read'" and f11 failed every week
       # from 1 Nov 2026. SEARCH_LOOP_CF_ANALYTICS_TOKEN holds both halves.
-      # Guard: npm run validate:search-loop-ai-measurement.
+      # (The search-loop AI measurement is the shared engine's own concern.)
       CLOUDFLARE_API_TOKEN: ${{ secrets.SEARCH_LOOP_CF_ANALYTICS_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.SEARCH_LOOP_CF_ACCOUNT_ID }}
       CLOUDFLARE_WORKERS_AI_TOKEN: ${{ secrets.SEARCH_LOOP_CF_WORKERS_AI_TOKEN }}

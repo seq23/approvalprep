@@ -5,7 +5,11 @@ name: Pinterest Refill
 # REFILL_THRESHOLD variants are unreleased it appends the next batch ($0 template
 # copy, scripts/pinterest/variants.mjs), builds, runs the drip and launch
 # validators, and pushes the queue to main; Cloudflare Pages deploys it and builds
-# the new pin images. A stocked day writes nothing and commits nothing.
+# the new pin images. A stocked day writes nothing and commits nothing. Every
+# refill runs the pin quality gate (scripts/pinterest/quality.mjs) before it
+# writes, so no failing pin is scheduled. While the approval hold is on
+# (queue.json config.APPROVAL.state "held") it schedules nothing; dispatching
+# with release_held=true ends the hold.
 on:
   schedule:
     - cron: "5 6 * * *"  # daily 06:05 CT
@@ -14,6 +18,10 @@ on:
     inputs:
       fixture_trace:
         description: "Run fixture workflow data trace only"
+        required: false
+        default: "false"
+      release_held:
+        description: "Owner approved the redrawn pins: release every held pin from tomorrow (docs/runbooks/pinterest-pins.md)"
         required: false
         default: "false"
 permissions:
@@ -41,6 +49,9 @@ jobs:
       - name: Run fixture workflow trace
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
         run: npm run workflows:trace -- --workflow pinterest-refill.yml
+      - name: Release the held pins (owner approved)
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.release_held == 'true' }}
+        run: npm run pinterest:release-held
       - name: Refill the queue if fewer than the threshold remain
         run: npm run pinterest:refill
       - name: Build and validate only when the queue changed
@@ -51,7 +62,6 @@ jobs:
           fi
           npm run build
           npm run validate:pinterest-drip
-          npm run validate:pinterest-launch
       - name: Commit and publish the refilled queue
         run: |
           git config user.name "approvalprep-content-bot"

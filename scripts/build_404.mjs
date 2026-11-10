@@ -30,6 +30,8 @@ const siteName = (siteNameTag.match(/\bcontent=["']([^"']+)["']/i) || [, 'Approv
 // Reuse the site's own footer so the 404 carries the same legal/nav links every
 // other page does, rather than becoming a dead end.
 const footer = (index.match(/<footer[\s\S]*?<\/footer>/i) || [''])[0];
+// The site header too, so the 404 shows the logo and the menu like every page.
+const header = (index.match(/<header class="site-header"[\s\S]*?<\/header>/i) || [''])[0];
 // Derive the origin from the homepage's canonical so the 404 can self-canonicalize
 // without this script knowing any repo's domain.
 // Attribute order varies across these repos, so match either arrangement.
@@ -60,6 +62,7 @@ ${styles}
   </style>
 </head>
 <body>
+${header}
   <main class="nf-wrap">
     <p class="nf-code">Error 404</p>
     <h1>We couldn&rsquo;t find that page</h1>
