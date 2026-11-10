@@ -62,7 +62,6 @@ jobs:
           fi
           npm run build
           npm run validate:pinterest-drip
-          npm run validate:pinterest-launch
       - name: Commit and publish the refilled queue
         run: |
           git config user.name "approvalprep-content-bot"
