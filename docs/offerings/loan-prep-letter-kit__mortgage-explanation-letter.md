@@ -16,9 +16,7 @@ This offering is included in the **Loan Prep Letter Kit** paid kit. After verifi
 
 ## Reviewable Files
 
-- PDF: [loan-prep-letter-kit.pdf](../../seed-downloads/loan-prep-letter-kit.pdf)
-- DOCX: [loan-prep-letter-kit.docx](../../seed-downloads/loan-prep-letter-kit.docx)
-- R2 production keys: `downloads/loan-prep-letter-kit.pdf`, `downloads/loan-prep-letter-kit.docx`
+- R2 keys (private bucket; the kit files are not in this repository): `products/loan-prep-letter-kit/loan-prep-letter-kit.pdf`, `products/loan-prep-letter-kit/loan-prep-letter-kit.docx`
 
 ## Contract Standard
 

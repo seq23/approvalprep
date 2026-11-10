@@ -16,9 +16,7 @@ This offering is included in the **Credit Letter Kit** paid kit. After verified 
 
 ## Reviewable Files
 
-- PDF: [credit-letter-kit.pdf](../../seed-downloads/credit-letter-kit.pdf)
-- DOCX: [credit-letter-kit.docx](../../seed-downloads/credit-letter-kit.docx)
-- R2 production keys: `downloads/credit-letter-kit.pdf`, `downloads/credit-letter-kit.docx`
+- R2 keys (private bucket; the kit files are not in this repository): `products/credit-letter-kit/credit-letter-kit.pdf`, `products/credit-letter-kit/credit-letter-kit.docx`
 
 ## Contract Standard
 
