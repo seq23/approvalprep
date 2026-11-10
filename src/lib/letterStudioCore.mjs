@@ -26,11 +26,40 @@ export const bureaus = [
 ];
 export const BUREAU_ADDRESSES_CHECKED = "10 Nov 2026";
 
-// The bureau's answer window: 15 U.S.C. 1681i(a)(1), as the FTC explains it.
+// The bureau's answer window. 30 days: the FTC's article. The extra 15 days: the statute itself.
 export const ANSWER_WINDOW = {
-  text: "A credit bureau generally has 30 days from the day it gets your dispute to investigate and send you the results in writing (up to 45 days in some cases).",
-  source: { label: "FTC, Disputing Errors on Your Credit Reports", url: "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports", read: "2026-11-10" }
+  days: 30,
+  text: "A credit bureau has 30 days from the day it gets your dispute to investigate, and must send you the results in writing. The law allows up to 15 more days if you send it more information during that time.",
+  source: { label: "FTC, Disputing Errors on Your Credit Reports", url: "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports", read: "2026-11-10" },
+  law: { label: "15 U.S.C. 1681i(a)(1)", url: "https://www.law.cornell.edu/uscode/text/15/1681i", read: "2026-11-10" }
 };
+
+/** "2026-11-10" (a date input's value) as a local calendar day; anything else is today. */
+export function parseDay(value, fallback = new Date()) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(value || ""));
+  const d = m ? new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3])) : new Date(fallback.getFullYear(), fallback.getMonth(), fallback.getDate());
+  return Number.isNaN(d.getTime()) ? new Date(fallback.getFullYear(), fallback.getMonth(), fallback.getDate()) : d;
+}
+export const dayValue = (d) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+/** The day the answer is due: the mailing day plus the 30-day window. A date we print, nothing we track. */
+export function answerDueDate(mailedOn) { const d = new Date(mailedOn.getFullYear(), mailedOn.getMonth(), mailedOn.getDate()); d.setDate(d.getDate() + ANSWER_WINDOW.days); return d; }
+
+/** A calendar file for her own calendar, made in the browser. It holds the date and a link, no account details. */
+export function buildAnswerDueIcs({ mailedOn, bureauName = "", now = new Date() }) {
+  const due = answerDueDate(mailedOn), next = new Date(due.getFullYear(), due.getMonth(), due.getDate() + 1);
+  const ymd = (d) => dayValue(d).replace(/-/g, "");
+  const esc = (t) => String(t).replace(/\\/g, "\\\\").replace(/([,;])/g, "\\$1").replace(/\n/g, "\\n");
+  const who = bureauName ? ` (${bureauName})` : "";
+  return [
+    "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//ApprovalPrep//Letter Studio//EN", "CALSCALE:GREGORIAN", "BEGIN:VEVENT",
+    `UID:answer-due-${ymd(mailedOn)}-${ymd(due)}-${bureauName.toLowerCase().replace(/[^a-z]/g, "") || "bureau"}@approvalprep.com`,
+    `DTSTAMP:${now.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z")}`,
+    `DTSTART;VALUE=DATE:${ymd(due)}`, `DTEND;VALUE=DATE:${ymd(next)}`,
+    `SUMMARY:${esc(`Credit bureau answer due about today${who}`)}`,
+    `DESCRIPTION:${esc(`You mailed your dispute on ${formatLetterDate(mailedOn)}. ${ANSWER_WINDOW.text} What each answer means and what you can do yourself: https://approvalprep.com/the-bureau-answered/`)}`,
+    "URL:https://approvalprep.com/the-bureau-answered/", "TRANSP:TRANSPARENT", "END:VEVENT", "END:VCALENDAR"
+  ].join("\r\n") + "\r\n";
+}
 
 // Page 2 of the free dispute PDF. Facts from the FTC article above.
 export const BEFORE_YOU_MAIL = [
@@ -130,7 +159,7 @@ export const studioSituations = [
 ].map((s) => ({ fields: explanationFields, ...s }));
 
 export const studioBenefits = [
-  "Free: no account, no upload, no payment.",
+  "No account. Nothing stored on our side. Nothing to renew.",
   "Nothing you type is sent to us. Your draft is kept in this browser tab only.",
   "A first-pass letter in proper letter form, to copy, share or print.",
   "The credit report dispute letter comes addressed to the bureau you pick and saves as a PDF.",

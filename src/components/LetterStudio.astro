@@ -53,7 +53,13 @@ const first = studioSituations[0];
         <p class="eyebrow">What happens next</p>
         <ol class="timeline-list">
           <li><strong>Today</strong><span>Print it, sign it and mail it yourself with your proof.</span></li>
-          <li><strong>In about 30 days</strong><span>{ANSWER_WINDOW.text} <a href={ANSWER_WINDOW.source.url} rel="noopener">Source: FTC</a>. What the bureau decides is up to the bureau.</span></li>
+          <li><strong>The answer is due about <span data-due-date>30 days after you mail it</span></strong>
+            <label class="mailed-on">Mailed on <input type="date" name="mailedOn" data-mailed-on /></label>
+            <span>{ANSWER_WINDOW.text} Sources: <a href={ANSWER_WINDOW.source.url} rel="noopener">FTC</a>, <a href={ANSWER_WINDOW.law.url} rel="noopener">{ANSWER_WINDOW.law.label}</a> (read 10 Nov 2026). What the bureau decides is up to the bureau.</span>
+            <button class="button secondary-button" type="button" data-add-calendar>Add the date to my calendar</button>
+            <span class="fine">The date is yours to keep. We send no reminder and store nothing.</span>
+            <a href="/the-bureau-answered/">The bureau answered? What you can do next, free</a>
+          </li>
           <li><strong>Then, everything after the envelope is sealed</strong><span>Your next letter depends on the answer. The Credit Letter Kit holds them, paid once:</span>
             <ul class="compact-list">{kitMoments["credit-letter-kit"].moments.map((m) => <li>{`${m.when}: ${m.items.join(", ")}.`}</li>)}</ul>
           </li>
@@ -73,7 +79,7 @@ const first = studioSituations[0];
 </section>
 
 <script>
-  import { studioSituations, bureaus, buildLetter, situationById, BEFORE_YOU_MAIL, ANSWER_WINDOW } from "../lib/letterStudioCore.mjs";
+  import { studioSituations, bureaus, buildLetter, situationById, BEFORE_YOU_MAIL, ANSWER_WINDOW, answerDueDate, parseDay, dayValue, buildAnswerDueIcs, formatLetterDate } from "../lib/letterStudioCore.mjs";
 
   const root = document.querySelector<HTMLElement>("[data-letter-studio]");
   if (root) {
@@ -162,6 +168,7 @@ const first = studioSituations[0];
       pdfButton.hidden = !(show && situation.kind === "dispute");
       mailSteps.hidden = !(show && situation.kind === "dispute");
       timeline.hidden = mailSteps.hidden;
+      if (!timeline.hidden) renderDue();
       recommendation.hidden = !timeline.hidden;
       shareButton.hidden = !(show && typeof navigator.share === "function");
       if (!show) { letter = null; sheet.replaceChildren(); return; }
@@ -176,6 +183,18 @@ const first = studioSituations[0];
         ? `Letter written. Still to fill in, marked in yellow: ${letter.blanks.join(", ")}.`
         : "Letter written. Read it once for anything that is not accurate, then sign it and send it yourself.", letter.blanks.length ? "todo" : "done");
     };
+
+    // Day 30 is a date we print, worked out here in the browser. Nothing is tracked or sent.
+    const mailedInput = root.querySelector<HTMLInputElement>("[data-mailed-on]")!;
+    const dueLabel = root.querySelector<HTMLElement>("[data-due-date]")!;
+    const mailedOn = () => parseDay(state.answers.mailedOn);
+    const renderDue = () => { mailedInput.value = dayValue(mailedOn()); dueLabel.textContent = formatLetterDate(answerDueDate(mailedOn())); };
+    mailedInput.addEventListener("change", () => { state.answers.mailedOn = mailedInput.value; renderDue(); save(); });
+    root.querySelector("[data-add-calendar]")!.addEventListener("click", () => {
+      const bureau = bureaus.find((b) => b.id === state.answers.bureau);
+      download(new Blob([buildAnswerDueIcs({ mailedOn: mailedOn(), bureauName: bureau?.name || "" })], { type: "text/calendar" }), "credit-bureau-answer-due.ics");
+      say(`Saved a calendar file for ${formatLetterDate(answerDueDate(mailedOn()))}. Open it to add the date to your own calendar.`, "done");
+    });
 
     const hasAnswers = () => Object.entries(state.answers).some(([, v]) => String(v).trim());
 
@@ -229,7 +248,7 @@ const first = studioSituations[0];
     pdfButton.addEventListener("click", async () => {
       if (!letter) return;
       const { buildLetterPdf, LETTER_PDF_FOOTER } = await import("../lib/letterPdf.mjs");
-      download(new Blob([buildLetterPdf(letter, { footer: LETTER_PDF_FOOTER, sheet: { title: "Before you mail", lines: BEFORE_YOU_MAIL, notes: [ANSWER_WINDOW.text + " Source: " + ANSWER_WINDOW.source.url, "What the bureau decides is up to the bureau. This letter asks for an investigation; it does not promise a result."] } })], { type: "application/pdf" }), "credit-report-dispute-letter.pdf");
+      download(new Blob([buildLetterPdf(letter, { footer: LETTER_PDF_FOOTER, sheet: { title: "Before you mail", lines: BEFORE_YOU_MAIL, notes: [`If you mail this on ${formatLetterDate(mailedOn())}, the bureau\u2019s answer is due about ${formatLetterDate(answerDueDate(mailedOn()))}. Mailed on another day: add 30 days to that date.`, ANSWER_WINDOW.text + " Sources: " + ANSWER_WINDOW.source.url + " and " + ANSWER_WINDOW.law.label + ". What each answer means: approvalprep.com/the-bureau-answered/", "What the bureau decides is up to the bureau. This letter asks for an investigation; it does not promise a result."] } })], { type: "application/pdf" }), "credit-report-dispute-letter.pdf");
       say("Saved as a PDF in your downloads: your letter, then a “Before you mail” page. Print it, sign it and mail it yourself.", "done");
     });
 
@@ -272,4 +291,9 @@ const first = studioSituations[0];
   .timeline-list { list-style: none; margin: 0 0 14px; padding: 0; display: grid; gap: 12px; }
   .timeline-list li { display: grid; gap: 2px; padding-left: 14px; border-left: 3px solid var(--highlighter); }
   .timeline-list span { font-size: 15px; }
+  .timeline-list .compact-list { margin: 6px 0 0; padding-left: 18px; list-style: disc; }
+  .timeline-list .compact-list li { display: list-item; border-left: 0; padding-left: 0; }
+  .mailed-on { display: grid; gap: 6px; font-weight: 600; max-width: 220px; margin: 6px 0; }
+  .mailed-on input { min-height: 48px; padding: 8px 10px; font: inherit; font-size: 16px; border: 1px solid var(--carbon-muted); border-radius: var(--radius-md); background: #fff; }
+  .timeline-list a { min-height: 44px; display: inline-flex; align-items: center; }
 </style>

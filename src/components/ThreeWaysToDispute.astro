@@ -1,0 +1,24 @@
+---
+// An honest comparison of the three free ways to dispute a credit report error, including when
+// the bureau's own online form is the better route. Facts are linked to their source. Nothing here
+// says one way gets a better result: the bureau must investigate either way.
+import { ANSWER_WINDOW } from "../data/letterStudio";
+const ways = [
+  { way: "Online, on the bureau's own site", cost: "Free", good: "A simple error, and you do not mind opening an account with that bureau. Usually the least work: nothing to print or post, and the answer arrives in that account.", need: "An account with each bureau that shows the error.",
+    links: [["Equifax", "https://www.equifax.com/personal/credit-report-services/credit-dispute/"], ["Experian", "https://www.experian.com/disputes/main.html"], ["TransUnion", "https://www.transunion.com/credit-disputes/dispute-your-credit"]] },
+  { way: "By mail, with the FTC's sample letter", cost: "Free, plus postage", good: "You want a paper record and are happy to copy the sample and fill in the brackets yourself.", need: "A word processor, a printer, the bureau's mail address.",
+    links: [["FTC sample letter", "https://consumer.ftc.gov/articles/sample-letter-credit-bureaus-disputing-errors-credit-reports"]] },
+  { way: "By mail, with the free Letter Studio", cost: "Free, plus postage", good: "You want the same kind of letter already filled in and addressed to the bureau, as a PDF with a “Before you mail” page.", need: "A few minutes and a printer. No account.",
+    links: [["Open the Letter Studio", "/letter-writing-studio/?situation=credit-dispute"]] }
+];
+---
+<section class="band three-ways" id="three-ways-to-dispute"><div class="shell">
+  <p class="eyebrow">Your choices</p>
+  <h2>What are the three free ways to dispute a credit report error?</h2>
+  <p class="lead">You can dispute online with the bureau, by mail with the FTC’s sample letter, or by mail with a letter from the free Letter Studio. All three are free. The bureau must investigate either way; none of them promises a result.</p>
+  <div class="table-wrap"><table class="comparison-table phone-cards"><thead><tr><th>Way</th><th>Cost</th><th>A good fit when</th><th>You need</th></tr></thead><tbody>
+    {ways.map((w) => <tr><td data-label="Way"><strong>{w.way}</strong><br />{w.links.map(([label, href], i) => <>{i > 0 && " · "}<a href={href} rel={href.startsWith("http") ? "noopener" : undefined}>{label}</a></>)}</td><td data-label="Cost">{w.cost}</td><td data-label="A good fit when">{w.good}</td><td data-label="You need">{w.need}</td></tr>)}
+  </tbody></table></div>
+  <p class="fine">{ANSWER_WINDOW.text} Sources: <a href={ANSWER_WINDOW.source.url} rel="noopener">FTC</a>, <a href={ANSWER_WINDOW.law.url} rel="noopener">{ANSWER_WINDOW.law.label}</a> (read 10 Nov 2026).</p>
+  <p class="ap-selfhelp">Self-help templates. Not legal or financial advice. We do not contact bureaus or creditors for you.</p>
+</div></section>
