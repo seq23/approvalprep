@@ -11,6 +11,7 @@ import fs from "node:fs";
 import { fail, readJson } from "./_common.mjs";
 import { studioSituations, bureaus, buildLetter, ANSWER_WINDOW, BEFORE_YOU_MAIL } from "../../src/lib/letterStudioCore.mjs";
 import { buildLetterPdf } from "../../src/lib/letterPdf.mjs";
+import { kitMoments } from "../../src/lib/kitMoments.mjs";
 
 const manifest = readJson("data/routes/route_manifest.json");
 const route = manifest.routes.find((item) => item.path === "/letter-writing-studio");
@@ -41,7 +42,18 @@ for (const s of studioSituations) {
   const empty = buildLetter(s.id, {}, { today });
   const brackets = empty.text.match(/\[[^\]]+\]/g) || [];
   if (!empty.blanks.length || !brackets.length) fail(`[letter-studio] ${s.id}: an empty form must list its blanks`);
-  if (!s.recommendationSku || !s.kitAdds) fail(`[letter-studio] ${s.id}: no kit named`);
+  if (!kitMoments[s.recommendationSku]) fail(`[letter-studio] ${s.id}: its kit has no "what the kit adds" list`);
+}
+
+// "What the kit adds" names only what the kit really holds, and leaves nothing out.
+const products = readJson("data/products/products.json").products;
+for (const [sku, kit] of Object.entries(kitMoments)) {
+  const held = products.find((p) => p.sku === sku)?.included_offerings || [];
+  const named = [...kit.moments.flatMap((m) => m.items), ...kit.alsoIncluded];
+  if (!held.length) fail(`[letter-studio] ${sku}: no such kit`);
+  for (const item of named) if (!held.includes(item)) fail(`[letter-studio] ${sku}: the page claims "${item}", which the kit does not hold`);
+  for (const item of held) if (named.filter((n) => n === item).length !== 1) fail(`[letter-studio] ${sku}: "${item}" must be listed exactly once`);
+  if (!kit.moments.length || kit.moments[0].items.some((i) => kit.alsoIncluded.includes(i))) fail(`[letter-studio] ${sku}: the kit must lead with what comes after the free letter`);
 }
 
 const disputes = studioSituations.filter((s) => s.kind === "dispute");

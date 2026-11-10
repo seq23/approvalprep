@@ -69,13 +69,11 @@ export const studioSituations = [
   {
     id: "credit-dispute", kind: "dispute", label: "An error on my credit report",
     recommendationSku: "credit-letter-kit", recommendationName: "Credit Letter Kit",
-    kitAdds: "The kit adds the letters that come after this one: the follow-up to a bureau, a letter to the company that reported the item, goodwill, debt validation and pay-for-delete requests, as editable Word files with a step-by-step guide.",
     subject: "Dispute of an item on my credit report", fields: disputeFields
   },
   {
     id: "credit", kind: "explanation", label: "A late payment or credit history to explain",
     recommendationSku: "credit-letter-kit", recommendationName: "Credit Letter Kit",
-    kitAdds: "The kit adds the other credit letters as editable Word files: goodwill, dispute follow-up, debt validation and pay-for-delete requests, with a step-by-step guide.",
     subject: "Explanation of an item in my credit history",
     opening: "I am writing to explain an item in my credit history that you will see when you review my file.",
     closing: "I am glad to answer any question about this item."
@@ -83,7 +81,6 @@ export const studioSituations = [
   {
     id: "general", kind: "explanation", label: "General explanation",
     recommendationSku: "letter-of-explanation", recommendationName: "Letter of Explanation Kit",
-    kitAdds: "The kit adds 9 explanation letters written for specific situations (job gap, address history, large deposit and more), as editable Word files with a guide and a review checklist.",
     subject: "Letter of explanation",
     opening: "I am writing to explain one part of my file, so that you have the facts in one place.",
     closing: "Please contact me if you need anything further."
@@ -91,7 +88,6 @@ export const studioSituations = [
   {
     id: "income", kind: "explanation", label: "Income or employment",
     recommendationSku: "income-employment-letter-kit", recommendationName: "Income + Employment Letter Kit",
-    kitAdds: "The kit adds employment and income letters for specific cases (self-employed, new job, gap in work, employer verification), as editable Word files with a guide.",
     subject: "Explanation of my income and employment",
     opening: "I am writing to explain my income and employment, so that the figures in my file are easy to follow.",
     closing: "I can provide further records of my income if they would help."
@@ -99,7 +95,6 @@ export const studioSituations = [
   {
     id: "rental", kind: "explanation", label: "Rental application",
     recommendationSku: "rental-application-kit", recommendationName: "Rental Application Kit",
-    kitAdds: "The kit adds the rental letters and forms around this one (cover letter, reference request, rental history, guarantor), as editable Word files with a guide.",
     subject: "Explanation to go with my rental application",
     opening: "I am writing to give you the facts behind one part of my rental application.",
     closing: "I am glad to provide references or further documents on request."
@@ -107,7 +102,6 @@ export const studioSituations = [
   {
     id: "loan", kind: "explanation", label: "Loan, auto or mortgage",
     recommendationSku: "loan-prep-letter-kit", recommendationName: "Loan Prep Letter Kit",
-    kitAdds: "The kit adds the letters lenders commonly ask for (credit inquiries, large deposit, gift funds, address and job history), as editable Word files with a guide.",
     subject: "Letter of explanation for my loan file",
     opening: "I am writing to explain one part of my loan application, as requested for my file.",
     closing: "Please let me know if the underwriter needs anything further from me."
@@ -115,7 +109,6 @@ export const studioSituations = [
   {
     id: "business", kind: "explanation", label: "Business funding",
     recommendationSku: "business-funding-prep-kit", recommendationName: "Business Funding Prep Kit",
-    kitAdds: "The kit adds the documents a funder asks for around this letter (use of funds, revenue explanation, ownership summary), as editable Word files with a guide.",
     subject: "Explanation to go with my business funding application",
     opening: "I am writing to explain one part of my business funding application.",
     closing: "I can provide further business records on request."
@@ -123,7 +116,6 @@ export const studioSituations = [
   {
     id: "life-admin", kind: "explanation", label: "Address, identity or records",
     recommendationSku: "life-admin-letter-kit", recommendationName: "Life Admin Letter Kit",
-    kitAdds: "The kit adds letters for specific records problems (name difference, address history, lost documents, records requests), as editable Word files with a guide.",
     subject: "Clarification of my records",
     opening: "I am writing to clarify a difference in my records, so that they can be matched correctly.",
     closing: "Please tell me if you need a further document to confirm this."
@@ -131,7 +123,6 @@ export const studioSituations = [
   {
     id: "not-sure", kind: "explanation", label: "I am not sure",
     recommendationSku: "letter-of-explanation", recommendationName: "Letter of Explanation Kit",
-    kitAdds: "Most situations start with a plain letter of explanation. The kit adds 9 of them written for specific situations, as editable Word files with a guide and a review checklist.",
     subject: "Letter of explanation",
     opening: "I am writing to explain one part of my file, so that you have the facts in one place.",
     closing: "Please contact me if you need anything further."
@@ -143,7 +134,7 @@ export const studioBenefits = [
   "Nothing you type is sent to us. Your draft is kept in this browser tab only.",
   "A first-pass letter in proper letter form, to copy, share or print.",
   "The credit report dispute letter comes addressed to the bureau you pick and saves as a PDF.",
-  "Each letter shows which paid kit carries the follow-up letters and examples."
+  "Each letter shows what the paid kit adds after it."
 ];
 
 export const situationById = (id) => studioSituations.find((s) => s.id === id) || studioSituations.find((s) => s.id === "general");

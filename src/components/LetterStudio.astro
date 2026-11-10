@@ -4,13 +4,13 @@
 // call, no upload; the draft is kept in this browser tab's sessionStorage so a reload does not
 // lose it. `data-no-session-recording` keeps the session recorder off this page
 // (scripts/install_clarity.mjs), so "nothing you type is sent to us" stays true.
-import { studioSituations, bureaus, SELF_HELP_LINE, TRUE_FACTS_LINE, BUREAU_ADDRESSES_CHECKED, ANSWER_WINDOW, BEFORE_YOU_MAIL } from "../data/letterStudio";
+import { studioSituations, bureaus, kitMoments, SELF_HELP_LINE, TRUE_FACTS_LINE, BUREAU_ADDRESSES_CHECKED, ANSWER_WINDOW, BEFORE_YOU_MAIL } from "../data/letterStudio";
 const creditKit = productForSku("credit-letter-kit");
 const creditKitLabel = `${creditKit?.name || "Credit Letter Kit"} — ${creditKit?.priceLabel || "$19"}`;
 import { productForSku } from "../data/content";
 const kits = Object.fromEntries(studioSituations.map((s) => {
   const product = productForSku(s.recommendationSku);
-  return [s.id, { name: product?.name || s.recommendationName, price: product?.priceLabel || "", sku: s.recommendationSku, adds: s.kitAdds }];
+  return [s.id, { name: product?.name || s.recommendationName, price: product?.priceLabel || "", sku: s.recommendationSku, ...kitMoments[s.recommendationSku] }];
 }));
 const first = studioSituations[0];
 ---
@@ -54,14 +54,17 @@ const first = studioSituations[0];
         <ol class="timeline-list">
           <li><strong>Today</strong><span>Print it, sign it and mail it yourself with your proof.</span></li>
           <li><strong>In about 30 days</strong><span>{ANSWER_WINDOW.text} <a href={ANSWER_WINDOW.source.url} rel="noopener">Source: FTC</a>. What the bureau decides is up to the bureau.</span></li>
-          <li><strong>Then, your next letter</strong><span>It depends on the answer: a follow-up to the bureau, a letter to the company that reported the item, or a goodwill letter if the late payment was accurate. Those letters are in the Credit Letter Kit, paid once.</span></li>
+          <li><strong>Then, everything after the envelope is sealed</strong><span>Your next letter depends on the answer. The Credit Letter Kit holds them, paid once:</span>
+            <ul class="compact-list">{kitMoments["credit-letter-kit"].moments.map((m) => <li>{`${m.when}: ${m.items.join(", ")}.`}</li>)}</ul>
+          </li>
         </ol>
         <a class="button secondary-button" href="/pricing/#credit-letter-kit">{`See the ${creditKitLabel}`}</a>
       </div>
       <div class="recommendation-card" data-recommendation>
         <p class="eyebrow">What the kit adds</p>
         <h3>{`${kits[first.id].name} — ${kits[first.id].price}`}</h3>
-        <p>{first.kitAdds}</p>
+        <p><strong>{kits[first.id].promise}</strong> An editable Word file and a PDF guide, paid once.</p>
+        <ul class="compact-list">{kits[first.id].moments.map((m) => <li>{`${m.when}: ${m.items.join(", ")}.`}</li>)}{kits[first.id].alsoIncluded.length > 0 && <li>{`Also included: ${kits[first.id].alsoIncluded.join(", ")}.`}</li>}</ul>
         <a class="button secondary-button" href={`/pricing/#${first.recommendationSku}`}>{`See the ${kits[first.id].name} — ${kits[first.id].price}`}</a>
       </div>
       <p class="ap-selfhelp">{SELF_HELP_LINE} This free tool uses fixed templates in your browser. It is not AI and not a promise of approval.</p>
@@ -146,7 +149,8 @@ const first = studioSituations[0];
       recommendation.replaceChildren(
         el("p", { class: "eyebrow" }, "What the kit adds"),
         el("h3", {}, title),
-        el("p", {}, kit.adds),
+        (() => { const p = el("p"); p.append(el("strong", {}, kit.promise), document.createTextNode(" An editable Word file and a PDF guide, paid once.")); return p; })(),
+        (() => { const ul = el("ul", { class: "compact-list" }); for (const m of kit.moments || []) ul.append(el("li", {}, `${m.when}: ${m.items.join(", ")}.`)); if ((kit.alsoIncluded || []).length) ul.append(el("li", {}, `Also included: ${kit.alsoIncluded.join(", ")}.`)); return ul; })(),
         el("a", { class: "button secondary-button", href: `/pricing/#${kit.sku}` }, `See the ${title}`)
       );
     };
