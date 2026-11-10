@@ -101,7 +101,7 @@ Run `npm run check` in `apps/mobile` after each task; the App preview run must s
     the bundle id is the placeholder, the preview flag is set or the purchases key is missing.
     Accept: a test per named stop. No agent runs a production build or submits.
 
-## Hostile review fixes (10 Nov 2026)
+## Hostile review fixes (10 Nov 2026; these win over the plan page)
 
 - **No other company's name or price inside the app** (S7 drew "Credit Saint, $79.99 to $139.99 a
   month"): a price in a shipped build goes stale and cannot be corrected without a new release, and a
