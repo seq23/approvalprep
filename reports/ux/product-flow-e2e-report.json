@@ -1,12 +1,12 @@
 {
   "status": "PASS",
-  "ranAt": "2026-11-03T16:14:01.964Z",
+  "ranAt": "2026-11-10T20:31:37.099Z",
   "model": "direct_paid_download_with_optional_browser_only_prefill",
   "productCount": 8,
-  "testCode": {
-    "code": "TEST100",
-    "sourceOfTruth": "Stripe promotion code, created in Stripe test mode as 100% off and active",
-    "expectedCheckoutResult": "completed Checkout Session with payment_status=no_payment_required and amount_total=0",
+  "discountTest": {
+    "code": null,
+    "sourceOfTruth": "No code is kept in the repo or printed on the site. The checkout E2E runs a discount only in Stripe test mode, with a code the operator passes in LOCAL_E2E_DISCOUNT_CODE; against live Stripe it refuses (scripts/ops/checkout-e2e-discount-guard.mjs).",
+    "expectedCheckoutResult": "test mode only: completed Checkout Session with payment_status=no_payment_required and amount_total=0",
     "expectedFulfillmentResult": "verify-download returns protected PDF and DOCX download links"
   },
   "products": [
@@ -36,7 +36,7 @@
         "Buyer can arrive from home Products grid, use-case rail, product page, or pricing page.",
         "CTA should send SKU letter-of-explanation and optional discount code only.",
         "Stripe Checkout must create a payment session using the matching test/live price ID.",
-        "For testing, enter TEST100 after creating it as an active 100% off Stripe test-mode promotion code.",
+        "Promo code field is optional and names no code; a discount is tested only in Stripe test mode or with the fixture, never with a live 100% off code.",
         "After completed payment or completed 100% off session, success page must unlock protected PDF and DOCX links.",
         "Buyer chooses either direct DOCX/PDF download or optional browser-only Studio prefill; no required pre-purchase intake.",
         "Buyer reviews placeholders, edits truthfully, attaches real documents where appropriate, and sends materials themselves."
@@ -69,7 +69,7 @@
         "Buyer can arrive from home Products grid, use-case rail, product page, or pricing page.",
         "CTA should send SKU income-employment-letter-kit and optional discount code only.",
         "Stripe Checkout must create a payment session using the matching test/live price ID.",
-        "For testing, enter TEST100 after creating it as an active 100% off Stripe test-mode promotion code.",
+        "Promo code field is optional and names no code; a discount is tested only in Stripe test mode or with the fixture, never with a live 100% off code.",
         "After completed payment or completed 100% off session, success page must unlock protected PDF and DOCX links.",
         "Buyer chooses either direct DOCX/PDF download or optional browser-only Studio prefill; no required pre-purchase intake.",
         "Buyer reviews placeholders, edits truthfully, attaches real documents where appropriate, and sends materials themselves."
@@ -102,7 +102,7 @@
         "Buyer can arrive from home Products grid, use-case rail, product page, or pricing page.",
         "CTA should send SKU credit-letter-kit and optional discount code only.",
         "Stripe Checkout must create a payment session using the matching test/live price ID.",
-        "For testing, enter TEST100 after creating it as an active 100% off Stripe test-mode promotion code.",
+        "Promo code field is optional and names no code; a discount is tested only in Stripe test mode or with the fixture, never with a live 100% off code.",
         "After completed payment or completed 100% off session, success page must unlock protected PDF and DOCX links.",
         "Buyer chooses either direct DOCX/PDF download or optional browser-only Studio prefill; no required pre-purchase intake.",
         "Buyer reviews placeholders, edits truthfully, attaches real documents where appropriate, and sends materials themselves."
@@ -135,7 +135,7 @@
         "Buyer can arrive from home Products grid, use-case rail, product page, or pricing page.",
         "CTA should send SKU rental-application-kit and optional discount code only.",
         "Stripe Checkout must create a payment session using the matching test/live price ID.",
-        "For testing, enter TEST100 after creating it as an active 100% off Stripe test-mode promotion code.",
+        "Promo code field is optional and names no code; a discount is tested only in Stripe test mode or with the fixture, never with a live 100% off code.",
         "After completed payment or completed 100% off session, success page must unlock protected PDF and DOCX links.",
         "Buyer chooses either direct DOCX/PDF download or optional browser-only Studio prefill; no required pre-purchase intake.",
         "Buyer reviews placeholders, edits truthfully, attaches real documents where appropriate, and sends materials themselves."
@@ -168,7 +168,7 @@
         "Buyer can arrive from home Products grid, use-case rail, product page, or pricing page.",
         "CTA should send SKU loan-prep-letter-kit and optional discount code only.",
         "Stripe Checkout must create a payment session using the matching test/live price ID.",
-        "For testing, enter TEST100 after creating it as an active 100% off Stripe test-mode promotion code.",
+        "Promo code field is optional and names no code; a discount is tested only in Stripe test mode or with the fixture, never with a live 100% off code.",
         "After completed payment or completed 100% off session, success page must unlock protected PDF and DOCX links.",
         "Buyer chooses either direct DOCX/PDF download or optional browser-only Studio prefill; no required pre-purchase intake.",
         "Buyer reviews placeholders, edits truthfully, attaches real documents where appropriate, and sends materials themselves."
@@ -201,7 +201,7 @@
         "Buyer can arrive from home Products grid, use-case rail, product page, or pricing page.",
         "CTA should send SKU business-funding-prep-kit and optional discount code only.",
         "Stripe Checkout must create a payment session using the matching test/live price ID.",
-        "For testing, enter TEST100 after creating it as an active 100% off Stripe test-mode promotion code.",
+        "Promo code field is optional and names no code; a discount is tested only in Stripe test mode or with the fixture, never with a live 100% off code.",
         "After completed payment or completed 100% off session, success page must unlock protected PDF and DOCX links.",
         "Buyer chooses either direct DOCX/PDF download or optional browser-only Studio prefill; no required pre-purchase intake.",
         "Buyer reviews placeholders, edits truthfully, attaches real documents where appropriate, and sends materials themselves."
@@ -234,7 +234,7 @@
         "Buyer can arrive from home Products grid, use-case rail, product page, or pricing page.",
         "CTA should send SKU life-admin-letter-kit and optional discount code only.",
         "Stripe Checkout must create a payment session using the matching test/live price ID.",
-        "For testing, enter TEST100 after creating it as an active 100% off Stripe test-mode promotion code.",
+        "Promo code field is optional and names no code; a discount is tested only in Stripe test mode or with the fixture, never with a live 100% off code.",
         "After completed payment or completed 100% off session, success page must unlock protected PDF and DOCX links.",
         "Buyer chooses either direct DOCX/PDF download or optional browser-only Studio prefill; no required pre-purchase intake.",
         "Buyer reviews placeholders, edits truthfully, attaches real documents where appropriate, and sends materials themselves."
@@ -267,7 +267,7 @@
         "Buyer can arrive from home Products grid, use-case rail, product page, or pricing page.",
         "CTA should send SKU complete-approvalprep-bundle and optional discount code only.",
         "Stripe Checkout must create a payment session using the matching test/live price ID.",
-        "For testing, enter TEST100 after creating it as an active 100% off Stripe test-mode promotion code.",
+        "Promo code field is optional and names no code; a discount is tested only in Stripe test mode or with the fixture, never with a live 100% off code.",
         "After completed payment or completed 100% off session, success page must unlock protected PDF and DOCX links.",
         "Buyer chooses either direct DOCX/PDF download or optional browser-only Studio prefill; no required pre-purchase intake.",
         "Buyer reviews placeholders, edits truthfully, attaches real documents where appropriate, and sends materials themselves."

@@ -221,13 +221,13 @@ const childRoutes = manifest.routes
         </div>
         <div class="card discount-card">
           <div>
-            <p class="eyebrow">Discount code</p>
-            <h3>Testing or promo code?</h3>
-            <p class="fine">Enter a Stripe promotion code before choosing a kit. For test-mode fulfillment, create the Stripe promotion code <strong>TEST100</strong> for 100% off, then enter it here to complete checkout without charging a card.</p>
+            <p class="eyebrow">Promo code</p>
+            <h3>Have a promo code?</h3>
+            <p class="fine">Enter it here before you choose a kit. No code? Leave this empty.</p>
           </div>
           <label>
-            Code
-            <input data-discount-code type="text" inputmode="text" autocomplete="off" placeholder="TEST100" />
+            Promo code
+            <input data-discount-code type="text" inputmode="text" autocomplete="off" autocapitalize="characters" />
           </label>
         </div>
         <PricingDeck products={productCards} />
