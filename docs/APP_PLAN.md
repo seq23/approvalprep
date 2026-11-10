@@ -22,6 +22,24 @@ letters (owner, 10 Nov 2026: "If the apps are sending reminders and all of that 
 that stuff"). No account, no
 upload, no analytics, no server, no AI call.
 
+## Paid content is never in the public repo or the app bundle (10 Nov 2026; build it this way from the start)
+
+This repo is public and anything inside an app bundle can be read out of it, so paid content ships
+only after a confirmed purchase:
+- **Bundled in the app (free):** the free dispute letter, the Letter Studio's situations and openers
+  (from `src/data/letterStudio.ts`), the screens, and short fake fixtures for tests.
+- **Delivered after purchase:** the 4 Credit Letter Kit templates, the 9 Letter of Explanation templates,
+  the guides and the bundle's 50 documents. Their sources live outside the repo
+  (`APPROVALPREP_KITS_DIR`, default `~/.boss-os/approvalprep/kits/`, uploaded to R2), never committed.
+- **The door:** a Pages Function `/api/app-unlock` checks the purchase with RevenueCat's server API
+  (secret on the server only) and returns short-lived signed links; the phone downloads once, keeps
+  it, and works offline after. No RevenueCat secret yet = NAMED STOP [REVENUECAT_SECRET_MISSING]
+  and Buy stays off. Restore re-runs the same door.
+- Tests: a check fails if any paid template or guide text is in `apps/mobile` or the repo; the route
+  refuses without a confirmed entitlement and answers the same for unknown and refused.
+- Task 4 ports only the free dispute letter into the app; the kit templates are written to the
+  private folder (tasks 8 and 13 read them through the door).
+
 ## Built for 100 paying customers a day (owner, 10 Nov 2026: "begin with the end in mind, build for 100 customers or more per day")
 
 Design target: **100 purchases a day per app**, which at 3 to 6% of free users buying means about
