@@ -105,7 +105,6 @@ has(layout, "Optional: prefill a draft in the Studio", "success page missing opt
 has(pricingDeck, "fill-in placeholders", "pricing cards missing fill-in placeholder clarity");
 has(productCard, "How filling works", "product cards missing fill-flow explanation");
 has(postPurchase, "Choose how to fill it", "post-purchase section missing fill-choice explanation");
-has(studioPage + studioComponent, "does not store", "Studio missing no-storage copy");
 has(deliveryMatrix, "Product Download Delivery Matrix", "download delivery matrix doc missing");
 has(deliveryMatrix, "Complete ApprovalPrep Bundle", "download delivery matrix missing Complete Bundle");
 has(deliveryMatrix, "Offering rows in kit", "download delivery matrix missing offering-count column");

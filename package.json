@@ -25,6 +25,7 @@
     "automation:self-heal-attempt": "node scripts/automation/attempt-self-heal.mjs",
     "automation:self-heal-revalidate": "node scripts/automation/revalidate-after-self-heal.mjs",
     "baseline": "node scripts/baseline.mjs",
+    "build:sample-pdf": "node scripts/build_sample_pdf.mjs",
     "build": "astro build && PAGES_OUT_DIR=dist node scripts/build_404.mjs && node scripts/build_pin_images.mjs && node scripts/search-loop/fold-pages.mjs && node scripts/install_clarity.mjs",
     "cadence:gate": "node scripts/cadence_gate.cjs",
     "cadence:headroom": "node scripts/cadence/publish_headroom.mjs",

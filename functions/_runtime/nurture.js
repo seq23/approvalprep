@@ -1,3 +1,4 @@
+import { bureaus, BUREAU_ADDRESSES_CHECKED } from '../../src/lib/letterStudioCore.mjs';
 // FREE SAMPLE -> EMAIL -> PAID, and the ONE post-purchase review ask (Growth playbook, 1 Nov 2026).
 //
 // A visitor types their own address to get the free Letter of Explanation sample
@@ -37,14 +38,22 @@ export const STARTER_CHECKLIST = [
   'Disputing an error is free: the credit bureau must investigate it at no charge (15 U.S.C. 1681i).',
   'A credit repair company may not charge you before the promised work is done (15 U.S.C. 1679b).',
   'Accurate information can lawfully stay on your report (most negative items for up to 7 years, 15 U.S.C. 1681c), whatever a company charges.',
-  'Use the letter frame below for one error at a time, attach a copy of your proof, and keep a copy of what you send.'
+  'Use the letter below for one error at a time, attach a copy of your proof, and keep a copy of what you send.'
 ];
+// The frame is a whole letter in letter order, with a bracket only where a fact of hers goes; the
+// Letter Studio fills the same letter in from her answers and saves it as a PDF.
 export const STARTER_LETTER = [
-  '[Your name] · [Your address] · [Date]',
-  '[Credit bureau name and its dispute address]',
-  'I am writing to dispute one item on my credit report. [Account name, last 4 digits] shows [what the report says]. This is wrong because [what is true]. A copy of [your proof] is attached.',
-  'Please investigate this item and correct it or remove it if it cannot be verified, and send me the results.',
-  '[Your signature]'
+  '[Your full name]',
+  '[Your street address, city, state and ZIP]',
+  '[Today\'s date]',
+  `Send it to the bureau that shows the error: ${bureaus.map((b) => b.lines.join(', ')).join(' · ')}. (Checked ${BUREAU_ADDRESSES_CHECKED}; check the bureau's site before you mail.)`,
+  'Re: Dispute of an item on my credit report. Account: [company name and last 4 digits]',
+  'To whom it may concern:',
+  'I am writing to dispute one item in my credit file. I have circled it on the enclosed copy of my report.',
+  'The report shows this for the account above: [what the report says]. This is not accurate. [What is true, in one or two sentences.]',
+  'I ask that you investigate this item and correct it, or remove it, so that my report is accurate. Please send me the written results of your investigation.',
+  'Sincerely, [your signature and printed name]',
+  'Enclosures: copy of my credit report with the item circled; copy of [your proof]'
 ];
 export const SELF_HELP_LINE = 'Self-help templates. Not legal or financial advice. We do not contact bureaus or creditors for you.';
 
@@ -52,15 +61,15 @@ export const SELF_HELP_LINE = 'Self-help templates. Not legal or financial advic
 export function starterSequence(prices = {}) {
   return [
     {
-      kind: 'cs0', subject: 'Your free credit repair starter',
+      kind: 'cs0', subject: 'Your free starter: before you pay a credit repair company',
       heading: 'Before you pay a credit repair company',
       paragraphs: [
         ...STARTER_CHECKLIST.map((line, i) => `${i + 1}. ${line}`),
-        'Your dispute letter frame (fill in the brackets with your true facts):',
+        'Your dispute letter (fill in each bracket with your true facts, or let the free Letter Studio fill it in and save it as a PDF):',
         ...STARTER_LETTER,
         `You fill it in and you send it yourself. ${SELF_HELP_LINE}`
       ],
-      cta: { label: 'Draft it free in the Letter Studio', url: `${SITE}/letter-writing-studio/` }
+      cta: { label: 'Draft free in the Letter Studio', url: `${SITE}/letter-writing-studio/?situation=credit-dispute` }
     },
     {
       kind: 'cs1', subject: 'Every credit letter, ready to fill in',
@@ -108,7 +117,7 @@ export function sequence(prices = {}) {
       kind: 'seq0', subject: 'Your free letter of explanation sample',
       heading: 'Here is your free sample.',
       paragraphs: [
-        'Two pages from the Letter of Explanation Kit: the rules to read first and the fill-in letter frame (what happened, when, what changed, what you are doing now).',
+        'Two pages: a filled-in sample letter of explanation (every detail made up) and the short list to read before you write yours (what happened, when, what changed, what you are sending).',
         'Keep it short, answer only the question you were asked, and attach real proof where it helps. ApprovalPrep is a self-service tool: you fill it in and you send it yourself.'
       ],
       cta: { label: 'Download the sample (PDF)', url: SAMPLE_URL }
