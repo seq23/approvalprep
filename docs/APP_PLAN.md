@@ -22,6 +22,17 @@ letters (owner, 10 Nov 2026: "If the apps are sending reminders and all of that 
 that stuff"). No account, no
 upload, no analytics, no server, no AI call.
 
+## Built for 100 paying customers a day (owner, 10 Nov 2026: "begin with the end in mind, build for 100 customers or more per day")
+
+Design target: **100 purchases a day per app**, which at 3 to 6% of free users buying means about
+**2,000 to 3,000 people a day** using the free part. Every task is built to that load at $0.
+- **Everything is on the phone:** Studio, letters, PDF, tracking, reminders. No server, no AI, no limit.
+- **Bundle downloads (task 13b):** served from R2 (no charge for downloads) behind the store's confirmed
+  purchase; sized for 100 bundle buyers a day.
+- **Purchases:** the stores and RevenueCat carry any volume; Restore must work with no support email.
+- **Load check before the store step:** a script replays 100 bundle downloads and 100 Restores against a
+  preview and fails on any error. Named stop on failure.
+
 ## Screens (route → plan id)
 
 | Id | Screen | Route |
