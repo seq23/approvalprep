@@ -20,7 +20,7 @@ export async function onRequestPost({ request, env }){
     if (discountCode) {
       const promotions = await stripeRequest(env, `/promotion_codes?code=${encodeURIComponent(discountCode)}&active=true`, { method: 'GET' });
       const promo = promotions?.data?.[0];
-      if (!promo?.id) return json({ok:false,error:'INVALID_DISCOUNT_CODE',message:`Discount code ${discountCode} was not found or is not active in Stripe ${mode} mode.`},400);
+      if (!promo?.id) return json({ok:false,error:'INVALID_DISCOUNT_CODE',message:'That promo code was not found or is no longer active. Check the spelling, or clear the box to continue without a code.'},400);
       params.set('discounts[0][promotion_code]', promo.id);
     } else {
       params.set('allow_promotion_codes','true');

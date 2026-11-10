@@ -2,9 +2,12 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { onRequestPost as verifyDownload } from "../../functions/api/verify-download.js";
 import { onRequestGet as downloadFile } from "../../functions/api/download-file.js";
+import { discountCheckDecision } from "./checkout-e2e-discount-guard.mjs";
 
 const baseUrl = (process.env.LOCAL_E2E_BASE_URL || process.env.POSTDEPLOY_BASE_URL || process.env.PLAYWRIGHT_BASE_URL || "http://localhost:8788").replace(/\/$/, "");
-const discountCode = String(process.env.LOCAL_E2E_DISCOUNT_CODE || "TEST100").trim().toUpperCase();
+// No default code: the discount path runs only when the operator names a code AND the site is in
+// Stripe test mode. A 100%-off code must never exist in live Stripe (see checkout-e2e-discount-guard.mjs).
+const discountCode = String(process.env.LOCAL_E2E_DISCOUNT_CODE || "").trim().toUpperCase();
 const skipDiscount = process.env.LOCAL_E2E_SKIP_DISCOUNT === "1";
 const runFixture = process.env.LOCAL_E2E_FIXTURE === "1" || process.env.LOCAL_E2E_FIXTURE_ONLY === "1";
 const fixtureOnly = process.env.LOCAL_E2E_FIXTURE_ONLY === "1";
@@ -37,7 +40,7 @@ const report = {
     ? "completed Stripe session verification and protected download link fetch will be tested"
     : "checkout creation and success UI only; completed payment/download proof requires a real completed Checkout Session ID",
   completedSessionInputNames: ["LOCAL_E2E_COMPLETED_SESSION_ID", "APPROVALPREP_COMPLETED_SESSION_ID", "STRIPE_CHECKOUT_SESSION_ID"],
-  discountCode: skipDiscount ? null : discountCode,
+  discountCode: skipDiscount || !discountCode ? null : discountCode,
   products: [],
   completedSession: null,
   fixture: null
@@ -157,7 +160,7 @@ async function runFulfillmentFixture() {
     client_reference_id: "letter-of-explanation"
   };
   const d1Throws = { prepare() { throw new Error("fixture D1 unavailable"); } };
-  const r2 = { async get(key) { return key === "downloads/letter-of-explanation.pdf" || key === "downloads/letter-of-explanation.docx" ? { body: new Blob(["fixture file"]) } : null; } };
+  const r2 = { async get(key) { return key === "products/letter-of-explanation/letter-of-explanation.pdf" || key === "products/letter-of-explanation/letter-of-explanation.docx" ? { body: new Blob(["fixture file"]) } : null; } };
   globalThis.fetch = async (url) => {
     if (String(url).includes("api.stripe.com/v1/checkout/sessions/")) return new Response(JSON.stringify(fixtureSession), { status: 200, headers: { "content-type": "application/json" } });
     return originalFetch(url);
@@ -189,11 +192,14 @@ async function runFulfillmentFixture() {
 
 if (!fixtureOnly) {
   for (const product of products) {
+    const fullPriceCheckout = await createCheckoutSession(product, "full_price");
+    const decision = discountCheckDecision({ code: skipDiscount ? "" : discountCode, fullPriceSessionId: fullPriceCheckout.sessionId });
+    if (decision.reason === "DISCOUNT_REFUSED_NOT_STRIPE_TEST_MODE") console.error(`[local-checkout-e2e] ${decision.reason}: ${baseUrl} is not in Stripe test mode, so the discount path was not run.`);
     report.products.push({
       sku: product.sku,
       name: product.name,
-      fullPriceCheckout: await createCheckoutSession(product, "full_price"),
-      discountCheckout: skipDiscount ? { skipped: true } : await createCheckoutSession(product, "discount"),
+      fullPriceCheckout,
+      discountCheckout: decision.run ? await createCheckoutSession(product, "discount") : { skipped: true, reason: decision.reason },
       successPage: await checkSuccessPage(product)
     });
   }

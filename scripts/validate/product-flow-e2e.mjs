@@ -86,10 +86,10 @@ const report = {
   ranAt: new Date().toISOString(),
   model: "direct_paid_download_with_optional_browser_only_prefill",
   productCount: products.length,
-  testCode: {
-    code: "TEST100",
-    sourceOfTruth: "Stripe promotion code, created in Stripe test mode as 100% off and active",
-    expectedCheckoutResult: "completed Checkout Session with payment_status=no_payment_required and amount_total=0",
+  discountTest: {
+    code: null,
+    sourceOfTruth: "No code is kept in the repo or printed on the site. The checkout E2E runs a discount only in Stripe test mode, with a code the operator passes in LOCAL_E2E_DISCOUNT_CODE; against live Stripe it refuses (scripts/ops/checkout-e2e-discount-guard.mjs).",
+    expectedCheckoutResult: "test mode only: completed Checkout Session with payment_status=no_payment_required and amount_total=0",
     expectedFulfillmentResult: "verify-download returns protected PDF and DOCX download links"
   },
   products: []
@@ -159,7 +159,7 @@ for (const product of products) {
   needs.push("Buyer can arrive from home Products grid, use-case rail, product page, or pricing page.");
   needs.push(`CTA should send SKU ${product.sku} and optional discount code only.`);
   needs.push("Stripe Checkout must create a payment session using the matching test/live price ID.");
-  needs.push("For testing, enter TEST100 after creating it as an active 100% off Stripe test-mode promotion code.");
+  needs.push("Promo code field is optional and names no code; a discount is tested only in Stripe test mode or with the fixture, never with a live 100% off code.");
   needs.push("After completed payment or completed 100% off session, success page must unlock protected PDF and DOCX links.");
   needs.push("Buyer chooses either direct DOCX/PDF download or optional browser-only Studio prefill; no required pre-purchase intake.");
   needs.push("Buyer reviews placeholders, edits truthfully, attaches real documents where appropriate, and sends materials themselves.");
