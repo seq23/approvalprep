@@ -6,7 +6,7 @@ export default function Unlock() {
   return (
     <Screen route="/letters/unlock" label="Credit Letter Kit" title="Four more letters, paid once">
       <Text style={type.body}>Goodwill, debt validation, settlement terms in writing and follow-up letters, plus the PDF guide.</Text>
-      <Planned what="the store price, Buy and Restore purchase (task 8)" />
+      <Planned />
     </Screen>
   );
 }

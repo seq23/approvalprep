@@ -11,7 +11,7 @@ export default function Questions() {
   return (
     <Screen route="/letters/[kind]" label="Question 1 of 5" title={letter.name}>
       <Text style={type.sub}>{HONEST_LIMIT}</Text>
-      <Planned what="the guided questions (task 4)" />
+      <Planned />
       <Button label="See the draft ›" onPress={() => router.push('/letters/draft')} />
     </Screen>
   );
