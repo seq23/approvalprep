@@ -23,7 +23,7 @@ test('CRUD uses real SQLite; restart keeps every field and updates preserve list
   await store.create(draft('one'));
   await store.create(draft('two'));
   await assert.rejects(store.create(draft('one')));
-  const sent: SavedLetter = { ...draft('one'), status: 'answered', sentDate: '2026-11-06', method: 'Certified mail', trackingNumber: '123', reminderDate: '2026-12-06', answerNote: 'Answered' };
+  const sent: SavedLetter = { ...draft('one'), status: 'answered', sentDate: '2026-11-06', method: 'Certified mail', trackingNumber: '123', reminderDate: '2026-12-06', answerNote: 'Answered', answeredAt: '2026-12-06T12:00:00.000Z' };
   await store.update(sent);
   db.close();
   db = new DatabaseSync(file);
