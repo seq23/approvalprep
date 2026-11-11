@@ -12,7 +12,8 @@
     "check": "npm run typecheck && npm test",
     "icons": "node scripts/make-icons.mjs",
     "preview:web": "expo export --platform web",
-    "release:gate": "node scripts/release-gate.mjs"
+    "release:gate": "node scripts/release-gate.mjs",
+    "eas-build-pre-install": "node scripts/release-gate.mjs --if-production"
   },
   "dependencies": {
     "@expo-google-fonts/archivo": "0.4.2",
