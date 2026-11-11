@@ -40,9 +40,10 @@ export default function Unlock() {
       setMessage(restored ? 'Your kit is saved on this phone and ready offline.' : 'No Credit Letter Kit purchase was found for this store account.');
     } catch (error) {
       const code = error instanceof Error ? error.message : '';
-      setMessage(code === 'STORE_ACCOUNTS_NOT_READY' ? 'STORE_ACCOUNTS_NOT_READY · Purchases are not available yet.'
-        : code === 'REVENUECAT_KEY_MISSING' ? 'REVENUECAT_KEY_MISSING · Purchases are not available in this preview.'
-        : code === 'REVENUECAT_SECRET_MISSING' ? 'REVENUECAT_SECRET_MISSING · Kit downloads are not available yet. Your purchase can be restored when downloads are ready.'
+      console.warn('Kit restore failed', code);
+      setMessage(code === 'STORE_ACCOUNTS_NOT_READY' ? 'Purchases are not available yet.'
+        : code === 'REVENUECAT_KEY_MISSING' ? 'Purchases are not available in this preview.'
+        : code === 'REVENUECAT_SECRET_MISSING' ? 'Kit downloads are not available yet. Your purchase can be restored when downloads are ready.'
         : 'Your kit could not be restored. Try again; you do not need to buy it again.');
     } finally { setBusy(false); }
   }
@@ -50,7 +51,6 @@ export default function Unlock() {
     <Text style={type.body}>Templates you fill in and send yourself. One purchase covers every letter and every dispute round.</Text>
     <Sheet>{LETTERS.filter(l => l.access === 'kit').map(l => <Text key={l.kind} style={type.body}>{l.name}</Text>)}</Sheet>
     <Text style={type.sub}>{HONEST_LIMIT}</Text>
-    <Text style={type.sub}>Mark as sent, tracking and reminders: not in this build yet.</Text>
     {owned ? <Button primary label="Write a kit letter ›" onPress={() => router.replace('/letters')} /> : <>
       {mock ? <Text style={type.sub}>Preview price only. No purchase can be made here.</Text> : null}
       <Button primary disabled={busy || !product} label={product ? `Get this kit, ${product.price} once` : 'Store price unavailable'} onPress={() => void act('buy')} />

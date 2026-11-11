@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { DatabaseSync } from 'node:sqlite';
 import { KIT } from '../src/kit';
 import { MockPurchases, acceptedKey, buyKit } from '../src/purchases/provider';
 import { restoreKit } from '../src/purchases/delivery';
@@ -9,6 +10,15 @@ import { onRequestPost } from '../../../functions/api/app-unlock.js';
 import { onRequestGet } from '../../../functions/api/app-kit-file.js';
 // @ts-ignore shared signing helper
 import { signedKitUrl } from '../../../functions/_runtime/app-kit.js';
+
+function rateDb() {
+  const raw = new DatabaseSync(':memory:');
+  const stmt = (sql: string, args: any[] = []) => ({
+    run: async () => raw.prepare(sql).run(...args),
+    first: async () => raw.prepare(sql).get(...args),
+  });
+  return { raw, prepare: (sql: string) => ({ ...stmt(sql), bind: (...args: any[]) => stmt(sql, args) }) };
+}
 
 test('preview cannot charge or unlock; sales switch prevents reaching any provider', async () => {
   const mock = new MockPurchases();
@@ -27,7 +37,7 @@ test('preview cannot charge or unlock; sales switch prevents reaching any provid
 
 test('download door refuses unknown, refunded, sandbox and unentitled purchases identically; signed files expire and reject tampering', async () => {
   const original = globalThis.fetch;
-  const env = { APPROVALPREP_REVENUECAT_SECRET: 'fake-server-test-key', DOWNLOAD_SIGNING_SECRET: 'fake-test-signing-key', PRODUCT_ASSETS_R2: { get: async (key: string) => { assert.equal(key, 'app-kits/credit-letter-kit.json'); return { body: 'FAKE TEST KIT' }; } } };
+  const env = { PRODUCTS_DB: rateDb(), APPROVALPREP_REVENUECAT_SECRET: 'fake-server-test-key', DOWNLOAD_SIGNING_SECRET: 'fake-test-signing-key', PRODUCT_ASSETS_R2: { get: async (key: string) => { assert.equal(key, 'app-kits/credit-letter-kit.json'); return { body: 'FAKE TEST KIT' }; } } };
   const request = new Request('https://approvalprep.com/api/app-unlock', { method: 'POST', headers: { Authorization: 'Bearer $RCAnonymousID:0123456789abcdef0123456789abcdef' } });
   const subscriber = { entitlements: { [KIT.productId]: { product_identifier: KIT.productId, expires_date: null } }, non_subscriptions: { [KIT.productId]: [{ is_sandbox: false }] } };
   let data: any = {};
@@ -95,4 +105,25 @@ test('confirmed Restore downloads a complete kit and saves it for offline use', 
     assert.equal(requests.length, 2);
     assert.ok(requests.every(url => url.startsWith('https://approvalprep.com/api/app-')));
   } finally { globalThis.fetch = original; }
+});
+
+ test('the eleventh unlock attempt from one caller is refused before RevenueCat, even with rotating IDs', async t => {
+  const db = rateDb(); t.after(() => db.raw.close());
+  const original = globalThis.fetch; t.after(() => { globalThis.fetch = original; });
+  let calls = 0;
+  globalThis.fetch = async () => { calls++; return new Response('{}', { status: 404 }); };
+  const env = { PRODUCTS_DB: db, APPROVALPREP_REVENUECAT_SECRET: 'fake', DOWNLOAD_SIGNING_SECRET: 'fake', PRODUCT_ASSETS_R2: {} };
+  const request = (ip: string, n: number) => new Request('https://approvalprep.com/api/app-unlock', {
+    method: 'POST', headers: { 'cf-connecting-ip': ip, Authorization: `Bearer $RCAnonymousID:${n.toString(16).padStart(32, '0')}` },
+  });
+  // Hold the clock inside one rate-limit window.
+  const now = Date.now; Date.now = () => 1_800_000; t.after(() => { Date.now = now; });
+  for (let n = 0; n < 10; n++) assert.equal((await onRequestPost({ request: request('203.0.113.1', n), env })).status, 403);
+  assert.equal((await onRequestPost({ request: request('203.0.113.1', 10), env })).status, 429);
+  assert.equal(calls, 10);
+  assert.equal((await onRequestPost({ request: request('203.0.113.2', 11), env })).status, 403);
+  assert.equal(calls, 11);
+  assert.ok(!JSON.stringify(db.raw.prepare('SELECT * FROM email_rate_limits').all()).includes('203.0.113'));
+  assert.equal((await onRequestPost({ request: request('203.0.113.1', 12), env: { ...env, PRODUCTS_DB: undefined } })).status, 503);
+  assert.equal(calls, 11);
 });

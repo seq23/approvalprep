@@ -7,6 +7,7 @@ import { savedLetters } from '../../../src/savedLetters';
 import { loadDeliveredKit } from '../../../src/kitTemplates';
 import type { SavedLetter } from '../../../src/letterStorage';
 import { dateInput, MAIL_METHODS, markSent, reminderDate, type MailMethod } from '../../../src/sentLetter';
+import { MailingDateField } from '../../../src/MailingDateField';
 import { localReminders } from '../../../src/localReminders';
 import { showDate } from '../../../src/myLetters';
 // Dated-letter detail structure from APP_PLAN screen pattern (h); the person records mailing.
@@ -59,7 +60,7 @@ export default function Sent() {
     </> : !letter ? <Text style={type.sub}>{message || 'Open a saved letter before recording when you mailed it.'}</Text>
       : letter.status === 'answered' ? <Text style={type.body}>This letter already has an answer recorded.</Text> : <>
         <Text style={type.body}>Save this after you mail the letter yourself.</Text>
-        <Field label="Date mailed (YYYY-MM-DD)" defaultHint="Today is filled in. Change it if you mailed on another day." value={date} onChangeText={setDate} />
+        <MailingDateField value={date} onChange={setDate} disabled={busy} />
         <Button label={`How it was sent: ${method} ▾`} disabled={busy} onPress={() => setChoosing(!choosing)} />
         {choosing ? <Sheet>{MAIL_METHODS.map(value => <Row key={value} title={value} selected={method === value} onPress={() => { setMethod(value); setChoosing(false); }} />)}</Sheet> : null}
         <Field label="Tracking number (optional)" value={tracking} onChangeText={setTracking} />
