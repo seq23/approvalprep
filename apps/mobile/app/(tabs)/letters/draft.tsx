@@ -26,6 +26,7 @@ export default function Draft() {
     {rendered && letter ? <>
       <Sheet><Text selectable style={type.body}>{rendered.text}</Text></Sheet>
       {rendered.blanks.length ? <Text style={type.sub}>Fill in the brackets before mailing: {rendered.blanks.join(', ')}.</Text> : null}
+      <Button label="Mark as sent ›" onPress={() => router.push({ pathname: '/letters/sent', params: { id: letter.id } })} />
       <Button label="Edit my answers ›" onPress={() => router.push({ pathname: '/letters/bureau-dispute', params: { id: letter.id } })} />
     </> : <Text style={type.sub}>{message}</Text>}
   </Screen>;
