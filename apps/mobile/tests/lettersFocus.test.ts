@@ -5,7 +5,8 @@ import { runInNewContext } from 'node:vm';
 import ts from 'typescript';
 
 test('returning from Restore refreshes the mounted chooser and opens delivered kit letters', async () => {
-  let kit: unknown = null, state: unknown = null;
+  let state: unknown = null;
+  const reads: ((kit: unknown) => void)[] = [];
   let focus!: () => () => void;
   const routes: string[] = [];
   const element = (type: unknown, props: unknown) => ({ type, props });
@@ -25,19 +26,28 @@ test('returning from Restore refreshes the mounted chooser and opens delivered k
     if (name.endsWith('/ui')) return { Row: 'Row', Screen: 'Screen' };
     if (name.endsWith('/letters')) return { LETTERS: [{ kind: 'goodwill', name: 'Goodwill', access: 'kit' }] };
     if (name.endsWith('/kitTemplates')) return {
-      loadDeliveredKit: async () => kit, kitLetter: (value: unknown) => value,
+      loadDeliveredKit: () => new Promise(resolve => reads.push(resolve)), kitLetter: (value: unknown) => value,
     };
     throw new Error(`Unexpected import: ${name}`);
   } });
   const render = () => exports.default!().props.children[1][0].props.onPress;
   render();
   const blur = focus();
+  reads.shift()!(null);
   await Promise.resolve();
   render()();
   assert.equal(routes.pop(), '/letters/unlock');
   blur();
-  kit = { letters: ['delivered'] };
+  // A previous visit can still be reading storage when Restore finishes.
+  const staleBlur = focus();
+  const staleRead = reads.shift()!;
+  staleBlur();
   focus();
+  reads.shift()!({ letters: ['delivered'] });
+  await Promise.resolve();
+  render()();
+  assert.equal(routes.pop(), '/letters/goodwill');
+  staleRead(null);
   await Promise.resolve();
   render()();
   assert.equal(routes.pop(), '/letters/goodwill');
