@@ -5,7 +5,7 @@ import { BottomSheet, Button, Row, Screen } from '../../../src/ui';
 import { color, space, type } from '../../../src/theme';
 import { savedLetters } from '../../../src/savedLetters';
 import type { SavedLetter } from '../../../src/letterStorage';
-import { loadDeliveredKit } from '../../../src/kitTemplates';
+import { hasTrackingKit } from '../../../src/kitTemplates';
 import { ANSWERS, dueDate, myLetters, recordAnswer, showDate, type Answer } from '../../../src/myLetters';
 export default function Mine() {
   const [letters, setLetters] = useState<SavedLetter[]>([]);
@@ -17,7 +17,7 @@ export default function Mine() {
   const load = useCallback(async () => {
     setState('loading');
     try {
-      const [saved, kit] = await Promise.all([savedLetters().then(store => store.list()), loadDeliveredKit()]);
+      const [saved, kit] = await Promise.all([savedLetters().then(store => store.list()), hasTrackingKit()]);
       setLetters(saved); setHasKit(!!kit); setState('ready');
     } catch { setState('error'); }
   }, []);
@@ -27,7 +27,7 @@ export default function Mine() {
     if (!selected || busy) return;
     setBusy(true); setError('');
     try {
-      const updated = recordAnswer(selected, value, !!await loadDeliveredKit());
+      const updated = recordAnswer(selected, value, await hasTrackingKit());
       await (await savedLetters()).update(updated);
       setLetters(old => old.map(letter => letter.id === updated.id ? updated : letter)); setSelected(null);
     } catch { setError('Your answer could not be saved. Try again.'); }
