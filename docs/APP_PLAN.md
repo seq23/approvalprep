@@ -228,3 +228,151 @@ Run `npm run check` in `apps/mobile` after each task; the App preview run must s
   entity. The bundle id `com.approvalprep.app` stays a placeholder until then.
 - She signs up for the store accounts and RevenueCat herself; until then sales stay off
   (`STORE_ACCOUNTS_NOT_READY`).
+
+## Screen patterns (shipped examples first; owner, 10 Nov 2026)
+
+These notes come from real shipped screens looked at on 10 Nov 2026 (free, no-account sources; nothing copied). They are evidence, not test results. **Where a note disagrees with a rule, a test or a ruling elsewhere in this plan (for example "rows never move", the offers order in `offersFor`, the two locked tasks per window, or any money or claims rule), the plan wins and the note is ignored on that point.** Colours, type and words come from `src/theme.ts` and this plan.
+
+# ApprovalPrep: screen patterns from shipped apps
+
+Read this first:
+- These are notes on shipped screens seen on 10 Nov 2026. They are not test results. Nobody measured which layout sells more.
+- SEEN = I looked at the screenshot. TEXT ONLY = I read a description and did not see it.
+- Sources: Adapty paywall library (a paywall capture per app) and App Store web pages (store screenshots, which are marketing frames around real screens).
+- Structure only. No competitor words, colours or art are to be reused.
+- Several credit apps seen promise score gains or removals in their store art. That is their choice and is NOT a pattern to follow: ApprovalPrep sells self-help templates, promises no outcome and never acts for the buyer.
+
+
+### (g) One-time kit purchase screen (one kit, then a second kit and a bundle)
+
+Examples looked at:
+- FormalWriter (letter templates): https://apps.apple.com/us/app/id6761338077 : one-time ($4.99, after 2 free letters), one offer. SEEN (small)
+- Structured, "lifetime only" variant: https://adapty.io/paywall-library/structured/ : one-time, one offer. SEEN
+- Subscription Manager: https://adapty.io/paywall-library/subscription-manager/ : one-time, two price tiers side by side. SEEN
+- Bills Organizer & Reminder: https://adapty.io/paywall-library/bills-organizer-reminder/ : two separate one-time unlocks, each with its own buy button and price. SEEN
+- Baby Checklist: https://adapty.io/paywall-library/baby-checklist-shopping-list/ : one-time content pack (extra lists), sold from the locked rows in the list itself. SEEN
+- Packing List Checklist: https://adapty.io/paywall-library/packing-list-checklist/ : one-time, one offer. SEEN
+- Contrast, subscriptions: My Bill of Sale https://adapty.io/paywall-library/my-bill-of-sale/ (monthly, with a long renewal paragraph); PDF Expert https://adapty.io/paywall-library/pdf-expert/ (yearly with trial); Genius Scan https://adapty.io/paywall-library/scanner-app-genius-scan/ (yearly with trial). SEEN
+- Price lists only: EasyLetter sells one lifetime pass https://apps.apple.com/us/app/id1495179755 ; Credit Dispute Tracker lists "Credit Pro" at $39.99 and $4.99 https://apps.apple.com/us/app/id6779428195 . TEXT ONLY for their purchase screens.
+
+What they share:
+- The one-time screens are short: a title, a list of what is inside (4 to 7 short rows), the price, one button, a restore link. They fit on one screen.
+- "Paid once" is said in plain words next to the price or in the title, not in small print.
+- The price is inside or directly above the main button. The button is the last big thing on the screen.
+- A close or cancel control is visible in a top corner from the first moment.
+- When two things are for sale, each is its own row or card with its own name, one line of what it is, and its own price. No toggle, no table.
+- Content packs are sold where the content sits: a lock on the item, then a small confirm step that names what you get (Baby Checklist).
+
+Build it like this:
+- Top bar: visible close. Title: the kit's name. One line under it: paid once, not a subscription, templates you fill in and send yourself.
+- "What is in this kit": 4 to 6 rows, each a named letter or sheet. Names of things, not benefits.
+- One line stating the limit plainly: self-help templates, no promised result, we do not send or act for you. Normal text size, above the button.
+- Main button: one, full width, with the price in it (kind: "Get this kit, $X once").
+- Under the button, a quiet section "Other options": the second kit as one row (name, one line, price), then the bundle as one row (name, what it includes, price). Each row opens its own copy of this screen or selects in place; only one main button on screen at a time.
+- Last: "Restore purchase" text link, terms, privacy.
+- Leave out: trial wording, monthly prices, reviews, score numbers, before-and-after figures, a comparison table, a "most popular" badge on more than one item.
+
+Do not:
+- Do not use timers, "was" prices that were never charged, or limited-stock wording.
+- Do not show score gains, removal counts or any result claim near the price.
+- Do not pre-select the bundle when the person arrived from one kit's lock; show the kit they asked for first.
+
+Honest limits: 6 one-time screens seen, but only 2 show two one-time items on one screen. No shipped screen was found with exactly "one kit, then a second kit and a bundle"; that order is assembled from the parts above. FormalWriter is the only letter app whose pay-once screen was seen, and only at small size.
+
+### (e) Start screen
+
+Examples looked at:
+- Credit Dispute Tracker ("Your file" home): https://apps.apple.com/us/app/id6779428195 : price list shows "Credit Pro" $39.99 and $4.99; type not confirmed. SEEN
+- FormalWriter (opens on the letter chooser): https://apps.apple.com/us/app/id6761338077 : one-time. SEEN
+- Credit Repair Letters (opens on a numbered letter list): https://apps.apple.com/us/app/id1237780957 : free, no in-app purchases listed. SEEN
+- Rocket Lawyer (dashboard is a list of your documents with status): https://apps.apple.com/us/app/id605512447 : SUBSCRIPTION. SEEN
+- EasyLetter (latest letters list, one compose control): https://apps.apple.com/us/app/id1495179755 : one-time lifetime pass. SEEN
+- Contract Maker (opens on "new draft"): https://apps.apple.com/us/app/id6446145749 : SUBSCRIPTION. SEEN
+
+What they share:
+- The first screen is the work itself: either "pick what to write" or "your documents". None of the six opens on a feature tour.
+- One main action, to start a new document. It is a single button or the list itself.
+- If the person already has documents, they show on the first screen as a short list with a status word and a date.
+- One app leads with the next date that matters (Credit Dispute Tracker: a "next date" card above the list).
+- No sign-in frame is shown first in any of the six store pages.
+
+Build it like this:
+- Top: app name and one plain line saying what it does (letters you fill in and send yourself).
+- Main button, large, upper half of the screen (kind: "Write a letter").
+- Under it one line: the first bureau dispute letter is free, as a PDF.
+- If letters exist: a "next date" card (the nearest answer-due date and which letter), then the 3 most recent letters with status, and a link to all of them.
+- If no letters exist: nothing else. No empty list, no sample data.
+- Small text links at the bottom: how it works, kits.
+- Leave out: sign-in, email capture, score meter, credit report import, chat, news or tips feed, a paywall on open.
+
+Do not:
+- Do not open on a paywall or a multi-page tour.
+- Do not show a credit score, a gauge or a points figure anywhere on this screen.
+
+Honest limits: 6 seen, all from store screenshots, which show a filled, best-case state. The true first-launch empty state was not seen for any of them.
+
+### (f) "Write a letter" chooser (pick one of several letter situations)
+
+Examples looked at:
+- FormalWriter: https://apps.apple.com/us/app/id6761338077 : one-time. SEEN
+- Credit Repair Letters: https://apps.apple.com/us/app/id1237780957 : free. SEEN
+- Contract Maker (template type list): https://apps.apple.com/us/app/id6446145749 : SUBSCRIPTION. SEEN
+- Baby Checklist (list with locked rows): https://adapty.io/paywall-library/baby-checklist-shopping-list/ : one-time pack. SEEN (a chooser with locks, not letters)
+- Rocket Lawyer (one question per screen once a document is picked): https://apps.apple.com/us/app/id605512447 : SUBSCRIPTION. SEEN (the step after the chooser)
+
+What they share:
+- A plain vertical list. One row per situation. No grid of tiles, no carousel.
+- The screen title is a question or an instruction to choose.
+- Each row is the situation in the user's words, with one small line under it saying what the letter asks for.
+- Short lists show everything at once (Credit Repair Letters: about a dozen rows). Long lists add a search box, a short "popular" group at the top, then categories (FormalWriter).
+- Tapping a row goes straight to filling it in. No confirm step.
+- Paid rows stay in the list with a small lock; free rows have no mark.
+
+Build it like this:
+- Title: a question (kind: "What do you need to write?").
+- First group, "Free": the bureau dispute letter as the first row, marked free.
+- Then the other situations as rows, grouped under 2 or 3 plain headers at most. Each row: situation name, one small line, and a small lock if it belongs to a kit.
+- Keep it to one screen of rows if possible (about 6 to 10). Add search only if the list passes about 15.
+- Tap a free row: go to the form. Tap a locked row: open that kit's purchase screen, showing that letter first in "what is in this kit".
+- One small line at the bottom: these are templates; you send them yourself.
+- Leave out: icons per row that carry no meaning, numbering, prices on every row, descriptions longer than one line.
+
+Do not:
+- Do not hide which rows are paid until after the form is filled in.
+- Do not order rows to push the paid ones above the free letter.
+
+Honest limits: 3 true letter or document choosers seen (FormalWriter, Credit Repair Letters, Contract Maker); the other 2 are related screens. That is the minimum asked for, not more.
+
+### (h) "My letters" list with status (draft, sent, answer due in N days)
+
+Examples looked at:
+- Credit Dispute Tracker (dispute detail and result screens): https://apps.apple.com/us/app/id6779428195 : type not confirmed. SEEN
+- Rocket Lawyer (documents list with a status word per row): https://apps.apple.com/us/app/id605512447 : SUBSCRIPTION. SEEN
+- Invoice Simple (list with due dates, overdue marked): https://apps.apple.com/us/app/id694831622 : SUBSCRIPTION. SEEN
+- EasyLetter (latest letters list): https://apps.apple.com/us/app/id1495179755 : one-time. SEEN
+- Chronicle (bills grouped "due soon" / "due later", days left on each row): https://apps.apple.com/us/app/id572561420 : mixed. SEEN
+- Bills Manager (groups: past due, due within 7 days, due within 30 days, paid): https://apps.apple.com/us/app/id834370671 : one-time. SEEN
+
+What they share:
+- One row per document: name on the first line, a status word and a date on the second line. The status word is coloured; nothing else on the row is.
+- Three or four statuses at most, in plain words (incomplete, complete, sent, answered; due, overdue, paid).
+- Rows with a deadline show the date or the days left on the right side, and late ones are the only rows in a warning colour.
+- Lists with deadlines are grouped by urgency (overdue, soon, later, done), not by the date the item was created.
+- The dated detail screen counts from the day the letter was received, and shows the mailed date, delivered date and due date together (Credit Dispute Tracker). The result is recorded as one choice from a short fixed list.
+- One "+" or compose control to start a new one.
+
+Build it like this:
+- Title: "My letters". One "+" control in the top corner.
+- Groups in this order, each shown only when it has rows: Answer overdue, Waiting for an answer, Drafts, Answered.
+- Row: who the letter is to and what it is about on line one. Line two: a status word (Draft, Sent, Answered) and the date it happened. Right side, for sent letters only: "answer due in N days" or "N days overdue".
+- Tap a draft: continue it. Tap a sent letter: a detail screen with date mailed, date delivered (the person enters these), the due date worked out from them, the PDF, and one control to record the answer.
+- Recording the answer: pick one from a short fixed list and a date. The row moves to Answered and stays.
+- The due date is a count of days only. Say next to it that it is a reminder based on the dates entered.
+- Leave out: progress rings, score changes, success rates, charts, swipe-only actions with no visible button.
+
+Do not:
+- Do not label any status with a result the app cannot know (such as "removed" or "fixed") unless the person recorded it.
+- Do not mark a letter Sent automatically; the person mails it and says so.
+- Do not hide answered letters or drafts.
+
+Honest limits: 6 seen. Only 1 (Credit Dispute Tracker) is a letter tracker with an answer deadline, and I saw its detail screens, not its list. The list layout above leans on the document, invoice and bill lists.
