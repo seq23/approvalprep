@@ -1,12 +1,18 @@
 # App build queue — 10 Nov 2026
 
-Task 1 PR is green and awaits coordinator review.
+Task 1 is merged into the scaffold branch.
 Task 2 is implemented in its own dependent PR against the scaffold branch.
 Next task: 3. Coordinator lands task 1 before task 2; agents never merge.
 
-Preview: CI exports the app for the web and puts a free download shortcut in its
-run summary. Download, unzip and serve with `python3 -m http.server 8080`.
-No Appetize uploads or minutes. This is a downloadable preview, not hosted hosting.
+Task 1a: CI publishes the web export to the app's separate free Cloudflare Pages
+project. The first summary line and PR comment contain the preview URL; noindex
+headers and robots.txt discourage indexing. Missing credentials, refused deployment
+or no deployment URL fail with NAMED STOP [PREVIEW_HOST_FAILED].
+No Appetize uploads or minutes. Website hosting is untouched.
+
+NAMED STOP [PATTERN_NOTES_MISSING] Start (S1); Write a letter (S2); My letters (7); kit purchase screens (8, 13, 13b).
+The scaffold plan has no Screen patterns section as of this run. Do not extend those
+screens until the coordinator adds the shipped-example structure notes.
 
 NAMED STOP [WAITS_FOR_LAUNCH_PLAN]: task 11 (store files) wait for the owner's launch plan after 13 Nov. Release gates remain in scope.
 
