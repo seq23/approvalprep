@@ -17,7 +17,8 @@ export const TABS: { tab: Tab; route: string; label: string }[] = [
 ];
 export const SCREENS: ScreenSpec[] = [
   { id: 'S1', route: '/', file: 'app/index.tsx', title: 'Start', kind: 'start', links: [HOME] },
-  { id: 'S2', route: '/letters', file: 'app/(tabs)/letters/index.tsx', title: 'Write a letter', kind: 'tab', tab: 'letters', links: ['/letters/[kind]', '/letters/unlock'] },
+  { id: 'S2', route: '/letters', file: 'app/(tabs)/letters/index.tsx', title: 'Write a letter', kind: 'tab', tab: 'letters', links: ['/letters/[kind]', '/letters/unlock', '/letters/studio'] },
+  { id: 'Studio', route: '/letters/studio', file: 'app/(tabs)/letters/studio.tsx', title: 'Letter Studio', kind: 'sub', tab: 'letters', back: '/letters', links: [] },
   { id: 'S3', route: '/letters/[kind]', file: 'app/(tabs)/letters/[kind].tsx', title: 'Questions', kind: 'sub', tab: 'letters', back: '/letters', links: ['/letters/draft'] },
   { id: 'S4', route: '/letters/draft', file: 'app/(tabs)/letters/draft.tsx', title: 'Your letter', kind: 'sub', tab: 'letters', back: '/letters', links: ['/letters/sent'] },
   { id: 'S5', route: '/letters/sent', file: 'app/(tabs)/letters/sent.tsx', title: 'Mark as sent', kind: 'sheet', tab: 'letters', back: '/letters/draft', links: [] },
