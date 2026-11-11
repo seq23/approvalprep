@@ -8,7 +8,7 @@
     "ios": "expo run:ios",
     "android": "expo run:android",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test tests/*.test.ts",
+    "test": "node --experimental-sqlite --import tsx --test tests/*.test.ts",
     "check": "npm run typecheck && npm test",
     "icons": "node scripts/make-icons.mjs",
     "preview:web": "expo export --platform web"
