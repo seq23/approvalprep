@@ -7,6 +7,8 @@ import { HONEST_LIMIT } from '../../../src/copy';
 import { bureaus, disputeQuestions, draftWriter, newDispute } from '../../../src/letterQuestions';
 import { savedLetters } from '../../../src/savedLetters';
 import type { SavedLetter } from '../../../src/letterStorage';
+import { KIT_KINDS, KIT_LOCKED_LINE, kitLetter, loadDeliveredKit, newKitDraft, type KitKind, type KitLetter } from '../../../src/kitTemplates';
+import { LETTERS } from '../../../src/letters';
 export default function Questions() {
   const { kind, id } = useLocalSearchParams<{ kind: string; id?: string }>();
   const [letter, setLetter] = useState<SavedLetter | null>(null);
@@ -14,20 +16,26 @@ export default function Questions() {
   const [message, setMessage] = useState('Opening your draft…');
   const [saving, setSaving] = useState(false);
   const [failed, setFailed] = useState(false);
+  // undefined = still looking on the phone; null = this kit letter has not been delivered.
+  const [paid, setPaid] = useState<KitLetter | null | undefined>(undefined);
+  const free = kind === 'bureau-dispute';
   const write = useRef<ReturnType<typeof draftWriter> | null>(null);
   const revision = useRef(0);
   const draftId = useRef(id ?? `letter-${Date.now()}-${Math.random().toString(36).slice(2)}`);
   useEffect(() => {
     let active = true;
-    if (kind !== 'bureau-dispute') return;
-    setLetter(null); setStep(0);
+    setLetter(null); setStep(0); setPaid(undefined); setMessage('Opening your draft…');
     (async () => {
+      const template = free ? null : kitLetter(await loadDeliveredKit(), kind);
+      if (!active) return;
+      setPaid(template);
+      if (!free && !template) return;
       const store = await savedLetters();
       if (id) draftId.current = id;
       let draft = await store.get(draftId.current);
       if (id && (!draft || draft.kind !== kind)) throw Error('DRAFT_NOT_FOUND');
       if (!draft) {
-        draft = newDispute(draftId.current);
+        draft = template ? newKitDraft(draftId.current, template.kind) : newDispute(draftId.current);
         try { await store.create(draft); } catch (error) {
           // React may remount while the first insert is pending.
           const existing = await store.get(draftId.current);
@@ -49,18 +57,28 @@ export default function Questions() {
       if (version === revision.current) { setSaving(false); setFailed(true); setMessage('Your latest answers could not be saved. Try saving again before continuing.'); }
     });
   }
-  const question = disputeQuestions[step];
-  return <Screen route="/letters/[kind]" label={`Question ${step + 1} of ${disputeQuestions.length}`} title={question.title}>
+  if (!free && !paid) {
+    const name = LETTERS.find(l => l.kind === kind)?.name ?? 'Write a letter';
+    return <Screen route="/letters/[kind]" label="Credit Letter Kit" title={name}>
+      <Text style={type.sub}>{HONEST_LIMIT}</Text>
+      {paid === undefined && KIT_KINDS.includes(kind as KitKind) ? <Text style={type.sub} accessibilityLiveRegion="polite">Opening…</Text>
+        : <><Text style={type.body}>{KIT_LOCKED_LINE}</Text><Button label="See the kit ›" onPress={() => router.replace('/letters/unlock')} /></>}
+    </Screen>;
+  }
+  const questions = paid ? paid.questions : disputeQuestions;
+  const question = questions[Math.min(step, questions.length - 1)];
+  return <Screen route="/letters/[kind]" label={`Question ${step + 1} of ${questions.length}`} title={question.title}>
     <Text style={type.sub}>{HONEST_LIMIT}</Text>
-    {kind !== 'bureau-dispute' ? <><Text style={type.body}>This letter is included in the Credit Letter Kit.</Text><Button label="See the kit ›" onPress={() => router.replace('/letters/unlock')} /></> : <>
+    {paid?.honestLine ? <Text style={type.sub}>{paid.honestLine}</Text> : null}
+    <>
       <Text style={type.sub} accessibilityLiveRegion="polite">{message}</Text>
       {letter ? <>
-        {step === 1 ? (bureaus as { id: string; name: string }[]).map(bureau => <Row key={bureau.id} title={bureau.name} selected={letter.answers.bureau === bureau.id} onPress={() => persist({ ...letter, answers: { ...letter.answers, bureau: bureau.id } })} />) : question.fields.map(field => <Field key={field.name} label={field.label} multiline={field.multiline} value={letter.answers[field.name] ?? ''} onChangeText={value => persist({ ...letter, answers: { ...letter.answers, [field.name]: value } })} />)}
+        {free && step === 1 ? (bureaus as { id: string; name: string }[]).map(bureau => <Row key={bureau.id} title={bureau.name} selected={letter.answers.bureau === bureau.id} onPress={() => persist({ ...letter, answers: { ...letter.answers, bureau: bureau.id } })} />) : question.fields.map(field => <Field key={field.name} label={field.label} multiline={field.multiline} value={letter.answers[field.name] ?? ''} onChangeText={value => persist({ ...letter, answers: { ...letter.answers, [field.name]: value } })} />)}
         <Text style={type.sub}>You can leave a blank. It will appear in brackets for you to fill before mailing.</Text>
         {failed ? <Button label="Try saving again" onPress={() => persist(letter)} /> : null}
-        <Button primary disabled={saving || failed} label={step === disputeQuestions.length - 1 ? 'Read my draft ›' : 'Next question ›'} onPress={() => step === disputeQuestions.length - 1 ? router.push({ pathname: '/letters/draft', params: { id: letter.id } }) : setStep(step + 1)} />
+        <Button primary disabled={saving || failed} label={step === questions.length - 1 ? 'Read my draft ›' : 'Next question ›'} onPress={() => step === questions.length - 1 ? router.push({ pathname: '/letters/draft', params: { id: letter.id } }) : setStep(step + 1)} />
         {step > 0 ? <Button label="← Previous question" onPress={() => setStep(step - 1)} /> : null}
       </> : null}
-    </>}
+    </>
   </Screen>;
 }
