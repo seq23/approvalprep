@@ -81,8 +81,10 @@ const after = kitMoments["credit-letter-kit"];
     <p class="eyebrow">Optional · paid once</p>
     <h2>Do I need to pay for any of this?</h2>
     <p>No. Every step on this page is free. If you would rather not write the letters from a blank page, the {kit?.name || "Credit Letter Kit"} is one purchase of {kit?.priceLabel || "$19"}, paid once. It covers every letter after the first, however many answers you get: <strong>{after.promise.toLowerCase().replace(/\.$/, "")}</strong>.</p>
-    <ul class="compact-list">{after.moments.map((m) => <li>{`${m.when}: ${m.items.join(", ")}.`}</li>)}</ul>
-    <p>Already have the kit? You do not pay again: the follow-up and goodwill letters are in the Word file you downloaded.</p>
+    <p>The kit's letter for each answer:</p>
+    <ul class="compact-list">{after.byAnswer.map((a) => <li>{`${a.answer}: ${a.items.join("; ")}.`}</li>)}</ul>
+    <p>Also in the kit: {after.moments.flatMap((m) => m.items).filter((i) => !after.byAnswer.some((a) => a.items.includes(i))).join(", ")}, and the first dispute letter.</p>
+    <p>Already have the kit? You do not pay again: every letter above is in the Word file you downloaded.</p>
     <div class="hero-actions"><button class="button primary-button checkout-button" type="button" data-sku="credit-letter-kit">{`Buy the ${kitLabel}`}</button><a class="button secondary secondary-button" href="/letter-writing-studio/?situation=credit-dispute">Draft free in the Letter Studio</a></div>
     <p class="ap-selfhelp">Self-help templates. Not legal or financial advice. We do not contact bureaus or creditors for you. You write and send every letter yourself, and a bureau or creditor decides what it does.</p>
   </div></section>

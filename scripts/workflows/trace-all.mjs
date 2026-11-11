@@ -16,21 +16,22 @@ const packageSequences = {};
 for (const m of sequenceSource.matchAll(/([A-Za-z0-9_-]+):\s*\[([^\]]*)\]/g)) {
   packageSequences[m[1]] = [...m[2].matchAll(/["']([^"']+)["']/g)].map(x=>x[1]);
 }
-function resolveScriptClosure(initialScripts) {
+function resolveScriptClosure(initialScripts, manifest = pkg) {
   const queue=[...initialScripts]; const seen=new Set(); const missing=new Set(); const commands=[];
   while(queue.length){
     const name=queue.shift(); if(seen.has(name)) continue; seen.add(name);
-    const command=pkg.scripts?.[name];
+    const command=manifest.scripts?.[name];
     if(!command){ missing.add(name); continue; }
     commands.push({script:name,command});
     for(const m of command.matchAll(/npm\s+run\s+([A-Za-z0-9:_-]+)/g)) queue.push(m[1]);
     const seq=command.match(/node\s+scripts\/workflows\/run-package-sequence\.mjs\s+([A-Za-z0-9_-]+)/);
     if(seq && packageSequences[seq[1]]) queue.push(...packageSequences[seq[1]]);
-    if(name === "validate:all") queue.push(...(validationRegistry.validators||[]).map(v=>v.npmScript).filter(Boolean));
+    if(manifest === pkg && name === "validate:all") queue.push(...(validationRegistry.validators||[]).map(v=>v.npmScript).filter(Boolean));
   }
   return {scripts:[...seen].sort(), missing:[...missing].sort(), commands};
 }
-function installReason(closure){
+function installReason(closure, manifest = pkg){
+  const packageNames = new Set([...Object.keys(manifest.dependencies||{}), ...Object.keys(manifest.devDependencies||{})].map(x=>x.replace(/^@[^/]+\//,'')));
   for(const {script,command} of closure.commands){
     if(script === "build") return `transitive:${script}`;
     const first=command.trim().split(/\s+/)[0].replace(/^\.\//,'');
@@ -62,11 +63,14 @@ const traces = files.map(file => {
   const secretRefs = [...new Set([...text.matchAll(/secrets\.([A-Z0-9_]+)/g)].map(m=>m[1]))].sort();
   const dataWrites = [...new Set(commands.flatMap(c => [...c.matchAll(/data\/[A-Za-z0-9_./-]+\.json/g)].map(m=>m[0])) )].sort();
   const npmScripts = [...new Set(commands.flatMap(c => [...c.matchAll(/npm\s+run\s+([A-Za-z0-9:_-]+)/g)].map(m=>m[1])) )].sort();
-  const closure = resolveScriptClosure(npmScripts);
+  // Resolve commands against the package selected by the job defaults.
+  const workdir = text.match(/working-directory:\s*([\w./-]+)/)?.[1];
+  const manifest = workdir ? JSON.parse(read(`${workdir}/package.json`)) : pkg;
+  const closure = resolveScriptClosure(npmScripts, manifest);
   const missingNpmScripts = closure.missing;
   const usesNpmInstall = /npm install/.test(text);
   const usesNpmCi = /npm ci\b/.test(text);
-  const installDependencyReason = installReason(closure);
+  const installDependencyReason = installReason(closure, manifest);
   const requiresDependencyInstall = Boolean(installDependencyReason);
   const buildsProject = closure.scripts.includes("build");
   const dependencyInstallPolicyOk = requiresDependencyInstall ? usesNpmCi && !usesNpmInstall : !usesNpmInstall;

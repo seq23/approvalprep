@@ -472,3 +472,10 @@ details summary { min-height: 44px; }
   .site-header .secondary-nav { display: none; }
   .site-header .nav-cta { min-height: 44px; padding: 8px 12px; }
 }
+
+/* On a phone, the home page kit cards keep the name, who it is for, what is inside, the price and
+   the Buy button. The preview picture and the "how filling works" line (the same on all eight
+   cards) are on each kit's own page. */
+@media (max-width: 740px) {
+  .product-card .product-media, .product-card .product-how { display: none; }
+}
