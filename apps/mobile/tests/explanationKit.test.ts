@@ -70,7 +70,10 @@ test('Restore independently delivers each owned kit or both; switched-off Buy ne
 });
 test('server checks the selected entitlement and signatures cannot switch kits', async () => {
   const original = globalThis.fetch;
-  const env = { APPROVALPREP_REVENUECAT_SECRET: 'FAKE', DOWNLOAD_SIGNING_SECRET: 'FAKE', PRODUCT_ASSETS_R2: {} };
+  const rate = new DatabaseSync(':memory:');
+  const statement = (sql: string, args: any[] = []) => ({ run: async () => rate.prepare(sql).run(...args), first: async () => rate.prepare(sql).get(...args) });
+  const PRODUCTS_DB = { prepare: (sql: string) => ({ ...statement(sql), bind: (...args: any[]) => statement(sql, args) }) };
+  const env = { PRODUCTS_DB, APPROVALPREP_REVENUECAT_SECRET: 'FAKE', DOWNLOAD_SIGNING_SECRET: 'FAKE', PRODUCT_ASSETS_R2: {} };
   const request = (kit: string) => new Request(`https://approvalprep.com/api/app-unlock?kit=${kit}`, { method: 'POST', headers: { Authorization: 'Bearer $RCAnonymousID:0123456789abcdef0123456789abcdef' } });
   try {
     for (const product of [KIT.productId, EXPLANATION_KIT.productId]) {

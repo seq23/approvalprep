@@ -14,7 +14,7 @@ const config: ExpoConfig = {
     blockedPermissions: ['android.permission.RECORD_AUDIO', 'android.permission.ACCESS_FINE_LOCATION',
       'android.permission.ACCESS_COARSE_LOCATION', 'android.permission.READ_CONTACTS', 'android.permission.CAMERA'] },
   updates: { enabled: false },
-  plugins: ['expo-router', 'expo-font', ['expo-splash-screen', { image: './assets/splash.png', imageWidth: 160, backgroundColor: '#F7F3EA' }]],
+  plugins: ['expo-router', 'expo-font', 'expo-notifications', ['expo-splash-screen', { image: './assets/splash.png', imageWidth: 160, backgroundColor: '#F7F3EA' }]],
 };
 if (process.env.EAS_BUILD_PROFILE === 'production') {
   assertReleaseReady({ env: process.env, iosBundleId: config.ios?.bundleIdentifier, androidPackage: config.android?.package });

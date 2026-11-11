@@ -13,3 +13,5 @@ export function kitPurchaseGate(enabled: boolean = KIT_SALES_ENABLED): { ok: tru
 }
 
 export const EXPLANATION_KIT = { productId: 'ap_explanation_kit', approvedPriceUSD: 14.99, approved: '2026-11-10' } as const;
+export const COMPLETE_BUNDLE = { productId: 'ap_complete_bundle', approvedPriceUSD: 49.99 } as const;
+export const BUNDLE_UPGRADE = { productId: 'ap_bundle_upgrade', approvedPriceUSD: 29.99 } as const;
