@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 export function publish({ project, branch, directory = 'dist', env = process.env, run = spawnSync }) {
   const stop = () => { throw new Error('NAMED STOP [PREVIEW_HOST_FAILED]'); };
   if (!env.CLOUDFLARE_API_TOKEN || !env.CLOUDFLARE_ACCOUNT_ID || !branch || !existsSync(resolve(directory, 'index.html'))) stop();
-  writeFileSync(resolve(directory, '_headers'), '/*\n  X-Robots-Tag: noindex, nofollow, noarchive\n');
+  writeFileSync(resolve(directory, '_headers'), '/*\n  X-Robots-Tag: noindex, nofollow, noarchive\n  Cross-Origin-Embedder-Policy: credentialless\n  Cross-Origin-Opener-Policy: same-origin\n');
   writeFileSync(resolve(directory, 'robots.txt'), 'User-agent: *\nDisallow: /\n');
   const invoke = (args) => run('npx', ['--yes', 'wrangler@4.110.0', 'pages', ...args], { env: { ...env, NO_COLOR: '1' }, encoding: 'utf8', timeout: 120000 });
   const list = invoke(['project', 'list', '--json']);
