@@ -19,3 +19,9 @@ My letters and kit-purchase patterns are now available. Task 9 remains a partial
 low-risk batch; next task is 4 (letters and questions), alone, then 4b, alone.
 Task 12 + 14 remain a separate release-gate/scorecard batch.
 All five More links returned HTTP 200 on 10 Nov 2026.
+
+Preview fixes: settlement-terms letter name replaces the retired offer, bundled fonts
+are moved out of assets/node_modules before hosting, font failure renders the app,
+and web previews use a centred column capped at 430 px. Based directly on the fresh
+scaffold; no open task-4 branch is included. Task 4 is already in PR #117;
+next task after that review is 4b. Launch stop remains unchanged.
