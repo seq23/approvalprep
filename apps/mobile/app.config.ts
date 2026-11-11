@@ -1,4 +1,7 @@
 import type { ExpoConfig } from 'expo/config';
+// @ts-ignore release guard is also run directly by Node
+import { assertPreviewOff } from './scripts/release-gate.mjs';
+if (process.env.EAS_BUILD_PROFILE === 'production') assertPreviewOff();
 // Bundle id and package are PLACEHOLDERS until the store accounts exist (docs/APP_PLAN.md, "What needs her").
 // Light only: the approved brand has no dark theme (spry brain, ApprovalPrep brand, 6 Nov 2026).
 const config: ExpoConfig = {
