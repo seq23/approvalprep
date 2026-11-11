@@ -916,7 +916,8 @@
         "b5 FAQ answer is 35 words (aim 40-60): \"Can I dispute information with multiple agencies a\""
       ],
       "extra_queries": [
-        "how to write a letter to credit bureau"
+        "how to write a letter to credit bureau",
+        "how to send credit dispute letters"
       ],
       "indexnow_at": "2026-11-10"
     },
@@ -955,7 +956,8 @@
         "b5 FAQ answer is 33 words (aim 40-60): \"Can a landlord charge an application fee?\"",
         "b5 FAQ answer is 39 words (aim 40-60): \"What happens if I have no credit history?\"",
         "b5 FAQ answer is 36 words (aim 40-60): \"Do all landlords require proof of income?\""
-      ]
+      ],
+      "indexnow_at": "2026-11-11"
     }
   ],
   "dropped": [
@@ -1170,6 +1172,53 @@
         "b5 FAQ answer is 27 words (aim 40-60): \"Can I use a goodwill letter for accounts in collec\"",
         "b5 FAQ answer is 28 words (aim 40-60): \"How long does a creditor take to reply?\"",
         "b5 FAQ answer is 28 words (aim 40-60): \"What if my goodwill letter gets denied?\"",
+        "facts: needs at least 2 distinct sources whose URLs answered 200 (found 1)"
+      ]
+    },
+    {
+      "query": "credit dispute letters that work",
+      "at": "2026-11-11",
+      "gate": 2,
+      "reason": [
+        "b5 FAQ answer is 28 words (aim 40-60): \"Do I have to pay to dispute a credit error?\"",
+        "b5 FAQ answer is 25 words (aim 40-60): \"Should I call the credit bureau on the phone?\"",
+        "b5 FAQ answer is 22 words (aim 40-60): \"How long does a credit bureau take to reply?\"",
+        "b5 FAQ answer is 20 words (aim 40-60): \"What should I include in my dispute envelope?\"",
+        "facts: needs at least 2 distinct sources whose URLs answered 200 (found 0)"
+      ]
+    },
+    {
+      "query": "how to write dispute credit letters",
+      "at": "2026-11-11",
+      "gate": 2,
+      "reason": [
+        "b5 FAQ answer is 29 words (aim 40-60): \"Should I dispute all negative items on my report?\"",
+        "b5 FAQ answer is 26 words (aim 40-60): \"How long does a credit bureau investigation take?\"",
+        "b5 FAQ answer is 27 words (aim 40-60): \"Can I dispute errors directly with the creditor?\"",
+        "facts: needs at least 2 distinct sources whose URLs answered 200 (found 1)",
+        "invented: review or testimonial language \"Review by\""
+      ]
+    },
+    {
+      "query": "how to write credit bureau dispute letters",
+      "at": "2026-11-11",
+      "gate": 2,
+      "reason": [
+        "b5 FAQ answer is 24 words (aim 40-60): \"How long do the bureaus take to investigate?\"",
+        "b5 FAQ answer is 25 words (aim 40-60): \"Should I send original documents with my letter?\"",
+        "b5 FAQ answer is 27 words (aim 40-60): \"Can I dispute items online instead of mailing a le\"",
+        "facts: needs at least 2 distinct sources whose URLs answered 200 (found 1)"
+      ]
+    },
+    {
+      "query": "goodwill letter for late payment example",
+      "at": "2026-11-11",
+      "gate": 2,
+      "reason": [
+        "b5 FAQ answer is 21 words (aim 40-60): \"Do creditors have to remove late payments?\"",
+        "b5 FAQ answer is 24 words (aim 40-60): \"Should I send goodwill letters to Equifax, Experia\"",
+        "b5 FAQ answer is 21 words (aim 40-60): \"Can I use a goodwill letter for a collection accou\"",
+        "b5 FAQ answer is 20 words (aim 40-60): \"How long does a late payment stay on my credit rep\"",
         "facts: needs at least 2 distinct sources whose URLs answered 200 (found 1)"
       ]
     }
@@ -1584,6 +1633,16 @@
       "matched_by": "high token overlap (0.60 >= 0.6)",
       "matched_text": "how to get approved for loan with bad credit",
       "stage": "draft"
+    },
+    {
+      "query": "how to send credit dispute letters",
+      "at": "2026-11-11",
+      "url": "https://approvalprep.com/questions/how-to-send-letters-to-credit-bureaus/",
+      "route": "/questions/how-to-send-letters-to-credit-bureaus/",
+      "kind": "engine",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "matched_text": "how to send letters to credit bureaus",
+      "stage": "search"
     }
   ]
 }

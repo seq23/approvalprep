@@ -2,73 +2,19 @@
   "schema": "search-loop-week-v1",
   "week": "2026-W46",
   "site": "approvalprep.com",
-  "generated_at": "2026-11-10T11:14:21.959Z",
+  "generated_at": "2026-11-11T11:14:32.082Z",
   "state": "running",
-  "published": 4,
+  "published": 2,
   "indexed": "not read: no page old enough to inspect yet (14 days)",
   "pace": 10,
   "ai_visitors": 0,
-  "ai_bot_hits": 504,
+  "ai_bot_hits": 433,
   "conversions": "not read: no conversion source configured for this site (form fills / checkouts)",
   "wins": 0,
   "undone": 0,
   "merged": 0,
-  "held_by_cap": 48,
+  "held_by_cap": 40,
   "redirected": [
-    {
-      "query": "home loan documents list",
-      "strengthen": "https://approvalprep.com/questions/list-of-documents-needed-for-home-loan-application/",
-      "matched_by": "high token overlap (0.67 >= 0.6)",
-      "at": "2026-11-04"
-    },
-    {
-      "query": "us mortgage documents list",
-      "strengthen": "https://approvalprep.com/questions/mortgage-loan-documents-list/",
-      "matched_by": "high token overlap (0.75 >= 0.6)",
-      "at": "2026-11-04"
-    },
-    {
-      "query": "your mortgage application checklist",
-      "strengthen": "https://approvalprep.com/questions/mortgage-checklist/",
-      "matched_by": "high token overlap (0.67 >= 0.6)",
-      "at": "2026-11-04"
-    },
-    {
-      "query": "home loan required documents list",
-      "strengthen": "https://approvalprep.com/questions/documents-required-for-home-mortgage-loan/",
-      "matched_by": "high token overlap (0.67 >= 0.6)",
-      "at": "2026-11-04"
-    },
-    {
-      "query": "loan closing documents checklist",
-      "strengthen": "https://approvalprep.com/questions/mortgage-loan-documents-checklist/",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-04"
-    },
-    {
-      "query": "mortgage loan approval checklist",
-      "strengthen": "https://approvalprep.com/questions/mortgage-loan-documents-checklist/",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-04"
-    },
-    {
-      "query": "complete your mortgage documents checklist",
-      "strengthen": "https://approvalprep.com/questions/mortgage-checklist/",
-      "matched_by": "high token overlap (0.75 >= 0.6)",
-      "at": "2026-11-04"
-    },
-    {
-      "query": "va mortgage document checklist",
-      "strengthen": "https://approvalprep.com/questions/mortgage-loan-documents-checklist/",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-04"
-    },
-    {
-      "query": "document for mortgage loan",
-      "strengthen": "https://approvalprep.com/questions/mortgage-loan-documents-checklist/",
-      "matched_by": "high token overlap (0.75 >= 0.6)",
-      "at": "2026-11-04"
-    },
     {
       "query": "what documents does mortgage lender need",
       "strengthen": "https://approvalprep.com/questions/what-documents-do-mortgage-lenders-require/",
@@ -98,6 +44,12 @@
       "strengthen": "https://approvalprep.com/questions/how-to-get-approved-for-loan-with-bad-credit/",
       "matched_by": "high token overlap (0.60 >= 0.6)",
       "at": "2026-11-10"
+    },
+    {
+      "query": "how to send credit dispute letters",
+      "strengthen": "https://approvalprep.com/questions/how-to-send-letters-to-credit-bureaus/",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-11"
     }
   ],
   "cap": {
@@ -107,15 +59,8 @@
     "why": "up from 22 to 25: Google impressions 55 in the last 28 days beat 10 in the 28 before"
   },
   "notes": [
-    "BUILD distinct gate: 2 search(es) had the same intent as an existing page and became strengthen briefs, not new pages (pages.json \"redirected\")",
-    "BUILD gate notes (not blocking): 1 published page(s) are outside a length or style aim; each is listed under gate_notes in pages.json",
-    "reshape of /questions/how-to-write-an-employment-verification-letter/ left as it was: facts: needs at least 2 distinct sources whose URLs answered 200 (found 1); shape: the body needs at least one list or table (give one section \"bullets\")",
-    "reshape of /questions/letter-verifying-employment-sample/ left as it was: shape: the body needs at least one list or table (give one section \"bullets\"); d2: a how-to page has no numbered steps",
-    "reshape of /questions/how-to-get-approved-for-apartment-self-employed/ left as it was: shape: the body needs at least one list or table (give one section \"bullets\"); d2: a how-to page has no numbered steps",
-    "reshape of /questions/how-to-get-approved-for-apartment-with-no-rental-history/ left as it was: shape: the body needs at least one list or table (give one section \"bullets\"); d2: a how-to page has no numbered steps",
-    "reshape of /questions/how-to-get-approved-for-apartment-with-no-job/ left as it was: facts: needs at least 2 distinct sources whose URLs answered 200 (found 1); shape: the body needs at least one list or table (give one section \"bullets\")",
-    "reshape of /questions/how-to-get-approved-for-apartment-with-low-credit-score/ left as it was: facts: needs at least 2 distinct sources whose URLs answered 200 (found 1); shape: the body needs at least one list or table (give one section \"bullets\")",
-    "reshape of /questions/how-to-get-approved-for-loan-with-bad-credit/ left as it was: facts: needs at least 2 distinct sources whose URLs answered 200 (found 1); shape: the body needs at least one list or table (give one section \"bullets\")"
+    "BUILD distinct gate: 1 search(es) had the same intent as an existing page and became strengthen briefs, not new pages (pages.json \"redirected\")",
+    "BUILD published 0 of quota 1: 4 draft(s) failed the gate and were dropped; 0 got no answer from the free model and stay queued"
   ],
   "lanes": {
     "ratio": {
@@ -143,5 +88,5 @@
     "weight_changes": [],
     "competition": "ok: 15 top-10 read(s) via brave"
   },
-  "run_url": "https://github.com/seq23/approvalprep/actions/runs/42805785330"
+  "run_url": "https://github.com/seq23/approvalprep/actions/runs/43010267492"
 }
