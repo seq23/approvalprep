@@ -141,13 +141,16 @@ test('no paid kit sentence is in apps/mobile or src', t => {
   for (const file of mobile) assert.doesNotMatch(readFileSync(file, 'utf8'), retired, relative(repo, file));
   assert.match(['Pay', 'For ', 'Delete'].join('-'), retired);
 
-  const privatePath = process.env.APPROVALPREP_APP_TEMPLATES || join(homedir(), '.boss-os', 'approvalprep', 'app-templates', 'credit-letter-kit.json');
+  const privatePaths = [process.env.APPROVALPREP_APP_TEMPLATES || join(homedir(), '.boss-os', 'approvalprep', 'app-templates', 'credit-letter-kit.json'), join(homedir(), '.boss-os', 'approvalprep', 'app-templates', 'letter-of-explanation-kit.json')];
+  for (const privatePath of privatePaths) {
   if (!existsSync(privatePath)) {
     t.diagnostic('NOTE [PRIVATE_TEMPLATES_ABSENT]: no private kit file on this machine, so no paid sentence was checked here. Only the retired-phrase check ran.');
-    return;
+    continue;
   }
   const kit = parseKitTemplates(readFileSync(privatePath, 'utf8'));
   assert.ok(kit, `${privatePath} is there but is not a valid kit`);
+  const promises = /raise (your|my) (credit )?score|boost (your|my) (credit )?score|\bguarantee|remove (any|all|negative|accurate)|(?:fix|repair|clean|erase) (your|my) credit/i;
+  for (const letter of kit.letters) assert.doesNotMatch([letter.template, letter.honestLine, ...(letter.notes ?? [])].join(' '), promises);
   const sentences = new Set<string>();
   for (const letter of kit.letters) {
     const pieces = [letter.template, letter.honestLine ?? '', ...(letter.notes ?? [])]
@@ -168,4 +171,5 @@ test('no paid kit sentence is in apps/mobile or src', t => {
     }
   }
   t.diagnostic(`checked ${sentences.size} paid sentences against ${files.length} files`);
+  }
 });

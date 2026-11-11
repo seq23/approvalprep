@@ -7,7 +7,7 @@ import { HONEST_LIMIT } from '../../../src/copy';
 import { renderDispute } from '../../../src/letterQuestions';
 import { savedLetters } from '../../../src/savedLetters';
 import type { SavedLetter } from '../../../src/letterStorage';
-import { KIT_KINDS, KIT_LOCKED_LINE, kitLetter, loadDeliveredKit, renderKitLetter, type KitKind, type KitLetter } from '../../../src/kitTemplates';
+import { ALL_KIT_KINDS, kitForKind, KIT_LOCKED_LINE, kitLetter, loadDeliveredKit, renderKitLetter, type KitKind, type KitLetter } from '../../../src/kitTemplates';
 import { disputedParts, letterHtml } from '../../../src/letterPdf';
 import { saveOrPrintLetter } from '../../../src/letterExport';
 export default function Draft() {
@@ -21,11 +21,11 @@ export default function Draft() {
     let active = true;
     setLetter(null); setPaid(null); setExportMessage('');
     savedLetters().then(store => id ? store.get(id) : null).then(async value => {
-      const template = value && KIT_KINDS.includes(value.kind as KitKind) ? kitLetter(await loadDeliveredKit(), value.kind) : null;
+      const template = value && ALL_KIT_KINDS.includes(value.kind as KitKind) ? kitLetter(await loadDeliveredKit(kitForKind(value.kind)), value.kind) : null;
       if (!active) return;
       setPaid(template);
       if (value && (value.kind === 'bureau-dispute' || template)) setLetter(value);
-      else if (value && KIT_KINDS.includes(value.kind as KitKind)) { setLetter(null); setMessage(KIT_LOCKED_LINE); }
+      else if (value && ALL_KIT_KINDS.includes(value.kind as KitKind)) { setLetter(null); setMessage(kitForKind(value.kind) === 'credit-letter-kit' ? KIT_LOCKED_LINE : 'This letter is included in the Letter of Explanation Kit.'); }
       else setMessage('This draft could not be found. Open Write a letter to start one.');
     }).catch(() => { if (active) setMessage('Your letter could not be loaded. Go back and try again.'); });
     return () => { active = false; };

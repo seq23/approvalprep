@@ -9,8 +9,9 @@ export const KIT_STOP = 'STORE_ACCOUNTS_NOT_READY';
 // Buying while switched off is a named stop, never a charge or a silent no-op.
 export function kitPurchaseGate(enabled: boolean = KIT_SALES_ENABLED): { ok: true } | { ok: false; stop: typeof KIT_STOP; reason: string } {
   if (enabled) return { ok: true };
-  return { ok: false, stop: KIT_STOP, reason: 'The company store accounts and RevenueCat are not set up yet, so the Credit Letter Kit cannot be bought.' };
+  return { ok: false, stop: KIT_STOP, reason: 'The company store accounts and RevenueCat are not set up yet, so the letter kits cannot be bought.' };
 }
 
+export const EXPLANATION_KIT = { productId: 'ap_explanation_kit', approvedPriceUSD: 14.99, approved: '2026-11-10' } as const;
 export const COMPLETE_BUNDLE = { productId: 'ap_complete_bundle', approvedPriceUSD: 49.99 } as const;
 export const BUNDLE_UPGRADE = { productId: 'ap_bundle_upgrade', approvedPriceUSD: 29.99 } as const;

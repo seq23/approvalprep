@@ -3,16 +3,22 @@
 // it back, checks every part of it, and fills a letter from her answers.
 import type { LetterDatabase, SavedLetter } from './letterStorage';
 import type { Question } from './letterQuestions';
-import type { LetterKind } from './letters';
+import { EXPLANATION_LETTERS, type LetterKind } from './letters';
 // @ts-ignore shared website module is JavaScript
 import { formatLetterDate } from '../../../src/lib/letterStudioCore.mjs';
 
 export type KitKind = Exclude<LetterKind, 'bureau-dispute'>;
 export const KIT_KINDS: readonly KitKind[] = ['goodwill', 'debt-validation', 'settlement-terms', 'follow-up'];
 export const KIT_ID = 'credit-letter-kit';
+export const EXPLANATION_KIT_ID = 'letter-of-explanation-kit';
+export type KitId = typeof KIT_ID | typeof EXPLANATION_KIT_ID;
+export const EXPLANATION_KINDS = EXPLANATION_LETTERS.map(l => l.kind as KitKind);
+export const ALL_KIT_KINDS = [...KIT_KINDS, ...EXPLANATION_KINDS];
+export const kitForKind = (kind: string): KitId => EXPLANATION_KINDS.includes(kind as KitKind) ? EXPLANATION_KIT_ID : KIT_ID;
+export const kindsForKit = (id: KitId) => id === KIT_ID ? KIT_KINDS : EXPLANATION_KINDS;
 export const KIT_LOCKED_LINE = 'This letter is included in the Credit Letter Kit.';
 export interface KitLetter { kind: KitKind; name: string; questions: Question[]; template: string; honestLine?: string; notes?: string[] }
-export interface KitTemplates { version: number; kit: typeof KIT_ID; letters: KitLetter[] }
+export interface KitTemplates { version: number; kit: KitId; letters: KitLetter[] }
 
 // A blank in a template is {{field|What to write here}}; {{today}} is the date on the letter.
 const TOKEN = /\{\{([A-Za-z][A-Za-z0-9]*)(?:\|([^{}|]+))?\}\}/g;
@@ -20,7 +26,7 @@ const text = (v: unknown): v is string => typeof v === 'string' && v.trim().leng
 const record = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v);
 
 function parseLetter(raw: unknown): KitLetter | null {
-  if (!record(raw) || !KIT_KINDS.includes(raw.kind as KitKind) || !text(raw.name) || !text(raw.template)) return null;
+  if (!record(raw) || !ALL_KIT_KINDS.includes(raw.kind as KitKind) || !text(raw.name) || !text(raw.template)) return null;
   if (!Array.isArray(raw.questions) || raw.questions.length < 4 || raw.questions.length > 6) return null;
   const names = new Set<string>();
   const questions: Question[] = [];
@@ -53,15 +59,15 @@ function parseLetter(raw: unknown): KitLetter | null {
 export function parseKitTemplates(raw: unknown): KitTemplates | null {
   try {
     const data = typeof raw === 'string' ? JSON.parse(raw) : raw;
-    if (!record(data) || data.kit !== KIT_ID || typeof data.version !== 'number' || !Number.isInteger(data.version) || data.version < 1) return null;
-    if (!Array.isArray(data.letters) || data.letters.length === 0) return null;
+    if (!record(data) || ![KIT_ID, EXPLANATION_KIT_ID].includes(data.kit as KitId) || typeof data.version !== 'number' || !Number.isInteger(data.version) || data.version < 1) return null;
+    if (!Array.isArray(data.letters) || data.letters.length === 0 || (data.kit === EXPLANATION_KIT_ID && data.letters.length !== EXPLANATION_KINDS.length)) return null;
     const letters: KitLetter[] = [];
     for (const item of data.letters) {
       const letter = parseLetter(item);
-      if (!letter || letters.some(l => l.kind === letter.kind)) return null;
+      if (!letter || !kindsForKit(data.kit as KitId).includes(letter.kind) || letters.some(l => l.kind === letter.kind)) return null;
       letters.push(letter);
     }
-    return { version: data.version, kit: KIT_ID, letters };
+    return { version: data.version, kit: data.kit as KitId, letters };
   } catch { return null; }
 }
 
@@ -91,32 +97,39 @@ export function newKitDraft(id: string, kind: KitKind): SavedLetter {
 }
 
 /** Where the delivered kit is kept on the phone. save() refuses anything parseKitTemplates refuses. */
-export async function kitStore(db: LetterDatabase) {
+export async function kitStore(db: LetterDatabase, kitId: KitId = KIT_ID) {
   await db.execAsync('CREATE TABLE IF NOT EXISTS delivered_kits (kit TEXT PRIMARY KEY NOT NULL, body TEXT NOT NULL);');
   return {
     async read(): Promise<KitTemplates | null> {
-      const rows = await db.getAllAsync<{ body: string }>('SELECT body FROM delivered_kits WHERE kit = ?', KIT_ID);
-      return rows[0] ? parseKitTemplates(rows[0].body) : null;
+      const rows = await db.getAllAsync<{ body: string }>('SELECT body FROM delivered_kits WHERE kit = ?', kitId);
+      const kit = rows[0] ? parseKitTemplates(rows[0].body) : null;
+      return kit?.kit === kitId ? kit : null;
     },
     async save(raw: unknown): Promise<boolean> {
       const kit = parseKitTemplates(raw);
-      if (!kit) return false;
-      await db.runAsync('INSERT INTO delivered_kits (kit, body) VALUES (?, ?) ON CONFLICT(kit) DO UPDATE SET body = excluded.body', KIT_ID, JSON.stringify(kit));
+      if (!kit || kit.kit !== kitId) return false;
+      await db.runAsync('INSERT INTO delivered_kits (kit, body) VALUES (?, ?) ON CONFLICT(kit) DO UPDATE SET body = excluded.body', kitId, JSON.stringify(kit));
       return true;
     },
-    async remove() { await db.runAsync('DELETE FROM delivered_kits WHERE kit = ?', KIT_ID); },
+    async remove() { await db.runAsync('DELETE FROM delivered_kits WHERE kit = ?', kitId); },
   };
 }
 
-let opening: Promise<Awaited<ReturnType<typeof kitStore>>> | undefined;
-export async function saveDeliveredKit(kit: KitTemplates): Promise<boolean> {
-  if (!opening) opening = import('expo-sqlite').then(sqlite => sqlite.openDatabaseAsync('approvalprep-kit.db')).then(kitStore);
-  return (await opening).save(kit);
+const opening: Partial<Record<KitId, Promise<Awaited<ReturnType<typeof kitStore>>>>> = {};
+async function deliveredStore(kitId: KitId) {
+  if (!opening[kitId]) opening[kitId] = import('expo-sqlite').then(sqlite => sqlite.openDatabaseAsync('approvalprep-kit.db')).then(db => kitStore(db, kitId));
+  try { return await opening[kitId]!; } catch (error) { delete opening[kitId]; throw error; }
 }
-/** The delivered kit, or null when nothing has been delivered (or the phone cannot read it). Never throws. */
-export async function loadDeliveredKit(): Promise<KitTemplates | null> {
+/** Without a kit ID, this is the shared tracking entitlement. Letter access always passes its own ID. */
+export async function loadDeliveredKit(kitId?: KitId): Promise<KitTemplates | null> {
   try {
-    if (!opening) opening = import('expo-sqlite').then(sqlite => sqlite.openDatabaseAsync('approvalprep-kit.db')).then(kitStore);
-    return await (await opening).read();
-  } catch { opening = undefined; return null; }
+    if (kitId) return await (await deliveredStore(kitId)).read();
+    return await (await deliveredStore(KIT_ID)).read() || await (await deliveredStore(EXPLANATION_KIT_ID)).read();
+  } catch { return null; }
+}
+export async function saveDeliveredKit(kit: KitTemplates): Promise<boolean> {
+  return (await deliveredStore(kit.kit)).save(kit);
+}
+export async function hasTrackingKit(): Promise<boolean> {
+  return !!(await loadDeliveredKit() || await loadDeliveredKit(EXPLANATION_KIT_ID));
 }

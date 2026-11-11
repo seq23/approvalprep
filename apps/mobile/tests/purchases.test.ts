@@ -78,7 +78,7 @@ test('restore never stores a bad or redirected kit and exposes missing server se
     await assert.rejects(restoreKit(provider, async () => { saves++; return true; }), /REVENUECAT_SECRET_MISSING/);
     globalThis.fetch = async () => new Response(JSON.stringify({ url: 'https://elsewhere.invalid/api/app-kit-file' }));
     await assert.rejects(restoreKit(provider, async () => { saves++; return true; }), /KIT_DOWNLOAD_UNAVAILABLE/);
-    globalThis.fetch = async input => new Response(JSON.stringify(String(input).endsWith('/app-unlock') ? { url: 'https://approvalprep.com/api/app-kit-file?fake=test' } : { letters: [] }));
+    globalThis.fetch = async input => new Response(JSON.stringify(new URL(String(input)).pathname === '/api/app-unlock' ? { url: 'https://approvalprep.com/api/app-kit-file?fake=test' } : { letters: [] }));
     await assert.rejects(restoreKit(provider, async () => { saves++; return true; }), /KIT_DOWNLOAD_UNAVAILABLE/);
     assert.equal(saves, 0);
   } finally { globalThis.fetch = original; }
@@ -96,7 +96,7 @@ test('confirmed Restore downloads a complete kit and saves it for offline use', 
   const requests: string[] = [];
   globalThis.fetch = async input => {
     requests.push(String(input));
-    return new Response(JSON.stringify(String(input).endsWith('/app-unlock') ? { url: 'https://approvalprep.com/api/app-kit-file?fake=test' } : kit));
+    return new Response(JSON.stringify(new URL(String(input)).pathname === '/api/app-unlock' ? { url: 'https://approvalprep.com/api/app-kit-file?fake=test' } : kit));
   };
   try {
     let saved: unknown;

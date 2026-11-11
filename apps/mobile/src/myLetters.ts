@@ -1,5 +1,5 @@
 import type { SavedLetter } from './letterStorage';
-import { LETTERS } from './letters';
+import { LETTERS, EXPLANATION_LETTERS } from './letters';
 // @ts-ignore shared phone/website date calculation
 import { answerDueDate } from '../../../src/lib/letterStudioCore.mjs';
 export const ANSWERS = ['Corrected', 'Verified', 'No answer', 'Other answer'] as const;
@@ -27,7 +27,7 @@ export function myLetters(letters: SavedLetter[], hasKit: boolean, today = new D
       const stamp = letter.answeredAt ? new Date(letter.answeredAt) : null;
       sub = `✓ Answered${stamp && Number.isFinite(stamp.getTime()) ? ` · ${showDate(stamp)}, ${stamp.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}` : ''}`;
     }
-    return { letter, title: [letter.answers.bureau, letter.answers.account || LETTERS.find(item => item.kind === letter.kind)?.name || 'Saved letter'].filter(Boolean).join(' · '), sub, needsAnswer };
+    return { letter, title: [letter.answers.bureau, letter.answers.account || [...LETTERS, ...EXPLANATION_LETTERS].find(item => item.kind === letter.kind)?.name || 'Saved letter'].filter(Boolean).join(' · '), sub, needsAnswer };
   });
   const count = rows.filter(row => row.needsAnswer).length;
   return { rows, summary: `${letters.length} ${letters.length === 1 ? 'letter' : 'letters'}${hasKit ? ` · ${count} ${count === 1 ? 'answer' : 'answers'} to check` : ''}` };
