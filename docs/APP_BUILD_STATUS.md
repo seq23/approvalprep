@@ -1,13 +1,21 @@
 # App build queue — 10 Nov 2026
 
-Task 1 PR is green and awaits coordinator review.
-Task 2 is implemented in its own dependent PR against the scaffold branch.
-Next task: 3. Coordinator lands task 1 before task 2; agents never merge.
+Task 1 is merged. Task 2 is implemented in open PR #111 and included as a dependency here.
+Task 1a publishes a noindex hosted preview URL in the CI summary and PR.
+Task 3 is implemented: SQLite stores letters and all answer/tracking fields on the phone;
+CRUD and restart persistence are tested with a real SQLite database.
+Next task: 4 (letters and questions), alone. Then task 4b (free Letter Studio), alone.
 
-Preview: CI exports the app for the web and puts a free download shortcut in its
-run summary. Download, unzip and serve with `python3 -m http.server 8080`.
-No Appetize uploads or minutes. This is a downloadable preview, not hosted hosting.
+NAMED STOP [WAITS_FOR_LAUNCH_PLAN]: task 11 (store files) waits for the owner's
+launch plan after 13 Nov. Release gates remain in scope. No Appetize use.
 
-NAMED STOP [WAITS_FOR_LAUNCH_PLAN]: task 11 (store files) wait for the owner's launch plan after 13 Nov. Release gates remain in scope.
+Task 9 is implemented: legal and contact links, in-page deletion confirmation with Keep,
+serialized delete-all, error/retry and completion feedback. Depends on open PR #113
+(tasks 1a, 2, 3); that PR includes #111. Next eligible low-risk task: 10.
 
-Tasks are grouped into PRs by risk (owner, 10 Nov 2026 evening); see the queue brief. Task 1a (a hosted preview link) comes before task 2. "Pay for delete" is retired: the kit's letter is "settlement terms in writing".
+Screen pattern hold cleared: coordinator PR #115 merged into the scaffold during
+this run; its new APP_PLAN.md is merged into this branch. Start, Write a letter,
+My letters and kit-purchase patterns are now available. Task 9 remains a partial
+low-risk batch; next task is 4 (letters and questions), alone, then 4b, alone.
+Task 12 + 14 remain a separate release-gate/scorecard batch.
+All five More links returned HTTP 200 on 10 Nov 2026.

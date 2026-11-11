@@ -8,7 +8,7 @@
     "ios": "expo run:ios",
     "android": "expo run:android",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test tests/*.test.ts",
+    "test": "node --experimental-sqlite --import tsx --test tests/*.test.ts",
     "check": "npm run typecheck && npm test",
     "icons": "node scripts/make-icons.mjs",
     "preview:web": "expo export --platform web"
@@ -23,6 +23,7 @@
     "expo-linking": "~58.0.15",
     "expo-router": "~58.0.29",
     "expo-splash-screen": "~58.0.13",
+    "expo-sqlite": "~58.0.15",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "react-native": "0.88.1",
