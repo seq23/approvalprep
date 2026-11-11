@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { Linking, Text, View } from 'react-native';
 import { Button, Row, Screen } from '../../../src/ui';
@@ -19,6 +20,7 @@ export default function More() {
   return <Screen route="/more" label="More" title="About ApprovalPrep">
     <Text style={type.body}>{PRIVACY_LINE}</Text>
     <Text style={type.body}>You write and send every letter yourself.</Text>
+    <Row title="Complete ApprovalPrep Bundle" sub="Both kits and the document library" onPress={() => router.push('/letters/bundle')} />
     {MORE_LINKS.map(link => <Row key={link.url} title={link.label} onPress={() => { Linking.openURL(link.url).catch(() => setMessage('Could not open the page. Try again when you are online.')); }} />)}
     <View style={{ marginTop: space[6], paddingTop: space[4], borderTopWidth: 1, borderColor: color.rule, gap: space[3] }}>
       <Button label="Delete all my letters" disabled={busy || confirming} onPress={() => { deletion.request(); setConfirming(true); setMessage(''); }} />
