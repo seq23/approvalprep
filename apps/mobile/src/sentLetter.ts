@@ -40,7 +40,17 @@ export async function markSent(letter: SavedLetter, details: SentDetails, deps: 
   await deps.reminders.cancel(identifier);
   let updated: SavedLetter = { ...letter, status: 'sent', sentDate: details.date, method: details.method,
     trackingNumber: details.tracking.trim() || null, reminderDate: null };
-  await deps.update(updated);
+  try {
+    await deps.update(updated);
+  } catch (error) {
+    // Storage still holds the old details; put their notification back as well.
+    if (letter.reminderDate) {
+      const previous = mailingDate(letter.reminderDate);
+      previous.setHours(9, 0, 0, 0);
+      if (previous > now) await deps.reminders.schedule(identifier, previous);
+    }
+    throw error;
+  }
   let reminder: 'scheduled' | 'off' | 'past' | 'denied' = 'off';
   if (details.remind && due > now) {
     if (await deps.reminders.permission()) {

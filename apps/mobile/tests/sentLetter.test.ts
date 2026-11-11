@@ -86,6 +86,21 @@ test('failed notification or persistence does not claim a saved reminder', async
   assert.equal(rollback.scheduled.size, 0);
 });
 
+test('failed sent-details save restores the existing reminder and preserves the stored letter', async () => {
+  const h = harness();
+  await markSent(h.read(), details, h.deps, now);
+  const previous = h.read();
+  const failure = Error('disk full');
+  h.deps.update = async () => { throw failure; };
+  await assert.rejects(markSent(previous, { ...details, date: '2026-11-10' }, h.deps, now), error => error === failure);
+  assert.deepEqual(h.read(), previous);
+  assert.equal(h.scheduled.size, 1);
+  const restored = h.scheduled.get(reminderId(previous.id))!;
+  assert.equal(dateInput(restored), previous.reminderDate);
+  assert.equal(restored.getHours(), 9);
+  assert.equal(h.permissions(), 1);
+});
+
 test('answering, deleting and deleting all letters cancel their reminders before changing storage', async () => {
   const h = harness();
   let letters = [{ ...newDispute('one'), status: 'sent' as SavedLetter['status'], reminderDate: '2026-12-06' }, newDispute('two')];
