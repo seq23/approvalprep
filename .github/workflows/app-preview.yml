@@ -1,6 +1,11 @@
 name: App preview
 on:
   workflow_dispatch:
+    inputs:
+      fixture_trace:
+        description: Run fixture workflow data trace only
+        required: false
+        default: "false"
   push:
     branches: [main]
     paths: ['apps/mobile/**', 'lib/**', '.github/workflows/app-preview.yml']
