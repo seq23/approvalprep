@@ -1,7 +1,7 @@
 // The approved ApprovalPrep design system (https://claude.ai/artifact/BKh2xEmgb1wAitJ9Tq9N4T, tokens.css).
 // Every colour, size and space on a screen comes from here; no hex after this file.
 export const color = {
-  paper: '#F7F3EA', paperRaised: '#FFFDF8', carbon: '#1D1C21', carbonMuted: '#57534C', rule: '#D9D0BE',
+  scrim: 'rgba(29,28,33,0.35)', paper: '#F7F3EA', paperRaised: '#FFFDF8', carbon: '#1D1C21', carbonMuted: '#57534C', rule: '#D9D0BE',
   signal: '#FF7A3D', onSignal: '#1D1C21', signalDeep: '#9A3F12', highlighter: '#FFE066',
   stop: '#B42318', stopSoft: '#FBE9E5', done: '#2F6B3A', focus: '#1D1C21',
 } as const;

@@ -17,7 +17,7 @@ export function goBack(route: string) {
 function HeaderButton({ label, onPress }: { label: string; onPress: () => void }) {
   return (
     <Pressable accessibilityRole="button" accessibilityLabel={label.replace(/[←✕]\s*/, '')} onPress={onPress} hitSlop={8}
-      style={{ minHeight: 44, minWidth: 44, justifyContent: 'center', paddingRight: 12 }}>
+      style={{ minHeight: 48, minWidth: 48, justifyContent: 'center', paddingRight: 12 }}>
       <Text style={[type.button, { color: color.carbon }]}>{label}</Text>
     </Pressable>
   );
