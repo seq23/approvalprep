@@ -11,3 +11,6 @@ export function kitPurchaseGate(enabled: boolean = KIT_SALES_ENABLED): { ok: tru
   if (enabled) return { ok: true };
   return { ok: false, stop: KIT_STOP, reason: 'The company store accounts and RevenueCat are not set up yet, so the Credit Letter Kit cannot be bought.' };
 }
+
+export const COMPLETE_BUNDLE = { productId: 'ap_complete_bundle', approvedPriceUSD: 49.99 } as const;
+export const BUNDLE_UPGRADE = { productId: 'ap_bundle_upgrade', approvedPriceUSD: 29.99 } as const;
