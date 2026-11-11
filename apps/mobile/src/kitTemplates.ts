@@ -109,6 +109,10 @@ export async function kitStore(db: LetterDatabase) {
 }
 
 let opening: Promise<Awaited<ReturnType<typeof kitStore>>> | undefined;
+export async function saveDeliveredKit(kit: KitTemplates): Promise<boolean> {
+  if (!opening) opening = import('expo-sqlite').then(sqlite => sqlite.openDatabaseAsync('approvalprep-kit.db')).then(kitStore);
+  return (await opening).save(kit);
+}
 /** The delivered kit, or null when nothing has been delivered (or the phone cannot read it). Never throws. */
 export async function loadDeliveredKit(): Promise<KitTemplates | null> {
   try {
