@@ -9,7 +9,7 @@ trap stop ERR
 [[ -n "${CLOUDFLARE_API_TOKEN:-}" && -n "${CLOUDFLARE_ACCOUNT_ID:-}" ]] || stop
 [[ -n "${PREVIEW_PROJECT:-}" && -n "${PREVIEW_BRANCH:-}" ]] || stop
 # Exported assets only; never run this from the website's Wrangler directory.
-printf '/*\n  X-Robots-Tag: noindex, nofollow\n' > dist/_headers
+printf '/*\n  X-Robots-Tag: noindex, nofollow\n  Cross-Origin-Embedder-Policy: credentialless\n  Cross-Origin-Opener-Policy: same-origin\n' > dist/_headers
 printf 'User-agent: *\nDisallow: /\n' > dist/robots.txt
 log=$(mktemp)
 trap 'rm -f "$log"' EXIT

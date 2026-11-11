@@ -2,7 +2,10 @@
 
 Task 1 is merged into the scaffold branch.
 Task 2 is implemented in its own dependent PR against the scaffold branch.
-Next task: 3. Coordinator lands task 1 before task 2; agents never merge.
+Task 3: SQLite storage is implemented and tested for create/update/delete/delete-all,
+restart persistence, stable order, rapid saves and bound user inputs. Native uses
+expo-sqlite; the hosted preview supports its WASM and isolation headers.
+Next task: 4 (letters and questions), then 4b (Studio; S2 pattern notes needed). Coordinator lands task 1 before task 2; agents never merge.
 
 Task 1a: CI publishes the web export to the app's separate free Cloudflare Pages
 project. The first summary line and PR comment contain the preview URL; noindex
