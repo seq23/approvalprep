@@ -11,7 +11,8 @@
     "test": "node --experimental-sqlite --import tsx --test tests/*.test.ts",
     "check": "npm run typecheck && npm test",
     "icons": "node scripts/make-icons.mjs",
-    "preview:web": "expo export --platform web"
+    "preview:web": "expo export --platform web",
+    "release:gate": "node scripts/release-gate.mjs"
   },
   "dependencies": {
     "@expo-google-fonts/archivo": "0.4.2",
