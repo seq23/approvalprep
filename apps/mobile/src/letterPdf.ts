@@ -1,13 +1,19 @@
 import { SELF_HELP_LINE } from './copy';
 import { color } from './theme';
 // @ts-ignore shared free packet checklist
-import { BEFORE_YOU_MAIL } from '../../../src/lib/letterStudioCore.mjs';
+import { BEFORE_YOU_MAIL, buildLetter, tidyFact } from '../../../src/lib/letterStudioCore.mjs';
 
 export const escapeHtml = (text: string) => text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 export function disputedParts(text: string, entry = ''): { text: string; highlighted: boolean }[] {
-  const start = entry.trim() ? text.indexOf(entry.trim()) : -1;
+  const normalized = tidyFact(entry);
+  if (!normalized) return [{ text, highlighted: false }];
+  const letter = buildLetter('credit-dispute', { shows: entry });
+  const paragraph = letter.paragraphs[letter.highlight];
+  if (!paragraph) return [{ text, highlighted: false }];
+  const paragraphStart = text.indexOf(`\n\n${paragraph}\n\n`);
+  const start = paragraphStart < 0 ? -1 : paragraphStart + 2 + paragraph.indexOf(normalized);
   if (start < 0) return [{ text, highlighted: false }];
-  const end = start + entry.trim().length;
+  const end = start + normalized.length;
   return [{ text: text.slice(0, start), highlighted: false }, { text: text.slice(start, end), highlighted: true }, { text: text.slice(end), highlighted: false }];
 }
 export function letterHtml(text: string, dispute = false): string {

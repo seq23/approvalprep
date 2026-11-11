@@ -19,6 +19,19 @@ test('packet preserves blanks, escapes HTML, adds the free checklist and disclos
   assert.deepEqual(parts.filter(p => p.highlighted).map(p => p.text), ['Wrong balance']);
   assert.equal(disputedParts(letter.text).filter(p => p.highlighted).length, 0);
 });
+test('disputed entry highlights the normalized report paragraph rather than an earlier matching account', () => {
+  for (const entry of ['60 days late\nin march 2026', 'Example Account', '  Wrong\t balance.; ']) {
+    const letter = renderDispute({ account: entry, shows: entry });
+    const parts = disputedParts(letter.text, entry);
+    assert.equal(parts.map(part => part.text).join(''), letter.text);
+    assert.equal(parts.filter(part => part.highlighted).length, 1);
+    assert.ok(parts[0].text.includes('Account:'));
+    assert.ok(parts[0].text.endsWith('The report shows this for the account above: '));
+    assert.ok(parts[2].text.startsWith('. This is not accurate.'));
+    assert.ok(!parts[1].text.includes('\n'));
+  }
+  assert.equal(disputedParts('Example Account', 'Example Account').some(part => part.highlighted), false);
+});
 test('native creates and shares a PDF; web and print open the document print flow', async () => {
   const calls: unknown[] = [];
   const tools: PdfTools = {
