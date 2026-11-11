@@ -9,7 +9,7 @@ import { join, relative } from 'node:path';
 import { KIT_KINDS, kitLetter, kitStore, parseKitTemplates, renderKitLetter } from '../src/kitTemplates';
 import { LETTERS } from '../src/letters';
 // @ts-ignore shared website module is JavaScript
-import { kitSamples } from '../../../src/lib/kitMoments.mjs';
+import { kitSamples } from '../../../src/lib/kitSamples.mjs';
 
 const sender = { title: 'FAKE who writes?', fields: [{ name: 'name', label: 'Fake name' }, { name: 'street', label: 'Fake street' }] };
 const fakeLetter = (kind: string, extra: { name: string; label: string; multiline?: boolean }[], body: string, more: object = {}) => ({
@@ -155,9 +155,9 @@ test('no paid kit sentence is in apps/mobile or src', t => {
     for (const piece of pieces) { const s = squash(piece).trim(); if (s.length >= 60) sentences.add(s); }
   }
   assert.ok(sentences.size >= kit.letters.length * 3, `only ${sentences.size} paid sentences found to check`);
-  // The website shows ONE filled sample page per kit, on purpose (kitSamples in src/lib/kitMoments.mjs).
+  // The website shows ONE filled sample page per kit, on purpose (kitSamples in src/lib/kitSamples.mjs).
   // Those lines may stay in that one file; nowhere else, and never in the app.
-  const samplePage = join(repo, 'src', 'lib', 'kitMoments.mjs');
+  const samplePage = join(repo, 'src', 'lib', 'kitSamples.mjs');
   const published = squash(Object.values(kitSamples as Record<string, { lines: string[] }>).flatMap(sample => sample.lines).join(' '));
   const files = [...mobile, ...textFiles(join(repo, 'src'))];
   for (const file of files) {
