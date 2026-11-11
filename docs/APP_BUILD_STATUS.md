@@ -19,3 +19,15 @@ My letters and kit-purchase patterns are now available. Task 9 remains a partial
 low-risk batch; next task is 4 (letters and questions), alone, then 4b, alone.
 Task 12 + 14 remain a separate release-gate/scorecard batch.
 All five More links returned HTTP 200 on 10 Nov 2026.
+
+Task 4 is IN PROGRESS in work/ap-letters-1110 (one task PR; resume this PR).
+The free bureau dispute flow asks six questions, saves each answer on the phone,
+reopens by letter ID, and renders the website's shared letter and sourced bureau address.
+Blank answers remain bracketed; save errors block Next and offer Retry.
+Remaining task 4: port the four private kit templates and their guided questions,
+with one rendered-letter test per kind. The existing source DOCX is outside the repo
+at ~/.boss-os/approvalprep/kits/credit-letter-kit.docx. Never copy it into this repo.
+NAMED STOP [PRIVATE_TEMPLATE_WRITE_DENIED]: this execution environment permits writes
+only inside GitHub and temporary directories. Generating the four private template
+files requires write access to APPROVALPREP_KITS_DIR, outside those allowed roots.
+Paid template text remains outside the app. Next task remains 4, then 4b.
