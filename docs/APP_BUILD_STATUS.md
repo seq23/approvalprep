@@ -31,3 +31,12 @@ NAMED STOP [PRIVATE_TEMPLATE_WRITE_DENIED]: this execution environment permits w
 only inside GitHub and temporary directories. Generating the four private template
 files requires write access to APPROVALPREP_KITS_DIR, outside those allowed roots.
 Paid template text remains outside the app. Next task remains 4, then 4b.
+Preview fixes: settlement-terms letter name replaces the retired offer, bundled fonts
+are moved out of assets/node_modules before hosting, font failure renders the app,
+and web previews use a centred column capped at 430 px. Based directly on the fresh
+scaffold; no open task-4 branch is included. Task 4 is already in PR #117;
+next task after that review is 4b. Launch stop remains unchanged.
+
+Preview follow-up: unfinished screens show plain customer text, guarded against builder
+notes. No Appetize use. Next new task: 4b (free Letter Studio, alone), after task 4 in PR #117.
+Start describes letters she writes and sends herself, with no credit-repair comparison.

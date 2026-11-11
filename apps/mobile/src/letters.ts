@@ -6,7 +6,7 @@ export const LETTERS: readonly LetterType[] = [
   { kind: 'bureau-dispute', name: 'Credit bureau dispute letter', when: 'Something on your report is wrong.', access: 'free' },
   { kind: 'goodwill', name: 'Goodwill letter', when: 'A late payment is accurate and you want to ask for kindness.', access: 'kit' },
   { kind: 'debt-validation', name: 'Debt validation letter', when: 'A collector contacted you and you want proof of the debt.', access: 'kit' },
-  { kind: 'settlement-terms', name: 'Settlement terms in writing letter', when: 'You want settlement terms in writing before paying. They may say no.', access: 'kit' },
+  { kind: 'settlement-terms', name: 'Settlement terms in writing letter', when: 'You want the collector’s offer in writing before you pay. They may say no.', access: 'kit' },
   { kind: 'follow-up', name: 'Follow-up letter', when: 'You sent a dispute and want to follow up on the answer.', access: 'kit' },
 ];
 export const isLetterKind = (k: string): k is LetterKind => LETTERS.some((l) => l.kind === k);

@@ -7,7 +7,7 @@ into a clear first draft. Save it as a PDF, print it or share it, then mark it a
 sent. My letters keeps the date you sent each one, so you know where you stand.
 
 - Free: the credit bureau dispute letter, as many times as you need.
-- Credit Letter Kit, paid once: goodwill, debt validation, pay for delete and
+- Credit Letter Kit, paid once: goodwill, debt validation, settlement terms in writing and
   follow-up letters, plus the PDF guide. No subscription.
 - No account and no upload. Your answers stay on this phone.
 
