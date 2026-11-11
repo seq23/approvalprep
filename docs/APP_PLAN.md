@@ -15,8 +15,8 @@ builds from. The page wins if the two ever differ.
 ## What it is
 
 A letter desk on the phone: draft a credit bureau dispute letter for free, save it as a PDF, mark it as
-sent. The Credit Letter Kit, paid once in the app, adds goodwill, debt validation, pay for delete and
-follow-up letters, and the tracking: mark as sent, the day count, the tracking number and a reminder on
+sent. The Credit Letter Kit, paid once in the app, adds goodwill, debt validation, settlement terms in
+writing and follow-up letters, and the tracking: mark as sent, the day count, the tracking number and a reminder on
 day 30 when the bureau's answer is due (FTC). Free: the dispute letter, its PDF and the list of saved
 letters (owner, 10 Nov 2026: "If the apps are sending reminders and all of that it should charge for
 that stuff"). No account, no
@@ -90,6 +90,14 @@ Run `npm run check` in `apps/mobile` after each task; the App preview run must s
 
 1. **Start from the scaffold.** Rebase the scaffold branch on main.
    Accept: `npm run check` green; App preview green with an Appetize link; all 8 screens reachable.
+1a. **A preview link she can open (coordinator, 10 Nov 2026; do this before task 2).** The owner
+   sees every build from a link, never a download. The preview job publishes the web export to
+   Cloudflare Pages (project `approvalprep-app-preview`, created by the job if missing; repo secrets
+   `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` already exist; free plan only) with
+   `npx wrangler pages deploy <export dir> --project-name approvalprep-app-preview --branch <pr branch>`
+   and prints the URL as the first line of the run summary and as a PR comment. The page carries
+   `noindex`. No token or a refused deploy: NAMED STOP [PREVIEW_HOST_FAILED], and the job fails.
+   Accept: the workflow fails when the deploy step prints no URL.
 2. **Components** from `src/theme.ts` only: Screen, Button, Row (circle, title, sub line, one action),
    BottomSheet, Field with a labelled default, Sheet, Tag.
    Accept: a test finds no colour hex outside `theme.ts`; every Pressable is at least 48 high.
@@ -100,7 +108,7 @@ Run `npm run check` in `apps/mobile` after each task; the App preview run must s
 4. **Letters and questions.** Five templates ported from the Credit Letter Kit's own wording in this
    repo; 4 to 6 questions each, one per screen; [brackets] for blanks; answers save as they type.
    Accept: a rendered-letter test per kind; the R-ADV-13 test covers the templates; question
-   screens show `HONEST_LIMIT`; pay for delete says "They may say no."
+   screens show `HONEST_LIMIT`; the settlement-terms letter says "They may say no." ("Pay for delete" is retired on the site and in the kits, 10 Nov 2026: never use the phrase.)
 4b. **The free Letter Studio: the main free draw** (owner, 10 Nov 2026: yes to the website's free
    product as the app's main attraction, and "make sure the free offering isn't making it not worth
    buying anything"). The website's Studio on the phone: the same eight situations and openers from

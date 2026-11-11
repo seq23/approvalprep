@@ -8,3 +8,5 @@ run summary. Download, unzip and serve with `python3 -m http.server 8080`.
 No Appetize uploads or minutes. This is a downloadable preview, not hosted hosting.
 
 NAMED STOP [WAITS_FOR_LAUNCH_PLAN]: task 11 (store files) wait for the owner's launch plan after 13 Nov. Release gates remain in scope.
+
+Tasks are grouped into PRs by risk (owner, 10 Nov 2026 evening); see the queue brief. Task 1a (a hosted preview link) comes before task 2. "Pay for delete" is retired: the kit's letter is "settlement terms in writing".
