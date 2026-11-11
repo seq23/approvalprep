@@ -84,3 +84,28 @@ test('server checks the selected entitlement and signatures cannot switch kits',
     assert.equal(await validKitUrl(url, 'FAKE'), false);
   } finally { globalThis.fetch = original; }
 });
+
+test('Restore saves the other owned kit when either delivery fails and reports partial failure', async () => {
+  const original = globalThis.fetch;
+  const provider = new MockPurchases();
+  provider.restore = async () => ({ creditKit: true, explanationKit: true });
+  provider.userId = async () => '$RCAnonymousID:0123456789abcdef0123456789abcdef';
+  try {
+    for (const failed of [KIT_ID, EXPLANATION_KIT_ID]) {
+      for (const failure of ['server', 'payload', 'save']) {
+        const saved: string[] = [];
+        globalThis.fetch = async input => {
+          const url = new URL(String(input)), kit = url.searchParams.get('kit');
+          if (kit === failed && failure === 'server') return new Response('{}', { status: 503 });
+          if (url.pathname.endsWith('app-unlock')) return new Response(JSON.stringify({ url: `https://approvalprep.com/api/app-kit-file?kit=${kit}` }));
+          return new Response(JSON.stringify(kit === failed && failure === 'payload' ? {} : kit === KIT_ID ? credit : explanation));
+        };
+        await assert.rejects(restoreKit(provider, async kit => {
+          if (kit.kit === failed && failure === 'save') return false;
+          saved.push(kit.kit); return true;
+        }), /KIT_RESTORE_PARTIAL/);
+        assert.deepEqual(saved, [failed === KIT_ID ? EXPLANATION_KIT_ID : KIT_ID]);
+      }
+    }
+  } finally { globalThis.fetch = original; }
+});

@@ -45,7 +45,9 @@ export default function Unlock() {
       setMessage(restored ? 'Your kit is saved on this phone and ready offline.' : 'No letter kit purchase was found for this store account.');
     } catch (error) {
       const code = error instanceof Error ? error.message : '';
-      setMessage(code === 'STORE_ACCOUNTS_NOT_READY' ? 'STORE_ACCOUNTS_NOT_READY · Purchases are not available yet.'
+      setOwned(!!await loadDeliveredKit(kitId));
+      setMessage(code === 'KIT_RESTORE_PARTIAL' ? 'Available kits are saved on this phone. Another kit could not be restored; try Restore again. You do not need to buy it again.'
+        : code === 'STORE_ACCOUNTS_NOT_READY' ? 'STORE_ACCOUNTS_NOT_READY · Purchases are not available yet.'
         : code === 'REVENUECAT_KEY_MISSING' ? 'REVENUECAT_KEY_MISSING · Purchases are not available in this preview.'
         : code === 'REVENUECAT_SECRET_MISSING' ? 'REVENUECAT_SECRET_MISSING · Kit downloads are not available yet. Your purchase can be restored when downloads are ready.'
         : 'Your kit could not be restored. Try again; you do not need to buy it again.');
