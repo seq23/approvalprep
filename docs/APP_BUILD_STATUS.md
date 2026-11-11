@@ -11,3 +11,5 @@ No Appetize uploads or minutes. This is a downloadable preview, not hosted hosti
 NAMED STOP [WAITS_FOR_LAUNCH_PLAN]: task 11 (store files) wait for the owner's launch plan after 13 Nov. Release gates remain in scope.
 
 Tasks are grouped into PRs by risk (owner, 10 Nov 2026 evening); see the queue brief. Task 1a (a hosted preview link) comes before task 2. "Pay for delete" is retired: the kit's letter is "settlement terms in writing".
+
+Task 1a: CI publishes a noindex Cloudflare Pages web preview and posts its link in the summary and PR. Missing credentials, refused deploys and missing URLs fail with NAMED STOP [PREVIEW_HOST_FAILED]. Next: task 3, after the open task 2 PR is reviewed.
