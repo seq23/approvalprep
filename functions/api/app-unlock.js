@@ -1,4 +1,5 @@
 import { APP_KIT_PRODUCT, appJson, signedKitUrl } from '../_runtime/app-kit.js';
+import { clientIp, sha256, withinLimit } from '../_runtime/rate-limit.js';
 // Unknown IDs, missing purchases, and upstream errors have the same public response.
 export async function onRequestPost({ request, env }) {
   if (!env.APPROVALPREP_REVENUECAT_SECRET) return appJson({ stop: 'REVENUECAT_SECRET_MISSING' }, 503);
@@ -6,7 +7,11 @@ export async function onRequestPost({ request, env }) {
   const refused = () => appJson({ error: 'KIT_NOT_AVAILABLE' }, 403);
   const id = request.headers.get('authorization')?.match(/^Bearer (\$RCAnonymousID:[a-f0-9]{32})$/)?.[1];
   if (!id) return refused();
+  if (!env.PRODUCTS_DB) return appJson({ stop: 'APP_KIT_DELIVERY_NOT_READY' }, 503);
   try {
+    if (!await withinLimit(env.PRODUCTS_DB, `app-unlock:ip:${await sha256(clientIp(request))}`, 10, 60_000)) {
+      return appJson({ error: 'TOO_MANY_REQUESTS' }, 429);
+    }
     const response = await fetch(`https://api.revenuecat.com/v1/subscribers/${encodeURIComponent(id)}`, { headers: { Authorization: `Bearer ${env.APPROVALPREP_REVENUECAT_SECRET}` }, signal: AbortSignal.timeout(10000) });
     if (!response.ok) return refused();
     const { subscriber } = await response.json();

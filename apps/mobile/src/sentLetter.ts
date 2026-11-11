@@ -8,7 +8,7 @@ export function dateInput(date = new Date()): string {
 }
 export function mailingDate(value: string): Date {
   const date = new Date(`${value}T12:00:00`);
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(value) || !Number.isFinite(date.getTime()) || dateInput(date) !== value) throw Error('Enter a real mailing date as YYYY-MM-DD.');
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value) || !Number.isFinite(date.getTime()) || dateInput(date) !== value) throw Error('Choose a valid mailing date.');
   return date;
 }
 export function reminderDate(mailedOn: string): Date {
