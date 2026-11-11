@@ -24,7 +24,8 @@ export const SCREENS: ScreenSpec[] = [
   { id: 'S5', route: '/letters/sent', file: 'app/(tabs)/letters/sent.tsx', title: 'Mark as sent', kind: 'sheet', tab: 'letters', back: '/letters/draft', links: [] },
   { id: 'S6', route: '/mine', file: 'app/(tabs)/mine/index.tsx', title: 'My letters', kind: 'tab', tab: 'mine', links: [] },
   { id: 'S7', route: '/letters/unlock', file: 'app/(tabs)/letters/unlock.tsx', title: 'Credit Letter Kit', kind: 'sub', tab: 'letters', back: '/letters', links: [] },
-  { id: 'S8', route: '/more', file: 'app/(tabs)/more/index.tsx', title: 'More', kind: 'tab', tab: 'more', links: [] },
+  { id: 'S8', route: '/more', file: 'app/(tabs)/more/index.tsx', title: 'More', kind: 'tab', tab: 'more', links: ['/letters/bundle'] },
+  { id: 'Bundle', route: '/letters/bundle', file: 'app/(tabs)/letters/bundle.tsx', title: 'Complete ApprovalPrep Bundle', kind: 'sub', tab: 'letters', back: '/letters', links: ['/letters/unlock'] },
 ];
 export const byRoute = (route: string) => {
   const s = SCREENS.find(x => x.route === route);
