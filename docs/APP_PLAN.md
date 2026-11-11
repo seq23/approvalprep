@@ -108,7 +108,7 @@ Run `npm run check` in `apps/mobile` after each task; the App preview run must s
 4. **Letters and questions.** Five templates ported from the Credit Letter Kit's own wording in this
    repo; 4 to 6 questions each, one per screen; [brackets] for blanks; answers save as they type.
    Accept: a rendered-letter test per kind; the R-ADV-13 test covers the templates; question
-   screens show `HONEST_LIMIT`; the settlement-terms letter says "They may say no." ("Pay for delete" is retired on the site and in the kits, 10 Nov 2026: never use the phrase.)
+   screens show `HONEST_LIMIT`; the settlement-terms letter says "They may say no." (The old payment-for-removal phrase is retired on the site and in the kits, 10 Nov 2026: never use it in any spelling.)
 4b. **The free Letter Studio: the main free draw** (owner, 10 Nov 2026: yes to the website's free
    product as the app's main attraction, and "make sure the free offering isn't making it not worth
    buying anything"). The website's Studio on the phone: the same eight situations and openers from

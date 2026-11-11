@@ -1,0 +1,118 @@
+// The four Credit Letter Kit letters. Their wording is paid: it is never in this repo or the app
+// bundle (docs/APP_PLAN.md). The purchase door saves the delivered kit on the phone; this file reads
+// it back, checks every part of it, and fills a letter from her answers.
+import type { LetterDatabase, SavedLetter } from './letterStorage';
+import type { Question } from './letterQuestions';
+import type { LetterKind } from './letters';
+// @ts-ignore shared website module is JavaScript
+import { formatLetterDate } from '../../../src/lib/letterStudioCore.mjs';
+
+export type KitKind = Exclude<LetterKind, 'bureau-dispute'>;
+export const KIT_KINDS: readonly KitKind[] = ['goodwill', 'debt-validation', 'settlement-terms', 'follow-up'];
+export const KIT_ID = 'credit-letter-kit';
+export const KIT_LOCKED_LINE = 'This letter is included in the Credit Letter Kit.';
+export interface KitLetter { kind: KitKind; name: string; questions: Question[]; template: string; honestLine?: string; notes?: string[] }
+export interface KitTemplates { version: number; kit: typeof KIT_ID; letters: KitLetter[] }
+
+// A blank in a template is {{field|What to write here}}; {{today}} is the date on the letter.
+const TOKEN = /\{\{([A-Za-z][A-Za-z0-9]*)(?:\|([^{}|]+))?\}\}/g;
+const text = (v: unknown): v is string => typeof v === 'string' && v.trim().length > 0;
+const record = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v);
+
+function parseLetter(raw: unknown): KitLetter | null {
+  if (!record(raw) || !KIT_KINDS.includes(raw.kind as KitKind) || !text(raw.name) || !text(raw.template)) return null;
+  if (!Array.isArray(raw.questions) || raw.questions.length < 4 || raw.questions.length > 6) return null;
+  const names = new Set<string>();
+  const questions: Question[] = [];
+  for (const q of raw.questions) {
+    if (!record(q) || !text(q.title) || !Array.isArray(q.fields) || q.fields.length === 0) return null;
+    const fields: Question['fields'] = [];
+    for (const f of q.fields) {
+      if (!record(f) || !text(f.name) || !text(f.label) || f.name === 'today' || names.has(f.name)) return null;
+      if (f.multiline !== undefined && typeof f.multiline !== 'boolean') return null;
+      names.add(f.name);
+      fields.push({ name: f.name, label: f.label, ...(f.multiline ? { multiline: true } : {}) });
+    }
+    questions.push({ title: q.title, fields });
+  }
+  // Every blank must be one she is asked about, and every question must reach the letter.
+  const used = new Set<string>();
+  for (const m of raw.template.matchAll(TOKEN)) {
+    if (m[1] === 'today') continue;
+    if (!names.has(m[1]) || !m[2]?.trim()) return null;
+    used.add(m[1]);
+  }
+  if (used.size !== names.size || raw.template.replace(TOKEN, '').includes('{{')) return null;
+  if (raw.honestLine !== undefined && !text(raw.honestLine)) return null;
+  if (raw.notes !== undefined && !(Array.isArray(raw.notes) && raw.notes.every(text))) return null;
+  return { kind: raw.kind as KitKind, name: raw.name, questions, template: raw.template,
+    ...(raw.honestLine ? { honestLine: raw.honestLine as string } : {}), ...(raw.notes ? { notes: raw.notes as string[] } : {}) };
+}
+
+/** The whole kit or nothing: one wrong letter and the kit counts as not delivered. */
+export function parseKitTemplates(raw: unknown): KitTemplates | null {
+  try {
+    const data = typeof raw === 'string' ? JSON.parse(raw) : raw;
+    if (!record(data) || data.kit !== KIT_ID || typeof data.version !== 'number' || !Number.isInteger(data.version) || data.version < 1) return null;
+    if (!Array.isArray(data.letters) || data.letters.length === 0) return null;
+    const letters: KitLetter[] = [];
+    for (const item of data.letters) {
+      const letter = parseLetter(item);
+      if (!letter || letters.some(l => l.kind === letter.kind)) return null;
+      letters.push(letter);
+    }
+    return { version: data.version, kit: KIT_ID, letters };
+  } catch { return null; }
+}
+
+export const kitLetter = (kit: KitTemplates | null, kind: string): KitLetter | null => kit?.letters.find(l => l.kind === kind) ?? null;
+
+/** Same shape as renderDispute: the letter as text, and the blanks she still has to fill. */
+export function renderKitLetter(letter: KitLetter, answers: Record<string, string>, today = new Date()): { text: string; blanks: string[] } {
+  const blanks: string[] = [];
+  const filled = letter.template.replace(TOKEN, (_all, name: string, prompt: string | undefined, at: number) => {
+    if (name === 'today') return formatLetterDate(today);
+    let value = (answers[name] ?? '').trim();
+    if (!value) {
+      const bracket = prompt!.trim();
+      if (!blanks.includes(bracket)) blanks.push(bracket);
+      return `[${bracket}]`;
+    }
+    // "Acme Co." before the sentence's own full stop prints one full stop, not two.
+    const after = at + _all.length;
+    if (value.endsWith('.') && letter.template[after] === '.') value = value.slice(0, -1);
+    return value;
+  });
+  return { text: filled, blanks };
+}
+
+export function newKitDraft(id: string, kind: KitKind): SavedLetter {
+  return { id, kind, answers: {}, status: 'draft', sentDate: null, method: null, trackingNumber: null, reminderDate: null, answerNote: '' };
+}
+
+/** Where the delivered kit is kept on the phone. save() refuses anything parseKitTemplates refuses. */
+export async function kitStore(db: LetterDatabase) {
+  await db.execAsync('CREATE TABLE IF NOT EXISTS delivered_kits (kit TEXT PRIMARY KEY NOT NULL, body TEXT NOT NULL);');
+  return {
+    async read(): Promise<KitTemplates | null> {
+      const rows = await db.getAllAsync<{ body: string }>('SELECT body FROM delivered_kits WHERE kit = ?', KIT_ID);
+      return rows[0] ? parseKitTemplates(rows[0].body) : null;
+    },
+    async save(raw: unknown): Promise<boolean> {
+      const kit = parseKitTemplates(raw);
+      if (!kit) return false;
+      await db.runAsync('INSERT INTO delivered_kits (kit, body) VALUES (?, ?) ON CONFLICT(kit) DO UPDATE SET body = excluded.body', KIT_ID, JSON.stringify(kit));
+      return true;
+    },
+    async remove() { await db.runAsync('DELETE FROM delivered_kits WHERE kit = ?', KIT_ID); },
+  };
+}
+
+let opening: Promise<Awaited<ReturnType<typeof kitStore>>> | undefined;
+/** The delivered kit, or null when nothing has been delivered (or the phone cannot read it). Never throws. */
+export async function loadDeliveredKit(): Promise<KitTemplates | null> {
+  try {
+    if (!opening) opening = import('expo-sqlite').then(sqlite => sqlite.openDatabaseAsync('approvalprep-kit.db')).then(kitStore);
+    return await (await opening).read();
+  } catch { opening = undefined; return null; }
+}
