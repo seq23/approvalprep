@@ -6,14 +6,12 @@ import { color, space, type } from '../../../src/theme';
 import { savedLetters } from '../../../src/savedLetters';
 import type { SavedLetter } from '../../../src/letterStorage';
 import { hasTrackingKit } from '../../../src/kitTemplates';
-import { ANSWERS, dueDate, myLetters, recordAnswer, showDate, type Answer } from '../../../src/myLetters';
+import { dueDate, myLetters, showDate } from '../../../src/myLetters';
 export default function Mine() {
   const [letters, setLetters] = useState<SavedLetter[]>([]);
   const [hasKit, setHasKit] = useState(false);
   const [state, setState] = useState<'loading' | 'ready' | 'error'>('loading');
   const [selected, setSelected] = useState<SavedLetter | null>(null);
-  const [error, setError] = useState('');
-  const [busy, setBusy] = useState(false);
   const load = useCallback(async () => {
     setState('loading');
     try {
@@ -23,16 +21,6 @@ export default function Mine() {
   }, []);
   useFocusEffect(useCallback(() => { void load(); }, [load]));
   const model = myLetters(letters, hasKit);
-  async function answer(value: Answer) {
-    if (!selected || busy) return;
-    setBusy(true); setError('');
-    try {
-      const updated = recordAnswer(selected, value, await hasTrackingKit());
-      await (await savedLetters()).update(updated);
-      setLetters(old => old.map(letter => letter.id === updated.id ? updated : letter)); setSelected(null);
-    } catch { setError('Your answer could not be saved. Try again.'); }
-    finally { setBusy(false); }
-  }
   return <Screen route="/mine" label="My letters" title={state === 'ready' ? model.summary : 'My letters'}>
     <Button label="+ Write a letter ›" onPress={() => router.push('/letters')} />
     {state === 'loading' ? <Text style={type.sub}>Opening your letters…</Text> : null}
@@ -41,22 +29,18 @@ export default function Mine() {
     {state === 'ready' ? model.rows.map(row => <View key={row.letter.id} style={row.needsAnswer ? { backgroundColor: color.highlighter, paddingHorizontal: space[2] } : undefined}>
       <Row title={row.title} sub={row.sub} onPress={() => {
         if (row.letter.status === 'draft') router.push({ pathname: '/letters/[kind]', params: { kind: row.letter.kind, id: row.letter.id } });
-        else { setError(''); setSelected(row.letter); }
+        else setSelected(row.letter);
       }} />
     </View>) : null}
     {letters.some(letter => letter.status === 'sent') ? <Text style={type.sub}>Answer dates are reminders based on the mailing dates you entered, not a confirmed deadline.</Text> : null}
-    <BottomSheet visible={!!selected} title="Your saved letter" onClose={() => { if (!busy) setSelected(null); }}>
+    <BottomSheet visible={!!selected} title="Your saved letter" onClose={() => setSelected(null)}>
       {selected ? <>
         <Text style={type.body}>Date mailed: {selected.sentDate || 'Not entered'}</Text>
         {dueDate(selected) ? <Text style={type.body}>Answer date: {showDate(dueDate(selected)!)}</Text> : null}
         <Text style={type.sub}>This is a reminder based on the date you entered.</Text>
         {selected.answerNote ? <Text style={type.body}>Answer recorded: {selected.answerNote}</Text> : null}
         <Button label="Open my letter ›" onPress={() => { setSelected(null); router.push({ pathname: '/letters/draft', params: { id: selected.id } }); }} />
-        {hasKit && selected.status === 'sent' ? <>
-          <Text style={type.section}>What answer did you receive?</Text>
-          {ANSWERS.map(value => <Button key={value} label={value} disabled={busy} onPress={() => void answer(value)} />)}
-        </> : null}
-        {error ? <Text accessibilityRole="alert" style={type.sub}>{error}</Text> : null}
+        <Button label="Record or change answer ›" onPress={() => { setSelected(null); router.push({ pathname: '/mine/answer', params: { id: selected.id } }); }} />
       </> : null}
     </BottomSheet>
   </Screen>;

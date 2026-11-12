@@ -2,6 +2,7 @@
 // bundle (docs/APP_PLAN.md). The purchase door saves the delivered kit on the phone; this file reads
 // it back, checks every part of it, and fills a letter from her answers.
 import type { LetterDatabase, SavedLetter } from './letterStorage';
+import { previewKit } from './previewSamples';
 import type { Question } from './letterQuestions';
 import { EXPLANATION_LETTERS, type LetterKind } from './letters';
 // @ts-ignore shared website module is JavaScript
@@ -122,6 +123,8 @@ async function deliveredStore(kitId: KitId) {
 }
 /** Without a kit ID, this is the shared tracking entitlement. Letter access always passes its own ID. */
 export async function loadDeliveredKit(kitId?: KitId): Promise<KitTemplates | null> {
+  const sample = previewKit(kitId);
+  if (sample) return sample;
   try {
     if (kitId) return await (await deliveredStore(kitId)).read();
     return await (await deliveredStore(KIT_ID)).read() || await (await deliveredStore(EXPLANATION_KIT_ID)).read();

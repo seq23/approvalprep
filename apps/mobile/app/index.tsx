@@ -25,7 +25,7 @@ export default function Start() {
       <Button primary label="Draft a free letter ›" onPress={() => router.replace('/letters')} />
       <Text style={type.sub}>{PRIVACY_LINE}</Text>
       <Button label="See the Credit Letter Kit ›" onPress={() => router.push('/letters/unlock')} />
-      {PREVIEW_ENABLED ? <Button label="Preview only: load sample letters ›" disabled={loading} onPress={() => void samples()} /> : null}
+      {PREVIEW_ENABLED ? <Button label="Preview only: try sample letters and kits ›" disabled={loading} onPress={() => void samples()} /> : null}
       {message ? <Text accessibilityRole="alert" style={type.sub}>{message}</Text> : null}
     </Screen>
   );
