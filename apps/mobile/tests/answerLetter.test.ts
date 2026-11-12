@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { ANSWER_CHOICES, answerOffer, saveBureauAnswer } from '../src/answerLetter';
+import { ANSWER_CHOICES, answerChoices, answerOffer, saveBureauAnswer } from '../src/answerLetter';
 import { newDispute } from '../src/letterQuestions';
 import { myLetters } from '../src/myLetters';
 import { letterStorage } from '../src/letterStorage';
@@ -98,4 +98,33 @@ test('answer screen starts unselected, renders all guidance without a checkout f
   nodes = walk(render());
   assert.equal(nodes.filter(node => node.type === 'Sheet').length, 0);
   assert.equal(nodes.find(node => node.props?.label === 'Save answer').props.disabled, false);
+  values = [{ ...sent, kind: 'goodwill' }, null, '', false, 'ready', false, '', 0];
+  nodes = walk(render());
+  const choices = nodes.filter(node => node.type === 'Row');
+  assert.equal(choices.length, 2);
+  choices[0].props.onPress();
+  assert.equal(values[1], 'Other answer');
+  assert.equal(nodes.filter(node => node.type === 'Sheet').length, 0);
+  assert.doesNotMatch(JSON.stringify(nodes), /Day 30/);
+});
+
+test('non-bureau letters record a general response without bureau outcomes or instructions', async () => {
+  const { LETTERS, EXPLANATION_LETTERS } = await import('../src/letters');
+  for (const kind of [...LETTERS, ...EXPLANATION_LETTERS].map(row => row.kind).filter(kind => !['bureau-dispute', 'follow-up'].includes(kind))) {
+    const letter = { ...sent, kind };
+    assert.deepEqual(answerChoices(letter).map(row => row.value), ['Other answer', 'No answer']);
+    assert.doesNotMatch(JSON.stringify(answerChoices(letter)), /bureau|verified|corrected/i);
+    let persisted;
+    const cancelled: string[] = [];
+    const deps = { update: async (value: typeof letter) => { persisted = value; }, reminders: { cancel: async (id: string) => { cancelled.push(id); } } };
+    const saved = await saveBureauAnswer(letter, 'Other answer', '2026-12-06', deps, now);
+    assert.equal(persisted, saved);
+    assert.equal(saved.status, 'answered');
+    assert.equal(saved.answerNote, 'Other answer');
+    assert.equal(saved.answers.answerArrivedOn, '2026-12-06');
+    assert.equal(saved.reminderDate, null);
+    assert.equal(cancelled.length, 1);
+    await assert.rejects(saveBureauAnswer(letter, 'Verified', '', deps, now));
+    assert.equal((await saveBureauAnswer(saved, 'No answer', '', deps, now)).status, 'sent');
+  }
 });
