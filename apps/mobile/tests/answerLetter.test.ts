@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { ANSWER_CHOICES, answerOffer, saveBureauAnswer } from '../src/answerLetter';
+import { ANSWER_CHOICES, answerChoices, answerOffer, saveBureauAnswer } from '../src/answerLetter';
 import { newDispute } from '../src/letterQuestions';
 import { myLetters } from '../src/myLetters';
 import { letterStorage } from '../src/letterStorage';
@@ -98,4 +98,36 @@ test('answer screen starts unselected, renders all guidance without a checkout f
   nodes = walk(render());
   assert.equal(nodes.filter(node => node.type === 'Sheet').length, 0);
   assert.equal(nodes.find(node => node.props?.label === 'Save answer').props.disabled, false);
+  for (const kind of ['goodwill', 'debt-validation', 'settlement-terms', 'explanation-credit']) {
+    values = [{ ...sent, kind }, 'Other answer', '', false, 'ready', false, '', 0];
+    nodes = walk(render());
+    assert.equal(nodes.filter(node => node.type === 'Row').length, 2);
+    assert.equal(nodes.filter(node => node.type === 'Row' && node.props.selected).length, 1);
+    assert.equal(nodes.filter(node => node.type === 'Sheet').length, 0);
+    assert.ok(!JSON.stringify(nodes).includes('Day 30'));
+    assert.equal(nodes.find(node => node.props?.label === 'Save answer').props.disabled, false);
+  }
+});
+
+test('non-bureau letters save neutral answers and reject bureau-only outcomes', async () => {
+  const { EXPLANATION_LETTERS } = await import('../src/letters');
+  for (const kind of ['goodwill', 'debt-validation', 'settlement-terms', ...EXPLANATION_LETTERS.map(row => row.kind)]) {
+    const letter = { ...sent, kind };
+    assert.deepEqual(answerChoices(kind).map(row => row.value), ['Other answer', 'No answer']);
+    const writes: import('../src/letterStorage').SavedLetter[] = [];
+    const cancelled: string[] = [];
+    const deps = { update: async (value: import('../src/letterStorage').SavedLetter) => { writes.push(value); }, reminders: { cancel: async (id: string) => { cancelled.push(id); } } };
+    const saved = await saveBureauAnswer(letter, 'Other answer', '2026-12-06', deps, now);
+    assert.equal(saved.status, 'answered');
+    assert.equal(saved.answerNote, 'Other answer');
+    assert.equal(saved.answers.answerArrivedOn, '2026-12-06');
+    assert.equal(saved.reminderDate, null);
+    assert.equal(cancelled.length, 1);
+    assert.deepEqual(writes, [saved]);
+    await assert.rejects(saveBureauAnswer(letter, 'Corrected', '', deps, now));
+    await assert.rejects(saveBureauAnswer(letter, 'Verified', '', deps, now));
+    const waiting = await saveBureauAnswer(saved, 'No answer', '', deps, now);
+    assert.equal(waiting.status, 'sent');
+    assert.equal(waiting.answers.answerArrivedOn, '');
+  }
 });
