@@ -173,3 +173,26 @@ test('no paid kit sentence is in apps/mobile or src', t => {
   t.diagnostic(`checked ${sentences.size} paid sentences against ${files.length} files`);
   }
 });
+
+test('one delivered purchase covers repeated letters and later dispute rounds offline without consuming ownership', async () => {
+  const db = new DatabaseSync(':memory:');
+  const adapter = { execAsync: async (sql: string) => { db.exec(sql); }, runAsync: async (sql: string, ...args: any[]) => db.prepare(sql).run(...args), getAllAsync: async <T>(sql: string, ...args: any[]) => db.prepare(sql).all(...args) as T[] };
+  const original = globalThis.fetch;
+  let networkCalls = 0;
+  globalThis.fetch = async () => { networkCalls++; throw Error('Offline'); };
+  try {
+    const store = await kitStore(adapter);
+    assert.equal(kitLetter(await store.read(), 'follow-up'), null);
+    assert.equal(await store.save(FAKE_KIT), true);
+    for (const day of ['2026-11-11', '2027-01-11', '2028-11-11']) {
+      const reopened = await kitStore(adapter);
+      for (const kind of KIT_KINDS) {
+        const letter = kitLetter(await reopened.read(), kind);
+        assert.ok(letter, kind);
+        assert.ok(renderKitLetter(letter, {}, new Date(day)).text);
+      }
+    }
+    assert.deepEqual(await store.read(), parseKitTemplates(FAKE_KIT));
+    assert.equal(networkCalls, 0);
+  } finally { globalThis.fetch = original; db.close(); }
+});

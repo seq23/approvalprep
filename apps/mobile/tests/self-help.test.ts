@@ -38,3 +38,30 @@ test('no screen, letter or store text promises an outcome', () => {
 test('the store description ends with the self-help line', () => {
   assert.equal(fs.readFileSync(path.join(root, 'store/en.md'), 'utf8').trim().split('\n').at(-1), SELF_HELP_LINE);
 });
+
+// Inspect executable text so comments and store-supplied interpolated prices are not mistaken for copy.
+import ts from 'typescript';
+const money = /(?:[$£€]\s*\d|\b\d+(?:[.,]\d{2})?\s*(?:USD|GBP|EUR)\b)/i;
+const competitor = /\b(?:Credit\s+Saint|Lexington\s+Law|The\s+Credit\s+People|Sky\s+Blue\s+Credit|CreditRepair\.com)\b/i;
+function literals(file: string) {
+  const source = ts.createSourceFile(file, fs.readFileSync(file, 'utf8'), ts.ScriptTarget.Latest, true, file.endsWith('.tsx') ? ts.ScriptKind.TSX : ts.ScriptKind.TS);
+  const values: string[] = [];
+  function visit(node: ts.Node) {
+    if (ts.isStringLiteralLike(node) || ts.isJsxText(node) || node.kind === ts.SyntaxKind.TemplateHead || node.kind === ts.SyntaxKind.TemplateMiddle || node.kind === ts.SyntaxKind.TemplateTail) values.push((node as ts.StringLiteral).text);
+    ts.forEachChild(node, visit);
+  }
+  visit(source); return values;
+}
+test('app copy has no competitor names or fixed prices outside approved products and mock providers', () => {
+  const files = [...screens, ...walk(path.join(root, 'src')).filter(file => /\.tsx?$/.test(file))];
+  assert.ok(files.length > 10);
+  const priceSources = new Set(['src/kit.ts', 'src/purchases/provider.ts', 'src/purchases/bundleAccount.ts']);
+  // Negative controls: a newly introduced competitor or fixed price must be detected.
+  assert.ok(competitor.test('Credit Saint')); assert.ok(money.test('$79.99')); assert.ok(money.test('79.99 USD'));
+  assert.ok(!money.test('Get this kit, '));
+  for (const file of files) for (const value of literals(file)) {
+    const name = path.relative(root, file);
+    assert.doesNotMatch(value, competitor, name);
+    if (!priceSources.has(name)) assert.doesNotMatch(value, money, name);
+  }
+});
