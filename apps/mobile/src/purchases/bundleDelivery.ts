@@ -10,8 +10,7 @@ export function validBundleKits(kits: unknown): kits is BundleReceipt['kits'] {
     const expected = id === 'credit-letter-kit' ? KIT_KINDS : explanationKinds;
     return kit && Number.isInteger(kit.version) && kit.version > 0 && Array.isArray(kit.letters) && kit.letters.length === expected.length
       && expected.every(kind => kit.letters.filter((letter: { kind?: string }) => letter?.kind === kind).length === 1)
-      // Reuse the shipped parser for questions/tokens while the explanation PR is held.
-      && kit.letters.every((letter: object) => !!parseKitTemplates({ version: kit.version, kit: 'credit-letter-kit', letters: [{ ...letter, kind: 'goodwill' }] }));
+      && !!parseKitTemplates(kit);
   });
 }
 export interface BundleAccount { restore(): Promise<BundleOwnership>; userId(): Promise<string> }

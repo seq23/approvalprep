@@ -4,7 +4,7 @@ import { Linking, Text } from 'react-native';
 import { Button, Row, Screen, Sheet } from '../../../src/ui';
 import { type } from '../../../src/theme';
 import { HONEST_LIMIT } from '../../../src/copy';
-import { COMPLETE_BUNDLE, BUNDLE_UPGRADE, KIT } from '../../../src/kit';
+import { COMPLETE_BUNDLE, BUNDLE_UPGRADE, KIT, KIT_SALES_ENABLED } from '../../../src/kit';
 import { offersFor, NO_OWNERSHIP, EXPLANATION_PRODUCT, type BundleOwnership, type OfferId } from '../../../src/purchases/bundleOffers';
 import { bundleAccount, type BundlePrice } from '../../../src/purchases/bundleAccount';
 import { restoreBundle } from '../../../src/purchases/bundleDelivery';
@@ -46,7 +46,8 @@ export default function Bundle() {
       setMessage(restored ? 'Both kits and your documents are saved on this phone. Use Save or share to open the ZIP in Files.' : 'No bundle purchase was found. A previous kit purchase is restored from its kit screen.');
     } catch (error) {
       const code = error instanceof Error ? error.message : '';
-      setMessage(code === 'STORE_ACCOUNTS_NOT_READY' ? 'STORE_ACCOUNTS_NOT_READY · Purchases are not available yet.'
+      console.warn('Bundle restore failed', code);
+      setMessage(code === 'STORE_ACCOUNTS_NOT_READY' ? 'Purchases are not available yet.'
         : code === 'NATIVE_DOWNLOAD_REQUIRED' ? 'Document downloads are available in the phone app. This preview cannot make purchases.'
         : 'Your bundle could not be downloaded. Try Restore again. You do not need to buy it again.');
     } finally { setBusy(false); }
@@ -64,7 +65,7 @@ export default function Bundle() {
     {selected && !local ? <>
       {mock ? <Text style={type.sub}>Preview price only. No purchase can be made here.</Text> : null}
       <Button primary disabled={busy || !ready || !price} label={price ? `Get ${selected === BUNDLE_UPGRADE.productId ? 'the upgrade' : 'the bundle'}, ${price} once` : 'Store price unavailable'} onPress={() => void act(true)} />
-      <Text style={type.sub}>Purchases are not available yet.</Text>
+      {!KIT_SALES_ENABLED ? <Text style={type.sub}>Purchases are not available yet.</Text> : null}
     </> : null}
     {offers.some(id => id === KIT.productId || id === EXPLANATION_PRODUCT) ? <Text style={type.sub}>Other options</Text> : null}
     {offers.filter(id => id === KIT.productId || id === EXPLANATION_PRODUCT).map(id => <Row key={id} title={nameOf(id)} sub={prices.find(p => p.id === id)?.price ? `${prices.find(p => p.id === id)!.price}, paid once` : 'One kit, paid once'} onPress={() => router.push({ pathname: '/letters/unlock', params: { kit: id === KIT.productId ? 'credit-letter-kit' : 'letter-of-explanation-kit' } })} />)}

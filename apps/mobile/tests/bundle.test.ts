@@ -50,6 +50,10 @@ test('restore installs complete kits only after verified delivery, rejecting for
   assert.equal(validBundleKits(bad), false);
   const invalid = fakeKits(); invalid[0].letters[0].template = 'FAKE {{unasked|Blank}}';
   assert.equal(validBundleKits(invalid), false);
+  const wrongKit = fakeKits(); wrongKit[1].kit = 'credit-letter-kit';
+  assert.equal(validBundleKits(wrongKit), false);
+  const wrongKind = fakeKits(); wrongKind[1].letters[0].kind = 'goodwill';
+  assert.equal(validBundleKits(wrongKind), false);
 });
 
 test('server verifies live non-refunded purchases before reading assets; signed downloads expire and reject tampering', async t => {
@@ -58,7 +62,7 @@ test('server verifies live non-refunded purchases before reading assets; signed 
   t.mock.method(globalThis, 'fetch', async () => Response.json({ subscriber: info }));
   const env = { APPROVALPREP_REVENUECAT_SECRET: 'fake-rc', DOWNLOAD_SIGNING_SECRET: 'fake-signing', PRODUCT_ASSETS_R2: {
     get: async (key: string) => { reads.push(key); return key.endsWith('.zip') ? { body: 'FAKE-ZIP' } : { json: async () => fakeKits()[key.includes('credit-letter') ? 0 : 1] }; },
-    head: async () => ({ customMetadata: { documentCount: '50', formats: 'pdf,docx' } }),
+    head: async () => ({ size: 123 }),
   } };
   for (const refused of [subscriber(KIT.productId), subscriber(COMPLETE_BUNDLE.productId, true), { ...subscriber(), non_subscriptions: {} }, { ...subscriber(), non_subscriptions: { [COMPLETE_BUNDLE.productId]: [{ is_sandbox: false, refunded_at: '2026-11-11' }] } }]) {
     info = refused;
@@ -80,4 +84,20 @@ test('server verifies live non-refunded purchases before reading assets; signed 
   const expired = await bundleUrl('https://approvalprep.com', 'fake-signing', Date.now() - 301000);
   assert.equal((await onRequestGet({ request: new Request(expired), env })).status, 403);
   assert.equal((await onRequestPost({ request: request(), env: {} })).status, 503);
+});
+
+
+test('bundle delivery requires an existing nonempty archive without custom metadata', async t => {
+  t.mock.method(globalThis, 'fetch', async () => Response.json({ subscriber: subscriber() }));
+  let archive: { size: number } | null = null;
+  const env = { APPROVALPREP_REVENUECAT_SECRET: 'fake', DOWNLOAD_SIGNING_SECRET: 'fake', PRODUCT_ASSETS_R2: {
+    get: async (key: string) => ({ json: async () => fakeKits()[key.includes('credit-letter') ? 0 : 1] }),
+    head: async () => archive,
+  } };
+  for (const value of [null, { size: 0 }]) {
+    archive = value;
+    assert.equal((await onRequestPost({ request: request(), env })).status, 503);
+  }
+  archive = { size: 123 };
+  assert.equal((await onRequestPost({ request: request(), env })).status, 200);
 });
