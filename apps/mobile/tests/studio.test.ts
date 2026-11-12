@@ -41,3 +41,17 @@ test('Studio outputs do not contain private kit template sentences', t => {
   assert.ok(sentences.length > 0);
   for (const s of situations) for (const sentence of sentences) assert.ok(!studioDraft(s.id, {}).text.includes(sentence), s.id);
 });
+
+// Each recommendation must reach an offer that actually delivers it.
+test('Studio recommendations reach the independent kit or the bundle containing the website guide', () => {
+  for (const situation of situations) {
+    const route = studioDraft(situation.id, {}).kitRoute;
+    if (situation.recommendationSku === 'credit-letter-kit') {
+      assert.deepEqual(route, { pathname: '/letters/unlock', params: { kit: 'credit-letter-kit' } });
+    } else if (situation.recommendationSku === 'letter-of-explanation') {
+      assert.deepEqual(route, { pathname: '/letters/unlock', params: { kit: 'letter-of-explanation-kit' } });
+    } else assert.deepEqual(route, { pathname: '/letters/bundle' });
+  }
+  const screen = readFileSync(join(__dirname, '../app/(tabs)/letters/studio.tsx'), 'utf8');
+  assert.match(screen, /router.push\(draft.kitRoute.pathname/);
+});
