@@ -35,13 +35,13 @@ export default function Unlock() {
       const local = { creditKit: !!credit, explanationKit: !!explanationKit, bundle: !!file };
       if (active) setOwnership(local);
       if (!active) return;
-      setOwned(!!kit); setMessage('');
+      setOwned(!!kit);
       if (kit) setProduct(null);
       const provider = await purchases();
       const account = await bundleAccount();
       const [products, bundlePrices, remote] = await Promise.all([provider.products(), account.products(), account.ownership()]);
       if (active) { setOwnership({ creditKit: local.creditKit || remote.creditKit, explanationKit: local.explanationKit || remote.explanationKit, bundle: local.bundle || remote.bundle }); setPrices([...products, ...bundlePrices]); setProduct(products.find(p => p.id === offer.productId) ?? null); setMock(provider.mode === 'mock'); }
-    })().catch(() => { if (active) setMessage('The store could not be loaded. Try Restore purchase again.'); });
+    })().catch(() => { if (active) setMessage(current => current || 'The store could not be loaded. Try Restore purchase again.'); });
     return () => { active = false; };
   }, [kitId, offer.productId, revision]));
   async function act(action: 'buy' | 'restore') {
