@@ -1,3 +1,4 @@
+import { phoneDatabase } from '../phoneDatabase';
 import { Platform } from 'react-native';
 import { validBundleKits, type BundleReceipt } from './bundleDelivery';
 /** Uses the same database/table as the kit door; each kit still has its own key. */
@@ -21,8 +22,7 @@ export async function installBundle(receipt: BundleReceipt): Promise<void> {
     await fs.deleteAsync(destination, { idempotent: true });
     throw Error('BUNDLE_DOWNLOAD_UNAVAILABLE');
   }
-  const sqlite = await import('expo-sqlite');
-  const db = await sqlite.openDatabaseAsync('approvalprep-kit.db', { useNewConnection: true });
+  const db = await phoneDatabase('approvalprep-kit.db');
   try {
     await db.execAsync('CREATE TABLE IF NOT EXISTS delivered_kits (kit TEXT PRIMARY KEY NOT NULL, body TEXT NOT NULL); CREATE TABLE IF NOT EXISTS delivered_bundle (id INTEGER PRIMARY KEY CHECK (id = 1), uri TEXT NOT NULL);');
     await db.withExclusiveTransactionAsync(async tx => {
@@ -30,17 +30,14 @@ export async function installBundle(receipt: BundleReceipt): Promise<void> {
       await tx.runAsync('INSERT INTO delivered_bundle (id, uri) VALUES (1, ?) ON CONFLICT(id) DO UPDATE SET uri = excluded.uri', destination);
     });
   } catch (error) { await fs.deleteAsync(destination, { idempotent: true }); throw error; }
-  finally { await db.closeAsync(); }
   if (previous && previous !== destination) await fs.deleteAsync(previous, { idempotent: true }).catch(() => {});
 }
 export async function bundleFile(): Promise<string | null> {
   if (Platform.OS === 'web') return null;
-  const db = await (await import('expo-sqlite')).openDatabaseAsync('approvalprep-kit.db', { useNewConnection: true });
-  try {
-    await db.execAsync('CREATE TABLE IF NOT EXISTS delivered_bundle (id INTEGER PRIMARY KEY CHECK (id = 1), uri TEXT NOT NULL);');
-    const row = await db.getFirstAsync<{ uri: string }>('SELECT uri FROM delivered_bundle WHERE id = 1');
-    return row && (await (await import('expo-file-system/legacy')).getInfoAsync(row.uri)).exists ? row.uri : null;
-  } finally { await db.closeAsync(); }
+  const db = await phoneDatabase('approvalprep-kit.db');
+  await db.execAsync('CREATE TABLE IF NOT EXISTS delivered_bundle (id INTEGER PRIMARY KEY CHECK (id = 1), uri TEXT NOT NULL);');
+  const row = await db.getFirstAsync<{ uri: string }>('SELECT uri FROM delivered_bundle WHERE id = 1');
+  return row && (await (await import('expo-file-system/legacy')).getInfoAsync(row.uri)).exists ? row.uri : null;
 }
 export async function shareBundle(): Promise<void> {
   const uri = await bundleFile();
