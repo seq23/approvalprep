@@ -4,6 +4,7 @@
 // stays on a report and a verified accurate item is not something to keep disputing; the Credit
 // Letter Kit is ONE one-time purchase offered once here, never a charge per letter or per answer;
 // we never act for her. validate:credit-boundary checks this page for those rules.
+import { bureauAnswer } from "../lib/bureauAnswer.mjs";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Byline from "../components/Byline.astro";
 import ThreeWaysToDispute from "../components/ThreeWaysToDispute.astro";
@@ -48,7 +49,7 @@ const after = kitMoments["credit-letter-kit"];
     <h2>What should I do if the bureau corrected or deleted the item?</h2>
     <p>Check that the change is the one you asked for. The bureau must give you the results in writing, and when a dispute leads to a change it must also give you a free copy of your report (<a href={FTC} rel="noopener">FTC</a>).</p>
     <ol class="compact-list">
-      <li>Read the free copy and confirm the item now shows correctly or is gone.</li>
+      <li>{bureauAnswer.corrected}</li>
       <li>Look at your reports from the other two bureaus. A correction at one bureau does not change the others; dispute there only if the same error appears.</li>
       <li>If you want, ask the bureau to send a notice of the correction to anyone who received your report in the past six months, or the past two years for employment (<a href={FTC} rel="noopener">FTC</a>).</li>
       <li>Keep the result letter with your copy of the dispute.</li>
@@ -56,24 +57,24 @@ const after = kitMoments["credit-letter-kit"];
   </div></section>
   <section class="band" id="verified"><div class="shell">
     <h2>What can I do if the bureau says the item is verified?</h2>
-    <p>“Verified” means the company that reported the item told the bureau it is correct. What you can do depends on whether the item is in fact accurate.</p>
+    <p>{bureauAnswer.verified}</p>
     <h3>If you still believe it is wrong</h3>
     <ol class="compact-list">
-      <li>Ask the bureau to include a statement of the dispute in your file and in future reports (<a href={FTC} rel="noopener">FTC</a>).</li>
+      <li>{bureauAnswer.statement} (<a href={FTC} rel="noopener">FTC</a>).</li>
       <li>Write to the company that reported the item, with copies of your proof. If it finds the information inaccurate, it must tell the bureau to update or delete it (<a href={FTC} rel="noopener">FTC</a>; the <a href={CFPB} rel="noopener">CFPB</a> has a free sample letter).</li>
       <li>Send a complaint to the Consumer Financial Protection Bureau. It is free: <a href={COMPLAINT} rel="noopener">consumerfinance.gov/complaint</a>.</li>
       <li>Write to the bureau again only if you have new information or new proof. A bureau may stop investigating a dispute it considers frivolous, and must tell you so with the reason (<a href={FTC} rel="noopener">FTC</a>).</li>
     </ol>
     <h3>If the information is accurate</h3>
-    <p>Accurate information can lawfully stay on your report, and a verified, accurate item is not something to dispute again. A bureau can report most negative information for seven years and bankruptcy for ten (<a href={FTC} rel="noopener">FTC</a>). What you can do is ask the creditor for a courtesy: a goodwill letter asks, it does not require, and creditors do not have to agree.</p>
+    <p>{bureauAnswer.accurate} A bureau can report most negative information for seven years and bankruptcy for ten (<a href={FTC} rel="noopener">FTC</a>). What you can do is ask the creditor for a courtesy: a goodwill letter asks, it does not require, and creditors do not have to agree.</p>
   </div></section>
   <section class="band" id="no-answer"><div class="shell">
     <h2>What if the answer window passes with no answer?</h2>
     <p>{ANSWER_WINDOW.text} (<a href={FTC} rel="noopener">FTC</a>; <a href={ANSWER_WINDOW.law.url} rel="noopener">{ANSWER_WINDOW.law.label}</a>.)</p>
     <ol class="compact-list">
-      <li>Count from the day the bureau received your letter. That is the date on your certified mail return receipt.</li>
-      <li>Check your report: sometimes the item has changed and the letter is still in the post.</li>
-      <li>Write to the bureau, enclose a copy of your first letter and the receipt, and ask for the written results.</li>
+      <li>{bureauAnswer.received}</li>
+      <li>{bureauAnswer.check}</li>
+      <li>{bureauAnswer.write}</li>
       <li>You can also send a free complaint to the CFPB: <a href={COMPLAINT} rel="noopener">consumerfinance.gov/complaint</a>.</li>
     </ol>
   </div></section>

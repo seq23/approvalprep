@@ -1,9 +1,9 @@
 import { dateInput, mailingDate } from './sentLetter';
 import { color, space, tap, type } from './theme';
 import type { MailingDateProps } from './MailingDateField';
-export function MailingDateField({ value, onChange, disabled }: MailingDateProps) {
+export function MailingDateField({ value, onChange, disabled, label = 'Date mailed' }: MailingDateProps) {
   return <label style={{ ...type.body, display: 'flex', flexDirection: 'column', gap: space[2] }}>
-    Date mailed
+    {label}
     <input type="date" value={value} max={dateInput()} disabled={disabled} onChange={event => {
       const next = event.currentTarget.value;
       try { mailingDate(next); if (next <= dateInput()) onChange(next); } catch { /* Keep the last valid selection. */ }
