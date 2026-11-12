@@ -76,6 +76,24 @@ test('an answer ending in a full stop does not print two', () => {
   assert.ok(text.includes('until Dec. 1.\n'));
 });
 
+test('skipped optional sentences leave no bracket or empty line; required blanks remain', () => {
+  const raw = clone();
+  raw.letters[0].template = '{{name|Fake name}}\nFAKE reason: {{why?|fake reason}}.\nFAKE month: {{month?|fake month}}.\n{{street|Fake street}}\n{{today}}\n{{to|Fake recipient}}';
+  const letter = kitLetter(parseKitTemplates(raw), 'goodwill');
+  assert.ok(letter);
+  const skipped = renderKitLetter(letter, { name: 'Example', why: '  ' }, today);
+  assert.equal(skipped.text, 'Example\n[Fake street]\nNovember 10, 2026\n[Fake recipient]');
+  assert.deepEqual(skipped.blanks, ['Fake street', 'Fake recipient']);
+  const filled = renderKitLetter(letter, { name: 'Example', why: 'A reason.', month: 'March' }, today);
+  assert.ok(filled.text.includes('Example\nFAKE reason: A reason.\nFAKE month: March.\n'));
+  assert.deepEqual(filled.blanks, ['Fake street', 'Fake recipient']);
+  for (const invalid of ['{{why?}}', '{{why?| }}', '{{today?}}', '{{why?|Fake reason}} {{name|Fake name}}']) {
+    const broken = clone();
+    broken.letters[0].template += `\n${invalid}`;
+    assert.equal(parseKitTemplates(broken), null, invalid);
+  }
+});
+
 test('a malformed kit parses to null, never to a half-read kit', () => {
   const bad: [string, (kit: any) => unknown][] = [
     ['not json', () => '{"version": 1, "kit": '],
