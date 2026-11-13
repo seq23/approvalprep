@@ -34,13 +34,11 @@ Plan: `docs/APP_PLAN.md`. Build branch: `apps/approvalprep-scaffold` (draft PR #
 - `NAMED STOP [BUNDLE_ID_PLACEHOLDER]`, `[REVENUECAT_KEY_MISSING]`, `[PREVIEW_FLAG_SET]`: release
   gate, see `apps/mobile/release/README.md`.
 - `NAMED STOP [WAITS_FOR_LAUNCH_PLAN]`: task 11 (store files) waits for the owner's launch plan.
-  `apps/mobile/store/en.md` is the 6 Nov draft and is not correct yet (it promises "plus the PDF
-  guide" with the kit, and mark as sent to free users).
-- `NAMED STOP [PRIVATE_WRITE_NEEDED]`: the two kit files must be in the private bucket
-  (`app-kits/credit-letter-kit.json`, `app-kits/letter-of-explanation-kit.json`) before sales are
-  switched on. The goodwill letter's three optional blanks need the `?` form first (see
-  `docs/APP_BUNDLE_DELIVERY.md` and the kit generator outside this repo). The bundle archive is
-  uploaded (coordinator, 11 Nov 2026).
+  `apps/mobile/store/en.md` now says only what the app delivers (13 Nov 2026): mark as sent
+  belongs to the kit, and the PDF guides come with the bundle.
+- Private kit files: both are in the private bucket (`app-kits/credit-letter-kit.json`,
+  `app-kits/letter-of-explanation-kit.json`; read back by sha256 on 13 Nov 2026), the goodwill
+  letter's optional blanks use the `?` form, and the bundle archive is uploaded (11 Nov 2026).
 
 ## Not done, and why
 
