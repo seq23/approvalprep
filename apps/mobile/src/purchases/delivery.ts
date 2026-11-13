@@ -1,9 +1,11 @@
-import type { PurchasesProvider } from './provider';
+import type { Entitlement, PurchasesProvider } from './provider';
 import { KIT_ID, EXPLANATION_KIT_ID, kindsForKit, parseKitTemplates, type KitTemplates } from '../kitTemplates';
 const ORIGIN = 'https://approvalprep.com';
 // No answers or letter text ever leave the phone. Only RevenueCat's anonymous ID is sent.
-export async function restoreKit(provider: PurchasesProvider, save: (kit: KitTemplates) => Promise<boolean>): Promise<boolean> {
-  const owned = await provider.restore();
+// `bought` is what the store just confirmed for a purchase made a moment ago: the store's own
+// Restore is not run again on top of it (on iPhone that can ask her to sign in a second time).
+export async function restoreKit(provider: PurchasesProvider, save: (kit: KitTemplates) => Promise<boolean>, bought?: Entitlement): Promise<boolean> {
+  const owned = bought ?? await provider.restore();
   let restored = false;
   const failures: unknown[] = [];
   for (const kitId of [KIT_ID, EXPLANATION_KIT_ID] as const) {

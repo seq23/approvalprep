@@ -50,9 +50,9 @@ export default function Unlock() {
     setBusy(true); setMessage('');
     try {
       const provider = await purchases();
-      if (action === 'buy') await buyKit(provider, offer.productId);
+      const bought = action === 'buy' ? await buyKit(provider, offer.productId) : undefined;
       // A bundle buyer who lands here from a locked letter gets her kits through the bundle door.
-      const restored = await restoreKit(provider, saveDeliveredKit) || await restoreBundle(await bundleAccount(), installBundle);
+      const restored = await restoreKit(provider, saveDeliveredKit, bought) || (!bought && await restoreBundle(await bundleAccount(), installBundle));
       setOwned(!!await loadDeliveredKit(kitId));
       setMessage(restored ? 'Your kit is saved on this phone and ready offline.' : 'No letter kit purchase was found for this store account.');
     } catch (error) {

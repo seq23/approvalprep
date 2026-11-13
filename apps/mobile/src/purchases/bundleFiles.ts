@@ -1,6 +1,6 @@
 import { phoneDatabase } from '../phoneDatabase';
 import { Platform } from 'react-native';
-import { validBundleKits, type BundleReceipt } from './bundleDelivery';
+import { bundlePath, validBundleKits, type BundleReceipt } from './bundleDelivery';
 /** Uses the same database/table as the kit door; each kit still has its own key. */
 export async function installBundle(receipt: BundleReceipt): Promise<void> {
   if (!validBundleKits(receipt.kits)) throw Error('BUNDLE_DOWNLOAD_UNAVAILABLE');
@@ -37,7 +37,9 @@ export async function bundleFile(): Promise<string | null> {
   const db = await phoneDatabase('approvalprep-kit.db');
   await db.execAsync('CREATE TABLE IF NOT EXISTS delivered_bundle (id INTEGER PRIMARY KEY CHECK (id = 1), uri TEXT NOT NULL);');
   const row = await db.getFirstAsync<{ uri: string }>('SELECT uri FROM delivered_bundle WHERE id = 1');
-  return row && (await (await import('expo-file-system/legacy')).getInfoAsync(row.uri)).exists ? row.uri : null;
+  const fs = await import('expo-file-system/legacy');
+  const uri = row ? bundlePath(row.uri, fs.documentDirectory) : null;
+  return uri && (await fs.getInfoAsync(uri)).exists ? uri : null;
 }
 export async function shareBundle(): Promise<void> {
   const uri = await bundleFile();

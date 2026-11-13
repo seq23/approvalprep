@@ -1,4 +1,5 @@
 export const MORE_LINKS = [
+  { label: 'The bureau answered: what it means', url: 'https://approvalprep.com/the-bureau-answered/' },
   { label: 'Privacy', url: 'https://approvalprep.com/privacy/' },
   { label: 'Not a credit repair company', url: 'https://approvalprep.com/not-a-credit-repair-company/' },
   { label: 'Terms', url: 'https://approvalprep.com/terms/' },

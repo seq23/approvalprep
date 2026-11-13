@@ -13,6 +13,11 @@ export function validBundleKits(kits: unknown): kits is BundleReceipt['kits'] {
       && !!parseKitTemplates(kit);
   });
 }
+/** iOS can move the app's folder on an update, so only the file's name is trusted from storage. */
+export function bundlePath(stored: string, documentDirectory: string | null): string | null {
+  const name = stored.split('/').pop() ?? '';
+  return documentDirectory && /^ApprovalPrep-bundle-\d+\.zip$/.test(name) ? `${documentDirectory}${name}` : null;
+}
 export interface BundleAccount { restore(): Promise<BundleOwnership>; userId(): Promise<string> }
 /** Local state never authorizes delivery: the server verifies the store purchase again. */
 export async function restoreBundle(account: BundleAccount, install: (receipt: BundleReceipt) => Promise<void>): Promise<boolean> {

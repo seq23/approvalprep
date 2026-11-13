@@ -132,3 +132,18 @@ test('confirmed Restore downloads a complete kit and saves it for offline use', 
   assert.equal((await onRequestPost({ request: request('203.0.113.1', 12), env: { ...env, PRODUCTS_DB: undefined } })).status, 503);
   assert.equal(calls, 11);
 });
+
+test('a purchase the store just confirmed is delivered without running the store Restore again', async t => {
+  const { restoreKit } = await import('../src/purchases/delivery');
+  let restores = 0; const asked: string[] = [];
+  t.mock.method(globalThis, 'fetch', async (url: string | URL) => { asked.push(String(url)); return Response.json({ stop: 'REVENUECAT_SECRET_MISSING' }, { status: 503 }); });
+  const provider = { mode: 'store' as const, products: async () => [], entitlement: async () => ({ creditKit: false }), purchase: async () => ({ creditKit: true }),
+    restore: async () => { restores++; return { creditKit: false }; }, userId: async () => '$RCAnonymousID:' + 'a'.repeat(32) };
+  // The door is asked for the kit just bought (and only that one); nothing was saved because the door refused.
+  await assert.rejects(restoreKit(provider, async () => true, { creditKit: true }), /REVENUECAT_SECRET_MISSING/);
+  assert.equal(restores, 0);
+  assert.deepEqual(asked, ['https://approvalprep.com/api/app-unlock?kit=credit-letter-kit']);
+  // A plain Restore still asks the store.
+  assert.equal(await restoreKit(provider, async () => true), false);
+  assert.equal(restores, 1);
+});

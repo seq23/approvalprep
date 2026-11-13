@@ -41,7 +41,8 @@ export default function Bundle() {
     try {
       const account = await bundleAccount();
       if (buy && selected) await account.buy(selected);
-      const restored = await restoreBundle(account, installBundle);
+      // Straight after a purchase the store has already confirmed it; its own Restore is not run again.
+      const restored = await restoreBundle(buy && selected ? { restore: account.ownership, userId: account.userId } : account, installBundle);
       setOwnership(await account.ownership()); setLocal(!!await bundleFile());
       setMessage(restored ? 'Both kits and your documents are saved on this phone. Use Save or share to open the ZIP in Files.' : 'No bundle purchase was found. A previous kit purchase is restored from its kit screen.');
     } catch (error) {
