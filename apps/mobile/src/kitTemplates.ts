@@ -1,6 +1,7 @@
 // The four Credit Letter Kit letters. Their wording is paid: it is never in this repo or the app
 // bundle (docs/APP_PLAN.md). The purchase door saves the delivered kit on the phone; this file reads
 // it back, checks every part of it, and fills a letter from her answers.
+import { phoneDatabase } from './phoneDatabase';
 import type { LetterDatabase, SavedLetter } from './letterStorage';
 import { previewKit } from './previewSamples';
 import type { Question } from './letterQuestions';
@@ -118,17 +119,17 @@ export async function kitStore(db: LetterDatabase, kitId: KitId = KIT_ID) {
 
 const opening: Partial<Record<KitId, Promise<Awaited<ReturnType<typeof kitStore>>>>> = {};
 async function deliveredStore(kitId: KitId) {
-  if (!opening[kitId]) opening[kitId] = import('expo-sqlite').then(sqlite => sqlite.openDatabaseAsync('approvalprep-kit.db')).then(db => kitStore(db, kitId));
+  if (!opening[kitId]) opening[kitId] = phoneDatabase('approvalprep-kit.db').then(db => kitStore(db, kitId));
   try { return await opening[kitId]!; } catch (error) { delete opening[kitId]; throw error; }
 }
 /** Without a kit ID, this is the shared tracking entitlement. Letter access always passes its own ID. */
-export async function loadDeliveredKit(kitId?: KitId): Promise<KitTemplates | null> {
+export async function loadDeliveredKit(kitId?: KitId, reportFailure = false): Promise<KitTemplates | null> {
   const sample = previewKit(kitId);
   if (sample) return sample;
   try {
     if (kitId) return await (await deliveredStore(kitId)).read();
     return await (await deliveredStore(KIT_ID)).read() || await (await deliveredStore(EXPLANATION_KIT_ID)).read();
-  } catch { return null; }
+  } catch (error) { if (reportFailure) throw error; return null; }
 }
 export async function saveDeliveredKit(kit: KitTemplates): Promise<boolean> {
   return (await deliveredStore(kit.kit)).save(kit);
