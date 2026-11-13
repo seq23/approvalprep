@@ -50,6 +50,18 @@ if (!layout.includes("Return to pricing and complete checkout") || !layout.inclu
   if (!button.disabled || button.textContent !== OPENING_LABEL) fail("[payment] a pressed Buy button must show it is opening the payment page");
   restoreCheckoutButtons([button]);
   if (button.disabled || button.textContent !== "Buy Credit Letter Kit — $19" || "label" in button.dataset) fail("[payment] back from Stripe must restore the Buy button");
+  // A checkout that cannot open tells the customer what happened and what to do, in a sentence.
+  // A dropped connection used to print the browser's own "Failed to fetch" under the button.
+  const { openCheckout } = await import("../../src/lib/checkoutButtons.mjs");
+  const said = async (fetchImpl) => { try { await openCheckout(fetchImpl, {}); return ""; } catch (error) { return error.message; } };
+  const dropped = await said(async () => { throw new TypeError("Failed to fetch"); });
+  const serverDown = await said(async () => ({ ok: false, json: async () => { throw new Error("not json"); } }));
+  const refused = await said(async () => ({ ok: false, json: async () => ({ message: "That promo code is not active." }) }));
+  for (const text of [dropped, serverDown]) {
+    if (/fetch|TypeError|undefined|not json/i.test(text) || !/not been charged/.test(text) || !/again/.test(text)) fail("[payment] a failed checkout must say plainly what happened and what to do, got: " + JSON.stringify(text));
+  }
+  if (refused !== "That promo code is not active.") fail("[payment] the server's own checkout message must reach the customer");
+  if (await openCheckout(async () => ({ ok: true, json: async () => ({ checkoutUrl: "https://checkout.stripe.com/x" }) }), {}) !== "https://checkout.stripe.com/x") fail("[payment] a good checkout must return Stripe's page");
 }
 if (!layout.includes("Optional: prefill a draft in the Studio") || !layout.includes("Download editable Word document")) fail("[payment] verified checkout UI must offer both direct template download and optional browser-only prefill path");
 const slugPage = fs.readFileSync(path.join(root, "src/pages/[...slug].astro"), "utf8");

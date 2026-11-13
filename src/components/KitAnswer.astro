@@ -17,7 +17,7 @@ const product = entry ? productForSku(entry.sku) : null;
         <h2>{entry.question}</h2>
         <p>{entry.answer}</p>
         <div class="hero-actions">
-          <button class="button primary-button checkout-button" type="button" data-sku={entry.sku}>{`Get the ${product.name} — ${product.priceLabel}`}</button>
+          <button class="button primary-button checkout-button" type="button" data-sku={entry.sku}>{`Buy ${product.name} — ${product.priceLabel}`}</button>
           <a class="button secondary-button" href={`/pricing/#${entry.sku}`}>See what is in the kit</a>
         </div>
         <p class="fine">Paid once. Editable DOCX and PDF. Not legal or credit advice.</p>

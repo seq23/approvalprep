@@ -18,6 +18,23 @@ export function restoreCheckoutButtons(buttons) {
   }
 }
 
+export const CHECKOUT_FAILED = "The payment page did not open, and you have not been charged. Check your connection and press the button again. If it keeps happening, email info@approvalprep.com.";
+
+// Asks the server for the Stripe page. Every failure becomes a sentence a customer can act on: the
+// server's own message when it sent one (a wrong promo code, say), otherwise CHECKOUT_FAILED. A
+// dropped connection used to print the browser's own words, "Failed to fetch".
+export async function openCheckout(fetchImpl, request) {
+  let response;
+  try {
+    response = await fetchImpl("/api/create-checkout-session", request);
+  } catch {
+    throw new Error(CHECKOUT_FAILED);
+  }
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok || !payload.checkoutUrl) throw new Error(payload.message || CHECKOUT_FAILED);
+  return payload.checkoutUrl;
+}
+
 function statusFor(button) {
   const next = button.nextElementSibling;
   if (next && next.classList.contains("checkout-status")) return next;
@@ -42,17 +59,14 @@ export function initCheckoutButtons() {
     status.textContent = "Opening Stripe’s secure payment page. Your letter answers and documents are never sent.";
     const discount_code = String(document.querySelector("[data-discount-code]")?.value || "").trim();
     try {
-      const response = await fetch("/api/create-checkout-session", {
+      window.location.href = await openCheckout(fetch, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ sku: button.dataset.sku, discount_code })
       });
-      const payload = await response.json().catch(() => ({}));
-      if (!response.ok || !payload.checkoutUrl) throw new Error(payload.message || "The payment page could not open. Please try again.");
-      window.location.href = payload.checkoutUrl;
     } catch (error) {
       restoreCheckoutButtons([button]);
-      status.textContent = error.message || "The payment page could not open. Please try again.";
+      status.textContent = error.message;
     }
   });
 }
