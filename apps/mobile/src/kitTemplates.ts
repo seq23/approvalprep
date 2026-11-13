@@ -1,7 +1,7 @@
 // The four Credit Letter Kit letters. Their wording is paid: it is never in this repo or the app
 // bundle (docs/APP_PLAN.md). The purchase door saves the delivered kit on the phone; this file reads
 // it back, checks every part of it, and fills a letter from her answers.
-import { phoneDatabase } from './phoneDatabase';
+import { phoneDatabase, reportStorageFailure } from './phoneDatabase';
 import type { LetterDatabase, SavedLetter } from './letterStorage';
 import { previewKit } from './previewSamples';
 import type { Question } from './letterQuestions';
@@ -147,7 +147,7 @@ export async function kitStore(db: LetterDatabase, kitId: KitId = KIT_ID) {
 const opening: Partial<Record<KitId, Promise<Awaited<ReturnType<typeof kitStore>>>>> = {};
 async function deliveredStore(kitId: KitId) {
   if (!opening[kitId]) opening[kitId] = phoneDatabase('approvalprep-kit.db').then(db => kitStore(db, kitId));
-  try { return await opening[kitId]!; } catch (error) { delete opening[kitId]; throw error; }
+  try { return await opening[kitId]!; } catch (error) { delete opening[kitId]; reportStorageFailure('kits', error); throw error; }
 }
 /** Without a kit ID, this is the shared tracking entitlement. Letter access always passes its own ID. */
 export async function loadDeliveredKit(kitId?: KitId, reportFailure = false): Promise<KitTemplates | null> {

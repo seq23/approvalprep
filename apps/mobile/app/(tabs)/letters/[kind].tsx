@@ -37,25 +37,19 @@ export default function Questions() {
       if (id) draftId.current = id;
       let draft = await store.get(draftId.current);
       if (id && (!draft || draft.kind !== kind)) throw Error('DRAFT_NOT_FOUND');
-      if (!draft) {
-        draft = template ? newKitDraft(draftId.current, template.kind) : newDispute(draftId.current);
-        try { await store.create(draft); } catch (error) {
-          // React may remount while the first insert is pending.
-          const existing = await store.get(draftId.current);
-          if (!existing || existing.kind !== kind) throw error;
-          draft = existing;
-        }
-      }
+      // A new letter is stored on its first answer, never on open.
+      const stored = !!draft;
+      if (!draft) draft = template ? newKitDraft(draftId.current, template.kind) : newDispute(draftId.current);
       if (!active) return;
-      write.current = draftWriter(store); setLetter(draft); setMessage('Saved on this phone.');
+      write.current = draftWriter(store, stored); setLetter(draft); setMessage(stored ? 'Saved on this phone.' : 'Your answers save on this phone as you type.');
     })()).catch(() => { if (active) { setLoadError(true); setMessage('Your draft could not be opened. Please try again.'); } });
     return () => { active = false; };
   }, [kind, id, attempt]);
-  function persist(next: SavedLetter) {
+  function persist(next: SavedLetter, then?: () => void) {
     setLetter(next); setSaving(true); setFailed(false); setMessage('Saving…');
     const version = ++revision.current;
     write.current!(next).then(() => {
-      if (version === revision.current) { setSaving(false); setMessage('Saved on this phone.'); }
+      if (version === revision.current) { setSaving(false); setMessage('Saved on this phone.'); then?.(); }
     }).catch(() => {
       if (version === revision.current) { setSaving(false); setFailed(true); setMessage('Your latest answers could not be saved. Try saving again before continuing.'); }
     });
@@ -84,7 +78,7 @@ export default function Questions() {
         {free && step === 1 ? (bureaus as { id: string; name: string }[]).map(bureau => <Row key={bureau.id} title={bureau.name} selected={letter.answers.bureau === bureau.id} onPress={() => persist({ ...letter, answers: { ...letter.answers, bureau: bureau.id } })} />) : question.fields.map(field => <Field key={field.name} label={field.label} multiline={field.multiline} value={letter.answers[field.name] ?? ''} onChangeText={value => persist({ ...letter, answers: { ...letter.answers, [field.name]: value } })} />)}
         <Text style={type.sub}>You can leave a blank. It will appear in brackets for you to fill before mailing.</Text>
         {failed ? <Button label="Try saving again" onPress={() => persist(letter)} /> : null}
-        <Button primary disabled={saving || failed} label={step === questions.length - 1 ? 'Read my draft ›' : 'Next question ›'} onPress={() => step === questions.length - 1 ? router.push({ pathname: '/letters/draft', params: { id: letter.id } }) : setStep(step + 1)} />
+        <Button primary disabled={saving || failed} label={step === questions.length - 1 ? 'Read my draft ›' : 'Next question ›'} onPress={() => step === questions.length - 1 ? persist(letter, () => router.push({ pathname: '/letters/draft', params: { id: letter.id } })) : setStep(step + 1)} />
         {step > 0 ? <Button label="← Previous question" onPress={() => setStep(step - 1)} /> : null}
       </> : null}
     </>
