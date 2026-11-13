@@ -101,3 +101,11 @@ test('bundle delivery requires an existing nonempty archive without custom metad
   archive = { size: 123 };
   assert.equal((await onRequestPost({ request: request(), env })).status, 200);
 });
+
+test('the saved bundle is found again after the phone moves the app folder, and only our own file name is trusted', async () => {
+  const { bundlePath } = await import('../src/purchases/bundleDelivery');
+  assert.equal(bundlePath('file:///old-container/Documents/ApprovalPrep-bundle-1731400000000.zip', 'file:///new-container/Documents/'), 'file:///new-container/Documents/ApprovalPrep-bundle-1731400000000.zip');
+  assert.equal(bundlePath('file:///old/Documents/../../etc/passwd', 'file:///new/Documents/'), null);
+  assert.equal(bundlePath('file:///old/Documents/other.zip', 'file:///new/Documents/'), null);
+  assert.equal(bundlePath('file:///old/Documents/ApprovalPrep-bundle-1.zip', null), null);
+});
