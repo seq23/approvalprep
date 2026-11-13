@@ -50,6 +50,11 @@ test('download door refuses unknown, refunded, sandbox and unentitled purchases 
       const refused = await onRequestPost({ request, env });
       assert.equal(refused.status, 403); assert.deepEqual(await refused.json(), { error: 'KIT_NOT_AVAILABLE' });
     }
+    // The store-review switch opens a sandbox purchase, never a refunded one.
+    data = { subscriber: { ...subscriber, non_subscriptions: { [KIT.productId]: [{ is_sandbox: true }] } } };
+    assert.equal((await onRequestPost({ request, env: { ...env, APPROVALPREP_ACCEPT_SANDBOX_PURCHASES: '1' } })).status, 200);
+    data = { subscriber: { ...subscriber, non_subscriptions: { [KIT.productId]: [{ is_sandbox: true, refunded_at: '2026-11-11' }] } } };
+    assert.equal((await onRequestPost({ request, env: { ...env, APPROVALPREP_ACCEPT_SANDBOX_PURCHASES: '1' } })).status, 403);
     status = 404;
     assert.equal((await onRequestPost({ request, env })).status, 403);
     status = 200; data = { subscriber };
