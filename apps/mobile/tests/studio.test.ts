@@ -26,8 +26,9 @@ test('Studio uses every website situation and produces the same first pass with 
 });
 
 test('free Studio screen has no PDF, sent or reminder action, and dispute keeps its own path', () => {
+  // Saving the draft on the phone is free (owner, 13 Nov 2026); the PDF, mark as sent and reminders stay paid.
   const screen = readFileSync(join(__dirname, '../app/(tabs)/letters/studio.tsx'), 'utf8');
-  assert.doesNotMatch(screen, /expo-print|expo-sharing|letters\/sent|scheduleNotification|savedLetters/);
+  assert.doesNotMatch(screen, /expo-print|expo-sharing|letterExport|letterPdf|letters\/sent|scheduleNotification|localReminders|markSent/);
   assert.match(screen, /router.push\('\/letters\/bureau-dispute'\)/);
   assert.match(screen, /Clipboard.setStringAsync\(draft!\.text\)/);
   assert.match(screen, /Share.share\(\{ message: draft!\.text \}\)/);
@@ -53,7 +54,9 @@ test('Studio recommendations reach the independent kit or the bundle containing 
     } else assert.deepEqual(route, { pathname: '/letters/bundle' });
   }
   const screen = readFileSync(join(__dirname, '../app/(tabs)/letters/studio.tsx'), 'utf8');
-  assert.match(screen, /router.push\(draft.kitRoute.pathname/);
+  // A kit the app does not sell on its own opens the bundle that holds it, and the screen says so first.
+  assert.match(screen, /'params' in draft\.kitRoute \? \{ pathname: '\/letters\/unlock', params: draft\.kitRoute\.params \} : '\/letters\/bundle'/);
+  assert.match(screen, /notSoldHere\(draft\.kitName\)/);
 });
 
 // The website kits of the same name hold more documents than the kits sold in the app.

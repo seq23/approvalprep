@@ -8,9 +8,9 @@ on:
         default: "false"
   push:
     branches: [main]
-    paths: ['apps/mobile/**', 'src/lib/**', 'src/data/letterStudio.ts', '.github/workflows/app-preview.yml']
+    paths: ['apps/mobile/**', 'src/lib/**', 'src/data/letterStudio.ts', 'data/products/products.json', '.github/workflows/app-preview.yml']
   pull_request:
-    paths: ['apps/mobile/**', 'src/lib/**', 'src/data/letterStudio.ts', '.github/workflows/app-preview.yml']
+    paths: ['apps/mobile/**', 'src/lib/**', 'src/data/letterStudio.ts', 'data/products/products.json', '.github/workflows/app-preview.yml']
 permissions:
   contents: read
   pull-requests: write

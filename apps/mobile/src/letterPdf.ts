@@ -3,6 +3,7 @@ import { color } from './theme';
 // @ts-ignore shared free packet checklist
 import { BEFORE_YOU_MAIL, buildLetter, tidyFact } from '../../../src/lib/letterStudioCore.mjs';
 
+export { BEFORE_YOU_MAIL };
 export const escapeHtml = (text: string) => text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 export function disputedParts(text: string, entry = ''): { text: string; highlighted: boolean }[] {
   const normalized = tidyFact(entry);

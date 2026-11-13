@@ -88,7 +88,9 @@ for (const screen of ['[kind]', 'sent']) test(`${screen}: stalled storage ends i
     if (name.endsWith('/theme')) return { type: {}, space: {} };
     if (name.endsWith('/sentLetter')) return { dateInput: () => '', MAIL_METHODS: [], reminderDate: () => '' };
     if (name.endsWith('/myLetters')) return { showDate: () => '' };
-    if (name.endsWith('/letters')) return { LETTERS: [], EXPLANATION_LETTERS: [] };
+    if (name.endsWith('/letters')) return { LETTERS: [], EXPLANATION_LETTERS: [], isCreditLetter: () => true };
+    if (name.endsWith('/prices')) return { usePrices: () => ({}) };
+    if (name.endsWith('/offers')) return { CREDIT_KIT: { name: 'Kit' }, offerTitle: () => 'title', kitOfferFor: () => ({ name: 'Kit' }) };
     if (name.endsWith('/ui')) return { Screen: 'Screen', Button: 'Button' };
     return {};
   } });

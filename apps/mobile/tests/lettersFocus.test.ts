@@ -18,7 +18,7 @@ test('returning from Restore refreshes the mounted chooser and opens delivered k
   runInNewContext(compiled, { exports, require: (name: string) => {
     if (name === 'react/jsx-runtime') return { jsx: element, jsxs: element };
     if (name === 'react') return {
-      useState: () => [state, (value: unknown) => { state = value; }],
+      useState: (initial: unknown) => [state ?? initial, (value: unknown) => { state = value; }],
       useCallback: (callback: () => void) => callback,
     };
     if (name === 'expo-router') return { router: { push: (route: string) => routes.push(route) },
@@ -26,6 +26,8 @@ test('returning from Restore refreshes the mounted chooser and opens delivered k
     if (name === 'react-native') return { Text: 'Text' };
     if (name.endsWith('/theme')) return { type: {} };
     if (name.endsWith('/ui')) return { Row: 'Row', Screen: 'Screen' };
+    if (name.endsWith('/offers')) return { BUNDLE_OFFER: {}, CREDIT_KIT: {}, EXPLANATION_KIT_OFFER: {}, STUDIO_COUNT: 9, kitOfferFor: () => ({ name: 'Kit', productId: 'kit' }), lockedLine: () => 'locked', offerTitle: () => 'title' };
+    if (name.endsWith('/prices')) return { usePrices: () => ({}) };
     if (name.endsWith('/letters')) return { EXPLANATION_LETTERS: [], LETTERS: [{ kind: 'goodwill', name: 'Goodwill', access: 'kit' }] };
     if (name.endsWith('/kitTemplates')) return {
       EXPLANATION_KIT_ID: 'letter-of-explanation-kit', kitForKind: () => 'credit-letter-kit',
@@ -33,7 +35,8 @@ test('returning from Restore refreshes the mounted chooser and opens delivered k
     };
     throw new Error(`Unexpected import: ${name}`);
   } });
-  const render = () => exports.default!().props.children[1][0].props.onPress;
+  // The one kit letter in this list: the row under the Credit Letter Kit heading and its "See the kit" row.
+  const render = () => exports.default!().props.children[6][0].props.onPress;
   render();
   const blur = focus();
   reads.shift()!(null);

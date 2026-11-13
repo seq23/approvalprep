@@ -3,4 +3,7 @@
 export const SELF_HELP_LINE = 'Self-help templates. Not legal or financial advice. We do not contact bureaus or creditors for you.';
 export const IDEA_LINE = 'Dispute it yourself. Skip the monthly fee.';
 export const HONEST_LIMIT = 'Accurate information usually stays on a report. A letter is a request, not a promise.';
+// For a letter to a landlord, lender or employer: the credit-report caution does not belong there.
+export const REQUEST_LINE = 'A letter is a request, not a promise. Whoever reads it decides.';
+export const WHAT_IT_IS = 'Letters you write and mail yourself.';
 export const PRIVACY_LINE = 'No account, no upload. Your answers stay on this phone.';

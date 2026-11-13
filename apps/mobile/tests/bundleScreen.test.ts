@@ -6,11 +6,13 @@ import ts from 'typescript';
 import * as kits from '../src/kit';
 import * as offers from '../src/purchases/bundleOffers';
 
-test('bundle sales notice follows the switch and Restore hides internal errors', async () => {
+// Buying is possible only with the switch on AND a real store. Whenever it is not, the Get button is
+// off and one line says so; a live-looking button never sits under a line saying nothing can be bought.
+test('the bundle Get button and its notice follow the sales switch and the store, and Restore hides internal errors', async () => {
   const compiled = ts.transpileModule(readFileSync(new URL('../app/(tabs)/letters/bundle.tsx', import.meta.url), 'utf8'), {
     compilerOptions: { module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX },
   }).outputText;
-  for (const enabled of [false, true]) {
+  for (const enabled of [false, true]) for (const mock of [false, true]) {
     const states: any[] = []; let index = 0; let focus!: () => void;
     const exports: any = {};
     const element = (type: any, props: any) => ({ type, props });
@@ -25,10 +27,13 @@ test('bundle sales notice follows the switch and Restore hides internal errors',
       if (name.endsWith('/ui')) return { Button: 'Button', Row: 'Row', Sheet: 'Sheet', Screen: 'Screen' };
       if (name.endsWith('/theme')) return { type: {} };
       if (name.endsWith('/copy')) return { HONEST_LIMIT: 'limit' };
+      if (name.endsWith('/previewSamples')) return { PREVIEW_ENABLED: false };
+      if (name.endsWith('/offers')) return { KIT_OFFERS: [], TRACKING_LINE: 'tracking', bundleFilesLine: () => 'files', bundleWebsiteKits: () => ['A kit'], offerTitle: (name: string) => name };
+      if (name.endsWith('/prices')) return { storePrices: async () => ({ [kits.COMPLETE_BUNDLE.productId]: 'price' }) };
       if (name.endsWith('/kit')) return { ...kits, KIT_SALES_ENABLED: enabled };
       if (name.endsWith('/bundleOffers')) return offers;
       if (name.endsWith('/bundleFiles')) return { bundleFile: async () => null };
-      if (name.endsWith('/bundleAccount')) return { bundleAccount: async () => ({ ownership: async () => offers.NO_OWNERSHIP, products: async () => [], mock: true }) };
+      if (name.endsWith('/bundleAccount')) return { bundleAccount: async () => ({ ownership: async () => offers.NO_OWNERSHIP, products: async () => [], mock }) };
       if (name.endsWith('/bundleDelivery')) return { restoreBundle: async () => { throw Error('STORE_ACCOUNTS_NOT_READY'); } };
       throw Error(name);
     } });
@@ -36,7 +41,9 @@ test('bundle sales notice follows the switch and Restore hides internal errors',
     const flatten = (node: any): any[] => !node ? [] : Array.isArray(node) ? node.flatMap(flatten) : typeof node === 'object' ? [node, ...flatten(node.props?.children)] : [];
     render(); focus(); await new Promise(resolve => setImmediate(resolve));
     const nodes = flatten(render());
-    assert.equal(nodes.some(n => n.props?.children === 'Purchases are not available yet.'), !enabled);
+    const canBuy = enabled && !mock;
+    assert.equal(nodes.some(n => n.props?.testID === 'buying-off'), !canBuy);
+    assert.equal(nodes.find(n => n.type === 'Button' && String(n.props.label).startsWith('Get the bundle')).props.disabled, !canBuy);
     nodes.find(n => n.type === 'Button' && n.props.label === 'Restore purchase').props.onPress();
     await new Promise(resolve => setImmediate(resolve));
     const alert = flatten(render()).find(n => n.props?.accessibilityRole === 'alert');

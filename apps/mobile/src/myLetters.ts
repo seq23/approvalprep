@@ -2,6 +2,17 @@ import type { SavedLetter } from './letterStorage';
 import { LETTERS, EXPLANATION_LETTERS } from './letters';
 // @ts-ignore shared phone/website date calculation
 import { answerDueDate } from '../../../src/lib/letterStudioCore.mjs';
+// @ts-ignore shared website module is JavaScript
+import { bureaus } from '../../../src/lib/letterStudioCore.mjs';
+import { situations } from './studio';
+import { studioSituationOf } from './studioDrafts';
+/** A saved letter's name as she would say it: "Equifax · Sample account", never the stored id "equifax". */
+export function letterTitle(letter: Pick<SavedLetter, 'kind' | 'answers'>): string {
+  const studio = studioSituationOf(letter.kind);
+  if (studio) return `${situations.find(s => s.id === studio)?.label ?? 'Letter'} · Letter Studio draft`;
+  const bureau = (bureaus as { id: string; name: string }[]).find(b => b.id === letter.answers.bureau)?.name ?? letter.answers.bureau;
+  return [bureau, letter.answers.account || [...LETTERS, ...EXPLANATION_LETTERS].find(item => item.kind === letter.kind)?.name || 'Saved letter'].filter(Boolean).join(' · ');
+}
 export const ANSWERS = ['Corrected', 'Verified', 'No answer', 'Other answer'] as const;
 export type Answer = typeof ANSWERS[number];
 const dayNumber = (d: Date) => Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000;
@@ -10,6 +21,8 @@ export function dueDate(letter: SavedLetter): Date | null {
   const date = new Date(`${letter.sentDate}T12:00:00`);
   return Number.isFinite(date.getTime()) ? answerDueDate(date) : null;
 }
+/** The date a bureau's answer is due for a letter mailed on `mailed` (the website's own 30-day rule). */
+export const answerDue = (mailed = new Date()): Date => answerDueDate(mailed);
 export const showDate = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 export function myLetters(letters: SavedLetter[], hasKit: boolean, today = new Date()) {
   const rows = letters.map(letter => {
@@ -27,7 +40,7 @@ export function myLetters(letters: SavedLetter[], hasKit: boolean, today = new D
       const stamp = letter.answeredAt ? new Date(letter.answeredAt) : null;
       sub = `✓ Answered${stamp && Number.isFinite(stamp.getTime()) ? ` · ${showDate(stamp)}, ${stamp.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}` : ''}`;
     }
-    return { letter, title: [letter.answers.bureau, letter.answers.account || [...LETTERS, ...EXPLANATION_LETTERS].find(item => item.kind === letter.kind)?.name || 'Saved letter'].filter(Boolean).join(' · '), sub, needsAnswer };
+    return { letter, title: letterTitle(letter), sub, needsAnswer };
   });
   const count = rows.filter(row => row.needsAnswer).length;
   return { rows, summary: `${letters.length} ${letters.length === 1 ? 'letter' : 'letters'}${hasKit ? ` · ${count} ${count === 1 ? 'answer' : 'answers'} to check` : ''}` };
