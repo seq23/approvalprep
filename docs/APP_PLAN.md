@@ -376,3 +376,48 @@ Do not:
 - Do not hide answered letters or drafts.
 
 Honest limits: 6 seen. Only 1 (Credit Dispute Tracker) is a letter tracker with an answer deadline, and I saw its detail screens, not its list. The list layout above leans on the document, invoice and bill lists.
+
+# ApprovalPrep: screen patterns from shipped apps (addition, 11 Nov 2026)
+
+Read this first:
+- Notes on shipped screens looked at on 11 Nov 2026. Not test results. Where a note disagrees with the plan (above all "Day 30 is her step, never a paid round"), the plan wins.
+- SEEN = I loaded the store page and looked at the screenshot. TEXT ONLY = I read a description and did not see the screen.
+- Sources: App Store web pages (store screenshots). No sign-in, no trial. Structure only.
+
+### (i) Day-30 answer screen: "What did they answer?" (one question, three choices, a calm next step)
+
+Examples looked at:
+- Credit Dispute Tracker: https://apps.apple.com/us/app/id6779428195 : on the dispute's detail screen, a "Result" block: four plain rows, one choice only (no answer yet, corrected, deleted, verified as accurate), then the date the answer arrived, one line of what changed, a link to see it, and "answered: no reminder is scheduled". SEEN
+- JobFolder, job application tracker: https://apps.apple.com/us/app/id6748940763 : "what happened?" as a sheet of full-width rows, one per outcome (waiting, meeting, offer, accepted, rejected), each with a small icon; a close control under the list; the choice becomes a dated card on the item's timeline. SEEN
+- Medisafe, reminder check-in: https://apps.apple.com/us/app/id573916946 : one sentence of what is due, the items, then three choices in one row (skip, snooze, take); the positive one sits on the right with a tick. SEEN
+- Way of Life, habit check-in: https://apps.apple.com/us/app/id393159800 : tap a day, a small row of choices opens in place (yes, no, skip, erase); the answer colours that day and can be changed later. SEEN
+
+What they have in common:
+- One question, answered with one tap from a short fixed list of plain words. No typing is needed to answer.
+- "Nothing happened yet" is a normal choice in the list (no answer yet, waiting, skip, snooze), not an error.
+- The answer is saved on the item with its date and can be changed afterwards; an "erase" or re-pick is always there.
+- What follows the choice is one or two quiet lines on the same item, not a new flow.
+- Answering switches the reminder off, and the screen says so.
+
+For our screen (top to bottom):
+1. Top bar: back control. Title is the letter (who it went to, what it is about).
+2. One line of fact: "Mailed on <date>. Day 30 was <date>." Under it, small: these dates come from what you entered.
+3. The question: "What did they answer?"
+4. Three full-width rows, same size, same weight, in this order: "They corrected it", "They said it is verified", "No answer yet". One choice only; nothing chosen at the start. An optional date row ("answer arrived on") shows after the first or second is picked.
+5. Under the rows, the next step for the row picked, 2 to 4 short lines, from the website's /the-bureau-answered/ content (imported, never retyped):
+   - Corrected: what that means; check your next free report to see it; this letter is done. No next action offered.
+   - Verified: what "verified" means; what she can do herself for free; and the off-ramp in plain words (accurate information stays on a report; a verified accurate item is not something to dispute again).
+   - No answer yet: the 30 days count from the day they received it; what she can do herself for free; her date stays on the letter.
+6. One main button at the bottom: "Save answer". It records the choice on the letter, moves the row to "Answered" in My letters (pattern h), and returns there. For "No answer yet" the letter stays under "Answer overdue".
+7. For someone who has not bought: below the next-step lines, one quiet card, once, offering the same single kit (`ap_credit_kit`), with a plain line of what it adds. It is a text-weight link to the kit screen (pattern g), never the main button. A buyer sees no offer at all here.
+8. States: before day 30 (the screen shows the date and "No answer yet" is already the sensible pick; the other two still work); answered (the screen opens showing the saved choice, its date, and "Change answer"); sales switched off (`STORE_ACCOUNTS_NOT_READY`: the kit card is hidden).
+
+Must NOT be there:
+- No second product, no Letter of Explanation Kit, no bundle, no recurring price on this screen (plan test).
+- No "round 2", "next round", "next letter", "keep disputing", "until it is removed", "we follow up", "subscription".
+- No "Write another letter" button after "verified" or "no answer", and no red or warning styling on those two rows: none of the three is a failure.
+- No promise or forecast of a result, no score, no success rate, no progress ring, no celebration screen for "corrected" beyond one plain line.
+- No fourth choice such as "deleted" unless the plan adds it; no choice pre-selected; no timer.
+- Nothing that suggests the app contacted the bureau or knows the answer: she records it.
+
+Honest limits: 4 seen. Only 1 (Credit Dispute Tracker) is a dispute-answer screen, and it lists four results on a long detail screen rather than one question on its own. None of the four shows a next step that differs per answer, and none sells anything on the outcome screen; the per-answer text and the single kit card come from the plan's day-30 ruling, not from an example. A return, claim or mailed-item tracker with an outcome picker was not found on a free page.
