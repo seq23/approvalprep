@@ -1,4 +1,5 @@
 import { test } from 'node:test';
+import { DatabaseSync } from 'node:sqlite';
 import assert from 'node:assert/strict';
 import { KIT, COMPLETE_BUNDLE, BUNDLE_UPGRADE, kitPurchaseGate } from '../src/kit';
 import { EXPLANATION_PRODUCT, offersFor, ownershipFrom, NO_OWNERSHIP } from '../src/purchases/bundleOffers';
@@ -29,6 +30,11 @@ const kinds = ['goodwill', 'debt-validation', 'settlement-terms', 'follow-up'];
 const explanationKinds = ['credit', 'income-gap', 'employment-gap', 'address-history', 'rental-issue', 'late-payment', 'bank-statement', 'life-event', 'general-application'].map(k => `explanation-${k}`);
 const fakeLetter = (kind: string) => ({ kind, name: `FAKE ${kind}`, template: 'FAKE {{a|A}} {{b|B}} {{c|C}} {{d|D}}', questions: ['a', 'b', 'c', 'd'].map(name => ({ title: 'FAKE question', fields: [{ name, label: 'FAKE field' }] })) });
 const fakeKits = () => [{ kit: 'credit-letter-kit', version: 1, letters: kinds.map(fakeLetter) }, { kit: 'letter-of-explanation-kit', version: 1, letters: explanationKinds.map(fakeLetter) }];
+function rateDb() {
+  const raw = new DatabaseSync(':memory:');
+  const stmt = (sql: string, args: any[] = []) => ({ run: async () => raw.prepare(sql).run(...args), first: async () => raw.prepare(sql).get(...args) });
+  return { raw, prepare: (sql: string) => ({ ...stmt(sql), bind: (...args: any[]) => stmt(sql, args) }) };
+}
 const request = () => new Request('https://approvalprep.com/api/app-bundle', { method: 'POST', headers: { authorization: `Bearer $RCAnonymousID:${'a'.repeat(32)}` } });
 const subscriber = (product: string = COMPLETE_BUNDLE.productId, sandbox = false) => ({ entitlements: { [product]: { product_identifier: product, expires_date: null } }, non_subscriptions: { [product]: [{ is_sandbox: sandbox }] } });
 
@@ -60,7 +66,7 @@ test('server verifies live non-refunded purchases before reading assets; signed 
   const reads: string[] = [];
   let info: object = subscriber();
   t.mock.method(globalThis, 'fetch', async () => Response.json({ subscriber: info }));
-  const env = { APPROVALPREP_REVENUECAT_SECRET: 'fake-rc', DOWNLOAD_SIGNING_SECRET: 'fake-signing', PRODUCT_ASSETS_R2: {
+  const env = { PRODUCTS_DB: rateDb(), APPROVALPREP_REVENUECAT_SECRET: 'fake-rc', DOWNLOAD_SIGNING_SECRET: 'fake-signing', PRODUCT_ASSETS_R2: {
     get: async (key: string) => { reads.push(key); return key.endsWith('.zip') ? { body: 'FAKE-ZIP' } : { json: async () => fakeKits()[key.includes('credit-letter') ? 0 : 1] }; },
     head: async () => ({ size: 123 }),
   } };
@@ -90,7 +96,7 @@ test('server verifies live non-refunded purchases before reading assets; signed 
 test('bundle delivery requires an existing nonempty archive without custom metadata', async t => {
   t.mock.method(globalThis, 'fetch', async () => Response.json({ subscriber: subscriber() }));
   let archive: { size: number } | null = null;
-  const env = { APPROVALPREP_REVENUECAT_SECRET: 'fake', DOWNLOAD_SIGNING_SECRET: 'fake', PRODUCT_ASSETS_R2: {
+  const env = { PRODUCTS_DB: rateDb(), APPROVALPREP_REVENUECAT_SECRET: 'fake', DOWNLOAD_SIGNING_SECRET: 'fake', PRODUCT_ASSETS_R2: {
     get: async (key: string) => ({ json: async () => fakeKits()[key.includes('credit-letter') ? 0 : 1] }),
     head: async () => archive,
   } };
@@ -108,4 +114,28 @@ test('the saved bundle is found again after the phone moves the app folder, and 
   assert.equal(bundlePath('file:///old/Documents/../../etc/passwd', 'file:///new/Documents/'), null);
   assert.equal(bundlePath('file:///old/Documents/other.zip', 'file:///new/Documents/'), null);
   assert.equal(bundlePath('file:///old/Documents/ApprovalPrep-bundle-1.zip', null), null);
+});
+
+test('bundle door: attempts are capped per caller before RevenueCat, and sandbox purchases open only with the review switch', async t => {
+  let calls = 0; let info: object = subscriber(COMPLETE_BUNDLE.productId, true);
+  t.mock.method(globalThis, 'fetch', async () => { calls++; return Response.json({ subscriber: info }); });
+  const assets = { get: async (key: string) => ({ json: async () => fakeKits()[key.includes('credit-letter') ? 0 : 1] }), head: async () => ({ size: 9 }) };
+  const base = { APPROVALPREP_REVENUECAT_SECRET: 'fake', DOWNLOAD_SIGNING_SECRET: 'fake', PRODUCT_ASSETS_R2: assets };
+  // No counter to count on: refuse rather than run uncapped.
+  assert.equal((await onRequestPost({ request: request(), env: base })).status, 503);
+  assert.equal(calls, 0);
+  const now = Date.now; Date.now = () => 1_800_000; t.after(() => { Date.now = now; });
+  const env = { ...base, PRODUCTS_DB: rateDb() };
+  // A sandbox purchase is refused, except while the store-review switch is on; a refund is refused either way.
+  assert.equal((await onRequestPost({ request: request(), env })).status, 403);
+  assert.equal((await onRequestPost({ request: request(), env: { ...env, APPROVALPREP_ACCEPT_SANDBOX_PURCHASES: 'true' } })).status, 403);
+  const review = { ...env, APPROVALPREP_ACCEPT_SANDBOX_PURCHASES: '1' };
+  assert.equal((await onRequestPost({ request: request(), env: review })).status, 200);
+  info = { ...subscriber(), non_subscriptions: { [COMPLETE_BUNDLE.productId]: [{ is_sandbox: true, refunded_at: '2026-11-11' }] } };
+  assert.equal((await onRequestPost({ request: request(), env: review })).status, 403);
+  // 4 attempts so far in this window; the 121st is refused without asking RevenueCat.
+  for (let n = 4; n < 120; n++) await onRequestPost({ request: request(), env });
+  const before = calls;
+  assert.equal((await onRequestPost({ request: request(), env })).status, 429);
+  assert.equal(calls, before);
 });

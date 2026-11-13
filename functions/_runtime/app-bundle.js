@@ -1,11 +1,16 @@
 const PRODUCTS = ['ap_complete_bundle', 'ap_bundle_upgrade'];
 export const bundleJson = (body, status = 200) => new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json', 'cache-control': 'private, no-store' } });
-export function ownsProduct(subscriber, product) {
+// Store reviewers and testers buy in the store's sandbox. Sandbox purchases open nothing unless the
+// server variable APPROVALPREP_ACCEPT_SANDBOX_PURCHASES is exactly "1" (set it for a store review,
+// remove it after); real customers' purchases are never sandbox ones.
+export const acceptsSandbox = env => env?.APPROVALPREP_ACCEPT_SANDBOX_PURCHASES === '1';
+export function ownsProduct(subscriber, product, sandbox = false) {
   const entitlement = subscriber?.entitlements?.[product];
+  const transactions = subscriber?.non_subscriptions?.[product];
   return entitlement?.product_identifier === product && entitlement.expires_date === null
-    && subscriber?.non_subscriptions?.[product]?.some(t => t.is_sandbox === false && !t.refunded_at) === true;
+    && Array.isArray(transactions) && transactions.some(t => (t.is_sandbox === false || (sandbox && t.is_sandbox === true)) && !t.refunded_at);
 }
-export const ownsBundle = subscriber => PRODUCTS.some(id => ownsProduct(subscriber, id));
+export const ownsBundle = (subscriber, sandbox = false) => PRODUCTS.some(id => ownsProduct(subscriber, id, sandbox));
 async function key(secret) { return crypto.subtle.importKey('raw', new TextEncoder().encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign', 'verify']); }
 export async function bundleUrl(origin, secret, now = Date.now()) {
   const expires = Math.floor(now / 1000) + 300;
