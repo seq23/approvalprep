@@ -1,3 +1,4 @@
+import { storageDeadline } from '../../../src/phoneDatabase';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import { Text } from 'react-native';
@@ -12,6 +13,8 @@ import { LETTERS, EXPLANATION_LETTERS } from '../../../src/letters';
 export default function Questions() {
   const { kind, id } = useLocalSearchParams<{ kind: string; id?: string }>();
   const [letter, setLetter] = useState<SavedLetter | null>(null);
+  const [attempt, setAttempt] = useState(0);
+  const [loadError, setLoadError] = useState(false);
   const [step, setStep] = useState(0);
   const [message, setMessage] = useState('Opening your draft…');
   const [saving, setSaving] = useState(false);
@@ -24,9 +27,9 @@ export default function Questions() {
   const draftId = useRef(id ?? `letter-${Date.now()}-${Math.random().toString(36).slice(2)}`);
   useEffect(() => {
     let active = true;
-    setLetter(null); setStep(0); setPaid(undefined); setMessage('Opening your draft…');
-    (async () => {
-      const template = free ? null : kitLetter(await loadDeliveredKit(kitForKind(kind)), kind);
+    setLoadError(false); setLetter(null); setStep(0); setPaid(undefined); setMessage('Opening your draft…');
+    storageDeadline((async () => {
+      const template = free ? null : kitLetter(await loadDeliveredKit(kitForKind(kind), true), kind);
       if (!active) return;
       setPaid(template);
       if (!free && !template) return;
@@ -45,9 +48,9 @@ export default function Questions() {
       }
       if (!active) return;
       write.current = draftWriter(store); setLetter(draft); setMessage('Saved on this phone.');
-    })().catch(() => { if (active) setMessage('Your draft could not be opened. Go back and try again.'); });
+    })()).catch(() => { if (active) { setLoadError(true); setMessage('Your draft could not be opened. Please try again.'); } });
     return () => { active = false; };
-  }, [kind, id]);
+  }, [kind, id, attempt]);
   function persist(next: SavedLetter) {
     setLetter(next); setSaving(true); setFailed(false); setMessage('Saving…');
     const version = ++revision.current;
@@ -57,6 +60,11 @@ export default function Questions() {
       if (version === revision.current) { setSaving(false); setFailed(true); setMessage('Your latest answers could not be saved. Try saving again before continuing.'); }
     });
   }
+  if (loadError) return <Screen route="/letters/[kind]" label="Write a letter" title="Your draft could not be opened">
+    <Text accessibilityRole="alert" style={type.sub}>{message}</Text>
+    <Button label="Try again" onPress={() => setAttempt(value => value + 1)} />
+    <Button label="Write a letter ›" onPress={() => router.replace('/letters')} />
+  </Screen>;
   if (!free && !paid) {
     const name = [...LETTERS, ...EXPLANATION_LETTERS].find(l => l.kind === kind)?.name ?? 'Write a letter';
     return <Screen route="/letters/[kind]" label={kitForKind(kind) === 'credit-letter-kit' ? 'Credit Letter Kit' : 'Letter of Explanation Kit'} title={name}>

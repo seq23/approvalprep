@@ -47,7 +47,7 @@ export default function Studio() {
       <Text style={type.sub} accessibilityLiveRegion="polite">{message}</Text>
       <Button label="Edit my answers" onPress={() => setReading(false)} />
       <Button label={`What the kit adds › ${draft.kitName}`} onPress={() => setShowKit(!showKit)} />
-      {showKit ? <Sheet><Text style={type.subhead}>{draft.kitName}</Text>{draft.moments.map(m => <Text key={m.when} style={type.body}>{m.when}{'\n'}{m.items.join('\n')}</Text>)}<Text style={type.sub}>Not in this build yet.</Text></Sheet> : null}
+      {showKit ? <Sheet><Text style={type.subhead}>{draft.kitName}</Text>{draft.moments.map(m => <Text key={m.when} style={type.body}>{m.when}{'\n'}{m.items.join('\n')}</Text>)}<Button label={draft.kitRoute.pathname === '/letters/bundle' ? 'See the bundle with this kit ›' : 'See the kit ›'} onPress={() => router.push(draft.kitRoute.pathname === '/letters/bundle' ? '/letters/bundle' : { pathname: '/letters/unlock', params: draft.kitRoute.params })} /></Sheet> : null}
       <Button label="Choose another situation" onPress={() => setId(null)} />
     </> : field ? <>
       <Field label={field.label} defaultHint={field.hint} multiline={field.kind === 'long' || field.kind === 'lines'} value={answers[field.name] ?? ''} onChangeText={value => setAnswers({ ...answers, [field.name]: value })} />
