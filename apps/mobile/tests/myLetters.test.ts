@@ -1,0 +1,34 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { myLetters, recordAnswer } from '../src/myLetters';
+import { newDispute } from '../src/letterQuestions';
+test('counts and row status update without moving letters; only mailed letters can be answered', () => {
+  const sent = { ...newDispute('due'), status: 'sent' as const, sentDate: '2026-11-06' };
+  const letters = [newDispute('draft'), sent, { ...sent, id: 'waiting', sentDate: '2026-12-01' }, { ...sent, id: 'overdue', sentDate: '2026-11-05' }];
+  const today = new Date(2026, 11, 6, 12);
+  let model = myLetters(letters, true, today);
+  assert.equal(model.rows.filter(row => row.needsAnswer).length, 2);
+  assert.match(model.summary, /4 .*2 /);
+  assert.match(model.rows[0].sub, /Draft/);
+  assert.match(model.rows[1].sub, /due today/);
+  assert.match(model.rows[2].sub, /25 days/);
+  assert.match(model.rows[3].sub, /1 days past/);
+  letters[1] = recordAnswer(sent, 'Verified', true, today);
+  model = myLetters(letters, true, today);
+  assert.deepEqual(model.rows.map(row => row.letter.id), ['draft', 'due', 'waiting', 'overdue']);
+  assert.equal(model.rows.filter(row => row.needsAnswer).length, 1);
+  assert.match(model.rows[1].sub, /✓.*2026.*12:00/);
+  assert.equal(letters[1].answerNote, 'Verified');
+  assert.equal(letters[1].answeredAt, today.toISOString());
+  assert.throws(() => recordAnswer(newDispute('draft'), 'Verified', true));
+});
+test('free list retains absolute answer date but gates paid counts and answer recording', () => {
+  const sent = { ...newDispute('free'), status: 'sent' as const, sentDate: '2026-11-06' };
+  const model = myLetters([sent], false, new Date(2026, 11, 7));
+  assert.equal(model.rows.length, 1);
+  assert.equal(model.rows[0].needsAnswer, false);
+  assert.doesNotMatch(model.summary + model.rows[0].sub, /to check|days|past/);
+  assert.match(model.rows[0].sub, /Dec 6, 2026/);
+  assert.throws(() => recordAnswer(sent, 'Verified', false));
+  assert.equal(myLetters([], false).rows.length, 0);
+});

@@ -3,7 +3,8 @@
 // comes after the free first letter, with one filled sample page where one exists. Reads the same
 // checked list as the Letter Studio's hand-off (src/lib/kitMoments.mjs), so free -> paid is one
 // path in the same words. The catalog's safety boundary is printed once, at the foot.
-import { kitMoments, inEveryKit, kitSamples } from "../data/letterStudio";
+import { kitSamples } from "../lib/kitSamples.mjs";
+import { kitMoments, inEveryKit } from "../data/letterStudio";
 const { product, offerings = [], sku = "" } = Astro.props;
 const kit = kitMoments[sku];
 const sample = kitSamples[sku];
