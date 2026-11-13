@@ -16,16 +16,16 @@ export const TABS: { tab: Tab; route: string; label: string }[] = [
   { tab: 'more', route: '/more', label: '☰ More' },
 ];
 export const SCREENS: ScreenSpec[] = [
-  { id: 'S1', route: '/', file: 'app/index.tsx', title: 'Start', kind: 'start', links: [HOME] },
+  { id: 'S1', route: '/', file: 'app/index.tsx', title: 'Start', kind: 'start', links: [HOME, '/letters/unlock'] },
   { id: 'S2', route: '/letters', file: 'app/(tabs)/letters/index.tsx', title: 'Write a letter', kind: 'tab', tab: 'letters', links: ['/letters/[kind]', '/letters/unlock', '/letters/studio'] },
-  { id: 'Studio', route: '/letters/studio', file: 'app/(tabs)/letters/studio.tsx', title: 'Letter Studio', kind: 'sub', tab: 'letters', back: '/letters', links: [] },
+  { id: 'Studio', route: '/letters/studio', file: 'app/(tabs)/letters/studio.tsx', title: 'Letter Studio', kind: 'sub', tab: 'letters', back: '/letters', links: ['/letters/unlock', '/letters/bundle'] },
   { id: 'S3', route: '/letters/[kind]', file: 'app/(tabs)/letters/[kind].tsx', title: 'Questions', kind: 'sub', tab: 'letters', back: '/letters', links: ['/letters/draft'] },
   { id: 'S4', route: '/letters/draft', file: 'app/(tabs)/letters/draft.tsx', title: 'Your letter', kind: 'sub', tab: 'letters', back: '/letters', links: ['/letters/sent'] },
   { id: 'S5', route: '/letters/sent', file: 'app/(tabs)/letters/sent.tsx', title: 'Mark as sent', kind: 'sheet', tab: 'letters', back: '/letters/draft', links: [] },
   { id: 'S6', route: '/mine', file: 'app/(tabs)/mine/index.tsx', title: 'My letters', kind: 'tab', tab: 'mine', links: ['/mine/answer'] },
   { id: 'Answer', route: '/mine/answer', file: 'app/(tabs)/mine/answer.tsx', title: 'What did they answer?', kind: 'sub', tab: 'mine', back: '/mine', links: ['/letters/unlock'] },
-  { id: 'S7', route: '/letters/unlock', file: 'app/(tabs)/letters/unlock.tsx', title: 'Credit Letter Kit', kind: 'sub', tab: 'letters', back: '/letters', links: [] },
-  { id: 'S8', route: '/more', file: 'app/(tabs)/more/index.tsx', title: 'More', kind: 'tab', tab: 'more', links: ['/letters/bundle'] },
+  { id: 'S7', route: '/letters/unlock', file: 'app/(tabs)/letters/unlock.tsx', title: 'Credit Letter Kit', kind: 'sub', tab: 'letters', back: '/letters', links: ['/letters/bundle', '/letters/unlock'] },
+  { id: 'S8', route: '/more', file: 'app/(tabs)/more/index.tsx', title: 'More', kind: 'tab', tab: 'more', links: ['/letters/bundle', '/letters/unlock'] },
   { id: 'Bundle', route: '/letters/bundle', file: 'app/(tabs)/letters/bundle.tsx', title: 'Complete ApprovalPrep Bundle', kind: 'sub', tab: 'letters', back: '/letters', links: ['/letters/unlock'] },
 ];
 export const byRoute = (route: string) => {
