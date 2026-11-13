@@ -1,4 +1,5 @@
 import { APP_KITS, appJson, signedKitUrl } from '../_runtime/app-kit.js';
+import { acceptsSandbox, ownsProduct } from '../_runtime/app-bundle.js';
 import { clientIp, sha256, withinLimit } from '../_runtime/rate-limit.js';
 // Unknown IDs, missing purchases, and upstream errors have the same public response.
 export async function onRequestPost({ request, env }) {
@@ -18,9 +19,7 @@ export async function onRequestPost({ request, env }) {
     const response = await fetch(`https://api.revenuecat.com/v1/subscribers/${encodeURIComponent(id)}`, { headers: { Authorization: `Bearer ${env.APPROVALPREP_REVENUECAT_SECRET}` }, signal: AbortSignal.timeout(10000) });
     if (!response.ok) return refused();
     const { subscriber } = await response.json();
-    const entitlement = subscriber?.entitlements?.[product];
-    const transactions = subscriber?.non_subscriptions?.[product];
-    if (entitlement?.product_identifier !== product || entitlement.expires_date !== null || !Array.isArray(transactions) || !transactions.some(t => t.is_sandbox === false && !t.refunded_at)) return refused();
+    if (!ownsProduct(subscriber, product, acceptsSandbox(env))) return refused();
     return appJson({ url: await signedKitUrl(new URL(request.url).origin, env.DOWNLOAD_SIGNING_SECRET, Date.now(), kit) });
   } catch { return refused(); }
 }

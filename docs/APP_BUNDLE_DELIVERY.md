@@ -59,3 +59,13 @@ Before store submission, `npm run bundle:load` replays 100 verified bundle Resto
 and 100 ZIP downloads against `AP_BUNDLE_LOAD_ORIGIN` using an already purchased
 anonymous identity in `AP_BUNDLE_LOAD_TOKEN`. Missing inputs stop visibly. Inject
 that token through the vault; never put it in a command line or the repo.
+
+## Limits and store review (13 Nov 2026)
+
+- Both doors need the `PRODUCTS_DB` binding for their attempt counters and answer 503
+  (`APP_KIT_DELIVERY_NOT_READY`, `APP_BUNDLE_DELIVERY_NOT_READY`) without it. `/api/app-unlock`
+  allows 10 attempts a minute per caller, `/api/app-bundle` 120 (room for the 100-Restore load
+  check). Callers are counted by a hash, never a raw address.
+- Sandbox purchases open nothing. Store reviewers and testers buy in the sandbox, so for the
+  days of a store review set the server variable `APPROVALPREP_ACCEPT_SANDBOX_PURCHASES` to `1`
+  and remove it afterwards. Refunded purchases stay refused either way.
