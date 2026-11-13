@@ -21,7 +21,7 @@ Plan: `docs/APP_PLAN.md`. Build branch: `apps/approvalprep-scaffold` (draft PR #
 | 12 Release gate | Built | `apps/mobile/scripts/release-gate.mjs` |
 | 13 Letter of Explanation Kit | Built, switched off | `tests/explanationKit.test.ts` |
 | 13b Complete Bundle | Built, switched off | `src/purchases/bundle*.ts`, `functions/api/app-bundle.js`, `docs/APP_BUNDLE_DELIVERY.md` |
-| 14 Scorecard row | Row `ap-phone-app` written (seq23/boss-os#388); record in `apps/mobile/release/scorecard.json` | see the stop below |
+| 14 Scorecard row | Registered: row `ap-phone-app` (seq23/boss-os#388, merged 13 Nov 2026), date recorded in `apps/mobile/release/scorecard.json` | `tests/releaseGate.test.ts` |
 | Start screen (pattern e) | Built: her next answer date and latest letters once she has some | `src/start.ts` |
 
 ## Named stops (each is in code; none is a silent pass)
@@ -31,9 +31,6 @@ Plan: `docs/APP_PLAN.md`. Build branch: `apps/approvalprep-scaffold` (draft PR #
   owner opens those). Nothing is created in a store by this branch.
 - `NAMED STOP [REVENUECAT_SECRET_MISSING]`: the server doors answer 503 until the server secret
   `APPROVALPREP_REVENUECAT_SECRET` is set. No paid file can leave before that.
-- `NAMED STOP [SCORECARD_NOT_REGISTERED]`: the release gate stops a store build until
-  seq23/boss-os#388 is merged and its date is written to `recordedAt` in
-  `apps/mobile/release/scorecard.json`.
 - `NAMED STOP [BUNDLE_ID_PLACEHOLDER]`, `[REVENUECAT_KEY_MISSING]`, `[PREVIEW_FLAG_SET]`: release
   gate, see `apps/mobile/release/README.md`.
 - `NAMED STOP [WAITS_FOR_LAUNCH_PLAN]`: task 11 (store files) waits for the owner's launch plan.

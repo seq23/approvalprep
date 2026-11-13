@@ -10,9 +10,9 @@ of store-account requirements. This task does not build or submit a store releas
   Never set a RevenueCat server secret in an app environment.
 - Remove `EXPO_PUBLIC_AP_PREVIEW=1` from production.
 
-- Scorecard (plan task 14): the Boss OS row is `ap-phone-app` (seq23/boss-os#388). When that
-  PR is merged, write its date to `recordedAt` in `release/scorecard.json`. Until then the gate
-  reports `NAMED STOP [SCORECARD_NOT_REGISTERED]`. The row carries the price step: `ap_credit_kit`
+- Scorecard (plan task 14): the Boss OS row is `ap-phone-app` (seq23/boss-os#388). It was merged
+  on 13 Nov 2026 and the date is in `release/scorecard.json`; the gate reports
+  `NAMED STOP [SCORECARD_NOT_REGISTERED]` only if that date goes missing. The row carries the price step: `ap_credit_kit`
   from $19.99 to $24.99 at about 20 real ratings, by a store price change only.
 - After launch, fill `release/store-metrics.json` weekly (counts only: launch date, installs,
   kit purchases). The scorecard reads that file; an empty or old count is "no number".
