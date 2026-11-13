@@ -6,7 +6,8 @@ import { type } from '../../../src/theme';
 import { savedLetters } from '../../../src/savedLetters';
 import { hasTrackingKit } from '../../../src/kitTemplates';
 import type { SavedLetter } from '../../../src/letterStorage';
-import { dueDate, showDate } from '../../../src/myLetters';
+import { dueDate, letterTitle, showDate } from '../../../src/myLetters';
+import { openFrom } from '../../../src/nav';
 import { answerChoices, answerOffer, saveBureauAnswer, type BureauAnswer } from '../../../src/answerLetter';
 import { localReminders } from '../../../src/localReminders';
 import { KIT_SALES_ENABLED } from '../../../src/kit';
@@ -47,7 +48,7 @@ export default function Answer() {
   const bureau = letter?.kind === 'bureau-dispute' || letter?.kind === 'follow-up';
   const choices = answerChoices(letter?.kind || '');
   const due = bureau && letter ? dueDate(letter) : null;
-  return <Screen route="/mine/answer" label="Your saved letter" title={letter ? [letter.answers.bureau, letter.answers.account || 'Your letter'].filter(Boolean).join(' · ') : 'What did they answer?'}>
+  return <Screen route="/mine/answer" label="Your saved letter" title={letter ? letterTitle(letter) : 'What did they answer?'}>
     {state === 'loading' ? <Text style={type.sub}>Opening your letter…</Text> : null}
     {state === 'error' ? <><Text style={type.body}>Your mailed letter could not be opened.</Text><Button label="Try again ›" onPress={() => setRetry(value => value + 1)} /><Button label="My letters ›" onPress={() => router.replace('/mine')} /></> : null}
     {state === 'ready' && letter ? <>
@@ -63,7 +64,7 @@ export default function Answer() {
       {choice ? <Text style={type.sub}>Saving this answer switches off this letter’s reminder.{choice === 'No answer' ? ' Your answer date stays on the letter.' : ''}</Text> : null}
       <Button primary label={busy ? 'Saving…' : 'Save answer'} disabled={!choice || busy} onPress={() => void save()} />
       {error ? <Text accessibilityRole="alert" style={type.sub}>{error}</Text> : null}
-      {bureau && answerOffer(hasKit, KIT_SALES_ENABLED) ? <Sheet><Text style={type.body}>The Credit Letter Kit adds templates you fill in and send yourself, paid once.</Text><Button label="See the Credit Letter Kit ›" onPress={() => router.push('/letters/unlock')} /></Sheet> : null}
+      {bureau && answerOffer(hasKit, KIT_SALES_ENABLED) ? <Sheet><Text style={type.body}>The Credit Letter Kit adds templates you fill in and send yourself, paid once.</Text><Button label="See the Credit Letter Kit ›" onPress={() => openFrom('/mine', '/letters/unlock')} /></Sheet> : null}
     </> : null}
   </Screen>;
 }

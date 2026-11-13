@@ -4,9 +4,12 @@ import { Linking, Text } from 'react-native';
 import { Button, Row, Screen, Sheet } from '../../../src/ui';
 import { type } from '../../../src/theme';
 import { HONEST_LIMIT } from '../../../src/copy';
+import { PREVIEW_ENABLED } from '../../../src/previewSamples';
+import { KIT_OFFERS, TRACKING_LINE, bundleFilesLine, bundleWebsiteKits, offerTitle } from '../../../src/offers';
 import { COMPLETE_BUNDLE, BUNDLE_UPGRADE, KIT, KIT_SALES_ENABLED } from '../../../src/kit';
-import { offersFor, NO_OWNERSHIP, EXPLANATION_PRODUCT, type BundleOwnership, type OfferId } from '../../../src/purchases/bundleOffers';
+import { offersFor, otherKits, NO_OWNERSHIP, type BundleOwnership, type OfferId } from '../../../src/purchases/bundleOffers';
 import { bundleAccount, type BundlePrice } from '../../../src/purchases/bundleAccount';
+import { storePrices } from '../../../src/purchases/prices';
 import { restoreBundle } from '../../../src/purchases/bundleDelivery';
 import { bundleFile, installBundle, shareBundle } from '../../../src/purchases/bundleFiles';
 const nameOf = (id: OfferId) => id === COMPLETE_BUNDLE.productId ? 'Complete ApprovalPrep Bundle' : id === BUNDLE_UPGRADE.productId ? 'Complete Bundle upgrade' : id === KIT.productId ? 'Credit Letter Kit' : 'Letter of Explanation Kit';
@@ -27,14 +30,16 @@ export default function Bundle() {
       const localFile = await bundleFile();
       if (active) setLocal(!!localFile);
       const account = await bundleAccount();
-      const [owned, products] = await Promise.all([account.ownership(), account.products()]);
-      if (active) { setOwnership(owned); setPrices(products); setMock(account.mock); setReady(true); }
+      const [owned, products] = await Promise.all([account.ownership(), storePrices()]);
+      if (active) { setOwnership(owned); setPrices(Object.entries(products).map(([id, price]) => ({ id, price }))); setMock(account.mock); setReady(true); }
     })().catch(() => { if (active) setMessage('The store could not be loaded. Your saved documents are still available. Try Restore again when online.'); });
     return () => { active = false; };
   }, []));
   const offers = offersFor(local ? { creditKit: true, explanationKit: true, bundle: true } : ownership, requested);
   const selected = offers.find(id => id === COMPLETE_BUNDLE.productId || id === BUNDLE_UPGRADE.productId);
   const price = prices.find(p => p.id === selected)?.price;
+  // Both kits are named here, whichever screen she came from, so neither looks like the only one.
+  const kits = otherKits(local ? { creditKit: true, explanationKit: true, bundle: true } : ownership);
   async function act(buy: boolean) {
     if (busy) return;
     setBusy(true); setMessage('');
@@ -56,20 +61,23 @@ export default function Bundle() {
   return <Screen route="/letters/bundle" label="Complete ApprovalPrep Bundle" title={ownership.bundle || local ? 'Your Complete Bundle' : 'Both kits and the document library'}>
     <Text style={type.body}>Paid once. Templates you fill in and send yourself.</Text>
     <Sheet>
-      <Text style={type.body}>Credit Letter Kit</Text>
-      <Text style={type.body}>Letter of Explanation Kit</Text>
-      <Text style={type.body}>Mark as sent, tracking and local reminders</Text>
-      <Text style={type.body}>Every website kit’s PDF guide and editable DOCX templates, in one ZIP</Text>
+      <Text style={type.subhead}>Both kits, to use in this app</Text>
+      {KIT_OFFERS.map(kit => <Text key={kit.id} style={type.body}>{kit.name}: {kit.letters.length} letters</Text>)}
+      <Text style={type.body}>{TRACKING_LINE}</Text>
+    </Sheet>
+    <Sheet>
+      <Text style={type.subhead}>{bundleFilesLine()}</Text>
+      {bundleWebsiteKits().map(name => <Text key={name} style={type.body}>{name}</Text>)}
+      <Text style={type.sub}>These files open in Files or Word, not inside this app. A bundle bought on the website does not appear in this app.</Text>
     </Sheet>
     <Text style={type.sub}>{HONEST_LIMIT}</Text>
     {local ? <Button primary label="Save or share documents ›" onPress={() => { void shareBundle().catch(() => setMessage('The documents could not be shared. Try Restore to download them again.')); }} /> : null}
     {selected && !local ? <>
-      {mock ? <Text style={type.sub}>Preview price only. No purchase can be made here.</Text> : null}
-      <Button primary disabled={busy || !ready || !price} label={price ? `Get ${selected === BUNDLE_UPGRADE.productId ? 'the upgrade' : 'the bundle'}, ${price} once` : 'Store price unavailable'} onPress={() => void act(true)} />
-      {!KIT_SALES_ENABLED ? <Text style={type.sub}>Purchases are not available yet.</Text> : null}
+      <Button primary disabled={busy || !ready || !price || mock || !KIT_SALES_ENABLED} label={price ? `Get ${selected === BUNDLE_UPGRADE.productId ? 'the upgrade' : 'the bundle'}, ${price} once` : 'Store price unavailable'} onPress={() => void act(true)} />
+      {!mock && KIT_SALES_ENABLED ? null : <Text testID="buying-off" style={type.sub}>{PREVIEW_ENABLED ? 'This is a preview, so buying is switched off and the button above does nothing. The price is shown so you can see it.' : 'Buying is not available right now.'}</Text>}
     </> : null}
-    {offers.some(id => id === KIT.productId || id === EXPLANATION_PRODUCT) ? <Text style={type.sub}>Other options</Text> : null}
-    {offers.filter(id => id === KIT.productId || id === EXPLANATION_PRODUCT).map(id => <Row key={id} title={nameOf(id)} sub={prices.find(p => p.id === id)?.price ? `${prices.find(p => p.id === id)!.price}, paid once` : 'One kit, paid once'} onPress={() => router.push({ pathname: '/letters/unlock', params: { kit: id === KIT.productId ? 'credit-letter-kit' : 'letter-of-explanation-kit' } })} />)}
+    {kits.length ? <Text style={type.sub}>Other options</Text> : null}
+    {kits.map(id => <Row key={id} title={offerTitle(nameOf(id), prices.find(p => p.id === id)?.price)} sub={KIT_OFFERS.find(kit => kit.productId === id)?.what} onPress={() => router.push({ pathname: '/letters/unlock', params: { kit: id === KIT.productId ? 'credit-letter-kit' : 'letter-of-explanation-kit' } })} />)}
     <Button label={busy ? 'Checking…' : 'Restore purchase'} disabled={busy} onPress={() => void act(false)} />
     {message ? <Text accessibilityRole="alert" style={type.sub}>{message}</Text> : null}
     <Button label="Terms ›" onPress={() => void Linking.openURL('https://approvalprep.com/terms/')} />

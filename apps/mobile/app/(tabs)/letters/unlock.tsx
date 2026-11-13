@@ -3,7 +3,9 @@ import { useCallback, useState } from 'react';
 import { Linking, Text } from 'react-native';
 import { Button, Row, Screen, Sheet } from '../../../src/ui';
 import { type } from '../../../src/theme';
-import { HONEST_LIMIT } from '../../../src/copy';
+import { HONEST_LIMIT, REQUEST_LINE } from '../../../src/copy';
+import { PREVIEW_ENABLED } from '../../../src/previewSamples';
+import { TRACKING_LINE, kitOfferFor, websiteDifference } from '../../../src/offers';
 import { KIT, EXPLANATION_KIT, COMPLETE_BUNDLE, BUNDLE_UPGRADE, KIT_SALES_ENABLED } from '../../../src/kit';
 import { LETTERS, EXPLANATION_LETTERS } from '../../../src/letters';
 import { KIT_ID, EXPLANATION_KIT_ID, loadDeliveredKit, saveDeliveredKit } from '../../../src/kitTemplates';
@@ -73,18 +75,22 @@ export default function Unlock() {
     onPress={() => router.push(id === COMPLETE_BUNDLE.productId || id === BUNDLE_UPGRADE.productId
       ? { pathname: '/letters/bundle', params: { kit: kitId } }
       : { pathname: '/letters/unlock', params: { kit: id === KIT.productId ? KIT_ID : EXPLANATION_KIT_ID } })} />;
+  const canBuy = KIT_SALES_ENABLED && !mock;
+  const other = kitOfferFor(explanation ? KIT_ID : EXPLANATION_KIT_ID);
   return <Screen route="/letters/unlock" label={kitName} title={owned ? 'Your kit is on this phone' : explanation ? 'Nine explanation letters, paid once' : 'Four more letters, paid once'}>
-    <Text style={type.body}>Templates you fill in and send yourself. {explanation ? 'One purchase covers the nine explanation letters.' : 'One purchase covers every letter and every dispute round.'}</Text>
-    <Sheet>{(explanation ? EXPLANATION_LETTERS : LETTERS.filter(l => l.access === 'kit')).map(l => <Text key={l.kind} style={type.body}>{l.name}</Text>)}</Sheet>
-    <Text style={type.sub}>{HONEST_LIMIT}</Text>
+    <Text style={type.body}>A kit is a set of letter templates you unlock once in this app, fill in and send yourself. {explanation ? 'One purchase covers the nine explanation letters.' : 'One purchase covers every letter and every dispute round.'}</Text>
+    <Sheet>{(explanation ? EXPLANATION_LETTERS : LETTERS.filter(l => l.access === 'kit')).map(l => <Text key={l.kind} style={type.body}>{l.name}</Text>)}<Text style={type.body}>{TRACKING_LINE}</Text></Sheet>
+    <Text style={type.sub}>{explanation ? REQUEST_LINE : HONEST_LIMIT}</Text>
+    <Text style={type.sub}>{websiteDifference(kitId)}</Text>
     {offers[0] === COMPLETE_BUNDLE.productId ? option(offers[0]) : null}
     {owned ? <Button primary label="Write a kit letter ›" onPress={() => router.replace('/letters')} /> : <>
-      {mock ? <Text style={type.sub}>Preview price only. No purchase can be made here.</Text> : null}
-      <Button primary disabled={busy || !product || !offers.includes(offer.productId)} label={product ? `Get this kit, ${product.price} once` : 'Store price unavailable'} onPress={() => void act('buy')} />
-      {!KIT_SALES_ENABLED ? <Text style={type.sub}>Purchases are not available yet.</Text> : null}
+      <Button primary disabled={busy || !canBuy || !product || !offers.includes(offer.productId)} label={product ? `Get this kit, ${product.price} once` : 'Store price unavailable'} onPress={() => void act('buy')} />
+      {canBuy ? null : <Text testID="buying-off" style={type.sub}>{PREVIEW_ENABLED ? 'This is a preview, so buying is switched off and the button above does nothing. The price is shown so you can see it.' : 'Buying is not available right now.'}</Text>}
     </>}
     {offers.some(id => id !== offer.productId && id !== COMPLETE_BUNDLE.productId) ? <Text style={type.sub}>Other options</Text> : null}
     {offers.filter(id => id !== offer.productId && id !== COMPLETE_BUNDLE.productId).map(option)}
+    {/* The other kit is named here too, so neither kit looks like the only one. */}
+    {ownership.bundle || (explanation ? ownership.creditKit : ownership.explanationKit) ? null : <Text style={type.sub}>{`This app also has the ${other.name}: ${other.what}. It is in the bundle above and on the Write a letter list.`}</Text>}
     <Button label={busy ? 'Checking…' : 'Restore purchase'} disabled={busy} onPress={() => void act('restore')} />
     {message ? <Text accessibilityRole="alert" style={type.sub}>{message}</Text> : null}
     <Button label="Terms ›" onPress={() => void Linking.openURL('https://approvalprep.com/terms/')} />

@@ -37,7 +37,7 @@ test('list status backgrounds stay neutral or gold for drafts, waiting, due, ove
     'expo-router': { router: {}, useFocusEffect: () => {} }, 'react-native': native,
     '../../../src/ui': { ...ui, Screen: 'Screen', BottomSheet: 'BottomSheet', Button: 'Button' },
     '../../../src/theme': { color, space, type }, '../../../src/savedLetters': {}, '../../../src/kitTemplates': {},
-    '../../../src/myLetters': { myLetters },
+    '../../../src/myLetters': { myLetters }, '../../../src/studioDrafts': {}, '../../../src/nav': {},
   }).default();
   const rows = screen.props.children[4];
   assert.equal(rows.length, 5);

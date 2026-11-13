@@ -32,7 +32,7 @@ test('opening a letter stores nothing; the first answer creates the draft, later
     if (name.endsWith('/kitTemplates')) return { kitForKind: () => 'credit-letter-kit', ALL_KIT_KINDS: [] };
     if (name.endsWith('/savedLetters')) return { savedLetters: async () => store };
     if (name.endsWith('/theme')) return { type: {}, space: {} };
-    if (name.endsWith('/letters')) return { LETTERS: [], EXPLANATION_LETTERS: [] };
+    if (name.endsWith('/letters')) return { LETTERS: [], EXPLANATION_LETTERS: [], isCreditLetter: () => true };
     if (name.endsWith('/ui')) return { Screen: 'Screen', Button: 'Button', Field: 'Field', Row: 'Row' };
     return {};
   } });

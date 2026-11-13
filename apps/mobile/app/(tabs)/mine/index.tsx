@@ -7,6 +7,8 @@ import { savedLetters } from '../../../src/savedLetters';
 import type { SavedLetter } from '../../../src/letterStorage';
 import { hasTrackingKit } from '../../../src/kitTemplates';
 import { dueDate, myLetters, showDate } from '../../../src/myLetters';
+import { draftHref } from '../../../src/studioDrafts';
+import { openFrom } from '../../../src/nav';
 export default function Mine() {
   const [letters, setLetters] = useState<SavedLetter[]>([]);
   const [hasKit, setHasKit] = useState(false);
@@ -28,18 +30,18 @@ export default function Mine() {
     {state === 'ready' && !letters.length ? <Text style={type.body}>No saved letters yet. Start a letter and your draft will appear here.</Text> : null}
     {state === 'ready' ? model.rows.map(row => <View key={row.letter.id} style={row.needsAnswer ? { backgroundColor: color.highlighter, paddingHorizontal: space[2] } : undefined}>
       <Row title={row.title} sub={row.sub} onPress={() => {
-        if (row.letter.status === 'draft') router.push({ pathname: '/letters/[kind]', params: { kind: row.letter.kind, id: row.letter.id } });
+        if (row.letter.status === 'draft') router.push(draftHref(row.letter, '/mine'));
         else setSelected(row.letter);
       }} />
     </View>) : null}
     {letters.some(letter => letter.status === 'sent') ? <Text style={type.sub}>Answer dates are reminders based on the mailing dates you entered, not a confirmed deadline.</Text> : null}
     <BottomSheet visible={!!selected} title="Your saved letter" onClose={() => setSelected(null)}>
       {selected ? <>
-        <Text style={type.body}>Date mailed: {selected.sentDate || 'Not entered'}</Text>
-        {dueDate(selected) ? <Text style={type.body}>Answer date: {showDate(dueDate(selected)!)}</Text> : null}
+        <Text style={type.body}>{`Date mailed: ${selected.sentDate ? showDate(new Date(`${selected.sentDate}T12:00:00`)) : 'Not entered'}`}</Text>
+        {dueDate(selected) ? <Text style={type.body}>{`Answer date: ${showDate(dueDate(selected)!)}`}</Text> : null}
         <Text style={type.sub}>This is a reminder based on the date you entered.</Text>
-        {selected.answerNote ? <Text style={type.body}>Answer recorded: {selected.answerNote}</Text> : null}
-        <Button label="Open my letter ›" onPress={() => { setSelected(null); router.push({ pathname: '/letters/draft', params: { id: selected.id } }); }} />
+        {selected.answerNote ? <Text style={type.body}>{`Answer recorded: ${selected.answerNote}`}</Text> : null}
+        <Button label="Open my letter ›" onPress={() => { setSelected(null); openFrom('/mine', '/letters/draft', { id: selected.id }); }} />
         <Button label="Record or change answer ›" onPress={() => { setSelected(null); router.push({ pathname: '/mine/answer', params: { id: selected.id } }); }} />
       </> : null}
     </BottomSheet>

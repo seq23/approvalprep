@@ -55,7 +55,8 @@ Design target: **100 purchases a day per app**, which at 3 to 6% of free users b
 
 | Id | Screen | Route |
 |---|---|---|
-| S1 | Start | `app/index.tsx` |
+| S1 | Home (the first screen, and the first tab) | `app/(tabs)/index.tsx` |
+| Lost | A wrong address: plain page with a way home | `app/+not-found.tsx` |
 | S2 | Write a letter (tab) | `app/(tabs)/letters/index.tsx` |
 | S3 | Questions | `app/(tabs)/letters/[kind].tsx` |
 | S4 | Your letter | `app/(tabs)/letters/draft.tsx` |
@@ -299,7 +300,7 @@ What they share:
 Build it like this:
 - Top: app name and one plain line saying what it does (letters you fill in and send yourself).
 - Main button, large, upper half of the screen (kind: "Write a letter").
-- Under it one line: the first bureau dispute letter is free, as a PDF.
+- Under it one line: the bureau dispute letter is free every time, as a PDF. (Superseded for the layout by pattern (j), 13 Nov 2026.)
 - If letters exist: a "next date" card (the nearest answer-due date and which letter), then the 3 most recent letters with status, and a link to all of them.
 - If no letters exist: nothing else. No empty list, no sample data.
 - Small text links at the bottom: how it works, kits.
@@ -421,3 +422,59 @@ Must NOT be there:
 - Nothing that suggests the app contacted the bureau or knows the answer: she records it.
 
 Honest limits: 4 seen. Only 1 (Credit Dispute Tracker) is a dispute-answer screen, and it lists four results on a long detail screen rather than one question on its own. None of the four shows a next step that differs per answer, and none sells anything on the outcome screen; the per-answer text and the single kit card come from the plan's day-30 ruling, not from an example. A return, claim or mailed-item tracker with an outcome picker was not found on a free page.
+
+# ApprovalPrep: screen patterns from shipped apps (addition, 13 Nov 2026)
+
+### (j) First screen that says what the app is, what is free and what is for sale
+
+Why this was looked at again: the 13 Nov hostile review found that no screen listed the offer
+("idk what is being offered on this app"). Pattern (e) above made the first screen "the work itself";
+that left the free Studio, the second kit, the bundle and every price off it. This pattern wins over
+(e) for the layout of S1. The examples in (e) and (g) were SEEN on 10 Nov; the four below were
+re-read on 13 Nov 2026 from free, no-account pages. Structure only; nothing copied.
+
+Examples looked at (13 Nov 2026):
+- FormalWriter, App Store page: https://apps.apple.com/us/app/id6761338077 : says what it is in one line (letter templates you fill in), free to download, ONE paid item ("Premium $4.99"), "pay once, use forever". TEXT ONLY (listing text; the screenshots were not readable on this pass. Its first screen was SEEN on 10 Nov: the letter chooser).
+- EasyLetter, App Store page: https://apps.apple.com/us/app/id1495179755 : "Write a letter and send it"; ten in-app items under one name at different prices plus per-letter charges and a lifetime pass. TEXT ONLY. Used as the contrast: a buyer cannot tell what is for sale.
+- Bills Organizer & Reminder, Adapty paywall library: https://adapty.io/paywall-library/bills-organizer-reminder/ : two separate one-time unlocks, each named with its own price ($5.99, $3.99). TEXT ONLY on this pass; SEEN on 10 Nov (two rows, each with its own button).
+- Baby Checklist, Adapty paywall library: https://adapty.io/paywall-library/baby-checklist-shopping-list/ : one named content pack ("Travel, Safety & Bath Lists"), sold where the content sits. TEXT ONLY on this pass; SEEN on 10 Nov.
+- Credit Repair Letters, App Store page: https://apps.apple.com/us/app/id1237780957 : free, opens on the letter list, nothing for sale. TEXT ONLY on this pass; SEEN on 10 Nov.
+
+What they share:
+- One line says what the app is before anything is asked of the person.
+- The free thing is the first thing you can do, and it is the largest control.
+- What costs money is named, item by item, each with its own price next to its name. The clear ones have one to three paid items; the unclear one has ten under one name.
+- "Once" is said beside the price where the purchase is one-time.
+- No sign-in, tour or paywall stands in front of the first screen.
+
+Build it like this (S1, `app/(tabs)/index.tsx`; words from `src/copy.ts` and `src/offers.ts`):
+- Label "ApprovalPrep"; title: what it is ("Letters you write and mail yourself."); one line of who they are for.
+- ONE main button, orange: the free Letter Studio (brand note: free step first; brain, 10 Nov: the Studio is the main draw).
+- One line: the Studio and the credit bureau dispute letter are free, as often as she likes. Then a quiet button to the free dispute letter.
+- If she has letters: the next answer date and her three latest, as before (pattern (e), kept).
+- "Kits, if you want more": one line defining a kit and saying each is paid once with no subscription, then three rows, each a name with its price and one line of what is inside: Credit Letter Kit, Letter of Explanation Kit, Complete ApprovalPrep Bundle. Prices come from the store at run time; until the store answers a row says "paid once" without a figure.
+- The privacy line. The tab bar under everything: Home, Write a letter, My letters, More.
+- Leave out: the tagline as a headline (cover, pins and bios only), a paywall on open, reviews, score numbers, any other company's name or price.
+
+Do not:
+- Do not put more than one orange button on the screen, and do not make a paid row the main button.
+- Do not show a price that is typed into the app; the store's price is the price.
+- Do not promise an outcome anywhere on it (R-ADV-13).
+
+Honest limits: on 13 Nov the pages were read as text; the layouts themselves were seen on 10 Nov for four of the five. No shipped letter app was found whose first screen lists a free tool beside two kits and a bundle; this order is assembled from the parts above. Evidence, not proof: the screen is ours only once the scorecard row shows it works.
+
+## Hostile review fixes (13 Nov 2026; these win over the plan page and the earlier notes)
+
+- **The first screen is a tab.** It can always be reached again and never stands without the tab bar (`src/screens.ts`, `FIRST`; `tests/nav.test.ts`).
+- **Back returns to the tab she came from.** A screen opened from another tab is handed `from` (`openFrom`, `backTarget`); only the screen on show answers Escape or Android back. Each tab's stack keeps its own list at the bottom.
+- **A wrong address** shows `app/+not-found.tsx`, never the developer's "Unmatched Route" page.
+- **One list of what is offered** (`src/offers.ts`): Home, the letter list, the kit screens, the bundle screen and More read it. A locked letter names its kit and that kit's price; each kit has its own entry; the kit screen is headed with its own name.
+- **The bundle names what is inside**: both in-app kits with their letter counts, and the website kits by name with a count, read from the website's product list (`src/websiteKits.ts`). A kit the Studio mentions but the app does not sell on its own says so, and opens the bundle.
+- **App kit and website kit of the same name are different products**, said once on the kit screen with the website's own count and price; a website purchase does not appear in the app.
+- **Letter Studio drafts are kept** in the same on-phone store as other letters (`src/studioDrafts.ts`): saved as typed, kept across Back, tab changes and reload, listed in My letters. Each question is a step in the tab's history, so Back goes to the previous question. Free stays free: no PDF, mark as sent or reminder in the Studio.
+- **The dispute letter is free every time**, and the screens say "every time", not "the first".
+- **"Mark as sent" on the free letter** says before the tap that tracking comes with a kit.
+- **"Restore a purchase" on More** checks the bundle and both kits itself and answers in place.
+- **Buying switched off**: the Get button is off and one line says why; the preview wording shows only in the preview build.
+- **The credit-report caution** shows on credit letters only (`isCreditLetter`); other letters carry "A letter is a request, not a promise."
+- **The free dispute letter** shows the website's "Before you mail it" list and the date the answer is due if mailed today. The calendar file is not in the app (left out: the day-30 reminder is the paid step here).

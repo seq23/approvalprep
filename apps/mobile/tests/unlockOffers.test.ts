@@ -22,14 +22,17 @@ test('kit screen orders offers and routes options without reselling owned kits',
         if (name === 'react-native') return { Text: 'Text', Linking: {} };
         if (name.endsWith('/ui')) return { Button: 'Button', Row: 'Row', Sheet: 'Sheet', Screen: 'Screen' };
         if (name.endsWith('/theme')) return { type: {} };
-        if (name.endsWith('/copy')) return { HONEST_LIMIT: 'limit' };
-        if (name.endsWith('/kit')) return kits;
+        if (name.endsWith('/copy')) return { HONEST_LIMIT: 'limit', REQUEST_LINE: 'request' };
+        if (name.endsWith('/previewSamples')) return { PREVIEW_ENABLED: false };
+        if (name.endsWith('/offers')) return { TRACKING_LINE: 'tracking', kitOfferFor: () => ({ name: 'Other kit', what: 'what', productId: 'other' }), websiteDifference: () => 'difference' };
+        // Buying is on here, so the Get button counts as an offer exactly when the kit is for sale.
+        if (name.endsWith('/kit')) return { ...kits, KIT_SALES_ENABLED: true };
         if (name.endsWith('/letters')) return { LETTERS: [], EXPLANATION_LETTERS: [] };
         if (name.endsWith('/kitTemplates')) return { KIT_ID: 'credit-letter-kit', EXPLANATION_KIT_ID: 'letter-of-explanation-kit', loadDeliveredKit: async (id: string) => (id === 'credit-letter-kit' ? ownership.creditKit : ownership.explanationKit) ? {} : null };
         if (name.endsWith('/bundleOffers')) return offers;
         if (name.endsWith('/bundleFiles')) return { bundleFile: async () => bundle ? 'file' : null };
         if (name.endsWith('/bundleAccount')) return { bundleAccount: async () => ({ ownership: async () => ownership, products: async () => prices }) };
-        if (name.endsWith('/purchases')) return { purchases: async () => ({ products: async () => prices, mode: 'mock' }) };
+        if (name.endsWith('/purchases')) return { purchases: async () => ({ products: async () => prices, mode: 'store' }) };
         if (name.endsWith('/provider') || name.endsWith('/delivery') || name.endsWith('/bundleDelivery')) return {};
         throw Error(name);
       } });
@@ -71,7 +74,9 @@ test('Restore messages survive ownership refresh even when the store is offline'
       if (name === 'react-native') return { Text: 'Text', Linking: {} };
       if (name.endsWith('/ui')) return { Button: 'Button', Row: 'Row', Sheet: 'Sheet', Screen: 'Screen' };
       if (name.endsWith('/theme')) return { type: {} };
-      if (name.endsWith('/copy')) return { HONEST_LIMIT: 'limit' };
+      if (name.endsWith('/copy')) return { HONEST_LIMIT: 'limit', REQUEST_LINE: 'request' };
+      if (name.endsWith('/previewSamples')) return { PREVIEW_ENABLED: false };
+      if (name.endsWith('/offers')) return { TRACKING_LINE: 'tracking', kitOfferFor: () => ({ name: 'Other kit', what: 'what', productId: 'other' }), websiteDifference: () => 'difference' };
       if (name.endsWith('/kit')) return kits;
       if (name.endsWith('/letters')) return { LETTERS: [], EXPLANATION_LETTERS: [] };
       if (name.endsWith('/kitTemplates')) return {

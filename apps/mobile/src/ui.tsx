@@ -22,7 +22,8 @@ export function Screen({ route, title, label, children }: { route: string; title
       <Text style={[type.sub, s.selfHelp]} testID="self-help-line">{SELF_HELP_LINE}</Text>
     </ScrollView>
   );
-  return spec.tab ? <View style={s.safe}>{body}</View> : <SafeAreaView style={s.safe} edges={['top']}>{body}</SafeAreaView>;
+  // A screen inside a tab's stack starts under that stack's header; Home and the not-found page have none.
+  return spec.tab && spec.tab !== 'index' ? <View style={s.safe}>{body}</View> : <SafeAreaView style={s.safe} edges={['top']}>{body}</SafeAreaView>;
 }
 
 export function Button({ label, onPress, primary, disabled = false }: { label: string; onPress?: () => void; primary?: boolean; disabled?: boolean }) {
@@ -57,12 +58,12 @@ export function Row({ title, sub, onPress, selected = false }: { title: string; 
   </Pressable>;
 }
 
-export function Field({ label, value, onChangeText, defaultHint, multiline = false }: { label: string; value: string; onChangeText: (value: string) => void; defaultHint?: string; multiline?: boolean }) {
+export function Field({ label, value, onChangeText, defaultHint, multiline = false, spoken }: { label: string; value: string; onChangeText: (value: string) => void; defaultHint?: string; multiline?: boolean; spoken?: string }) {
   const labelId = useId();
   return <View style={{ gap: space[2] }}>
     <Text nativeID={labelId} style={type.label}>{label}</Text>
     {defaultHint ? <Text style={type.sub}>{defaultHint}</Text> : null}
-    <TextInput accessibilityLabel={label} accessibilityLabelledBy={labelId} value={value} onChangeText={onChangeText} multiline={multiline} style={[type.body, { minHeight: tap, padding: space[3], borderWidth: 1, borderColor: color.rule, backgroundColor: color.paperRaised, borderRadius: radius.sm }]} />
+    <TextInput accessibilityLabel={spoken ?? label} accessibilityLabelledBy={labelId} value={value} onChangeText={onChangeText} multiline={multiline} style={[type.body, { minHeight: tap, padding: space[3], borderWidth: 1, borderColor: color.rule, backgroundColor: color.paperRaised, borderRadius: radius.sm }]} />
   </View>;
 }
 

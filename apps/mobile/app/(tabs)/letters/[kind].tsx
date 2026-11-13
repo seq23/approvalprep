@@ -4,12 +4,13 @@ import { useEffect, useRef, useState } from 'react';
 import { Text } from 'react-native';
 import { Button, Field, Row, Screen } from '../../../src/ui';
 import { type } from '../../../src/theme';
-import { HONEST_LIMIT } from '../../../src/copy';
+import { HONEST_LIMIT, REQUEST_LINE } from '../../../src/copy';
+import { kitOfferFor } from '../../../src/offers';
 import { bureaus, disputeQuestions, draftWriter, newDispute } from '../../../src/letterQuestions';
 import { savedLetters } from '../../../src/savedLetters';
 import type { SavedLetter } from '../../../src/letterStorage';
 import { ALL_KIT_KINDS, kitForKind, KIT_LOCKED_LINE, kitLetter, loadDeliveredKit, newKitDraft, type KitKind, type KitLetter } from '../../../src/kitTemplates';
-import { LETTERS, EXPLANATION_LETTERS } from '../../../src/letters';
+import { LETTERS, EXPLANATION_LETTERS, isCreditLetter } from '../../../src/letters';
 export default function Questions() {
   const { kind, id } = useLocalSearchParams<{ kind: string; id?: string }>();
   const [letter, setLetter] = useState<SavedLetter | null>(null);
@@ -62,15 +63,15 @@ export default function Questions() {
   if (!free && !paid) {
     const name = [...LETTERS, ...EXPLANATION_LETTERS].find(l => l.kind === kind)?.name ?? 'Write a letter';
     return <Screen route="/letters/[kind]" label={kitForKind(kind) === 'credit-letter-kit' ? 'Credit Letter Kit' : 'Letter of Explanation Kit'} title={name}>
-      <Text style={type.sub}>{HONEST_LIMIT}</Text>
+      <Text style={type.sub}>{isCreditLetter(kind) ? HONEST_LIMIT : REQUEST_LINE}</Text>
       {paid === undefined && ALL_KIT_KINDS.includes(kind as KitKind) ? <Text style={type.sub} accessibilityLiveRegion="polite">Opening…</Text>
-        : <><Text style={type.body}>{kitForKind(kind) === 'credit-letter-kit' ? KIT_LOCKED_LINE : 'This letter is included in the Letter of Explanation Kit.'}</Text><Button label="See the kit ›" onPress={() => router.replace({ pathname: '/letters/unlock', params: { kit: kitForKind(kind) } })} /></>}
+        : <><Text style={type.body}>{kitForKind(kind) === 'credit-letter-kit' ? KIT_LOCKED_LINE : 'This letter is included in the Letter of Explanation Kit.'}</Text><Button label={`See the ${kitOfferFor(kitForKind(kind)).name} ›`} onPress={() => router.replace({ pathname: '/letters/unlock', params: { kit: kitForKind(kind) } })} /></>}
     </Screen>;
   }
   const questions = paid ? paid.questions : disputeQuestions;
   const question = questions[Math.min(step, questions.length - 1)];
   return <Screen route="/letters/[kind]" label={`Question ${step + 1} of ${questions.length}`} title={question.title}>
-    <Text style={type.sub}>{HONEST_LIMIT}</Text>
+    <Text style={type.sub}>{isCreditLetter(kind) ? HONEST_LIMIT : REQUEST_LINE}</Text>
     {paid?.honestLine ? <Text style={type.sub}>{paid.honestLine}</Text> : null}
     <>
       <Text style={type.sub} accessibilityLiveRegion="polite">{message}</Text>

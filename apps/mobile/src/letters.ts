@@ -10,6 +10,9 @@ export const LETTERS: readonly LetterType[] = [
   { kind: 'settlement-terms', name: 'Settlement terms in writing letter', when: 'You want the collector’s offer in writing before you pay. They may say no.', access: 'kit' },
   { kind: 'follow-up', name: 'Follow-up letter', when: 'You sent a dispute and want to follow up on the answer.', access: 'kit' },
 ];
+/** Letters about a credit report or a debt carry the credit-report caution; the others do not. */
+const CREDIT_KINDS: readonly string[] = ['bureau-dispute', 'goodwill', 'debt-validation', 'settlement-terms', 'follow-up', 'explanation-credit', 'explanation-late-payment', 'studio-credit-dispute', 'studio-credit'];
+export const isCreditLetter = (kind: string) => CREDIT_KINDS.includes(kind);
 export const isLetterKind = (k: string): k is LetterKind => [...LETTERS, ...EXPLANATION_LETTERS].some((l) => l.kind === k);
 
 export const EXPLANATION_LETTERS: readonly LetterType[] = [

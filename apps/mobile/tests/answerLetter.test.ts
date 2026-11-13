@@ -79,6 +79,7 @@ test('answer screen starts unselected, renders all guidance without a checkout f
     if (name.endsWith('/kitTemplates')) return { hasTrackingKit: async () => false };
     if (name.endsWith('/localReminders')) return { localReminders: {} };
     if (name.endsWith('/kit')) return { KIT_SALES_ENABLED: true };
+    if (name.endsWith('/nav')) return { openFrom: () => {} };
     return require(name.replace('../../../src/', '../src/'));
   } });
   const render = () => { index = 0; return exports.default(); };
