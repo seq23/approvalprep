@@ -6,14 +6,13 @@ import RecommendationSummary from "../components/RecommendationSummary.astro";
 import { routeCopy } from "../data/content";
 const copy = routeCopy["/blog"];
 const published = answersData.answers.filter((item) => item.status === "published_by_contract");
-const review = answersData.answers.filter((item) => item.status !== "published_by_contract");
 const slugify = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 100);
 ---
-<BaseLayout title="ApprovalPrep Blog - Daily Document Prep Answers" description="Daily and cadenced ApprovalPrep publishing for self-service document prep, explanation letters, application packets, and paperwork readiness." canonical="https://approvalprep.com/blog">
+<BaseLayout title="ApprovalPrep Blog - Short Document Prep Answers" description="Short, plain answers about explanation letters, credit letters, rental application packets and income proof, each with the guide or kit that goes with it." canonical="https://approvalprep.com/blog">
   <section class="hero shell">
-    <p class="eyebrow">Publishing hub</p>
-    <h1>Daily document-prep answers live here.</h1>
-    <p class="lead">This is the public home for ApprovalPrep’s daily and cadenced publishing: short explainers, route-specific answers, preparation prompts, and self-service document guidance.</p>
+    <p class="eyebrow">Blog</p>
+    <h1>Short answers to paperwork questions.</h1>
+    <p class="lead">Plain answers about explanation letters, credit letters, rental packets and income proof. Each one links to the guide or kit that goes with it.</p>
     <div class="hero-actions">
       <a class="button primary-button" href="/letter-writing-studio/">Draft free in the Letter Studio</a>
       <a class="button secondary-button" href="/resources/">Browse all resources</a>
@@ -28,27 +27,18 @@ const slugify = (value) => value.toLowerCase().replace(/[^a-z0-9]+/g, "-").repla
     <div class="publishing-header">
       <div>
         <p class="eyebrow">Published answers</p>
-        <h2>{published.length} answers available now.</h2>
-        <p class="lead">Each answer now has its own crawlable detail page and still points back to the relevant product, guide, or policy page.</p>
+        <h2>{`${published.length} answers to read now.`}</h2>
+        <p class="lead">Each answer has its own page and links to the guide or kit that goes with it.</p>
       </div>
-      <div class="card"><h3>Cadence</h3><p>Daily answer assets and scheduled content should publish here after they pass safety, boundary, and approval rules.</p></div>
     </div>
     <div class="blog-list">
       {published.map((item) => (
         <article class="card blog-card">
-          <p class="eyebrow">{item.riskLevel} risk</p>
-          <h3>{item.title}</h3>
+                    <h3>{item.title}</h3>
           <p>{item.answer}</p>
-          <div class="hero-actions"><a class="button primary-button" href={internalHref(`/blog/${slugify(item.title)}`)}>Read answer page</a><a class="button secondary-button" href={internalHref(item.route)}>Related page</a></div>
+          <div class="hero-actions"><a class="button primary-button" href={internalHref(`/blog/${slugify(item.title)}`)}>Read the answer</a><a class="button secondary-button" href={internalHref(item.route)}>Related page</a></div>
         </article>
       ))}
     </div>
   </div></section>
-  {review.length > 0 && (
-    <section class="band"><div class="shell">
-      <p class="eyebrow">Approval queue</p>
-      <h2>{review.length} answer assets require review before public promotion.</h2>
-      <p class="lead">Credit-sensitive and regulated content should stay visibly governed. This queue makes the boundary clear without pretending every generated asset is automatically approved.</p>
-    </div></section>
-  )}
 </BaseLayout>

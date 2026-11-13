@@ -29,6 +29,7 @@ const {
   ordered = false,
   ctaLabel = "",
   ctaHref = "",
+  sku = "",
   eyebrow = "",
   variant = "card"
 } = Astro.props;
@@ -54,6 +55,8 @@ const headingText = headline || "What this page recommends";
     {statement && <p class="recommendation-summary-statement">{statement}</p>}
     {detail && <p>{detail}</p>}
     {points.length > 0 && <List class="compact-list">{points.map((item) => <li>{item}</li>)}</List>}
-    {ctaHref && ctaLabel && <a class="button secondary-button" href={internalHref(ctaHref)}>{ctaLabel}</a>}
+    {/* A label that says "Buy" opens the payment page, the same as every other Buy button on the page. */}
+    {sku && ctaLabel ? <button class="button secondary-button checkout-button" type="button" data-sku={sku}>{ctaLabel}</button>
+      : ctaHref && ctaLabel && <a class="button secondary-button" href={/^[#]|[?]/.test(ctaHref) ? ctaHref : internalHref(ctaHref)}>{ctaLabel}</a>}
   </Tag>
 )}

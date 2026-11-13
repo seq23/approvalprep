@@ -14,6 +14,10 @@ export const customerNextSteps = nextStepsData.steps;
 export const nextStepsShort = nextStepsData.shortCopy;
 export const productCards = productsData.products.filter((product) => product.status === "active_paid" && product.stripe_enabled);
 export const offeringCategories = offeringData.categories;
+// Counts shown to customers are counted from the product data, never typed: the bundle is not a kit.
+export const BUNDLE_SKU = "complete-approvalprep-bundle";
+export const kitCount = productCards.filter((product) => product.sku !== BUNDLE_SKU).length;
+export const kitCountWord = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"][kitCount] || String(kitCount);
 export const allOfferings = offeringCategories.flatMap((category) => category.offerings.map((offering) => ({ ...offering, productSku: category.product_sku, productName: category.product_name, price: category.price })));
 export const offeringsForSku = (sku) => offeringCategories.find((category) => category.product_sku === sku)?.offerings || [];
 export const productForSku = (sku) => productCards.find((product) => product.sku === sku) || offeringCategories.find((category) => category.product_sku === sku);
@@ -27,43 +31,37 @@ export const homepageChooser = [
     "title": "I need a fast explanation letter",
     "copy": "Use one $15 direct-download kit for credit, income, job gap, address history, late payment, bank statement, rental issue, life event, or general application explanations.",
     "href": "/letter-of-explanation",
-    "product": "Letter of Explanation Kit",
-    "cta": "Buy the explanation kit — $15"
+    "product": "Letter of Explanation Kit"
   },
   {
     "title": "I want to get apartment-ready",
     "copy": "Build a cleaner rental packet before you apply: cover letter, income explanation, rental history explanation, landlord follow-up, and move-in document checklist.",
     "href": "/apartment-application",
-    "product": "Rental Application Kit",
-    "cta": "Get the rental kit — $29"
+    "product": "Rental Application Kit"
   },
   {
     "title": "I want self-service credit repair letters",
     "copy": "The letters for after your first dispute: bureau follow-ups, a direct dispute to the company that reported the item, debt validation, settlement terms in writing, goodwill and late-payment letters, an error checklist and a mailing log.",
     "href": "/credit-letter-kit",
-    "product": "Credit Letter Kit",
-    "cta": "Get DIY credit letters — $19"
+    "product": "Credit Letter Kit"
   },
   {
     "title": "I need to prove income or explain work",
     "copy": "Prepare employment verification, proof-of-income, self-employment, job-change, employment-gap, and bank-statement explanation letters.",
     "href": "/income-employment-letter-kit",
-    "product": "Income + Employment Letter Kit",
-    "cta": "Get the income kit — $19"
+    "product": "Income + Employment Letter Kit"
   },
   {
     "title": "I need to get loan-ready",
     "copy": "Organize auto, mortgage, personal-loan, income, credit, bank-statement, lender follow-up, and loan document checklist materials before review.",
     "href": "/loan-prep-letter-kit",
-    "product": "Loan Prep Letter Kit",
-    "cta": "Get the loan prep kit — $29"
+    "product": "Loan Prep Letter Kit"
   },
   {
     "title": "I want every current document kit",
     "copy": "Get the full direct-download library: credit letters, explanation letters, rental prep, income proof, loan prep, business funding, and life-admin paperwork.",
     "href": "/complete-approvalprep-bundle",
-    "product": "Complete ApprovalPrep Bundle",
-    "cta": "Get the full bundle — $49"
+    "product": "Complete ApprovalPrep Bundle"
   }
 ];
 
@@ -276,7 +274,7 @@ export const footerGroups = [
 export const routeFamilyCopy = {
   "pricing": {
     "label": "Pricing and kit selection",
-    "promise": "Compare the kits by situation, not by confusion. The page is designed to help a buyer decide quickly without pretending one document fixes every problem.",
+    "promise": "Each kit is listed with what is inside and its price. Pick the one that matches the paperwork in front of you.",
     "prepare": [
       "The situation you are preparing for",
       "Whether you need one letter or a full packet",
@@ -321,7 +319,7 @@ export const routeFamilyCopy = {
   },
   "credit": {
     "label": "Credit letter kit",
-    "promise": "Organize DIY credit letters, goodwill requests, late-payment explanations, and follow-up notes without crossing into credit repair service claims.",
+    "promise": "DIY credit letters, goodwill requests, late-payment explanations and follow-up notes in one kit. You fill them in and mail them yourself.",
     "prepare": [
       "Credit report item details",
       "Account names and dates",
@@ -772,9 +770,9 @@ const manualRouteCopy = {
   },
   "/resources": {
     "heading": "Resources",
-    "lead": "ApprovalPrep resources help users find guides, policies, publishing updates, glossary definitions, privacy boundaries, and product paths without guessing where the next piece of content lives.",
-    "shortAnswer": "The Resources hub is the organizing layer for ApprovalPrep education. It points users to the blog, methodology, glossary, legal policies, pricing, and the free Studio while keeping the self-service boundary visible.",
-    "primaryCta": "Read the publishing hub",
+    "lead": "Find ApprovalPrep guides, short answers, the glossary, prices and every policy page in one place.",
+    "shortAnswer": "Everything to read before you write or buy is linked from this page: the free Letter Studio, the short answers, how the kits are made, the glossary, prices, and the privacy and refund policies.",
+    "primaryCta": "Read the short answers",
     "secondaryCta": "Draft free in the Letter Studio",
     "decisionContext": [
       "A resource section should not be a pile of footer links. It should explain where the content engine publishes, where users can learn the method, where policies live, and where buyers can return when they are ready to choose a kit.",
@@ -839,8 +837,8 @@ const manualRouteCopy = {
   },
   "/blog": {
     "heading": "ApprovalPrep Blog",
-    "lead": "The ApprovalPrep Blog is the public home for daily and cadenced document-prep publishing: short answers, route-specific explainers, and practical self-service guidance.",
-    "shortAnswer": "The Blog answers the question of where ongoing content goes. Published answer assets live here, point back to relevant product or guide pages, and keep users moving toward the right next step.",
+    "lead": "Short answers to common questions about explanation letters, credit letters, rental packets and income proof, each with the guide or kit that goes with it.",
+    "shortAnswer": "Short, plain answers to common paperwork questions. Each one links to the guide or kit that goes with it. To start a letter now, open the free Letter Studio.",
     "primaryCta": "Draft free in the Letter Studio",
     "secondaryCta": "Browse resources",
     "decisionContext": [
@@ -971,11 +969,11 @@ const manualRouteCopy = {
   },
   "/pricing": {
     "heading": "Pricing",
-    "metaTitle": "ApprovalPrep Pricing: Compare All Eight Document Prep Kits",
-    "lead": "Compare all eight ApprovalPrep kits side by side: what each one covers, which situations it fits, and when the free Studio or a free checklist is enough.",
-    "shortAnswer": "Eight kits, each a one-time purchase with no subscription: pick the one that matches the paperwork in front of you, or the bundle if you are facing several at once. Compare kits by the document you actually have to produce this month, not by item count; every kit downloads as both a PDF guide and an editable DOCX.",
+    "metaTitle": `ApprovalPrep Pricing: Compare ${kitCountWord} Kits and the Complete Bundle`,
+    "lead": `Compare all ${kitCountWord.toLowerCase()} ApprovalPrep kits and the Complete Bundle side by side: what each one covers, which situations it fits, and when the free Studio or a free checklist is enough.`,
+    "shortAnswer": `${kitCountWord} kits and one bundle, each a one-time purchase with no subscription: pick the one that matches the paperwork in front of you, or the bundle if you are facing several at once. Compare kits by the document you actually have to produce this month, not by item count; every kit downloads as both a PDF guide and an editable DOCX.`,
     "primaryCta": "See the kits and prices",
-    "secondaryCta": "View product paths",
+    "secondaryCta": "Draft free in the Letter Studio",
     "steps": [
       "Clarify the request or situation.",
       "Gather real supporting documents.",
@@ -991,13 +989,13 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
   "/letter-of-explanation": {
     "heading": "Write a clear letter of explanation.",
+    "studioSituation": "general",
     "lead": "Write one clear letter of explanation for a credit, income, job gap, address, or deposit question, with the facts and proof a reviewer needs to close it.",
     "shortAnswer": "A letter of explanation is a short, factual account of one event in your financial history, written for a reviewer who has asked you to account for it. Name the event, give its dates, say what changed and what is true now, and attach only the documents that support those specific statements.",
     "primaryCta": "Create my letter",
@@ -1017,8 +1015,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -1067,8 +1064,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -1113,8 +1109,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -1159,8 +1154,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -1205,8 +1199,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -1252,8 +1245,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -1278,13 +1270,13 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
   "/credit-dispute-letter": {
     "heading": "Credit Dispute Letter Generator",
+    "studioSituation": "credit-dispute",
     "lead": "Draft your own credit report dispute letter naming the exact item, why it is inaccurate, and the proof you attach. You send it to the bureau yourself.",
     "shortAnswer": "A credit dispute letter asks a bureau to investigate a specific entry you believe is inaccurate, and asks for the result in writing. Identify the account, say exactly what is wrong with it, and keep a dated copy of what you sent and how you sent it.",
     "primaryCta": "Get the credit letter kit",
@@ -1307,13 +1299,12 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
   "/apartment-application": {
-    "heading": "Apartment Ready-to-Apply Kit",
+    "heading": "Apartment Application: Rental Application Kit",
     "lead": "Get an apartment application ready before you tour: ID, income proof, rental history, references, and a short cover letter, gathered into one packet.",
     "shortAnswer": "A rental application packet is the set of documents a leasing office asks for, assembled once so you can submit it the same day you view a place. Scan each item to a clearly named file and keep one folder you can send whole, so nothing is missing at the counter.",
     "primaryCta": "Get the rental kit",
@@ -1333,8 +1324,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -1380,13 +1370,12 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
   "/how-to-get-approved-for-an-apartment": {
-    "heading": "How to Get Approved for an Apartment",
+    "heading": "Applying for an Apartment: What to Prepare",
     "lead": "What landlords check on a rental application, income, rental history, credit, and references, and how to prepare each one honestly before you apply.",
     "shortAnswer": "Approval usually turns on three things a screener can verify: income against the rent, rental history, and what a credit and background check shows. Find out the office's income and score thresholds before applying, and prepare an explanation for anything a screening report will surface.",
     "primaryCta": "Build my packet",
@@ -1426,8 +1415,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -1473,8 +1461,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -1520,8 +1507,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -1567,8 +1553,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -1614,8 +1599,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -1661,8 +1645,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -1708,8 +1691,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -1754,8 +1736,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -1801,8 +1782,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -1848,8 +1828,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -1874,8 +1853,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -1900,8 +1878,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -1925,8 +1902,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": true
   },
@@ -1950,8 +1926,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": true
   },
@@ -1976,8 +1951,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -2002,8 +1976,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -2032,8 +2005,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -2058,8 +2030,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -2084,8 +2055,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -2110,8 +2080,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -2136,8 +2105,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -2246,8 +2214,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -2272,8 +2239,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -2301,8 +2267,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -2330,8 +2295,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -2356,8 +2320,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -2385,8 +2348,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -2411,8 +2373,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -2437,8 +2398,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -2463,8 +2423,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -2489,8 +2448,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   },
@@ -2514,8 +2472,7 @@ const manualRouteCopy = {
       "Instant verified download when a kit is purchased",
       "No account required",
       "PDF + editable DOCX for paid kits",
-      "Self-service only",
-      "No fake document help"
+      "Self-service only"
     ],
     "noindexCtaAllowed": false
   }

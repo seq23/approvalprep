@@ -178,7 +178,7 @@ for (const item of selected) {
       { question: "Will ApprovalPrep send this for me?", answer: "No. ApprovalPrep is self-service. You review, download, and send your own materials." },
       { question: "Can I use this if my situation is complicated?", answer: "You can use it to organize facts, but legal, tax, lending, court, immigration, or regulated issues may require a qualified professional." }
     ],
-    trustSignals: ["Self-service only", "No fake document help", "No approval promise", "You send it yourself"],
+    trustSignals: ["Self-service only", "No approval promise", "You send it yourself"],
     citationSummary: `${item.title}: a self-service guide for preparing truthful ${item.primaryQuery} materials with supporting proof and clear boundaries.`,
     targetProductSku: item.targetProductSku,
     generatedBy: "page_factory",

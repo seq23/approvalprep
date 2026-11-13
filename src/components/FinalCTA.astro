@@ -1,17 +1,28 @@
 ---
 import { internalHref } from "../lib/schema";
-const { primary = "See the kits and prices", secondary = "Build my packet", href = "/pricing", secondaryHref = "/apartment-application", primarySku = "" } = Astro.props;
+const { primary = "See the kits and prices", secondary = "Build my packet", href = "/pricing", secondaryHref = "/apartment-application", primarySku = "", freeHref = "", freeLabel = "" } = Astro.props;
+// "#…" stays on this page; internalHref would turn it into a path.
+const link = (value) => String(value).startsWith("#") ? value : internalHref(value);
 ---
 <section class="final-cta shell">
   <p class="eyebrow">Next step</p>
   <h2>Get your papers ready before you apply.</h2>
   <p>Your next step is simple: choose the letter or packet, fill in your truthful details, download it, review it, and send it yourself when you are ready.</p>
   <div class="hero-actions">
-    {primarySku ? (
-      <button class="button primary-button checkout-button" type="button" data-sku={primarySku}>{primary}</button>
-    ) : (
-      <a class="button primary-button" href={internalHref(href)}>{primary}</a>
-    )}
-    {secondary && <a class="button secondary secondary-button" href={internalHref(secondaryHref)}>{secondary}</a>}
+  {freeHref && primarySku ? (
+    <>
+      <a class="button primary-button" href={freeHref}>{freeLabel}</a>
+      <button class="button secondary secondary-button checkout-button" type="button" data-sku={primarySku}>{primary}</button>
+    </>
+  ) : (
+    <>
+      {primarySku ? (
+        <button class="button primary-button checkout-button" type="button" data-sku={primarySku}>{primary}</button>
+      ) : (
+        <a class="button primary-button" href={link(href)}>{primary}</a>
+      )}
+      {secondary && <a class="button secondary secondary-button" href={link(secondaryHref)}>{secondary}</a>}
+    </>
+  )}
   </div>
 </section>

@@ -16,7 +16,9 @@ import FreeStudioCTA from "../components/FreeStudioCTA.astro";
 import CreditStarterSignup from "../components/CreditStarterSignup.astro";
 import RecommendationSummary from "../components/RecommendationSummary.astro";
 import OfferingUniverse from "../components/OfferingUniverse.astro";
-import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComparison, offeringCategories } from "../data/content";
+import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComparison, offeringCategories, productCards, kitCount } from "../data/content";
+// One label for every card that opens a kit's page, with the name and price read from the product record.
+const kitLabel = (name) => { const product = productCards.find((p) => p.name === name); return product ? `See the ${product.name} — ${product.priceLabel} ›` : ""; };
 // 65 characters is the ceiling (src/lib/title.mjs): this ran 67 with the brand
 // twice over, once as the lead word and once inside the phrase. The query leads
 // now and the site name appears once, as the suffix every other page carries.
@@ -157,7 +159,7 @@ const homeSchema = [
           <span>{item.product}</span>
           <h3>{item.title}</h3>
           <p>{item.copy}</p>
-          <strong>{item.cta}</strong>
+          <strong>{kitLabel(item.product)}</strong>
         </a>
       ))}
     </div>
@@ -171,7 +173,7 @@ const homeSchema = [
     </tbody></table></div>
   </div></section>
   <section class="band"><div class="shell">
-    <p class="eyebrow">30+ self-service documents. 8 direct-download kits.</p>
+    <p class="eyebrow">{`30+ self-service documents. ${kitCount} kits and one bundle.`}</p>
     <h2>Buy one kit, get the related letters and checklists together.</h2>
     <p class="lead">The offer is intentionally simple: you do not buy every letter one by one. Each paid kit bundles the letters, checklists, examples, and next steps for that paperwork lane, then unlocks as PDF + editable DOCX after checkout.</p>
     <OfferingUniverse categories={offeringCategories} variant="summary" />

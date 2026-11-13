@@ -1,12 +1,23 @@
 ---
 import { internalHref } from "../lib/schema";
-const { primary = "See the kits and prices", secondary = "Build my packet", href = "/pricing", secondaryHref = "/apartment-application", primarySku = "" } = Astro.props;
+const { primary = "See the kits and prices", secondary = "Build my packet", href = "/pricing", secondaryHref = "/apartment-application", primarySku = "", freeHref = "", freeLabel = "" } = Astro.props;
+// "#…" stays on this page; internalHref would turn it into a path.
+const link = (value) => String(value).startsWith("#") ? value : internalHref(value);
 ---
 <div class="hero-actions">
-  {primarySku ? (
-    <button class="button primary-button checkout-button" type="button" data-sku={primarySku}>{primary}</button>
+  {freeHref && primarySku ? (
+    <>
+      <a class="button primary-button" href={freeHref}>{freeLabel}</a>
+      <button class="button secondary secondary-button checkout-button" type="button" data-sku={primarySku}>{primary}</button>
+    </>
   ) : (
-    <a class="button primary-button" href={internalHref(href)}>{primary}</a>
+    <>
+      {primarySku ? (
+        <button class="button primary-button checkout-button" type="button" data-sku={primarySku}>{primary}</button>
+      ) : (
+        <a class="button primary-button" href={link(href)}>{primary}</a>
+      )}
+      {secondary && <a class="button secondary secondary-button" href={link(secondaryHref)}>{secondary}</a>}
+    </>
   )}
-  {secondary && <a class="button secondary secondary-button" href={internalHref(secondaryHref)}>{secondary}</a>}
 </div>
