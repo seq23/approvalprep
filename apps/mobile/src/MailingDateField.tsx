@@ -5,11 +5,11 @@ import { Button } from './ui';
 import { type } from './theme';
 import { dateInput, mailingDate } from './sentLetter';
 import { showDate } from './myLetters';
-export interface MailingDateProps { value: string; onChange(value: string): void; disabled?: boolean }
-export function MailingDateField({ value, onChange, disabled }: MailingDateProps) {
+export interface MailingDateProps { value: string; onChange(value: string): void; disabled?: boolean; label?: string }
+export function MailingDateField({ value, onChange, disabled, label = 'Date mailed' }: MailingDateProps) {
   const [open, setOpen] = useState(false);
   return <View>
-    <Text style={type.label}>Date mailed</Text>
+    <Text style={type.label}>{label}</Text>
     <Button label={showDate(mailingDate(value))} disabled={disabled} onPress={() => setOpen(true)} />
     {open ? <DateTimePicker value={mailingDate(value)} mode="date" maximumDate={new Date()} disabled={disabled}
       onChange={(event, selected) => {
