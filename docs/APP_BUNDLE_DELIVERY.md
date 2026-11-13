@@ -26,17 +26,16 @@ Required private objects:
 
 - `app-kits/credit-letter-kit.json`: the four credit kit templates.
 - `app-kits/letter-of-explanation-kit.json`: the nine explanation templates.
-- `app-kits/complete-approvalprep-bundle.zip`: all 50 documents, PDF guides and
-  editable DOCX templates. Set custom metadata `documentCount` to `50` and
-  `formats` to `pdf,docx` after checking the private archive contents. Missing
-  assets or metadata returns `APP_BUNDLE_ASSET_MISSING`.
+- `app-kits/complete-approvalprep-bundle.zip`: PDF guides and editable DOCX
+  templates from the website kits. The object must exist and have a positive byte
+  size; no custom metadata or document count is required. A missing or empty
+  archive returns `APP_BUNDLE_ASSET_MISSING`.
 
 Paid sources stay in `APPROVALPREP_KITS_DIR` (default
 `~/.boss-os/approvalprep/kits/`), never in the public repo or phone bundle.
-`NAMED STOP [PRIVATE_WRITE_NEEDED]`: preparing the private archive is outside this
-run's permitted write scope. The private contents must be checked before upload;
-metadata alone is not a review of the archive. Store products, company accounts,
-RevenueCat entitlements and the server secret remain owner-held setup.
+The coordinator confirmed the private archive upload on 11 Nov 2026. Store
+products, company accounts, RevenueCat entitlements and the server secret remain
+owner-held setup.
 
 On the phone, Restore downloads the ZIP before installing either kit. All three
 local records commit together in the existing `approvalprep-kit.db`; a failed

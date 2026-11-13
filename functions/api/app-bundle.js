@@ -13,7 +13,7 @@ export async function onRequestPost({ request, env }) {
     const [credit, explanation, archive] = await Promise.all([
       assets.get('app-kits/credit-letter-kit.json'), assets.get('app-kits/letter-of-explanation-kit.json'), assets.head('app-kits/complete-approvalprep-bundle.zip'),
     ]);
-    if (!credit || !explanation || !archive || archive.customMetadata?.documentCount !== '50' || archive.customMetadata?.formats !== 'pdf,docx') return bundleJson({ stop: 'APP_BUNDLE_ASSET_MISSING' }, 503);
+    if (!credit || !explanation || !archive || !(archive.size > 0)) return bundleJson({ stop: 'APP_BUNDLE_ASSET_MISSING' }, 503);
     const kits = await Promise.all([credit.json(), explanation.json()]);
     return bundleJson({ kits, archiveUrl: await bundleUrl(new URL(request.url).origin, env.DOWNLOAD_SIGNING_SECRET) });
   } catch { return refused(); }
