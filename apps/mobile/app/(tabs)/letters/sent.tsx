@@ -1,3 +1,4 @@
+import { storageDeadline } from '../../../src/phoneDatabase';
 import { router, useLocalSearchParams, useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
 import { Platform, Switch, Text, View } from 'react-native';
@@ -13,6 +14,8 @@ import { showDate } from '../../../src/myLetters';
 // Dated-letter detail structure from APP_PLAN screen pattern (h); the person records mailing.
 export default function Sent() {
   const { id } = useLocalSearchParams<{ id?: string }>();
+  const [attempt, setAttempt] = useState(0);
+  const [loadError, setLoadError] = useState(false);
   const [letter, setLetter] = useState<SavedLetter | null>(null);
   const [owned, setOwned] = useState(false);
   const [ready, setReady] = useState(false);
@@ -25,8 +28,8 @@ export default function Sent() {
   const [message, setMessage] = useState('');
   useFocusEffect(useCallback(() => {
     let active = true;
-    setReady(false); setMessage('');
-    Promise.all([savedLetters().then(store => id ? store.get(id) : null), loadDeliveredKit()]).then(([value, kit]) => {
+    setLoadError(false); setReady(false); setMessage('');
+    storageDeadline(Promise.all([savedLetters().then(store => id ? store.get(id) : null), loadDeliveredKit(undefined, true)])).then(([value, kit]) => {
       if (!active) return;
       setLetter(value); setOwned(!!kit); setReady(true);
       if (value) {
@@ -34,9 +37,9 @@ export default function Sent() {
         setMethod(MAIL_METHODS.includes(value.method as MailMethod) ? value.method as MailMethod : 'Certified mail');
         setRemind(!!value.reminderDate);
       }
-    }).catch(() => { if (active) { setReady(true); setLetter(null); setMessage('Your letter could not be loaded. Go back and try again.'); } });
+    }).catch(() => { if (active) { setLoadError(true); setReady(true); setLetter(null); setMessage('Your letter could not be loaded. Go back and try again.'); } });
     return () => { active = false; };
-  }, [id]));
+  }, [id, attempt]));
   let due = '';
   try { due = showDate(reminderDate(date)); } catch {}
   async function save() {
@@ -54,7 +57,11 @@ export default function Sent() {
     finally { setBusy(false); }
   }
   return <Screen route="/letters/sent" label="Mark as sent" title="When did you send it?">
-    {!ready ? <Text style={type.sub}>Opening your letter…</Text> : !owned ? <>
+    {loadError ? <>
+      <Text accessibilityRole="alert" style={type.sub}>{message}</Text>
+      <Button label="Try again" onPress={() => setAttempt(value => value + 1)} />
+      <Button label="My letters ›" onPress={() => router.replace('/mine')} />
+    </> : !ready ? <Text style={type.sub}>Opening your letter…</Text> : !owned ? <>
       <Text style={type.body}>Marking as sent, tracking and the day-30 reminder are included in the Credit Letter Kit, paid once.</Text>
       <Button label="See the kit ›" onPress={() => router.push('/letters/unlock')} />
     </> : !letter ? <Text style={type.sub}>{message || 'Open a saved letter before recording when you mailed it.'}</Text>
