@@ -30,7 +30,7 @@ test('kit screen orders offers and routes options without reselling owned kits',
         if (name.endsWith('/bundleFiles')) return { bundleFile: async () => bundle ? 'file' : null };
         if (name.endsWith('/bundleAccount')) return { bundleAccount: async () => ({ ownership: async () => ownership, products: async () => prices }) };
         if (name.endsWith('/purchases')) return { purchases: async () => ({ products: async () => prices, mode: 'mock' }) };
-        if (name.endsWith('/provider') || name.endsWith('/delivery')) return {};
+        if (name.endsWith('/provider') || name.endsWith('/delivery') || name.endsWith('/bundleDelivery')) return {};
         throw Error(name);
       } });
       const render = () => { index = 0; return exports.default(); };
@@ -53,9 +53,11 @@ test('kit screen orders offers and routes options without reselling owned kits',
 });
 
 test('Restore messages survive ownership refresh even when the store is offline', async () => {
-  for (const outcome of ['success', 'missing', 'partial', 'failure']) for (const offline of [false, true]) {
+  for (const outcome of ['success', 'missing', 'partial', 'failure', 'bundle']) for (const offline of [false, true]) {
     const states: any[] = []; let index = 0; let focus!: () => void;
     let delivered = false; let refresh = false;
+    // 'bundle' is a bundle buyer on a new phone: no single-kit purchase exists for her.
+    const bundleOwner = outcome === 'bundle';
     const source = readFileSync(new URL('../app/(tabs)/letters/unlock.tsx', import.meta.url), 'utf8');
     const compiled = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX } }).outputText;
     const exports: any = {};
@@ -78,7 +80,8 @@ test('Restore messages survive ownership refresh even when the store is offline'
         saveDeliveredKit: async () => { delivered = true; },
       };
       if (name.endsWith('/bundleOffers')) return offers;
-      if (name.endsWith('/bundleFiles')) return { bundleFile: async () => null };
+      if (name.endsWith('/bundleFiles')) return { bundleFile: async () => null, installBundle: async () => { delivered = true; } };
+      if (name.endsWith('/bundleDelivery')) return { restoreBundle: async (_account: unknown, install: () => Promise<void>) => { if (!bundleOwner) return false; await install(); return true; } };
       if (name.endsWith('/bundleAccount')) return { bundleAccount: async () => ({ products: async () => [], ownership: async () => offers.NO_OWNERSHIP }) };
       if (name.endsWith('/purchases')) return { purchases: async () => ({ products: async () => {
         if (refresh && offline) throw Error('offline');
@@ -101,7 +104,7 @@ test('Restore messages survive ownership refresh even when the store is offline'
     await new Promise(resolve => setImmediate(resolve));
     const result = alert();
     assert.ok(result, `Restore must report ${outcome}`);
-    assert.equal(delivered, outcome === 'success' || outcome === 'partial');
+    assert.equal(delivered, outcome === 'success' || outcome === 'partial' || outcome === 'bundle');
     // The revision dependency reruns the focus effect after Restore finishes.
     refresh = true; render(); focus(); await new Promise(resolve => setImmediate(resolve));
     assert.equal(alert(), result, `${outcome} result must survive ${offline ? 'offline' : 'successful'} refresh`);

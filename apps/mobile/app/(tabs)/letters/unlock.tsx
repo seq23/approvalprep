@@ -11,7 +11,8 @@ import { purchases } from '../../../src/purchases';
 import { buyKit, type Product } from '../../../src/purchases/provider';
 import { restoreKit } from '../../../src/purchases/delivery';
 import { bundleAccount } from '../../../src/purchases/bundleAccount';
-import { bundleFile } from '../../../src/purchases/bundleFiles';
+import { bundleFile, installBundle } from '../../../src/purchases/bundleFiles';
+import { restoreBundle } from '../../../src/purchases/bundleDelivery';
 import { offersFor, NO_OWNERSHIP, type BundleOwnership } from '../../../src/purchases/bundleOffers';
 export default function Unlock() {
   const { kit } = useLocalSearchParams<{ kit?: string }>();
@@ -50,7 +51,8 @@ export default function Unlock() {
     try {
       const provider = await purchases();
       if (action === 'buy') await buyKit(provider, offer.productId);
-      const restored = await restoreKit(provider, saveDeliveredKit);
+      // A bundle buyer who lands here from a locked letter gets her kits through the bundle door.
+      const restored = await restoreKit(provider, saveDeliveredKit) || await restoreBundle(await bundleAccount(), installBundle);
       setOwned(!!await loadDeliveredKit(kitId));
       setMessage(restored ? 'Your kit is saved on this phone and ready offline.' : 'No letter kit purchase was found for this store account.');
     } catch (error) {
