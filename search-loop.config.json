@@ -53,8 +53,30 @@
       "credit repair business",
       "credit repair software",
       "credit repair certification",
-      "credit repair jobs"
-    ]
+      "credit repair jobs",
+      "credit repair cloud",
+      "credit repair specialist",
+      "credit repair course",
+      "credit repair training",
+      "credit repair agent",
+      "credit union",
+      "legit",
+      "lawsuit",
+      "complaints",
+      "reviews",
+      "bbb",
+      "saint a scam",
+      "saint scam",
+      "pros a scam",
+      "pros scam",
+      "blue a scam",
+      "blue scam",
+      "law a scam",
+      "law scam",
+      "make money"
+    ],
+    "priority_topics": 12,
+    "max_autocomplete_calls": 160
   },
   "action": {
     "label": "Draft your dispute letter free, or get the DIY Credit Letter Kit ($19 once)",
@@ -138,5 +160,11 @@
     "source": "none"
   },
   "shares_audience_with": [],
-  "ledger_dir": "data/search-loop"
+  "ledger_dir": "data/search-loop",
+  "gate": {
+    "banned_patterns": [
+      "\\b(credit saint|the credit pros|credit pros|sky blue credit|lexington law|creditrepair\\.com)\\b[^.?!]{0,160}\\b(scams?|scammers?|fraud|fraudulent|rip-?offs?|illegal|crooks?)\\b",
+      "\\b(scams?|scammers?|fraud|fraudulent|rip-?offs?|illegal|crooks?)\\b[^.?!]{0,160}\\b(credit saint|the credit pros|credit pros|sky blue credit|lexington law|creditrepair\\.com)\\b"
+    ]
+  }
 }

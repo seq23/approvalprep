@@ -18,11 +18,17 @@ import fs from "node:fs";
 const CONFIG = "search-loop.config.json";
 // Credit-repair buyers first (her ruling 3 Nov 2026: the search pages target people about to
 // pay a monthly credit repair company; loop olp_m6jbamwwq5rbj46g).
-const CORE = [
+// BUYER is the engine's priority list: find.priority_topics (search-loop v1.11.0) is set to its
+// length below, so searches grown from these are asked about, screened and built before any other.
+// Until 13 Nov 2026 "first in topics" meant nothing to the engine and none of them was ever asked.
+const BUYER = [
   "credit repair cost", "is credit repair worth it", "credit repair scams", "diy credit repair",
   "credit repair company alternatives", "credit saint alternative", "the credit pros alternative",
   "sky blue credit alternative", "dispute credit report yourself", "how to dispute a credit report error",
   "do credit repair companies work", "credit repair vs doing it yourself",
+];
+const CORE = [
+  ...BUYER,
   "letter of explanation", "proof of employment letter", "employment verification letter",
   "rental application letter", "landlord reference letter", "goodwill letter", "609 dispute letter",
   "gift letter for mortgage", "hardship letter", "proof of income",
@@ -45,7 +51,8 @@ if (!counts.size) {
 const ranked = [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).map(([s]) => s.toLowerCase());
 const topics = [...new Set([...CORE, ...ranked])].slice(0, MAX_TOPICS);
 const cfg = JSON.parse(fs.readFileSync(CONFIG, "utf8"));
-const changed = JSON.stringify(cfg.topics) !== JSON.stringify(topics);
+const changed = JSON.stringify(cfg.topics) !== JSON.stringify(topics) || cfg.find?.priority_topics !== BUYER.length;
 cfg.topics = topics;
+cfg.find = { ...(cfg.find || {}), priority_topics: BUYER.length };
 fs.writeFileSync(CONFIG, JSON.stringify(cfg, null, 2) + "\n");
 console.log(`[search-loop:sync-topics] OK subjects_with_open_opportunities=${counts.size} topics=${topics.length} changed=${changed}`);
