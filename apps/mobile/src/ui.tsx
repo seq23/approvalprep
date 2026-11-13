@@ -34,11 +34,6 @@ export function Button({ label, onPress, primary, disabled = false }: { label: s
   );
 }
 
-// A screen not built yet says so in plain words (docs/APP_PLAN.md task list builds it).
-export function Planned() {
-  return <View style={s.card}><Text style={type.sub}>Not in this build yet.</Text></View>;
-}
-
 export function Hl({ children }: { children: ReactNode }) {
   return <Text style={{ backgroundColor: color.highlighter }}>{children}</Text>;
 }

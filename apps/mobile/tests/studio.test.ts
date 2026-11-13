@@ -55,3 +55,21 @@ test('Studio recommendations reach the independent kit or the bundle containing 
   const screen = readFileSync(join(__dirname, '../app/(tabs)/letters/studio.tsx'), 'utf8');
   assert.match(screen, /router.push\(draft.kitRoute.pathname/);
 });
+
+// The website kits of the same name hold more documents than the kits sold in the app.
+test('"What the kit adds" for a kit sold in the app lists only what that in-app kit holds', async () => {
+  const { kitAdds } = await import('../src/studio');
+  const { LETTERS, EXPLANATION_LETTERS } = await import('../src/letters');
+  const { kindsForKit } = await import('../src/kitTemplates');
+  const nameOf = new Map([...LETTERS, ...EXPLANATION_LETTERS].map(l => [l.name, l.kind]));
+  for (const [sku, kit] of [['credit-letter-kit', 'credit-letter-kit'], ['letter-of-explanation', 'letter-of-explanation-kit']] as const) {
+    const [letters, tracking, ...rest] = kitAdds(sku);
+    assert.equal(rest.length, 0);
+    assert.deepEqual(letters.items.map(name => nameOf.get(name)).sort(), [...kindsForKit(kit)].sort(), sku);
+    assert.equal(tracking.items.length, 1);
+  }
+  for (const s of situations) {
+    const inApp = s.recommendationSku === 'credit-letter-kit' || s.recommendationSku === 'letter-of-explanation';
+    assert.equal(studioDraft(s.id, {}).kitRoute.pathname === '/letters/unlock', inApp, s.id);
+  }
+});
