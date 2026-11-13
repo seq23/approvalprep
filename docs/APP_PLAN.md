@@ -29,7 +29,7 @@ only after a confirmed purchase:
 - **Bundled in the app (free):** the free dispute letter, the Letter Studio's situations and openers
   (from `src/data/letterStudio.ts`), the screens, and short fake fixtures for tests.
 - **Delivered after purchase:** the 4 Credit Letter Kit templates, the 9 Letter of Explanation templates,
-  the guides and the bundle's 50 documents. Their sources live outside the repo
+  the guides and the bundle's documents. Their sources live outside the repo
   (`APPROVALPREP_KITS_DIR`, default `~/.boss-os/approvalprep/kits/`, uploaded to R2), never committed.
 - **The door:** a Pages Function `/api/app-unlock` checks the purchase with RevenueCat's server API
   (secret on the server only) and returns short-lived signed links; the phone downloads once, keeps
@@ -168,7 +168,7 @@ Run `npm run check` in `apps/mobile` after each task; the App preview run must s
 13b. **The Complete ApprovalPrep Bundle in the app** (owner, 10 Nov 2026: "offer the more expensive
     full bundle on app too"). **`ap_complete_bundle` at $49.99, paid once** (the website sells it for
     $49): both in-app kits (credit letters and explanation letters, with tracking and reminders) plus
-    every website kit's PDF guide and editable DOCX templates (all 50 documents), downloaded from our
+    every website kit's PDF guide and editable DOCX templates, downloaded from our
     server after the store confirms, restorable, like Dream Wedding's printables. **`ap_bundle_upgrade`
     at $29.99** for anyone who already owns a kit, so nobody pays twice ($19.99 + $29.99 = $49.98).
     Offers are one pure function `offersFor` (as Dream Wedding): owns nothing → the bundle first

@@ -1,0 +1,13 @@
+{
+  "id": "ap-phone-app",
+  "bossOsRowId": "ap-phone-app",
+  "registration": "seq23/boss-os#388",
+  "recordedAt": null,
+  "_note": "recordedAt stays null until seq23/boss-os#388 is merged; set it to that date (YYYY-MM-DD). The release gate stops a store build with SCORECARD_NOT_REGISTERED until then.",
+  "result": "Credit Letter Kit purchases in the app (store-confirmed), with installs as the lead-in",
+  "day30Floor": "at least 3 kit purchases in the last 30 days (lead-in: 100 installs)",
+  "day60Floor": "at least 10 kit purchases in the last 60 days (lead-in: 300 installs)",
+  "versionB": "Lead the store listing with debt validation: subtitle \"Debt Validation & Goodwill Letters\" and the screenshots in that order.",
+  "priceStep": "At about 20 real ratings ap_credit_kit goes from $19.99 to $24.99 by a store price change only. Never hardcode these prices in the app.",
+  "measurement": "apps/mobile/release/store-metrics.json: counts only, filled weekly after launch from the store or RevenueCat (needs the store accounts). A null or stale count is no number, never zero."
+}

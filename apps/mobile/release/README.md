@@ -10,13 +10,24 @@ of store-account requirements. This task does not build or submit a store releas
   Never set a RevenueCat server secret in an app environment.
 - Remove `EXPO_PUBLIC_AP_PREVIEW=1` from production.
 
-Task 14: NAMED STOP [SCORECARD_PLAN_UNAVAILABLE]. The linked plan artifact could not
-be read on 11 November 2026. Its result definition, day-30 and day-60 floors and
-version B must be recovered before recording the app row in Boss OS; do not invent them.
-The local Boss OS scorecard manifest has no ApprovalPrep phone-app row as of this check.
-The row must carry the approved credit-kit price change: from $19.99 to $24.99 at
-about 20 real ratings, by changing the store price. No store submission before the row exists.
+- Scorecard (plan task 14): the Boss OS row is `ap-phone-app` (seq23/boss-os#388). When that
+  PR is merged, write its date to `recordedAt` in `release/scorecard.json`. Until then the gate
+  reports `NAMED STOP [SCORECARD_NOT_REGISTERED]`. The row carries the price step: `ap_credit_kit`
+  from $19.99 to $24.99 at about 20 real ratings, by a store price change only.
+- After launch, fill `release/store-metrics.json` weekly (counts only: launch date, installs,
+  kit purchases). The scorecard reads that file; an empty or old count is "no number".
 
-Task 6: NAMED STOP [PATTERN_NOTES_MISSING] Mark as sent (S5). The plan has patterns
-for Start, chooser, kit purchase and My letters, but no entry for this sheet.
-Task 11: NAMED STOP [WAITS_FOR_LAUNCH_PLAN], as directed by the owner.
+Server side, before sales are switched on (`KIT_SALES_ENABLED` in `src/kit.ts`):
+
+- Set the server secret `APPROVALPREP_REVENUECAT_SECRET` on the website's Pages project. Without
+  it the doors answer `NAMED STOP [REVENUECAT_SECRET_MISSING]` and no paid file leaves.
+- Put both kit files in the private bucket (`docs/APP_BUNDLE_DELIVERY.md`).
+- For the days of a store review only, set `APPROVALPREP_ACCEPT_SANDBOX_PURCHASES=1` so the
+  reviewer's test purchase opens the kit; remove it afterwards.
+- In RevenueCat, name each entitlement exactly as its product (`ap_credit_kit`,
+  `ap_explanation_kit`, `ap_complete_bundle`, `ap_bundle_upgrade`), one product each.
+- Run `npm run bundle:load` against a preview with a verified purchase identity, and restore
+  once on a second phone, before the first submission.
+
+Task 11: NAMED STOP [WAITS_FOR_LAUNCH_PLAN], as directed by the owner. No agent runs a
+production build or submits.
