@@ -22,7 +22,7 @@ test('autosave serializes rapid edits and snapshots answers before writing', asy
   const values: string[] = [];
   let unblock!: () => void;
   const blocked = new Promise<void>(resolve => { unblock = resolve; });
-  const write = draftWriter({ update: async letter => { await blocked; values.push(letter.answers.name); } });
+  const write = draftWriter({ create: async () => {}, update: async letter => { await blocked; values.push(letter.answers.name); } });
   const letter = newDispute('example');
   letter.answers.name = 'First'; const first = write(letter);
   letter.answers.name = 'Latest'; const second = write(letter);
@@ -34,7 +34,7 @@ test('autosave serializes rapid edits and snapshots answers before writing', asy
 test('failed saves reach the caller; a retry persists the latest answers', async () => {
   let fails = true;
   const saved: string[] = [];
-  const write = draftWriter({ update: async letter => { if (fails) throw Error('disk full'); saved.push(letter.answers.name); } });
+  const write = draftWriter({ create: async () => {}, update: async letter => { if (fails) throw Error('disk full'); saved.push(letter.answers.name); } });
   const letter = newDispute('retry');
   letter.answers.name = 'Earlier'; await assert.rejects(write(letter), /disk full/);
   fails = false; letter.answers.name = 'Latest'; await write(letter);

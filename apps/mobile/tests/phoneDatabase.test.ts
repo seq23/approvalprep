@@ -14,6 +14,35 @@ test('concurrent kit readers share one open; a stalled worker fails and permits 
   assert.equal(await retry('kits'), db);
 });
 
+test('two databases opened together open one after the other, never at once', async () => {
+  let inFlight = 0, most = 0;
+  const order: string[] = [];
+  const open = sharedDatabase(async (name: string) => {
+    most = Math.max(most, ++inFlight); order.push(`start ${name}`);
+    await new Promise(resolve => setTimeout(resolve, 5));
+    inFlight--; order.push(`end ${name}`);
+    return name;
+  });
+  assert.deepEqual(await Promise.all([open('letters'), open('kits')]), ['letters', 'kits']);
+  assert.equal(most, 1);
+  assert.deepEqual(order, ['start letters', 'end letters', 'start kits', 'end kits']);
+});
+test('a failed open logs its real reason once and does not block the next open', async () => {
+  const lines: string[] = [];
+  const original = console.error;
+  console.error = (...args: unknown[]) => { lines.push(args.join(' ')); };
+  try {
+    let broken = true;
+    const open = sharedDatabase(async (name: string) => { if (broken) throw Error('xLock is undefined'); return name; });
+    await assert.rejects(open('letters'), /xLock is undefined/);
+    assert.equal(lines.length, 1);
+    assert.match(lines[0], /letters.*xLock is undefined/);
+    broken = false;
+    assert.equal(await open('kits'), 'kits');
+    assert.equal(await open('letters'), 'letters');
+  } finally { console.error = original; }
+});
+
 import { readFileSync } from 'node:fs';
 import { runInNewContext } from 'node:vm';
 import ts from 'typescript';

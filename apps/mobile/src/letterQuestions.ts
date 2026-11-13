@@ -18,11 +18,15 @@ export function newDispute(id: string): SavedLetter {
 export function renderDispute(answers: Record<string, string>, today = new Date()): { text: string; blanks: string[] } {
   return buildLetter('credit-dispute', answers, { today });
 }
-export function draftWriter(store: { update(letter: SavedLetter): Promise<void> }) {
+/** `saved: false` is a letter just opened: nothing is stored until its first write, so My letters never fills with blank drafts. */
+export function draftWriter(store: { update(letter: SavedLetter): Promise<void>; create(letter: SavedLetter): Promise<unknown> }, saved = true) {
   let pending = Promise.resolve();
   return (letter: SavedLetter) => {
     const snapshot = { ...letter, answers: { ...letter.answers } };
-    pending = pending.catch(() => {}).then(() => store.update(snapshot));
+    pending = pending.catch(() => {}).then(async () => {
+      if (saved) return store.update(snapshot);
+      await store.create(snapshot); saved = true;
+    });
     return pending;
   };
 }

@@ -5,12 +5,23 @@ export function storageDeadline<T>(work: Promise<T>, milliseconds = 8000): Promi
     work.then(value => { clearTimeout(timer); resolve(value); }, error => { clearTimeout(timer); reject(error); });
   });
 }
+/** One line in the console with the real reason, so a storage failure is never silent. */
+export function reportStorageFailure(what: string, error: unknown) {
+  console.error(`Phone storage failed (${what}): ${error instanceof Error ? error.message : String(error)}`);
+}
 export function sharedDatabase<T>(open: (name: string) => Promise<T>, milliseconds = 8000) {
   const pending = new Map<string, Promise<T>>();
+  // One open at a time. On web, expo-sqlite sets up its SQLite engine inside the first open; two
+  // databases opened together (letters + kits on the Start screen) each set up their own engine,
+  // the second replaced the first, and every later query on the first database failed.
+  let last: Promise<unknown> = Promise.resolve();
   return (name: string): Promise<T> => {
     let result = pending.get(name);
     if (!result) {
-      result = storageDeadline(Promise.resolve().then(() => open(name)), milliseconds).catch(error => { pending.delete(name); throw error; });
+      // The limit starts when this open's turn does, so a stalled open cannot hold the queue.
+      const turn = last.then(() => storageDeadline(Promise.resolve().then(() => open(name)), milliseconds));
+      last = turn.catch(() => {});
+      result = turn.catch(error => { pending.delete(name); reportStorageFailure(`open ${name}`, error); throw error; });
       pending.set(name, result);
     }
     return result;
