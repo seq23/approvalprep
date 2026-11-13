@@ -16,7 +16,7 @@ export const TABS: { tab: Tab; route: string; label: string }[] = [
   { tab: 'more', route: '/more', label: '☰ More' },
 ];
 export const SCREENS: ScreenSpec[] = [
-  { id: 'S1', route: '/', file: 'app/index.tsx', title: 'Start', kind: 'start', links: [HOME, '/letters/unlock'] },
+  { id: 'S1', route: '/', file: 'app/index.tsx', title: 'Start', kind: 'start', links: [HOME, '/letters/unlock', '/mine', '/letters/[kind]'] },
   { id: 'S2', route: '/letters', file: 'app/(tabs)/letters/index.tsx', title: 'Write a letter', kind: 'tab', tab: 'letters', links: ['/letters/[kind]', '/letters/unlock', '/letters/studio'] },
   { id: 'Studio', route: '/letters/studio', file: 'app/(tabs)/letters/studio.tsx', title: 'Letter Studio', kind: 'sub', tab: 'letters', back: '/letters', links: ['/letters/unlock', '/letters/bundle'] },
   { id: 'S3', route: '/letters/[kind]', file: 'app/(tabs)/letters/[kind].tsx', title: 'Questions', kind: 'sub', tab: 'letters', back: '/letters', links: ['/letters/draft'] },
