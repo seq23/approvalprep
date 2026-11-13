@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { sharedDatabase, storageDeadline } from '../src/phoneDatabase';
+import { openWhenFree, sharedDatabase, storageDeadline } from '../src/phoneDatabase';
 test('concurrent kit readers share one open; a stalled worker fails and permits retry', async () => {
   let calls = 0;
   const db = {};
@@ -40,6 +40,27 @@ test('a failed open logs its real reason once and does not block the next open',
     broken = false;
     assert.equal(await open('kits'), 'kits');
     assert.equal(await open('letters'), 'letters');
+  } finally { console.error = original; }
+});
+
+test('a store held by another tab is never started; it opens once the files are free, and Try again works', async () => {
+  let held = 2, opens = 0;
+  const open = openWhenFree(async () => held-- <= 0, async (name: string) => { opens++; return name; }, 5, 1);
+  assert.equal(await open('letters'), 'letters');
+  assert.equal(opens, 1);
+  let busy = true, asked = 0; opens = 0;
+  const lines: string[] = []; const original = console.error;
+  console.error = (...args: unknown[]) => { lines.push(args.join(' ')); };
+  try {
+    const shared = sharedDatabase(openWhenFree(async () => { asked++; return !busy; }, async (name: string) => { opens++; return name; }, 3, 1));
+    await assert.rejects(shared('letters'), /PHONE_STORAGE_BUSY/);
+    assert.equal(asked, 3);
+    assert.equal(opens, 0, 'the store was not touched while busy');
+    assert.match(lines[0], /PHONE_STORAGE_BUSY/);
+    busy = false;
+    assert.equal(await shared('letters'), 'letters');
+    assert.equal(await shared('kits'), 'kits');
+    assert.equal(asked, 4, 'once started, later opens do not ask again');
   } finally { console.error = original; }
 });
 

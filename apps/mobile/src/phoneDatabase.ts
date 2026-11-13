@@ -1,3 +1,4 @@
+import { storeFree } from './storeFree';
 /** A failed SQLite worker must not leave the person waiting forever. */
 export function storageDeadline<T>(work: Promise<T>, milliseconds = 8000): Promise<T> {
   return new Promise((resolve, reject) => {
@@ -27,4 +28,20 @@ export function sharedDatabase<T>(open: (name: string) => Promise<T>, millisecon
     return result;
   };
 }
-export const phoneDatabase = sharedDatabase(async name => (await import('expo-sqlite')).openDatabaseAsync(name));
+/**
+ * Never start the store while its files are held elsewhere (another tab, or the page just left):
+ * a first open that fails that way leaves the web store broken until the page is reloaded.
+ * Asks a few times, then fails without touching the store, so "Try again" can still succeed.
+ */
+export function openWhenFree<T>(free: () => Promise<boolean>, open: (name: string) => Promise<T>, tries = 20, pause = 150) {
+  let started = false;
+  return async (name: string): Promise<T> => {
+    for (let attempt = 1; !started; attempt++) {
+      if (await free()) { started = true; break; }
+      if (attempt >= tries) throw Error('PHONE_STORAGE_BUSY: the saved letters are open in another tab or window');
+      await new Promise(resolve => setTimeout(resolve, pause));
+    }
+    return open(name);
+  };
+}
+export const phoneDatabase = sharedDatabase(openWhenFree(storeFree, async name => (await import('expo-sqlite')).openDatabaseAsync(name)));
