@@ -87,7 +87,17 @@ test('skipped optional sentences leave no bracket or empty line; required blanks
   const filled = renderKitLetter(letter, { name: 'Example', why: 'A reason.', month: 'March' }, today);
   assert.ok(filled.text.includes('Example\nFAKE reason: A reason.\nFAKE month: March.\n'));
   assert.deepEqual(filled.blanks, ['Fake street', 'Fake recipient']);
-  for (const invalid of ['{{why?}}', '{{why?| }}', '{{today?}}', '{{why?|Fake reason}} {{name|Fake name}}']) {
+  // The real letters keep an optional sentence inside a paragraph, an optional line inside an
+  // address block and an optional last line after an empty one: none may leave a gap or a bracket.
+  raw.letters[0].template = '{{name|Fake name}}\n{{why?|fake reason}}\n{{street|Fake street}}\n\nFAKE para, {{to|Fake recipient}}, ends. {{month?|fake month}}\n\nFAKE close\n\nFAKE label: {{why?|fake reason}}';
+  const real = kitLetter(parseKitTemplates(raw), 'goodwill');
+  assert.ok(real);
+  const bare = renderKitLetter(real, { name: 'Example', street: '1 Fake St', to: 'Them' }, today);
+  assert.equal(bare.text, 'Example\n1 Fake St\n\nFAKE para, Them, ends.\n\nFAKE close');
+  assert.deepEqual(bare.blanks, []);
+  const full = renderKitLetter(real, { name: 'Example', street: '1 Fake St', to: 'Them', why: 'Because', month: 'I changed.' }, today);
+  assert.equal(full.text, 'Example\nBecause\n1 Fake St\n\nFAKE para, Them, ends. I changed.\n\nFAKE close\n\nFAKE label: Because');
+  for (const invalid of ['{{why?}}', '{{why?| }}', '{{today?}}']) {
     const broken = clone();
     broken.letters[0].template += `\n${invalid}`;
     assert.equal(parseKitTemplates(broken), null, invalid);

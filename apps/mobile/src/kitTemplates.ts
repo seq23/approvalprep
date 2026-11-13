@@ -22,9 +22,10 @@ export const KIT_LOCKED_LINE = 'This letter is included in the Credit Letter Kit
 export interface KitLetter { kind: KitKind; name: string; questions: Question[]; template: string; honestLine?: string; notes?: string[] }
 export interface KitTemplates { version: number; kit: KitId; letters: KitLetter[] }
 
-// {{field?|Prompt}} makes its entire line optional. Keep optional sentences on their own
-// line, without required fields: an unanswered optional field removes that line entirely.
 // Required blanks use {{field|Prompt}}; {{today}} is the date on the letter.
+// {{field?|Prompt}} is an optional blank. Left unanswered it prints nothing: a line holding only
+// optional blanks (and fixed words such as a label) is removed with one neighbouring empty line;
+// on a line that also has required blanks, only the optional blank and the space before it go.
 const TOKEN = /\{\{([A-Za-z][A-Za-z0-9]*)(\?)?(?:\|([^{}|]+))?\}\}/g;
 const text = (v: unknown): v is string => typeof v === 'string' && v.trim().length > 0;
 const record = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v);
@@ -56,10 +57,6 @@ function parseLetter(raw: unknown): KitLetter | null {
     used.add(m[1]);
   }
   if (used.size !== names.size || raw.template.replace(TOKEN, '').includes('{{')) return null;
-  for (const line of raw.template.split(/\r?\n/)) {
-    const tokens = [...line.matchAll(TOKEN)];
-    if (tokens.some(m => m[2]) && tokens.some(m => !m[2])) return null;
-  }
   if (raw.honestLine !== undefined && !text(raw.honestLine)) return null;
   if (raw.notes !== undefined && !(Array.isArray(raw.notes) && raw.notes.every(text))) return null;
   return { kind: raw.kind as KitKind, name: raw.name, questions, template: raw.template,
@@ -87,9 +84,27 @@ export const kitLetter = (kit: KitTemplates | null, kind: string): KitLetter | n
 /** Same shape as renderDispute: the letter as text, and the blanks she still has to fill. */
 export function renderKitLetter(letter: KitLetter, answers: Record<string, string>, today = new Date()): { text: string; blanks: string[] } {
   const blanks: string[] = [];
-  const template = letter.template.split(/\r?\n/).filter(line =>
-    ![...line.matchAll(TOKEN)].some(m => m[2] && !(answers[m[1]] ?? '').trim())
-  ).join('\n');
+  const skipped = (m: RegExpMatchArray) => !!m[2] && !(answers[m[1]] ?? '').trim();
+  const lines = letter.template.split(/\r?\n/);
+  const kept: string[] = [];
+  let dropBlank = false;
+  lines.forEach((line, i) => {
+    if (dropBlank && !line.trim()) { dropBlank = false; return; }
+    dropBlank = false;
+    const tokens = [...line.matchAll(TOKEN)];
+    if (!tokens.some(skipped)) { kept.push(line); return; }
+    if (tokens.every(m => m[2])) {
+      // The whole line goes, with one of the empty lines around it, so no gap is left behind.
+      const nextBlank = i + 1 >= lines.length || !lines[i + 1].trim();
+      if (!nextBlank) return;
+      if (kept.length && !kept[kept.length - 1].trim()) kept.pop();
+      else if (!kept.length) dropBlank = true;
+      return;
+    }
+    kept.push(line.replace(TOKEN, (all, name: string, optional: string | undefined) => optional && !(answers[name] ?? '').trim() ? '\u0000' : all)
+      .replace(/[ \t]*\u0000[ \t]*/g, ' ').trim());
+  });
+  const template = kept.join('\n');
   const filled = template.replace(TOKEN, (_all, name: string, _optional: string | undefined, prompt: string | undefined, at: number) => {
     if (name === 'today') return formatLetterDate(today);
     let value = (answers[name] ?? '').trim();
