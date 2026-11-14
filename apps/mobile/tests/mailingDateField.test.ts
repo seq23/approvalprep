@@ -18,7 +18,7 @@ for (const platform of ['web', 'android', 'ios']) test(`${platform}: date select
     if (name === 'react-native') return { Platform: { OS: platform }, View: 'View', Text: 'Text' };
     if (name === '@react-native-community/datetimepicker') return { default: 'Picker' };
     if (name === './ui') return { Button: 'Button' };
-    if (name === './theme') return { color: {}, space: {}, type: {} };
+    if (name === './theme') return { color: {}, space: {}, tap: 48, type: { body: { fontSize: 15, lineHeight: 23 }, label: {} } };
     if (name === './sentLetter') return { dateInput, mailingDate };
     if (name === './myLetters') return { showDate: dateInput };
     throw Error(`Unexpected import ${name}`);
@@ -28,6 +28,8 @@ for (const platform of ['web', 'android', 'ios']) test(`${platform}: date select
   const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 1);
   if (platform === 'web') {
     const input = render().props.children[1];
+    // A bare number here renders as 23x the font size and the box fills the screen.
+    for (const style of [render().props.style, input.props.style]) assert.match(String(style.lineHeight), /^\d+px$/);
     assert.equal(input.props.type, 'date'); assert.equal(input.props.value, dateInput()); assert.equal(input.props.max, dateInput());
     for (const value of ['', '2026-02-30', dateInput(tomorrow)]) input.props.onChange({ currentTarget: { value } });
     assert.deepEqual(changes, []);
