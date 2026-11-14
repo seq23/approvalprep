@@ -1,5 +1,6 @@
 import { json } from '../_runtime/responses.js';
 import { recordPurchase } from '../_runtime/nurture.js';
+import { revokeRefundedCharge } from '../_runtime/refunds.js';
 async function hmacHex(secret, payload){
   const key=await crypto.subtle.importKey('raw',new TextEncoder().encode(secret),{name:'HMAC',hash:'SHA-256'},false,['sign']);
   const sig=await crypto.subtle.sign('HMAC',key,new TextEncoder().encode(payload));
@@ -27,7 +28,8 @@ async function recordCheckout(env, session){
   if(!env.PRODUCTS_DB) return;
   const productId=session.metadata?.sku || session.metadata?.product_id || session.client_reference_id || '';
   if(!productId) return;
-  const existing=await env.PRODUCTS_DB.prepare('SELECT id FROM download_entitlements WHERE stripe_session_id=?').bind(session.id).first();
+  const existing=await env.PRODUCTS_DB.prepare('SELECT id,revoked_at FROM download_entitlements WHERE stripe_session_id=?').bind(session.id).first();
+  if(existing?.revoked_at) return; // refunded already: a replayed paid event never unlocks it again
   const id=existing?.id||crypto.randomUUID();
   await env.PRODUCTS_DB.prepare('INSERT OR REPLACE INTO download_entitlements (id,stripe_session_id,product_id,customer_email,payment_status,amount_total,currency,created_at,expires_at) VALUES (?,?,?,?,?,?,?,?,?)').bind(id,session.id,productId,'',session.payment_status||'unknown',session.amount_total||0,session.currency||'usd',new Date().toISOString(),new Date(Date.now()+1000*60*60*24*30).toISOString()).run();
 }
@@ -46,6 +48,11 @@ export async function onRequestPost({ request, env }){
       try { await recordPurchase(env, session.customer_details?.email || session.customer_email, session.metadata?.product_name); }
       catch(e){ console.error(JSON.stringify({event:'RECORD_PURCHASE_FAILED',error:String(e?.message||e)})); }
     }
+  }
+  if(event.type==='charge.refunded'){
+    // A full refund ends download access (functions/_runtime/refunds.js). A failure returns 500 so Stripe retries.
+    try { await revokeRefundedCharge(env, event.data.object); }
+    catch(e){ console.error(JSON.stringify({event:'REFUND_REVOKE_FAILED',error:String(e?.message||e)})); return json({ok:false,error:'REFUND_REVOKE_FAILED'},500); }
   }
   return json({ok:true,received:true});
 }

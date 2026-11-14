@@ -101,6 +101,67 @@ if (!slugPage.includes("data-discount-code")) fail("[payment] pricing page must 
   if (discountCheckDecision({ code: "ANYCODE", fullPriceSessionId: "cs_test_abc" }).run !== true) fail("[payment] checkout E2E must still run the discount path in Stripe test mode");
 }
 
+// A full refund closes the downloads: charge.refunded revokes the entitlement, and neither download
+// path may reopen it through the Stripe fallback (a refunded session still says "paid").
+{
+  const rows = new Map();
+  const db = { prepare(sql) { return { bind(...a) { return {
+    async first() {
+      const r = rows.get(a[0]);
+      if (!r) return null;
+      if (/revoked_at IS NULL/.test(sql) && r.revoked_at) return null;
+      if (/revoked_at IS NOT NULL/.test(sql) && !r.revoked_at) return null;
+      return r;
+    },
+    async run() {
+      if (/^UPDATE download_entitlements SET revoked_at/.test(sql)) { const r = rows.get(a[1]); if (r) r.revoked_at = a[0]; }
+      else if (/INSERT OR REPLACE INTO download_entitlements/.test(sql)) rows.set(a[1], { id: a[0], stripe_session_id: a[1], product_id: a[2], payment_status: a[4], expires_at: a[8], revoked_at: null });
+      else if (/INSERT INTO download_entitlements/.test(sql)) rows.set(a[1], { id: a[0], stripe_session_id: a[1], product_id: a[2], payment_status: a[4], expires_at: a[8], revoked_at: a[9] });
+      return { meta: { changes: 1 } };
+    } }; } }; } };
+  const r2 = { async get() { return { body: "file" }; } };
+  const env = { PRODUCTS_DB: db, PRODUCT_ASSETS_R2: r2, STRIPE_SECRET_KEY: "sk_test_x", STRIPE_MODE: "test", STRIPE_WEBHOOK_SECRET: "whsec_test" };
+  const sku = "credit-letter-kit";
+  const session = (id) => ({ id, object: "checkout.session", status: "complete", payment_status: "paid", amount_total: 1900, currency: "usd", metadata: { sku }, client_reference_id: sku, payment_intent: "pi_" + id });
+  const realFetch = globalThis.fetch;
+  globalThis.fetch = async (url) => {
+    const u = String(url);
+    const listed = u.match(/checkout\/sessions\?payment_intent=pi_([^&]+)/);
+    const body = listed ? { data: [session(decodeURIComponent(listed[1]))] } : session(decodeURIComponent(u.split("/checkout/sessions/")[1]));
+    return new Response(JSON.stringify(body), { status: 200, headers: { "content-type": "application/json" } });
+  };
+  try {
+    const crypto = await import("node:crypto");
+    const { onRequestPost: webhook } = await import("../../functions/api/stripe-webhook.js");
+    const { onRequestPost: verifyPost } = await import("../../functions/api/verify-download.js");
+    const { onRequestGet: downloadGet } = await import("../../functions/api/download-file.js");
+    const deliver = async (event) => {
+      const raw = JSON.stringify(event); const t = Math.floor(Date.now() / 1000);
+      const sig = crypto.createHmac("sha256", env.STRIPE_WEBHOOK_SECRET).update(`${t}.${raw}`).digest("hex");
+      return webhook({ env, request: new Request("https://x/api/stripe-webhook", { method: "POST", headers: { "stripe-signature": `t=${t},v1=${sig}` }, body: raw }) });
+    };
+    const verify = (sid) => verifyPost({ env, request: new Request("https://x/api/verify-download", { method: "POST", body: JSON.stringify({ sku, session_id: sid }) }) });
+    const download = (sid) => downloadGet({ env, request: new Request(`https://x/api/download-file?session_id=${sid}&type=pdf`) });
+    const refund = (sid, refunded = true) => deliver({ id: "evt_r_" + sid, type: "charge.refunded", data: { object: { id: "ch_" + sid, refunded, payment_intent: "pi_" + sid } } });
+
+    // Paid, then fully refunded: both paths lock, and replaying the paid event does not reopen it.
+    await deliver({ id: "evt_paid", type: "checkout.session.completed", data: { object: session("cs_test_paid") } });
+    if ((await download("cs_test_paid")).status !== 200) fail("[payment] a paid purchase must download before any refund");
+    if ((await refund("cs_test_paid")).status !== 200) fail("[payment] charge.refunded must be accepted by the webhook");
+    if ((await verify("cs_test_paid")).status !== 403) fail("[payment] verify-download must lock a fully refunded purchase");
+    if ((await download("cs_test_paid")).status !== 403) fail("[payment] download-file must lock a fully refunded purchase, even though Stripe still says paid");
+    await deliver({ id: "evt_paid", type: "checkout.session.completed", data: { object: session("cs_test_paid") } });
+    if ((await download("cs_test_paid")).status !== 403) fail("[payment] a replayed paid event must not reopen a refunded purchase");
+    // Refund when the paid webhook was never recorded: still locked.
+    await refund("cs_test_missed");
+    if ((await download("cs_test_missed")).status !== 403) fail("[payment] a refund must lock a purchase whose paid webhook was missed");
+    // A partial refund keeps access.
+    await deliver({ id: "evt_part", type: "checkout.session.completed", data: { object: session("cs_test_part") } });
+    await refund("cs_test_part", false);
+    if ((await download("cs_test_part")).status !== 200) fail("[payment] a partial refund must not close the downloads");
+  } finally { globalThis.fetch = realFetch; }
+}
+
 const homepage = fs.readFileSync(path.join(root, "src/pages/index.astro"), "utf8");
 for (const token of ["After checkout, you choose", "Option A: Download now", "Option B: Use the free Studio", "replace the placeholders with your true facts"]) {
   if (!homepage.includes(token)) fail("[payment] homepage must clearly explain direct download versus Studio prefill option: " + token);

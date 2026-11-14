@@ -62,7 +62,9 @@ const allowedOperational = [
   "functions/_runtime/catalog.js",
   // Typed-in sample sign-ups and hashes only; scripts/validate/email-nurture.mjs proves a
   // buyer's address is never written.
-  "functions/_runtime/nurture.js"
+  "functions/_runtime/nurture.js",
+  // Marks a refunded session's entitlement revoked; writes no email or answers (customer_email is '').
+  "functions/_runtime/refunds.js"
 ];
 for (const file of walk("functions").filter((item) => item.endsWith(".js"))) {
   const text = fs.readFileSync(file, "utf8");

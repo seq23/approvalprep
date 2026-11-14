@@ -1,6 +1,7 @@
 import { json } from '../_runtime/responses.js';
 import { getProductBySlug } from '../_runtime/catalog.js';
 import { productAssetKey } from '../_runtime/asset-keys.js';
+import { isSessionRevoked } from '../_runtime/refunds.js';
 
 function contentTypeFor(type) {
   return type === 'docx' ? 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' : 'application/pdf';
@@ -63,6 +64,7 @@ export async function onRequestGet({ request, env }){
     const entitlement = await readEntitlement(env, sid);
     productId = entitlement.productId;
     if (!productId) {
+      if (await isSessionRevoked(env, sid)) return json({ ok:false, error:'DOWNLOAD_NOT_AUTHORIZED', paymentStatus:'refunded' }, 403);
       const stripe = await fetchStripeSession(env, sid);
       if (!stripe.ok) return stripe.response;
       productId = stripe.productId;
