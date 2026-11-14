@@ -18,7 +18,7 @@ export const FILE_TYPES = ['pdf', 'docx'];
 export const CONTENT_TYPES = { pdf: 'application/pdf', docx: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' };
 export const isFileKit = kit => typeof kit === 'string' && Object.hasOwn(APP_FILE_KITS, kit);
 /** The kit's own product, or the bundle (or its upgrade), live and not refunded. */
-export const ownsFileKit = (subscriber, kit, sandbox = false) => isFileKit(kit) && (ownsProduct(subscriber, APP_FILE_KITS[kit], sandbox) || ownsBundle(subscriber, sandbox));
+export const ownsFileKit = (purchases, kit, sandbox = false) => isFileKit(kit) && (ownsProduct(purchases, APP_FILE_KITS[kit], sandbox) || ownsBundle(purchases, sandbox));
 export const fileKey = (kit, type) => productAssetKey(kit, type);
 const hex = buffer => Array.from(new Uint8Array(buffer), b => b.toString(16).padStart(2, '0')).join('');
 export async function signedFileUrl(origin, secret, kit, type, now = Date.now()) {

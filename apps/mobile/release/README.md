@@ -21,6 +21,9 @@ Server side, before sales are switched on (`KIT_SALES_ENABLED` in `src/kit.ts`):
 
 - Set the server secret `APPROVALPREP_REVENUECAT_SECRET` on the website's Pages project. Without
   it the doors answer `NAMED STOP [REVENUECAT_SECRET_MISSING]` and no paid file leaves.
+  It is the ApprovalPrep project's RevenueCat **v2** secret key (vault `REVENUECAT_AP_V2_SECRET_KEY`): the doors read
+  `/v2/projects/{project}/customers/{id}/purchases` and `/products` (`functions/_runtime/revenuecat.js`). A key
+  RevenueCat refuses answers `NAMED STOP [REVENUECAT_KEY_REJECTED]`.
 - Put both kit files in the private bucket (`docs/APP_BUNDLE_DELIVERY.md`).
 - For the days of a store review only, set `APPROVALPREP_ACCEPT_SANDBOX_PURCHASES=1` so the
   reviewer's test purchase opens the kit; remove it afterwards.
