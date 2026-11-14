@@ -26,7 +26,7 @@ test('the read-back check passes only when RevenueCat matches the code', () => {
   const wrong = live();
   wrong.products = wrong.products.filter(p => !(p.app_id === 'a2' && p.store_identifier === 'ap_credit_kit'));
   wrong.entitlementProducts.ap_complete_bundle = [];
-  wrong.offeringPackages.default[0].position = 5;
+  wrong.offeringPackages.default[0].position = 99;
   (wrong.apps[0] as { app_store: { bundle_id: string } }).app_store.bundle_id = 'com.other';
   assert.deepEqual(diff(catalog, wrong).length, 4);
 });
