@@ -17,7 +17,7 @@ import { installBundle } from '../../../src/purchases/bundleFiles';
 import { saveDeliveredKit } from '../../../src/kitTemplates';
 import { restoreAll, restoreFileKits, restoreMessage } from '../../../src/purchases/restoreAll';
 import { downloadKitFiles, saveKitFiles } from '../../../src/purchases/kitFiles';
-import { unlockWebsiteOrder, websiteUnlockMessage } from '../../../src/purchases/websiteUnlock';
+import { emailWebsiteOrderLinks, unlockWebsiteOrder, websiteUnlockMessage } from '../../../src/purchases/websiteUnlock';
 import { exportAllLetters } from '../../../src/allLetters';
 export default function More() {
   const [confirming, setConfirming] = useState(false);
@@ -29,6 +29,9 @@ export default function More() {
   const [order, setOrder] = useState('');
   const [unlocking, setUnlocking] = useState(false);
   const [unlocked, setUnlocked] = useState('');
+  const [buyerEmail, setBuyerEmail] = useState('');
+  const [emailing, setEmailing] = useState(false);
+  const [emailed, setEmailed] = useState('');
   const [exporting, setExporting] = useState(false);
   const [exported, setExported] = useState('');
   async function unlockOrder() {
@@ -37,6 +40,12 @@ export default function More() {
     try { setUnlocked(websiteUnlockMessage(await unlockWebsiteOrder(order, { saveKit: saveDeliveredKit, saveFiles: saveKitFiles, installBundle }), PREVIEW_ENABLED)); setOrder(''); }
     catch (error) { setUnlocked(websiteUnlockMessage(error instanceof Error ? error : Error('WEBSITE_UNLOCK_UNAVAILABLE'), PREVIEW_ENABLED)); }
     finally { setUnlocking(false); }
+  }
+  async function emailLinks() {
+    if (emailing) return;
+    setEmailing(true); setEmailed('');
+    try { setEmailed(await emailWebsiteOrderLinks(buyerEmail, PREVIEW_ENABLED)); }
+    finally { setEmailing(false); }
   }
   async function exportAll() {
     if (exporting) return;
@@ -72,6 +81,11 @@ export default function More() {
     <Field label="Your order link" value={order} onChangeText={setOrder} />
     <Button label={unlocking ? 'Checking…' : 'Open my website kit ›'} disabled={unlocking || !order.trim()} onPress={() => void unlockOrder()} />
     {unlocked ? <Text accessibilityRole="alert" style={type.sub}>{unlocked}</Text> : null}
+    <Text style={type.body}>No link? Enter the email you paid with</Text>
+    <Text style={type.sub}>We email the link for any kit bought with that address. Only the email you type is sent.</Text>
+    <Field label="Email you paid with" value={buyerEmail} onChangeText={setBuyerEmail} email />
+    <Button label={emailing ? 'Sending…' : 'Email me my link ›'} disabled={emailing || !buyerEmail.trim()} onPress={() => void emailLinks()} />
+    {emailed ? <Text accessibilityRole="alert" style={type.sub}>{emailed}</Text> : null}
     <Text style={type.section} accessibilityRole="header">Your letters</Text>
     <Text style={type.sub}>Your letters and mailing dates are kept only on this phone. Deleting the app deletes them. Save a copy you can keep.</Text>
     <Button label={exporting ? 'Making the PDF…' : 'Save all my letters as one PDF ›'} disabled={exporting} onPress={() => void exportAll()} />

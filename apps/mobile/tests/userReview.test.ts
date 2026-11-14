@@ -13,7 +13,7 @@ import { answerRows, copyOf } from '../src/draftAnswers';
 import { disputeQuestions } from '../src/letterQuestions';
 import { letterHref } from '../src/studioDrafts';
 import { newKitDraft } from '../src/kitTemplates';
-import { unlockWebsiteOrder, websiteOrderCode } from '../src/purchases/websiteUnlock';
+import { EMAIL_LOOKUP_SENT, emailWebsiteOrderLinks, unlockWebsiteOrder, websiteOrderCode } from '../src/purchases/websiteUnlock';
 import type { SavedLetter } from '../src/letterStorage';
 import { onRequestPost as websiteUnlock, orderContents } from '../../../functions/api/app-website-unlock.js';
 import { onRequestPost as appUnlock } from '../../../functions/api/app-unlock.js';
@@ -207,6 +207,18 @@ test('#12 the app sends only the order code, follows only our own signed links a
   t.mock.method(globalThis, 'fetch', async () => Response.json({ error: 'ORDER_NOT_FOUND' }, { status: 403 }));
   await assert.rejects(unlockWebsiteOrder(order, deps), /ORDER_NOT_FOUND/);
   assert.deepEqual(saved, ['rental-application-kit']);
+});
+
+test('no link: the app sends only the typed email, to our own server, and never learns whether it bought anything', async t => {
+  const calls: { url: string; body: string }[] = [];
+  t.mock.method(globalThis, 'fetch', async (url: string, init: RequestInit) => { calls.push({ url: String(url), body: String(init.body) }); return Response.json({ status: 'ACCEPTED' }, { status: 202 }); });
+  assert.equal(await emailWebsiteOrderLinks('  Buyer@Example.com ', false), EMAIL_LOOKUP_SENT);
+  assert.deepEqual(calls, [{ url: 'https://approvalprep.com/api/email-download-links', body: JSON.stringify({ email: 'buyer@example.com' }) }]);
+  assert.notEqual(await emailWebsiteOrderLinks('not an email', false), EMAIL_LOOKUP_SENT);
+  assert.notEqual(await emailWebsiteOrderLinks('buyer@example.com', true), EMAIL_LOOKUP_SENT);
+  assert.equal(calls.length, 1);
+  t.mock.method(globalThis, 'fetch', async () => Response.json({ status: 'RATE_LIMITED' }, { status: 429 }));
+  assert.match(await emailWebsiteOrderLinks('buyer@example.com', false), /Too many tries/);
 });
 
 test('#1 a TestFlight (sandbox) purchase opens its kit only while the server allows sandbox purchases', async t => {
