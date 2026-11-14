@@ -4,9 +4,9 @@
 EAS pre-install hook enforce the same checks. Preview and development builds remain free
 of store-account requirements. This task does not build or submit a store release.
 
-- Replace both `com.approvalprep.app` placeholders with the company account identifiers.
+- Bundle id `com.approvalprep.app` is registered (App Store Connect app 6834891489); the gate stops only a missing or example id.
 - Set the public RevenueCat SDK keys `EXPO_PUBLIC_AP_REVENUECAT_IOS_KEY` (`appl_`)
-  and `EXPO_PUBLIC_AP_REVENUECAT_ANDROID_KEY` (`goog_`) in the build environment.
+  and `EXPO_PUBLIC_AP_REVENUECAT_ANDROID_KEY` (`goog_`) in the build environment (EAS project env, `production`).
   Never set a RevenueCat server secret in an app environment.
 - Remove `EXPO_PUBLIC_AP_PREVIEW=1` from production.
 
@@ -32,5 +32,5 @@ Server side, before sales are switched on (`KIT_SALES_ENABLED` in `src/kit.ts`):
 - Run `npm run bundle:load` against a preview with a verified purchase identity, and restore
   once on a second phone, before the first submission.
 
-Task 11: NAMED STOP [WAITS_FOR_LAUNCH_PLAN], as directed by the owner. No agent runs a
-production build or submits.
+Task 11: production builds go to TestFlight (`eas build -p ios --profile production --auto-submit`,
+submit profile `production`, ascAppId 6834891489). Submitting for App Store review stays with the owner.

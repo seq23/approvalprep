@@ -12,7 +12,9 @@ export function releaseStops(options) {
   const scorecard = 'scorecard' in options ? options.scorecard : readScorecard();
   const stops = [];
   if (env.EXPO_PUBLIC_AP_PREVIEW === '1') stops.push('PREVIEW_FLAG_SET');
-  if (!iosBundleId || !androidPackage || [iosBundleId, androidPackage].includes('com.approvalprep.app')) stops.push('BUNDLE_ID_PLACEHOLDER');
+  // A store build needs a real reverse-DNS id on both platforms; example ids are placeholders.
+  const realId = (id) => typeof id === 'string' && /^[a-z][a-z0-9]*(\.[a-z][a-z0-9-]*)+$/i.test(id) && !/^(com|org|net)\.example\./i.test(id);
+  if (!realId(iosBundleId) || !realId(androidPackage)) stops.push('BUNDLE_ID_PLACEHOLDER');
   if (!env.EXPO_PUBLIC_AP_REVENUECAT_IOS_KEY?.startsWith('appl_') || !env.EXPO_PUBLIC_AP_REVENUECAT_ANDROID_KEY?.startsWith('goog_')) stops.push('REVENUECAT_KEY_MISSING');
   if (!scorecard?.bossOsRowId || !/^\d{4}-\d{2}-\d{2}$/.test(scorecard?.recordedAt ?? '')) stops.push('SCORECARD_NOT_REGISTERED');
   return stops;
