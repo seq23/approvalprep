@@ -7,7 +7,7 @@ import { HONEST_LIMIT, REQUEST_LINE } from '../../../src/copy';
 import { isCreditLetter } from '../../../src/letters';
 import { CREDIT_KIT, offerTitle } from '../../../src/offers';
 import { usePrices } from '../../../src/purchases/prices';
-import { answerDue, showDate } from '../../../src/myLetters';
+import { answerDue, letterTypeName, showDate } from '../../../src/myLetters';
 import { bureaus, disputeQuestions } from '../../../src/letterQuestions';
 import { savedLetters } from '../../../src/savedLetters';
 import type { SavedLetter } from '../../../src/letterStorage';
@@ -44,7 +44,7 @@ export default function Draft() {
   const output = async (action: 'save' | 'print') => {
     if (!rendered || !letter || busy) return;
     setBusy(true); setExportMessage('');
-    try { await saveOrPrintLetter(letterHtml(rendered.text, letter.kind === 'bureau-dispute'), action); }
+    try { await saveOrPrintLetter(letterHtml(rendered.text, letter.kind === 'bureau-dispute', letterTypeName(letter.kind)), action, letterTypeName(letter.kind)); }
     catch (error) { setExportMessage(error instanceof Error ? error.message : 'Your PDF could not be opened. Please try again.'); }
     finally { setBusy(false); }
   };
@@ -65,7 +65,7 @@ export default function Draft() {
   return <Screen route="/letters/draft" label={mailed ? 'Your letter' : 'Your letter, first draft'} title={mailed ? 'The letter you mailed' : 'Read it before you mail it'}>
     <Text style={type.sub}>{!letter || isCreditLetter(letter.kind) ? HONEST_LIMIT : REQUEST_LINE}</Text>
     {rendered && letter ? <>
-      <Sheet><Text selectable style={type.body}>{disputedParts(rendered.text, dispute ? letter.answers.shows : '').map((part, index) => part.highlighted ? <Hl key={index}>{part.text}</Hl> : <Text key={index}>{part.text}</Text>)}</Text></Sheet>
+      <Sheet><Text selectable style={type.letter}>{disputedParts(rendered.text, dispute ? letter.answers.shows : '').map((part, index) => part.highlighted ? <Hl key={index}>{part.text}</Hl> : <Text key={index}>{part.text}</Text>)}</Text></Sheet>
       <Button primary label={busy ? 'Opening PDF…' : Platform.OS === 'web' ? 'Save as PDF or print ›' : 'Save or share PDF ›'} disabled={busy} onPress={() => void output('save')} />
       {Platform.OS !== 'web' ? <Button label="Print ›" disabled={busy} onPress={() => void output('print')} /> : <Text style={type.sub}>Choose Save as PDF in your browser’s print window, then share the saved file.</Text>}
       {exportMessage ? <Text accessibilityRole="alert" style={type.sub}>{exportMessage}</Text> : null}

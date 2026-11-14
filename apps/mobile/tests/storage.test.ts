@@ -4,7 +4,7 @@ import { DatabaseSync } from 'node:sqlite';
 import { mkdtempSync, rmSync, readdirSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { letterStorage, type SavedLetter } from '../src/letterStorage';
+import { letterStorage, ssnInput, type SavedLetter } from '../src/letterStorage';
 
 const draft = (id: string): SavedLetter => ({ id, kind: 'bureau-dispute', answers: { description: "A quoted ' value; DROP TABLE letters;" }, status: 'draft', sentDate: null, method: null, trackingNumber: null, reminderDate: null, answerNote: '' });
 function driver(db: DatabaseSync) {
@@ -43,4 +43,35 @@ test('phone source cannot call the network outside purchases', () => {
   const files = walk(join(__dirname, '../src')).filter(f => /\.tsx?$/.test(f) && !/\/purchases\//.test(f));
   assert.ok(files.length > 0);
   for (const file of files) assert.doesNotMatch(readFileSync(file, 'utf8'), /\b(fetch|XMLHttpRequest|WebSocket|EventSource)\s*\(|\b(?:axios|https?|net)\s*\./, file);
+});
+
+test('only the last 4 SSN digits are ever on the phone: on write, on read, and an older longer value is cut down on open', async t => {
+  const dir = mkdtempSync(join(tmpdir(), 'ap-ssn-'));
+  const file = join(dir, 'letters.db');
+  let db = new DatabaseSync(file);
+  t.after(() => { db.close(); rmSync(dir, { recursive: true, force: true }); });
+  let store = await letterStorage(driver(db));
+  await store.create({ ...draft('typed'), answers: { name: 'Jordan Avery', ssn4: '123456' } });
+  assert.equal((await store.get('typed'))!.answers.ssn4, '3456');
+  await store.update({ ...draft('typed'), answers: { name: 'Jordan Avery', ssn4: '123-45-6789' } });
+  assert.equal((await store.get('typed'))!.answers.ssn4, '6789');
+  // A full number saved by an older build, written straight into the table.
+  db.prepare('INSERT INTO letters (id, kind, answers, status, answerNote) VALUES (?, ?, ?, ?, ?)').run('old', 'bureau-dispute', JSON.stringify({ ssn4: '987654321', name: 'A' }), 'draft', '');
+  const raw = () => (db.prepare('SELECT answers FROM letters').all() as { answers: string }[]).map(r => r.answers).join(' ');
+  assert.match(raw(), /987654321/);
+  db.close();
+  db = new DatabaseSync(file);
+  store = await letterStorage(driver(db));
+  assert.doesNotMatch(raw(), /\d{5,}/, 'no 5+ digit run is left in the table');
+  assert.equal((await store.get('old'))!.answers.ssn4, '4321');
+  assert.equal((await store.get('old'))!.answers.name, 'A');
+  assert.equal((await store.list()).length, 2);
+});
+
+test('the SSN box takes digits only, at most 4: a 5th key is ignored, a pasted full number keeps its last 4', () => {
+  assert.equal(ssnInput('12', '1'), '12');
+  assert.equal(ssnInput('12a3-', '12'), '123');
+  assert.equal(ssnInput('12345', '1234'), '1234');
+  assert.equal(ssnInput('123-45-6789', ''), '6789');
+  assert.equal(ssnInput('', '1234'), '');
 });

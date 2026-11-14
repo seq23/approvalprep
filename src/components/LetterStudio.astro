@@ -139,7 +139,9 @@ const first = studioSituations[0];
         } else if (field.kind === "long" || field.kind === "lines") {
           input = el("textarea", { id, name: field.name, rows: field.kind === "lines" ? "2" : "4", autocomplete: field.autocomplete || "off" });
         } else {
-          input = el("input", { id, name: field.name, type: "text", autocomplete: field.autocomplete || "off" });
+          input = field.name === "ssn4"
+            ? el("input", { id, name: field.name, type: "text", inputmode: "numeric", pattern: "[0-9]{4}", autocomplete: "off" })
+            : el("input", { id, name: field.name, type: "text", autocomplete: field.autocomplete || "off" });
         }
         input.value = state.answers[field.name] || "";
         label.append(input);
@@ -201,6 +203,8 @@ const first = studioSituations[0];
     form.addEventListener("input", (event) => {
       const target = event.target as HTMLInputElement;
       if (!target?.name || target.name === "situation") return;
+      // Only the last 4 SSN digits are ever kept, even from a pasted full number.
+      if (target.name === "ssn4") { const digits = target.value.replace(/\D/g, ""); target.value = digits.length <= 4 ? digits : (event as InputEvent).inputType === "insertFromPaste" ? digits.slice(-4) : digits.slice(0, 4); }
       state.answers[target.name] = target.value;
       if (state.drafted) renderLetter();
       save();

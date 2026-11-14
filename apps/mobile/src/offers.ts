@@ -1,6 +1,6 @@
 // Everything the app offers, in one place, so the first screen, the letter list, the kit screens
 // and the bundle screen all name the same things (hostile review, 13 Nov 2026: "idk what is being
-// offered on this app"). Prices are never typed here: screens show the store's price (usePrices).
+// offered on this app"). Screens show the store's own price string (usePrices); FALLBACK_PRICES only fills a product the store did not answer for.
 import { KIT, EXPLANATION_KIT, COMPLETE_BUNDLE, FILE_KITS, SITE_SKU, fileKitBySku, isUpgrade } from './kit';
 import { LETTERS, EXPLANATION_LETTERS } from './letters';
 import { situations } from './studio';
@@ -25,6 +25,12 @@ export const BUNDLE_OFFER = {
 export const KIT_OFFERS = [CREDIT_KIT, EXPLANATION_KIT_OFFER] as const;
 export const kitOfferFor = (kitId: string) => kitId === EXPLANATION_KIT_OFFER.id ? EXPLANATION_KIT_OFFER : CREDIT_KIT;
 
+/** Each product's approved US price, shown only where the store has not given its own price string
+ * (the store's own string wins: it is what she is charged, in her currency). */
+export const FALLBACK_PRICES: Record<string, string> = Object.fromEntries(
+  [[KIT.productId, KIT.approvedPriceUSD], [EXPLANATION_KIT.productId, EXPLANATION_KIT.approvedPriceUSD], [COMPLETE_BUNDLE.productId, COMPLETE_BUNDLE.approvedPriceUSD], ...FILE_KITS.map(k => [k.productId, k.approvedPriceUSD] as const)]
+    .map(([id, usd]) => [id, `$${Number(usd).toFixed(2)}`]));
+export const withFallbackPrices = (store: Record<string, string>): Record<string, string> => ({ ...FALLBACK_PRICES, ...Object.fromEntries(Object.entries(store).filter(([, price]) => !!price)) });
 /** "Credit Letter Kit · $19.99 once", or without the price until the store has answered. */
 export const offerTitle = (name: string, price?: string) => price ? `${name} · ${price} once` : `${name} · paid once`;
 /** A locked letter says which kit holds it and what that kit costs. */
@@ -32,6 +38,8 @@ export const lockedLine = (kitName: string, price?: string) => price ? `In the $
 
 export const STUDIO_COUNT = situations.length;
 export const FREE_LINE = `Free, as often as you like: the Letter Studio (${STUDIO_COUNT} situations) and the credit bureau dispute letter with its PDF.`;
+/** Home's line over the kits: the same kits as the website, never "the same price" (the store sets its own). */
+export const SAME_KITS_LINE = 'The kits approvalprep.com sells, in the same order. Here you buy them through the app store, at the app store’s price.';
 export const PAID_ONCE_LINE = 'Each is paid once. There is no subscription.';
 
 // The app's two letter kits also carry the website kit of the same name, as its files.

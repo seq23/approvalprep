@@ -197,6 +197,18 @@ export function tidySentences(value) {
 export const tidyFact = (value) => collapse(value).replace(/[.;,]+$/, "");
 /** A name typed all in lower case gets its capitals; anything else is left as she wrote it. */
 const tidyName = (value) => { const v = tidyFact(value); return v && v === v.toLowerCase() ? v.replace(/(^|[\s'-])([a-z])/g, (_, lead, ch) => lead + ch.toUpperCase()) : v; };
+// Her words spliced into the middle of one of our sentences ("The report shows this ...: a 60-day
+// late payment", "Copy of bank statement"): a plain first word loses its capital, and a leading
+// "Shows" is dropped because our sentence already says it. A name ("Chase", "Bank of America") is
+// left as she wrote it: only common words are lowered, and never before "of" or a capital.
+const PLAIN_LEAD = new Set("a an the my one two three this that these those it late paid unpaid closed open opened past wrong incorrect duplicate not never no account accounts balance payment payments collection collections charge charged charge-off settled settlement debt loan card credit inquiry hard bank pay paystub paystubs police court letter letters receipt receipts proof statement statements copy copies bill bills utility lease tax mortgage identity id photo report record records email emails canceled cancelled check checks screenshot screenshots".split(" "));
+export function midSentence(value) {
+  const words = tidyFact(value).replace(/^(?:(?:it|the report|my report|report)\s+)?(?:shows|says|lists|reports|reported|has)(?:\s+that)?\s+/i, "").split(" ");
+  const [first = "", next] = words;
+  const plain = PLAIN_LEAD.has(first.toLowerCase()) && /^[A-Z][a-z-]*$/.test(first) && (!next || (!/^[A-Z]/.test(next) && next.toLowerCase() !== "of"));
+  if (plain) words[0] = first.toLowerCase();
+  return words.join(" ");
+}
 const lines = (value) => String(value ?? "").split(/\n|;/).map(collapse).filter(Boolean);
 const listItems = (value) => String(value ?? "").split(/\n|;|,(?!\s*\d{4}\b)| and (?=[a-z])/i).map((x) => tidyFact(x)).filter(Boolean);
 
@@ -245,7 +257,7 @@ export function buildLetter(situationId, answers = {}, { today = new Date() } = 
     if (bureau) recipient = [...bureau.lines]; else { blanks.push("The credit bureau"); recipient = ["[Credit bureau name]", "[Its mail address for disputes]"]; }
     salutation = "To whom it may concern:";
     reference = [`Account: ${cap(need("account", "Company name and last 4 digits of the account"))}`.replace("Account: [C", "Account: [C")];
-    const shows = need("shows", "What the report says");
+    const shows = answers.shows && tidyFact(answers.shows) ? midSentence(answers.shows) : need("shows", "What the report says");
     const why = tidySentences(answers.happened);
     if (!why) blanks.push("Why it is wrong");
     paragraphs = [
@@ -255,7 +267,7 @@ export function buildLetter(situationId, answers = {}, { today = new Date() } = 
       "I ask that you investigate this item and correct it, or remove it, so that my report is accurate. Please send me the written results of your investigation.",
       enclosed.length ? "Copies of the documents that support this dispute are enclosed and listed below." : "A copy of my credit report with the item circled is enclosed."
     ];
-    enclosures = ["Copy of my credit report with the item circled", ...enclosed.map((x) => `Copy of ${x.replace(/^(a |an |my |copy of |copies of )/i, "")}`)];
+    enclosures = ["Copy of my credit report with the item circled", ...enclosed.map((x) => `Copy of ${midSentence(x.replace(/^(a |an |my |copy of |copies of )/i, ""))}`)];
   } else {
     const to = tidyFact(answers.recipient);
     recipient = to ? [to] : [];

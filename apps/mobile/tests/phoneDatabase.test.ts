@@ -79,9 +79,10 @@ for (const screen of ['[kind]', 'sent']) test(`${screen}: stalled storage ends i
     if (name === 'react') return {
       useState: (initial: any) => { const i = cursor++; if (!(i in state)) state[i] = initial; return [state[i], (value: any) => { state[i] = typeof value === 'function' ? value(state[i]) : value; }]; },
       useRef: (current: any) => ({ current }), useCallback: (fn: any) => fn,
-      useEffect: (fn: any) => { effect = fn; },
+      useEffect: (fn: any) => { effect ??= fn; },
     };
-    if (name === 'expo-router') return { useLocalSearchParams: () => ({ kind: 'goodwill', id: 'saved' }), useFocusEffect: (fn: any) => { effect = fn; }, router: {} };
+    // The screen's first effect is the one that opens storage ([kind] also re-reads on a later focus).
+    if (name === 'expo-router') return { useLocalSearchParams: () => ({ kind: 'goodwill', id: 'saved' }), useFocusEffect: (fn: any) => { effect ??= fn; }, router: {} };
     if (name.endsWith('/phoneDatabase')) return { storageDeadline: (work: Promise<any>) => storageDeadline(work, 5) };
     if (name.endsWith('/kitTemplates')) return { loadDeliveredKit: stalled, kitForKind: () => 'credit-letter-kit', ALL_KIT_KINDS: ['goodwill'] };
     if (name.endsWith('/savedLetters')) return { savedLetters: stalled };
@@ -94,7 +95,7 @@ for (const screen of ['[kind]', 'sent']) test(`${screen}: stalled storage ends i
     if (name.endsWith('/ui')) return { Screen: 'Screen', Button: 'Button' };
     return {};
   } });
-  const render = () => { cursor = 0; return exports.default(); };
+  const render = () => { cursor = 0; effect = undefined; return exports.default(); };
   render(); effect!();
   await new Promise(resolve => setTimeout(resolve, 15));
   const tree = render();

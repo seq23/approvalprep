@@ -6,7 +6,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import { FIRST, HOME, SCREENS, TABS, backTarget, byRoute, screenForPath, titleFor } from '../src/screens';
+import { FIRST, HOME, SCREENS, TABS, backTarget, byRoute, screenForPath, shownTab, titleFor } from '../src/screens';
 
 const root = path.join(__dirname, '..');
 const routeOfFile = (f: string) => ('/' + f.replace(/^app\//, '').replace(/\(tabs\)\//, '').replace(/(^|\/)index\.tsx$|\.tsx$/, '')).replace(/\/$/, '') || '/';
@@ -99,4 +99,18 @@ test('the kit screen is headed with the name of the kit it shows', () => {
   assert.equal(titleFor('/letters/unlock'), 'Credit Letter Kit');
   assert.equal(titleFor('/letters/bundle', { kit: 'letter-of-explanation-kit' }), 'Complete ApprovalPrep Bundle');
   assert.equal(titleFor('/letters/files', { kit: 'rental-application-kit' }), 'Rental Application Kit');
+});
+
+test('a screen opened from Home keeps Home lit on the tab bar through the screens after it, until a tab page is reached', () => {
+  let s = shownTab('/', undefined, null);
+  assert.equal(s.tab, 'index');
+  s = shownTab('/letters/[kind]'.replace('[kind]', 'bureau-dispute'), '/', s.origin);
+  assert.equal(s.tab, 'index', 'the dispute questions opened from Home');
+  s = shownTab('/letters/draft', undefined, s.origin);
+  assert.equal(s.tab, 'index', '"Your letter", which carries no from');
+  s = shownTab('/letters/unlock', '/more', null);
+  assert.equal(s.tab, 'more', 'a kit opened from More');
+  s = shownTab('/letters', undefined, s.origin);
+  assert.deepEqual(s, { tab: 'letters', origin: null });
+  assert.equal(shownTab('/letters/studio', undefined, null).tab, 'letters', 'opened inside Write a letter');
 });

@@ -11,7 +11,7 @@ import type { SavedLetter } from '../../src/letterStorage';
 import { startModel } from '../../src/start';
 import { type } from '../../src/theme';
 import { PRIVACY_LINE, WHAT_IT_IS } from '../../src/copy';
-import { FREE_LINE, PAID_ONCE_LINE, PRODUCTS, offerTitle } from '../../src/offers';
+import { FREE_LINE, PAID_ONCE_LINE, PRODUCTS, SAME_KITS_LINE, offerTitle } from '../../src/offers';
 import { usePrices } from '../../src/purchases/prices';
 import { openFrom } from '../../src/nav';
 import { draftHref, letterHref } from '../../src/studioDrafts';
@@ -76,7 +76,7 @@ export default function Home() {
       }} />)}
       {model.returning ? <Button label="All my letters ›" onPress={() => router.navigate('/mine')} /> : null}
       <Text style={type.section} accessibilityRole="header">Kits, if you want more</Text>
-      <Text style={type.sub}>The same kits approvalprep.com sells, in the same order. {PAID_ONCE_LINE}</Text>
+      <Text style={type.sub}>{SAME_KITS_LINE} {PAID_ONCE_LINE}</Text>
       {PRODUCTS.map(p => <Row key={p.sku} title={offerTitle(p.name, prices[p.productId])} sub={p.what} onPress={() => openFrom('/', p.screen, p.params)} />)}
       <Text style={type.sub}>{PRIVACY_LINE}</Text>
       {PREVIEW_ENABLED ? <Button label="Preview only: load sample letters and kits ›" disabled={loading} onPress={() => void samples()} /> : null}

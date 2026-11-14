@@ -76,7 +76,7 @@ export default function Files() {
       onPress={() => router.push(route.pathname === '/letters/bundle' ? '/letters/bundle' : { pathname: route.pathname, params: route.params })} />;
   };
   return <Screen route="/letters/files" label={offer.name} title={owned ? 'Your kit is on this phone' : `${offer.documentNames.length} documents, paid once`}>
-    <Text style={type.body}>The website's {offer.name}: a PDF guide and an editable Word file. You fill in your true facts and send it yourself.</Text>
+    <Text style={type.body}>A PDF guide and an editable Word file with these {offer.documentNames.length} documents. You fill in your true facts and send each one yourself.</Text>
     <Sheet>{offer.documentNames.map(name => <Text key={name} style={type.body}>{name}</Text>)}</Sheet>
     <Text style={type.sub}>{REQUEST_LINE}</Text>
     <Text style={type.sub}>Self-help templates. Not legal or financial advice. We do not contact anyone for you.</Text>

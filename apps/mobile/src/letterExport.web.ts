@@ -1,6 +1,6 @@
 // Print only the packet, never the app's navigation or private draft controls.
 // Expo Print's web implementation calls window.print() and ignores its HTML option.
-export async function saveOrPrintLetter(html: string, _action: 'save' | 'print'): Promise<void> {
+export async function saveOrPrintLetter(html: string, _action: 'save' | 'print', _title?: string): Promise<void> {
   const frame = document.createElement('iframe');
   frame.title = 'Your letter for printing';
   frame.style.position = 'fixed';

@@ -54,6 +54,18 @@ test('row has one action and fields keep their supplied value and editing callba
   assert.ok(input.accessibilityLabelledBy);
   input.onChangeText('2026-11-11'); assert.equal(edited, '2026-11-11');
 });
+test('the SSN box is a number pad that passes on at most 4 digits; link and email boxes are never capitalised or corrected', () => {
+  let edited = '';
+  render(ui.Field, { label: 'SSN', value: '', kind: 'ssn4', onChangeText: (s: string) => edited = s });
+  const ssn = nativeProps.TextInput[0];
+  assert.equal(ssn.keyboardType, 'number-pad');
+  ssn.onChangeText('123456'); assert.equal(edited, '3456', 'a pasted longer number keeps only its last 4');
+  for (const [kind, keyboard] of [['url', 'url'], ['email', 'email-address']]) {
+    render(ui.Field, { label: kind, value: '', kind, onChangeText: () => {} });
+    const box = nativeProps.TextInput[0];
+    assert.equal(box.keyboardType, keyboard); assert.equal(box.autoCapitalize, 'none'); assert.equal(box.autoCorrect, false);
+  }
+});
 test('sheet system dismissal and close button use the same callback; disclosure remains', () => {
   let closed = 0;
   const html = render(ui.BottomSheet, { visible: true, title: 'Task', onClose: () => closed++, children: 'Content' });

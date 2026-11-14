@@ -6,6 +6,12 @@ import { answerDueDate } from '../../../src/lib/letterStudioCore.mjs';
 import { bureaus } from '../../../src/lib/letterStudioCore.mjs';
 import { situations } from './studio';
 import { studioSituationOf } from './studioDrafts';
+/** What kind of letter it is ("Credit bureau dispute letter"), with no account or personal detail: names the PDF file. */
+export function letterTypeName(kind: string): string {
+  const studio = studioSituationOf(kind);
+  if (studio) return situations.find(s => s.id === studio)?.label ?? 'Letter';
+  return [...LETTERS, ...EXPLANATION_LETTERS].find(item => item.kind === kind)?.name ?? 'Letter';
+}
 /** A saved letter's name as she would say it: "Equifax · Sample account", never the stored id "equifax". */
 export function letterTitle(letter: Pick<SavedLetter, 'kind' | 'answers'>): string {
   const studio = studioSituationOf(letter.kind);

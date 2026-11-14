@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { disputedParts, exportLetter, letterHtml, type PdfTools } from '../src/letterPdf';
+import { PAGE_MARGIN_PT, disputedParts, exportLetter, letterHtml, pdfFileName, type PdfTools } from '../src/letterPdf';
 import { renderDispute } from '../src/letterQuestions';
 import { SELF_HELP_LINE } from '../src/copy';
 test('packet preserves blanks, escapes HTML, adds the free checklist and disclosure', () => {
@@ -16,7 +16,7 @@ test('packet preserves blanks, escapes HTML, adds the free checklist and disclos
   assert.ok(!letterHtml('A delivered letter').includes('<section>'));
   const parts = disputedParts(letter.text, 'Wrong balance');
   assert.equal(parts.map(p => p.text).join(''), letter.text);
-  assert.deepEqual(parts.filter(p => p.highlighted).map(p => p.text), ['Wrong balance']);
+  assert.deepEqual(parts.filter(p => p.highlighted).map(p => p.text), ['wrong balance'], 'her words as they read in the sentence');
   assert.equal(disputedParts(letter.text).filter(p => p.highlighted).length, 0);
 });
 test('disputed entry highlights the normalized report paragraph rather than an earlier matching account', () => {
@@ -34,13 +34,17 @@ test('disputed entry highlights the normalized report paragraph rather than an e
 });
 test('native creates and shares a PDF; web and print open the document print flow', async () => {
   const calls: unknown[] = [];
+  const names: string[] = [];
   const tools: PdfTools = {
     web: false, print: async html => { calls.push(['print', html]); },
-    create: async html => { calls.push(['create', html]); return 'file:///letter.pdf'; },
+    create: async (html, fileName) => { calls.push(['create', html]); names.push(fileName); return 'file:///letter.pdf'; },
     canShare: async () => true, share: async uri => { calls.push(['share', uri]); },
   };
   await exportLetter('packet', 'save', tools);
   assert.deepEqual(calls.splice(0), [['create', 'packet'], ['share', 'file:///letter.pdf']]);
+  await exportLetter('packet', 'save', tools, pdfFileName('Credit bureau dispute letter', new Date(2026, 10, 14)));
+  calls.splice(0);
+  assert.equal(names.at(-1), 'Credit bureau dispute letter – November 14, 2026.pdf', 'the shared file is named after the letter, never a random id');
   await exportLetter('packet', 'save', { ...tools, web: true });
   await exportLetter('packet', 'print', tools);
   assert.deepEqual(calls.splice(0), [['print', 'packet'], ['print', 'packet']]);
@@ -73,4 +77,14 @@ test('web prints only its isolated packet and removes the frame after printing',
     if (original) Object.defineProperty(globalThis, 'document', original);
     else Reflect.deleteProperty(globalThis, 'document');
   }
+});
+
+test('the PDF keeps at least 0.75in (54pt) from the paper edge, in a face whose zero has no slash, and its file name is safe', () => {
+  assert.ok(PAGE_MARGIN_PT >= 54);
+  const html = letterHtml('November 14, 2026', true, 'Rental: issue/letter');
+  const margin = Number(/@page \{[^}]*margin: ([\d.]+)in/.exec(html)![1]);
+  assert.ok(margin >= 0.75, `@page margin ${margin}in`);
+  assert.match(html, /font: 12pt\/1\.45 Arial/);
+  assert.doesNotMatch(pdfFileName('Rental: issue/letter', new Date(2026, 0, 2)), /[\/:]/);
+  assert.equal(pdfFileName('  ', new Date(2026, 0, 2)), 'Your letter – January 2, 2026.pdf');
 });

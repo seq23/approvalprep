@@ -7,7 +7,10 @@ interface WebsiteProduct { sku: string; name: string; priceLabel: string; status
 const paid = (catalog.products as WebsiteProduct[]).filter(p => p.status === 'active_paid' && p.stripe_enabled);
 export const BUNDLE_SKU = 'complete-approvalprep-bundle';
 export interface WebsiteKit { sku: string; name: string; price: string; documents: number; documentNames: string[] }
-const asKit = (p: WebsiteProduct): WebsiteKit => ({ sku: p.sku, name: p.name, price: p.priceLabel, documents: (p.included_offerings ?? []).length, documentNames: p.included_offerings ?? [] });
+// The catalog lists documents in lower case ("apartment application checklist"); a list on a screen
+// reads them as titles, in the app's sentence case ("Apartment application checklist").
+const asTitle = (name: string) => name.charAt(0).toUpperCase() + name.slice(1);
+const asKit = (p: WebsiteProduct): WebsiteKit => ({ sku: p.sku, name: p.name, price: p.priceLabel, documents: (p.included_offerings ?? []).length, documentNames: (p.included_offerings ?? []).map(asTitle) });
 /** All eight paid products, bundle included, in the website's order. */
 export const WEBSITE_PRODUCTS: WebsiteKit[] = paid.map(asKit);
 export const WEBSITE_KITS: WebsiteKit[] = WEBSITE_PRODUCTS.filter(p => p.sku !== BUNDLE_SKU);

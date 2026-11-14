@@ -78,12 +78,12 @@ export default function More() {
     {restored ? <Text accessibilityRole="alert" style={type.sub}>{restored}</Text> : null}
     <Text style={type.section} accessibilityRole="header">Bought on approvalprep.com?</Text>
     <Text style={type.sub}>A kit you bought on the website opens here at no charge. Paste the link from your download page or from the email "Your ApprovalPrep download link". Only the order code in it is sent.</Text>
-    <Field label="Your order link" value={order} onChangeText={setOrder} />
+    <Field label="Your order link" kind="url" value={order} onChangeText={text => { setOrder(text); setUnlocked(''); }} />
     <Button label={unlocking ? 'Checking…' : 'Open my website kit ›'} disabled={unlocking || !order.trim()} onPress={() => void unlockOrder()} />
     {unlocked ? <Text accessibilityRole="alert" style={type.sub}>{unlocked}</Text> : null}
     <Text style={type.body}>No link? Enter the email you paid with</Text>
     <Text style={type.sub}>We email the link for any kit bought with that address. Only the email you type is sent.</Text>
-    <Field label="Email you paid with" value={buyerEmail} onChangeText={setBuyerEmail} email />
+    <Field label="Email you paid with" kind="email" value={buyerEmail} onChangeText={text => { setBuyerEmail(text); setEmailed(''); }} />
     <Button label={emailing ? 'Sending…' : 'Email me my link ›'} disabled={emailing || !buyerEmail.trim()} onPress={() => void emailLinks()} />
     {emailed ? <Text accessibilityRole="alert" style={type.sub}>{emailed}</Text> : null}
     <Text style={type.section} accessibilityRole="header">Your letters</Text>

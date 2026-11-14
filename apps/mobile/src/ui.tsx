@@ -1,10 +1,11 @@
-import { useEffect, useId, type ReactNode } from 'react';
+import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
 import { Modal, Platform, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { color, radius, space, tap, type } from './theme';
 import { SELF_HELP_LINE } from './copy';
 import { byRoute } from './screens';
 import { useBackKeys } from './nav';
+import { ssnInput } from './letterStorage';
 
 // Every screen is a <Screen>: paper ground, phone margin, and the R-ADV-13 self-help line last.
 // The line cannot be switched off; tests/self-help.test.ts fails if a screen skips <Screen>.
@@ -63,12 +64,32 @@ export function Row({ title, sub, onPress, selected }: { title: string; sub?: st
   </Pressable>;
 }
 
-export function Field({ label, value, onChangeText, defaultHint, multiline = false, spoken, email = false }: { label: string; value: string; onChangeText: (value: string) => void; defaultHint?: string; multiline?: boolean; spoken?: string; email?: boolean }) {
+/** What kind of answer a box takes, so the phone shows the right keyboard and never "corrects" it. */
+export type FieldKind = 'text' | 'email' | 'url' | 'ssn4';
+const KEYBOARD = {
+  text: {},
+  email: { keyboardType: 'email-address', autoCapitalize: 'none', autoComplete: 'email', autoCorrect: false, textContentType: 'emailAddress', spellCheck: false },
+  url: { keyboardType: 'url', autoCapitalize: 'none', autoComplete: 'url', autoCorrect: false, textContentType: 'URL', spellCheck: false },
+  ssn4: { keyboardType: 'number-pad', autoComplete: 'off', autoCorrect: false, textContentType: 'none', spellCheck: false },
+} as const;
+/** The keyboard settings for a kind of box (tests/ui.test.ts reads these). */
+export const keyboardFor = (kind: FieldKind) => KEYBOARD[kind];
+/** The box keeps what she typed itself, so a slow save or a re-render can never put back an older
+ * value and drop her last letters; the parent only hears about each change. A new value from the
+ * parent (a cleared box, a reloaded draft) still replaces it. */
+export function Field({ label, value, onChangeText, defaultHint, multiline = false, spoken, email = false, kind = email ? 'email' : 'text' }: { label: string; value: string; onChangeText: (value: string) => void; defaultHint?: string; multiline?: boolean; spoken?: string; email?: boolean; kind?: FieldKind }) {
   const labelId = useId();
+  const [text, setText] = useState(value);
+  const typed = useRef(value);
+  useEffect(() => { if (value !== typed.current) { typed.current = value; setText(value); } }, [value]);
+  const change = (raw: string) => {
+    const next = kind === 'ssn4' ? ssnInput(raw, typed.current) : raw;
+    typed.current = next; setText(next); onChangeText(next);
+  };
   return <View style={{ gap: space[2] }}>
     <Text nativeID={labelId} style={type.label}>{label}</Text>
     {defaultHint ? <Text style={type.sub}>{defaultHint}</Text> : null}
-    <TextInput accessibilityLabel={spoken ?? label} accessibilityLabelledBy={labelId} value={value} onChangeText={onChangeText} multiline={multiline} {...(email ? { keyboardType: 'email-address' as const, autoCapitalize: 'none' as const, autoComplete: 'email' as const, autoCorrect: false } : {})} style={[type.body, { minHeight: tap, padding: space[3], borderWidth: 1, borderColor: color.rule, backgroundColor: color.paperRaised, borderRadius: radius.sm }]} />
+    <TextInput accessibilityLabel={spoken ?? label} accessibilityLabelledBy={labelId} value={text} onChangeText={change} multiline={multiline} {...KEYBOARD[kind]} style={[type.body, { minHeight: tap, padding: space[3], borderWidth: 1, borderColor: color.rule, backgroundColor: color.paperRaised, borderRadius: radius.sm }]} />
   </View>;
 }
 

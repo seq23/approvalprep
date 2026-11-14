@@ -20,6 +20,9 @@ export const type = {
   body: { fontFamily: font.body, fontSize: 15, lineHeight: 23, color: color.carbon },
   sub: { fontFamily: font.body, fontSize: 13, lineHeight: 18, color: color.carbonMuted },
   button: { fontFamily: font.bodyBold, fontSize: 16, lineHeight: 20 },
+  // The letter itself, on screen: the phone's own face, whose zero has no slash (the brand body
+  // face draws "2Ø26" in dates and account numbers). The PDF uses Arial for the same reason.
+  letter: { fontSize: 15, lineHeight: 23, color: color.carbon },
   label: { fontFamily: font.mono, fontSize: 12, lineHeight: 16, letterSpacing: 1.4, color: color.carbonMuted, textTransform: 'uppercase' as const },
 } as const;
 export const tap = 48; // every button; links at least 44
