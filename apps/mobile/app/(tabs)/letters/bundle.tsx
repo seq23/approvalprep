@@ -78,9 +78,9 @@ export default function Bundle() {
     </> : null}
     {kits.length ? <Text style={type.sub}>Other options</Text> : null}
     {kits.map(id => <Row key={id} title={offerTitle(nameOf(id), prices.find(p => p.id === id)?.price)} sub={KIT_OFFERS.find(kit => kit.productId === id)?.what} onPress={() => router.push({ pathname: '/letters/unlock', params: { kit: id === KIT.productId ? 'credit-letter-kit' : 'letter-of-explanation-kit' } })} />)}
-    <Button label={busy ? 'Checking…' : 'Restore purchase'} disabled={busy} onPress={() => void act(false)} />
+    <Button quiet label={busy ? 'Checking…' : 'Restore purchase'} disabled={busy} onPress={() => void act(false)} />
     {message ? <Text accessibilityRole="alert" style={type.sub}>{message}</Text> : null}
-    <Button label="Terms ›" onPress={() => void Linking.openURL('https://approvalprep.com/terms/')} />
-    <Button label="Privacy ›" onPress={() => void Linking.openURL('https://approvalprep.com/privacy/')} />
+    <Button quiet label="Terms ›" onPress={() => void Linking.openURL('https://approvalprep.com/terms/')} />
+    <Button quiet label="Privacy ›" onPress={() => void Linking.openURL('https://approvalprep.com/privacy/')} />
   </Screen>;
 }

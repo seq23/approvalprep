@@ -64,6 +64,19 @@ if (!layout.includes("Return to pricing and complete checkout") || !layout.inclu
   if (await openCheckout(async () => ({ ok: true, json: async () => ({ checkoutUrl: "https://checkout.stripe.com/x" }) }), {}) !== "https://checkout.stripe.com/x") fail("[payment] a good checkout must return Stripe's page");
 }
 if (!layout.includes("Optional: prefill a draft in the Studio") || !layout.includes("Download editable Word document")) fail("[payment] verified checkout UI must offer both direct template download and optional browser-only prefill path");
+// The verified page labels each file by the URL verify-download returns (/api/download-file?...&type=).
+// Both used to read "Download editable Word document" because the URL does not end in ".pdf".
+{
+  const rule = layout.match(/const isPdf = (.+);/);
+  if (!rule) fail("[payment] verified checkout UI must decide the PDF label from the download URL");
+  else {
+    const isPdf = new Function("file", "window", `return ${rule[1]};`);
+    const win = { location: { origin: "https://approvalprep.com" } };
+    if (!isPdf("/api/download-file?session_id=cs_test_x&type=pdf", win)) fail("[payment] the PDF download link must be labelled as the PDF guide");
+    if (isPdf("/api/download-file?session_id=cs_test_x&type=docx", win)) fail("[payment] the DOCX download link must be labelled as the Word document");
+  }
+  if (!layout.includes('fetch("/api/resend-download-email"')) fail("[payment] the verified download page must offer to email the download link again");
+}
 const slugPage = fs.readFileSync(path.join(root, "src/pages/[...slug].astro"), "utf8");
 if (!slugPage.includes("If Stripe has not confirmed this checkout session as paid") || !slugPage.includes("download the blank/editable templates")) fail("[payment] checkout success page must explain paid-download versus optional prefill choice");
 if (!slugPage.includes("data-discount-code")) fail("[payment] pricing page must keep the promo code field");

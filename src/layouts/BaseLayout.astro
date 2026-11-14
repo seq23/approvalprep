@@ -165,7 +165,9 @@ const documentTitle = fitTitle(String(title));
                 const a = document.createElement("a");
                 a.className = "button secondary secondary-button";
                 a.href = file;
-                a.textContent = file.endsWith(".pdf") ? "Download PDF guide" : "Download editable Word document";
+                // The links are /api/download-file?...&type=pdf|docx, so the type comes from the query, not the end of the URL.
+                const isPdf = new URL(file, window.location.origin).searchParams.get("type") === "pdf" || file.endsWith(".pdf");
+                a.textContent = isPdf ? "Download PDF guide" : "Download editable Word document";
                 a.setAttribute("download", "");
                 links.appendChild(a);
               }
@@ -178,6 +180,25 @@ const documentTitle = fitTitle(String(title));
               studio.href = `/letter-writing-studio?sku=${encodeURIComponent(sku)}&source=checkout-success`;
               studio.textContent = "Optional: prefill a draft in the Studio";
               links.appendChild(studio);
+              // "Get your link again": the server emails this page's link to the address Stripe holds
+              // for the order (functions/_runtime/resend-download.js); nothing typed here is used.
+              const again = document.createElement("p");
+              again.className = "fine download-again";
+              const againButton = document.createElement("button");
+              againButton.type = "button";
+              againButton.className = "link-button";
+              againButton.textContent = "Email me this download link ›";
+              const againNote = document.createElement("span");
+              againNote.setAttribute("role", "status");
+              againButton.addEventListener("click", async () => {
+                againButton.disabled = true;
+                const res = await fetch("/api/resend-download-email", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ session_id }) }).catch(() => null);
+                const body = res ? await res.json().catch(() => ({})) : {};
+                againNote.textContent = " " + (body.message || "Email resend is unavailable right now. Contact info@approvalprep.com with your Stripe receipt.");
+                againButton.disabled = false;
+              });
+              again.append("Want it for later? ", againButton, againNote);
+              links.appendChild(again);
             }
           } catch (error) {
             if (status) status.textContent = `${error.message || "Download verification failed."} Session: ${session_id}`;

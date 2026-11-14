@@ -26,11 +26,12 @@ export function Screen({ route, title, label, children }: { route: string; title
   return spec.tab && spec.tab !== 'index' ? <View style={s.safe}>{body}</View> : <SafeAreaView style={s.safe} edges={['top']}>{body}</SafeAreaView>;
 }
 
-export function Button({ label, onPress, primary, disabled = false }: { label: string; onPress?: () => void; primary?: boolean; disabled?: boolean }) {
+/** quiet: a text-weight link (Restore purchase, Terms, Privacy) so the one main button stays the last big thing. */
+export function Button({ label, onPress, primary, quiet, disabled = false }: { label: string; onPress?: () => void; primary?: boolean; quiet?: boolean; disabled?: boolean }) {
   return (
     <Pressable accessibilityRole="button" onPress={onPress} disabled={disabled || !onPress} accessibilityState={{ disabled: disabled || !onPress }}
-      style={({ pressed }) => [s.btn, primary ? s.primary : s.secondary, (disabled || !onPress) ? { opacity: 0.5 } : pressed && { opacity: 0.85 }]}>
-      <Text style={[type.button, { color: color.carbon }]}>{label}</Text>
+      style={({ pressed }) => [s.btn, primary ? s.primary : quiet ? s.quiet : s.secondary, (disabled || !onPress) ? { opacity: 0.5 } : pressed && { opacity: 0.85 }]}>
+      <Text style={[type.button, quiet ? { color: color.signalDeep, textDecorationLine: 'underline' } : { color: color.carbon }]}>{label}</Text>
     </Pressable>
   );
 }
@@ -46,6 +47,7 @@ const s = StyleSheet.create({
   btn: { minHeight: tap, borderRadius: radius.md, borderWidth: 2, alignItems: 'center', justifyContent: 'center', paddingHorizontal: space[5] },
   primary: { backgroundColor: color.signal, borderColor: color.signal },
   secondary: { backgroundColor: color.paperRaised, borderColor: color.carbon },
+  quiet: { borderColor: 'transparent', alignItems: 'flex-start', paddingHorizontal: 0 },
   card: { backgroundColor: color.paperRaised, borderColor: color.rule, borderWidth: 1, borderRadius: radius.md, padding: space[4] },
 });
 

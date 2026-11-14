@@ -136,15 +136,17 @@ const childRoutes = manifest.routes
     the generator fits both bands; no blocking validator (removed 1 Nov 2026). */}
 <BaseLayout title={pageTitle} description={copy.lead} canonical={canonical} noindex={!route.index} ogType={isGuide || priorityEntry ? "article" : "website"}>
   <section class={`hero shell ${isLegal ? "legal-hero" : "hero-split"}`}>
-    <div>
+    {/* The download page leads with its own confirmation (one H1, below); the generic hero and
+        its "Before you start" list are for guide and kit pages, not for a buyer who has paid. */}
+    {!isDownload && <div>
       <p class="eyebrow">{familyCopy?.label || route.family.replaceAll("_", " ")}</p>
       <h1>{pageHeading}</h1>
       <p class="lead">{copy.lead}</p>
       {familyCopy?.promise && <p class="supporting-copy">{familyCopy.promise}</p>}
       {!isLegal && !isDownload && <OutcomeCTA primary={primaryCtaWithPrice} secondary={copy.secondaryCta} href={heroHref} secondaryHref={heroSecondaryHref} primarySku={primarySku} freeHref={freeHref} freeLabel={FREE_LABEL} />}
       <TrustBar signals={copy.trustSignals} />
-    </div>
-    {!isLegal && (
+    </div>}
+    {!isLegal && !isDownload && (
       <aside class="hero-panel">
         <p class="eyebrow">Before you start</p>
         <h2>Prepare the facts first.</h2>
