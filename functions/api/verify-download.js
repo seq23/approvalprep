@@ -1,3 +1,5 @@
+import { isSessionRevoked } from "../_runtime/refunds.js";
+
 const allowedSkus = new Set([
   "letter-of-explanation",
   "income-employment-letter-kit",
@@ -101,6 +103,8 @@ export async function onRequestPost(context) {
 
     const entitlementResult = await findPaidEntitlement(context.env, sessionId, sku);
     if (entitlementResult.entitlement) return json({ status: "VERIFIED", source: "entitlement", ...downloadManifestFor(sku, sessionId) });
+
+    if (await isSessionRevoked(context.env, sessionId)) return json({ status: "REFUNDED", message: "This purchase was refunded, so its downloads are closed. Questions: info@approvalprep.com.", sku }, 403);
 
     const stripe = await fetchStripeSession(context.env, sessionId);
     if (!stripe.ok) return json({ ...stripe.body, sku, warning: entitlementResult.warning || undefined }, stripe.status);
