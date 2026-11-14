@@ -5,9 +5,9 @@ import { Button, Row, Screen, Sheet } from '../../../src/ui';
 import { type } from '../../../src/theme';
 import { HONEST_LIMIT } from '../../../src/copy';
 import { PREVIEW_ENABLED } from '../../../src/previewSamples';
-import { KIT_OFFERS, KIT_ORDER, PRODUCTS, TRACKING_LINE, bundleFilesLine, bundleWebsiteKits, offerTitle, productName, productRoute } from '../../../src/offers';
-import { COMPLETE_BUNDLE, BUNDLE_UPGRADE, KIT_SALES_ENABLED } from '../../../src/kit';
-import { offersFor, otherKits, NO_OWNERSHIP, type BundleOwnership } from '../../../src/purchases/bundleOffers';
+import { BUNDLE_LINE, KIT_OFFERS, KIT_ORDER, PRODUCTS, upgradeLine, TRACKING_LINE, bundleFilesLine, bundleWebsiteKits, offerTitle, productName, productRoute } from '../../../src/offers';
+import { COMPLETE_BUNDLE, KIT_SALES_ENABLED, isUpgrade, upgradeFor } from '../../../src/kit';
+import { offersFor, otherKits, ownedKitIds, NO_OWNERSHIP, type BundleOwnership } from '../../../src/purchases/bundleOffers';
 import { bundleAccount, type BundlePrice } from '../../../src/purchases/bundleAccount';
 import { storePrices } from '../../../src/purchases/prices';
 import { restoreBundle } from '../../../src/purchases/bundleDelivery';
@@ -38,10 +38,13 @@ export default function Bundle() {
   const all = { creditKit: true, explanationKit: true, bundle: true };
   const owned = local || ownership.bundle;
   const offers = offersFor(local ? all : ownership, requested);
-  const selected = offers.find(id => id === COMPLETE_BUNDLE.productId || id === BUNDLE_UPGRADE.productId);
+  const selected = offers.find(id => id === COMPLETE_BUNDLE.productId || isUpgrade(id));
+  const mine = local ? [] : ownedKitIds(ownership);
+  const paid = upgradeFor(mine)?.paid ?? 0;
   const price = prices.find(p => p.id === selected)?.price;
   // Every kit is named here, whichever screen she came from, so none looks like the only one.
-  const kits = otherKits(local ? all : ownership, KIT_ORDER);
+  // A kit she could not add without passing the bundle price is left to the upgrade.
+  const kits = otherKits(local ? all : ownership, KIT_ORDER).filter(id => offersFor(ownership, id).includes(id));
   const canBuy = (KIT_SALES_ENABLED && !mock) || preview;
   async function act(buy: boolean) {
     if (busy) return;
@@ -67,7 +70,7 @@ export default function Bundle() {
         : 'Your bundle could not be downloaded. Try Restore again. You do not need to buy it again.');
     } finally { setBusy(false); }
   }
-  return <Screen route="/letters/bundle" label="Complete ApprovalPrep Bundle" title={owned ? 'Your Complete Bundle' : 'Every kit, paid once'}>
+  return <Screen route="/letters/bundle" label="Complete ApprovalPrep Bundle" title={owned ? 'Your Complete Bundle' : `${BUNDLE_LINE}`}>
     <Text style={type.body}>Paid once. Templates you fill in and send yourself.</Text>
     <Sheet>
       <Text style={type.subhead}>The two letter kits, to use in this app</Text>
@@ -84,7 +87,7 @@ export default function Bundle() {
     {/* In the preview the bundle's files are opened kit by kit, from each kit's own screen. */}
     {preview && ownership.bundle ? PRODUCTS.filter(p => p.productId !== COMPLETE_BUNDLE.productId).map(p => <Row key={p.sku} title={`${p.name}: your files ›`} sub="Open the PDF guide and the Word file" onPress={() => router.push({ pathname: productRoute(p.productId).pathname, params: p.params })} />) : null}
     {selected && !owned ? <>
-      <Button primary disabled={busy || !ready || !price || !canBuy} label={price ? `Get ${selected === BUNDLE_UPGRADE.productId ? 'the upgrade' : 'the bundle'}, ${price} once` : 'Store price unavailable'} onPress={() => void act(true)} />
+      <Button primary disabled={busy || !ready || !price || !canBuy} label={!price ? 'Store price unavailable' : isUpgrade(selected) ? upgradeLine(KIT_ORDER.length - mine.length, price, paid) : `Get the bundle, ${price} once`} onPress={() => void act(true)} />
       {preview ? <Text testID="buying-pretend" style={type.sub}>This is a preview: buying here is pretend, nothing is charged, and it lasts until you close the page.</Text>
         : canBuy ? null : <Text testID="buying-off" style={type.sub}>{PREVIEW_ENABLED ? 'This is a preview, so buying is switched off and the button above does nothing. The price is shown so you can see it.' : 'Buying is not available right now.'}</Text>}
     </> : null}

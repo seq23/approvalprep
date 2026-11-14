@@ -31,7 +31,7 @@ test('the bundle Get button and its notice follow the sales switch and the store
       if (name.endsWith('/theme')) return { type: {} };
       if (name.endsWith('/copy')) return { HONEST_LIMIT: 'limit' };
       if (name.endsWith('/previewSamples')) return { PREVIEW_ENABLED: false };
-      if (name.endsWith('/offers')) return { KIT_OFFERS: [], KIT_ORDER: realOffers.KIT_ORDER, PRODUCTS: realOffers.PRODUCTS, productName: realOffers.productName, productRoute: realOffers.productRoute, TRACKING_LINE: 'tracking', bundleFilesLine: () => 'files', bundleWebsiteKits: () => ['A kit'], offerTitle: (name: string) => name };
+      if (name.endsWith('/offers')) return { KIT_OFFERS: [], KIT_ORDER: realOffers.KIT_ORDER, PRODUCTS: realOffers.PRODUCTS, BUNDLE_LINE: realOffers.BUNDLE_LINE, upgradeLine: realOffers.upgradeLine, productName: realOffers.productName, productRoute: realOffers.productRoute, TRACKING_LINE: 'tracking', bundleFilesLine: () => 'files', bundleWebsiteKits: () => ['A kit'], offerTitle: (name: string) => name };
       if (name.endsWith('/prices')) return { storePrices: async () => ({ [kits.COMPLETE_BUNDLE.productId]: 'price' }) };
       if (name.endsWith('/kit')) return { ...kits, KIT_SALES_ENABLED: enabled };
       if (name.endsWith('/bundleOffers')) return offers;

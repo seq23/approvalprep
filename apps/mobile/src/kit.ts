@@ -16,8 +16,19 @@ export function kitPurchaseGate(enabled: boolean = KIT_SALES_ENABLED): { ok: tru
 
 export const EXPLANATION_KIT = { productId: 'ap_explanation_kit', approvedPriceUSD: 14.99, approved: '2026-11-10' } as const;
 export const COMPLETE_BUNDLE = { productId: 'ap_complete_bundle', approvedPriceUSD: 49.99 } as const;
-// One upgrade for anyone who owns any kit, whichever and however many (docs/APP_PLAN.md, "Bundle upgrade").
-export const BUNDLE_UPGRADE = { productId: 'ap_bundle_upgrade', approvedPriceUSD: 29.99 } as const;
+// Kit owners upgrade through a few fixed tiers so nobody pays more than the bundle in total
+// (src/lib/appUpgrade.mjs, shared with the server; docs/APP_PLAN.md, "Bundle upgrade").
+// @ts-ignore shared website module is JavaScript
+import * as shared from '../../../src/lib/appUpgrade.mjs';
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const upgrade: any = shared;
+export interface UpgradeTier { id: string; price: number }
+export const UPGRADE_TIERS: readonly UpgradeTier[] = upgrade.UPGRADE_TIERS;
+export const UPGRADE_IDS: readonly string[] = upgrade.UPGRADE_IDS;
+export const isUpgrade = (id: string): boolean => upgrade.isUpgrade(id);
+export const SHARED_KIT_PRICES: Record<string, number> = upgrade.KIT_PRICES;
+export const upgradeFor = (kitIds: readonly string[]): { paid: number; free: boolean; tier: UpgradeTier | null } | null => upgrade.upgradeFor(kitIds);
+export const bundleUnlocked = (owned: { kits?: readonly string[]; upgrades?: readonly string[]; bundle?: boolean }): boolean => upgrade.bundleUnlocked(owned);
 
 // The five website kits that are files only in the app (the website's PDF guide and editable Word
 // file), keyed by the website's own sku. Nearest store price to the website's price.
@@ -41,3 +52,5 @@ export const SITE_SKU: Record<string, string> = {
 };
 /** Every single kit, in no particular order (screens use the website's order from src/offers.ts). */
 export const ALL_KIT_IDS: readonly string[] = Object.keys(SITE_SKU);
+/** A single kit's approved price, in dollars. */
+export const kitPrice = (id: string): number => id === KIT.productId ? KIT.approvedPriceUSD : id === EXPLANATION_KIT.productId ? EXPLANATION_KIT.approvedPriceUSD : fileKitByProduct(id)?.approvedPriceUSD ?? 0;

@@ -1,12 +1,13 @@
 import { Platform } from 'react-native';
-import { KIT, COMPLETE_BUNDLE, BUNDLE_UPGRADE, FILE_KITS, FILE_KIT_IDS, kitPurchaseGate } from '../kit';
+import { KIT, COMPLETE_BUNDLE, FILE_KITS, FILE_KIT_IDS, UPGRADE_IDS, UPGRADE_TIERS, kitPurchaseGate } from '../kit';
 import { EXPLANATION_PRODUCT, NO_OWNERSHIP, offersFor, ownershipFrom, type BundleOwnership, type OfferId } from './bundleOffers';
 import { PREVIEW_ENABLED, previewBuy, previewOwns, previewBundle } from '../previewSamples';
 // The bundle, its upgrade and the five file-only kits are bought through this account.
-const SOLD_HERE = [COMPLETE_BUNDLE.productId, BUNDLE_UPGRADE.productId, ...FILE_KIT_IDS];
+const SOLD_HERE = [COMPLETE_BUNDLE.productId, ...UPGRADE_IDS, ...FILE_KIT_IDS];
 /** Labelled preview prices: the approved prices, shown only where no store exists. */
 const PREVIEW_PRICES: BundlePrice[] = [
-  { id: COMPLETE_BUNDLE.productId, price: `$${COMPLETE_BUNDLE.approvedPriceUSD}` }, { id: BUNDLE_UPGRADE.productId, price: `$${BUNDLE_UPGRADE.approvedPriceUSD}` },
+  { id: COMPLETE_BUNDLE.productId, price: `$${COMPLETE_BUNDLE.approvedPriceUSD}` },
+  ...UPGRADE_TIERS.map(t => ({ id: t.id, price: `$${t.price}` })),
   ...FILE_KITS.map(k => ({ id: k.productId, price: `$${k.approvedPriceUSD}` })),
 ];
 /** What the web preview's pretend purchases add up to. */
@@ -39,7 +40,7 @@ async function open(): Promise<BundlePurchases> {
       userId: async () => { throw Error('REVENUECAT_KEY_MISSING'); } };
   }
   if (!accepted) {
-    return { mock: true, products: async () => PREVIEW_PRICES.slice(0, 2), ownership: async () => NO_OWNERSHIP, restore: async () => NO_OWNERSHIP,
+    return { mock: true, products: async () => PREVIEW_PRICES.slice(0, 1 + UPGRADE_TIERS.length), ownership: async () => NO_OWNERSHIP, restore: async () => NO_OWNERSHIP,
     buy: async () => { const gate = kitPurchaseGate(); throw Error(gate.ok ? 'REVENUECAT_KEY_MISSING' : gate.stop); },
     userId: async () => { throw Error('REVENUECAT_KEY_MISSING'); } };
   }

@@ -3,7 +3,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { DatabaseSync } from 'node:sqlite';
-import { KIT, COMPLETE_BUNDLE, BUNDLE_UPGRADE, FILE_KITS, SITE_SKU, kitPurchaseGate } from '../src/kit';
+import { KIT, COMPLETE_BUNDLE, FILE_KITS, SITE_SKU, kitPurchaseGate } from '../src/kit';
 import { validFileLinks } from '../src/purchases/kitFileLinks';
 import { restoreFileKits } from '../src/purchases/restoreAll';
 import { MockPurchases, PreviewPurchases, buyKit } from '../src/purchases/provider';
@@ -23,7 +23,7 @@ function rateDb() {
   return { prepare: (sql: string) => ({ ...stmt(sql), bind: (...args: any[]) => stmt(sql, args) }) };
 }
 const request = (kit: string) => new Request(`https://approvalprep.com/api/app-files?kit=${kit}`, { method: 'POST', headers: { authorization: `Bearer $RCAnonymousID:${'b'.repeat(32)}` } });
-const subscriber = (product: string, extra: object = {}) => ({ entitlements: { [product]: { product_identifier: product, expires_date: null } }, non_subscriptions: { [product]: [{ is_sandbox: false, ...extra }] } });
+const subscriber = (product: string | string[], extra: object = {}) => { const ids = ([] as string[]).concat(product); return { entitlements: Object.fromEntries(ids.map(id => [id, { product_identifier: id, expires_date: null }])), non_subscriptions: Object.fromEntries(ids.map(id => [id, [{ is_sandbox: false, ...extra }]])) }; };
 
 test('the server and the app name the same kit for every product, and each is the website kit\'s own files', () => {
   assert.deepEqual(Object.fromEntries(Object.entries(APP_FILE_KITS).map(([sku, id]) => [id, sku])), SITE_SKU);
@@ -51,7 +51,7 @@ test('file door: refuses anyone who has not bought this kit or the bundle, befor
   }
   assert.equal(reads.length, 0);
   // The kit itself, the bundle or the upgrade opens it; the credit kit owner gets the credit kit's files.
-  for (const [who, sku] of [[subscriber(kit.productId), kit.sku], [subscriber(COMPLETE_BUNDLE.productId), kit.sku], [subscriber(BUNDLE_UPGRADE.productId), kit.sku], [subscriber(KIT.productId), 'credit-letter-kit']] as const) {
+  for (const [who, sku] of [[subscriber(kit.productId), kit.sku], [subscriber(COMPLETE_BUNDLE.productId), kit.sku], [subscriber([FILE_KITS[0].productId, 'ap_bundle_upgrade']), kit.sku], [subscriber(KIT.productId), 'credit-letter-kit']] as const) {
     info = who;
     const response = await onRequestPost({ request: request(sku), env });
     assert.equal(response.status, 200);
@@ -117,7 +117,10 @@ test('pretend purchases exist only with the preview flag, and never get past the
   assert.equal((await buyKit(preview, KIT.productId)).creditKit, true);
   assert.ok(previewKit('credit-letter-kit', true), 'a pretend Credit Letter Kit opens its letters');
   assert.equal(previewKit('letter-of-explanation-kit', true), null);
-  for (const kit of FILE_KITS) { assert.equal(previewOwns(kit.productId, true), false); previewBuy(kit.productId, true); assert.equal(previewOwns(kit.productId, true), true); }
+  for (const kit of FILE_KITS) { resetPreviewPurchases(); assert.equal(previewOwns(kit.productId, true), false); previewBuy(kit.productId, true); assert.equal(previewOwns(kit.productId, true), true); }
+  // Kits that add up to the bundle price unlock everything, as in the store.
+  resetPreviewPurchases(); previewBuy('ap_business_funding_kit', true); assert.equal(previewOwns(KIT.productId, true), false);
+  previewBuy('ap_rental_application_kit', true); assert.equal(previewOwns(KIT.productId, true), true);
   resetPreviewPurchases();
   previewBuy(COMPLETE_BUNDLE.productId, true);
   for (const id of Object.keys(SITE_SKU)) assert.equal(previewOwns(id, true), true, id);

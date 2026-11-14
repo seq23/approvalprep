@@ -78,3 +78,9 @@ Same bindings as above (`PRODUCT_ASSETS_R2`, `APPROVALPREP_REVENUECAT_SECRET`,
 `DOWNLOAD_SIGNING_SECRET`, `PRODUCTS_DB`; 30 attempts a minute per caller). It reads the objects the
 website already serves, so nothing new is uploaded. A missing or empty object answers
 `APP_FILES_ASSET_MISSING`. Plan: docs/APP_PLAN.md, "Exact mirror".
+
+## Upgrade tiers (13 Nov 2026)
+
+`POST /api/app-bundle` (and the file door) accept the bundle, kits that already add up to $49.99, or
+kits plus an upgrade tier at least as high as those kits call for (`src/lib/appUpgrade.mjs`, shared
+with the app). `ap_bundle_upgrade` alone, with no kit, no longer opens anything.

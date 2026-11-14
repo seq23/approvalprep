@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import { DatabaseSync } from 'node:sqlite';
 import assert from 'node:assert/strict';
-import { KIT, COMPLETE_BUNDLE, BUNDLE_UPGRADE, ALL_KIT_IDS, FILE_KIT_IDS, kitPurchaseGate } from '../src/kit';
+import { KIT, COMPLETE_BUNDLE, ALL_KIT_IDS, FILE_KIT_IDS, SHARED_KIT_PRICES, UPGRADE_IDS, UPGRADE_TIERS, bundleUnlocked, isUpgrade, kitPrice, kitPurchaseGate, upgradeFor } from '../src/kit';
 import { EXPLANATION_PRODUCT, offersFor, ownershipFrom, ownsKit, NO_OWNERSHIP } from '../src/purchases/bundleOffers';
 import { restoreBundle, validBundleKits } from '../src/purchases/bundleDelivery';
 // @ts-ignore Pages runtime is JavaScript
@@ -11,40 +11,62 @@ import { onRequestGet } from '../../../functions/api/app-bundle-file.js';
 // @ts-ignore Pages runtime is JavaScript
 import { bundleUrl } from '../../../functions/_runtime/app-bundle.js';
 const owned = (creditKit = false, explanationKit = false, bundle = false, fileKits: string[] = []) => ({ creditKit, explanationKit, bundle, fileKits });
-// Nobody pays twice (docs/APP_PLAN.md, "Bundle upgrade"): an owned kit is never offered again, a kit
-// owner is never offered the full-price bundle, and the upgrade only ever goes to a kit owner.
-test('offers cover each ownership combination without selling an owned kit again', () => {
-  assert.deepEqual(offersFor(owned()), [COMPLETE_BUNDLE.productId, KIT.productId]);
-  assert.deepEqual(offersFor(owned(), 'explanation'), [COMPLETE_BUNDLE.productId, EXPLANATION_PRODUCT]);
-  assert.deepEqual(offersFor(owned(true)), [BUNDLE_UPGRADE.productId]);
-  assert.deepEqual(offersFor(owned(true), 'explanation'), [EXPLANATION_PRODUCT, BUNDLE_UPGRADE.productId]);
-  assert.deepEqual(offersFor(owned(false, true)), [KIT.productId, BUNDLE_UPGRADE.productId]);
-  assert.deepEqual(offersFor(owned(true, true)), [BUNDLE_UPGRADE.productId]);
-  // Asking for the bundle or the upgrade is never an offer of a kit, and never the upgrade without a kit.
-  assert.deepEqual(offersFor(owned(), COMPLETE_BUNDLE.productId), [COMPLETE_BUNDLE.productId]);
-  assert.deepEqual(offersFor(owned(), BUNDLE_UPGRADE.productId), [COMPLETE_BUNDLE.productId]);
-  for (const credit of [false, true]) for (const explanation of [false, true]) assert.deepEqual(offersFor(owned(credit, explanation, true)), []);
-  // Every kit, against owning nothing, itself, another kit, or the bundle.
-  for (const kit of ALL_KIT_IDS) {
-    assert.deepEqual(offersFor(owned(), kit), [COMPLETE_BUNDLE.productId, kit]);
-    for (const other of ALL_KIT_IDS) {
-      const mine = owned(other === KIT.productId, other === EXPLANATION_PRODUCT, false, FILE_KIT_IDS.includes(other) ? [other] : []);
-      const offers = offersFor(mine, kit);
-      assert.deepEqual(offers, other === kit ? [BUNDLE_UPGRADE.productId] : [kit, BUNDLE_UPGRADE.productId], `${other} owner asking for ${kit}`);
-      assert.ok(!offers.includes(COMPLETE_BUNDLE.productId) && !offers.includes(other));
+// Her rule, 13 Nov 2026: nobody ever pays more in total than the $49.99 Complete Bundle.
+const cents = (n: number) => Math.round(n * 100);
+const asOwnership = (kits: string[], bundle = false) => owned(kits.includes(KIT.productId), kits.includes(EXPLANATION_PRODUCT), bundle, kits.filter(id => FILE_KIT_IDS.includes(id)));
+const subsets = <T,>(items: readonly T[]) => Array.from({ length: 2 ** items.length }, (_, mask) => items.filter((_, i) => mask >> i & 1));
+test('for every combination of owned kits, what she has paid plus anything offered never passes the bundle price', () => {
+  assert.equal(ALL_KIT_IDS.length, 7);
+  assert.deepEqual(Object.keys(SHARED_KIT_PRICES).sort(), [...ALL_KIT_IDS].sort());
+  for (const id of ALL_KIT_IDS) assert.equal(SHARED_KIT_PRICES[id], kitPrice(id), id);
+  let reachable = 0, free = 0;
+  for (const kits of subsets(ALL_KIT_IDS)) {
+    const paid = kits.reduce((sum, id) => sum + cents(kitPrice(id)), 0);
+    const mine = ownershipFrom(Object.fromEntries(kits.map(id => [id, { productIdentifier: id, expirationDate: null }])));
+    // Kits that already reach the bundle price unlock it with no purchase.
+    if (paid >= cents(COMPLETE_BUNDLE.approvedPriceUSD)) { assert.equal(mine.bundle, true, kits.join()); assert.deepEqual(offersFor(mine), []); continue; }
+    reachable++;
+    for (const requested of [...ALL_KIT_IDS, COMPLETE_BUNDLE.productId]) {
+      for (const offer of offersFor(mine, requested)) {
+        const price = offer === COMPLETE_BUNDLE.productId ? COMPLETE_BUNDLE.approvedPriceUSD : isUpgrade(offer) ? UPGRADE_TIERS.find(t => t.id === offer)!.price : kitPrice(offer);
+        assert.ok(paid + cents(price) <= cents(COMPLETE_BUNDLE.approvedPriceUSD) + 1, `owns ${kits.join() || 'nothing'}, offered ${offer}: ${(paid + cents(price)) / 100}`);
+        assert.ok(!kits.includes(offer), `an owned kit is offered again: ${offer}`);
+        if (kits.length) assert.notEqual(offer, COMPLETE_BUNDLE.productId, 'a kit owner is never shown the full bundle');
+      }
     }
-    assert.deepEqual(offersFor(owned(false, false, true), kit), []);
-    assert.equal(ownsKit(owned(false, false, true), kit), true);
+    const up = upgradeFor(kits);
+    if (!kits.length) { assert.equal(up, null); continue; }
+    if (up!.free) { free++; assert.equal(mine.bundle, true, `${kits.join()} has less than the smallest tier left`); continue; }
+    // The upgrade is the highest tier not above what is left, and buying it unlocks everything...
+    const left = cents(COMPLETE_BUNDLE.approvedPriceUSD) - paid;
+    assert.ok(cents(up!.tier!.price) <= left && !UPGRADE_TIERS.some(t => cents(t.price) <= left && t.price > up!.tier!.price));
+    const withUpgrade = { ...Object.fromEntries(kits.map(id => [id, { productIdentifier: id, expirationDate: null }])), [up!.tier!.id]: { productIdentifier: up!.tier!.id, expirationDate: null } };
+    assert.equal(ownershipFrom(withUpgrade).bundle, true);
+    // ...while a lower tier, or an upgrade with no kit, unlocks nothing.
+    for (const lower of UPGRADE_TIERS.filter(t => t.price < up!.tier!.price)) assert.equal(bundleUnlocked({ kits, upgrades: [lower.id] }), false, `${kits.join()} + ${lower.id}`);
   }
+  for (const tier of UPGRADE_TIERS) assert.equal(bundleUnlocked({ kits: [], upgrades: [tier.id] }), false);
+  assert.ok(reachable > 7 && free > 0);
+  // The worked example from the rule: a Business Funding Prep Kit owner upgrades for $9.99.
+  assert.equal(upgradeFor(['ap_business_funding_kit'])!.tier!.price, 9.99);
   assert.equal(kitPurchaseGate().ok, false);
 });
-test('either bundle product grants every kit; individual kits remain independent', () => {
-  for (const product of [COMPLETE_BUNDLE.productId, BUNDLE_UPGRADE.productId]) assert.deepEqual(ownershipFrom({ [product]: { productIdentifier: product, expirationDate: null } }), owned(true, true, true, [...FILE_KIT_IDS]));
+test('owning nothing offers the bundle first, then the kit she asked about; owning the bundle offers nothing', () => {
+  assert.deepEqual(offersFor(owned()), [COMPLETE_BUNDLE.productId, KIT.productId]);
+  assert.deepEqual(offersFor(owned(), 'explanation'), [COMPLETE_BUNDLE.productId, EXPLANATION_PRODUCT]);
+  assert.deepEqual(offersFor(owned(), COMPLETE_BUNDLE.productId), [COMPLETE_BUNDLE.productId]);
+  assert.deepEqual(offersFor(owned(), UPGRADE_IDS[0]), [COMPLETE_BUNDLE.productId]);
+  for (const kit of ALL_KIT_IDS) { assert.deepEqual(offersFor(owned(false, false, true), kit), []); assert.equal(ownsKit(owned(false, false, true), kit), true); }
+});
+test('the bundle grants every kit; individual kits remain independent', () => {
+  assert.deepEqual(ownershipFrom({ [COMPLETE_BUNDLE.productId]: { productIdentifier: COMPLETE_BUNDLE.productId, expirationDate: null } }), owned(true, true, true, [...FILE_KIT_IDS]));
   assert.deepEqual(ownershipFrom({ [KIT.productId]: { productIdentifier: KIT.productId } }), owned(true));
   assert.deepEqual(ownershipFrom({ [EXPLANATION_PRODUCT]: { productIdentifier: EXPLANATION_PRODUCT } }), owned(false, true));
   for (const id of FILE_KIT_IDS) assert.deepEqual(ownershipFrom({ [id]: { productIdentifier: id } }), owned(false, false, false, [id]));
   assert.deepEqual(ownershipFrom({ [FILE_KIT_IDS[0]]: { productIdentifier: FILE_KIT_IDS[0], expirationDate: '2027-01-01' } }), NO_OWNERSHIP);
   assert.deepEqual(ownershipFrom({ [COMPLETE_BUNDLE.productId]: { productIdentifier: KIT.productId } }), NO_OWNERSHIP);
+  assert.deepEqual(ownershipFrom({ [UPGRADE_IDS[0]]: { productIdentifier: UPGRADE_IDS[0] } }), NO_OWNERSHIP);
+  void asOwnership;
 });
 const kinds = ['goodwill', 'debt-validation', 'settlement-terms', 'follow-up'];
 const explanationKinds = ['credit', 'income-gap', 'employment-gap', 'address-history', 'rental-issue', 'late-payment', 'bank-statement', 'life-event', 'general-application'].map(k => `explanation-${k}`);
@@ -56,7 +78,7 @@ function rateDb() {
   return { raw, prepare: (sql: string) => ({ ...stmt(sql), bind: (...args: any[]) => stmt(sql, args) }) };
 }
 const request = () => new Request('https://approvalprep.com/api/app-bundle', { method: 'POST', headers: { authorization: `Bearer $RCAnonymousID:${'a'.repeat(32)}` } });
-const subscriber = (product: string = COMPLETE_BUNDLE.productId, sandbox = false) => ({ entitlements: { [product]: { product_identifier: product, expires_date: null } }, non_subscriptions: { [product]: [{ is_sandbox: sandbox }] } });
+const subscriber = (product: string | string[] = COMPLETE_BUNDLE.productId, sandbox = false) => { const ids = ([] as string[]).concat(product); return { entitlements: Object.fromEntries(ids.map(id => [id, { product_identifier: id, expires_date: null }])), non_subscriptions: Object.fromEntries(ids.map(id => [id, [{ is_sandbox: sandbox }]])) }; };
 
 test('restore installs complete kits only after verified delivery, rejecting foreign URLs and malformed kits', async t => {
   let calls = 0, installs = 0;
@@ -90,12 +112,13 @@ test('server verifies live non-refunded purchases before reading assets; signed 
     get: async (key: string) => { reads.push(key); return key.endsWith('.zip') ? { body: 'FAKE-ZIP' } : { json: async () => fakeKits()[key.includes('credit-letter') ? 0 : 1] }; },
     head: async () => ({ size: 123 }),
   } };
-  for (const refused of [subscriber(KIT.productId), subscriber(COMPLETE_BUNDLE.productId, true), { ...subscriber(), non_subscriptions: {} }, { ...subscriber(), non_subscriptions: { [COMPLETE_BUNDLE.productId]: [{ is_sandbox: false, refunded_at: '2026-11-11' }] } }]) {
+  for (const refused of [subscriber(KIT.productId), subscriber(UPGRADE_IDS[1]), subscriber([KIT.productId, 'ap_bundle_upgrade_1999']), subscriber(COMPLETE_BUNDLE.productId, true), { ...subscriber(), non_subscriptions: {} }, { ...subscriber(), non_subscriptions: { [COMPLETE_BUNDLE.productId]: [{ is_sandbox: false, refunded_at: '2026-11-11' }] } }]) {
     info = refused;
     assert.equal((await onRequestPost({ request: request(), env })).status, 403);
   }
   assert.equal(reads.length, 0);
-  for (const product of [COMPLETE_BUNDLE.productId, BUNDLE_UPGRADE.productId]) {
+  // The bundle; a Credit Letter Kit owner's own $29.99 tier; kits that already add up to $49.99.
+  for (const product of [COMPLETE_BUNDLE.productId, [KIT.productId, 'ap_bundle_upgrade'], ['ap_business_funding_kit', 'ap_rental_application_kit']]) {
     info = subscriber(product);
     const response = await onRequestPost({ request: request(), env });
     assert.equal(response.status, 200);
