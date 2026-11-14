@@ -69,3 +69,10 @@ test('application colours stay in the theme', () => {
   const walk = (dir: string): string[] => readdirSync(dir, { withFileTypes: true }).flatMap(f => f.isDirectory() ? walk(`${dir}/${f.name}`) : /\.tsx?$/.test(f.name) ? [`${dir}/${f.name}`] : []);
   for (const file of [...walk('src'), ...walk('app')].filter(f => f !== 'src/theme.ts')) assert.equal(/#[\da-f]{3,8}\b/i.test(readFileSync(file, 'utf8')), false, file);
 });
+
+test('#16 a plain list row draws no radio mark; only a real choice shows ○ or ●', () => {
+  const marks = (props: Record<string, unknown>) => { nativeProps.Text = []; render(ui.Row, { title: 'A kit', onPress: () => {}, ...props }); return nativeProps.Text.map((t: any) => t.children).filter((c: unknown) => c === '○' || c === '●'); };
+  assert.deepEqual(marks({}), []);
+  assert.deepEqual(marks({ selected: false }), ['○']);
+  assert.deepEqual(marks({ selected: true }), ['●']);
+});

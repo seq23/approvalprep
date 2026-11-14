@@ -41,3 +41,7 @@ export async function buyKit(provider: PurchasesProvider, id: string = KIT.produ
   if (!gate.ok) throw Error(gate.stop);
   return provider.purchase(id);
 }
+
+/** The store sheet closed without buying: not a failure, and nothing was charged. */
+export const purchaseCancelled = (error: unknown): boolean => !!error && typeof error === 'object' && (error as { userCancelled?: boolean }).userCancelled === true;
+export const CANCELLED_LINE = 'Purchase cancelled. Nothing was charged.';

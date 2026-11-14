@@ -11,8 +11,16 @@ export function newStudioDraft(id: string, situation: string): SavedLetter {
 }
 /** The draft she last worked on for this situation, so choosing it again picks up where she stopped. */
 export async function latestStudioDraft(store: { list(): Promise<SavedLetter[]> }, situation: string): Promise<SavedLetter | null> {
-  const mine = (await store.list()).filter(letter => letter.kind === studioKind(situation) && letter.status === 'draft');
-  return mine.at(-1) ?? null;
+  return latestDraft(store, studioKind(situation));
+}
+/** The unfinished letter of this kind she worked on last, so opening it again never piles up duplicates. */
+export async function latestDraft(store: { list(): Promise<SavedLetter[]> }, kind: string): Promise<SavedLetter | null> {
+  return (await store.list()).filter(letter => letter.kind === kind && letter.status === 'draft').at(-1) ?? null;
+}
+/** Where "write this letter" opens: her latest unfinished one of that kind, or a new one. */
+export async function letterHref(store: { list(): Promise<SavedLetter[]> }, kind: string, from?: string) {
+  const last = await latestDraft(store, kind).catch(() => null);
+  return { pathname: '/letters/[kind]' as const, params: { kind, ...(last ? { id: last.id, resumed: '1' } : {}), ...(from ? { from } : {}) } };
 }
 /** The question an address asks for, kept inside the situation's own list. */
 export function studioStep(param: string | string[] | undefined, questions: number): number {

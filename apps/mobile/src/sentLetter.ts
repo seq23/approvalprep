@@ -23,13 +23,13 @@ export interface LocalReminders {
   cancel(id: string): Promise<void>;
 }
 export const reminderId = (id: string) => `approvalprep-letter-${id}`;
-/** Permission is requested only by this explicit save action, after ownership and input checks. */
+/** Recording the day she mailed it is free for everyone (finding #11, 14 Nov 2026); the reminder is
+ * the kit's. Permission is requested only by this explicit save action, after ownership and input checks. */
 export async function markSent(letter: SavedLetter, details: SentDetails, deps: {
   ownsKit(): Promise<boolean>;
   update(letter: SavedLetter): Promise<void>;
   reminders: LocalReminders;
 }, now = new Date()) {
-  if (!await deps.ownsKit()) throw Error('This feature is included in the Credit Letter Kit.');
   if (letter.status === 'answered') throw Error('This letter already has an answer recorded.');
   const sent = mailingDate(details.date);
   if (dateInput(sent) > dateInput(now)) throw Error('The mailing date cannot be in the future.');
@@ -51,8 +51,10 @@ export async function markSent(letter: SavedLetter, details: SentDetails, deps: 
     }
     throw error;
   }
-  let reminder: 'scheduled' | 'off' | 'past' | 'denied' = 'off';
-  if (details.remind && due > now) {
+  let reminder: 'scheduled' | 'off' | 'past' | 'denied' | 'kit' = 'off';
+  const owns = details.remind ? await deps.ownsKit() : false;
+  if (details.remind && !owns) reminder = 'kit';
+  else if (details.remind && due > now) {
     if (await deps.reminders.permission()) {
       await deps.reminders.schedule(identifier, due);
       updated = { ...updated, reminderDate: dateInput(due) };
@@ -61,6 +63,14 @@ export async function markSent(letter: SavedLetter, details: SentDetails, deps: 
     } else reminder = 'denied';
   } else if (details.remind) reminder = 'past';
   return { letter: updated, reminder, due };
+}
+
+/** "Not sent yet": back to a draft, its mailing details and reminder gone (finding #10). */
+export async function unmarkSent(letter: SavedLetter, deps: { update(letter: SavedLetter): Promise<void>; reminders: Pick<LocalReminders, 'cancel'> }): Promise<SavedLetter> {
+  await deps.reminders.cancel(reminderId(letter.id));
+  const draft: SavedLetter = { ...letter, status: 'draft', sentDate: null, method: null, trackingNumber: null, reminderDate: null, answerNote: '', answeredAt: undefined };
+  await deps.update(draft);
+  return draft;
 }
 
 /** Deleting a letter or recording its answer also removes its scheduled notification. */

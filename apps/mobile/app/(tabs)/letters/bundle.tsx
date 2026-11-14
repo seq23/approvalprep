@@ -1,11 +1,12 @@
 import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
+import { CANCELLED_LINE, purchaseCancelled } from '../../../src/purchases/provider';
 import { useCallback, useState } from 'react';
 import { Linking, Text } from 'react-native';
 import { Button, Row, Screen, Sheet } from '../../../src/ui';
 import { type } from '../../../src/theme';
 import { HONEST_LIMIT } from '../../../src/copy';
 import { PREVIEW_ENABLED } from '../../../src/previewSamples';
-import { BUNDLE_LINE, KIT_OFFERS, KIT_ORDER, PRODUCTS, upgradeLine, TRACKING_LINE, bundleFilesLine, bundleWebsiteKits, offerTitle, productName, productRoute } from '../../../src/offers';
+import { WEBSITE_BUYER_LABEL, BUNDLE_LINE, KIT_OFFERS, KIT_ORDER, PRODUCTS, upgradeLine, TRACKING_LINE, bundleFilesLine, bundleWebsiteKits, offerTitle, productName, productRoute } from '../../../src/offers';
 import { COMPLETE_BUNDLE, KIT_SALES_ENABLED, isUpgrade, upgradeFor } from '../../../src/kit';
 import { offersFor, otherKits, ownedKitIds, NO_OWNERSHIP, type BundleOwnership } from '../../../src/purchases/bundleOffers';
 import { bundleAccount, type BundlePrice } from '../../../src/purchases/bundleAccount';
@@ -65,7 +66,7 @@ export default function Bundle() {
     } catch (error) {
       const code = error instanceof Error ? error.message : '';
       console.warn('Bundle restore failed', code);
-      setMessage(code === 'STORE_ACCOUNTS_NOT_READY' ? 'Purchases are not available yet.'
+      setMessage(purchaseCancelled(error) ? CANCELLED_LINE : code === 'STORE_ACCOUNTS_NOT_READY' ? 'Purchases are not available yet.'
         : code === 'NATIVE_DOWNLOAD_REQUIRED' ? 'Document downloads are available in the phone app. This preview cannot make purchases.'
         : 'Your bundle could not be downloaded. Try Restore again. You do not need to buy it again.');
     } finally { setBusy(false); }
@@ -80,7 +81,7 @@ export default function Bundle() {
     <Sheet>
       <Text style={type.subhead}>{bundleFilesLine()}</Text>
       {bundleWebsiteKits().map(name => <Text key={name} style={type.body}>{name}</Text>)}
-      <Text style={type.sub}>These files open in Files or Word, not inside this app. A bundle bought on the website does not appear in this app.</Text>
+      <Text style={type.sub}>These files open in Files or Word, not inside this app.</Text>
     </Sheet>
     <Text style={type.sub}>{HONEST_LIMIT}</Text>
     {local ? <Button primary label="Save or share documents ›" onPress={() => { void shareBundle().catch(() => setMessage('The documents could not be shared. Try Restore to download them again.')); }} /> : null}
@@ -93,6 +94,7 @@ export default function Bundle() {
     </> : null}
     {kits.length ? <Text style={type.sub}>Other options</Text> : null}
     {kits.map(id => <Row key={id} title={offerTitle(productName(id), prices.find(p => p.id === id)?.price)} sub={PRODUCTS.find(p => p.productId === id)?.what} onPress={() => router.push(productRoute(id))} />)}
+    <Button quiet label={WEBSITE_BUYER_LABEL} onPress={() => router.navigate('/more')} />
     <Button quiet label={busy ? 'Checking…' : 'Restore purchase'} disabled={busy} onPress={() => void act(false)} />
     {message ? <Text accessibilityRole="alert" style={type.sub}>{message}</Text> : null}
     <Button quiet label="Terms ›" onPress={() => void Linking.openURL('https://approvalprep.com/terms/')} />

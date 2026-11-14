@@ -31,13 +31,13 @@ test('list status backgrounds stay neutral or gold for drafts, waiting, due, ove
   const ui = load('../src/ui.tsx', { react: {}, 'react-native': native, 'react-native-safe-area-context': {},
     './theme': { color, space, type, radius, tap }, './copy': {}, './screens': {}, './nav': {} });
   let index = 0;
-  const states = [letters, true, 'ready', null, '', false];
+  const states = [letters, true, 'ready', null, false, false, ''];
   const screen = load('../app/(tabs)/mine/index.tsx', {
     react: { useState: () => [states[index++], () => {}], useCallback: (f: any) => f },
     'expo-router': { router: {}, useFocusEffect: () => {} }, 'react-native': native,
     '../../../src/ui': { ...ui, Screen: 'Screen', BottomSheet: 'BottomSheet', Button: 'Button' },
     '../../../src/theme': { color, space, type }, '../../../src/savedLetters': {}, '../../../src/kitTemplates': {},
-    '../../../src/myLetters': { myLetters }, '../../../src/studioDrafts': {}, '../../../src/nav': {},
+    '../../../src/myLetters': { myLetters }, '../../../src/studioDrafts': {}, '../../../src/nav': {}, '../../../src/sentLetter': {}, '../../../src/localReminders': {},
   }).default();
   const rows = screen.props.children[4];
   assert.equal(rows.length, 5);

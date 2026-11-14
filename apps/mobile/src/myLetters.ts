@@ -15,9 +15,13 @@ export function letterTitle(letter: Pick<SavedLetter, 'kind' | 'answers'>): stri
 }
 export const ANSWERS = ['Corrected', 'Verified', 'No answer', 'Other answer'] as const;
 export type Answer = typeof ANSWERS[number];
+/** Only a credit bureau has a legal 30-day duty to answer (15 U.S.C. 1681i), so only the bureau dispute
+ * and its follow-up get an answer date; a letter to a landlord, lender or collector gets a plain reminder. */
+export const ANSWER_DATE_KINDS: readonly string[] = ['bureau-dispute', 'follow-up'];
+export const hasAnswerDate = (kind: string) => ANSWER_DATE_KINDS.includes(kind);
 const dayNumber = (d: Date) => Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000;
 export function dueDate(letter: SavedLetter): Date | null {
-  if (!letter.sentDate || !/^\d{4}-\d{2}-\d{2}$/.test(letter.sentDate)) return null;
+  if (!hasAnswerDate(letter.kind) || !letter.sentDate || !/^\d{4}-\d{2}-\d{2}$/.test(letter.sentDate)) return null;
   const date = new Date(`${letter.sentDate}T12:00:00`);
   return Number.isFinite(date.getTime()) ? answerDueDate(date) : null;
 }
@@ -35,6 +39,7 @@ export function myLetters(letters: SavedLetter[], hasKit: boolean, today = new D
       if (due) sub += hasKit
         ? ` · ${days! > 0 ? `Answer due in ${days} days` : days === 0 ? 'Answer due today' : `${-days!} days past the reminder date`}`
         : ` · Answer date ${showDate(due)}`;
+      else if (letter.reminderDate) sub += ` · Follow-up reminder ${showDate(new Date(`${letter.reminderDate}T12:00:00`))}`;
     }
     if (letter.status === 'answered') {
       const stamp = letter.answeredAt ? new Date(letter.answeredAt) : null;

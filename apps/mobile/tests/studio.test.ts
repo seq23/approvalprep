@@ -25,11 +25,13 @@ test('Studio uses every website situation and produces the same first pass with 
   assert.throws(() => studioDraft('unknown', {}));
 });
 
-test('free Studio screen has no PDF, sent or reminder action, and dispute keeps its own path', () => {
-  // Saving the draft on the phone is free (owner, 13 Nov 2026); the PDF, mark as sent and reminders stay paid.
+test('free Studio screen saves or prints its draft but has no sent or reminder action, and dispute keeps its own path', () => {
+  // Saving the draft and its PDF / print are free, as on the website ("to copy, share or print"; finding #5,
+  // 14 Nov 2026); mark as sent and reminders stay with the kits.
   const screen = readFileSync(join(__dirname, '../app/(tabs)/letters/studio.tsx'), 'utf8');
-  assert.doesNotMatch(screen, /expo-print|expo-sharing|letterExport|letterPdf|letters\/sent|scheduleNotification|localReminders|markSent/);
-  assert.match(screen, /router.push\('\/letters\/bureau-dispute'\)/);
+  assert.doesNotMatch(screen, /letters\/sent|scheduleNotification|localReminders|markSent/);
+  assert.match(screen, /saveOrPrintLetter\(letterHtml\(draft\.text\), action\)/);
+  assert.match(screen, /letterHref\(store, 'bureau-dispute'\)/);
   assert.match(screen, /Clipboard.setStringAsync\(draft!\.text\)/);
   assert.match(screen, /Share.share\(\{ message: draft!\.text \}\)/);
 });

@@ -51,11 +51,14 @@ test('saving sent details schedules once, persists the date, and changing dates 
 });
 
 test('no ownership, invalid input, denied permission and past dates never schedule a notification', async () => {
+  // Without a kit the mailing date is still saved (free, finding #11), but no reminder is asked for or set.
   const locked = harness(false);
-  await assert.rejects(markSent(locked.read(), details, locked.deps, now));
-  assert.equal(locked.read().status, 'draft');
+  assert.equal((await markSent(locked.read(), details, locked.deps, now)).reminder, 'kit');
+  assert.equal(locked.read().status, 'sent');
+  assert.equal(locked.read().sentDate, details.date);
+  assert.equal(locked.read().reminderDate, null);
   assert.equal(locked.permissions(), 0);
-  assert.equal(locked.cancelled.length, 0);
+  assert.equal(locked.scheduled.size, 0);
   const invalid = harness();
   for (const date of ['2026-02-30', '2026-11-12']) await assert.rejects(markSent(invalid.read(), { ...details, date }, invalid.deps, now));
   assert.equal(invalid.permissions(), 0);

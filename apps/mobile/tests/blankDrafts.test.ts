@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 import { runInNewContext } from 'node:vm';
 import ts from 'typescript';
 import * as letterQuestions from '../src/letterQuestions';
+import * as studioDrafts from '../src/studioDrafts';
 import type { SavedLetter } from '../src/letterStorage';
 
 test('opening a letter stores nothing; the first answer creates the draft, later answers update it', async () => {
@@ -29,6 +30,7 @@ test('opening a letter stores nothing; the first answer creates the draft, later
     if (name === 'expo-router') return { useLocalSearchParams: () => ({ kind: 'bureau-dispute' }), router: {} };
     if (name.endsWith('/phoneDatabase')) return { storageDeadline: (work: Promise<any>) => work };
     if (name.endsWith('/letterQuestions')) return letterQuestions;
+    if (name.endsWith('/studioDrafts')) return studioDrafts;
     if (name.endsWith('/kitTemplates')) return { kitForKind: () => 'credit-letter-kit', ALL_KIT_KINDS: [] };
     if (name.endsWith('/savedLetters')) return { savedLetters: async () => store };
     if (name.endsWith('/theme')) return { type: {}, space: {} };

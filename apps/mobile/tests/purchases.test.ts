@@ -27,8 +27,11 @@ test('preview cannot charge or unlock; sales switch prevents reaching any provid
   assert.equal((await mock.entitlement()).creditKit, false);
   await assert.rejects(mock.purchase(KIT.productId), /REVENUECAT_KEY_MISSING/);
   let calls = 0;
-  await assert.rejects(buyKit({ ...mock, mode: 'store', purchase: async () => { calls++; return { creditKit: true }; } } as any), /STORE_ACCOUNTS_NOT_READY/);
-  assert.equal(calls, 0);
+  // Sales are on: a store provider is asked once; an unknown product never reaches it.
+  assert.deepEqual(await buyKit({ ...mock, mode: 'store', purchase: async () => { calls++; return { creditKit: true }; } } as any), { creditKit: true });
+  assert.equal(calls, 1);
+  await assert.rejects(buyKit({ ...mock, mode: 'store', purchase: async () => { calls++; return { creditKit: true }; } } as any, 'ap_unknown'), /STORE_PRODUCTS_MISSING/);
+  assert.equal(calls, 1); calls = 0;
   assert.equal(await restoreKit(mock, async () => { calls++; return true; }), false);
   assert.equal(calls, 0);
   assert.equal(acceptedKey('web', 'appl_fake'), false);

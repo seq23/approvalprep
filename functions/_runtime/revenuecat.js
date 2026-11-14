@@ -23,7 +23,9 @@ export function storePurchases(purchases, products) {
 /** { purchases } for a known buyer; { purchases: [] } for an unknown one or any upstream failure (the
  * doors answer those identically); { stop } when RevenueCat refuses our key, which is never her fault. */
 export async function revenueCatPurchases(id, secret) {
-  const get = path => fetch(`${RC}${path}`, { headers: { Authorization: `Bearer ${secret}`, Accept: 'application/json' }, signal: AbortSignal.timeout(10000), redirect: 'error' });
+  // redirect: 'manual', never 'error': Cloudflare Workers throw a TypeError on 'error' before any request,
+  // which made every door refuse every buyer. A redirect is simply not ok, so it reads as no purchase.
+  const get = path => fetch(`${RC}${path}`, { headers: { Authorization: `Bearer ${secret}`, Accept: 'application/json' }, signal: AbortSignal.timeout(10000), redirect: 'manual' });
   const [purchases, products] = await Promise.all([get(`/customers/${encodeURIComponent(id)}/purchases?limit=1000`), get('/products?limit=1000')]);
   if ([purchases, products].some(r => r.status === 401 || r.status === 403)) {
     console.error(JSON.stringify({ event: 'NAMED_STOP', stop: 'REVENUECAT_KEY_REJECTED', where: 'app-doors' }));

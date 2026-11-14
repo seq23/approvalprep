@@ -3,7 +3,9 @@ import { Text } from 'react-native';
 import { useCallback, useState } from 'react';
 import { PREVIEW_ENABLED, loadSamples } from '../../src/previewSamples';
 import { savedLetters } from '../../src/savedLetters';
-import { Button, Row, Screen, Sheet } from '../../src/ui';
+import { BottomSheet, Button, Row, Screen, Sheet } from '../../src/ui';
+import { Linking } from 'react-native';
+import { DIY_FACTS, DIY_SOURCE } from '../../src/copy';
 import { hasTrackingKit } from '../../src/kitTemplates';
 import type { SavedLetter } from '../../src/letterStorage';
 import { startModel } from '../../src/start';
@@ -12,7 +14,7 @@ import { PRIVACY_LINE, WHAT_IT_IS } from '../../src/copy';
 import { FREE_LINE, PAID_ONCE_LINE, PRODUCTS, offerTitle } from '../../src/offers';
 import { usePrices } from '../../src/purchases/prices';
 import { openFrom } from '../../src/nav';
-import { draftHref } from '../../src/studioDrafts';
+import { draftHref, letterHref } from '../../src/studioDrafts';
 // S1 Home (the first screen, and a tab so it can always be reached again). Plan: docs/APP_PLAN.md,
 // screen S1 and pattern (j): what this is, what is free, the free Studio as the one main button,
 // then everything that is for sale, by name, each with its price: the website's eight products in the
@@ -20,6 +22,7 @@ import { draftHref } from '../../src/studioDrafts';
 export default function Home() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
+  const [facts, setFacts] = useState(false);
   const [letters, setLetters] = useState<SavedLetter[]>([]);
   const [hasKit, setHasKit] = useState(false);
   const prices = usePrices();
@@ -32,6 +35,11 @@ export default function Home() {
     return () => { active = false; };
   }, []));
   const model = startModel(letters, hasKit);
+  // Her unfinished dispute opens again rather than a second blank one.
+  async function openDispute() {
+    const href = await savedLetters().then(store => letterHref(store, 'bureau-dispute', '/')).catch(() => ({ params: { kind: 'bureau-dispute', from: '/' } }));
+    router.push({ ...href, pathname: '/letters/[kind]' });
+  }
   async function samples() {
     if (loading) return;
     setLoading(true); setMessage('');
@@ -46,7 +54,15 @@ export default function Home() {
       <Text style={type.body}>For a credit bureau, a landlord, a lender or an employer. You answer a few questions and the app writes the letter. You print it and mail it.</Text>
       <Button primary label="Open the free Letter Studio ›" onPress={() => openFrom('/', '/letters/studio')} />
       <Text style={type.sub}>{FREE_LINE}</Text>
-      <Button label="Free credit bureau dispute letter ›" onPress={() => openFrom('/', '/letters/[kind]', { kind: 'bureau-dispute' })} />
+      <Button label="Free credit bureau dispute letter ›" onPress={() => void openDispute()} />
+      {/* Finding #14: for someone about to pay a credit repair company, the free facts first (FTC). */}
+      <Row title="Thinking of paying a credit repair company?" sub="What the FTC says first, free · 1 minute" onPress={() => setFacts(true)} />
+      <BottomSheet visible={facts} title="Before you pay a credit repair company" onClose={() => setFacts(false)}>
+        {DIY_FACTS.map(line => <Text key={line} style={type.body}>• {line}</Text>)}
+        <Button quiet label={`Source: ${DIY_SOURCE.label} ›`} onPress={() => void Linking.openURL(DIY_SOURCE.url).catch(() => {})} />
+        <Text style={type.sub}>ApprovalPrep is not a credit repair company. It gives you the letter to send yourself.</Text>
+        <Button primary label="Write the free dispute letter ›" onPress={() => { setFacts(false); void openDispute(); }} />
+      </BottomSheet>
       {model.next ? <Sheet>
         <Text style={type.sub}>Next answer date</Text>
         <Text style={type.subhead}>{model.next.date}</Text>

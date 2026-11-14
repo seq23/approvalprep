@@ -3,9 +3,11 @@
 // for kit owners (10 Nov), and on 13 Nov 2026 "Exact mirror": every kit the website sells is sold
 // here too, same name, same order, nearest store price, each unlocking the files the site delivers.
 // All are non-consumable (paid once, no subscription), sold under the COMPANY store accounts.
-// Switched OFF until those accounts and RevenueCat exist; she signs up for them herself.
+// Switched ON 14 Nov 2026: the 14 App Store products, RevenueCat project projf63ea019 (offering,
+// packages and entitlements match scripts/revenuecat/setup.ts) and the server doors are live. A store
+// build with this false is refused by the release gate (NAMED STOP KIT_SALES_OFF, scripts/release-gate.mjs).
 export const KIT = { productId: 'ap_credit_kit', approvedPriceUSD: 19.99, approved: '2026-11-06' } as const;
-export const KIT_SALES_ENABLED = false;
+export const KIT_SALES_ENABLED: boolean = true;
 export const KIT_STOP = 'STORE_ACCOUNTS_NOT_READY';
 
 // Buying while switched off is a named stop, never a charge or a silent no-op.

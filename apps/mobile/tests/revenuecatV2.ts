@@ -11,6 +11,8 @@ export const purchase = (product: string, extra: object = {}) => ({ object: 'pur
   store_purchase_identifier: 'fictional-transaction', ownership: 'purchased', ...extra });
 /** Owned App Store purchases of each product, with any field overridden. */
 export const purchases = (product: string | string[], extra: object = {}) => ([] as string[]).concat(product).map(id => purchase(id, extra));
-/** A fetch that answers RevenueCat's product list with the real fixture and the buyer's purchases with `items()`. */
-export const rcFetch = (items: () => unknown, status: () => number = () => 200) => async (input: unknown) =>
-  String(input).includes('/products?') ? Response.json(products) : Response.json({ object: 'list', items: items(), next_page: null }, { status: status() });
+/** A fetch that answers RevenueCat's product list with the real fixture and the buyer's purchases with `items()`.
+ * Like Cloudflare Workers, it throws on `redirect: 'error'` (the 14 Nov 2026 bug that refused every buyer). */
+export const workersFetchCheck = (init?: RequestInit) => { if (init?.redirect === 'error') throw new TypeError("Invalid redirect value, must be one of 'follow' or 'manual' ('error' won't be implemented since it does not make sense at the edge; use 'manual' instead)."); };
+export const rcFetch = (items: () => unknown, status: () => number = () => 200) => async (input: unknown, init?: RequestInit) =>
+  (workersFetchCheck(init), String(input)).includes('/products?') ? Response.json(products) : Response.json({ object: 'list', items: items(), next_page: null }, { status: status() });

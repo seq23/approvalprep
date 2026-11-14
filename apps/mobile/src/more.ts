@@ -1,6 +1,7 @@
 // The public page on how ApprovalPrep stays outside credit-repair law (her ask 13 Nov 2026).
 export const CREDIT_REPAIR_DEFENSE_URL = 'https://approvalprep.com/credit-repair-disclaimer/';
-export const CREDIT_REPAIR_DEFENSE_LABEL = 'Why we\u2019re not a credit repair company ›';
+// No › here: a list row draws its own (finding #20, "› ›"); a link button adds one.
+export const CREDIT_REPAIR_DEFENSE_LABEL = 'Why we\u2019re not a credit repair company';
 export const MORE_LINKS = [
   { label: 'The bureau answered: what it means', url: 'https://approvalprep.com/the-bureau-answered/' },
   { label: 'Privacy', url: 'https://approvalprep.com/privacy/' },

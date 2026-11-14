@@ -1,4 +1,5 @@
 import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
+import { CANCELLED_LINE, purchaseCancelled } from '../../../src/purchases/provider';
 import { useCallback, useState } from 'react';
 import { Linking, Text } from 'react-native';
 import { Button, Row, Screen, Sheet } from '../../../src/ui';
@@ -6,8 +7,9 @@ import { CREDIT_REPAIR_DEFENSE_LABEL, CREDIT_REPAIR_DEFENSE_URL } from '../../..
 import { type } from '../../../src/theme';
 import { HONEST_LIMIT, REQUEST_LINE } from '../../../src/copy';
 import { PREVIEW_ENABLED } from '../../../src/previewSamples';
-import { TRACKING_LINE, kitOfferFor, websiteDifference, productName, productRoute, BUNDLE_LINE, KIT_ORDER, upgradeLine, siteSkuFor } from '../../../src/offers';
+import { WEBSITE_BUYER_LABEL, TRACKING_LINE, kitOfferFor, websiteDifference, productName, productRoute, BUNDLE_LINE, KIT_ORDER, upgradeLine, siteSkuFor } from '../../../src/offers';
 import { KitFiles } from '../../../src/KitFiles';
+import { openFrom } from '../../../src/nav';
 import { KIT, EXPLANATION_KIT, COMPLETE_BUNDLE, KIT_SALES_ENABLED, isUpgrade, upgradeFor } from '../../../src/kit';
 import { LETTERS, EXPLANATION_LETTERS } from '../../../src/letters';
 import { KIT_ID, EXPLANATION_KIT_ID, loadDeliveredKit, saveDeliveredKit } from '../../../src/kitTemplates';
@@ -19,7 +21,10 @@ import { bundleFile, installBundle } from '../../../src/purchases/bundleFiles';
 import { restoreBundle } from '../../../src/purchases/bundleDelivery';
 import { offersFor, ownedKitIds, NO_OWNERSHIP, type BundleOwnership } from '../../../src/purchases/bundleOffers';
 export default function Unlock() {
-  const { kit } = useLocalSearchParams<{ kit?: string }>();
+  // letter: the locked letter she tapped; once the kit is hers, that letter opens (finding #13).
+  const { kit, letter } = useLocalSearchParams<{ kit?: string; letter?: string }>();
+  const wanted = [...LETTERS, ...EXPLANATION_LETTERS].find(l => l.kind === letter && l.access === 'kit') ?? null;
+  const openWanted = () => { if (wanted) router.replace({ pathname: '/letters/[kind]', params: { kind: wanted.kind } }); };
   const explanation = kit === EXPLANATION_KIT_ID;
   const kitId = explanation ? EXPLANATION_KIT_ID : KIT_ID;
   const offer = explanation ? EXPLANATION_KIT : KIT;
@@ -61,17 +66,20 @@ export default function Unlock() {
         const has = !!await loadDeliveredKit(kitId);
         setOwned(has);
         setMessage(has ? 'Preview: this kit is unlocked for this visit. Nothing was charged.' : 'This is a preview, so there are no purchases to restore here.');
+        if (has && bought) openWanted();
         return;
       }
       // A bundle buyer who lands here from a locked letter gets her kits through the bundle door.
       const restored = await restoreKit(provider, saveDeliveredKit, bought) || (!bought && await restoreBundle(await bundleAccount(), installBundle));
-      setOwned(!!await loadDeliveredKit(kitId));
+      const has = !!await loadDeliveredKit(kitId);
+      setOwned(has);
       setMessage(restored ? 'Your kit is saved on this phone and ready offline.' : 'No letter kit purchase was found for this store account.');
+      if (has && bought) openWanted();
     } catch (error) {
       const code = error instanceof Error ? error.message : '';
       console.warn('Kit restore failed', code);
       setOwned(!!await loadDeliveredKit(kitId));
-      setMessage(code === 'KIT_RESTORE_PARTIAL' ? 'Available kits are saved on this phone. Another kit could not be restored; try Restore again. You do not need to buy it again.'
+      setMessage(purchaseCancelled(error) ? CANCELLED_LINE : code === 'KIT_RESTORE_PARTIAL' ? 'Available kits are saved on this phone. Another kit could not be restored; try Restore again. You do not need to buy it again.'
         : code === 'STORE_ACCOUNTS_NOT_READY' ? 'Purchases are not available yet.'
         : code === 'REVENUECAT_KEY_MISSING' ? 'Purchases are not available in this preview.'
         : code === 'REVENUECAT_SECRET_MISSING' ? 'Kit downloads are not available yet. Your purchase can be restored when downloads are ready.'
@@ -84,26 +92,27 @@ export default function Unlock() {
     const everything = route.pathname === '/letters/bundle';
     return <Row key={id} title={productName(id)}
       sub={isUpgrade(id) ? upgradeLine(KIT_ORDER.length - ownedKitIds(ownership).length, prices.find(p => p.id === id)?.price || 'the store price', upgradeFor(ownedKitIds(ownership))?.paid ?? 0)
-        : `${everything ? BUNDLE_LINE : 'Self-help letter templates'} · ${prices.find(p => p.id === id)?.price || 'Store price unavailable'} · paid once`}
+        : everything ? `${BUNDLE_LINE} · ${prices.find(p => p.id === id)?.price || 'Store price unavailable'}` : `Self-help letter templates · ${prices.find(p => p.id === id)?.price || 'Store price unavailable'} · paid once`}
       onPress={() => router.push(everything ? { pathname: '/letters/bundle', params: { kit: kitId } } : { pathname: route.pathname, params: route.params })} />;
   };
   const canBuy = (KIT_SALES_ENABLED && !mock) || preview;
   const other = kitOfferFor(explanation ? KIT_ID : EXPLANATION_KIT_ID);
   return <Screen route="/letters/unlock" label={kitName} title={owned ? 'Your kit is on this phone' : explanation ? 'Nine explanation letters, paid once' : 'Four more letters, paid once'}>
-    <Text style={type.body}>A kit is a set of letter templates you unlock once in this app, fill in and send yourself. {explanation ? 'One purchase covers the nine explanation letters.' : 'One purchase covers every letter and every dispute round.'}</Text>
-    {explanation ? null : <Text style={type.body}>Looking for a cheaper, easier, fairer alternative to a credit repair company? Do it yourself with these letters, paid once, no monthly fee.</Text>}
+    <Text style={type.body}>A kit is a set of letter templates you unlock once in this app, fill in and send yourself. {explanation ? 'One purchase covers the nine explanation letters.' : 'One purchase covers every letter in this kit, as often as you need it.'}</Text>
+    {explanation ? null : <Text style={type.body}>Thinking of paying a credit repair company? You can send these letters yourself, paid once, with no monthly fee. ApprovalPrep is not a credit repair company.</Text>}
     <Sheet>{(explanation ? EXPLANATION_LETTERS : LETTERS.filter(l => l.access === 'kit')).map(l => <Text key={l.kind} style={type.body}>{l.name}</Text>)}<Text style={type.body}>{TRACKING_LINE}</Text></Sheet>
     <Text style={type.sub}>{explanation ? REQUEST_LINE : HONEST_LIMIT}</Text>
     <Text style={type.sub}>{websiteDifference(kitId)}</Text>
+    {owned ? null : <Button quiet label={WEBSITE_BUYER_LABEL} onPress={() => openFrom('/letters/unlock', '/more')} />}
     {offers[0] === COMPLETE_BUNDLE.productId ? option(offers[0]) : null}
     {owned ? <>
-      <Button primary label="Write a kit letter ›" onPress={() => router.replace('/letters')} />
+      <Button primary label={wanted ? `Write the ${wanted.name.charAt(0).toLowerCase()}${wanted.name.slice(1)} ›` : 'Write a kit letter ›'} onPress={() => wanted ? openWanted() : router.replace('/letters')} />
       <KitFiles sku={siteSkuFor(offer.productId)!} productId={offer.productId} name={kitName} />
     </> : <>
       <Button primary disabled={busy || !canBuy || !product || !offers.includes(offer.productId)} label={product ? `Get this kit, ${product.price} once` : 'Store price unavailable'} onPress={() => void act('buy')} />
       {preview ? <Text testID="buying-pretend" style={type.sub}>This is a preview: buying here is pretend, nothing is charged, and it lasts until you close the page.</Text>
         : canBuy ? null : <Text testID="buying-off" style={type.sub}>{PREVIEW_ENABLED ? 'This is a preview, so buying is switched off and the button above does nothing. The price is shown so you can see it.' : 'Buying is not available right now.'}</Text>}
-      <Button quiet label={CREDIT_REPAIR_DEFENSE_LABEL} onPress={() => void Linking.openURL(CREDIT_REPAIR_DEFENSE_URL)} />
+      <Button quiet label={`${CREDIT_REPAIR_DEFENSE_LABEL} ›`} onPress={() => void Linking.openURL(CREDIT_REPAIR_DEFENSE_URL)} />
     </>}
     {offers.some(id => id !== offer.productId && id !== COMPLETE_BUNDLE.productId) ? <Text style={type.sub}>Other options</Text> : null}
     {offers.filter(id => id !== offer.productId && id !== COMPLETE_BUNDLE.productId).map(option)}

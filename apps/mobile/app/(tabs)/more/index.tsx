@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Linking, Text, View } from 'react-native';
-import { Button, Row, Screen } from '../../../src/ui';
+import { Button, Field, Row, Screen } from '../../../src/ui';
 import { type, space, color } from '../../../src/theme';
 import { PRIVACY_LINE } from '../../../src/copy';
 import { MORE_LINKS, deletionController } from '../../../src/more';
@@ -16,7 +16,9 @@ import { restoreBundle } from '../../../src/purchases/bundleDelivery';
 import { installBundle } from '../../../src/purchases/bundleFiles';
 import { saveDeliveredKit } from '../../../src/kitTemplates';
 import { restoreAll, restoreFileKits, restoreMessage } from '../../../src/purchases/restoreAll';
-import { downloadKitFiles } from '../../../src/purchases/kitFiles';
+import { downloadKitFiles, saveKitFiles } from '../../../src/purchases/kitFiles';
+import { unlockWebsiteOrder, websiteUnlockMessage } from '../../../src/purchases/websiteUnlock';
+import { exportAllLetters } from '../../../src/allLetters';
 export default function More() {
   const [confirming, setConfirming] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -24,6 +26,25 @@ export default function More() {
   const [restoring, setRestoring] = useState(false);
   const [restored, setRestored] = useState('');
   const prices = usePrices();
+  const [order, setOrder] = useState('');
+  const [unlocking, setUnlocking] = useState(false);
+  const [unlocked, setUnlocked] = useState('');
+  const [exporting, setExporting] = useState(false);
+  const [exported, setExported] = useState('');
+  async function unlockOrder() {
+    if (unlocking) return;
+    setUnlocking(true); setUnlocked('');
+    try { setUnlocked(websiteUnlockMessage(await unlockWebsiteOrder(order, { saveKit: saveDeliveredKit, saveFiles: saveKitFiles, installBundle }), PREVIEW_ENABLED)); setOrder(''); }
+    catch (error) { setUnlocked(websiteUnlockMessage(error instanceof Error ? error : Error('WEBSITE_UNLOCK_UNAVAILABLE'), PREVIEW_ENABLED)); }
+    finally { setUnlocking(false); }
+  }
+  async function exportAll() {
+    if (exporting) return;
+    setExporting(true); setExported('');
+    try { const count = await exportAllLetters(); setExported(count ? '' : 'You have no saved letters yet.'); }
+    catch (error) { setExported(error instanceof Error && error.message ? error.message : 'Your letters could not be saved as a PDF. Please try again.'); }
+    finally { setExporting(false); }
+  }
   async function restore() {
     if (restoring) return;
     setRestoring(true); setRestored('');
@@ -46,6 +67,15 @@ export default function More() {
     {PRODUCTS.map(p => <Row key={p.sku} title={offerTitle(p.name, prices[p.productId])} sub={p.what} onPress={() => openFrom('/more', p.screen, p.params)} />)}
     <Row title={restoring ? 'Checking…' : 'Restore a purchase'} sub="Checks this store account for a kit or the bundle and puts it back on this phone" onPress={() => void restore()} />
     {restored ? <Text accessibilityRole="alert" style={type.sub}>{restored}</Text> : null}
+    <Text style={type.section} accessibilityRole="header">Bought on approvalprep.com?</Text>
+    <Text style={type.sub}>A kit you bought on the website opens here at no charge. Paste the link from your download page or from the email "Your ApprovalPrep download link". Only the order code in it is sent.</Text>
+    <Field label="Your order link" value={order} onChangeText={setOrder} />
+    <Button label={unlocking ? 'Checking…' : 'Open my website kit ›'} disabled={unlocking || !order.trim()} onPress={() => void unlockOrder()} />
+    {unlocked ? <Text accessibilityRole="alert" style={type.sub}>{unlocked}</Text> : null}
+    <Text style={type.section} accessibilityRole="header">Your letters</Text>
+    <Text style={type.sub}>Your letters and mailing dates are kept only on this phone. Deleting the app deletes them. Save a copy you can keep.</Text>
+    <Button label={exporting ? 'Making the PDF…' : 'Save all my letters as one PDF ›'} disabled={exporting} onPress={() => void exportAll()} />
+    {exported ? <Text accessibilityRole="alert" style={type.sub}>{exported}</Text> : null}
     <Text style={type.section} accessibilityRole="header">About</Text>
     {MORE_LINKS.map(link => <Row key={link.url} title={link.label} onPress={() => { Linking.openURL(link.url).catch(() => setMessage('Could not open the page. Try again when you are online.')); }} />)}
     <View style={{ marginTop: space[6], paddingTop: space[4], borderTopWidth: 1, borderColor: color.rule, gap: space[3] }}>
