@@ -288,6 +288,8 @@ button:disabled { opacity: .7; cursor: wait; transform: none; }
 .success-flow-notice { grid-column: 1 / -1; border-left-color: var(--done); background: var(--done-soft); }
 .download-panel { border-color: var(--done); }
 .download-links { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-top: 14px; }
+/* A Stripe session id is one long word: let it break so the page never runs off a phone screen. */
+.download-links p, [data-download-status] { flex-basis: 100%; overflow-wrap: anywhere; }
 .path-choice-band { background: var(--paper-raised); }
 .path-choice-grid { margin-top: 18px; }
 .path-choice-card { display: grid; gap: 10px; align-content: start; }
@@ -327,7 +329,8 @@ h3 { font-size: 1.15rem; line-height: 1.3; }
 .button.secondary, .secondary-button, .button.secondary-button { background: var(--paper-raised); color: var(--carbon); border: 2px solid var(--carbon); }
 .button.secondary:hover, .secondary-button:hover { background: var(--color-soft); color: var(--carbon); border-color: var(--carbon); }
 .hero-actions .button::after, .final-cta .button::after, .ap-go::after { content: " \203A"; white-space: pre; }
-.nav-cta { background: var(--signal); border-color: var(--signal); }
+/* The header button is the quiet outline: the page's own free step is the one signal fill on a screen. */
+.nav-cta, .nav-cta:hover { background: var(--paper-raised); border: 2px solid var(--carbon); color: var(--carbon) !important; }
 
 /* Header: the logo, then the menu. */
 .site-header { background: var(--paper); border-bottom: 1px solid var(--rule); }
@@ -479,3 +482,4 @@ details summary { min-height: 44px; }
 @media (max-width: 740px) {
   .product-card .product-media, .product-card .product-how { display: none; }
 }
+.download-again .link-button { background: none; border: 0; padding: 12px 0; min-height: 44px; font: inherit; color: var(--signal-deep); text-decoration: underline; cursor: pointer; }

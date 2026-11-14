@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { BackHandler, Platform, Pressable, Text } from 'react-native';
-import { router, useLocalSearchParams, usePathname, type Href } from 'expo-router';
+import { router, useIsFocused, useLocalSearchParams, usePathname, type Href } from 'expo-router';
 import { Stack } from 'expo-router';
 import { color, font, type } from './theme';
 import { SCREENS, backTarget, byRoute, screenForPath, titleFor, type Tab } from './screens';
@@ -46,8 +46,12 @@ export function useBackKeys(route: string) {
   const s = byRoute(route);
   const { from } = useLocalSearchParams<{ from?: string }>();
   // Screens under this one stay mounted. Only the screen on show answers Escape or Android back,
-  // so one press goes back one screen ("Mark as sent" used to jump two).
-  const showing = screenForPath(usePathname()).route === route;
+  // so one press goes back one screen ("Mark as sent" used to jump two). The path alone is not
+  // enough: the Studio pushes one copy of the same route per question, and every copy matched the
+  // path, so one Escape fired once per copy and jumped from question 2 straight to Home. Only the
+  // focused copy listens.
+  const focused = useIsFocused();
+  const showing = focused && screenForPath(usePathname()).route === route;
   useEffect(() => {
     if (!s.back || !showing) return;
     const sub = BackHandler.addEventListener('hardwareBackPress', () => { goBack(route, from); return true; });

@@ -1884,7 +1884,7 @@ const manualRouteCopy = {
   },
   "/checkout/success": {
     "heading": "Checkout Success",
-    "lead": "Checkout Success helps you prepare for payment confirmation with truthful details, organized supporting documents, and a clear next step before protected delivery becomes urgent.",
+    "lead": "Your ApprovalPrep download page. Once Stripe confirms your payment, your PDF guide and editable Word file are ready to save from this page.",
     "shortAnswer": "Your payment has gone through and your files are ready on this page. Download both the PDF guide and the editable DOCX now, and save them somewhere you will find them again.",
     "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
@@ -1908,7 +1908,7 @@ const manualRouteCopy = {
   },
   "/download": {
     "heading": "Download",
-    "lead": "Download helps you prepare for verified download with truthful details, organized supporting documents, and a clear next step before private file access becomes urgent.",
+    "lead": "Your ApprovalPrep download page. Once Stripe confirms your payment, your PDF guide and editable Word file are ready to save from this page.",
     "shortAnswer": "This is where a verified purchase collects its files. Use the same email address you bought with, and the page will show what your purchase includes.",
     "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",

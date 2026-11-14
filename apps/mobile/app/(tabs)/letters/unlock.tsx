@@ -91,9 +91,9 @@ export default function Unlock() {
     {offers.filter(id => id !== offer.productId && id !== COMPLETE_BUNDLE.productId).map(option)}
     {/* The other kit is named here too, so neither kit looks like the only one. */}
     {ownership.bundle || (explanation ? ownership.creditKit : ownership.explanationKit) ? null : <Text style={type.sub}>{`This app also has the ${other.name}: ${other.what}. It is in the bundle above and on the Write a letter list.`}</Text>}
-    <Button label={busy ? 'Checking…' : 'Restore purchase'} disabled={busy} onPress={() => void act('restore')} />
+    <Button quiet label={busy ? 'Checking…' : 'Restore purchase'} disabled={busy} onPress={() => void act('restore')} />
     {message ? <Text accessibilityRole="alert" style={type.sub}>{message}</Text> : null}
-    <Button label="Terms ›" onPress={() => void Linking.openURL('https://approvalprep.com/terms/')} />
-    <Button label="Privacy ›" onPress={() => void Linking.openURL('https://approvalprep.com/privacy/')} />
+    <Button quiet label="Terms ›" onPress={() => void Linking.openURL('https://approvalprep.com/terms/')} />
+    <Button quiet label="Privacy ›" onPress={() => void Linking.openURL('https://approvalprep.com/privacy/')} />
   </Screen>;
 }
