@@ -2,7 +2,7 @@ import { newDispute } from './letterQuestions';
 import { LETTERS, EXPLANATION_LETTERS } from './letters';
 import type { KitId, KitTemplates, KitKind } from './kitTemplates';
 import type { SavedLetter } from './letterStorage';
-import { BUNDLE_UPGRADE, COMPLETE_BUNDLE, EXPLANATION_KIT, KIT } from './kit';
+import { ALL_KIT_IDS, COMPLETE_BUNDLE, EXPLANATION_KIT, KIT, bundleUnlocked } from './kit';
 export const PREVIEW_ENABLED = process.env.EXPO_PUBLIC_AP_PREVIEW === '1';
 let samplesActive = false;
 
@@ -14,11 +14,12 @@ export function previewBuy(productId: string, enabled = PREVIEW_ENABLED): void {
   if (!enabled) throw Error('REVENUECAT_KEY_MISSING');
   previewBought.add(productId);
 }
+/** The same bundle rule as the store: bought, an upgrade high enough, or kits that already cover it. */
+export const previewBundle = (enabled = PREVIEW_ENABLED) => enabled && bundleUnlocked({ kits: ALL_KIT_IDS.filter(id => previewBought.has(id)), upgrades: [...previewBought], bundle: previewBought.has(COMPLETE_BUNDLE.productId) });
 export function previewOwns(productId: string, enabled = PREVIEW_ENABLED): boolean {
   if (!enabled) return false;
-  return previewBought.has(productId) || previewBought.has(COMPLETE_BUNDLE.productId) || previewBought.has(BUNDLE_UPGRADE.productId);
+  return previewBought.has(productId) || previewBundle(enabled);
 }
-export const previewBundle = (enabled = PREVIEW_ENABLED) => enabled && (previewBought.has(COMPLETE_BUNDLE.productId) || previewBought.has(BUNDLE_UPGRADE.productId));
 /** For tests: forget the pretend purchases. */
 export function resetPreviewPurchases() { previewBought.clear(); }
 

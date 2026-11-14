@@ -6,9 +6,9 @@ import { CREDIT_REPAIR_DEFENSE_LABEL, CREDIT_REPAIR_DEFENSE_URL } from '../../..
 import { type } from '../../../src/theme';
 import { HONEST_LIMIT, REQUEST_LINE } from '../../../src/copy';
 import { PREVIEW_ENABLED } from '../../../src/previewSamples';
-import { TRACKING_LINE, kitOfferFor, websiteDifference, productName, productRoute, siteSkuFor } from '../../../src/offers';
+import { TRACKING_LINE, kitOfferFor, websiteDifference, productName, productRoute, BUNDLE_LINE, KIT_ORDER, upgradeLine, siteSkuFor } from '../../../src/offers';
 import { KitFiles } from '../../../src/KitFiles';
-import { KIT, EXPLANATION_KIT, COMPLETE_BUNDLE, KIT_SALES_ENABLED } from '../../../src/kit';
+import { KIT, EXPLANATION_KIT, COMPLETE_BUNDLE, KIT_SALES_ENABLED, isUpgrade, upgradeFor } from '../../../src/kit';
 import { LETTERS, EXPLANATION_LETTERS } from '../../../src/letters';
 import { KIT_ID, EXPLANATION_KIT_ID, loadDeliveredKit, saveDeliveredKit } from '../../../src/kitTemplates';
 import { purchases } from '../../../src/purchases';
@@ -17,7 +17,7 @@ import { restoreKit } from '../../../src/purchases/delivery';
 import { bundleAccount } from '../../../src/purchases/bundleAccount';
 import { bundleFile, installBundle } from '../../../src/purchases/bundleFiles';
 import { restoreBundle } from '../../../src/purchases/bundleDelivery';
-import { offersFor, NO_OWNERSHIP, type BundleOwnership } from '../../../src/purchases/bundleOffers';
+import { offersFor, ownedKitIds, NO_OWNERSHIP, type BundleOwnership } from '../../../src/purchases/bundleOffers';
 export default function Unlock() {
   const { kit } = useLocalSearchParams<{ kit?: string }>();
   const explanation = kit === EXPLANATION_KIT_ID;
@@ -83,7 +83,8 @@ export default function Unlock() {
     const route = productRoute(id);
     const everything = route.pathname === '/letters/bundle';
     return <Row key={id} title={productName(id)}
-      sub={`${everything ? 'Every kit, in this app and as files' : 'Self-help letter templates'} · ${prices.find(p => p.id === id)?.price || 'Store price unavailable'} · paid once`}
+      sub={isUpgrade(id) ? upgradeLine(KIT_ORDER.length - ownedKitIds(ownership).length, prices.find(p => p.id === id)?.price || 'the store price', upgradeFor(ownedKitIds(ownership))?.paid ?? 0)
+        : `${everything ? BUNDLE_LINE : 'Self-help letter templates'} · ${prices.find(p => p.id === id)?.price || 'Store price unavailable'} · paid once`}
       onPress={() => router.push(everything ? { pathname: '/letters/bundle', params: { kit: kitId } } : { pathname: route.pathname, params: route.params })} />;
   };
   const canBuy = (KIT_SALES_ENABLED && !mock) || preview;

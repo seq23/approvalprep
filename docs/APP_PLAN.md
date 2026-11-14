@@ -510,12 +510,20 @@ products the website has?" — her pick: "Exact mirror".
   RevenueCat again and returns two five-minute signed links; `GET /api/app-files-file` streams the
   fixed object. No file content is in the repo or the app bundle. The Credit Letter Kit and the Letter
   of Explanation Kit keep their in-app letters and tracking and also get their website files.
-- **Bundle upgrade: nobody pays twice.** One upgrade product, `ap_bundle_upgrade` at $29.99, offered to
-  anyone who owns any kit (one or several, whichever). A kit she owns is never offered again, a kit
-  owner is never shown the full-price bundle, and the upgrade is never offered to someone who owns no
-  kit (`offersFor` in `src/purchases/bundleOffers.ts`, tested for every kit against every other).
-  Known: a Business Funding Prep Kit owner pays $39.99 + $29.99, more than the $49.99 bundle alone;
-  one upgrade price was chosen to keep the store setup simple.
+- **Bundle upgrade: nobody ever pays more in total than the $49.99 bundle** (owner, 13 Nov 2026; this
+  replaces the single $29.99 upgrade). The website has no kit-owner upgrade, so the app's rule stands
+  alone. Her upgrade is $49.99 minus what her kits cost, rounded **down** to a fixed store tier:
+  `ap_bundle_upgrade_3499` $34.99, `ap_bundle_upgrade` $29.99, `ap_bundle_upgrade_1999` $19.99,
+  `ap_bundle_upgrade_1499` $14.99, `ap_bundle_upgrade_999` $9.99, `ap_bundle_upgrade_499` $4.99.
+  When her kits add up to $49.99 or more, or less than $4.99 is left, the rest unlocks free with no
+  purchase. A kit owner is offered another single kit only while it keeps her total within $49.99,
+  never the full-price bundle, and never a kit she owns. The line reads "Get the other N kits for $X
+  (you’ve already paid $Y)". One rule for app and server: `src/lib/appUpgrade.mjs`; an upgrade lower
+  than her kits call for, or with no kit, opens nothing. Proved for every combination of owned kits
+  (`apps/mobile/tests/bundle.test.ts`). Examples: Letter of Explanation owner $34.99; Credit,
+  Income or Life Admin owner $29.99; Rental or Loan Prep owner $19.99; Business Funding owner $9.99.
+  The bundle reads "All 7 kits above, paid once." on Home and More, and "All 7 kits, paid once" on
+  its screen.
 - **The free web preview** lets every product be "bought" (pretend, session-only, nothing charged,
   `previewBuy` in `src/previewSamples.ts`, only with `EXPO_PUBLIC_AP_PREVIEW=1`, which the release gate
   refuses for a store build). A pretend kit opens its letters and its files; in the preview a file opens

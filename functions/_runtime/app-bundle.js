@@ -1,4 +1,4 @@
-const PRODUCTS = ['ap_complete_bundle', 'ap_bundle_upgrade'];
+import { BUNDLE_PRODUCT, KIT_PRICES, UPGRADE_IDS, bundleUnlocked } from '../../src/lib/appUpgrade.mjs';
 export const bundleJson = (body, status = 200) => new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json', 'cache-control': 'private, no-store' } });
 // Store reviewers and testers buy in the store's sandbox. Sandbox purchases open nothing unless the
 // server variable APPROVALPREP_ACCEPT_SANDBOX_PURCHASES is exactly "1" (set it for a store review,
@@ -10,7 +10,14 @@ export function ownsProduct(subscriber, product, sandbox = false) {
   return entitlement?.product_identifier === product && entitlement.expires_date === null
     && Array.isArray(transactions) && transactions.some(t => (t.is_sandbox === false || (sandbox && t.is_sandbox === true)) && !t.refunded_at);
 }
-export const ownsBundle = (subscriber, sandbox = false) => PRODUCTS.some(id => ownsProduct(subscriber, id, sandbox));
+// The same rule as the app (src/lib/appUpgrade.mjs): the bundle itself, an upgrade at least as high
+// as her kits call for, or kits that already add up to the bundle price. Only live, non-refunded
+// store purchases count.
+export const ownsBundle = (subscriber, sandbox = false) => bundleUnlocked({
+  bundle: ownsProduct(subscriber, BUNDLE_PRODUCT, sandbox),
+  kits: Object.keys(KIT_PRICES).filter(id => ownsProduct(subscriber, id, sandbox)),
+  upgrades: UPGRADE_IDS.filter(id => ownsProduct(subscriber, id, sandbox)),
+});
 async function key(secret) { return crypto.subtle.importKey('raw', new TextEncoder().encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign', 'verify']); }
 export async function bundleUrl(origin, secret, now = Date.now()) {
   const expires = Math.floor(now / 1000) + 300;

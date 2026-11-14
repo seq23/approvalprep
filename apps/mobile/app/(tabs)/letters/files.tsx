@@ -6,13 +6,13 @@ import { CREDIT_REPAIR_DEFENSE_LABEL, CREDIT_REPAIR_DEFENSE_URL } from '../../..
 import { type } from '../../../src/theme';
 import { REQUEST_LINE } from '../../../src/copy';
 import { PREVIEW_ENABLED } from '../../../src/previewSamples';
-import { FILE_KIT_OFFERS, productName, productRoute } from '../../../src/offers';
-import { COMPLETE_BUNDLE, KIT_SALES_ENABLED } from '../../../src/kit';
+import { FILE_KIT_OFFERS, productName, productRoute, BUNDLE_LINE, KIT_ORDER, upgradeLine } from '../../../src/offers';
+import { COMPLETE_BUNDLE, KIT_SALES_ENABLED, isUpgrade, upgradeFor } from '../../../src/kit';
 import { KitFiles } from '../../../src/KitFiles';
 import { bundleAccount, type BundlePrice } from '../../../src/purchases/bundleAccount';
 import { storePrices } from '../../../src/purchases/prices';
 import { downloadKitFiles } from '../../../src/purchases/kitFiles';
-import { NO_OWNERSHIP, offersFor, ownsKit, type BundleOwnership } from '../../../src/purchases/bundleOffers';
+import { NO_OWNERSHIP, offersFor, ownedKitIds, ownsKit, type BundleOwnership } from '../../../src/purchases/bundleOffers';
 // One of the five website kits the app sells as files (her ruling 13 Nov 2026, "Exact mirror"):
 // the same PDF guide and Word file the website delivers, paid once. Pattern (g), like the kit screen.
 export default function Files() {
@@ -66,7 +66,8 @@ export default function Files() {
   }
   const option = (id: string) => {
     const route = productRoute(id);
-    return <Row key={id} title={productName(id)} sub={`${route.pathname === '/letters/bundle' ? 'Every kit, in this app and as files' : 'Self-help templates'} · ${prices.find(p => p.id === id)?.price || 'Store price unavailable'} · paid once`}
+    return <Row key={id} title={productName(id)} sub={isUpgrade(id) ? upgradeLine(KIT_ORDER.length - ownedKitIds(ownership).length, prices.find(p => p.id === id)?.price || 'the store price', upgradeFor(ownedKitIds(ownership))?.paid ?? 0)
+      : `${route.pathname === '/letters/bundle' ? BUNDLE_LINE : 'Self-help templates'} · ${prices.find(p => p.id === id)?.price || 'Store price unavailable'} · paid once`}
       onPress={() => router.push(route.pathname === '/letters/bundle' ? '/letters/bundle' : { pathname: route.pathname, params: route.params })} />;
   };
   return <Screen route="/letters/files" label={offer.name} title={owned ? 'Your kit is on this phone' : `${offer.documentNames.length} documents, paid once`}>

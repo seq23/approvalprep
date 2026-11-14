@@ -1,7 +1,7 @@
 // Everything the app offers, in one place, so the first screen, the letter list, the kit screens
 // and the bundle screen all name the same things (hostile review, 13 Nov 2026: "idk what is being
 // offered on this app"). Prices are never typed here: screens show the store's price (usePrices).
-import { KIT, EXPLANATION_KIT, COMPLETE_BUNDLE, BUNDLE_UPGRADE, FILE_KITS, SITE_SKU, fileKitBySku } from './kit';
+import { KIT, EXPLANATION_KIT, COMPLETE_BUNDLE, FILE_KITS, SITE_SKU, fileKitBySku, isUpgrade } from './kit';
 import { LETTERS, EXPLANATION_LETTERS } from './letters';
 import { situations } from './studio';
 import { BUNDLE_SKU, WEBSITE_KITS, WEBSITE_PRODUCTS, websiteKit } from './websiteKits';
@@ -20,7 +20,7 @@ export const EXPLANATION_KIT_OFFER = {
 } as const;
 export const BUNDLE_OFFER = {
   productId: COMPLETE_BUNDLE.productId, name: 'Complete ApprovalPrep Bundle',
-  get what() { return `Every kit: the two letter kits in this app, plus all ${WEBSITE_KITS.length} website kits as files`; },
+  get what() { return `All ${WEBSITE_KITS.length} kits above, paid once.`; },
 } as const;
 export const KIT_OFFERS = [CREDIT_KIT, EXPLANATION_KIT_OFFER] as const;
 export const kitOfferFor = (kitId: string) => kitId === EXPLANATION_KIT_OFFER.id ? EXPLANATION_KIT_OFFER : CREDIT_KIT;
@@ -70,13 +70,18 @@ export const PRODUCTS: ProductOffer[] = WEBSITE_PRODUCTS.map((site): ProductOffe
 /** Single kits only, in the website's order. */
 export const KIT_ORDER = PRODUCTS.filter(p => p.productId !== COMPLETE_BUNDLE.productId).map(p => p.productId);
 export function productName(id: string): string {
-  if (id === BUNDLE_UPGRADE.productId) return 'Complete Bundle upgrade';
+  if (isUpgrade(id)) return 'Complete Bundle upgrade';
   return PRODUCTS.find(p => p.productId === id)?.name ?? id;
 }
 export function productRoute(id: string): { pathname: ProductScreen; params: Record<string, string> } {
-  if (id === BUNDLE_UPGRADE.productId) return { pathname: '/letters/bundle', params: {} };
+  if (isUpgrade(id)) return { pathname: '/letters/bundle', params: {} };
   const p = PRODUCTS.find(x => x.productId === id);
   if (!p) throw Error(`UNKNOWN_PRODUCT ${id}`);
   return { pathname: p.screen, params: p.params };
 }
+/** "Get the other 6 kits for $34.99 (you’ve already paid $14.99)". */
+export const upgradeLine = (otherKits: number, price: string, paid: number) =>
+  `Get the other ${count(otherKits, 'kit')} for ${price} (you’ve already paid $${paid.toFixed(2)})`;
+/** The bundle, said the same way on every screen. */
+export const BUNDLE_LINE = `All ${WEBSITE_KITS.length} kits, paid once`;
 export const siteSkuFor = (productId: string) => SITE_SKU[productId] ?? null;
