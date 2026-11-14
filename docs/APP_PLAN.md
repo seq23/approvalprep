@@ -227,8 +227,29 @@ Run `npm run check` in `apps/mobile` after each task; the App preview run must s
 - **Store accounts: the company accounts (Redwood Reserve Holdings LLC), after the D-U-N-S number.
   Approved 6 Nov 2026.** Why: Apple's guideline 5.1.1(ix) expects financial-field apps from a legal
   entity. The bundle id `com.approvalprep.app` stays a placeholder until then.
-- She signs up for the store accounts and RevenueCat herself; until then sales stay off
+- She signs up for the store accounts herself; until then sales stay off
   (`STORE_ACCOUNTS_NOT_READY`).
+
+## RevenueCat (set up 13 Nov 2026, her yes: "set up revenuecat for the other 3 apps")
+
+The project **ApprovalPrep** exists in her RevenueCat account. Everything inside it is made from the
+code by `apps/mobile/scripts/revenuecat/setup.ts`: the iOS and Android apps (`com.approvalprep.app`),
+the 14 one-time products on each store and the Test Store, one entitlement per product id (what
+`ownershipFrom` reads), and the `default` offering in paywall order. It re-checks everything and
+fixes only what is missing, so it is safe to re-run after any product change:
+`cd ~/GitHub/boss-os && npm run -s vault:run -- npx --prefix ~/GitHub/approvalprep/apps/mobile tsx ~/GitHub/approvalprep/apps/mobile/scripts/revenuecat/setup.ts --save-keys`
+(the public SDK keys go to the vault as `REVENUECAT_AP_{IOS,ANDROID,TEST}_PUBLIC_KEY`; at the store
+build they become `EXPO_PUBLIC_AP_REVENUECAT_IOS_KEY` / `_ANDROID_KEY`, never in git).
+
+Steps left, in order:
+1. Her: the project's v2 secret key (dashboard → ApprovalPrep → API keys → New secret API key,
+   Project configuration read & write), then `pbpaste | npm run -s vault:set REVENUECAT_AP_V2_SECRET_KEY`
+   in `~/GitHub/boss-os`. Until then the script stops with `REVENUECAT_SECRET_MISSING`.
+2. Run the command above; it ends with `0 mismatches, 0 errors`.
+3. When the company store accounts exist: create the same 14 product ids and prices in App Store
+   Connect and Play Console; set the real bundle id in `app.config.ts` and re-run the script.
+4. Link the stores in RevenueCat: App Store Connect In-App Purchase key (.p8, key id, issuer id) and
+   Play service-account JSON; then set `KIT_SALES_ENABLED = true`.
 
 ## Screen patterns (shipped examples first; owner, 10 Nov 2026)
 
