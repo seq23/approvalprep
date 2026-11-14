@@ -36,7 +36,7 @@ test('kit storage keeps ownership independent across restart and rejects cross-k
   assert.equal(EXPLANATION_LETTERS.length, 9);
   assert.equal(EXPLANATION_KIT.productId, 'ap_explanation_kit');
   assert.equal(EXPLANATION_KIT.approvedPriceUSD, 14.99);
-  assert.equal(KIT_SALES_ENABLED, false);
+  assert.equal(KIT_SALES_ENABLED, true);
   assert.equal(parseKitTemplates({ ...explanation, letters: credit.letters }), null);
   const db = new DatabaseSync(':memory:');
   const adapter = { execAsync: async (sql: string) => { db.exec(sql); }, runAsync: async (sql: string, ...args: any[]) => db.prepare(sql).run(...args), getAllAsync: async <T>(sql: string, ...args: any[]) => db.prepare(sql).all(...args) as T[] };
@@ -65,7 +65,7 @@ test('Restore independently delivers each owned kit or both; switched-off Buy ne
       };
       assert.equal(await restoreKit(mockProvider, async kit => { saved.push(kit.kit); return true; }), true);
       assert.deepEqual(saved, [ ...(owns.creditKit ? [KIT_ID] : []), ...(owns.explanationKit ? [EXPLANATION_KIT_ID] : []) ]);
-      await assert.rejects(buyKit(mockProvider, EXPLANATION_KIT.productId), /STORE_ACCOUNTS_NOT_READY/);
+      await assert.rejects(buyKit(mockProvider, EXPLANATION_KIT.productId), /MUST_NOT_REACH_STORE/);
     }
   } finally { globalThis.fetch = original; }
 });

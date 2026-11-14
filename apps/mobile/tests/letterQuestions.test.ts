@@ -15,7 +15,13 @@ test('free dispute renders the selected address and facts; missing facts remain 
   assert.ok(empty.blanks.length > 0);
   assert.match(empty.text, /\[[^\]]+\]/);
   assert.ok(!empty.text.includes('Sample Writer'));
-  assert.ok(disputeQuestions.length >= 4 && disputeQuestions.length <= 6);
+  // Seven short questions: the ID details (date of birth, last 4 of SSN) are their own optional step.
+  assert.equal(disputeQuestions.length, 7);
+  const id = renderDispute({ ...answers, dob: 'January 2, 1990', ssn4: '123-45-6789' }, new Date(2026, 10, 10));
+  assert.match(id.text, /Date of birth: January 2, 1990/);
+  assert.match(id.text, /Last 4 digits of SSN: 6789/);
+  assert.doesNotMatch(id.text, /123-45/);
+  assert.equal(id.blanks.length, 0);
 });
 
 test('autosave serializes rapid edits and snapshots answers before writing', async () => {

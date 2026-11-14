@@ -14,6 +14,12 @@ export async function downloadKitFiles(sku: string, account: FileAccount): Promi
   if (!response.ok) throw Error(data.stop || 'KIT_FILES_UNAVAILABLE');
   const links = validFileLinks(data, sku);
   if (!links) throw Error('KIT_FILES_UNAVAILABLE');
+  await saveKitFiles(sku, links);
+}
+
+/** Saves a kit's two files from links our own server signed (checked again here); earlier files stay on a failure. */
+export async function saveKitFiles(sku: string, links: { type: FileType; url: string }[]): Promise<void> {
+  if (Platform.OS === 'web') throw Error('NATIVE_DOWNLOAD_REQUIRED');
   const fs = await import('expo-file-system/legacy');
   if (!fs.documentDirectory) throw Error('KIT_FILES_UNAVAILABLE');
   for (const { type, url } of links) {

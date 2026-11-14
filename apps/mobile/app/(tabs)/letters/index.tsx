@@ -7,6 +7,8 @@ import { LETTERS, EXPLANATION_LETTERS, type LetterType } from '../../../src/lett
 import { kitLetter, kitForKind, loadDeliveredKit, EXPLANATION_KIT_ID, type KitTemplates } from '../../../src/kitTemplates';
 import { BUNDLE_OFFER, CREDIT_KIT, EXPLANATION_KIT_OFFER, FILE_KIT_OFFERS, STUDIO_COUNT, kitOfferFor, lockedLine, offerTitle } from '../../../src/offers';
 import { usePrices } from '../../../src/purchases/prices';
+import { savedLetters } from '../../../src/savedLetters';
+import { letterHref } from '../../../src/studioDrafts';
 export default function Letters() {
   const [kits, setKits] = useState<(KitTemplates | null)[]>([]);
   const prices = usePrices();
@@ -20,7 +22,8 @@ export default function Letters() {
   const row = (l: LetterType) => {
     const kit = kitOfferFor(kitForKind(l.kind));
     return <Row key={l.kind} title={l.name} sub={`${l.access === 'free' ? 'Free every time' : open(l) ? 'In your kit' : lockedLine(kit.name, prices[kit.productId])} · ${l.when}`}
-      onPress={() => router.push(open(l) ? `/letters/${l.kind}` : { pathname: '/letters/unlock', params: { kit: kitForKind(l.kind) } })} />;
+      onPress={() => void (open(l) ? savedLetters().then(store => letterHref(store, l.kind)).catch(() => ({ params: { kind: l.kind } })).then(href => router.push({ ...href, pathname: '/letters/[kind]' }))
+        : router.push({ pathname: '/letters/unlock', params: { kit: kitForKind(l.kind), letter: l.kind } }))} />;
   };
   return <Screen route="/letters" label="Write a letter" title="Which letter do you need?">
     <Text style={type.section} accessibilityRole="header">Free</Text>

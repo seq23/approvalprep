@@ -38,6 +38,7 @@ test('the bundle Get button and its notice follow the sales switch and the store
       if (name.endsWith('/bundleFiles')) return { bundleFile: async () => null };
       if (name.endsWith('/bundleAccount')) return { bundleAccount: async () => ({ ownership: async () => bought.length ? { ...offers.NO_OWNERSHIP, bundle: true } : offers.NO_OWNERSHIP, products: async () => [], mock, preview, buy: async (id: string) => { bought.push(id); } }) };
       if (name.endsWith('/bundleDelivery')) return { restoreBundle: async () => { throw Error('STORE_ACCOUNTS_NOT_READY'); } };
+      if (name.endsWith('/provider')) return { purchaseCancelled: () => false, CANCELLED_LINE: 'cancelled' };
       throw Error(name);
     } });
     const render = () => { index = 0; return exports.default(); };

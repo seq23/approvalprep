@@ -68,6 +68,7 @@ export const BEFORE_YOU_MAIL = [
   "Put in copies of your proof. Keep the originals.",
   "Send it by certified mail and ask for a return receipt, so you know the day it arrived.",
   "Keep a copy of the letter and of everything you enclosed.",
+  "Put in a copy of a photo ID (for example a driver's license) and a proof of your address (for example a utility bill or bank statement), so the bureau can find your file.",
   "Check the mail address against the bureau's own website or your report before you mail.",
   "Send a letter only to a bureau whose report shows the error."
 ];
@@ -80,12 +81,22 @@ const F = {
   dates: { name: "dates", label: "When did it happen?", hint: "Example: March to May 2025", optional: true },
   happened: { name: "happened", label: "What happened?", hint: "Two or three plain sentences, in your own words", kind: "long" },
   now: { name: "now", label: "What is different now?", hint: "What changed, or what you are doing about it", kind: "long", optional: true },
-  enclosures: { name: "enclosures", label: "What are you sending with it?", hint: "Example: bank statement, pay stubs", optional: true }
+  enclosures: { name: "enclosures", label: "What are you sending with it?", hint: "Example: bank statement, pay stubs", optional: true },
+  senderAddress: { name: "address", label: "Your mailing address", hint: "Street, then city, state and ZIP, so they can write back", kind: "lines", autocomplete: "street-address", optional: true },
+  contact: { name: "contact", label: "Phone or email", hint: "So they can reach you", autocomplete: "email", optional: true },
+  dob: { name: "dob", label: "Date of birth", hint: "The bureau uses it to find your file. Kept on your device", optional: true },
+  ssn4: { name: "ssn4", label: "Last 4 digits of your Social Security number", hint: "Only the last 4. The bureau uses it to find your file. Kept on your device", optional: true }
 };
-const explanationFields = [F.name, F.recipient, F.reference, F.dates, F.happened, F.now, F.enclosures];
+/** The explanation questions, worded for one situation: labels a situation does not override stay as above. */
+const explain = (labels = {}, { skipDates = false, extra = [] } = {}) =>
+  [F.name, F.senderAddress, F.contact, F.recipient, F.reference, ...(skipDates ? [] : [F.dates]), F.happened, F.now, ...extra, F.enclosures]
+    .map((f) => (labels[f.name] ? { ...f, ...labels[f.name] } : f));
+const explanationFields = explain();
 const disputeFields = [
   F.name,
   F.address,
+  F.dob,
+  F.ssn4,
   { name: "bureau", label: "Which credit bureau shows the error?", kind: "bureau" },
   { name: "account", label: "Which account is wrong?", hint: "Company name and the last 4 digits. Example: Capital One, ending 4471" },
   { name: "shows", label: "What does the report say?", hint: "Example: 60 days late in March 2026" },
@@ -101,7 +112,7 @@ export const studioSituations = [
     subject: "Dispute of an item on my credit report", fields: disputeFields
   },
   {
-    id: "credit", kind: "explanation", label: "A late payment or credit history to explain",
+    id: "credit", kind: "explanation", fields: explain({ recipient: { hint: "The lender or company reviewing your credit. Leave empty for \"To whom it may concern\"" }, reference: { label: "Account or application number", hint: "Only the last 4 digits of an account. Leave empty if you do not have one" }, dates: { label: "When was the late payment or problem?", hint: "Example: March to May 2025" } }), refLabel: "Account", label: "A late payment or credit history to explain",
     recommendationSku: "credit-letter-kit", recommendationName: "Credit Letter Kit",
     subject: "Explanation of an item in my credit history",
     opening: "I am writing to explain an item in my credit history that you will see when you review my file.",
@@ -115,35 +126,35 @@ export const studioSituations = [
     closing: "Please contact me if you need anything further."
   },
   {
-    id: "income", kind: "explanation", label: "Income or employment",
+    id: "income", kind: "explanation", fields: explain({ reference: { label: "Application or loan number" }, dates: { label: "Which dates does this cover?", hint: "Example: the gap from June to September 2025" }, happened: { hint: "Your work and income in two or three plain sentences" } }), label: "Income or employment",
     recommendationSku: "income-employment-letter-kit", recommendationName: "Income + Employment Letter Kit",
     subject: "Explanation of my income and employment",
     opening: "I am writing to explain my income and employment, so that the figures in my file are easy to follow.",
     closing: "I can provide further records of my income if they would help."
   },
   {
-    id: "rental", kind: "explanation", label: "Rental application",
+    id: "rental", kind: "explanation", fields: explain({ recipient: { label: "Who is the letter for?", hint: "The landlord, leasing office or property manager" }, reference: { label: "Property or unit you are applying for", hint: "Example: 12 Oak St, unit 4" }, dates: { label: "When did it happen?", hint: "Skip this if nothing happened, for example if you have never rented before", optional: true }, happened: { label: "What should the landlord know?", hint: "Example: this is my first apartment, or why a past rent payment was late" } }, { extra: [{ name: "support", label: "What can you offer?", hint: "Example: proof of income, references, a co-signer or a larger deposit", kind: "long", optional: true }] }), refLabel: "Property", label: "Rental application",
     recommendationSku: "rental-application-kit", recommendationName: "Rental Application Kit",
     subject: "Explanation to go with my rental application",
     opening: "I am writing to give you the facts behind one part of my rental application.",
     closing: "I am glad to provide references or further documents on request."
   },
   {
-    id: "loan", kind: "explanation", label: "Loan, auto or mortgage",
+    id: "loan", kind: "explanation", fields: explain({ recipient: { hint: "Your loan officer or the underwriter. Leave empty for \"To whom it may concern\"" }, reference: { label: "Loan or application number" } }), refLabel: "Loan", label: "Loan, auto or mortgage",
     recommendationSku: "loan-prep-letter-kit", recommendationName: "Loan Prep Letter Kit",
     subject: "Letter of explanation for my loan file",
     opening: "I am writing to explain one part of my loan application, as requested for my file.",
     closing: "Please let me know if the underwriter needs anything further from me."
   },
   {
-    id: "business", kind: "explanation", label: "Business funding",
+    id: "business", kind: "explanation", fields: explain({ name: { label: "Your full name and title", hint: "Example: Jordan Lee, owner" }, reference: { label: "Business name or application number" } }), label: "Business funding",
     recommendationSku: "business-funding-prep-kit", recommendationName: "Business Funding Prep Kit",
     subject: "Explanation to go with my business funding application",
     opening: "I am writing to explain one part of my business funding application.",
     closing: "I can provide further business records on request."
   },
   {
-    id: "life-admin", kind: "explanation", label: "Address, identity or records",
+    id: "life-admin", kind: "explanation", fields: explain({ reference: { label: "Account or record number" }, dates: { label: "Which dates or records differ?", hint: "Example: my old address from 2019 to 2022" } }), label: "Address, identity or records",
     recommendationSku: "life-admin-letter-kit", recommendationName: "Life Admin Letter Kit",
     subject: "Clarification of my records",
     opening: "I am writing to clarify a difference in my records, so that they can be matched correctly.",
@@ -189,6 +200,20 @@ const tidyName = (value) => { const v = tidyFact(value); return v && v === v.toL
 const lines = (value) => String(value ?? "").split(/\n|;/).map(collapse).filter(Boolean);
 const listItems = (value) => String(value ?? "").split(/\n|;|,(?!\s*\d{4}\b)| and (?=[a-z])/i).map((x) => tidyFact(x)).filter(Boolean);
 
+// "Dear Ms. Rivera:" for a person; an office or role reads "Dear Leasing Office:" (never "Dear The
+// leasing office:"); a company reads "To Parkview Apartments LLC:".
+const ROLE = /\b(office|team|department|dept|manager|managers|underwriter|underwriting|committee|landlord|officer|desk|staff|hr|human resources|admissions)$/i;
+const COMPANY = /\b(llc|l\.l\.c|inc|incorporated|corp|corporation|co|company|ltd|lp|llp|bank|credit union|apartments|properties|property|realty|group|mortgage|lending|financial|management|leasing|holdings|partners|services|associates|homes|living|residences)\.?$/i;
+const titleCase = (t) => t.replace(/(^|[\s/-])([a-z])/g, (_, lead, ch) => lead + ch.toUpperCase());
+export function salutationFor(to) {
+  const who = String(to || "").trim();
+  if (!who) return "To whom it may concern:";
+  const bare = who.replace(/^(the|a|an)\s+/i, "");
+  if (ROLE.test(bare)) return `Dear ${who === who.toLowerCase() || bare !== who ? titleCase(bare) : bare}:`;
+  if (COMPANY.test(bare)) return `To ${bare === bare.toLowerCase() ? titleCase(bare) : bare}:`;
+  return `Dear ${who}:`;
+}
+
 export function formatLetterDate(date = new Date()) {
   return date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
 }
@@ -214,6 +239,8 @@ export function buildLetter(situationId, answers = {}, { today = new Date() } = 
   if (s.kind === "dispute") {
     const addr = lines(answers.address);
     if (addr.length) sender.push(...addr); else { blanks.push("Your mailing address"); sender.push("[Your street address]", "[City, state and ZIP]"); }
+    const dob = tidyFact(answers.dob); if (dob) sender.push(`Date of birth: ${dob}`);
+    const ssn4 = String(answers.ssn4 ?? "").replace(/\D/g, "").slice(-4); if (ssn4.length === 4) sender.push(`Last 4 digits of SSN: ${ssn4}`);
     const bureau = bureaus.find((b) => b.id === answers.bureau);
     if (bureau) recipient = [...bureau.lines]; else { blanks.push("The credit bureau"); recipient = ["[Credit bureau name]", "[Its mail address for disputes]"]; }
     salutation = "To whom it may concern:";
@@ -232,8 +259,10 @@ export function buildLetter(situationId, answers = {}, { today = new Date() } = 
   } else {
     const to = tidyFact(answers.recipient);
     recipient = to ? [to] : [];
-    salutation = to ? `Dear ${to}:` : "To whom it may concern:";
-    const ref = tidyFact(answers.reference); if (ref) reference.push(`Reference: ${ref}`);
+    salutation = salutationFor(to);
+    const addr = lines(answers.address); if (addr.length) sender.push(...addr);
+    const contact = tidyFact(answers.contact); if (contact) sender.push(contact);
+    const ref = tidyFact(answers.reference); if (ref) reference.push(`${s.refLabel || "Reference"}: ${ref}`);
     const when = tidyFact(answers.dates); if (when) reference.push(`Dates: ${when}`);
     const happened = tidySentences(answers.happened);
     if (!happened) blanks.push("What happened");
@@ -242,6 +271,7 @@ export function buildLetter(situationId, answers = {}, { today = new Date() } = 
       s.opening,
       happened || "[Say what happened, in two or three plain sentences]",
       ...(now ? [now] : []),
+      ...(tidySentences(answers.support) ? [tidySentences(answers.support)] : []),
       `${enclosed.length ? "The documents listed below are enclosed to support these facts. " : ""}Everything in this letter is true to the best of my knowledge. ${s.closing}`
     ];
     enclosures = enclosed.map(cap);

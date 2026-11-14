@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { runInNewContext } from 'node:vm';
 import ts from 'typescript';
+import * as studioDrafts from '../src/studioDrafts';
 
 test('returning from Restore refreshes the mounted chooser and opens delivered kit letters', async () => {
   let state: unknown = null;
@@ -33,6 +34,8 @@ test('returning from Restore refreshes the mounted chooser and opens delivered k
       EXPLANATION_KIT_ID: 'letter-of-explanation-kit', kitForKind: () => 'credit-letter-kit',
       loadDeliveredKit: () => new Promise(resolve => reads.push(resolve)), kitLetter: (value: unknown) => value,
     };
+    if (name.endsWith('/savedLetters')) return { savedLetters: async () => ({ list: async () => [] }) };
+    if (name.endsWith('/studioDrafts')) return studioDrafts;
     throw new Error(`Unexpected import: ${name}`);
   } });
   // The one kit letter in this list: the row under the Credit Letter Kit heading and its "See the kit" row.
@@ -55,10 +58,13 @@ test('returning from Restore refreshes the mounted chooser and opens delivered k
   reads.shift()!(null);
   await new Promise(resolve => setImmediate(resolve));
   render()();
-  assert.equal(routes.pop(), '/letters/goodwill');
+  await new Promise(resolve => setTimeout(resolve, 5));
+  // A delivered kit letter opens its questions (her latest unfinished one when there is one).
+  assert.deepEqual(JSON.parse(JSON.stringify(routes.pop())), { pathname: '/letters/[kind]', params: { kind: 'goodwill' } });
   staleRead(null);
   staleOtherRead(null);
   await new Promise(resolve => setImmediate(resolve));
   render()();
-  assert.equal(routes.pop(), '/letters/goodwill');
+  await new Promise(resolve => setTimeout(resolve, 5));
+  assert.deepEqual(JSON.parse(JSON.stringify(routes.pop())), { pathname: '/letters/[kind]', params: { kind: 'goodwill' } });
 });

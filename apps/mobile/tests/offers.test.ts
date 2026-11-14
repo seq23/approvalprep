@@ -68,8 +68,8 @@ test('the kit screen says it also unlocks the website kit of the same name, with
   assert.ok(text.includes(site.name) && text.includes(String(site.documents)));
   assert.ok(text.includes(String(CREDIT_KIT.letters.length)));
   assert.match(text, /PDF guide and an editable Word file/);
-  assert.match(text, /does not appear in this app/);
-  assert.match(websiteDifference(EXPLANATION_KIT_OFFER.id), /does not appear in this app/);
+  // A website buyer is never told her kit is missing here: she opens it at no charge (finding #12, 14 Nov 2026).
+  for (const t of [text, websiteDifference(EXPLANATION_KIT_OFFER.id)]) assert.doesNotMatch(t, /does not appear in this app/);
 });
 
 test('Restore a purchase checks the bundle and the kits itself, and says what it found', async () => {

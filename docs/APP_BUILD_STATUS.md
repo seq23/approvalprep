@@ -26,9 +26,13 @@ Plan: `docs/APP_PLAN.md`. Build branch: `apps/approvalprep-scaffold` (draft PR #
 
 ## Named stops (each is in code; none is a silent pass)
 
-- `NAMED STOP [STORE_ACCOUNTS_NOT_READY]`: `KIT_SALES_ENABLED = false` in `apps/mobile/src/kit.ts`.
-  Buying is off until the company store accounts, the store products and RevenueCat exist (the
-  owner opens those). Nothing is created in a store by this branch.
+- Buying is ON (14 Nov 2026): `KIT_SALES_ENABLED = true` in `apps/mobile/src/kit.ts`; the 14 App Store
+  products and RevenueCat (`scripts/revenuecat/setup.ts`: 0 mismatches) exist. A store build with it
+  switched off is refused by the release gate: `NAMED STOP [KIT_SALES_OFF]`. Switched off in code,
+  a tap is `STORE_ACCOUNTS_NOT_READY`, never a charge.
+- Website buyers open their kit in the app at no charge: `POST /api/app-website-unlock` (the order
+  link from the download page or email; Stripe checks it), More › "Bought on approvalprep.com?".
+  Follow-up `WEBSITE_ORDER_EMAIL_LOOKUP`: a buyer with no saved link cannot yet get one from her email alone.
 - `NAMED STOP [REVENUECAT_SECRET_MISSING]`: the server doors answer 503 until the server secret
   `APPROVALPREP_REVENUECAT_SECRET` is set. No paid file can leave before that.
 - `NAMED STOP [BUNDLE_ID_PLACEHOLDER]`, `[REVENUECAT_KEY_MISSING]`, `[PREVIEW_FLAG_SET]`: release

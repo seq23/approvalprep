@@ -1,4 +1,5 @@
 import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
+import { CANCELLED_LINE, purchaseCancelled } from '../../../src/purchases/provider';
 import { useCallback, useState } from 'react';
 import { Linking, Text } from 'react-native';
 import { Button, Row, Screen, Sheet } from '../../../src/ui';
@@ -6,12 +7,13 @@ import { CREDIT_REPAIR_DEFENSE_LABEL, CREDIT_REPAIR_DEFENSE_URL } from '../../..
 import { type } from '../../../src/theme';
 import { REQUEST_LINE } from '../../../src/copy';
 import { PREVIEW_ENABLED } from '../../../src/previewSamples';
-import { FILE_KIT_OFFERS, productName, productRoute, BUNDLE_LINE, KIT_ORDER, upgradeLine } from '../../../src/offers';
+import { WEBSITE_BUYER_LABEL, FILE_KIT_OFFERS, productName, productRoute, BUNDLE_LINE, KIT_ORDER, upgradeLine } from '../../../src/offers';
 import { COMPLETE_BUNDLE, KIT_SALES_ENABLED, isUpgrade, upgradeFor } from '../../../src/kit';
 import { KitFiles } from '../../../src/KitFiles';
+import { openFrom } from '../../../src/nav';
 import { bundleAccount, type BundlePrice } from '../../../src/purchases/bundleAccount';
 import { storePrices } from '../../../src/purchases/prices';
-import { downloadKitFiles } from '../../../src/purchases/kitFiles';
+import { downloadKitFiles, kitFilesOnPhone } from '../../../src/purchases/kitFiles';
 import { NO_OWNERSHIP, offersFor, ownedKitIds, ownsKit, type BundleOwnership } from '../../../src/purchases/bundleOffers';
 // One of the five website kits the app sells as files (her ruling 13 Nov 2026, "Exact mirror"):
 // the same PDF guide and Word file the website delivers, paid once. Pattern (g), like the kit screen.
@@ -25,16 +27,19 @@ export default function Files() {
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('');
   const [revision, setRevision] = useState(0);
+  const [onPhone, setOnPhone] = useState(false);
   useFocusEffect(useCallback(() => {
     let active = true;
     (async () => {
+      kitFilesOnPhone(offer.id, offer.productId).then(types => { if (active) setOnPhone(types.length === 2); }).catch(() => {});
       const account = await bundleAccount();
       const [owned, found] = await Promise.all([account.ownership(), storePrices()]);
       if (active) { setOwnership(owned); setPrices(Object.entries(found).map(([id, price]) => ({ id, price }))); setMock(account.mock); setPreview(!!account.preview); }
     })().catch(() => { if (active) setMessage(current => current || 'The store could not be loaded. Try Restore purchase again.'); });
     return () => { active = false; };
   }, [offer.productId, revision]));
-  const owned = ownsKit(ownership, offer.productId);
+  // Files already on this phone (from a website order, or an earlier download) are hers too.
+  const owned = ownsKit(ownership, offer.productId) || onPhone;
   const offers = offersFor(ownership, offer.productId);
   const price = prices.find(p => p.id === offer.productId)?.price;
   const canBuy = (KIT_SALES_ENABLED && !mock) || preview;
@@ -59,7 +64,7 @@ export default function Files() {
     } catch (error) {
       const code = error instanceof Error ? error.message : '';
       console.warn('Kit files failed', code);
-      setMessage(code === 'STORE_ACCOUNTS_NOT_READY' ? 'Purchases are not available yet.'
+      setMessage(purchaseCancelled(error) ? CANCELLED_LINE : code === 'STORE_ACCOUNTS_NOT_READY' ? 'Purchases are not available yet.'
         : code === 'REVENUECAT_KEY_MISSING' ? 'Purchases are not available in this preview.'
         : 'Your kit could not be restored. Try again; you do not need to buy it again.');
     } finally { setBusy(false); setRevision(value => value + 1); }
@@ -67,7 +72,7 @@ export default function Files() {
   const option = (id: string) => {
     const route = productRoute(id);
     return <Row key={id} title={productName(id)} sub={isUpgrade(id) ? upgradeLine(KIT_ORDER.length - ownedKitIds(ownership).length, prices.find(p => p.id === id)?.price || 'the store price', upgradeFor(ownedKitIds(ownership))?.paid ?? 0)
-      : `${route.pathname === '/letters/bundle' ? BUNDLE_LINE : 'Self-help templates'} · ${prices.find(p => p.id === id)?.price || 'Store price unavailable'} · paid once`}
+      : route.pathname === '/letters/bundle' ? `${BUNDLE_LINE} · ${prices.find(p => p.id === id)?.price || 'Store price unavailable'}` : `Self-help templates · ${prices.find(p => p.id === id)?.price || 'Store price unavailable'} · paid once`}
       onPress={() => router.push(route.pathname === '/letters/bundle' ? '/letters/bundle' : { pathname: route.pathname, params: route.params })} />;
   };
   return <Screen route="/letters/files" label={offer.name} title={owned ? 'Your kit is on this phone' : `${offer.documentNames.length} documents, paid once`}>
@@ -80,11 +85,11 @@ export default function Files() {
       <Button primary disabled={busy || !canBuy || !price || !offers.includes(offer.productId)} label={price ? `Get this kit, ${price} once` : 'Store price unavailable'} onPress={() => void act('buy')} />
       {preview ? <Text testID="buying-pretend" style={type.sub}>This is a preview: buying here is pretend, nothing is charged, and it lasts until you close the page.</Text>
         : canBuy ? null : <Text testID="buying-off" style={type.sub}>{PREVIEW_ENABLED ? 'This is a preview, so buying is switched off and the button above does nothing. The price is shown so you can see it.' : 'Buying is not available right now.'}</Text>}
-      <Button quiet label={CREDIT_REPAIR_DEFENSE_LABEL} onPress={() => void Linking.openURL(CREDIT_REPAIR_DEFENSE_URL)} />
+      <Button quiet label={`${CREDIT_REPAIR_DEFENSE_LABEL} ›`} onPress={() => void Linking.openURL(CREDIT_REPAIR_DEFENSE_URL)} />
     </>}
     {offers.some(id => id !== offer.productId && id !== COMPLETE_BUNDLE.productId) ? <Text style={type.sub}>Other options</Text> : null}
     {offers.filter(id => id !== offer.productId && id !== COMPLETE_BUNDLE.productId).map(option)}
-    <Text style={type.sub}>A kit bought on the website does not appear in this app, and a kit bought here does not appear on the website.</Text>
+    <Button quiet label={WEBSITE_BUYER_LABEL} onPress={() => openFrom('/letters/files', '/more')} />
     <Button quiet label={busy ? 'Checking…' : 'Restore purchase'} disabled={busy} onPress={() => void act('restore')} />
     {message ? <Text accessibilityRole="alert" style={type.sub}>{message}</Text> : null}
     <Button quiet label="Terms ›" onPress={() => void Linking.openURL('https://approvalprep.com/terms/')} />

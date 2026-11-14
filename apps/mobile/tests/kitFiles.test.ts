@@ -106,11 +106,11 @@ test('Restore brings back every file kit owned on its own, and says so when one 
 
 test('pretend purchases exist only with the preview flag, and never get past the sales switch otherwise', async () => {
   resetPreviewPurchases();
-  assert.equal(kitPurchaseGate().ok, false);
+  assert.equal(kitPurchaseGate().ok, true);
   assert.throws(() => previewBuy(KIT.productId, false), /REVENUECAT_KEY_MISSING/);
   assert.equal(previewOwns(KIT.productId, false), false);
   // Without the flag the app's own provider is the keyless mock, which can never unlock anything.
-  await assert.rejects(buyKit(new MockPurchases(), KIT.productId), /STORE_ACCOUNTS_NOT_READY/);
+  await assert.rejects(buyKit(new MockPurchases(), KIT.productId), /REVENUECAT_KEY_MISSING/);
   await assert.rejects(buyKit(new PreviewPurchases(false), KIT.productId), /REVENUECAT_KEY_MISSING/);
   assert.equal((await new PreviewPurchases(false).entitlement()).creditKit, false);
   // With it, each of the eight can be "bought" and is owned for the visit; the bundle owns every kit.

@@ -51,10 +51,13 @@ const s = StyleSheet.create({
   card: { backgroundColor: color.paperRaised, borderColor: color.rule, borderWidth: 1, borderRadius: radius.md, padding: space[4] },
 });
 
-/** One action per row; the whole row is the accessible tap target. */
-export function Row({ title, sub, onPress, selected = false }: { title: string; sub?: string; onPress: () => void; selected?: boolean }) {
-  return <Pressable accessibilityRole="button" accessibilityState={{ selected }} onPress={onPress} style={{ minHeight: tap, flexDirection: 'row', alignItems: 'center', gap: space[3], paddingVertical: space[3], borderBottomWidth: 1, borderColor: color.rule }}>
-    <Text accessibilityElementsHidden style={{ color: color.carbon }}>{selected ? '●' : '○'}</Text>
+/** One action per row; the whole row is the accessible tap target. Pass `selected` only on a real
+ * choice (bureau, mail method, answer): only those rows draw ○ / ●, so a plain list never looks like
+ * one she must pick from (finding #16). */
+export function Row({ title, sub, onPress, selected }: { title: string; sub?: string; onPress: () => void; selected?: boolean }) {
+  const choice = selected !== undefined;
+  return <Pressable accessibilityRole={choice ? 'radio' : 'button'} accessibilityState={choice ? { selected, checked: selected } : {}} onPress={onPress} style={{ minHeight: tap, flexDirection: 'row', alignItems: 'center', gap: space[3], paddingVertical: space[3], borderBottomWidth: 1, borderColor: color.rule }}>
+    {choice ? <Text accessibilityElementsHidden style={{ color: color.carbon }}>{selected ? '●' : '○'}</Text> : null}
     <View style={{ flex: 1 }}><Text style={type.subhead}>{title}</Text>{sub ? <Text style={type.sub}>{sub}</Text> : null}</View>
     <Text accessibilityElementsHidden style={{ color: color.carbon }}>›</Text>
   </Pressable>;

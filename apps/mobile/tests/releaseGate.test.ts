@@ -7,6 +7,7 @@ const ready = {
   env: { NODE_ENV: 'test' as const, EXPO_PUBLIC_AP_REVENUECAT_IOS_KEY: 'appl_fixture', EXPO_PUBLIC_AP_REVENUECAT_ANDROID_KEY: 'goog_fixture' },
   iosBundleId: 'com.approvalprep.app', androidPackage: 'com.approvalprep.app',
   scorecard: { bossOsRowId: 'fixture-row', recordedAt: '2026-11-20' } as { bossOsRowId?: string; recordedAt?: string | null } | null,
+  kitSource: 'export const KIT_SALES_ENABLED: boolean = true;' as string,
 };
 test('release gate refuses each unsafe build independently and accepts a configured build', () => {
   assert.deepEqual(releaseStops(ready), []);
@@ -22,6 +23,8 @@ test('release gate refuses each unsafe build independently and accepts a configu
     [{ ...ready, scorecard: { bossOsRowId: 'fixture-row', recordedAt: null } }, 'SCORECARD_NOT_REGISTERED'],
     [{ ...ready, scorecard: { recordedAt: '2026-11-20' } }, 'SCORECARD_NOT_REGISTERED'],
     [{ ...ready, env: { ...ready.env, EXPO_PUBLIC_AP_REVENUECAT_ANDROID_KEY: 'test_fixture' } }, 'REVENUECAT_KEY_MISSING'],
+    [{ ...ready, kitSource: 'export const KIT_SALES_ENABLED = false;' }, 'KIT_SALES_OFF'],
+    [{ ...ready, kitSource: '' }, 'KIT_SALES_OFF'],
   ] as const) {
     assert.deepEqual(releaseStops(options), [stop]);
     assert.throws(() => assertReleaseReady(options), new RegExp(stop));
@@ -44,4 +47,14 @@ test('the committed scorecard record names the Boss OS row and stops a store bui
   assert.equal(card.bossOsRowId, 'ap-phone-app');
   const { scorecard: _fixture, ...withoutFixture } = ready;
   assert.equal(releaseStops(withoutFixture).includes('SCORECARD_NOT_REGISTERED'), !/^\d{4}-\d{2}-\d{2}$/.test(card.recordedAt ?? ''));
+});
+
+test('the committed kit switch passes the KIT_SALES_OFF stop, and switching it off would fail the store build', async () => {
+  // @ts-ignore plain Node build hook
+  const { kitSalesOn, readKitSource } = await import('../scripts/release-gate.mjs');
+  const source = readKitSource();
+  assert.equal(kitSalesOn(source), true);
+  assert.equal(kitSalesOn(source.replace(/KIT_SALES_ENABLED(: boolean)? = true/, 'KIT_SALES_ENABLED$1 = false')), false);
+  const { scorecard: _s, kitSource: _k, ...live } = ready;
+  assert.equal(releaseStops({ ...live, scorecard: ready.scorecard }).includes('KIT_SALES_OFF'), false);
 });

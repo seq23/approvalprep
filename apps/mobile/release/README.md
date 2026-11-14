@@ -34,3 +34,5 @@ Server side, before sales are switched on (`KIT_SALES_ENABLED` in `src/kit.ts`):
 
 Task 11: production builds go to TestFlight (`eas build -p ios --profile production --auto-submit`,
 submit profile `production`, ascAppId 6834891489). Submitting for App Store review stays with the owner.
+- `NAMED STOP [KIT_SALES_OFF]`: a store build with `KIT_SALES_ENABLED` not `true` in `src/kit.ts` is refused
+  (Apple rejects prices that cannot be paid, guideline 2.1).

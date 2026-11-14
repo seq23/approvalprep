@@ -25,9 +25,9 @@ test('kit screen orders offers and routes options without reselling owned kits',
         if (name.endsWith('/theme')) return { type: {} };
         if (name.endsWith('/copy')) return { HONEST_LIMIT: 'limit', REQUEST_LINE: 'request' };
         if (name.endsWith('/previewSamples')) return { PREVIEW_ENABLED: false };
-        if (name.endsWith('/offers')) return { TRACKING_LINE: 'tracking', kitOfferFor: () => ({ name: 'Other kit', what: 'what', productId: 'other' }), websiteDifference: () => 'difference', productName: realOffers.productName, productRoute: realOffers.productRoute, siteSkuFor: realOffers.siteSkuFor, BUNDLE_LINE: realOffers.BUNDLE_LINE, KIT_ORDER: realOffers.KIT_ORDER, upgradeLine: realOffers.upgradeLine };
+        if (name.endsWith('/offers')) return { WEBSITE_BUYER_LABEL: 'Bought it on approvalprep.com? ›', TRACKING_LINE: 'tracking', kitOfferFor: () => ({ name: 'Other kit', what: 'what', productId: 'other' }), websiteDifference: () => 'difference', productName: realOffers.productName, productRoute: realOffers.productRoute, siteSkuFor: realOffers.siteSkuFor, BUNDLE_LINE: realOffers.BUNDLE_LINE, KIT_ORDER: realOffers.KIT_ORDER, upgradeLine: realOffers.upgradeLine };
         if (name.endsWith('/KitFiles')) return { KitFiles: 'KitFiles' };
-        if (name.endsWith('/more')) return { CREDIT_REPAIR_DEFENSE_LABEL: 'Why we\u2019re not a credit repair company ›', CREDIT_REPAIR_DEFENSE_URL: 'https://approvalprep.com/credit-repair-disclaimer/' };
+        if (name.endsWith('/more')) return { CREDIT_REPAIR_DEFENSE_LABEL: 'Why we\u2019re not a credit repair company', CREDIT_REPAIR_DEFENSE_URL: 'https://approvalprep.com/credit-repair-disclaimer/' };
         // Buying is on here, so the Get button counts as an offer exactly when the kit is for sale.
         if (name.endsWith('/kit')) return { ...kits, KIT_SALES_ENABLED: true };
         if (name.endsWith('/letters')) return { LETTERS: [], EXPLANATION_LETTERS: [] };
@@ -36,7 +36,9 @@ test('kit screen orders offers and routes options without reselling owned kits',
         if (name.endsWith('/bundleFiles')) return { bundleFile: async () => bundle ? 'file' : null };
         if (name.endsWith('/bundleAccount')) return { bundleAccount: async () => ({ ownership: async () => ownership, products: async () => prices }) };
         if (name.endsWith('/purchases')) return { purchases: async () => ({ products: async () => prices, mode: 'store' }) };
-        if (name.endsWith('/provider') || name.endsWith('/delivery') || name.endsWith('/bundleDelivery')) return {};
+        if (name.endsWith('/provider')) return { purchaseCancelled: () => false, CANCELLED_LINE: 'cancelled' };
+        if (name.endsWith('/nav')) return { openFrom: () => {} };
+        if (name.endsWith('/delivery') || name.endsWith('/bundleDelivery')) return {};
         throw Error(name);
       } });
       const render = () => { index = 0; return exports.default(); };
@@ -86,9 +88,9 @@ test('Restore messages survive ownership refresh even when the store is offline'
       if (name.endsWith('/theme')) return { type: {} };
       if (name.endsWith('/copy')) return { HONEST_LIMIT: 'limit', REQUEST_LINE: 'request' };
       if (name.endsWith('/previewSamples')) return { PREVIEW_ENABLED: false };
-      if (name.endsWith('/offers')) return { TRACKING_LINE: 'tracking', kitOfferFor: () => ({ name: 'Other kit', what: 'what', productId: 'other' }), websiteDifference: () => 'difference', productName: realOffers.productName, productRoute: realOffers.productRoute, siteSkuFor: realOffers.siteSkuFor, BUNDLE_LINE: realOffers.BUNDLE_LINE, KIT_ORDER: realOffers.KIT_ORDER, upgradeLine: realOffers.upgradeLine };
+      if (name.endsWith('/offers')) return { WEBSITE_BUYER_LABEL: 'Bought it on approvalprep.com? ›', TRACKING_LINE: 'tracking', kitOfferFor: () => ({ name: 'Other kit', what: 'what', productId: 'other' }), websiteDifference: () => 'difference', productName: realOffers.productName, productRoute: realOffers.productRoute, siteSkuFor: realOffers.siteSkuFor, BUNDLE_LINE: realOffers.BUNDLE_LINE, KIT_ORDER: realOffers.KIT_ORDER, upgradeLine: realOffers.upgradeLine };
         if (name.endsWith('/KitFiles')) return { KitFiles: 'KitFiles' };
-        if (name.endsWith('/more')) return { CREDIT_REPAIR_DEFENSE_LABEL: 'Why we\u2019re not a credit repair company ›', CREDIT_REPAIR_DEFENSE_URL: 'https://approvalprep.com/credit-repair-disclaimer/' };
+        if (name.endsWith('/more')) return { CREDIT_REPAIR_DEFENSE_LABEL: 'Why we\u2019re not a credit repair company', CREDIT_REPAIR_DEFENSE_URL: 'https://approvalprep.com/credit-repair-disclaimer/' };
       if (name.endsWith('/kit')) return kits;
       if (name.endsWith('/letters')) return { LETTERS: [], EXPLANATION_LETTERS: [] };
       if (name.endsWith('/kitTemplates')) return {
@@ -104,7 +106,8 @@ test('Restore messages survive ownership refresh even when the store is offline'
         if (refresh && offline) throw Error('offline');
         return [];
       }, mode: 'mock' }) };
-      if (name.endsWith('/provider')) return {};
+      if (name.endsWith('/provider')) return { purchaseCancelled: () => false, CANCELLED_LINE: 'cancelled' };
+      if (name.endsWith('/nav')) return { openFrom: () => {} };
       if (name.endsWith('/delivery')) return { restoreKit: async (_provider: unknown, save: () => Promise<void>) => {
         if (outcome === 'success' || outcome === 'partial') await save();
         if (outcome === 'partial') throw Error('KIT_RESTORE_PARTIAL');

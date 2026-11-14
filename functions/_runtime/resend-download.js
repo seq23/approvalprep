@@ -23,7 +23,7 @@ export const ACCEPTED = { status: 'ACCEPTED', message: 'If this matches a paid A
 const SESSION_RE = /^cs_(test|live)_[A-Za-z0-9]{10,200}$/;
 const tooMany = () => json({ status: 'RATE_LIMITED', message: 'Too many requests. Please try again later.' }, 429);
 
-async function paidOrder(env, sessionId, fetchImpl) {
+export async function paidOrder(env, sessionId, fetchImpl = fetch) {
   if (env.PRODUCTS_DB) {
     const revoked = await env.PRODUCTS_DB.prepare('SELECT 1 FROM download_entitlements WHERE stripe_session_id=? AND revoked_at IS NOT NULL').bind(sessionId).first().catch(() => null);
     if (revoked) return null;

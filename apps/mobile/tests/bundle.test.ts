@@ -50,7 +50,7 @@ test('for every combination of owned kits, what she has paid plus anything offer
   assert.ok(reachable > 7 && free > 0);
   // The worked example from the rule: a Business Funding Prep Kit owner upgrades for $9.99.
   assert.equal(upgradeFor(['ap_business_funding_kit'])!.tier!.price, 9.99);
-  assert.equal(kitPurchaseGate().ok, false);
+  assert.equal(kitPurchaseGate().ok, true);
 });
 test('owning nothing offers the bundle first, then the kit she asked about; owning the bundle offers nothing', () => {
   assert.deepEqual(offersFor(owned()), [COMPLETE_BUNDLE.productId, KIT.productId]);
