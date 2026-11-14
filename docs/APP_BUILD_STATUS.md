@@ -32,7 +32,10 @@ Plan: `docs/APP_PLAN.md`. Build branch: `apps/approvalprep-scaffold` (draft PR #
   a tap is `STORE_ACCOUNTS_NOT_READY`, never a charge.
 - Website buyers open their kit in the app at no charge: `POST /api/app-website-unlock` (the order
   link from the download page or email; Stripe checks it), More › "Bought on approvalprep.com?".
-  Follow-up `WEBSITE_ORDER_EMAIL_LOOKUP`: a buyer with no saved link cannot yet get one from her email alone.
+  `WEBSITE_ORDER_EMAIL_LOOKUP` (built 14 Nov 2026): no link kept, she types the email she paid with
+  (`POST /api/email-download-links`); Stripe is searched, paid unrefunded orders get their link emailed
+  to that address only, and the answer is the same found or not. Stop if Stripe refuses the list:
+  `NAMED STOP [EMAIL_LOOKUP_STRIPE_REFUSED]` in the Pages log.
 - `NAMED STOP [REVENUECAT_SECRET_MISSING]`: the server doors answer 503 until the server secret
   `APPROVALPREP_REVENUECAT_SECRET` is set. No paid file can leave before that.
 - `NAMED STOP [BUNDLE_ID_PLACEHOLDER]`, `[REVENUECAT_KEY_MISSING]`, `[PREVIEW_FLAG_SET]`: release

@@ -39,3 +39,19 @@ export function websiteUnlockMessage(result: { sku: string } | Error, preview: b
   if (result.message === 'NATIVE_DOWNLOAD_REQUIRED' || preview) return 'Website kits open in the phone app. This preview cannot download them.';
   return 'Your website kit could not be opened right now. Try again when you are online. You do not need to buy it again.';
 }
+// No link kept? She types the email she paid with; the server searches Stripe and, for a paid,
+// unrefunded order, emails the link to that address only (functions/api/email-download-links.js).
+// The app never learns whether an order exists: the answer is the same either way.
+export const EMAIL_LOOKUP_SENT = "If that email bought a kit, we've sent the link to it. Paste it above when it arrives.";
+export const looksLikeEmail = (typed: string): boolean => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(typed.trim());
+/** Asks the server to email her order links; returns the line to show. Sends only the address. */
+export async function emailWebsiteOrderLinks(typed: string, preview: boolean): Promise<string> {
+  if (!looksLikeEmail(typed)) return 'Enter the whole email address you paid with, like name@example.com.';
+  if (preview) return 'Email lookup works in the phone app. This preview cannot send it.';
+  try {
+    const response = await fetch(`${FILES_ORIGIN}/api/email-download-links`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ email: typed.trim().toLowerCase() }) });
+    if (response.status === 429) return 'Too many tries. Please wait an hour and try again.';
+    if (response.ok) return EMAIL_LOOKUP_SENT;
+  } catch { /* offline: fall through */ }
+  return 'We could not send it right now. Try again when you are online. You do not need to buy it again.';
+}

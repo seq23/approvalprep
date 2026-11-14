@@ -6,7 +6,7 @@
 // an unknown order, limits do not answer 429, or a paid order does not send to Stripe's stored
 // address with a server-built link. Hard-fails on zero emails examined (rule 0).
 import { DatabaseSync } from 'node:sqlite';
-import { resendDownload, LIMITS, ACCEPTED } from '../../functions/_runtime/resend-download.js';
+import { resendDownload, emailDownloadLinks, LIMITS, ACCEPTED, EMAIL_LIMITS, EMAIL_ACCEPTED } from '../../functions/_runtime/resend-download.js';
 import { onRequestPost as samplePost } from '../../functions/api/sample.js';
 
 const fail = (m) => { console.error(`[resend-download-email] FAIL ${m}`); process.exit(1); };
@@ -99,5 +99,52 @@ let examined = 0;
   if (codes.at(-1) !== 429 || sent.length !== 5) fail(`sample per-IP limit: codes ${JSON.stringify(codes)}, sent ${sent.length}`);
   examined += sent.length;
 }
+// 6. Email lookup (WEBSITE_ORDER_EMAIL_LOOKUP): same answer found or not, refunded never emailed,
+//    links only to the searched address, no order data back, limits per IP and per address.
+{
+  const REFUNDED = 'cs_live_REFUNDEDorder12345678';
+  const OTHER = 'cs_live_OTHERshoporder1234567';
+  const listed = {
+    'buyer@example.com': [sessions[PAID], { id: REFUNDED, payment_status: 'paid', status: 'complete', metadata: { sku: 'rental-application-kit' }, customer_details: { email: 'buyer@example.com' } }, { id: OTHER, payment_status: 'paid', status: 'complete', metadata: { sku: 'not-an-approvalprep-kit' }, customer_details: { email: 'buyer@example.com' } }],
+    'refunded@example.com': [{ id: REFUNDED, payment_status: 'paid', status: 'complete', metadata: { sku: 'rental-application-kit' }, customer_details: { email: 'refunded@example.com' } }],
+  };
+  const lookups = [];
+  const sent = [];
+  const fetchImpl = async (url, init) => {
+    if (String(url).startsWith('https://api.resend.com/')) { sent.push(JSON.parse(init.body)); return new Response('{}', { status: 200 }); }
+    const u = new URL(String(url));
+    if (u.pathname !== '/v1/checkout/sessions' || u.searchParams.get('status') !== 'complete') return new Response('{}', { status: 404 });
+    const email = u.searchParams.get('customer_details[email]'); lookups.push(email);
+    return new Response(JSON.stringify({ data: listed[email] ?? [] }), { status: 200 });
+  };
+  const ereq = (body, ip = '203.0.113.20') => new Request('https://approvalprep.com/api/email-download-links', { method: 'POST', headers: { 'content-type': 'application/json', 'cf-connecting-ip': ip }, body: JSON.stringify(body) });
+  const db = fakeD1(); const e = env(db);
+  db.raw.prepare('INSERT INTO download_entitlements VALUES (?, ?)').run(REFUNDED, '2026-01-01');
+  const answer = async (body, ip) => { const r = await emailDownloadLinks(ereq(body, ip), e, fetchImpl); return [r.status, await r.text()]; };
+  const found = await answer({ email: '  Buyer@Example.COM ' }, '203.0.113.21');
+  if (lookups[0] !== 'buyer@example.com') fail(`email not trimmed/lowercased before the Stripe search: ${JSON.stringify(lookups[0])}`);
+  if (sent.length !== 1) fail(`a paid order found by email sent ${sent.length} emails, want 1`);
+  const m = sent[0]; examined++;
+  if (JSON.stringify(m.to) !== JSON.stringify(['buyer@example.com'])) fail(`lookup email went to ${JSON.stringify(m.to)}`);
+  if (!m.text.includes(`https://approvalprep.com/checkout/success?session_id=${PAID}&sku=credit-letter-kit`)) fail('lookup email lacks the server-built link');
+  if (m.text.includes(REFUNDED) || m.text.includes(OTHER)) fail('a refunded or non-ApprovalPrep order was emailed');
+  const notFound = await answer({ email: 'nobody@example.com' }, '203.0.113.22');
+  const refunded = await answer({ email: 'refunded@example.com' }, '203.0.113.23');
+  const junk = await answer({ email: 'not an email', to: 'victim@evil.test' }, '203.0.113.24');
+  if (sent.length !== 1) fail(`not-found/refunded/junk lookups sent ${sent.length - 1} email(s)`);
+  for (const a of [notFound, refunded, junk]) if (JSON.stringify(a) !== JSON.stringify(found)) fail(`lookup answer ${JSON.stringify(a)} differs from a found one ${JSON.stringify(found)} (enumeration)`);
+  if (found[0] !== 202 || JSON.parse(found[1]).message !== EMAIL_ACCEPTED.message || /cs_|sku|credit-letter/.test(found[1])) fail(`lookup answer leaks or is wrong: ${JSON.stringify(found)}`);
+  // Limits: per address (3/hour, any IP) then per IP (10/hour, any address) -> 429; no raw address or IP stored.
+  const perEmail = [];
+  for (let i = 0; i < EMAIL_LIMITS.perEmailHour + 1; i++) perEmail.push((await answer({ email: 'limit@example.com' }, `198.51.100.${60 + i}`))[0]);
+  if (perEmail.at(-1) !== 429 || perEmail.slice(0, -1).some((c) => c !== 202)) fail(`per-address limit codes ${JSON.stringify(perEmail)}`);
+  const perIp = [];
+  for (let i = 0; i < EMAIL_LIMITS.perIpHour + 1; i++) perIp.push((await answer({ email: `ip${i}@example.com` }, '192.0.2.77'))[0]);
+  if (perIp.at(-1) !== 429 || perIp.slice(0, -1).some((c) => c !== 202)) fail(`per-IP lookup limit codes ${JSON.stringify(perIp)}`);
+  const dump = JSON.stringify(db.raw.prepare('SELECT * FROM email_rate_limits').all());
+  if (/example\.com|192\.0\.2\.77/.test(dump)) fail('a raw address or IP was written to the rate-limit table');
+  const r = await emailDownloadLinks(ereq({ email: 'buyer@example.com' }), { PRODUCTS_DB: fakeD1() }, fetchImpl);
+  if (r.status !== 503) fail('lookup without Stripe/Resend keys did not stop with 503');
+}
 if (!examined) fail('zero emails examined');
-console.log(`[resend-download-email] PASS (no send for unknown/unpaid/revoked orders, same answer either way, caller fields ignored, stored address + server link, 429 per order/IP, sample per-IP cap; ${examined} emails examined)`);
+console.log(`[resend-download-email] PASS (no send for unknown/unpaid/revoked orders, same answer either way, caller fields ignored, stored address + server link, 429 per order/IP, sample per-IP cap; email lookup: same answer found/not, refunded not sent, per-address/IP 429; ${examined} emails examined)`);

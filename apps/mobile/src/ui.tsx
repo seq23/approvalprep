@@ -63,12 +63,12 @@ export function Row({ title, sub, onPress, selected }: { title: string; sub?: st
   </Pressable>;
 }
 
-export function Field({ label, value, onChangeText, defaultHint, multiline = false, spoken }: { label: string; value: string; onChangeText: (value: string) => void; defaultHint?: string; multiline?: boolean; spoken?: string }) {
+export function Field({ label, value, onChangeText, defaultHint, multiline = false, spoken, email = false }: { label: string; value: string; onChangeText: (value: string) => void; defaultHint?: string; multiline?: boolean; spoken?: string; email?: boolean }) {
   const labelId = useId();
   return <View style={{ gap: space[2] }}>
     <Text nativeID={labelId} style={type.label}>{label}</Text>
     {defaultHint ? <Text style={type.sub}>{defaultHint}</Text> : null}
-    <TextInput accessibilityLabel={spoken ?? label} accessibilityLabelledBy={labelId} value={value} onChangeText={onChangeText} multiline={multiline} style={[type.body, { minHeight: tap, padding: space[3], borderWidth: 1, borderColor: color.rule, backgroundColor: color.paperRaised, borderRadius: radius.sm }]} />
+    <TextInput accessibilityLabel={spoken ?? label} accessibilityLabelledBy={labelId} value={value} onChangeText={onChangeText} multiline={multiline} {...(email ? { keyboardType: 'email-address' as const, autoCapitalize: 'none' as const, autoComplete: 'email' as const, autoCorrect: false } : {})} style={[type.body, { minHeight: tap, padding: space[3], borderWidth: 1, borderColor: color.rule, backgroundColor: color.paperRaised, borderRadius: radius.sm }]} />
   </View>;
 }
 
