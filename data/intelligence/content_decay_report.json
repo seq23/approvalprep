@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-11-07T12:56:31.855Z",
+  "generatedAt": "2026-11-14T11:41:59.035Z",
   "mode": "structural",
   "policy": "Lifecycle recommendations do not claim traffic, ranking, indexing, or conversion decay without live telemetry.",
   "items": [
@@ -174,7 +174,7 @@
     },
     {
       "route": "/goodwill-letter-to-remove-late-payment",
-      "title": "Goodwill Letter to Remove a Late Payment",
+      "title": "Goodwill Letter for a Late Payment: How to Ask",
       "risk": "regulated",
       "pageFamily": "credit_self_service",
       "recommendedAction": "approval_required_refresh",
@@ -244,7 +244,7 @@
     },
     {
       "route": "/apartment-application",
-      "title": "Apartment Ready-to-Apply Kit",
+      "title": "Apartment Application: Rental Application Kit",
       "risk": "medium",
       "pageFamily": "apartment_rental",
       "recommendedAction": "refresh",
@@ -272,7 +272,7 @@
     },
     {
       "route": "/how-to-get-approved-for-an-apartment",
-      "title": "How to Get Approved for an Apartment",
+      "title": "Applying for an Apartment: What to Prepare",
       "risk": "medium",
       "pageFamily": "apartment_rental",
       "recommendedAction": "refresh",
@@ -917,6 +917,20 @@
     {
       "route": "/goodwill-letter-credit",
       "title": "Goodwill Letter for Credit: Which Items It Can Reach",
+      "risk": "regulated",
+      "pageFamily": "credit_self_service",
+      "recommendedAction": "approval_required_refresh",
+      "reasonCodes": [
+        "regulated_or_credit_sensitive"
+      ],
+      "priorityScore": 90,
+      "source": "route_manifest_and_existing_intelligence",
+      "claimType": "structural_not_live_performance",
+      "ownerReviewRequired": true
+    },
+    {
+      "route": "/the-bureau-answered",
+      "title": "The Credit Bureau Answered Your Dispute: What Next?",
       "risk": "regulated",
       "pageFamily": "credit_self_service",
       "recommendedAction": "approval_required_refresh",

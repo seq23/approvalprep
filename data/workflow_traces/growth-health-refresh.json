@@ -24,13 +24,11 @@
   "secretRefs": [],
   "npmScripts": [
     "build",
-    "health:build-growth",
-    "validate:seo-surfaces"
+    "health:build-growth"
   ],
   "transitiveNpmScripts": [
     "build",
-    "health:build-growth",
-    "validate:seo-surfaces"
+    "health:build-growth"
   ],
   "missingNpmScripts": [],
   "expectedDataTouches": [],
@@ -69,5 +67,5 @@
     }
   ],
   "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
-  "traceId": "5ce439078728e06a"
+  "traceId": "c038901e79c43135"
 }
