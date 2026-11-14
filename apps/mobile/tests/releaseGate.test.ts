@@ -5,7 +5,7 @@ import { spawnSync } from 'node:child_process';
 import { assertReleaseReady, releaseStops } from '../scripts/release-gate.mjs';
 const ready = {
   env: { NODE_ENV: 'test' as const, EXPO_PUBLIC_AP_REVENUECAT_IOS_KEY: 'appl_fixture', EXPO_PUBLIC_AP_REVENUECAT_ANDROID_KEY: 'goog_fixture' },
-  iosBundleId: 'org.example.letterdesk', androidPackage: 'org.example.letterdesk',
+  iosBundleId: 'com.approvalprep.app', androidPackage: 'com.approvalprep.app',
   scorecard: { bossOsRowId: 'fixture-row', recordedAt: '2026-11-20' } as { bossOsRowId?: string; recordedAt?: string | null } | null,
 };
 test('release gate refuses each unsafe build independently and accepts a configured build', () => {
@@ -13,8 +13,9 @@ test('release gate refuses each unsafe build independently and accepts a configu
   assert.doesNotThrow(() => assertReleaseReady(ready));
   for (const [options, stop] of [
     [{ ...ready, env: { ...ready.env, EXPO_PUBLIC_AP_PREVIEW: '1' } }, 'PREVIEW_FLAG_SET'],
-    [{ ...ready, iosBundleId: 'com.approvalprep.app' }, 'BUNDLE_ID_PLACEHOLDER'],
-    [{ ...ready, androidPackage: 'com.approvalprep.app' }, 'BUNDLE_ID_PLACEHOLDER'],
+    [{ ...ready, iosBundleId: 'com.example.app' }, 'BUNDLE_ID_PLACEHOLDER'],
+    [{ ...ready, androidPackage: 'org.example.letterdesk' }, 'BUNDLE_ID_PLACEHOLDER'],
+    [{ ...ready, iosBundleId: 'approvalprep' }, 'BUNDLE_ID_PLACEHOLDER'],
     [{ ...ready, iosBundleId: undefined }, 'BUNDLE_ID_PLACEHOLDER'],
     [{ ...ready, env: { ...ready.env, EXPO_PUBLIC_AP_REVENUECAT_IOS_KEY: '' } }, 'REVENUECAT_KEY_MISSING'],
     [{ ...ready, scorecard: null }, 'SCORECARD_NOT_REGISTERED'],

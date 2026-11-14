@@ -30,7 +30,7 @@ test('production config and release command reject the preview flag', () => {
     const config = spawnSync(process.execPath, ['--import', 'tsx', '-e', "import('./app.config.ts')"], { env, encoding: 'utf8' });
     for (const result of [command, config]) {
       assert.equal(result.status, 1, result.stderr);
-      assert.match(result.stderr, /BUNDLE_ID_PLACEHOLDER/);
+      assert.doesNotMatch(result.stderr, /BUNDLE_ID_PLACEHOLDER/, 'the registered bundle id passes the gate');
       assert.match(result.stderr, /REVENUECAT_KEY_MISSING/);
       if (flag === '1') assert.match(result.stderr, /PREVIEW_FLAG_SET/);
     }
