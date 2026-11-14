@@ -29,7 +29,7 @@ test('list status backgrounds stay neutral or gold for drafts, waiting, due, ove
   }
   const native = { Text: 'Text', View: 'View', Pressable: 'Pressable', StyleSheet: { create: (s: any) => s } };
   const ui = load('../src/ui.tsx', { react: {}, 'react-native': native, 'react-native-safe-area-context': {},
-    './theme': { color, space, type, radius, tap }, './copy': {}, './screens': {}, './nav': {} });
+    './theme': { color, space, type, radius, tap }, './copy': {}, './screens': {}, './nav': {}, './letterStorage': {} });
   let index = 0;
   const states = [letters, true, 'ready', null, false, false, ''];
   const screen = load('../app/(tabs)/mine/index.tsx', {
