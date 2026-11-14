@@ -50,7 +50,7 @@ test('row has one action and fields keep their supplied value and editing callba
   let edited = '';
   render(ui.Field, { label: 'Sent date', value: '2026-11-10', defaultHint: 'Today', onChangeText: (s: string) => edited = s });
   const input = nativeProps.TextInput[0];
-  assert.equal(input.value, '2026-11-10');
+  assert.equal(input.defaultValue, '2026-11-10', 'the box starts with the supplied value');
   assert.ok(input.accessibilityLabelledBy);
   input.onChangeText('2026-11-11'); assert.equal(edited, '2026-11-11');
 });

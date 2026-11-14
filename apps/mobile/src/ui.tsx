@@ -74,22 +74,41 @@ const KEYBOARD = {
 } as const;
 /** The keyboard settings for a kind of box (tests/ui.test.ts reads these). */
 export const keyboardFor = (kind: FieldKind) => KEYBOARD[kind];
-/** The box keeps what she typed itself, so a slow save or a re-render can never put back an older
- * value and drop her last letters; the parent only hears about each change. A new value from the
- * parent (a cleared box, a reloaded draft) still replaces it. */
+/** The phone's box owns the text (uncontrolled, `defaultValue`): the app never writes text back into
+ * it while she types. A controlled `value` that re-renders on each key fights the native box on the
+ * new architecture, and the native side then drops change events: the box shows "Jordan Avery" but
+ * the app only heard "Jordan" (sim retest). The parent hears every change, and again on blur / end
+ * of editing with the box's own text, so a change event the phone never sent is still saved before
+ * Next. Only a genuinely new value from the parent (a cleared box, a reloaded draft) is put back,
+ * by re-creating the box; the parent echoing something she typed earlier is never mistaken for one. */
 export function Field({ label, value, onChangeText, defaultHint, multiline = false, spoken, email = false, kind = email ? 'email' : 'text' }: { label: string; value: string; onChangeText: (value: string) => void; defaultHint?: string; multiline?: boolean; spoken?: string; email?: boolean; kind?: FieldKind }) {
   const labelId = useId();
-  const [text, setText] = useState(value);
+  // What the box holds now, as last reported by the phone (after the SSN mask).
   const typed = useRef(value);
-  useEffect(() => { if (value !== typed.current) { typed.current = value; setText(value); } }, [value]);
-  const change = (raw: string) => {
-    const next = kind === 'ssn4' ? ssnInput(raw, typed.current) : raw;
-    typed.current = next; setText(next); onChangeText(next);
+  // Values handed up since the parent last caught up: an echo of one of these is not a new value.
+  const handed = useRef(new Set<string>());
+  // The text a re-created box starts with, and its key.
+  const [box, setBox] = useState({ text: value, n: 0 });
+  useEffect(() => {
+    if (value === typed.current) { handed.current.clear(); return; }
+    if (handed.current.has(value)) return;
+    typed.current = value; handed.current.clear(); setBox(b => ({ text: value, n: b.n + 1 }));
+  }, [value]);
+  const hand = (next: string) => { if (next === typed.current) return; typed.current = next; handed.current.add(next); onChangeText(next); };
+  const masked = (raw: string) => kind === 'ssn4' ? ssnInput(raw, typed.current) : raw;
+  // The mask is applied to what the parent hears on every key, but written into the box only when
+  // she leaves it, so it never fights the keys she is typing.
+  const settle = (raw: unknown) => {
+    if (typeof raw !== 'string') return;
+    const next = masked(raw); hand(next);
+    if (next !== raw) setBox(b => ({ text: next, n: b.n + 1 }));
   };
   return <View style={{ gap: space[2] }}>
     <Text nativeID={labelId} style={type.label}>{label}</Text>
     {defaultHint ? <Text style={type.sub}>{defaultHint}</Text> : null}
-    <TextInput accessibilityLabel={spoken ?? label} accessibilityLabelledBy={labelId} value={text} onChangeText={change} multiline={multiline} {...KEYBOARD[kind]} style={[type.body, { minHeight: tap, padding: space[3], borderWidth: 1, borderColor: color.rule, backgroundColor: color.paperRaised, borderRadius: radius.sm }]} />
+    <TextInput key={box.n} accessibilityLabel={spoken ?? label} accessibilityLabelledBy={labelId} defaultValue={box.text} onChangeText={raw => hand(masked(raw))}
+      onEndEditing={e => settle(e?.nativeEvent?.text)} onBlur={e => settle((e?.nativeEvent as { text?: unknown } | undefined)?.text)}
+      multiline={multiline} {...KEYBOARD[kind]} style={[type.body, { minHeight: tap, padding: space[3], borderWidth: 1, borderColor: color.rule, backgroundColor: color.paperRaised, borderRadius: radius.sm }]} />
   </View>;
 }
 
