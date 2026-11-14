@@ -15,7 +15,7 @@ Top navigation must act like a buying guide: Products, Letter Studio, Pricing, R
 
 ## Homepage Positioning
 
-The homepage must sell the strongest compliant commercial promise first: self-service credit repair letters and approval-ready document kits at a lower-cost, direct-download model. It can use phrases such as "self-service credit repair letters," "DIY credit letters," and "without the high monthly fees" when paired elsewhere on the page and site with truthful self-service boundaries. Do not lead the hero with negative warning copy such as "no credit repair." Boundaries belong in trust/legal sections, footer, and product detail context, not in the first conversion moment.
+The homepage must sell the strongest compliant commercial promise first: self-service credit dispute letters (the do-it-yourself alternative to a credit repair company) and approval-ready document kits at a lower-cost, direct-download model. It can use phrases such as "self-service credit repair letters," "DIY credit letters," and "without the high monthly fees" when paired elsewhere on the page and site with truthful self-service boundaries. Do not lead the hero with negative warning copy such as "no credit repair." Boundaries belong in trust/legal sections, footer, and product detail context, not in the first conversion moment.
 
 ## Commercial CTA Rhythm
 

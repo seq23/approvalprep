@@ -6,7 +6,7 @@ import { PRIVACY_LINE } from '../../../src/copy';
 import { MORE_LINKS, deletionController } from '../../../src/more';
 import { savedLetters } from '../../../src/savedLetters';
 import { openFrom } from '../../../src/nav';
-import { BUNDLE_OFFER, KIT_OFFERS, PAID_ONCE_LINE, offerTitle } from '../../../src/offers';
+import { PAID_ONCE_LINE, PRODUCTS, offerTitle } from '../../../src/offers';
 import { usePrices } from '../../../src/purchases/prices';
 import { PREVIEW_ENABLED } from '../../../src/previewSamples';
 import { purchases } from '../../../src/purchases';
@@ -15,7 +15,8 @@ import { restoreKit } from '../../../src/purchases/delivery';
 import { restoreBundle } from '../../../src/purchases/bundleDelivery';
 import { installBundle } from '../../../src/purchases/bundleFiles';
 import { saveDeliveredKit } from '../../../src/kitTemplates';
-import { restoreAll, restoreMessage } from '../../../src/purchases/restoreAll';
+import { restoreAll, restoreFileKits, restoreMessage } from '../../../src/purchases/restoreAll';
+import { downloadKitFiles } from '../../../src/purchases/kitFiles';
 export default function More() {
   const [confirming, setConfirming] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -26,7 +27,7 @@ export default function More() {
   async function restore() {
     if (restoring) return;
     setRestoring(true); setRestored('');
-    try { setRestored(restoreMessage(await restoreAll({ provider: purchases, account: bundleAccount, restoreKit, restoreBundle, saveKit: saveDeliveredKit, installBundle }), PREVIEW_ENABLED)); }
+    try { setRestored(restoreMessage(await restoreAll({ provider: purchases, account: bundleAccount, restoreKit, restoreBundle, saveKit: saveDeliveredKit, installBundle, restoreFiles: async () => restoreFileKits(await bundleAccount(), downloadKitFiles) }), PREVIEW_ENABLED)); }
     catch (error) { setRestored(restoreMessage(error instanceof Error ? error : Error('RESTORE_FAILED'), PREVIEW_ENABLED)); }
     finally { setRestoring(false); }
   }
@@ -42,8 +43,7 @@ export default function More() {
     <Text style={type.body}>You write and send every letter yourself.</Text>
     <Text style={type.section} accessibilityRole="header">Kits and the bundle</Text>
     <Text style={type.sub}>{PAID_ONCE_LINE}</Text>
-    {KIT_OFFERS.map(kit => <Row key={kit.id} title={offerTitle(kit.name, prices[kit.productId])} sub={kit.what} onPress={() => openFrom('/more', '/letters/unlock', { kit: kit.id })} />)}
-    <Row title={offerTitle(BUNDLE_OFFER.name, prices[BUNDLE_OFFER.productId])} sub={BUNDLE_OFFER.what} onPress={() => openFrom('/more', '/letters/bundle')} />
+    {PRODUCTS.map(p => <Row key={p.sku} title={offerTitle(p.name, prices[p.productId])} sub={p.what} onPress={() => openFrom('/more', p.screen, p.params)} />)}
     <Row title={restoring ? 'Checking…' : 'Restore a purchase'} sub="Checks this store account for a kit or the bundle and puts it back on this phone" onPress={() => void restore()} />
     {restored ? <Text accessibilityRole="alert" style={type.sub}>{restored}</Text> : null}
     <Text style={type.section} accessibilityRole="header">About</Text>

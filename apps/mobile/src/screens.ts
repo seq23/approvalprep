@@ -1,3 +1,4 @@
+import { websiteKit } from './websiteKits';
 // Every screen in the plan (docs/APP_PLAN.md, Screens) and how you move between them
 // (make-it-calm section 7; the owner's tap-through of the sibling app, 6 Nov 2026: "i cant
 // go back or back to home or esc"). The stack headers (src/nav.tsx) and <Screen> read this
@@ -19,18 +20,19 @@ export const TABS: { tab: Tab; route: string; label: string }[] = [
   { tab: 'more', route: '/more', label: '☰ More' },
 ];
 export const SCREENS: ScreenSpec[] = [
-  { id: 'S1', route: '/', file: 'app/(tabs)/index.tsx', title: 'Home', kind: 'tab', tab: 'index', links: ['/letters/studio', '/letters/[kind]', '/letters/unlock', '/letters/bundle', '/mine'] },
+  { id: 'S1', route: '/', file: 'app/(tabs)/index.tsx', title: 'Home', kind: 'tab', tab: 'index', links: ['/letters/studio', '/letters/[kind]', '/letters/unlock', '/letters/files', '/letters/bundle', '/mine'] },
   { id: 'Lost', route: '/+not-found', file: 'app/+not-found.tsx', title: 'Page not found', kind: 'start', links: [FIRST, HOME] },
-  { id: 'S2', route: '/letters', file: 'app/(tabs)/letters/index.tsx', title: 'Write a letter', kind: 'tab', tab: 'letters', links: ['/letters/[kind]', '/letters/unlock', '/letters/studio', '/letters/bundle'] },
-  { id: 'Studio', route: '/letters/studio', file: 'app/(tabs)/letters/studio.tsx', title: 'Letter Studio', kind: 'sub', tab: 'letters', back: '/letters', links: ['/letters/unlock', '/letters/bundle', '/mine'] },
+  { id: 'S2', route: '/letters', file: 'app/(tabs)/letters/index.tsx', title: 'Write a letter', kind: 'tab', tab: 'letters', links: ['/letters/[kind]', '/letters/unlock', '/letters/files', '/letters/studio', '/letters/bundle'] },
+  { id: 'Studio', route: '/letters/studio', file: 'app/(tabs)/letters/studio.tsx', title: 'Letter Studio', kind: 'sub', tab: 'letters', back: '/letters', links: ['/letters/unlock', '/letters/files', '/mine'] },
   { id: 'S3', route: '/letters/[kind]', file: 'app/(tabs)/letters/[kind].tsx', title: 'Questions', kind: 'sub', tab: 'letters', back: '/letters', links: ['/letters/draft'] },
   { id: 'S4', route: '/letters/draft', file: 'app/(tabs)/letters/draft.tsx', title: 'Your letter', kind: 'sub', tab: 'letters', back: '/letters', links: ['/letters/sent'] },
   { id: 'S5', route: '/letters/sent', file: 'app/(tabs)/letters/sent.tsx', title: 'Mark as sent', kind: 'sheet', tab: 'letters', back: '/letters/draft', links: [] },
   { id: 'S6', route: '/mine', file: 'app/(tabs)/mine/index.tsx', title: 'My letters', kind: 'tab', tab: 'mine', links: ['/mine/answer', '/letters/draft'] }, // drafts open through draftHref (src/studioDrafts.ts)
   { id: 'Answer', route: '/mine/answer', file: 'app/(tabs)/mine/answer.tsx', title: 'What did they answer?', kind: 'sub', tab: 'mine', back: '/mine', links: ['/letters/unlock'] },
-  { id: 'S7', route: '/letters/unlock', file: 'app/(tabs)/letters/unlock.tsx', title: 'Credit Letter Kit', kind: 'sub', tab: 'letters', back: '/letters', links: ['/letters/bundle', '/letters/unlock'] },
-  { id: 'S8', route: '/more', file: 'app/(tabs)/more/index.tsx', title: 'More', kind: 'tab', tab: 'more', links: ['/letters/bundle', '/letters/unlock'] },
-  { id: 'Bundle', route: '/letters/bundle', file: 'app/(tabs)/letters/bundle.tsx', title: 'Complete ApprovalPrep Bundle', kind: 'sub', tab: 'letters', back: '/letters', links: ['/letters/unlock'] },
+  { id: 'S7', route: '/letters/unlock', file: 'app/(tabs)/letters/unlock.tsx', title: 'Credit Letter Kit', kind: 'sub', tab: 'letters', back: '/letters', links: ['/letters/bundle', '/letters/unlock', '/letters/files'] },
+  { id: 'S8', route: '/more', file: 'app/(tabs)/more/index.tsx', title: 'More', kind: 'tab', tab: 'more', links: ['/letters/bundle', '/letters/unlock', '/letters/files'] },
+  { id: 'Bundle', route: '/letters/bundle', file: 'app/(tabs)/letters/bundle.tsx', title: 'Complete ApprovalPrep Bundle', kind: 'sub', tab: 'letters', back: '/letters', links: ['/letters/unlock', '/letters/files'] },
+  { id: 'Files', route: '/letters/files', file: 'app/(tabs)/letters/files.tsx', title: 'Letter kit', kind: 'sub', tab: 'letters', back: '/letters', links: ['/letters/bundle', '/letters/files', '/letters/unlock'] },
 ];
 export const byRoute = (route: string) => {
   const s = SCREENS.find(x => x.route === route);
@@ -60,5 +62,6 @@ export function screenForPath(pathname: string): ScreenSpec {
 // The name in the header. The kit screen shows the name of the kit it is selling.
 export function titleFor(route: string, params?: Record<string, unknown>): string {
   if (route === '/letters/unlock') return params?.kit === 'letter-of-explanation-kit' ? 'Letter of Explanation Kit' : 'Credit Letter Kit';
+  if (route === '/letters/files') return websiteKit(String(params?.kit ?? ''))?.name ?? byRoute(route).title;
   return byRoute(route).title;
 }

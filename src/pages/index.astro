@@ -19,19 +19,19 @@ import OfferingUniverse from "../components/OfferingUniverse.astro";
 import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComparison, offeringCategories, productCards, kitCount } from "../data/content";
 // One label for every card that opens a kit's page, with the name and price read from the product record.
 const kitLabel = (name) => { const product = productCards.find((p) => p.name === name); return product ? `See the ${product.name} — ${product.priceLabel} ›` : ""; };
-// 65 characters is the ceiling (src/lib/title.mjs): this ran 67 with the brand
-// twice over, once as the lead word and once inside the phrase. The query leads
-// now and the site name appears once, as the suffix every other page carries.
-const pageTitle = "Self-Service Credit Repair Letters - ApprovalPrep";
-const pageDescription = "Download self-service credit repair letters, explanation letters, rental packets, income proof templates, and approval-prep document kits.";
-// Kept at the live 140 characters: the 6 Nov launch appended "The DIY alternative to monthly
-// credit repair." and took it to 184, past the 120-160 snippet band (search-readiness b2).
+// Her ruling 13 Nov 2026 ("credit repair" wording, spry brain): "credit repair" appears only as the
+// thing we replace, with the disclaimer beside it; never "credit repair letters" or a line saying
+// ApprovalPrep does credit repair. The title is hers word for word, so it ships unfitted (exactTitle).
+const pageTitle = "Credit Dispute Letters: the DIY Credit Repair Alternative | ApprovalPrep";
+const pageDescription = "Write and send your own credit dispute letters instead of paying a credit repair company. Explanation letters, rental and income kits too, paid once.";
+// 148 characters, inside the 120-160 snippet band (search-readiness b2).
 // Added 6 Nov 2026 (search and blue-ocean decision, https://claude.ai/artifact/JxZbRkaRbZfZrKEJpUMV6Y):
 // the homepage had no FAQ. Every answer keeps to risk R-ADV-13: self-help only, no
 // promise to remove items or change a score, accurate information stays. The one
 // competitor price carries its source and the date it was read.
 const CREDIT_SAINT_READ = "6 November 2026";
 const homeFaq = [
+  { question: "Can I do credit repair myself?", answer: "Yes. You can dispute errors on your credit report yourself, for free, directly with the credit bureaus and the business that reported them. Our letters are the do-it-yourself version of what a credit repair company charges for: you fill in your true facts and send them yourself. Accurate information usually stays on your report." },
   { question: "Is ApprovalPrep a credit repair company?", answer: "No. ApprovalPrep sells self-help letter templates. You write, review and send every letter yourself. We do not contact credit bureaus or creditors for you, and we do not act on your behalf." },
   { question: "Can I dispute my credit report myself for free?", answer: "Yes. You can dispute an error directly with the credit bureau and with the business that reported it. Federal law (the Fair Credit Reporting Act) requires the bureau to investigate your dispute free of charge. Our kits give you the letter wording and the steps; the free Letter Studio lets you draft a first version before you pay anything." },
   { question: "What does a credit repair company cost?", answer: `Credit Saint's own website listed plans from $79.99 to $139.99 a month, plus a first-work fee of $99 to $195, when we read it on ${CREDIT_SAINT_READ}. The ApprovalPrep Credit Letter Kit is $19, paid once.` },
@@ -48,13 +48,13 @@ const homeSchema = [
   faqSchema(homeFaq)
 ];
 ---
-<BaseLayout title={pageTitle} description={pageDescription} schema={homeSchema}>
+<BaseLayout title={pageTitle} exactTitle description={pageDescription} schema={homeSchema}>
   <section class="hero hero-split shell">
     <div>
       <p class="eyebrow">DIY credit letters + approval paperwork</p>
-      <h1>Self-service credit repair letters and approval-ready documents, <span class="ap-hl">without the high monthly fees.</span></h1>
-      <p class="lead" id="what-is-approvalprep">ApprovalPrep is a self-service document prep site that sells one-time, direct-download kits of letters, checklists, and templates for credit report questions, goodwill letters, debt validation, rental applications, income proof, loan reviews, and letters of explanation. Each kit unlocks a PDF guide and an editable DOCX file; you fill in your true facts and send it yourself.</p>
+      <h1>Self-service credit dispute letters and approval-ready documents, <span class="ap-hl">without a credit repair company's monthly fees.</span></h1>
       <p class="supporting-copy ap-settle"><strong>You write and send the letters yourself. ApprovalPrep is not a credit repair company.</strong></p>
+      <p class="lead" id="what-is-approvalprep">ApprovalPrep is a self-service document prep site that sells one-time, direct-download kits of letters, checklists, and templates for credit report questions, goodwill letters, debt validation, rental applications, income proof, loan reviews, and letters of explanation. Each kit unlocks a PDF guide and an editable DOCX file; you fill in your true facts and send it yourself.</p>
       <p class="supporting-copy ap-alt-line">The do-it-yourself alternative to a monthly credit repair company: draft free, buy the letters once, send them yourself.</p>
       <div class="hero-actions ap-hero-actions">
         <a class="button primary-button" href={internalHref("/letter-writing-studio/")}>Draft free in the Letter Studio</a>
@@ -180,7 +180,7 @@ const homeSchema = [
   </div></section>
   <section class="band"><div class="shell"><HowItWorks steps={howItWorks} /></div></section>
   <section class="band"><div class="shell"><WhatYouGet title="Why ApprovalPrep" items={whyApprovalPrep} /></div></section>
-  <section class="band"><div class="shell"><UseCaseList items={["You want self-service credit repair letters or credit explanation paperwork you can prepare and send yourself.", "You want to get apartment-ready, job-ready, loan-ready, or funding-ready before a reviewer asks for more documents.", "You want a lower-cost paperwork kit instead of an open-ended service, while keeping control of what you send and when."]} /></div></section>
+  <section class="band"><div class="shell"><UseCaseList items={["You want self-service credit dispute letters or credit explanation paperwork you can prepare and send yourself.", "You want to get apartment-ready, job-ready, loan-ready, or funding-ready before a reviewer asks for more documents.", "You want a lower-cost paperwork kit instead of an open-ended service, while keeping control of what you send and when."]} /></div></section>
   <section class="band"><div class="shell"><NextStepsExplainer /></div></section>
   <section class="band"><div class="shell"><DataPrivacyNotice /></div></section>
   </details>

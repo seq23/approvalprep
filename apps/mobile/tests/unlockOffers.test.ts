@@ -5,6 +5,7 @@ import { runInNewContext } from 'node:vm';
 import ts from 'typescript';
 import * as kits from '../src/kit';
 import * as offers from '../src/purchases/bundleOffers';
+import * as realOffers from '../src/offers';
 test('kit screen orders offers and routes options without reselling owned kits', async () => {
   for (const requested of ['credit-letter-kit', 'letter-of-explanation-kit']) {
     for (const creditKit of [false, true]) for (const explanationKit of [false, true]) for (const bundle of [false, true]) {
@@ -24,7 +25,9 @@ test('kit screen orders offers and routes options without reselling owned kits',
         if (name.endsWith('/theme')) return { type: {} };
         if (name.endsWith('/copy')) return { HONEST_LIMIT: 'limit', REQUEST_LINE: 'request' };
         if (name.endsWith('/previewSamples')) return { PREVIEW_ENABLED: false };
-        if (name.endsWith('/offers')) return { TRACKING_LINE: 'tracking', kitOfferFor: () => ({ name: 'Other kit', what: 'what', productId: 'other' }), websiteDifference: () => 'difference' };
+        if (name.endsWith('/offers')) return { TRACKING_LINE: 'tracking', kitOfferFor: () => ({ name: 'Other kit', what: 'what', productId: 'other' }), websiteDifference: () => 'difference', productName: realOffers.productName, productRoute: realOffers.productRoute, siteSkuFor: realOffers.siteSkuFor };
+        if (name.endsWith('/KitFiles')) return { KitFiles: 'KitFiles' };
+        if (name.endsWith('/more')) return { CREDIT_REPAIR_DEFENSE_LABEL: 'Why we\u2019re not a credit repair company ›', CREDIT_REPAIR_DEFENSE_URL: 'https://approvalprep.com/credit-repair-disclaimer/' };
         // Buying is on here, so the Get button counts as an offer exactly when the kit is for sale.
         if (name.endsWith('/kit')) return { ...kits, KIT_SALES_ENABLED: true };
         if (name.endsWith('/letters')) return { LETTERS: [], EXPLANATION_LETTERS: [] };
@@ -39,6 +42,13 @@ test('kit screen orders offers and routes options without reselling owned kits',
       const render = () => { index = 0; return exports.default(); };
       render(); focus(); await new Promise(resolve => setImmediate(resolve));
       const flatten = (node: any): any[] => !node ? [] : Array.isArray(node) ? node.flatMap(flatten) : typeof node === 'object' ? [node, ...flatten(node.props?.children)] : [];
+      // A kit she owns also opens the website kit's own files (her ruling 13 Nov 2026).
+      const mine = requested === 'credit-letter-kit' ? ownership.creditKit : ownership.explanationKit;
+      const files = flatten(render()).filter(e => e.type === 'KitFiles');
+      assert.equal(files.length, mine ? 1 : 0);
+      // Beside the price, before anything is bought: why we are not a credit repair company.
+      assert.equal(flatten(render()).some(e => e.type === 'Button' && e.props.label === 'Why we\u2019re not a credit repair company ›'), !mine);
+      if (mine) assert.equal(files[0].props.sku, requested === 'credit-letter-kit' ? 'credit-letter-kit' : 'letter-of-explanation');
       const expected = offers.offersFor(ownership, requested === 'credit-letter-kit' ? 'credit' : 'explanation');
       const enabled = flatten(render()).filter(e => (e.type === 'Row' || (e.type === 'Button' && e.props.label.startsWith('Get this kit'))) && !e.props.disabled);
       assert.equal(enabled.length, expected.length);
@@ -76,7 +86,9 @@ test('Restore messages survive ownership refresh even when the store is offline'
       if (name.endsWith('/theme')) return { type: {} };
       if (name.endsWith('/copy')) return { HONEST_LIMIT: 'limit', REQUEST_LINE: 'request' };
       if (name.endsWith('/previewSamples')) return { PREVIEW_ENABLED: false };
-      if (name.endsWith('/offers')) return { TRACKING_LINE: 'tracking', kitOfferFor: () => ({ name: 'Other kit', what: 'what', productId: 'other' }), websiteDifference: () => 'difference' };
+      if (name.endsWith('/offers')) return { TRACKING_LINE: 'tracking', kitOfferFor: () => ({ name: 'Other kit', what: 'what', productId: 'other' }), websiteDifference: () => 'difference', productName: realOffers.productName, productRoute: realOffers.productRoute, siteSkuFor: realOffers.siteSkuFor };
+        if (name.endsWith('/KitFiles')) return { KitFiles: 'KitFiles' };
+        if (name.endsWith('/more')) return { CREDIT_REPAIR_DEFENSE_LABEL: 'Why we\u2019re not a credit repair company ›', CREDIT_REPAIR_DEFENSE_URL: 'https://approvalprep.com/credit-repair-disclaimer/' };
       if (name.endsWith('/kit')) return kits;
       if (name.endsWith('/letters')) return { LETTERS: [], EXPLANATION_LETTERS: [] };
       if (name.endsWith('/kitTemplates')) return {

@@ -5,7 +5,7 @@ import { Row, Screen } from '../../../src/ui';
 import { type } from '../../../src/theme';
 import { LETTERS, EXPLANATION_LETTERS, type LetterType } from '../../../src/letters';
 import { kitLetter, kitForKind, loadDeliveredKit, EXPLANATION_KIT_ID, type KitTemplates } from '../../../src/kitTemplates';
-import { BUNDLE_OFFER, CREDIT_KIT, EXPLANATION_KIT_OFFER, STUDIO_COUNT, kitOfferFor, lockedLine, offerTitle } from '../../../src/offers';
+import { BUNDLE_OFFER, CREDIT_KIT, EXPLANATION_KIT_OFFER, FILE_KIT_OFFERS, STUDIO_COUNT, kitOfferFor, lockedLine, offerTitle } from '../../../src/offers';
 import { usePrices } from '../../../src/purchases/prices';
 export default function Letters() {
   const [kits, setKits] = useState<(KitTemplates | null)[]>([]);
@@ -33,6 +33,9 @@ export default function Letters() {
     <Text style={type.section} accessibilityRole="header">{EXPLANATION_KIT_OFFER.name}</Text>
     <Row title={`See the ${offerTitle(EXPLANATION_KIT_OFFER.name, prices[EXPLANATION_KIT_OFFER.productId])}`} sub={EXPLANATION_KIT_OFFER.what} onPress={() => router.push({ pathname: '/letters/unlock', params: { kit: EXPLANATION_KIT_OFFER.id } })} />
     {EXPLANATION_LETTERS.map(row)}
+    <Text style={type.section} accessibilityRole="header">More kits, as files</Text>
+    <Text style={type.sub}>The website's PDF guide and editable Word file, to fill in and send yourself.</Text>
+    {FILE_KIT_OFFERS.map(kit => <Row key={kit.id} title={offerTitle(kit.name, prices[kit.productId])} sub={kit.what} onPress={() => router.push({ pathname: '/letters/files', params: { kit: kit.id } })} />)}
     <Text style={type.section} accessibilityRole="header">Everything</Text>
     <Row title={offerTitle(BUNDLE_OFFER.name, prices[BUNDLE_OFFER.productId])} sub={BUNDLE_OFFER.what} onPress={() => router.push('/letters/bundle')} />
   </Screen>;

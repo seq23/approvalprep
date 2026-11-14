@@ -69,3 +69,12 @@ that token through the vault; never put it in a command line or the repo.
 - Sandbox purchases open nothing. Store reviewers and testers buy in the sandbox, so for the
   days of a store review set the server variable `APPROVALPREP_ACCEPT_SANDBOX_PURCHASES` to `1`
   and remove it afterwards. Refunded purchases stay refused either way.
+
+## Single-kit files (13 Nov 2026)
+
+Every in-app kit also opens the website kit's PDF guide and Word file through
+`POST /api/app-files?kit=<sku>` and `GET /api/app-files-file` (functions/_runtime/app-files.js).
+Same bindings as above (`PRODUCT_ASSETS_R2`, `APPROVALPREP_REVENUECAT_SECRET`,
+`DOWNLOAD_SIGNING_SECRET`, `PRODUCTS_DB`; 30 attempts a minute per caller). It reads the objects the
+website already serves, so nothing new is uploaded. A missing or empty object answers
+`APP_FILES_ASSET_MISSING`. Plan: docs/APP_PLAN.md, "Exact mirror".

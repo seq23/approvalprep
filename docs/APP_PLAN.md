@@ -452,7 +452,7 @@ Build it like this (S1, `app/(tabs)/index.tsx`; words from `src/copy.ts` and `sr
 - ONE main button, orange: the free Letter Studio (brand note: free step first; brain, 10 Nov: the Studio is the main draw).
 - One line: the Studio and the credit bureau dispute letter are free, as often as she likes. Then a quiet button to the free dispute letter.
 - If she has letters: the next answer date and her three latest, as before (pattern (e), kept).
-- "Kits, if you want more": one line defining a kit and saying each is paid once with no subscription, then three rows, each a name with its price and one line of what is inside: Credit Letter Kit, Letter of Explanation Kit, Complete ApprovalPrep Bundle. Prices come from the store at run time; until the store answers a row says "paid once" without a figure.
+- "Kits, if you want more": one line defining a kit and saying each is paid once with no subscription, then one row per product the website sells, in the website's order with the website's names (eight rows since 13 Nov 2026, see "Exact mirror" below), each a name with its price and one line of what is inside. Prices come from the store at run time; until the store answers a row says "paid once" without a figure.
 - The privacy line. The tab bar under everything: Home, Write a letter, My letters, More.
 - Leave out: the tagline as a headline (cover, pins and bios only), a paywall on open, reviews, score numbers, any other company's name or price.
 
@@ -478,3 +478,47 @@ Honest limits: on 13 Nov the pages were read as text; the layouts themselves wer
 - **Buying switched off**: the Get button is off and one line says why; the preview wording shows only in the preview build.
 - **The credit-report caution** shows on credit letters only (`isCreditLetter`); other letters carry "A letter is a request, not a promise."
 - **The free dispute letter** shows the website's "Before you mail it" list and the date the answer is due if mailed today. The calendar file is not in the app (left out: the day-30 reminder is the paid step here).
+
+## Exact mirror of the website's products (owner, 13 Nov 2026; this wins over the plan page and the notes above)
+
+Her words: "why arent all of them available? when im on the home page why dont i see the same list of
+products the website has?" — her pick: "Exact mirror".
+
+- **The app sells the website's 8 products, same names, same order** (the home page's kit grid, read
+  live 13 Nov 2026). The list is `PRODUCTS` in `apps/mobile/src/offers.ts`, built from
+  `data/products/products.json`, which the website's grid renders too; `tests/offers.test.ts` holds
+  names, order, count and prices to it. Home and More list all 8; the Letter Studio and the free
+  dispute letter stay above them.
+
+| Website order | Product | In-app id | Store price | Website price | Screen |
+|---|---|---|---|---|---|
+| 1 | Letter of Explanation Kit | `ap_explanation_kit` | $14.99 | $15 | kit screen (`/letters/unlock`) |
+| 2 | Income + Employment Letter Kit | `ap_income_employment_kit` | $19.99 | $19 | files screen (`/letters/files`) |
+| 3 | Credit Letter Kit | `ap_credit_kit` | $19.99 | $19 | kit screen |
+| 4 | Rental Application Kit | `ap_rental_application_kit` | $29.99 | $29 | files screen |
+| 5 | Loan Prep Letter Kit | `ap_loan_prep_kit` | $29.99 | $29 | files screen |
+| 6 | Business Funding Prep Kit | `ap_business_funding_kit` | $39.99 | $39 | files screen |
+| 7 | Life Admin Letter Kit | `ap_life_admin_kit` | $19.99 | $19 | files screen |
+| 8 | Complete ApprovalPrep Bundle | `ap_complete_bundle` | $49.99 | $49 | bundle screen |
+
+- **All one-time, non-consumable.** Same `KIT_SALES_ENABLED = false` switch and
+  `STORE_ACCOUNTS_NOT_READY` named stop; nothing is created in any store or in RevenueCat until her
+  accounts exist (the five new ids are created then, beside the first three).
+- **Each kit unlocks the same files the website delivers**: the website kit's PDF guide and editable
+  Word file, the very R2 objects the website's own download serves (`products/<sku>/<sku>.pdf|docx`).
+  `POST /api/app-files?kit=<sku>` checks the store purchase (the kit, the bundle or the upgrade) with
+  RevenueCat again and returns two five-minute signed links; `GET /api/app-files-file` streams the
+  fixed object. No file content is in the repo or the app bundle. The Credit Letter Kit and the Letter
+  of Explanation Kit keep their in-app letters and tracking and also get their website files.
+- **Bundle upgrade: nobody pays twice.** One upgrade product, `ap_bundle_upgrade` at $29.99, offered to
+  anyone who owns any kit (one or several, whichever). A kit she owns is never offered again, a kit
+  owner is never shown the full-price bundle, and the upgrade is never offered to someone who owns no
+  kit (`offersFor` in `src/purchases/bundleOffers.ts`, tested for every kit against every other).
+  Known: a Business Funding Prep Kit owner pays $39.99 + $29.99, more than the $49.99 bundle alone;
+  one upgrade price was chosen to keep the store setup simple.
+- **The free web preview** lets every product be "bought" (pretend, session-only, nothing charged,
+  `previewBuy` in `src/previewSamples.ts`, only with `EXPO_PUBLIC_AP_PREVIEW=1`, which the release gate
+  refuses for a store build). A pretend kit opens its letters and its files; in the preview a file opens
+  as a stand-in page naming the real file and the documents in it.
+- **Credit-repair law page**: More has "Why we’re not a credit repair company ›" and the kit and files
+  screens show the same link beside the price; both open https://approvalprep.com/credit-repair-disclaimer/.

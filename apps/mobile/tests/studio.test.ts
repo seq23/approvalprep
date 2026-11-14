@@ -43,20 +43,26 @@ test('Studio outputs do not contain private kit template sentences', t => {
   for (const s of situations) for (const sentence of sentences) assert.ok(!studioDraft(s.id, {}).text.includes(sentence), s.id);
 });
 
-// Each recommendation must reach an offer that actually delivers it.
-test('Studio recommendations reach the independent kit or the bundle containing the website guide', () => {
+// Each recommendation must reach that kit's own screen, sold on its own (her ruling 13 Nov 2026).
+test('Studio recommendations reach the recommended kit itself, sold on its own in the app', async () => {
+  const { PRODUCTS } = await import('../src/offers');
+  let files = 0;
   for (const situation of situations) {
     const route = studioDraft(situation.id, {}).kitRoute;
     if (situation.recommendationSku === 'credit-letter-kit') {
       assert.deepEqual(route, { pathname: '/letters/unlock', params: { kit: 'credit-letter-kit' } });
     } else if (situation.recommendationSku === 'letter-of-explanation') {
       assert.deepEqual(route, { pathname: '/letters/unlock', params: { kit: 'letter-of-explanation-kit' } });
-    } else assert.deepEqual(route, { pathname: '/letters/bundle' });
+    } else { assert.deepEqual(route, { pathname: '/letters/files', params: { kit: situation.recommendationSku } }); files++; }
+    // The screen it opens sells exactly the kit the Studio named, under the same name.
+    const product = PRODUCTS.find(p => p.screen === route.pathname && p.params.kit === route.params.kit);
+    assert.ok(product, situation.id);
+    assert.equal(product!.name, studioDraft(situation.id, {}).kitName, situation.id);
   }
+  assert.ok(files > 0, 'at least one Studio situation recommends a file kit');
   const screen = readFileSync(join(__dirname, '../app/(tabs)/letters/studio.tsx'), 'utf8');
-  // A kit the app does not sell on its own opens the bundle that holds it, and the screen says so first.
-  assert.match(screen, /'params' in draft\.kitRoute \? \{ pathname: '\/letters\/unlock', params: draft\.kitRoute\.params \} : '\/letters\/bundle'/);
-  assert.match(screen, /notSoldHere\(draft\.kitName\)/);
+  assert.match(screen, /pathname: '\/letters\/files', params: draft\.kitRoute\.params/);
+  assert.match(screen, /pathname: '\/letters\/unlock', params: draft\.kitRoute\.params/);
 });
 
 // The website kits of the same name hold more documents than the kits sold in the app.
