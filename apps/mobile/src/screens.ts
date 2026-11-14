@@ -65,3 +65,20 @@ export function titleFor(route: string, params?: Record<string, unknown>): strin
   if (route === '/letters/files') return websiteKit(String(params?.kit ?? ''))?.name ?? byRoute(route).title;
   return byRoute(route).title;
 }
+
+/**
+ * Which tab the bar lights up. A screen opened from another tab (the Studio, a kit or "Your letter"
+ * opened from Home) lives in the Write a letter stack, but she is still on the tab she came from, so
+ * that tab stays lit through every screen she moves on to, until she reaches a tab's own page.
+ * `origin` is what this returned last time ({ tab, origin }), so the screens after the first,
+ * which carry no `from`, keep it.
+ */
+export function shownTab(pathname: string, from: string | string[] | undefined, origin: Tab | null): { tab: Tab; origin: Tab | null } {
+  const here = screenForPath(pathname).tab ?? 'index';
+  const path = pathname.replace(/\/+$/, '') || '/';
+  if (TABS.some(t => t.route === path)) return { tab: here, origin: null };
+  const asked = Array.isArray(from) ? from[0] : from;
+  const fromTab = TABS.find(t => t.route === asked)?.tab ?? null;
+  const next = fromTab && fromTab !== here ? fromTab : origin;
+  return { tab: next ?? here, origin: next };
+}

@@ -25,9 +25,10 @@ test('opening a letter stores nothing; the first answer creates the draft, later
     if (name === 'react') return {
       useState: (initial: any) => { const i = cursor++; if (!(i in state)) state[i] = initial; return [state[i], (value: any) => { state[i] = typeof value === 'function' ? value(state[i]) : value; }]; },
       useRef: (current: any) => { const i = refAt++; return refs[i] ?? (refs[i] = { current }); },
-      useEffect: (fn: any) => { effect = fn; },
+      useEffect: (fn: any) => { effect = fn; }, useCallback: (fn: any) => fn,
     };
-    if (name === 'expo-router') return { useLocalSearchParams: () => ({ kind: 'bureau-dispute' }), router: {} };
+    // The re-read on a later focus is not this test's subject; opening is.
+    if (name === 'expo-router') return { useLocalSearchParams: () => ({ kind: 'bureau-dispute' }), useFocusEffect: () => {}, router: {} };
     if (name.endsWith('/phoneDatabase')) return { storageDeadline: (work: Promise<any>) => work };
     if (name.endsWith('/letterQuestions')) return letterQuestions;
     if (name.endsWith('/studioDrafts')) return studioDrafts;

@@ -3,10 +3,10 @@ import type { SavedLetter } from './letterStorage';
 // @ts-ignore shared website module is JavaScript
 import { buildLetter, bureaus } from '../../../src/lib/letterStudioCore.mjs';
 export { bureaus };
-export interface Question { title: string; fields: { name: string; label: string; multiline?: boolean }[] }
+export interface Question { title: string; fields: { name: string; label: string; multiline?: boolean; kind?: 'ssn4' }[] }
 export const disputeQuestions: Question[] = [
   { title: 'Who is sending this letter?', fields: [{ name: 'name', label: 'Your full name' }, { name: 'address', label: 'Your mailing address', multiline: true }] },
-  { title: 'Help the bureau find your file', fields: [{ name: 'dob', label: 'Date of birth (optional)' }, { name: 'ssn4', label: 'Last 4 digits of your Social Security number (optional, only the last 4)' }] },
+  { title: 'Help the bureau find your file', fields: [{ name: 'dob', label: 'Date of birth (optional)' }, { name: 'ssn4', label: 'Last 4 digits of your Social Security number (optional, only the last 4)', kind: 'ssn4' }] },
   { title: 'Which bureau shows the error?', fields: [] },
   { title: 'Which account is wrong?', fields: [{ name: 'account', label: 'Company name and last four account digits' }] },
   { title: 'What does your report say?', fields: [{ name: 'shows', label: 'The entry you believe is wrong', multiline: true }] },

@@ -81,7 +81,7 @@ export default function Studio() {
   async function output(action: 'save' | 'print') {
     if (!draft || busy) return;
     setBusy(true); setMessage('');
-    try { await saveOrPrintLetter(letterHtml(draft.text), action); }
+    try { await saveOrPrintLetter(letterHtml(draft.text, false, situation!.label), action, situation!.label); }
     catch (error) { setMessage(error instanceof Error ? error.message : 'Your PDF could not be opened. Please try again.'); }
     finally { setBusy(false); }
   }
@@ -94,7 +94,7 @@ export default function Studio() {
     </> : reading ? <>
       {limit}
       <Text style={type.sub}>Check every fact and fill any brackets before you send it.</Text>
-      {draft ? <Sheet><Text selectable style={type.body}>{draft.text}</Text></Sheet> : <Text style={type.sub} accessibilityLiveRegion="polite">{note || 'Opening your draft…'}</Text>}
+      {draft ? <Sheet><Text selectable style={type.letter}>{draft.text}</Text></Sheet> : <Text style={type.sub} accessibilityLiveRegion="polite">{note || 'Opening your draft…'}</Text>}
       {draft ? <>
         <Button primary label={busy ? 'Opening PDF…' : Platform.OS === 'web' ? 'Save as PDF or print ›' : 'Save or share PDF ›'} disabled={busy} onPress={() => void output('save')} />
         {Platform.OS !== 'web' ? <Button label="Print ›" disabled={busy} onPress={() => void output('print')} /> : <Text style={type.sub}>Choose Save as PDF in your browser’s print window, then share the saved file.</Text>}

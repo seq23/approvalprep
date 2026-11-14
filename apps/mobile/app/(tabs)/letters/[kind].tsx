@@ -1,6 +1,6 @@
 import { storageDeadline } from '../../../src/phoneDatabase';
-import { router, useLocalSearchParams } from 'expo-router';
-import { useEffect, useRef, useState } from 'react';
+import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Text } from 'react-native';
 import { Button, Field, Row, Screen } from '../../../src/ui';
 import { type } from '../../../src/theme';
@@ -15,6 +15,10 @@ import { studioStep } from '../../../src/studioDrafts';
 // Each question is its own step in the tab's history (like the Letter Studio), so "← Back" on
 // question 4 goes to question 3, never out of the letter. `edit=1` opens one question from the
 // draft's answer list and returns to the draft. `resumed=1` is her latest unfinished letter.
+// The last save from any question screen. A question shown again (Back from a later one) waits
+// for it, then reads the draft from the phone, so it never writes back answers older than the
+// ones a later question just saved.
+let lastSave: Promise<unknown> = Promise.resolve();
 const newId = () => `letter-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 export default function Questions() {
   const { kind, id, step: stepParam, edit, resumed } = useLocalSearchParams<{ kind: string; id?: string; step?: string; edit?: string; resumed?: string }>();
@@ -32,6 +36,10 @@ export default function Questions() {
   const revision = useRef(0);
   const pending = useRef<Promise<void>>(Promise.resolve());
   const draftId = useRef(id ?? newId());
+  // The newest version of the letter, updated the moment she types, so a tap on Next straight after
+  // typing (before the screen has redrawn) saves and reads her latest words (sim test: "Jordan Av").
+  const latest = useRef<SavedLetter | null>(null);
+  const shown = useRef(false);
   useEffect(() => {
     let active = true;
     setLoadError(false); setLetter(null); setPaid(undefined); setMessage('Opening your draft…');
@@ -48,15 +56,29 @@ export default function Questions() {
       const found = !!draft;
       if (!draft) draft = template ? newKitDraft(draftId.current, template.kind) : newDispute(draftId.current);
       if (!active) return;
-      write.current = draftWriter(store, found); setStored(found); setLetter(draft); setMessage(found ? 'Saved on this phone.' : 'Your answers save on this phone as you type.');
+      write.current = draftWriter(store, found); setStored(found); latest.current = draft; setLetter(draft); setMessage(found ? 'Saved on this phone.' : 'Your answers save on this phone as you type.');
     })()).catch(() => { if (active) { setLoadError(true); setMessage('Your draft could not be opened. Please try again.'); } });
     return () => { active = false; };
   }, [kind, id, attempt]);
+  useFocusEffect(useCallback(() => {
+    if (!shown.current) { shown.current = true; return; }
+    let active = true;
+    lastSave.catch(() => {}).then(async () => {
+      const store = await savedLetters();
+      const fresh = await store.get(draftId.current);
+      if (!active || !fresh || fresh.kind !== kind) return;
+      write.current = draftWriter(store, true); latest.current = fresh; setStored(true); setLetter(fresh);
+    }).catch(() => {});
+    return () => { active = false; };
+  }, [kind]));
+  /** One answer changed, on top of the newest version of the letter (never a stale render's copy). */
+  const answer = (name: string, value: string) => persist({ ...latest.current!, answers: { ...latest.current!.answers, [name]: value } });
   function persist(next: SavedLetter) {
+    latest.current = next;
     setLetter(next); setSaving(true); setFailed(false); setMessage('Saving…');
     const version = ++revision.current;
     const saved = write.current!(next);
-    pending.current = saved;
+    pending.current = saved; lastSave = saved;
     saved.then(() => {
       if (version === revision.current) { setSaving(false); setStored(true); setMessage('Saved on this phone.'); }
     }).catch(() => {
@@ -90,11 +112,11 @@ export default function Questions() {
     {paid?.honestLine ? <Text style={type.sub}>{paid.honestLine}</Text> : null}
     <Text style={type.sub} accessibilityLiveRegion="polite">{resumed === '1' && step === 0 && stored ? 'This is the letter you started before. Your answers are filled in.' : message}</Text>
     {letter ? <>
-      {free && question.fields.length === 0 ? (bureaus as { id: string; name: string }[]).map(bureau => <Row key={bureau.id} title={bureau.name} selected={letter.answers.bureau === bureau.id} onPress={() => persist({ ...letter, answers: { ...letter.answers, bureau: bureau.id } })} />) : question.fields.map(field => <Field key={field.name} label={field.label} multiline={field.multiline} value={letter.answers[field.name] ?? ''} onChangeText={value => persist({ ...letter, answers: { ...letter.answers, [field.name]: value } })} />)}
+      {free && question.fields.length === 0 ? (bureaus as { id: string; name: string }[]).map(bureau => <Row key={bureau.id} title={bureau.name} selected={letter.answers.bureau === bureau.id} onPress={() => answer('bureau', bureau.id)} />) : question.fields.map(field => <Field key={field.name} label={field.label} multiline={field.multiline} kind={'kind' in field && field.kind === 'ssn4' ? 'ssn4' : 'text'} value={letter.answers[field.name] ?? ''} onChangeText={value => answer(field.name, value)} />)}
       <Text style={type.sub}>You can leave a blank. It will appear in brackets for you to fill before mailing.</Text>
-      {failed ? <Button label="Try saving again" onPress={() => persist(letter)} /> : null}
+      {failed ? <Button label="Try saving again" onPress={() => persist(latest.current!)} /> : null}
       {editing ? <Button primary disabled={saving || failed} label="Save and read my draft ›" onPress={() => after(() => router.back())} />
-        : <Button primary disabled={saving || failed} label={last ? 'Read my draft ›' : 'Next question ›'} onPress={() => last ? (persist(letter), after(() => router.push({ pathname: '/letters/draft', params: { id: draftId.current } }))) : go(step + 1)} />}
+        : <Button primary disabled={saving || failed} label={last ? 'Read my draft ›' : 'Next question ›'} onPress={() => last ? (persist(latest.current!), after(() => router.push({ pathname: '/letters/draft', params: { id: draftId.current } }))) : go(step + 1)} />}
       {step > 0 && !editing ? <Button label="← Previous question" onPress={() => router.back()} /> : null}
       {resumed === '1' && step === 0 && stored ? <Button label="Start a blank one instead" onPress={() => router.replace({ pathname: '/letters/[kind]', params: { kind, id: newId() } })} /> : null}
     </> : null}

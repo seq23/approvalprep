@@ -5,7 +5,7 @@ import { renderDispute } from './letterQuestions';
 import { renderKitLetter, type KitLetter } from './kitTemplates';
 import { studioDraft } from './studio';
 import { studioSituationOf } from './studioDrafts';
-import { escapeHtml } from './letterPdf';
+import { LETTER_FONT, PAGE_MARGIN_IN, escapeHtml } from './letterPdf';
 import { letterTitle, showDate } from './myLetters';
 import { SELF_HELP_LINE } from './copy';
 import { color } from './theme';
@@ -35,8 +35,8 @@ export function allLettersHtml(letters: SavedLetter[], kitFor: (kind: string) =>
       + `<article>${escapeHtml(rendered?.text ?? 'This kit letter needs its kit on this phone to print. Restore your purchase on More, then save again.')}</article></section>`;
   });
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>My ApprovalPrep letters</title><style>
-    @page { size: letter; margin: 0.65in; }
-    body { color: ${color.carbon}; background: ${color.paperRaised}; font: 12pt/1.45 Arial, sans-serif; margin: 0; }
+    @page { size: letter; margin: ${PAGE_MARGIN_IN}in; }
+    body { color: ${color.carbon}; background: ${color.paperRaised}; font: 12pt/1.45 ${LETTER_FONT}; margin: 0; }
     section + section { break-before: page; } h1 { font-size: 20pt; } h2 { font-size: 14pt; margin: 0 0 4pt; }
     .meta { font-size: 10pt; margin: 0 0 12pt; } article { white-space: pre-wrap; overflow-wrap: anywhere; }
     footer { font-size: 9pt; border-top: 1px solid ${color.rule}; margin-top: 24pt; padding-top: 10pt; }
@@ -48,6 +48,6 @@ export async function exportAllLetters(): Promise<number> {
   const letters = await (await savedLetters()).list();
   if (!letters.length) return 0;
   const kits = { [KIT_ID]: await loadDeliveredKit(KIT_ID), [EXPLANATION_KIT_ID]: await loadDeliveredKit(EXPLANATION_KIT_ID) };
-  await saveOrPrintLetter(allLettersHtml(letters, kind => ALL_KIT_KINDS.includes(kind as never) ? kitLetter(kits[kitForKind(kind)], kind) : null), 'save');
+  await saveOrPrintLetter(allLettersHtml(letters, kind => ALL_KIT_KINDS.includes(kind as never) ? kitLetter(kits[kitForKind(kind)], kind) : null), 'save', 'My ApprovalPrep letters');
   return letters.length;
 }

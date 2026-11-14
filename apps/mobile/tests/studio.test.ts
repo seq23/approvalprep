@@ -30,7 +30,7 @@ test('free Studio screen saves or prints its draft but has no sent or reminder a
   // 14 Nov 2026); mark as sent and reminders stay with the kits.
   const screen = readFileSync(join(__dirname, '../app/(tabs)/letters/studio.tsx'), 'utf8');
   assert.doesNotMatch(screen, /letters\/sent|scheduleNotification|localReminders|markSent/);
-  assert.match(screen, /saveOrPrintLetter\(letterHtml\(draft\.text\), action\)/);
+  assert.match(screen, /saveOrPrintLetter\(letterHtml\(draft\.text, false, situation!\.label\), action, situation!\.label\)/);
   assert.match(screen, /letterHref\(store, 'bureau-dispute'\)/);
   assert.match(screen, /Clipboard.setStringAsync\(draft!\.text\)/);
   assert.match(screen, /Share.share\(\{ message: draft!\.text \}\)/);

@@ -93,3 +93,11 @@ test('Restore a purchase checks the bundle and the kits itself, and says what it
   }
   assert.notEqual(restoreMessage('none', false), restoreMessage('none', true));
 });
+
+test('a price shown is the store’s own string when it has one, the approved price only for a product it did not answer for', async () => {
+  const { withFallbackPrices, FALLBACK_PRICES } = await import('../src/offers');
+  const shown = withFallbackPrices({ [KIT.productId]: '£18.99', [EXPLANATION_KIT.productId]: '' });
+  assert.equal(shown[KIT.productId], '£18.99');
+  assert.equal(shown[EXPLANATION_KIT.productId], '$14.99');
+  for (const p of PRODUCTS) assert.match(FALLBACK_PRICES[p.productId] ?? '', /^\$\d+\.\d\d$/, `${p.name} has a fallback price`);
+});
