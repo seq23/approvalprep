@@ -26,7 +26,7 @@ test('returning from Restore refreshes the mounted chooser and opens delivered k
     if (name === 'react-native') return { Text: 'Text' };
     if (name.endsWith('/theme')) return { type: {} };
     if (name.endsWith('/ui')) return { Row: 'Row', Screen: 'Screen' };
-    if (name.endsWith('/offers')) return { BUNDLE_OFFER: {}, CREDIT_KIT: {}, EXPLANATION_KIT_OFFER: {}, STUDIO_COUNT: 9, kitOfferFor: () => ({ name: 'Kit', productId: 'kit' }), lockedLine: () => 'locked', offerTitle: () => 'title' };
+    if (name.endsWith('/offers')) return { BUNDLE_OFFER: {}, CREDIT_KIT: {}, EXPLANATION_KIT_OFFER: {}, FILE_KIT_OFFERS: [], STUDIO_COUNT: 9, kitOfferFor: () => ({ name: 'Kit', productId: 'kit' }), lockedLine: () => 'locked', offerTitle: () => 'title' };
     if (name.endsWith('/prices')) return { usePrices: () => ({}) };
     if (name.endsWith('/letters')) return { EXPLANATION_LETTERS: [], LETTERS: [{ kind: 'goodwill', name: 'Goodwill', access: 'kit' }] };
     if (name.endsWith('/kitTemplates')) return {

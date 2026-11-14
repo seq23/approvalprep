@@ -40,7 +40,7 @@ export const homepageChooser = [
     "product": "Rental Application Kit"
   },
   {
-    "title": "I want self-service credit repair letters",
+    "title": "I want self-service credit dispute letters",
     "copy": "The letters for after your first dispute: bureau follow-ups, a direct dispute to the company that reported the item, debt validation, settlement terms in writing, goodwill and late-payment letters, an error checklist and a mailing log.",
     "href": "/credit-letter-kit",
     "product": "Credit Letter Kit"
@@ -2245,7 +2245,7 @@ const manualRouteCopy = {
   },
   "/credit-repair-disclaimer": {
     "heading": "Credit Repair Disclaimer",
-    "lead": "ApprovalPrep sells do-it-yourself credit letters, not credit repair. You write and send each letter; nobody disputes items or contacts bureaus for you.",
+    "lead": "ApprovalPrep is not a credit repair company. We sell self-help dispute letter templates; you fill in your true facts and mail them yourself.",
     "shortAnswer": "This page explains the credit repair disclaimer boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
     "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",

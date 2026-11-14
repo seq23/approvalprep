@@ -12,13 +12,13 @@ import DemandGuideLinks from "../components/DemandGuideLinks.astro";
 import { titleForPath, canonicalUrl, internalHref, OG_IMAGE, organizationNode } from "../lib/schema";
 import { fitTitle } from "../lib/title";
 import { navCta, primaryNav, secondaryNav } from "../data/navigation";
-const { title = "ApprovalPrep", description = "Self-service approval prep tools.", canonical = "https://approvalprep.com", noindex = false, showPrivacyNotice = true, schema = [], ogType: ogTypeProp = null, publishedTime = null } = Astro.props;
+const { title = "ApprovalPrep", exactTitle = false, description = "Self-service approval prep tools.", canonical = "https://approvalprep.com", noindex = false, showPrivacyNotice = true, schema = [], ogType: ogTypeProp = null, publishedTime = null } = Astro.props;
 // Breadcrumbs belong to the layout so every surface gets the same trail from the
 // same source. The path comes from the route being rendered; the crumb label
 // comes from the page's registered title, falling back to the <title> with the
 // site suffix removed for surfaces that live outside the route registries.
 const currentPath = Astro.url.pathname.replace(/\/+$/, "") || "/";
-const crumbTitle = titleForPath(currentPath) || String(title).replace(/\s*-\s*ApprovalPrep\s*$/, "");
+const crumbTitle = titleForPath(currentPath) || String(title).replace(/\s*[-|]\s*ApprovalPrep\s*$/, "");
 // A page that already publishes its own BreadcrumbList must not get a second one.
 const hasBreadcrumbSchema = (Array.isArray(schema) ? schema : []).some((entry) => entry && entry["@type"] === "BreadcrumbList");
 // Same rule for WebPage. The Search Readiness checklist (item c2, 25 Oct 2026)
@@ -40,8 +40,9 @@ const canonicalHref = canonicalUrl(canonical);
 const articleNode = schemaList.find((entry) => [].concat(entry?.["@type"] ?? []).some((t) => ["Article", "TechArticle", "BlogPosting", "NewsArticle"].includes(String(t))));
 const ogType = ogTypeProp || (articleNode ? "article" : "website");
 const articlePublished = publishedTime || articleNode?.datePublished || null;
-// Bing flags <title> over 70 characters; see src/lib/title.mjs.
-const documentTitle = fitTitle(String(title));
+// Bing flags <title> over 70 characters; see src/lib/title.mjs. A title the owner ruled word for
+// word (exactTitle, the home page since 13 Nov 2026) ships as ruled.
+const documentTitle = exactTitle ? String(title) : fitTitle(String(title));
 ---
 <!doctype html>
 <html lang="en">

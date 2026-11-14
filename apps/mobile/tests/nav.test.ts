@@ -1,6 +1,7 @@
 // Navigation map checks (make-it-calm section 7; the owner's tap-through of the sibling
 // Dream Wedding app, 6 Nov 2026: "i cant go back or back to home or esc"). Back, Close and
 // the tab bar are drawn from src/screens.ts, so the map being right is the app being navigable.
+import { PRODUCTS } from '../src/offers';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -45,7 +46,9 @@ test('no orphans: every screen is reachable from Start, and every link is a real
   for (const s of SCREENS) {
     const src = fs.readFileSync(path.join(root, s.file), 'utf8');
     assert.ok(src.includes(`<Screen route="${s.route}"`), `${s.file} does not draw <Screen> for ${s.route}`);
-    for (const l of s.links) assert.ok(src.includes(`'${l}'`) || src.includes(l.replace('[kind]', '${')), `${s.id}: no button goes to ${l}`);
+    // A screen that lists the products (src/offers.ts) opens each product's own screen from that list.
+    const listsProducts = /\bPRODUCTS\.map\(|productRoute\(/.test(src);
+    for (const l of s.links) assert.ok(src.includes(`'${l}'`) || src.includes(l.replace('[kind]', '${')) || (listsProducts && PRODUCTS.some(p => p.screen === l)), `${s.id}: no button goes to ${l}`);
   }
 });
 
@@ -95,4 +98,5 @@ test('the kit screen is headed with the name of the kit it shows', () => {
   assert.equal(titleFor('/letters/unlock', { kit: 'credit-letter-kit' }), 'Credit Letter Kit');
   assert.equal(titleFor('/letters/unlock'), 'Credit Letter Kit');
   assert.equal(titleFor('/letters/bundle', { kit: 'letter-of-explanation-kit' }), 'Complete ApprovalPrep Bundle');
+  assert.equal(titleFor('/letters/files', { kit: 'rental-application-kit' }), 'Rental Application Kit');
 });

@@ -9,13 +9,14 @@ import type { SavedLetter } from '../../src/letterStorage';
 import { startModel } from '../../src/start';
 import { type } from '../../src/theme';
 import { PRIVACY_LINE, WHAT_IT_IS } from '../../src/copy';
-import { BUNDLE_OFFER, FREE_LINE, KIT_OFFERS, PAID_ONCE_LINE, offerTitle } from '../../src/offers';
+import { FREE_LINE, PAID_ONCE_LINE, PRODUCTS, offerTitle } from '../../src/offers';
 import { usePrices } from '../../src/purchases/prices';
 import { openFrom } from '../../src/nav';
 import { draftHref } from '../../src/studioDrafts';
 // S1 Home (the first screen, and a tab so it can always be reached again). Plan: docs/APP_PLAN.md,
 // screen S1 and pattern (j): what this is, what is free, the free Studio as the one main button,
-// then everything that is for sale, by name, each with its price.
+// then everything that is for sale, by name, each with its price: the website's eight products in the
+// website's order with the website's names (her ruling 13 Nov 2026, "Exact mirror").
 export default function Home() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
@@ -59,9 +60,8 @@ export default function Home() {
       }} />)}
       {model.returning ? <Button label="All my letters ›" onPress={() => router.navigate('/mine')} /> : null}
       <Text style={type.section} accessibilityRole="header">Kits, if you want more</Text>
-      <Text style={type.sub}>A kit is a set of letter templates you unlock in this app. {PAID_ONCE_LINE}</Text>
-      {KIT_OFFERS.map(kit => <Row key={kit.id} title={offerTitle(kit.name, prices[kit.productId])} sub={kit.what} onPress={() => openFrom('/', '/letters/unlock', { kit: kit.id })} />)}
-      <Row title={offerTitle(BUNDLE_OFFER.name, prices[BUNDLE_OFFER.productId])} sub={BUNDLE_OFFER.what} onPress={() => openFrom('/', '/letters/bundle')} />
+      <Text style={type.sub}>The same kits approvalprep.com sells, in the same order. {PAID_ONCE_LINE}</Text>
+      {PRODUCTS.map(p => <Row key={p.sku} title={offerTitle(p.name, prices[p.productId])} sub={p.what} onPress={() => openFrom('/', p.screen, p.params)} />)}
       <Text style={type.sub}>{PRIVACY_LINE}</Text>
       {PREVIEW_ENABLED ? <Button label="Preview only: load sample letters and kits ›" disabled={loading} onPress={() => void samples()} /> : null}
       {message ? <Text accessibilityRole="alert" style={type.sub}>{message}</Text> : null}

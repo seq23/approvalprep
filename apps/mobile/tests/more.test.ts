@@ -19,8 +19,10 @@ test('a failed deletion stays confirmable and can be retried', async () => {
   assert.equal(await action.confirm(), true); assert.equal(calls, 2);
 });
 test('More links are distinct secure pages on our own site', () => {
-  assert.equal(MORE_LINKS.length, 6);
-  assert.equal(new Set(MORE_LINKS.map(l => l.url)).size, 6);
+  assert.equal(MORE_LINKS.length, 7);
+  assert.equal(new Set(MORE_LINKS.map(l => l.url)).size, 7);
+  // Terms, Privacy, the Disclaimer and why we are not a credit repair company are always one tap away.
+  for (const path of ['/terms/', '/privacy/', '/disclaimer/', '/credit-repair-disclaimer/']) assert.ok(MORE_LINKS.some(l => new URL(l.url).pathname === path), path);
   // Coming back after the bureau answers is free information for everyone, buyer or not.
   assert.ok(MORE_LINKS.some(l => new URL(l.url).pathname === '/the-bureau-answered/'));
   for (const link of MORE_LINKS) { const url = new URL(link.url); assert.equal(url.protocol, 'https:'); assert.equal(url.host, 'approvalprep.com'); }

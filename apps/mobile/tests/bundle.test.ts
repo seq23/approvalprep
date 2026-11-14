@@ -1,8 +1,8 @@
 import { test } from 'node:test';
 import { DatabaseSync } from 'node:sqlite';
 import assert from 'node:assert/strict';
-import { KIT, COMPLETE_BUNDLE, BUNDLE_UPGRADE, kitPurchaseGate } from '../src/kit';
-import { EXPLANATION_PRODUCT, offersFor, ownershipFrom, NO_OWNERSHIP } from '../src/purchases/bundleOffers';
+import { KIT, COMPLETE_BUNDLE, BUNDLE_UPGRADE, ALL_KIT_IDS, FILE_KIT_IDS, kitPurchaseGate } from '../src/kit';
+import { EXPLANATION_PRODUCT, offersFor, ownershipFrom, ownsKit, NO_OWNERSHIP } from '../src/purchases/bundleOffers';
 import { restoreBundle, validBundleKits } from '../src/purchases/bundleDelivery';
 // @ts-ignore Pages runtime is JavaScript
 import { onRequestPost } from '../../../functions/api/app-bundle.js';
@@ -10,20 +10,40 @@ import { onRequestPost } from '../../../functions/api/app-bundle.js';
 import { onRequestGet } from '../../../functions/api/app-bundle-file.js';
 // @ts-ignore Pages runtime is JavaScript
 import { bundleUrl } from '../../../functions/_runtime/app-bundle.js';
-const owned = (creditKit = false, explanationKit = false, bundle = false) => ({ creditKit, explanationKit, bundle });
+const owned = (creditKit = false, explanationKit = false, bundle = false, fileKits: string[] = []) => ({ creditKit, explanationKit, bundle, fileKits });
+// Nobody pays twice (docs/APP_PLAN.md, "Bundle upgrade"): an owned kit is never offered again, a kit
+// owner is never offered the full-price bundle, and the upgrade only ever goes to a kit owner.
 test('offers cover each ownership combination without selling an owned kit again', () => {
   assert.deepEqual(offersFor(owned()), [COMPLETE_BUNDLE.productId, KIT.productId]);
   assert.deepEqual(offersFor(owned(), 'explanation'), [COMPLETE_BUNDLE.productId, EXPLANATION_PRODUCT]);
-  assert.deepEqual(offersFor(owned(true)), [EXPLANATION_PRODUCT, BUNDLE_UPGRADE.productId]);
+  assert.deepEqual(offersFor(owned(true)), [BUNDLE_UPGRADE.productId]);
+  assert.deepEqual(offersFor(owned(true), 'explanation'), [EXPLANATION_PRODUCT, BUNDLE_UPGRADE.productId]);
   assert.deepEqual(offersFor(owned(false, true)), [KIT.productId, BUNDLE_UPGRADE.productId]);
   assert.deepEqual(offersFor(owned(true, true)), [BUNDLE_UPGRADE.productId]);
+  // Asking for the bundle or the upgrade is never an offer of a kit, and never the upgrade without a kit.
+  assert.deepEqual(offersFor(owned(), COMPLETE_BUNDLE.productId), [COMPLETE_BUNDLE.productId]);
+  assert.deepEqual(offersFor(owned(), BUNDLE_UPGRADE.productId), [COMPLETE_BUNDLE.productId]);
   for (const credit of [false, true]) for (const explanation of [false, true]) assert.deepEqual(offersFor(owned(credit, explanation, true)), []);
+  // Every kit, against owning nothing, itself, another kit, or the bundle.
+  for (const kit of ALL_KIT_IDS) {
+    assert.deepEqual(offersFor(owned(), kit), [COMPLETE_BUNDLE.productId, kit]);
+    for (const other of ALL_KIT_IDS) {
+      const mine = owned(other === KIT.productId, other === EXPLANATION_PRODUCT, false, FILE_KIT_IDS.includes(other) ? [other] : []);
+      const offers = offersFor(mine, kit);
+      assert.deepEqual(offers, other === kit ? [BUNDLE_UPGRADE.productId] : [kit, BUNDLE_UPGRADE.productId], `${other} owner asking for ${kit}`);
+      assert.ok(!offers.includes(COMPLETE_BUNDLE.productId) && !offers.includes(other));
+    }
+    assert.deepEqual(offersFor(owned(false, false, true), kit), []);
+    assert.equal(ownsKit(owned(false, false, true), kit), true);
+  }
   assert.equal(kitPurchaseGate().ok, false);
 });
-test('either bundle product grants both kits; individual kits remain independent', () => {
-  for (const product of [COMPLETE_BUNDLE.productId, BUNDLE_UPGRADE.productId]) assert.deepEqual(ownershipFrom({ [product]: { productIdentifier: product, expirationDate: null } }), owned(true, true, true));
+test('either bundle product grants every kit; individual kits remain independent', () => {
+  for (const product of [COMPLETE_BUNDLE.productId, BUNDLE_UPGRADE.productId]) assert.deepEqual(ownershipFrom({ [product]: { productIdentifier: product, expirationDate: null } }), owned(true, true, true, [...FILE_KIT_IDS]));
   assert.deepEqual(ownershipFrom({ [KIT.productId]: { productIdentifier: KIT.productId } }), owned(true));
   assert.deepEqual(ownershipFrom({ [EXPLANATION_PRODUCT]: { productIdentifier: EXPLANATION_PRODUCT } }), owned(false, true));
+  for (const id of FILE_KIT_IDS) assert.deepEqual(ownershipFrom({ [id]: { productIdentifier: id } }), owned(false, false, false, [id]));
+  assert.deepEqual(ownershipFrom({ [FILE_KIT_IDS[0]]: { productIdentifier: FILE_KIT_IDS[0], expirationDate: '2027-01-01' } }), NO_OWNERSHIP);
   assert.deepEqual(ownershipFrom({ [COMPLETE_BUNDLE.productId]: { productIdentifier: KIT.productId } }), NO_OWNERSHIP);
 });
 const kinds = ['goodwill', 'debt-validation', 'settlement-terms', 'follow-up'];

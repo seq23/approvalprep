@@ -7,7 +7,6 @@ import { type } from '../../../src/theme';
 import { HONEST_LIMIT, REQUEST_LINE } from '../../../src/copy';
 import { isCreditLetter } from '../../../src/letters';
 import { situations, studioDraft } from '../../../src/studio';
-import { notSoldHere } from '../../../src/offers';
 import { savedLetters } from '../../../src/savedLetters';
 import { draftWriter } from '../../../src/letterQuestions';
 import type { SavedLetter } from '../../../src/letterStorage';
@@ -76,7 +75,6 @@ export default function Studio() {
   }
   const field = situation?.fields[step];
   const limit = situation ? <Text style={type.sub}>{isCreditLetter(studioKind(situation.id)) ? HONEST_LIMIT : REQUEST_LINE}</Text> : null;
-  const sold = draft ? draft.kitRoute.pathname !== '/letters/bundle' : true;
   return <Screen route="/letters/studio" label="Free Letter Studio" title={!situation ? 'What do you need to write?' : reading ? 'Your first-pass draft' : field!.label}>
     {!situation ? <>
       <Text style={type.body}>A first-pass letter to copy or share. Free every time, with no account. Your answers save on this phone as you type, and the draft is kept in My letters.</Text>
@@ -95,9 +93,8 @@ export default function Studio() {
         <Button label={`What the ${draft.kitName} adds ${showKit ? '▴' : '▾'}`} onPress={() => setShowKit(!showKit)} />
         {showKit ? <Sheet>
           <Text style={type.subhead}>{draft.kitName}</Text>
-          {sold ? null : <Text style={type.body}>{notSoldHere(draft.kitName)}</Text>}
           {draft.moments.map(m => <Text key={m.when} style={type.body}>{m.when}{'\n'}{m.items.join('\n')}</Text>)}
-          <Button label={sold ? `See the ${draft.kitName} ›` : 'See the Complete ApprovalPrep Bundle ›'} onPress={() => router.push('params' in draft.kitRoute ? { pathname: '/letters/unlock', params: draft.kitRoute.params } : '/letters/bundle')} />
+          <Button label={`See the ${draft.kitName} ›`} onPress={() => router.push(draft.kitRoute.pathname === '/letters/files' ? { pathname: '/letters/files', params: draft.kitRoute.params } : { pathname: '/letters/unlock', params: draft.kitRoute.params })} />
         </Sheet> : null}
         <Button label="Choose another situation" onPress={() => router.push('/letters/studio')} />
       </> : null}

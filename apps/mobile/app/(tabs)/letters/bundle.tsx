@@ -5,20 +5,20 @@ import { Button, Row, Screen, Sheet } from '../../../src/ui';
 import { type } from '../../../src/theme';
 import { HONEST_LIMIT } from '../../../src/copy';
 import { PREVIEW_ENABLED } from '../../../src/previewSamples';
-import { KIT_OFFERS, TRACKING_LINE, bundleFilesLine, bundleWebsiteKits, offerTitle } from '../../../src/offers';
-import { COMPLETE_BUNDLE, BUNDLE_UPGRADE, KIT, KIT_SALES_ENABLED } from '../../../src/kit';
-import { offersFor, otherKits, NO_OWNERSHIP, type BundleOwnership, type OfferId } from '../../../src/purchases/bundleOffers';
+import { KIT_OFFERS, KIT_ORDER, PRODUCTS, TRACKING_LINE, bundleFilesLine, bundleWebsiteKits, offerTitle, productName, productRoute } from '../../../src/offers';
+import { COMPLETE_BUNDLE, BUNDLE_UPGRADE, KIT_SALES_ENABLED } from '../../../src/kit';
+import { offersFor, otherKits, NO_OWNERSHIP, type BundleOwnership } from '../../../src/purchases/bundleOffers';
 import { bundleAccount, type BundlePrice } from '../../../src/purchases/bundleAccount';
 import { storePrices } from '../../../src/purchases/prices';
 import { restoreBundle } from '../../../src/purchases/bundleDelivery';
 import { bundleFile, installBundle, shareBundle } from '../../../src/purchases/bundleFiles';
-const nameOf = (id: OfferId) => id === COMPLETE_BUNDLE.productId ? 'Complete ApprovalPrep Bundle' : id === BUNDLE_UPGRADE.productId ? 'Complete Bundle upgrade' : id === KIT.productId ? 'Credit Letter Kit' : 'Letter of Explanation Kit';
 export default function Bundle() {
   const { kit } = useLocalSearchParams<{ kit?: string }>();
-  const requested = kit === 'letter-of-explanation-kit' ? 'explanation' : 'credit';
+  const requested = PRODUCTS.find(p => p.params.kit === kit)?.productId ?? 'credit';
   const [ownership, setOwnership] = useState<BundleOwnership>(NO_OWNERSHIP);
   const [prices, setPrices] = useState<BundlePrice[]>([]);
   const [mock, setMock] = useState(false);
+  const [preview, setPreview] = useState(false);
   const [local, setLocal] = useState(false);
   const [busy, setBusy] = useState(false);
   const [ready, setReady] = useState(false);
@@ -31,21 +31,30 @@ export default function Bundle() {
       if (active) setLocal(!!localFile);
       const account = await bundleAccount();
       const [owned, products] = await Promise.all([account.ownership(), storePrices()]);
-      if (active) { setOwnership(owned); setPrices(Object.entries(products).map(([id, price]) => ({ id, price }))); setMock(account.mock); setReady(true); }
+      if (active) { setOwnership(owned); setPrices(Object.entries(products).map(([id, price]) => ({ id, price }))); setMock(account.mock); setPreview(!!account.preview); setReady(true); }
     })().catch(() => { if (active) setMessage('The store could not be loaded. Your saved documents are still available. Try Restore again when online.'); });
     return () => { active = false; };
   }, []));
-  const offers = offersFor(local ? { creditKit: true, explanationKit: true, bundle: true } : ownership, requested);
+  const all = { creditKit: true, explanationKit: true, bundle: true };
+  const owned = local || ownership.bundle;
+  const offers = offersFor(local ? all : ownership, requested);
   const selected = offers.find(id => id === COMPLETE_BUNDLE.productId || id === BUNDLE_UPGRADE.productId);
   const price = prices.find(p => p.id === selected)?.price;
-  // Both kits are named here, whichever screen she came from, so neither looks like the only one.
-  const kits = otherKits(local ? { creditKit: true, explanationKit: true, bundle: true } : ownership);
+  // Every kit is named here, whichever screen she came from, so none looks like the only one.
+  const kits = otherKits(local ? all : ownership, KIT_ORDER);
+  const canBuy = (KIT_SALES_ENABLED && !mock) || preview;
   async function act(buy: boolean) {
     if (busy) return;
     setBusy(true); setMessage('');
     try {
       const account = await bundleAccount();
       if (buy && selected) await account.buy(selected);
+      if (account.preview) {
+        const now = await account.ownership();
+        setOwnership(now);
+        setMessage(now.bundle ? 'Preview: every kit is unlocked for this visit. Nothing was charged.' : 'This is a preview, so there are no purchases to restore here.');
+        return;
+      }
       // Straight after a purchase the store has already confirmed it; its own Restore is not run again.
       const restored = await restoreBundle(buy && selected ? { restore: account.ownership, userId: account.userId } : account, installBundle);
       setOwnership(await account.ownership()); setLocal(!!await bundleFile());
@@ -58,10 +67,10 @@ export default function Bundle() {
         : 'Your bundle could not be downloaded. Try Restore again. You do not need to buy it again.');
     } finally { setBusy(false); }
   }
-  return <Screen route="/letters/bundle" label="Complete ApprovalPrep Bundle" title={ownership.bundle || local ? 'Your Complete Bundle' : 'Both kits and the document library'}>
+  return <Screen route="/letters/bundle" label="Complete ApprovalPrep Bundle" title={owned ? 'Your Complete Bundle' : 'Every kit, paid once'}>
     <Text style={type.body}>Paid once. Templates you fill in and send yourself.</Text>
     <Sheet>
-      <Text style={type.subhead}>Both kits, to use in this app</Text>
+      <Text style={type.subhead}>The two letter kits, to use in this app</Text>
       {KIT_OFFERS.map(kit => <Text key={kit.id} style={type.body}>{kit.name}: {kit.letters.length} letters</Text>)}
       <Text style={type.body}>{TRACKING_LINE}</Text>
     </Sheet>
@@ -72,12 +81,15 @@ export default function Bundle() {
     </Sheet>
     <Text style={type.sub}>{HONEST_LIMIT}</Text>
     {local ? <Button primary label="Save or share documents ›" onPress={() => { void shareBundle().catch(() => setMessage('The documents could not be shared. Try Restore to download them again.')); }} /> : null}
-    {selected && !local ? <>
-      <Button primary disabled={busy || !ready || !price || mock || !KIT_SALES_ENABLED} label={price ? `Get ${selected === BUNDLE_UPGRADE.productId ? 'the upgrade' : 'the bundle'}, ${price} once` : 'Store price unavailable'} onPress={() => void act(true)} />
-      {!mock && KIT_SALES_ENABLED ? null : <Text testID="buying-off" style={type.sub}>{PREVIEW_ENABLED ? 'This is a preview, so buying is switched off and the button above does nothing. The price is shown so you can see it.' : 'Buying is not available right now.'}</Text>}
+    {/* In the preview the bundle's files are opened kit by kit, from each kit's own screen. */}
+    {preview && ownership.bundle ? PRODUCTS.filter(p => p.productId !== COMPLETE_BUNDLE.productId).map(p => <Row key={p.sku} title={`${p.name}: your files ›`} sub="Open the PDF guide and the Word file" onPress={() => router.push({ pathname: productRoute(p.productId).pathname, params: p.params })} />) : null}
+    {selected && !owned ? <>
+      <Button primary disabled={busy || !ready || !price || !canBuy} label={price ? `Get ${selected === BUNDLE_UPGRADE.productId ? 'the upgrade' : 'the bundle'}, ${price} once` : 'Store price unavailable'} onPress={() => void act(true)} />
+      {preview ? <Text testID="buying-pretend" style={type.sub}>This is a preview: buying here is pretend, nothing is charged, and it lasts until you close the page.</Text>
+        : canBuy ? null : <Text testID="buying-off" style={type.sub}>{PREVIEW_ENABLED ? 'This is a preview, so buying is switched off and the button above does nothing. The price is shown so you can see it.' : 'Buying is not available right now.'}</Text>}
     </> : null}
     {kits.length ? <Text style={type.sub}>Other options</Text> : null}
-    {kits.map(id => <Row key={id} title={offerTitle(nameOf(id), prices.find(p => p.id === id)?.price)} sub={KIT_OFFERS.find(kit => kit.productId === id)?.what} onPress={() => router.push({ pathname: '/letters/unlock', params: { kit: id === KIT.productId ? 'credit-letter-kit' : 'letter-of-explanation-kit' } })} />)}
+    {kits.map(id => <Row key={id} title={offerTitle(productName(id), prices.find(p => p.id === id)?.price)} sub={PRODUCTS.find(p => p.productId === id)?.what} onPress={() => router.push(productRoute(id))} />)}
     <Button quiet label={busy ? 'Checking…' : 'Restore purchase'} disabled={busy} onPress={() => void act(false)} />
     {message ? <Text accessibilityRole="alert" style={type.sub}>{message}</Text> : null}
     <Button quiet label="Terms ›" onPress={() => void Linking.openURL('https://approvalprep.com/terms/')} />

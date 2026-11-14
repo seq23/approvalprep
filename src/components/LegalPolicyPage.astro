@@ -114,18 +114,67 @@ const legalPolicies = {
       "ApprovalPrep should not claim live rankings, citations, or telemetry that has not been observed."
     ]
   },
+  // The public version of the defense record in the spry brain ("ApprovalPrep: how we stay outside
+  // credit-repair law"), her ask 13 Nov 2026: answer first, the law as the reader's own rights, our
+  // safeguards, the free path, then not legal advice. The internal limits and notes stay in the brain.
   "/credit-repair-disclaimer": {
-    summary: "ApprovalPrep is not a credit repair company and does not sell credit repair services. Credit-related tools are self-service templates and preparation materials only.",
-    covers: [
-      "Users write, review, and send their own letters and supporting materials.",
-      "ApprovalPrep does not contact credit bureaus, creditors, collectors, furnishers, lenders, landlords, or agencies for users.",
-      "ApprovalPrep does not promise deletion, score increases, approval, funding, or acceptance."
+    effectiveDate: "November 13, 2026",
+    summary: "ApprovalPrep is not a credit repair company. We sell self-help dispute letter templates: you fill in your own true facts, then sign and mail every letter yourself.",
+    welcome: "Looking for a cheaper, easier, fairer alternative to a credit repair company? You’re in the right place: do it yourself with our letters, paid once, no monthly fee.",
+    sections: [
+      {
+        heading: "The law on credit repair companies, in plain words",
+        paragraphs: [
+          "The federal Credit Repair Organizations Act (15 U.S.C. 1679 to 1679j) covers anyone who, for payment, performs a service to improve your credit record, history or rating. If you ever hire a credit repair company, these are your rights:"
+        ],
+        items: [
+          "It may not charge you anything until it has fully done the work it promised.",
+          "It must give you a written contract that spells out the services, the total cost, how long it will take and any result it guarantees.",
+          "You have three business days to cancel without paying anything, and it must give you a cancellation form.",
+          "Before you sign, it must give you a written statement of your rights, including that you can dispute errors yourself for free.",
+          "It may not lie about what it can do. No one can legally remove accurate, current information from your credit report."
+        ],
+        links: [
+          { href: "https://consumer.ftc.gov/articles/fixing-your-credit-faqs", label: "FTC: Fixing your credit FAQs" },
+          { href: "https://www.consumerfinance.gov/ask-cfpb/what-is-a-credit-repair-company-en-1343/", label: "CFPB: What is a credit repair company?" },
+          { href: "https://www.consumerfinance.gov/ask-cfpb/what-are-my-rights-if-i-hire-a-credit-repair-company-en-1345/", label: "CFPB: Your rights if you hire a credit repair company" }
+        ]
+      },
+      {
+        heading: "Why ApprovalPrep is a product, not a service",
+        paragraphs: ["You buy a finished set of templates and get it at once. We do not do the work for you. These are the safeguards we keep:"],
+        items: [
+          "We never act for you. We never mail anything, contact a credit bureau, creditor, landlord, lender or employer, read your credit report, or follow up on a dispute.",
+          "We never promise a result. We do not say we will raise a score, remove an item, fix or repair your credit, or get you approved.",
+          "Paid once, delivered at once. You pay one price and get the files right after paying, so you never pay ahead for future work.",
+          "No monthly fee and no per-round, per-letter or per-bureau charge. One kit covers every later letter, and coming back is never a new charge.",
+          "In the phone app, the mailing date and the day-30 reminder live only on your own phone. We never see them or act on them.",
+          "The free path comes first: a free credit bureau dispute letter and a free Letter Studio draft.",
+          "Accurate information stays on a report. A letter is a request, not a promise.",
+          "We hold no customer documents. We do not keep your answers, finished letters or uploads; only payment and download records.",
+          "True facts only. The templates are for your real facts, and we never make fake documents."
+        ]
+      },
+      {
+        heading: "Disputing an error is free",
+        paragraphs: [
+          "You can dispute a mistake on your credit report yourself, at no cost, directly with the credit bureaus and with the business that reported it. The bureau must look into it. You can get your free credit reports at AnnualCreditReport.com."
+        ],
+        links: [
+          { href: "https://www.consumerfinance.gov/ask-cfpb/how-do-i-dispute-an-error-on-my-credit-report-en-314/", label: "CFPB: How to dispute an error on your credit report" },
+          { href: "https://www.annualcreditreport.com/", label: "AnnualCreditReport.com" },
+          { href: "/letter-writing-studio/", label: "Draft a dispute letter free in the Letter Studio" }
+        ]
+      },
+      {
+        heading: "Not legal advice",
+        paragraphs: [
+          "This page is general information, not legal or financial advice. Self-help templates. Not legal or financial advice. We do not contact bureaus or creditors for you. Questions: info@approvalprep.com."
+        ]
+      }
     ],
-    limits: [
-      "Credit disputes and deadlines may involve legal rights or regulated procedures; users may need qualified help.",
-      "Users should only dispute information they believe is inaccurate, incomplete, unverifiable, or otherwise appropriate to question.",
-      "No template should be used to make false statements or misrepresent facts."
-    ]
+    covers: [],
+    limits: []
   },
   "/not-a-credit-repair-company": {
     summary: "ApprovalPrep does not perform credit repair. It provides self-service organization tools for users who choose to prepare and send their own materials.",
@@ -152,7 +201,7 @@ const policy = legalPolicies[route.path] || {
   <div class="shell legal-policy-layout">
     <aside class="legal-policy-meta card">
       <p class="eyebrow">Policy page</p>
-      <p><strong>Effective:</strong> {effectiveDate}</p>
+      <p><strong>Effective:</strong> {policy.effectiveDate || effectiveDate}</p>
       {/*
         email_off / email_on are Cloudflare's documented opt-out from Email Address Obfuscation.
         Without them the zone rewrites every address on this page into a link to
@@ -168,7 +217,16 @@ const policy = legalPolicies[route.path] || {
       <p class="eyebrow">Plain-English summary</p>
       <h2>{route.title}</h2>
       <p class="lead">{policy.summary}</p>
-      <div class="legal-policy-grid">
+      {policy.welcome && <p class="supporting-copy ap-alt-line"><strong>{policy.welcome}</strong></p>}
+      {(policy.sections || []).map((section) => (
+        <section class="card legal-policy-section">
+          <h3>{section.heading}</h3>
+          <!--email_off-->{(section.paragraphs || []).map((text) => <p>{text}</p>)}<!--email_on-->
+          {section.items?.length > 0 && <ul>{section.items.map((item) => <li>{item}</li>)}</ul>}
+          {section.links?.length > 0 && <ul class="compact-list">{section.links.map((link) => <li><a href={link.href} rel={link.href.startsWith("http") ? "noopener" : undefined}>{link.label}</a></li>)}</ul>}
+        </section>
+      ))}
+      {(policy.covers.length > 0 || policy.limits.length > 0) && <div class="legal-policy-grid">
         <div class="card">
           <h3>What this covers</h3>
           <ul><!--email_off-->{policy.covers.map((item) => <li>{item}</li>)}<!--email_on--></ul>
@@ -177,13 +235,14 @@ const policy = legalPolicies[route.path] || {
           <h3>Important limits</h3>
           <ul><!--email_off-->{policy.limits.map((item) => <li>{item}</li>)}<!--email_on--></ul>
         </div>
-      </div>
+      </div>}
       <DataPrivacyNotice />
       <BoundaryNotice />
       <div class="legal-links">
         <a href="/privacy/">Privacy</a>
         <a href="/terms/">Terms</a>
         <a href="/disclaimer/">Disclaimer</a>
+        <a href="/credit-repair-disclaimer/">Why we’re not a credit repair company</a>
         <a href="/refund-policy/">Refund policy</a>
         <a href="/contact/">Contact</a>
       </div>
