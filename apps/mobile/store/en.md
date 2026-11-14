@@ -1,6 +1,6 @@
-# ApprovalPrep: Dispute Letters (store description draft)
+# ApprovalPrep: Credit Disputes (store description draft)
 
-Subtitle: DIY credit repair alternative. ApprovalPrep is not a credit repair company: you write and send the letters yourself.
+Subtitle: Skip the credit repair company. ApprovalPrep is not a credit repair company: you write and send the letters yourself.
 
 Write the letters a credit repair company would send, and send them yourself.
 
