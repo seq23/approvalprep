@@ -27,7 +27,6 @@ export default function Questions() {
   const [attempt, setAttempt] = useState(0);
   const [loadError, setLoadError] = useState(false);
   const [message, setMessage] = useState('Opening your draft…');
-  const [saving, setSaving] = useState(false);
   const [failed, setFailed] = useState(false);
   // undefined = still looking on the phone; null = this kit letter has not been delivered.
   const [paid, setPaid] = useState<KitLetter | null | undefined>(undefined);
@@ -75,18 +74,19 @@ export default function Questions() {
   const answer = (name: string, value: string) => persist({ ...latest.current!, answers: { ...latest.current!.answers, [name]: value } });
   function persist(next: SavedLetter) {
     latest.current = next;
-    setLetter(next); setSaving(true); setFailed(false); setMessage('Saving…');
+    setLetter(next); setFailed(false); setMessage('Saving…');
     const version = ++revision.current;
     const saved = write.current!(next);
     pending.current = saved; lastSave = saved;
     saved.then(() => {
-      if (version === revision.current) { setSaving(false); setStored(true); setMessage('Saved on this phone.'); }
+      if (version === revision.current) { setStored(true); setMessage('Saved on this phone.'); }
     }).catch(() => {
-      if (version === revision.current) { setSaving(false); setFailed(true); setMessage('Your latest answers could not be saved. Try saving again before continuing.'); }
+      if (version === revision.current) { setFailed(true); setMessage('Your latest answers could not be saved. Try saving again before continuing.'); }
     });
   }
   // The next screen opens only after the last answer is on the phone, so it reads what she just typed.
-  // A failed save keeps her here, with "Try saving again".
+  // A failed save keeps her here, with "Try saving again". Next stays tappable while a save runs (it
+  // waits for it): disabling it on each key swallowed a quick tap and redrew the screen on every key.
   const after = (then: () => void) => { pending.current.then(then, () => {}); };
   if (loadError) return <Screen route="/letters/[kind]" label="Write a letter" title="Your draft could not be opened">
     <Text accessibilityRole="alert" style={type.sub}>{message}</Text>
@@ -115,8 +115,8 @@ export default function Questions() {
       {free && question.fields.length === 0 ? (bureaus as { id: string; name: string }[]).map(bureau => <Row key={bureau.id} title={bureau.name} selected={letter.answers.bureau === bureau.id} onPress={() => answer('bureau', bureau.id)} />) : question.fields.map(field => <Field key={field.name} label={field.label} multiline={field.multiline} kind={'kind' in field && field.kind === 'ssn4' ? 'ssn4' : 'text'} value={letter.answers[field.name] ?? ''} onChangeText={value => answer(field.name, value)} />)}
       <Text style={type.sub}>You can leave a blank. It will appear in brackets for you to fill before mailing.</Text>
       {failed ? <Button label="Try saving again" onPress={() => persist(latest.current!)} /> : null}
-      {editing ? <Button primary disabled={saving || failed} label="Save and read my draft ›" onPress={() => after(() => router.back())} />
-        : <Button primary disabled={saving || failed} label={last ? 'Read my draft ›' : 'Next question ›'} onPress={() => last ? (persist(latest.current!), after(() => router.push({ pathname: '/letters/draft', params: { id: draftId.current } }))) : go(step + 1)} />}
+      {editing ? <Button primary disabled={failed} label="Save and read my draft ›" onPress={() => after(() => router.back())} />
+        : <Button primary disabled={failed} label={last ? 'Read my draft ›' : 'Next question ›'} onPress={() => last ? (persist(latest.current!), after(() => router.push({ pathname: '/letters/draft', params: { id: draftId.current } }))) : go(step + 1)} />}
       {step > 0 && !editing ? <Button label="← Previous question" onPress={() => router.back()} /> : null}
       {resumed === '1' && step === 0 && stored ? <Button label="Start a blank one instead" onPress={() => router.replace({ pathname: '/letters/[kind]', params: { kind, id: newId() } })} /> : null}
     </> : null}
