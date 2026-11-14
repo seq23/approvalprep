@@ -1,3 +1,4 @@
+import { fixture, purchase, purchases, rcFetch } from './revenuecatV2';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { DatabaseSync } from 'node:sqlite';
@@ -39,25 +40,25 @@ test('download door refuses unknown, refunded, sandbox and unentitled purchases 
   const original = globalThis.fetch;
   const env = { PRODUCTS_DB: rateDb(), APPROVALPREP_REVENUECAT_SECRET: 'fake-server-test-key', DOWNLOAD_SIGNING_SECRET: 'fake-test-signing-key', PRODUCT_ASSETS_R2: { get: async (key: string) => { assert.equal(key, 'app-kits/credit-letter-kit.json'); return { body: 'FAKE TEST KIT' }; } } };
   const request = new Request('https://approvalprep.com/api/app-unlock', { method: 'POST', headers: { Authorization: 'Bearer $RCAnonymousID:0123456789abcdef0123456789abcdef' } });
-  const subscriber = { entitlements: { [KIT.productId]: { product_identifier: KIT.productId, expires_date: null } }, non_subscriptions: { [KIT.productId]: [{ is_sandbox: false }] } };
-  let data: any = {};
+  const subscriber = purchases(KIT.productId);
+  let data: any = [];
   let status = 200;
-  globalThis.fetch = async () => new Response(JSON.stringify(data), { status });
+  globalThis.fetch = rcFetch(() => data, () => status) as typeof fetch;
   try {
     assert.equal((await onRequestPost({ request, env: {} })).status, 503);
-    for (const value of [{}, { subscriber: { ...subscriber, entitlements: {} } }, { subscriber: { ...subscriber, non_subscriptions: { [KIT.productId]: [{ is_sandbox: true }] } } }, { subscriber: { ...subscriber, non_subscriptions: { [KIT.productId]: [{ is_sandbox: false, refunded_at: '2026-11-11' }] } } }]) {
+    for (const value of [[], 'malformed', purchases('ap_explanation_kit'), purchases(KIT.productId, { environment: 'sandbox' }), purchases(KIT.productId, { status: 'refunded' }), purchases(KIT.productId, { store: 'test_store' })]) {
       data = value;
       const refused = await onRequestPost({ request, env });
       assert.equal(refused.status, 403); assert.deepEqual(await refused.json(), { error: 'KIT_NOT_AVAILABLE' });
     }
     // The store-review switch opens a sandbox purchase, never a refunded one.
-    data = { subscriber: { ...subscriber, non_subscriptions: { [KIT.productId]: [{ is_sandbox: true }] } } };
+    data = purchases(KIT.productId, { environment: 'sandbox' });
     assert.equal((await onRequestPost({ request, env: { ...env, APPROVALPREP_ACCEPT_SANDBOX_PURCHASES: '1' } })).status, 200);
-    data = { subscriber: { ...subscriber, non_subscriptions: { [KIT.productId]: [{ is_sandbox: true, refunded_at: '2026-11-11' }] } } };
+    data = purchases(KIT.productId, { environment: 'sandbox', status: 'refunded' });
     assert.equal((await onRequestPost({ request, env: { ...env, APPROVALPREP_ACCEPT_SANDBOX_PURCHASES: '1' } })).status, 403);
     status = 404;
     assert.equal((await onRequestPost({ request, env })).status, 403);
-    status = 200; data = { subscriber };
+    status = 200; data = subscriber;
     const response = await onRequestPost({ request, env });
     assert.equal(response.status, 200);
     const { url } = await response.json() as { url: string };
@@ -116,7 +117,7 @@ test('confirmed Restore downloads a complete kit and saves it for offline use', 
   const db = rateDb(); t.after(() => db.raw.close());
   const original = globalThis.fetch; t.after(() => { globalThis.fetch = original; });
   let calls = 0;
-  globalThis.fetch = async () => { calls++; return new Response('{}', { status: 404 }); };
+  globalThis.fetch = async (input: unknown) => { if (!String(input).includes('/products?')) calls++; return new Response('{}', { status: 404 }); }; // one buyer lookup per attempt
   const env = { PRODUCTS_DB: db, APPROVALPREP_REVENUECAT_SECRET: 'fake', DOWNLOAD_SIGNING_SECRET: 'fake', PRODUCT_ASSETS_R2: {} };
   const request = (ip: string, n: number) => new Request('https://approvalprep.com/api/app-unlock', {
     method: 'POST', headers: { 'cf-connecting-ip': ip, Authorization: `Bearer $RCAnonymousID:${n.toString(16).padStart(32, '0')}` },
@@ -146,4 +147,24 @@ test('a purchase the store just confirmed is delivered without running the store
   // A plain Restore still asks the store.
   assert.equal(await restoreKit(provider, async () => true), false);
   assert.equal(restores, 1);
+});
+
+test('real RevenueCat replies: our rejected key is a named stop, a real customer with no purchase is refused, and an owned kit unlocks', async () => {
+  const original = globalThis.fetch;
+  const env = { PRODUCTS_DB: rateDb(), APPROVALPREP_REVENUECAT_SECRET: 'fake-server-test-key', DOWNLOAD_SIGNING_SECRET: 'fake-test-signing-key', PRODUCT_ASSETS_R2: {} };
+  const request = () => new Request('https://approvalprep.com/api/app-unlock', { method: 'POST', headers: { Authorization: 'Bearer $RCAnonymousID:0123456789abcdef0123456789abcdef' } });
+  const rejected = fixture('v1-subscriber-v2-key-rejected'), none = fixture('v2-purchases-no-purchase');
+  const error = console.error; const logged: string[] = []; console.error = (line: string) => { logged.push(line); };
+  try {
+    globalThis.fetch = (async () => Response.json(rejected.body, { status: rejected.status })) as typeof fetch;
+    const stopped = await onRequestPost({ request: request(), env });
+    assert.equal(stopped.status, 503);
+    assert.deepEqual(await stopped.json(), { stop: 'REVENUECAT_KEY_REJECTED' });
+    assert.ok(logged.some(line => line.includes('REVENUECAT_KEY_REJECTED')));
+    assert.deepEqual(none.body.items, []);
+    globalThis.fetch = rcFetch(() => none.body.items, () => none.status) as typeof fetch;
+    assert.equal((await onRequestPost({ request: request(), env })).status, 403);
+    globalThis.fetch = rcFetch(() => [purchase(KIT.productId)]) as typeof fetch;
+    assert.equal((await onRequestPost({ request: request(), env })).status, 200);
+  } finally { globalThis.fetch = original; console.error = error; }
 });

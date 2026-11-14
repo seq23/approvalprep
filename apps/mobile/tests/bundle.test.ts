@@ -1,3 +1,4 @@
+import { purchases, rcFetch } from './revenuecatV2';
 import { test } from 'node:test';
 import { DatabaseSync } from 'node:sqlite';
 import assert from 'node:assert/strict';
@@ -78,7 +79,7 @@ function rateDb() {
   return { raw, prepare: (sql: string) => ({ ...stmt(sql), bind: (...args: any[]) => stmt(sql, args) }) };
 }
 const request = () => new Request('https://approvalprep.com/api/app-bundle', { method: 'POST', headers: { authorization: `Bearer $RCAnonymousID:${'a'.repeat(32)}` } });
-const subscriber = (product: string | string[] = COMPLETE_BUNDLE.productId, sandbox = false) => { const ids = ([] as string[]).concat(product); return { entitlements: Object.fromEntries(ids.map(id => [id, { product_identifier: id, expires_date: null }])), non_subscriptions: Object.fromEntries(ids.map(id => [id, [{ is_sandbox: sandbox }]])) }; };
+const subscriber = (product: string | string[] = COMPLETE_BUNDLE.productId, sandbox = false) => purchases(product, sandbox ? { environment: 'sandbox' } : {});
 
 test('restore installs complete kits only after verified delivery, rejecting foreign URLs and malformed kits', async t => {
   let calls = 0, installs = 0;
@@ -107,12 +108,12 @@ test('restore installs complete kits only after verified delivery, rejecting for
 test('server verifies live non-refunded purchases before reading assets; signed downloads expire and reject tampering', async t => {
   const reads: string[] = [];
   let info: object = subscriber();
-  t.mock.method(globalThis, 'fetch', async () => Response.json({ subscriber: info }));
+  t.mock.method(globalThis, 'fetch', rcFetch(() => info));
   const env = { PRODUCTS_DB: rateDb(), APPROVALPREP_REVENUECAT_SECRET: 'fake-rc', DOWNLOAD_SIGNING_SECRET: 'fake-signing', PRODUCT_ASSETS_R2: {
     get: async (key: string) => { reads.push(key); return key.endsWith('.zip') ? { body: 'FAKE-ZIP' } : { json: async () => fakeKits()[key.includes('credit-letter') ? 0 : 1] }; },
     head: async () => ({ size: 123 }),
   } };
-  for (const refused of [subscriber(KIT.productId), subscriber(UPGRADE_IDS[1]), subscriber([KIT.productId, 'ap_bundle_upgrade_1999']), subscriber(COMPLETE_BUNDLE.productId, true), { ...subscriber(), non_subscriptions: {} }, { ...subscriber(), non_subscriptions: { [COMPLETE_BUNDLE.productId]: [{ is_sandbox: false, refunded_at: '2026-11-11' }] } }]) {
+  for (const refused of [subscriber(KIT.productId), subscriber(UPGRADE_IDS[1]), subscriber([KIT.productId, 'ap_bundle_upgrade_1999']), subscriber(COMPLETE_BUNDLE.productId, true), [], purchases(COMPLETE_BUNDLE.productId, { status: 'refunded' }), purchases(COMPLETE_BUNDLE.productId, { store: 'promotional' }), purchases(COMPLETE_BUNDLE.productId, { store: 'test_store' })]) {
     info = refused;
     assert.equal((await onRequestPost({ request: request(), env })).status, 403);
   }
@@ -137,7 +138,7 @@ test('server verifies live non-refunded purchases before reading assets; signed 
 
 
 test('bundle delivery requires an existing nonempty archive without custom metadata', async t => {
-  t.mock.method(globalThis, 'fetch', async () => Response.json({ subscriber: subscriber() }));
+  t.mock.method(globalThis, 'fetch', rcFetch(() => subscriber()));
   let archive: { size: number } | null = null;
   const env = { PRODUCTS_DB: rateDb(), APPROVALPREP_REVENUECAT_SECRET: 'fake', DOWNLOAD_SIGNING_SECRET: 'fake', PRODUCT_ASSETS_R2: {
     get: async (key: string) => ({ json: async () => fakeKits()[key.includes('credit-letter') ? 0 : 1] }),
@@ -161,7 +162,7 @@ test('the saved bundle is found again after the phone moves the app folder, and 
 
 test('bundle door: attempts are capped per caller before RevenueCat, and sandbox purchases open only with the review switch', async t => {
   let calls = 0; let info: object = subscriber(COMPLETE_BUNDLE.productId, true);
-  t.mock.method(globalThis, 'fetch', async () => { calls++; return Response.json({ subscriber: info }); });
+  t.mock.method(globalThis, 'fetch', async (input: unknown) => { calls++; return rcFetch(() => info)(input); });
   const assets = { get: async (key: string) => ({ json: async () => fakeKits()[key.includes('credit-letter') ? 0 : 1] }), head: async () => ({ size: 9 }) };
   const base = { APPROVALPREP_REVENUECAT_SECRET: 'fake', DOWNLOAD_SIGNING_SECRET: 'fake', PRODUCT_ASSETS_R2: assets };
   // No counter to count on: refuse rather than run uncapped.
@@ -174,7 +175,7 @@ test('bundle door: attempts are capped per caller before RevenueCat, and sandbox
   assert.equal((await onRequestPost({ request: request(), env: { ...env, APPROVALPREP_ACCEPT_SANDBOX_PURCHASES: 'true' } })).status, 403);
   const review = { ...env, APPROVALPREP_ACCEPT_SANDBOX_PURCHASES: '1' };
   assert.equal((await onRequestPost({ request: request(), env: review })).status, 200);
-  info = { ...subscriber(), non_subscriptions: { [COMPLETE_BUNDLE.productId]: [{ is_sandbox: true, refunded_at: '2026-11-11' }] } };
+  info = purchases(COMPLETE_BUNDLE.productId, { environment: 'sandbox', status: 'refunded' });
   assert.equal((await onRequestPost({ request: request(), env: review })).status, 403);
   // 4 attempts so far in this window; the 121st is refused without asking RevenueCat.
   for (let n = 4; n < 120; n++) await onRequestPost({ request: request(), env });

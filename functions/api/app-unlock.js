@@ -1,5 +1,6 @@
 import { APP_KITS, appJson, signedKitUrl } from '../_runtime/app-kit.js';
 import { acceptsSandbox, ownsProduct } from '../_runtime/app-bundle.js';
+import { revenueCatPurchases } from '../_runtime/revenuecat.js';
 import { clientIp, sha256, withinLimit } from '../_runtime/rate-limit.js';
 // Unknown IDs, missing purchases, and upstream errors have the same public response.
 export async function onRequestPost({ request, env }) {
@@ -16,10 +17,9 @@ export async function onRequestPost({ request, env }) {
     if (!await withinLimit(env.PRODUCTS_DB, `app-unlock:ip:${await sha256(clientIp(request))}`, 10, 60_000)) {
       return appJson({ error: 'TOO_MANY_REQUESTS' }, 429);
     }
-    const response = await fetch(`https://api.revenuecat.com/v1/subscribers/${encodeURIComponent(id)}`, { headers: { Authorization: `Bearer ${env.APPROVALPREP_REVENUECAT_SECRET}` }, signal: AbortSignal.timeout(10000) });
-    if (!response.ok) return refused();
-    const { subscriber } = await response.json();
-    if (!ownsProduct(subscriber, product, acceptsSandbox(env))) return refused();
+    const rc = await revenueCatPurchases(id, env.APPROVALPREP_REVENUECAT_SECRET);
+    if (rc.stop) return appJson({ stop: rc.stop }, 503);
+    if (!ownsProduct(rc.purchases, product, acceptsSandbox(env))) return refused();
     return appJson({ url: await signedKitUrl(new URL(request.url).origin, env.DOWNLOAD_SIGNING_SECRET, Date.now(), kit) });
   } catch { return refused(); }
 }

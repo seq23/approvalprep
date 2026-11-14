@@ -1,3 +1,4 @@
+import { purchases, rcFetch } from './revenuecatV2';
 // Her ruling 13 Nov 2026, "Exact mirror": each in-app kit unlocks the same PDF and Word file the
 // website delivers, only after the store purchase is checked again on the server.
 import { test } from 'node:test';
@@ -23,7 +24,7 @@ function rateDb() {
   return { prepare: (sql: string) => ({ ...stmt(sql), bind: (...args: any[]) => stmt(sql, args) }) };
 }
 const request = (kit: string) => new Request(`https://approvalprep.com/api/app-files?kit=${kit}`, { method: 'POST', headers: { authorization: `Bearer $RCAnonymousID:${'b'.repeat(32)}` } });
-const subscriber = (product: string | string[], extra: object = {}) => { const ids = ([] as string[]).concat(product); return { entitlements: Object.fromEntries(ids.map(id => [id, { product_identifier: id, expires_date: null }])), non_subscriptions: Object.fromEntries(ids.map(id => [id, [{ is_sandbox: false, ...extra }]])) }; };
+const subscriber = (product: string | string[], extra: object = {}) => purchases(product, extra);
 
 test('the server and the app name the same kit for every product, and each is the website kit\'s own files', () => {
   assert.deepEqual(Object.fromEntries(Object.entries(APP_FILE_KITS).map(([sku, id]) => [id, sku])), SITE_SKU);
@@ -32,17 +33,17 @@ test('the server and the app name the same kit for every product, and each is th
 
 test('file door: refuses anyone who has not bought this kit or the bundle, before reading a file; serves the website\'s own objects on signed, expiring links', async t => {
   const reads: string[] = [];
-  let info: object = {};
+  let info: unknown = [];
   let heads: Record<string, { size: number } | null> = {};
-  t.mock.method(globalThis, 'fetch', async () => Response.json({ subscriber: info }));
+  t.mock.method(globalThis, 'fetch', rcFetch(() => info));
   const env = { PRODUCTS_DB: rateDb(), APPROVALPREP_REVENUECAT_SECRET: 'fake-rc', DOWNLOAD_SIGNING_SECRET: 'fake-signing', PRODUCT_ASSETS_R2: {
     head: async (key: string) => { reads.push(key); return key in heads ? heads[key] : { size: 10 }; },
     get: async (key: string) => { reads.push(key); return { body: `FAKE ${key}` }; },
   } };
   const kit = FILE_KITS[1];
   // Not bought, another kit bought, sandbox, refunded, expiring, unknown kit: one refusal, nothing read.
-  for (const [who, sku] of [[{}, kit.sku], [subscriber(FILE_KITS[0].productId), kit.sku], [subscriber(KIT.productId), kit.sku], [subscriber(kit.productId, { is_sandbox: true }), kit.sku],
-    [subscriber(kit.productId, { refunded_at: '2026-11-12' }), kit.sku], [{ ...subscriber(kit.productId), entitlements: { [kit.productId]: { product_identifier: kit.productId, expires_date: '2027-01-01' } } }, kit.sku],
+  for (const [who, sku] of [[[], kit.sku], [subscriber(FILE_KITS[0].productId), kit.sku], [subscriber(KIT.productId), kit.sku], [subscriber(kit.productId, { environment: 'sandbox' }), kit.sku],
+    [subscriber(kit.productId, { status: 'refunded' }), kit.sku], [subscriber(kit.productId, { store: 'promotional' }), kit.sku],
     [subscriber(kit.productId), 'products/../secret'], [subscriber(kit.productId), 'free-preview']] as const) {
     info = who;
     const refused = await onRequestPost({ request: request(sku), env });

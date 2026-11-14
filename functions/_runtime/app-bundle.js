@@ -4,19 +4,19 @@ export const bundleJson = (body, status = 200) => new Response(JSON.stringify(bo
 // server variable APPROVALPREP_ACCEPT_SANDBOX_PURCHASES is exactly "1" (set it for a store review,
 // remove it after); real customers' purchases are never sandbox ones.
 export const acceptsSandbox = env => env?.APPROVALPREP_ACCEPT_SANDBOX_PURCHASES === '1';
-export function ownsProduct(subscriber, product, sandbox = false) {
-  const entitlement = subscriber?.entitlements?.[product];
-  const transactions = subscriber?.non_subscriptions?.[product];
-  return entitlement?.product_identifier === product && entitlement.expires_date === null
-    && Array.isArray(transactions) && transactions.some(t => (t.is_sandbox === false || (sandbox && t.is_sandbox === true)) && !t.refunded_at);
+/** `purchases` comes from revenueCatPurchases (RevenueCat v2): an owned App Store or Google Play purchase
+ * of this product. Promotional grants are not purchases; Test Store and refunded ones never count. */
+export function ownsProduct(purchases, product, sandbox = false) {
+  return Array.isArray(purchases) && purchases.some(p => p.product === product && p.status === 'owned'
+    && (p.store === 'app_store' || p.store === 'play_store') && (p.environment === 'production' || (sandbox && p.environment === 'sandbox')));
 }
 // The same rule as the app (src/lib/appUpgrade.mjs): the bundle itself, an upgrade at least as high
 // as her kits call for, or kits that already add up to the bundle price. Only live, non-refunded
 // store purchases count.
-export const ownsBundle = (subscriber, sandbox = false) => bundleUnlocked({
-  bundle: ownsProduct(subscriber, BUNDLE_PRODUCT, sandbox),
-  kits: Object.keys(KIT_PRICES).filter(id => ownsProduct(subscriber, id, sandbox)),
-  upgrades: UPGRADE_IDS.filter(id => ownsProduct(subscriber, id, sandbox)),
+export const ownsBundle = (purchases, sandbox = false) => bundleUnlocked({
+  bundle: ownsProduct(purchases, BUNDLE_PRODUCT, sandbox),
+  kits: Object.keys(KIT_PRICES).filter(id => ownsProduct(purchases, id, sandbox)),
+  upgrades: UPGRADE_IDS.filter(id => ownsProduct(purchases, id, sandbox)),
 });
 async function key(secret) { return crypto.subtle.importKey('raw', new TextEncoder().encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign', 'verify']); }
 export async function bundleUrl(origin, secret, now = Date.now()) {

@@ -1,3 +1,4 @@
+import { purchases, rcFetch } from './revenuecatV2';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { DatabaseSync } from 'node:sqlite';
@@ -77,7 +78,7 @@ test('server checks the selected entitlement and signatures cannot switch kits',
   const request = (kit: string) => new Request(`https://approvalprep.com/api/app-unlock?kit=${kit}`, { method: 'POST', headers: { Authorization: 'Bearer $RCAnonymousID:0123456789abcdef0123456789abcdef' } });
   try {
     for (const product of [KIT.productId, EXPLANATION_KIT.productId]) {
-      globalThis.fetch = async () => new Response(JSON.stringify({ subscriber: { entitlements: { [product]: { product_identifier: product, expires_date: null } }, non_subscriptions: { [product]: [{ is_sandbox: false }] } } }));
+      globalThis.fetch = rcFetch(() => purchases(product)) as typeof fetch;
       assert.equal((await onRequestPost({ request: request(product === KIT.productId ? KIT_ID : EXPLANATION_KIT_ID), env })).status, 200);
       assert.equal((await onRequestPost({ request: request(product === KIT.productId ? EXPLANATION_KIT_ID : KIT_ID), env })).status, 403);
     }
