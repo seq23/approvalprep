@@ -20,7 +20,8 @@ function mountMore(unlock: (link: string) => Promise<unknown>, lookup: (email: s
       useMemo: (make: () => unknown) => make(),
     };
     if (name === 'react-native') return { Linking: {}, Text: 'Text', View: 'View' };
-    if (name.endsWith('/ui')) return { Button: 'Button', Field: 'Field', Row: 'Row', Screen: 'Screen' };
+    if (name.endsWith('/ui')) return { Button: 'Button', Field: 'Field', Row: 'Row', Screen: 'Screen', flushFields: async () => {},
+      useTypedText: (initial = '') => { const i = slot++; if (!(i in slots)) slots[i] = initial; return [slots[i], (v: unknown) => { slots[i] = v; }, () => slots[i]]; } };
     if (name.endsWith('/offers')) return { PAID_ONCE_LINE: '', PRODUCTS: [], offerTitle: () => '' };
     if (name.endsWith('/more')) return { MORE_LINKS: [], deletionController: () => ({}) };
     if (name.endsWith('/websiteUnlock')) return { unlockWebsiteOrder: unlock, emailWebsiteOrderLinks: lookup,
