@@ -92,7 +92,9 @@ export function needsRefill(queue, now = new Date()) {
 // ran again and again): at most SPREAD_MAX pins of one page in any SPREAD_DAYS-day window.
 export const SPREAD_MAX = 2;
 export const SPREAD_DAYS = 7;
-export function scheduleVariants(variants, { startDate, perDay = 1, prevDaySlugs = [], history = [] }) {
+// first: slugs placed ahead of every other page whenever they can be (a page with no live pin
+// yet, refill_queue.mjs discoveryPins), so a page nothing links to is not queued behind repeats.
+export function scheduleVariants(variants, { startDate, perDay = 1, prevDaySlugs = [], history = [], first = new Set() }) {
   const byPage = new Map();
   for (const v of variants) {
     if (!byPage.has(v.slug)) byPage.set(v.slug, []);
@@ -109,7 +111,7 @@ export function scheduleVariants(variants, { startDate, perDay = 1, prevDaySlugs
   while ([...byPage.values()].some((l) => l.length)) {
     const candidates = order
       .filter((s) => byPage.get(s).length && !yesterday.has(s) && inWindow(s, day) < SPREAD_MAX)
-      .sort((a, b) => byPage.get(b).length - byPage.get(a).length || order.indexOf(a) - order.indexOf(b));
+      .sort((a, b) => Number(first.has(b)) - Number(first.has(a)) || byPage.get(b).length - byPage.get(a).length || order.indexOf(a) - order.indexOf(b));
     // A day every page left is blocked on (by yesterday or the spread rule) stays empty:
     // fewer pins, never a page crowded. SPREAD_DAYS empty days in a row cannot happen unless
     // the rule is broken, so that throws.

@@ -15,7 +15,9 @@
 //
 // Also, every run (owner-approved 1 Nov 2026):
 //   - every live search-loop /questions/ page becomes a pin the day it is found
-//     (kind "question", the question itself as headline and title);
+//     (kind "question", the question itself as headline and title); since 15 Nov 2026 so
+//     does every published letter page in the content registries (discoveryPins below), each
+//     from its own words, scheduled ahead of the queued repeats;
 //   - the Growth-playbook stop rule (pace.mjs): 0 visits at 4 weeks -> new format,
 //     8 weeks -> pause, never delete;
 //   --start-today  re-date every unreleased pin at PINS_PER_DAY from today, giving
@@ -32,8 +34,9 @@ import path from "node:path";
 import { loadPinfeed, loadQueue, QUEUE_FILE, chicagoDate, addDays, scheduleVariants, unreleasedCount, needsRefill, previewImagePath, pinBoards } from "../../src/lib/pinfeed.mjs";
 import { applyFallback, applyPause, decidePace } from "./pace.mjs";
 import { paidSkusFrom } from "../../src/lib/skuForRoute.mjs";
-import { buildVariant, VARIANTS_PER_PAGE_PER_BATCH, boards as pinBoardsCfg } from "./variants.mjs";
-import { gateQueue } from "./quality.mjs";
+import { buildVariant, VARIANTS_PER_PAGE_PER_BATCH } from "./variants.mjs";
+import { PAPER_TEXT, QUESTION_LAYOUTS, wrapPx } from "./paper_layouts.mjs";
+import { gateQueue, SALES_WORDS } from "./quality.mjs";
 
 const root = process.cwd();
 const readJson = (f) => JSON.parse(fs.readFileSync(path.join(root, f), "utf8"));
@@ -94,42 +97,199 @@ export function appendBatch(queue, pages, now = new Date()) {
   return scheduled;
 }
 
-/** Live search-loop question pages as pins (one each), not yet in the queue. */
-export function questionPins(queue, today) {
+// ---- Discovery pins (15 Nov 2026): one pin for every published page nothing links to yet ----
+// The 1 Nov duty ("every live search-loop /questions/ page becomes a pin the day it is found")
+// demanded 5 checklist lines of 4-40 characters, which a question page (prose under <h2>
+// sub-questions) never has, so it made zero pins for 14 days. A question page now shows its own
+// sub-questions and FAQ questions; a published letter page in the content registries shows the
+// opening of its own template. Every word on these pins comes from the page itself; no model.
+const decode = (s) => String(s || "").replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&#39;|&apos;|&#x27;/g, "'").replace(/&quot;/g, '"').replace(/&nbsp;/g, " ").replace(/\s+/g, " ").trim();
+const SMALL = new Set(["a", "an", "and", "as", "at", "by", "for", "from", "in", "of", "on", "or", "the", "to", "with", "vs"]);
+const STOP_END = new Set([...SMALL, "is", "are", "do", "does", "can", "you", "your", "i", "my", "what", "how", "when", "if"]);
+const ACRONYMS = new Set(["pdf", "sba", "llc", "fha", "va", "irs"]);
+const smartTitle = (s) => String(s).split(/\s+/).map((w, i) => (ACRONYMS.has(w.toLowerCase()) ? w.toUpperCase() : i > 0 && SMALL.has(w.toLowerCase()) ? w.toLowerCase() : w.charAt(0).toUpperCase() + w.slice(1))).join(" ");
+const capFirst = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+/** At most 7 words, never ending on a small word or a dangling punctuation mark. */
+function trimWords(s, max = 7) {
+  const ws = String(s).replace(/[?.!:]+$/, "").split(/\s+/).filter(Boolean).slice(0, max);
+  while (ws.length && STOP_END.has(ws.at(-1).toLowerCase().replace(/[^a-z]/g, ""))) ws.pop();
+  return ws.join(" ").replace(/[,;:—-]+$/, "").trim();
+}
+const DROPPABLE_TAIL = new Set(["checklist", "list", "template", "sample", "pdf", "guide", "form"]);
+/** A headline that prints uncut (3 lines) in every one of the given layouts. */
+const headlineFits = (h, layouts) => layouts.every((l) => wrapPx(h, PAPER_TEXT[l].headline.size, PAPER_TEXT[l].headline.width, PAPER_TEXT[l].headline.face).length <= PAPER_TEXT[l].headline.lines);
+/** The candidates that fit; if none does, the longest whole-word cut of `fallback` that fits. */
+function fittingHeadlines(cands, fallback, layouts) {
+  const ok = [...new Set(cands)].filter((h) => headlineFits(h, layouts));
+  if (ok.length) return ok;
+  // Cut only at a phrase boundary: the word after the cut is a small word ("for", "with"…), or
+  // all that is dropped is a format word ("checklist", "template"…).
+  const all = String(fallback).replace(/[?.!:]+$/, "").split(/\s+/).filter(Boolean);
+  for (let n = 6; n >= 3; n--) {
+    const h = smartTitle(trimWords(fallback, n)), k = h.split(/\s+/).length;
+    const boundary = SMALL.has(String(all[k] || "").toLowerCase()) || all.slice(k).every((w) => DROPPABLE_TAIL.has(w.toLowerCase()));
+    if (k >= 3 && boundary && headlineFits(h, layouts)) return [h];
+  }
+  return [];
+}
+const NOT_SUBQUESTIONS = /^(what the sources say|frequently asked questions|related questions|sources)$/i;
+
+/** A /questions/ page's paper copy, from its own query, headings, FAQ and meta description. */
+function questionPage(p) {
+  const slug = p.route.replace(/^\/questions\//, "").replace(/\/+$/, "");
+  const file = path.join(root, "questions", slug, "index.html");
+  if (!fs.existsSync(file)) return { skip: `${p.route}: questions/${slug}/index.html missing` };
+  const html = fs.readFileSync(file, "utf8");
+  // Either attribute order: the search-loop pages write content= before name=.
+  const metaTag = html.match(/<meta\b[^>]*\bname="description"[^>]*>/i)?.[0] || "";
+  const meta = decode(metaTag.match(/\bcontent="([^"]*)"/i)?.[1] || "");
+  const q = String(p.query || slug.replace(/-/g, " ")).trim().replace(/\?*$/, "");
+  const question = `${capFirst(q)}${/^(how|what|when|where|why|who|which|can|do|does|is|are|should|will)\b/i.test(q) ? "?" : ""}`;
+  if (!meta) return { skip: `${p.route}: no meta description` };
+  if (question.length > 90) return { skip: `${p.route}: question longer than 90 characters` };
+  const main = html.match(/<main[\s\S]*?<\/main>/i)?.[0] || html;
+  // Its own sub-questions (content <h2>s), then its FAQ questions (<h3>s under the FAQ <h2>).
+  const heads = [...main.matchAll(/<h([23])\b[^>]*>([\s\S]*?)<\/h\1>/gi)].map((m) => ({ level: m[1], text: decode(m[2]) }));
+  const subs = [], faq = [];
+  let section = "";
+  for (const h of heads) {
+    if (h.level === "2") { section = h.text; if (!NOT_SUBQUESTIONS.test(h.text)) subs.push(h.text); }
+    else if (/^frequently asked questions$/i.test(section)) faq.push(h.text);
+  }
+  const spec = PAPER_TEXT[QUESTION_LAYOUTS[0]].body;
+  const items = [];
+  let lines = 0;
+  for (const t of [...subs, ...faq]) {
+    if (items.length >= spec.maxItems || items.some((x) => x.toLowerCase() === t.toLowerCase())) continue;
+    const n = wrapPx(t, spec.size, spec.width, spec.face).length;
+    if (n > spec.lines || lines + n > spec.budget) continue;
+    items.push(t); lines += n;
+  }
+  if (items.length < spec.minItems) return { skip: `${p.route}: ${items.length} sub-questions fit a pin, ${spec.minItems} needed` };
+  const h1 = decode(main.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || "");
+  // Headline candidates, each a whole phrase of the page's own (never cut mid-phrase): the query;
+  // the query without its "how to" / "what is a" opener; the page's <h1>; the part of the query
+  // after its first "for" ("apartment with no rental history"). Cut to 7 words only if none fits.
+  const fits = (h) => { const n = String(h || "").split(/\s+/).filter(Boolean).length; return n >= 3 && n <= 7; };
+  const bare = q.match(/^what (?:does|do) (?:a |an |the )?(.+?) (?:look like|mean)$/i)?.[1] || q.replace(/^(how (do|can|should) (i|you) |how to |what (is|are) (a |an |the )?)/i, "");
+  const forTail = q.match(/\bfor (.+)$/i)?.[1] || "";
+  let cands = [q, bare, h1.replace(/[?.]+$/, "")].filter(fits).map(smartTitle);
+  if (!cands.length) cands = [forTail.split(/\s+/).length >= 4 ? forTail : trimWords(q)].filter(fits).map(smartTitle);
+  const headlines = fittingHeadlines(cands, q, QUESTION_LAYOUTS);
+  if (!headlines.length) return { skip: `${p.route}: no headline of its own words fits the pin` };
+  return {
+    page: {
+      slug: `q-${slug}`, path: `/questions/${slug}/`, kind: "question", imageSku: "complete-approvalprep-bundle", question: q,
+      searchText: [q, h1, meta, ...subs].join(" "),
+      paperCopy: {
+        derived: true, phrases: [q.toLowerCase()], layouts: QUESTION_LAYOUTS, minItems: spec.minItems, cta: "Read the full answer and its sources.",
+        headlines, titles: [question.slice(0, 100), `${capFirst(q)}, answered with sources`.slice(0, 100)],
+        description: meta.slice(0, 440), checklist: items, letters: [],
+      },
+    },
+  };
+}
+
+/** A published letter page's paper copy: the opening of its own template. */
+function letterPage(entry, published) {
+  const key = String(entry.path || "").replace(/\/+$/, "");
+  if (!key || typeof entry.template !== "string" || !entry.template.trim()) return null;
+  if (!published(key)) return { skip: `${key}/: not in the sitemap yet` };
+  const slug = key.replace(/^\//, "").replace(/\//g, "-");
+  const phrase = String(entry.targetQuery || entry.title || slug.replace(/-/g, " ")).trim().toLowerCase();
+  const titleWords = String(entry.title || "").trim();
+  const headlines = fittingHeadlines([
+    phrase.split(/\s+/).length <= 7 ? smartTitle(phrase) : smartTitle(trimWords(phrase)),
+    titleWords && titleWords.split(/\s+/).length <= 7 ? titleWords.replace(/:.*$/, "") : null,
+  ].filter((h) => h && h.split(/\s+/).length >= 3), phrase, ["paper-letter", "paper-letter-low", "paper-list", "paper-list-band"]);
+  if (!headlines.length) return { skip: `${key}/: no headline of its own words fits the pin` };
+  const paras = entry.template.split(/\n\s*\n/).map((x) => x.trim()).filter(Boolean);
+  const base = {
+    derived: true, phrases: [phrase], cta: "See the full template and what to fill in.", headlines,
+    titles: [`${capFirst(phrase)}: a sample to fill in`, `${capFirst(phrase)}: what to write`],
+    description: decode(entry.description || entry.summary || "").slice(0, 440),
+  };
+  const page = { slug, path: `${key}/`, kind: "guide", imageSku: entry.sku || "complete-approvalprep-bundle", question: entry.targetQuery || entry.title, searchText: [phrase, entry.title, entry.description].filter(Boolean).join(" ") };
+  // A form ("Field ......... [value]" lines) shows its own field names as a checklist.
+  const fields = entry.template.split("\n").map((l) => l.match(/^\s*(.+?)\s*\.{2,}/)?.[1]?.trim()).filter((f) => f && f.length >= 4 && f.length <= 40);
+  if (fields.length >= 5) return { page: { ...page, paperCopy: { ...base, checklist: fields.slice(0, 8), letters: [] } } };
+  // A letter: its Re:/Subject: line, its greeting (or the addressee line), its first paragraphs.
+  const lineOf = (re) => { for (let i = 0; i < paras.length; i++) { const l = paras[i].split("\n").find((x) => re.test(x.trim())); if (l) return { i, text: l.trim() }; } return null; };
+  const reLine = lineOf(/^(re|subject):/i);
+  const greet = lineOf(/^(dear|to|hello|hi)\b.*[,:]$/i);
+  let greeting = greet?.text;
+  if (!greeting && reLine) greeting = paras[reLine.i].split("\n").map((x) => x.trim()).find((x) => x && !/^(re|subject):/i.test(x)) || (reLine.i > 0 ? paras[reLine.i - 1].split("\n")[0].trim() : null);
+  if (!greeting || /^\[date\]$/i.test(greeting)) return { skip: `${key}/: template has no greeting or addressee line` };
+  const after = Math.max(reLine?.i ?? -1, greet?.i ?? -1);
+  // Whole paragraphs only, stopping before one the pin may not show (a sales word, e.g. "truthful").
+  const body = [];
+  for (const x of paras.slice(after + 1).map((y) => y.split("\n").map((l) => l.trim()).join(" ")).filter((y) => y.length >= 12)) {
+    if (body.length >= 3) break;
+    if (SALES_WORDS.some((re) => re.test(x))) {
+      // Keep the whole sentences before the one the pin may not show, then stop.
+      const kept = [];
+      for (const sentence of x.split(/(?<=[.?!])\s+/)) { if (SALES_WORDS.some((re) => re.test(sentence))) break; kept.push(sentence); }
+      if (kept.length) body.push(kept.join(" "));
+      break;
+    }
+    body.push(x);
+  }
+  if (!body.length) return { skip: `${key}/: template has no paragraph after its greeting` };
+  const letter = { re: reLine?.text || `Re: ${entry.title}`, greeting, body };
+  return { page: { ...page, paperCopy: { ...base, checklist: [], letters: [{ ...letter, headlines, titles: base.titles }] } } };
+}
+
+/** Every page the discovery lane covers: live /questions/ pages and published registry letter pages. */
+export function discoveryPages({ log = () => {} } = {}) {
+  const sitemap = fs.readFileSync(path.join(root, "public/sitemap.xml"), "utf8");
+  const published = (key) => sitemap.includes(`<loc>https://approvalprep.com${key}/</loc>`);
   const ledger = fs.existsSync(path.join(root, "data/search-loop/pages.json")) ? readJson("data/search-loop/pages.json") : { pages: [] };
-  const have = new Set(queue.items.map((v) => v.id));
-  const out = [];
+  const qs = [], letters = [];
   for (const p of ledger.pages || []) {
     if (p?.status !== "live" || typeof p.route !== "string" || !p.route.startsWith("/questions/")) continue;
-    const slug = p.route.replace(/^\/questions\//, "").replace(/\/+$/, "");
-    const id = `q-${slug}-v1`;
-    if (have.has(id)) continue;
-    const file = path.join(root, "questions", slug, "index.html");
-    if (!fs.existsSync(file)) continue;
-    const html = fs.readFileSync(file, "utf8");
-    // Either attribute order: the search-loop pages write content= before name= (until 6 Nov
-    // 2026 this only matched name-first, so no question page ever became a pin).
-    const metaTag = html.match(/<meta\b[^>]*\bname="description"[^>]*>/i)?.[0] || "";
-    const meta = (metaTag.match(/\bcontent="([^"]*)"/i)?.[1] || "").replace(/&amp;/g, "&").replace(/&#39;|&apos;/g, "'").replace(/&quot;/g, '"').trim();
-    const q = String(p.query || slug.replace(/-/g, " ")).trim().replace(/\?*$/, "");
-    const question = `${q.charAt(0).toUpperCase()}${q.slice(1)}${/^(how|what|when|where|why|who|which|can|do|does|is|are|should|will)\b/i.test(q) ? "?" : ""}`;
-    if (!meta || question.length > 90) continue;
-    // Paper format: the page's own checklist lines (its list items), 5 to 8 of them; a page
-    // with fewer has nothing to show on a pin and is skipped (named below).
-    const main = html.match(/<main[\s\S]*?<\/main>/i)?.[0] || html;
-    const items = [...main.matchAll(/<li[^>]*>([\s\S]*?)<\/li>/gi)].map((m) => m[1].replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&#39;|&apos;/g, "'").replace(/\s+/g, " ").trim()).filter((x) => x.length >= 4 && x.length <= 40);
-    if (items.length < 5) { console.log(`[pinterest-refill] QUESTION_PIN_SKIPPED ${p.route}: ${items.length} short checklist lines on the page, 5 needed`); continue; }
-    const board = pinBoardsCfg().boardFor(`/questions/${slug}/`, q);
-    const phrase = q.charAt(0).toUpperCase() + q.slice(1);
-    const headline = phrase.split(/\s+/).length <= 7 ? phrase.replace(/\b\w/g, (c) => c.toUpperCase()) : phrase.split(/\s+/).slice(0, 7).join(" ");
-    out.push({
-      id, slug: `q-${slug}`, path: `/questions/${slug}/`, kind: "question", imageSku: "complete-approvalprep-bundle", format: "paper",
-      angle: "list-first", layout: "paper-list", palette: board.accent, phrases: [q.toLowerCase()],
-      headline, subhead: items[0], items: items.slice(0, 8),
-      title: question.slice(0, 100), description: meta.slice(0, 440), releaseDate: today,
-    });
+    const r = questionPage(p);
+    if (r.skip) log(`DISCOVERY_PIN_SKIPPED ${r.skip}`); else qs.push(r.page);
+  }
+  const kitPaths = new Set(pinPages().map((pg) => pg.path));
+  for (const f of LETTER_REGISTRIES) {
+    if (!fs.existsSync(path.join(root, f))) continue;
+    for (const e of readJson(f).pages || []) {
+      const r = letterPage(e, published);
+      if (!r || kitPaths.has(`${String(e.path).replace(/\/+$/, "")}/`)) continue;
+      if (r.skip) log(`DISCOVERY_PIN_SKIPPED ${r.skip}`); else letters.push(r.page);
+    }
+  }
+  // Interleaved, so two pins in a row rarely share a layout (the quality gate's look check).
+  const out = [];
+  for (let i = 0; i < Math.max(qs.length, letters.length); i++) { if (qs[i]) out.push(qs[i]); if (letters[i]) out.push(letters[i]); }
+  return out;
+}
+export const LETTER_REGISTRIES = ["data/content/demand_coverage_pages.json", "data/content/seo_recovery_pages.json"];
+
+/** One new pin for every discovery page that has no pin (queued, released or held) yet. */
+export function discoveryPins(queue, today, opts = {}) {
+  const linked = new Set([...(queue.items || []), ...(queue.held || [])].map((v) => v.path));
+  const out = [];
+  for (const page of discoveryPages(opts)) {
+    if (linked.has(page.path)) continue;
+    const v = buildVariant(page, 1);
+    if (v) out.push({ ...v, phrases: page.paperCopy.phrases, discovery: true, releaseDate: today });
   }
   return out;
+}
+
+/** Every page the quality gate may need to rework a pin: the drip pages and the discovery pages. */
+export const gatePages = () => [...pinPages(), ...discoveryPages()];
+
+/** Re-date every unreleased pin from tomorrow, discovery pins first (they link pages nothing else does). */
+export function redateLater(queue, today) {
+  const later = queue.items.filter((v) => v.releaseDate > today).sort((a, b) => (a.releaseDate < b.releaseDate ? -1 : a.releaseDate > b.releaseDate ? 1 : 0));
+  queue.items = queue.items.filter((v) => v.releaseDate <= today);
+  const prev = queue.items.filter((v) => v.releaseDate === today).map((v) => v.slug);
+  const first = new Set(later.filter((v) => v.discovery).map((v) => v.slug));
+  const scheduled = scheduleVariants(later, { startDate: addDays(today, 1), perDay: Number(queue.config.PINS_PER_DAY), prevDaySlugs: prev, history: queue.items, first });
+  queue.items.push(...scheduled);
+  return scheduled;
 }
 
 /**
@@ -138,16 +298,13 @@ export function questionPins(queue, today) {
  * no gaps, and the gate runs again on the new order (at most 3 passes).
  */
 export async function gateAndReschedule(queue, today) {
-  const pages = new Map(pinPages().map((p) => [p.slug, p]));
+  const pages = new Map(gatePages().map((p) => [p.slug, p]));
   const all = { reworked: [], held: [] };
   for (let pass = 0; pass < 3; pass++) {
     const r = await gateQueue(queue, today, { pageFor: (v) => pages.get(v.slug) || null });
     all.reworked.push(...r.reworked); all.held.push(...r.held);
     if (!r.held.length) break;
-    const later = queue.items.filter((v) => v.releaseDate > today).sort((a, b) => (a.releaseDate < b.releaseDate ? -1 : a.releaseDate > b.releaseDate ? 1 : 0));
-    queue.items = queue.items.filter((v) => v.releaseDate <= today);
-    const prev = queue.items.filter((v) => v.releaseDate === today).map((v) => v.slug);
-    queue.items.push(...scheduleVariants(later, { startDate: addDays(today, 1), perDay: Number(queue.config.PINS_PER_DAY), prevDaySlugs: prev, history: queue.items }));
+    redateLater(queue, today);
   }
   for (const w of all.reworked) console.log(`[pin-quality] reworked ${w.id}: ${w.from} -> ${w.to} (${w.reason})`);
   if (all.held.length) {
@@ -174,7 +331,8 @@ export function releaseHeld(queue, today) {
   const later = queue.items.filter((v) => v.releaseDate > today);
   queue.items = queue.items.filter((v) => v.releaseDate <= today);
   const prev = queue.items.filter((v) => v.releaseDate === today).map((v) => v.slug);
-  const scheduled = scheduleVariants([...later, ...held.map((v) => ({ ...v, releaseDate: null }))], { startDate: addDays(today, 1), perDay: Number(queue.config.PINS_PER_DAY), prevDaySlugs: prev, history: queue.items });
+  const all = [...later, ...held.map((v) => ({ ...v, releaseDate: null }))];
+  const scheduled = scheduleVariants(all, { startDate: addDays(today, 1), perDay: Number(queue.config.PINS_PER_DAY), prevDaySlugs: prev, history: queue.items, first: new Set(all.filter((v) => v.discovery).map((v) => v.slug)) });
   queue.items.push(...scheduled);
   queue.held = [];
   queue.config.APPROVAL = { ...(queue.config.APPROVAL || {}), state: "released", released_at: today };
@@ -224,9 +382,15 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   // Approval hold: nothing unreleased stays scheduled until the owner's yes.
   const holding = isHeld(queue);
   if (holding) { const moved = holdUnreleased(queue, today); if (moved) { changed = true; console.log(`[pinterest-refill] held ${moved} unreleased pin(s) for approval`); } }
-  // Question pages from the search loop (held too while the hold is on).
-  const questions = paused ? [] : questionPins(queue, today);
-  if (questions.length) { (holding ? (queue.held ||= []) : queue.items).push(...questions.map((q) => (holding ? { ...q, releaseDate: null } : q))); changed = true; console.log(`[pinterest-refill] question pins${holding ? " (held)" : ""}: ${questions.map((q) => q.path).join(", ")}`); }
+  // Discovery pins: every live question page and published letter page with no pin yet, dated
+  // ahead of the queued repeats (held too while the hold is on).
+  const fresh = paused ? [] : discoveryPins(queue, addDays(today, 1), { log: (m) => console.log(`[pinterest-refill] ${m}`) });
+  if (fresh.length) {
+    if (holding) (queue.held ||= []).push(...fresh.map((q) => ({ ...q, releaseDate: null })));
+    else { queue.items.push(...fresh); redateLater(queue, today); }
+    changed = true;
+    console.log(`[pinterest-refill] discovery pins${holding ? " (held)" : ""}: ${fresh.length} - ${fresh.map((q) => q.path).join(", ")}`);
+  }
   const left = unreleasedCount(queue, now);
   {
     const g = await gateAndReschedule(queue, today);
