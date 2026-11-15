@@ -1,0 +1,53 @@
+name: iOS store build
+# Free App Store build on a GitHub-hosted Mac (public repo = free minutes).
+# Signing credentials stay on EAS; EXPO_TOKEN lets the local build fetch them.
+# Output: app.ipa as a 3-day artifact. Submitting it to TestFlight is a separate step.
+on:
+  workflow_dispatch:
+    inputs:
+      fixture_trace:
+        description: Run fixture workflow data trace only (no build)
+        required: false
+        default: "false"
+permissions:
+  contents: read
+concurrency:
+  group: ios-store-build
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: macos-26
+    timeout-minutes: 90
+    defaults:
+      run:
+        working-directory: apps/mobile
+    env:
+      CI: '1'
+      EXPO_NO_TELEMETRY: '1'
+      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+    steps:
+      - name: Named stop when EXPO_TOKEN is missing
+        if: env.EXPO_TOKEN == ''
+        run: echo "NAMED STOP [EXPO_TOKEN_MISSING] set the EXPO_TOKEN repo secret" && exit 1
+      - uses: actions/checkout@v4
+      - name: Use the newest Xcode on the runner
+        run: |
+          XCODE=$(ls -d /Applications/Xcode_*.app | sort -V | tail -1)
+          sudo xcode-select -s "$XCODE"
+          xcodebuild -version
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.12.0
+          cache: npm
+          cache-dependency-path: apps/mobile/package-lock.json
+      - run: npm ci --no-audit --no-fund
+      - name: Build the store .ipa
+        if: inputs.fixture_trace != 'true'
+        run: npx -y eas-cli@latest build --platform ios --profile production --local --non-interactive --output "$GITHUB_WORKSPACE/app.ipa"
+      - uses: actions/upload-artifact@v4
+        if: inputs.fixture_trace != 'true'
+        with:
+          name: app-ipa
+          path: app.ipa
+          if-no-files-found: error
+          retention-days: 3
