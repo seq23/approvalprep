@@ -75,7 +75,7 @@ const traces = files.map(file => {
   const buildsProject = closure.scripts.includes("build");
   const dependencyInstallPolicyOk = requiresDependencyInstall ? usesNpmCi && !usesNpmInstall : !usesNpmInstall;
   const nodeVersionOk = searchLoopCaller || /node-version:\s*22\.12\.0/.test(text);
-  const runnerPinned = searchLoopCaller || /runs-on:\s*ubuntu-24\.04/.test(text);
+  const runnerPinned = searchLoopCaller || /runs-on:\s*(ubuntu-24\.04|macos-\d+)\s*$/m.test(text);
   const timeoutSet = searchLoopCaller || /timeout-minutes:\s*\d+/.test(text);
   const mainWriter = /safe-push-main\.sh/.test(text) || /(^|\n)\s*git push(?:\s|$)/m.test(text);
   const sharedWriterConcurrency = !mainWriter || (/group:\s*approvalprep-main-writer\b/.test(text) && /cancel-in-progress:\s*false/.test(text));

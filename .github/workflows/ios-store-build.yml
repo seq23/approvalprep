@@ -4,6 +4,11 @@ name: iOS store build
 # Output: app.ipa as a 3-day artifact. Submitting it to TestFlight is a separate step.
 on:
   workflow_dispatch:
+    inputs:
+      fixture_trace:
+        description: Run fixture workflow data trace only (no build)
+        required: false
+        default: "false"
 permissions:
   contents: read
 concurrency:
@@ -37,8 +42,10 @@ jobs:
           cache-dependency-path: apps/mobile/package-lock.json
       - run: npm ci --no-audit --no-fund
       - name: Build the store .ipa
+        if: inputs.fixture_trace != 'true'
         run: npx -y eas-cli@latest build --platform ios --profile production --local --non-interactive --output "$GITHUB_WORKSPACE/app.ipa"
       - uses: actions/upload-artifact@v4
+        if: inputs.fixture_trace != 'true'
         with:
           name: app-ipa
           path: app.ipa
