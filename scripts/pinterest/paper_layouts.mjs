@@ -27,8 +27,15 @@ export const ACCENTS = {
   ledger: { hex: "#2B4A7A", tint: "#C5D1E6" },
 };
 
-export const PAPER_LAYOUTS = ["paper-list", "paper-list-band", "paper-letter", "paper-letter-low", "photo-band"];
-export const FORMAT_OF = { "paper-list": "list", "paper-list-band": "list", "paper-letter": "letter", "paper-letter-low": "letter", "photo-band": "photo" };
+export const PAPER_LAYOUTS = ["paper-list", "paper-list-band", "paper-letter", "paper-letter-low", "photo-band", "paper-questions", "paper-questions-band"];
+export const FORMAT_OF = { "paper-list": "list", "paper-list-band": "list", "paper-letter": "letter", "paper-letter-low": "letter", "photo-band": "photo", "paper-questions": "list", "paper-questions-band": "list" };
+// The layouts a kit or guide page rotates through (a page may name its own set: variants.mjs paperSlots).
+export const DEFAULT_LAYOUTS = ["paper-list", "paper-list-band", "paper-letter", "paper-letter-low", "photo-band"];
+// A /questions/ page's list is its own sub-questions, longer than a kit's checklist lines, so it
+// gets the same two looks with a tighter body (15 Nov 2026: at 48px/720 only 13 of the 25 live
+// question pages could fill a list; at 44px all 25 can, 10.4px on a 236px thumbnail). Wrap
+// widths keep the text inside its sheet: 740 on the white sheet (text from x 176, sheet edge 930).
+export const QUESTION_LAYOUTS = ["paper-questions", "paper-questions-band"];
 
 // What each layout prints: headline + body roles. body.lines = lines per item (list) or the
 // total line budget (letter); body.minItems/maxItems bound a checklist.
@@ -38,6 +45,8 @@ export const PAPER_TEXT = {
   "paper-letter": { headline: { width: 860, lines: 3, size: 76, face: "head" }, body: { width: 750, lines: 14, size: 44, face: "body", minLines: 6 } },
   "paper-letter-low": { headline: { width: 840, lines: 3, size: 80, face: "head" }, body: { width: 770, lines: 14, size: 44, face: "body", minLines: 6 } },
   "photo-band": { headline: { width: 860, lines: 3, size: 84, face: "head" } },
+  "paper-questions": { headline: { width: 840, lines: 3, size: 76, face: "head" }, body: { width: 740, lines: 2, size: 44, face: "bold", minItems: 4, maxItems: 8, budget: 14 } },
+  "paper-questions-band": { headline: { width: 860, lines: 3, size: 76, face: "head" }, body: { width: 760, lines: 2, size: 44, face: "bold", minItems: 4, maxItems: 8, budget: 14 } },
 };
 
 // Text is drawn as vector paths from the bundled OFL fonts (scripts/pinterest/fonts), so a
@@ -138,14 +147,14 @@ function letterSheet(letter, spec, accent, { x, y, w, h, rotate = 0, shrink = fa
 const svgDoc = (body) => Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${PIN_WIDTH}" height="${PIN_HEIGHT}"><rect width="100%" height="100%" fill="${PAPER}"/>${body}</svg>`);
 
 const LAYOUT = {
-  "paper-list": (v, a) => {
-    const s = PAPER_TEXT["paper-list"];
+  "paper-list": (v, a, key = "paper-list") => {
+    const s = PAPER_TEXT[key];
     const hb = headlineBlock(v.headline, s.headline, a, 72, 170);
     const top = hb.bottom + 50;
     return `<rect x="0" y="0" width="1000" height="16" fill="${a.hex}"/>${hb.svg}<rect x="70" y="${top + 10}" width="870" height="${1370 - top}" fill="${RULE}"/><rect x="60" y="${top}" width="870" height="${1370 - top}" fill="${SHEET}"/>${listRows(v.items, s.body, a, 100, top + 10, 1360)}${footer(a)}`;
   },
-  "paper-list-band": (v, a) => {
-    const s = PAPER_TEXT["paper-list-band"];
+  "paper-list-band": (v, a, key = "paper-list-band") => {
+    const s = PAPER_TEXT[key];
     const ls = wrapPx(v.headline, s.headline.size, s.headline.width, "head").slice(0, s.headline.lines);
     const bandH = 120 + ls.length * Math.round(s.headline.size * 1.16);
     const lines = ls.map((l, i) => t(500, 130 + i * Math.round(s.headline.size * 1.16), l, { size: s.headline.size, face: "head", anchor: "middle" })).join("");
@@ -165,6 +174,8 @@ const LAYOUT = {
     const hb = headlineBlock(v.headline, s.headline, a, 70, hTop + s.headline.size * 0.7);
     return `<rect width="1000" height="16" fill="${a.hex}"/>${letterSheet(v.letter, s.body, a, { x: 60, y: 60, w: 880, h: hTop - 120, rotate: 1.2 })}${hb.svg}${footer(a, 1462)}`;
   },
+  "paper-questions": (v, a) => LAYOUT["paper-list"](v, a, "paper-questions"),
+  "paper-questions-band": (v, a) => LAYOUT["paper-list-band"](v, a, "paper-questions-band"),
   "photo-band": (v, a) => {
     const s = PAPER_TEXT["photo-band"];
     const ls = wrapPx(v.headline, s.headline.size, s.headline.width, "head").slice(0, s.headline.lines);

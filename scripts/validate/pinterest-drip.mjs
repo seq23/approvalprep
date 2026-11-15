@@ -31,13 +31,17 @@
 // 11. approval hold: a held pin is in any feed, lacks its image, or releasing the hold would
 //    break any rule above (every schedule, refill and quality check runs on the released plan);
 // 12. a guide page a pin links to is not og:type article; the weekly visit count would skip
-//    days (measure_window.mjs windowStart).
+//    days (measure_window.mjs windowStart);
+// 13. discovery (15 Nov 2026): a live /questions/ page published 2+ days ago, or a published
+//    letter page in the content registries with a template, has no pin at all; or the lane
+//    that makes those pins (refill_queue.mjs discoveryPins) produces nothing from a queue
+//    without them (it made zero question pins for 14 days before this check existed).
 import fs from "node:fs";
 import path from "node:path";
 import { SITE, loadPinfeed, loadQueue, chicagoDate, addDays, dueEntries, renderFeedAt, renderBoardFeedAt, pinBoards, unreleasedCount, needsRefill, variantLink } from "../../src/lib/pinfeed.mjs";
 import { decidePace, applyFallback, applyPause } from "../pinterest/pace.mjs";
 import { LAYOUTS, PALETTES, ANGLES } from "../pinterest/variants.mjs";
-import { appendBatch, pinPages, releaseHeld, isHeld } from "../pinterest/refill_queue.mjs";
+import { appendBatch, pinPages, releaseHeld, isHeld, gatePages, discoveryPins, LETTER_REGISTRIES } from "../pinterest/refill_queue.mjs";
 import { dHash, distance, headlineIssue, thumbnailIssue, gateQueue, auditQueue, MIN_DISTANCE, pinIssue, photoIssue } from "../pinterest/quality.mjs";
 import { SPREAD_MAX, SPREAD_DAYS, scheduleVariants } from "../../src/lib/pinfeed-core.mjs";
 import { windowStart } from "../pinterest/measure_window.mjs";
@@ -69,7 +73,7 @@ for (const v of items) {
   const label = v.id || JSON.stringify(v).slice(0, 60);
   if (!v.id || !v.slug || v.id !== `${v.slug}-v${v.id.split("-v").pop()}` || !/^\d+$/.test(v.id.split("-v").pop())) fail(`${label}: id must be <slug>-v<n>`);
   if (ids.has(v.id)) fail(`${label}: duplicate id`); ids.add(v.id);
-  if (!/^\/(questions\/)?[a-z0-9-]+\/$/.test(v.path || "")) fail(`${label}: path must look like /page-slug/ or /questions/slug/`);
+  if (!/^\/([a-z0-9-]+\/)+$/.test(v.path || "")) fail(`${label}: path must look like /page-slug/, /questions/slug/ or /section/page-slug/`);
   if (!["kit", "guide", "question"].includes(v.kind)) fail(`${label}: kind must be kit, guide or question`);
   if (!v.imageSku) fail(`${label}: no imageSku`);
   if (!ANGLES.includes(v.angle)) fail(`${label}: unknown angle ${v.angle}`);
@@ -340,7 +344,7 @@ if (fs.existsSync(path.join(dist, "_routes.json"))) {
 
 // 9. Pin quality gate: fixtures first (the gate must catch each failure), then every unreleased built pin.
 {
-  const pagesBySlug = new Map(pinPages().map((p) => [p.slug, p]));
+  const pagesBySlug = new Map(gatePages().map((p) => [p.slug, p]));
   const pageFor = (v) => pagesBySlug.get(v.slug) || null;
   const base = items.find((v) => v.kind === "kit" && pageFor(v));
   if (!base) fail("quality fixture: no kit pin to test the gate with");
@@ -376,7 +380,7 @@ if (fs.existsSync(path.join(dist, "_routes.json"))) {
 
 // 10. Paper-format gate fixtures: each refusal must fire, and a real paper pin must pass.
 {
-  const pagesBySlug = new Map(pinPages().map((p) => [p.slug, p]));
+  const pagesBySlug = new Map(gatePages().map((p) => [p.slug, p]));
   const pageFor = (v) => pagesBySlug.get(v.slug) || null;
   const paper = items.filter((v) => v.format === "paper" && pageFor(v));
   const kitPin = paper.find((v) => v.kind === "kit");
@@ -430,6 +434,32 @@ if (fs.existsSync(path.join(dist, "_routes.json"))) {
   if (windowStart({ weeks: [] }, now) !== new Date(now.getTime() - 7 * 86400000).toISOString()) fail("measure window: first count is not 7 days");
 }
 
+// 13. Discovery: every page nothing else links to has a pin, and the lane is not silent.
+let discoveryCount = 0;
+{
+  const today = chicagoDate(new Date());
+  const linked = new Set([...items, ...held].map((v) => v.path));
+  const need = [];
+  const ledger = fs.existsSync("data/search-loop/pages.json") ? JSON.parse(fs.readFileSync("data/search-loop/pages.json", "utf8")) : { pages: [] };
+  // A page found today or yesterday gets its pin on the next daily refill; older ones must have one.
+  for (const p of ledger.pages || []) if (p?.status === "live" && String(p.route || "").startsWith("/questions/") && String(p.published_at || "") <= addDays(today, -2)) need.push(p.route.endsWith("/") ? p.route : `${p.route}/`);
+  const sitemap = fs.readFileSync("public/sitemap.xml", "utf8");
+  for (const f of LETTER_REGISTRIES) if (fs.existsSync(f)) for (const e of JSON.parse(fs.readFileSync(f, "utf8")).pages || []) {
+    const key = String(e.path || "").replace(/\/+$/, "");
+    if (key && typeof e.template === "string" && e.template.trim() && sitemap.includes(`<loc>${SITE}${key}/</loc>`)) need.push(`${key}/`);
+  }
+  if (!need.length) fail("discovery: zero live question pages and zero registry letter pages found - the check would pass seeing nothing");
+  for (const p of need) if (!linked.has(p)) fail(`discovery: ${p} is published but no pin links to it - run npm run pinterest:refill (refill_queue.mjs discoveryPins)`);
+  discoveryCount = [...items, ...held].filter((v) => v.discovery).length;
+  if (!discoveryCount) fail("discovery: the queue holds zero discovery pins");
+  // The lane itself: from a queue with every discovery pin removed, it must rebuild a pin for each page it removed.
+  const stripped = { ...queue, items: items.filter((v) => !v.discovery), held: held.filter((v) => !v.discovery) };
+  const rebuilt = new Set(discoveryPins(stripped, addDays(today, 1)).map((v) => v.path));
+  const removed = [...new Set([...items, ...held].filter((v) => v.discovery).map((v) => v.path))];
+  if (!rebuilt.size) fail("discovery: refill_queue.mjs discoveryPins made zero pins from a queue without them");
+  for (const p of removed) if (!rebuilt.has(p)) fail(`discovery: discoveryPins can no longer build a pin for ${p}`);
+}
+
 if (errors.length) { console.error(`[pinterest-drip] FAIL\n- ${errors.slice(0, 40).join("\n- ")}${errors.length > 40 ? `\n- ... ${errors.length - 40} more` : ""}`); process.exit(1); }
 const pages = new Set(items.map((v) => v.slug)).size;
-console.log(`[pinterest-drip] OK ${items.length} variants for ${pages} pages, ${cfg.PINS_PER_DAY}/day ${items[0]?.releaseDate}..${lastDay}, ${liveLeft} unreleased; no page on consecutive days; every image 1000x1500; feed exact at fixed clocks; refill flips at ${T}; every unreleased pin passes the quality gate`);
+console.log(`[pinterest-drip] OK ${items.length} variants for ${pages} pages, ${cfg.PINS_PER_DAY}/day ${items[0]?.releaseDate}..${lastDay}, ${liveLeft} unreleased; no page on consecutive days; every image 1000x1500; feed exact at fixed clocks; refill flips at ${T}; every unreleased pin passes the quality gate; ${discoveryCount} discovery pins, every published question and letter page linked`);

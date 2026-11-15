@@ -4,7 +4,7 @@
 // A submit that returns OK says nothing about what the property holds, so this
 // asks: sitemaps.list before, sitemaps.submit only when the sitemap is absent,
 // sitemaps.list after. Both list responses go to
-// data/search_intelligence/gsc_sitemaps.json, which validate:index-coverage reads.
+// data/search_intelligence/gsc_sitemaps.json, kept beside index_coverage.json (validate:index-coverage, which read it, was cut in #100).
 //
 // No credential: NAMED_STOP (exit 0), written only when no earlier record exists.
 // 401/403: NAMED_STOP with the owner step. Submitted and still not listed: exit 1.

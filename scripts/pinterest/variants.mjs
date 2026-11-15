@@ -12,7 +12,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import { PAPER_LAYOUTS, FORMAT_OF, ACCENTS } from "./paper_layouts.mjs";
+import { PAPER_LAYOUTS, DEFAULT_LAYOUTS, FORMAT_OF, ACCENTS } from "./paper_layouts.mjs";
 import { PIN_COPY } from "./pin_copy.mjs";
 import { pinBoards } from "../../src/lib/pinfeed-core.mjs";
 
@@ -253,7 +253,9 @@ export function derivedPaperCopy(page) {
     letters: [], checklist: items,
   };
 }
-export const paperCopyFor = (page) => PIN_COPY[page.slug] || derivedPaperCopy(page);
+// A page may bring its own paper copy, built only from its own words (refill_queue.mjs
+// discoveryPages: a /questions/ page's sub-questions, a letter page's own template).
+export const paperCopyFor = (page) => page?.paperCopy || PIN_COPY[page.slug] || derivedPaperCopy(page);
 
 /** Every distinct look a page's paper pin can take, in rotation order. Each card (a letter, or
  * the checklist) brings its own headlines and titles, so image and title always match. */
@@ -261,9 +263,10 @@ export function paperSlots(page) {
   const copy = paperCopyFor(page);
   if (!copy) return [];
   const cards = [];
-  if ((copy.checklist || []).length >= 5) cards.push({ fmt: "list", items: copy.checklist.slice(0, 8), headlines: copy.listHeadlines || copy.headlines, titles: copy.listTitles || copy.titles });
+  if ((copy.checklist || []).length >= (copy.minItems || 5)) cards.push({ fmt: "list", items: copy.checklist.slice(0, 8), headlines: copy.listHeadlines || copy.headlines, titles: copy.listTitles || copy.titles });
   (copy.letters || []).forEach((l, i) => cards.push({ fmt: "letter", letter: { re: l.re, greeting: l.greeting, body: l.body }, headlines: l.headlines || [copy.headlines[i % copy.headlines.length], ...copy.headlines.filter((_, j) => j !== i % copy.headlines.length)], titles: l.titles || copy.titles }));
-  const per = cards.map((c) => PAPER_LAYOUTS.filter((l) => FORMAT_OF[l] === c.fmt).flatMap((layout) => c.headlines.map((headline) => ({ layout, headline, titles: c.titles, letter: c.letter, items: c.items }))));
+  const layouts = copy.layouts || DEFAULT_LAYOUTS;
+  const per = cards.map((c) => layouts.filter((l) => FORMAT_OF[l] === c.fmt).flatMap((layout) => c.headlines.map((headline) => ({ layout, headline, titles: c.titles, letter: c.letter, items: c.items }))));
   // Round-robin across cards, alternating layouts within each.
   const out = [];
   for (let k = 0; per.some((p) => k < p.length); k++) for (const p of per) if (k < p.length) out.push(p[Math.floor(k / 2) + (k % 2) * Math.ceil(p.length / 2)] || p[k]);
@@ -274,7 +277,7 @@ export function paperSlots(page) {
 export function paperFields(page, titleIndex, slot) {
   const copy = paperCopyFor(page);
   const board = boards().boardFor(page.path, slot.headline);
-  const cta = copy.link === "kit" ? "See the full template and what to fill in." : "Read the guide for the full checklist.";
+  const cta = copy.cta ?? (copy.link === "kit" ? "See the full template and what to fill in." : "Read the guide for the full checklist.");
   const titles = slot.titles || copy.titles;
   const f = {
     format: "paper", angle: FORMAT_OF[slot.layout] === "letter" ? "letter-first" : "list-first", layout: slot.layout, palette: board.accent,

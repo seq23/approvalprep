@@ -34,6 +34,26 @@ and by `npm run validate:pinterest-drip` on every pull request. A new pin is ref
 The scheduler (`src/lib/pinfeed-core.mjs` `scheduleVariants`) never puts more than 2 pins of
 one page in any 7 days. A day where every remaining page is blocked stays empty.
 
+## Pages nothing else links to (since 15 Nov 2026)
+
+Every live search-loop `/questions/` page and every published letter page in
+`data/content/demand_coverage_pages.json` or `data/content/seo_recovery_pages.json` that has a
+`template` gets one pin, built only from that page's own words (`scripts/pinterest/refill_queue.mjs`
+`discoveryPins`, run by `npm run pinterest:refill`):
+
+- a question page shows its own sub-question headings and FAQ questions in the
+  `paper-questions` layouts (44 px type, 4 to 8 lines), headlined with its own query or `<h1>`,
+  described with its own meta description;
+- a letter page shows the opening of its own template (`Re:` line, greeting, first paragraphs,
+  stopping before a sentence with a refused word); a form template shows its own field names
+  as a checklist.
+
+These pins are dated ahead of the queued repeat pins (`scheduleVariants` `first`), so a page no
+pin links to gets one within days, not after the queue drains. A page that cannot make a pin is
+named in a `DISCOVERY_PIN_SKIPPED` line. `npm run validate:pinterest-drip` fails when a question
+page published 2+ days ago, or a published registry letter page, has no pin, or when
+`discoveryPins` builds nothing from a queue without them.
+
 ## The approval hold
 
 While `config.APPROVAL.state` in `data/pinterest/queue.json` is `"held"`:

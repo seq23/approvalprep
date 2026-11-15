@@ -8,7 +8,9 @@
 // inspects the first 25 manifest routes serially and never the sitemap.
 // This step runs in the daily cycle (intelligence-ingest-free-sources.yml) and
 // commits data/search_intelligence/index_coverage.json with counts by
-// coverageState; validate:index-coverage checks it is fresh and consistent.
+// coverageState. No validator reads it (validate:index-coverage was cut in #100); the
+// release keeps its URL set equal to the sitemap with --reconcile, and a run that cannot
+// inspect writes a NAMED_STOP state in the file rather than silent zeros.
 //
 // Quota: at most DAILY_CAP inspections per UTC day (counted in the file's own
 // quota ledger), 8 in parallel. If the sitemap ever exceeds the cap, the URLs
@@ -77,7 +79,7 @@ function write(urls, byUrl, state, namedStop, inspectedThisRun, quotaLedger) {
 }
 
 // A release adds URLs to the sitemap between two daily inspection runs. Before
-// 27 Oct 2026 every release that published a page then failed
+// 27 Oct 2026 every release that published a page then failed the (since cut)
 // validate:index-coverage ("URL set differs from the sitemap: missing 2") with
 // no repair registered, because only the daily cycle rewrote this file. The
 // release now reconciles it: a new sitemap URL gets an honest NOT_INSPECTED row
