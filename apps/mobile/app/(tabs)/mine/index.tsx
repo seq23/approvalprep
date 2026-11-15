@@ -53,8 +53,8 @@ export default function Mine() {
     <BottomSheet visible={!!selected} title={selected?.status === 'draft' ? 'Your draft' : 'Your saved letter'} onClose={close}>
       {selected ? <>
         {selected.status === 'draft' ? <Button primary label="Continue writing ›" onPress={() => { const letter = selected; close(); router.push(draftHref(letter, '/mine')); }} /> : <>
-          <Text style={type.body}>{`Date mailed: ${selected.sentDate ? showDate(new Date(`${selected.sentDate}T12:00:00`)) : 'Not entered'}`}</Text>
-          {dueDate(selected) ? <><Text style={type.body}>{`Answer date: ${showDate(dueDate(selected)!)}`}</Text><Text style={type.sub}>This is a reminder based on the date you entered.</Text></> : null}
+          <Text style={type.letter}>{`Date mailed: ${selected.sentDate ? showDate(new Date(`${selected.sentDate}T12:00:00`)) : 'Not entered'}`}</Text>
+          {dueDate(selected) ? <><Text style={type.letter}>{`Answer date: ${showDate(dueDate(selected)!)}`}</Text><Text style={type.sub}>This is a reminder based on the date you entered.</Text></> : null}
           {selected.answerNote ? <Text style={type.body}>{`Answer recorded: ${selected.answerNote}`}</Text> : null}
           <Button label="Open my letter ›" onPress={() => { const letter = selected; close(); openFrom('/mine', '/letters/draft', { id: letter.id }); }} />
           {hasAnswerDate(selected.kind) ? <Button label="Record or change answer ›" onPress={() => { const letter = selected; close(); router.push({ pathname: '/mine/answer', params: { id: letter.id } }); }} /> : null}

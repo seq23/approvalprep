@@ -23,6 +23,8 @@ export const type = {
   // The letter itself, on screen: the phone's own face, whose zero has no slash (the brand body
   // face draws "2Ø26" in dates and account numbers). The PDF uses Arial for the same reason.
   letter: { fontSize: 15, lineHeight: 23, color: color.carbon },
+  // Her answers and dates in a small line (answer lists): the same zero-safe face at the sub size.
+  answer: { fontSize: 13, lineHeight: 18, color: color.carbonMuted },
   label: { fontFamily: font.mono, fontSize: 12, lineHeight: 16, letterSpacing: 1.4, color: color.carbonMuted, textTransform: 'uppercase' as const },
 } as const;
 export const tap = 48; // every button; links at least 44

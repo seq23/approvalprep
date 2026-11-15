@@ -52,7 +52,7 @@ export default function Answer() {
     {state === 'loading' ? <Text style={type.sub}>Opening your letter…</Text> : null}
     {state === 'error' ? <><Text style={type.body}>Your mailed letter could not be opened.</Text><Button label="Try again ›" onPress={() => setRetry(value => value + 1)} /><Button label="My letters ›" onPress={() => router.replace('/mine')} /></> : null}
     {state === 'ready' && letter ? <>
-      <Text style={type.body}>Mailed on {showDate(new Date(`${letter.sentDate}T12:00:00`))}.{due ? ` Day 30 ${due > new Date() ? 'is' : 'was'} ${showDate(due)}.` : ''}</Text>
+      <Text style={type.letter}>Mailed on {showDate(new Date(`${letter.sentDate}T12:00:00`))}.{due ? ` Day 30 ${due > new Date() ? 'is' : 'was'} ${showDate(due)}.` : ''}</Text>
       <Text style={type.sub}>These dates come from what you entered.</Text>
       {letter.answerNote ? <Text style={type.sub}>Saved answer: {letter.answerNote}. Change answer below.</Text> : null}
       <Text style={type.section}>What did they answer?</Text>

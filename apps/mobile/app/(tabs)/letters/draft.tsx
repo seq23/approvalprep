@@ -75,7 +75,7 @@ export default function Draft() {
       {dispute && !mailed ? <Sheet>
         <Text style={type.subhead}>Before you mail it</Text>
         {(BEFORE_YOU_MAIL as string[]).map(line => <Text key={line} style={type.body}>• {line}</Text>)}
-        <Text style={type.body}>If you mail it today, the bureau’s answer is due around {showDate(answerDue())}.</Text>
+        <Text style={type.letter}>If you mail it today, the bureau’s answer is due around {showDate(answerDue())}.</Text>
         <Text style={type.sub}>A bureau has 30 days from the day it gets your dispute. This date is a guide based on today, not a confirmed deadline.</Text>
       </Sheet> : null}
       <Button label={mailed ? 'Change sent details ›' : 'Mark as sent ›'} onPress={() => router.push({ pathname: '/letters/sent', params: { id: letter.id } })} />
@@ -90,7 +90,7 @@ export default function Draft() {
         <Button label="Make a copy to change ›" disabled={busy} onPress={() => void copy({})} />
       </> : <>
         <Text style={type.sub}>Tap one to change it.</Text>
-        {answerRows(questions, letter.answers).map((row, step) => <Row key={row.title} title={row.title} sub={row.sub} onPress={() => router.push({ pathname: '/letters/[kind]', params: { kind: letter.kind, id: letter.id, step: String(step), edit: '1' } })} />)}
+        {answerRows(questions, letter.answers).map((row, step) => <Row key={row.title} answer title={row.title} sub={row.sub} onPress={() => router.push({ pathname: '/letters/[kind]', params: { kind: letter.kind, id: letter.id, step: String(step), edit: '1' } })} />)}
       </>}
     </> : <Text style={type.sub}>{message}</Text>}
   </Screen>;

@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Linking, Text, View } from 'react-native';
-import { Button, Field, Row, Screen } from '../../../src/ui';
+import { Button, Field, Row, Screen, flushFields, useTypedText } from '../../../src/ui';
 import { type, space, color } from '../../../src/theme';
 import { PRIVACY_LINE } from '../../../src/copy';
 import { MORE_LINKS, deletionController } from '../../../src/more';
@@ -26,10 +26,10 @@ export default function More() {
   const [restoring, setRestoring] = useState(false);
   const [restored, setRestored] = useState('');
   const prices = usePrices();
-  const [order, setOrder] = useState('');
+  const [order, setOrder, orderNow] = useTypedText();
   const [unlocking, setUnlocking] = useState(false);
   const [unlocked, setUnlocked] = useState('');
-  const [buyerEmail, setBuyerEmail] = useState('');
+  const [buyerEmail, setBuyerEmail, buyerEmailNow] = useTypedText();
   const [emailing, setEmailing] = useState(false);
   const [emailed, setEmailed] = useState('');
   const [exporting, setExporting] = useState(false);
@@ -37,14 +37,20 @@ export default function More() {
   async function unlockOrder() {
     if (unlocking) return;
     setUnlocking(true); setUnlocked('');
-    try { setUnlocked(websiteUnlockMessage(await unlockWebsiteOrder(order, { saveKit: saveDeliveredKit, saveFiles: saveKitFiles, installBundle }), PREVIEW_ENABLED)); setOrder(''); }
+    await flushFields();
+    const pasted = orderNow();
+    if (!pasted.trim()) { setUnlocking(false); setUnlocked('Paste the link from your download page first.'); return; }
+    try { setUnlocked(websiteUnlockMessage(await unlockWebsiteOrder(pasted, { saveKit: saveDeliveredKit, saveFiles: saveKitFiles, installBundle }), PREVIEW_ENABLED)); setOrder(''); }
     catch (error) { setUnlocked(websiteUnlockMessage(error instanceof Error ? error : Error('WEBSITE_UNLOCK_UNAVAILABLE'), PREVIEW_ENABLED)); }
     finally { setUnlocking(false); }
   }
   async function emailLinks() {
     if (emailing) return;
     setEmailing(true); setEmailed('');
-    try { setEmailed(await emailWebsiteOrderLinks(buyerEmail, PREVIEW_ENABLED)); }
+    await flushFields();
+    const typed = buyerEmailNow();
+    if (!typed.trim()) { setEmailing(false); setEmailed('Enter the email you paid with first.'); return; }
+    try { setEmailed(await emailWebsiteOrderLinks(typed, PREVIEW_ENABLED)); }
     finally { setEmailing(false); }
   }
   async function exportAll() {
@@ -79,12 +85,12 @@ export default function More() {
     <Text style={type.section} accessibilityRole="header">Bought on approvalprep.com?</Text>
     <Text style={type.sub}>A kit you bought on the website opens here at no charge. Paste the link from your download page or from the email "Your ApprovalPrep download link". Only the order code in it is sent.</Text>
     <Field label="Your order link" kind="url" value={order} onChangeText={text => { setOrder(text); setUnlocked(''); }} />
-    <Button label={unlocking ? 'Checking…' : 'Open my website kit ›'} disabled={unlocking || !order.trim()} onPress={() => void unlockOrder()} />
+    <Button label={unlocking ? 'Checking…' : 'Open my website kit ›'} disabled={unlocking} onPress={() => void unlockOrder()} />
     {unlocked ? <Text accessibilityRole="alert" style={type.sub}>{unlocked}</Text> : null}
     <Text style={type.body}>No link? Enter the email you paid with</Text>
     <Text style={type.sub}>We email the link for any kit bought with that address. Only the email you type is sent.</Text>
     <Field label="Email you paid with" kind="email" value={buyerEmail} onChangeText={text => { setBuyerEmail(text); setEmailed(''); }} />
-    <Button label={emailing ? 'Sending…' : 'Email me my link ›'} disabled={emailing || !buyerEmail.trim()} onPress={() => void emailLinks()} />
+    <Button label={emailing ? 'Sending…' : 'Email me my link ›'} disabled={emailing} onPress={() => void emailLinks()} />
     {emailed ? <Text accessibilityRole="alert" style={type.sub}>{emailed}</Text> : null}
     <Text style={type.section} accessibilityRole="header">Your letters</Text>
     <Text style={type.sub}>Your letters and mailing dates are kept only on this phone. Deleting the app deletes them. Save a copy you can keep.</Text>

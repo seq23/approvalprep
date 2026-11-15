@@ -41,8 +41,18 @@ function mountField() {
     return require(id);
   }, output, output.exports);
   const find = (node: any): any => !node || typeof node !== 'object' ? null : node.type === TextInput ? node : [node.props?.children].flat(9).map(find).find(Boolean) ?? null;
-  // The phone's box: its own text, re-created when the app gives it a new key.
-  const phone = { text: '', key: undefined as unknown, props: {} as any };
+  // The phone's box: its own text, re-created when the app gives it a new key. Ending editing (blur)
+  // sends end-of-editing and then blur, each carrying the box's whole text, `endLag` ms later (a busy
+  // JS thread); `endLag: null` models a box whose end-of-editing never arrives.
+  const phone = { text: '', key: undefined as unknown, props: {} as any, focused: false, endLag: 30 as number | null, instance: {} as any };
+  phone.instance = {
+    isFocused: () => phone.focused,
+    blur: () => {
+      if (!phone.focused) return; phone.focused = false;
+      if (phone.endLag === null) return;
+      setTimeout(() => { const text = phone.text; phone.props.onEndEditing?.({ nativeEvent: { text } }); phone.props.onBlur?.({ nativeEvent: { text } }); }, phone.endLag);
+    },
+  };
   const render = (props: any) => {
     do {
       at = 0; dirty = false; effects = [];
@@ -50,25 +60,27 @@ function mountField() {
       if (input.key !== phone.key) { phone.key = input.key; phone.text = input.props.defaultValue ?? input.props.value ?? ''; }
       if (input.props.value !== undefined) phone.text = input.props.value;
       phone.props = input.props;
+      if (input.props.ref && typeof input.props.ref === 'object') input.props.ref.current = phone.instance;
       for (const run of effects) run();
     } while (dirty);
   };
-  return { render, phone };
+  return { render, phone, flushFields: (wait?: number): Promise<void> => output.exports.flushFields(wait) };
 }
 
 /** A parent that saves each change and redraws its field `lag` keys late, then taps Next. */
-function typeFast(words: string, opts: { lag?: number; dropAfter?: number; kind?: string } = {}) {
-  const { render, phone } = mountField();
+function typeFast(words: string, opts: { lag?: number; dropAfter?: number; kind?: string; multiline?: boolean } = {}) {
+  const { render, phone, flushFields } = mountField();
   let heard = '';
   const history: string[] = [''];
-  const props = (value: string) => ({ label: 'Answer', kind: opts.kind, value, onChangeText: (v: string) => { heard = v; history.push(v); } });
+  const props = (value: string) => ({ label: 'Answer', kind: opts.kind, multiline: opts.multiline, value, onChangeText: (v: string) => { heard = v; history.push(v); } });
   render(props(''));
+  phone.focused = true; phone.props.onFocus?.({ nativeEvent: {} });
   [...words].forEach((ch, n) => {
     phone.text += ch;
     if (opts.dropAfter === undefined || n < opts.dropAfter) phone.props.onChangeText(phone.text);
     render(props(history[Math.max(0, history.length - 1 - (opts.lag ?? 0))]));
   });
-  return { get heard() { return heard; }, phone, render, props, blur: () => { phone.props.onEndEditing?.({ nativeEvent: { text: phone.text } }); phone.props.onBlur?.({ nativeEvent: { text: phone.text } }); render(props(heard)); } };
+  return { get heard() { return heard; }, phone, render, props, flushFields, blur: () => { phone.props.onEndEditing?.({ nativeEvent: { text: phone.text } }); phone.props.onBlur?.({ nativeEvent: { text: phone.text } }); render(props(heard)); } };
 }
 
 test('fast typing with the screen redrawing a few keys late saves every letter, and Next reads it at once', () => {
@@ -102,4 +114,30 @@ test('the SSN box passes on at most 4 digits as she types and shows them once sh
   typed.blur();
   assert.equal(typed.phone.text, '1234');
   assert.equal(typed.heard, '1234');
+});
+
+// Sim retest 2 (14 Nov 2026, a heavily loaded Mac): the long Q6 answer typed fast with Next tapped at
+// once was saved as "…shows the payment cle". The box held the rest; its change events had not
+// reached the app when Next read the answer. Next now ends editing first and waits for the box's text.
+test('letters still in flight when she taps Next are saved from the end-of-editing text (long multiline answer)', async () => {
+  const words = 'I paid on time; the bank statement shows the payment cleared March 2';
+  for (const lag of [0, 2]) {
+    const typed = typeFast(words, { multiline: true, lag, dropAfter: words.indexOf('cle') + 3 });
+    assert.equal(typed.heard, 'I paid on time; the bank statement shows the payment cle', 'the app is behind the box when Next is tapped');
+    await typed.flushFields();
+    assert.equal(typed.heard, words, `Next saves the whole answer (lag ${lag})`);
+    assert.equal(typed.phone.focused, false, 'the box has finished editing');
+  }
+});
+
+test('Next still goes on when the box never sends its end-of-editing text, and at once when no box is open', async () => {
+  const typed = typeFast('Capital One', { dropAfter: 7 });
+  typed.phone.endLag = null;
+  const started = Date.now();
+  await typed.flushFields(40);
+  assert.ok(Date.now() - started < 1000, 'the wait is bounded');
+  assert.equal(typed.heard, 'Capital', 'it goes on with what it heard');
+  const idle = Date.now();
+  await typed.flushFields(5000);
+  assert.ok(Date.now() - idle < 1000, 'no focused box: no wait');
 });
