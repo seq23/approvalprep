@@ -55,11 +55,12 @@ const s = StyleSheet.create({
 /** One action per row; the whole row is the accessible tap target. Pass `selected` only on a real
  * choice (bureau, mail method, answer): only those rows draw ○ / ●, so a plain list never looks like
  * one she must pick from (finding #16). */
-export function Row({ title, sub, onPress, selected }: { title: string; sub?: string; onPress: () => void; selected?: boolean }) {
+/** `answer`: the sub line is her own answer, shown in the zero-safe face (no "Ø3/14/1988"). */
+export function Row({ title, sub, onPress, selected, answer = false }: { title: string; sub?: string; onPress: () => void; selected?: boolean; answer?: boolean }) {
   const choice = selected !== undefined;
   return <Pressable accessibilityRole={choice ? 'radio' : 'button'} accessibilityState={choice ? { selected, checked: selected } : {}} onPress={onPress} style={{ minHeight: tap, flexDirection: 'row', alignItems: 'center', gap: space[3], paddingVertical: space[3], borderBottomWidth: 1, borderColor: color.rule }}>
     {choice ? <Text accessibilityElementsHidden style={{ color: color.carbon }}>{selected ? '●' : '○'}</Text> : null}
-    <View style={{ flex: 1 }}><Text style={type.subhead}>{title}</Text>{sub ? <Text style={type.sub}>{sub}</Text> : null}</View>
+    <View style={{ flex: 1 }}><Text style={type.subhead}>{title}</Text>{sub ? <Text style={answer ? type.answer : type.sub}>{sub}</Text> : null}</View>
     <Text accessibilityElementsHidden style={{ color: color.carbon }}>›</Text>
   </Pressable>;
 }
@@ -80,7 +81,8 @@ export const keyboardFor = (kind: FieldKind) => KEYBOARD[kind];
  * the app only heard "Jordan" (sim retest). The parent hears every change, and again on blur / end
  * of editing with the box's own text, so a change event the phone never sent is still saved before
  * Next. Only a genuinely new value from the parent (a cleared box, a reloaded draft) is put back,
- * by re-creating the box; the parent echoing something she typed earlier is never mistaken for one. */
+ * by re-creating the box; the parent echoing something she typed earlier is never mistaken for one.
+ * Every Next / Save / Send calls `flushFields()` first and reads its value after it (see below). */
 export function Field({ label, value, onChangeText, defaultHint, multiline = false, spoken, email = false, kind = email ? 'email' : 'text' }: { label: string; value: string; onChangeText: (value: string) => void; defaultHint?: string; multiline?: boolean; spoken?: string; email?: boolean; kind?: FieldKind }) {
   const labelId = useId();
   // What the box holds now, as last reported by the phone (after the SSN mask).
@@ -99,17 +101,56 @@ export function Field({ label, value, onChangeText, defaultHint, multiline = fal
   // The mask is applied to what the parent hears on every key, but written into the box only when
   // she leaves it, so it never fights the keys she is typing.
   const settle = (raw: unknown) => {
-    if (typeof raw !== 'string') return;
-    const next = masked(raw); hand(next);
-    if (next !== raw) setBox(b => ({ text: next, n: b.n + 1 }));
+    focused.current = false;
+    if (typeof raw === 'string') {
+      const next = masked(raw); hand(next);
+      if (next !== raw) setBox(b => ({ text: next, n: b.n + 1 }));
+    }
+    // End of editing comes before blur, so the box's full text is handed up before anyone waiting on it reads.
+    for (const done of waiting.current.splice(0)) done();
   };
+  const input = useRef<{ blur?(): void; isFocused?(): boolean } | null>(null);
+  const focused = useRef(false);
+  const waiting = useRef<(() => void)[]>([]);
+  useEffect(() => {
+    const me: OpenField = {
+      focused: () => focused.current || !!input.current?.isFocused?.(),
+      finish: wait => new Promise<void>(done => {
+        // No end-of-editing in time: go on with what was heard; the box was told to blur, so it is closed.
+        const timer = setTimeout(() => { focused.current = false; done(); }, wait);
+        waiting.current.push(() => { clearTimeout(timer); done(); });
+        input.current?.blur?.();
+      }),
+    };
+    openFields.add(me);
+    return () => { openFields.delete(me); };
+  }, []);
   return <View style={{ gap: space[2] }}>
     <Text nativeID={labelId} style={type.label}>{label}</Text>
     {defaultHint ? <Text style={type.sub}>{defaultHint}</Text> : null}
-    <TextInput key={box.n} accessibilityLabel={spoken ?? label} accessibilityLabelledBy={labelId} defaultValue={box.text} onChangeText={raw => hand(masked(raw))}
+    <TextInput key={box.n} ref={input as never} onFocus={() => { focused.current = true; }} accessibilityLabel={spoken ?? label} accessibilityLabelledBy={labelId} defaultValue={box.text} onChangeText={raw => hand(masked(raw))}
       onEndEditing={e => settle(e?.nativeEvent?.text)} onBlur={e => settle((e?.nativeEvent as { text?: unknown } | undefined)?.text)}
-      multiline={multiline} {...KEYBOARD[kind]} style={[type.body, { minHeight: tap, padding: space[3], borderWidth: 1, borderColor: color.rule, backgroundColor: color.paperRaised, borderRadius: radius.sm }]} />
+      multiline={multiline} {...KEYBOARD[kind]} style={[type.letter, { minHeight: tap, padding: space[3], borderWidth: 1, borderColor: color.rule, backgroundColor: color.paperRaised, borderRadius: radius.sm }]} />
   </View>;
+}
+
+/** A Field on screen that a Next / Save / Send can make finish editing. */
+interface OpenField { focused(): boolean; finish(wait: number): Promise<void> }
+const openFields = new Set<OpenField>();
+/** How long a Next waits for the box's end-of-editing text before going on with what it has. */
+export const FLUSH_WAIT_MS = 500;
+/** Call before reading any typed value on Next, Save or Send. When the phone is busy, the box can hold
+ * letters whose change events have not reached the app yet (sim retest: "…shows the payment cle" saved
+ * for "…cleared March 2"). This ends editing in the focused box and waits for its end-of-editing
+ * event, which carries the box's whole text, so the parent has heard every letter when it resolves. */
+export function flushFields(wait = FLUSH_WAIT_MS): Promise<void> {
+  return Promise.all([...openFields].filter(f => f.focused()).map(f => f.finish(wait))).then(() => {});
+}
+/** A screen's typed value, also readable at once (`now()`) after flushFields(), before the screen redraws. */
+export function useTypedText(initial = ''): [string, (value: string) => void, () => string] {
+  const [value, setValue] = useState(initial);
+  const latest = useRef(initial);
+  return [value, next => { latest.current = next; setValue(next); }, () => latest.current];
 }
 
 export function Sheet({ children }: { children: ReactNode }) {

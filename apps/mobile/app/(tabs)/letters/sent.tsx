@@ -2,7 +2,7 @@ import { storageDeadline } from '../../../src/phoneDatabase';
 import { router, useLocalSearchParams, useFocusEffect } from 'expo-router';
 import { useCallback, useState } from 'react';
 import { Platform, Switch, Text, View } from 'react-native';
-import { Button, Field, Row, Screen, Sheet } from '../../../src/ui';
+import { Button, Field, Row, Screen, Sheet, flushFields, useTypedText } from '../../../src/ui';
 import { type, space } from '../../../src/theme';
 import { savedLetters } from '../../../src/savedLetters';
 import { loadDeliveredKit } from '../../../src/kitTemplates';
@@ -25,7 +25,7 @@ export default function Sent() {
   const [date, setDate] = useState(dateInput());
   const [method, setMethod] = useState<MailMethod>('Certified mail');
   const [choosing, setChoosing] = useState(false);
-  const [tracking, setTracking] = useState('');
+  const [tracking, setTracking, trackingNow] = useTypedText();
   const [remind, setRemind] = useState(false);
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState('');
@@ -53,7 +53,8 @@ export default function Sent() {
     if (!letter || busy) return;
     setBusy(true); setMessage('');
     try {
-      const result = await markSent(letter, { date, method, tracking, remind }, {
+      await flushFields();
+      const result = await markSent(letter, { date, method, tracking: trackingNow(), remind }, {
         ownsKit: async () => !!await loadDeliveredKit(), update: (await savedLetters()).update, reminders: localReminders,
       });
       setLetter(result.letter);
@@ -76,7 +77,7 @@ export default function Sent() {
         {choosing ? <Sheet>{MAIL_METHODS.map(value => <Row key={value} title={value} selected={method === value} onPress={() => { setMethod(value); setChoosing(false); }} />)}</Sheet> : null}
         <Field label="Tracking number (optional)" value={tracking} onChangeText={setTracking} />
         {due && bureau ? <>
-          <Text style={type.body}>{`Answer date: ${due}`}</Text>
+          <Text style={type.letter}>{`Answer date: ${due}`}</Text>
           <Text style={type.sub}>A credit bureau has 30 days from the day it gets your letter. This is a reminder based on the mailing date you enter, not a confirmed deadline.</Text>
         </> : null}
         {!owned ? <>

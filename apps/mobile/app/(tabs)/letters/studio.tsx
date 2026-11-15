@@ -2,7 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
 import { Platform, Share, Text } from 'react-native';
 import * as Clipboard from 'expo-clipboard';
-import { Button, Field, Row, Screen, Sheet } from '../../../src/ui';
+import { Button, Field, Row, Screen, Sheet, flushFields } from '../../../src/ui';
 import { type } from '../../../src/theme';
 import { HONEST_LIMIT, REQUEST_LINE } from '../../../src/copy';
 import { isCreditLetter } from '../../../src/letters';
@@ -54,8 +54,10 @@ export default function Studio() {
     pending.current = write.current!(next).then(() => { if (version === revision.current) { setStored(true); setNote('Saved on this phone.'); } })
       .catch(() => { if (version === revision.current) setNote('Your latest answer could not be saved. Type it again to retry.'); });
   }
-  // The next step opens only after the last answer is on the phone, so it reads what she just typed.
-  const go = (extra: Record<string, string>) => { void pending.current.finally(() => router.push({ pathname: '/letters/studio', params: { situation: situation!.id, id: params.id!, ...extra } })); };
+  // The next step opens only after the box has finished editing (its last letters handed up, even when
+  // the phone is slow) and that answer is on the phone, so the next screen reads what she just typed.
+  const settled = () => flushFields().then(() => pending.current.catch(() => {}));
+  const go = (extra: Record<string, string>) => { void settled().then(() => router.push({ pathname: '/letters/studio', params: { situation: situation!.id, id: params.id!, ...extra } })); };
   async function choose(next: string, fresh = false) {
     if (next === 'credit-dispute') { router.push({ ...await savedLetters().then(store => letterHref(store, 'bureau-dispute')).catch(() => ({ params: { kind: 'bureau-dispute' } })), pathname: '/letters/[kind]' }); return; }
     let last: SavedLetter | null = null;
@@ -105,7 +107,7 @@ export default function Studio() {
         {stored ? <Button label="Open My letters ›" onPress={() => router.navigate('/mine')} /> : null}
         <Text style={type.section} accessibilityRole="header">Your answers</Text>
         <Text style={type.sub}>Tap one to change it.</Text>
-        {situation.fields.map((f, n) => <Row key={f.name} title={f.label} sub={(letter!.answers[f.name] ?? '').trim().replace(/\s+/g, ' ').slice(0, 120) || 'Not answered yet'} onPress={() => go({ step: String(n), edit: '1' })} />)}
+        {situation.fields.map((f, n) => <Row key={f.name} answer title={f.label} sub={(letter!.answers[f.name] ?? '').trim().replace(/\s+/g, ' ').slice(0, 120) || 'Not answered yet'} onPress={() => go({ step: String(n), edit: '1' })} />)}
         <Button label={`What the ${draft.kitName} adds ${showKit ? '▴' : '▾'}`} onPress={() => setShowKit(!showKit)} />
         {showKit ? <Sheet>
           <Text style={type.subhead}>{draft.kitName}</Text>
@@ -120,7 +122,7 @@ export default function Studio() {
       {letter ? <>
         <Field label={`Question ${step + 1} of ${situation.fields.length}`} spoken={field.label} defaultHint={field.hint} multiline={field.kind === 'long' || field.kind === 'lines'} value={letter.answers[field.name] ?? ''} onChangeText={value => persist({ ...letter, answers: { ...letter.answers, [field.name]: value } })} />
         <Text style={type.sub}>You may leave a blank to fill before sending.</Text>
-        {editing ? <Button primary label="Save and read my draft ›" onPress={() => { void pending.current.finally(() => router.back()); }} />
+        {editing ? <Button primary label="Save and read my draft ›" onPress={() => { void settled().then(() => router.back()); }} />
           : <Button primary label={step === situation.fields.length - 1 ? 'Read my draft ›' : 'Next question ›'} onPress={() => go(step === situation.fields.length - 1 ? { view: 'draft' } : { step: String(step + 1) })} />}
         {step > 0 && !editing ? <Button label="← Previous question" onPress={() => router.back()} /> : null}
         {resumed && step === 0 && stored ? <Button label="Start a blank one instead" onPress={() => void choose(situation.id, true)} /> : null}

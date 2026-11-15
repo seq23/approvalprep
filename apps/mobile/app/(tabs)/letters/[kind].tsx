@@ -2,7 +2,7 @@ import { storageDeadline } from '../../../src/phoneDatabase';
 import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Text } from 'react-native';
-import { Button, Field, Row, Screen } from '../../../src/ui';
+import { Button, Field, Row, Screen, flushFields } from '../../../src/ui';
 import { type } from '../../../src/theme';
 import { HONEST_LIMIT, REQUEST_LINE } from '../../../src/copy';
 import { kitOfferFor } from '../../../src/offers';
@@ -87,7 +87,9 @@ export default function Questions() {
   // The next screen opens only after the last answer is on the phone, so it reads what she just typed.
   // A failed save keeps her here, with "Try saving again". Next stays tappable while a save runs (it
   // waits for it): disabling it on each key swallowed a quick tap and redrew the screen on every key.
-  const after = (then: () => void) => { pending.current.then(then, () => {}); };
+  // flushFields() first: a slow phone can still hold letters it has not reported (sim: "…payment cle").
+  const after = (then: () => void) => { void flushFields().then(() => pending.current).then(then, () => {}); };
+  const finish = () => { void flushFields().then(() => { persist(latest.current!); after(() => router.push({ pathname: '/letters/draft', params: { id: draftId.current } })); }); };
   if (loadError) return <Screen route="/letters/[kind]" label="Write a letter" title="Your draft could not be opened">
     <Text accessibilityRole="alert" style={type.sub}>{message}</Text>
     <Button label="Try again" onPress={() => setAttempt(value => value + 1)} />
@@ -116,7 +118,7 @@ export default function Questions() {
       <Text style={type.sub}>You can leave a blank. It will appear in brackets for you to fill before mailing.</Text>
       {failed ? <Button label="Try saving again" onPress={() => persist(latest.current!)} /> : null}
       {editing ? <Button primary disabled={failed} label="Save and read my draft ›" onPress={() => after(() => router.back())} />
-        : <Button primary disabled={failed} label={last ? 'Read my draft ›' : 'Next question ›'} onPress={() => last ? (persist(latest.current!), after(() => router.push({ pathname: '/letters/draft', params: { id: draftId.current } }))) : go(step + 1)} />}
+        : <Button primary disabled={failed} label={last ? 'Read my draft ›' : 'Next question ›'} onPress={() => last ? finish() : go(step + 1)} />}
       {step > 0 && !editing ? <Button label="← Previous question" onPress={() => router.back()} /> : null}
       {resumed === '1' && step === 0 && stored ? <Button label="Start a blank one instead" onPress={() => router.replace({ pathname: '/letters/[kind]', params: { kind, id: newId() } })} /> : null}
     </> : null}
