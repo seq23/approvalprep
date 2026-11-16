@@ -1,38 +1,20 @@
 {
   "schema": "search-loop-week-v1",
-  "week": "2026-W46",
+  "week": "2026-W47",
   "site": "approvalprep.com",
-  "generated_at": "2026-11-15T11:13:01.613Z",
+  "generated_at": "2026-11-16T11:20:18.225Z",
   "state": "running",
-  "published": 3,
-  "indexed": "not read: no page old enough to inspect yet (14 days)",
+  "published": 4,
+  "indexed": 0,
   "pace": 10,
   "ai_visitors": 0,
-  "ai_bot_hits": 757,
+  "ai_bot_hits": 733,
   "conversions": "not read: no conversion source configured for this site (form fills / checkouts)",
   "wins": 0,
   "undone": 0,
   "merged": 0,
   "held_by_cap": 29,
   "redirected": [
-    {
-      "query": "what documents does mortgage lender need",
-      "strengthen": "https://approvalprep.com/questions/what-documents-do-mortgage-lenders-require/",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-09"
-    },
-    {
-      "query": "how to write a letter to credit bureau",
-      "strengthen": "https://approvalprep.com/questions/how-to-send-letters-to-credit-bureaus/",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-09"
-    },
-    {
-      "query": "get approved for apartment with bad credit",
-      "strengthen": "https://approvalprep.com/questions/how-to-get-approved-for-loan-with-bad-credit/",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-09"
-    },
     {
       "query": "mortgage paperwork checklist",
       "strengthen": "https://approvalprep.com/questions/mortgage-checklist/",
@@ -50,16 +32,31 @@
       "strengthen": "https://approvalprep.com/questions/how-to-send-letters-to-credit-bureaus/",
       "matched_by": "high token overlap (0.60 >= 0.6)",
       "at": "2026-11-11"
+    },
+    {
+      "query": "how to dispute a credit report error with equifax",
+      "strengthen": "https://approvalprep.com/questions/how-to-dispute-a-credit-report-error/",
+      "matched_by": "high token overlap (0.80 >= 0.6)",
+      "at": "2026-11-16"
+    },
+    {
+      "query": "how to dispute a credit report error experian",
+      "strengthen": "https://approvalprep.com/questions/how-to-dispute-a-credit-report-error/",
+      "matched_by": "high token overlap (0.80 >= 0.6)",
+      "at": "2026-11-16"
     }
   ],
   "cap": {
-    "max_live_pages": 25,
-    "live": 25,
-    "room": 0,
-    "why": "up from 22 to 25: Google impressions 55 in the last 28 days beat 10 in the 28 before"
+    "max_live_pages": 28,
+    "live": 27,
+    "room": 1,
+    "why": "up from 25 to 28: Google impressions 43 in the last 28 days beat 27 in the 28 before"
   },
   "notes": [
-    "BUILD held by the cap: 25 live engine page(s), cap 25 (up from 22 to 25: Google impressions 55 in the last 28 days beat 10 in the 28 before); 10 more page(s) today would have gone over it, those searches stay queued"
+    "cap: up from 25 to 28: Google impressions 43 in the last 28 days beat 27 in the 28 before",
+    "BUILD distinct gate: 2 search(es) had the same intent as an existing page and became strengthen briefs, not new pages (pages.json \"redirected\")",
+    "BUILD gate notes (not blocking): 2 published page(s) are outside a length or style aim; each is listed under gate_notes in pages.json",
+    "IndexNow: 2 new page(s) not live yet; submitted when they answer 200"
   ],
   "lanes": {
     "ratio": {
@@ -73,10 +70,10 @@
       "hit_rate": "not read: no page in this lane has reached its 2-week check yet"
     },
     "striking": {
-      "pages": 25,
-      "measured": 0,
+      "pages": 27,
+      "measured": 10,
       "top3": 0,
-      "hit_rate": "not read: no page in this lane has reached its 2-week check yet"
+      "hit_rate": 0
     },
     "weights": {
       "neighbour": 35,
@@ -87,5 +84,5 @@
     "weight_changes": [],
     "competition": "ok: 15 top-10 read(s) via brave"
   },
-  "run_url": "https://github.com/seq23/approvalprep/actions/runs/43707824816"
+  "run_url": "https://github.com/seq23/approvalprep/actions/runs/43856800093"
 }

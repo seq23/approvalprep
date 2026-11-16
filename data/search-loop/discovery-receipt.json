@@ -1,8 +1,8 @@
 {
   "schema": "search-loop-discovery-v1",
   "site": "approvalprep.com",
-  "week": "2026-W46",
-  "generated_at": "2026-11-09T11:14:51.402Z",
+  "week": "2026-W47",
+  "generated_at": "2026-11-16T11:20:18.225Z",
   "paid_calls": 0,
   "cost_usd": 0,
   "hosts": {
@@ -19,14 +19,14 @@
       "cost_usd": 0
     },
     "suggestqueries.google.com": {
-      "calls": 40,
-      "ok": 40,
+      "calls": 80,
+      "ok": 80,
       "failed": 0,
       "cost_usd": 0
     },
     "api.bing.com": {
-      "calls": 40,
-      "ok": 40,
+      "calls": 80,
+      "ok": 80,
       "failed": 0,
       "cost_usd": 0
     },
@@ -38,16 +38,24 @@
     }
   },
   "sources": {
-    "search_console": "ok: 16 rows",
-    "bing_webmaster": "ok: 12 rows",
-    "easy_wins": "ok: 0 easy win(s) in Search Console",
+    "search_console": "ok: 15 rows",
+    "bing_webmaster": "ok: 13 rows",
+    "easy_wins": "ok: 1 easy win(s) in Search Console",
     "suggestqueries.google.com": "ok",
     "api.bing.com": "ok",
-    "relevance_screen": "ok: kept 66 of 148 (free model)",
+    "relevance_screen": "ok: kept 119 of 150 (free model)",
     "top10": "ok: 15 top-10 read(s) via brave"
   },
+  "seeds": {
+    "planned": 265,
+    "asked": 80,
+    "topics": 30,
+    "topics_asked": 30,
+    "priority_topics": 12,
+    "priority_targets": 65
+  },
   "notes": [
-    "autocomplete stopped at its budget of 80 calls"
+    "autocomplete stopped at its budget of 160 calls (80 of 265 planned questions asked)"
   ],
   "competition": "ok: 15 top-10 read(s) via brave",
   "lanes": {
@@ -55,8 +63,8 @@
       "can_be_one": 2,
       "striking": 1
     },
-    "can_be_one": 3,
-    "striking": 63,
+    "can_be_one": 22,
+    "striking": 97,
     "weights": {
       "neighbour": 35,
       "unanswered": 30,
@@ -65,9 +73,9 @@
     }
   },
   "counts": {
-    "candidates": 176,
-    "targets": 66,
-    "strengthen_candidates": 13,
+    "candidates": 728,
+    "targets": 119,
+    "strengthen_candidates": 19,
     "dropped_shared_audience": 0
   }
 }
