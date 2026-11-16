@@ -6,7 +6,38 @@ const { route, copy } = Astro.props;
 const effectiveDate = "July 8, 2026";
 const legalPolicies = {
   "/privacy": {
+    // The app section mirrors the App Store privacy label and the code it was read from:
+    // apps/mobile/src/purchases (RevenueCat configured with diagnostics and device identifiers off;
+    // websiteUnlock.ts sends only the order code or the typed email) and functions/api/app-*.js +
+    // email-download-links.js (no buyer list; Stripe searched read-only; hashed rate-limit buckets).
+    effectiveDate: "November 16, 2026",
     summary: "ApprovalPrep does not ask users to create accounts for public self-service tools and does not store letter answers, completed drafts, uploaded documents, or personal application packets.",
+    sections: [
+      {
+        heading: "The ApprovalPrep app (iPhone)",
+        paragraphs: [
+          "The app works without an account. Your letters, answers, drafts, mailing dates and reminders are kept on your own phone. They are not sent to ApprovalPrep, and the reminder is a notification your phone sets for itself.",
+          "The app collects only what it needs to sell you a kit and open what you bought:"
+        ],
+        items: [
+          "Purchase history. When you buy a kit in the app, Apple processes the payment. We never see your card or your Apple ID. The purchase is recorded through RevenueCat, our service provider for in-app purchases, so the app can unlock your kit, restore it on a new phone, and so we can count sales. It is linked to your purchases, not to your name.",
+          "An anonymous app user ID. RevenueCat gives the app a random ID. The app sends it to our server only to check that a kit is paid for before it hands over the files. It is not linked to your name or email.",
+          "Your email address, only if you type it. If you bought a kit on approvalprep.com and lost the link, you can type the email you paid with. We use it once to look up your order with Stripe and email the link to that address only. We keep no list of buyers; a one-way scrambled copy of the address is kept for a short time to stop repeated tries.",
+          "An order code, only if you paste it. If you paste the link from a website purchase, the app sends only the order code in it, so our server can check the order with Stripe and open the kit at no charge.",
+          "No tracking and no ad networks. The app does not track you across other apps or websites, has no advertising, and does not sell or share your information. RevenueCat’s device identifier collection and diagnostics are switched off. Like the website, our server keeps a one-way scrambled copy of your network address for a short time to stop abuse."
+        ]
+      },
+      {
+        heading: "Deleting your app data",
+        paragraphs: [
+          "Deleting the app removes everything kept on your phone. To ask us to delete the purchase record linked to your app user ID, email info@approvalprep.com with the words “delete my app data”, the kit you bought and roughly when. Apple keeps its own record of App Store purchases under Apple’s privacy policy."
+        ],
+        links: [
+          { href: "https://www.revenuecat.com/privacy/", label: "RevenueCat privacy policy" },
+          { href: "https://www.apple.com/legal/privacy/", label: "Apple privacy policy" }
+        ]
+      }
+    ],
     covers: [
       "What information may be processed to operate checkout, downloads, support, security, and analytics.",
       "What ApprovalPrep intentionally does not store: customer letter answers, completed drafts, uploaded documents, or private application packets.",
