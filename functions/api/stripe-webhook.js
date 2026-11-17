@@ -17,8 +17,8 @@ function timingSafeEqual(a,b){
 // open a download in the live products database (16 Nov 2026: 97 test retries failed on the live secret).
 async function verifyStripeSignature(request, env, body){
   const live=await verifyWith(env.STRIPE_WEBHOOK_SECRET, request, body);
-  if(live.ok||!env.STRIPE_WEBHOOK_SECRET_TEST) return live;
-  const test=await verifyWith(env.STRIPE_WEBHOOK_SECRET_TEST, request, body);
+  if(live.ok||!env.STRIPE_TEST_WEBHOOK_SECRET) return live;
+  const test=await verifyWith(env.STRIPE_TEST_WEBHOOK_SECRET, request, body);
   return test.ok ? {ok:true,test:true} : live;
 }
 async function verifyWith(secret, request, body){

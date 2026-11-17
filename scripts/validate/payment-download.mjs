@@ -150,10 +150,10 @@ if (!slugPage.includes("data-discount-code")) fail("[payment] pricing page must 
     if ((await refund("cs_test_paid")).status !== 200) fail("[payment] charge.refunded must be accepted by the webhook");
     // A test-mode event (signed with the TEST secret) is acknowledged with 200 but opens no download.
     {
-      const tenv = { ...env, STRIPE_WEBHOOK_SECRET_TEST: "whsec_testmode" };
+      const tenv = { ...env, STRIPE_TEST_WEBHOOK_SECRET: "whsec_testmode" };
       const traw = JSON.stringify({ type: "checkout.session.completed", data: { object: { id: "cs_testmode_only", payment_status: "paid", amount_total: 999, currency: "usd", metadata: {} } } });
       const tt = Math.floor(Date.now() / 1000);
-      const tsig = crypto.createHmac("sha256", tenv.STRIPE_WEBHOOK_SECRET_TEST).update(`${tt}.${traw}`).digest("hex");
+      const tsig = crypto.createHmac("sha256", tenv.STRIPE_TEST_WEBHOOK_SECRET).update(`${tt}.${traw}`).digest("hex");
       const tr = await webhook({ env: tenv, request: new Request("https://x/api/stripe-webhook", { method: "POST", headers: { "stripe-signature": `t=${tt},v1=${tsig}` }, body: traw }) });
       if (tr.status !== 200) fail("[payment] a test-mode webhook event must be acknowledged with 200");
       const row = await db.prepare("SELECT id FROM download_entitlements WHERE stripe_session_id=?").bind("cs_testmode_only").first();
