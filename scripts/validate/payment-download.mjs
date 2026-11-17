@@ -148,6 +148,19 @@ if (!slugPage.includes("data-discount-code")) fail("[payment] pricing page must 
     await deliver({ id: "evt_paid", type: "checkout.session.completed", data: { object: session("cs_test_paid") } });
     if ((await download("cs_test_paid")).status !== 200) fail("[payment] a paid purchase must download before any refund");
     if ((await refund("cs_test_paid")).status !== 200) fail("[payment] charge.refunded must be accepted by the webhook");
+    // A test-mode event (signed with the TEST secret) is acknowledged with 200 but opens no download.
+    {
+      const tenv = { ...env, STRIPE_WEBHOOK_SECRET_TEST: "whsec_testmode" };
+      const traw = JSON.stringify({ type: "checkout.session.completed", data: { object: { id: "cs_testmode_only", payment_status: "paid", amount_total: 999, currency: "usd", metadata: {} } } });
+      const tt = Math.floor(Date.now() / 1000);
+      const tsig = crypto.createHmac("sha256", tenv.STRIPE_WEBHOOK_SECRET_TEST).update(`${tt}.${traw}`).digest("hex");
+      const tr = await webhook({ env: tenv, request: new Request("https://x/api/stripe-webhook", { method: "POST", headers: { "stripe-signature": `t=${tt},v1=${tsig}` }, body: traw }) });
+      if (tr.status !== 200) fail("[payment] a test-mode webhook event must be acknowledged with 200");
+      const row = await db.prepare("SELECT id FROM download_entitlements WHERE stripe_session_id=?").bind("cs_testmode_only").first();
+      if (row) fail("[payment] a test-mode webhook event must never open a download");
+      const bad = await webhook({ env: tenv, request: new Request("https://x/api/stripe-webhook", { method: "POST", headers: { "stripe-signature": `t=${tt},v1=deadbeef` }, body: traw }) });
+      if (bad.status !== 400) fail("[payment] a webhook signed with neither secret must still be refused");
+    }
     if ((await verify("cs_test_paid")).status !== 403) fail("[payment] verify-download must lock a fully refunded purchase");
     if ((await download("cs_test_paid")).status !== 403) fail("[payment] download-file must lock a fully refunded purchase, even though Stripe still says paid");
     await deliver({ id: "evt_paid", type: "checkout.session.completed", data: { object: session("cs_test_paid") } });
