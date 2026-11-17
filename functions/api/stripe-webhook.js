@@ -12,8 +12,17 @@ function timingSafeEqual(a,b){
   for(let i=0;i<a.length;i++) out|=a.charCodeAt(i)^b.charCodeAt(i);
   return out===0;
 }
+// Stripe signs live and sandbox events with different endpoint secrets. An event signed with the
+// TEST secret is acknowledged (so Stripe stops retrying) but never fulfils: a test purchase must not
+// open a download in the live products database (16 Nov 2026: 97 test retries failed on the live secret).
 async function verifyStripeSignature(request, env, body){
-  if(!env.STRIPE_WEBHOOK_SECRET) return {ok:false,error:'MISSING_STRIPE_WEBHOOK_SECRET'};
+  const live=await verifyWith(env.STRIPE_WEBHOOK_SECRET, request, body);
+  if(live.ok||!env.STRIPE_TEST_WEBHOOK_SECRET) return live;
+  const test=await verifyWith(env.STRIPE_TEST_WEBHOOK_SECRET, request, body);
+  return test.ok ? {ok:true,test:true} : live;
+}
+async function verifyWith(secret, request, body){
+  if(!secret) return {ok:false,error:'MISSING_STRIPE_WEBHOOK_SECRET'};
   const header=request.headers.get('stripe-signature')||'';
   const parts=Object.fromEntries(header.split(',').map(p=>p.split('=').map(v=>v.trim())).filter(p=>p.length===2));
   const timestamp=parts.t;
@@ -21,7 +30,7 @@ async function verifyStripeSignature(request, env, body){
   if(!timestamp||!signature) return {ok:false,error:'MISSING_STRIPE_SIGNATURE'};
   const age=Math.abs(Math.floor(Date.now()/1000)-Number(timestamp));
   if(!Number.isFinite(age)||age>300) return {ok:false,error:'STALE_STRIPE_SIGNATURE'};
-  const expected=await hmacHex(env.STRIPE_WEBHOOK_SECRET,`${timestamp}.${body}`);
+  const expected=await hmacHex(secret,`${timestamp}.${body}`);
   return timingSafeEqual(expected,signature) ? {ok:true} : {ok:false,error:'INVALID_STRIPE_SIGNATURE'};
 }
 async function recordCheckout(env, session){
@@ -39,6 +48,7 @@ export async function onRequestPost({ request, env }){
   if(!verified.ok) return json({ok:false,error:verified.error},400);
   const event=JSON.parse(raw);
   if(!event?.type) return json({ok:false,error:'INVALID_EVENT'},400);
+  if(verified.test) return json({ok:true,received:true,test:true});
   if(event.type==='checkout.session.completed'){
     const session=event.data.object;
     await recordCheckout(env,session);
