@@ -2,31 +2,19 @@
   "schema": "search-loop-week-v1",
   "week": "2026-W47",
   "site": "approvalprep.com",
-  "generated_at": "2026-11-16T11:20:18.225Z",
+  "generated_at": "2026-11-17T11:14:05.307Z",
   "state": "running",
   "published": 4,
   "indexed": 0,
   "pace": 10,
   "ai_visitors": 0,
-  "ai_bot_hits": 733,
+  "ai_bot_hits": 650,
   "conversions": "not read: no conversion source configured for this site (form fills / checkouts)",
   "wins": 0,
   "undone": 0,
   "merged": 0,
-  "held_by_cap": 29,
+  "held_by_cap": 38,
   "redirected": [
-    {
-      "query": "mortgage paperwork checklist",
-      "strengthen": "https://approvalprep.com/questions/mortgage-checklist/",
-      "matched_by": "high token overlap (0.67 >= 0.6)",
-      "at": "2026-11-10"
-    },
-    {
-      "query": "approval for apartment with bad credit",
-      "strengthen": "https://approvalprep.com/questions/how-to-get-approved-for-loan-with-bad-credit/",
-      "matched_by": "high token overlap (0.60 >= 0.6)",
-      "at": "2026-11-10"
-    },
     {
       "query": "how to send credit dispute letters",
       "strengthen": "https://approvalprep.com/questions/how-to-send-letters-to-credit-bureaus/",
@@ -44,19 +32,29 @@
       "strengthen": "https://approvalprep.com/questions/how-to-dispute-a-credit-report-error/",
       "matched_by": "high token overlap (0.80 >= 0.6)",
       "at": "2026-11-16"
+    },
+    {
+      "query": "credit repair cost average",
+      "strengthen": "https://approvalprep.com/questions/how-much-does-credit-repair-cost/",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-17"
+    },
+    {
+      "query": "credit repair company cost",
+      "strengthen": "https://approvalprep.com/questions/how-much-does-credit-repair-cost/",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-17"
     }
   ],
   "cap": {
     "max_live_pages": 28,
-    "live": 27,
-    "room": 1,
+    "live": 28,
+    "room": 0,
     "why": "up from 25 to 28: Google impressions 43 in the last 28 days beat 27 in the 28 before"
   },
   "notes": [
-    "cap: up from 25 to 28: Google impressions 43 in the last 28 days beat 27 in the 28 before",
-    "BUILD distinct gate: 2 search(es) had the same intent as an existing page and became strengthen briefs, not new pages (pages.json \"redirected\")",
-    "BUILD gate notes (not blocking): 2 published page(s) are outside a length or style aim; each is listed under gate_notes in pages.json",
-    "IndexNow: 2 new page(s) not live yet; submitted when they answer 200"
+    "BUILD held by the cap: 28 live engine page(s), cap 28 (up from 25 to 28: Google impressions 43 in the last 28 days beat 27 in the 28 before); 9 more page(s) today would have gone over it, those searches stay queued",
+    "BUILD distinct gate: 2 search(es) had the same intent as an existing page and became strengthen briefs, not new pages (pages.json \"redirected\")"
   ],
   "lanes": {
     "ratio": {
@@ -70,8 +68,8 @@
       "hit_rate": "not read: no page in this lane has reached its 2-week check yet"
     },
     "striking": {
-      "pages": 27,
-      "measured": 10,
+      "pages": 28,
+      "measured": 20,
       "top3": 0,
       "hit_rate": 0
     },
@@ -84,5 +82,5 @@
     "weight_changes": [],
     "competition": "ok: 15 top-10 read(s) via brave"
   },
-  "run_url": "https://github.com/seq23/approvalprep/actions/runs/43856800093"
+  "run_url": "https://github.com/seq23/approvalprep/actions/runs/44072115397"
 }
