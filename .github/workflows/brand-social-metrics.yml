@@ -10,6 +10,11 @@ on:
     - cron: "10 6 * * *"  # daily 06:10 CT
       timezone: America/Chicago
   workflow_dispatch:
+    inputs:
+      fixture_trace:
+        description: "Run fixture workflow data trace only"
+        required: false
+        default: "false"
 permissions:
   contents: write
 concurrency:
@@ -32,6 +37,9 @@ jobs:
           cache: npm
       - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
+      - name: Run fixture workflow trace
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
+        run: npm run workflows:trace -- --workflow brand-social-metrics.yml
       - name: Read Buffer and D1
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
