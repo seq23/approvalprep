@@ -1,0 +1,74 @@
+name: Brand Social Posts
+# ApprovalPrep's Instagram posts through the brands Buffer (spry brain 8 Nov 2026: carousels
+# from the pin copy + one screen-recorded Letter Studio video a week, a few posts a week).
+# Switched OFF until turned on: data/brand-social/plan.json `enabled`. Off, both steps print
+# an OUTPUT ... OFF line and nothing is drawn or queued. On: draw this week's posts into
+# public/social, commit (the Pages deploy publishes them), then queue them in Buffer once the
+# files are live (scripts/brand_social/queue_posts.mjs). Every failure is a NAMED STOP and a
+# red run (BUFFER_TOKEN_MISSING, BUFFER_TOKEN_REFUSED, BUFFER_QUEUE_FULL,
+# BRAND_SOCIAL_MEDIA_NOT_LIVE, BUFFER_POST_REFUSED, BRAND_SOCIAL_HASHTAGS_STALE, ...).
+on:
+  schedule:
+    - cron: "45 7 * * 1"  # Mondays 07:45 CT
+      timezone: America/Chicago
+  workflow_dispatch:
+    inputs:
+      fixture_trace:
+        description: "Run fixture workflow data trace only"
+        required: false
+        default: "false"
+permissions:
+  contents: write
+concurrency:
+  group: approvalprep-main-writer
+  cancel-in-progress: false
+jobs:
+  post:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Synchronize latest main
+        run: bash scripts/workflows/prepare-main-writer.sh
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22.12.0
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Run fixture workflow trace
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
+        run: npm run workflows:trace -- --workflow brand-social-posts.yml
+      - name: Is it switched on?
+        id: on
+        run: echo "enabled=$(node -p "require('./data/brand-social/plan.json').enabled === true")" >> "$GITHUB_OUTPUT"
+      - name: Browser and ffmpeg for drawing
+        if: steps.on.outputs.enabled == 'true'
+        run: |
+          npx playwright install --with-deps chromium
+          command -v ffmpeg || { sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg; }
+      - name: Draw this week's posts
+        run: node scripts/brand_social/queue_posts.mjs --render
+      - name: Commit the drawn posts (deploys them)
+        if: steps.on.outputs.enabled == 'true'
+        run: |
+          git config user.name "approvalprep-content-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/social
+          git diff --cached --quiet && { echo "No new posts to commit."; exit 0; }
+          git commit -m "chore(brand-social): this week's posts"
+          bash scripts/workflows/safe-push-main.sh
+      - name: Queue them in Buffer
+        env:
+          BUFFER_BRANDS_ACCESS_TOKEN: ${{ secrets.BUFFER_BRANDS_ACCESS_TOKEN }}
+        run: node scripts/brand_social/queue_posts.mjs --queue
+      - name: Record what was queued
+        if: always() && steps.on.outputs.enabled == 'true'
+        run: |
+          git add data/brand-social/posted.json
+          git diff --cached --quiet && { echo "Nothing queued to record."; exit 0; }
+          git commit -m "chore(brand-social): queued posts ledger"
+          bash scripts/workflows/safe-push-main.sh

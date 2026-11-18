@@ -1,0 +1,21 @@
+{
+  "_comment": "ApprovalPrep brand social posts (Instagram @approvalprep via the brands Buffer; no TikTok yet). enabled stays false until her yes to the sample page (spry brain 8 Nov 2026: she sees 3 carousels + 1 video per brand before anything posts); the coordinator flips it. Read by scripts/brand_social/queue_posts.mjs. Hashtags: data/brand-social/hashtags.json (researched, refreshed monthly).",
+  "enabled": false,
+  "approved": null,
+  "channels": {
+    "instagram": {
+      "service": "instagram",
+      "name": "approvalprep"
+    }
+  },
+  "posts_per_week": 3,
+  "per_channel_queue_max": 3,
+  "sample": {
+    "carousels": [
+      "ap-letter-of-explanation-c1",
+      "ap-how-to-get-approved-for-an-apartment-c1",
+      "ap-credit-dispute-letter-c1"
+    ],
+    "video_week": 0
+  }
+}

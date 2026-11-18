@@ -1,0 +1,58 @@
+name: Brand Social Metrics
+# Daily data/brand-social/metrics.json for the Boss OS scorecard row ap-brand-social: posts the
+# brands Buffer sent on Instagram @approvalprep and page views that arrived with
+# utm_source=instagram|tiktok, each over 28 days (scripts/brand_social/collect_metrics.mjs).
+# Daily so one failed run never leaves the Monday row blank (the scorecard refuses a file
+# older than 9 days). A broken read is a NAMED STOP and a red run after the file is committed;
+# a Buffer token not set is a note.
+on:
+  schedule:
+    - cron: "10 6 * * *"  # daily 06:10 CT
+      timezone: America/Chicago
+  workflow_dispatch:
+    inputs:
+      fixture_trace:
+        description: "Run fixture workflow data trace only"
+        required: false
+        default: "false"
+permissions:
+  contents: write
+concurrency:
+  group: approvalprep-main-writer
+  cancel-in-progress: false
+jobs:
+  measure:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Synchronize latest main
+        run: bash scripts/workflows/prepare-main-writer.sh
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22.12.0
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Run fixture workflow trace
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
+        run: npm run workflows:trace -- --workflow brand-social-metrics.yml
+      - name: Read Buffer and D1
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          BUFFER_BRANDS_ACCESS_TOKEN: ${{ secrets.BUFFER_BRANDS_ACCESS_TOKEN }}
+        run: npm run brand-social:metrics
+      - name: Commit the measurement
+        run: |
+          git config user.name "approvalprep-content-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/brand-social/metrics.json
+          git diff --cached --quiet && { echo "No change to commit."; exit 0; }
+          git commit -m "chore(brand-social): daily metrics"
+          bash scripts/workflows/safe-push-main.sh
+      - name: A broken read is a named stop
+        run: node scripts/brand_social/collect_metrics.mjs --stop-check

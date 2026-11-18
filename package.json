@@ -203,6 +203,8 @@
     "validate:zero-paid-llm": "node scripts/llm/validate_zero_paid_llm.mjs",
     "validate:kit-page-sells-its-own-kit": "node scripts/validate/kit-page-sells-its-own-kit.mjs",
     "validate:pinterest-drip": "node scripts/validate/pinterest-drip.mjs",
+    "validate:brand-social": "node scripts/validate/brand-social.mjs",
+    "brand-social:metrics": "node scripts/brand_social/collect_metrics.mjs",
     "pinterest:refill": "node scripts/pinterest/refill_queue.mjs",
     "pinterest:metrics": "node scripts/pinterest/measure.mjs",
     "validate:clarity-scope": "node scripts/validate/clarity-scope.mjs",
