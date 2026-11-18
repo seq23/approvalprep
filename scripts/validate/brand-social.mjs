@@ -67,6 +67,8 @@ check('queue limits', () => {
   const input = postInput(carousels[0], 'instagram', 'ch', (p, f) => `https://approvalprep.com/social/${p.id}/${f}`, postText(carousels[0], 'instagram'));
   assert.equal(input.metadata.instagram.type, 'carousel');
   assert.equal(input.mode, 'addToQueue');
+  const reel = postInput(video, 'instagram', 'ch', (p, f) => `https://approvalprep.com/social/${p.id}/${f}`, postText(video, 'instagram'));
+  assert.deepEqual(Object.keys(reel.assets[0].video), ['url'], 'Buffer refuses thumbnailUrl (18 Nov 2026 live run)');
 });
 const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'bs-'));
 const run = (enabled) => {
