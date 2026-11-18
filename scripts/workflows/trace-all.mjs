@@ -78,7 +78,7 @@ const traces = files.map(file => {
   const runnerPinned = searchLoopCaller || /runs-on:\s*(ubuntu-24\.04|macos-\d+)\s*$/m.test(text);
   const timeoutSet = searchLoopCaller || /timeout-minutes:\s*\d+/.test(text);
   const mainWriter = /safe-push-main\.sh/.test(text) || /(^|\n)\s*git push(?:\s|$)/m.test(text);
-  const sharedWriterConcurrency = !mainWriter || (/group:\s*approvalprep-main-writer\b/.test(text) && /cancel-in-progress:\s*false/.test(text));
+  const sharedWriterConcurrency = !mainWriter || (/group:\s*(approvalprep-main-writer\b|\$\{\{ github\.event_name == 'pull_request' && [^\n]*\|\| 'approvalprep-main-writer' \}\})/.test(text) /* a PR-only config check (never writes) may take its own group; every writing run takes the shared one */ && /cancel-in-progress:\s*false/.test(text));
   const fullMainCheckout = !mainWriter || searchLoopCaller || (/ref:\s*main/.test(text) && /fetch-depth:\s*0/.test(text));
   const preparesLatestMain = !mainWriter || searchLoopCaller || /prepare-main-writer\.sh/.test(text);
   const safePushHelper = !mainWriter || /safe-push-main\.sh/.test(text);
