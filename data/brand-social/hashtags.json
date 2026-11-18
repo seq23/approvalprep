@@ -1,0 +1,246 @@
+{
+  "_comment": "Researched hashtag sets for ApprovalPrep's Instagram posts, one per topic (scripts/brand_social/posts.mjs topicOf). Mix: 2 broad, 3-4 mid (100k-2M posts), niche where a measured one exists. Instagram post counts from best-hashtags.com tag reports (read 18 Nov 2026; each report's update date in `as_of`). Risk R-ADV-13: nothing that implies credit repair, score changes or removals (#creditrepair, #creditrestoration, #fixmycredit, #badcredit, #creditscore are left out on purpose). Refresh monthly: the weekly run stops with BRAND_SOCIAL_HASHTAGS_STALE after refresh_by.",
+  "read_on": "2026-11-18",
+  "refresh_by": "2026-12-18",
+  "source": "https://best-hashtags.com/hashtag/<tag>/ (Instagram post counts)",
+  "banned": [
+    "#creditrepair",
+    "#creditrestoration",
+    "#fixmycredit",
+    "#fixyourcredit",
+    "#badcredit",
+    "#creditscore",
+    "#creditrepairservices",
+    "#raiseyourscore"
+  ],
+  "sets": {
+    "credit": [
+      {
+        "tag": "#personalfinance",
+        "tier": "broad",
+        "posts": 3503194,
+        "as_of": "2025-09-16"
+      },
+      {
+        "tag": "#financialliteracy",
+        "tier": "broad",
+        "posts": 4286324,
+        "as_of": "2025-12-14"
+      },
+      {
+        "tag": "#financialeducation",
+        "tier": "mid",
+        "posts": 941685,
+        "as_of": "2025-12-14"
+      },
+      {
+        "tag": "#financetips",
+        "tier": "mid",
+        "posts": 635967,
+        "as_of": "2025-09-16"
+      },
+      {
+        "tag": "#moneytips",
+        "tier": "mid",
+        "posts": 594872,
+        "as_of": "2024-10-15"
+      },
+      {
+        "tag": "#creditreport",
+        "tier": "mid",
+        "posts": 304833,
+        "as_of": "2024-10-15"
+      }
+    ],
+    "rental": [
+      {
+        "tag": "#apartment",
+        "tier": "broad",
+        "posts": 5484236,
+        "as_of": "2026-02-03"
+      },
+      {
+        "tag": "#househunting",
+        "tier": "broad",
+        "posts": 4073644,
+        "as_of": "2026-02-03"
+      },
+      {
+        "tag": "#apartmentlife",
+        "tier": "mid",
+        "posts": 570392,
+        "as_of": "2026-02-03"
+      },
+      {
+        "tag": "#renting",
+        "tier": "mid",
+        "posts": 408687,
+        "as_of": "2024-10-15"
+      },
+      {
+        "tag": "#newapartment",
+        "tier": "mid",
+        "posts": 329434,
+        "as_of": "2026-02-03"
+      },
+      {
+        "tag": "#apartmenthunting",
+        "tier": "mid",
+        "posts": 233155,
+        "as_of": "2026-02-03"
+      }
+    ],
+    "loan": [
+      {
+        "tag": "#firsttimehomebuyer",
+        "tier": "broad",
+        "posts": 7593112,
+        "as_of": "2025-12-14"
+      },
+      {
+        "tag": "#personalfinance",
+        "tier": "broad",
+        "posts": 3503194,
+        "as_of": "2025-09-16"
+      },
+      {
+        "tag": "#buyingahome",
+        "tier": "mid",
+        "posts": 765591,
+        "as_of": "2025-12-14"
+      },
+      {
+        "tag": "#mortgagetips",
+        "tier": "mid",
+        "posts": 667578,
+        "as_of": "2024-10-15"
+      },
+      {
+        "tag": "#firsttimebuyer",
+        "tier": "mid",
+        "posts": 641210,
+        "as_of": "2025-12-14"
+      },
+      {
+        "tag": "#homeloans",
+        "tier": "mid",
+        "posts": 574948,
+        "as_of": "2025-12-14"
+      }
+    ],
+    "income": [
+      {
+        "tag": "#firsttimehomebuyer",
+        "tier": "broad",
+        "posts": 7593112,
+        "as_of": "2025-12-14"
+      },
+      {
+        "tag": "#personalfinance",
+        "tier": "broad",
+        "posts": 3503194,
+        "as_of": "2025-09-16"
+      },
+      {
+        "tag": "#buyingahome",
+        "tier": "mid",
+        "posts": 765591,
+        "as_of": "2025-12-14"
+      },
+      {
+        "tag": "#mortgagetips",
+        "tier": "mid",
+        "posts": 667578,
+        "as_of": "2024-10-15"
+      },
+      {
+        "tag": "#homeloans",
+        "tier": "mid",
+        "posts": 574948,
+        "as_of": "2025-12-14"
+      },
+      {
+        "tag": "#renting",
+        "tier": "mid",
+        "posts": 408687,
+        "as_of": "2024-10-15"
+      }
+    ],
+    "business": [
+      {
+        "tag": "#smallbusinessowner",
+        "tier": "broad",
+        "posts": 31761665,
+        "as_of": "2026-05-11"
+      },
+      {
+        "tag": "#smallbusinessowners",
+        "tier": "broad",
+        "posts": 2855970,
+        "as_of": "2026-05-11"
+      },
+      {
+        "tag": "#financialplanning",
+        "tier": "mid",
+        "posts": 983015,
+        "as_of": "2025-09-16"
+      },
+      {
+        "tag": "#loans",
+        "tier": "mid",
+        "posts": 994281,
+        "as_of": "2024-10-15"
+      },
+      {
+        "tag": "#financetips",
+        "tier": "mid",
+        "posts": 635967,
+        "as_of": "2025-09-16"
+      },
+      {
+        "tag": "#smallbusinessownersclub",
+        "tier": "niche",
+        "posts": 25436,
+        "as_of": "2026-05-11"
+      }
+    ],
+    "default": [
+      {
+        "tag": "#firsttimehomebuyer",
+        "tier": "broad",
+        "posts": 7593112,
+        "as_of": "2025-12-14"
+      },
+      {
+        "tag": "#personalfinance",
+        "tier": "broad",
+        "posts": 3503194,
+        "as_of": "2025-09-16"
+      },
+      {
+        "tag": "#buyingahome",
+        "tier": "mid",
+        "posts": 765591,
+        "as_of": "2025-12-14"
+      },
+      {
+        "tag": "#mortgagetips",
+        "tier": "mid",
+        "posts": 667578,
+        "as_of": "2024-10-15"
+      },
+      {
+        "tag": "#firsttimebuyer",
+        "tier": "mid",
+        "posts": 641210,
+        "as_of": "2025-12-14"
+      },
+      {
+        "tag": "#homeloans",
+        "tier": "mid",
+        "posts": 574948,
+        "as_of": "2025-12-14"
+      }
+    ]
+  }
+}

@@ -637,6 +637,17 @@
       "scope": "data/pinterest/queue.json schema and copy rules, schedule (PINS_PER_DAY, no gaps, no page on consecutive days), on-site utm links incl. utm_content, dist/pins/<id>.png 1000x1500, feed exact at fixed America/Chicago clocks, refill threshold and batch, request-time Pages Function wiring"
     },
     {
+      "id": "brand-social",
+      "npmScript": "validate:brand-social",
+      "entrypoint": "scripts/validate/brand-social.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "The weekly Instagram job posts publicly with no human in the loop once switched on: a credit post without the self-help line or with a credit-repair tag breaks R-ADV-13, and a queue rule that overfills the free Buffer or re-posts is a break a follower sees",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "scripts/brand_social: carousel shape and copy, credit line on every credit slide, banned tags, hashtag mix and monthly expiry, Buffer queue limits and ledger, OFF switch and BUFFER_TOKEN_MISSING stop, music generator"
+    },
+    {
       "id": "email-nurture",
       "npmScript": "validate:email-nurture",
       "entrypoint": "scripts/validate/email-nurture.mjs",
