@@ -65,7 +65,7 @@ check('queue limits', () => {
   assert.equal(picks.instagram[0].id, video.id);
   assert.ok(!picks.instagram.some((p) => p.id === carousels[0].id), 're-posts');
   const input = postInput(carousels[0], 'instagram', 'ch', (p, f) => `https://approvalprep.com/social/${p.id}/${f}`, postText(carousels[0], 'instagram'));
-  assert.equal(input.metadata.instagram.type, 'carousel');
+  assert.equal(input.metadata.instagram.type, 'post', "Buffer refuses 'carousel' (18 Nov 2026 live run)");
   assert.equal(input.mode, 'addToQueue');
   const reel = postInput(video, 'instagram', 'ch', (p, f) => `https://approvalprep.com/social/${p.id}/${f}`, postText(video, 'instagram'));
   assert.deepEqual(Object.keys(reel.assets[0].video), ['url'], 'Buffer refuses thumbnailUrl (18 Nov 2026 live run)');
