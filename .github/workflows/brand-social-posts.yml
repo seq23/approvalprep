@@ -47,10 +47,15 @@ jobs:
         run: echo "enabled=$(node -p "require('./data/brand-social/plan.json').enabled === true")" >> "$GITHUB_OUTPUT"
       - name: Browser and ffmpeg for drawing
         if: steps.on.outputs.enabled == 'true'
+        timeout-minutes: 8  # ~1 min normally; the 18 Nov 2026 run sat 16 min in apt and was cancelled
         run: |
-          npx playwright install --with-deps chromium
-          command -v ffmpeg || { sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg; }
+          # The runner image ships Chrome and its libraries, so only the headless shell is fetched;
+          # the system packages are installed only if it cannot start.
+          npx playwright install chromium-headless-shell
+          node -e "require('playwright').chromium.launch().then((b) => b.close())" || npx playwright install-deps chromium
+          command -v ffmpeg || { sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg; }
       - name: Draw this week's posts
+        timeout-minutes: 10
         run: node scripts/brand_social/queue_posts.mjs --render
       - name: Commit the drawn posts (deploys them)
         if: steps.on.outputs.enabled == 'true'

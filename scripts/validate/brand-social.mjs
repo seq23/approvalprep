@@ -75,6 +75,12 @@ const run = (enabled) => {
   try { return { out: execFileSync('node', ['scripts/brand_social/queue_posts.mjs', '--queue'], { encoding: 'utf8', stdio: 'pipe', env: { ...process.env, BRAND_SOCIAL_PLAN: file, BUFFER_BRANDS_ACCESS_TOKEN: '' } }), code: 0 }; } catch (e) { return { out: String(e.stdout) + String(e.stderr), code: e.status }; }
 };
 check('off says OFF', () => { const r = run(false); assert.equal(r.code, 0); assert.match(r.out, /^OUTPUT brand-social queue \(ApprovalPrep\): OFF/); });
+check('the real entrypoint loads and names the week', () => {
+  const file = path.join(dir, 'plan-dry.json');
+  fs.writeFileSync(file, JSON.stringify({ ...plan, enabled: true }));
+  const out = execFileSync('node', ['scripts/brand_social/queue_posts.mjs', '--render'], { encoding: 'utf8', env: { ...process.env, BRAND_SOCIAL_PLAN: file, BRAND_SOCIAL_DRY_RUN: '1' } });
+  assert.match(out, /^OUTPUT brand-social render \(ApprovalPrep\): dry run - would draw ap-studio-video-w\d+, ap-/);
+});
 check('on without a token is a named stop', () => { const r = run(true); assert.equal(r.code, 1); assert.match(r.out, /NAMED STOP: BUFFER_TOKEN_MISSING/); });
 check('music', () => {
   const [a] = synth({ preset: 'approvalprep', seconds: 3, week: 0 });
