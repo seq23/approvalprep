@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Daily: writes data/brand-social/metrics.json, the file the Boss OS Monday scorecard reads
 // for the `ap-brand-social` row (boss-os src/shared/boss/scorecard/manifest.json):
-//   posts_published_28d  posts the brands Buffer sent on Instagram @approvalprep in 28 days
+//   posts_published_28d  posts ApprovalPrep's Buffer sent on Instagram @approvalprep in 28 days
 //   social_visits_28d    page views on approvalprep.com that arrived from Instagram or
 //                        TikTok in 28 days: D1 conversion_events page_view rows whose stored
 //                        path carries utm_source=instagram|tiktok (the tracker keeps the
@@ -42,7 +42,7 @@ async function posts() {
     const org = (await call('{ account { organizations { id } } }')).account.organizations[0].id;
     const { channels } = await call('query($o:OrganizationId!){ channels(input:{organizationId:$o}){ id service name } }', { o: org });
     const ids = Object.values(plan.channels).map((w) => channels.find((c) => c.service === w.service && c.name === w.name)?.id).filter(Boolean);
-    if (ids.length !== Object.keys(plan.channels).length) throw new Error('a plan channel is not in the brands Buffer');
+    if (ids.length !== Object.keys(plan.channels).length) throw new Error(`a plan channel is not in the Buffer ${TOKEN_ENV} opens`);
     const { posts: p } = await call('query($o:OrganizationId!,$c:[ChannelId!]){ posts(input:{organizationId:$o, filter:{status:[sent], channelIds:$c}}){ edges { node { channelId sentAt } } } }', { o: org, c: ids });
     doc.posts_published_28d = countSent(p.edges ?? [], ids, since);
   } catch (e) {

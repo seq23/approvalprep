@@ -1,8 +1,8 @@
-// Brand social posts for ApprovalPrep (Instagram @approvalprep via the brands Buffer),
+// Brand social posts for ApprovalPrep (Instagram @approvalprep via ApprovalPrep's own Buffer since 18 Nov 2026),
 // made at $0 from the Pinterest pin copy (spry brain, 8 Nov 2026: "4-6 slide carousels
 // ... reused from the Pinterest pin designs, plus one screen-recorded tool video a week
 // per brand ... posts via the second Buffer a few a week"). ApprovalPrep has no TikTok
-// yet (the brands Buffer is full at 3 channels), so Instagram only.
+// yet (ApprovalPrep's free Buffer holds Instagram + Threads, 2 of 3 channels), so Instagram only.
 //
 // Pure functions only. scripts/brand_social/render_posts.mjs draws the slides and the
 // video; scripts/brand_social/queue_posts.mjs hands due posts to Buffer.

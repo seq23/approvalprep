@@ -6,22 +6,26 @@
 //    number has no source check (R-PRF-03) or checks a page outside its own sources;
 // 2. any bank post trips the R-ADV-13 phrase check, or the check misses a known bad phrase
 //    (safety: a hit hard-blocks the post at queue time);
-// 3. slots are not 19:30 America/Chicago (CST and CDT), or the window is not 7 days;
+// 3. slots are not 19:30 America/Chicago (CST and CDT), or the window is not 6 days;
 // 4. (fixture tests/fixtures/threads/pricing_page.html) a post whose source no longer shows
 //    its figure is queued instead of skipped with THREADS_SOURCE_CHANGED <url>;
 // 5. after the bank runs out it does not recycle the oldest 60+ day evergreen post, puts two
 //    Question posts on consecutive days, or overfills the organisation's limit;
 // 6. end to end against a fake Buffer: two Threads channels do not post only to approvalprep, a
 //    duplicate name is not AMBIGUOUS_THREADS_CHANNEL, no approvalprep Threads channel is not NO_THREADS_CHANNEL, a missing
-//    token is not SECRET_MISSING_BUFFER_APPROVALPREP_ACCESS_TOKEN, an empty queue does not get 7
+//    token is not SECRET_MISSING_BUFFER_APPROVALPREP_ACCESS_TOKEN, an empty queue does not get 6
 //    customScheduled posts, a full one does not print the OUTPUT line, a low bank does not
-//    print THREADS_BANK_LOW, a blocked post does not end THREADS_PHRASE_BLOCKED.
+//    print THREADS_BANK_LOW, a blocked post does not end THREADS_PHRASE_BLOCKED;
+// 7. Threads and Instagram @approvalprep share this Buffer's 10 (since 18 Nov 2026): from any
+//    starting queue, in either order, the two jobs together pass 10, or Instagram's Monday
+//    batch of 3 does not fit beside a full Threads week.
 // Run by validate:all (registered HARD_FAIL in _repo_validation_registry.json). No network.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { LINK, SELF_HELP, figureOnPage, main, planRun, r13Hits, slotsAhead, slotUtc } from '../threads/threads_loop.mjs';
+import { LINK, SELF_HELP, figureOnPage, main, planRun, r13Hits, slotsAhead, slotUtc, threadsRoom } from '../threads/threads_loop.mjs';
+import { roomInQueue } from '../brand_social/posts.mjs';
 
 const bank = JSON.parse(fs.readFileSync('data/threads/posts.json', 'utf8'));
 const banned = JSON.parse(fs.readFileSync('data/brand-social/hashtags.json', 'utf8')).banned;
@@ -60,7 +64,7 @@ await check('slots are 19:30 Central', () => {
   assert.equal(slotUtc('2026-11-18', '19:30'), '2026-11-19T01:30:00.000Z');
   assert.equal(slotUtc('2027-04-01', '19:30'), '2027-04-02T00:30:00.000Z');
   const s = slotsAhead(Date.parse('2026-11-18T20:00:00Z'), bank);
-  assert.equal(s.length, 7); assert.equal(s[0].date, '2026-11-18'); assert.equal(s[6].date, '2026-11-24');
+  assert.equal(s.length, 6); assert.equal(s[0].date, '2026-11-18'); assert.equal(s[5].date, '2026-11-23');
   assert.equal(slotsAhead(Date.parse('2026-11-19T01:20:00Z'), bank)[0].date, '2026-11-19', 'a slot under 15 minutes away is skipped');
 });
 
@@ -135,23 +139,23 @@ await check('two Threads channels: posts only to approvalprep', async () => {
   assert.ok(fb.made.length > 0, 'nothing queued');
   assert.ok(fb.made.every((i) => i.channelId === 'ch'), `posted to ${[...new Set(fb.made.map((i) => i.channelId))].join(',')}`);
 });
-await check('an empty queue gets 7 posts at 19:30 CT from the real bank', async () => {
+await check('an empty queue gets 6 posts at 19:30 CT from the real bank', async () => {
   const fb = fakeBuffer({ channels: threads });
   const allFigures = `<p>${bank.posts.flatMap((p) => p.checks ?? []).map((c) => c.figure).join(' | ')}</p>`;
   const { r, e, lines, ledgerFile } = await run({ fetchImpl: fb.fetchImpl, fetchText: async () => allFigures });
   assert.ok(!e, e?.message);
-  assert.equal(fb.made.length, 7);
+  assert.equal(fb.made.length, 6);
   for (const i of fb.made) { assert.equal(i.mode, 'customScheduled'); assert.equal(i.metadata.threads.type, 'post'); assert.equal(i.channelId, 'ch'); assert.match(new Date(i.dueAt).toLocaleString('en-US', { timeZone: 'America/Chicago' }), /7:30:00 PM/); }
   assert.equal(fb.made[0].text, bank.posts[0].text);
-  assert.ok(lines.includes(`OUTPUT: queued 7, scheduled ahead 7, bank unposted ${bank.posts.length - 7}, recycled 0`), lines.join(' | '));
-  assert.equal(Object.keys(JSON.parse(fs.readFileSync(ledgerFile, 'utf8')).posts).length, 7);
-  assert.equal(r.queued, 7);
+  assert.ok(lines.some((l) => l.startsWith(`OUTPUT: queued 6, scheduled ahead 6, bank unposted ${bank.posts.length - 6}, recycled 0;`)), lines.join(' | '));
+  assert.equal(Object.keys(JSON.parse(fs.readFileSync(ledgerFile, 'utf8')).posts).length, 6);
+  assert.equal(r.queued, 6);
 });
 await check('a full week queues nothing and still reports', async () => {
   const scheduled = slotsAhead(NOW, bank).map((s, i) => ({ id: `s${i}`, channelId: 'ch', dueAt: s.dueAt }));
   const { e, lines } = await run({ fetchImpl: fakeBuffer({ channels: threads, scheduled }).fetchImpl });
   assert.ok(!e, e?.message);
-  assert.ok(lines.some((l) => l.startsWith('OUTPUT: queued 0, scheduled ahead 7,')), lines.join(' | '));
+  assert.ok(lines.some((l) => l.startsWith('OUTPUT: queued 0, scheduled ahead 6,')), lines.join(' | '));
 });
 await check('a low bank is a note, a blocked post is red', async () => {
   const small = path.join(tmp, 'bank.json');
@@ -159,6 +163,30 @@ await check('a low bank is a note, a blocked post is red', async () => {
   const { e, lines } = await run({ bankFile: small, fetchImpl: fakeBuffer({ channels: threads }).fetchImpl });
   assert.ok(lines.some((l) => l.startsWith('NAMED NOTE THREADS_BANK_LOW 2 unposted')), lines.join(' | '));
   assert.equal(e?.code, 'THREADS_PHRASE_BLOCKED');
+});
+// 7. the shared Buffer: Threads (daily, up to days_ahead) + Instagram (Monday, up to per_channel_queue_max) never pass 10
+await check('Threads and Instagram together never pass the 10 and the Monday batch always fits', async () => {
+  const igPlan = JSON.parse(fs.readFileSync('data/brand-social/plan.json', 'utf8'));
+  const igMax = igPlan.per_channel_queue_max; const ahead = bank.days_ahead; const LIMIT = 10;
+  assert.ok(ahead + igMax <= LIMIT, `Threads ${ahead} + Instagram ${igMax} pass ${LIMIT}`);
+  const threadsJob = (q) => ({ ...q, t: q.t + Math.max(0, Math.min(ahead - q.t, threadsRoom({ orgLimit: LIMIT, orgPending: q.t + q.i + q.x, igPending: q.i, igMax }))) });
+  const igJob = (q) => ({ ...q, i: q.i + roomInQueue({ channelScheduled: q.i, orgScheduled: q.t + q.i + q.x, perChannelMax: igMax, orgLimit: LIMIT }) });
+  for (let t = 0; t <= ahead; t += 1) for (let i = 0; i <= igMax; i += 1) for (let x = 0; x <= LIMIT - t - i; x += 1) {
+    for (const order of [[threadsJob, igJob], [igJob, threadsJob], [threadsJob, igJob, threadsJob, igJob]]) {
+      const end = order.reduce((q, job) => job(q), { t, i, x });
+      assert.ok(end.t + end.i + end.x <= LIMIT, `start t${t} i${i} other${x}: ended at ${end.t + end.i + end.x}`);
+      assert.ok(end.t >= t && end.i >= i, 'a job removed the other\'s posts');
+      if (x === 0) assert.equal(igJob(threadsJob({ t, i, x })).i, igMax, `Monday batch did not fit after Threads (t${t} i${i})`);
+    }
+  }
+  // end to end: a real run beside Instagram's 2 waiting leaves Instagram its last slot
+  const igQueued = [{ id: 'g1', channelId: 'ig' }, { id: 'g2', channelId: 'ig' }];
+  const fb = fakeBuffer({ channels: [...threads, { id: 'ig', service: 'instagram', name: 'approvalprep', isQueuePaused: false }], scheduled: [...igQueued, ...['o1', 'o2'].map((id) => ({ id, channelId: 'other' }))] });
+  const allFigures = `<p>${bank.posts.flatMap((p) => p.checks ?? []).map((c) => c.figure).join(' | ')}</p>`;
+  const { e, lines } = await run({ fetchImpl: fb.fetchImpl, fetchText: async () => allFigures });
+  assert.ok(!e, e?.message);
+  assert.equal(fb.made.length, 5, '10 - 4 waiting - 1 kept for Instagram');
+  assert.ok(lines.some((l) => /Instagram 2 waiting \+ 1 kept free/.test(l)), lines.join(' | '));
 });
 fs.rmSync(tmp, { recursive: true, force: true });
 

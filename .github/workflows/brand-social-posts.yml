@@ -1,5 +1,7 @@
 name: Brand Social Posts
-# ApprovalPrep's Instagram posts through the brands Buffer (spry brain 8 Nov 2026: carousels
+# ApprovalPrep's Instagram posts through ApprovalPrep's own Buffer (moved from the brands Buffer
+# 18 Nov 2026; shared with Threads @approvalprep: Instagram up to 3 waiting, Threads up to 6,
+# never past the free plan's 10, neither job deletes the other's posts) (spry brain 8 Nov 2026: carousels
 # from the pin copy + one screen-recorded Letter Studio video a week, a few posts a week).
 # Switched OFF until turned on: data/brand-social/plan.json `enabled`. Off, both steps print
 # an OUTPUT ... OFF line and nothing is drawn or queued. On: draw this week's posts into
@@ -70,7 +72,7 @@ jobs:
           bash scripts/workflows/safe-push-main.sh
       - name: Queue them in Buffer
         env:
-          BUFFER_BRANDS_ACCESS_TOKEN: ${{ secrets.BUFFER_BRANDS_ACCESS_TOKEN }}
+          BUFFER_APPROVALPREP_ACCESS_TOKEN: ${{ secrets.BUFFER_APPROVALPREP_ACCESS_TOKEN }}
         run: node scripts/brand_social/queue_posts.mjs --queue
       - name: Record what was queued
         if: always() && steps.on.outputs.enabled == 'true'

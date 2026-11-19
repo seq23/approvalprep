@@ -1,11 +1,15 @@
-// Hands this week's brand social posts to the brands Buffer (api.buffer.com GraphQL), within
+// Hands this week's brand social posts to the brand's Buffer (api.buffer.com GraphQL), within
 // the free plan: the organisation holds at most `limits.scheduledPosts` (10) scheduled posts
-// in all, and this job keeps at most plan.per_channel_queue_max (3) waiting per channel, so
-// three channels never pass 9. Posts join each channel's Buffer queue (mode addToQueue) and
-// go out on that channel's own posting times.
+// in all, and this job keeps at most plan.per_channel_queue_max (3) waiting per channel. Posts
+// join each channel's Buffer queue (mode addToQueue) and go out on that channel's own times.
+// ApprovalPrep (since 18 Nov 2026): Instagram @approvalprep sits in ApprovalPrep's own Buffer
+// (BUFFER_APPROVALPREP_ACCESS_TOKEN) beside Threads @approvalprep, which shares the 10: Threads
+// keeps at most 6 ahead and leaves Instagram's 3 free (scripts/threads/threads_loop.mjs
+// threadsRoom); this job takes only the room left. Neither job ever deletes a post.
 //
-// Brand-agnostic: the same file runs in dream-wedding-builder and approvalprep; each repo's
-// scripts/brand_social/queue_posts.mjs passes its plan, its posts and its site.
+// Brand-agnostic: the same file runs in dream-wedding-builder (TOKEN_ENV there is the brands
+// Buffer's) and approvalprep; each repo's scripts/brand_social/queue_posts.mjs passes its plan,
+// its posts and its site.
 //
 // Named stops (each prints `NAMED STOP: <CODE> - why` and exits 1, so the run is red and the
 // Boss OS run watcher shows it): BUFFER_TOKEN_MISSING, BUFFER_TOKEN_REFUSED (401/403),
@@ -15,7 +19,7 @@
 // plan.enabled = false is not a stop: the job prints OUTPUT ... OFF and queues nothing.
 
 export const API = 'https://api.buffer.com';
-export const TOKEN_ENV = 'BUFFER_BRANDS_ACCESS_TOKEN';
+export const TOKEN_ENV = 'BUFFER_APPROVALPREP_ACCESS_TOKEN';
 
 export class NamedStop extends Error {
   constructor(code, why) { super(`${code} - ${why}`); this.code = code; }
@@ -59,10 +63,26 @@ export async function readState(call, plan) {
   const out = {};
   for (const [platform, want] of Object.entries(plan.channels)) {
     const ch = channels.find((c) => c.service === want.service && c.name === want.name);
-    if (!ch) throw new NamedStop('BUFFER_CHANNEL_MISSING', `no ${want.service} channel named ${want.name} in the brands Buffer`);
+    if (!ch) throw new NamedStop('BUFFER_CHANNEL_MISSING', `no ${want.service} channel named ${want.name} in the Buffer ${TOKEN_ENV} opens`);
     out[platform] = { ...ch, scheduled: scheduled.filter((p) => p.channelId === ch.id).length };
   }
-  return { orgId: org.id, orgLimit: Number(org.limits?.scheduledPosts ?? 10), orgScheduled: scheduled.length, channels: out };
+  return { orgId: org.id, orgLimit: Number(org.limits?.scheduledPosts ?? 10), orgScheduled: scheduled.length, pendingIds: new Set(scheduled.map((p) => p.id)), channels: out };
+}
+
+/**
+ * A ledger entry whose Buffer post is gone before its time (deleted, or lost when the channel
+ * moved Buffers: 18 Nov 2026) is forgotten, so the job queues it again. Past-due entries stay.
+ * Returns the forgotten "<post> <platform>" pairs.
+ */
+export function forgetVanished(ledger, pendingIds, now) {
+  const gone = [];
+  for (const [id, byPlatform] of Object.entries(ledger.posts ?? {})) {
+    for (const [platform, v] of Object.entries(byPlatform)) {
+      if (v.due_at && Date.parse(v.due_at) > now && !pendingIds.has(v.buffer_id)) { delete byPlatform[platform]; gone.push(`${id} ${platform}`); }
+    }
+    if (!Object.keys(byPlatform).length) delete ledger.posts[id];
+  }
+  return gone;
 }
 
 /** The createPost input for one post on one platform. */
