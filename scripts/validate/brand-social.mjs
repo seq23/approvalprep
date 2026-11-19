@@ -18,7 +18,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { planWeek, postInput, readState } from '../brand_social/buffer_queue.mjs';
 import { CREDIT_LINE, carouselFor, carouselSlugs, hashtagsFresh, postText, roomInQueue, videoFor } from '../brand_social/posts.mjs';
-import { synth } from '../brand_social/music.mjs';
+import { synth, concatSeconds } from '../brand_social/music.mjs';
 
 const plan = JSON.parse(fs.readFileSync('data/brand-social/plan.json', 'utf8'));
 const tags = JSON.parse(fs.readFileSync('data/brand-social/hashtags.json', 'utf8'));
@@ -105,6 +105,12 @@ try {
   assert.equal(state.orgScheduled, 2);
   assert.equal(state.channels.instagram.scheduled, 2);
 } catch (e) { fails.push(`queue read sees every scheduled post: ${e.message.split('\n')[0]}`); }
+
+check('the renderer needs only ffmpeg, and reads length from the concat list', () => {
+  assert.ok(Math.abs(concatSeconds("file 'a'\nduration 2.6\nfile 'b'\nduration 3\nfile 'b'\n") - 5.6) < 1e-9);
+  const src = fs.readFileSync('scripts/brand_social/render_posts.mjs', 'utf8');
+  assert.deepEqual([...new Set([...src.matchAll(/exec(?:File)?Sync\('([^']+)'/g)].map((m) => m[1]))], ['ffmpeg'], 'static ffmpeg has no ffprobe (18 Nov 2026 run)');
+});
 
 if (fails.length) { for (const f of fails) console.error(`[brand-social] FAIL ${f}`); process.exit(1); }
 console.log(`[brand-social] PASS ${carousels.length} carousels, ${Object.keys(tags.sets).length} hashtag sets, queue limits, OFF switch, music`);
