@@ -44,13 +44,13 @@ for (const p of bank.posts) await check(p.id, () => {
   assert.deepEqual(r13Hits(p.text), [], 'R-ADV-13 wording');
   if (p.link) { assert.ok(p.text.includes('approvalprep.com/?utm_source=threads'), 'no tagged link'); assert.ok(p.text.includes(SELF_HELP), 'no self-help line'); }
   if (p.link && !p.approved) assert.ok(p.text.endsWith(SELF_HELP) && p.text.includes(LINK), 'a new linked post ends with the self-help line after the full link');
-  if (!p.approved) for (const t of banned) assert.ok(!p.text.toLowerCase().includes(t), `banned tag ${t}`);
+  for (const t of banned) assert.ok(!new RegExp(`${t}\\b`, 'i').test(p.text), `banned tag ${t}`);
   if (/\$\d|\d+(\.\d+)? (days?|years?|months?|million|billion)/i.test(p.text)) assert.ok(p.checks?.length, 'a number with no source check');
   for (const s of p.sources) assert.match(s, SOURCES, 'source outside the allowed list');
   for (const c of p.checks ?? []) { assert.ok(p.sources.includes(c.url), `check ${c.url} is not a listed source`); assert.ok(c.figure?.length >= 2); }
 });
 await check('R-ADV-13 check catches the banned phrases', () => {
-  for (const bad of ['Ready for round 2?', 'Keep disputing until it is removed.', 'We raise your score.', 'We will fix your credit.', 'Boost your credit score fast', 'Guaranteed results', 'We remove negative items', 'Get them removed for good']) assert.ok(r13Hits(bad).length, bad);
+  for (const bad of ['Ready for round 2?', 'Keep disputing until it is removed.', 'We raise your score.', 'We will fix your credit.', 'Boost your credit score fast', 'Guaranteed results', 'We remove negative items', 'Get them removed for good', 'Save this. #creditrepair', 'Check it. #CreditScore']) assert.ok(r13Hits(bad).length, bad);
   assert.equal(r13Hits('No one can legally remove accurate, current information.').length, 0);
 });
 
