@@ -238,7 +238,7 @@ async function gateList(list, context, { pageFor, render }) {
       if (near.length) { firstReason ||= `image only ${Math.min(...near)} bits from a pin just before it (need >= ${MIN_DISTANCE})`; continue; }
       chosen = c; break;
     }
-    if (!chosen) { held.push({ id: v0.id, reason: firstReason || "no distinct version left" }); continue; }
+    if (!chosen) { held.push({ id: v0.id, path: v0.path, discovery: Boolean(v0.discovery), reason: firstReason || "no distinct version left" }); continue; }
     if (chosen.layout !== v0.layout || chosen.title !== v0.title || chosen.headline !== v0.headline) reworked.push({ id: v0.id, from: `${v0.layout}/${v0.palette} "${v0.title}"`, to: `${chosen.layout}/${chosen.palette} "${chosen.title}"`, reason: firstReason });
     kept.push(chosen); done.push(chosen);
   }

@@ -449,7 +449,11 @@ let discoveryCount = 0;
     if (key && typeof e.template === "string" && e.template.trim() && sitemap.includes(`<loc>${SITE}${key}/</loc>`)) need.push(`${key}/`);
   }
   if (!need.length) fail("discovery: zero live question pages and zero registry letter pages found - the check would pass seeing nothing");
-  for (const p of need) if (!linked.has(p)) fail(`discovery: ${p} is published but no pin links to it - run npm run pinterest:refill (refill_queue.mjs discoveryPins)`);
+  // A page the pin quality gate refused carries a named PIN_QUALITY_HOLD record with its reason.
+  const qualityHeld = new Map((queue.qualityHeld || []).map((h) => [h.path, h]));
+  for (const [p, h] of qualityHeld) if (!String(h?.reason || "").trim() || !/^\d{4}-\d{2}-\d{2}$/.test(String(h?.heldOn || ""))) fail(`discovery: quality hold for ${p} has no reason or date`);
+  for (const p of need) if (qualityHeld.has(p)) console.log(`[pinterest-drip] PIN_QUALITY_HOLD ${p}: ${qualityHeld.get(p).reason}`);
+  for (const p of need) if (!linked.has(p) && !qualityHeld.has(p)) fail(`discovery: ${p} is published but no pin links to it - run npm run pinterest:refill (refill_queue.mjs discoveryPins)`);
   discoveryCount = [...items, ...held].filter((v) => v.discovery).length;
   if (!discoveryCount) fail("discovery: the queue holds zero discovery pins");
   // The lane itself: from a queue with every discovery pin removed, it must rebuild a pin for each page it removed.
