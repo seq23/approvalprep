@@ -306,6 +306,14 @@ export async function gateAndReschedule(queue, today) {
     if (!r.held.length) break;
     redateLater(queue, today);
   }
+  // A discovery page whose every pin version fails the gate keeps a named record (queue.qualityHeld),
+  // so the drip validator sees a recorded PIN_QUALITY_HOLD instead of a page silently left unpinned.
+  // Each refill tries the page again and replaces its record; a page that gets a pin loses it.
+  const linkedNow = new Set([...(queue.items || []), ...(queue.held || [])].map((v) => v.path));
+  const fresh = all.held.filter((h) => h.discovery && h.path && !linkedNow.has(h.path));
+  const prior = (queue.qualityHeld || []).filter((h) => !linkedNow.has(h.path) && !fresh.some((f) => f.path === h.path));
+  queue.qualityHeld = [...prior, ...fresh.map((h) => ({ path: h.path, id: h.id, reason: h.reason, heldOn: today }))];
+  if (!queue.qualityHeld.length) delete queue.qualityHeld;
   for (const w of all.reworked) console.log(`[pin-quality] reworked ${w.id}: ${w.from} -> ${w.to} (${w.reason})`);
   if (all.held.length) {
     const note = `${all.held.length} pin(s) held, no version passed the quality gate: ${all.held.map((h) => `${h.id} (${h.reason})`).join("; ")}`;
