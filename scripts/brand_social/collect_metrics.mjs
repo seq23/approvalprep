@@ -7,6 +7,8 @@
 //                        path carries utm_source=instagram|tiktok (the tracker keeps the
 //                        query string; functions/api/track-event.js), i.e. the bio link
 //                        and any UTM link in a post
+//   threads_visits_28d   page views that arrived on the Threads link (utm_source=threads)
+//   threads_sales_28d    paid checkouts seen in a session that arrived on the Threads link
 //   updatedAt            ISO time; the scorecard refuses a file older than 9 days
 // A number that cannot be read is ABSENT with a reason under `unread`, never a 0. A missing
 // Buffer token is a note (green); a refused token or an unreadable D1 is a NAMED STOP and a
@@ -69,6 +71,10 @@ function visits() {
     }
     doc.social_visits_28d = total;
     doc.all_pageviews_28d = all;
+    // Threads @approvalprep (scripts/threads/threads_loop.mjs) for the Boss OS `ap-threads` row:
+    // visits on the tagged link, and paid checkouts seen in a session that arrived on it.
+    doc.threads_visits_28d = Number(d1(`SELECT COUNT(*) AS n FROM conversion_events WHERE event = 'page_view' AND created_at >= '${since}' AND path LIKE '%utm_source=threads%'`)[0]?.n ?? 0);
+    doc.threads_sales_28d = Number(d1(`SELECT COUNT(DISTINCT session_id_hash) AS n FROM conversion_events WHERE event = 'checkout_success_seen' AND created_at >= '${since}' AND session_id_hash IN (SELECT session_id_hash FROM conversion_events WHERE event = 'page_view' AND path LIKE '%utm_source=threads%' AND session_id_hash IS NOT NULL)`)[0]?.n ?? 0);
   } catch (e) {
     doc.unread.social_visits_28d = `D1 read failed: ${e.message}`; doc.unread_kind.social_visits_28d = 'broken'; stops.push(`BRAND_SOCIAL_VISITS_UNREAD - ${e.message}`);
   }
@@ -88,5 +94,5 @@ if (isMain) {
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
   if (stops.length) doc.stops = stops;
   fs.writeFileSync(OUT, `${JSON.stringify(doc, null, 2)}\n`);
-  console.log(`OUTPUT brand-social metrics (ApprovalPrep): posts ${doc.posts_published_28d ?? 'not read'}, visits from Instagram/TikTok ${doc.social_visits_28d ?? 'not read'} (28 days)`);
+  console.log(`OUTPUT brand-social metrics (ApprovalPrep): posts ${doc.posts_published_28d ?? 'not read'}, visits from Instagram/TikTok ${doc.social_visits_28d ?? 'not read'}, from Threads ${doc.threads_visits_28d ?? 'not read'}, Threads sales ${doc.threads_sales_28d ?? 'not read'} (28 days)`);
 }

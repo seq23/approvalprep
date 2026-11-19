@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-11-18T23:47:48.721Z",
+  "generatedAt": "2026-11-19T00:27:23.442Z",
   "status": "PASS",
-  "writerWorkflowCount": 15,
+  "writerWorkflowCount": 16,
   "sharedConcurrencyGroup": "approvalprep-main-writer",
   "writers": [
     {
@@ -133,6 +133,15 @@
     },
     {
       "workflow": "pinterest-refill.yml",
+      "sharedConcurrency": true,
+      "cancelInProgressFalse": true,
+      "fullCheckout": true,
+      "preparesLatestMain": true,
+      "safePush": true,
+      "directPush": false
+    },
+    {
+      "workflow": "threads-posts.yml",
       "sharedConcurrency": true,
       "cancelInProgressFalse": true,
       "fullCheckout": true,
