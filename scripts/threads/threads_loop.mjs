@@ -17,7 +17,7 @@
 //   - before queuing a post with a price, number or company claim, each of its `checks` is
 //     fetched and the exact figure must still be on the page; otherwise the post is skipped
 //     for this run with NAMED NOTE THREADS_SOURCE_CHANGED <url> and the next one is used;
-//   - the R-ADV-13 phrase check runs on every post at queue time; a hit hard-blocks the post
+//   - the R-ADV-13 phrase and banned-tag check runs on every post at queue time; a hit hard-blocks the post
 //     and the run ends red with NAMED STOP THREADS_PHRASE_BLOCKED after the others are queued.
 //
 // Rule 0: every run prints `OUTPUT: queued N, scheduled ahead M, bank unposted K, recycled R`.
@@ -54,8 +54,13 @@ export const R13_PATTERNS = [
   /\bwe (send|mail|file) (it|the letter|your dispute|the dispute) for you\b/i,
 ];
 
+// The banned credit-repair tags are the Instagram job's list (data/brand-social/hashtags.json `banned`):
+// #creditrepair, #creditscore and the rest are blocked on Threads the same way (her call 18 Nov 2026).
+const BANNED_TAGS = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'brand-social', 'hashtags.json'), 'utf8')).banned.map((t) => t.toLowerCase());
+
 export function r13Hits(text) {
-  return R13_PATTERNS.filter((re) => re.test(text)).map((re) => text.match(re)[0]);
+  const tags = (text.match(/#[A-Za-z0-9_]+/g) ?? []).filter((t) => BANNED_TAGS.includes(t.toLowerCase()));
+  return [...R13_PATTERNS.filter((re) => re.test(text)).map((re) => text.match(re)[0]), ...tags];
 }
 
 // ---- time: slots at 19:30 America/Chicago -------------------------------------------------
