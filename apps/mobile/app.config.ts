@@ -12,7 +12,9 @@ const config: ExpoConfig = {
   android: { package: 'com.approvalprep.app', allowBackup: false,
     adaptiveIcon: { foregroundImage: './assets/adaptive-icon.png', backgroundColor: '#FF7A3D' },
     blockedPermissions: ['android.permission.RECORD_AUDIO', 'android.permission.ACCESS_FINE_LOCATION',
-      'android.permission.ACCESS_COARSE_LOCATION', 'android.permission.READ_CONTACTS', 'android.permission.CAMERA'] },
+      'android.permission.ACCESS_COARSE_LOCATION', 'android.permission.READ_CONTACTS', 'android.permission.CAMERA',
+      // Listed by the 19 Nov 2026 AAB, used by nothing: no overlay, and files live in app storage only.
+      'android.permission.SYSTEM_ALERT_WINDOW', 'android.permission.READ_EXTERNAL_STORAGE', 'android.permission.WRITE_EXTERNAL_STORAGE'] },
   extra: { eas: { projectId: '378c0655-6268-4a12-8bfe-d615ed402858' } },
   updates: { enabled: false },
   plugins: ['expo-router', 'expo-font', 'expo-notifications', ['expo-splash-screen', { image: './assets/splash.png', imageWidth: 160, backgroundColor: '#F7F3EA' }]],

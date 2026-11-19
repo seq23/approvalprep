@@ -34,6 +34,81 @@ Answer, reviewed against R-ADV-13 and Play Help 13849271:
   sells one-time letter templates and never reads a report, tracks a dispute or acts for the buyer.
 - If Play asks for a licence: none is held or needed, because the app offers no regulated financial service.
 
-## Other forms
+## Permissions in the Android build
 
-- **Account deletion:** the app has no accounts (RevenueCat's anonymous id only). Answer "No, my app does not allow users to create an account". "Delete all my letters" is in More.
+`app.config.ts:14-17` blocks every permission the app does not use (`tests/store.test.ts` fails if one comes back).
+SYSTEM_ALERT_WINDOW and READ/WRITE_EXTERNAL_STORAGE were in the 19 Nov 2026 AAB; nothing uses an overlay, and
+letters and kits are written to the app's own cache and document folders (`src/letterExport.ts:16`, `src/purchases/kitFiles.ts:24-26`).
+
+Final manifest, EAS preview build 691df3dc-6a18-4e90-a8a2-687e6e96af3a (free plan, 19 Nov 2026, this branch):
+INTERNET, ACCESS_NETWORK_STATE, POST_NOTIFICATIONS, RECEIVE_BOOT_COMPLETED, VIBRATE, WAKE_LOCK, READ_APP_BADGE,
+plus Google Play's install-referrer/billing and launcher badge permissions added by libraries. BIND_JOB_SERVICE and
+DUMP appear only as protections on library services and receivers, not as requested permissions.
+
+## Data safety (Policy > App content > Data safety)
+
+Derived from the code on `main`, the same reading as the Apple label (`docs/app-privacy.md`). Paths are
+under `apps/mobile/` unless they start with `functions/` or `src/components/`.
+
+- **Does your app collect or share any of the required user data types?** Yes.
+- **Is all of the user data collected by your app encrypted in transit?** Yes. Every request goes to
+  `https://approvalprep.com` (`src/purchases/kitFileLinks.ts:4`, `delivery.ts:3`, `bundleDelivery.ts:3`) or RevenueCat over HTTPS.
+- **Do you provide a way for users to request that their data is deleted?** Yes. URL:
+  `https://approvalprep.com/privacy/` (section "Deleting your app data", `src/components/LegalPolicyPage.astro:31-34`):
+  email info@approvalprep.com with "delete my app data". On the phone, More > "Delete all my letters"
+  (`app/(tabs)/more/index.tsx:102`); uninstalling removes everything else.
+- **Account creation:** "My app does not allow users to create an account" (no login anywhere; the only id is RevenueCat's anonymous one).
+- **Shared with third parties:** none. RevenueCat (purchases), Stripe (website order lookup) and Resend (sending the link email)
+  act for us as service providers, which Google does not count as sharing.
+
+| Play data type | Collected | Shared | Ephemeral | Required? | Purpose | Code |
+|---|---|---|---|---|---|---|
+| Financial info > Purchase history | Yes | No | No | Required (only when buying) | App functionality, Analytics | RevenueCat with Google Play Billing (`src/purchases/revenuecat.ts:7`, `bundleAccount.ts:48`); website order code (`websiteUnlock.ts:20`) |
+| Personal info > Email address | Yes | No | No | Optional (only if typed) | App functionality | More > "Email you paid with" (`app/(tabs)/more/index.tsx:92`) → `websiteUnlock.ts:52` → `functions/api/email-download-links.js` (Stripe lookup, link emailed; a one-way hash is kept briefly to stop repeat tries) |
+| App info and performance; Device or other IDs | Device or other IDs: Yes | No | No | Required (only when buying or opening a kit) | App functionality | The anonymous RevenueCat app user id, sent as the bearer token (`delivery.ts:14`, `bundleDelivery.ts:25`, `kitFiles.ts:12`). Not linked to a name or email. |
+
+Not declared, and why:
+- Letters, answers, drafts, mailing dates: kept on the phone in SQLite (`src/phoneDatabase.ts:47`); no fetch sends them.
+- Location, contacts, photos, audio, files: none read; the permissions are blocked (`app.config.ts:14-17`).
+- Diagnostics / crash logs / advertising id: RevenueCat runs with `diagnosticsEnabled: false` and
+  `automaticDeviceIdentifierCollectionEnabled: false` (`revenuecat.ts:7`); no analytics, crash or ad SDK in `package.json`.
+- Reminders are local notifications with no push token (`src/localReminders.ts:5`).
+- The server keeps a short-lived one-way hash of the network address for abuse limits; it is not used for location.
+
+## Content rating (IARC questionnaire)
+
+- Category: **All other app types** (reference, tools, productivity).
+- Violence, fear, sexuality, nudity, profanity or crude humour, drugs, alcohol, tobacco, gambling or simulated gambling: **No** to every question.
+- Users interact or exchange content with each other: **No** (no chat, no upload, no sharing between users).
+- Shares the user's current physical location with other users: **No**.
+- Allows users to purchase digital goods: **Yes** (one-time letter kits through Google Play Billing).
+- Unrestricted internet access (a browser or search): **No**; it opens only approvalprep.com and ftc.gov pages (`src/more.ts:2-12`, `src/copy.ts:12`).
+- Expected result: Everyone / PEGI 3, with the "In-App Purchases" notice.
+
+## Target audience and content
+
+- **Target age:** 18 and over only. The app is about the user's own credit report and letters to bureaus and creditors,
+  which is adult business; nothing in the code is built for children.
+- **Could the app appeal to children unintentionally?** No.
+
+## Ads
+
+- **Does your app contain ads?** No. No ad SDK in `package.json`, no ad network calls; the privacy policy says "No tracking and no ad networks" (`src/components/LegalPolicyPage.astro:27`).
+
+## App access (notes for the reviewer)
+
+- **All functionality is available without special access.** No login, no account, no credentials.
+- Note to paste: "No account or sign-in. The free credit bureau dispute letter works at once from Home or Write a letter. Paid
+  letter kits are one-time Google Play in-app products; buying one unlocks its templates on the phone. More > 'Open my website kit' unlocks a website order from its link; it needs a real order, so it can be skipped in review. Self-help templates only:
+  users write and mail their own letters; the app never contacts a bureau or creditor."
+
+## Other declarations
+
+- **Health apps:** No health features.
+- **Government apps:** No. Not made for or on behalf of a government; the FTC link is a public source (`src/copy.ts:12`).
+- **News apps:** No.
+- **AI-generated content:** No. Letters are built on the phone from fixed templates and the user's answers
+  (`src/studio.ts:1-3`, shared `src/data/letterStudio`); no AI model or AI API is called, so no in-app AI report control is needed.
+- **Account deletion:** the app has no accounts (RevenueCat's anonymous id only). Answer "No, my app does not allow users to
+  create an account". "Delete all my letters" is in More.
+- **Privacy policy:** `https://approvalprep.com/privacy/` covers the iPhone and Android app (`src/components/LegalPolicyPage.astro:17`).

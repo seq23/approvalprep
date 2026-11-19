@@ -14,13 +14,13 @@ const legalPolicies = {
     summary: "ApprovalPrep does not ask users to create accounts for public self-service tools and does not store letter answers, completed drafts, uploaded documents, or personal application packets.",
     sections: [
       {
-        heading: "The ApprovalPrep app (iPhone)",
+        heading: "The ApprovalPrep app (iPhone and Android)",
         paragraphs: [
           "The app works without an account. Your letters, answers, drafts, mailing dates and reminders are kept on your own phone. They are not sent to ApprovalPrep, and the reminder is a notification your phone sets for itself.",
           "The app collects only what it needs to sell you a kit and open what you bought:"
         ],
         items: [
-          "Purchase history. When you buy a kit in the app, Apple processes the payment. We never see your card or your Apple ID. The purchase is recorded through RevenueCat, our service provider for in-app purchases, so the app can unlock your kit, restore it on a new phone, and so we can count sales. It is linked to your purchases, not to your name.",
+          "Purchase history. When you buy a kit in the app, Apple or Google processes the payment. We never see your card, your Apple ID or your Google account. The purchase is recorded through RevenueCat, our service provider for in-app purchases, so the app can unlock your kit, restore it on a new phone, and so we can count sales. It is linked to your purchases, not to your name.",
           "An anonymous app user ID. RevenueCat gives the app a random ID. The app sends it to our server only to check that a kit is paid for before it hands over the files. It is not linked to your name or email.",
           "Your email address, only if you type it. If you bought a kit on approvalprep.com and lost the link, you can type the email you paid with. We use it once to look up your order with Stripe and email the link to that address only. We keep no list of buyers; a one-way scrambled copy of the address is kept for a short time to stop repeated tries.",
           "An order code, only if you paste it. If you paste the link from a website purchase, the app sends only the order code in it, so our server can check the order with Stripe and open the kit at no charge.",
@@ -30,11 +30,12 @@ const legalPolicies = {
       {
         heading: "Deleting your app data",
         paragraphs: [
-          "Deleting the app removes everything kept on your phone. To ask us to delete the purchase record linked to your app user ID, email info@approvalprep.com with the words “delete my app data”, the kit you bought and roughly when. Apple keeps its own record of App Store purchases under Apple’s privacy policy."
+          "Deleting the app removes everything kept on your phone. To ask us to delete the purchase record linked to your app user ID, email info@approvalprep.com with the words “delete my app data”, the kit you bought and roughly when. Apple and Google keep their own records of App Store and Google Play purchases under their own privacy policies."
         ],
         links: [
           { href: "https://www.revenuecat.com/privacy/", label: "RevenueCat privacy policy" },
-          { href: "https://www.apple.com/legal/privacy/", label: "Apple privacy policy" }
+          { href: "https://www.apple.com/legal/privacy/", label: "Apple privacy policy" },
+          { href: "https://policies.google.com/privacy", label: "Google privacy policy" }
         ]
       }
     ],
