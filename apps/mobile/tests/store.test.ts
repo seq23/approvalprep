@@ -27,3 +27,10 @@ test('the Play listing fits Google limits and carries no hashtags', () => {
   assert.ok(playFull.trim().length > 200 && playFull.length <= 4000, `play full ${playFull.length}`);
   for (const text of [playFull, listing.play_short_description]) assert.doesNotMatch(text, /#\w/, 'Play forbids hashtags (and never #creditrepair)');
 });
+
+test('Android build blocks permissions the app never uses (Play declarations stay true)', async () => {
+  const { default: config } = await import('../app.config');
+  const blocked = config.android?.blockedPermissions ?? [];
+  for (const p of ['SYSTEM_ALERT_WINDOW', 'READ_EXTERNAL_STORAGE', 'WRITE_EXTERNAL_STORAGE', 'RECORD_AUDIO', 'CAMERA', 'ACCESS_FINE_LOCATION', 'READ_CONTACTS'])
+    assert.ok(blocked.includes(`android.permission.${p}`), `${p} must be blocked`);
+});
