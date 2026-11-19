@@ -1,7 +1,8 @@
 // The daily ApprovalPrep Threads job (.github/workflows/threads-posts.yml): one post a day at
 // 19:30 America/Chicago on Threads @approvalprep, through ApprovalPrep's own free Buffer
-// (BUFFER_APPROVALPREP_ACCESS_TOKEN; its organisation has one channel, found at run time by
-// service == "threads"). Her yes 18 Nov 2026: "yes to threads post for approval prep - but u
+// (BUFFER_APPROVALPREP_ACCESS_TOKEN). The channel is found at run time by service "threads" AND
+// name THREADS_CHANNEL_NAME: the same organisation also holds the Peace Be Still Threads channel,
+// so a match on service alone could post here to the wrong account (fix 18 Nov 2026). Her yes 18 Nov 2026: "yes to threads post for approval prep - but u
 // need to come up with a loop so it can not be interrupted after day 14 and a plan".
 //
 // Every run keeps the next 7 evening slots filled (customScheduled, dueAt 19:30 CT), within the
@@ -23,6 +24,7 @@
 // Rule 0: every run prints `OUTPUT: queued N, scheduled ahead M, bank unposted K, recycled R`.
 // Zero queued with fewer than 7 ahead and no named note is NAMED STOP THREADS_NOTHING_QUEUED.
 // Other named stops (red): SECRET_MISSING_BUFFER_APPROVALPREP_ACCESS_TOKEN, NO_THREADS_CHANNEL,
+// AMBIGUOUS_THREADS_CHANNEL,
 // THREADS_QUEUE_PAUSED, and the Buffer client's BUFFER_TOKEN_REFUSED / BUFFER_READ_FAILED /
 // BUFFER_POST_REFUSED.
 import fs from 'node:fs';
@@ -34,6 +36,8 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 export const BANK_FILE = path.join(ROOT, 'data', 'threads', 'posts.json');
 export const LEDGER_FILE = path.join(ROOT, 'data', 'threads', 'posted.json');
 export const TOKEN = 'BUFFER_APPROVALPREP_ACCESS_TOKEN';
+/** The Buffer channel name of Threads @approvalprep. Never match on service alone. */
+export const THREADS_CHANNEL_NAME = 'approvalprep';
 export const LINK = 'https://approvalprep.com/?utm_source=threads';
 export const SELF_HELP = 'Self-help templates, not legal advice.';
 const TZ = 'America/Chicago';
@@ -184,6 +188,14 @@ export async function planRun({ bank, ledger, pending, now, orgRoom, fetchText }
   return { picks, notes, blocked, slotsOpen: slots.length };
 }
 
+/** The one Threads channel named `name`; zero or several is a named stop, never a guess. */
+export function pickThreadsChannel(channels, name = THREADS_CHANNEL_NAME) {
+  const hits = (channels ?? []).filter((c) => c.service === 'threads' && String(c.name ?? '').toLowerCase() === name.toLowerCase());
+  if (!hits.length) throw new NamedStop('NO_THREADS_CHANNEL', `the ApprovalPrep Buffer organisation has no Threads channel named ${name}: reconnect Threads @${name} in Buffer`);
+  if (hits.length > 1) throw new NamedStop('AMBIGUOUS_THREADS_CHANNEL', `${hits.length} Threads channels are named ${name} in Buffer; refusing to guess which one to post to`);
+  return hits[0];
+}
+
 /** The createPost input: a plain Threads text post at the slot's exact time. */
 export function threadsInput(post, channelId, dueAt) {
   return { channelId, text: post.text, assets: [], metadata: { threads: { type: 'post' } }, mode: 'customScheduled', dueAt, schedulingType: 'automatic', needsApproval: false, source: 'threads-loop' };
@@ -201,8 +213,7 @@ export async function main({ now = Date.now(), env = process.env, fetchImpl = fe
   const org = (await call('{ account { organizations { id limits { scheduledPosts } } } }'))?.account?.organizations?.[0];
   if (!org) throw new NamedStop('BUFFER_READ_FAILED', 'the token sees no Buffer organisation');
   const { channels } = await call('query($o:OrganizationId!){ channels(input:{organizationId:$o}){ id service name isQueuePaused } }', { o: org.id });
-  const ch = (channels ?? []).find((c) => c.service === 'threads');
-  if (!ch) throw new NamedStop('NO_THREADS_CHANNEL', 'the ApprovalPrep Buffer organisation has no Threads channel: reconnect Threads @approvalprep in Buffer');
+  const ch = pickThreadsChannel(channels);
   if (ch.isQueuePaused) throw new NamedStop('THREADS_QUEUE_PAUSED', 'the Threads queue is paused in Buffer, so nothing scheduled goes out: unpause it');
   const all = await pendingPosts(call, org.id, 'id channelId dueAt');
   const pending = all.filter((p) => p.channelId === ch.id);

@@ -11,7 +11,8 @@
 //    its figure is queued instead of skipped with THREADS_SOURCE_CHANGED <url>;
 // 5. after the bank runs out it does not recycle the oldest 60+ day evergreen post, puts two
 //    Question posts on consecutive days, or overfills the organisation's limit;
-// 6. end to end against a fake Buffer: no Threads channel is not NO_THREADS_CHANNEL, a missing
+// 6. end to end against a fake Buffer: two Threads channels do not post only to approvalprep, a
+//    duplicate name is not AMBIGUOUS_THREADS_CHANNEL, no approvalprep Threads channel is not NO_THREADS_CHANNEL, a missing
 //    token is not SECRET_MISSING_BUFFER_APPROVALPREP_ACCESS_TOKEN, an empty queue does not get 7
 //    customScheduled posts, a full one does not print the OUTPUT line, a low bank does not
 //    print THREADS_BANK_LOW, a blocked post does not end THREADS_PHRASE_BLOCKED.
@@ -122,6 +123,17 @@ const threads = [{ id: 'ch', service: 'threads', name: 'approvalprep', isQueuePa
 await check('named stops', async () => {
   assert.equal((await run({ env: {} })).e?.code, 'SECRET_MISSING_BUFFER_APPROVALPREP_ACCESS_TOKEN');
   assert.equal((await run({ fetchImpl: fakeBuffer({ channels: [{ id: 'i', service: 'instagram', name: 'approvalprep' }] }).fetchImpl })).e?.code, 'NO_THREADS_CHANNEL');
+  assert.equal((await run({ fetchImpl: fakeBuffer({ channels: [{ id: 'pbs', service: 'threads', name: 'peacebestillapp', isQueuePaused: false }] }).fetchImpl })).e?.code, 'NO_THREADS_CHANNEL', 'another Threads account must never be used');
+  const twice = [...threads, { id: 'ch2', service: 'threads', name: 'approvalprep', isQueuePaused: false }];
+  assert.equal((await run({ fetchImpl: fakeBuffer({ channels: twice }).fetchImpl })).e?.code, 'AMBIGUOUS_THREADS_CHANNEL');
+});
+await check('two Threads channels: posts only to approvalprep', async () => {
+  const fb = fakeBuffer({ channels: [{ id: 'pbs', service: 'threads', name: 'peacebestillapp', isQueuePaused: false }, ...threads] });
+  const allFigures = `<p>${bank.posts.flatMap((p) => p.checks ?? []).map((c) => c.figure).join(' | ')}</p>`;
+  const { e } = await run({ fetchImpl: fb.fetchImpl, fetchText: async () => allFigures });
+  assert.ok(!e, e?.message);
+  assert.ok(fb.made.length > 0, 'nothing queued');
+  assert.ok(fb.made.every((i) => i.channelId === 'ch'), `posted to ${[...new Set(fb.made.map((i) => i.channelId))].join(',')}`);
 });
 await check('an empty queue gets 7 posts at 19:30 CT from the real bank', async () => {
   const fb = fakeBuffer({ channels: threads });
