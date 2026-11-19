@@ -21,7 +21,7 @@ export class NamedStop extends Error {
   constructor(code, why) { super(`${code} - ${why}`); this.code = code; }
 }
 
-export function bufferClient(token, fetchImpl = fetch) {
+export function bufferClient(token, fetchImpl = fetch, tokenEnv = TOKEN_ENV) {
   return async function call(query, variables = {}) {
     let res;
     try {
@@ -29,7 +29,7 @@ export function bufferClient(token, fetchImpl = fetch) {
     } catch (e) {
       throw new NamedStop('BUFFER_READ_FAILED', `api.buffer.com unreachable: ${e.message}`);
     }
-    if (res.status === 401 || res.status === 403) throw new NamedStop('BUFFER_TOKEN_REFUSED', `api.buffer.com answered ${res.status}: mint a new token in Buffer and save it as ${TOKEN_ENV}`);
+    if (res.status === 401 || res.status === 403) throw new NamedStop('BUFFER_TOKEN_REFUSED', `api.buffer.com answered ${res.status}: mint a new token in Buffer and save it as ${tokenEnv}`);
     const body = await res.json().catch(() => null);
     if (!res.ok || !body || body.errors?.length) throw new NamedStop('BUFFER_READ_FAILED', `api.buffer.com ${res.status}: ${JSON.stringify(body?.errors ?? body).slice(0, 300)}`);
     return body.data;
@@ -39,17 +39,23 @@ export function bufferClient(token, fetchImpl = fetch) {
 /** The organisation, its scheduled-post limit, the plan's channels and what each has queued. */
 export const PENDING_STATUSES = ['scheduled', 'sending', 'needs_approval'];
 
+/** Every post still waiting to go out in the organisation (also used by scripts/threads/threads_loop.mjs). */
+export async function pendingPosts(call, orgId, fields = 'id channelId') {
+  // One status per query: Buffer answers a multi-status filter with nothing (18 Nov 2026: [scheduled,sending] -> 0, [scheduled] -> 6).
+  const out = [];
+  for (const status of PENDING_STATUSES) {
+    const { posts } = await call(`query($o:OrganizationId!){ posts(first:100, input:{organizationId:$o, filter:{status:[${status}]}}){ edges { node { ${fields} } } } }`, { o: orgId });
+    out.push(...(posts?.edges ?? []).map((e) => e.node));
+  }
+  return out;
+}
+
 export async function readState(call, plan) {
   const acct = await call('{ account { organizations { id limits { scheduledPosts } } } }');
   const org = acct?.account?.organizations?.[0];
   if (!org) throw new NamedStop('BUFFER_READ_FAILED', 'the token sees no Buffer organisation');
   const { channels } = await call('query($o:OrganizationId!){ channels(input:{organizationId:$o}){ id service name isQueuePaused } }', { o: org.id });
-  // One status per query: Buffer answers a multi-status filter with nothing (18 Nov 2026: [scheduled,sending] -> 0, [scheduled] -> 6).
-  const scheduled = [];
-  for (const status of PENDING_STATUSES) {
-    const { posts } = await call(`query($o:OrganizationId!){ posts(first:100, input:{organizationId:$o, filter:{status:[${status}]}}){ edges { node { id channelId } } } }`, { o: org.id });
-    scheduled.push(...(posts?.edges ?? []).map((e) => e.node));
-  }
+  const scheduled = await pendingPosts(call, org.id);
   const out = {};
   for (const [platform, want] of Object.entries(plan.channels)) {
     const ch = channels.find((c) => c.service === want.service && c.name === want.name);

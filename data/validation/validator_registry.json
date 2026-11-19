@@ -648,6 +648,17 @@
       "scope": "scripts/brand_social: carousel shape and copy, credit line on every credit slide, banned tags, hashtag mix and monthly expiry, Buffer queue limits and ledger, OFF switch and BUFFER_TOKEN_MISSING stop, music generator"
     },
     {
+      "id": "threads-loop",
+      "npmScript": "validate:threads-loop",
+      "entrypoint": "scripts/validate/threads-loop.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "The daily Threads job posts publicly with no human in the loop: a post with R-ADV-13 wording, an unsourced or changed figure, a wrong time, an overfilled free Buffer, or a loop that stops after the bank runs out is a break a follower sees",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "data/threads/posts.json rules (60+ posts, <500 chars, one tag, tagged link + self-help line, source checks, allowed sources), R-ADV-13 phrase check, 19:30 CT slots, source-changed skip (fixture), recycling 60+ days with no back-to-back Questions, org limit, named stops and OUTPUT line against a fake Buffer"
+    },
+    {
       "id": "email-nurture",
       "npmScript": "validate:email-nurture",
       "entrypoint": "scripts/validate/email-nurture.mjs",

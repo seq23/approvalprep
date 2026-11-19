@@ -1,0 +1,61 @@
+name: Threads Posts
+# ApprovalPrep's daily Threads post (@approvalprep) through ApprovalPrep's own free Buffer
+# (her yes 18 Nov 2026: a loop that cannot be interrupted after day 14). Every morning it keeps
+# the next 7 evenings filled, one post each at 19:30 CT (Buffer customScheduled), from
+# data/threads/posts.json, then records what it queued in data/threads/posted.json.
+# After the bank runs out it recycles evergreen posts (60+ days since they ran). Notes, never
+# red: THREADS_BANK_LOW, THREADS_SOURCE_CHANGED <url>, THREADS_RECYCLE_UNDER_60. Named stops
+# (red): SECRET_MISSING_BUFFER_APPROVALPREP_ACCESS_TOKEN, NO_THREADS_CHANNEL,
+# THREADS_QUEUE_PAUSED, THREADS_PHRASE_BLOCKED (R-ADV-13), THREADS_NOTHING_QUEUED, and the
+# Buffer client's BUFFER_TOKEN_REFUSED / BUFFER_READ_FAILED / BUFFER_POST_REFUSED.
+# Every run prints `OUTPUT: queued N, scheduled ahead M, bank unposted K, recycled R`.
+# Logic and proof: scripts/threads/threads_loop.mjs, scripts/validate/threads-loop.mjs.
+on:
+  schedule:
+    - cron: "25 8 * * *"  # daily 08:25 CT
+      timezone: America/Chicago
+  workflow_dispatch:
+    inputs:
+      fixture_trace:
+        description: "Run fixture workflow data trace only"
+        required: false
+        default: "false"
+permissions:
+  contents: write
+concurrency:
+  group: approvalprep-main-writer
+  cancel-in-progress: false
+jobs:
+  post:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Synchronize latest main
+        run: bash scripts/workflows/prepare-main-writer.sh
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22.12.0
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Run fixture workflow trace
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
+        run: npm run workflows:trace -- --workflow threads-posts.yml
+      - name: Queue the next 7 evenings
+        timeout-minutes: 5
+        env:
+          BUFFER_APPROVALPREP_ACCESS_TOKEN: ${{ secrets.BUFFER_APPROVALPREP_ACCESS_TOKEN }}
+        run: npm run threads:queue
+      - name: Record what was queued
+        if: always()
+        run: |
+          git config user.name "approvalprep-content-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/threads/posted.json
+          git diff --cached --quiet && { echo "Nothing queued to record."; exit 0; }
+          git commit -m "chore(threads): queued posts ledger"
+          bash scripts/workflows/safe-push-main.sh

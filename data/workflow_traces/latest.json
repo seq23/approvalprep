@@ -1,14 +1,14 @@
 {
   "schemaVersion": "4.4.0",
-  "generatedAt": "2026-11-18T23:47:47.663Z",
+  "generatedAt": "2026-11-19T00:27:21.678Z",
   "status": "COMPLETE_FIXTURE_TRACE",
-  "workflowCount": 27,
-  "manualReadyCount": 27,
-  "scheduledCount": 18,
+  "workflowCount": 28,
+  "manualReadyCount": 28,
+  "scheduledCount": 19,
   "pushTriggeredCount": 2,
   "pullRequestTriggeredCount": 4,
-  "mainWriterCount": 16,
-  "fauxScenarioCount": 210,
+  "mainWriterCount": 17,
+  "fauxScenarioCount": 219,
   "allManualReady": true,
   "allHaveFixtureTraceInput": true,
   "allUsePinnedRunner": true,
@@ -254,6 +254,7 @@
         "validate:stripe-mode",
         "validate:telemetry-claims",
         "validate:template-preview-safety",
+        "validate:threads-loop",
         "validate:vault-schema",
         "validate:workflow-main-writer-safety",
         "validate:workflow-yaml-parse",
@@ -578,6 +579,7 @@
         "validate:stripe-mode",
         "validate:telemetry-claims",
         "validate:template-preview-safety",
+        "validate:threads-loop",
         "validate:vault-schema",
         "validate:workflow-main-writer-safety",
         "validate:workflow-yaml-parse",
@@ -776,6 +778,7 @@
         "validate:stripe-mode",
         "validate:telemetry-claims",
         "validate:template-preview-safety",
+        "validate:threads-loop",
         "validate:vault-schema",
         "validate:workflow-main-writer-safety",
         "validate:workflow-yaml-parse",
@@ -1586,6 +1589,7 @@
         "validate:stripe-mode",
         "validate:telemetry-claims",
         "validate:template-preview-safety",
+        "validate:threads-loop",
         "validate:vault-schema",
         "validate:workflow-main-writer-safety",
         "validate:workflow-yaml-parse",
@@ -2358,6 +2362,90 @@
       "traceId": "3ee0f56db5498bfe"
     },
     {
+      "workflow": "threads-posts.yml",
+      "traceMode": "FIXTURE_TRACE_WITH_TRANSITIVE_PACKAGE_RESOLUTION_NOT_PRODUCTION_TELEMETRY",
+      "proof_type": "fixture",
+      "real_telemetry": false,
+      "may_be_used_for_growth_claims": false,
+      "manualReady": true,
+      "scheduled": true,
+      "pushTriggered": false,
+      "pullRequestTriggered": false,
+      "hasCheckout": true,
+      "hasNodeSetup": true,
+      "nodeVersionOk": true,
+      "runnerPinned": true,
+      "timeoutSet": true,
+      "usesNpmInstall": false,
+      "usesNpmCi": true,
+      "buildsProject": false,
+      "requiresDependencyInstall": false,
+      "installDependencyReason": null,
+      "dependencyInstallPolicyOk": true,
+      "fixtureTraceInput": true,
+      "secretRefs": [
+        "BUFFER_APPROVALPREP_ACCESS_TOKEN"
+      ],
+      "npmScripts": [
+        "threads:queue",
+        "workflows:trace"
+      ],
+      "transitiveNpmScripts": [
+        "threads:queue",
+        "workflows:trace"
+      ],
+      "missingNpmScripts": [],
+      "expectedDataTouches": [],
+      "mainWriter": true,
+      "sharedWriterConcurrency": true,
+      "fullMainCheckout": true,
+      "preparesLatestMain": true,
+      "safePushHelper": true,
+      "directUnsafePush": false,
+      "fauxScenarios": [
+        {
+          "id": "manual_fixture_dispatch",
+          "status": "PASS"
+        },
+        {
+          "id": "known_command_resolution",
+          "status": "PASS"
+        },
+        {
+          "id": "transitive_dependency_install",
+          "status": "PASS",
+          "requires_dependency_install": false,
+          "reason": null
+        },
+        {
+          "id": "pinned_runtime_and_timeout",
+          "status": "PASS"
+        },
+        {
+          "id": "secret_boundary",
+          "status": "PROVIDER_GATED_NO_FAKE_SUCCESS"
+        },
+        {
+          "id": "latest_main_before_generation",
+          "status": "PASS"
+        },
+        {
+          "id": "no_change_commit_path",
+          "status": "PASS"
+        },
+        {
+          "id": "remote_advance_rebase_retry",
+          "status": "PASS"
+        },
+        {
+          "id": "conflict_blocks_without_force",
+          "status": "PASS"
+        }
+      ],
+      "proofBoundary": "This fixture trace resolves direct and transitive npm scripts, Citation OS package sequences, and validate:all registry members so dependency-backed runtime requirements cannot hide behind wrapper scripts. It also proves workflow shape, secret references, serialized main-writer controls, and manual readiness. It does not prove provider credentials or deployed runtime.",
+      "traceId": "9ca8614ae3f9b721"
+    },
+    {
       "workflow": "validate.yml",
       "traceMode": "FIXTURE_TRACE_WITH_TRANSITIVE_PACKAGE_RESOLUTION_NOT_PRODUCTION_TELEMETRY",
       "proof_type": "fixture",
@@ -2445,6 +2533,7 @@
         "validate:stripe-mode",
         "validate:telemetry-claims",
         "validate:template-preview-safety",
+        "validate:threads-loop",
         "validate:vault-schema",
         "validate:workflow-main-writer-safety",
         "validate:workflow-yaml-parse",

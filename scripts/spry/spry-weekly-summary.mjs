@@ -82,9 +82,21 @@ export function pagesLine(known, queue, now) {
   return { read: true, line: `Pages: ${plural(added, "new page")} published this week${waiting}.` };
 }
 
+/** Threads line from the post bank and its ledger (scripts/threads/threads_loop.mjs); carries THREADS_BANK_LOW. */
+export function threadsLine(bank, ledger, now) {
+  if (!bank || !Array.isArray(bank.posts)) return notRead("Threads", "no post bank in data/threads/posts.json");
+  const runs = Object.values(ledger?.posts ?? {}).flatMap((v) => v.runs ?? []);
+  const went = runs.filter((r) => Date.parse(r.due_at) <= now && Date.parse(r.due_at) > now - 7 * DAY).length;
+  const ahead = runs.filter((r) => Date.parse(r.due_at) > now).length;
+  const left = bank.posts.filter((p) => !(ledger?.posts?.[p.id]?.runs ?? []).length).length;
+  const low = left < (bank.bank_low_below ?? 14) ? ` THREADS_BANK_LOW: recycling keeps it posting, but new approved posts are due.` : "";
+  return { read: true, line: `Threads: ${plural(went, "post")} went out this week, ${ahead} scheduled ahead, ${plural(left, "new post")} left in the bank.${low}` };
+}
+
 /** The summary Boss OS reads. Throws NAMED STOP when nothing at all was read. */
-export function buildSummary({ sales, gsc, pin, known, queue, now = Date.now(), runUrl = null }) {
+export function buildSummary({ sales, gsc, pin, known, queue, threads = null, now = Date.now(), runUrl = null }) {
   const lines = [salesLine(sales), searchLine(gsc, now), pinterestLine(pin, now), pagesLine(known, queue, now)];
+  const extra = threads ? [threadsLine(threads.bank, threads.ledger, now)] : [];
   const read = lines.filter((l) => l.read).length;
   if (read === 0) throw new Error("NAMED STOP [NOTHING_READ] not one of sales, search, Pinterest or pages could be read; nothing to hand to Boss OS.");
   const missing = lines.length - read;
@@ -92,7 +104,7 @@ export function buildSummary({ sales, gsc, pin, known, queue, now = Date.now(), 
     schema: SCHEMA, business: "ApprovalPrep", week: new Date(now).toISOString().slice(0, 10),
     generated_at: new Date(now).toISOString(), run_url: runUrl,
     sites: [{ host: HOST, label: HOST, state: missing ? "watch" : "fine", why: missing ? [`${plural(missing, "number")} could not be read this week`] : [] }],
-    notes: lines.map((l) => l.line),
+    notes: [...lines, ...extra].map((l) => l.line),
   };
 }
 
@@ -144,6 +156,8 @@ export function selfCheck() {
   let refused = false;
   try { buildSummary({ now, sales: { error: "x" }, gsc: null, pin: null, known: null, queue: null }); } catch { refused = true; }
   if (!refused) throw new Error("self-check: a summary with nothing read was handed on (rule 0)");
+  const low = threadsLine({ posts: [{ id: "a" }, { id: "b" }], bank_low_below: 14 }, { posts: { a: { runs: [{ due_at: "2026-11-02T01:30:00Z" }, { due_at: "2026-11-06T01:30:00Z" }] } } }, now).line;
+  if (low !== "Threads: 1 post went out this week, 1 scheduled ahead, 1 new post left in the bank. THREADS_BANK_LOW: recycling keeps it posting, but new approved posts are due.") throw new Error(`self-check: the Threads line lost its bank-low note: ${low}`);
   console.log("spry-weekly-summary self-check: ok");
 }
 
@@ -156,6 +170,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
       now, runUrl: process.env.RUN_URL ?? null, sales: await readSales(now),
       gsc: readJson("data/search_intelligence/gsc_truth.json"), pin: readJson("data/pinterest/metrics.json"),
       known: readJson("data/cadence/known_urls.json"), queue: readJson("data/intelligence/page_refresh_queue.json"),
+      threads: { bank: readJson("data/threads/posts.json"), ledger: readJson("data/threads/posted.json") },
     });
     fs.writeFileSync(out, `${JSON.stringify(summary, null, 2)}\n`);
     for (const l of summary.notes) console.log(`  ${l}`);

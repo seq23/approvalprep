@@ -1,0 +1,1149 @@
+{
+ "_comment": "ApprovalPrep Threads @approvalprep post bank, read by scripts/threads/threads_loop.mjs (daily job .github/workflows/threads-posts.yml). Days 1-14 approved by her 18 Nov 2026 word for word ('approved' date); days 15-60 written to the same rules (R-ADV-13, every outside fact sourced to the company's own pricing page, the FTC, the CFPB or AnnualCreditReport.com). `checks`: the exact figure each source must still show; the job fetches it before queuing and skips the post with THREADS_SOURCE_CHANGED if it is gone. `evergreen`: may be recycled once the bank has all gone out (day 9 names a month). Add new posts at the end; never reuse an id.",
+ "slot_time_ct": "19:30",
+ "days_ahead": 7,
+ "recycle_after_days": 60,
+ "bank_low_below": 14,
+ "posts": [
+  {
+   "id": "t01",
+   "day": 1,
+   "type": "Receipt",
+   "link": true,
+   "evergreen": true,
+   "approved": "2026-11-18",
+   "text": "$578.94.\n\nThat's six months of the cheapest plan on Credit Saint's own pricing page: $79.99 a month plus a $99 first-work fee.\n\nThe FTC says anything a credit repair company can legally do, you can do yourself.\n\nYour first letter is free: approvalprep.com/?utm_source=threads\n\nSelf-help templates, not legal advice.\n\n#creditrepair",
+   "sources": [
+    "https://www.creditsaint.com/packages/",
+    "https://consumer.ftc.gov/articles/fixing-your-credit-faqs"
+   ],
+   "checks": [
+    {
+     "url": "https://www.creditsaint.com/packages/",
+     "figure": "$79.99"
+    },
+    {
+     "url": "https://www.creditsaint.com/packages/",
+     "figure": "$99"
+    },
+    {
+     "url": "https://consumer.ftc.gov/articles/fixing-your-credit-faqs",
+     "figure": "for yourself for little or no cost"
+    }
+   ]
+  },
+  {
+   "id": "t02",
+   "day": 2,
+   "type": "Myth or fact",
+   "link": false,
+   "evergreen": true,
+   "approved": "2026-11-18",
+   "text": "Myth or fact: a credit repair company can get an accurate late payment taken off your report.\n\nMyth. The FTC says nobody can legally remove accurate, current information. Not them, not you.\n\nA dispute is for mistakes. Which is exactly why you can do it yourself.\n\n#creditscore",
+   "sources": [
+    "https://consumer.ftc.gov/articles/fixing-your-credit-faqs"
+   ],
+   "checks": [
+    {
+     "url": "https://consumer.ftc.gov/articles/fixing-your-credit-faqs",
+     "figure": "accurate and current"
+    }
+   ]
+  },
+  {
+   "id": "t03",
+   "day": 3,
+   "type": "Save this",
+   "link": false,
+   "evergreen": true,
+   "approved": "2026-11-18",
+   "text": "How to dispute a credit report mistake yourself. Save this.\n\n1. Pull your free reports at AnnualCreditReport.com. Free every week.\n2. Circle what's wrong: a wrong balance, a wrong date, an account that isn't yours.\n3. One letter per mistake: what's wrong, why, and what proof you have.\n4. Attach copies. Never originals.\n5. Mail it, keep a copy, mark 30 days on your calendar.\n\n#personalfinance",
+   "sources": [
+    "https://consumer.ftc.gov/articles/free-credit-reports",
+    "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports"
+   ],
+   "checks": [
+    {
+     "url": "https://consumer.ftc.gov/articles/free-credit-reports",
+     "figure": "once a week"
+    }
+   ]
+  },
+  {
+   "id": "t04",
+   "day": 4,
+   "type": "Question",
+   "link": false,
+   "evergreen": true,
+   "approved": "2026-11-18",
+   "text": "Be honest: have you ever paid a credit repair company?\n\nIf you did, did you ever see a single letter they sent for you?",
+   "sources": [],
+   "checks": []
+  },
+  {
+   "id": "t05",
+   "day": 5,
+   "type": "Receipt",
+   "link": false,
+   "evergreen": true,
+   "approved": "2026-11-18",
+   "text": "$1.8 billion.\n\nThat's what the CFPB said in Dec 2024 it was returning to 4.3 million people charged illegal upfront fees by the companies behind Lexington Law and CreditRepair.com.\n\nA federal court found they charged before the work was done.\n\nIf a company wants money every month before anything happens, ask why.\n\n#creditrepair",
+   "sources": [
+    "https://www.consumerfinance.gov/about-us/newsroom/cfpb-reaches-multibillion-dollar-settlement-with-credit-repair-conglomerate",
+    "https://www.consumerfinance.gov/about-us/newsroom/cfpb-announces-return-of-1-8-billion-in-illegal-junk-fees-to-4-3-million-americans-harmed-in-massive-credit-repair-scheme"
+   ],
+   "checks": [
+    {
+     "url": "https://www.consumerfinance.gov/about-us/newsroom/cfpb-announces-return-of-1-8-billion-in-illegal-junk-fees-to-4-3-million-americans-harmed-in-massive-credit-repair-scheme",
+     "figure": "$1.8 billion"
+    },
+    {
+     "url": "https://www.consumerfinance.gov/about-us/newsroom/cfpb-announces-return-of-1-8-billion-in-illegal-junk-fees-to-4-3-million-americans-harmed-in-massive-credit-repair-scheme",
+     "figure": "4.3 million"
+    }
+   ]
+  },
+  {
+   "id": "t06",
+   "day": 6,
+   "type": "Save this",
+   "link": true,
+   "evergreen": true,
+   "approved": "2026-11-18",
+   "text": "The whole dispute letter, in five parts:\n\nWho you are. Which account. What's wrong. Why it's wrong. What proof you attached.\n\nNo fancy legal wording needed.\n\nOur free Letter Studio puts it together with the bureau's mailing address on it. You print it and mail it yourself.\n\napprovalprep.com/?utm_source=threads\n\nSelf-help templates, not legal advice.",
+   "sources": [
+    "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports"
+   ],
+   "checks": []
+  },
+  {
+   "id": "t07",
+   "day": 7,
+   "type": "Save this",
+   "link": false,
+   "evergreen": true,
+   "approved": "2026-11-18",
+   "text": "Open your credit report and check these 3 things before the score:\n\n1. Addresses. One you never lived at is worth a second look.\n2. Accounts you don't recognize.\n3. Late-payment dates. Most negative items can be reported for 7 years, bankruptcy for 10.\n\nEveryone looks at the number. The mistakes are in the details.\n\n#creditscore",
+   "sources": [
+    "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports"
+   ],
+   "checks": [
+    {
+     "url": "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports",
+     "figure": "seven years"
+    },
+    {
+     "url": "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports",
+     "figure": "10 years"
+    }
+   ]
+  },
+  {
+   "id": "t08",
+   "day": 8,
+   "type": "Question",
+   "link": false,
+   "evergreen": true,
+   "approved": "2026-11-18",
+   "text": "What stops people from disputing a mistake on their own report?\n\nA. Not sure what to write\nB. Not sure where to mail it\nC. Scared of making it worse\nD. Didn't know you could\n\nWhich one was it for you?",
+   "sources": [],
+   "checks": []
+  },
+  {
+   "id": "t09",
+   "day": 9,
+   "type": "Receipt",
+   "link": true,
+   "evergreen": false,
+   "approved": "2026-11-18",
+   "text": "Credit repair prices, from their own websites (Nov 2026):\n\nSky Blue Credit: $79 to $119 a month\nThe Credit People: $99 or $119 a month\nCredit Saint: $79.99 to $139.99 a month, plus a first-work fee\n\nApprovalPrep: first letter free, full credit kit $19 once. You mail your own letters. We never act for you.\n\napprovalprep.com/?utm_source=threads\n\nSelf-help templates, not legal advice.\n\n#creditrepair",
+   "sources": [
+    "https://skybluecredit.com/easy-cost/",
+    "https://www.thecreditpeople.com/pricing",
+    "https://www.creditsaint.com/packages/"
+   ],
+   "checks": [
+    {
+     "url": "https://skybluecredit.com/easy-cost/",
+     "figure": "$79"
+    },
+    {
+     "url": "https://skybluecredit.com/easy-cost/",
+     "figure": "$119"
+    },
+    {
+     "url": "https://www.thecreditpeople.com/pricing",
+     "figure": "$99"
+    },
+    {
+     "url": "https://www.thecreditpeople.com/pricing",
+     "figure": "$119"
+    },
+    {
+     "url": "https://www.creditsaint.com/packages/",
+     "figure": "$79.99"
+    },
+    {
+     "url": "https://www.creditsaint.com/packages/",
+     "figure": "$139.99"
+    }
+   ]
+  },
+  {
+   "id": "t10",
+   "day": 10,
+   "type": "Myth or fact",
+   "link": false,
+   "evergreen": true,
+   "approved": "2026-11-18",
+   "text": "Myth or fact: disputing a mistake on your credit report costs money.\n\nMyth. The FTC says the credit bureaus and the businesses that report to them have to correct errors for free.\n\nYour real cost is paper and a stamp.\n\n#personalfinance",
+   "sources": [
+    "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports"
+   ],
+   "checks": [
+    {
+     "url": "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports",
+     "figure": "for free"
+    }
+   ]
+  },
+  {
+   "id": "t11",
+   "day": 11,
+   "type": "Save this",
+   "link": false,
+   "evergreen": true,
+   "approved": "2026-11-18",
+   "text": "Mailed your dispute? Here's what happens next.\n\nThe bureau usually has 30 days to look into it. Then you hear one of three things: corrected, verified, or nothing yet.\n\nIf it's verified and the item is accurate, it stays. That's not you failing. That's the system working.\n\nPut the 30-day date on your calendar the day you mail it.",
+   "sources": [
+    "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports"
+   ],
+   "checks": [
+    {
+     "url": "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports",
+     "figure": "30 days"
+    }
+   ]
+  },
+  {
+   "id": "t12",
+   "day": 12,
+   "type": "Myth or fact",
+   "link": false,
+   "evergreen": true,
+   "approved": "2026-11-18",
+   "text": "Myth or fact: you need someone to talk to Equifax, Experian or TransUnion for you.\n\nMyth. You can dispute directly with the bureau, or with the business that reported the item. Both are free.\n\nOnline or by mail. If you mail it, keep a copy.\n\n#creditscore",
+   "sources": [
+    "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports"
+   ],
+   "checks": [
+    {
+     "url": "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports",
+     "figure": "business that reported the inaccurate information"
+    }
+   ]
+  },
+  {
+   "id": "t13",
+   "day": 13,
+   "type": "Question",
+   "link": false,
+   "evergreen": true,
+   "approved": "2026-11-18",
+   "text": "What's the most anyone has ever charged you to \"fix\" your credit?\n\nNo judgment. Lots of people paid before they knew they could do it themselves.",
+   "sources": [],
+   "checks": []
+  },
+  {
+   "id": "t14",
+   "day": 14,
+   "type": "Save this",
+   "link": true,
+   "evergreen": true,
+   "approved": "2026-11-18",
+   "text": "Before you pay anyone to dispute your credit report, try this first. It's free.\n\nPull your 3 reports. Circle one mistake. Draft one letter.\n\nIf you can do that, you may not need the monthly plan at all.\n\nFree letter: approvalprep.com/?utm_source=threads\n\nSelf-help templates, not legal advice.",
+   "sources": [
+    "https://consumer.ftc.gov/articles/free-credit-reports",
+    "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports"
+   ],
+   "checks": [
+    {
+     "url": "https://consumer.ftc.gov/articles/free-credit-reports",
+     "figure": "AnnualCreditReport.com"
+    }
+   ]
+  },
+  {
+   "id": "t15",
+   "day": 15,
+   "type": "Save this",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "Turned down for an apartment after a background check? You have rights. Save this.\n\n1. The landlord has to give you an adverse action notice.\n2. It names the screening company, with its address and phone number.\n3. Ask that company for your free copy within 60 days.\n4. Something wrong on it? Tell them. They have to investigate within 30 days.\n\n#renting",
+   "sources": [
+    "https://consumer.ftc.gov/articles/tenant-background-checks-and-your-rights"
+   ],
+   "checks": [
+    {
+     "url": "https://consumer.ftc.gov/articles/tenant-background-checks-and-your-rights",
+     "figure": "adverse action"
+    },
+    {
+     "url": "https://consumer.ftc.gov/articles/tenant-background-checks-and-your-rights",
+     "figure": "60 days"
+    },
+    {
+     "url": "https://consumer.ftc.gov/articles/tenant-background-checks-and-your-rights",
+     "figure": "30 days"
+    }
+   ]
+  },
+  {
+   "id": "t16",
+   "day": 16,
+   "type": "Receipt",
+   "link": true,
+   "evergreen": true,
+   "approved": null,
+   "text": "$334.99.\n\nThat's month one of Credit Saint's Clean Slate plan, on their own pricing page: $139.99 a month plus a $195 first-work fee.\n\nThe FTC says the bureaus have to correct errors for free. Your cost is paper and a stamp.\n\nDraft your letter: https://approvalprep.com/?utm_source=threads\n\nSelf-help templates, not legal advice.",
+   "sources": [
+    "https://www.creditsaint.com/packages/",
+    "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports"
+   ],
+   "checks": [
+    {
+     "url": "https://www.creditsaint.com/packages/",
+     "figure": "$139.99"
+    },
+    {
+     "url": "https://www.creditsaint.com/packages/",
+     "figure": "$195"
+    },
+    {
+     "url": "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports",
+     "figure": "for free"
+    },
+    {
+     "url": "https://www.creditsaint.com/packages/",
+     "figure": "Clean Slate"
+    }
+   ]
+  },
+  {
+   "id": "t17",
+   "day": 17,
+   "type": "Question",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "When did you last read your actual credit report? Not the score. The report.\n\nThis month, this year, or never?",
+   "sources": [],
+   "checks": []
+  },
+  {
+   "id": "t18",
+   "day": 18,
+   "type": "Myth or fact",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "Myth or fact: you can buy a \"new credit identity\" and start over.\n\nMyth, and a dangerous one. The FTC calls it a scam. These companies often use stolen Social Security numbers or EINs gotten under false pretenses.\n\nApply with a number that isn't yours and you could face fines or prison.\n\n#identitytheft",
+   "sources": [
+    "https://consumer.ftc.gov/articles/fixing-your-credit-faqs"
+   ],
+   "checks": [
+    {
+     "url": "https://consumer.ftc.gov/articles/fixing-your-credit-faqs",
+     "figure": "new credit identity"
+    },
+    {
+     "url": "https://consumer.ftc.gov/articles/fixing-your-credit-faqs",
+     "figure": "fines or prison"
+    }
+   ]
+  },
+  {
+   "id": "t19",
+   "day": 19,
+   "type": "Save this",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "Thinking of hiring a credit repair company? Read this first.\n\nThe FTC says they have to give you a written contract that shows:\n\n- the services they'll perform\n- the total cost\n- how long it will take\n- your three-day right to cancel, free\n\nNo contract, no deal.\n\n#personalfinance",
+   "sources": [
+    "https://consumer.ftc.gov/articles/fixing-your-credit-faqs"
+   ],
+   "checks": [
+    {
+     "url": "https://consumer.ftc.gov/articles/fixing-your-credit-faqs",
+     "figure": "three-day right to cancel"
+    },
+    {
+     "url": "https://consumer.ftc.gov/articles/fixing-your-credit-faqs",
+     "figure": "the total cost"
+    }
+   ]
+  },
+  {
+   "id": "t20",
+   "day": 20,
+   "type": "Receipt",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "$2,148 a year.\n\nThat's Sky Blue Credit's couples plan at $179 a month, from their own pricing page.\n\nTwo people can each pull their own free reports and mail their own letters. The FTC says the bureaus have to correct errors for free.\n\n#personalfinance",
+   "sources": [
+    "https://skybluecredit.com/easy-cost/",
+    "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports"
+   ],
+   "checks": [
+    {
+     "url": "https://skybluecredit.com/easy-cost/",
+     "figure": "$179"
+    },
+    {
+     "url": "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports",
+     "figure": "for free"
+    }
+   ]
+  },
+  {
+   "id": "t21",
+   "day": 21,
+   "type": "Question",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "If a lender said no tomorrow, would you know how to find out why?\n\nYes, no, or \"I'd just apply somewhere else\"?",
+   "sources": [],
+   "checks": []
+  },
+  {
+   "id": "t22",
+   "day": 22,
+   "type": "Save this",
+   "link": true,
+   "evergreen": true,
+   "approved": null,
+   "text": "A debt collector wrote to you. Before you pay a cent, save this. Per the CFPB:\n\n1. Find the validation notice. It comes first or within five days of first contact.\n2. It names the creditor and breaks down the amount.\n3. It gives a 30-day window to dispute in writing.\n4. Dispute in writing in that window and they have to pause collecting the disputed amount until they respond.\n\nhttps://approvalprep.com/?utm_source=threads\n\nSelf-help templates, not legal advice.",
+   "sources": [
+    "https://www.consumerfinance.gov/ask-cfpb/what-information-does-a-debt-collector-have-to-give-me-about-the-debt-en-331/"
+   ],
+   "checks": [
+    {
+     "url": "https://www.consumerfinance.gov/ask-cfpb/what-information-does-a-debt-collector-have-to-give-me-about-the-debt-en-331/",
+     "figure": "five days"
+    },
+    {
+     "url": "https://www.consumerfinance.gov/ask-cfpb/what-information-does-a-debt-collector-have-to-give-me-about-the-debt-en-331/",
+     "figure": "30 days"
+    },
+    {
+     "url": "https://www.consumerfinance.gov/ask-cfpb/what-information-does-a-debt-collector-have-to-give-me-about-the-debt-en-331/",
+     "figure": "pause collecting"
+    }
+   ]
+  },
+  {
+   "id": "t23",
+   "day": 23,
+   "type": "Myth or fact",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "Myth or fact: freezing your credit hurts your score.\n\nMyth. The FTC says placing or lifting a freeze costs nothing and doesn't affect your credit score.\n\nIt keeps new lenders out of your report until you lift it.\n\n#identitytheft",
+   "sources": [
+    "https://consumer.ftc.gov/articles/what-know-about-credit-freezes-fraud-alerts"
+   ],
+   "checks": [
+    {
+     "url": "https://consumer.ftc.gov/articles/what-know-about-credit-freezes-fraud-alerts",
+     "figure": "doesn't affect your credit score"
+    }
+   ]
+  },
+  {
+   "id": "t24",
+   "day": 24,
+   "type": "Save this",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "Fraud alert or credit freeze? The difference in one post.\n\nFraud alert: a flag on your file. An initial one lasts one year. An extended one lasts seven years.\n\nCredit freeze: lenders can't pull your report for new credit until you lift it. Free to place, free to lift.\n\n#identitytheft",
+   "sources": [
+    "https://consumer.ftc.gov/articles/what-know-about-credit-freezes-fraud-alerts"
+   ],
+   "checks": [
+    {
+     "url": "https://consumer.ftc.gov/articles/what-know-about-credit-freezes-fraud-alerts",
+     "figure": "lasts one year"
+    },
+    {
+     "url": "https://consumer.ftc.gov/articles/what-know-about-credit-freezes-fraud-alerts",
+     "figure": "lasts seven years"
+    },
+    {
+     "url": "https://consumer.ftc.gov/articles/what-know-about-credit-freezes-fraud-alerts",
+     "figure": "no cost to place or lift"
+    }
+   ]
+  },
+  {
+   "id": "t25",
+   "day": 25,
+   "type": "Question",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "Which letter would you want help with first?\n\nA. Explaining something to a mortgage lender\nB. A rental application\nC. A mistake on your credit report\nD. Answering a debt collector",
+   "sources": [],
+   "checks": []
+  },
+  {
+   "id": "t26",
+   "day": 26,
+   "type": "Receipt",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "$599.\n\nThat's The Credit People's 6-month flat rate, on their own pricing page.\n\nThe FTC says anything a credit repair company can legally do, you can do for yourself for little or no cost.\n\nYour cost: paper and a stamp.\n\n#personalfinance",
+   "sources": [
+    "https://www.thecreditpeople.com/pricing",
+    "https://consumer.ftc.gov/articles/fixing-your-credit-faqs"
+   ],
+   "checks": [
+    {
+     "url": "https://www.thecreditpeople.com/pricing",
+     "figure": "$599"
+    },
+    {
+     "url": "https://consumer.ftc.gov/articles/fixing-your-credit-faqs",
+     "figure": "for yourself for little or no cost"
+    },
+    {
+     "url": "https://www.thecreditpeople.com/pricing",
+     "figure": "6 months flat rate"
+    }
+   ]
+  },
+  {
+   "id": "t27",
+   "day": 27,
+   "type": "Myth or fact",
+   "link": true,
+   "evergreen": true,
+   "approved": null,
+   "text": "Myth or fact: you only dispute with the credit bureau.\n\nMyth. The CFPB says correcting an error generally means contacting both the bureau and the company that supplied the information, like your bank or card company.\n\nTwo letters. Same proof. Copies, never originals.\n\nhttps://approvalprep.com/?utm_source=threads\n\nSelf-help templates, not legal advice.",
+   "sources": [
+    "https://www.consumerfinance.gov/ask-cfpb/how-do-i-dispute-an-error-on-my-credit-report-en-314/"
+   ],
+   "checks": [
+    {
+     "url": "https://www.consumerfinance.gov/ask-cfpb/how-do-i-dispute-an-error-on-my-credit-report-en-314/",
+     "figure": "company that provided the information"
+    }
+   ]
+  },
+  {
+   "id": "t28",
+   "day": 28,
+   "type": "Save this",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "What goes in the envelope when you dispute a credit report mistake. Save this.\n\n- Your letter: each error, with its account number\n- A copy of the report page with the item circled\n- Copies of your proof. Never originals.\n\nThe CFPB suggests certified mail, so you can show it arrived.\n\n#creditreport",
+   "sources": [
+    "https://www.consumerfinance.gov/ask-cfpb/how-do-i-dispute-an-error-on-my-credit-report-en-314/"
+   ],
+   "checks": [
+    {
+     "url": "https://www.consumerfinance.gov/ask-cfpb/how-do-i-dispute-an-error-on-my-credit-report-en-314/",
+     "figure": "account number"
+    },
+    {
+     "url": "https://www.consumerfinance.gov/ask-cfpb/how-do-i-dispute-an-error-on-my-credit-report-en-314/",
+     "figure": "circled"
+    },
+    {
+     "url": "https://www.consumerfinance.gov/ask-cfpb/how-do-i-dispute-an-error-on-my-credit-report-en-314/",
+     "figure": "certified mail"
+    }
+   ]
+  },
+  {
+   "id": "t29",
+   "day": 29,
+   "type": "Question",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "Has a mistake on your credit report ever cost you something? An apartment, a card, a better rate?\n\nWhat happened?",
+   "sources": [],
+   "checks": []
+  },
+  {
+   "id": "t30",
+   "day": 30,
+   "type": "Myth or fact",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "Myth or fact: once a dispute comes back \"verified\", you have no say.\n\nMyth. If it isn't resolved, the FTC says you can ask the bureau to put a statement of the dispute in your file and in future reports.\n\nYour side of the story, on the record.\n\n#creditreport",
+   "sources": [
+    "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports"
+   ],
+   "checks": [
+    {
+     "url": "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports",
+     "figure": "statement of the dispute"
+    }
+   ]
+  },
+  {
+   "id": "t31",
+   "day": 31,
+   "type": "Save this",
+   "link": true,
+   "evergreen": true,
+   "approved": null,
+   "text": "Your dispute got a mistake corrected. Do this next.\n\nAsk the bureau to send the correction to anyone who pulled your report in the past six months. For employers, the past two years.\n\nThe FTC says they have to, but only if you ask.\n\nhttps://approvalprep.com/?utm_source=threads\n\nSelf-help templates, not legal advice.",
+   "sources": [
+    "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports"
+   ],
+   "checks": [
+    {
+     "url": "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports",
+     "figure": "past six months"
+    },
+    {
+     "url": "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports",
+     "figure": "past two years"
+    }
+   ]
+  },
+  {
+   "id": "t32",
+   "day": 32,
+   "type": "Receipt",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "$1,418.88.\n\nOne year of Credit Saint's Credit Remodel plan, from their own pricing page: $109.99 a month plus a $99 first-work fee.\n\nThe FTC says the bureaus have to correct errors for free, and you can dispute with them directly.\n\nPull your free reports first. Then decide.\n\n#personalfinance",
+   "sources": [
+    "https://www.creditsaint.com/packages/",
+    "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports"
+   ],
+   "checks": [
+    {
+     "url": "https://www.creditsaint.com/packages/",
+     "figure": "$109.99"
+    },
+    {
+     "url": "https://www.creditsaint.com/packages/",
+     "figure": "$99"
+    },
+    {
+     "url": "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports",
+     "figure": "for free"
+    },
+    {
+     "url": "https://www.creditsaint.com/packages/",
+     "figure": "Credit Remodel"
+    }
+   ]
+  },
+  {
+   "id": "t33",
+   "day": 33,
+   "type": "Question",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "Honest question: what feels scarier, opening your credit report or calling a debt collector back?",
+   "sources": [],
+   "checks": []
+  },
+  {
+   "id": "t34",
+   "day": 34,
+   "type": "Myth or fact",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "Myth or fact: a credit repair company can charge you before it does any work.\n\nMyth. The FTC says it's illegal for credit repair companies to charge you before they help you.\n\nAsked to pay upfront? That's your sign to walk away.\n\n#personalfinance",
+   "sources": [
+    "https://consumer.ftc.gov/articles/fixing-your-credit-faqs"
+   ],
+   "checks": [
+    {
+     "url": "https://consumer.ftc.gov/articles/fixing-your-credit-faqs",
+     "figure": "charge you before they help you"
+    }
+   ]
+  },
+  {
+   "id": "t35",
+   "day": 35,
+   "type": "Save this",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "Turned down for credit, a job, insurance or housing? You may get an extra free credit report. Save this.\n\nThe FTC says you qualify if:\n\n- you got a denial notice (ask within 60 days)\n- you're unemployed and applying for jobs within 60 days\n- your report is wrong because of fraud\n\nThat's on top of the free weekly ones.\n\n#creditreport",
+   "sources": [
+    "https://consumer.ftc.gov/articles/free-credit-reports"
+   ],
+   "checks": [
+    {
+     "url": "https://consumer.ftc.gov/articles/free-credit-reports",
+     "figure": "60 days"
+    },
+    {
+     "url": "https://consumer.ftc.gov/articles/free-credit-reports",
+     "figure": "once a week"
+    }
+   ]
+  },
+  {
+   "id": "t36",
+   "day": 36,
+   "type": "Save this",
+   "link": true,
+   "evergreen": true,
+   "approved": null,
+   "text": "How to write a letter of explanation a lender will actually read.\n\n1. One page.\n2. Name the issue: the date, the account, the amount.\n3. Say what happened, plainly.\n4. Say what's different now.\n5. Attach proof if you have it.\n\nOur free Letter Studio helps you draft it. You send it yourself.\n\nhttps://approvalprep.com/?utm_source=threads\n\nSelf-help templates, not legal advice.",
+   "sources": [],
+   "checks": []
+  },
+  {
+   "id": "t37",
+   "day": 37,
+   "type": "Question",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "Has a lender ever asked you to explain something in writing? A job gap, a late payment, a big deposit?\n\nWhat was yours?",
+   "sources": [],
+   "checks": []
+  },
+  {
+   "id": "t38",
+   "day": 38,
+   "type": "Myth or fact",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "Myth or fact: a late payment stays on your report forever.\n\nMyth. The FTC says a bureau can report most negative information for seven years. Bankruptcy, 10.\n\nAccurate items stay until then. Mistakes don't have to wait.\n\n#creditreport",
+   "sources": [
+    "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports"
+   ],
+   "checks": [
+    {
+     "url": "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports",
+     "figure": "seven years"
+    },
+    {
+     "url": "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports",
+     "figure": "10 years"
+    }
+   ]
+  },
+  {
+   "id": "t39",
+   "day": 39,
+   "type": "Save this",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "Your dispute answer came back. Here's how to read it.\n\nCorrected: the item changed. You get a free copy of your report, and it doesn't count as your free annual one.\n\nVerified: the business says it's accurate. It stays.\n\nNo answer yet: the bureau has 30 days to investigate.\n\n#creditreport",
+   "sources": [
+    "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports"
+   ],
+   "checks": [
+    {
+     "url": "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports",
+     "figure": "30 days"
+    },
+    {
+     "url": "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports",
+     "figure": "doesn't count as your free annual credit report"
+    }
+   ]
+  },
+  {
+   "id": "t40",
+   "day": 40,
+   "type": "Receipt",
+   "link": true,
+   "evergreen": true,
+   "approved": null,
+   "text": "$0.\n\nWhat it costs you to dispute a mistake with Equifax, Experian or TransUnion. The FTC says they have to correct errors for free.\n\nSky Blue Credit's Basic plan: $79 a month, on their own pricing page.\n\nOnly one of those numbers is required.\n\nhttps://approvalprep.com/?utm_source=threads\n\nSelf-help templates, not legal advice.",
+   "sources": [
+    "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports",
+    "https://skybluecredit.com/easy-cost/"
+   ],
+   "checks": [
+    {
+     "url": "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports",
+     "figure": "for free"
+    },
+    {
+     "url": "https://skybluecredit.com/easy-cost/",
+     "figure": "$79"
+    }
+   ]
+  },
+  {
+   "id": "t41",
+   "day": 41,
+   "type": "Question",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "What's one credit thing you wish someone had told you at 18?",
+   "sources": [],
+   "checks": []
+  },
+  {
+   "id": "t42",
+   "day": 42,
+   "type": "Myth or fact",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "Myth or fact: if a company tells you not to contact the bureaus yourself, it's protecting you.\n\nMyth. The FTC lists that as a warning sign of a credit repair scam.\n\nYou can always contact the bureaus directly. It's free.\n\n#personalfinance",
+   "sources": [
+    "https://consumer.ftc.gov/articles/fixing-your-credit-faqs",
+    "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports"
+   ],
+   "checks": [
+    {
+     "url": "https://consumer.ftc.gov/articles/fixing-your-credit-faqs",
+     "figure": "not to contact the credit bureaus directly"
+    },
+    {
+     "url": "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports",
+     "figure": "for free"
+    }
+   ]
+  },
+  {
+   "id": "t43",
+   "day": 43,
+   "type": "Save this",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "Free credit reports, without the scam sites. Save this.\n\n1. Go to AnnualCreditReport.com. The FTC says it's the only website authorized to fill orders for the free reports.\n2. Or call 1-877-322-8228.\n3. You can check each bureau once a week, free.\n\n#creditreport",
+   "sources": [
+    "https://consumer.ftc.gov/articles/free-credit-reports"
+   ],
+   "checks": [
+    {
+     "url": "https://consumer.ftc.gov/articles/free-credit-reports",
+     "figure": "Only one website"
+    },
+    {
+     "url": "https://consumer.ftc.gov/articles/free-credit-reports",
+     "figure": "1-877-322-8228"
+    },
+    {
+     "url": "https://consumer.ftc.gov/articles/free-credit-reports",
+     "figure": "once a week"
+    }
+   ]
+  },
+  {
+   "id": "t44",
+   "day": 44,
+   "type": "Save this",
+   "link": true,
+   "evergreen": true,
+   "approved": null,
+   "text": "Rental application? Get ahead of the background check.\n\nIf something on your report needs context, a short letter with your application can answer it before they ask.\n\nKeep it to facts: what happened, when, and what's changed.\n\nAnd if they say no because of a report, they have to tell you which company it came from.\n\nhttps://approvalprep.com/?utm_source=threads\n\nSelf-help templates, not legal advice.",
+   "sources": [
+    "https://consumer.ftc.gov/articles/tenant-background-checks-and-your-rights"
+   ],
+   "checks": [
+    {
+     "url": "https://consumer.ftc.gov/articles/tenant-background-checks-and-your-rights",
+     "figure": "adverse action"
+    }
+   ]
+  },
+  {
+   "id": "t45",
+   "day": 45,
+   "type": "Myth or fact",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "Myth or fact: you can dispute anything, even if it's accurate.\n\nMyth. The FTC says a company telling you to dispute information you know is accurate is a sign of a scam.\n\nDisputes are for real mistakes. Accurate items stay.\n\n#personalfinance",
+   "sources": [
+    "https://consumer.ftc.gov/articles/fixing-your-credit-faqs"
+   ],
+   "checks": [
+    {
+     "url": "https://consumer.ftc.gov/articles/fixing-your-credit-faqs",
+     "figure": "you know is accurate"
+    }
+   ]
+  },
+  {
+   "id": "t46",
+   "day": 46,
+   "type": "Question",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "Poll: how do you check your credit?\n\nA. A free app\nB. My bank\nC. AnnualCreditReport.com\nD. I don't",
+   "sources": [],
+   "checks": []
+  },
+  {
+   "id": "t47",
+   "day": 47,
+   "type": "Receipt",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "$1,428 a year.\n\nThat's Sky Blue Credit's Premium plan at $119 a month, from their own pricing page.\n\nCompare: the FTC says you can check your report from each bureau once a week, free.\n\nStart there before you sign anything.\n\n#personalfinance",
+   "sources": [
+    "https://skybluecredit.com/easy-cost/",
+    "https://consumer.ftc.gov/articles/free-credit-reports"
+   ],
+   "checks": [
+    {
+     "url": "https://skybluecredit.com/easy-cost/",
+     "figure": "$119"
+    },
+    {
+     "url": "https://consumer.ftc.gov/articles/free-credit-reports",
+     "figure": "once a week"
+    }
+   ]
+  },
+  {
+   "id": "t48",
+   "day": 48,
+   "type": "Save this",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "Dispute letter mistakes that slow you down:\n\n- Five problems crammed into one vague paragraph\n- No account number\n- Sending originals instead of copies\n- Not keeping a copy for yourself\n- No 30-day date on your calendar\n\nOne clear letter per mistake beats one long angry one.\n\n#creditreport",
+   "sources": [
+    "https://www.consumerfinance.gov/ask-cfpb/how-do-i-dispute-an-error-on-my-credit-report-en-314/",
+    "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports"
+   ],
+   "checks": [
+    {
+     "url": "https://www.consumerfinance.gov/ask-cfpb/how-do-i-dispute-an-error-on-my-credit-report-en-314/",
+     "figure": "account number"
+    },
+    {
+     "url": "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports",
+     "figure": "30 days"
+    }
+   ]
+  },
+  {
+   "id": "t49",
+   "day": 49,
+   "type": "Myth or fact",
+   "link": true,
+   "evergreen": true,
+   "approved": null,
+   "text": "Myth or fact: a dispute letter needs special legal wording.\n\nMyth. Say what's wrong, why, and what proof you attached. The CFPB says to list each error with its account number.\n\nPlain words are fine.\n\nhttps://approvalprep.com/?utm_source=threads\n\nSelf-help templates, not legal advice.",
+   "sources": [
+    "https://www.consumerfinance.gov/ask-cfpb/how-do-i-dispute-an-error-on-my-credit-report-en-314/"
+   ],
+   "checks": [
+    {
+     "url": "https://www.consumerfinance.gov/ask-cfpb/how-do-i-dispute-an-error-on-my-credit-report-en-314/",
+     "figure": "account number"
+    }
+   ]
+  },
+  {
+   "id": "t50",
+   "day": 50,
+   "type": "Question",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "If you've disputed something before: online or by mail?\n\nAnd would you do it the same way again?",
+   "sources": [],
+   "checks": []
+  },
+  {
+   "id": "t51",
+   "day": 51,
+   "type": "Save this",
+   "link": true,
+   "evergreen": true,
+   "approved": null,
+   "text": "Your mortgage lender asked for a letter of explanation. It's a request, not a rejection.\n\nThey want to understand one thing: a late payment, a job gap, a large deposit, an old address.\n\nAnswer only what they asked. Short, dated, signed. Attach proof.\n\nDraft it free: https://approvalprep.com/?utm_source=threads\n\nSelf-help templates, not legal advice.",
+   "sources": [],
+   "checks": []
+  },
+  {
+   "id": "t52",
+   "day": 52,
+   "type": "Myth or fact",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "Myth or fact: a debt collector can keep collecting while you dispute in writing.\n\nMyth, if you dispute within the 30-day window. The CFPB says they have to pause collecting the disputed amount until they respond.\n\nThe date on the validation notice matters. Circle it.\n\n#debt",
+   "sources": [
+    "https://www.consumerfinance.gov/ask-cfpb/what-information-does-a-debt-collector-have-to-give-me-about-the-debt-en-331/"
+   ],
+   "checks": [
+    {
+     "url": "https://www.consumerfinance.gov/ask-cfpb/what-information-does-a-debt-collector-have-to-give-me-about-the-debt-en-331/",
+     "figure": "30 days"
+    },
+    {
+     "url": "https://www.consumerfinance.gov/ask-cfpb/what-information-does-a-debt-collector-have-to-give-me-about-the-debt-en-331/",
+     "figure": "pause collecting"
+    }
+   ]
+  },
+  {
+   "id": "t53",
+   "day": 53,
+   "type": "Receipt",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "$1,188 a year.\n\nThat's The Credit People's Standard plan at $99 a month, on their own pricing page.\n\nThe FTC says anything a credit repair company can legally do, you can do for yourself for little or no cost.\n\nTry one letter yourself before you sign up.\n\n#personalfinance",
+   "sources": [
+    "https://www.thecreditpeople.com/pricing",
+    "https://consumer.ftc.gov/articles/fixing-your-credit-faqs"
+   ],
+   "checks": [
+    {
+     "url": "https://www.thecreditpeople.com/pricing",
+     "figure": "$99"
+    },
+    {
+     "url": "https://consumer.ftc.gov/articles/fixing-your-credit-faqs",
+     "figure": "for yourself for little or no cost"
+    }
+   ]
+  },
+  {
+   "id": "t54",
+   "day": 54,
+   "type": "Save this",
+   "link": true,
+   "evergreen": true,
+   "approved": null,
+   "text": "Your credit report check, step by step. Save this.\n\n1. Pull all three free reports.\n2. Check your name, addresses and employers.\n3. List every account. Circle any you don't recognize.\n4. Check balances and late-payment dates.\n5. One letter per real mistake.\n\nhttps://approvalprep.com/?utm_source=threads\n\nSelf-help templates, not legal advice.",
+   "sources": [
+    "https://consumer.ftc.gov/articles/free-credit-reports"
+   ],
+   "checks": [
+    {
+     "url": "https://consumer.ftc.gov/articles/free-credit-reports",
+     "figure": "once a week"
+    }
+   ]
+  },
+  {
+   "id": "t55",
+   "day": 55,
+   "type": "Question",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "What's the one thing on your credit report you've never understood?\n\nAsk it here. Someone in the replies probably knows.",
+   "sources": [],
+   "checks": []
+  },
+  {
+   "id": "t56",
+   "day": 56,
+   "type": "Myth or fact",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "Myth or fact: paying a company gets your dispute looked at faster.\n\nMyth. The FTC says however you file, the bureau has 30 days to investigate.\n\nSame clock whether you mail it yourself or someone else does.\n\n#creditreport",
+   "sources": [
+    "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports"
+   ],
+   "checks": [
+    {
+     "url": "https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports",
+     "figure": "30 days to investigate"
+    }
+   ]
+  },
+  {
+   "id": "t57",
+   "day": 57,
+   "type": "Save this",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "Think someone opened an account in your name? Save this.\n\n1. Freeze your credit. The FTC says it costs nothing to place or lift.\n2. Pull your reports and mark what isn't yours.\n3. Dispute those items with the bureau.\n4. A report that's wrong because of fraud also gets you an extra free copy.\n\n#identitytheft",
+   "sources": [
+    "https://consumer.ftc.gov/articles/what-know-about-credit-freezes-fraud-alerts",
+    "https://consumer.ftc.gov/articles/free-credit-reports"
+   ],
+   "checks": [
+    {
+     "url": "https://consumer.ftc.gov/articles/what-know-about-credit-freezes-fraud-alerts",
+     "figure": "no cost to place or lift"
+    },
+    {
+     "url": "https://consumer.ftc.gov/articles/free-credit-reports",
+     "figure": "because of fraud"
+    }
+   ]
+  },
+  {
+   "id": "t58",
+   "day": 58,
+   "type": "Question",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "Landlord, lender or employer: who checking your credit makes you most nervous?",
+   "sources": [],
+   "checks": []
+  },
+  {
+   "id": "t59",
+   "day": 59,
+   "type": "Myth or fact",
+   "link": true,
+   "evergreen": true,
+   "approved": null,
+   "text": "Myth or fact: ApprovalPrep disputes your credit report for you.\n\nMyth. We don't contact bureaus or creditors for you, and we don't promise results. You get letter templates. You fill in your true facts, sign them and mail them yourself.\n\nAccurate items stay. Real mistakes are worth a letter.\n\nhttps://approvalprep.com/?utm_source=threads\n\nSelf-help templates, not legal advice.",
+   "sources": [],
+   "checks": []
+  },
+  {
+   "id": "t60",
+   "day": 60,
+   "type": "Save this",
+   "link": false,
+   "evergreen": true,
+   "approved": null,
+   "text": "Before you sign with any credit repair company, ask these 4 questions. Save this.\n\n1. Do I pay before you do anything? (The FTC says that's illegal.)\n2. Where's my written contract?\n3. Where's my three-day cancel form?\n4. Will you tell me to dispute things that are accurate?\n\nThe wrong answer to any one is your answer.\n\n#personalfinance",
+   "sources": [
+    "https://consumer.ftc.gov/articles/fixing-your-credit-faqs"
+   ],
+   "checks": [
+    {
+     "url": "https://consumer.ftc.gov/articles/fixing-your-credit-faqs",
+     "figure": "charge you before they help you"
+    },
+    {
+     "url": "https://consumer.ftc.gov/articles/fixing-your-credit-faqs",
+     "figure": "three-day right to cancel"
+    }
+   ]
+  }
+ ]
+}
