@@ -27,7 +27,7 @@ const PROMISES = [/raise (your|my) (credit )?score/i, /boost (your|my) (credit )
   /remove (any|all|negative|accurate)/i, /(fix|repair|clean|erase) (your|my) credit/i, /we (will )?(dispute|contact|send) .* for you/i, /points? (higher|raised|increase)/i];
 
 test('no screen, letter or store text promises an outcome', () => {
-  const files = [...screens, ...walk(path.join(root, 'src')), ...walk(path.join(root, 'store'))];
+  const files = [...screens, ...walk(path.join(root, 'src')), ...walk(path.join(root, 'store')).filter((f) => /\.(md|json|txt)$/.test(f))];
   assert.ok(files.length > 10);
   for (const f of files) {
     const text = fs.readFileSync(f, 'utf8').replace(SELF_HELP_LINE, '');
@@ -35,8 +35,9 @@ test('no screen, letter or store text promises an outcome', () => {
   }
 });
 
-test('the store description ends with the self-help line', () => {
-  assert.equal(fs.readFileSync(path.join(root, 'store/en.md'), 'utf8').trim().split('\n').at(-1), SELF_HELP_LINE);
+test('the store descriptions end with the self-help line', () => {
+  for (const f of ['store/en.md', 'store/google-play/full-description.txt'])
+    assert.equal(fs.readFileSync(path.join(root, f), 'utf8').trim().split('\n').at(-1), SELF_HELP_LINE, f);
 });
 
 // Inspect executable text so comments and store-supplied interpolated prices are not mistaken for copy.

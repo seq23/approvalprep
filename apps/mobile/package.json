@@ -14,7 +14,8 @@
     "preview:web": "expo export --platform web",
     "release:gate": "node scripts/release-gate.mjs",
     "eas-build-pre-install": "node scripts/release-gate.mjs --if-production",
-    "bundle:load": "node scripts/bundle-load.mjs"
+    "bundle:load": "node scripts/bundle-load.mjs",
+    "play:assets": "node scripts/make-play-assets.mjs"
   },
   "dependencies": {
     "@expo-google-fonts/archivo": "0.4.2",
