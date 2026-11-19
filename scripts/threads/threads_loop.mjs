@@ -5,8 +5,11 @@
 // so a match on service alone could post here to the wrong account (fix 18 Nov 2026). Her yes 18 Nov 2026: "yes to threads post for approval prep - but u
 // need to come up with a loop so it can not be interrupted after day 14 and a plan".
 //
-// Every run keeps the next 7 evening slots filled (customScheduled, dueAt 19:30 CT), within the
-// organisation's scheduled-post limit (10 on the free plan). Posts come from the bank
+// Every run keeps the next 6 evening slots filled (customScheduled, dueAt 19:30 CT; bank
+// days_ahead), within the organisation's scheduled-post limit (10 on the free plan), which it
+// shares with Instagram @approvalprep (moved into this Buffer 18 Nov 2026; weekly Monday batch
+// of 3, scripts/brand_social/queue_posts.mjs): Threads never takes the room Instagram still
+// needs (threadsRoom), so 6 + 3 never pass 10. Neither job ever deletes the other's posts. Posts come from the bank
 // data/threads/posts.json, in order; each run is recorded in data/threads/posted.json.
 //
 // Uninterruptible past the bank:
@@ -22,7 +25,7 @@
 //     and the run ends red with NAMED STOP THREADS_PHRASE_BLOCKED after the others are queued.
 //
 // Rule 0: every run prints `OUTPUT: queued N, scheduled ahead M, bank unposted K, recycled R`.
-// Zero queued with fewer than 7 ahead and no named note is NAMED STOP THREADS_NOTHING_QUEUED.
+// Zero queued with fewer than days_ahead ahead and no named note is NAMED STOP THREADS_NOTHING_QUEUED.
 // Other named stops (red): SECRET_MISSING_BUFFER_APPROVALPREP_ACCESS_TOKEN, NO_THREADS_CHANNEL,
 // AMBIGUOUS_THREADS_CHANNEL,
 // THREADS_QUEUE_PAUSED, and the Buffer client's BUFFER_TOKEN_REFUSED / BUFFER_READ_FAILED /
@@ -36,6 +39,12 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 export const BANK_FILE = path.join(ROOT, 'data', 'threads', 'posts.json');
 export const LEDGER_FILE = path.join(ROOT, 'data', 'threads', 'posted.json');
 export const TOKEN = 'BUFFER_APPROVALPREP_ACCESS_TOKEN';
+const BRAND_PLAN = path.join(ROOT, 'data', 'brand-social', 'plan.json');
+
+/** Room Threads may take: the organisation's room less what Instagram's weekly batch still needs. */
+export function threadsRoom({ orgLimit, orgPending, igPending, igMax }) {
+  return Math.max(0, orgLimit - orgPending - Math.max(0, igMax - igPending));
+}
 /** The Buffer channel name of Threads @approvalprep. Never match on service alone. */
 export const THREADS_CHANNEL_NAME = 'approvalprep';
 export const LINK = 'https://approvalprep.com/?utm_source=threads';
@@ -226,7 +235,12 @@ export async function main({ now = Date.now(), env = process.env, fetchImpl = fe
     if (keep.length !== (v.runs ?? []).length) { notes.push(`THREADS_POST_VANISHED ${id}: its Buffer post is gone before its time; it will be queued again`); v.runs = keep; }
   }
 
-  const orgRoom = Number(org.limits?.scheduledPosts ?? 10) - all.length;
+  const ig = readJson(BRAND_PLAN, { channels: {} }).channels?.instagram;
+  const igMax = readJson(BRAND_PLAN, {}).per_channel_queue_max ?? 3;
+  const igCh = ig && channels.find((c) => c.service === ig.service && c.name === ig.name);
+  const igPending = igCh ? all.filter((p) => p.channelId === igCh.id).length : 0;
+  const orgLimit = Number(org.limits?.scheduledPosts ?? 10);
+  const orgRoom = threadsRoom({ orgLimit, orgPending: all.length, igPending, igMax });
   const plan = await planRun({ bank, ledger, pending, now, orgRoom, fetchText });
   notes.push(...plan.notes);
   let queued = 0;
@@ -245,7 +259,7 @@ export async function main({ now = Date.now(), env = process.env, fetchImpl = fe
   const left = unposted(bank, ledger).length;
   if (left < (bank.bank_low_below ?? 14)) notes.push(`THREADS_BANK_LOW ${left} unposted left in data/threads/posts.json; recycling keeps posting, add new approved posts`);
   for (const n of notes) log(`NAMED NOTE ${n}`);
-  const output = `OUTPUT: queued ${queued}, scheduled ahead ${ahead}, bank unposted ${left}, recycled ${recycled}`;
+  const output = `OUTPUT: queued ${queued}, scheduled ahead ${ahead}, bank unposted ${left}, recycled ${recycled}; Buffer split: Threads up to ${bank.days_ahead ?? 7}, Instagram ${igPending} waiting + ${Math.max(0, igMax - igPending)} kept free (up to ${igMax}), organisation ${all.length + queued} of ${orgLimit}`;
   log(output);
   if (env.GITHUB_STEP_SUMMARY) fs.appendFileSync(env.GITHUB_STEP_SUMMARY, `### Threads @approvalprep\n\n- ${output}\n${notes.map((n) => `- NAMED NOTE ${n}`).join('\n')}\n`);
   if (plan.blocked.length) throw new NamedStop('THREADS_PHRASE_BLOCKED', `R-ADV-13 wording in ${plan.blocked.join('; ')}: rewrite or delete it in data/threads/posts.json (the others were queued)`);

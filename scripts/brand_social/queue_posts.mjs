@@ -2,7 +2,8 @@
 //
 //   --render  draw the posts this week can use (this week's video + the next carousels)
 //             into public/social, so the commit that follows deploys them
-//   --queue   hand them to the brands Buffer, within the free plan's limits, and record
+//   --queue   hand them to ApprovalPrep's Buffer, within the free plan's limits (shared with
+//             Threads: Instagram up to 3 waiting, Threads up to 6, 10 in all), and record
 //             each in data/brand-social/posted.json (never posted twice)
 //
 // Switched OFF until her yes to the sample page: data/brand-social/plan.json `enabled`.
@@ -11,13 +12,14 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { NamedStop, TOKEN_ENV, bufferClient, createPost, planWeek, postInput, readState, waitLive } from './buffer_queue.mjs';
+import { NamedStop, TOKEN_ENV, bufferClient, createPost, forgetVanished, planWeek, postInput, readState, waitLive } from './buffer_queue.mjs';
 import { SITE, hashtagsFresh, postText, roomInQueue, weekIndex } from './posts.mjs';
 import { allCarousels, loadHashtags, loadPlan, render, weekVideo } from './render_posts.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const LEDGER = path.join(ROOT, 'data', 'brand-social', 'posted.json');
 const BRAND = 'ApprovalPrep';
+const THREADS_AHEAD = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'threads', 'posts.json'), 'utf8')).days_ahead;
 
 export const mediaUrl = (post, file) => `${SITE}/social/${post.id}/${file}`;
 const mediaFiles = (post) => (post.type === 'video' ? ['video.mp4', 'cover.jpg'] : post.slides.map((_, i) => `${i + 1}.jpg`));
@@ -40,7 +42,7 @@ async function main(mode, now = Date.now()) {
   if (!hashtagsFresh(tags, now)) throw new NamedStop('BRAND_SOCIAL_HASHTAGS_STALE', `data/brand-social/hashtags.json was due a refresh on ${tags.refresh_by}: re-read the counts and pick again`);
   const ledger = readLedger();
   const week = weekIndex(now);
-  const { carousels, video } = candidates(plan, ledger, week);
+  let { carousels, video } = candidates(plan, ledger, week);
   if (!carousels.length) throw new NamedStop('BRAND_SOCIAL_EXHAUSTED', 'every carousel the pin copy can make has posted; add angles to data/pinterest/angles.json or a second carousel per page');
   const need = [video, ...carousels.slice(0, plan.posts_per_week)];
   if (mode === '--render') {
@@ -57,6 +59,9 @@ async function main(mode, now = Date.now()) {
   if (!token) throw new NamedStop('BUFFER_TOKEN_MISSING', `${TOKEN_ENV} is not set (repository secret)`);
   const call = bufferClient(token);
   const state = await readState(call, plan);
+  const gone = forgetVanished(ledger, state.pendingIds, now);
+  if (gone.length) { writeLedger(ledger); console.log(`NAMED NOTE BRAND_SOCIAL_POST_VANISHED ${gone.join(', ')}: gone from Buffer before its time; queued again`); }
+  if (gone.length) ({ carousels, video } = candidates(plan, ledger, week));
   const picks = planWeek({ plan, carousels, video, ledger, week, state, roomInQueue });
   const total = Object.values(picks).flat().length;
   const thisWeek = Object.values(ledger.posts ?? {}).filter((v) => Object.values(v).some((x) => x.week === week)).length;
@@ -76,7 +81,7 @@ async function main(mode, now = Date.now()) {
     }
   }
   const per = Object.entries(picks).map(([p, l]) => `${p} ${l.length}`).join(', ');
-  console.log(`OUTPUT ${label}: ${queued} post(s) queued in Buffer for week ${week} (${per}); organisation ${state.orgScheduled + queued} of ${state.orgLimit} scheduled`);
+  console.log(`OUTPUT ${label}: ${queued} post(s) queued in Buffer for week ${week} (${per}); organisation ${state.orgScheduled + queued} of ${state.orgLimit} scheduled (split: Instagram up to ${plan.per_channel_queue_max}, Threads up to ${THREADS_AHEAD}, never past ${state.orgLimit})`);
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {

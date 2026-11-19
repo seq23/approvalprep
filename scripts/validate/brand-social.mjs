@@ -1,12 +1,13 @@
 #!/usr/bin/env node
-// Brand social posts (Instagram @approvalprep via the brands Buffer). Fails if:
+// Brand social posts (Instagram @approvalprep via ApprovalPrep's own Buffer, shared with Threads). Fails if:
 // 1. no carousel can be made from the pin copy, or one is not cover -> 2 checklist slides
 //    -> (letter) -> Letter Studio close, or prints a price;
 // 2. a credit carousel misses the self-help line on any slide or in its caption (R-ADV-13);
 // 3. a hashtag set breaks the mix (2 broad, 3+ mid at 100k-2M posts), lacks a count or date,
 //    or any post carries a banned credit-repair tag (R-ADV-13);
 // 4. the Buffer queue rule lets a channel pass per_channel_queue_max or the organisation
-//    pass its scheduled-post limit, re-posts a post, or passes the week's count;
+//    pass its scheduled-post limit, re-posts a post, or passes the week's count, or a post
+//    gone from Buffer before its time (the 18 Nov 2026 channel move) is not queued again;
 // 5. switched off, the job does anything but print OUTPUT ... OFF; switched on with no
 //    token, it is anything but the named stop BUFFER_TOKEN_MISSING;
 // 6. the music generator gives silence or a different track for the same week.
@@ -16,7 +17,7 @@ import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { planWeek, postInput, readState } from '../brand_social/buffer_queue.mjs';
+import { forgetVanished, planWeek, postInput, readState } from '../brand_social/buffer_queue.mjs';
 import { CREDIT_LINE, carouselFor, carouselSlugs, hashtagsFresh, postText, roomInQueue, videoFor } from '../brand_social/posts.mjs';
 import { synth, concatSeconds } from '../brand_social/music.mjs';
 
@@ -74,7 +75,7 @@ const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'bs-'));
 const run = (enabled) => {
   const file = path.join(dir, `plan-${enabled}.json`);
   fs.writeFileSync(file, JSON.stringify({ ...plan, enabled }));
-  try { return { out: execFileSync('node', ['scripts/brand_social/queue_posts.mjs', '--queue'], { encoding: 'utf8', stdio: 'pipe', env: { ...process.env, BRAND_SOCIAL_PLAN: file, BUFFER_BRANDS_ACCESS_TOKEN: '' } }), code: 0 }; } catch (e) { return { out: String(e.stdout) + String(e.stderr), code: e.status }; }
+  try { return { out: execFileSync('node', ['scripts/brand_social/queue_posts.mjs', '--queue'], { encoding: 'utf8', stdio: 'pipe', env: { ...process.env, BRAND_SOCIAL_PLAN: file, BUFFER_APPROVALPREP_ACCESS_TOKEN: '' } }), code: 0 }; } catch (e) { return { out: String(e.stdout) + String(e.stderr), code: e.status }; }
 };
 check('off says OFF', () => { const r = run(false); assert.equal(r.code, 0); assert.match(r.out, /^OUTPUT brand-social queue \(ApprovalPrep\): OFF/); });
 check('the real entrypoint loads and names the week', () => {
@@ -105,6 +106,21 @@ try {
   assert.equal(state.orgScheduled, 2);
   assert.equal(state.channels.instagram.scheduled, 2);
 } catch (e) { fails.push(`queue read sees every scheduled post: ${e.message.split('\n')[0]}`); }
+
+check('a post gone from Buffer before its time is queued again; a sent one is not', () => {
+  const now = Date.parse('2026-11-19T03:00:00Z');
+  const ledger = { posts: {
+    v: { instagram: { buffer_id: 'sent', due_at: '2026-11-19T00:54:00Z', week: 45 } },
+    c1: { instagram: { buffer_id: 'lost', due_at: '2026-11-19T16:21:00Z', week: 45 } },
+    c2: { instagram: { buffer_id: 'kept', due_at: '2026-11-25T01:34:00Z', week: 45 } },
+  } };
+  assert.deepEqual(forgetVanished(ledger, new Set(['kept']), now), ['c1 instagram']);
+  assert.deepEqual(Object.keys(ledger.posts).sort(), ['c2', 'v']);
+  const state = { orgLimit: 10, orgScheduled: 7, channels: { instagram: { scheduled: 1 } } };
+  const picks = planWeek({ plan, carousels: [{ id: 'c1' }, { id: 'c9' }], video: { id: 'v' }, ledger, week: 45, state, roomInQueue });
+  assert.deepEqual(picks.instagram.map((p) => p.id), ['c1'], 'the lost carousel goes again, the sent video does not');
+  assert.equal(forgetVanished({ posts: {} }, new Set(), now).length, 0);
+});
 
 check('the renderer needs only ffmpeg, and reads length from the concat list', () => {
   assert.ok(Math.abs(concatSeconds("file 'a'\nduration 2.6\nfile 'b'\nduration 3\nfile 'b'\n") - 5.6) < 1e-9);

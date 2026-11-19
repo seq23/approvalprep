@@ -1,14 +1,16 @@
 name: Threads Posts
 # ApprovalPrep's daily Threads post (@approvalprep) through ApprovalPrep's own free Buffer
 # (her yes 18 Nov 2026: a loop that cannot be interrupted after day 14). Every morning it keeps
-# the next 7 evenings filled, one post each at 19:30 CT (Buffer customScheduled), from
+# the next 6 evenings filled, one post each at 19:30 CT (Buffer customScheduled), from
 # data/threads/posts.json, then records what it queued in data/threads/posted.json.
 # After the bank runs out it recycles evergreen posts (60+ days since they ran). Notes, never
 # red: THREADS_BANK_LOW, THREADS_SOURCE_CHANGED <url>, THREADS_RECYCLE_UNDER_60. Named stops
 # (red): SECRET_MISSING_BUFFER_APPROVALPREP_ACCESS_TOKEN, NO_THREADS_CHANNEL, AMBIGUOUS_THREADS_CHANNEL,
 # THREADS_QUEUE_PAUSED, THREADS_PHRASE_BLOCKED (R-ADV-13), THREADS_NOTHING_QUEUED, and the
 # Buffer client's BUFFER_TOKEN_REFUSED / BUFFER_READ_FAILED / BUFFER_POST_REFUSED.
-# Every run prints `OUTPUT: queued N, scheduled ahead M, bank unposted K, recycled R`.
+# The Buffer's 10 free scheduled posts are shared with Instagram @approvalprep (Mondays, up to 3):
+# Threads keeps at most 6 ahead and never takes the room Instagram still needs.
+# Every run prints `OUTPUT: queued N, scheduled ahead M, bank unposted K, recycled R; Buffer split: ...`.
 # Logic and proof: scripts/threads/threads_loop.mjs, scripts/validate/threads-loop.mjs.
 on:
   schedule:
