@@ -15,7 +15,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
 import { carouselFor, carouselSlugs, videoFor } from './posts.mjs';
-import { muxArgs, writeTrack } from './music.mjs';
+import { concatSeconds, muxArgs, writeTrack } from './music.mjs';
 
 const MUSIC_PRESET = 'approvalprep';
 
@@ -152,7 +152,7 @@ async function drawVideo(browser, post) {
   const silent = path.join(frames, 'silent.mp4');
   execFileSync('ffmpeg', ['-loglevel', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', path.join(frames, 'list.txt'), '-vf', 'scale=1080:1920:flags=lanczos,format=yuv420p', '-r', '30', '-c:v', 'libx264', '-crf', '23', '-an', silent]);
   // Original music under it (scripts/brand_social/music.mjs; data/brand-social/music.json).
-  const seconds = Number(execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', silent], { encoding: 'utf8' }).trim());
+  const seconds = concatSeconds(fs.readFileSync(path.join(frames, 'list.txt'), 'utf8')); // no ffprobe: the static ffmpeg build has none
   const wav = writeTrack(path.join(frames, 'music.wav'), { preset: MUSIC_PRESET, seconds, week: post.week ?? 0 });
   execFileSync('ffmpeg', muxArgs(silent, wav, seconds, mp4));
   const cover = path.join(dir, 'cover.jpg');

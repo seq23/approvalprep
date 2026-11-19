@@ -16,9 +16,9 @@ import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { planWeek, postInput } from '../brand_social/buffer_queue.mjs';
+import { planWeek, postInput, readState } from '../brand_social/buffer_queue.mjs';
 import { CREDIT_LINE, carouselFor, carouselSlugs, hashtagsFresh, postText, roomInQueue, videoFor } from '../brand_social/posts.mjs';
-import { synth } from '../brand_social/music.mjs';
+import { synth, concatSeconds } from '../brand_social/music.mjs';
 
 const plan = JSON.parse(fs.readFileSync('data/brand-social/plan.json', 'utf8'));
 const tags = JSON.parse(fs.readFileSync('data/brand-social/hashtags.json', 'utf8'));
@@ -89,6 +89,27 @@ check('music', () => {
   const [b] = synth({ preset: 'approvalprep', seconds: 3, week: 0 });
   assert.ok(Math.sqrt(a.reduce((s, v) => s + v * v, 0) / a.length) > 0.01, 'silent');
   assert.deepEqual(Array.from(a.slice(0, 1000)), Array.from(b.slice(0, 1000)));
+});
+
+// Buffer answers a multi-status filter with nothing (18 Nov 2026: 0 while 6 were scheduled); the queue count must still see them.
+try {
+  const posts = [{ id: 'a', channelId: 'ig', status: 'scheduled' }, { id: 'b', channelId: 'ig', status: 'sending' }];
+  const call = async (q) => {
+    if (q.includes('account')) return { account: { organizations: [{ id: 'o', limits: { scheduledPosts: 10 } }] } };
+    if (q.includes('channels')) return { channels: Object.values(plan.channels).map((c) => ({ id: 'ig', service: c.service, name: c.name })) };
+    const wanted = q.match(/status:\[([^\]]*)\]/)[1].split(',').map((x) => x.trim());
+    if (wanted.length !== 1) return { posts: { edges: [] } };
+    return { posts: { edges: posts.filter((p) => p.status === wanted[0]).map((node) => ({ node })) } };
+  };
+  const state = await readState(call, plan);
+  assert.equal(state.orgScheduled, 2);
+  assert.equal(state.channels.instagram.scheduled, 2);
+} catch (e) { fails.push(`queue read sees every scheduled post: ${e.message.split('\n')[0]}`); }
+
+check('the renderer needs only ffmpeg, and reads length from the concat list', () => {
+  assert.ok(Math.abs(concatSeconds("file 'a'\nduration 2.6\nfile 'b'\nduration 3\nfile 'b'\n") - 5.6) < 1e-9);
+  const src = fs.readFileSync('scripts/brand_social/render_posts.mjs', 'utf8');
+  assert.deepEqual([...new Set([...src.matchAll(/exec(?:File)?Sync\('([^']+)'/g)].map((m) => m[1]))], ['ffmpeg'], 'static ffmpeg has no ffprobe (18 Nov 2026 run)');
 });
 
 if (fails.length) { for (const f of fails) console.error(`[brand-social] FAIL ${f}`); process.exit(1); }
