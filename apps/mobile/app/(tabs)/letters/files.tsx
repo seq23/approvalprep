@@ -52,7 +52,7 @@ export default function Files() {
       if (account.preview) {
         const now = await account.ownership();
         setOwnership(now);
-        setMessage(ownsKit(now, offer.productId) ? 'Preview: this kit is unlocked for this visit. Nothing was charged.' : 'This is a preview, so there are no purchases to restore here.');
+        setMessage(ownsKit(now, offer.productId) ? 'Preview: this kit is open for this visit. Nothing was charged.' : 'This is a preview, so there are no purchases to restore here.');
         return;
       }
       // Straight after a purchase the store has already confirmed it; its own Restore is not run again.
