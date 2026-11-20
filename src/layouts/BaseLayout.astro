@@ -133,7 +133,7 @@ const documentTitle = exactTitle ? String(title) : fitTitle(String(title));
           const session_id = params.get("session_id") || "";
           const sku = params.get("sku") || "";
           if (!session_id || !sku) {
-            if (status) status.textContent = "No verified Stripe session was found. Return to pricing and complete checkout to unlock downloads.";
+            if (status) status.textContent = "No verified Stripe session was found. Return to pricing and complete checkout to get your downloads.";
             return;
           }
             if (status) status.textContent = "Verifying your payment with Stripe. ApprovalPrep does not store your letter answers or completed customer documents.";
