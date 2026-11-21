@@ -29,6 +29,7 @@ test('the bundle Get button and its notice follow the sales switch and the store
       if (name === 'react-native') return { Text: 'Text', Linking: {} };
       if (name.endsWith('/ui')) return { Button: 'Button', Row: 'Row', Sheet: 'Sheet', Screen: 'Screen' };
       if (name.endsWith('/theme')) return { type: {} };
+      if (name.endsWith('/more')) return { TERMS_URL: 'terms', PRIVACY_URL: 'privacy' };
       if (name.endsWith('/copy')) return { HONEST_LIMIT: 'limit' };
       if (name.endsWith('/previewSamples')) return { PREVIEW_ENABLED: false };
       if (name.endsWith('/offers')) return { KIT_OFFERS: [], KIT_ORDER: realOffers.KIT_ORDER, PRODUCTS: realOffers.PRODUCTS, BUNDLE_LINE: realOffers.BUNDLE_LINE, upgradeLine: realOffers.upgradeLine, productName: realOffers.productName, productRoute: realOffers.productRoute, TRACKING_LINE: 'tracking', bundleFilesLine: () => 'files', bundleWebsiteKits: () => ['A kit'], offerTitle: (name: string) => name };
