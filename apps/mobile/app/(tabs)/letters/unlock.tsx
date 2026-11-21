@@ -7,9 +7,8 @@ import { CREDIT_REPAIR_DEFENSE_LABEL, CREDIT_REPAIR_DEFENSE_URL } from '../../..
 import { type } from '../../../src/theme';
 import { HONEST_LIMIT, REQUEST_LINE } from '../../../src/copy';
 import { PREVIEW_ENABLED } from '../../../src/previewSamples';
-import { WEBSITE_BUYER_LABEL, TRACKING_LINE, kitOfferFor, websiteDifference, productName, productRoute, BUNDLE_LINE, KIT_ORDER, upgradeLine, siteSkuFor } from '../../../src/offers';
+import { TRACKING_LINE, kitOfferFor, websiteDifference, productName, productRoute, BUNDLE_LINE, KIT_ORDER, upgradeLine, siteSkuFor } from '../../../src/offers';
 import { KitFiles } from '../../../src/KitFiles';
-import { openFrom } from '../../../src/nav';
 import { KIT, EXPLANATION_KIT, COMPLETE_BUNDLE, KIT_SALES_ENABLED, isUpgrade, upgradeFor } from '../../../src/kit';
 import { LETTERS, EXPLANATION_LETTERS } from '../../../src/letters';
 import { KIT_ID, EXPLANATION_KIT_ID, loadDeliveredKit, saveDeliveredKit } from '../../../src/kitTemplates';
@@ -103,7 +102,6 @@ export default function Unlock() {
     <Sheet>{(explanation ? EXPLANATION_LETTERS : LETTERS.filter(l => l.access === 'kit')).map(l => <Text key={l.kind} style={type.body}>{l.name}</Text>)}<Text style={type.body}>{TRACKING_LINE}</Text></Sheet>
     <Text style={type.sub}>{explanation ? REQUEST_LINE : HONEST_LIMIT}</Text>
     <Text style={type.sub}>{websiteDifference(kitId)}</Text>
-    {owned ? null : <Button quiet label={WEBSITE_BUYER_LABEL} onPress={() => openFrom('/letters/unlock', '/more')} />}
     {offers[0] === COMPLETE_BUNDLE.productId ? option(offers[0]) : null}
     {owned ? <>
       <Button primary label={wanted ? `Write the ${wanted.name.charAt(0).toLowerCase()}${wanted.name.slice(1)} ›` : 'Write a kit letter ›'} onPress={() => wanted ? openWanted() : router.replace('/letters')} />

@@ -7,10 +7,9 @@ import { CREDIT_REPAIR_DEFENSE_LABEL, CREDIT_REPAIR_DEFENSE_URL } from '../../..
 import { type } from '../../../src/theme';
 import { REQUEST_LINE } from '../../../src/copy';
 import { PREVIEW_ENABLED } from '../../../src/previewSamples';
-import { WEBSITE_BUYER_LABEL, FILE_KIT_OFFERS, productName, productRoute, BUNDLE_LINE, KIT_ORDER, upgradeLine } from '../../../src/offers';
+import { FILE_KIT_OFFERS, productName, productRoute, BUNDLE_LINE, KIT_ORDER, upgradeLine } from '../../../src/offers';
 import { COMPLETE_BUNDLE, KIT_SALES_ENABLED, isUpgrade, upgradeFor } from '../../../src/kit';
 import { KitFiles } from '../../../src/KitFiles';
-import { openFrom } from '../../../src/nav';
 import { bundleAccount, type BundlePrice } from '../../../src/purchases/bundleAccount';
 import { storePrices } from '../../../src/purchases/prices';
 import { downloadKitFiles, kitFilesOnPhone } from '../../../src/purchases/kitFiles';
@@ -89,7 +88,6 @@ export default function Files() {
     </>}
     {offers.some(id => id !== offer.productId && id !== COMPLETE_BUNDLE.productId) ? <Text style={type.sub}>Other options</Text> : null}
     {offers.filter(id => id !== offer.productId && id !== COMPLETE_BUNDLE.productId).map(option)}
-    <Button quiet label={WEBSITE_BUYER_LABEL} onPress={() => openFrom('/letters/files', '/more')} />
     <Button quiet label={busy ? 'Checking…' : 'Restore purchase'} disabled={busy} onPress={() => void act('restore')} />
     {message ? <Text accessibilityRole="alert" style={type.sub}>{message}</Text> : null}
     <Button quiet label="Terms ›" onPress={() => void Linking.openURL('https://approvalprep.com/terms/')} />
