@@ -1,0 +1,8 @@
+---
+import AuthorityGuidePage from "../components/AuthorityGuidePage.astro";
+import registry from "../../data/content/demand_coverage_pages.json";
+import { resolveBureauPage } from "../lib/bureauPage.mjs";
+// Addresses, sources and checked dates come from the Letter Studio's own bureau list.
+const page=resolveBureauPage(registry.pages.find((item)=>item.path==="/credit-bureau-dispute-addresses"));
+---
+<AuthorityGuidePage page={page} />
