@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "orchestratorSource": "_repo_validation_registry.json",
-  "validatorCount": 60,
-  "hardFailCount": 59,
+  "validatorCount": 62,
+  "hardFailCount": 61,
   "strongWarningCount": 1,
   "validators": [
     {
@@ -520,6 +520,24 @@
     },
     {
       "order": 58,
+      "id": "brand-social",
+      "npmScript": "validate:brand-social",
+      "entrypoint": "scripts/validate/brand-social.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "growth-critical"
+    },
+    {
+      "order": 59,
+      "id": "threads-loop",
+      "npmScript": "validate:threads-loop",
+      "entrypoint": "scripts/validate/threads-loop.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "growth-critical"
+    },
+    {
+      "order": 60,
       "id": "email-nurture",
       "npmScript": "validate:email-nurture",
       "entrypoint": "scripts/validate/email-nurture.mjs",
@@ -528,7 +546,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 59,
+      "order": 61,
       "id": "resend-download-email",
       "npmScript": "validate:resend-download-email",
       "entrypoint": "scripts/validate/resend-download-email.mjs",
@@ -537,7 +555,7 @@
       "group": "growth-critical"
     },
     {
-      "order": 60,
+      "order": 62,
       "id": "endpoint-auth",
       "npmScript": "validate:endpoint-auth",
       "entrypoint": "scripts/validate/endpoint-auth.mjs",

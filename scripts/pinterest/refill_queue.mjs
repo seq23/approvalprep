@@ -191,13 +191,29 @@ function questionPage(p) {
 }
 
 /** A published letter page's paper copy: the opening of its own template. */
+// What the pin promises follows what the page is (registry field `pinKind`, default "letter"): a letter
+// page holds a sample to fill in; an address page holds where to mail, not a sample; a notice page
+// explains a letter someone sent you and the request letters you can send back (review, 21 Nov 2026).
+export const PIN_KINDS = {
+  letter: { titles: ["a sample to fill in", "what to write"], cta: "See the full template and what to fill in." },
+  address: { titles: ["where to mail it", "what to put in the envelope"], cta: "See the address, its source and what to enclose." },
+  notice: { titles: ["what it means", "the letters you can send back"], cta: "See what the notice must tell you, and the free letters." },
+};
+export function pinTitles(phrase, kind = "letter") {
+  const spec = PIN_KINDS[kind];
+  if (!spec) throw new Error(`NAMED STOP [PIN_KIND_UNKNOWN] ${kind}`);
+  return spec.titles.map((t) => `${capFirst(phrase)}: ${t}`);
+}
+
 function letterPage(entry, published) {
   const key = String(entry.path || "").replace(/\/+$/, "");
   if (!key || typeof entry.template !== "string" || !entry.template.trim()) return null;
   if (!published(key)) return { skip: `${key}/: not in the sitemap yet` };
   const slug = key.replace(/^\//, "").replace(/\//g, "-");
-  const phrase = String(entry.targetQuery || entry.title || slug.replace(/-/g, " ")).trim().toLowerCase();
   const titleWords = String(entry.title || "").trim();
+  // Lower-cased for matching, but a name the title spells with inner capitals keeps them ("TransUnion", "CFPB").
+  const spelled = new Map(titleWords.split(/[^A-Za-z0-9]+/).filter((w) => /[A-Z]/.test(w.slice(1))).map((w) => [w.toLowerCase(), w]));
+  const phrase = String(entry.targetQuery || entry.title || slug.replace(/-/g, " ")).trim().toLowerCase().replace(/[a-z0-9]+/g, (w) => spelled.get(w) || w);
   const headlines = fittingHeadlines([
     phrase.split(/\s+/).length <= 7 ? smartTitle(phrase) : smartTitle(trimWords(phrase)),
     titleWords && titleWords.split(/\s+/).length <= 7 ? titleWords.replace(/:.*$/, "") : null,
@@ -205,8 +221,8 @@ function letterPage(entry, published) {
   if (!headlines.length) return { skip: `${key}/: no headline of its own words fits the pin` };
   const paras = entry.template.split(/\n\s*\n/).map((x) => x.trim()).filter(Boolean);
   const base = {
-    derived: true, phrases: [phrase], cta: "See the full template and what to fill in.", headlines,
-    titles: [`${capFirst(phrase)}: a sample to fill in`, `${capFirst(phrase)}: what to write`],
+    derived: true, phrases: [phrase], cta: (PIN_KINDS[entry.pinKind || "letter"] || PIN_KINDS.letter).cta, headlines,
+    titles: pinTitles(phrase, entry.pinKind),
     description: decode(entry.description || entry.summary || "").slice(0, 440),
   };
   const page = { slug, path: `${key}/`, kind: "guide", imageSku: entry.sku || "complete-approvalprep-bundle", question: entry.targetQuery || entry.title, searchText: [phrase, entry.title, entry.description].filter(Boolean).join(" ") };
