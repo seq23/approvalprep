@@ -70,6 +70,9 @@ test('home and every paywall stay silent about buying on the website; the websit
 test('More opens only app-view pages, and every page the app opens is one the live check reads', () => {
   for (const link of realMore.MORE_LINKS) assert.equal(new URL(link.url).searchParams.get('app'), '1', `${link.label} opens outside app view`);
   const checked: string[] = appPagePaths();
+  // Pages Functions run only on the paths public/_routes.json includes: app view needs every app page there.
+  const routes = JSON.parse(readFileSync(new URL('../../../public/_routes.json', import.meta.url), 'utf8'));
+  for (const path of checked) assert.ok(routes.include.includes(path), `${path} is not routed through functions/_middleware.js`);
   for (const url of [...realMore.MORE_LINKS.map(l => l.url), realMore.TERMS_URL, realMore.PRIVACY_URL, realMore.CREDIT_REPAIR_DEFENSE_URL]) {
     assert.ok(checked.includes(new URL(url).pathname), `${url} is not in the live check's list`);
   }
