@@ -3,7 +3,7 @@ import { CANCELLED_LINE, purchaseCancelled } from '../../../src/purchases/provid
 import { useCallback, useState } from 'react';
 import { Linking, Text } from 'react-native';
 import { Button, Row, Screen, Sheet } from '../../../src/ui';
-import { CREDIT_REPAIR_DEFENSE_LABEL, CREDIT_REPAIR_DEFENSE_URL } from '../../../src/more';
+import { CREDIT_REPAIR_DEFENSE_LABEL, CREDIT_REPAIR_DEFENSE_URL, PRIVACY_URL, TERMS_URL } from '../../../src/more';
 import { type } from '../../../src/theme';
 import { HONEST_LIMIT, REQUEST_LINE } from '../../../src/copy';
 import { PREVIEW_ENABLED } from '../../../src/previewSamples';
@@ -118,7 +118,7 @@ export default function Unlock() {
     {ownership.bundle || (explanation ? ownership.creditKit : ownership.explanationKit) ? null : <Text style={type.sub}>{`This app also has the ${other.name}: ${other.what}. It is in the bundle above and on the Write a letter list.`}</Text>}
     <Button quiet label={busy ? 'Checking…' : 'Restore purchase'} disabled={busy} onPress={() => void act('restore')} />
     {message ? <Text accessibilityRole="alert" style={type.sub}>{message}</Text> : null}
-    <Button quiet label="Terms ›" onPress={() => void Linking.openURL('https://approvalprep.com/terms/')} />
-    <Button quiet label="Privacy ›" onPress={() => void Linking.openURL('https://approvalprep.com/privacy/')} />
+    <Button quiet label="Terms ›" onPress={() => void Linking.openURL(TERMS_URL)} />
+    <Button quiet label="Privacy ›" onPress={() => void Linking.openURL(PRIVACY_URL)} />
   </Screen>;
 }

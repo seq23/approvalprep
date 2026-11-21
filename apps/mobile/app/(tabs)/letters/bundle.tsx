@@ -4,6 +4,7 @@ import { useCallback, useState } from 'react';
 import { Linking, Text } from 'react-native';
 import { Button, Row, Screen, Sheet } from '../../../src/ui';
 import { type } from '../../../src/theme';
+import { PRIVACY_URL, TERMS_URL } from '../../../src/more';
 import { HONEST_LIMIT } from '../../../src/copy';
 import { PREVIEW_ENABLED } from '../../../src/previewSamples';
 import { BUNDLE_LINE, KIT_OFFERS, KIT_ORDER, PRODUCTS, upgradeLine, TRACKING_LINE, bundleFilesLine, bundleWebsiteKits, offerTitle, productName, productRoute } from '../../../src/offers';
@@ -96,7 +97,7 @@ export default function Bundle() {
     {kits.map(id => <Row key={id} title={offerTitle(productName(id), prices.find(p => p.id === id)?.price)} sub={PRODUCTS.find(p => p.productId === id)?.what} onPress={() => router.push(productRoute(id))} />)}
     <Button quiet label={busy ? 'Checking…' : 'Restore purchase'} disabled={busy} onPress={() => void act(false)} />
     {message ? <Text accessibilityRole="alert" style={type.sub}>{message}</Text> : null}
-    <Button quiet label="Terms ›" onPress={() => void Linking.openURL('https://approvalprep.com/terms/')} />
-    <Button quiet label="Privacy ›" onPress={() => void Linking.openURL('https://approvalprep.com/privacy/')} />
+    <Button quiet label="Terms ›" onPress={() => void Linking.openURL(TERMS_URL)} />
+    <Button quiet label="Privacy ›" onPress={() => void Linking.openURL(PRIVACY_URL)} />
   </Screen>;
 }

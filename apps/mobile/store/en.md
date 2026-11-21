@@ -8,7 +8,7 @@ ApprovalPrep walks you through one question at a time and turns your true facts
 into a clear first draft. Save it as a PDF, print it or share it.
 
 - Free: the credit bureau dispute letter, as many times as you need.
-- The same eight products as approvalprep.com, each paid once, no subscription: Letter of
+- Eight products, each paid once, no subscription: Letter of
   Explanation Kit, Income + Employment Letter Kit, Credit Letter Kit, Rental Application Kit,
   Loan Prep Letter Kit, Business Funding Prep Kit, Life Admin Letter Kit and the Complete
   ApprovalPrep Bundle. Each kit opens the website kit's PDF guide and editable Word file.

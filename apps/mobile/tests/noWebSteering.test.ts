@@ -8,6 +8,8 @@ import * as realOffers from '../src/offers';
 import * as realCopy from '../src/copy';
 import * as realMore from '../src/more';
 import * as bundleOffers from '../src/purchases/bundleOffers';
+// @ts-ignore plain .mjs shared with the live check
+import { appPagePaths, appViewProblems } from '../../../scripts/ops/app-view.mjs';
 
 // App Review guideline 3.1.1 (ship-ready app-review.md row 1): home and the three paywalls never point
 // a buyer at approvalprep.com or at the website-order unlock. That unlock lives in More only, where a
@@ -60,5 +62,37 @@ test('home and every paywall stay silent about buying on the website; the websit
     view.press();
     assert.ok(view.routes.length > 0, `${screen}: no button was pressed`);
     assert.ok(!view.routes.some(r => /"\/more"/.test(r)), `${screen} sends a buyer to the website-order unlock: ${view.routes.join(' ')}`);
+    // Terms, Privacy and the credit-repair page open in app view only: no shop menu, no links onward.
+    for (const r of view.routes.filter(r => r.includes('approvalprep.com'))) assert.match(r, /approvalprep\.com\/[^"]*\?app=1"/, `${screen} opens a website page outside app view: ${r}`);
+  }
+});
+
+test('More opens only app-view pages, and every page the app opens is one the live check reads', () => {
+  for (const link of realMore.MORE_LINKS) assert.equal(new URL(link.url).searchParams.get('app'), '1', `${link.label} opens outside app view`);
+  const checked: string[] = appPagePaths();
+  for (const url of [...realMore.MORE_LINKS.map(l => l.url), realMore.TERMS_URL, realMore.PRIVACY_URL, realMore.CREDIT_REPAIR_DEFENSE_URL]) {
+    assert.ok(checked.includes(new URL(url).pathname), `${url} is not in the live check's list`);
+  }
+});
+
+// The served pages themselves. The site's shop menu (kit links) is what a normal page carries, so the
+// reader must catch it; app view must remove it. APP_VIEW_ORIGIN (a deploy preview or production) runs
+// the same reader over the real pages; after every deploy scripts/ops/post-deploy-live-check.mjs does.
+test('the reader catches a page with the shop menu and passes the same page in app view', () => {
+  const shop = '<header class="site-header"><nav><a href="/credit-letter-kit/">Credit Letter Kit</a></nav></header><main><p>Terms.</p><button>Buy the Credit Letter Kit — $19</button></main>';
+  const problems = appViewProblems(shop);
+  assert.ok(problems.some((p: string) => p.includes('/credit-letter-kit/')));
+  assert.ok(problems.some((p: string) => p.startsWith('buy button')));
+  assert.deepEqual(appViewProblems('<main><p>Terms. Questions: <a href="mailto:info@approvalprep.com">email us</a>.</p></main>'), []);
+});
+
+test('every page the app opens is served with no way to buy (APP_VIEW_ORIGIN)', { skip: !process.env.APP_VIEW_ORIGIN && 'runs against a deploy: set APP_VIEW_ORIGIN' }, async () => {
+  const origin = process.env.APP_VIEW_ORIGIN!.replace(/\/+$/, '');
+  const paths: string[] = appPagePaths();
+  assert.ok(paths.length >= 6);
+  for (const path of paths) {
+    const response = await fetch(`${origin}${path}?app=1`);
+    assert.equal(response.status, 200, path);
+    assert.deepEqual(appViewProblems(await response.text()), [], path);
   }
 });
