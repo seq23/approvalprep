@@ -14,8 +14,9 @@ export function MortgageCaution() {
 }
 
 /** The underwriter's questions mapped to the letter that answers each. `open`: each row opens that
- * letter (the letter screen itself says when it needs the kit); without it the list is read-only. */
-export function UnderwriterGuide({ open = true }: { open?: boolean }) {
+ * letter (the letter screen itself says when it needs the kit); without it the list is read-only.
+ * `caution`: the ask-your-loan-officer line, only where a dispute letter is also on offer. */
+export function UnderwriterGuide({ open = true, caution = true }: { open?: boolean; caution?: boolean }) {
   const go = (kind: string) => void savedLetters().then(store => letterHref(store, kind)).catch(() => ({ params: { kind } }))
     .then(href => router.push({ ...href, pathname: '/letters/[kind]' }));
   return <Sheet>
@@ -24,7 +25,6 @@ export function UnderwriterGuide({ open = true }: { open?: boolean }) {
     {UNDERWRITER_CONDITIONS.map(c => open
       ? <Row key={c.kind} title={c.asks} sub={c.letter} onPress={() => go(c.kind)} />
       : <Text key={c.kind} style={type.body}>{c.asks}{'\n'}<Text style={type.sub}>{c.letter}</Text></Text>)}
-    <Text style={type.sub}>{MORTGAGE_DISPUTE_LINE}</Text>
-    <Source />
+    {caution ? <><Text style={type.sub}>{MORTGAGE_DISPUTE_LINE}</Text><Source /></> : null}
   </Sheet>;
 }

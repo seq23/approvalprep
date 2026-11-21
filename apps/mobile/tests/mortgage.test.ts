@@ -37,7 +37,18 @@ test('the dispute caution cites a dated https source', () => {
 test('the screens a mortgage borrower meets draw the guide and the caution', () => {
   assert.match(screen('studio.tsx'), /showsUnderwriterGuide\(situation\.id, step\)[^\n]*<UnderwriterGuide \/>/);
   assert.match(screen('[kind].tsx'), /showsMortgageCaution\(kind, step\)[^\n]*<MortgageCaution \/>/);
-  assert.match(screen('unlock.tsx'), /explanation \? <UnderwriterGuide open=\{owned\} \/>/);
+  assert.match(screen('unlock.tsx'), /explanation \? <UnderwriterGuide open=\{owned\} caution=\{false\} \/>/, 'the LOE Kit has no dispute letter, so no dispute caution');
+});
+
+test('a Studio question’s box follows its title: the guide sits below the box and its Next button', () => {
+  const s = screen('studio.tsx');
+  const field = s.indexOf('<Field label={`Question ${step + 1}');
+  const next = s.indexOf("'Next question ›'");
+  const guide = s.indexOf('<UnderwriterGuide');
+  assert.ok(field > 0 && next > field && guide > next, 'nothing may sit between the question title and its box');
+  // Between the screen opening for a question and its box there is only the short honest-limit and save lines.
+  const between = s.slice(s.indexOf(': field ? <>'), field);
+  assert.doesNotMatch(between, /<(UnderwriterGuide|Sheet|MortgageCaution)\b/);
 });
 
 test('every buy button is followed by the paid-once line', () => {

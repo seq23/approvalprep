@@ -102,7 +102,7 @@ export default function Unlock() {
     {explanation ? null : <Text style={type.body}>Thinking of paying a credit repair company? You can send these letters yourself, paid once, with no monthly fee. ApprovalPrep is not a credit repair company.</Text>}
     <Sheet>{(explanation ? EXPLANATION_LETTERS : LETTERS.filter(l => l.access === 'kit')).map(l => <Text key={l.kind} style={type.body}>{l.name}</Text>)}<Text style={type.body}>{TRACKING_LINE}</Text></Sheet>
     <Text style={type.sub}>{explanation ? REQUEST_LINE : HONEST_LIMIT}</Text>
-    {explanation ? <UnderwriterGuide open={owned} /> : null}
+    {explanation ? <UnderwriterGuide open={owned} caution={false} /> : null}
     <Text style={type.sub}>{websiteDifference(kitId)}</Text>
     {offers[0] === COMPLETE_BUNDLE.productId ? option(offers[0]) : null}
     {owned ? <>

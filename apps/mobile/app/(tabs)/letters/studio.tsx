@@ -120,7 +120,6 @@ export default function Studio() {
       </> : null}
     </> : field ? <>
       {limit}
-      {showsUnderwriterGuide(situation.id, step) && !editing ? <UnderwriterGuide /> : null}
       <Text style={type.sub} accessibilityLiveRegion="polite">{resumed && step === 0 && stored ? 'This is the draft you started before. Your answers are filled in.' : note || 'Opening your draft…'}</Text>
       {letter ? <>
         <Field label={`Question ${step + 1} of ${situation.fields.length}`} spoken={field.label} defaultHint={field.hint} multiline={field.kind === 'long' || field.kind === 'lines'} value={letter.answers[field.name] ?? ''} onChangeText={value => persist({ ...letter, answers: { ...letter.answers, [field.name]: value } })} />
@@ -130,6 +129,8 @@ export default function Studio() {
         {step > 0 && !editing ? <Button label="← Previous question" onPress={() => router.back()} /> : null}
         {resumed && step === 0 && stored ? <Button label="Start a blank one instead" onPress={() => void choose(situation.id, true)} /> : null}
       </> : null}
+      {/* Below the question's box and its Next button, so the box stays right under its title. */}
+      {showsUnderwriterGuide(situation.id, step) && !editing ? <UnderwriterGuide /> : null}
     </> : null}
   </Screen>;
 }
