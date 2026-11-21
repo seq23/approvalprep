@@ -44,31 +44,13 @@ const withNoindex = async (next) => {
   return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
 };
 
-// App view (?app=1): the phone app opens its legal and help pages with this flag (apps/mobile/src/more.ts).
-// The page is served without the site menu, footer and breadcrumbs, and every link onward is turned into
-// plain text, so nothing opened from the app leads to buying on the website (App Review 3.1.1). The check
-// that the live pages stay that way: scripts/ops/post-deploy-live-check.mjs (appViewProblems).
-const APP_VIEW_REMOVE = "header.site-header, nav.secondary-nav, nav.breadcrumbs, footer.site-footer";
-const isAppView = (url) => url.searchParams.get("app") === "1";
-const appView = async (next) => {
-  const response = await next();
-  if (!(response.headers.get("content-type") || "").includes("text/html")) return response;
-  const out = new HTMLRewriter()
-    .on(APP_VIEW_REMOVE, { element: (el) => el.remove() })
-    .on("a[href]", { element: (el) => { if (!/^(mailto|tel):/i.test(el.getAttribute("href") || "")) el.removeAndKeepContent(); } })
-    .transform(response);
-  const headers = new Headers(out.headers);
-  headers.set("X-Robots-Tag", "noindex, nofollow");
-  return new Response(out.body, { status: out.status, statusText: out.statusText, headers });
-};
-
 export const onRequest = (context) => {
   const { request, next } = context;
   const url = new URL(request.url);
   const hostname = url.hostname.toLowerCase();
 
-  if (hostname === CANONICAL_HOST) return isAppView(url) ? appView(next) : next();
-  if (isNonProductionHost(hostname)) return withNoindex(isAppView(url) ? () => appView(next) : next);
+  if (hostname === CANONICAL_HOST) return next();
+  if (isNonProductionHost(hostname)) return withNoindex(next);
 
   // Redirecting a POST turns it into a GET, which would silently break a form
   // or an /api call aimed at the wrong host. Only navigations get moved.

@@ -9,7 +9,9 @@ import * as realCopy from '../src/copy';
 import * as realMore from '../src/more';
 import * as bundleOffers from '../src/purchases/bundleOffers';
 // @ts-ignore plain .mjs shared with the live check
-import { appPagePaths, appViewProblems } from '../../../scripts/ops/app-view.mjs';
+import { appPagePaths, appViewProblems, appViewUrl } from '../../../scripts/ops/app-view.mjs';
+// @ts-ignore plain .js Pages Function
+import { APP_PAGES } from '../../../functions/api/app-page/[[path]].js';
 
 // App Review guideline 3.1.1 (ship-ready app-review.md row 1): home and the three paywalls never point
 // a buyer at approvalprep.com or at the website-order unlock. That unlock lives in More only, where a
@@ -63,18 +65,17 @@ test('home and every paywall stay silent about buying on the website; the websit
     assert.ok(view.routes.length > 0, `${screen}: no button was pressed`);
     assert.ok(!view.routes.some(r => /"\/more"/.test(r)), `${screen} sends a buyer to the website-order unlock: ${view.routes.join(' ')}`);
     // Terms, Privacy and the credit-repair page open in app view only: no shop menu, no links onward.
-    for (const r of view.routes.filter(r => r.includes('approvalprep.com'))) assert.match(r, /approvalprep\.com\/[^"]*\?app=1"/, `${screen} opens a website page outside app view: ${r}`);
+    for (const r of view.routes.filter(r => r.includes('approvalprep.com'))) assert.match(r, /approvalprep\.com\/api\/app-page\//, `${screen} opens a website page outside app view: ${r}`);
   }
 });
 
 test('More opens only app-view pages, and every page the app opens is one the live check reads', () => {
-  for (const link of realMore.MORE_LINKS) assert.equal(new URL(link.url).searchParams.get('app'), '1', `${link.label} opens outside app view`);
+  for (const link of realMore.MORE_LINKS) assert.ok(new URL(link.url).pathname.startsWith('/api/app-page/'), `${link.label} opens outside app view`);
   const checked: string[] = appPagePaths();
-  // Pages Functions run only on the paths public/_routes.json includes: app view needs every app page there.
-  const routes = JSON.parse(readFileSync(new URL('../../../public/_routes.json', import.meta.url), 'utf8'));
-  for (const path of checked) assert.ok(routes.include.includes(path), `${path} is not routed through functions/_middleware.js`);
+  // The app-page Function serves exactly the pages the app opens.
+  assert.deepEqual([...APP_PAGES].sort(), [...checked].sort());
   for (const url of [...realMore.MORE_LINKS.map(l => l.url), realMore.TERMS_URL, realMore.PRIVACY_URL, realMore.CREDIT_REPAIR_DEFENSE_URL]) {
-    assert.ok(checked.includes(new URL(url).pathname), `${url} is not in the live check's list`);
+    assert.ok(checked.includes(new URL(url).pathname.replace('/api/app-page', '')), `${url} is not in the live check's list`);
   }
 });
 
@@ -94,7 +95,7 @@ test('every page the app opens is served with no way to buy (APP_VIEW_ORIGIN)', 
   const paths: string[] = appPagePaths();
   assert.ok(paths.length >= 6);
   for (const path of paths) {
-    const response = await fetch(`${origin}${path}?app=1`);
+    const response = await fetch(appViewUrl(origin, path));
     assert.equal(response.status, 200, path);
     assert.deepEqual(appViewProblems(await response.text()), [], path);
   }

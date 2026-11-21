@@ -1,5 +1,5 @@
-// What the phone app may open on the website (App Review 3.1.1): pages served in app view (?app=1,
-// functions/_middleware.js) with no way onward to buying. One reader for the live check
+// What the phone app may open on the website (App Review 3.1.1): pages served in app view (/api/app-page/,
+// functions/api/app-page/[[path]].js) with no way onward to buying. One reader for the live check
 // (scripts/ops/post-deploy-live-check.mjs) and the app's test (apps/mobile/tests/noWebSteering.test.ts).
 import fs from "node:fs";
 
@@ -25,3 +25,6 @@ export function appViewProblems(html) {
   if (/<(header|footer)\b[^>]*class="site-(header|footer)/i.test(html)) out.push("site menu or footer still shown");
   return out;
 }
+
+/** The URL the app opens for a page path. */
+export const appViewUrl = (origin, pagePath) => `${origin.replace(/\/+$/, "")}/api/app-page${pagePath}`;

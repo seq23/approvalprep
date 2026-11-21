@@ -1,7 +1,7 @@
-// Every website page the app opens carries ?app=1: the site then serves it without its shop menu,
-// footer or links onward (functions/_middleware.js), so nothing opened from the app points to buying
-// on the website (App Review 3.1.1). Checked live by scripts/ops/post-deploy-live-check.mjs.
-export const appPage = (path: string) => `https://approvalprep.com${path}?app=1`;
+// Every website page the app opens goes through /api/app-page/ (functions/api/app-page/[[path]].js): the
+// page without its shop menu, footer or links onward, so nothing opened from the app points to buying on
+// the website (App Review 3.1.1). Checked live by scripts/ops/post-deploy-live-check.mjs.
+export const appPage = (path: string) => `https://approvalprep.com/api/app-page${path}`;
 // The public page on how ApprovalPrep stays outside credit-repair law (her ask 13 Nov 2026).
 export const CREDIT_REPAIR_DEFENSE_URL = appPage('/credit-repair-disclaimer/');
 // No › here: a list row draws its own (finding #20, "› ›"); a link button adds one.
