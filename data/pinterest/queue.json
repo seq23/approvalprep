@@ -2023,35 +2023,6 @@
       "releaseDate": "2026-11-22"
     },
     {
-      "id": "debt-validation-letter-v1",
-      "slug": "debt-validation-letter",
-      "path": "/debt-validation-letter/",
-      "kind": "guide",
-      "imageSku": "credit-letter-kit",
-      "format": "paper",
-      "angle": "letter-first",
-      "layout": "paper-letter",
-      "palette": "orange",
-      "headline": "Debt Validation Letter",
-      "subhead": "Re: Reference number [number on the notice]",
-      "title": "Debt validation letter: a sample to fill in",
-      "description": "A debt validation letter is your written dispute to a debt collector, sent inside the 30-day window on its validation notice. Sent in time, it makes the collector stop collecting until it mails you verification. Here is the free template, the dates that matter and what the collector has to send back. See the full template and what to fill in.",
-      "letter": {
-        "re": "Re: Reference number [number on the notice]",
-        "greeting": "[Collector's name]",
-        "body": [
-          "I am writing about your notice dated [date on the notice], which I received on [date you received it].",
-          "I dispute this debt. Please send me verification of the debt, and the name and address of the original creditor.",
-          "Until you have mailed me that verification, please stop collecting this debt. If you report this debt to a credit bureau, please report it as disputed."
-        ]
-      },
-      "phrases": [
-        "debt validation letter"
-      ],
-      "discovery": true,
-      "releaseDate": "2026-11-23"
-    },
-    {
       "id": "equifax-dispute-address-v1",
       "slug": "equifax-dispute-address",
       "path": "/equifax-dispute-address/",
@@ -2063,8 +2034,8 @@
       "palette": "orange",
       "headline": "Equifax Dispute Address",
       "subhead": "Re: Dispute of information on my credit report",
-      "title": "Equifax dispute address: a sample to fill in",
-      "description": "The mailing address Equifax lists for credit report disputes, with the date we last checked it against Equifax's own source, what to put in the envelope, and when its online form is the better choice. See the full template and what to fill in.",
+      "title": "Equifax dispute address: where to mail it",
+      "description": "The mailing address Equifax lists for credit report disputes, with the date we last checked it against Equifax's own source, what to put in the envelope, and when its online form is the better choice. See the address, its source and what to enclose.",
       "letter": {
         "re": "Re: Dispute of information on my credit report",
         "greeting": "Date of birth: [optional]  ·  SSN, last 4 only: [optional]",
@@ -2092,8 +2063,8 @@
       "palette": "orange",
       "headline": "Experian Dispute Address",
       "subhead": "Re: Dispute of information on my credit report",
-      "title": "Experian dispute address: a sample to fill in",
-      "description": "The mailing address Experian lists for credit report disputes, with the date we last checked it against Experian's own source, what to put in the envelope, and when its online form is the better choice. See the full template and what to fill in.",
+      "title": "Experian dispute address: where to mail it",
+      "description": "The mailing address Experian lists for credit report disputes, with the date we last checked it against Experian's own source, what to put in the envelope, and when its online form is the better choice. See the address, its source and what to enclose.",
       "letter": {
         "re": "Re: Dispute of information on my credit report",
         "greeting": "Date of birth: [optional]  ·  SSN, last 4 only: [optional]",
@@ -2117,12 +2088,12 @@
       "imageSku": "credit-letter-kit",
       "format": "paper",
       "angle": "letter-first",
-      "layout": "paper-letter",
+      "layout": "paper-letter-low",
       "palette": "orange",
-      "headline": "Transunion Dispute Address",
+      "headline": "TransUnion Dispute Address",
       "subhead": "Re: Dispute of information on my credit report",
-      "title": "Transunion dispute address: a sample to fill in",
-      "description": "The mailing address TransUnion lists for credit report disputes, with the date we last checked it against TransUnion's own source, what to put in the envelope, and when its online form is the better choice. See the full template and what to fill in.",
+      "title": "TransUnion dispute address: where to mail it",
+      "description": "The mailing address TransUnion lists for credit report disputes, with the date we last checked it against TransUnion's own source, what to put in the envelope, and when its online form is the better choice. See the address, its source and what to enclose.",
       "letter": {
         "re": "Re: Dispute of information on my credit report",
         "greeting": "Date of birth: [optional]  ·  SSN, last 4 only: [optional]",
@@ -2133,10 +2104,10 @@
         ]
       },
       "phrases": [
-        "transunion dispute address"
+        "TransUnion dispute address"
       ],
       "discovery": true,
-      "releaseDate": "2026-11-24"
+      "releaseDate": "2026-11-23"
     },
     {
       "id": "adverse-action-notice-v1",
@@ -2150,8 +2121,8 @@
       "palette": "orange",
       "headline": "Adverse Action Notice",
       "subhead": "Re: My application dated [date], reference [number if any]",
-      "title": "Adverse action notice: a sample to fill in",
-      "description": "An adverse action notice is the letter a lender must send when it turns you down. It tells you why, or how to ask why, and if a credit report played a part, which bureau it came from and how to get that report free. Read it in five minutes with this page. See the full template and what to fill in.",
+      "title": "Adverse action notice: what it means",
+      "description": "An adverse action notice is the letter a lender must send when it turns you down. It tells you why, or how to ask why, and if a credit report played a part, which bureau it came from and how to get that report free. Read it in five minutes with this page. See what the notice must tell you, and the free letters.",
       "letter": {
         "re": "Re: My application dated [date], reference [number if any]",
         "greeting": "[Creditor's name]",
@@ -2163,6 +2134,35 @@
       },
       "phrases": [
         "adverse action notice"
+      ],
+      "discovery": true,
+      "releaseDate": "2026-11-24"
+    },
+    {
+      "id": "debt-validation-letter-v1",
+      "slug": "debt-validation-letter",
+      "path": "/debt-validation-letter/",
+      "kind": "guide",
+      "imageSku": "credit-letter-kit",
+      "format": "paper",
+      "angle": "letter-first",
+      "layout": "paper-letter",
+      "palette": "orange",
+      "headline": "Debt Validation Letter",
+      "subhead": "Re: Reference number [number on the notice]",
+      "title": "Debt validation letter: a sample to fill in",
+      "description": "A debt validation letter is your written dispute to a debt collector, sent inside the 30-day window on its validation notice. Sent in time, it makes the collector stop collecting until it mails you verification. Here is the free template, the dates that matter and what the collector has to send back. See the full template and what to fill in.",
+      "letter": {
+        "re": "Re: Reference number [number on the notice]",
+        "greeting": "[Collector's name]",
+        "body": [
+          "I am writing about your notice dated [date on the notice], which I received on [date you received it].",
+          "I dispute this debt. Please send me verification of the debt, and the name and address of the original creditor.",
+          "Until you have mailed me that verification, please stop collecting this debt. If you report this debt to a credit bureau, please report it as disputed."
+        ]
+      },
+      "phrases": [
+        "debt validation letter"
       ],
       "discovery": true,
       "releaseDate": "2026-11-24"
@@ -6115,12 +6115,6 @@
   "held": [],
   "qualityHeld": [
     {
-      "path": "/questions/diy-credit-repair-kit/",
-      "id": "q-diy-credit-repair-kit-v1",
-      "reason": "sales words on the pin (\"Kit\" in \"Diy Credit Repair Kit\")",
-      "heldOn": "2026-11-21"
-    },
-    {
       "path": "/lexington-law-alternative/",
       "id": "lexington-law-alternative-none",
       "reason": "No pin by design: a competitor's name on a pin reads as advertising against them (risk R-REPO-06); this page is for search only.",
@@ -6130,6 +6124,12 @@
       "path": "/credit-bureau-dispute-addresses/",
       "id": "credit-bureau-dispute-addresses-none",
       "reason": "No pin by design: the hub has no letter of its own; the Equifax, Experian and TransUnion address pages carry the pins.",
+      "heldOn": "2026-11-21"
+    },
+    {
+      "path": "/questions/diy-credit-repair-kit/",
+      "id": "q-diy-credit-repair-kit-v1",
+      "reason": "sales words on the pin (\"Kit\" in \"Diy Credit Repair Kit\")",
       "heldOn": "2026-11-21"
     }
   ]

@@ -41,7 +41,7 @@ import path from "node:path";
 import { SITE, loadPinfeed, loadQueue, chicagoDate, addDays, dueEntries, renderFeedAt, renderBoardFeedAt, pinBoards, unreleasedCount, needsRefill, variantLink } from "../../src/lib/pinfeed.mjs";
 import { decidePace, applyFallback, applyPause } from "../pinterest/pace.mjs";
 import { LAYOUTS, PALETTES, ANGLES } from "../pinterest/variants.mjs";
-import { appendBatch, pinPages, releaseHeld, isHeld, gatePages, discoveryPins, LETTER_REGISTRIES } from "../pinterest/refill_queue.mjs";
+import { appendBatch, pinPages, releaseHeld, isHeld, gatePages, discoveryPins, LETTER_REGISTRIES, pinTitles } from "../pinterest/refill_queue.mjs";
 import { dHash, distance, headlineIssue, thumbnailIssue, gateQueue, auditQueue, MIN_DISTANCE, pinIssue, photoIssue } from "../pinterest/quality.mjs";
 import { SPREAD_MAX, SPREAD_DAYS, scheduleVariants } from "../../src/lib/pinfeed-core.mjs";
 import { windowStart } from "../pinterest/measure_window.mjs";
@@ -454,6 +454,20 @@ let discoveryCount = 0;
   for (const [p, h] of qualityHeld) if (!String(h?.reason || "").trim() || !/^\d{4}-\d{2}-\d{2}$/.test(String(h?.heldOn || ""))) fail(`discovery: quality hold for ${p} has no reason or date`);
   for (const p of need) if (qualityHeld.has(p)) console.log(`[pinterest-drip] PIN_QUALITY_HOLD ${p}: ${qualityHeld.get(p).reason}`);
   for (const p of need) if (!linked.has(p) && !qualityHeld.has(p)) fail(`discovery: ${p} is published but no pin links to it - run npm run pinterest:refill (refill_queue.mjs discoveryPins)`);
+  // A pin says what its page is (pinKind): an address page is never "a sample to fill in" (review, 21 Nov 2026).
+  let kindChecked = 0;
+  for (const f of LETTER_REGISTRIES) if (fs.existsSync(f)) for (const e of JSON.parse(fs.readFileSync(f, "utf8")).pages || []) {
+    if (!e.pinKind) continue;
+    const key = `${String(e.path || "").replace(/\/+$/, "")}/`;
+    const allowed = new Set(pinTitles("x", e.pinKind).map((t) => t.slice(3)));
+    for (const v of [...items, ...held].filter((x) => x.discovery && x.path === key)) {
+      kindChecked += 1;
+      const tail = String(v.title || "").split(": ").pop();
+      if (!allowed.has(tail)) fail(`discovery: ${key} is a ${e.pinKind} page but its pin is titled "${v.title}"`);
+    }
+  }
+  if (!kindChecked) fail("discovery: no pin of a registry page with a pinKind was checked - the kind check saw nothing");
+  try { pinTitles("x", "letter"); pinTitles("x", "no-such-kind"); fail("discovery: an unknown pinKind did not stop the generator"); } catch (err) { if (!/PIN_KIND_UNKNOWN/.test(String(err.message))) throw err; }
   discoveryCount = [...items, ...held].filter((v) => v.discovery).length;
   if (!discoveryCount) fail("discovery: the queue holds zero discovery pins");
   // The lane itself: from a queue with every discovery pin removed, it must rebuild a pin for each page it removed.
