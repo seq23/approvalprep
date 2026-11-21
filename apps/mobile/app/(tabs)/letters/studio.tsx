@@ -12,6 +12,8 @@ import { letterHtml } from '../../../src/letterPdf';
 import { saveOrPrintLetter } from '../../../src/letterExport';
 import { draftWriter } from '../../../src/letterQuestions';
 import type { SavedLetter } from '../../../src/letterStorage';
+import { showsUnderwriterGuide } from '../../../src/mortgage';
+import { UnderwriterGuide } from '../../../src/MortgageMoment';
 import { letterHref, latestStudioDraft, newStudioDraft, newStudioId, studioKind, studioStep } from '../../../src/studioDrafts';
 
 // The free Letter Studio. Each question is its own step in the tab's history, so Back goes to the
@@ -118,6 +120,7 @@ export default function Studio() {
       </> : null}
     </> : field ? <>
       {limit}
+      {showsUnderwriterGuide(situation.id, step) && !editing ? <UnderwriterGuide /> : null}
       <Text style={type.sub} accessibilityLiveRegion="polite">{resumed && step === 0 && stored ? 'This is the draft you started before. Your answers are filled in.' : note || 'Opening your draft…'}</Text>
       {letter ? <>
         <Field label={`Question ${step + 1} of ${situation.fields.length}`} spoken={field.label} defaultHint={field.hint} multiline={field.kind === 'long' || field.kind === 'lines'} value={letter.answers[field.name] ?? ''} onChangeText={value => persist({ ...letter, answers: { ...letter.answers, [field.name]: value } })} />

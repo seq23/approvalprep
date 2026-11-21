@@ -37,6 +37,8 @@ test('opening a letter stores nothing; the first answer creates the draft, later
     if (name.endsWith('/theme')) return { type: {}, space: {} };
     if (name.endsWith('/letters')) return { LETTERS: [], EXPLANATION_LETTERS: [], isCreditLetter: () => true };
     if (name.endsWith('/ui')) return { Screen: 'Screen', Button: 'Button', Field: 'Field', Row: 'Row' };
+    if (name.endsWith('/mortgage')) return { showsMortgageCaution: () => true };
+    if (name.endsWith('/MortgageMoment')) return { MortgageCaution: 'MortgageCaution' };
     return {};
   } });
   const render = () => { cursor = 0; refAt = 0; return exports.default(); };
