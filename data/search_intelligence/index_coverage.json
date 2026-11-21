@@ -6,7 +6,7 @@
   "state": "OK",
   "named_stop": null,
   "sitemap_source": "public/sitemap.xml",
-  "sitemap_url_count": 104,
+  "sitemap_url_count": 112,
   "inspected_this_run": 104,
   "quota": {
     "daily_cap": 150,
@@ -33,11 +33,13 @@
     "by_coverage_state": {
       "Crawled - currently not indexed": 6,
       "Discovered - currently not indexed": 46,
+      "NOT_INSPECTED": 8,
       "Submitted and indexed": 44,
       "URL is unknown to Google": 8
     },
     "by_verdict": {
       "NEUTRAL": 60,
+      "NONE": 8,
       "PASS": 44
     },
     "buckets": {
@@ -46,7 +48,7 @@
       "discovered_not_indexed": 46,
       "unknown_to_google": 8,
       "other": 0,
-      "not_inspected": 0
+      "not_inspected": 8
     }
   },
   "truth_boundary": "URL Inspection reports Google's index state for each URL at inspected_at. It is not a ranking or traffic measure; impressions come from data/intelligence/gsc_search_analytics.json.",
@@ -86,6 +88,15 @@
       "googleCanonical": null,
       "userCanonical": null,
       "inspected_at": "2026-11-21T16:48:37.418Z"
+    },
+    {
+      "url": "https://approvalprep.com/adverse-action-notice/",
+      "verdict": null,
+      "coverageState": "NOT_INSPECTED",
+      "lastCrawlTime": null,
+      "indexingState": null,
+      "inspected_at": null,
+      "not_inspected_reason": "published after the last inspection run; the next daily cycle inspects it"
     },
     {
       "url": "https://approvalprep.com/ai-use-policy/",
@@ -244,6 +255,15 @@
       "inspected_at": "2026-11-21T16:49:08.219Z"
     },
     {
+      "url": "https://approvalprep.com/credit-bureau-dispute-addresses/",
+      "verdict": null,
+      "coverageState": "NOT_INSPECTED",
+      "lastCrawlTime": null,
+      "indexingState": null,
+      "inspected_at": null,
+      "not_inspected_reason": "published after the last inspection run; the next daily cycle inspects it"
+    },
+    {
       "url": "https://approvalprep.com/credit-dispute-letter/",
       "verdict": "NEUTRAL",
       "coverageState": "Crawled - currently not indexed",
@@ -266,6 +286,15 @@
       "googleCanonical": "https://approvalprep.com/credit-letter-kit/",
       "userCanonical": "https://approvalprep.com/credit-letter-kit/",
       "inspected_at": "2026-11-21T16:48:24.907Z"
+    },
+    {
+      "url": "https://approvalprep.com/debt-validation-letter/",
+      "verdict": null,
+      "coverageState": "NOT_INSPECTED",
+      "lastCrawlTime": null,
+      "indexingState": null,
+      "inspected_at": null,
+      "not_inspected_reason": "published after the last inspection run; the next daily cycle inspects it"
     },
     {
       "url": "https://approvalprep.com/documents-needed-for-car-loan/",
@@ -326,6 +355,24 @@
       "googleCanonical": "https://approvalprep.com/employment-verification-letter/",
       "userCanonical": "https://approvalprep.com/employment-verification-letter/",
       "inspected_at": "2026-11-21T16:49:02.204Z"
+    },
+    {
+      "url": "https://approvalprep.com/equifax-dispute-address/",
+      "verdict": null,
+      "coverageState": "NOT_INSPECTED",
+      "lastCrawlTime": null,
+      "indexingState": null,
+      "inspected_at": null,
+      "not_inspected_reason": "published after the last inspection run; the next daily cycle inspects it"
+    },
+    {
+      "url": "https://approvalprep.com/experian-dispute-address/",
+      "verdict": null,
+      "coverageState": "NOT_INSPECTED",
+      "lastCrawlTime": null,
+      "indexingState": null,
+      "inspected_at": null,
+      "not_inspected_reason": "published after the last inspection run; the next daily cycle inspects it"
     },
     {
       "url": "https://approvalprep.com/glossary/",
@@ -590,6 +637,15 @@
       "googleCanonical": "https://approvalprep.com/letter-writing-studio/",
       "userCanonical": "https://approvalprep.com/letter-writing-studio/",
       "inspected_at": "2026-11-21T16:48:49.646Z"
+    },
+    {
+      "url": "https://approvalprep.com/lexington-law-alternative/",
+      "verdict": null,
+      "coverageState": "NOT_INSPECTED",
+      "lastCrawlTime": null,
+      "indexingState": null,
+      "inspected_at": null,
+      "not_inspected_reason": "published after the last inspection run; the next daily cycle inspects it"
     },
     {
       "url": "https://approvalprep.com/life-admin-letter-kit/",
@@ -1192,6 +1248,15 @@
       "inspected_at": "2026-11-21T16:49:02.070Z"
     },
     {
+      "url": "https://approvalprep.com/security-deposit-demand-letter/",
+      "verdict": null,
+      "coverageState": "NOT_INSPECTED",
+      "lastCrawlTime": null,
+      "indexingState": null,
+      "inspected_at": null,
+      "not_inspected_reason": "published after the last inspection run; the next daily cycle inspects it"
+    },
+    {
       "url": "https://approvalprep.com/templates/",
       "verdict": "NEUTRAL",
       "coverageState": "Discovered - currently not indexed",
@@ -1298,6 +1363,15 @@
       "googleCanonical": "https://approvalprep.com/tools/proof-of-income-packet-checklist/",
       "userCanonical": "https://approvalprep.com/tools/proof-of-income-packet-checklist/",
       "inspected_at": "2026-11-21T16:49:08.309Z"
+    },
+    {
+      "url": "https://approvalprep.com/transunion-dispute-address/",
+      "verdict": null,
+      "coverageState": "NOT_INSPECTED",
+      "lastCrawlTime": null,
+      "indexingState": null,
+      "inspected_at": null,
+      "not_inspected_reason": "published after the last inspection run; the next daily cycle inspects it"
     }
   ]
 }
