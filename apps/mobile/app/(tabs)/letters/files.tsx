@@ -7,7 +7,7 @@ import { CREDIT_REPAIR_DEFENSE_LABEL, CREDIT_REPAIR_DEFENSE_URL, PRIVACY_URL, TE
 import { type } from '../../../src/theme';
 import { REQUEST_LINE } from '../../../src/copy';
 import { PREVIEW_ENABLED } from '../../../src/previewSamples';
-import { FILE_KIT_OFFERS, productName, productRoute, BUNDLE_LINE, KIT_ORDER, upgradeLine } from '../../../src/offers';
+import { PAID_ONCE_LINE, FILE_KIT_OFFERS, productName, productRoute, BUNDLE_LINE, KIT_ORDER, upgradeLine } from '../../../src/offers';
 import { COMPLETE_BUNDLE, KIT_SALES_ENABLED, isUpgrade, upgradeFor } from '../../../src/kit';
 import { KitFiles } from '../../../src/KitFiles';
 import { bundleAccount, type BundlePrice } from '../../../src/purchases/bundleAccount';
@@ -82,6 +82,7 @@ export default function Files() {
     {offers[0] === COMPLETE_BUNDLE.productId ? option(offers[0]) : null}
     {owned ? <KitFiles primary sku={offer.id} productId={offer.productId} name={offer.name} /> : <>
       <Button primary disabled={busy || !canBuy || !price || !offers.includes(offer.productId)} label={price ? `Get this kit, ${price} once` : 'Store price unavailable'} onPress={() => void act('buy')} />
+      <Text style={type.sub}>{PAID_ONCE_LINE}</Text>
       {preview ? <Text testID="buying-pretend" style={type.sub}>This is a preview: buying here is pretend, nothing is charged, and it lasts until you close the page.</Text>
         : canBuy ? null : <Text testID="buying-off" style={type.sub}>{PREVIEW_ENABLED ? 'This is a preview, so buying is switched off and the button above does nothing. The price is shown so you can see it.' : 'Buying is not available right now.'}</Text>}
       <Button quiet label={`${CREDIT_REPAIR_DEFENSE_LABEL} ›`} onPress={() => void Linking.openURL(CREDIT_REPAIR_DEFENSE_URL)} />

@@ -38,7 +38,7 @@ export const lockedLine = (kitName: string, price?: string) => price ? `In the $
 
 export const STUDIO_COUNT = situations.length;
 export const FREE_LINE = `Free, as often as you like: the Letter Studio (${STUDIO_COUNT} situations) and the credit bureau dispute letter with its PDF.`;
-export const PAID_ONCE_LINE = 'Each is paid once. There is no subscription.';
+export const PAID_ONCE_LINE = 'Each is paid once. No subscription, no renewal, nothing to cancel.';
 
 // The app's two letter kits also carry the website kit of the same name, as its files.
 // Said once, on the kit screen, with the website's own count.

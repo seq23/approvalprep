@@ -12,6 +12,8 @@ import { letterHtml } from '../../../src/letterPdf';
 import { saveOrPrintLetter } from '../../../src/letterExport';
 import { draftWriter } from '../../../src/letterQuestions';
 import type { SavedLetter } from '../../../src/letterStorage';
+import { showsUnderwriterGuide } from '../../../src/mortgage';
+import { UnderwriterGuide } from '../../../src/MortgageMoment';
 import { letterHref, latestStudioDraft, newStudioDraft, newStudioId, studioKind, studioStep } from '../../../src/studioDrafts';
 
 // The free Letter Studio. Each question is its own step in the tab's history, so Back goes to the
@@ -127,6 +129,8 @@ export default function Studio() {
         {step > 0 && !editing ? <Button label="← Previous question" onPress={() => router.back()} /> : null}
         {resumed && step === 0 && stored ? <Button label="Start a blank one instead" onPress={() => void choose(situation.id, true)} /> : null}
       </> : null}
+      {/* Below the question's box and its Next button, so the box stays right under its title. */}
+      {showsUnderwriterGuide(situation.id, step) && !editing ? <UnderwriterGuide /> : null}
     </> : null}
   </Screen>;
 }

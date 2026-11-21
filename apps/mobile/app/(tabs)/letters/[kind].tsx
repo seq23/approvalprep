@@ -12,6 +12,8 @@ import type { SavedLetter } from '../../../src/letterStorage';
 import { ALL_KIT_KINDS, kitForKind, KIT_LOCKED_LINE, kitLetter, loadDeliveredKit, newKitDraft, type KitKind, type KitLetter } from '../../../src/kitTemplates';
 import { LETTERS, EXPLANATION_LETTERS, isCreditLetter } from '../../../src/letters';
 import { studioStep } from '../../../src/studioDrafts';
+import { showsMortgageCaution } from '../../../src/mortgage';
+import { MortgageCaution } from '../../../src/MortgageMoment';
 // Each question is its own step in the tab's history (like the Letter Studio), so "← Back" on
 // question 4 goes to question 3, never out of the letter. `edit=1` opens one question from the
 // draft's answer list and returns to the draft. `resumed=1` is her latest unfinished letter.
@@ -112,6 +114,7 @@ export default function Questions() {
   return <Screen route="/letters/[kind]" label={`Question ${step + 1} of ${questions.length}`} title={question.title}>
     <Text style={type.sub}>{isCreditLetter(kind) ? HONEST_LIMIT : REQUEST_LINE}</Text>
     {paid?.honestLine ? <Text style={type.sub}>{paid.honestLine}</Text> : null}
+    {showsMortgageCaution(kind, step) && edit !== '1' ? <MortgageCaution /> : null}
     <Text style={type.sub} accessibilityLiveRegion="polite">{resumed === '1' && step === 0 && stored ? 'This is the letter you started before. Your answers are filled in.' : message}</Text>
     {letter ? <>
       {free && question.fields.length === 0 ? (bureaus as { id: string; name: string }[]).map(bureau => <Row key={bureau.id} title={bureau.name} selected={letter.answers.bureau === bureau.id} onPress={() => answer('bureau', bureau.id)} />) : question.fields.map(field => <Field key={field.name} label={field.label} multiline={field.multiline} kind={'kind' in field && field.kind === 'ssn4' ? 'ssn4' : 'text'} value={letter.answers[field.name] ?? ''} onChangeText={value => answer(field.name, value)} />)}
