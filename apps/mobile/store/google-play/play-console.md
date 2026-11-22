@@ -23,6 +23,37 @@ Wording follows risk rule R-ADV-13 (self-help templates only). `tests/store.test
 - `screenshots/*.png`: five 1080 x 1920 phone screenshots of the real app (web build, sample letters loaded).
 - Adaptive icon: already set in `app.config.ts` (`assets/adaptive-icon.png` on #FF7A3D).
 
+## In-app products (the shared `~/bin/play-products` tool, catalog `scripts/store/play-products.mjs`)
+
+The 14 one-time products (7 kits, the Complete Bundle, 6 bundle-upgrade tiers) are created on Play from the
+app's own code: ids from the RevenueCat catalog (`scripts/revenuecat/setup.ts`), USD prices from `src/kit.ts`
+and `src/lib/appUpgrade.mjs`, every other region from Google's own price conversion, titles and descriptions
+from `src/offers.ts` (no price in the text: Play shows it in the buyer's currency). The tool lives in seq-bin
+(`~/bin/play-products`, one copy for every app); this repo keeps only the catalog. Re-run it after any product
+change: it creates what is missing (each product read again just before it is written), activates only
+drafts, and never deletes, deactivates or reprices. A different US price on Play prints `MISMATCH`; a product
+switched off on Play prints `SWITCHED OFF`; both are left as they are.
+
+**Never more than the bundle, in any region.** Each upgrade carries a ceiling: every set of kits that leads to
+it (`upgradeFor`) plus the upgrade must not cost more than the Complete Bundle. Play converts each price on its
+own, so the tool lowers an upgrade's price in a region just enough to stay under; the US price stays the code
+price. A live price that breaks it is a `MISMATCH`.
+
+```
+cd ~/GitHub/boss-os && npm run -s vault:run -- ~/bin/play-products ~/GitHub/approvalprep/apps/mobile/scripts/store/play-products.mjs           # dry run: the plan
+cd ~/GitHub/boss-os && npm run -s vault:run -- ~/bin/play-products ~/GitHub/approvalprep/apps/mobile/scripts/store/play-products.mjs --apply   # create, activate, read back
+```
+
+`--apply` writes nothing while RevenueCat still holds any of these products on Play with another type
+(`NAMED STOP [RC_TYPES_NOT_READY]`: a sale would be consumed); run `~/bin/revenuecat-setup` first.
+
+Exit 0 means Play matches; 3 means a dry run with work left; 1 a failure or mismatch; 2 a named stop. Done
+means the `--apply` run ends `read-back on com.approvalprep.app: 14/14 active …` and a dry run after it exits 0.
+A failure (401/403, 429, 5xx, network) stops every write and prints Google's answer; re-run once it clears.
+`NAMED STOP [PLAY_PERMISSION_DENIED]`: the service account in `GOOGLE_PLAY_UPLOAD_SA_JSON` lacks "Manage store
+presence" on this app in Play Console (a new grant can take up to 36 hours to reach the API). Tests: the
+catalog in `tests/playProducts.test.ts`, the tool in seq-bin `tests/store/`.
+
 ## Financial features declaration (Policy > App content)
 
 Answer, reviewed against R-ADV-13 and Play Help 13849271:
