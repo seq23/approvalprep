@@ -97,6 +97,9 @@ Google Play's reviewer cannot buy, and the app has no accounts, so every paid ki
   RevenueCat -> 2 new devices per IP a day -> 10 devices per code version (the 11th files an Open Loops row,
   `REVIEW_DEVICE_CAP`) -> RevenueCat v2 `grant_entitlement` of `ap_complete_bundle` until `min(now + 7 days,
   REVIEW_UNTIL)`. Any RevenueCat failure revokes the granted entitlement (never a purchase), frees the slot, 503.
+  A 403 on the grant (read-only key) also files an Open Loops row, `REVIEW_RC_KEY_READONLY`: the
+  `APPROVALPREP_REVENUECAT_SECRET` key needs Customer information Read & write (the live key, `play-review-grant`, made
+  22 Nov 2026, has that plus Project configuration Read only). A Pages secret takes effect on the next deployment.
 - **Doors**: `app-unlock`, `app-bundle` and `app-files` check the real purchase first, unchanged; only when there is
   none do they accept `reviewGrantLive`: window open AND a `review_grant` row for this ID under the current code
   version, not expired, AND RevenueCat still lists the bundle entitlement active. Anything else, or D1/RevenueCat

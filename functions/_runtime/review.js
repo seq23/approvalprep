@@ -121,7 +121,8 @@ export async function reviewUnlock(request, env, { now = Date.now(), fetcher = f
       if (!row) {
         await giveBack(db, `slot:${day}`, ipHash);
         stop('REVIEW_DEVICE_CAP');
-        waitUntil(fileCapLoop(env, fetcher));
+        waitUntil(fileLoop(env, fetcher, 'REVIEW_DEVICE_CAP', 'ApprovalPrep: the Play review code is used up',
+          `All ${maxDevices(env)} review slots for code version ${env.REVIEW_CODE_VERSION} are taken. Rotate: new AP_PLAY_REVIEW_CODE in the vault, new REVIEW_CODE_SECRET + REVIEW_CODE_VERSION on the Pages project, then she pastes the new code in Play Console.`));
         return json({ error: 'USED_UP' }, 403);
       }
       newSlot = true;
@@ -137,7 +138,13 @@ export async function reviewUnlock(request, env, { now = Date.now(), fetcher = f
   };
   try {
     const res = await customer(env, id, fetcher, '/actions/grant_entitlement', { method: 'POST', body: JSON.stringify({ entitlement_id: BUNDLE_ENTITLEMENT, expires_at: expires }) });
-    if (res.status === 403) { stop('REVIEW_RC_KEY_READONLY'); await undo(); return json({ error: 'TRY_AGAIN' }, 503); }
+    if (res.status === 403) {
+      // A read-only key fails every reviewer, every time, and only a new key fixes it: a row someone sees, not only a log.
+      stop('REVIEW_RC_KEY_READONLY'); await undo();
+      waitUntil(fileLoop(env, fetcher, 'REVIEW_RC_KEY_READONLY', 'ApprovalPrep: the Play review code cannot unlock (RevenueCat key is read-only)',
+        'RevenueCat refused the review grant with 403. Make a v2 secret key in the ApprovalPrep project with Customer information: Read & write and Project configuration: Read only, save it to the vault as REVENUECAT_AP_V2_SECRET_KEY, set it as the Pages secret APPROVALPREP_REVENUECAT_SECRET, redeploy production, then redeem the code once on a test ID.'));
+      return json({ error: 'TRY_AGAIN' }, 503);
+    }
     if (!res.ok) throw Error(`HTTP_${res.status}`);
   } catch {
     // A timeout may still have granted: revoke what this call may have granted, give the slot back, answer "try again".
@@ -169,13 +176,14 @@ export async function reviewGrantLive(env, id, { now = Date.now(), fetcher = fet
   } catch { return false; }
 }
 
-/** The cap was hit: a row on Boss OS's Open Loops list, so it is seen, not only logged. */
-async function fileCapLoop(env, fetcher) {
+/** A stop no retry fixes (the cap, a read-only key): a row on Boss OS's Open Loops list (upserted by repo + stop), so it
+ * is seen, not only logged. */
+async function fileLoop(env, fetcher, code, title, nextStep) {
   if (!env.BOSS_OPEN_LOOPS_TOKEN) { stop('OPEN_LOOPS_TOKEN_MISSING'); return; }
   try {
     const r = await fetcher(OPEN_LOOPS_INTAKE, { method: 'POST', headers: { 'content-type': 'application/json', authorization: `Bearer ${env.BOSS_OPEN_LOOPS_TOKEN}` },
-      body: JSON.stringify({ repo: 'seq23/approvalprep', stop: 'REVIEW_DEVICE_CAP', business: 'spry', finish_line: 'ApprovalPrep: live in both stores, selling', owner: 'claude',
-        title: 'ApprovalPrep: the Play review code is used up', next_step: `All ${maxDevices(env)} review slots for code version ${env.REVIEW_CODE_VERSION} are taken. Rotate: new AP_PLAY_REVIEW_CODE in the vault, new REVIEW_CODE_SECRET + REVIEW_CODE_VERSION on the Pages project, then she pastes the new code in Play Console.` }),
+      body: JSON.stringify({ repo: 'seq23/approvalprep', stop: code, business: 'spry', finish_line: 'ApprovalPrep: live in both stores, selling', owner: 'claude',
+        title, next_step: nextStep }),
       signal: AbortSignal.timeout(8000) });
     if (!r.ok) stop('OPEN_LOOPS_REFUSED');
   } catch { stop('OPEN_LOOPS_UNREACHABLE'); }
