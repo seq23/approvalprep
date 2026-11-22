@@ -133,7 +133,7 @@ const documentTitle = exactTitle ? String(title) : fitTitle(String(title));
           const session_id = params.get("session_id") || "";
           const sku = params.get("sku") || "";
           if (!session_id || !sku) {
-            if (status) status.textContent = "No verified Stripe session was found. Return to pricing and complete checkout to unlock downloads.";
+            if (status) status.textContent = "No verified Stripe session was found. Return to pricing and complete checkout to get your downloads.";
             return;
           }
             if (status) status.textContent = "Verifying your payment with Stripe. ApprovalPrep does not store your letter answers or completed customer documents.";
@@ -155,7 +155,7 @@ const documentTitle = exactTitle ? String(title) : fitTitle(String(title));
               error.code = "PAYMENT_NOT_COMPLETED";
               throw error;
             }
-            throw new Error(payload.message || "Payment could not be verified yet. Contact info@approvalprep.com with your Stripe receipt and this session id.");
+            throw new Error(payload.message || "Payment could not be verified yet. Email info@approvalprep.com with the receipt Stripe emailed you.");
           };
           try {
             const payload = await verify();
@@ -212,7 +212,7 @@ const documentTitle = exactTitle ? String(title) : fitTitle(String(title));
               links.appendChild(pricing);
               const support = document.createElement("p");
               support.className = "fine";
-              support.textContent = "ApprovalPrep cannot release paid files until Stripe confirms this session as paid. If Stripe shows a completed payment, email info@approvalprep.com with the receipt and session id.";
+              support.textContent = "Your files open here once Stripe confirms the payment. If Stripe shows it as paid, email info@approvalprep.com with the receipt Stripe emailed you.";
               links.appendChild(support);
             }
           }

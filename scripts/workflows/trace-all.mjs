@@ -49,6 +49,9 @@ const traces = files.map(file => {
   // post_build_command and commit_command. Those scripts are folded in as run: steps, so
   // their npm scripts are resolved and their push is judged like any other main writer.
   const searchLoopCaller = /uses:\s*seq23\/search-loop\/\.github\/workflows\/search-loop\.yml@v1\s*$/m.test(text) && /engine_ref:\s*v1\s*$/m.test(text);
+  // A caller of a shared seq23 workflow (search-loop, seq-bin's ship-ready-baseline) runs on the shared
+  // workflow's runner, node and timeout; it is judged on what it hands that workflow.
+  const sharedCaller = searchLoopCaller || /uses:\s*seq23\/seq-bin\/\.github\/workflows\/ship-ready-baseline\.yml@v1\s*$/m.test(text);
   if (searchLoopCaller) {
     for (const key of ["setup_command", "post_build_command", "commit_command"]) {
       const m = text.match(new RegExp(`${key}:\\s*(.+)`));
@@ -74,13 +77,13 @@ const traces = files.map(file => {
   const requiresDependencyInstall = Boolean(installDependencyReason);
   const buildsProject = closure.scripts.includes("build");
   const dependencyInstallPolicyOk = requiresDependencyInstall ? usesNpmCi && !usesNpmInstall : !usesNpmInstall;
-  const nodeVersionOk = searchLoopCaller || /node-version:\s*22\.12\.0/.test(text);
-  const runnerPinned = searchLoopCaller || /runs-on:\s*(ubuntu-24\.04|macos-\d+)\s*$/m.test(text);
-  const timeoutSet = searchLoopCaller || /timeout-minutes:\s*\d+/.test(text);
+  const nodeVersionOk = sharedCaller || /node-version:\s*22\.12\.0/.test(text);
+  const runnerPinned = sharedCaller || /runs-on:\s*(ubuntu-24\.04|macos-\d+)\s*$/m.test(text);
+  const timeoutSet = sharedCaller || /timeout-minutes:\s*\d+/.test(text);
   const mainWriter = /safe-push-main\.sh/.test(text) || /(^|\n)\s*git push(?:\s|$)/m.test(text);
   const sharedWriterConcurrency = !mainWriter || (/group:\s*(approvalprep-main-writer\b|\$\{\{ github\.event_name == 'pull_request' && [^\n]*\|\| 'approvalprep-main-writer' \}\})/.test(text) /* a PR-only config check (never writes) may take its own group; every writing run takes the shared one */ && /cancel-in-progress:\s*false/.test(text));
-  const fullMainCheckout = !mainWriter || searchLoopCaller || (/ref:\s*main/.test(text) && /fetch-depth:\s*0/.test(text));
-  const preparesLatestMain = !mainWriter || searchLoopCaller || /prepare-main-writer\.sh/.test(text);
+  const fullMainCheckout = !mainWriter || sharedCaller || (/ref:\s*main/.test(text) && /fetch-depth:\s*0/.test(text));
+  const preparesLatestMain = !mainWriter || sharedCaller || /prepare-main-writer\.sh/.test(text);
   const safePushHelper = !mainWriter || /safe-push-main\.sh/.test(text);
   const directUnsafePush = /(^|\n)\s*git push(?:\s|$)/m.test(text);
   const fauxScenarios = [
@@ -112,7 +115,7 @@ const traces = files.map(file => {
     nodeVersionOk, runnerPinned, timeoutSet, usesNpmInstall, usesNpmCi, buildsProject,
     requiresDependencyInstall, installDependencyReason, dependencyInstallPolicyOk,
     // The search loop's proof lane is a dispatch on any non-default branch (builds, gates, uploads, commits nothing).
-    fixtureTraceInput: /fixture_trace/.test(text) || file === "workflow-data-trace.yml" || (searchLoopCaller && /workflow_dispatch:/.test(text)),
+    fixtureTraceInput: /fixture_trace/.test(text) || file === "workflow-data-trace.yml" || (sharedCaller && /workflow_dispatch:/.test(text)),
     secretRefs, npmScripts, transitiveNpmScripts: closure.scripts, missingNpmScripts,
     expectedDataTouches: dataWrites, mainWriter, sharedWriterConcurrency, fullMainCheckout,
     preparesLatestMain, safePushHelper, directUnsafePush, fauxScenarios,

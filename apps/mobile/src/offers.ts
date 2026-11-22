@@ -45,7 +45,7 @@ export const PAID_ONCE_LINE = 'Each is paid once. No subscription, no renewal, n
 export function websiteDifference(kitId: string): string {
   const offer = kitOfferFor(kitId);
   const site = websiteKit(kitId === EXPLANATION_KIT_OFFER.id ? 'letter-of-explanation' : 'credit-letter-kit');
-  const files = site ? ` It also unlocks the website's ${site.name} as files: a PDF guide and an editable Word file with its ${count(site.documents, 'document')}.` : '';
+  const files = site ? ` It also gives you the website's ${site.name} as files: a PDF guide and an editable Word file with its ${count(site.documents, 'document')}.` : '';
   return `In this app the ${offer.name} is the ${count(offer.letters.length, 'letter')} above, filled in here, plus tracking.${files} A kit bought here does not appear on the website.`;
 }
 /** The website kits the bundle delivers as files, by name. */

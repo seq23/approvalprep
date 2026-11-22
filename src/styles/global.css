@@ -158,7 +158,6 @@ button:disabled { opacity: .7; cursor: wait; transform: none; }
 .checkout-status:empty { display: none; }
 
 .featured-product { border: 2px solid var(--color-accent); box-shadow: none; position: relative; }
-.featured-product::before { content: "Best value"; position: absolute; top: 14px; right: 14px; background: var(--color-accent); color: var(--carbon); border-radius: var(--radius-md); padding: 5px 10px; font-size: .78rem; font-weight: 800; }
 .product-card ul { padding-left: 1.1rem; margin-top: 0; }
 .product-card li { margin-bottom: 4px; }
 .checkout-cancelled { margin-top: 18px; margin-bottom: 18px; }
@@ -348,7 +347,6 @@ h3 { font-size: 1.15rem; line-height: 1.3; }
 /* Cards are a rule border on paper-raised; only the letter sheet lifts. */
 .card, .product-card, .pricing-card, .decision-card, .hero-panel, .final-cta, .table-wrap, .recommendation-card { background: var(--paper-raised); border: 1px solid var(--rule); border-radius: var(--radius-md); box-shadow: none; }
 .featured-product, .pricing-card-featured { border: 2px solid var(--carbon); }
-.featured-product::before { background: var(--highlighter); color: var(--carbon); border-radius: var(--radius-sm); font-family: var(--font-mono); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; font-size: 11px; }
 .decision-card span, .resource-card span { font-family: var(--font-mono); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; font-size: 12px; color: var(--carbon-muted); }
 .decision-card strong { color: var(--signal-deep); }
 .notice { border-left-color: var(--carbon); background: var(--paper-raised); border: 1px solid var(--rule); border-left: 4px solid var(--carbon); }
@@ -366,7 +364,7 @@ h3 { font-size: 1.15rem; line-height: 1.3; }
 .ap-sheet .eyebrow { border: 0; padding-bottom: 8px; }
 .ap-free-note { margin: 8px 0 0; font-size: 13px; line-height: 18px; color: var(--carbon-muted); }
 .ap-selfhelp { border-top: 1px solid var(--rule); padding-top: var(--space-3); color: var(--carbon-muted); font-size: 15px; }
-.ap-tag { display: inline-block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; border: 1px solid var(--rule); border-radius: var(--radius-sm); padding: 1px 6px; color: var(--carbon-muted); vertical-align: middle; }
+.ap-tag { display: inline-block; font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; border: 1px solid var(--rule); border-radius: var(--radius-sm); padding: 1px 6px; color: var(--carbon-muted); vertical-align: middle; }
 
 /* Footer: same paper, a carbon rule, the logo again. */
 .site-footer { background: var(--paper-raised); border-top: 2px solid var(--carbon); }
@@ -397,7 +395,7 @@ details summary { min-height: 44px; }
 .ap-planned { padding: 0 0 var(--space-4); }
 .ap-compare .comparison-table th[scope="row"] { font-family: var(--font-body); text-transform: none; letter-spacing: 0; font-size: 15px; font-weight: 700; background: var(--paper-raised); }
 @media (max-width: 740px) {
-  td[data-label]::before { content: attr(data-label); display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--carbon-muted); margin-bottom: 2px; }
+  td[data-label]::before { content: attr(data-label); display: block; font-family: var(--font-mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--carbon-muted); margin-bottom: 2px; }
   .ap-compare .comparison-table th[scope="row"] { display: block; border: 0; padding: 0 0 6px; }
   .table-wrap { border: 0; background: transparent; }
 }
