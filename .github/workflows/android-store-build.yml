@@ -5,6 +5,11 @@ name: Android store build
 # the .aab is never uploaded as an artifact (public repo).
 on:
   workflow_dispatch:
+    inputs:
+      fixture_trace:
+        description: Run fixture workflow data trace only (no build, no upload)
+        required: false
+        default: "false"
 permissions:
   contents: read
 concurrency:
@@ -42,8 +47,10 @@ jobs:
           cache-dependency-path: apps/mobile/package-lock.json
       - run: npm ci --no-audit --no-fund
       - name: Build the store .aab (internal profile, EAS keystore)
+        if: inputs.fixture_trace != 'true'
         run: npx -y eas-cli@latest build --platform android --profile internal --local --non-interactive --output "$RUNNER_TEMP/app.aab"
       - name: Check package, versionCode and upload key
+        if: inputs.fixture_trace != 'true'
         id: aab
         run: |
           curl -fsSL -o "$RUNNER_TEMP/bundletool.jar" https://github.com/google/bundletool/releases/download/1.17.2/bundletool-all-1.17.2.jar
@@ -56,10 +63,13 @@ jobs:
           [ "$SHA1" = "$UPLOAD_KEY_SHA1" ] || { echo "NAMED STOP [UPLOAD_KEY_CHANGED] $SHA1"; exit 1; }
           echo "version_code=$CODE" >> "$GITHUB_OUTPUT"
       - name: Write the Play service account file
+        if: inputs.fixture_trace != 'true'
         run: (umask 077 && printf '%s' "$PLAY_SA_JSON" > play-sa.json)
       - name: Submit to the Play internal track as a draft
+        if: inputs.fixture_trace != 'true'
         run: npx -y eas-cli@latest submit --platform android --profile internal --path "$RUNNER_TEMP/app.aab" --non-interactive
       - name: Prove the draft reached the internal track (and no other)
+        if: inputs.fixture_trace != 'true'
         run: node scripts/play-internal-check.mjs "$PACKAGE" "${{ steps.aab.outputs.version_code }}"
       - name: Delete the service account file and the bundle
         if: always()
