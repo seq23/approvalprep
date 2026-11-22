@@ -65,7 +65,7 @@ under `apps/mobile/` unless they start with `functions/` or `src/components/`.
 |---|---|---|---|---|---|---|
 | Financial info > Purchase history | Yes | No | No | Required (only when buying) | App functionality, Analytics | RevenueCat with Google Play Billing (`src/purchases/revenuecat.ts:7`, `bundleAccount.ts:48`); website order code (`websiteUnlock.ts:20`) |
 | Personal info > Email address | Yes | No | No | Optional (only if typed) | App functionality | More > "Email you paid with" (`app/(tabs)/more/index.tsx:92`) → `websiteUnlock.ts:52` → `functions/api/email-download-links.js` (Stripe lookup, link emailed; a one-way hash is kept briefly to stop repeat tries) |
-| App info and performance; Device or other IDs | Device or other IDs: Yes | No | No | Required (only when buying or opening a kit) | App functionality | The anonymous RevenueCat app user id, sent as the bearer token (`delivery.ts:14`, `bundleDelivery.ts:25`, `kitFiles.ts:12`). Not linked to a name or email. |
+| App info and performance; Device or other IDs | Device or other IDs: Yes | No | No | Required (only when buying or opening a kit) | App functionality | The anonymous RevenueCat app user id, sent as the bearer token (`delivery.ts:14`, `bundleDelivery.ts:25`, `kitFiles.ts:12`), and, on Android only when a Play review code is typed, with that code (`purchases/review.ts`). Not linked to a name or email. |
 
 Not declared, and why:
 - Letters, answers, drafts, mailing dates: kept on the phone in SQLite (`src/phoneDatabase.ts:47`); no fetch sends them.
@@ -97,10 +97,15 @@ Not declared, and why:
 
 ## App access (notes for the reviewer)
 
-- **All functionality is available without special access.** No login, no account, no credentials.
-- Note to paste: "No account or sign-in. The free credit bureau dispute letter works at once from Home or Write a letter. Paid
-  letter kits are one-time Google Play in-app products; buying one unlocks its templates on the phone. More > 'Open my website kit' unlocks a website order from its link; it needs a real order, so it can be skipped in review. Self-help templates only:
-  users write and mail their own letters; the app never contacts a bureau or creditor."
+Play Console > App content > App access > Sign in details: Username `No account needed`; Password = the review
+code (the Boss OS vault `AP_PLAY_REVIEW_CODE`, copied with
+`cd ~/GitHub/boss-os && npm run -s vault:run -- sh -c 'printf %s "$AP_PLAY_REVIEW_CODE" | pbcopy'`; never typed here
+or in the app); tick full access including paid content; paste the note below as "Any other instructions"
+(tests/reviewUnlock.test.ts holds it to 500 characters and to the screen's own labels). The code works only while the
+review window on the Pages project is open (`REVIEW_UNTIL`, kept open while the app is live on Play, renewed
+yearly); how it works and how to rotate it: `docs/APP_BUNDLE_DELIVERY.md` ("Play review access").
+
+> No account or sign-in. The free credit bureau dispute letter works at once from Home. To open every paid kit free: More > Have a review code?, type the 10-digit code from the password field, tap Use this code. The Complete Bundle (both letter kits and every kit's PDF and Word file) opens for 7 days. Self-help templates only: the app never contacts a bureau or creditor. 'Open my website kit' needs a website order; skip it.
 
 ## Other declarations
 

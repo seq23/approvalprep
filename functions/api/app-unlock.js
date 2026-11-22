@@ -1,6 +1,7 @@
 import { APP_KITS, appJson, signedKitUrl } from '../_runtime/app-kit.js';
 import { acceptsSandbox, ownsProduct } from '../_runtime/app-bundle.js';
 import { revenueCatPurchases } from '../_runtime/revenuecat.js';
+import { reviewGrantLive } from '../_runtime/review.js';
 import { clientIp, sha256, withinLimit } from '../_runtime/rate-limit.js';
 // Unknown IDs, missing purchases, and upstream errors have the same public response.
 export async function onRequestPost({ request, env }) {
@@ -19,7 +20,8 @@ export async function onRequestPost({ request, env }) {
     }
     const rc = await revenueCatPurchases(id, env.APPROVALPREP_REVENUECAT_SECRET);
     if (rc.stop) return appJson({ stop: rc.stop }, 503);
-    if (!ownsProduct(rc.purchases, product, acceptsSandbox(env))) return refused();
+    // A real purchase first (unchanged); else a live Play review grant (functions/_runtime/review.js), refused identically.
+    if (!ownsProduct(rc.purchases, product, acceptsSandbox(env)) && !await reviewGrantLive(env, id)) return refused();
     return appJson({ url: await signedKitUrl(new URL(request.url).origin, env.DOWNLOAD_SIGNING_SECRET, Date.now(), kit) });
   } catch { return refused(); }
 }

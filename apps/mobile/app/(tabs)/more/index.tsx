@@ -19,6 +19,7 @@ import { restoreAll, restoreFileKits, restoreMessage } from '../../../src/purcha
 import { downloadKitFiles, saveKitFiles } from '../../../src/purchases/kitFiles';
 import { emailWebsiteOrderLinks, unlockWebsiteOrder, websiteUnlockMessage } from '../../../src/purchases/websiteUnlock';
 import { exportAllLetters } from '../../../src/allLetters';
+import { ReviewCode } from '../../../src/ReviewCode';
 export default function More() {
   const [confirming, setConfirming] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -82,6 +83,7 @@ export default function More() {
     {PRODUCTS.map(p => <Row key={p.sku} title={offerTitle(p.name, prices[p.productId])} sub={p.what} onPress={() => openFrom('/more', p.screen, p.params)} />)}
     <Row title={restoring ? 'Checking…' : 'Restore a purchase'} sub="Checks this store account for a kit or the bundle and puts it back on this phone" onPress={() => void restore()} />
     {restored ? <Text accessibilityRole="alert" style={type.sub}>{restored}</Text> : null}
+    <ReviewCode />
     <Text style={type.section} accessibilityRole="header">Bought on approvalprep.com?</Text>
     <Text style={type.sub}>A kit you bought on the website opens here at no charge. Paste the link from your download page or from the email "Your ApprovalPrep download link". Only the order code in it is sent.</Text>
     <Field label="Your order link" kind="url" value={order} onChangeText={text => { setOrder(text); setUnlocked(''); }} />

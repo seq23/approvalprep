@@ -23,6 +23,8 @@ export interface BundlePurchases {
   products(): Promise<BundlePrice[]>;
   ownership(): Promise<BundleOwnership>;
   restore(): Promise<BundleOwnership>;
+  /** RevenueCat's answer read fresh (cache dropped), with no store Restore: used after the Play review code. */
+  refresh(): Promise<BundleOwnership>;
   buy(id: OfferId): Promise<void>;
   userId(): Promise<string>;
 }
@@ -35,12 +37,12 @@ async function open(): Promise<BundlePurchases> {
   const key = Platform.OS === 'ios' ? process.env.EXPO_PUBLIC_AP_REVENUECAT_IOS_KEY : process.env.EXPO_PUBLIC_AP_REVENUECAT_ANDROID_KEY;
   const accepted = !!key && (Platform.OS === 'ios' ? key.startsWith('appl_') : Platform.OS === 'android' && key.startsWith('goog_'));
   if (PREVIEW_ENABLED) {
-    return { mock: true, preview: true, products: async () => PREVIEW_PRICES, ownership: async () => previewOwnership(), restore: async () => previewOwnership(),
+    return { mock: true, preview: true, products: async () => PREVIEW_PRICES, ownership: async () => previewOwnership(), restore: async () => previewOwnership(), refresh: async () => previewOwnership(),
       buy: async id => { if (!SOLD_HERE.includes(id) || !offersFor(previewOwnership(), id).includes(id)) throw Error('OFFER_NOT_AVAILABLE'); previewBuy(id); },
       userId: async () => { throw Error('REVENUECAT_KEY_MISSING'); } };
   }
   if (!accepted) {
-    return { mock: true, products: async () => PREVIEW_PRICES.slice(0, 1 + UPGRADE_TIERS.length), ownership: async () => NO_OWNERSHIP, restore: async () => NO_OWNERSHIP,
+    return { mock: true, products: async () => PREVIEW_PRICES.slice(0, 1 + UPGRADE_TIERS.length), ownership: async () => NO_OWNERSHIP, restore: async () => NO_OWNERSHIP, refresh: async () => NO_OWNERSHIP,
     buy: async () => { const gate = kitPurchaseGate(); throw Error(gate.ok ? 'REVENUECAT_KEY_MISSING' : gate.stop); },
     userId: async () => { throw Error('REVENUECAT_KEY_MISSING'); } };
   }
@@ -50,6 +52,7 @@ async function open(): Promise<BundlePurchases> {
   return {
     mock: false,
     products: async () => (await Purchases.getProducts([KIT.productId, EXPLANATION_PRODUCT, ...SOLD_HERE], PRODUCT_CATEGORY.NON_SUBSCRIPTION)).filter(p => p.subscriptionPeriod === null).map(p => ({ id: p.identifier, price: p.priceString })),
+    refresh: async () => { await Purchases.invalidateCustomerInfoCache(); return ownership(); },
     ownership, restore: async () => ownershipFrom((await Purchases.restorePurchases()).entitlements.active), userId: () => Purchases.getAppUserID(),
     buy: async id => {
       const gate = kitPurchaseGate();

@@ -2,6 +2,7 @@ import { appJson } from '../_runtime/app-kit.js';
 import { acceptsSandbox } from '../_runtime/app-bundle.js';
 import { FILE_TYPES, fileKey, isFileKit, ownsFileKit, signedFileUrl } from '../_runtime/app-files.js';
 import { revenueCatPurchases } from '../_runtime/revenuecat.js';
+import { reviewGrantLive } from '../_runtime/review.js';
 import { clientIp, sha256, withinLimit } from '../_runtime/rate-limit.js';
 // POST /api/app-files?kit=<website sku>: after RevenueCat confirms the kit (or the bundle), two
 // five-minute signed links to the website kit's PDF guide and Word file. Unknown IDs, missing
@@ -19,7 +20,8 @@ export async function onRequestPost({ request, env }) {
     if (!await withinLimit(env.PRODUCTS_DB, `app-files:ip:${await sha256(clientIp(request))}`, 30, 60_000)) return appJson({ error: 'TOO_MANY_REQUESTS' }, 429);
     const rc = await revenueCatPurchases(id, env.APPROVALPREP_REVENUECAT_SECRET);
     if (rc.stop) return appJson({ stop: rc.stop }, 503);
-    if (!ownsFileKit(rc.purchases, kit, acceptsSandbox(env))) return refused();
+    // A real purchase first (unchanged); else a live Play review grant (functions/_runtime/review.js), refused identically.
+    if (!ownsFileKit(rc.purchases, kit, acceptsSandbox(env)) && !await reviewGrantLive(env, id)) return refused();
     const heads = await Promise.all(FILE_TYPES.map(type => env.PRODUCT_ASSETS_R2.head(fileKey(kit, type))));
     if (heads.some(head => !head || !(head.size > 0))) return appJson({ stop: 'APP_FILES_ASSET_MISSING' }, 503);
     const origin = new URL(request.url).origin;

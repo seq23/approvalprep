@@ -84,3 +84,32 @@ website already serves, so nothing new is uploaded. A missing or empty object an
 `POST /api/app-bundle` (and the file door) accept the bundle, kits that already add up to $49.99, or
 kits plus an upgrade tier at least as high as those kits call for (`src/lib/appUpgrade.mjs`, shared
 with the app). `ap_bundle_upgrade` alone, with no kit, no longer opens anything.
+
+## Play review access (22 Nov 2026)
+
+Google Play's reviewer cannot buy, and the app has no accounts, so every paid kit opens with ONE server-checked
+10-digit code (design: `~/Work/google-play-2026-11-21/REVIEW-UNLOCK-DESIGN.md`, shared with DW, KMP and PBS).
+
+- **Where**: More > "Have a review code?" (`apps/mobile/src/ReviewCode.tsx`), Android only, store account only,
+  not for a bundle owner, and only while `GET /api/review` answers 200. iOS never shows it.
+- **Server**: `functions/api/review/{index,unlock}.js` -> `functions/_runtime/review.js`. Window -> body/ID format
+  -> try limits (5/min burst, 20/IP/day, 1,000/day; all before the compare) -> constant-time compare -> ID known to
+  RevenueCat -> 2 new devices per IP a day -> 10 devices per code version (the 11th files an Open Loops row,
+  `REVIEW_DEVICE_CAP`) -> RevenueCat v2 `grant_entitlement` of `ap_complete_bundle` until `min(now + 7 days,
+  REVIEW_UNTIL)`. Any RevenueCat failure revokes the granted entitlement (never a purchase), frees the slot, 503.
+- **Doors**: `app-unlock`, `app-bundle` and `app-files` check the real purchase first, unchanged; only when there is
+  none do they accept `reviewGrantLive`: window open AND a `review_grant` row for this ID under the current code
+  version, not expired, AND RevenueCat still lists the bundle entitlement active. Anything else, or D1/RevenueCat
+  down, gets the same refusal as "no purchase". The app's `ownershipFrom` reads the same RevenueCat grant
+  (`grantedBundle`), so the app and the doors agree.
+- **Pages settings** (production): secrets `REVIEW_CODE_SECRET` (vault `AP_PLAY_REVIEW_CODE`), `REVIEW_HASH_SECRET`
+  (vault `AP_REVIEW_HASH_SECRET`), `BOSS_OPEN_LOOPS_TOKEN`; `REVIEW_CODE_VERSION` (the window id, `v1`) and
+  `REVIEW_UNTIL` (ISO date) are vars in `wrangler.toml` (production only). Missing or past = every review route
+  404 and no RevenueCat call. Preview deployments have no `REVIEW_CODE_SECRET`, so they stay closed.
+- **Tables**: the additive migration `0002_review` in `migrations/` (HMACs only; rows purged 7 days after expiry on
+  each redeem). Pages does not apply migrations on deploy: apply it to the `approvalprep-products` D1 by hand once.
+- **Rotate** only on a `REVIEW_DEVICE_CAP` row or a suspected leak: new vault code, new `REVIEW_CODE_SECRET` secret
+  (`printf %s "$AP_PLAY_REVIEW_CODE" | npx wrangler pages secret put REVIEW_CODE_SECRET --project-name approvalprep` under
+  `vault:run`), the next `REVIEW_CODE_VERSION` in `wrangler.toml` (a new version starts a fresh 10 slots), and she
+  pastes the new code in Play Console.
+- **Revoke one device by hand**: RevenueCat v2 `POST /customers/{id}/actions/revoke_granted_entitlement` only.
