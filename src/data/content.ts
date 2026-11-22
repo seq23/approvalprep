@@ -19,11 +19,11 @@ export const BUNDLE_SKU = "complete-approvalprep-bundle";
 export const kitCount = productCards.filter((product) => product.sku !== BUNDLE_SKU).length;
 // The bundle's value line on /pricing, worked out from the same prices the cards show (never typed),
 // so it stays true when a price changes.
-const dollars = (label: string) => Number(String(label).replace(/[^0-9.]/g, ""));
+const dollars = (label) => Number(String(label).replace(/[^0-9.]/g, ""));
 const bundleCard = productCards.find((product) => product.sku === BUNDLE_SKU);
 export const kitsOneByOneUsd = productCards.filter((product) => product.sku !== BUNDLE_SKU).reduce((sum, product) => sum + dollars(product.priceLabel), 0);
 export const bundleValueLine = bundleCard && kitsOneByOneUsd > dollars(bundleCard.priceLabel)
-  ? `All ${productCards.length - 1} kits bought one by one come to $${kitsOneByOneUsd}. The bundle is ${bundleCard.priceLabel}, paid once.`
+  ? `All ${kitCount} kits bought one by one come to $${kitsOneByOneUsd}.`
   : "";
 export const kitCountWord = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"][kitCount] || String(kitCount);
 export const allOfferings = offeringCategories.flatMap((category) => category.offerings.map((offering) => ({ ...offering, productSku: category.product_sku, productName: category.product_name, price: category.price })));
