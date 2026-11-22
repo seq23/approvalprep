@@ -38,6 +38,8 @@ const sets = kitSetsByTier();
 
 export const catalog = {
   app: 'ApprovalPrep', packageName: revenuecat.bundleId,
+  // The tool's order guard: no Play write until RevenueCat holds every product here with its code type.
+  revenuecat,
   products: revenuecat.products.map(p => ({
     id: p.id, title: productName(p.id), description: describe(p.id), priceUsd: priceFor(p.id),
     // The owner rule (appUpgrade.mjs): nobody pays more in total than the bundle, in any region. Play
