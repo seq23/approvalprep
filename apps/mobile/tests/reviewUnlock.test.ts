@@ -50,9 +50,18 @@ function revenuecat() {
   const calls: string[] = [];
   let mode: 'ok' | '5xx' | 'timeout' | '403' = 'ok', active: 'ok' | '5xx' = 'ok', openLoops = 0;
   const openLoopStops: string[] = [];
+  // Boss OS's intake: up (201), down (fetch throws), refusing (500), or hanging until the test releases it.
+  let intake: 'up' | 'throws' | '500' | 'hangs' = 'up';
+  const held: (() => void)[] = [];
   const fetcher = (async (input: unknown, init: RequestInit = {}) => {
     const url = String(input);
-    if (url.includes('open-loops/intake')) { openLoops++; openLoopStops.push(JSON.parse(String(init?.body)).stop); return new Response('{}', { status: 201 }); }
+    if (url.includes('open-loops/intake')) {
+      openLoops++; openLoopStops.push(JSON.parse(String(init?.body)).stop);
+      if (intake === 'throws') throw new TypeError('fetch failed');
+      if (intake === '500') return new Response('{}', { status: 500 });
+      if (intake === 'hangs') return new Promise<Response>((_, fail) => held.push(() => fail(new DOMException('timed out', 'TimeoutError'))));
+      return new Response('{}', { status: 201 });
+    }
     if (url.includes('/products?')) return Response.json(products);
     calls.push(`${init.method ?? 'GET'} ${url.replace(/^.*\/customers\//, '')}`);
     const id = decodeURIComponent(url.split('/customers/')[1]!.split(/[/?]/)[0]!);
@@ -73,7 +82,7 @@ function revenuecat() {
     granted.set(id, body.expires_at);
     return new Response('{}', { status: 201 });
   }) as unknown as typeof fetch;
-  return { known, granted, bought, sandboxEntitled, calls, fetcher, set(m: typeof mode) { mode = m; }, activeDown(on: boolean) { active = on ? '5xx' : 'ok'; }, get openLoops() { return openLoops; }, openLoopStops };
+  return { known, granted, bought, sandboxEntitled, calls, fetcher, set(m: typeof mode) { mode = m; }, setIntake(m: typeof intake) { intake = m; }, release() { held.splice(0).forEach(f => f()); }, activeDown(on: boolean) { active = on ? '5xx' : 'ok'; }, get openLoops() { return openLoops; }, openLoopStops };
 }
 type RC = ReturnType<typeof revenuecat>;
 
@@ -85,11 +94,12 @@ function env(db: D1 = d1(), over: Record<string, unknown> = {}) {
 type Env = ReturnType<typeof env>;
 const req = (body: unknown, ip = '203.0.113.7', type = 'application/json') =>
   new Request('https://approvalprep.com/api/review/unlock', { method: 'POST', headers: { 'content-type': type, 'cf-connecting-ip': ip }, body: typeof body === 'string' ? body : JSON.stringify(body) });
-async function call(e: Env, rc: RC, body: unknown, ip?: string, now = NOW) {
+/** Calls like Pages: work handed to waitUntil is collected and, unless `settle` is false, finished before returning. */
+async function call(e: Env, rc: RC, body: unknown, ip?: string, now = NOW, settle = true) {
   const waits: Promise<unknown>[] = [];
   const res = await reviewUnlock(req(body, ip), e, { now, fetcher: rc.fetcher, waitUntil: (p: Promise<unknown>) => waits.push(p) });
-  await Promise.all(waits);
-  return { status: res.status, body: await res.json() as { error?: string; unlocked?: boolean }, headers: res.headers };
+  if (settle) await Promise.all(waits);
+  return { status: res.status, body: await res.json() as { error?: string; unlocked?: boolean }, headers: res.headers, waits };
 }
 const triesTaken = (e: Env) => Number((e.PRODUCTS_DB as D1).raw.prepare("SELECT COALESCE(SUM(tries),0) AS n FROM review_try WHERE bucket LIKE 'all:%'").get()!.n);
 const slots = (e: Env) => Number((e.PRODUCTS_DB as D1).raw.prepare('SELECT COUNT(*) AS n FROM review_grant').get()!.n);
@@ -208,6 +218,28 @@ test('outage: RevenueCat 5xx, timeout or read-only key = 503, slot given back, n
   const db = d1(), e = env(db), rc = revenuecat(); rc.known.add(anon(1)); db.fail(true);
   const r = await call(e, rc, { code: CODE, app_user_id: anon(1) });
   assert.equal(r.status, 503); assert.deepEqual(rc.calls, []);
+});
+
+test('outage of the alert itself: Boss OS down, refusing or hanging never delays or changes the read-only-key 503', async t => {
+  const log = t.mock.method(console, 'log', () => {});
+  for (const [intake, logged] of [['throws', 'OPEN_LOOPS_UNREACHABLE'], ['500', 'OPEN_LOOPS_REFUSED'], ['hangs', 'OPEN_LOOPS_UNREACHABLE']] as const) {
+    log.mock.resetCalls();
+    const e = env(), rc = revenuecat(); rc.known.add(anon(1)); rc.set('403'); rc.setIntake(intake);
+    // The answer comes back while the alert is still in flight (a hung intake has not settled yet).
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const r = await Promise.race([call(e, rc, { code: CODE, app_user_id: anon(1) }, undefined, NOW, false), new Promise<'HUNG'>(ok => { timer = setTimeout(() => ok('HUNG'), 500); })]);
+    clearTimeout(timer);
+    assert.notEqual(r, 'HUNG', `${intake}: the 503 waited on the alert`);
+    if (r === 'HUNG') continue;
+    assert.equal(r.status, 503, intake); assert.equal(r.body.error, 'TRY_AGAIN');
+    assert.equal(slots(e), 0, intake); assert.ok(!rc.granted.has(anon(1)), `${intake}: nothing granted`);
+    assert.equal(r.waits.length, 1, `${intake}: the alert is scheduled through waitUntil`);
+    rc.release();
+    await Promise.all(r.waits);
+    assert.deepEqual(rc.openLoopStops, ['REVIEW_RC_KEY_READONLY'], intake);
+    const lines = log.mock.calls.map(c => c.arguments.join(' ')).join('\n');
+    assert.ok(lines.includes('REVIEW_RC_KEY_READONLY'), intake); assert.ok(lines.includes(logged), `${intake}: logs ${logged}`);
+  }
 });
 
 test('doors: a live review grant opens the bundle, both kits and the file kits; every other case is refused exactly like no purchase', async t => {
