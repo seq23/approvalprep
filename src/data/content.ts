@@ -26,7 +26,6 @@ export const bundleValueLine = bundleCard && kitsOneByOneUsd > dollars(bundleCar
   ? `All ${kitCount} kits bought one by one come to $${kitsOneByOneUsd}.`
   : "";
 export const kitCountWord = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"][kitCount] || String(kitCount);
-export const allOfferings = offeringCategories.flatMap((category) => category.offerings.map((offering) => ({ ...offering, productSku: category.product_sku, productName: category.product_name, price: category.price })));
 export const offeringsForSku = (sku) => offeringCategories.find((category) => category.product_sku === sku)?.offerings || [];
 export const productForSku = (sku) => productCards.find((product) => product.sku === sku) || offeringCategories.find((category) => category.product_sku === sku);
 
@@ -73,43 +72,20 @@ export const homepageChooser = [
   }
 ];
 
+// The comparison table's prices are read from the product cards (data/products/products.json), never typed,
+// so the table cannot show a price the pricing page and checkout do not.
+const priceLabelFor = (sku) => {
+  const label = productCards.find((product) => product.sku === sku)?.priceLabel;
+  if (!label) throw new Error(`productComparison: no live product card for ${sku}`);
+  return label;
+};
 export const productComparison = [
-  {
-    "product": "Letter of Explanation",
-    "bestFor": "One clear explanation letter",
-    "includes": "Nine explanation letters by situation, a filled example under each, a sent and received log",
-    "price": "$15",
-    "href": "/pricing#letter-of-explanation"
-  },
-  {
-    "product": "Income + Employment Letter Kit",
-    "bestFor": "Work, income, employment gaps, job changes",
-    "includes": "Employment verification for your employer to sign, proof of income, self-employment, job change and gap letters",
-    "price": "$19",
-    "href": "/pricing#income-employment-letter-kit"
-  },
-  {
-    "product": "Credit Letter Kit",
-    "bestFor": "DIY credit letters and follow-up",
-    "includes": "Three bureau follow-ups, direct dispute, validation, settlement terms, goodwill, late payment, checklist, log",
-    "price": "$19",
-    "href": "/pricing#credit-letter-kit"
-  },
-  {
-    "product": "Rental Application Kit",
-    "bestFor": "Apartment and rental applications",
-    "includes": "Rental checklist, cover letter, income/rental history explanations",
-    "price": "$29",
-    "href": "/pricing#rental-application-kit"
-  },
-  {
-    "product": "Complete ApprovalPrep Bundle",
-    "bestFor": "The full self-service library",
-    "includes": "Every current kit, checklist, guide, and letter packet",
-    "price": "$49",
-    "href": "/pricing#complete-approvalprep-bundle"
-  }
-];
+  { sku: "letter-of-explanation", product: "Letter of Explanation", bestFor: "One clear explanation letter", includes: "Nine explanation letters by situation, a filled example under each, a sent and received log" },
+  { sku: "income-employment-letter-kit", product: "Income + Employment Letter Kit", bestFor: "Work, income, employment gaps, job changes", includes: "Employment verification for your employer to sign, proof of income, self-employment, job change and gap letters" },
+  { sku: "credit-letter-kit", product: "Credit Letter Kit", bestFor: "DIY credit letters and follow-up", includes: "Three bureau follow-ups, direct dispute, validation, settlement terms, goodwill, late payment, checklist, log" },
+  { sku: "rental-application-kit", product: "Rental Application Kit", bestFor: "Apartment and rental applications", includes: "Rental checklist, cover letter, income/rental history explanations" },
+  { sku: "complete-approvalprep-bundle", product: "Complete ApprovalPrep Bundle", bestFor: "The full self-service library", includes: "Every current kit, checklist, guide, and letter packet" },
+].map((row) => ({ ...row, price: priceLabelFor(row.sku), href: `/pricing#${row.sku}` }));
 
 export const footerGroups = [
   {
