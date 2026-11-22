@@ -102,14 +102,14 @@ Google Play's reviewer cannot buy, and the app has no accounts, so every paid ki
   version, not expired, AND RevenueCat still lists the bundle entitlement active. Anything else, or D1/RevenueCat
   down, gets the same refusal as "no purchase". The app's `ownershipFrom` reads the same RevenueCat grant
   (`grantedBundle`), so the app and the doors agree.
-- **Pages settings** (production): secrets `REVIEW_CODE` (vault `AP_PLAY_REVIEW_CODE`), `REVIEW_HASH_SECRET`
+- **Pages settings** (production): secrets `REVIEW_CODE_SECRET` (vault `AP_PLAY_REVIEW_CODE`), `REVIEW_HASH_SECRET`
   (vault `AP_REVIEW_HASH_SECRET`), `BOSS_OPEN_LOOPS_TOKEN`; `REVIEW_CODE_VERSION` (the window id, `v1`) and
   `REVIEW_UNTIL` (ISO date) are vars in `wrangler.toml` (production only). Missing or past = every review route
-  404 and no RevenueCat call. Preview deployments have no `REVIEW_CODE`, so they stay closed.
+  404 and no RevenueCat call. Preview deployments have no `REVIEW_CODE_SECRET`, so they stay closed.
 - **Tables**: the additive migration `0002_review` in `migrations/` (HMACs only; rows purged 7 days after expiry on
   each redeem). Pages does not apply migrations on deploy: apply it to the `approvalprep-products` D1 by hand once.
-- **Rotate** only on a `REVIEW_DEVICE_CAP` row or a suspected leak: new vault code, new `REVIEW_CODE` secret
-  (`printf %s "$AP_PLAY_REVIEW_CODE" | npx wrangler pages secret put REVIEW_CODE --project-name approvalprep` under
+- **Rotate** only on a `REVIEW_DEVICE_CAP` row or a suspected leak: new vault code, new `REVIEW_CODE_SECRET` secret
+  (`printf %s "$AP_PLAY_REVIEW_CODE" | npx wrangler pages secret put REVIEW_CODE_SECRET --project-name approvalprep` under
   `vault:run`), the next `REVIEW_CODE_VERSION` in `wrangler.toml` (a new version starts a fresh 10 slots), and she
   pastes the new code in Play Console.
 - **Revoke one device by hand**: RevenueCat v2 `POST /customers/{id}/actions/revoke_granted_entitlement` only.

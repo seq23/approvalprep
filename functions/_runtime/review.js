@@ -1,6 +1,6 @@
 // Google Play review access. ApprovalPrep has no accounts, so a store reviewer reaches every paid kit with ONE
 // 10-digit code typed on More > "Have a review code?" (Android only). The code lives only in the Pages secret
-// REVIEW_CODE, the Boss OS vault (AP_PLAY_REVIEW_CODE) and Play Console's private sign-in details: never in the app
+// REVIEW_CODE_SECRET, the Boss OS vault (AP_PLAY_REVIEW_CODE) and Play Console's private sign-in details: never in the app
 // or this public repo. The right code asks RevenueCat to grant this phone's anonymous purchase ID the Complete Bundle
 // entitlement for 7 days; RevenueCat then answers "bundle" to the app exactly as for a buyer, and the content doors
 // (app-unlock, app-bundle, app-files) accept the grant through reviewGrantLive below. Nothing here or in the app
@@ -32,7 +32,7 @@ const stop = (code) => console.log(JSON.stringify({ event: 'NAMED_STOP', stop: c
 /** Open only when every secret and binding it needs is present, the code is 10 digits and REVIEW_UNTIL is in the future. */
 export function reviewOpen(env, now = Date.now()) {
   const until = Date.parse(env?.REVIEW_UNTIL ?? '');
-  return CODE.test(env?.REVIEW_CODE ?? '') && Number.isFinite(until) && until > now &&
+  return CODE.test(env?.REVIEW_CODE_SECRET ?? '') && Number.isFinite(until) && until > now &&
     /^[A-Za-z0-9._-]{1,32}$/.test(env?.REVIEW_CODE_VERSION ?? '') && (env?.REVIEW_HASH_SECRET ?? '').length >= 32 &&
     !!env?.APPROVALPREP_REVENUECAT_SECRET && !!env?.PRODUCTS_DB;
 }
@@ -98,7 +98,7 @@ export async function reviewUnlock(request, env, { now = Date.now(), fetcher = f
     if (!(await take(db, `all:${day}`, 'all', LIMITS.globalDaily, now + 2 * DAY))) { stop('REVIEW_DAILY_CAP'); return json({ error: 'SLOW_DOWN' }, 429); }
   } catch { stop('REVIEW_DB_UNAVAILABLE'); return json({ error: 'TRY_AGAIN' }, 503); }
 
-  if (!CODE.test(code) || !(await same(secret, code, env.REVIEW_CODE))) { stop('REVIEW_CODE_WRONG'); return json({ error: 'WRONG_CODE' }, 403); }
+  if (!CODE.test(code) || !(await same(secret, code, env.REVIEW_CODE_SECRET))) { stop('REVIEW_CODE_WRONG'); return json({ error: 'WRONG_CODE' }, 403); }
 
   // The ID must be one RevenueCat already knows (the SDK creates it on first launch): a made-up ID takes no slot.
   try {
@@ -175,7 +175,7 @@ async function fileCapLoop(env, fetcher) {
   try {
     const r = await fetcher(OPEN_LOOPS_INTAKE, { method: 'POST', headers: { 'content-type': 'application/json', authorization: `Bearer ${env.BOSS_OPEN_LOOPS_TOKEN}` },
       body: JSON.stringify({ repo: 'seq23/approvalprep', stop: 'REVIEW_DEVICE_CAP', business: 'spry', finish_line: 'ApprovalPrep: live in both stores, selling', owner: 'claude',
-        title: 'ApprovalPrep: the Play review code is used up', next_step: `All ${maxDevices(env)} review slots for code version ${env.REVIEW_CODE_VERSION} are taken. Rotate: new AP_PLAY_REVIEW_CODE in the vault, new REVIEW_CODE + REVIEW_CODE_VERSION on the Pages project, then she pastes the new code in Play Console.` }),
+        title: 'ApprovalPrep: the Play review code is used up', next_step: `All ${maxDevices(env)} review slots for code version ${env.REVIEW_CODE_VERSION} are taken. Rotate: new AP_PLAY_REVIEW_CODE in the vault, new REVIEW_CODE_SECRET + REVIEW_CODE_VERSION on the Pages project, then she pastes the new code in Play Console.` }),
       signal: AbortSignal.timeout(8000) });
     if (!r.ok) stop('OPEN_LOOPS_REFUSED');
   } catch { stop('OPEN_LOOPS_UNREACHABLE'); }

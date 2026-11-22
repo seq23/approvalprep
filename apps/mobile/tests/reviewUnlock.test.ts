@@ -78,7 +78,7 @@ type RC = ReturnType<typeof revenuecat>;
 
 const assets = { get: async (key: string) => key.endsWith('.zip') ? { body: 'FAKE-ZIP' } : { json: async () => ({ kit: key }) }, head: async () => ({ size: 123 }) };
 function env(db: D1 = d1(), over: Record<string, unknown> = {}) {
-  return { REVIEW_CODE: CODE, REVIEW_CODE_VERSION: 'v1', REVIEW_UNTIL: '2099-12-01', REVIEW_HASH_SECRET: 's'.repeat(40), REVIEW_MAX_DEVICES: '10',
+  return { REVIEW_CODE_SECRET: CODE, REVIEW_CODE_VERSION: 'v1', REVIEW_UNTIL: '2099-12-01', REVIEW_HASH_SECRET: 's'.repeat(40), REVIEW_MAX_DEVICES: '10',
     APPROVALPREP_REVENUECAT_SECRET: 'sk_fictional', BOSS_OPEN_LOOPS_TOKEN: 't', PRODUCTS_DB: db, DOWNLOAD_SIGNING_SECRET: 'fake-signing', PRODUCT_ASSETS_R2: assets, ...over };
 }
 type Env = ReturnType<typeof env>;
@@ -113,7 +113,7 @@ const refusedEverywhere = (d: Record<string, [number, string]>, noPurchase: Reco
 
 test('closed window (past, missing, malformed, no secret, no D1): status and unlock answer 404 and call no one', async () => {
   const rc = revenuecat(); rc.known.add(anon(1));
-  for (const over of [{ REVIEW_UNTIL: '2026-01-01' }, { REVIEW_UNTIL: undefined }, { REVIEW_UNTIL: 'soon' }, { REVIEW_CODE: undefined }, { REVIEW_CODE: '123456' },
+  for (const over of [{ REVIEW_UNTIL: '2026-01-01' }, { REVIEW_UNTIL: undefined }, { REVIEW_UNTIL: 'soon' }, { REVIEW_CODE_SECRET: undefined }, { REVIEW_CODE_SECRET: '123456' },
     { REVIEW_CODE_VERSION: undefined }, { APPROVALPREP_REVENUECAT_SECRET: undefined }, { REVIEW_HASH_SECRET: 'short' }, { PRODUCTS_DB: undefined }]) {
     const e = env(d1(), over);
     assert.equal((await reviewStatus(e, NOW)).status, 404, JSON.stringify(over));
@@ -224,7 +224,7 @@ test('doors: a live review grant opens the bundle, both kits and the file kits; 
   db.raw.prepare('UPDATE review_grant SET expires_at = ?').run(Date.now() - 1);
   refusedEverywhere(await doors(e, anon(1)), noPurchase);
   db.raw.prepare('UPDATE review_grant SET expires_at = ?').run(Date.now() + DAY);
-  for (const shut of [{ REVIEW_UNTIL: '2026-01-01' }, { REVIEW_CODE: undefined }, { REVIEW_CODE_VERSION: 'v0' }]) refusedEverywhere(await doors({ ...e, ...shut }, anon(1)), noPurchase);
+  for (const shut of [{ REVIEW_UNTIL: '2026-01-01' }, { REVIEW_CODE_SECRET: undefined }, { REVIEW_CODE_VERSION: 'v0' }]) refusedEverywhere(await doors({ ...e, ...shut }, anon(1)), noPurchase);
   rc.activeDown(true); refusedEverywhere(await doors(e, anon(1)), noPurchase); rc.activeDown(false);
   db.failOn(/review_grant/); refusedEverywhere(await doors(e, anon(1)), noPurchase); db.failOn(null);
   for (const [k, [status]] of Object.entries(await doors(e, anon(1)))) assert.equal(status, 200, `back open: ${k}`);
@@ -250,7 +250,7 @@ test('data loss: a buyer who redeems keeps the purchase; window closed or grant 
   // Window closed and the grant gone: the buyer's real purchase still opens every door.
   rc.granted.delete(anon(1));
   assert.deepEqual(statuses(await doors({ ...e, REVIEW_UNTIL: '2026-01-01' }, anon(1))), before);
-  assert.deepEqual(statuses(await doors(env(d1(), { REVIEW_CODE: undefined }), anon(1))), before);
+  assert.deepEqual(statuses(await doors(env(d1(), { REVIEW_CODE_SECRET: undefined }), anon(1))), before);
   assert.deepEqual(statuses(await doors(e, anon(1))), before);
   // Every call made is a read, a grant or a revoke of a GRANTED entitlement: never a purchase or customer change.
   assert.ok(rc.calls.every(c => /^GET |\/actions\/(grant_entitlement|revoke_granted_entitlement)$/.test(c)), rc.calls.join('\n'));
