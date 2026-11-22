@@ -13,7 +13,11 @@ import RecommendationSummary from "../../components/RecommendationSummary.astro"
 import TrustAndBoundaryBand from "../../components/TrustAndBoundaryBand.astro";
 import { canonicalUrl, webPageSchema, breadcrumbSchema, itemListSchema, internalHref } from "../../lib/schema";
 import { productForSku } from "../../data/content";
-import registry from "../../../data/content/amazon_book_landing_pages.json";
+import rawRegistry from "../../../data/content/amazon_book_landing_pages.json";
+import seed from "../../../data/products/seed_product_registry.json";
+import { fillPrices } from "../../lib/kitPrice.mjs";
+// {price:<sku>} tokens in the copy are filled from the seed.
+const registry = fillPrices(rawRegistry, seed.products);
 
 const canonical = canonicalUrl(registry.indexPath);
 const cards = registry.pages.map((page) => {

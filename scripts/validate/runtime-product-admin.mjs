@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import path from 'node:path';
 const fail=(m)=>{console.error(`FAIL runtime-product-admin: ${m}`); process.exit(1)};
 const need=(p)=>{if(!fs.existsSync(p)) fail(`missing ${p}`)};
 ['data/products/seed_product_registry.json','migrations/0001_runtime_product_admin.sql','functions/_runtime/admin.js','functions/_runtime/catalog.js','functions/api/admin/products.js','functions/api/admin/upload.js','functions/api/admin/product-revoke.js','functions/api/download-file.js','docs/products/LIVE_PRODUCT_CATALOG.md','docs/products/PRODUCT_ADMIN_RUNBOOK.md'].forEach(need);
@@ -41,6 +42,20 @@ const { kitsMode, CI_NOTE } = await import('../lib/kits-dir.mjs');
 const kitFilesMode = kitsMode('runtime-product-admin');
 if (kitFilesMode === 'files' && sweep.downloadsRead < seed.products.length * 2) fail(`kit price sweep read ${sweep.downloadsRead} PDF/DOCX kit files, expected ${seed.products.length * 2}`);
 if (kitFilesMode === 'contract') console.log(`runtime-product-admin: ${CI_NOTE}`);
-if (sweep.mentionsChecked === 0) fail('kit price sweep matched no kit price on any surface; the sweep is not reading what it governs');
+
+// One source: a kit price is never typed into source. Code reads the product cards
+// (priceLabel / kitPriceOf in src/data/content.ts); copy kept as data writes {price:<sku>},
+// filled at build (src/lib/kitPrice.mjs). Only the built pages and the kit files may show "$N".
+const buildRoot = path.resolve(publishedDir());
+const inBuild = (m) => path.resolve(m.file).startsWith(buildRoot + path.sep);
+const typed = sweep.mentions.filter((m) => !/\.(pdf|docx)$/.test(m.file) && !inBuild(m));
+// Source now carries no typed price, so the matcher is proved on the built pages, where every
+// price is rendered. dist/ is built before this validator in validate:all.
+if (fs.existsSync(path.join(buildRoot, 'index.html'))) {
+  if (!sweep.mentions.some(inBuild)) fail('kit price sweep matched no kit price on the built pages; the sweep is not reading what it governs');
+  const unfilled = surfaces.filter((f) => path.resolve(f).startsWith(buildRoot + path.sep) && fs.readFileSync(f, 'utf8').includes('{price:'));
+  if (unfilled.length) fail(`a {price:<sku>} token reached the built site unfilled (fill it with fillPrices, src/lib/kitPrice.mjs):\n  ${unfilled.slice(0, 20).join('\n  ')}`);
+} else console.log('runtime-product-admin: dist/ not built here, so the built-page price sweep did not run (validate:all builds first)');
+if (typed.length) fail(`a kit price is typed into source; read it from the cards or write {price:<sku>}:\n  ${typed.slice(0, 40).map((m) => `${m.file}:${m.line}: $${m.n} (${m.slug})`).join('\n  ')}`);
 if (sweep.problems.length) fail(`kit price shown on a customer surface disagrees with the seed:\n  ${sweep.problems.slice(0, 40).join('\n  ')}`);
 console.log(`PASS runtime-product-admin (kit prices: ${fields.fieldsChecked} data fields, ${sweep.mentionsChecked} mentions across ${sweep.filesRead} files, ${sweep.downloadsRead} kit downloads read)`);

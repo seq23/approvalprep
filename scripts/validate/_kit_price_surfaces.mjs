@@ -144,11 +144,13 @@ function readSurface(file) {
   return fs.readFileSync(file, 'utf8');
 }
 
-// Returns { problems, filesRead, downloadsRead, mentionsChecked }.
+// Returns { problems, filesRead, downloadsRead, mentionsChecked, mentions } (mentions: { file, line, slug, n }).
 export function sweepKitPrices(seedProducts, files) {
   const aliases = seedProducts.flatMap((p) => aliasesFor(p).map((a) => ({ a: a.toLowerCase(), slug: p.slug, price: p.priceCents / 100 })))
     .sort((x, y) => y.a.length - x.a.length);
   const problems = [];
+  const mentions = [];
+  const current = new Set(seedProducts.map((p) => p.priceCents / 100));
   let mentionsChecked = 0, downloadsRead = 0;
   for (const file of files) {
     let text;
@@ -175,12 +177,14 @@ export function sweepKitPrices(seedProducts, files) {
       const line = text.slice(0, m.index).split('\n').length;
       const kitWord = /kit|bundle|paid once|complete set/.test(before.slice(-80) + after);
       if (RETIRED.has(n) && kitWord) { problems.push(`${file}:${line}: $${n} is a retired price (${hit ? hit.slug : 'kit copy'})`); mentionsChecked++; continue; }
-      if (!hit) continue;
+      // A current kit price beside kit words that names no kit is still a typed price.
+      if (!hit) { if (kitWord && current.has(n)) mentions.push({ file, line, slug: null, n }); continue; }
       mentionsChecked++;
+      mentions.push({ file, line, slug: hit.slug, n });
       if (n !== hit.price) problems.push(`${file}:${line}: ${hit.slug} shown at $${n}, charged $${hit.price}`);
     }
   }
-  return { problems, filesRead: files.length, downloadsRead, mentionsChecked };
+  return { problems, filesRead: files.length, downloadsRead, mentionsChecked, mentions };
 }
 
 // --- structured price fields ------------------------------------------------

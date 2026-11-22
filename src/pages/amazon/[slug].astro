@@ -48,10 +48,13 @@ import TrustAndBoundaryBand from "../../components/TrustAndBoundaryBand.astro";
 import WhatHappensAfterPurchase from "../../components/WhatHappensAfterPurchase.astro";
 import { articleSchema, breadcrumbSchema, faqSchema, howToSchema, canonicalUrl, productSchema, internalHref } from "../../lib/schema";
 import { productForSku } from "../../data/content";
-import registry from "../../../data/content/amazon_book_landing_pages.json";
+import rawRegistry from "../../../data/content/amazon_book_landing_pages.json";
+import seed from "../../../data/products/seed_product_registry.json";
+import { fillPrices } from "../../lib/kitPrice.mjs";
 
 export function getStaticPaths() {
-  return registry.pages.map((page) => ({ params: { slug: page.id }, props: { page } }));
+  // {price:<sku>} tokens in the copy are filled from the seed (src/lib/kitPrice.mjs).
+  return fillPrices(rawRegistry, seed.products).pages.map((page) => ({ params: { slug: page.id }, props: { page } }));
 }
 
 const { page } = Astro.props;
@@ -73,7 +76,7 @@ const finalCta = page.finalCta || {
   body: `Everything the book taught is yours already. The kit is ${product.priceLabel} paid once: a PDF guide plus editable DOCX files covering ${product.included_offerings.length} named documents, so you fill in blanks instead of retyping.`
 };
 const schema = [
-  articleSchema({ title: page.title, description: page.description, url: canonical, datePublished: registry.generatedAt }),
+  articleSchema({ title: page.title, description: page.description, url: canonical, datePublished: rawRegistry.generatedAt }),
   breadcrumbSchema(page.path),
   faqSchema(page.faq),
   howToSchema({ name: page.protocol.heading, steps: page.protocol.steps }),
