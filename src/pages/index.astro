@@ -16,7 +16,7 @@ import FreeStudioCTA from "../components/FreeStudioCTA.astro";
 import CreditStarterSignup from "../components/CreditStarterSignup.astro";
 import RecommendationSummary from "../components/RecommendationSummary.astro";
 import OfferingUniverse from "../components/OfferingUniverse.astro";
-import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComparison, offeringCategories, productCards, kitCount } from "../data/content";
+import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComparison, offeringCategories, productCards, kitCount, kitPriceOf, lowestKitPrice } from "../data/content";
 // One label for every card that opens a kit's page, with the name and price read from the product record.
 const kitLabel = (name) => { const product = productCards.find((p) => p.name === name); return product ? `See the ${product.name} — ${product.priceLabel} ›` : ""; };
 // Her ruling 13 Nov 2026 ("credit repair" wording, spry brain): "credit repair" appears only as the
@@ -34,7 +34,7 @@ const homeFaq = [
   { question: "Can I do credit repair myself?", answer: "Yes. You can dispute errors on your credit report yourself, for free, directly with the credit bureaus and the business that reported them. Our letters are the do-it-yourself version of what a credit repair company charges for: you fill in your true facts and send them yourself. Accurate information usually stays on your report." },
   { question: "Is ApprovalPrep a credit repair company?", answer: "No. ApprovalPrep sells self-help letter templates. You write, review and send every letter yourself. We do not contact credit bureaus or creditors for you, and we do not act on your behalf." },
   { question: "Can I dispute my credit report myself for free?", answer: "Yes. You can dispute an error directly with the credit bureau and with the business that reported it. Federal law (the Fair Credit Reporting Act) requires the bureau to investigate your dispute free of charge. Our kits give you the letter wording and the steps; the free Letter Studio lets you draft a first version before you pay anything." },
-  { question: "What does a credit repair company cost?", answer: `Credit Saint's own website listed plans from $79.99 to $139.99 a month, plus a first-work fee of $99 to $195, when we read it on ${CREDIT_SAINT_READ}. The ApprovalPrep Credit Letter Kit is $19, paid once.` },
+  { question: "What does a credit repair company cost?", answer: `Credit Saint's own website listed plans from $79.99 to $139.99 a month, plus a first-work fee of $99 to $195, when we read it on ${CREDIT_SAINT_READ}. The ApprovalPrep Credit Letter Kit is ${kitPriceOf("credit-letter-kit")}, paid once.` },
   { question: "Will these letters remove items or raise my score?", answer: "We cannot promise that, and no template can. A letter is a request. Credit bureaus must look into a dispute, and information that is wrong or cannot be verified must be corrected or removed, but accurate information usually stays on your report." }
 ];
 // The definition paragraph directly under the H1 is what an answer engine or a
@@ -59,14 +59,14 @@ const homeSchema = [
       <div class="hero-actions ap-hero-actions">
         <a class="button primary-button" href={internalHref("/letter-writing-studio/")}>Draft free in the Letter Studio</a>
         <p class="ap-free-note">No account, no upload, no stored answers, and no payment.</p>
-        <a class="button secondary secondary-button" href={internalHref("/pricing/#credit-letter-kit")}>Get DIY credit letters — $19</a>
+        <a class="button secondary secondary-button" href={internalHref("/pricing/#credit-letter-kit")}>{`Get DIY credit letters — ${kitPriceOf("credit-letter-kit")}`}</a>
         <a class="ap-textlink" href={internalHref("/pricing")}>Compare all kits and prices</a>
       </div>
       {/* Three reasons row (her yes, 7 Nov 2026: "2 yes"; her words of 3 Nov). Each opens a page that exists. */}
       <div class="ap-reasons" aria-label="Which one sounds like you?">
         <p class="eyebrow">Which one sounds like you?</p>
         <a class="ap-reason" href={internalHref("/not-a-credit-repair-company/")}><strong>Tired of credit repair scams?</strong><span>What a company may not charge you before the work is done, and what you can do free. Open ›</span></a>
-        <a class="ap-reason" href="#company-or-yourself"><strong>Credit repair costs too much?</strong><span>Credit Saint: $79.99 to $139.99 a month (its own site, read 6 November 2026). The Credit Letter Kit: $19 once. Open ›</span></a>
+        <a class="ap-reason" href="#company-or-yourself"><strong>Credit repair costs too much?</strong><span>Credit Saint: $79.99 to $139.99 a month (its own site, read 6 November 2026). The Credit Letter Kit: {kitPriceOf("credit-letter-kit")} once. Open ›</span></a>
         <a class="ap-reason" href={internalHref("/complete-approvalprep-bundle/")}><strong>Rather do it yourself?</strong><span>Download the bundle: letters, checklists and a PDF guide. You send them yourself. Open ›</span></a>
       </div>
       <CreditStarterSignup inline />
@@ -89,7 +89,7 @@ const homeSchema = [
         <li>Pay once for the kit instead of starting an open-ended monthly service.</li>
       </ol>
       <div class="hero-actions">
-        <a class="button primary-button" href="/pricing/">See kits from $15</a>
+        <a class="button primary-button" href="/pricing/">{`See kits from ${lowestKitPrice}`}</a>
         <a class="button secondary-button" href="/letter-writing-studio/">Draft free in the Letter Studio</a>
       </div>
     </aside>
@@ -99,7 +99,7 @@ const homeSchema = [
     <p class="eyebrow">Before you sign up for a monthly plan</p>
     <h2>A credit repair company or doing it yourself?</h2>
     <div class="table-wrap"><table class="comparison-table ap-labelled"><thead><tr><th></th><th>Monthly credit repair company</th><th>Do it yourself with ApprovalPrep</th></tr></thead><tbody>
-      <tr><th scope="row">What you pay</th><td data-label="Credit repair company">Credit Saint: $79.99 to $139.99 a month, plus a $99 to $195 first-work fee (<a href="https://www.creditsaint.com/" rel="nofollow noopener" target="_blank">its own site</a>, read {CREDIT_SAINT_READ}).</td><td data-label="Do it yourself">$19 once for the Credit Letter Kit. Drafting in the Letter Studio is free.</td></tr>
+      <tr><th scope="row">What you pay</th><td data-label="Credit repair company">Credit Saint: $79.99 to $139.99 a month, plus a $99 to $195 first-work fee (<a href="https://www.creditsaint.com/" rel="nofollow noopener" target="_blank">its own site</a>, read {CREDIT_SAINT_READ}).</td><td data-label="Do it yourself">{kitPriceOf("credit-letter-kit")} once for the Credit Letter Kit. Drafting in the Letter Studio is free.</td></tr>
       <tr><th scope="row">Who sends the letters</th><td data-label="Credit repair company">The company, on your behalf.</td><td data-label="Do it yourself">You do. We never contact bureaus or creditors for you.</td></tr>
       <tr><th scope="row">What the law says</th><td data-label="Credit repair company">The Credit Repair Organizations Act bars a credit repair company from charging you before the promised work is done (<a href="https://www.law.cornell.edu/uscode/text/15/1679b" rel="noopener" target="_blank">15 U.S.C. 1679b</a>).</td><td data-label="Do it yourself">Disputing an error is free: the credit bureau must investigate it free of charge (<a href="https://www.law.cornell.edu/uscode/text/15/1681i" rel="noopener" target="_blank">15 U.S.C. 1681i</a>).</td></tr>
     </tbody></table></div>
@@ -117,7 +117,7 @@ const homeSchema = [
     <RecommendationSummary
       headline="Buy the kit, download the files, fill in your true facts, and send the paperwork yourself."
       statement="The free Studio is optional if you want to draft before you buy."
-      ctaLabel="See kits from $15"
+      ctaLabel={`See kits from ${lowestKitPrice}`}
       ctaHref="/pricing"
     />
   </div></section>

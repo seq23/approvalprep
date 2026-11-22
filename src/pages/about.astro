@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import editorial from "../data/editorial.json";
 import { canonicalUrl, editorialAuthor, faqSchema } from "../lib/schema";
-import { routeCopy } from "../data/content";
+import { routeCopy, lowestKitPrice, bundlePrice } from "../data/content";
 
 // /about returned 404 until 8 Oct 2026. Every fact on this page comes from
 // src/data/editorial.json, the same file the visible byline and the JSON-LD
@@ -25,7 +25,7 @@ const schema = [{
     <p class="lead">ApprovalPrep helps you write the letters and gather the documents that landlords, lenders, employers and credit bureaus ask for, in plain words, using your own true facts.</p>
     <div class="hero-actions">
       <a class="button primary-button" href="/letter-writing-studio/">Start a free letter</a>
-      <a class="button secondary-button" href="/pricing/">See kits from $15</a>
+      <a class="button secondary-button" href="/pricing/">{`See kits from ${lowestKitPrice}`}</a>
     </div>
   </section>
   <section class="band"><div class="shell grid">
@@ -37,7 +37,7 @@ const schema = [{
       <h2>What ApprovalPrep does</h2>
       <ul>
         <li>Free browser-only letter drafts. Nothing you type is saved.</li>
-        <li>Paid kits from $15 to $49, paid once: editable DOCX and PDF letters, checklists and next steps.</li>
+        <li>Paid kits from {lowestKitPrice} to {bundlePrice}, paid once: editable DOCX and PDF letters, checklists and next steps.</li>
         <li>You review everything and send it yourself.</li>
       </ul>
     </article>

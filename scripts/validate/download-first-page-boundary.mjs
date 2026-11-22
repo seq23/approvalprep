@@ -85,7 +85,7 @@ if (process.argv.includes("--self-test")) process.exit(0);
 
 // --- the public contract (always checked) -----------------------------------
 const manifest = readJson("data/products/download_manifest.json");
-const catalog = readJson("data/products/product_catalog.json");
+const catalog = readJson("data/products/products.json");
 const registry = readJson("data/products/offering_contract_registry.json");
 const skus = manifest.products.map((p) => p.sku);
 const activePaid = catalog.products.filter((p) => p.status === "active_paid").map((p) => p.sku).sort();

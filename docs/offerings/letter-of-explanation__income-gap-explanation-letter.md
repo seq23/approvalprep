@@ -2,7 +2,6 @@
 
 **Offering ID:** `letter-of-explanation__income-gap-explanation-letter`  
 **Bundled product:** Letter of Explanation Kit (`letter-of-explanation`)  
-**Price:** $15  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 
@@ -44,7 +43,6 @@ First-page boundary requirements:
 ## Conversion And Search Contract
 
 - Search intent: income gap explanation letter template
-- CTA label: Use the Letter of Explanation Kit — $15
 - Customer situation: Your income dipped for a stretch, and the reviewer wants that period explained rather than left blank.
 
 ## Safety Boundary

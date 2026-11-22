@@ -1,6 +1,5 @@
 import type { APIRoute } from "astro";
 import routes from "../../data/routes/route_manifest.json";
-import products from "../../data/products/products.json";
 import atoms from "../../data/atoms/answer_atoms.json";
 import claims from "../../data/citations/claim_registry.json";
 import sources from "../../data/citations/source_registry.json";
@@ -9,6 +8,7 @@ import toolRegistry from "../../data/tools/tool_registry.json";
 import templateRegistry from "../../data/templates/template_registry.json";
 import reportRegistry from "../../data/reports/public_report_registry.json";
 import { canonicalUrl } from "../lib/schema";
+import { productCards } from "../data/content";
 
 export const GET: APIRoute = async () => new Response(`# ApprovalPrep Full LLM Index
 
@@ -24,7 +24,7 @@ ApprovalPrep is a self-service document-prep platform. It helps users prepare cl
 - Users review, download, and send their own materials.
 
 ## Products
-${products.products.filter((product) => product.status === "active_paid").map((product) => `### ${product.name}
+${productCards.map((product) => `### ${product.name}
 Path: ${canonicalUrl(`/${product.sku}`)}
 Price: ${product.priceLabel}
 Best for: ${product.customer_situation}
