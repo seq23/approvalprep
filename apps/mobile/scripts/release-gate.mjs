@@ -2,6 +2,9 @@
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
+/** Every profile whose binary reaches a store (Play internal testing included) clears the full gate. */
+export const STORE_PROFILES = ['production', 'internal'];
+export const isStoreProfile = (profile) => STORE_PROFILES.includes(profile);
 export function assertPreviewOff(env = process.env) {
   if (env.EXPO_PUBLIC_AP_PREVIEW === '1') throw Error('NAMED STOP [PREVIEW_FLAG_SET] Remove the preview flag before a store build.');
 }
@@ -30,7 +33,7 @@ export function assertReleaseReady(options) {
   if (stops.length) throw Error(stops.map(code => `NAMED STOP [${code}]`).join('\n'));
 }
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  if (!process.argv.includes('--if-production') || process.env.EAS_BUILD_PROFILE === 'production') {
+  if (!process.argv.includes('--if-production') || isStoreProfile(process.env.EAS_BUILD_PROFILE)) {
     const config = readFileSync(new URL('../app.config.ts', import.meta.url), 'utf8');
     assertReleaseReady({
       env: process.env,

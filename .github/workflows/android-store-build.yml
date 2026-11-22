@@ -1,0 +1,66 @@
+name: Android store build
+# Free Play build on a GitHub-hosted Linux runner (public repo = free minutes), same shape as ios-store-build.yml.
+# The upload keystore stays on EAS; EXPO_TOKEN lets the local build fetch it. The `internal` profile clears the
+# full release gate (RevenueCat goog_ key included). Output goes to the Play internal testing track as a DRAFT only;
+# the .aab is never uploaded as an artifact (public repo).
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: android-store-build
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    defaults:
+      run:
+        working-directory: apps/mobile
+    env:
+      CI: '1'
+      EXPO_NO_TELEMETRY: '1'
+      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      PLAY_SA_JSON: ${{ secrets.GOOGLE_PLAY_UPLOAD_SA_JSON }}
+      PACKAGE: com.approvalprep.app
+      # SHA-1 of the EAS-held upload key, read from the 19 Nov 2026 production AAB (EAS build c3501af5).
+      # A different key would lock every future update out of Play.
+      UPLOAD_KEY_SHA1: 2E:D2:42:A5:44:42:C4:36:0A:58:83:51:2E:2C:A0:99:70:BE:8C:F8
+    steps:
+      - name: Named stop when a secret is missing
+        if: env.EXPO_TOKEN == '' || env.PLAY_SA_JSON == ''
+        run: echo "NAMED STOP [SECRET_MISSING] set the EXPO_TOKEN and GOOGLE_PLAY_UPLOAD_SA_JSON repo secrets" && exit 1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.12.0
+          cache: npm
+          cache-dependency-path: apps/mobile/package-lock.json
+      - run: npm ci --no-audit --no-fund
+      - name: Build the store .aab (internal profile, EAS keystore)
+        run: npx -y eas-cli@latest build --platform android --profile internal --local --non-interactive --output "$RUNNER_TEMP/app.aab"
+      - name: Check package, versionCode and upload key
+        id: aab
+        run: |
+          curl -fsSL -o "$RUNNER_TEMP/bundletool.jar" https://github.com/google/bundletool/releases/download/1.17.2/bundletool-all-1.17.2.jar
+          BT="java -jar $RUNNER_TEMP/bundletool.jar dump manifest --bundle $RUNNER_TEMP/app.aab --xpath"
+          PKG=$($BT /manifest/@package); CODE=$($BT /manifest/@android:versionCode)
+          SHA1=$(keytool -printcert -jarfile "$RUNNER_TEMP/app.aab" | awk '/SHA1:/ {print $2; exit}')
+          echo "package=$PKG versionCode=$CODE uploadKeySha1=$SHA1"
+          [ "$PKG" = "$PACKAGE" ] || { echo "NAMED STOP [WRONG_PACKAGE] $PKG"; exit 1; }
+          [[ "$CODE" =~ ^[0-9]+$ ]] || { echo "NAMED STOP [VERSION_CODE_UNKNOWN]"; exit 1; }
+          [ "$SHA1" = "$UPLOAD_KEY_SHA1" ] || { echo "NAMED STOP [UPLOAD_KEY_CHANGED] $SHA1"; exit 1; }
+          echo "version_code=$CODE" >> "$GITHUB_OUTPUT"
+      - name: Write the Play service account file
+        run: (umask 077 && printf '%s' "$PLAY_SA_JSON" > play-sa.json)
+      - name: Submit to the Play internal track as a draft
+        run: npx -y eas-cli@latest submit --platform android --profile internal --path "$RUNNER_TEMP/app.aab" --non-interactive
+      - name: Prove the draft reached the internal track (and no other)
+        run: node scripts/play-internal-check.mjs "$PACKAGE" "${{ steps.aab.outputs.version_code }}"
+      - name: Delete the service account file and the bundle
+        if: always()
+        run: rm -f play-sa.json "$RUNNER_TEMP/app.aab"
