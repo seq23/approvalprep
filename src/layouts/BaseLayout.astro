@@ -155,7 +155,7 @@ const documentTitle = exactTitle ? String(title) : fitTitle(String(title));
               error.code = "PAYMENT_NOT_COMPLETED";
               throw error;
             }
-            throw new Error(payload.message || "Payment could not be verified yet. Contact info@approvalprep.com with your Stripe receipt and this session id.");
+            throw new Error(payload.message || "Payment could not be verified yet. Email info@approvalprep.com with the receipt Stripe emailed you.");
           };
           try {
             const payload = await verify();
@@ -212,7 +212,7 @@ const documentTitle = exactTitle ? String(title) : fitTitle(String(title));
               links.appendChild(pricing);
               const support = document.createElement("p");
               support.className = "fine";
-              support.textContent = "ApprovalPrep cannot release paid files until Stripe confirms this session as paid. If Stripe shows a completed payment, email info@approvalprep.com with the receipt and session id.";
+              support.textContent = "Your files open here once Stripe confirms the payment. If Stripe shows it as paid, email info@approvalprep.com with the receipt Stripe emailed you.";
               links.appendChild(support);
             }
           }
