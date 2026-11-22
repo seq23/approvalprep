@@ -1,6 +1,6 @@
 import type { ExpoConfig } from 'expo/config';
 // @ts-ignore release guard is also run directly by Node
-import { assertReleaseReady } from './scripts/release-gate.mjs';
+import { assertReleaseReady, isStoreProfile } from './scripts/release-gate.mjs';
 // Bundle id com.approvalprep.app is registered in App Store Connect (app id 6834891489).
 // Light only: the approved brand has no dark theme (spry brain, ApprovalPrep brand, 6 Nov 2026).
 const config: ExpoConfig = {
@@ -19,7 +19,7 @@ const config: ExpoConfig = {
   updates: { enabled: false },
   plugins: ['expo-router', 'expo-font', 'expo-notifications', ['expo-splash-screen', { image: './assets/splash.png', imageWidth: 160, backgroundColor: '#F7F3EA' }]],
 };
-if (process.env.EAS_BUILD_PROFILE === 'production') {
+if (isStoreProfile(process.env.EAS_BUILD_PROFILE)) {
   assertReleaseReady({ env: process.env, iosBundleId: config.ios?.bundleIdentifier, androidPackage: config.android?.package });
 }
 export default config;
