@@ -2,11 +2,11 @@
 
 Subtitle: Skip the credit repair company. ApprovalPrep is not a credit repair company: you write and send the letters yourself.
 
-ApprovalPrep helps you write your own credit dispute letter, letter of explanation or rental application letter, and send it yourself.
+ApprovalPrep helps you write your own credit dispute letter, letter of explanation or rental application letter.
 
 Who it is for: anyone with an error on a credit report, and anyone a lender, landlord or employer has asked to explain something on a mortgage, loan, apartment or job application.
 
-What it costs: the credit bureau dispute letter is free, as many times as you need. Every kit is a one-time purchase. No subscription, no monthly fee and no account.
+What it costs: the credit bureau dispute letter is free, as many times as you need. Every kit is a one-time purchase. No subscription and no monthly fee.
 
 ApprovalPrep is not a credit repair company: you write and send every letter yourself. The app walks you through one question at a time and turns your true facts into a clear first draft. Save it as a PDF, print it or share it.
 

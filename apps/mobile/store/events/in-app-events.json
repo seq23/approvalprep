@@ -1,39 +1,43 @@
 {
-  "rule": "DRAFT ONLY. Nothing here is submitted: the app is in review and events are public. The coordinator takes these to her. Apple limits (App Store Connect > In-App Events): reference name 64, event name 30, short description 50, long description 120; an event runs at most 31 days and can be promoted up to 14 days before it starts; card media 16:9 (1920 x 1080), details media 9:16 (1080 x 1920). R-ADV-13: no outcome promise; every event points at something free that is built today. Checked by tests/storeEvents.test.ts.",
+  "rule": "DRAFT ONLY. Nothing here is submitted: the app is in review and events are public. The coordinator takes these to her. Apple limits (App Store Connect > In-App Events): reference name 64, event name 30, short description 50, long description 120; an event runs at most 31 days and can be promoted up to 14 days before it starts; card media 16:9 (1920 x 1080), details media 9:16 (1080 x 1920). R-ADV-13: no outcome promise; every event opens a free Studio situation whose seasonal tip (in_app_tip) shows in the app only during the event. Checked by tests/storeEvents.test.ts.",
   "events": [
     {
       "reference_name": "AP 2027 tax time: income letters",
       "event_name": "Tax-Time Income Letters",
       "short_description": "Explain your income in a free first draft",
-      "long_description": "W-2s and 1099s are out. Draft a free income or employment letter for a lender or landlord, then send it yourself.",
+      "long_description": "W-2s and 1099s are out. Draft a free income letter, with a tax-time list of what to attach, then send it yourself.",
       "badge": "Special Event",
       "purpose": "Attract new users",
       "priority": "Normal",
       "promote_from": "2027-01-11",
       "starts": "2027-01-25",
       "ends": "2027-02-24",
-      "deep_link": "approvalprep://letters/studio",
+      "deep_link": "approvalprep://letters/studio?situation=income",
       "studio_situation": "income",
       "card_image": "tax-time-card-1920x1080.png",
       "details_image": "tax-time-details-1080x1920.png",
-      "why_this_season": "W-2s are due to workers by 31 January and most 1099s by mid-February, when lenders and landlords start asking self-employed and new-job applicants to explain income."
+      "why_this_season": "W-2s are due to workers by 31 January and most 1099s by mid-February, when lenders and landlords start asking self-employed and new-job applicants to explain income.",
+      "in_app_tip": "Tax time: if a lender or landlord asks about income, attach copies of this year's W-2s or 1099s, or last year's tax return if you are self-employed. Send copies, never originals.",
+      "in_app_content": "The tip above shows at the top of this situation's first question only between starts and ends (src/seasonal.ts reads this file)."
     },
     {
       "reference_name": "AP 2027 rental season: application letters",
       "event_name": "Rental Season Letters",
       "short_description": "A free rental application letter, step by step",
-      "long_description": "Applying for an apartment? Draft a free letter that answers the landlord's questions, then send it yourself.",
+      "long_description": "Renting? Draft a free rental application letter, with a rental-season list of what to attach, then send it yourself.",
       "badge": "Special Event",
       "purpose": "Attract new users",
       "priority": "Normal",
       "promote_from": "2027-04-17",
       "starts": "2027-05-01",
       "ends": "2027-05-31",
-      "deep_link": "approvalprep://letters/studio",
+      "deep_link": "approvalprep://letters/studio?situation=rental",
       "studio_situation": "rental",
       "card_image": "rental-season-card-1920x1080.png",
       "details_image": "rental-season-details-1080x1920.png",
-      "why_this_season": "Most US moves happen from May to September, so rental applications peak from May."
+      "why_this_season": "Most US moves happen from May to September, so rental applications peak from May.",
+      "in_app_tip": "Rental season: landlords often choose fast. Have copies of recent pay stubs, a photo ID and one or two references ready to send with this letter.",
+      "in_app_content": "The tip above shows at the top of this situation's first question only between starts and ends (src/seasonal.ts reads this file)."
     }
   ],
   "featuring_nomination": {
@@ -41,7 +45,7 @@
     "type": "New Content",
     "name": "ApprovalPrep: tax and rental season letters",
     "publish_date": "2027-01-25",
-    "description": "ApprovalPrep is a self-help letter writer for people applying for a mortgage, loan, apartment or job, or fixing an error on a credit report. From late January, applicants are asked to explain income from W-2s and 1099s, and from May, rental applications peak. The free Letter Studio drafts an income letter or a rental application letter one question at a time; the person checks it and sends it. No account, no upload: answers stay on the phone. Kits are one-time purchases, never a subscription.",
+    "description": "ApprovalPrep is a self-help letter writer for people applying for a mortgage, loan, apartment or job, or fixing an error on a credit report. From late January, applicants are asked to explain income from W-2s and 1099s, and from May, rental applications peak. During each window the free Letter Studio adds a short seasonal list of what to attach to an income letter or a rental application letter, drafted one question at a time; the person checks it and sends it. No account, no upload: answers stay on the phone. Kits are one-time purchases, never a subscription.",
     "audience": "First-time renters, self-employed and new-job applicants, and anyone answering a lender's or landlord's question",
     "regions": "United States",
     "accessibility": "Body text is Atkinson Hyperlegible Next, a typeface made for low-vision readers",

@@ -17,6 +17,13 @@ export async function latestStudioDraft(store: { list(): Promise<SavedLetter[]> 
 export async function latestDraft(store: { list(): Promise<SavedLetter[]> }, kind: string): Promise<SavedLetter | null> {
   return (await store.list()).filter(letter => letter.kind === kind && letter.status === 'draft').at(-1) ?? null;
 }
+/** Where choosing a Studio situation (or an event's link that names only the situation) opens:
+ * her latest unfinished draft of it, or a new one, at the first question. */
+export async function studioEntry(store: { list(): Promise<SavedLetter[]> } | null, situation: string, fresh = false) {
+  let last: SavedLetter | null = null;
+  try { last = fresh || !store ? null : await latestStudioDraft(store, situation); } catch { /* A new draft is still possible. */ }
+  return { pathname: '/letters/studio' as const, params: { situation, id: last?.id ?? newStudioId(), step: '0', ...(last ? { resumed: '1' } : {}) } };
+}
 /** Where "write this letter" opens: her latest unfinished one of that kind, or a new one. */
 export async function letterHref(store: { list(): Promise<SavedLetter[]> }, kind: string, from?: string) {
   const last = await latestDraft(store, kind).catch(() => null);
