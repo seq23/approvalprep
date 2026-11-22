@@ -26,15 +26,20 @@ jobs:
       CI: '1'
       EXPO_NO_TELEMETRY: '1'
       EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-      PLAY_SA_JSON: ${{ secrets.GOOGLE_PLAY_UPLOAD_SA_JSON }}
       PACKAGE: com.approvalprep.app
       # SHA-1 of the EAS-held upload key, read from the 19 Nov 2026 production AAB (EAS build c3501af5).
       # A different key would lock every future update out of Play.
       UPLOAD_KEY_SHA1: 2E:D2:42:A5:44:42:C4:36:0A:58:83:51:2E:2C:A0:99:70:BE:8C:F8
     steps:
       - name: Named stop when a secret is missing
-        if: env.EXPO_TOKEN == '' || env.PLAY_SA_JSON == ''
-        run: echo "NAMED STOP [SECRET_MISSING] set the EXPO_TOKEN and GOOGLE_PLAY_UPLOAD_SA_JSON repo secrets" && exit 1
+        # A step's own env is not readable in its `if:`, so the test is in the shell (before checkout: no apps/mobile yet).
+        working-directory: ${{ github.workspace }}
+        env:
+          PLAY_SA_JSON: ${{ secrets.GOOGLE_PLAY_UPLOAD_SA_JSON }}
+        run: |
+          if [ -z "$EXPO_TOKEN" ] || [ -z "$PLAY_SA_JSON" ]; then
+            echo "NAMED STOP [SECRET_MISSING] set the EXPO_TOKEN and GOOGLE_PLAY_UPLOAD_SA_JSON repo secrets"; exit 1
+          fi
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
@@ -54,6 +59,7 @@ jobs:
         id: aab
         run: |
           curl -fsSL -o "$RUNNER_TEMP/bundletool.jar" https://github.com/google/bundletool/releases/download/1.17.2/bundletool-all-1.17.2.jar
+          echo "2d4ad908faea64047c1cc9cb747e6aa667c6ab192e09607bd16b67246a8cd6ae  $RUNNER_TEMP/bundletool.jar" | sha256sum -c - || { echo "NAMED STOP [BUNDLETOOL_CHECKSUM]"; exit 1; }
           BT="java -jar $RUNNER_TEMP/bundletool.jar dump manifest --bundle $RUNNER_TEMP/app.aab --xpath"
           PKG=$($BT /manifest/@package); CODE=$($BT /manifest/@android:versionCode)
           SHA1=$(keytool -printcert -jarfile "$RUNNER_TEMP/app.aab" | awk '/SHA1:/ {print $2; exit}')
@@ -64,6 +70,8 @@ jobs:
           echo "version_code=$CODE" >> "$GITHUB_OUTPUT"
       - name: Write the Play service account file
         if: inputs.fixture_trace != 'true'
+        env:
+          PLAY_SA_JSON: ${{ secrets.GOOGLE_PLAY_UPLOAD_SA_JSON }}
         run: (umask 077 && printf '%s' "$PLAY_SA_JSON" > play-sa.json)
       - name: Submit to the Play internal track as a draft
         if: inputs.fixture_trace != 'true'

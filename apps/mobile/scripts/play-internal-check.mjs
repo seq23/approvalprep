@@ -38,7 +38,8 @@ async function main([pkg, versionCode]) {
     if (stops.length) throw Error(stops.map(s => `NAMED STOP [${s}]`).join('\n'));
     console.log(`OUTPUT play-internal: ${pkg} versionCode ${versionCode} is a draft on the internal track only`);
   } finally {
-    await call('DELETE', `${base}/${id}`); // read-only: the edit is never committed
+    // read-only: the edit is never committed (and expires on its own), so a failed delete never hides the real stop
+    await call('DELETE', `${base}/${id}`).catch(e => console.error(e.message));
   }
 }
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
