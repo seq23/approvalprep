@@ -59,7 +59,8 @@ export const REVIEW_USE = 'Use this code';
 export const REVIEW_SAYS: Record<ReviewResult, string> = {
   unlocked: 'The Complete Bundle is open on this phone for 7 days: both letter kits and every kit\u2019s PDF guide and Word file. Open any kit from the list above.',
   wrong: 'That code is not right. Check the 10 digits and try again.',
-  usedUp: 'This review code has been used on too many phones. Contact us for a new one.',
+  // USED_UP is both the 10-phone cap and the 2-new-phones-per-network-a-day limit, so it names both ways out.
+  usedUp: 'This code cannot open another phone today. Try again tomorrow, or contact us for a new code.',
   slow: 'Too many tries. Wait a few minutes, then try again.',
   tryAgain: 'The code could not be checked just now. Check your connection and try again.',
 };
