@@ -57,6 +57,85 @@ export const STARTER_LETTER = [
 ];
 export const SELF_HELP_LINE = 'Self-help templates. Not legal or financial advice. We do not contact bureaus or creditors for you.';
 
+// The free employment verification letter (launch kit, 21 Nov 2026): "employment verification
+// letter" is ApprovalPrep's top low-competition search (18,100 a month, KD 6). A checklist and a
+// letter frame for the employer to fill in, shown on the page at once and emailed after the
+// address is confirmed; its own 3-email series (ev0-ev2): two that help, one that sells.
+export const EMPLOYMENT_SOURCE = 'starter:employment-verification';
+export const EMPLOYMENT_CONSENT_TEXT = 'Email me the free employment verification letter, then two short emails about proving income (one every few days at most). I can unsubscribe at any time.';
+export const EMPLOYMENT_CHECKLIST = [
+  'An employment verification letter comes from your employer (HR or your manager), not from you. Handing them this frame makes it quick for them.',
+  'Ask for only what the lender or landlord asked for: usually your job title, start date, hours and pay.',
+  'It goes on company letterhead, signed, with a phone number or email the reader can use to check it.',
+  'Self-employed? Nobody can sign it for you. Lenders and landlords usually ask for tax returns, 1099s or bank statements instead.',
+  'Keep a copy of what you send.'
+];
+export const EMPLOYMENT_LETTER = [
+  '[Company letterhead]',
+  '[Date]',
+  'To: [The landlord, lender or agency that asked]',
+  'Re: Employment verification for [employee\'s full name]',
+  'To whom it may concern:',
+  'This letter confirms that [employee\'s full name] has worked for [company name] since [start date] as a [job title].',
+  '[He / She / They] works [full-time / part-time, about __ hours a week]. [Current pay: $__ a year / $__ an hour.]',
+  'You can reach me at [phone or email] to confirm these details.',
+  'Sincerely,',
+  '[Signature]',
+  '[Printed name and job title]',
+  '[Company name, address and phone]'
+];
+const EMPLOYMENT_PLAIN = 'Self-help templates. Not legal or financial advice.';
+
+/** The employment letter series: the letter once confirmed, one email that helps, one that sells. */
+export function employmentSequence(prices = {}) {
+  return [
+    {
+      kind: 'ev0', subject: 'Your free employment verification letter',
+      heading: 'Your employment verification letter',
+      paragraphs: [
+        ...EMPLOYMENT_CHECKLIST.map((line, i) => `${i + 1}. ${line}`),
+        'The letter (your employer fills in each bracket and signs it on letterhead):',
+        ...EMPLOYMENT_LETTER,
+        EMPLOYMENT_PLAIN
+      ],
+      cta: { label: 'Draft your own income letter free', url: `${SITE}/letter-writing-studio/` }
+    },
+    {
+      kind: 'ev1', subject: 'Self-employed? What to send instead',
+      heading: 'No employer to sign? What to send instead',
+      paragraphs: [
+        'If you work for yourself, nobody can sign an employment letter for you. Lenders and landlords usually take other proof instead: your last two years of tax returns, this year\'s 1099s, recent bank statements, or a profit and loss statement for this year.',
+        'A short letter can tie them together: what you do, how long you have done it and how your income comes in. The free Letter Studio drafts one from your answers (choose "Income or employment").',
+        'Send copies, never originals, and keep a copy of everything you send.'
+      ],
+      cta: { label: 'Draft it free in the Letter Studio', url: `${SITE}/letter-writing-studio/` }
+    },
+    {
+      kind: 'ev2', subject: 'Every income and employment letter, ready to fill in',
+      heading: `The Income + Employment Letter Kit${price(prices, 'income-employment-letter-kit')}`,
+      paragraphs: [
+        'The kit has seven documents: the employment verification letter for your employer to sign, a proof of income letter, a self-employment income letter, a bank statement explanation, a job change letter, an employment gap explanation and a sent-and-received log.',
+        `Paid once, no monthly fee. You fill them in and send them yourself. ${EMPLOYMENT_PLAIN} This is the last email in this short series.`
+      ],
+      cta: { label: 'See the Income + Employment Letter Kit', url: `${SITE}/pricing/` }
+    }
+  ];
+}
+
+/** The one email that confirms the address before anything else is sent (double opt-in). */
+export function confirmStep(source, url) {
+  const what = source === STARTER_SOURCE ? 'free credit starter' : source === EMPLOYMENT_SOURCE ? 'free employment verification letter' : 'free letter of explanation sample';
+  return {
+    kind: 'confirm', subject: `Confirm your email to get your ${what}`,
+    heading: 'Please confirm your email',
+    paragraphs: [
+      `Press the button to confirm this is your address. Then we email you the ${what}, and a few short emails after it, one every few days at most.`,
+      'If you did not ask for this, ignore this email. Without a confirmation we send nothing more.'
+    ],
+    cta: { label: 'Confirm my email', url }
+  };
+}
+
 /** The credit starter series: the starter at once, then two kit emails, one every 3 days. */
 export function starterSequence(prices = {}) {
   return [
@@ -93,7 +172,8 @@ export function starterSequence(prices = {}) {
 }
 
 /** Which series an address gets, from the source it signed up with. */
-export const sequenceFor = (source, prices = {}) => (source === STARTER_SOURCE ? starterSequence(prices) : sequence(prices));
+export const sequenceFor = (source, prices = {}) => (source === STARTER_SOURCE ? starterSequence(prices) : source === EMPLOYMENT_SOURCE ? employmentSequence(prices) : sequence(prices));
+const MAGNETS = { loe: [SAMPLE_SOURCE, CONSENT_TEXT], 'credit-starter': [STARTER_SOURCE, STARTER_CONSENT_TEXT], 'employment-letter': [EMPLOYMENT_SOURCE, EMPLOYMENT_CONSENT_TEXT] };
 
 export const DAYS_BETWEEN = 3;
 // Resend schedules at most 72 hours ahead; 71 hours keeps a margin.
@@ -101,6 +181,10 @@ export const REVIEW_ASK_AFTER_HOURS = 71;
 const DAY = 86_400_000;
 const MAX_PER_RUN = 50;
 
+// Double opt-in (21 Nov 2026), added as columns so no existing row is rewritten: a row from before
+// has confirm_required 0 and keeps its series; every new sign-up has 1 and gets nothing but the one
+// confirm email until confirmed_at is set.
+export const SIGNUP_COLUMNS = [['email_hash', 'TEXT'], ['confirm_required', 'INTEGER NOT NULL DEFAULT 0'], ['confirmed_at', 'TEXT']];
 export const NURTURE_DDL = [
   `CREATE TABLE IF NOT EXISTS email_signups (email TEXT PRIMARY KEY, consent_text TEXT NOT NULL, source TEXT, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP)`,
   `CREATE TABLE IF NOT EXISTS email_sends (email_hash TEXT NOT NULL, kind TEXT NOT NULL, sent_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, provider_message_id TEXT, PRIMARY KEY (email_hash, kind))`,
@@ -178,9 +262,19 @@ export async function emailHash(email) {
   return hex(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(String(email).trim().toLowerCase())));
 }
 
-async function hmac(secret, value) {
+async function hmac(secret, value, purpose = 'unsubscribe') {
   const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
-  return hex(await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(`unsubscribe:${value}`))).slice(0, 32);
+  return hex(await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(`${purpose}:${value}`))).slice(0, 32);
+}
+
+/** The confirm link: a hash of the address and its own signature (an unsubscribe token never confirms). */
+export async function confirmUrl(secret, hash) {
+  return `${SITE}/api/confirm?id=${hash}&t=${await hmac(secret, hash, 'confirm')}`;
+}
+
+export async function verifyConfirm(secret, hash, token) {
+  if (!/^[0-9a-f]{64}$/.test(String(hash)) || !/^[0-9a-f]{32}$/.test(String(token))) return false;
+  return (await hmac(secret, hash, 'confirm')) === token;
 }
 
 /** The link carries a hash of the address and a signature, never the address itself. */
@@ -203,7 +297,7 @@ const esc = (v) => String(v).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&
 
 /** One email, html + text, both with the unsubscribe link and the mailing address. */
 export function renderEmail(step, unsubscribe) {
-  const footer = 'You are getting this because you asked for a free sample or starter, or bought from ApprovalPrep.';
+  const footer = 'You are getting this because you asked for a free sample, starter or letter, or bought from ApprovalPrep.';
   const html = `<div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;color:#1f2933;line-height:1.55"><h1 style="font-size:22px">${esc(step.heading)}</h1>${step.paragraphs.map((p) => `<p>${esc(p)}</p>`).join('')}${step.cta ? `<p><a href="${esc(step.cta.url)}" style="display:inline-block;background:#1f2933;color:#fff;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:700">${esc(step.cta.label)}</a></p>` : ''}<hr style="border:none;border-top:1px solid #ddd;margin:28px 0 12px"><p style="font-size:12px;color:#777">${esc(footer)} <a href="${esc(unsubscribe)}">Unsubscribe</a> (one click).<br>ApprovalPrep, ${esc(MAILING_ADDRESS)}</p></div>`;
   const text = `${step.heading}\n\n${step.paragraphs.join('\n\n')}${step.cta ? `\n\n${step.cta.label}: ${step.cta.url}` : ''}\n\n--\n${footer}\nUnsubscribe (one click): ${unsubscribe}\nApprovalPrep, ${MAILING_ADDRESS}\n`;
   return { html, text };
@@ -219,6 +313,8 @@ export function nurtureStop(env) {
 
 export async function ensureTables(db) {
   for (const ddl of NURTURE_DDL) await db.prepare(ddl).run();
+  const have = new Set(((await db.prepare('PRAGMA table_info(email_signups)').bind().all()).results ?? []).map((c) => c.name));
+  for (const [name, type] of SIGNUP_COLUMNS) if (!have.has(name)) await db.prepare(`ALTER TABLE email_signups ADD COLUMN ${name} ${type}`).run();
 }
 
 const sqlTime = (ms) => new Date(ms).toISOString().replace('T', ' ').slice(0, 19);
@@ -228,7 +324,7 @@ const parseSql = (v) => Date.parse(`${String(v).replace(' ', 'T')}Z`);
 export function dueStep(steps, sentKinds, lastSentAt, now) {
   const next = steps.find((s) => !sentKinds.has(s.kind));
   if (!next) return null;
-  if (next.kind !== 'seq0' && next.kind !== 'cs0' && lastSentAt != null && now - lastSentAt < DAYS_BETWEEN * DAY) return null;
+  if (!['seq0', 'cs0', 'ev0'].includes(next.kind) && lastSentAt != null && now - lastSentAt < DAYS_BETWEEN * DAY) return null;
   return next;
 }
 
@@ -271,18 +367,77 @@ async function livePrices(db) {
   } catch { return {}; }
 }
 
-/** Store a typed-in sign-up and send the free item at once (magnet: 'loe' sample or 'credit-starter'). */
+/**
+ * Store a typed-in sign-up and send ONE email: the confirm link (double opt-in). Nothing else goes
+ * to the address until it is confirmed (confirmSignup). magnet: 'loe' | 'credit-starter' | 'employment-letter'.
+ * The sign-up is stored before any send, so a Resend outage loses nothing: the next nurture run
+ * sends the confirm email, and the claim in email_sends means it is never sent twice.
+ */
 export async function signUpForSample(env, email, fetchImpl = fetch, magnet = 'loe') {
-  const starter = magnet === 'credit-starter';
+  const [source, consent] = MAGNETS[magnet] ?? MAGNETS.loe;
   const stop = nurtureStop(env);
   if (stop && !env?.PRODUCTS_DB) return { status: 'STOPPED', stop };
   const db = env.PRODUCTS_DB;
   await ensureTables(db);
-  await db.prepare('INSERT INTO email_signups (email, consent_text, source) VALUES (?, ?, ?) ON CONFLICT(email) DO NOTHING').bind(email, starter ? STARTER_CONSENT_TEXT : CONSENT_TEXT, starter ? STARTER_SOURCE : SAMPLE_SOURCE).run();
-  if (stop) return { status: 'STOPPED', stop };
   const hash = await emailHash(email);
+  await db.prepare('INSERT INTO email_signups (email, consent_text, source, email_hash, confirm_required) VALUES (?, ?, ?, ?, 1) ON CONFLICT(email) DO NOTHING').bind(email, consent, source, hash).run();
+  if (stop) return { status: 'STOPPED', stop };
   if (await db.prepare('SELECT 1 FROM email_optouts WHERE email_hash = ?').bind(hash).first()) return { status: 'OPTED_OUT' };
-  return { status: await sendOnce(env, email, hash, (starter ? starterSequence() : sequence())[0], fetchImpl) };
+  const row = await db.prepare('SELECT source, confirm_required, confirmed_at FROM email_signups WHERE email = ?').bind(email).first();
+  if (!row?.confirm_required || row.confirmed_at) return { status: 'ALREADY' };
+  return { status: await sendOnce(env, email, hash, confirmStep(row.source, await confirmUrl(env.DOWNLOAD_SIGNING_SECRET, hash)), fetchImpl) };
+}
+
+/**
+ * The confirm button (POST /api/confirm): marks the address confirmed and sends the free item at
+ * once. An unsubscribe always wins: an opted-out address is never confirmed or emailed.
+ * A failed send is retried by the next nurture run (the claim is released).
+ */
+export async function confirmSignup(env, hash, fetchImpl = fetch, now = Date.now()) {
+  const db = env.PRODUCTS_DB;
+  await ensureTables(db);
+  const row = await db.prepare('SELECT email, source, confirmed_at FROM email_signups WHERE email_hash = ?').bind(hash).first();
+  if (!row) return { status: 'UNKNOWN' };
+  if (await db.prepare('SELECT 1 FROM email_optouts WHERE email_hash = ?').bind(hash).first()) return { status: 'OPTED_OUT', source: row.source };
+  if (!row.confirmed_at) await db.prepare('UPDATE email_signups SET confirmed_at = ? WHERE email_hash = ? AND confirmed_at IS NULL').bind(sqlTime(now), hash).run();
+  const sent = await sendOnce(env, row.email, hash, sequenceFor(row.source, await livePrices(db))[0], fetchImpl);
+  return { status: 'CONFIRMED', source: row.source, sent };
+}
+
+/** Counts only (no address), for the Boss OS scorecard: GET /api/nurture-run with the run secret. */
+export async function signupCounts(db) {
+  await ensureTables(db);
+  const one = async (sql) => Number((await db.prepare(sql).bind().first())?.n ?? 0);
+  const bySource = Object.fromEntries((((await db.prepare('SELECT source, COUNT(*) AS n FROM email_signups GROUP BY source').bind().all()).results) ?? []).map((r) => [r.source ?? 'unknown', Number(r.n)]));
+  return {
+    signups: await one('SELECT COUNT(*) AS n FROM email_signups'),
+    confirmed: await one('SELECT COUNT(*) AS n FROM email_signups WHERE confirm_required = 0 OR confirmed_at IS NOT NULL'),
+    awaiting_confirmation: await one('SELECT COUNT(*) AS n FROM email_signups WHERE confirm_required = 1 AND confirmed_at IS NULL'),
+    unsubscribed: await one('SELECT COUNT(*) AS n FROM email_optouts'),
+    by_source: bySource
+  };
+}
+
+/**
+ * Is there a mail server for this address's domain? Cloudflare DNS over HTTPS (free). A domain that
+ * does not exist, or says it takes no mail (null MX, RFC 7505), is refused before anything is sent.
+ * Any lookup failure lets the sign-up through: an outage never turns a real person away.
+ */
+export async function mailDomainOk(email, fetchImpl = fetch) {
+  const domain = String(email).split('@')[1];
+  const ask = async (type) => {
+    const res = await fetchImpl(`https://cloudflare-dns.com/dns-query?name=${encodeURIComponent(domain)}&type=${type}`, { headers: { accept: 'application/dns-json' }, signal: AbortSignal.timeout(2500) });
+    if (!res.ok) throw Error(`DoH ${res.status}`);
+    return res.json();
+  };
+  try {
+    const mx = await ask('MX');
+    if (mx.Status === 3) return false; // NXDOMAIN
+    const answers = (mx.Answer ?? []).filter((a) => a.type === 15).map((a) => String(a.data).trim());
+    if (answers.length) return !answers.every((a) => /^0\s+\.?$/.test(a));
+    const a = await ask('A'); // no MX: mail goes to the domain's own address (RFC 5321 5.1)
+    return a.Status !== 3 && (a.Answer ?? []).some((x) => x.type === 1);
+  } catch { return true; }
 }
 
 /**
@@ -320,12 +475,15 @@ export async function runNurture(env, now = Date.now(), fetchImpl = fetch) {
   }
   const prices = await livePrices(db);
   let sent = 0; let failed = 0;
-  for (const r of (await db.prepare('SELECT email, source FROM email_signups ORDER BY created_at').bind().all()).results ?? []) {
+  for (const r of (await db.prepare('SELECT email, source, confirm_required, confirmed_at FROM email_signups ORDER BY created_at').bind().all()).results ?? []) {
     if (sent >= MAX_PER_RUN) break;
     const hash = await emailHash(r.email);
     if (optouts.has(hash) || buyers.has(hash)) continue; // stop on unsubscribe or purchase
     const e = byHash.get(hash) ?? { kinds: new Set(), last: null };
-    const step = dueStep(sequenceFor(r.source, prices), e.kinds, e.last, now);
+    // Not confirmed yet: only the one confirm email, resent here only if its first send failed.
+    const step = r.confirm_required && !r.confirmed_at
+      ? (e.kinds.has('confirm') ? null : confirmStep(r.source, await confirmUrl(env.DOWNLOAD_SIGNING_SECRET, hash)))
+      : dueStep(sequenceFor(r.source, prices), e.kinds, e.last, now);
     if (!step) continue;
     const result = await sendOnce(env, r.email, hash, step, fetchImpl);
     if (result === 'SENT') { sent++; e.kinds.add(step.kind); e.last = now; byHash.set(hash, e); }

@@ -6,9 +6,11 @@
 // a buyer is asked for a review twice, or a buyer's address is written to D1.
 // Hard-fails on zero emails examined (rule 0).
 import { DatabaseSync } from 'node:sqlite';
-import { MAILING_ADDRESS, emailHash, optOut, recordPurchase, renderEmail, runNurture, sequence, signUpForSample, starterSequence, STARTER_SOURCE, unsubscribeUrl, verifyUnsubscribe } from '../../functions/_runtime/nurture.js';
+import { MAILING_ADDRESS, confirmSignup, emailHash, employmentSequence, EMPLOYMENT_SOURCE, mailDomainOk, optOut, recordPurchase, renderEmail, runNurture, sequence, signUpForSample, signupCounts, starterSequence, STARTER_SOURCE, unsubscribeUrl, verifyUnsubscribe } from '../../functions/_runtime/nurture.js';
+import { onRequestGet as confirmGet, onRequestPost as confirmPost } from '../../functions/api/confirm.js';
 
 const DAY = 86_400_000;
+const dnsOk = async () => new Response(JSON.stringify({ Status: 0, Answer: [{ type: 15, data: '10 mx.example.net.' }] }), { status: 200 });
 const fail = (m) => { console.error(`[email-nurture] FAIL ${m}`); process.exit(1); };
 function fakeD1() {
   const raw = new DatabaseSync(':memory:');
@@ -26,16 +28,40 @@ function resend() {
   return { sent, fetchImpl };
 }
 const envFor = (db) => ({ PRODUCTS_DB: db, RESEND_API_KEY: 'k', DOWNLOAD_SIGNING_SECRET: 's' });
+// Double opt-in: press the button behind the confirm link in the last confirm email to this address.
+async function pressConfirm(env, sent, to, fetchImpl) {
+  const m = [...sent].reverse().find((x) => x.to === to && /^Confirm your email/.test(x.subject));
+  if (!m) fail(`no confirm email reached ${to}`);
+  const link = /Confirm my email: (\S+)/.exec(m.text)?.[1];
+  if (!link) fail('the confirm email has no confirm link');
+  return confirmPost({ request: new Request(link, { method: 'POST' }), env }, fetchImpl);
+}
+const subjects = (sent, to) => sent.filter((m) => !to || m.to === to).map((m) => m.subject);
 
-// 1. The series: sample at once, then one kit per 3 days, then it ends.
+// 1. Double opt-in, then the series: ONE confirm email; nothing more until the button is pressed;
+// then the sample at once, one kit per 3 days, and it ends.
 {
   const db = fakeD1(); const { sent, fetchImpl } = resend(); const env = envFor(db);
   await signUpForSample(env, 'a@example.com', fetchImpl);
   await signUpForSample(env, 'a@example.com', fetchImpl);
-  if (sent.length !== 1) fail(`a double sign-up sent ${sent.length} samples`);
+  if (sent.length !== 1 || !/^Confirm your email/.test(sent[0].subject)) fail(`a double sign-up sent ${JSON.stringify(subjects(sent))}, want one confirm email`);
+  for (let h = 1; h <= 10 * 24; h += 6) await runNurture(env, Date.now() + h * 3_600_000, fetchImpl);
+  if (sent.length !== 1) fail(`an unconfirmed address got ${JSON.stringify(subjects(sent))}`);
+  const link = /Confirm my email: (\S+)/.exec(sent[0].text)[1];
+  const scanned = await confirmGet({ request: new Request(link), env });
+  if (scanned.status !== 200 || !/method="post"/.test(await scanned.text())) fail('opening the confirm link does not show a confirm button');
+  if (db.raw.prepare('SELECT confirmed_at FROM email_signups').get().confirmed_at) fail('a GET (a link scanner) confirmed the address');
+  const forged = await confirmPost({ request: new Request(link.replace(/t=[0-9a-f]+/, 't=' + '0'.repeat(32)), { method: 'POST' }), env }, fetchImpl);
+  if (forged.status !== 400) fail('a forged confirm token was accepted');
+  const unsub = await unsubscribeUrl('s', await emailHash('a@example.com'));
+  if ((await confirmPost({ request: new Request(link.replace(/t=[0-9a-f]+/, 't=' + new URL(unsub).searchParams.get('t')), { method: 'POST' }), env }, fetchImpl)).status !== 400) fail('an unsubscribe token confirmed an address');
+  const pressed = await pressConfirm(env, sent, 'a@example.com', fetchImpl);
+  if (pressed.status !== 200) fail(`the confirm button answered ${pressed.status}`);
+  await pressConfirm(env, sent, 'a@example.com', fetchImpl);
   for (let h = 1; h <= 40 * 24; h += 6) await runNurture(env, Date.now() + h * 3_600_000, fetchImpl);
-  const want = sequence().map((s) => s.subject);
-  if (JSON.stringify(sent.map((s) => s.subject)) !== JSON.stringify(want)) fail(`series sent ${JSON.stringify(sent.map((s) => s.subject))}`);
+  const want = ['confirm', ...sequence().map((x) => x.subject)];
+  const got = subjects(sent).map((x, i) => (i === 0 ? 'confirm' : x));
+  if (JSON.stringify(got) !== JSON.stringify(want)) fail(`series sent ${JSON.stringify(subjects(sent))}`);
   for (const m of sent) {
     if (!m.text.includes(MAILING_ADDRESS) || !m.html.includes(MAILING_ADDRESS)) fail(`"${m.subject}" has no mailing address`);
     const link = /Unsubscribe \(one click\): (\S+)/.exec(m.text)?.[1];
@@ -44,13 +70,50 @@ const envFor = (db) => ({ PRODUCTS_DB: db, RESEND_API_KEY: 'k', DOWNLOAD_SIGNING
     const u = new URL(link);
     if (!(await verifyUnsubscribe('s', u.searchParams.get('id'), u.searchParams.get('t')))) fail('an unsubscribe link does not verify');
   }
-  if (!/\$15/.test(sent[1].html)) fail('the kit email does not carry the live D1 price');
+  if (!/\$15/.test(sent[2].html)) fail('the kit email does not carry the live D1 price');
+}
+// 1b. A sign-up from before double opt-in (no confirm columns set) keeps its series; no row is rewritten.
+{
+  const db = fakeD1(); const { sent, fetchImpl } = resend(); const env = envFor(db);
+  db.raw.exec("CREATE TABLE email_signups (email TEXT PRIMARY KEY, consent_text TEXT NOT NULL, source TEXT, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP); INSERT INTO email_signups (email, consent_text, source) VALUES ('old@example.com', 'x', 'sample:letter-of-explanation')");
+  await runNurture(env, Date.now(), fetchImpl);
+  if (subjects(sent)[0] !== sequence()[0].subject) fail(`a sign-up from before double opt-in got ${JSON.stringify(subjects(sent))}`);
+  const row = db.raw.prepare('SELECT * FROM email_signups').get();
+  if (row.confirm_required !== 0 || row.confirmed_at !== null || row.email_hash !== null) fail('adding the confirm columns rewrote an existing sign-up');
+}
+// 1c. Outage: Resend down at sign-up and at confirm. Nothing is lost (the next run sends it), and
+// nothing is sent twice.
+{
+  const db = fakeD1(); const { sent, fetchImpl } = resend(); const env = envFor(db);
+  const down = async () => new Response('{}', { status: 503 });
+  if ((await signUpForSample(env, 'o@example.com', down)).status !== 'FAILED') fail('a send during an outage was not reported as failed');
+  if (!db.raw.prepare('SELECT 1 FROM email_signups WHERE email = ?').get('o@example.com')) fail('a sign-up was lost in an outage');
+  await runNurture(env, Date.now(), fetchImpl);
+  await runNurture(env, Date.now() + 3_600_000, fetchImpl);
+  if (JSON.stringify(subjects(sent).map((x) => x.slice(0, 18))) !== JSON.stringify(['Confirm your email'])) fail(`after the outage the confirm email went ${sent.length} times`);
+  const link = /Confirm my email: (\S+)/.exec(sent[0].text)[1];
+  await confirmPost({ request: new Request(link, { method: 'POST' }), env }, down);
+  await runNurture(env, Date.now() + 2 * 3_600_000, fetchImpl);
+  await runNurture(env, Date.now() + 3 * 3_600_000, fetchImpl);
+  if (subjects(sent).filter((x) => x === sequence()[0].subject).length !== 1) fail(`after an outage at confirm the sample went ${JSON.stringify(subjects(sent))}`);
+}
+// 1d. An unsubscribe always wins: the confirm button never re-subscribes, and no later run emails it.
+{
+  const db = fakeD1(); const { sent, fetchImpl } = resend(); const env = envFor(db);
+  await signUpForSample(env, 'u@example.com', fetchImpl);
+  await optOut(db, await emailHash('u@example.com'));
+  const res = await pressConfirm(env, sent, 'u@example.com', fetchImpl);
+  if (!/unsubscribed/i.test(await res.text())) fail('the confirm page did not say the address is unsubscribed');
+  for (let d = 1; d <= 20; d++) await runNurture(env, Date.now() + d * DAY, fetchImpl);
+  if (sent.length !== 1) fail(`an unsubscribed address got ${JSON.stringify(subjects(sent))}`);
 }
 // 2. Stop on purchase, stop on unsubscribe; one review ask, scheduled, buyer address never stored.
 {
   const db = fakeD1(); const { sent, fetchImpl } = resend(); const env = envFor(db);
   await signUpForSample(env, 'buyer@example.com', fetchImpl);
   await signUpForSample(env, 'gone@example.com', fetchImpl);
+  await pressConfirm(env, sent, 'buyer@example.com', fetchImpl);
+  await pressConfirm(env, sent, 'gone@example.com', fetchImpl);
   await optOut(db, await emailHash('gone@example.com'));
   sent.length = 0;
   const now = Date.now();
@@ -76,7 +139,10 @@ const envFor = (db) => ({ PRODUCTS_DB: db, RESEND_API_KEY: 'k', DOWNLOAD_SIGNING
   const db = fakeD1(); const { sent, fetchImpl } = resend(); const env = envFor(db);
   db.raw.exec("INSERT INTO products VALUES ('credit-letter-kit', 1900, 'live')");
   await signUpForSample(env, 'c@example.com', fetchImpl, 'credit-starter');
-  if (sent.length !== 1 || sent[0].subject !== starterSequence()[0].subject) fail(`the starter sign-up sent ${JSON.stringify(sent.map((m) => m.subject))}`);
+  if (sent.length !== 1 || !/credit starter/.test(sent[0].subject)) fail(`the starter sign-up sent ${JSON.stringify(sent.map((m) => m.subject))}`);
+  await pressConfirm(env, sent, 'c@example.com', fetchImpl);
+  sent.shift();
+  if (sent[0]?.subject !== starterSequence()[0].subject) fail('confirming did not send the starter at once');
   if (db.raw.prepare('SELECT source FROM email_signups WHERE email = ?').get('c@example.com')?.source !== STARTER_SOURCE) fail('the starter sign-up was not stored with its own source');
   for (let h = 1; h <= 30 * 24; h += 6) await runNurture(env, Date.now() + h * 3_600_000, fetchImpl);
   const want = starterSequence().map((x) => x.subject);
@@ -98,10 +164,48 @@ const envFor = (db) => ({ PRODUCTS_DB: db, RESEND_API_KEY: 'k', DOWNLOAD_SIGNING
   if (run.sent !== 0) fail('a refused send was counted as sent');
   const { onRequestPost } = await import('../../functions/api/sample.js');
   const req = new Request('https://approvalprep.com/api/sample', { method: 'POST', headers: { 'content-type': 'application/json', 'cf-connecting-ip': '203.0.113.9' }, body: JSON.stringify({ email: 'r2@example.com', consent: true, magnet: 'credit-starter' }) });
-  const body = await (await onRequestPost({ request: req, env: envFor(fakeD1()) }, refuse)).json();
+  const body = await (await onRequestPost({ request: req, env: envFor(fakeD1()) }, refuse, dnsOk)).json();
   if (body.emailed !== false || !/RESEND_SEND_FAILED/.test(body.stop ?? '')) fail(`the sample endpoint hid a failed send: ${JSON.stringify(body)}`);
   const ok = await runNurture(envFor(fakeD1()), Date.now(), resend().fetchImpl);
   if (ok.stop !== null) fail('a run with nothing failing was stopped');
+}
+// 2d. The employment verification letter (top search): confirm, then the letter, one email that
+// helps and one that sells, 3 days apart, then it ends; the kit email carries the live price.
+{
+  const db = fakeD1(); const { sent, fetchImpl } = resend(); const env = envFor(db);
+  db.raw.exec("INSERT INTO products VALUES ('income-employment-letter-kit', 1900, 'live')");
+  await signUpForSample(env, 'e@example.com', fetchImpl, 'employment-letter');
+  if (db.raw.prepare('SELECT source FROM email_signups WHERE email = ?').get('e@example.com')?.source !== EMPLOYMENT_SOURCE) fail('the employment sign-up was not stored with its own source');
+  if (!/employment verification letter/.test(sent[0]?.subject ?? '')) fail('the employment confirm email does not name the letter');
+  await pressConfirm(env, sent, 'e@example.com', fetchImpl);
+  for (let h = 1; h <= 30 * 24; h += 6) await runNurture(env, Date.now() + h * 3_600_000, fetchImpl);
+  const want = employmentSequence().map((x) => x.subject);
+  if (JSON.stringify(subjects(sent).slice(1)) !== JSON.stringify(want)) fail(`employment series sent ${JSON.stringify(subjects(sent))}`);
+  if (!/\$19/.test(sent[3].html)) fail('the Income + Employment kit email does not carry the live D1 price');
+  if (sent.slice(1, 3).some((m) => /\$\d|kit/i.test(m.subject + m.text.split('--')[0]))) fail('an employment email before the last one sells');
+  const counts = await signupCounts(db);
+  if (counts.signups !== 1 || counts.confirmed !== 1 || counts.by_source[EMPLOYMENT_SOURCE] !== 1) fail(`signup counts are wrong: ${JSON.stringify(counts)}`);
+  if (JSON.stringify(counts).includes('@')) fail('the signup counts carry an address');
+}
+// 2e. Abuse: a typed-in address on a domain that takes no mail is refused before any send; a DNS
+// outage lets the person through; the honeypot and the per-IP cap hold.
+{
+  const dns = (mx, a = { Status: 0, Answer: [] }) => async (u) => new Response(JSON.stringify(new URL(u).searchParams.get('type') === 'MX' ? mx : a), { status: 200 });
+  if (await mailDomainOk('x@nope.invalid', dns({ Status: 3 }))) fail('a domain that does not exist was accepted');
+  if (await mailDomainOk('x@example.com', dns({ Status: 0, Answer: [{ type: 15, data: '0 .' }] }))) fail('a null-MX domain was accepted');
+  if (!(await mailDomainOk('x@gmail.com', dns({ Status: 0, Answer: [{ type: 15, data: '5 gmail-smtp-in.l.google.com.' }] })))) fail('a real mail domain was refused');
+  if (!(await mailDomainOk('x@host.test', dns({ Status: 0 }, { Status: 0, Answer: [{ type: 1, data: '192.0.2.1' }] })))) fail('a domain with no MX but an address was refused');
+  if (!(await mailDomainOk('x@gmail.com', async () => { throw Error('down'); }))) fail('a DNS outage turned a person away');
+  const { onRequestPost } = await import('../../functions/api/sample.js');
+  const post = (email, extra = {}, ip = '203.0.113.20') => new Request('https://approvalprep.com/api/sample', { method: 'POST', headers: { 'content-type': 'application/json', 'cf-connecting-ip': ip }, body: JSON.stringify({ email, consent: true, ...extra }) });
+  const db = fakeD1(); const { sent, fetchImpl } = resend(); const env = envFor(db);
+  const bad = await onRequestPost({ request: post('x@nope.invalid'), env }, fetchImpl, dns({ Status: 3 }));
+  if (bad.status !== 400 || sent.length) fail('an address on a dead domain was emailed');
+  await onRequestPost({ request: post('bot@example.com', { company: 'Acme' }), env }, fetchImpl, dnsOk);
+  if (sent.length) fail('the honeypot did not stop a bot');
+  const codes = [];
+  for (let i = 0; i < 7; i++) codes.push((await onRequestPost({ request: post(`p${i}@example.com`), env }, fetchImpl, dnsOk)).status);
+  if (codes.filter((c) => c === 429).length < 2) fail(`one IP was not capped: ${codes}`);
 }
 // 3. A missing key is a named stop, not a silent pass.
 {
@@ -110,4 +214,4 @@ const envFor = (db) => ({ PRODUCTS_DB: db, RESEND_API_KEY: 'k', DOWNLOAD_SIGNING
 }
 const link = await unsubscribeUrl('s', await emailHash('x@example.com'));
 if (!renderEmail(sequence()[0], link).text.includes(link)) fail('rendered email lost its unsubscribe link');
-console.log('[email-nurture] PASS (series, 3-day gap, stop on purchase/unsubscribe, one scheduled review ask, buyer address never stored, credit starter series, a refused send is a named stop, named stop)');
+console.log('[email-nurture] PASS (double opt-in, link scanners never confirm, outage keeps and retries once, unsubscribe wins, series, 3-day gap, stop on purchase/unsubscribe, one scheduled review ask, buyer address never stored, credit starter series, a refused send is a named stop, named stop)');

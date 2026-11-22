@@ -7,7 +7,7 @@
 // No network: fetch throws, and the nurture env has no Resend key, so nothing can be sent.
 // Hard-fails on zero requests examined (rule 0).
 import { DatabaseSync } from 'node:sqlite';
-import { onRequestPost as nurturePost } from '../../functions/api/nurture-run.js';
+import { onRequestPost as nurturePost, onRequestGet as nurtureGet } from '../../functions/api/nurture-run.js';
 import { onRequestPost as loginPost } from '../../functions/api/admin/login.js';
 import { requireAdmin } from '../../functions/_runtime/admin.js';
 import { ADMIN_LOCKOUT } from '../../functions/_runtime/admin-lockout.js';
@@ -43,6 +43,13 @@ const expect = (label, got, want) => { examined++; if (got !== want) fail(`${lab
   const body = await ok.json();
   if (ok.status === 401 || body.error === 'UNAUTHORIZED') fail('the right bearer was refused');
   examined++;
+  // The sign-up counts (GET, for the Boss OS scorecard) need the same bearer and carry no address.
+  const read = (auth) => nurtureGet({ env, request: new Request('https://approvalprep.com/api/nurture-run', { headers: auth ? { authorization: auth } : {} }) });
+  expect('signup counts with no Authorization', (await read()).status, 401);
+  expect('signup counts with a wrong bearer', (await read('Bearer nope')).status, 401);
+  const counts = await read(`Bearer ${SECRET}`);
+  expect('signup counts with the secret', counts.status, 200);
+  if (typeof (await counts.json()).counts?.signups !== 'number') fail('the signup counts have no number');
 }
 
 // 2. Admin login and the x-admin-password header: per-IP lockout after 10 wrong passwords.

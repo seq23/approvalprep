@@ -1,7 +1,7 @@
 ---
 // Free sample -> email -> paid (functions/_runtime/nurture.js). Two real pages of the Letter
 // of Explanation Kit for a typed-in address. Once the address is in, the page shows the PDF
-// link as well, so nobody waits on an email.
+// link at once, so nobody waits on an email; the email asks them to confirm first (double opt-in).
 import { CONSENT_TEXT } from "../../functions/_runtime/nurture.js";
 interface Props { heading?: string }
 const { heading = "Get a free letter of explanation sample" } = Astro.props;
@@ -21,8 +21,8 @@ const { heading = "Get a free letter of explanation sample" } = Astro.props;
       <button class="button" type="submit">Email me the free sample</button>
       <p class="fine">Every email has a one-click unsubscribe link. See the <a href="/privacy/">privacy page</a>.</p>
     </form>
-    <p class="notice" data-sample-done hidden>Sent. You can also <a href="/samples/letter-of-explanation-sample.pdf">open the sample now</a>.</p>
-    <p class="notice warning-card" role="alert" data-sample-unsent hidden>The email did not send, so it is not in your inbox. <a href="/samples/letter-of-explanation-sample.pdf">Open the sample now</a>; we have been told and will fix it.</p>
+    <p class="notice" role="status" data-sample-done hidden>Check your inbox and press <strong>Confirm my email</strong>; then we send you the sample. You can <a href="/samples/letter-of-explanation-sample.pdf">open the sample now</a>.</p>
+    <p class="notice warning-card" role="alert" data-sample-unsent hidden>The confirm email did not send, so it is not in your inbox yet; we will try again shortly. <a href="/samples/letter-of-explanation-sample.pdf">Open the sample now</a>.</p>
   </div>
 </div></section>
 <script>

@@ -1,7 +1,7 @@
 ---
 // The free credit starter (her yes, 7 Nov 2026: "1A yes"): "Before you pay a credit repair
 // company". Email only; the starter opens on this page the moment the address is in, and the
-// same content is emailed (functions/_runtime/nurture.js starterSequence, cs0). Self-help only
+// same content is emailed once the address is confirmed (double opt-in; functions/_runtime/nurture.js starterSequence, cs0). Self-help only
 // (risk R-ADV-13): no score, removal or "fix your credit" promise.
 import { STARTER_CHECKLIST, STARTER_CONSENT_TEXT, STARTER_LETTER, SELF_HELP_LINE } from "../../functions/_runtime/nurture.js";
 interface Props { inline?: boolean }
@@ -23,8 +23,8 @@ const { inline = false } = Astro.props;
       <p class="fine">It opens here as soon as you press the button. Every email has a one-click unsubscribe link. See the <a href="/privacy/">privacy page</a>.</p>
     </form>
     <div data-starter-done hidden>
-      <p class="notice" role="status" data-starter-sent>Here is your starter. A copy is on its way to your inbox.</p>
-      <p class="notice warning-card" role="alert" data-starter-unsent hidden>Here is your starter. The email copy did not send, so it is not in your inbox: save or print this page. We have been told and will fix it.</p>
+      <p class="notice" role="status" data-starter-sent>Here is your starter. To get a copy by email, press <strong>Confirm my email</strong> in the email we just sent.</p>
+      <p class="notice warning-card" role="alert" data-starter-unsent hidden>Here is your starter. The confirm email did not send yet; we will try again shortly. Save or print this page in the meantime.</p>
       <ol class="compact-list">{STARTER_CHECKLIST.map((line) => <li>{line}</li>)}</ol>
       <h3>Your dispute letter</h3>
       <p class="fine">Fill in each bracket with your true facts, or let the free Letter Studio fill it in and save it as a PDF.</p>
