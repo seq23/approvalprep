@@ -1,5 +1,6 @@
 ---
 import { studioBenefits } from "../data/letterStudio";
+import { lowestKitPrice } from "../data/content";
 ---
 <section class="free-studio-cta band">
   <div class="shell two">
@@ -9,7 +10,7 @@ import { studioBenefits } from "../data/letterStudio";
       <p class="lead">Use the free Letter Writing Studio to organize your facts, pressure-test what you need to say, and decide which direct-download kit fits. Paid kits do not require the Studio. After checkout, buyers download the PDF guide and editable DOCX files directly.</p>
       <div class="hero-actions">
         <a class="button primary-button" href="/letter-writing-studio/">Draft free in the Letter Studio</a>
-        <a class="button secondary-button" href="/pricing/">See paid kits from $15</a>
+        <a class="button secondary-button" href="/pricing/">{`See paid kits from ${lowestKitPrice}`}</a>
       </div>
     </div>
     <div class="card">

@@ -25,6 +25,16 @@ export const kitCount = productCards.filter((product) => product.sku !== BUNDLE_
 // so it stays true when a price changes.
 const dollars = (label) => Number(String(label).replace(/[^0-9.]/g, ""));
 const bundleCard = productCards.find((product) => product.sku === BUNDLE_SKU);
+// Prices in prose are read from the cards too: the price of one kit, and the range "from $X to $Y".
+export const kitPriceOf = (sku) => {
+  const label = productCards.find((product) => product.sku === sku)?.priceLabel;
+  if (!label) throw new Error(`content: no live product card for ${sku}`);
+  return label;
+};
+const singleKitPrices = productCards.filter((product) => product.sku !== BUNDLE_SKU).map((product) => dollars(product.priceLabel));
+export const lowestKitPrice = `$${Math.min(...singleKitPrices)}`;
+export const highestKitPrice = `$${Math.max(...singleKitPrices)}`;
+export const bundlePrice = kitPriceOf(BUNDLE_SKU);
 export const kitsOneByOneUsd = productCards.filter((product) => product.sku !== BUNDLE_SKU).reduce((sum, product) => sum + dollars(product.priceLabel), 0);
 export const bundleValueLine = bundleCard && kitsOneByOneUsd > dollars(bundleCard.priceLabel)
   ? `All ${kitCount} kits bought one by one come to $${kitsOneByOneUsd}.`
@@ -40,7 +50,7 @@ export const whyApprovalPrep = ["Built for application pressure, not vague paper
 export const homepageChooser = [
   {
     "title": "I need a fast explanation letter",
-    "copy": "Use one $15 direct-download kit for credit, income, job gap, address history, late payment, bank statement, rental issue, life event, or general application explanations.",
+    "copy": `Use one ${kitPriceOf("letter-of-explanation")} direct-download kit for credit, income, job gap, address history, late payment, bank statement, rental issue, life event, or general application explanations.`,
     "href": "/letter-of-explanation",
     "product": "Letter of Explanation Kit"
   },
@@ -76,20 +86,14 @@ export const homepageChooser = [
   }
 ];
 
-// The comparison table's prices are read from the product cards (data/products/products.json), never typed,
-// so the table cannot show a price the pricing page and checkout do not.
-const priceLabelFor = (sku) => {
-  const label = productCards.find((product) => product.sku === sku)?.priceLabel;
-  if (!label) throw new Error(`productComparison: no live product card for ${sku}`);
-  return label;
-};
+// The comparison table's prices are read from the product cards, never typed.
 export const productComparison = [
   { sku: "letter-of-explanation", product: "Letter of Explanation", bestFor: "One clear explanation letter", includes: "Nine explanation letters by situation, a filled example under each, a sent and received log" },
   { sku: "income-employment-letter-kit", product: "Income + Employment Letter Kit", bestFor: "Work, income, employment gaps, job changes", includes: "Employment verification for your employer to sign, proof of income, self-employment, job change and gap letters" },
   { sku: "credit-letter-kit", product: "Credit Letter Kit", bestFor: "DIY credit letters and follow-up", includes: "Three bureau follow-ups, direct dispute, validation, settlement terms, goodwill, late payment, checklist, log" },
   { sku: "rental-application-kit", product: "Rental Application Kit", bestFor: "Apartment and rental applications", includes: "Rental checklist, cover letter, income/rental history explanations" },
   { sku: "complete-approvalprep-bundle", product: "Complete ApprovalPrep Bundle", bestFor: "The full self-service library", includes: "Every current kit, checklist, guide, and letter packet" },
-].map((row) => ({ ...row, price: priceLabelFor(row.sku), href: `/pricing#${row.sku}` }));
+].map((row) => ({ ...row, price: kitPriceOf(row.sku), href: `/pricing#${row.sku}` }));
 
 export const footerGroups = [
   {
@@ -2100,7 +2104,7 @@ const manualRouteCopy = {
   "/about": {
     "heading": "About ApprovalPrep",
     "lead": "Who publishes ApprovalPrep, what the kits do, what they never do, and how to reach a person about a purchase or download.",
-    "shortAnswer": "ApprovalPrep is published by ApprovalPrep Editorial, a subsidiary of Spry Labs. It sells self-service letter and checklist kits from $15 to $49 and offers free browser-only drafts. It is not a law firm, a lender, or a credit repair organization, and nothing on the site is legal or credit advice.",
+    "shortAnswer": `ApprovalPrep is published by ApprovalPrep Editorial, a subsidiary of Spry Labs. It sells self-service letter and checklist kits from ${lowestKitPrice} to ${bundlePrice} and offers free browser-only drafts. It is not a law firm, a lender, or a credit repair organization, and nothing on the site is legal or credit advice.`,
     "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
     "decisionContext": [
@@ -2169,7 +2173,7 @@ const manualRouteCopy = {
       },
       {
         "question": "How much do the kits cost?",
-        "answer": "Single kits cost $15 to $39, and the complete set of all seven kits costs $49. You pay once; there is no subscription."
+        "answer": `Single kits cost ${lowestKitPrice} to ${highestKitPrice}, and the complete set of all seven kits costs ${bundlePrice}. You pay once; there is no subscription.`
       }
     ],
     "trustSignals": [

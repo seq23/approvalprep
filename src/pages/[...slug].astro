@@ -36,7 +36,7 @@ import { routeAnswers } from "../lib/routeAnswers";
 import RecommendationSummary from "../components/RecommendationSummary.astro";
 import manifest from "../../data/routes/route_manifest.json";
 import demandCoverage from "../../data/content/demand_coverage_pages.json";
-import { routeCopy, boundary, kitCount, productCards, productComparison, routeFamilyCopy, offeringCategories, offeringsForSku, productForSku } from "../data/content";
+import { routeCopy, boundary, kitCount, kitPriceOf, productCards, productComparison, routeFamilyCopy, offeringCategories, offeringsForSku, productForSku } from "../data/content";
 
 export function getStaticPaths() {
   // Routes that own a dedicated page file. Astro cannot build two pages for one
@@ -227,7 +227,7 @@ const childRoutes = manifest.routes
           </div>
         </div>
         <div class="pricing-model-grid">
-          <article class="notice"><strong>What you get:</strong><p>Each kit is a PDF guide plus an editable Word file with a blank for each fact. You pay once on Stripe and it downloads at once: no subscription, nothing renews. Each card lists every document in that kit; the $15 Letter of Explanation Kit has all 9 explanation-letter templates.</p></article>
+          <article class="notice"><strong>What you get:</strong><p>Each kit is a PDF guide plus an editable Word file with a blank for each fact. You pay once on Stripe and it downloads at once: no subscription, nothing renews. Each card lists every document in that kit; the {kitPriceOf("letter-of-explanation")} Letter of Explanation Kit has all 9 explanation-letter templates.</p></article>
           <article class="notice"><strong>Not ready to buy?</strong><p>Start with the free Letter Studio. It drafts a first-pass letter and points you to the one kit that fits, without storing your answers.</p></article>
         </div>
         <div class="card discount-card">

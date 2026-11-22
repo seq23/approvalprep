@@ -16,7 +16,7 @@ import FreeStudioCTA from "../components/FreeStudioCTA.astro";
 import CreditStarterSignup from "../components/CreditStarterSignup.astro";
 import RecommendationSummary from "../components/RecommendationSummary.astro";
 import OfferingUniverse from "../components/OfferingUniverse.astro";
-import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComparison, offeringCategories, productCards, kitCount } from "../data/content";
+import { trustSignals, howItWorks, whyApprovalPrep, homepageChooser, productComparison, offeringCategories, productCards, kitCount, kitPriceOf, lowestKitPrice } from "../data/content";
 // One label for every card that opens a kit's page, with the name and price read from the product record.
 const kitLabel = (name) => { const product = productCards.find((p) => p.name === name); return product ? `See the ${product.name} — ${product.priceLabel} ›` : ""; };
 // Her ruling 13 Nov 2026 ("credit repair" wording, spry brain): "credit repair" appears only as the
@@ -59,7 +59,7 @@ const homeSchema = [
       <div class="hero-actions ap-hero-actions">
         <a class="button primary-button" href={internalHref("/letter-writing-studio/")}>Draft free in the Letter Studio</a>
         <p class="ap-free-note">No account, no upload, no stored answers, and no payment.</p>
-        <a class="button secondary secondary-button" href={internalHref("/pricing/#credit-letter-kit")}>Get DIY credit letters — $19</a>
+        <a class="button secondary secondary-button" href={internalHref("/pricing/#credit-letter-kit")}>{`Get DIY credit letters — ${kitPriceOf("credit-letter-kit")}`}</a>
         <a class="ap-textlink" href={internalHref("/pricing")}>Compare all kits and prices</a>
       </div>
       {/* Three reasons row (her yes, 7 Nov 2026: "2 yes"; her words of 3 Nov). Each opens a page that exists. */}
@@ -89,7 +89,7 @@ const homeSchema = [
         <li>Pay once for the kit instead of starting an open-ended monthly service.</li>
       </ol>
       <div class="hero-actions">
-        <a class="button primary-button" href="/pricing/">See kits from $15</a>
+        <a class="button primary-button" href="/pricing/">{`See kits from ${lowestKitPrice}`}</a>
         <a class="button secondary-button" href="/letter-writing-studio/">Draft free in the Letter Studio</a>
       </div>
     </aside>
@@ -117,7 +117,7 @@ const homeSchema = [
     <RecommendationSummary
       headline="Buy the kit, download the files, fill in your true facts, and send the paperwork yourself."
       statement="The free Studio is optional if you want to draft before you buy."
-      ctaLabel="See kits from $15"
+      ctaLabel={`See kits from ${lowestKitPrice}`}
       ctaHref="/pricing"
     />
   </div></section>
