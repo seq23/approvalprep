@@ -1,0 +1,91 @@
+{
+  "app": "ApprovalPrep",
+  "brand": "approvalprep",
+  "about": "The app's own robot walk for every PR that changes a screen (boss-os scripts/ops/tap-through.mjs, ship-ready app-review.md). Preview purchases are pretend (session-only, nothing charged); every request that is not a read is blocked, so no email is sent and no order code is checked.",
+  "journeys": [
+    {
+      "name": "first-open",
+      "start": "/",
+      "steps": [
+        { "see": "Open the free Letter Studio ›", "id": "home" },
+        { "sweep": true }
+      ]
+    },
+    {
+      "name": "main-task",
+      "start": "/",
+      "steps": [
+        { "tap": "Free credit bureau dispute letter ›", "id": "dispute" },
+        { "sweep": true }
+      ]
+    },
+    {
+      "name": "letter-studio",
+      "start": "/",
+      "steps": [
+        { "tap": "Open the free Letter Studio ›", "id": "studio" },
+        { "sweep": true }
+      ]
+    },
+    {
+      "name": "credit-kit",
+      "start": "/",
+      "steps": [
+        { "tap": "/^Credit Letter Kit · /", "then": "Four more letters, paid once", "id": "plans" },
+        { "see": "This is a preview: buying here is pretend, nothing is charged, and it lasts until you close the page." },
+        { "tap": "Restore purchase", "then": "This is a preview, so there are no purchases to restore here.", "id": "restore-purchase" },
+        { "tap": "/^Get this kit, /", "id": "bought" },
+        { "tap": "/Goodwill letter/", "id": "goodwill" },
+        { "sweep": true }
+      ]
+    },
+    {
+      "name": "explanation-kit",
+      "start": "/",
+      "steps": [
+        { "tap": "/^Letter of Explanation Kit · /", "then": "Nine explanation letters, paid once", "id": "plans" },
+        { "tap": "/^Get this kit, /", "id": "bought" },
+        { "tap": "/Income gap explanation letter/", "id": "income-gap" },
+        { "sweep": true }
+      ]
+    },
+    {
+      "name": "bundle",
+      "start": "/",
+      "steps": [
+        { "tap": "/^Complete ApprovalPrep Bundle · /", "id": "bundle" },
+        { "sweep": true }
+      ]
+    },
+    {
+      "name": "my-letters",
+      "start": "/",
+      "steps": [
+        { "tap": "Preview only: load sample letters and kits ›" },
+        { "tap": { "role": "tab", "name": "My letters" }, "id": "mine" },
+        { "sweep": true }
+      ]
+    },
+    {
+      "name": "settings-and-delete",
+      "start": "/",
+      "steps": [
+        { "tap": { "role": "tab", "name": "☰ More" }, "then": "About ApprovalPrep", "id": "more" },
+        { "sweep": true },
+        { "tap": "Delete all my letters", "then": "Yes, delete" },
+        { "tap": "Yes, delete", "then": "Your letters have been deleted from this phone.", "id": "deleted" }
+      ]
+    }
+  ],
+  "promises": [
+    { "text": "Goodwill letter", "on": "credit-kit:plans", "built": "credit-kit:goodwill" },
+    { "text": "Mark as sent, the day count and a reminder on day 30", "on": "credit-kit:plans", "built": "my-letters:mine" },
+    { "text": "Income gap explanation letter", "on": "explanation-kit:plans", "built": "explanation-kit:income-gap" },
+    { "text": "Restore purchase", "on": "credit-kit:plans", "built": "credit-kit:restore-purchase" }
+  ],
+  "native_only": [
+    { "feature": "in-app purchase", "why": "the web preview's purchases are pretend and session-only; the store sheet itself only exists on a phone", "simulator": "a sandbox purchase on the simulator build (GitHub macOS runner, free: public repo)" },
+    { "feature": "share sheet and file save", "why": "saving a PDF or Word file opens the phone's share sheet", "simulator": "the simulator build" },
+    { "feature": "day-30 reminder notification", "why": "local notifications only fire on a phone", "simulator": "the simulator build" }
+  ]
+}

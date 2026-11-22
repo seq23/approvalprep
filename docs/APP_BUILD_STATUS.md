@@ -8,6 +8,7 @@ Plan: `docs/APP_PLAN.md`. Build branch: `apps/approvalprep-scaffold` (draft PR #
 | Plan task | State | Where |
 |---|---|---|
 | 1, 1a Scaffold and the free web preview link | Built | `.github/workflows/app-preview.yml`, `apps/mobile/scripts/preview/host.mjs` |
+| Tap-through on every app PR (ship-ready app-review.md) | Built | `tap-through.json` (journeys, kit promises mapped to the screens behind them, native-only features); the preview workflow calls boss-os `tap-through.yml`; artifact `tap-through-<run id>` has a video per journey and a shot per step |
 | 2 Components | Built | `apps/mobile/src/ui.tsx`, `tests/ui.test.ts` |
 | 3 On-phone storage | Built; a stalled store ends in "Try again", never a spinner | `src/letterStorage.ts`, `src/phoneDatabase.ts` |
 | 4 Letters and questions | Built; optional blanks (`{{field?|Prompt}}`) print nothing when skipped | `src/kitTemplates.ts` |
