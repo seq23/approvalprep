@@ -49,9 +49,10 @@ function revenuecat() {
   const known = new Set<string>(), granted = new Map<string, number>(), bought = new Map<string, unknown[]>(), sandboxEntitled = new Set<string>();
   const calls: string[] = [];
   let mode: 'ok' | '5xx' | 'timeout' | '403' = 'ok', active: 'ok' | '5xx' = 'ok', openLoops = 0;
+  const openLoopStops: string[] = [];
   const fetcher = (async (input: unknown, init: RequestInit = {}) => {
     const url = String(input);
-    if (url.includes('open-loops/intake')) { openLoops++; return new Response('{}', { status: 201 }); }
+    if (url.includes('open-loops/intake')) { openLoops++; openLoopStops.push(JSON.parse(String(init?.body)).stop); return new Response('{}', { status: 201 }); }
     if (url.includes('/products?')) return Response.json(products);
     calls.push(`${init.method ?? 'GET'} ${url.replace(/^.*\/customers\//, '')}`);
     const id = decodeURIComponent(url.split('/customers/')[1]!.split(/[/?]/)[0]!);
@@ -72,7 +73,7 @@ function revenuecat() {
     granted.set(id, body.expires_at);
     return new Response('{}', { status: 201 });
   }) as unknown as typeof fetch;
-  return { known, granted, bought, sandboxEntitled, calls, fetcher, set(m: typeof mode) { mode = m; }, activeDown(on: boolean) { active = on ? '5xx' : 'ok'; }, get openLoops() { return openLoops; } };
+  return { known, granted, bought, sandboxEntitled, calls, fetcher, set(m: typeof mode) { mode = m; }, activeDown(on: boolean) { active = on ? '5xx' : 'ok'; }, get openLoops() { return openLoops; }, openLoopStops };
 }
 type RC = ReturnType<typeof revenuecat>;
 
@@ -197,6 +198,8 @@ test('outage: RevenueCat 5xx, timeout or read-only key = 503, slot given back, n
     const r = await call(e, rc, { code: CODE, app_user_id: anon(1) });
     assert.equal(r.status, 503, mode); assert.equal(r.body.error, 'TRY_AGAIN');
     assert.equal(slots(e), 0, mode); assert.ok(!rc.granted.has(anon(1)), `${mode}: nothing half-granted`);
+    // Only the read-only key (no retry fixes it) files an Open Loops row; a passing outage does not.
+    assert.deepEqual(rc.openLoopStops, mode === '403' ? ['REVIEW_RC_KEY_READONLY'] : [], mode);
     // The IP's new-device slot really came back: it can still open its two.
     rc.set('ok'); rc.known.add(anon(2));
     assert.equal((await call(e, rc, { code: CODE, app_user_id: anon(1) })).status, 200);
