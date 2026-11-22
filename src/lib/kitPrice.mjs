@@ -16,3 +16,21 @@ export function withSeedPrices(products, seedProducts) {
     return { ...product, priceLabel, cta_label: `Buy ${product.name} — ${priceLabel}` };
   });
 }
+
+// Copy kept as data (data/content/*.json) names a price as {price:<sku>}, never "$29": the
+// token is filled here from the seed when the page is built. An unknown sku throws, so a page
+// can never render a token or a guessed price.
+const PRICE_TOKEN = /\{price:([a-z0-9-]+)\}/g;
+export function fillPrices(value, seedProducts) {
+  const cents = new Map(seedProducts.map((p) => [p.slug, p.priceCents]));
+  const fill = (v) => {
+    if (typeof v === "string") return v.replace(PRICE_TOKEN, (_, sku) => {
+      if (!cents.has(sku)) throw new Error(`kitPrice: {price:${sku}} names no kit in seed_product_registry.json`);
+      return priceLabelFromCents(cents.get(sku));
+    });
+    if (Array.isArray(v)) return v.map(fill);
+    if (v && typeof v === "object") return Object.fromEntries(Object.entries(v).map(([k, x]) => [k, fill(x)]));
+    return v;
+  };
+  return fill(value);
+}
