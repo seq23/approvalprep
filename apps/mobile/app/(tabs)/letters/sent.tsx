@@ -13,6 +13,7 @@ import { localReminders } from '../../../src/localReminders';
 import { hasAnswerDate, showDate } from '../../../src/myLetters';
 import { CREDIT_KIT, offerTitle } from '../../../src/offers';
 import { usePrices } from '../../../src/purchases/prices';
+import { askForRatingAfterSave } from '../../../src/askForRating';
 // Dated-letter detail structure from APP_PLAN screen pattern (h); the person records mailing.
 const due0 = (date: string) => { try { return ` on ${showDate(reminderDate(date))}`; } catch { return ''; } };
 export default function Sent() {
@@ -61,6 +62,8 @@ export default function Sent() {
       setMessage(result.reminder === 'scheduled' ? 'Saved as sent. Your reminder is set for the answer date.'
         : result.reminder === 'denied' ? 'Saved as sent without a reminder. Notifications are not allowed; you can enable them in phone settings and save again.'
         : result.reminder === 'past' ? 'Saved as sent. That reminder date has passed, so no notification was set.' : 'Saved as sent.');
+      // The one rating ask follows the success, never an error (src/ratingPrompt.ts).
+      void askForRatingAfterSave();
     } catch (error) { setMessage(error instanceof Error ? error.message : 'Could not save. Please try again.'); }
     finally { setBusy(false); }
   }
