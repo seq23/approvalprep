@@ -234,7 +234,7 @@ Run `npm run check` in `apps/mobile` after each task; the App preview run must s
 
 The project **ApprovalPrep** exists in her RevenueCat account. Everything inside it is made from the
 code by the shared `~/bin/revenuecat-setup` tool (seq-bin) from the catalog in `apps/mobile/scripts/revenuecat/setup.ts`: the iOS and Android apps (`com.approvalprep.app`),
-the 14 one-time products on each store and the Test Store (each `non_consumable`, never `one_time`: on Play RevenueCat consumes a one-time purchase not held as non_consumable), one entitlement per product id (what
+the 14 one-time products on each store and the Test Store (each `non_consumable`; on Play RevenueCat holds them as `one_time` with `is_consumable: false`, which the tool checks), one entitlement per product id (what
 `ownershipFrom` reads), and the `default` offering in paywall order. It re-checks everything and
 fixes only what is missing, so it is safe to re-run after any product change:
 `cd ~/GitHub/boss-os && npm run -s vault:run -- ~/bin/revenuecat-setup ~/GitHub/approvalprep/apps/mobile/scripts/revenuecat/setup.ts --save-keys`
