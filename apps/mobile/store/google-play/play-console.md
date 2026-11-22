@@ -23,6 +23,24 @@ Wording follows risk rule R-ADV-13 (self-help templates only). `tests/store.test
 - `screenshots/*.png`: five 1080 x 1920 phone screenshots of the real app (web build, sample letters loaded).
 - Adaptive icon: already set in `app.config.ts` (`assets/adaptive-icon.png` on #FF7A3D).
 
+## In-app products (made by `scripts/store/play-products.mjs`)
+
+The 14 one-time products (7 kits, the Complete Bundle, 6 bundle-upgrade tiers) are created on Play from the
+app's own code: ids from the RevenueCat catalog (`scripts/revenuecat/setup.ts`), USD prices from `src/kit.ts`
+and `src/lib/appUpgrade.mjs`, every other region from Google's own price conversion, titles and descriptions
+from `src/offers.ts`. Re-run it after any product change; it only creates what is missing and activates what
+is not active, never deletes, deactivates or reprices (a different price on Play prints `MISMATCH`).
+
+```
+cd ~/GitHub/boss-os && npm run -s vault:run -- npx --prefix ~/GitHub/approvalprep/apps/mobile tsx ~/GitHub/approvalprep/apps/mobile/scripts/store/play-products.mjs           # dry run: the plan
+cd ~/GitHub/boss-os && npm run -s vault:run -- npx --prefix ~/GitHub/approvalprep/apps/mobile tsx ~/GitHub/approvalprep/apps/mobile/scripts/store/play-products.mjs --apply   # create, activate, read back
+```
+
+Done means the last line reads `read-back 14/14 active, 0 mismatches, 0 named stops`, and a dry run after it
+plans `0 to create, 0 to activate`. `NAMED STOP [PLAY_PERMISSION_DENIED]`: the service account in
+`GOOGLE_PLAY_UPLOAD_SA_JSON` lacks "Manage store presence" on this app in Play Console (a new grant can take up to
+36 hours to reach the API). Tests: `tests/playProducts.test.ts`.
+
 ## Financial features declaration (Policy > App content)
 
 Answer, reviewed against R-ADV-13 and Play Help 13849271:
