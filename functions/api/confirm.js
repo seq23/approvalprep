@@ -1,4 +1,4 @@
-import { confirmSignup, verifyConfirm } from '../_runtime/nurture.js';
+import { confirmSignup, esc, verifyConfirm } from '../_runtime/nurture.js';
 
 // Double opt-in. The link in the confirm email opens a page with ONE button; only pressing it (POST)
 // confirms. A link scanner that opens every link in an inbox (GET) therefore never confirms anyone.
@@ -7,11 +7,10 @@ const WHAT = {
   'starter:credit-repair': { label: 'Draft free in the Letter Studio', url: '/letter-writing-studio/' },
   'starter:employment-verification': { label: 'Draft free in the Letter Studio', url: '/letter-writing-studio/' }
 };
-const esc = (v) => String(v).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 export function page(title, body, status = 200) {
-  return new Response(`<!doctype html><html lang="en"><meta charset="utf-8"><meta name="robots" content="noindex"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)} · ApprovalPrep</title>
-<style>:root{--paper:#F7F3EA;--carbon:#1D1C21;--orange:#FF7A3D}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--carbon);font:400 18px/1.55 "Atkinson Hyperlegible Next",Arial,sans-serif}main{max-width:520px;margin:0 auto;padding:56px 16px}h1{font:800 28px/1.15 Archivo,Arial,sans-serif;margin:0 0 16px}button,.button{display:inline-block;min-height:48px;border:2px solid var(--carbon);border-radius:10px;background:var(--orange);color:var(--carbon);font:700 18px/1 inherit;font-family:inherit;padding:14px 22px;text-decoration:none;cursor:pointer}a{color:var(--carbon)}.fine{font-size:15px;opacity:.8}</style>
-<main><h1>${esc(title)}</h1>${body}</main></html>`, { status, headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store' } });
+  return new Response(`<!doctype html><html lang="en"><meta charset="utf-8"><meta name="robots" content="noindex"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)} · ApprovalPrep</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,700..800&family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap">
+<style>:root{--paper:#F7F3EA;--carbon:#1D1C21;--orange:#FF7A3D}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--carbon);font:400 18px/1.55 "Atkinson Hyperlegible Next",Arial,sans-serif}main{max-width:520px;margin:0 auto;padding:56px 16px}h1{font:800 28px/1.15 Archivo,Arial,sans-serif;font-stretch:112%;margin:0 0 16px}.home{display:inline-block;margin-bottom:32px;font:800 20px/1 Archivo,Arial,sans-serif;font-stretch:112%;text-decoration:none}.home span{background:#FFE066;padding:0 4px}button,.button{display:inline-block;min-height:48px;border:2px solid var(--carbon);border-radius:10px;background:var(--orange);color:var(--carbon);font:700 18px/1 inherit;font-family:inherit;padding:14px 22px;text-decoration:none;cursor:pointer}a{color:var(--carbon)}.fine{font-size:15px;opacity:.8}</style>
+<main><a class="home" href="/">Approval<span>Prep</span></a><h1>${esc(title)}</h1>${body}</main></html>`, { status, headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store' } });
 }
 async function checked(request, env) {
   const url = new URL(request.url);

@@ -16,19 +16,22 @@ export async function onRequestPost({ request, env }, fetchImpl = fetch, dnsFetc
   const email = normalizeEmail(body.email);
   if (!email) return json({ ok: false, error: 'Enter a valid email address.' }, 400);
   if (body.consent !== true) return json({ ok: false, error: 'Please tick the box so we can email it to you.' }, 400);
-  if (!(await mailDomainOk(email, dnsFetch))) return json({ ok: false, error: 'That email address cannot receive mail. Please check the part after the @.' }, 400);
   if (!env.PRODUCTS_DB) return json({ ok: false, error: 'Sign-up is unavailable right now. Please try again shortly.' }, 503);
   if (!(await withinLimit(env.PRODUCTS_DB, `sample:ip:${await sha256(clientIp(request))}`, SAMPLE_LIMITS.perIpHour, HOUR))
     || !(await withinLimit(env.PRODUCTS_DB, 'sample:global', SAMPLE_LIMITS.globalDay, DAY))) {
     return json({ ok: false, error: 'Too many sign-ups right now. Please try again later.' }, 429);
   }
+  if (!(await mailDomainOk(email, dnsFetch))) return json({ ok: false, error: 'That email address cannot receive mail. Please check the part after the @.' }, 400);
   const magnet = ['credit-starter', 'employment-letter'].includes(body.magnet) ? body.magnet : 'loe';
   const sent = await signUpForSample(env, email, fetchImpl, magnet);
-  const emailed = sent.status === 'SENT' || sent.status === 'ALREADY';
+  // state tells the page what really happened: a confirm email just sent, one sent earlier and
+  // still waiting, an address already on the list, an unsubscribed address, or nothing sent.
+  const state = { SENT: 'confirm_sent', PENDING: 'confirm_pending', SUBSCRIBED: 'already_subscribed', OPTED_OUT: 'opted_out' }[sent.status] ?? 'not_sent';
+  const emailed = state !== 'not_sent' && state !== 'opted_out';
   // Not emailed is said, never hidden: the page tells the visitor plainly, and the stop is logged by
   // name. The claim was released, so the next nurture tick retries it and goes red if it fails again.
   const stop = emailed || sent.status === 'OPTED_OUT' ? null : (sent.stop ?? sendFailureStop(1));
   if (stop) console.error(JSON.stringify({ event: 'SAMPLE_NOT_SENT', stop }));
-  return json({ ok: true, emailed, ...(stop ? { stop } : {}) });
+  return json({ ok: true, emailed, state, ...(stop ? { stop } : {}) });
 }
 export async function onRequestGet() { return json({ ok: false, error: 'POST_REQUIRED' }, 405); }

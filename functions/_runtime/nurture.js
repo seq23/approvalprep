@@ -77,14 +77,14 @@ export const EMPLOYMENT_LETTER = [
   'Re: Employment verification for [employee\'s full name]',
   'To whom it may concern:',
   'This letter confirms that [employee\'s full name] has worked for [company name] since [start date] as a [job title].',
-  '[He / She / They] works [full-time / part-time, about __ hours a week]. [Current pay: $__ a year / $__ an hour.]',
+  '[Employee\'s first name] works [full-time / part-time, about __ hours a week]. [Current pay: $__ a year / $__ an hour.]',
   'You can reach me at [phone or email] to confirm these details.',
   'Sincerely,',
   '[Signature]',
   '[Printed name and job title]',
   '[Company name, address and phone]'
 ];
-const EMPLOYMENT_PLAIN = 'Self-help templates. Not legal or financial advice.';
+export const EMPLOYMENT_PLAIN = 'Self-help templates. Not legal or financial advice.';
 
 /** The employment letter series: the letter once confirmed, one email that helps, one that sells. */
 export function employmentSequence(prices = {}) {
@@ -94,10 +94,10 @@ export function employmentSequence(prices = {}) {
       heading: 'Your employment verification letter',
       paragraphs: [
         ...EMPLOYMENT_CHECKLIST.map((line, i) => `${i + 1}. ${line}`),
-        'The letter (your employer fills in each bracket and signs it on letterhead):',
-        ...EMPLOYMENT_LETTER,
-        EMPLOYMENT_PLAIN
+        'The letter (your employer fills in each bracket and signs it on letterhead):'
       ],
+      letter: EMPLOYMENT_LETTER,
+      after: [EMPLOYMENT_PLAIN],
       cta: { label: 'Draft your own income letter free', url: `${SITE}/letter-writing-studio/` }
     },
     {
@@ -293,13 +293,13 @@ export function normalizeEmail(raw) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) ? email : null;
 }
 
-const esc = (v) => String(v).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+export const esc = (v) => String(v).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
 /** One email, html + text, both with the unsubscribe link and the mailing address. */
 export function renderEmail(step, unsubscribe) {
   const footer = 'You are getting this because you asked for a free sample, starter or letter, or bought from ApprovalPrep.';
-  const html = `<div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;color:#1f2933;line-height:1.55"><h1 style="font-size:22px">${esc(step.heading)}</h1>${step.paragraphs.map((p) => `<p>${esc(p)}</p>`).join('')}${step.cta ? `<p><a href="${esc(step.cta.url)}" style="display:inline-block;background:#1f2933;color:#fff;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:700">${esc(step.cta.label)}</a></p>` : ''}<hr style="border:none;border-top:1px solid #ddd;margin:28px 0 12px"><p style="font-size:12px;color:#777">${esc(footer)} <a href="${esc(unsubscribe)}">Unsubscribe</a> (one click).<br>ApprovalPrep, ${esc(MAILING_ADDRESS)}</p></div>`;
-  const text = `${step.heading}\n\n${step.paragraphs.join('\n\n')}${step.cta ? `\n\n${step.cta.label}: ${step.cta.url}` : ''}\n\n--\n${footer}\nUnsubscribe (one click): ${unsubscribe}\nApprovalPrep, ${MAILING_ADDRESS}\n`;
+  const html = `<div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;color:#1f2933;line-height:1.55"><h1 style="font-size:22px">${esc(step.heading)}</h1>${step.paragraphs.map((p) => `<p>${esc(p)}</p>`).join('')}${step.letter ? `<div style="border:2px solid #1D1C21;border-radius:8px;padding:16px 18px;margin:16px 0;background:#fff">${step.letter.map((l) => `<p style="margin:0 0 8px">${esc(l)}</p>`).join('')}</div>` : ''}${(step.after ?? []).map((p) => `<p>${esc(p)}</p>`).join('')}${step.cta ? `<p><a href="${esc(step.cta.url)}" style="display:inline-block;background:#1f2933;color:#fff;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:700">${esc(step.cta.label)}</a></p>` : ''}<hr style="border:none;border-top:1px solid #ddd;margin:28px 0 12px"><p style="font-size:12px;color:#777">${esc(footer)} <a href="${esc(unsubscribe)}">Unsubscribe</a> (one click).<br>ApprovalPrep, ${esc(MAILING_ADDRESS)}</p></div>`;
+  const text = `${step.heading}\n\n${step.paragraphs.join('\n\n')}${step.letter ? `\n\n------ letter ------\n${step.letter.join('\n')}\n------ end of letter ------` : ''}${(step.after ?? []).map((p) => `\n\n${p}`).join('')}${step.cta ? `\n\n${step.cta.label}: ${step.cta.url}` : ''}\n\n--\n${footer}\nUnsubscribe (one click): ${unsubscribe}\nApprovalPrep, ${MAILING_ADDRESS}\n`;
   return { html, text };
 }
 
@@ -373,7 +373,7 @@ async function livePrices(db) {
  * The sign-up is stored before any send, so a Resend outage loses nothing: the next nurture run
  * sends the confirm email, and the claim in email_sends means it is never sent twice.
  */
-export async function signUpForSample(env, email, fetchImpl = fetch, magnet = 'loe') {
+export async function signUpForSample(env, email, fetchImpl = fetch, magnet = 'loe', now = Date.now()) {
   const [source, consent] = MAGNETS[magnet] ?? MAGNETS.loe;
   const stop = nurtureStop(env);
   if (stop && !env?.PRODUCTS_DB) return { status: 'STOPPED', stop };
@@ -384,8 +384,12 @@ export async function signUpForSample(env, email, fetchImpl = fetch, magnet = 'l
   if (stop) return { status: 'STOPPED', stop };
   if (await db.prepare('SELECT 1 FROM email_optouts WHERE email_hash = ?').bind(hash).first()) return { status: 'OPTED_OUT' };
   const row = await db.prepare('SELECT source, confirm_required, confirmed_at FROM email_signups WHERE email = ?').bind(email).first();
-  if (!row?.confirm_required || row.confirmed_at) return { status: 'ALREADY' };
-  return { status: await sendOnce(env, email, hash, confirmStep(row.source, await confirmUrl(env.DOWNLOAD_SIGNING_SECRET, hash)), fetchImpl) };
+  if (!row?.confirm_required || row.confirmed_at) return { status: 'SUBSCRIBED' };
+  // Lost the confirm email? Signing up again a day or more later sends it once more.
+  const claim = await db.prepare("SELECT sent_at FROM email_sends WHERE email_hash = ? AND kind = 'confirm'").bind(hash).first();
+  if (claim && now - parseSql(claim.sent_at) >= DAY) await db.prepare("DELETE FROM email_sends WHERE email_hash = ? AND kind = 'confirm'").bind(hash).run();
+  const result = await sendOnce(env, email, hash, confirmStep(row.source, await confirmUrl(env.DOWNLOAD_SIGNING_SECRET, hash)), fetchImpl);
+  return { status: result === 'ALREADY' ? 'PENDING' : result };
 }
 
 /**
@@ -433,10 +437,16 @@ export async function mailDomainOk(email, fetchImpl = fetch) {
   try {
     const mx = await ask('MX');
     if (mx.Status === 3) return false; // NXDOMAIN
+    if (mx.Status !== 0) return true; // SERVFAIL and the like: the lookup failed, not the address
     const answers = (mx.Answer ?? []).filter((a) => a.type === 15).map((a) => String(a.data).trim());
     if (answers.length) return !answers.every((a) => /^0\s+\.?$/.test(a));
-    const a = await ask('A'); // no MX: mail goes to the domain's own address (RFC 5321 5.1)
-    return a.Status !== 3 && (a.Answer ?? []).some((x) => x.type === 1);
+    // No MX: mail goes to the domain's own address (RFC 5321 5.1), IPv4 or IPv6.
+    for (const type of ['A', 'AAAA']) {
+      const r = await ask(type);
+      if (r.Status !== 0) return true;
+      if ((r.Answer ?? []).some((x) => x.type === 1 || x.type === 28)) return true;
+    }
+    return false;
   } catch { return true; }
 }
 

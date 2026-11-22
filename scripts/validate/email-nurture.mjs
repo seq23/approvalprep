@@ -72,6 +72,23 @@ const subjects = (sent, to) => sent.filter((m) => !to || m.to === to).map((m) =>
   }
   if (!/\$15/.test(sent[2].html)) fail('the kit email does not carry the live D1 price');
 }
+// 1a. What the page is told is true: confirm sent, still pending, already on the list, unsubscribed;
+// and a lost confirm email can be sent once more a day later, never sooner.
+{
+  const db = fakeD1(); const { sent, fetchImpl } = resend(); const env = envFor(db);
+  const t0 = Date.now();
+  const st = async (email, at = t0) => (await signUpForSample(env, email, fetchImpl, 'loe', at)).status;
+  if (await st('p@example.com') !== 'SENT') fail('a new sign-up was not told the confirm email went');
+  if (await st('p@example.com', t0 + 3_600_000) !== 'PENDING' || sent.length !== 1) fail('a repeat sign-up within a day was not told it is pending, or got a second email');
+  if (await st('p@example.com', t0 + DAY + 60_000) !== 'SENT' || sent.length !== 2) fail('a lost confirm email could not be sent again a day later');
+  await pressConfirm(env, sent, 'p@example.com', fetchImpl);
+  if (await st('p@example.com', t0 + 2 * DAY) !== 'SUBSCRIBED') fail('a confirmed address was not told it is already on the list');
+  await optOut(db, await emailHash('p@example.com'));
+  if (await st('p@example.com', t0 + 3 * DAY) !== 'OPTED_OUT') fail('an unsubscribed address was not told so');
+  const { onRequestPost } = await import('../../functions/api/sample.js');
+  const r = await (await onRequestPost({ request: new Request('https://approvalprep.com/api/sample', { method: 'POST', headers: { 'cf-connecting-ip': '198.51.100.7' }, body: JSON.stringify({ email: 'p@example.com', consent: true }) }), env }, fetchImpl, dnsOk)).json();
+  if (r.state !== 'opted_out' || r.emailed !== false) fail(`the endpoint told an unsubscribed address ${JSON.stringify(r)}`);
+}
 // 1b. A sign-up from before double opt-in (no confirm columns set) keeps its series; no row is rewritten.
 {
   const db = fakeD1(); const { sent, fetchImpl } = resend(); const env = envFor(db);
@@ -196,6 +213,8 @@ const subjects = (sent, to) => sent.filter((m) => !to || m.to === to).map((m) =>
   if (!(await mailDomainOk('x@gmail.com', dns({ Status: 0, Answer: [{ type: 15, data: '5 gmail-smtp-in.l.google.com.' }] })))) fail('a real mail domain was refused');
   if (!(await mailDomainOk('x@host.test', dns({ Status: 0 }, { Status: 0, Answer: [{ type: 1, data: '192.0.2.1' }] })))) fail('a domain with no MX but an address was refused');
   if (!(await mailDomainOk('x@gmail.com', async () => { throw Error('down'); }))) fail('a DNS outage turned a person away');
+  if (!(await mailDomainOk('x@gmail.com', dns({ Status: 2 }, { Status: 2 })))) fail('a SERVFAIL answer turned a person away');
+  if (!(await mailDomainOk('x@v6.test', async (u) => new Response(JSON.stringify(new URL(u).searchParams.get('type') === 'AAAA' ? { Status: 0, Answer: [{ type: 28, data: '2001:db8::1' }] } : { Status: 0 }), { status: 200 })))) fail('an IPv6-only mail domain was refused');
   const { onRequestPost } = await import('../../functions/api/sample.js');
   const post = (email, extra = {}, ip = '203.0.113.20') => new Request('https://approvalprep.com/api/sample', { method: 'POST', headers: { 'content-type': 'application/json', 'cf-connecting-ip': ip }, body: JSON.stringify({ email, consent: true, ...extra }) });
   const db = fakeD1(); const { sent, fetchImpl } = resend(); const env = envFor(db);
