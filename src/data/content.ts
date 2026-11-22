@@ -1,4 +1,6 @@
 import productsData from "../../data/products/products.json";
+import seedData from "../../data/products/seed_product_registry.json";
+import { withSeedPrices } from "../lib/kitPrice.mjs";
 import offeringData from "../../data/products/full_offering_catalog.json";
 import nextStepsData from "../../data/content/customer_next_steps.json";
 import boundaryData from "../../data/legal/self_service_boundary.json";
@@ -12,7 +14,9 @@ export const dataDoesNotStore = boundaryData.dataDoesNotStore;
 export const limitedOperationalRecords = boundaryData.limitedOperationalRecords;
 export const customerNextSteps = nextStepsData.steps;
 export const nextStepsShort = nextStepsData.shortCopy;
-export const productCards = productsData.products.filter((product) => product.status === "active_paid" && product.stripe_enabled);
+// Prices come from the seed (src/lib/kitPrice.mjs), never from a typed label.
+export const catalogProducts = withSeedPrices(productsData.products, seedData.products);
+export const productCards = catalogProducts.filter((product) => product.status === "active_paid" && product.stripe_enabled);
 export const offeringCategories = offeringData.categories;
 // Counts shown to customers are counted from the product data, never typed: the bundle is not a kit.
 export const BUNDLE_SKU = "complete-approvalprep-bundle";

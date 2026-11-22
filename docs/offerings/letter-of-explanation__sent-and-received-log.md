@@ -2,7 +2,6 @@
 
 **Offering ID:** `letter-of-explanation__sent-and-received-log`  
 **Bundled product:** Letter of Explanation Kit (`letter-of-explanation`)  
-**Price:** $15  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 
@@ -44,7 +43,6 @@ First-page boundary requirements:
 ## Conversion And Search Contract
 
 - Search intent: sent and received log for letters
-- CTA label: Use the Letter of Explanation Kit — $15
 - Customer situation: You want one page that records what you sent, to whom, when, and what came back.
 
 ## Safety Boundary

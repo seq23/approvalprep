@@ -2,7 +2,6 @@
 
 **Offering ID:** `life-admin-letter-kit__name-address-explanation`  
 **Bundled product:** Life Admin Letter Kit (`life-admin-letter-kit`)  
-**Price:** $19  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 

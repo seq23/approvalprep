@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
-const products = JSON.parse(fs.readFileSync('data/products/products.json','utf8')).products;
+import { withSeedPrices } from '../../src/lib/kitPrice.mjs';
+const seed = JSON.parse(fs.readFileSync('data/products/seed_product_registry.json','utf8')).products;
+const products = withSeedPrices(JSON.parse(fs.readFileSync('data/products/products.json','utf8')).products, seed);
 const active = products.filter(p=>p.status === 'active_paid' && p.stripe_enabled);
 if (active.length !== 8) { console.error(`[product-model] expected 8 active paid products, found ${active.length}`); process.exit(1); }
 const offerings = new Set(active.flatMap(p=>p.included_offerings || []));

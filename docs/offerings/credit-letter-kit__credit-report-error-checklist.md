@@ -2,7 +2,6 @@
 
 **Offering ID:** `credit-letter-kit__credit-report-error-checklist`  
 **Bundled product:** Credit Letter Kit (`credit-letter-kit`)  
-**Price:** $19  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 

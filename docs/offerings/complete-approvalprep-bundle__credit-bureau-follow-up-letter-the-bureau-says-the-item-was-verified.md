@@ -2,7 +2,6 @@
 
 **Offering ID:** `complete-approvalprep-bundle__credit-bureau-follow-up-letter-the-bureau-says-the-item-was-verified`  
 **Bundled product:** Complete ApprovalPrep Bundle (`complete-approvalprep-bundle`)  
-**Price:** $49  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 

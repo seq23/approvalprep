@@ -2,7 +2,6 @@
 
 **Offering ID:** `business-funding-prep-kit__sent-and-received-log`  
 **Bundled product:** Business Funding Prep Kit (`business-funding-prep-kit`)  
-**Price:** $39  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 

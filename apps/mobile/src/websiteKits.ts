@@ -3,8 +3,11 @@
 // this same list, in this order). Names, prices, counts and document names only: these are the
 // public facts on the pricing and kit pages. No kit wording is in this file or in the app.
 import catalog from '../../../data/products/products.json';
+import seed from '../../../data/products/seed_product_registry.json';
+import { withSeedPrices } from '../../../src/lib/kitPrice.mjs';
 interface WebsiteProduct { sku: string; name: string; priceLabel: string; status: string; stripe_enabled?: boolean; included_offerings?: string[] }
-const paid = (catalog.products as WebsiteProduct[]).filter(p => p.status === 'active_paid' && p.stripe_enabled);
+// Prices come from the seed, the price the website charges (src/lib/kitPrice.mjs).
+const paid = (withSeedPrices(catalog.products, seed.products) as WebsiteProduct[]).filter(p => p.status === 'active_paid' && p.stripe_enabled);
 export const BUNDLE_SKU = 'complete-approvalprep-bundle';
 export interface WebsiteKit { sku: string; name: string; price: string; documents: number; documentNames: string[] }
 // The catalog lists documents in lower case ("apartment application checklist"); a list on a screen
