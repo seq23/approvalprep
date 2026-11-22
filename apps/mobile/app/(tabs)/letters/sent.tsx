@@ -63,7 +63,7 @@ export default function Sent() {
         : result.reminder === 'denied' ? 'Saved as sent without a reminder. Notifications are not allowed; you can enable them in phone settings and save again.'
         : result.reminder === 'past' ? 'Saved as sent. That reminder date has passed, so no notification was set.' : 'Saved as sent.');
       // The one rating ask follows the success, never an error (src/ratingPrompt.ts).
-      void askForRatingAfterSave();
+      if (Platform.OS !== 'web') void askForRatingAfterSave();
     } catch (error) { setMessage(error instanceof Error ? error.message : 'Could not save. Please try again.'); }
     finally { setBusy(false); }
   }
