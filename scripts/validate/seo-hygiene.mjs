@@ -2,7 +2,7 @@
 /**
  * validate:seo-hygiene:jsonld (restored 10 Nov 2026, hostile review: Product prices only), over
  * the BUILT site (dist/):
- *   - every Product offers.price (USD) equals its kit's price in data/products/products.json;
+ *   - every Product offers.price (USD) equals its kit's charged price (seed_product_registry.json priceCents);
  *   - that price is visible on the page;
  *   - no Product carries review or aggregateRating (there are none to cite).
  * Hard-fails on zero pages, zero paid kits or zero Product nodes, so an empty dist/ cannot pass.
@@ -10,6 +10,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { priceLabelFromCents } from "../../src/lib/kitPrice.mjs";
 
 const ROOT = process.cwd();
 const DIST = path.join(ROOT, "dist");
@@ -53,9 +54,9 @@ function jsonld(html, where) {
 
 const checks = {
   jsonld(all) {
-    const catalog = JSON.parse(fs.readFileSync(path.join(ROOT, "data/products/products.json"), "utf8"));
-    const kitPrices = new Map(catalog.products.filter((x) => x.status === "active_paid" && x.stripe_enabled).map((x) => [x.sku, String(x.priceLabel || "").replace(/[^0-9.]/g, "")]));
-    if (!kitPrices.size) fail("[jsonld] no paid kits in data/products/products.json");
+    const seed = JSON.parse(fs.readFileSync(path.join(ROOT, "data/products/seed_product_registry.json"), "utf8"));
+    const kitPrices = new Map(seed.products.map((x) => [x.slug, priceLabelFromCents(x.priceCents).slice(1)]));
+    if (!kitPrices.size) fail("[jsonld] no paid kits in data/products/seed_product_registry.json");
     let productNodes = 0;
     for (const [p, html] of all) {
       const text = visibleText(html);

@@ -2,7 +2,6 @@
 
 **Offering ID:** `letter-of-explanation__life-event-explanation-letter`  
 **Bundled product:** Letter of Explanation Kit (`letter-of-explanation`)  
-**Price:** $15  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 
@@ -44,7 +43,6 @@ First-page boundary requirements:
 ## Conversion And Search Contract
 
 - Search intent: life event explanation letter template
-- CTA label: Use the Letter of Explanation Kit — $15
 - Customer situation: A divorce, illness, bereavement or move changed your finances, and your file needs that context to make sense.
 
 ## Safety Boundary

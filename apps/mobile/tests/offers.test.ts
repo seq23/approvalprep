@@ -4,6 +4,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { BUNDLE_OFFER, CREDIT_KIT, EXPLANATION_KIT_OFFER, KIT_OFFERS, KIT_ORDER, PRODUCTS, bundleWebsiteKits, kitOfferFor, lockedLine, offerTitle, productRoute, websiteDifference } from '../src/offers';
 import catalog from '../../../data/products/products.json';
+import seed from '../../../data/products/seed_product_registry.json';
 import { WEBSITE_KITS, websiteKit } from '../src/websiteKits';
 import { LETTERS, EXPLANATION_LETTERS } from '../src/letters';
 import { kitForKind, kindsForKit } from '../src/kitTemplates';
@@ -24,7 +25,7 @@ test('every locked letter names its own kit, and both kits hold exactly their le
 
 // Her ruling 13 Nov 2026, "Exact mirror": the app sells the website's 8 products, same names, same order.
 test('the app sells exactly the website\'s paid products, in the website\'s order, under the website\'s names', () => {
-  const site = (catalog.products as { sku: string; name: string; status: string; stripe_enabled?: boolean; priceLabel: string }[]).filter(p => p.status === 'active_paid' && p.stripe_enabled);
+  const site = (catalog.products as { sku: string; name: string; status: string; stripe_enabled?: boolean }[]).filter(p => p.status === 'active_paid' && p.stripe_enabled);
   assert.equal(site.length, 8);
   assert.deepEqual(PRODUCTS.map(p => p.name), site.map(p => p.name));
   assert.deepEqual(PRODUCTS.map(p => p.sku), site.map(p => p.sku));
@@ -40,7 +41,7 @@ test('the app sells exactly the website\'s paid products, in the website\'s orde
   // Nearest store price to the price the website shows.
   const approved: Record<string, number> = { [KIT.productId]: KIT.approvedPriceUSD, [EXPLANATION_KIT.productId]: EXPLANATION_KIT.approvedPriceUSD, [COMPLETE_BUNDLE.productId]: COMPLETE_BUNDLE.approvedPriceUSD, ...Object.fromEntries(FILE_KITS.map(k => [k.productId, k.approvedPriceUSD])) };
   for (const p of PRODUCTS) {
-    const dollars = Number(site.find(s => s.sku === p.sku)!.priceLabel.replace(/^\$/, ''));
+    const dollars = seed.products.find(s => s.slug === p.sku)!.priceCents / 100;
     assert.ok(dollars > 0, p.name);
     assert.ok(Math.abs(approved[p.productId] - dollars) < 1, `${p.name}: ${approved[p.productId]} vs ${dollars}`);
     assert.match(String(approved[p.productId]), /\.99$/);

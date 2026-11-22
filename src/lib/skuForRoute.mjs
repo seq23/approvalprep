@@ -1,7 +1,7 @@
 // Which kit a page's buy button sells. Pure, so the validator
 // (scripts/validate/kit-page-sells-its-own-kit.mjs) can run it against every path.
 //
-// 16 Oct 2026: /life-admin-letter-kit/ sold the $15 Letter of Explanation kit,
+// 16 Oct 2026: /life-admin-letter-kit/ sold the Letter of Explanation kit,
 // because no keyword below matches "life-admin" and the fallthrough won. A path
 // that IS a paid kit's slug now sells that kit before any keyword is consulted.
 export function skuForRoute(path, { priorityEntry = null, paidSkus = [] } = {}) {

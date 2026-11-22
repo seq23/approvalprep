@@ -58,6 +58,12 @@ export async function gscAccessToken(scope = "https://www.googleapis.com/auth/we
   } catch {
     return "";
   }
+  return serviceAccountAccessToken(info, scope);
+}
+
+// One JWT-bearer exchange for every Google API a service account calls here
+// (Search Console above, Play Developer API for the Android internal-track check).
+export async function serviceAccountAccessToken(info, scope) {
   if (!info?.client_email || !info?.private_key) return "";
   const b64 = (v) => Buffer.from(typeof v === "string" ? v : JSON.stringify(v)).toString("base64url");
   const iat = Math.floor(Date.now() / 1000);

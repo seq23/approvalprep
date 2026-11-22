@@ -4,9 +4,10 @@ import { useCallback, useState } from 'react';
 import { Linking, Text } from 'react-native';
 import { Button, Row, Screen, Sheet } from '../../../src/ui';
 import { type } from '../../../src/theme';
+import { PRIVACY_URL, TERMS_URL } from '../../../src/more';
 import { HONEST_LIMIT } from '../../../src/copy';
 import { PREVIEW_ENABLED } from '../../../src/previewSamples';
-import { WEBSITE_BUYER_LABEL, BUNDLE_LINE, KIT_OFFERS, KIT_ORDER, PRODUCTS, upgradeLine, TRACKING_LINE, bundleFilesLine, bundleWebsiteKits, offerTitle, productName, productRoute } from '../../../src/offers';
+import { PAID_ONCE_LINE, BUNDLE_LINE, KIT_OFFERS, KIT_ORDER, PRODUCTS, upgradeLine, TRACKING_LINE, bundleFilesLine, bundleWebsiteKits, offerTitle, productName, productRoute } from '../../../src/offers';
 import { COMPLETE_BUNDLE, KIT_SALES_ENABLED, isUpgrade, upgradeFor } from '../../../src/kit';
 import { offersFor, otherKits, ownedKitIds, NO_OWNERSHIP, type BundleOwnership } from '../../../src/purchases/bundleOffers';
 import { bundleAccount, type BundlePrice } from '../../../src/purchases/bundleAccount';
@@ -89,15 +90,15 @@ export default function Bundle() {
     {preview && ownership.bundle ? PRODUCTS.filter(p => p.productId !== COMPLETE_BUNDLE.productId).map(p => <Row key={p.sku} title={`${p.name}: your files ›`} sub="Open the PDF guide and the Word file" onPress={() => router.push({ pathname: productRoute(p.productId).pathname, params: p.params })} />) : null}
     {selected && !owned ? <>
       <Button primary disabled={busy || !ready || !price || !canBuy} label={!price ? 'Store price unavailable' : isUpgrade(selected) ? upgradeLine(KIT_ORDER.length - mine.length, price, paid) : `Get the bundle, ${price} once`} onPress={() => void act(true)} />
+      <Text style={type.sub}>{PAID_ONCE_LINE}</Text>
       {preview ? <Text testID="buying-pretend" style={type.sub}>This is a preview: buying here is pretend, nothing is charged, and it lasts until you close the page.</Text>
         : canBuy ? null : <Text testID="buying-off" style={type.sub}>{PREVIEW_ENABLED ? 'This is a preview, so buying is switched off and the button above does nothing. The price is shown so you can see it.' : 'Buying is not available right now.'}</Text>}
     </> : null}
     {kits.length ? <Text style={type.sub}>Other options</Text> : null}
     {kits.map(id => <Row key={id} title={offerTitle(productName(id), prices.find(p => p.id === id)?.price)} sub={PRODUCTS.find(p => p.productId === id)?.what} onPress={() => router.push(productRoute(id))} />)}
-    <Button quiet label={WEBSITE_BUYER_LABEL} onPress={() => router.navigate('/more')} />
     <Button quiet label={busy ? 'Checking…' : 'Restore purchase'} disabled={busy} onPress={() => void act(false)} />
     {message ? <Text accessibilityRole="alert" style={type.sub}>{message}</Text> : null}
-    <Button quiet label="Terms ›" onPress={() => void Linking.openURL('https://approvalprep.com/terms/')} />
-    <Button quiet label="Privacy ›" onPress={() => void Linking.openURL('https://approvalprep.com/privacy/')} />
+    <Button quiet label="Terms ›" onPress={() => void Linking.openURL(TERMS_URL)} />
+    <Button quiet label="Privacy ›" onPress={() => void Linking.openURL(PRIVACY_URL)} />
   </Screen>;
 }

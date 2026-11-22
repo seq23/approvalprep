@@ -6,7 +6,7 @@
 // (scripts/install_clarity.mjs), so "nothing you type is sent to us" stays true.
 import { studioSituations, bureaus, kitMoments, SELF_HELP_LINE, TRUE_FACTS_LINE, BUREAU_ADDRESSES_CHECKED, ANSWER_WINDOW, BEFORE_YOU_MAIL } from "../data/letterStudio";
 const creditKit = productForSku("credit-letter-kit");
-const creditKitLabel = `${creditKit?.name || "Credit Letter Kit"} — ${creditKit?.priceLabel || "$19"}`;
+const creditKitLabel = `${creditKit.name} — ${creditKit.priceLabel}`;
 import { productForSku } from "../data/content";
 const kits = Object.fromEntries(studioSituations.map((s) => {
   const product = productForSku(s.recommendationSku);

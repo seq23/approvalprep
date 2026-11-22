@@ -1,14 +1,15 @@
 import { json } from '../_runtime/responses.js';
-import { normalizeEmail, sendFailureStop, signUpForSample } from '../_runtime/nurture.js';
+import { mailDomainOk, normalizeEmail, sendFailureStop, signUpForSample } from '../_runtime/nurture.js';
 import { DAY, HOUR, clientIp, sha256, withinLimit } from '../_runtime/rate-limit.js';
 
 // The sample goes to any typed-in address, so sends are capped: 5 an hour per IP, 100 a day overall.
 const SAMPLE_LIMITS = { perIpHour: 5, globalDay: 100 };
 
-// The free Letter of Explanation sample (src/components/SampleSignup.astro). The visitor
-// types their own address and ticks consent; the sample is emailed at once and the page
-// shows the PDF link too. The follow-up series is functions/_runtime/nurture.js.
-export async function onRequestPost({ request, env }, fetchImpl = fetch) {
+// The free sample, credit starter and employment letter sign-ups (src/components/*Signup.astro).
+// The visitor types their own address and ticks consent; the page shows the free item at once, and
+// the ONE email sent now asks them to confirm the address (double opt-in). The free item and the
+// short series follow only after the confirm button (functions/api/confirm.js, nurture.js).
+export async function onRequestPost({ request, env }, fetchImpl = fetch, dnsFetch = fetch) {
   const body = await request.json().catch(() => null);
   if (!body) return json({ ok: false, error: 'Invalid request.' }, 400);
   if (body.company) return json({ ok: true }); // honeypot
@@ -20,13 +21,17 @@ export async function onRequestPost({ request, env }, fetchImpl = fetch) {
     || !(await withinLimit(env.PRODUCTS_DB, 'sample:global', SAMPLE_LIMITS.globalDay, DAY))) {
     return json({ ok: false, error: 'Too many sign-ups right now. Please try again later.' }, 429);
   }
-  const magnet = body.magnet === 'credit-starter' ? 'credit-starter' : 'loe';
+  if (!(await mailDomainOk(email, dnsFetch))) return json({ ok: false, error: 'That email address cannot receive mail. Please check the part after the @.' }, 400);
+  const magnet = ['credit-starter', 'employment-letter'].includes(body.magnet) ? body.magnet : 'loe';
   const sent = await signUpForSample(env, email, fetchImpl, magnet);
-  const emailed = sent.status === 'SENT' || sent.status === 'ALREADY';
+  // state tells the page what really happened: a confirm email just sent, one sent earlier and
+  // still waiting, an address already on the list, an unsubscribed address, or nothing sent.
+  const state = { SENT: 'confirm_sent', PENDING: 'confirm_pending', SUBSCRIBED: 'already_subscribed', OPTED_OUT: 'opted_out' }[sent.status] ?? 'not_sent';
+  const emailed = state !== 'not_sent' && state !== 'opted_out';
   // Not emailed is said, never hidden: the page tells the visitor plainly, and the stop is logged by
   // name. The claim was released, so the next nurture tick retries it and goes red if it fails again.
   const stop = emailed || sent.status === 'OPTED_OUT' ? null : (sent.stop ?? sendFailureStop(1));
   if (stop) console.error(JSON.stringify({ event: 'SAMPLE_NOT_SENT', stop }));
-  return json({ ok: true, emailed, ...(stop ? { stop } : {}) });
+  return json({ ok: true, emailed, state, ...(stop ? { stop } : {}) });
 }
 export async function onRequestGet() { return json({ ok: false, error: 'POST_REQUIRED' }, 405); }

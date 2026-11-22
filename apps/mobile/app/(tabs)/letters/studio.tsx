@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
 import { Platform, Share, Text } from 'react-native';
 import * as Clipboard from 'expo-clipboard';
@@ -12,7 +12,10 @@ import { letterHtml } from '../../../src/letterPdf';
 import { saveOrPrintLetter } from '../../../src/letterExport';
 import { draftWriter } from '../../../src/letterQuestions';
 import type { SavedLetter } from '../../../src/letterStorage';
-import { letterHref, latestStudioDraft, newStudioDraft, newStudioId, studioKind, studioStep } from '../../../src/studioDrafts';
+import { showsUnderwriterGuide } from '../../../src/mortgage';
+import { UnderwriterGuide } from '../../../src/MortgageMoment';
+import { letterHref, newStudioDraft, studioEntry, studioKind, studioStep } from '../../../src/studioDrafts';
+import { seasonalTip } from '../../../src/seasonal';
 
 // The free Letter Studio. Each question is its own step in the tab's history, so Back goes to the
 // previous question; every answer is saved on the phone as it is typed (src/studioDrafts.ts), so
@@ -60,10 +63,15 @@ export default function Studio() {
   const go = (extra: Record<string, string>) => { void settled().then(() => router.push({ pathname: '/letters/studio', params: { situation: situation!.id, id: params.id!, ...extra } })); };
   async function choose(next: string, fresh = false) {
     if (next === 'credit-dispute') { router.push({ ...await savedLetters().then(store => letterHref(store, 'bureau-dispute')).catch(() => ({ params: { kind: 'bureau-dispute' } })), pathname: '/letters/[kind]' }); return; }
-    let last: SavedLetter | null = null;
-    try { last = fresh ? null : await latestStudioDraft(await savedLetters(), next); } catch { /* A new draft is still possible. */ }
-    router.push({ pathname: '/letters/studio', params: { situation: next, id: last?.id ?? newStudioId(), step: '0', ...(last ? { resumed: '1' } : {}) } });
+    router.push(await studioEntry(await savedLetters().catch(() => null), next, fresh));
   }
+  // An In-App Event link names only the situation (approvalprep://letters/studio?situation=income):
+  // open it the same way choosing it on the list does.
+  useEffect(() => {
+    if (!situation || params.id) return;
+    if (situation.id === 'credit-dispute') { void choose(situation.id); return; }
+    void savedLetters().catch(() => null).then(store => studioEntry(store, situation.id)).then(href => router.replace(href));
+  }, [situation?.id, params.id]);
   const draft = situation && letter ? studioDraft(situation.id, letter.answers) : null;
   async function copy() {
     try { await Clipboard.setStringAsync(draft!.text); setMessage('Copied.'); }
@@ -118,6 +126,7 @@ export default function Studio() {
       </> : null}
     </> : field ? <>
       {limit}
+      {step === 0 && seasonalTip(situation.id) ? <Text style={type.body}>{seasonalTip(situation.id)}</Text> : null}
       <Text style={type.sub} accessibilityLiveRegion="polite">{resumed && step === 0 && stored ? 'This is the draft you started before. Your answers are filled in.' : note || 'Opening your draft…'}</Text>
       {letter ? <>
         <Field label={`Question ${step + 1} of ${situation.fields.length}`} spoken={field.label} defaultHint={field.hint} multiline={field.kind === 'long' || field.kind === 'lines'} value={letter.answers[field.name] ?? ''} onChangeText={value => persist({ ...letter, answers: { ...letter.answers, [field.name]: value } })} />
@@ -127,6 +136,8 @@ export default function Studio() {
         {step > 0 && !editing ? <Button label="← Previous question" onPress={() => router.back()} /> : null}
         {resumed && step === 0 && stored ? <Button label="Start a blank one instead" onPress={() => void choose(situation.id, true)} /> : null}
       </> : null}
+      {/* Below the question's box and its Next button, so the box stays right under its title. */}
+      {showsUnderwriterGuide(situation.id, step) && !editing ? <UnderwriterGuide /> : null}
     </> : null}
   </Screen>;
 }

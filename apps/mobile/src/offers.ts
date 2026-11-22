@@ -38,9 +38,7 @@ export const lockedLine = (kitName: string, price?: string) => price ? `In the $
 
 export const STUDIO_COUNT = situations.length;
 export const FREE_LINE = `Free, as often as you like: the Letter Studio (${STUDIO_COUNT} situations) and the credit bureau dispute letter with its PDF.`;
-/** Home's line over the kits: the same kits as the website, never "the same price" (the store sets its own). */
-export const SAME_KITS_LINE = 'The kits approvalprep.com sells, in the same order. Here you buy them through the app store, at the app store’s price.';
-export const PAID_ONCE_LINE = 'Each is paid once. There is no subscription.';
+export const PAID_ONCE_LINE = 'Each is paid once. No subscription, no renewal, nothing to cancel.';
 
 // The app's two letter kits also carry the website kit of the same name, as its files.
 // Said once, on the kit screen, with the website's own count.
@@ -50,8 +48,6 @@ export function websiteDifference(kitId: string): string {
   const files = site ? ` It also gives you the website's ${site.name} as files: a PDF guide and an editable Word file with its ${count(site.documents, 'document')}.` : '';
   return `In this app the ${offer.name} is the ${count(offer.letters.length, 'letter')} above, filled in here, plus tracking.${files} A kit bought here does not appear on the website.`;
 }
-/** A kit bought on approvalprep.com opens in this app at no charge (More, src/purchases/websiteUnlock.ts). */
-export const WEBSITE_BUYER_LABEL = 'Bought it on approvalprep.com? Open it here at no charge ›';
 /** The website kits the bundle delivers as files, by name. */
 export const bundleWebsiteKits = () => WEBSITE_KITS.map(k => k.name);
 export const bundleFilesLine = () => `The ${WEBSITE_KITS.length} website kits as files (a PDF guide and editable Word templates for each), in one ZIP:`;

@@ -36,3 +36,10 @@ Task 11: production builds go to TestFlight (`eas build -p ios --profile product
 submit profile `production`, ascAppId 6834891489). Submitting for App Store review stays with the owner.
 - `NAMED STOP [KIT_SALES_OFF]`: a store build with `KIT_SALES_ENABLED` not `true` in `src/kit.ts` is refused
   (Apple rejects prices that cannot be paid, guideline 2.1).
+
+Google Play: the `internal` build profile (extends `production`, same full gate, RevenueCat `goog_` key from the EAS
+`production` environment) is built and uploaded by `.github/workflows/android-store-build.yml` (manual dispatch only):
+`eas build --local` on a GitHub runner with the EAS-held upload key (SHA-1 checked against the 19 Nov 2026 AAB), then
+`eas submit --profile internal` to the internal testing track as a **draft**, then `scripts/play-internal-check.mjs`
+fails the run unless Play shows that versionCode as a draft on internal and on no other track. `play-sa.json` is written
+from the `GOOGLE_PLAY_UPLOAD_SA_JSON` secret and deleted in an `always()` step. Production on Play is a later, separate step.

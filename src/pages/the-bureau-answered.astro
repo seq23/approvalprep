@@ -16,7 +16,7 @@ const canonical = canonicalUrl(path);
 const title = "The Credit Bureau Answered Your Dispute: What Next?";
 const description = "A credit bureau answers a dispute in one of three ways: corrected, verified, or silence. What each answer means and the free steps you can take yourself, with sources.";
 const kit = productForSku("credit-letter-kit");
-const kitLabel = `${kit?.name || "Credit Letter Kit"} — ${kit?.priceLabel || "$19"}`;
+const kitLabel = `${kit.name} — ${kit.priceLabel}`;
 const FTC = ANSWER_WINDOW.source.url;
 const CFPB = "https://www.consumerfinance.gov/ask-cfpb/how-do-i-dispute-an-error-on-my-credit-report-en-314/";
 const COMPLAINT = "https://www.consumerfinance.gov/complaint/";
@@ -81,7 +81,7 @@ const after = kitMoments["credit-letter-kit"];
   <section class="band cta-callout" id="the-kit" data-credit-path-offer><div class="shell">
     <p class="eyebrow">Optional · paid once</p>
     <h2>Do I need to pay for any of this?</h2>
-    <p>No. Every step on this page is free. If you would rather not write the letters from a blank page, the {kit?.name || "Credit Letter Kit"} is one purchase of {kit?.priceLabel || "$19"}, paid once. It covers every letter after the first, however many answers you get: <strong>{after.promise.toLowerCase().replace(/\.$/, "")}</strong>.</p>
+    <p>No. Every step on this page is free. If you would rather not write the letters from a blank page, the {kit.name} is one purchase of {kit.priceLabel}, paid once. It covers every letter after the first, however many answers you get: <strong>{after.promise.toLowerCase().replace(/\.$/, "")}</strong>.</p>
     <p>The kit's letter for each answer:</p>
     <ul class="compact-list">{after.byAnswer.map((a) => <li>{`${a.answer}: ${a.items.join("; ")}.`}</li>)}</ul>
     <p>Also in the kit: {after.moments.flatMap((m) => m.items).filter((i) => !after.byAnswer.some((a) => a.items.includes(i))).join(", ")}, and the first dispute letter.</p>

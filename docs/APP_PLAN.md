@@ -233,11 +233,11 @@ Run `npm run check` in `apps/mobile` after each task; the App preview run must s
 ## RevenueCat (set up 13 Nov 2026, her yes: "set up revenuecat for the other 3 apps")
 
 The project **ApprovalPrep** exists in her RevenueCat account. Everything inside it is made from the
-code by `apps/mobile/scripts/revenuecat/setup.ts`: the iOS and Android apps (`com.approvalprep.app`),
-the 14 one-time products on each store and the Test Store, one entitlement per product id (what
+code by the shared `~/bin/revenuecat-setup` tool (seq-bin) from the catalog in `apps/mobile/scripts/revenuecat/setup.ts`: the iOS and Android apps (`com.approvalprep.app`),
+the 14 one-time products on each store and the Test Store (each `non_consumable`; on Play RevenueCat holds them as `one_time` with `is_consumable: false`, which the tool checks), one entitlement per product id (what
 `ownershipFrom` reads), and the `default` offering in paywall order. It re-checks everything and
 fixes only what is missing, so it is safe to re-run after any product change:
-`cd ~/GitHub/boss-os && npm run -s vault:run -- npx --prefix ~/GitHub/approvalprep/apps/mobile tsx ~/GitHub/approvalprep/apps/mobile/scripts/revenuecat/setup.ts --save-keys`
+`cd ~/GitHub/boss-os && npm run -s vault:run -- ~/bin/revenuecat-setup ~/GitHub/approvalprep/apps/mobile/scripts/revenuecat/setup.ts --save-keys`
 (the public SDK keys go to the vault as `REVENUECAT_AP_{IOS,ANDROID,TEST}_PUBLIC_KEY`; at the store
 build they become `EXPO_PUBLIC_AP_REVENUECAT_IOS_KEY` / `_ANDROID_KEY`, never in git).
 

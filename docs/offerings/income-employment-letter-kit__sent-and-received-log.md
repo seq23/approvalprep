@@ -2,7 +2,6 @@
 
 **Offering ID:** `income-employment-letter-kit__sent-and-received-log`  
 **Bundled product:** Income + Employment Letter Kit (`income-employment-letter-kit`)  
-**Price:** $19  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 

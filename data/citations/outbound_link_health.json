@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-19T19:32:52.819Z",
+  "generatedAt": "2026-11-21T17:59:30.255Z",
   "measuredBy": "scripts/seo/probe-outbound-links.mjs",
   "note": "Measured HTTP status of every outbound <a href> in dist/. `dead` suppresses the hyperlink at render time; nothing else does.",
   "counts": {
-    "live": 143,
+    "live": 153,
     "dead": 5,
-    "unreachable": 7,
-    "crawler_blocked": 11
+    "unreachable": 9,
+    "crawler_blocked": 13
   },
   "links": [
     {
@@ -15,7 +15,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -27,7 +27,7 @@
       "classification": "dead",
       "httpStatus": 404,
       "evidence": "browser=404 googlebot=404",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [],
       "emittedAsLink": false
@@ -37,9 +37,11 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-10T20:46:30.474Z",
       "citedBy": [
+        "/credit-bureau-dispute-addresses/",
+        "/equifax-dispute-address/",
         "/letter-writing-studio/"
       ],
       "emittedAsLink": true
@@ -49,7 +51,7 @@
       "classification": "dead",
       "httpStatus": 404,
       "evidence": "browser=404 googlebot=404",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [],
       "emittedAsLink": false
@@ -59,7 +61,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -71,7 +73,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -83,7 +85,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -95,13 +97,15 @@
       "classification": "unreachable",
       "httpStatus": 404,
       "evidence": "origin down: https://consumer.ftc.gov/articles/disputing-errors-your-credit-reports answered browser=404 googlebot=403 and the origin root https://consumer.ftc.gov/ answered 404",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/amazon/credit-dispute-letter/",
+        "/credit-bureau-dispute-addresses/",
         "/goodwill-letter-credit/",
         "/letter-writing-studio/",
-        "/the-bureau-answered/"
+        "/the-bureau-answered/",
+        "/transunion-dispute-address/"
       ],
       "emittedAsLink": true
     },
@@ -110,7 +114,7 @@
       "classification": "unreachable",
       "httpStatus": 404,
       "evidence": "origin down: https://consumer.ftc.gov/articles/fixing-your-credit-faqs answered browser=404 googlebot=403 and the origin root https://consumer.ftc.gov/ answered 404",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-14T01:43:56.625Z",
       "citedBy": [
         "/credit-repair-disclaimer/"
@@ -122,7 +126,7 @@
       "classification": "unreachable",
       "httpStatus": 404,
       "evidence": "origin down: https://consumer.ftc.gov/articles/sample-letter-credit-bureaus-disputing-errors-credit-reports answered browser=404 googlebot=403 and the origin root https://consumer.ftc.gov/ answered 404",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-10T20:58:20.845Z",
       "citedBy": [
         "/letter-writing-studio/",
@@ -135,7 +139,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -147,7 +151,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -159,7 +163,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -171,7 +175,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-13T11:14:50.015Z",
       "citedBy": [
         "/questions/what-is-a-goodwill-credit-adjustment/"
@@ -183,7 +187,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-09T11:18:15.206Z",
       "citedBy": [
         "/questions/how-to-send-letters-to-credit-bureaus/"
@@ -195,7 +199,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-03T11:18:24.404Z",
       "citedBy": [
         "/questions/how-much-does-credit-repair-cost/",
@@ -209,7 +213,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-02T13:53:52.542Z",
       "citedBy": [
         "/questions/how-to-get-approved-for-apartment-with-no-rental-history/"
@@ -221,7 +225,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-05T10:07:19.631Z",
       "citedBy": [
         "/questions/mortgage-pre-approval-documents-checklist/"
@@ -233,7 +237,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-02T13:53:52.542Z",
       "citedBy": [
         "/questions/what-documents-do-mortgage-lenders-require/"
@@ -245,7 +249,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-03T11:18:24.404Z",
       "citedBy": [
         "/questions/letter-confirming-employment-template/"
@@ -257,7 +261,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -269,7 +273,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -281,7 +285,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -293,7 +297,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "googlebot-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/amazon/letter-of-explanation/",
@@ -308,7 +312,7 @@
       "classification": "crawler_blocked",
       "httpStatus": 403,
       "evidence": "browser=403 googlebot=403",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -320,7 +324,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -331,8 +335,8 @@
       "url": "https://homeloanhelp.bankofamerica.com/en/document-checklist.html",
       "classification": "live",
       "httpStatus": 200,
-      "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "evidence": "googlebot-ua",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -344,7 +348,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -356,7 +360,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -368,7 +372,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -380,7 +384,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -392,7 +396,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -404,7 +408,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-10-09T04:17:11.531Z",
       "citedBy": [
         "/609-dispute-letter/",
@@ -420,14 +424,38 @@
       "emittedAsLink": true
     },
     {
+      "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1950.5",
+      "classification": "crawler_blocked",
+      "httpStatus": 403,
+      "evidence": "browser=403 googlebot=403",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
+      "firstSeenAt": "2026-11-21T16:37:07.463Z",
+      "citedBy": [
+        "/security-deposit-demand-letter/"
+      ],
+      "emittedAsLink": true
+    },
+    {
       "url": "https://lgefoundation.org/content/docs/BusinessLoanChecklist50kPlus.pdf",
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
+      ],
+      "emittedAsLink": true
+    },
+    {
+      "url": "https://money.com/lexington-law-credit-repair-review/",
+      "classification": "live",
+      "httpStatus": 200,
+      "evidence": "browser-ua",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
+      "firstSeenAt": "2026-11-21T16:37:07.463Z",
+      "citedBy": [
+        "/lexington-law-alternative/"
       ],
       "emittedAsLink": true
     },
@@ -436,7 +464,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -448,7 +476,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -460,7 +488,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -472,7 +500,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -484,7 +512,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -496,7 +524,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -508,7 +536,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -520,7 +548,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-19T13:42:47.743Z",
       "citedBy": [
         "/privacy/"
@@ -532,7 +560,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -544,7 +572,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -556,7 +584,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/amazon/gift-letter-down-payment/",
@@ -571,14 +599,51 @@
       "emittedAsLink": true
     },
     {
+      "url": "https://selling-guide.fanniemae.com/sel/b3-4.3-04/personal-gifts",
+      "classification": "live",
+      "httpStatus": 200,
+      "evidence": "browser-ua",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
+      "firstSeenAt": "2026-11-21T16:37:07.463Z",
+      "citedBy": [
+        "/letter-of-explanation/mortgage/",
+        "/mortgage/gift-letter-explanation/"
+      ],
+      "emittedAsLink": true
+    },
+    {
+      "url": "https://selling-guide.fanniemae.com/sel/b3-5.3-09/du-credit-report-analysis",
+      "classification": "live",
+      "httpStatus": 200,
+      "evidence": "browser-ua",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
+      "firstSeenAt": "2026-11-21T16:37:07.463Z",
+      "citedBy": [
+        "/letter-of-explanation/mortgage/"
+      ],
+      "emittedAsLink": true
+    },
+    {
       "url": "https://settlhome.com/checklist",
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
+      ],
+      "emittedAsLink": true
+    },
+    {
+      "url": "https://statutes.capitol.texas.gov/Docs/PR/htm/PR.92.htm",
+      "classification": "live",
+      "httpStatus": 200,
+      "evidence": "browser-ua",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
+      "firstSeenAt": "2026-11-21T16:37:07.463Z",
+      "citedBy": [
+        "/security-deposit-demand-letter/"
       ],
       "emittedAsLink": true
     },
@@ -587,7 +652,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -599,7 +664,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -611,7 +676,7 @@
       "classification": "dead",
       "httpStatus": 404,
       "evidence": "browser=404 googlebot=404",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [],
       "emittedAsLink": false
@@ -621,7 +686,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -633,7 +698,7 @@
       "classification": "crawler_blocked",
       "httpStatus": 403,
       "evidence": "browser=403 googlebot=403",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -645,17 +710,21 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/609-dispute-letter/",
+        "/adverse-action-notice/",
         "/credit-dispute-letter/",
         "/credit-letter-kit/",
         "/credit-repair-disclaimer/",
+        "/equifax-dispute-address/",
+        "/experian-dispute-address/",
         "/goodwill-letter-credit/",
         "/goodwill-letter-to-remove-late-payment/",
         "/letter-of-explanation/credit/",
-        "/letter-of-explanation/late-payment/"
+        "/letter-of-explanation/late-payment/",
+        "/transunion-dispute-address/"
       ],
       "emittedAsLink": true
     },
@@ -664,7 +733,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-16T18:36:35.707Z",
       "citedBy": [
         "/privacy/"
@@ -676,7 +745,7 @@
       "classification": "dead",
       "httpStatus": 404,
       "evidence": "browser=404 googlebot=404",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [],
       "emittedAsLink": false
@@ -686,7 +755,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -698,7 +767,7 @@
       "classification": "crawler_blocked",
       "httpStatus": 403,
       "evidence": "browser=403 googlebot=403",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -710,7 +779,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -722,7 +791,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -734,7 +803,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -746,7 +815,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -758,7 +827,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/609-dispute-letter/",
@@ -779,7 +848,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/goodwill-letter-to-remove-late-payment/"
@@ -791,7 +860,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-14T01:43:56.625Z",
       "citedBy": [
         "/credit-repair-disclaimer/"
@@ -803,7 +872,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-03T11:18:24.404Z",
       "citedBy": [
         "/questions/documents-required-for-home-mortgage-loan/"
@@ -815,7 +884,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-03T11:18:24.404Z",
       "citedBy": [
         "/questions/what-paperwork-is-needed-for-a-mortgage/"
@@ -827,7 +896,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-03T11:18:24.404Z",
       "citedBy": [
         "/questions/mortgage-checklist/"
@@ -839,7 +908,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-14T01:43:56.625Z",
       "citedBy": [
         "/credit-repair-disclaimer/",
@@ -852,7 +921,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-02T13:53:52.542Z",
       "citedBy": [
         "/questions/mortgage-loan-documents-checklist/"
@@ -864,7 +933,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/amazon/landlord-reference-letter/",
@@ -887,12 +956,13 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/",
         "/about/",
         "/accessibility/",
+        "/adverse-action-notice/",
         "/ai-use-policy/",
         "/amazon/",
         "/amazon/credit-dispute-letter/",
@@ -908,13 +978,18 @@
         "/checkout/success/",
         "/complete-approvalprep-bundle/",
         "/contact/",
+        "/credit-bureau-dispute-addresses/",
         "/credit-repair-disclaimer/",
+        "/debt-validation-letter/",
         "/disclaimer/",
         "/download/",
         "/editorial-policy/",
+        "/equifax-dispute-address/",
+        "/experian-dispute-address/",
         "/glossary/",
         "/important-documents-checklist/",
         "/letter-writing-studio/",
+        "/lexington-law-alternative/",
         "/life-admin-letter-kit/",
         "/methodology/",
         "/moving-checklist/",
@@ -954,12 +1029,14 @@
         "/reports/",
         "/reports/document-readiness-index/",
         "/resources/",
+        "/security-deposit-demand-letter/",
         "/security/",
         "/templates/",
         "/terms/",
         "/the-bureau-answered/",
         "/tools/",
-        "/tools/important-documents-folder-checklist/"
+        "/tools/important-documents-folder-checklist/",
+        "/transunion-dispute-address/"
       ],
       "emittedAsLink": true
     },
@@ -968,7 +1045,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/amazon/credit-dispute-letter/",
@@ -984,11 +1061,23 @@
       "emittedAsLink": true
     },
     {
+      "url": "https://www.consumerfinance.gov/consumer-tools/debt-collection/",
+      "classification": "live",
+      "httpStatus": 200,
+      "evidence": "browser-ua",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
+      "firstSeenAt": "2026-11-21T16:37:07.463Z",
+      "citedBy": [
+        "/debt-validation-letter/"
+      ],
+      "emittedAsLink": true
+    },
+    {
       "url": "https://www.consumerfinance.gov/consumer-tools/mortgages/",
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-03T11:18:24.404Z",
       "citedBy": [
         "/questions/list-of-documents-needed-for-home-loan-application/",
@@ -998,11 +1087,23 @@
       "emittedAsLink": true
     },
     {
+      "url": "https://www.consumerfinance.gov/enforcement/actions/pgx-holdings-inc/",
+      "classification": "live",
+      "httpStatus": 200,
+      "evidence": "browser-ua",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
+      "firstSeenAt": "2026-11-21T16:37:07.463Z",
+      "citedBy": [
+        "/lexington-law-alternative/"
+      ],
+      "emittedAsLink": true
+    },
+    {
       "url": "https://www.consumerfinance.gov/find-a-housing-counselor/",
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/auto-loan-documents/",
@@ -1034,7 +1135,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/amazon/gift-letter-down-payment/",
@@ -1071,7 +1172,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/letter-of-explanation/large-deposit/",
@@ -1085,7 +1186,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-03T11:18:24.404Z",
       "citedBy": [
         "/questions/home-loan-documents-required-for-self-employed/"
@@ -1097,7 +1198,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/blog/what-should-i-know-about-a-mortgage-loan-documents-checklist/",
@@ -1111,7 +1212,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-06T21:16:27.608Z",
       "citedBy": [
         "/"
@@ -1123,7 +1224,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1135,7 +1236,7 @@
       "classification": "crawler_blocked",
       "httpStatus": 403,
       "evidence": "browser=403 googlebot=403",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/employment-verification-letter/",
@@ -1148,7 +1249,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1160,7 +1261,7 @@
       "classification": "crawler_blocked",
       "httpStatus": 403,
       "evidence": "browser=403 googlebot=403",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-02T13:53:52.542Z",
       "citedBy": [
         "/questions/how-to-write-an-employment-verification-letter/",
@@ -1173,7 +1274,7 @@
       "classification": "crawler_blocked",
       "httpStatus": 403,
       "evidence": "browser=403 googlebot=403",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/amazon/employment-verification-letter/",
@@ -1191,10 +1292,34 @@
       "classification": "crawler_blocked",
       "httpStatus": 403,
       "evidence": "browser=403 googlebot=403",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-03T11:18:24.404Z",
       "citedBy": [
         "/questions/what-does-a-verification-of-employment-letter-look-like/"
+      ],
+      "emittedAsLink": true
+    },
+    {
+      "url": "https://www.ecfr.gov/current/title-12/chapter-X/part-1002/section-1002.9",
+      "classification": "live",
+      "httpStatus": 200,
+      "evidence": "browser-ua",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
+      "firstSeenAt": "2026-11-21T16:37:07.463Z",
+      "citedBy": [
+        "/adverse-action-notice/"
+      ],
+      "emittedAsLink": true
+    },
+    {
+      "url": "https://www.ecfr.gov/current/title-12/chapter-X/part-1006/subpart-B/section-1006.34",
+      "classification": "live",
+      "httpStatus": 200,
+      "evidence": "browser-ua",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
+      "firstSeenAt": "2026-11-21T16:37:07.463Z",
+      "citedBy": [
+        "/debt-validation-letter/"
       ],
       "emittedAsLink": true
     },
@@ -1203,7 +1328,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1215,7 +1340,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1227,7 +1352,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-10T20:58:20.845Z",
       "citedBy": [
         "/letter-writing-studio/",
@@ -1240,9 +1365,11 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-10T20:46:30.474Z",
       "citedBy": [
+        "/credit-bureau-dispute-addresses/",
+        "/experian-dispute-address/",
         "/letter-writing-studio/"
       ],
       "emittedAsLink": true
@@ -1252,7 +1379,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1264,7 +1391,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-10T20:58:20.845Z",
       "citedBy": [
         "/letter-writing-studio/",
@@ -1277,7 +1404,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-04T11:18:45.194Z",
       "citedBy": [
         "/questions/mortgage-processing-checklist-pdf/"
@@ -1289,7 +1416,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1301,7 +1428,7 @@
       "classification": "unreachable",
       "httpStatus": 404,
       "evidence": "origin down: https://www.ftc.gov/business-guidance/resources/background-checks-what-employers-need-know answered browser=404 googlebot=403 and the origin root https://www.ftc.gov/ answered 404",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/employment-verification-form/",
@@ -1319,11 +1446,23 @@
       "emittedAsLink": true
     },
     {
+      "url": "https://www.ftc.gov/business-guidance/resources/using-consumer-reports-credit-decisions-what-know-about-adverse-action-risk-based-pricing-notices",
+      "classification": "unreachable",
+      "httpStatus": 404,
+      "evidence": "origin down: https://www.ftc.gov/business-guidance/resources/using-consumer-reports-credit-decisions-what-know-about-adverse-action-risk-based-pricing-notices answered browser=404 googlebot=403 and the origin root https://www.ftc.gov/ answered 404",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
+      "firstSeenAt": "2026-11-21T16:37:07.463Z",
+      "citedBy": [
+        "/adverse-action-notice/"
+      ],
+      "emittedAsLink": true
+    },
+    {
       "url": "https://www.ftc.gov/business-guidance/resources/using-consumer-reports-what-landlords-need-know",
       "classification": "unreachable",
       "httpStatus": 404,
       "evidence": "origin down: https://www.ftc.gov/business-guidance/resources/using-consumer-reports-what-landlords-need-know answered browser=404 googlebot=403 and the origin root https://www.ftc.gov/ answered 404",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/amazon/rental-application-packet/",
@@ -1337,7 +1476,7 @@
       "classification": "unreachable",
       "httpStatus": 404,
       "evidence": "origin down: https://www.ftc.gov/legal-library/browse/statutes/fair-credit-reporting-act answered browser=404 googlebot=403 and the origin root https://www.ftc.gov/ answered 404",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/amazon/credit-dispute-letter/",
@@ -1353,7 +1492,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-09T11:18:15.206Z",
       "citedBy": [
         "/questions/how-to-send-letters-to-credit-bureaus/"
@@ -1365,7 +1504,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1377,7 +1516,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1389,7 +1528,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1401,7 +1540,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1413,7 +1552,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1425,7 +1564,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1437,7 +1576,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-02T13:53:52.542Z",
       "citedBy": [
         "/questions/home-loan-documents-checklist/",
@@ -1450,7 +1589,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1462,7 +1601,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-10T11:17:07.507Z",
       "citedBy": [
         "/questions/what-do-apartment-applications-ask-for/"
@@ -1474,7 +1613,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/amazon/landlord-reference-letter/",
@@ -1487,7 +1626,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-02T13:53:52.542Z",
       "citedBy": [
         "/questions/how-to-get-approved-for-apartment-with-no-rental-history/"
@@ -1499,7 +1638,7 @@
       "classification": "crawler_blocked",
       "httpStatus": 403,
       "evidence": "browser=403 googlebot=403",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1511,7 +1650,7 @@
       "classification": "crawler_blocked",
       "httpStatus": 403,
       "evidence": "browser=403 googlebot=403",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1523,7 +1662,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-02T13:53:52.542Z",
       "citedBy": [
         "/questions/letter-verifying-employment-sample/"
@@ -1535,11 +1674,12 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/amazon/gift-letter-down-payment/",
-        "/letter-of-explanation/mortgage/"
+        "/letter-of-explanation/mortgage/",
+        "/mortgage/gift-letter-explanation/"
       ],
       "emittedAsLink": true
     },
@@ -1548,7 +1688,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-03T11:18:24.404Z",
       "citedBy": [
         "/questions/what-does-a-verification-of-employment-letter-look-like/"
@@ -1560,7 +1700,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-02T13:53:52.542Z",
       "citedBy": [
         "/questions/how-to-get-approved-for-apartment-self-employed/"
@@ -1572,7 +1712,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-02T13:53:52.542Z",
       "citedBy": [
         "/questions/home-loan-documents-required-for-self-employed/",
@@ -1587,7 +1727,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/amazon/proof-of-income-self-employed/",
@@ -1600,7 +1740,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1609,10 +1749,10 @@
     },
     {
       "url": "https://www.jsums.edu/staffhandbook/2-9-3employment-verification-references-and-inquiries-from-third-parties/",
-      "classification": "live",
-      "httpStatus": 200,
-      "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "classification": "unreachable",
+      "httpStatus": 503,
+      "evidence": "non-2xx that does not mean removed: browser=503 googlebot=503",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1624,7 +1764,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/amazon/landlord-reference-letter/",
@@ -1639,7 +1779,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1651,7 +1791,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1663,7 +1803,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1675,10 +1815,11 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-06T21:16:27.608Z",
       "citedBy": [
-        "/"
+        "/",
+        "/lexington-law-alternative/"
       ],
       "emittedAsLink": true
     },
@@ -1687,7 +1828,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/609-dispute-letter/"
@@ -1699,13 +1840,54 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/",
         "/609-dispute-letter/",
+        "/credit-bureau-dispute-addresses/",
+        "/equifax-dispute-address/",
+        "/experian-dispute-address/",
         "/letter-writing-studio/",
-        "/the-bureau-answered/"
+        "/lexington-law-alternative/",
+        "/the-bureau-answered/",
+        "/transunion-dispute-address/"
+      ],
+      "emittedAsLink": true
+    },
+    {
+      "url": "https://www.law.cornell.edu/uscode/text/15/1681m",
+      "classification": "live",
+      "httpStatus": 200,
+      "evidence": "browser-ua",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
+      "firstSeenAt": "2026-11-21T16:37:07.463Z",
+      "citedBy": [
+        "/adverse-action-notice/"
+      ],
+      "emittedAsLink": true
+    },
+    {
+      "url": "https://www.law.cornell.edu/uscode/text/15/1692e",
+      "classification": "live",
+      "httpStatus": 200,
+      "evidence": "browser-ua",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
+      "firstSeenAt": "2026-11-21T16:37:07.463Z",
+      "citedBy": [
+        "/debt-validation-letter/"
+      ],
+      "emittedAsLink": true
+    },
+    {
+      "url": "https://www.law.cornell.edu/uscode/text/15/1692g",
+      "classification": "live",
+      "httpStatus": 200,
+      "evidence": "browser-ua",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
+      "firstSeenAt": "2026-11-21T16:37:07.463Z",
+      "citedBy": [
+        "/debt-validation-letter/"
       ],
       "emittedAsLink": true
     },
@@ -1714,7 +1896,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1726,7 +1908,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1738,10 +1920,22 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
+      ],
+      "emittedAsLink": true
+    },
+    {
+      "url": "https://www.nysenate.gov/legislation/laws/GOB/7-108",
+      "classification": "crawler_blocked",
+      "httpStatus": 403,
+      "evidence": "browser=403 googlebot=403",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
+      "firstSeenAt": "2026-11-21T16:37:07.463Z",
+      "citedBy": [
+        "/security-deposit-demand-letter/"
       ],
       "emittedAsLink": true
     },
@@ -1750,7 +1944,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1762,7 +1956,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1774,7 +1968,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1786,7 +1980,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1798,7 +1992,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1810,7 +2004,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-16T18:36:35.707Z",
       "citedBy": [
         "/privacy/"
@@ -1822,7 +2016,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1834,7 +2028,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1846,7 +2040,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1858,7 +2052,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1870,7 +2064,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1882,7 +2076,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1894,7 +2088,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1906,7 +2100,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1918,7 +2112,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1930,7 +2124,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1942,7 +2136,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1954,7 +2148,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1966,7 +2160,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/business-funding-prep-kit/",
@@ -1982,7 +2176,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -1994,7 +2188,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -2006,7 +2200,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-10-09T04:17:11.531Z",
       "citedBy": [
         "/609-dispute-letter/",
@@ -2026,7 +2220,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -2038,7 +2232,7 @@
       "classification": "crawler_blocked",
       "httpStatus": 403,
       "evidence": "browser=403 googlebot=403",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/amazon/proof-of-income-self-employed/",
@@ -2051,7 +2245,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -2063,7 +2257,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -2075,7 +2269,7 @@
       "classification": "dead",
       "httpStatus": 404,
       "evidence": "browser=404 googlebot=404",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [],
       "emittedAsLink": false
@@ -2085,7 +2279,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -2097,7 +2291,7 @@
       "classification": "crawler_blocked",
       "httpStatus": 403,
       "evidence": "browser=403 googlebot=403",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-10T20:58:20.845Z",
       "citedBy": [
         "/letter-writing-studio/",
@@ -2110,7 +2304,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -2122,7 +2316,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -2134,7 +2328,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-11-17T11:16:50.691Z",
       "citedBy": [
         "/questions/diy-credit-repair-kit/"
@@ -2146,7 +2340,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/amazon/employment-verification-letter/",
@@ -2159,7 +2353,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -2171,7 +2365,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/employment-verification-letter-template/"
@@ -2183,7 +2377,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/amazon/employment-verification-letter/",
@@ -2196,7 +2390,7 @@
       "classification": "unreachable",
       "httpStatus": 0,
       "evidence": "no response; origin root https://www.waterstonemortgage.com/ answered nothing either",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -2208,7 +2402,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/reports/document-readiness-index/"
@@ -2220,7 +2414,7 @@
       "classification": "live",
       "httpStatus": 200,
       "evidence": "browser-ua",
-      "checkedAt": "2026-11-19T19:32:52.819Z",
+      "checkedAt": "2026-11-21T17:59:30.255Z",
       "firstSeenAt": "2026-09-03T03:03:36.681Z",
       "citedBy": [
         "/letter-of-explanation/large-deposit/",

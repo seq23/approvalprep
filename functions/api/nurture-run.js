@@ -1,5 +1,5 @@
 import { json } from '../_runtime/responses.js';
-import { runNurture } from '../_runtime/nurture.js';
+import { runNurture, signupCounts } from '../_runtime/nurture.js';
 import { safeEqual } from '../_runtime/rate-limit.js';
 
 // Tick (three times a day) from .github/workflows/email-nurture.yml, which sends
@@ -14,4 +14,10 @@ export async function onRequestPost({ request, env }) {
   const run = await runNurture(env);
   return json({ ok: !run.stop, ...run }, run.stop ? 503 : 200);
 }
-export async function onRequestGet() { return json({ ok: false, error: 'POST_REQUIRED' }, 405); }
+// GET with the same secret: sign-up counts only (no address), read by the Boss OS scorecard.
+export async function onRequestGet({ request, env }) {
+  if (!env.NURTURE_RUN_SECRET || !env.PRODUCTS_DB) return json({ ok: false, stop: 'NAMED STOP [NO_NURTURE_RUN_SECRET] NURTURE_RUN_SECRET or PRODUCTS_DB is missing on the Pages project' }, 503);
+  const auth = request.headers.get('authorization') || '';
+  if (!auth.startsWith('Bearer ') || !(await safeEqual(auth.slice(7), env.NURTURE_RUN_SECRET))) return json({ ok: false, error: 'UNAUTHORIZED' }, 401);
+  return json({ ok: true, counts: await signupCounts(env.PRODUCTS_DB) });
+}

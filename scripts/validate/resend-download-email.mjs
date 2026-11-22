@@ -89,13 +89,14 @@ let examined = 0;
   const r = await resendDownload(req({ session_id: PAID }), { PRODUCTS_DB: fakeD1() }, fetchImpl);
   if (r.status !== 503 || sent.length) fail('missing Resend/Stripe key did not stop with 503');
 }
-// 5. /api/sample: 5 an hour per IP, then 429.
+// 5. /api/sample: 5 an hour per IP, then 429. (The mail-domain lookup is stubbed: no network here.)
+const dnsOk = async () => new Response(JSON.stringify({ Status: 0, Answer: [{ type: 15, data: '10 mx.example.net.' }] }), { status: 200 });
 {
   const db = fakeD1(); const { sent, fetchImpl } = mocks();
   const e = { PRODUCTS_DB: db, RESEND_API_KEY: 'k', DOWNLOAD_SIGNING_SECRET: 's' };
   db.raw.exec("CREATE TABLE products (slug TEXT, price_cents INTEGER, status TEXT)");
   const codes = [];
-  for (let i = 0; i < 6; i++) codes.push((await samplePost({ request: new Request('https://approvalprep.com/api/sample', { method: 'POST', headers: { 'cf-connecting-ip': '192.0.2.50' }, body: JSON.stringify({ email: `s${i}@example.com`, consent: true }) }), env: e }, fetchImpl)).status);
+  for (let i = 0; i < 6; i++) codes.push((await samplePost({ request: new Request('https://approvalprep.com/api/sample', { method: 'POST', headers: { 'cf-connecting-ip': '192.0.2.50' }, body: JSON.stringify({ email: `s${i}@example.com`, consent: true }) }), env: e }, fetchImpl, dnsOk)).status);
   if (codes.at(-1) !== 429 || sent.length !== 5) fail(`sample per-IP limit: codes ${JSON.stringify(codes)}, sent ${sent.length}`);
   examined += sent.length;
 }

@@ -45,11 +45,12 @@ export function sampleLetters(today = new Date()): SavedLetter[] {
     const day = new Date(today.getFullYear(), today.getMonth(), today.getDate() + offset);
     return `${day.getFullYear()}-${String(day.getMonth() + 1).padStart(2, '0')}-${String(day.getDate()).padStart(2, '0')}`;
   };
-  const base = (id: string) => ({ ...newDispute(`preview-${id}`), answers: { bureau: 'equifax', account: 'Sample account · 0000', shows: 'Sample entry', happened: 'Sample facts for preview only' } });
+  // Invented, but read like a real person's letters: the preview and the store screenshots are made from these.
+  const base = (id: string, bureau: string, account: string, shows: string) => ({ ...newDispute(`preview-${id}`), answers: { bureau, account, shows, happened: 'The payment was made on time. My bank statement shows it.' } });
   return [
-    base('draft'),
-    { ...base('sent'), status: 'sent', sentDate: date(-10), method: 'Certified mail' },
-    { ...base('answered'), status: 'answered', sentDate: date(-35), answerNote: 'Verified', answeredAt: today.toISOString() },
+    base('draft', 'experian', 'Auto loan ending in 2217', 'A balance that was already paid off'),
+    { ...base('sent', 'equifax', 'Credit card ending in 4821', 'Reported 30 days late in March 2026'), status: 'sent', sentDate: date(-10), method: 'Certified mail' },
+    { ...base('answered', 'transunion', 'Store card ending in 0937', 'Reported 60 days late in May 2026'), status: 'answered', sentDate: date(-35), answerNote: 'Corrected', answeredAt: new Date(today.getFullYear(), today.getMonth(), today.getDate() - 4, 10).toISOString() },
   ];
 }
 export async function loadSamples(store: { get(id: string): Promise<SavedLetter | null>; create(letter: SavedLetter): Promise<unknown> }, enabled: boolean, today = new Date()) {

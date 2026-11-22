@@ -27,6 +27,7 @@
 // Usage: node scripts/ops/post-deploy-live-check.mjs [--base https://host]
 import fs from "node:fs";
 import path from "node:path";
+import { appPagePaths, appViewProblems, appViewUrl } from "./app-view.mjs";
 
 const root = process.cwd();
 const arg = (name) => { const i = process.argv.indexOf(name); return i === -1 ? null : process.argv[i + 1]; };
@@ -142,6 +143,18 @@ if (home) {
   if (!typed(/^WebSite$/)) failures.push("homepage: no WebSite in the served JSON-LD");
   if (!typed(/WebPage$|^(AboutPage|ContactPage|FAQPage|CollectionPage|ItemPage)$/)) failures.push("homepage: no WebPage in the served JSON-LD");
   notes.push(`homepage json-ld nodes=${nodes.length}`);
+}
+
+// --- what the phone app opens -------------------------------------------------
+// App Review 3.1.1: every page the app opens is served in app view, with no way onward to buying.
+{
+  const paths = appPagePaths();
+  if (paths.length < 6) failures.push(`app view: only ${paths.length} app pages found in apps/mobile/src/more.ts`);
+  for (const p of paths) {
+    const html = await expect200(appViewUrl(BASE, p), { what: "page the app opens", contentType: "text/html", minBytes: 500 });
+    if (html) for (const problem of appViewProblems(html)) failures.push(`app view ${p}: ${problem}`);
+  }
+  notes.push(`app view pages=${paths.length}`);
 }
 
 // --- the URLs search actually sends people to --------------------------------

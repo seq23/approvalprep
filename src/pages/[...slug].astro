@@ -36,7 +36,7 @@ import { routeAnswers } from "../lib/routeAnswers";
 import RecommendationSummary from "../components/RecommendationSummary.astro";
 import manifest from "../../data/routes/route_manifest.json";
 import demandCoverage from "../../data/content/demand_coverage_pages.json";
-import { routeCopy, boundary, kitCount, productCards, productComparison, routeFamilyCopy, offeringCategories, offeringsForSku, productForSku } from "../data/content";
+import { routeCopy, boundary, kitCount, kitPriceOf, productCards, productComparison, routeFamilyCopy, offeringCategories, offeringsForSku, productForSku } from "../data/content";
 
 export function getStaticPaths() {
   // Routes that own a dedicated page file. Astro cannot build two pages for one
@@ -215,9 +215,9 @@ const childRoutes = manifest.routes
       <section class="band pricing-band" id="kits"><div class="shell">
         <div class="pricing-header">
           <div>
-            <p class="eyebrow">Pricing first</p>
-            <h2>Choose the kit that matches the paperwork pressure.</h2>
-            <p class="lead">{`ApprovalPrep sells ${kitCount} kits of letters, templates and checklists, and one bundle that holds all ${kitCount}. You do not buy letters one at a time: choose the kit with the paperwork you need, or the Complete Bundle for everything.`}</p>
+            <p class="eyebrow">Paid once · no subscription</p>
+            <h2>Pick the kit for the paperwork in front of you.</h2>
+            <p class="lead">{`${kitCount} kits of letters, templates and checklists, each paid once. Facing more than one application this year (a lease, a loan, a new job)? The Complete Bundle holds all ${kitCount}.`}</p>
           </div>
           <div class="card pricing-start-free">
             <p class="eyebrow">$0 starting path</p>
@@ -227,8 +227,8 @@ const childRoutes = manifest.routes
           </div>
         </div>
         <div class="pricing-model-grid">
-          <article class="notice"><strong>How the offers work:</strong><p>Every paid product is a direct paid download. Pick one paid kit below; Stripe unlocks that kit's PDF guide and editable DOCX file. The named offerings listed inside each card are the tools covered by that kit. The $15 Letter of Explanation Kit includes all 9 explanation-letter templates listed in that card.</p></article>
-          <article class="notice"><strong>Not ready to buy?</strong><p>Start with the free $0 Studio. It helps you draft a first-pass letter and choose the right paid kit without storing your answers.</p></article>
+          <article class="notice"><strong>What you get:</strong><p>Each kit is a PDF guide plus an editable Word file with a blank for each fact. You pay once on Stripe and it downloads at once: no subscription, nothing renews. Each card lists every document in that kit; the {kitPriceOf("letter-of-explanation")} Letter of Explanation Kit has all 9 explanation-letter templates.</p></article>
+          <article class="notice"><strong>Not ready to buy?</strong><p>Start with the free Letter Studio. It drafts a first-pass letter and points you to the one kit that fits, without storing your answers.</p></article>
         </div>
         <div class="card discount-card">
           <div>

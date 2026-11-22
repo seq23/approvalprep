@@ -23,6 +23,37 @@ Wording follows risk rule R-ADV-13 (self-help templates only). `tests/store.test
 - `screenshots/*.png`: five 1080 x 1920 phone screenshots of the real app (web build, sample letters loaded).
 - Adaptive icon: already set in `app.config.ts` (`assets/adaptive-icon.png` on #FF7A3D).
 
+## In-app products (the shared `~/bin/play-products` tool, catalog `scripts/store/play-products.mjs`)
+
+The 14 one-time products (7 kits, the Complete Bundle, 6 bundle-upgrade tiers) are created on Play from the
+app's own code: ids from the RevenueCat catalog (`scripts/revenuecat/setup.ts`), USD prices from `src/kit.ts`
+and `src/lib/appUpgrade.mjs`, every other region from Google's own price conversion, titles and descriptions
+from `src/offers.ts` (no price in the text: Play shows it in the buyer's currency). The tool lives in seq-bin
+(`~/bin/play-products`, one copy for every app); this repo keeps only the catalog. Re-run it after any product
+change: it creates what is missing (each product read again just before it is written), activates only
+drafts, and never deletes, deactivates or reprices. A different US price on Play prints `MISMATCH`; a product
+switched off on Play prints `SWITCHED OFF`; both are left as they are.
+
+**Never more than the bundle, in any region.** Each upgrade carries a ceiling: every set of kits that leads to
+it (`upgradeFor`) plus the upgrade must not cost more than the Complete Bundle. Play converts each price on its
+own, so the tool lowers an upgrade's price in a region just enough to stay under; the US price stays the code
+price. A live price that breaks it is a `MISMATCH`.
+
+```
+cd ~/GitHub/boss-os && npm run -s vault:run -- ~/bin/play-products ~/GitHub/approvalprep/apps/mobile/scripts/store/play-products.mjs           # dry run: the plan
+cd ~/GitHub/boss-os && npm run -s vault:run -- ~/bin/play-products ~/GitHub/approvalprep/apps/mobile/scripts/store/play-products.mjs --apply   # create, activate, read back
+```
+
+`--apply` writes nothing while RevenueCat still holds any of these products on Play with another type
+(`NAMED STOP [RC_TYPES_NOT_READY]`: a sale would be consumed); run `~/bin/revenuecat-setup` first.
+
+Exit 0 means Play matches; 3 means a dry run with work left; 1 a failure or mismatch; 2 a named stop. Done
+means the `--apply` run ends `read-back on com.approvalprep.app: 14/14 active …` and a dry run after it exits 0.
+A failure (401/403, 429, 5xx, network) stops every write and prints Google's answer; re-run once it clears.
+`NAMED STOP [PLAY_PERMISSION_DENIED]`: the service account in `GOOGLE_PLAY_UPLOAD_SA_JSON` lacks "Manage store
+presence" on this app in Play Console (a new grant can take up to 36 hours to reach the API). Tests: the
+catalog in `tests/playProducts.test.ts`, the tool in seq-bin `tests/store/`.
+
 ## Financial features declaration (Policy > App content)
 
 Answer, reviewed against R-ADV-13 and Play Help 13849271:
@@ -65,7 +96,7 @@ under `apps/mobile/` unless they start with `functions/` or `src/components/`.
 |---|---|---|---|---|---|---|
 | Financial info > Purchase history | Yes | No | No | Required (only when buying) | App functionality, Analytics | RevenueCat with Google Play Billing (`src/purchases/revenuecat.ts:7`, `bundleAccount.ts:48`); website order code (`websiteUnlock.ts:20`) |
 | Personal info > Email address | Yes | No | No | Optional (only if typed) | App functionality | More > "Email you paid with" (`app/(tabs)/more/index.tsx:92`) → `websiteUnlock.ts:52` → `functions/api/email-download-links.js` (Stripe lookup, link emailed; a one-way hash is kept briefly to stop repeat tries) |
-| App info and performance; Device or other IDs | Device or other IDs: Yes | No | No | Required (only when buying or opening a kit) | App functionality | The anonymous RevenueCat app user id, sent as the bearer token (`delivery.ts:14`, `bundleDelivery.ts:25`, `kitFiles.ts:12`). Not linked to a name or email. |
+| App info and performance; Device or other IDs | Device or other IDs: Yes | No | No | Required (only when buying or opening a kit) | App functionality | The anonymous RevenueCat app user id, sent as the bearer token (`delivery.ts:14`, `bundleDelivery.ts:25`, `kitFiles.ts:12`), and, on Android only when a Play review code is typed, with that code (`purchases/review.ts`). Not linked to a name or email. |
 
 Not declared, and why:
 - Letters, answers, drafts, mailing dates: kept on the phone in SQLite (`src/phoneDatabase.ts:47`); no fetch sends them.
@@ -97,10 +128,15 @@ Not declared, and why:
 
 ## App access (notes for the reviewer)
 
-- **All functionality is available without special access.** No login, no account, no credentials.
-- Note to paste: "No account or sign-in. The free credit bureau dispute letter works at once from Home or Write a letter. Paid
-  letter kits are one-time Google Play in-app products; buying one unlocks its templates on the phone. More > 'Open my website kit' unlocks a website order from its link; it needs a real order, so it can be skipped in review. Self-help templates only:
-  users write and mail their own letters; the app never contacts a bureau or creditor."
+Play Console > App content > App access > Sign in details: Username `No account needed`; Password = the review
+code (the Boss OS vault `AP_PLAY_REVIEW_CODE`, copied with
+`cd ~/GitHub/boss-os && npm run -s vault:run -- sh -c 'printf %s "$AP_PLAY_REVIEW_CODE" | pbcopy'`; never typed here
+or in the app); tick full access including paid content; paste the note below as "Any other instructions"
+(tests/reviewUnlock.test.ts holds it to 500 characters and to the screen's own labels). The code works only while the
+review window on the Pages project is open (`REVIEW_UNTIL`, kept open while the app is live on Play, renewed
+yearly); how it works and how to rotate it: `docs/APP_BUNDLE_DELIVERY.md` ("Play review access").
+
+> No account or sign-in. The free credit bureau dispute letter works at once from Home. To open every paid kit free: More > Have a review code?, type the 10-digit code from the password field, tap Use this code. The Complete Bundle (both letter kits and every kit's PDF and Word file) opens for 7 days. Self-help templates only: the app never contacts a bureau or creditor. 'Open my website kit' needs a website order; skip it.
 
 ## Other declarations
 

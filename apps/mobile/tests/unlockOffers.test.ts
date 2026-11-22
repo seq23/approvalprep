@@ -25,8 +25,8 @@ test('kit screen orders offers and routes options without reselling owned kits',
         if (name.endsWith('/theme')) return { type: {} };
         if (name.endsWith('/copy')) return { HONEST_LIMIT: 'limit', REQUEST_LINE: 'request' };
         if (name.endsWith('/previewSamples')) return { PREVIEW_ENABLED: false };
-        if (name.endsWith('/offers')) return { WEBSITE_BUYER_LABEL: 'Bought it on approvalprep.com? ›', TRACKING_LINE: 'tracking', kitOfferFor: () => ({ name: 'Other kit', what: 'what', productId: 'other' }), websiteDifference: () => 'difference', productName: realOffers.productName, productRoute: realOffers.productRoute, siteSkuFor: realOffers.siteSkuFor, BUNDLE_LINE: realOffers.BUNDLE_LINE, KIT_ORDER: realOffers.KIT_ORDER, upgradeLine: realOffers.upgradeLine };
-        if (name.endsWith('/KitFiles')) return { KitFiles: 'KitFiles' };
+        if (name.endsWith('/offers')) return { TRACKING_LINE: 'tracking', kitOfferFor: () => ({ name: 'Other kit', what: 'what', productId: 'other' }), websiteDifference: () => 'difference', productName: realOffers.productName, productRoute: realOffers.productRoute, siteSkuFor: realOffers.siteSkuFor, BUNDLE_LINE: realOffers.BUNDLE_LINE, KIT_ORDER: realOffers.KIT_ORDER, upgradeLine: realOffers.upgradeLine };
+        if (name.endsWith('/KitFiles')) return { KitFiles: 'KitFiles' }; if (name.endsWith('/MortgageMoment')) return { UnderwriterGuide: 'UnderwriterGuide' };
         if (name.endsWith('/more')) return { CREDIT_REPAIR_DEFENSE_LABEL: 'Why we\u2019re not a credit repair company', CREDIT_REPAIR_DEFENSE_URL: 'https://approvalprep.com/credit-repair-disclaimer/' };
         // Buying is on here, so the Get button counts as an offer exactly when the kit is for sale.
         if (name.endsWith('/kit')) return { ...kits, KIT_SALES_ENABLED: true };
@@ -48,6 +48,10 @@ test('kit screen orders offers and routes options without reselling owned kits',
       const mine = requested === 'credit-letter-kit' ? ownership.creditKit : ownership.explanationKit;
       const files = flatten(render()).filter(e => e.type === 'KitFiles');
       assert.equal(files.length, mine ? 1 : 0);
+      // The Letter of Explanation Kit screen maps the underwriter's questions to its letters; tappable once owned.
+      const guide = flatten(render()).filter(e => e.type === 'UnderwriterGuide');
+      assert.equal(guide.length, requested === 'credit-letter-kit' ? 0 : 1);
+      if (guide.length) assert.equal(guide[0].props.open, mine);
       // Beside the price, before anything is bought: why we are not a credit repair company.
       assert.equal(flatten(render()).some(e => e.type === 'Button' && e.props.label === 'Why we\u2019re not a credit repair company ›'), !mine);
       if (mine) assert.equal(files[0].props.sku, requested === 'credit-letter-kit' ? 'credit-letter-kit' : 'letter-of-explanation');
@@ -88,8 +92,8 @@ test('Restore messages survive ownership refresh even when the store is offline'
       if (name.endsWith('/theme')) return { type: {} };
       if (name.endsWith('/copy')) return { HONEST_LIMIT: 'limit', REQUEST_LINE: 'request' };
       if (name.endsWith('/previewSamples')) return { PREVIEW_ENABLED: false };
-      if (name.endsWith('/offers')) return { WEBSITE_BUYER_LABEL: 'Bought it on approvalprep.com? ›', TRACKING_LINE: 'tracking', kitOfferFor: () => ({ name: 'Other kit', what: 'what', productId: 'other' }), websiteDifference: () => 'difference', productName: realOffers.productName, productRoute: realOffers.productRoute, siteSkuFor: realOffers.siteSkuFor, BUNDLE_LINE: realOffers.BUNDLE_LINE, KIT_ORDER: realOffers.KIT_ORDER, upgradeLine: realOffers.upgradeLine };
-        if (name.endsWith('/KitFiles')) return { KitFiles: 'KitFiles' };
+      if (name.endsWith('/offers')) return { TRACKING_LINE: 'tracking', kitOfferFor: () => ({ name: 'Other kit', what: 'what', productId: 'other' }), websiteDifference: () => 'difference', productName: realOffers.productName, productRoute: realOffers.productRoute, siteSkuFor: realOffers.siteSkuFor, BUNDLE_LINE: realOffers.BUNDLE_LINE, KIT_ORDER: realOffers.KIT_ORDER, upgradeLine: realOffers.upgradeLine };
+        if (name.endsWith('/KitFiles')) return { KitFiles: 'KitFiles' }; if (name.endsWith('/MortgageMoment')) return { UnderwriterGuide: 'UnderwriterGuide' };
         if (name.endsWith('/more')) return { CREDIT_REPAIR_DEFENSE_LABEL: 'Why we\u2019re not a credit repair company', CREDIT_REPAIR_DEFENSE_URL: 'https://approvalprep.com/credit-repair-disclaimer/' };
       if (name.endsWith('/kit')) return kits;
       if (name.endsWith('/letters')) return { LETTERS: [], EXPLANATION_LETTERS: [] };

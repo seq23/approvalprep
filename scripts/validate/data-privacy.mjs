@@ -64,7 +64,10 @@ const allowedOperational = [
   // buyer's address is never written.
   "functions/_runtime/nurture.js",
   // Marks a refunded session's entitlement revoked; writes no email or answers (customer_email is '').
-  "functions/_runtime/refunds.js"
+  "functions/_runtime/refunds.js",
+  // Play review access: HMACs of the anonymous purchase ID and the IP, a code version and timestamps only
+  // (apps/mobile/tests/reviewUnlock.test.ts proves no raw ID, IP or code is stored).
+  "functions/_runtime/review.js"
 ];
 for (const file of walk("functions").filter((item) => item.endsWith(".js"))) {
   const text = fs.readFileSync(file, "utf8");

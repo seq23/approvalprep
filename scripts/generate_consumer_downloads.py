@@ -26,7 +26,7 @@ for p in DOWNLOADS.glob('*.md'):
 for p in DOWNLOADS.glob('*.txt'):
     p.unlink()
 
-catalog = json.loads((ROOT/'data/products/product_catalog.json').read_text())['products']
+catalog = json.loads((ROOT/'data/products/products.json').read_text())['products']
 products = [p for p in catalog if p.get('status') == 'active_paid']
 
 def product_by_sku(sku):

@@ -2,18 +2,16 @@
   "schema_version": "1.0",
   "truth_source": "google_search_console_url_inspection",
   "site_url": "sc-domain:approvalprep.com",
-  "collected_at": "2026-11-19T18:22:42.270Z",
+  "collected_at": "2026-11-21T16:49:14.761Z",
   "state": "OK",
   "named_stop": null,
   "sitemap_source": "public/sitemap.xml",
-  "sitemap_url_count": 104,
+  "sitemap_url_count": 112,
   "inspected_this_run": 104,
   "quota": {
     "daily_cap": 150,
     "workers": 8,
     "inspections_by_day": {
-      "2026-11-05": 97,
-      "2026-11-06": 97,
       "2026-11-07": 97,
       "2026-11-08": 97,
       "2026-11-09": 97,
@@ -26,27 +24,31 @@
       "2026-11-16": 101,
       "2026-11-17": 103,
       "2026-11-18": 104,
-      "2026-11-19": 104
+      "2026-11-19": 104,
+      "2026-11-20": 104,
+      "2026-11-21": 104
     }
   },
   "summary": {
     "by_coverage_state": {
       "Crawled - currently not indexed": 6,
-      "Discovered - currently not indexed": 35,
+      "Discovered - currently not indexed": 46,
+      "NOT_INSPECTED": 8,
       "Submitted and indexed": 44,
-      "URL is unknown to Google": 19
+      "URL is unknown to Google": 8
     },
     "by_verdict": {
       "NEUTRAL": 60,
+      "NONE": 8,
       "PASS": 44
     },
     "buckets": {
       "indexed": 44,
       "crawled_not_indexed": 6,
-      "discovered_not_indexed": 35,
-      "unknown_to_google": 19,
+      "discovered_not_indexed": 46,
+      "unknown_to_google": 8,
       "other": 0,
-      "not_inspected": 0
+      "not_inspected": 8
     }
   },
   "truth_boundary": "URL Inspection reports Google's index state for each URL at inspected_at. It is not a ranking or traffic measure; impressions come from data/intelligence/gsc_search_analytics.json.",
@@ -61,19 +63,19 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/",
       "userCanonical": "https://approvalprep.com/",
-      "inspected_at": "2026-11-19T18:22:15.776Z"
+      "inspected_at": "2026-11-21T16:48:43.767Z"
     },
     {
       "url": "https://approvalprep.com/609-dispute-letter/",
       "verdict": "NEUTRAL",
-      "coverageState": "URL is unknown to Google",
+      "coverageState": "Discovered - currently not indexed",
       "lastCrawlTime": null,
       "indexingState": "INDEXING_STATE_UNSPECIFIED",
       "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:37.831Z"
+      "inspected_at": "2026-11-21T16:48:24.795Z"
     },
     {
       "url": "https://approvalprep.com/about/",
@@ -85,7 +87,16 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:22:03.401Z"
+      "inspected_at": "2026-11-21T16:48:37.418Z"
+    },
+    {
+      "url": "https://approvalprep.com/adverse-action-notice/",
+      "verdict": null,
+      "coverageState": "NOT_INSPECTED",
+      "lastCrawlTime": null,
+      "indexingState": null,
+      "inspected_at": null,
+      "not_inspected_reason": "published after the last inspection run; the next daily cycle inspects it"
     },
     {
       "url": "https://approvalprep.com/ai-use-policy/",
@@ -97,19 +108,19 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/ai-use-policy/",
       "userCanonical": "https://approvalprep.com/ai-use-policy/",
-      "inspected_at": "2026-11-19T18:21:50.117Z"
+      "inspected_at": "2026-11-21T16:48:18.738Z"
     },
     {
       "url": "https://approvalprep.com/apartment-application/",
       "verdict": "PASS",
       "coverageState": "Submitted and indexed",
-      "lastCrawlTime": "2026-11-11T23:01:54Z",
+      "lastCrawlTime": "2026-11-20T04:16:10Z",
       "indexingState": "INDEXING_ALLOWED",
       "robotsTxtState": "ALLOWED",
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/apartment-application/",
       "userCanonical": "https://approvalprep.com/apartment-application/",
-      "inspected_at": "2026-11-19T18:21:56.438Z"
+      "inspected_at": "2026-11-21T16:48:24.881Z"
     },
     {
       "url": "https://approvalprep.com/auto-loan-documents/",
@@ -121,31 +132,31 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/auto-loan-documents/",
       "userCanonical": "https://approvalprep.com/auto-loan-documents/",
-      "inspected_at": "2026-11-19T18:21:37.348Z"
+      "inspected_at": "2026-11-21T16:48:18.770Z"
     },
     {
       "url": "https://approvalprep.com/auto-loan/income-verification/",
       "verdict": "NEUTRAL",
-      "coverageState": "Discovered - currently not indexed",
+      "coverageState": "URL is unknown to Google",
       "lastCrawlTime": null,
       "indexingState": "INDEXING_STATE_UNSPECIFIED",
       "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:50.508Z"
+      "inspected_at": "2026-11-21T16:48:25.102Z"
     },
     {
       "url": "https://approvalprep.com/blog/",
       "verdict": "PASS",
       "coverageState": "Submitted and indexed",
-      "lastCrawlTime": "2026-11-18T13:59:56Z",
+      "lastCrawlTime": "2026-11-21T11:29:16Z",
       "indexingState": "INDEXING_ALLOWED",
       "robotsTxtState": "ALLOWED",
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/blog/",
       "userCanonical": "https://approvalprep.com/blog/",
-      "inspected_at": "2026-11-19T18:21:43.679Z"
+      "inspected_at": "2026-11-21T16:48:12.439Z"
     },
     {
       "url": "https://approvalprep.com/blog/what-should-i-know-about-a-mortgage-loan-documents-checklist/",
@@ -157,31 +168,31 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:43.967Z"
+      "inspected_at": "2026-11-21T16:48:56.087Z"
     },
     {
       "url": "https://approvalprep.com/blog/what-should-i-know-about-letter-of-verification-of-employment/",
       "verdict": "NEUTRAL",
-      "coverageState": "URL is unknown to Google",
+      "coverageState": "Discovered - currently not indexed",
       "lastCrawlTime": null,
       "indexingState": "INDEXING_STATE_UNSPECIFIED",
       "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:43.741Z"
+      "inspected_at": "2026-11-21T16:48:12.476Z"
     },
     {
       "url": "https://approvalprep.com/business-funding-prep-kit/",
       "verdict": "PASS",
       "coverageState": "Submitted and indexed",
-      "lastCrawlTime": "2026-11-12T19:53:23Z",
+      "lastCrawlTime": "2026-11-19T19:00:35Z",
       "indexingState": "INDEXING_ALLOWED",
       "robotsTxtState": "ALLOWED",
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/business-funding-prep-kit/",
       "userCanonical": "https://approvalprep.com/business-funding-prep-kit/",
-      "inspected_at": "2026-11-19T18:22:02.508Z"
+      "inspected_at": "2026-11-21T16:48:31.055Z"
     },
     {
       "url": "https://approvalprep.com/business-funding/documents-for-llc/",
@@ -193,7 +204,7 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:50.189Z"
+      "inspected_at": "2026-11-21T16:48:18.837Z"
     },
     {
       "url": "https://approvalprep.com/business-loan-documents/",
@@ -205,7 +216,7 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/business-loan-documents/",
       "userCanonical": "https://approvalprep.com/business-loan-documents/",
-      "inspected_at": "2026-11-19T18:21:56.570Z"
+      "inspected_at": "2026-11-21T16:48:30.923Z"
     },
     {
       "url": "https://approvalprep.com/car-loan-checklist/",
@@ -217,7 +228,7 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/car-loan-checklist/",
       "userCanonical": "https://approvalprep.com/car-loan-checklist/",
-      "inspected_at": "2026-11-19T18:21:50.490Z"
+      "inspected_at": "2026-11-21T16:48:24.799Z"
     },
     {
       "url": "https://approvalprep.com/complete-approvalprep-bundle/",
@@ -229,7 +240,7 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/complete-approvalprep-bundle/",
       "userCanonical": "https://approvalprep.com/complete-approvalprep-bundle/",
-      "inspected_at": "2026-11-19T18:21:57.102Z"
+      "inspected_at": "2026-11-21T16:48:31.054Z"
     },
     {
       "url": "https://approvalprep.com/contact/",
@@ -241,7 +252,16 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/contact/",
       "userCanonical": "https://approvalprep.com/contact/",
-      "inspected_at": "2026-11-19T18:22:40.787Z"
+      "inspected_at": "2026-11-21T16:49:08.219Z"
+    },
+    {
+      "url": "https://approvalprep.com/credit-bureau-dispute-addresses/",
+      "verdict": null,
+      "coverageState": "NOT_INSPECTED",
+      "lastCrawlTime": null,
+      "indexingState": null,
+      "inspected_at": null,
+      "not_inspected_reason": "published after the last inspection run; the next daily cycle inspects it"
     },
     {
       "url": "https://approvalprep.com/credit-dispute-letter/",
@@ -253,7 +273,7 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/credit-dispute-letter/",
       "userCanonical": "https://approvalprep.com/credit-dispute-letter/",
-      "inspected_at": "2026-11-19T18:21:56.892Z"
+      "inspected_at": "2026-11-21T16:48:31.083Z"
     },
     {
       "url": "https://approvalprep.com/credit-letter-kit/",
@@ -265,7 +285,16 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/credit-letter-kit/",
       "userCanonical": "https://approvalprep.com/credit-letter-kit/",
-      "inspected_at": "2026-11-19T18:21:50.613Z"
+      "inspected_at": "2026-11-21T16:48:24.907Z"
+    },
+    {
+      "url": "https://approvalprep.com/debt-validation-letter/",
+      "verdict": null,
+      "coverageState": "NOT_INSPECTED",
+      "lastCrawlTime": null,
+      "indexingState": null,
+      "inspected_at": null,
+      "not_inspected_reason": "published after the last inspection run; the next daily cycle inspects it"
     },
     {
       "url": "https://approvalprep.com/documents-needed-for-car-loan/",
@@ -277,31 +306,31 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/documents-needed-for-car-loan/",
       "userCanonical": "https://approvalprep.com/documents-needed-for-car-loan/",
-      "inspected_at": "2026-11-19T18:21:49.941Z"
+      "inspected_at": "2026-11-21T16:48:18.706Z"
     },
     {
       "url": "https://approvalprep.com/editorial-policy/",
       "verdict": "PASS",
       "coverageState": "Submitted and indexed",
-      "lastCrawlTime": "2026-11-12T07:09:54Z",
+      "lastCrawlTime": "2026-11-20T09:16:10Z",
       "indexingState": "INDEXING_ALLOWED",
       "robotsTxtState": "ALLOWED",
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/editorial-policy/",
       "userCanonical": "https://approvalprep.com/editorial-policy/",
-      "inspected_at": "2026-11-19T18:22:02.960Z"
+      "inspected_at": "2026-11-21T16:48:37.093Z"
     },
     {
       "url": "https://approvalprep.com/employment-verification-form/",
       "verdict": "NEUTRAL",
-      "coverageState": "URL is unknown to Google",
+      "coverageState": "Discovered - currently not indexed",
       "lastCrawlTime": null,
       "indexingState": "INDEXING_STATE_UNSPECIFIED",
       "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:22:02.961Z"
+      "inspected_at": "2026-11-21T16:48:37.105Z"
     },
     {
       "url": "https://approvalprep.com/employment-verification-letter-template/",
@@ -313,55 +342,73 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:43.718Z"
+      "inspected_at": "2026-11-21T16:48:31.344Z"
     },
     {
       "url": "https://approvalprep.com/employment-verification-letter/",
       "verdict": "PASS",
       "coverageState": "Submitted and indexed",
-      "lastCrawlTime": "2026-11-19T08:12:27Z",
+      "lastCrawlTime": "2026-11-20T18:49:01Z",
       "indexingState": "INDEXING_ALLOWED",
       "robotsTxtState": "ALLOWED",
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/employment-verification-letter/",
       "userCanonical": "https://approvalprep.com/employment-verification-letter/",
-      "inspected_at": "2026-11-19T18:22:08.916Z"
+      "inspected_at": "2026-11-21T16:49:02.204Z"
+    },
+    {
+      "url": "https://approvalprep.com/equifax-dispute-address/",
+      "verdict": null,
+      "coverageState": "NOT_INSPECTED",
+      "lastCrawlTime": null,
+      "indexingState": null,
+      "inspected_at": null,
+      "not_inspected_reason": "published after the last inspection run; the next daily cycle inspects it"
+    },
+    {
+      "url": "https://approvalprep.com/experian-dispute-address/",
+      "verdict": null,
+      "coverageState": "NOT_INSPECTED",
+      "lastCrawlTime": null,
+      "indexingState": null,
+      "inspected_at": null,
+      "not_inspected_reason": "published after the last inspection run; the next daily cycle inspects it"
     },
     {
       "url": "https://approvalprep.com/glossary/",
       "verdict": "PASS",
       "coverageState": "Submitted and indexed",
-      "lastCrawlTime": "2026-11-15T23:49:39Z",
+      "lastCrawlTime": "2026-11-20T15:40:22Z",
       "indexingState": "INDEXING_ALLOWED",
       "robotsTxtState": "ALLOWED",
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/glossary/",
       "userCanonical": "https://approvalprep.com/glossary/",
-      "inspected_at": "2026-11-19T18:22:16.287Z"
+      "inspected_at": "2026-11-21T16:48:49.471Z"
     },
     {
       "url": "https://approvalprep.com/goodwill-letter-credit/",
       "verdict": "NEUTRAL",
-      "coverageState": "URL is unknown to Google",
+      "coverageState": "Discovered - currently not indexed",
       "lastCrawlTime": null,
       "indexingState": "INDEXING_STATE_UNSPECIFIED",
       "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:22:03.859Z"
+      "inspected_at": "2026-11-21T16:48:37.279Z"
     },
     {
       "url": "https://approvalprep.com/goodwill-letter-to-remove-late-payment/",
       "verdict": "PASS",
       "coverageState": "Submitted and indexed",
-      "lastCrawlTime": "2026-11-19T03:07:25Z",
+      "lastCrawlTime": "2026-11-20T15:02:49Z",
       "indexingState": "INDEXING_ALLOWED",
       "robotsTxtState": "ALLOWED",
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/goodwill-letter-to-remove-late-payment/",
       "userCanonical": "https://approvalprep.com/goodwill-letter-to-remove-late-payment/",
-      "inspected_at": "2026-11-19T18:22:09.787Z"
+      "inspected_at": "2026-11-21T16:48:49.875Z"
     },
     {
       "url": "https://approvalprep.com/how-to-get-approved-for-an-apartment/",
@@ -373,7 +420,7 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/how-to-get-approved-for-an-apartment/",
       "userCanonical": "https://approvalprep.com/how-to-get-approved-for-an-apartment/",
-      "inspected_at": "2026-11-19T18:21:56.493Z"
+      "inspected_at": "2026-11-21T16:48:30.895Z"
     },
     {
       "url": "https://approvalprep.com/how-to-write-a-letter-of-explanation/",
@@ -385,7 +432,7 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:22:15.786Z"
+      "inspected_at": "2026-11-21T16:48:43.686Z"
     },
     {
       "url": "https://approvalprep.com/important-documents-checklist/",
@@ -397,7 +444,7 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/important-documents-checklist/",
       "userCanonical": "https://approvalprep.com/important-documents-checklist/",
-      "inspected_at": "2026-11-19T18:21:56.479Z"
+      "inspected_at": "2026-11-21T16:48:30.871Z"
     },
     {
       "url": "https://approvalprep.com/income-employment-letter-kit/",
@@ -409,19 +456,19 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/income-employment-letter-kit/",
       "userCanonical": "https://approvalprep.com/income-employment-letter-kit/",
-      "inspected_at": "2026-11-19T18:21:57.018Z"
+      "inspected_at": "2026-11-21T16:49:08.150Z"
     },
     {
       "url": "https://approvalprep.com/landlord-reference-letter/",
       "verdict": "NEUTRAL",
-      "coverageState": "Discovered - currently not indexed",
+      "coverageState": "URL is unknown to Google",
       "lastCrawlTime": null,
       "indexingState": "INDEXING_STATE_UNSPECIFIED",
       "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:22:09.156Z"
+      "inspected_at": "2026-11-21T16:48:37.262Z"
     },
     {
       "url": "https://approvalprep.com/letter-of-explanation/",
@@ -433,7 +480,7 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/letter-of-explanation/",
       "userCanonical": "https://approvalprep.com/letter-of-explanation/",
-      "inspected_at": "2026-11-19T18:22:22.229Z"
+      "inspected_at": "2026-11-21T16:49:08.094Z"
     },
     {
       "url": "https://approvalprep.com/letter-of-explanation/address-history/",
@@ -445,7 +492,7 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/letter-of-explanation/address-history/",
       "userCanonical": "https://approvalprep.com/letter-of-explanation/address-history/",
-      "inspected_at": "2026-11-19T18:22:15.128Z"
+      "inspected_at": "2026-11-21T16:48:43.386Z"
     },
     {
       "url": "https://approvalprep.com/letter-of-explanation/bank-statement-deposits/",
@@ -457,7 +504,7 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/letter-of-explanation/bank-statement-deposits/",
       "userCanonical": "https://approvalprep.com/letter-of-explanation/bank-statement-deposits/",
-      "inspected_at": "2026-11-19T18:22:03.296Z"
+      "inspected_at": "2026-11-21T16:48:37.214Z"
     },
     {
       "url": "https://approvalprep.com/letter-of-explanation/credit/",
@@ -469,7 +516,7 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/letter-of-explanation/credit/",
       "userCanonical": "https://approvalprep.com/letter-of-explanation/credit/",
-      "inspected_at": "2026-11-19T18:22:09.330Z"
+      "inspected_at": "2026-11-21T16:48:43.252Z"
     },
     {
       "url": "https://approvalprep.com/letter-of-explanation/employment-gap/",
@@ -481,7 +528,7 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/letter-of-explanation/employment-gap/",
       "userCanonical": "https://approvalprep.com/letter-of-explanation/employment-gap/",
-      "inspected_at": "2026-11-19T18:22:10.027Z"
+      "inspected_at": "2026-11-21T16:48:43.430Z"
     },
     {
       "url": "https://approvalprep.com/letter-of-explanation/eviction/",
@@ -493,7 +540,7 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/letter-of-explanation/eviction/",
       "userCanonical": "https://approvalprep.com/letter-of-explanation/eviction/",
-      "inspected_at": "2026-11-19T18:22:03.040Z"
+      "inspected_at": "2026-11-21T16:48:37.172Z"
     },
     {
       "url": "https://approvalprep.com/letter-of-explanation/income-change/",
@@ -505,7 +552,7 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:22:15.597Z"
+      "inspected_at": "2026-11-21T16:48:43.531Z"
     },
     {
       "url": "https://approvalprep.com/letter-of-explanation/income/",
@@ -517,7 +564,7 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/letter-of-explanation/income/",
       "userCanonical": "https://approvalprep.com/letter-of-explanation/income/",
-      "inspected_at": "2026-11-19T18:22:15.849Z"
+      "inspected_at": "2026-11-21T16:48:49.482Z"
     },
     {
       "url": "https://approvalprep.com/letter-of-explanation/large-deposit/",
@@ -529,7 +576,7 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:22:22.698Z"
+      "inspected_at": "2026-11-21T16:48:55.650Z"
     },
     {
       "url": "https://approvalprep.com/letter-of-explanation/late-payment/",
@@ -541,7 +588,7 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:22:22.060Z"
+      "inspected_at": "2026-11-21T16:48:55.672Z"
     },
     {
       "url": "https://approvalprep.com/letter-of-explanation/mortgage/",
@@ -553,7 +600,7 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:22:09.225Z"
+      "inspected_at": "2026-11-21T16:48:37.579Z"
     },
     {
       "url": "https://approvalprep.com/letter-of-explanation/sample/",
@@ -565,19 +612,19 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:22:09.626Z"
+      "inspected_at": "2026-11-21T16:48:43.318Z"
     },
     {
       "url": "https://approvalprep.com/letter-of-explanation/template/",
       "verdict": "NEUTRAL",
-      "coverageState": "URL is unknown to Google",
+      "coverageState": "Discovered - currently not indexed",
       "lastCrawlTime": null,
       "indexingState": "INDEXING_STATE_UNSPECIFIED",
       "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:22:16.596Z"
+      "inspected_at": "2026-11-21T16:48:49.625Z"
     },
     {
       "url": "https://approvalprep.com/letter-writing-studio/",
@@ -589,7 +636,16 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/letter-writing-studio/",
       "userCanonical": "https://approvalprep.com/letter-writing-studio/",
-      "inspected_at": "2026-11-19T18:22:21.509Z"
+      "inspected_at": "2026-11-21T16:48:49.646Z"
+    },
+    {
+      "url": "https://approvalprep.com/lexington-law-alternative/",
+      "verdict": null,
+      "coverageState": "NOT_INSPECTED",
+      "lastCrawlTime": null,
+      "indexingState": null,
+      "inspected_at": null,
+      "not_inspected_reason": "published after the last inspection run; the next daily cycle inspects it"
     },
     {
       "url": "https://approvalprep.com/life-admin-letter-kit/",
@@ -601,7 +657,7 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/life-admin-letter-kit/",
       "userCanonical": "https://approvalprep.com/life-admin-letter-kit/",
-      "inspected_at": "2026-11-19T18:22:09.349Z"
+      "inspected_at": "2026-11-21T16:48:43.254Z"
     },
     {
       "url": "https://approvalprep.com/loan-prep-letter-kit/",
@@ -613,7 +669,7 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/loan-prep-letter-kit/",
       "userCanonical": "https://approvalprep.com/loan-prep-letter-kit/",
-      "inspected_at": "2026-11-19T18:22:16.329Z"
+      "inspected_at": "2026-11-21T16:48:49.458Z"
     },
     {
       "url": "https://approvalprep.com/methodology/",
@@ -625,7 +681,7 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/methodology/",
       "userCanonical": "https://approvalprep.com/methodology/",
-      "inspected_at": "2026-11-19T18:22:29.245Z"
+      "inspected_at": "2026-11-21T16:49:01.893Z"
     },
     {
       "url": "https://approvalprep.com/mortgage-checklist/",
@@ -637,31 +693,31 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/mortgage-checklist/",
       "userCanonical": "https://approvalprep.com/mortgage-checklist/",
-      "inspected_at": "2026-11-19T18:22:22.812Z"
+      "inspected_at": "2026-11-21T16:49:14.238Z"
     },
     {
       "url": "https://approvalprep.com/mortgage-document-checklist/",
       "verdict": "PASS",
       "coverageState": "Submitted and indexed",
-      "lastCrawlTime": "2026-11-19T15:56:10Z",
+      "lastCrawlTime": "2026-11-20T06:46:11Z",
       "indexingState": "INDEXING_ALLOWED",
       "robotsTxtState": "ALLOWED",
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/mortgage-document-checklist/",
       "userCanonical": "https://approvalprep.com/mortgage-document-checklist/",
-      "inspected_at": "2026-11-19T18:22:29.299Z"
+      "inspected_at": "2026-11-21T16:49:01.904Z"
     },
     {
       "url": "https://approvalprep.com/mortgage/gift-letter-explanation/",
       "verdict": "NEUTRAL",
-      "coverageState": "URL is unknown to Google",
+      "coverageState": "Discovered - currently not indexed",
       "lastCrawlTime": null,
       "indexingState": "INDEXING_STATE_UNSPECIFIED",
       "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:22:41.377Z"
+      "inspected_at": "2026-11-21T16:49:08.431Z"
     },
     {
       "url": "https://approvalprep.com/moving-checklist/",
@@ -673,19 +729,19 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/moving-checklist/",
       "userCanonical": "https://approvalprep.com/moving-checklist/",
-      "inspected_at": "2026-11-19T18:22:27.660Z"
+      "inspected_at": "2026-11-21T16:49:14.471Z"
     },
     {
       "url": "https://approvalprep.com/not-a-credit-repair-company/",
       "verdict": "PASS",
       "coverageState": "Submitted and indexed",
-      "lastCrawlTime": "2026-11-11T14:21:00Z",
+      "lastCrawlTime": "2026-11-19T18:23:03Z",
       "indexingState": "INDEXING_ALLOWED",
       "robotsTxtState": "ALLOWED",
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/not-a-credit-repair-company/",
       "userCanonical": "https://approvalprep.com/not-a-credit-repair-company/",
-      "inspected_at": "2026-11-19T18:22:21.998Z"
+      "inspected_at": "2026-11-21T16:48:49.733Z"
     },
     {
       "url": "https://approvalprep.com/pricing/",
@@ -697,7 +753,7 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/pricing/",
       "userCanonical": "https://approvalprep.com/pricing/",
-      "inspected_at": "2026-11-19T18:22:22.152Z"
+      "inspected_at": "2026-11-21T16:48:49.914Z"
     },
     {
       "url": "https://approvalprep.com/proof-of-employment-letter/",
@@ -709,7 +765,7 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:22:28.137Z"
+      "inspected_at": "2026-11-21T16:48:55.837Z"
     },
     {
       "url": "https://approvalprep.com/proof-of-income-letter/",
@@ -721,19 +777,19 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/proof-of-income-letter/",
       "userCanonical": "https://approvalprep.com/proof-of-income-letter/",
-      "inspected_at": "2026-11-19T18:22:33.935Z"
+      "inspected_at": "2026-11-21T16:49:14.527Z"
     },
     {
       "url": "https://approvalprep.com/proof-of-income/self-employed/",
       "verdict": "NEUTRAL",
-      "coverageState": "Discovered - currently not indexed",
+      "coverageState": "URL is unknown to Google",
       "lastCrawlTime": null,
       "indexingState": "INDEXING_STATE_UNSPECIFIED",
       "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:22:34.660Z"
+      "inspected_at": "2026-11-21T16:49:02.103Z"
     },
     {
       "url": "https://approvalprep.com/questions/",
@@ -745,31 +801,31 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:22:02.724Z"
+      "inspected_at": "2026-11-21T16:48:31.166Z"
     },
     {
       "url": "https://approvalprep.com/questions/diy-credit-repair-kit/",
       "verdict": "NEUTRAL",
-      "coverageState": "URL is unknown to Google",
+      "coverageState": "Discovered - currently not indexed",
       "lastCrawlTime": null,
       "indexingState": "INDEXING_STATE_UNSPECIFIED",
       "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:24.672Z"
+      "inspected_at": "2026-11-21T16:48:00.134Z"
     },
     {
       "url": "https://approvalprep.com/questions/documents-required-for-home-mortgage-loan/",
       "verdict": "NEUTRAL",
-      "coverageState": "URL is unknown to Google",
+      "coverageState": "Discovered - currently not indexed",
       "lastCrawlTime": null,
       "indexingState": "INDEXING_STATE_UNSPECIFIED",
       "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:43.041Z"
+      "inspected_at": "2026-11-21T16:48:12.421Z"
     },
     {
       "url": "https://approvalprep.com/questions/home-loan-documents-checklist/",
@@ -781,7 +837,7 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:37.039Z"
+      "inspected_at": "2026-11-21T16:48:06.298Z"
     },
     {
       "url": "https://approvalprep.com/questions/home-loan-documents-required-for-self-employed/",
@@ -793,22 +849,10 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:30.816Z"
+      "inspected_at": "2026-11-21T16:48:12.541Z"
     },
     {
       "url": "https://approvalprep.com/questions/how-much-does-credit-repair-cost/",
-      "verdict": "NEUTRAL",
-      "coverageState": "URL is unknown to Google",
-      "lastCrawlTime": null,
-      "indexingState": "INDEXING_STATE_UNSPECIFIED",
-      "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
-      "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
-      "googleCanonical": null,
-      "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:24.839Z"
-    },
-    {
-      "url": "https://approvalprep.com/questions/how-to-dispute-a-credit-report-error/",
       "verdict": "NEUTRAL",
       "coverageState": "Discovered - currently not indexed",
       "lastCrawlTime": null,
@@ -817,7 +861,19 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:24.573Z"
+      "inspected_at": "2026-11-21T16:48:00.176Z"
+    },
+    {
+      "url": "https://approvalprep.com/questions/how-to-dispute-a-credit-report-error/",
+      "verdict": "NEUTRAL",
+      "coverageState": "URL is unknown to Google",
+      "lastCrawlTime": null,
+      "indexingState": "INDEXING_STATE_UNSPECIFIED",
+      "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+      "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+      "googleCanonical": null,
+      "userCanonical": null,
+      "inspected_at": "2026-11-21T16:48:00.185Z"
     },
     {
       "url": "https://approvalprep.com/questions/how-to-get-approved-for-apartment-self-employed/",
@@ -829,7 +885,7 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:37.468Z"
+      "inspected_at": "2026-11-21T16:48:24.751Z"
     },
     {
       "url": "https://approvalprep.com/questions/how-to-get-approved-for-apartment-with-low-credit-score/",
@@ -841,19 +897,19 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:44.230Z"
+      "inspected_at": "2026-11-21T16:48:18.551Z"
     },
     {
       "url": "https://approvalprep.com/questions/how-to-get-approved-for-apartment-with-no-job/",
       "verdict": "NEUTRAL",
-      "coverageState": "URL is unknown to Google",
+      "coverageState": "Discovered - currently not indexed",
       "lastCrawlTime": null,
       "indexingState": "INDEXING_STATE_UNSPECIFIED",
       "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:43.869Z"
+      "inspected_at": "2026-11-21T16:48:12.659Z"
     },
     {
       "url": "https://approvalprep.com/questions/how-to-get-approved-for-apartment-with-no-rental-history/",
@@ -865,31 +921,31 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:31.075Z"
+      "inspected_at": "2026-11-21T16:48:06.274Z"
     },
     {
       "url": "https://approvalprep.com/questions/how-to-get-approved-for-loan-with-bad-credit/",
       "verdict": "NEUTRAL",
-      "coverageState": "URL is unknown to Google",
+      "coverageState": "Discovered - currently not indexed",
       "lastCrawlTime": null,
       "indexingState": "INDEXING_STATE_UNSPECIFIED",
       "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:56.127Z"
+      "inspected_at": "2026-11-21T16:48:24.951Z"
     },
     {
       "url": "https://approvalprep.com/questions/how-to-send-letters-to-credit-bureaus/",
       "verdict": "NEUTRAL",
-      "coverageState": "URL is unknown to Google",
+      "coverageState": "Discovered - currently not indexed",
       "lastCrawlTime": null,
       "indexingState": "INDEXING_STATE_UNSPECIFIED",
       "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:24.284Z"
+      "inspected_at": "2026-11-21T16:48:00.266Z"
     },
     {
       "url": "https://approvalprep.com/questions/how-to-write-an-employment-verification-letter/",
@@ -901,7 +957,7 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:49.704Z"
+      "inspected_at": "2026-11-21T16:48:18.674Z"
     },
     {
       "url": "https://approvalprep.com/questions/letter-confirming-employment-template/",
@@ -913,7 +969,7 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:30.829Z"
+      "inspected_at": "2026-11-21T16:48:06.287Z"
     },
     {
       "url": "https://approvalprep.com/questions/letter-verifying-employment-sample/",
@@ -925,7 +981,7 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:37.091Z"
+      "inspected_at": "2026-11-21T16:48:06.395Z"
     },
     {
       "url": "https://approvalprep.com/questions/list-of-documents-needed-for-home-loan-application/",
@@ -937,7 +993,7 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:36.903Z"
+      "inspected_at": "2026-11-21T16:48:06.560Z"
     },
     {
       "url": "https://approvalprep.com/questions/mortgage-checklist/",
@@ -949,7 +1005,7 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:31.201Z"
+      "inspected_at": "2026-11-21T16:48:06.348Z"
     },
     {
       "url": "https://approvalprep.com/questions/mortgage-loan-documents-checklist/",
@@ -961,7 +1017,7 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:30.657Z"
+      "inspected_at": "2026-11-21T16:48:00.163Z"
     },
     {
       "url": "https://approvalprep.com/questions/mortgage-loan-documents-list/",
@@ -973,7 +1029,7 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:37.424Z"
+      "inspected_at": "2026-11-21T16:48:12.406Z"
     },
     {
       "url": "https://approvalprep.com/questions/mortgage-loan-processing-checklist-template/",
@@ -985,22 +1041,10 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:50.296Z"
+      "inspected_at": "2026-11-21T16:48:24.917Z"
     },
     {
       "url": "https://approvalprep.com/questions/mortgage-pre-approval-documents-checklist/",
-      "verdict": "NEUTRAL",
-      "coverageState": "Discovered - currently not indexed",
-      "lastCrawlTime": null,
-      "indexingState": "INDEXING_STATE_UNSPECIFIED",
-      "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
-      "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
-      "googleCanonical": null,
-      "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:24.736Z"
-    },
-    {
-      "url": "https://approvalprep.com/questions/mortgage-processing-checklist-pdf/",
       "verdict": "NEUTRAL",
       "coverageState": "URL is unknown to Google",
       "lastCrawlTime": null,
@@ -1009,7 +1053,19 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:24.376Z"
+      "inspected_at": "2026-11-21T16:48:00.194Z"
+    },
+    {
+      "url": "https://approvalprep.com/questions/mortgage-processing-checklist-pdf/",
+      "verdict": "NEUTRAL",
+      "coverageState": "Discovered - currently not indexed",
+      "lastCrawlTime": null,
+      "indexingState": "INDEXING_STATE_UNSPECIFIED",
+      "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
+      "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
+      "googleCanonical": null,
+      "userCanonical": null,
+      "inspected_at": "2026-11-21T16:48:00.174Z"
     },
     {
       "url": "https://approvalprep.com/questions/what-do-apartment-applications-ask-for/",
@@ -1021,7 +1077,7 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:30.903Z"
+      "inspected_at": "2026-11-21T16:48:06.389Z"
     },
     {
       "url": "https://approvalprep.com/questions/what-documents-do-mortgage-lenders-require/",
@@ -1033,7 +1089,7 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:43.741Z"
+      "inspected_at": "2026-11-21T16:48:12.629Z"
     },
     {
       "url": "https://approvalprep.com/questions/what-documents-need-for-mortgage-loan/",
@@ -1045,19 +1101,19 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:37.100Z"
+      "inspected_at": "2026-11-21T16:48:18.769Z"
     },
     {
       "url": "https://approvalprep.com/questions/what-does-a-verification-of-employment-letter-look-like/",
       "verdict": "NEUTRAL",
-      "coverageState": "Discovered - currently not indexed",
+      "coverageState": "URL is unknown to Google",
       "lastCrawlTime": null,
       "indexingState": "INDEXING_STATE_UNSPECIFIED",
       "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:24.273Z"
+      "inspected_at": "2026-11-21T16:48:00.278Z"
     },
     {
       "url": "https://approvalprep.com/questions/what-is-a-goodwill-credit-adjustment/",
@@ -1069,55 +1125,55 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:24.444Z"
+      "inspected_at": "2026-11-21T16:48:12.730Z"
     },
     {
       "url": "https://approvalprep.com/questions/what-paperwork-is-needed-for-a-mortgage/",
       "verdict": "NEUTRAL",
-      "coverageState": "URL is unknown to Google",
+      "coverageState": "Discovered - currently not indexed",
       "lastCrawlTime": null,
       "indexingState": "INDEXING_STATE_UNSPECIFIED",
       "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:31.107Z"
+      "inspected_at": "2026-11-21T16:48:06.315Z"
     },
     {
       "url": "https://approvalprep.com/rental-application-checklist/",
       "verdict": "PASS",
       "coverageState": "Submitted and indexed",
-      "lastCrawlTime": "2026-11-19T01:42:22Z",
+      "lastCrawlTime": "2026-11-21T04:47:58Z",
       "indexingState": "INDEXING_ALLOWED",
       "robotsTxtState": "ALLOWED",
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/rental-application-checklist/",
       "userCanonical": "https://approvalprep.com/rental-application-checklist/",
-      "inspected_at": "2026-11-19T18:22:35.683Z"
+      "inspected_at": "2026-11-21T16:49:02.404Z"
     },
     {
       "url": "https://approvalprep.com/rental-application-kit/",
       "verdict": "PASS",
       "coverageState": "Submitted and indexed",
-      "lastCrawlTime": "2026-11-15T07:13:58Z",
+      "lastCrawlTime": "2026-11-20T16:17:52Z",
       "indexingState": "INDEXING_ALLOWED",
       "robotsTxtState": "ALLOWED",
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/rental-application-kit/",
       "userCanonical": "https://approvalprep.com/rental-application-kit/",
-      "inspected_at": "2026-11-19T18:22:28.447Z"
+      "inspected_at": "2026-11-21T16:48:55.855Z"
     },
     {
       "url": "https://approvalprep.com/rental-application-letter/",
       "verdict": "NEUTRAL",
-      "coverageState": "URL is unknown to Google",
+      "coverageState": "Discovered - currently not indexed",
       "lastCrawlTime": null,
       "indexingState": "INDEXING_STATE_UNSPECIFIED",
       "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:22:28.964Z"
+      "inspected_at": "2026-11-21T16:49:01.888Z"
     },
     {
       "url": "https://approvalprep.com/rental-application/cover-letter/",
@@ -1129,19 +1185,19 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/rental-application/cover-letter/",
       "userCanonical": "https://approvalprep.com/rental-application/cover-letter/",
-      "inspected_at": "2026-11-19T18:22:22.884Z"
+      "inspected_at": "2026-11-21T16:48:55.612Z"
     },
     {
       "url": "https://approvalprep.com/rental-verification-form/",
       "verdict": "NEUTRAL",
-      "coverageState": "URL is unknown to Google",
+      "coverageState": "Discovered - currently not indexed",
       "lastCrawlTime": null,
       "indexingState": "INDEXING_STATE_UNSPECIFIED",
       "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:22:28.813Z"
+      "inspected_at": "2026-11-21T16:48:56.186Z"
     },
     {
       "url": "https://approvalprep.com/reports/",
@@ -1153,7 +1209,7 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/reports/",
       "userCanonical": "https://approvalprep.com/reports/",
-      "inspected_at": "2026-11-19T18:22:28.558Z"
+      "inspected_at": "2026-11-21T16:48:55.962Z"
     },
     {
       "url": "https://approvalprep.com/reports/document-readiness-index/",
@@ -1165,7 +1221,7 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/reports/document-readiness-index/",
       "userCanonical": "https://approvalprep.com/reports/document-readiness-index/",
-      "inspected_at": "2026-11-19T18:22:40.340Z"
+      "inspected_at": "2026-11-21T16:49:08.028Z"
     },
     {
       "url": "https://approvalprep.com/resources/",
@@ -1177,7 +1233,7 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/resources/",
       "userCanonical": "https://approvalprep.com/resources/",
-      "inspected_at": "2026-11-19T18:22:35.172Z"
+      "inspected_at": "2026-11-21T16:49:14.291Z"
     },
     {
       "url": "https://approvalprep.com/sba-loan-checklist/",
@@ -1189,7 +1245,16 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/sba-loan-checklist/",
       "userCanonical": "https://approvalprep.com/sba-loan-checklist/",
-      "inspected_at": "2026-11-19T18:22:34.289Z"
+      "inspected_at": "2026-11-21T16:49:02.070Z"
+    },
+    {
+      "url": "https://approvalprep.com/security-deposit-demand-letter/",
+      "verdict": null,
+      "coverageState": "NOT_INSPECTED",
+      "lastCrawlTime": null,
+      "indexingState": null,
+      "inspected_at": null,
+      "not_inspected_reason": "published after the last inspection run; the next daily cycle inspects it"
     },
     {
       "url": "https://approvalprep.com/templates/",
@@ -1201,19 +1266,19 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:22:34.982Z"
+      "inspected_at": "2026-11-21T16:49:14.610Z"
     },
     {
       "url": "https://approvalprep.com/the-bureau-answered/",
       "verdict": "NEUTRAL",
-      "coverageState": "URL is unknown to Google",
+      "coverageState": "Discovered - currently not indexed",
       "lastCrawlTime": null,
       "indexingState": "INDEXING_STATE_UNSPECIFIED",
       "robotsTxtState": "ROBOTS_TXT_STATE_UNSPECIFIED",
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:21:30.706Z"
+      "inspected_at": "2026-11-21T16:48:18.525Z"
     },
     {
       "url": "https://approvalprep.com/tools/",
@@ -1225,7 +1290,7 @@
       "pageFetchState": "PAGE_FETCH_STATE_UNSPECIFIED",
       "googleCanonical": null,
       "userCanonical": null,
-      "inspected_at": "2026-11-19T18:22:41.668Z"
+      "inspected_at": "2026-11-21T16:49:08.531Z"
     },
     {
       "url": "https://approvalprep.com/tools/apartment-application-readiness-checklist/",
@@ -1237,7 +1302,7 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/tools/apartment-application-readiness-checklist/",
       "userCanonical": "https://approvalprep.com/tools/apartment-application-readiness-checklist/",
-      "inspected_at": "2026-11-19T18:22:35.334Z"
+      "inspected_at": "2026-11-21T16:49:02.236Z"
     },
     {
       "url": "https://approvalprep.com/tools/business-funding-document-checklist/",
@@ -1249,7 +1314,7 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/tools/business-funding-document-checklist/",
       "userCanonical": "https://approvalprep.com/tools/business-funding-document-checklist/",
-      "inspected_at": "2026-11-19T18:22:42.270Z"
+      "inspected_at": "2026-11-21T16:49:14.761Z"
     },
     {
       "url": "https://approvalprep.com/tools/car-loan-document-checklist/",
@@ -1261,7 +1326,7 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/tools/car-loan-document-checklist/",
       "userCanonical": "https://approvalprep.com/tools/car-loan-document-checklist/",
-      "inspected_at": "2026-11-19T18:22:35.877Z"
+      "inspected_at": "2026-11-21T16:49:14.565Z"
     },
     {
       "url": "https://approvalprep.com/tools/important-documents-folder-checklist/",
@@ -1273,7 +1338,7 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/tools/important-documents-folder-checklist/",
       "userCanonical": "https://approvalprep.com/tools/important-documents-folder-checklist/",
-      "inspected_at": "2026-11-19T18:22:41.482Z"
+      "inspected_at": "2026-11-21T16:49:08.326Z"
     },
     {
       "url": "https://approvalprep.com/tools/mortgage-document-readiness-checklist/",
@@ -1285,7 +1350,7 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/tools/mortgage-document-readiness-checklist/",
       "userCanonical": "https://approvalprep.com/tools/mortgage-document-readiness-checklist/",
-      "inspected_at": "2026-11-19T18:22:42.254Z"
+      "inspected_at": "2026-11-21T16:49:14.164Z"
     },
     {
       "url": "https://approvalprep.com/tools/proof-of-income-packet-checklist/",
@@ -1297,7 +1362,16 @@
       "pageFetchState": "SUCCESSFUL",
       "googleCanonical": "https://approvalprep.com/tools/proof-of-income-packet-checklist/",
       "userCanonical": "https://approvalprep.com/tools/proof-of-income-packet-checklist/",
-      "inspected_at": "2026-11-19T18:22:41.051Z"
+      "inspected_at": "2026-11-21T16:49:08.309Z"
+    },
+    {
+      "url": "https://approvalprep.com/transunion-dispute-address/",
+      "verdict": null,
+      "coverageState": "NOT_INSPECTED",
+      "lastCrawlTime": null,
+      "indexingState": null,
+      "inspected_at": null,
+      "not_inspected_reason": "published after the last inspection run; the next daily cycle inspects it"
     }
   ]
 }

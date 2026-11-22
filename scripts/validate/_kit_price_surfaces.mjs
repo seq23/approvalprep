@@ -144,11 +144,13 @@ function readSurface(file) {
   return fs.readFileSync(file, 'utf8');
 }
 
-// Returns { problems, filesRead, downloadsRead, mentionsChecked }.
+// Returns { problems, filesRead, downloadsRead, mentionsChecked, mentions } (mentions: { file, line, slug, n }).
 export function sweepKitPrices(seedProducts, files) {
   const aliases = seedProducts.flatMap((p) => aliasesFor(p).map((a) => ({ a: a.toLowerCase(), slug: p.slug, price: p.priceCents / 100 })))
     .sort((x, y) => y.a.length - x.a.length);
   const problems = [];
+  const mentions = [];
+  const current = new Set(seedProducts.map((p) => p.priceCents / 100));
   let mentionsChecked = 0, downloadsRead = 0;
   for (const file of files) {
     let text;
@@ -175,10 +177,54 @@ export function sweepKitPrices(seedProducts, files) {
       const line = text.slice(0, m.index).split('\n').length;
       const kitWord = /kit|bundle|paid once|complete set/.test(before.slice(-80) + after);
       if (RETIRED.has(n) && kitWord) { problems.push(`${file}:${line}: $${n} is a retired price (${hit ? hit.slug : 'kit copy'})`); mentionsChecked++; continue; }
-      if (!hit) continue;
+      // A current kit price beside kit words that names no kit is still a typed price.
+      if (!hit) { if (kitWord && current.has(n)) mentions.push({ file, line, slug: null, n }); continue; }
       mentionsChecked++;
+      mentions.push({ file, line, slug: hit.slug, n });
       if (n !== hit.price) problems.push(`${file}:${line}: ${hit.slug} shown at $${n}, charged $${hit.price}`);
     }
   }
-  return { problems, filesRead: files.length, downloadsRead, mentionsChecked };
+  return { problems, filesRead: files.length, downloadsRead, mentionsChecked, mentions };
+}
+
+// --- structured price fields ------------------------------------------------
+// The sweep above reads prose. This reads data: every JSON object under data/
+// (and the runtime seed) that names a kit by sku/slug/product_sku and carries a
+// price-like field must carry that kit's charged price. products.json once kept
+// a second `price` field ($249 for the $49 bundle) that nothing here compared.
+const KIT_ID_KEYS = ['sku', 'slug', 'product_sku', 'productSku', 'recommendationSku'];
+const PRICE_KEY = /^(price|pricelabel|price_label|pricecents|price_cents|unit_amount|amount_cents)$/i;
+
+function priceOf(key, value) {
+  if (typeof value === 'number') return /cents|unit_amount/i.test(key) ? value / 100 : value;
+  if (typeof value === 'string') { const m = value.match(/^\$?\s?(\d+(?:\.\d+)?)$/); return m ? Number(m[1]) : null; }
+  return null;
+}
+
+// Returns { problems, fieldsChecked }.
+export function sweepStructuredPrices(seedProducts, docs) {
+  const price = new Map(seedProducts.map((p) => [p.slug, p.priceCents / 100]));
+  const problems = [];
+  let fieldsChecked = 0;
+  const visit = (node, file, trail) => {
+    if (Array.isArray(node)) { node.forEach((v, i) => visit(v, file, `${trail}[${i}]`)); return; }
+    if (!node || typeof node !== 'object') return;
+    const kit = KIT_ID_KEYS.map((k) => node[k]).find((v) => price.has(v));
+    if (kit) for (const [k, v] of Object.entries(node)) {
+      if (!PRICE_KEY.test(k)) continue;
+      const n = priceOf(k, v);
+      fieldsChecked++;
+      if (n !== price.get(kit)) problems.push(`${file} ${trail}.${k}: ${kit} carries ${JSON.stringify(v)}, charged $${price.get(kit)}`);
+    }
+    for (const [k, v] of Object.entries(node)) visit(v, file, `${trail}.${k}`);
+  };
+  for (const { file, json } of docs) visit(json, file, '');
+  return { problems, fieldsChecked };
+}
+
+export function structuredPriceDocs() {
+  const docs = walk('data', (p) => p.endsWith('.json')).map((file) => ({ file, json: JSON.parse(fs.readFileSync(file, 'utf8')) }));
+  const runtime = fs.readFileSync('functions/_runtime/seed-products.js', 'utf8');
+  docs.push({ file: 'functions/_runtime/seed-products.js', json: JSON.parse(runtime.slice(runtime.indexOf('{'), runtime.lastIndexOf('}') + 1)) });
+  return docs;
 }

@@ -1,5 +1,6 @@
 ---
 import { orderedOfferings } from "../data/letterStudio";
+import { bundleValueLine, BUNDLE_SKU } from "../data/content";
 const { products = [] } = Astro.props;
 // What comes after the free first letter leads; the letter the free Studio already writes is last.
 const listFor = (product) => { const items = orderedOfferings(product.sku, product.included_offerings || product.includes || []); return [items.filter((i) => !i.also).map((i) => i.name).join(" · "), items.filter((i) => i.also).map((i) => i.name).join(", ")]; };
@@ -13,6 +14,7 @@ const listFor = (product) => { const items = orderedOfferings(product.sku, produ
         <p>{product.customer_situation}</p>
       </div>
       <p class="pricing-amount">{product.priceLabel}</p>
+      {product.sku === BUNDLE_SKU && bundleValueLine && <p class="fine"><strong>{bundleValueLine}</strong></p>}
       <p class="fine"><strong>{`In this kit (${(product.included_offerings || product.includes || []).length} documents):`}</strong> {listFor(product)[0]}{listFor(product)[1] && <> · also included: {listFor(product)[1]}</>}</p>
       <p class="fine">You get a PDF guide and an editable Word file with a blank for each fact. Paid once; it downloads as soon as you pay.</p>
       <button class="button primary-button checkout-button" type="button" data-sku={product.sku}>Buy {product.name} — {product.priceLabel}</button>

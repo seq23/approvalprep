@@ -5,13 +5,14 @@ import zlib from "node:zlib";
 import { fail, readJson } from "./_common.mjs";
 import { productAssetKey } from "../../functions/_runtime/asset-keys.js";
 import { kitsMode, kitPath, CI_NOTE } from "../lib/kits-dir.mjs";
+import { withSeedPrices } from "../../src/lib/kitPrice.mjs";
 
 // Kit files live in APPROVALPREP_KITS_DIR; in CI they are absent (contract mode).
 const kitFilesMode = kitsMode("product-flow-e2e");
 
-const products = readJson("data/products/products.json").products.filter((item) => item.status === "active_paid" && item.stripe_enabled);
-const offeringCatalog = readJson("data/products/full_offering_catalog.json");
 const seedProducts = readJson("data/products/seed_product_registry.json").products || [];
+const products = withSeedPrices(readJson("data/products/products.json").products, seedProducts).filter((item) => item.status === "active_paid" && item.stripe_enabled);
+const offeringCatalog = readJson("data/products/full_offering_catalog.json");
 const routes = new Set(readJson("data/routes/route_manifest.json").routes.map((route) => route.path));
 const pricingPage = fs.readFileSync("src/pages/[...slug].astro", "utf8");
 const homePage = fs.readFileSync("src/pages/index.astro", "utf8");

@@ -2,7 +2,6 @@
 
 **Offering ID:** `rental-application-kit__employment-verification-request-to-your-employer`  
 **Bundled product:** Rental Application Kit (`rental-application-kit`)  
-**Price:** $29  
 **Delivery model:** Direct paid download; Studio not required  
 **Review status:** PASS_BY_STRUCTURAL_CONTRACT
 
