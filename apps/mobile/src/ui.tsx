@@ -66,12 +66,14 @@ export function Row({ title, sub, onPress, selected, answer = false }: { title: 
 }
 
 /** What kind of answer a box takes, so the phone shows the right keyboard and never "corrects" it. */
-export type FieldKind = 'text' | 'email' | 'url' | 'ssn4';
+export type FieldKind = 'text' | 'email' | 'url' | 'ssn4' | 'digits';
 const KEYBOARD = {
   text: {},
   email: { keyboardType: 'email-address', autoCapitalize: 'none', autoComplete: 'email', autoCorrect: false, textContentType: 'emailAddress', spellCheck: false },
   url: { keyboardType: 'url', autoCapitalize: 'none', autoComplete: 'url', autoCorrect: false, textContentType: 'URL', spellCheck: false },
   ssn4: { keyboardType: 'number-pad', autoComplete: 'off', autoCorrect: false, textContentType: 'none', spellCheck: false },
+  // A code typed from somewhere else (the Play review code): number pad, digits only, no autocorrect.
+  digits: { keyboardType: 'number-pad', autoComplete: 'off', autoCorrect: false, textContentType: 'oneTimeCode', spellCheck: false },
 } as const;
 /** The keyboard settings for a kind of box (tests/ui.test.ts reads these). */
 export const keyboardFor = (kind: FieldKind) => KEYBOARD[kind];
@@ -97,7 +99,7 @@ export function Field({ label, value, onChangeText, defaultHint, multiline = fal
     typed.current = value; handed.current.clear(); setBox(b => ({ text: value, n: b.n + 1 }));
   }, [value]);
   const hand = (next: string) => { if (next === typed.current) return; typed.current = next; handed.current.add(next); onChangeText(next); };
-  const masked = (raw: string) => kind === 'ssn4' ? ssnInput(raw, typed.current) : raw;
+  const masked = (raw: string) => kind === 'ssn4' ? ssnInput(raw, typed.current) : kind === 'digits' ? raw.replace(/\D/g, '') : raw;
   // The mask is applied to what the parent hears on every key, but written into the box only when
   // she leaves it, so it never fights the keys she is typing.
   const settle = (raw: unknown) => {

@@ -35,10 +35,17 @@ export function otherKits(owned: BundleOwnership, order: readonly string[] = [KI
   if (owned.bundle) return [];
   return order.filter(id => !ownsKit(owned, id));
 }
-export function ownershipFrom(active: Record<string, { productIdentifier: string; expirationDate?: string | null }>): BundleOwnership {
+/** RevenueCat's promotional grant of the bundle, made by the server only for the Play reviewer's code
+ * (functions/_runtime/review.js): active, with a future end date, from the PROMOTIONAL store (product rc_promo_*).
+ * Nothing on the phone makes this up: it is RevenueCat's own answer, and it ends by itself after 7 days. */
+export function grantedBundle(entry: { productIdentifier: string; expirationDate?: string | null; store?: string } | undefined, now = Date.now()): boolean {
+  return !!entry && (entry.store === 'PROMOTIONAL' || entry.productIdentifier.startsWith('rc_promo_'))
+    && !!entry.expirationDate && Date.parse(entry.expirationDate) > now;
+}
+export function ownershipFrom(active: Record<string, { productIdentifier: string; expirationDate?: string | null; store?: string }>, now = Date.now()): BundleOwnership {
   const owns = (id: string) => active[id]?.productIdentifier === id && active[id]?.expirationDate == null;
   const kits = ALL_KIT_IDS.filter(owns);
-  const bundle = bundleUnlocked({ kits, upgrades: UPGRADE_IDS.filter(owns), bundle: owns(COMPLETE_BUNDLE.productId) });
+  const bundle = bundleUnlocked({ kits, upgrades: UPGRADE_IDS.filter(owns), bundle: owns(COMPLETE_BUNDLE.productId) }) || grantedBundle(active[COMPLETE_BUNDLE.productId], now);
   return { bundle, creditKit: bundle || owns(KIT.productId), explanationKit: bundle || owns(EXPLANATION_PRODUCT),
     fileKits: FILE_KITS.map(k => k.productId).filter(id => bundle || owns(id)) };
 }

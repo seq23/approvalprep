@@ -6,11 +6,17 @@ pages_build_output_dir = "dist"
 PUBLIC_SITE_URL = "https://approvalprep.com"
 PUBLIC_BRAND_NAME = "ApprovalPrep"
 PUBLIC_ADMIN_GATE_ENABLED = "true"
+# Play review window (functions/_runtime/review.js; docs/APP_BUNDLE_DELIVERY.md "Play review access"). Production
+# only: preview has no REVIEW_CODE secret, so every review route there answers 404. Renew REVIEW_UNTIL yearly.
+REVIEW_CODE_VERSION = "v1"
+REVIEW_UNTIL = "2027-11-22"
 
 [env.production.vars]
 PUBLIC_SITE_URL = "https://approvalprep.com"
 PUBLIC_BRAND_NAME = "ApprovalPrep"
 PUBLIC_ADMIN_GATE_ENABLED = "true"
+REVIEW_CODE_VERSION = "v1"
+REVIEW_UNTIL = "2027-11-22"
 
 [env.preview.vars]
 PUBLIC_SITE_URL = "https://preview.approvalprep.com"
