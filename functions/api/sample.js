@@ -16,11 +16,18 @@ export async function onRequestPost({ request, env }, fetchImpl = fetch, dnsFetc
   const email = normalizeEmail(body.email);
   if (!email) return json({ ok: false, error: 'Enter a valid email address.' }, 400);
   if (body.consent !== true) return json({ ok: false, error: 'Please tick the box so we can email it to you.' }, 400);
-  if (!env.PRODUCTS_DB) return json({ ok: false, error: 'Sign-up is unavailable right now. Please try again shortly.' }, 503);
-  if (!(await withinLimit(env.PRODUCTS_DB, `sample:ip:${await sha256(clientIp(request))}`, SAMPLE_LIMITS.perIpHour, HOUR))
-    || !(await withinLimit(env.PRODUCTS_DB, 'sample:global', SAMPLE_LIMITS.globalDay, DAY))) {
-    return json({ ok: false, error: 'Too many sign-ups right now. Please try again later.' }, 429);
+  const unavailable = () => json({ ok: false, error: 'Sign-up is unavailable right now. Please try again shortly.' }, 503);
+  if (!env.PRODUCTS_DB) return unavailable();
+  // The limit store down is a plain "try again shortly" (503), never an uncounted send and never a bare 500.
+  let allowed;
+  try {
+    allowed = await withinLimit(env.PRODUCTS_DB, `sample:ip:${await sha256(clientIp(request))}`, SAMPLE_LIMITS.perIpHour, HOUR)
+      && await withinLimit(env.PRODUCTS_DB, 'sample:global', SAMPLE_LIMITS.globalDay, DAY);
+  } catch {
+    console.error(JSON.stringify({ event: 'SAMPLE_LIMIT_UNAVAILABLE', stop: 'NAMED STOP [SAMPLE_LIMIT_UNAVAILABLE] the rate-limit store failed' }));
+    return unavailable();
   }
+  if (!allowed) return json({ ok: false, error: 'Too many sign-ups right now. Please try again later.' }, 429);
   if (!(await mailDomainOk(email, dnsFetch))) return json({ ok: false, error: 'That email address cannot receive mail. Please check the part after the @.' }, 400);
   const magnet = ['credit-starter', 'employment-letter'].includes(body.magnet) ? body.magnet : 'loe';
   const sent = await signUpForSample(env, email, fetchImpl, magnet);

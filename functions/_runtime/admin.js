@@ -1,13 +1,14 @@
 import { json, nowIso } from './responses.js';
 import { safeEqual } from './rate-limit.js';
-import { adminLockedOut, lockedOutResponse, recordAdminFailure } from './admin-lockout.js';
+import { adminTryRefusal, recordAdminFailure } from './admin-lockout.js';
 async function sha256Hex(input){ const data = new TextEncoder().encode(input); const hash = await crypto.subtle.digest('SHA-256', data); return [...new Uint8Array(hash)].map(b=>b.toString(16).padStart(2,'0')).join(''); }
 function cookieValue(request,name){ const raw=request.headers.get('cookie')||''; return raw.split(';').map(v=>v.trim()).find(v=>v.startsWith(name+'='))?.split('=').slice(1).join('=') || ''; }
 export async function requireAdmin(request, env){
   const password = request.headers.get('x-admin-password');
   if (password) {
     // The password header is a login on every call, so it gets the same per-IP lockout as /api/admin/login.
-    if (await adminLockedOut(request, env)) return { ok:false, response:lockedOutResponse() };
+    const refusal = await adminTryRefusal(request, env);
+    if (refusal) return { ok:false, response:refusal };
     if (await safeEqual(password, env.ADMIN_GATE_PASSWORD)) return { ok:true, actor:'admin-password' };
     await recordAdminFailure(request, env);
     return { ok:false, response:json({ ok:false, error:'ADMIN_AUTH_REQUIRED' },401) };

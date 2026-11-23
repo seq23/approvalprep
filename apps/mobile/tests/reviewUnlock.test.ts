@@ -10,6 +10,8 @@ import { BUNDLE_ENTITLEMENT, LIMITS, reviewStatus, reviewUnlock } from '../../..
 // @ts-ignore Pages runtime is JavaScript
 import { onRequestGet as statusRoute } from '../../../functions/api/review/index.js';
 // @ts-ignore Pages runtime is JavaScript
+import { ipPrefix } from '../../../functions/_runtime/rate-limit.js';
+// @ts-ignore Pages runtime is JavaScript
 import { onRequestPost as bundleDoor } from '../../../functions/api/app-bundle.js';
 // @ts-ignore Pages runtime is JavaScript
 import { onRequestPost as filesDoor } from '../../../functions/api/app-files.js';
@@ -208,6 +210,36 @@ test('IPv6: every address in one /64 is one network, so rotating the low 64 bits
   const rotated = await call(e, rc, { code: CODE, app_user_id: anon(1) }, '2001:0db8:00aa:00bb:ffff:ffff:ffff:fffe', start + 30 * 61_000);
   assert.equal(rotated.status, 429); assert.equal(rc.granted.size, 0);
   assert.equal((await call(e, rc, { code: CODE, app_user_id: anon(1) }, '2001:db8:aa:bc::1', start + 31 * 61_000)).status, 200);
+});
+
+test('IPv6 /48: one tunnel-broker block cannot spend the shared day by hopping /64s; its 41st try is refused before the compare and another /48 still gets in', async () => {
+  const e = env(), rc = revenuecat(); rc.known.add(anon(1));
+  const start = Date.parse(new Date(NOW).toISOString().slice(0, 10) + 'T00:00:30Z');
+  // 40 tries, each from its own /64 inside 2001:db8:77::/48 and its own install, all under every per-network cap.
+  for (let i = 0; i < LIMITS.perNet48Daily; i++)
+    assert.equal((await call(e, rc, { code: '0000000000', app_user_id: anon(400 + i) }, `2001:db8:77:${(i + 1).toString(16)}::9`, start + i * 61_000)).status, 403);
+  const before = triesTaken(e);
+  const hop = await call(e, rc, { code: CODE, app_user_id: anon(1) }, '2001:db8:77:ffff::1', start + 50 * 61_000);
+  assert.equal(hop.status, 429); assert.equal(rc.granted.size, 0); assert.deepEqual(rc.calls, []);
+  assert.equal(triesTaken(e), before, 'a refused /48 try never reaches the shared daily budget');
+  assert.equal(before, LIMITS.perNet48Daily);
+  assert.equal((await call(e, rc, { code: CODE, app_user_id: anon(1) }, '2001:db8:78::1', start + 51 * 61_000)).status, 200);
+});
+
+test('IPv4-mapped IPv6 (::ffff:a.b.c.d) is the IPv4 it carries: two such callers never share a bucket, and the mapped and plain forms of one address do', async () => {
+  // ipPrefix itself, both spellings of the mapped form.
+  assert.equal(ipPrefix('::ffff:198.51.100.1'), '198.51.100.1');
+  assert.equal(ipPrefix('::FFFF:c633:6402'), '198.51.100.2');
+  assert.equal(ipPrefix('2601:3cb:500:15e1:742a:4616:6d6c:4807'), '2601:3cb:500:15e1::/64');
+  assert.equal(ipPrefix('2601:3cb:500:15e1:742a:4616:6d6c:4807', 48), '2601:3cb:500::/48');
+  const e = env(), rc = revenuecat(); rc.known.add(anon(1));
+  const start = Date.parse(new Date(NOW).toISOString().slice(0, 10) + 'T00:00:30Z');
+  for (let i = 0; i < LIMITS.perIpDaily; i++)
+    assert.equal((await call(e, rc, { code: '0000000000', app_user_id: anon(500 + i) }, '::ffff:198.51.100.1', start + i * 61_000)).status, 403);
+  // The same address written plainly is the same caller: refused.
+  assert.equal((await call(e, rc, { code: CODE, app_user_id: anon(1) }, '198.51.100.1', start + 30 * 61_000)).status, 429);
+  // A different IPv4 behind the same mapped prefix is someone else: let in.
+  assert.equal((await call(e, rc, { code: CODE, app_user_id: anon(1) }, '::ffff:198.51.100.2', start + 31 * 61_000)).status, 200);
 });
 
 test('the window is one review, never a standing date: more than 30 days ahead is closed (code, status route and sandbox); exactly 30 is open', async () => {
