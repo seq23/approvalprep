@@ -6,7 +6,7 @@
   "state": "OK",
   "named_stop": null,
   "sitemap_source": "public/sitemap.xml",
-  "sitemap_url_count": 112,
+  "sitemap_url_count": 114,
   "inspected_this_run": 112,
   "quota": {
     "daily_cap": 150,
@@ -32,11 +32,13 @@
     "by_coverage_state": {
       "Crawled - currently not indexed": 6,
       "Discovered - currently not indexed": 48,
+      "NOT_INSPECTED": 2,
       "Submitted and indexed": 44,
       "URL is unknown to Google": 14
     },
     "by_verdict": {
       "NEUTRAL": 68,
+      "NONE": 2,
       "PASS": 44
     },
     "buckets": {
@@ -45,7 +47,7 @@
       "discovered_not_indexed": 48,
       "unknown_to_google": 14,
       "other": 0,
-      "not_inspected": 0
+      "not_inspected": 2
     }
   },
   "truth_boundary": "URL Inspection reports Google's index state for each URL at inspected_at. It is not a ranking or traffic measure; impressions come from data/intelligence/gsc_search_analytics.json.",
@@ -973,6 +975,24 @@
       "googleCanonical": null,
       "userCanonical": null,
       "inspected_at": "2026-11-23T21:30:45.273Z"
+    },
+    {
+      "url": "https://approvalprep.com/questions/is-paying-for-credit-repair-worth-it/",
+      "verdict": null,
+      "coverageState": "NOT_INSPECTED",
+      "lastCrawlTime": null,
+      "indexingState": null,
+      "inspected_at": null,
+      "not_inspected_reason": "published after the last inspection run; the next daily cycle inspects it"
+    },
+    {
+      "url": "https://approvalprep.com/questions/is-sky-blue-credit-repair-worth-it/",
+      "verdict": null,
+      "coverageState": "NOT_INSPECTED",
+      "lastCrawlTime": null,
+      "indexingState": null,
+      "inspected_at": null,
+      "not_inspected_reason": "published after the last inspection run; the next daily cycle inspects it"
     },
     {
       "url": "https://approvalprep.com/questions/letter-confirming-employment-template/",
