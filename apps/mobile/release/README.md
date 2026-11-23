@@ -25,8 +25,9 @@ Server side, before sales are switched on (`KIT_SALES_ENABLED` in `src/kit.ts`):
   `/v2/projects/{project}/customers/{id}/purchases` and `/products` (`functions/_runtime/revenuecat.js`). A key
   RevenueCat refuses answers `NAMED STOP [REVENUECAT_KEY_REJECTED]`.
 - Put both kit files in the private bucket (`docs/APP_BUNDLE_DELIVERY.md`).
-- For the days of a store review only, set `APPROVALPREP_ACCEPT_SANDBOX_PURCHASES=1` so the
-  reviewer's test purchase opens the kit; remove it afterwards.
+- For a store review, set `APPROVALPREP_ACCEPT_SANDBOX_PURCHASES=1` so the reviewer's test purchase
+  opens the kit. It counts only while `REVIEW_UNTIL` (wrangler.toml, at most 30 days ahead) is open, so
+  reopen that window for each submission (`docs/APP_BUNDLE_DELIVERY.md`, "Play review access").
 - In RevenueCat, name each entitlement exactly as its product (`ap_credit_kit`,
   `ap_explanation_kit`, `ap_complete_bundle`, `ap_bundle_upgrade`), one product each.
 - Run `npm run bundle:load` against a preview with a verified purchase identity, and restore

@@ -6,11 +6,13 @@ on:
         description: Run fixture workflow data trace only
         required: false
         default: "false"
+  # functions/, migrations/ and wrangler.toml are here because apps/mobile/tests run the server's review code, doors and
+  # window date: a server-only change ran none of them before 23 Nov 2026.
   push:
     branches: [main]
-    paths: ['apps/mobile/**', 'src/lib/**', 'src/data/letterStudio.ts', 'data/products/products.json', 'data/products/seed_product_registry.json', '.github/workflows/app-preview.yml']
+    paths: ['apps/mobile/**', 'src/lib/**', 'src/data/letterStudio.ts', 'data/products/products.json', 'data/products/seed_product_registry.json', '.github/workflows/app-preview.yml', 'functions/**', 'migrations/**', 'wrangler.toml', 'docs/APP_BUNDLE_DELIVERY.md']
   pull_request:
-    paths: ['apps/mobile/**', 'src/lib/**', 'src/data/letterStudio.ts', 'data/products/products.json', 'data/products/seed_product_registry.json', '.github/workflows/app-preview.yml']
+    paths: ['apps/mobile/**', 'src/lib/**', 'src/data/letterStudio.ts', 'data/products/products.json', 'data/products/seed_product_registry.json', '.github/workflows/app-preview.yml', 'functions/**', 'migrations/**', 'wrangler.toml', 'docs/APP_BUNDLE_DELIVERY.md']
 permissions:
   contents: read
   pull-requests: write

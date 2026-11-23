@@ -66,9 +66,12 @@ that token through the vault; never put it in a command line or the repo.
   (`APP_KIT_DELIVERY_NOT_READY`, `APP_BUNDLE_DELIVERY_NOT_READY`) without it. `/api/app-unlock`
   allows 10 attempts a minute per caller, `/api/app-bundle` 120 (room for the 100-Restore load
   check). Callers are counted by a hash, never a raw address.
-- Sandbox purchases open nothing. Store reviewers and testers buy in the sandbox, so for the
-  days of a store review set the server variable `APPROVALPREP_ACCEPT_SANDBOX_PURCHASES` to `1`
-  and remove it afterwards. Refunded purchases stay refused either way.
+- Sandbox purchases open nothing unless the server variable `APPROVALPREP_ACCEPT_SANDBOX_PURCHASES`
+  is `1` AND the store review window (`REVIEW_UNTIL`, see "Play review access") is open
+  (`acceptsSandbox` in `functions/_runtime/app-bundle.js`). Store reviewers and testers buy in the
+  sandbox, so a review needs both; the day the window closes, sandbox purchases stop opening anything
+  even if the flag was left on. Real purchases are never sandbox ones, so paid access never depends on
+  either. Refunded purchases stay refused either way.
 
 ## Single-kit files (13 Nov 2026)
 
@@ -93,7 +96,8 @@ Google Play's reviewer cannot buy, and the app has no accounts, so every paid ki
 - **Where**: More > "Have a review code?" (`apps/mobile/src/ReviewCode.tsx`), Android only, store account only,
   not for a bundle owner, and only while `GET /api/review` answers 200. iOS never shows it.
 - **Server**: `functions/api/review/{index,unlock}.js` -> `functions/_runtime/review.js`. Window -> body/ID format
-  -> try limits (5/min burst, 20/IP/day, 1,000/day; all before the compare) -> constant-time compare -> ID known to
+  -> try limits (all before the compare: per install 5 a minute and 10 a day, per network 5 a minute and 20 a day
+  with IPv6 counted by its /64, everyone 1,000 a day; the 1,000th files one Open Loops row a day, `REVIEW_DAILY_CAP`) -> constant-time compare -> ID known to
   RevenueCat -> 2 new devices per IP a day -> 10 devices per code version (the 11th files an Open Loops row,
   `REVIEW_DEVICE_CAP`) -> RevenueCat v2 `grant_entitlement` of `ap_complete_bundle` until `min(now + 7 days,
   REVIEW_UNTIL)`. Any RevenueCat failure revokes the granted entitlement (never a purchase), frees the slot, 503.
@@ -107,8 +111,16 @@ Google Play's reviewer cannot buy, and the app has no accounts, so every paid ki
   (`grantedBundle`), so the app and the doors agree.
 - **Pages settings** (production): secrets `REVIEW_CODE_SECRET` (vault `AP_PLAY_REVIEW_CODE`), `REVIEW_HASH_SECRET`
   (vault `AP_REVIEW_HASH_SECRET`), `BOSS_OPEN_LOOPS_TOKEN`; `REVIEW_CODE_VERSION` (the window id, `v1`) and
-  `REVIEW_UNTIL` (ISO date) are vars in `wrangler.toml` (production only). Missing or past = every review route
-  404 and no RevenueCat call. Preview deployments have no `REVIEW_CODE_SECRET`, so they stay closed.
+  `REVIEW_UNTIL` (ISO date) are vars in `wrangler.toml` (production only). Missing, past or more than 30 days ahead
+  = every review route 404, no RevenueCat call, and sandbox purchases refused. Preview deployments have no
+  `REVIEW_CODE_SECRET`, so they stay closed.
+- **Window** (23 Nov 2026): `REVIEW_UNTIL = 2026-12-14` covers the Play production review sent 22 Nov and the
+  App Store 1.0 review (send day + 21 days). It is ONE review's window, never a standing date: the code caps it at
+  30 days (`LIMITS.maxWindowDays`), so the guessing budget is at most 1,000 x 30 = 30,000 tries per window against
+  10^10 codes (3 in a million). For every later Play or App Store submission (an update re-review too), set
+  `REVIEW_UNTIL` in both `wrangler.toml` blocks to send day + 21 days in the same PR that ships the build, and land
+  it before pressing send. While it is closed, the Play Console "App access" code does nothing and the card is
+  hidden.
 - **Tables**: the additive migration `0002_review` in `migrations/` (HMACs only; rows purged 7 days after expiry on
   each redeem). Pages does not apply migrations on deploy: apply it to the `approvalprep-products` D1 by hand once.
 - **Rotate** only on a `REVIEW_DEVICE_CAP` row or a suspected leak: new vault code, new `REVIEW_CODE_SECRET` secret
