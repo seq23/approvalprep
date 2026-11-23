@@ -26,7 +26,7 @@ jobs:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
         with:
-          node-version: 22.12.0
+          node-version: 22.23.5
       # search-intelligence:derive (added by #54) spawns `npm run build` (astro):
       # without an install the job died with "astro: not found", exit 127, from
       # 26 Oct 2026. validate:workflow-deps-installed keeps this from recurring.

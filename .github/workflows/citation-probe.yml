@@ -52,7 +52,7 @@ jobs:
       - uses: actions/setup-node@v7
         if: ${{ inputs.confirm_paid }}
         with:
-          node-version: 22.12.0
+          node-version: 22.23.5
 
       - name: Observe whether answer engines cite us
         if: ${{ inputs.confirm_paid }}

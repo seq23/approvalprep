@@ -6,6 +6,9 @@ const root = process.cwd();
 const arg = process.argv.find(a => a.startsWith("--workflow="));
 const only = arg ? arg.split("=").slice(1).join("=").replace(/^\.github\/workflows\//, "") : null;
 function read(file){ return fs.readFileSync(path.join(root,file),"utf8"); }
+// One Node pin for the repo: .nvmrc (Cloudflare Pages builds with it). Every workflow must pin the same version.
+const NODE_PIN = (() => { try { return read(".nvmrc").trim(); } catch { return ""; } })();
+if (!/^\d+\.\d+\.\d+$/.test(NODE_PIN)) { console.error(`[trace-all] FAIL .nvmrc must hold one exact Node version, found "${NODE_PIN}"`); process.exit(1); }
 function write(file,data){ const p=path.join(root,file); fs.mkdirSync(path.dirname(p),{recursive:true}); fs.writeFileSync(p, JSON.stringify(data,null,2)+"\n"); }
 const dir = path.join(root,".github/workflows");
 const pkg = JSON.parse(read("package.json"));
@@ -77,7 +80,7 @@ const traces = files.map(file => {
   const requiresDependencyInstall = Boolean(installDependencyReason);
   const buildsProject = closure.scripts.includes("build");
   const dependencyInstallPolicyOk = requiresDependencyInstall ? usesNpmCi && !usesNpmInstall : !usesNpmInstall;
-  const nodeVersionOk = sharedCaller || /node-version:\s*22\.12\.0/.test(text);
+  const nodeVersionOk = sharedCaller || new RegExp(`node-version:\\s*${NODE_PIN.replace(/\./g, "\\.")}\\s*($|[\\s}])`, "m").test(text);
   const runnerPinned = sharedCaller || /runs-on:\s*(ubuntu-24\.04|macos-\d+)\s*$/m.test(text);
   const timeoutSet = sharedCaller || /timeout-minutes:\s*\d+/.test(text);
   const mainWriter = /safe-push-main\.sh/.test(text) || /(^|\n)\s*git push(?:\s|$)/m.test(text);

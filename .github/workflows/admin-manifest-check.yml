@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
-        with: { node-version: 22.12.0 }
+        with: { node-version: 22.23.5 }
       - name: Run fixture workflow trace
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
         run: npm run workflows:trace -- --workflow admin-manifest-check.yml

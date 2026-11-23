@@ -41,7 +41,9 @@ let recorded = 0;
 // 2. Bodies over the cap: refused with 413 whether the header says so or the stream runs over with no header.
 {
   const db = fakeD1();
-  const big = JSON.stringify({ ...EVENT, source: 'x'.repeat(TRACK_LIMITS.maxBody) });
+  // Fixed sizes, never derived from TRACK_LIMITS, so a raised cap cannot make its own test pass.
+  if (TRACK_LIMITS.maxBody !== 4096) fail(`the body cap is ${TRACK_LIMITS.maxBody} bytes; this guard and the docs say 4096`);
+  const big = JSON.stringify({ ...EVENT, source: 'x'.repeat(4096) });
   const byHeader = await post(db, '198.51.100.8', NOW, big);
   const chunk = new TextEncoder().encode('x'.repeat(1024));
   let sent = 0;
@@ -50,9 +52,9 @@ let recorded = 0;
   if (byHeader.status !== 413 || streamed.status !== 413) fail(`an oversized body was accepted (header ${byHeader.status}, streamed ${streamed.status})`);
   if (sent > 8) fail(`the streamed body was read to ${sent} KB before refusing; the cap is ${TRACK_LIMITS.maxBody} bytes`);
   if (rows(db) !== 0) fail('an oversized body was recorded');
-  const edge = JSON.stringify({ ...EVENT, source: 'y' }).padEnd(TRACK_LIMITS.maxBody, ' ');
+  const edge = JSON.stringify({ ...EVENT, source: 'y' }).padEnd(4096, ' ');
   const atCap = await post(db, '198.51.100.8', NOW, edge);
-  if (atCap.status !== 200 || rows(db) !== 1) fail(`a body of exactly ${TRACK_LIMITS.maxBody} bytes was refused (${atCap.status})`);
+  if (atCap.status !== 200 || rows(db) !== 1) fail(`a body of exactly 4096 bytes was refused (${atCap.status})`);
   recorded += rows(db);
 }
 // 3. One network: the minute share, then refused; another network still records. IPv6 addresses in one /64 are one
