@@ -7,7 +7,8 @@ on:
         required: false
         default: "false"
   schedule:
-    - cron: "27 4 * * 1-5"  # America/Chicago, all year
+    # Weekly since 23 Nov 2026 (owner rule: daily only when something changes daily AND someone acts on it daily).
+    - cron: "27 4 * * 1"
       timezone: America/Chicago
 permissions:
   contents: write
