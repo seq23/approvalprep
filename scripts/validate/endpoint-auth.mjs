@@ -75,5 +75,23 @@ const loginReq = (password, ip) => new Request('https://approvalprep.com/api/adm
   expect('x-admin-password from another IP with the right password', other.ok ? 200 : other.response.status, 200);
 }
 
+// 3. The lockout store down fails closed: the RIGHT password gets no session (503) on either way in, and a wrong one is
+//    still a plain 401 when only the count cannot be written. Never a bare 500, never a door opened uncounted.
+{
+  const db = fakeD1();
+  const down = (pattern) => ({ raw: db.raw, prepare: (sql) => { if (pattern.test(sql)) throw new Error('D1_DOWN'); return db.prepare(sql); } });
+  const env = { PRODUCTS_DB: down(/email_rate_limits/), ADMIN_GATE_PASSWORD: PASSWORD, ADMIN_SESSION_SECRET: 's' };
+  const right = await loginPost({ request: loginReq(PASSWORD, '203.0.113.20'), env });
+  expect('login with the right password while the lockout store is down', right.status, 503);
+  if ((await right.json()).error !== 'ADMIN_UNAVAILABLE') fail('store-down login is not the named ADMIN_UNAVAILABLE refusal');
+  if (right.headers.get('set-cookie')) fail('store-down login set a session cookie');
+  if (db.raw.prepare('SELECT COUNT(*) AS n FROM admin_sessions').get().n) fail('store-down login wrote a session');
+  const hdr = await requireAdmin(new Request('https://approvalprep.com/api/admin/products', { headers: { 'x-admin-password': PASSWORD, 'cf-connecting-ip': '203.0.113.21' } }), env);
+  expect('x-admin-password with the right password while the lockout store is down', hdr.ok ? 200 : hdr.response.status, 503);
+  // Reads work, writes fail: a wrong password is still refused as wrong.
+  const writesDown = { PRODUCTS_DB: down(/INSERT INTO email_rate_limits/), ADMIN_GATE_PASSWORD: PASSWORD, ADMIN_SESSION_SECRET: 's' };
+  expect('wrong password while the count cannot be written', (await loginPost({ request: loginReq('nope', '203.0.113.22'), env: writesDown })).status, 401);
+}
+
 if (examined < 20) fail(`only ${examined} requests examined`);
-console.log(`[endpoint-auth] PASS ${examined} requests: nurture-run needs the CI bearer; admin login and x-admin-password lock an IP out after ${ADMIN_LOCKOUT.maxFailures} wrong passwords`);
+console.log(`[endpoint-auth] PASS ${examined} requests: nurture-run needs the CI bearer; admin login and x-admin-password lock an IP out after ${ADMIN_LOCKOUT.maxFailures} wrong passwords; lockout store down = 503, no session`);

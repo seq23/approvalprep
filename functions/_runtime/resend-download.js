@@ -22,6 +22,13 @@ export const KITS = {
 export const ACCEPTED = { status: 'ACCEPTED', message: 'If this matches a paid ApprovalPrep order, the download link has been emailed to the address used at checkout.' };
 const SESSION_RE = /^cs_(test|live)_[A-Za-z0-9]{10,200}$/;
 const tooMany = () => json({ status: 'RATE_LIMITED', message: 'Too many requests. Please try again later.' }, 429);
+// The limit store down is a plain 503 with the contact address, never an uncounted send and never a bare 500.
+const storeDown = (event, message) => {
+  console.error(JSON.stringify({ event, stop: `NAMED STOP [${event}] the rate-limit store failed` }));
+  return json({ status: 'UNAVAILABLE', message }, 503);
+};
+const RESEND_UNAVAILABLE = 'Email resend is unavailable right now. Contact info@approvalprep.com with your Stripe receipt.';
+const LOOKUP_UNAVAILABLE = 'This is unavailable right now. Contact info@approvalprep.com with your Stripe receipt.';
 
 /** The order a Stripe Checkout Session stands for: paid, for a known kit, with an address; else null. */
 export function orderFromSession(s, sessionId = s?.id) {
@@ -53,12 +60,14 @@ export async function resendDownload(request, env, fetchImpl = fetch, now = Date
   const db = env?.PRODUCTS_DB;
   if (!db || !env.RESEND_API_KEY || !env.STRIPE_SECRET_KEY) {
     console.error(JSON.stringify({ event: 'RESEND_DOWNLOAD_STOP', stop: 'NAMED STOP [RESEND_DOWNLOAD_NOT_CONFIGURED] PRODUCTS_DB, RESEND_API_KEY or STRIPE_SECRET_KEY missing' }));
-    return json({ status: 'UNAVAILABLE', message: 'Email resend is unavailable right now. Contact info@approvalprep.com with your Stripe receipt.' }, 503);
+    return json({ status: 'UNAVAILABLE', message: RESEND_UNAVAILABLE }, 503);
   }
-  if (!(await withinLimit(db, `rdl:ip:${await sha256(clientIp(request))}`, LIMITS.perIpHour, HOUR, now))) return tooMany();
-  if (!SESSION_RE.test(sessionId)) return json(ACCEPTED, 202);
-  if (!(await withinLimit(db, `rdl:order:${await sha256(sessionId)}`, LIMITS.perOrderHour, HOUR, now))) return tooMany();
-  if (!(await withinLimit(db, 'rdl:global', LIMITS.globalDay, DAY, now))) return tooMany();
+  try {
+    if (!(await withinLimit(db, `rdl:ip:${await sha256(clientIp(request))}`, LIMITS.perIpHour, HOUR, now))) return tooMany();
+    if (!SESSION_RE.test(sessionId)) return json(ACCEPTED, 202);
+    if (!(await withinLimit(db, `rdl:order:${await sha256(sessionId)}`, LIMITS.perOrderHour, HOUR, now))) return tooMany();
+    if (!(await withinLimit(db, 'rdl:global', LIMITS.globalDay, DAY, now))) return tooMany();
+  } catch { return storeDown('RESEND_DOWNLOAD_LIMIT_UNAVAILABLE', RESEND_UNAVAILABLE); }
 
   let order = null;
   try { order = await paidOrder(env, sessionId, fetchImpl); } catch { order = null; }
@@ -132,14 +141,16 @@ export async function emailDownloadLinks(request, env, fetchImpl = fetch, now = 
   const db = env?.PRODUCTS_DB;
   if (!db || !env.RESEND_API_KEY || !env.STRIPE_SECRET_KEY) {
     console.error(JSON.stringify({ event: 'EMAIL_LOOKUP_STOP', stop: 'NAMED STOP [EMAIL_LOOKUP_NOT_CONFIGURED] PRODUCTS_DB, RESEND_API_KEY or STRIPE_SECRET_KEY missing' }));
-    return json({ status: 'UNAVAILABLE', message: 'This is unavailable right now. Contact info@approvalprep.com with your Stripe receipt.' }, 503);
+    return json({ status: 'UNAVAILABLE', message: LOOKUP_UNAVAILABLE }, 503);
   }
   const body = await request.json().catch(() => ({}));
-  if (!(await withinLimit(db, `edl:ip:${await sha256(clientIp(request))}`, EMAIL_LIMITS.perIpHour, HOUR, now))) return tooMany();
   const email = normalizeEmail(body?.email);
-  if (!email) return json(EMAIL_ACCEPTED, 202);
-  if (!(await withinLimit(db, `edl:email:${await sha256(email)}`, EMAIL_LIMITS.perEmailHour, HOUR, now))) return tooMany();
-  if (!(await withinLimit(db, 'rdl:global', LIMITS.globalDay, DAY, now))) return tooMany();
+  try {
+    if (!(await withinLimit(db, `edl:ip:${await sha256(clientIp(request))}`, EMAIL_LIMITS.perIpHour, HOUR, now))) return tooMany();
+    if (!email) return json(EMAIL_ACCEPTED, 202);
+    if (!(await withinLimit(db, `edl:email:${await sha256(email)}`, EMAIL_LIMITS.perEmailHour, HOUR, now))) return tooMany();
+    if (!(await withinLimit(db, 'rdl:global', LIMITS.globalDay, DAY, now))) return tooMany();
+  } catch { return storeDown('EMAIL_LOOKUP_LIMIT_UNAVAILABLE', LOOKUP_UNAVAILABLE); }
   const work = sendOrderLinks(env, email, fetchImpl).catch(() => console.error(JSON.stringify({ event: 'EMAIL_LOOKUP_SEND_FAILED', status: 0 })));
   if (waitUntil) waitUntil(work); else await work;
   return json(EMAIL_ACCEPTED, 202);

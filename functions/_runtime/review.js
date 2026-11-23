@@ -10,11 +10,12 @@
 // Window: REVIEW_UNTIL is the end of ONE store review (submission + 21 days), never a standing date: a value more than
 // LIMITS.maxWindowDays ahead closes the window (fail closed), so the guessing budget below is a fact of the code.
 // Guessing budget per window: at most LIMITS.globalDaily x LIMITS.maxWindowDays = 30,000 tries against 10^10 codes
-// (a 3-in-a-million chance). Lockout: one install, and one network (IPv6 by /64), each have their own small buckets,
-// taken before the shared one, so a stranger has to spread over 50+ networks a day to fill the global cap; when that
-// happens an Open Loops row says so the same day (REVIEW_DAILY_CAP).
+// (a 3-in-a-million chance). Lockout: one install, one network (IPv6 by /64) and one IPv6 site block (/48, what one
+// tunnel-broker account hands out) each have their own small buckets, taken before the shared one, so a stranger has to
+// spread over 50+ IPv4 addresses or 25+ IPv6 /48s a day to fill the global cap; when that happens an Open Loops row says
+// so the same day (REVIEW_DAILY_CAP).
 // Order: window -> body and ID format -> try limits (atomic, BEFORE the compare: per install 5 a minute and 10 a day,
-// per network 5 a minute and 20 a day, everyone 1,000 a day) -> constant-time compare -> ID known
+// per network 5 a minute and 20 a day, per IPv6 /48 40 a day, everyone 1,000 a day) -> constant-time compare -> ID known
 // to RevenueCat -> per-IP new-slot limit -> device slot (cap REVIEW_MAX_DEVICES per code version) -> grant. Any
 // RevenueCat failure revokes what this call granted (granted entitlements only, never a purchase), gives the slot
 // back and answers 503: never half-granted.
@@ -28,7 +29,7 @@ import { clientIp } from './rate-limit.js';
 // 22 Nov 2026): an identifier, not a secret. The bundle opens both kits and the five file kits (ownsBundle).
 export const BUNDLE_ENTITLEMENT = 'entl0ed811eba7';
 export const RC = `https://api.revenuecat.com/v2/projects/${REVENUECAT_PROJECT}`;
-export const LIMITS = { perInstallBurst: 5, perInstallDaily: 10, perIpBurst: 5, perIpDaily: 20, globalDaily: 1000, newSlotsPerIpDaily: 2, maxDevices: 10, maxWindowDays: 30 };
+export const LIMITS = { perInstallBurst: 5, perInstallDaily: 10, perIpBurst: 5, perIpDaily: 20, perNet48Daily: 40, globalDaily: 1000, newSlotsPerIpDaily: 2, maxDevices: 10, maxWindowDays: 30 };
 const CODE = /^\d{10}$/;
 const ANON_ID = /^\$RCAnonymousID:[0-9a-f]{32}$/;
 const DAY = 86_400_000, WEEK = 7 * DAY, MAX_BODY = 1024;
@@ -101,8 +102,8 @@ export async function reviewUnlock(request, env, { now = Date.now(), fetcher = f
   if (typeof code !== 'string' || typeof id !== 'string' || !ANON_ID.test(id)) return json({ error: 'BAD_REQUEST' }, 400);
 
   const db = env.PRODUCTS_DB, secret = env.REVIEW_HASH_SECRET, version = env.REVIEW_CODE_VERSION;
-  const ip = clientIp(request);
-  const ipHash = hex(await hmac(secret, `ip:${ip}`)), idHash = await idHashOf(env, id);
+  const ipHash = hex(await hmac(secret, `ip:${clientIp(request)}`)), net48Hash = hex(await hmac(secret, `net48:${clientIp(request, 48)}`));
+  const idHash = await idHashOf(env, id);
   const day = new Date(now).toISOString().slice(0, 10), minute = Math.floor(now / 60_000);
   try {
     // Expired rows first: try counters past their day or minute, grants 7 days past expiry.
@@ -115,6 +116,8 @@ export async function reviewUnlock(request, env, { now = Date.now(), fetcher = f
     if (!(await take(db, `id:${day}`, idHash, LIMITS.perInstallDaily, dayEnd))) { stop('REVIEW_INSTALL_DAILY_CAP'); return json({ error: 'SLOW_DOWN' }, 429); }
     if (!(await take(db, `burst:${minute}`, ipHash, LIMITS.perIpBurst, minuteEnd))) return json({ error: 'SLOW_DOWN' }, 429);
     if (!(await take(db, `ip:${day}`, ipHash, LIMITS.perIpDaily, dayEnd))) { stop('REVIEW_IP_DAILY_CAP'); return json({ error: 'SLOW_DOWN' }, 429); }
+    // One /48 holds 65,536 /64s, so the per-network cap alone lets one tunnel-broker account fill the shared day.
+    if (!(await take(db, `net48:${day}`, net48Hash, LIMITS.perNet48Daily, dayEnd))) { stop('REVIEW_NET48_DAILY_CAP'); return json({ error: 'SLOW_DOWN' }, 429); }
     if (!(await take(db, `all:${day}`, 'all', LIMITS.globalDaily, dayEnd))) {
       stop('REVIEW_DAILY_CAP');
       // Everyone, the reviewer too, is refused until tomorrow: one Open Loops row the first time a day, so it is seen.

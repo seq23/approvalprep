@@ -147,5 +147,21 @@ const dnsOk = async () => new Response(JSON.stringify({ Status: 0, Answer: [{ ty
   const r = await emailDownloadLinks(ereq({ email: 'buyer@example.com' }), { PRODUCTS_DB: fakeD1() }, fetchImpl);
   if (r.status !== 503) fail('lookup without Stripe/Resend keys did not stop with 503');
 }
+// 7. The limit store down: each form answers a plain 503 with what to do, sends nothing and asks Stripe nothing.
+{
+  const down = () => { const db = fakeD1(); return { raw: db.raw, prepare: (sql) => { if (/email_rate_limits/.test(sql)) throw new Error('D1_DOWN'); return db.prepare(sql); } }; };
+  const { sent, fetchImpl } = mocks();
+  let asked = 0; const counted = async (url, init) => { if (!String(url).startsWith('https://api.resend.com/')) asked++; return fetchImpl(url, init); };
+  const r1 = await resendDownload(req({ session_id: PAID }), env(down()), counted);
+  const b1 = await r1.json();
+  if (r1.status !== 503 || b1.status !== 'UNAVAILABLE' || !b1.message.includes('info@approvalprep.com')) fail(`resend with the limit store down answered ${r1.status} ${JSON.stringify(b1)}`);
+  const r2 = await emailDownloadLinks(new Request('https://approvalprep.com/api/email-download-links', { method: 'POST', headers: { 'content-type': 'application/json', 'cf-connecting-ip': '203.0.113.30' }, body: JSON.stringify({ email: 'buyer@example.com' }) }), env(down()), counted);
+  const b2 = await r2.json();
+  if (r2.status !== 503 || b2.status !== 'UNAVAILABLE' || !b2.message.includes('info@approvalprep.com')) fail(`email lookup with the limit store down answered ${r2.status} ${JSON.stringify(b2)}`);
+  const r3 = await samplePost({ request: new Request('https://approvalprep.com/api/sample', { method: 'POST', headers: { 'cf-connecting-ip': '192.0.2.60' }, body: JSON.stringify({ email: 'down@example.com', consent: true }) }), env: { PRODUCTS_DB: down(), RESEND_API_KEY: 'k', DOWNLOAD_SIGNING_SECRET: 's' } }, counted, dnsOk);
+  const b3 = await r3.json();
+  if (r3.status !== 503 || b3.error !== 'Sign-up is unavailable right now. Please try again shortly.') fail(`sign-up with the limit store down answered ${r3.status} ${JSON.stringify(b3)}`);
+  if (sent.length || asked) fail(`limit store down still sent ${sent.length} email(s) and asked Stripe ${asked} time(s)`);
+}
 if (!examined) fail('zero emails examined');
-console.log(`[resend-download-email] PASS (no send for unknown/unpaid/revoked orders, same answer either way, caller fields ignored, stored address + server link, 429 per order/IP, sample per-IP cap; email lookup: same answer found/not, refunded not sent, per-address/IP 429; ${examined} emails examined)`);
+console.log(`[resend-download-email] PASS (no send for unknown/unpaid/revoked orders, same answer either way, caller fields ignored, stored address + server link, 429 per order/IP, sample per-IP cap; email lookup: same answer found/not, refunded not sent, per-address/IP 429; limit store down = 503 and nothing sent on all three; ${examined} emails examined)`);
