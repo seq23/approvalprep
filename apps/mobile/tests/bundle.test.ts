@@ -170,10 +170,10 @@ test('bundle door: attempts are capped per caller before RevenueCat, and sandbox
   assert.equal(calls, 0);
   const now = Date.now; Date.now = () => 1_800_000; t.after(() => { Date.now = now; });
   const env = { ...base, PRODUCTS_DB: rateDb() };
-  // A sandbox purchase is refused, except while the store-review switch is on; a refund is refused either way.
+  // A sandbox purchase is refused, except while the store-review switch is on inside the review window; a refund is refused either way.
   assert.equal((await onRequestPost({ request: request(), env })).status, 403);
   assert.equal((await onRequestPost({ request: request(), env: { ...env, APPROVALPREP_ACCEPT_SANDBOX_PURCHASES: 'true' } })).status, 403);
-  const review = { ...env, APPROVALPREP_ACCEPT_SANDBOX_PURCHASES: '1' };
+  const review = { ...env, APPROVALPREP_ACCEPT_SANDBOX_PURCHASES: '1', REVIEW_UNTIL: new Date(Date.now() + 10 * 86_400_000).toISOString() };
   assert.equal((await onRequestPost({ request: request(), env: review })).status, 200);
   info = purchases(COMPLETE_BUNDLE.productId, { environment: 'sandbox', status: 'refunded' });
   assert.equal((await onRequestPost({ request: request(), env: review })).status, 403);

@@ -10,8 +10,20 @@ export async function sha256(value) {
   return hex(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(String(value))));
 }
 
+/** IPv6 is cut to its /64: one home or phone holds a whole /64, so the full address would give one person 2^64
+ * "IPs" and make every per-IP limit meaningless. IPv4 is kept whole. Same rule as peace-be-still worker/src/iphash.ts. */
+export function ipPrefix(ip) {
+  const text = String(ip || '').trim().toLowerCase();
+  if (!text.includes(':')) return text || 'unknown';
+  const [head, tail = ''] = text.split('::');
+  const left = head ? head.split(':') : [], right = tail ? tail.split(':') : [];
+  const groups = text.includes('::') ? [...left, ...Array(Math.max(0, 8 - left.length - right.length)).fill('0'), ...right] : left;
+  return groups.slice(0, 4).map((g) => (parseInt(g || '0', 16) || 0).toString(16)).join(':') + '::/64';
+}
+
+/** The caller's network for limits: Cloudflare's own header (a client cannot set it at the edge), IPv6 as its /64. */
 export function clientIp(request) {
-  return request.headers.get('cf-connecting-ip') || request.headers.get('x-real-ip') || 'unknown';
+  return ipPrefix(request.headers.get('cf-connecting-ip') || request.headers.get('x-real-ip') || 'unknown');
 }
 
 /** Counts one hit; returns true while the bucket is within its limit for the current window. */

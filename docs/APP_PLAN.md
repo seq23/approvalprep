@@ -79,7 +79,7 @@ reaches Write a letter in one tap, Back stays inside its tab, and nothing is orp
 printed in the run summary. Pin it with the repo variable `APPROVALPREP_APPETIZE_PUBLIC_KEY`.
 No `APPETIZE_API_TOKEN` secret → `NAMED STOP [APPETIZE_TOKEN_MISSING]` in the summary, the APK still
 attached. Android rather than the iOS simulator: this repo's workflow contract
-(`scripts/workflows/trace-all.mjs`) requires ubuntu-24.04 and Node 22.12.0 for every workflow.
+(`scripts/workflows/trace-all.mjs`) requires ubuntu-24.04 and, in every workflow, the Node version in `.nvmrc` (22.23.5; astro 7.4.5+ needs 22.23.4 or later). Cloudflare Pages builds with `.nvmrc` too.
 
 The workflow never builds or deploys the website. Proof for the scaffold PR: `npm run build` on the
 branch and on main gave the same 230 files, byte for byte, apart from the `generatedAt` stamps in

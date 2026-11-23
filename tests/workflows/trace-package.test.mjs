@@ -10,10 +10,11 @@ test('workflow commands resolve in their package and unknown scripts still fail'
   const put = (file, value) => { mkdirSync(join(dir, file, '..'), { recursive: true }); writeFileSync(join(dir, file), value); };
   try {
     put('package.json', JSON.stringify({ scripts: {} }));
+    put('.nvmrc', '22.23.5\n');
     put('_repo_validation_registry.json', JSON.stringify({ validators: [] }));
     put('scripts/workflows/run-package-sequence.mjs', '');
     put('apps/mobile/package.json', JSON.stringify({ scripts: { check: 'npm run typecheck', typecheck: 'tsc --noEmit' }, devDependencies: { typescript: '*' } }));
-    const workflow = script => `on:\n  workflow_dispatch:\n    inputs:\n      fixture_trace: {}\njobs:\n  preview:\n    runs-on: ubuntu-24.04\n    timeout-minutes: 5\n    defaults:\n      run:\n        working-directory: apps/mobile\n    steps:\n      - uses: actions/setup-node@v4\n        with:\n          node-version: 22.12.0\n      - run: npm ci\n      - run: npm run ${script}\n`;
+    const workflow = script => `on:\n  workflow_dispatch:\n    inputs:\n      fixture_trace: {}\njobs:\n  preview:\n    runs-on: ubuntu-24.04\n    timeout-minutes: 5\n    defaults:\n      run:\n        working-directory: apps/mobile\n    steps:\n      - uses: actions/setup-node@v4\n        with:\n          node-version: 22.23.5\n      - run: npm ci\n      - run: npm run ${script}\n`;
     const run = () => spawnSync(process.execPath, [resolve('scripts/workflows/trace-all.mjs')], { cwd: dir });
     put('.github/workflows/preview.yml', workflow('check'));
     assert.equal(run().status, 0);
@@ -22,5 +23,11 @@ test('workflow commands resolve in their package and unknown scripts still fail'
     put('.github/workflows/preview.yml', workflow('missing'));
     assert.equal(run().status, 1);
     assert.deepEqual(JSON.parse(readFileSync(join(dir, 'data/workflow_traces/latest.json'))).traces[0].missingNpmScripts, ['missing']);
+    // One Node pin: a workflow on any version other than .nvmrc fails (Pages builds with .nvmrc; astro sets the floor).
+    put('.github/workflows/preview.yml', workflow('check').replace('node-version: 22.23.5', 'node-version: 22.12.0'));
+    assert.equal(run().status, 1);
+    assert.equal(JSON.parse(readFileSync(join(dir, 'data/workflow_traces/latest.json'))).traces[0].nodeVersionOk, false);
+    put('.github/workflows/preview.yml', workflow('check').replace('node-version: 22.23.5', 'node-version: 22.23.50'));
+    assert.equal(run().status, 1);
   } finally { rmSync(dir, { recursive: true, force: true }); }
 });

@@ -61,6 +61,7 @@ export const REVIEW_SAYS: Record<ReviewResult, string> = {
   wrong: 'That code is not right. Check the 10 digits and try again.',
   // USED_UP is both the 10-phone cap and the 2-new-phones-per-network-a-day limit, so it names both ways out.
   usedUp: 'This code cannot open another phone today. Try again tomorrow, or contact us for a new code.',
-  slow: 'Too many tries. Wait a few minutes, then try again.',
+  // SLOW_DOWN is both the per-minute limit and the per-day one (10 tries a phone, 20 a network), so it names both.
+  slow: 'Too many tries. Wait a few minutes and try again. If it still says this, try again tomorrow.',
   tryAgain: 'The code could not be checked just now. Check your connection and try again.',
 };

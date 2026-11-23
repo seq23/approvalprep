@@ -681,6 +681,17 @@
       "scope": "functions/_runtime/resend-download.js and functions/api/sample.js: paid-order lookup, stored recipient and server-built link only, no enumeration, per-order/per-IP/global limits"
     },
     {
+      "id": "track-event-limits",
+      "npmScript": "validate:track-event-limits",
+      "entrypoint": "scripts/validate/track-event-limits.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "an analytics endpoint with no body cap or write limit lets one script fill the products database and drown the conversion numbers",
+      "owner": "approvalprep-ops",
+      "group": "growth-critical",
+      "scope": "functions/api/track-event.js: 4 KB body cap (header and stream), per-network (IPv6 /64) minute and day caps, site day cap, nothing written when the limiter is down, blocked fields still refused"
+    },
+    {
       "id": "endpoint-auth",
       "npmScript": "validate:endpoint-auth",
       "entrypoint": "scripts/validate/endpoint-auth.mjs",

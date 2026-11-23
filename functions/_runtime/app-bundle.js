@@ -1,9 +1,11 @@
+import { storeReviewWindow } from './review.js';
 import { BUNDLE_PRODUCT, KIT_PRICES, UPGRADE_IDS, bundleUnlocked } from '../../src/lib/appUpgrade.mjs';
 export const bundleJson = (body, status = 200) => new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json', 'cache-control': 'private, no-store' } });
 // Store reviewers and testers buy in the store's sandbox. Sandbox purchases open nothing unless the
-// server variable APPROVALPREP_ACCEPT_SANDBOX_PURCHASES is exactly "1" (set it for a store review,
-// remove it after); real customers' purchases are never sandbox ones.
-export const acceptsSandbox = env => env?.APPROVALPREP_ACCEPT_SANDBOX_PURCHASES === '1';
+// server variable APPROVALPREP_ACCEPT_SANDBOX_PURCHASES is exactly "1" AND the store review window
+// (REVIEW_UNTIL, at most 30 days ahead) is open: a flag left on stops counting the moment the review ends.
+// Real customers' purchases are never sandbox ones, so this never touches paid access.
+export const acceptsSandbox = (env, now = Date.now()) => env?.APPROVALPREP_ACCEPT_SANDBOX_PURCHASES === '1' && storeReviewWindow(env, now);
 /** `purchases` comes from revenueCatPurchases (RevenueCat v2): an owned App Store or Google Play purchase
  * of this product. Promotional grants are not purchases; Test Store and refunded ones never count. */
 export function ownsProduct(purchases, product, sandbox = false) {

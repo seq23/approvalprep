@@ -221,11 +221,11 @@ test('no link: the app sends only the typed email, to our own server, and never 
   assert.match(await emailWebsiteOrderLinks('buyer@example.com', false), /Too many tries/);
 });
 
-test('#1 a TestFlight (sandbox) purchase opens its kit only while the server allows sandbox purchases', async t => {
+test('#1 a TestFlight (sandbox) purchase opens its kit only while the server allows sandbox purchases (switch on, review window open)', async t => {
   const { purchase, rcFetch } = await import('./revenuecatV2');
   t.mock.method(globalThis, 'fetch', rcFetch(() => [purchase('ap_credit_kit', { environment: 'sandbox' })]));
   const env = { PRODUCTS_DB: rateDb(), APPROVALPREP_REVENUECAT_SECRET: 'k', DOWNLOAD_SIGNING_SECRET: 's', PRODUCT_ASSETS_R2: {} };
   const req = () => new Request('https://approvalprep.com/api/app-unlock', { method: 'POST', headers: { Authorization: 'Bearer $RCAnonymousID:' + 'b'.repeat(32) } });
   assert.equal((await appUnlock({ request: req(), env })).status, 403);
-  assert.equal((await appUnlock({ request: req(), env: { ...env, APPROVALPREP_ACCEPT_SANDBOX_PURCHASES: '1' } })).status, 200);
+  assert.equal((await appUnlock({ request: req(), env: { ...env, APPROVALPREP_ACCEPT_SANDBOX_PURCHASES: '1', REVIEW_UNTIL: new Date(Date.now() + 10 * 86_400_000).toISOString() } })).status, 200);
 });
