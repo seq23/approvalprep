@@ -80,7 +80,8 @@ const traces = files.map(file => {
   const requiresDependencyInstall = Boolean(installDependencyReason);
   const buildsProject = closure.scripts.includes("build");
   const dependencyInstallPolicyOk = requiresDependencyInstall ? usesNpmCi && !usesNpmInstall : !usesNpmInstall;
-  const nodeVersionOk = sharedCaller || new RegExp(`node-version:\\s*${NODE_PIN.replace(/\./g, "\\.")}\\s*($|[\\s}])`, "m").test(text);
+  const nodePins = [...text.matchAll(/node-version:\s*([^\s}]+)/g)].map(m => m[1]);
+  const nodeVersionOk = sharedCaller || (nodePins.length > 0 && nodePins.every(v => v === NODE_PIN));
   const runnerPinned = sharedCaller || /runs-on:\s*(ubuntu-24\.04|macos-\d+)\s*$/m.test(text);
   const timeoutSet = sharedCaller || /timeout-minutes:\s*\d+/.test(text);
   const mainWriter = /safe-push-main\.sh/.test(text) || /(^|\n)\s*git push(?:\s|$)/m.test(text);
