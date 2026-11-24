@@ -10,9 +10,13 @@ name: LinkedIn Posts
 # scripts/validate/linkedin-poster.mjs.
 on:
   schedule:
-    - cron: "10 9 * * 1-5"  # weekdays 09:10 CT
-      timezone: America/Chicago
+    - cron: "10 15 * * 1-5"  # weekdays 09:10 CST (10:10 in summer); UTC like every workflow here
   workflow_dispatch:
+    inputs:
+      fixture_trace:
+        description: "Run fixture workflow data trace only"
+        required: false
+        default: "false"
 permissions:
   contents: write
 concurrency:
@@ -35,7 +39,11 @@ jobs:
           cache: npm
       - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
+      - name: Run fixture workflow trace
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
+        run: npm run workflows:trace -- --workflow linkedin-posts.yml
       - name: Post today's LinkedIn post
+        if: ${{ github.event.inputs.fixture_trace != 'true' }}
         timeout-minutes: 5
         env:
           LINKEDIN_APPROVALPREP_ACCESS_TOKEN: ${{ secrets.LINKEDIN_APPROVALPREP_ACCESS_TOKEN }}
