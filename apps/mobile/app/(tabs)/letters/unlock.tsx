@@ -65,7 +65,7 @@ export default function Unlock() {
         // A pretend purchase: the kit opens for this visit only; nothing is fetched or charged.
         const has = !!await loadDeliveredKit(kitId);
         setOwned(has);
-        setMessage(has ? 'Preview: this kit is unlocked for this visit. Nothing was charged.' : 'This is a preview, so there are no purchases to restore here.');
+        setMessage(has ? 'Preview: this kit is open for this visit. Nothing was charged.' : 'This is a preview, so there are no purchases to restore here.');
         if (has && bought) openWanted();
         return;
       }
@@ -98,7 +98,7 @@ export default function Unlock() {
   const canBuy = (KIT_SALES_ENABLED && !mock) || preview;
   const other = kitOfferFor(explanation ? KIT_ID : EXPLANATION_KIT_ID);
   return <Screen route="/letters/unlock" label={kitName} title={owned ? 'Your kit is on this phone' : explanation ? 'Nine explanation letters, paid once' : 'Four more letters, paid once'}>
-    <Text style={type.body}>A kit is a set of letter templates you unlock once in this app, fill in and send yourself. {explanation ? 'One purchase covers the nine explanation letters.' : 'One purchase covers every letter in this kit, as often as you need it.'}</Text>
+    <Text style={type.body}>A kit is a set of letter templates you buy once in this app, fill in and send yourself. {explanation ? 'One purchase covers the nine explanation letters.' : 'One purchase covers every letter in this kit, as often as you need it.'}</Text>
     {explanation ? null : <Text style={type.body}>Thinking of paying a credit repair company? You can send these letters yourself, paid once, with no monthly fee. ApprovalPrep is not a credit repair company.</Text>}
     <Sheet>{(explanation ? EXPLANATION_LETTERS : LETTERS.filter(l => l.access === 'kit')).map(l => <Text key={l.kind} style={type.body}>{l.name}</Text>)}<Text style={type.body}>{TRACKING_LINE}</Text></Sheet>
     <Text style={type.sub}>{explanation ? REQUEST_LINE : HONEST_LIMIT}</Text>

@@ -7,19 +7,29 @@
 // decides "paid" on its own. One contract with Peace Be Still's worker/src/review.ts and KeepMyProof's
 // site/server/review.mjs: ~/Work/google-play-2026-11-21/REVIEW-UNLOCK-DESIGN.md section 3.
 //
-// Order: window -> body and ID format -> try limits (atomic, BEFORE the compare) -> constant-time compare -> ID known
+// Window: REVIEW_UNTIL is the end of ONE store review (submission + 21 days), never a standing date: a value more than
+// LIMITS.maxWindowDays ahead closes the window (fail closed), so the guessing budget below is a fact of the code.
+// Guessing budget per window: at most LIMITS.globalDaily x LIMITS.maxWindowDays = 30,000 tries against 10^10 codes
+// (a 3-in-a-million chance). Lockout: one install, one network (IPv6 by /64) and one IPv6 site block (/48, what one
+// tunnel-broker account hands out) each have their own small buckets, taken before the shared one, so a stranger has to
+// spread over 50+ IPv4 addresses or 25+ IPv6 /48s a day to fill the global cap; when that happens an Open Loops row says
+// so the same day (REVIEW_DAILY_CAP).
+// Order: window -> body and ID format -> try limits (atomic, BEFORE the compare: per install 5 a minute and 10 a day,
+// per network 5 a minute and 20 a day, per IPv6 /48 40 a day, everyone 1,000 a day) -> constant-time compare -> ID known
 // to RevenueCat -> per-IP new-slot limit -> device slot (cap REVIEW_MAX_DEVICES per code version) -> grant. Any
 // RevenueCat failure revokes what this call granted (granted entitlements only, never a purchase), gives the slot
 // back and answers 503: never half-granted.
 // Stored (PRODUCTS_DB, migrations/0002_review.sql): HMACs of the ID and the IP (REVIEW_HASH_SECRET), the code
 // version, timestamps. Never a raw ID, IP or code. Self-help only: this unlocks the same templates a buyer gets.
 import { REVENUECAT_PROJECT } from './revenuecat.js';
+import { readCapped } from './responses.js';
+import { clientIp } from './rate-limit.js';
 
 // RevenueCat's own id for the ap_complete_bundle entitlement (read from GET /v2/projects/projf63ea019/entitlements,
 // 22 Nov 2026): an identifier, not a secret. The bundle opens both kits and the five file kits (ownsBundle).
 export const BUNDLE_ENTITLEMENT = 'entl0ed811eba7';
 export const RC = `https://api.revenuecat.com/v2/projects/${REVENUECAT_PROJECT}`;
-export const LIMITS = { perIpDaily: 20, globalDaily: 1000, burstPerMinute: 5, newSlotsPerIpDaily: 2, maxDevices: 10 };
+export const LIMITS = { perInstallBurst: 5, perInstallDaily: 10, perIpBurst: 5, perIpDaily: 20, perNet48Daily: 40, globalDaily: 1000, newSlotsPerIpDaily: 2, maxDevices: 10, maxWindowDays: 30 };
 const CODE = /^\d{10}$/;
 const ANON_ID = /^\$RCAnonymousID:[0-9a-f]{32}$/;
 const DAY = 86_400_000, WEEK = 7 * DAY, MAX_BODY = 1024;
@@ -29,10 +39,17 @@ const json = (body, status = 200) => new Response(JSON.stringify(body), { status
 const closed = () => json({ error: 'NOT_FOUND' }, 404);
 const stop = (code) => console.log(JSON.stringify({ event: 'NAMED_STOP', stop: code, where: 'review' }));
 
-/** Open only when every secret and binding it needs is present, the code is 10 digits and REVIEW_UNTIL is in the future. */
-export function reviewOpen(env, now = Date.now()) {
+/** The store review window (REVIEW_UNTIL) alone: true while it ends in the future and at most LIMITS.maxWindowDays from
+ * now. Missing, malformed, past or too far ahead (a forgotten standing date) is closed. Also ends sandbox purchases
+ * (app-bundle.js acceptsSandbox). */
+export function storeReviewWindow(env, now = Date.now()) {
   const until = Date.parse(env?.REVIEW_UNTIL ?? '');
-  return CODE.test(env?.REVIEW_CODE_SECRET ?? '') && Number.isFinite(until) && until > now &&
+  return Number.isFinite(until) && until > now && until - now <= LIMITS.maxWindowDays * DAY;
+}
+
+/** Open only when every secret and binding it needs is present, the code is 10 digits and the window is open. */
+export function reviewOpen(env, now = Date.now()) {
+  return CODE.test(env?.REVIEW_CODE_SECRET ?? '') && storeReviewWindow(env, now) &&
     /^[A-Za-z0-9._-]{1,32}$/.test(env?.REVIEW_CODE_VERSION ?? '') && (env?.REVIEW_HASH_SECRET ?? '').length >= 32 &&
     !!env?.APPROVALPREP_REVENUECAT_SECRET && !!env?.PRODUCTS_DB;
 }
@@ -75,27 +92,41 @@ export async function reviewStatus(env, now = Date.now()) {
  */
 export async function reviewUnlock(request, env, { now = Date.now(), fetcher = fetch, waitUntil = (p) => p } = {}) {
   if (!reviewOpen(env, now)) return closed();
-  // Body: JSON only, at most 1 KB, a code and RevenueCat's anonymous ID. Anything else is refused before any count or call.
-  const length = Number(request.headers.get('content-length') ?? 0);
-  if (!/^application\/json\b/i.test(request.headers.get('content-type') ?? '') || length > MAX_BODY) return json({ error: 'BAD_REQUEST' }, 400);
-  const raw = await request.text();
-  if (raw.length > MAX_BODY) return json({ error: 'BAD_REQUEST' }, 400);
+  // Body: JSON only, at most 1 KB (by header and while reading), a code and RevenueCat's anonymous ID. Anything else is
+  // refused before any count or call.
+  if (!/^application\/json\b/i.test(request.headers.get('content-type') ?? '')) return json({ error: 'BAD_REQUEST' }, 400);
+  const raw = await readCapped(request, MAX_BODY);
+  if (raw === null) return json({ error: 'BAD_REQUEST' }, 400);
   let body; try { body = JSON.parse(raw); } catch { return json({ error: 'BAD_REQUEST' }, 400); }
   const code = body?.code, id = body?.app_user_id;
   if (typeof code !== 'string' || typeof id !== 'string' || !ANON_ID.test(id)) return json({ error: 'BAD_REQUEST' }, 400);
 
   const db = env.PRODUCTS_DB, secret = env.REVIEW_HASH_SECRET, version = env.REVIEW_CODE_VERSION;
-  const ip = request.headers.get('cf-connecting-ip') ?? 'unknown';
-  const ipHash = hex(await hmac(secret, `ip:${ip}`)), idHash = await idHashOf(env, id);
+  const ipHash = hex(await hmac(secret, `ip:${clientIp(request)}`)), net48Hash = hex(await hmac(secret, `net48:${clientIp(request, 48)}`));
+  const idHash = await idHashOf(env, id);
   const day = new Date(now).toISOString().slice(0, 10), minute = Math.floor(now / 60_000);
   try {
     // Expired rows first: try counters past their day or minute, grants 7 days past expiry.
     await db.prepare('DELETE FROM review_try WHERE until < ?').bind(now).run();
     await db.prepare('DELETE FROM review_grant WHERE expires_at + ? < ?').bind(WEEK, now).run();
-    // Limits, taken before the code is compared, so guessing costs a try whatever the guess.
-    if (!(await take(db, `burst:${minute}`, ipHash, LIMITS.burstPerMinute, (minute + 2) * 60_000))) return json({ error: 'SLOW_DOWN' }, 429);
-    if (!(await take(db, `ip:${day}`, ipHash, LIMITS.perIpDaily, now + 2 * DAY))) { stop('REVIEW_IP_DAILY_CAP'); return json({ error: 'SLOW_DOWN' }, 429); }
-    if (!(await take(db, `all:${day}`, 'all', LIMITS.globalDaily, now + 2 * DAY))) { stop('REVIEW_DAILY_CAP'); return json({ error: 'SLOW_DOWN' }, 429); }
+    // Limits, taken before the code is compared, so guessing costs a try whatever the guess. The install's and the
+    // network's own buckets come first: one caller stops there and never spends the shared daily tries.
+    const minuteEnd = (minute + 2) * 60_000, dayEnd = now + 2 * DAY;
+    if (!(await take(db, `id-burst:${minute}`, idHash, LIMITS.perInstallBurst, minuteEnd))) return json({ error: 'SLOW_DOWN' }, 429);
+    if (!(await take(db, `id:${day}`, idHash, LIMITS.perInstallDaily, dayEnd))) { stop('REVIEW_INSTALL_DAILY_CAP'); return json({ error: 'SLOW_DOWN' }, 429); }
+    if (!(await take(db, `burst:${minute}`, ipHash, LIMITS.perIpBurst, minuteEnd))) return json({ error: 'SLOW_DOWN' }, 429);
+    if (!(await take(db, `ip:${day}`, ipHash, LIMITS.perIpDaily, dayEnd))) { stop('REVIEW_IP_DAILY_CAP'); return json({ error: 'SLOW_DOWN' }, 429); }
+    // One /48 holds 65,536 /64s, so the per-network cap alone lets one tunnel-broker account fill the shared day.
+    if (!(await take(db, `net48:${day}`, net48Hash, LIMITS.perNet48Daily, dayEnd))) { stop('REVIEW_NET48_DAILY_CAP'); return json({ error: 'SLOW_DOWN' }, 429); }
+    if (!(await take(db, `all:${day}`, 'all', LIMITS.globalDaily, dayEnd))) {
+      stop('REVIEW_DAILY_CAP');
+      // Everyone, the reviewer too, is refused until tomorrow: one Open Loops row the first time a day, so it is seen.
+      if (await take(db, `alert:${day}`, 'all', 1, dayEnd)) {
+        waitUntil(fileLoop(env, fetcher, 'REVIEW_DAILY_CAP', 'ApprovalPrep: the Play review code hit its daily try cap',
+          `${LIMITS.globalDaily} code tries in one day (UTC ${day}) from many networks: someone is guessing, and the Play reviewer cannot redeem until tomorrow. Check the review_try rows, rotate the code (new AP_PLAY_REVIEW_CODE, REVIEW_CODE_SECRET and REVIEW_CODE_VERSION) if it may have leaked, and tell her if a review is waiting.`));
+      }
+      return json({ error: 'SLOW_DOWN' }, 429);
+    }
   } catch { stop('REVIEW_DB_UNAVAILABLE'); return json({ error: 'TRY_AGAIN' }, 503); }
 
   if (!CODE.test(code) || !(await same(secret, code, env.REVIEW_CODE_SECRET))) { stop('REVIEW_CODE_WRONG'); return json({ error: 'WRONG_CODE' }, 403); }
@@ -121,7 +152,8 @@ export async function reviewUnlock(request, env, { now = Date.now(), fetcher = f
       if (!row) {
         await giveBack(db, `slot:${day}`, ipHash);
         stop('REVIEW_DEVICE_CAP');
-        waitUntil(fileCapLoop(env, fetcher));
+        waitUntil(fileLoop(env, fetcher, 'REVIEW_DEVICE_CAP', 'ApprovalPrep: the Play review code is used up',
+          `All ${maxDevices(env)} review slots for code version ${env.REVIEW_CODE_VERSION} are taken. Rotate: new AP_PLAY_REVIEW_CODE in the vault, new REVIEW_CODE_SECRET + REVIEW_CODE_VERSION on the Pages project, then she pastes the new code in Play Console.`));
         return json({ error: 'USED_UP' }, 403);
       }
       newSlot = true;
@@ -137,7 +169,13 @@ export async function reviewUnlock(request, env, { now = Date.now(), fetcher = f
   };
   try {
     const res = await customer(env, id, fetcher, '/actions/grant_entitlement', { method: 'POST', body: JSON.stringify({ entitlement_id: BUNDLE_ENTITLEMENT, expires_at: expires }) });
-    if (res.status === 403) { stop('REVIEW_RC_KEY_READONLY'); await undo(); return json({ error: 'TRY_AGAIN' }, 503); }
+    if (res.status === 403) {
+      // A read-only key fails every reviewer, every time, and only a new key fixes it: a row someone sees, not only a log.
+      stop('REVIEW_RC_KEY_READONLY'); await undo();
+      waitUntil(fileLoop(env, fetcher, 'REVIEW_RC_KEY_READONLY', 'ApprovalPrep: the Play review code cannot unlock (RevenueCat key is read-only)',
+        'RevenueCat refused the review grant with 403. Make a v2 secret key in the ApprovalPrep project with Customer information: Read & write and Project configuration: Read only, save it to the vault as REVENUECAT_AP_V2_SECRET_KEY, set it as the Pages secret APPROVALPREP_REVENUECAT_SECRET, redeploy production, then redeem the code once on a test ID.'));
+      return json({ error: 'TRY_AGAIN' }, 503);
+    }
     if (!res.ok) throw Error(`HTTP_${res.status}`);
   } catch {
     // A timeout may still have granted: revoke what this call may have granted, give the slot back, answer "try again".
@@ -169,13 +207,14 @@ export async function reviewGrantLive(env, id, { now = Date.now(), fetcher = fet
   } catch { return false; }
 }
 
-/** The cap was hit: a row on Boss OS's Open Loops list, so it is seen, not only logged. */
-async function fileCapLoop(env, fetcher) {
+/** A stop no retry fixes (the cap, a read-only key): a row on Boss OS's Open Loops list (upserted by repo + stop), so it
+ * is seen, not only logged. */
+async function fileLoop(env, fetcher, code, title, nextStep) {
   if (!env.BOSS_OPEN_LOOPS_TOKEN) { stop('OPEN_LOOPS_TOKEN_MISSING'); return; }
   try {
     const r = await fetcher(OPEN_LOOPS_INTAKE, { method: 'POST', headers: { 'content-type': 'application/json', authorization: `Bearer ${env.BOSS_OPEN_LOOPS_TOKEN}` },
-      body: JSON.stringify({ repo: 'seq23/approvalprep', stop: 'REVIEW_DEVICE_CAP', business: 'spry', finish_line: 'ApprovalPrep: live in both stores, selling', owner: 'claude',
-        title: 'ApprovalPrep: the Play review code is used up', next_step: `All ${maxDevices(env)} review slots for code version ${env.REVIEW_CODE_VERSION} are taken. Rotate: new AP_PLAY_REVIEW_CODE in the vault, new REVIEW_CODE_SECRET + REVIEW_CODE_VERSION on the Pages project, then she pastes the new code in Play Console.` }),
+      body: JSON.stringify({ repo: 'seq23/approvalprep', stop: code, business: 'spry', finish_line: 'ApprovalPrep: live in both stores, selling', owner: 'claude',
+        title, next_step: nextStep }),
       signal: AbortSignal.timeout(8000) });
     if (!r.ok) stop('OPEN_LOOPS_REFUSED');
   } catch { stop('OPEN_LOOPS_UNREACHABLE'); }

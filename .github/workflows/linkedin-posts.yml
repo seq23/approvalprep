@@ -1,0 +1,59 @@
+name: LinkedIn Posts
+# ApprovalPrep's LinkedIn page (urn:li:organization:147008522): one banked post each weekday, 09:10 CT,
+# through LinkedIn's own Posts API. Her words 24 Nov 2026: "make sure noelle is in charge of linkedin also
+# for the apps that have a linkedin page". Noelle (Boss OS) banks the posts in data/linkedin/posts.json.
+# Dormant until data/linkedin/posted.json says "access": "granted" (LinkedIn's Community Management API):
+# until then every run prints NAMED STOP [LINKEDIN_NO_ACCESS] and posts nothing, and exits 0.
+# Named stops (red): SECRET_MISSING_LINKEDIN_APPROVALPREP_ACCESS_TOKEN, LINKEDIN_TOKEN_REFUSED,
+# LINKEDIN_POST_REFUSED, LINKEDIN_PHRASE_BLOCKED (R-ADV-13), LINKEDIN_BANK_EMPTY.
+# Every run prints `OUTPUT: posted N, waiting M`. Logic and proof: scripts/linkedin/linkedin_poster.mjs,
+# scripts/validate/linkedin-poster.mjs.
+on:
+  schedule:
+    - cron: "10 15 * * 1-5"  # weekdays 09:10 CST (10:10 in summer); UTC like every workflow here
+  workflow_dispatch:
+    inputs:
+      fixture_trace:
+        description: "Run fixture workflow data trace only"
+        required: false
+        default: "false"
+permissions:
+  contents: write
+concurrency:
+  group: approvalprep-main-writer
+  cancel-in-progress: false
+jobs:
+  post:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Synchronize latest main
+        run: bash scripts/workflows/prepare-main-writer.sh
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22.23.5
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Run fixture workflow trace
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
+        run: npm run workflows:trace -- --workflow linkedin-posts.yml
+      - name: Post today's LinkedIn post
+        if: ${{ github.event.inputs.fixture_trace != 'true' }}
+        timeout-minutes: 5
+        env:
+          LINKEDIN_APPROVALPREP_ACCESS_TOKEN: ${{ secrets.LINKEDIN_APPROVALPREP_ACCESS_TOKEN }}
+        run: npm run linkedin:post
+      - name: Record what was posted
+        if: always()
+        run: |
+          git config user.name "approvalprep-content-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/linkedin/posted.json
+          git diff --cached --quiet && { echo "Nothing posted to record."; exit 0; }
+          git commit -m "chore(linkedin): posted ledger"
+          bash scripts/workflows/safe-push-main.sh

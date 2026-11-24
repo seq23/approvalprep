@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
   "orchestratorSource": "_repo_validation_registry.json",
-  "validatorCount": 62,
-  "hardFailCount": 61,
+  "validatorCount": 63,
+  "hardFailCount": 62,
   "strongWarningCount": 1,
   "validators": [
     {
@@ -556,6 +556,15 @@
     },
     {
       "order": 62,
+      "id": "track-event-limits",
+      "npmScript": "validate:track-event-limits",
+      "entrypoint": "scripts/validate/track-event-limits.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "group": "growth-critical"
+    },
+    {
+      "order": 63,
       "id": "endpoint-auth",
       "npmScript": "validate:endpoint-auth",
       "entrypoint": "scripts/validate/endpoint-auth.mjs",

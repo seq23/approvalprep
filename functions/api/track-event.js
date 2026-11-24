@@ -1,4 +1,10 @@
-import { json, readJson, nowIso } from '../_runtime/responses.js';
+import { json, readCapped, nowIso } from '../_runtime/responses.js';
+import { DAY, clientIp, sha256, withinLimit } from '../_runtime/rate-limit.js';
+
+// Flood guard: an event is a few hundred bytes, and the busiest real day so far had well under 100 events (23 Nov
+// 2026, conversion_events), so these leave 50x room for real visitors while one script cannot fill the table.
+// Over a limit, or with the limiter unreadable, nothing is written.
+export const TRACK_LIMITS = { maxBody: 4096, perIpMinute: 30, perIpDay: 300, allDay: 5000 };
 
 const allowedEvents = new Set(['page_view','related_link_click','studio_click','pricing_click','product_cta_click','checkout_start','checkout_success_seen','download_verified']);
 const allowedKeys = new Set(['event','url','path','referrerPath','targetUrl','sku','source','sessionIdHash','createdAt']);
@@ -29,10 +35,22 @@ function sanitize(body){
   return out;
 }
 
-export async function onRequestPost({ request, env }){
+export async function onRequestPost({ request, env, now = Date.now() }){
+  const raw = await readCapped(request, TRACK_LIMITS.maxBody).catch(() => null);
+  if (raw === null) return json({ ok:false, error:'BODY_TOO_LARGE' }, 413);
   let event;
-  try { event = sanitize(await readJson(request)); } catch (e) { return json({ ok:false, error:e.message || 'INVALID_EVENT' }, 400); }
+  try { event = sanitize(JSON.parse(raw || '{}') ?? {}); } catch (e) { return json({ ok:false, error:e instanceof SyntaxError ? 'INVALID_EVENT' : (e.message || 'INVALID_EVENT') }, 400); }
   if (!env.PRODUCTS_DB || typeof env.PRODUCTS_DB.prepare !== 'function') return json({ ok:true, recorded:false, mode:'no_d1_binding', acceptedEvent:event.event });
+  const db = env.PRODUCTS_DB;
+  try {
+    const caller = `track:ip:${await sha256(clientIp(request))}`;
+    const allowed = await withinLimit(db, `${caller}:m`, TRACK_LIMITS.perIpMinute, 60_000, now)
+      && await withinLimit(db, `${caller}:d`, TRACK_LIMITS.perIpDay, DAY, now)
+      && await withinLimit(db, 'track:all', TRACK_LIMITS.allDay, DAY, now);
+    if (!allowed) return json({ ok:false, recorded:false, error:'TOO_MANY_REQUESTS' }, 429);
+  } catch {
+    return json({ ok:false, recorded:false, mode:'limit_unavailable' }, 503);
+  }
   try {
     await env.PRODUCTS_DB.prepare('INSERT INTO conversion_events (id,event,path,target_url,sku,source,session_id_hash,created_at) VALUES (?,?,?,?,?,?,?,?)')
       .bind(crypto.randomUUID(), event.event, event.path || event.url || '', event.targetUrl || '', event.sku || '', event.source || '', event.sessionIdHash || '', event.createdAt)

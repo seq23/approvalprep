@@ -1,10 +1,11 @@
 import { json, readJson } from '../../_runtime/responses.js';
 import { createAdminSession } from '../../_runtime/admin.js';
 import { safeEqual } from '../../_runtime/rate-limit.js';
-import { adminLockedOut, lockedOutResponse, recordAdminFailure } from '../../_runtime/admin-lockout.js';
+import { adminTryRefusal, recordAdminFailure } from '../../_runtime/admin-lockout.js';
 // 10 wrong passwords from one IP in 15 minutes locks that IP out (functions/_runtime/admin-lockout.js).
 export async function onRequestPost({ request, env }) {
-  if (await adminLockedOut(request, env)) return lockedOutResponse();
+  const refusal = await adminTryRefusal(request, env);
+  if (refusal) return refusal;
   const body = await readJson(request);
   if (!env.ADMIN_GATE_PASSWORD || !(await safeEqual(body.password, env.ADMIN_GATE_PASSWORD))) {
     await recordAdminFailure(request, env);

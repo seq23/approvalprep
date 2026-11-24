@@ -39,7 +39,7 @@ if (!checkout.includes("discount_code") || !checkout.includes("promotion_codes")
 const webhook = fs.readFileSync(path.join(root, "functions/api/stripe-webhook.js"), "utf8");
 if (!webhook.includes("stripe-signature") || !webhook.includes("STRIPE_WEBHOOK_SECRET")) fail("[payment] Stripe webhook must verify signatures");
 const layout = fs.readFileSync(path.join(root, "src/layouts/BaseLayout.astro"), "utf8");
-if (!layout.includes("Return to pricing and complete checkout") || !layout.includes("until Stripe confirms this session as paid")) fail("[payment] checkout success UI must explain unconfirmed sessions and send customers back to checkout or support");
+if (!layout.includes("Return to pricing and complete checkout") || !layout.includes("Your files open here once Stripe confirms the payment")) fail("[payment] checkout success UI must explain unconfirmed sessions and send customers back to checkout or support");
 // Buy buttons: the promo code is sent, and coming Back from Stripe leaves the button ready again.
 {
   const { beginCheckout, restoreCheckoutButtons, OPENING_LABEL } = await import("../../src/lib/checkoutButtons.mjs");
@@ -78,7 +78,7 @@ if (!layout.includes("Optional: prefill a draft in the Studio") || !layout.inclu
   if (!layout.includes('fetch("/api/resend-download-email"')) fail("[payment] the verified download page must offer to email the download link again");
 }
 const slugPage = fs.readFileSync(path.join(root, "src/pages/[...slug].astro"), "utf8");
-if (!slugPage.includes("If Stripe has not confirmed this checkout session as paid") || !slugPage.includes("download the blank/editable templates")) fail("[payment] checkout success page must explain paid-download versus optional prefill choice");
+if (!slugPage.includes("If Stripe has not confirmed this checkout as paid") || !slugPage.includes("download the blank, editable templates")) fail("[payment] checkout success page must explain paid-download versus optional prefill choice");
 if (!slugPage.includes("data-discount-code")) fail("[payment] pricing page must keep the promo code field");
 // Money leak guard: no test or 100%-off code is ever printed to customers. Scans every source that
 // can reach a page or an API response, and the built site when it exists.

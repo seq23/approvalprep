@@ -2114,7 +2114,7 @@ const manualRouteCopy = {
     "whoFor": [
       "Renters, borrowers, and job applicants deciding whether to use a self-service kit.",
       "People who want to know who wrote a guide before they rely on it.",
-      "Buyers checking how to get help with a purchase or a download that did not unlock.",
+      "Buyers checking how to get help with a purchase or a download that did not open.",
       "Reviewers, journalists, and partners who need a clear statement of what ApprovalPrep is."
     ],
     "value": [

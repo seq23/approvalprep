@@ -1,9 +1,9 @@
 // ApprovalPrep's RevenueCat setup, built from the app's own product code (src/kit.ts and the shared
 // src/lib/appUpgrade.mjs), so the dashboard can never drift from what the app sells.
-// How to run and what each flag does: engine.mjs. Remaining store-side steps: docs/APP_PLAN.md.
+// The shared tool in seq-bin (~/bin/revenuecat-setup) reads this catalog, sets RevenueCat up and reads it
+// back; how to run it and what each flag does is in its header. Remaining store-side steps: docs/APP_PLAN.md.
+//   cd ~/GitHub/boss-os && npm run -s vault:run -- ~/bin/revenuecat-setup ~/GitHub/approvalprep/apps/mobile/scripts/revenuecat/setup.ts
 import { KIT, EXPLANATION_KIT, COMPLETE_BUNDLE, FILE_KITS, UPGRADE_TIERS, ALL_KIT_IDS } from '../../src/kit';
-// @ts-ignore plain JavaScript module
-import { run } from './engine.mjs';
 
 const usd = (n: number) => `$${n.toFixed(2)}`;
 const products = [
@@ -25,4 +25,3 @@ export const catalog = {
 };
 
 if (products.length !== 1 + ALL_KIT_IDS.length + UPGRADE_TIERS.length) throw Error('catalog does not cover every kit');
-if (process.argv[1]?.endsWith('setup.ts')) run(catalog).then(code => { process.exitCode = code; });

@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
         with:
-          node-version: 22.12.0
+          node-version: 22.23.5
           cache: npm
       - run: npm ci
       - name: Run fixture workflow trace
@@ -30,6 +30,11 @@ jobs:
         # runs citation-os:weekly. 2026-10-11: citation-probe.yml merged without
         # fixture_trace and the weekly lane went red on dispatch. Offline, seconds.
         run: npm run workflows:trace
+      - name: Test the workflow tracer itself
+        # tests/workflows ran nowhere until 23 Nov 2026, so the tracer's own
+        # rules (one Node pin from .nvmrc, scripts resolved per package) were
+        # unguarded. Offline, under a second.
+        run: node --test tests/workflows/*.test.mjs
       - name: Run canonical severity-aware validator registry
         # No `npm run build` step ahead of this. There used to be one, and it is
         # the reason the 2026-09-02 daily failures were invisible until they

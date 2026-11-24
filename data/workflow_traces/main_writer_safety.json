@@ -1,8 +1,8 @@
 {
   "schemaVersion": "1.0.0",
-  "generatedAt": "2026-11-21T16:49:37.683Z",
+  "generatedAt": "2026-11-24T14:39:31.287Z",
   "status": "PASS",
-  "writerWorkflowCount": 16,
+  "writerWorkflowCount": 17,
   "sharedConcurrencyGroup": "approvalprep-main-writer",
   "writers": [
     {
@@ -97,6 +97,15 @@
     },
     {
       "workflow": "intelligence-ingest-free-sources.yml",
+      "sharedConcurrency": true,
+      "cancelInProgressFalse": true,
+      "fullCheckout": true,
+      "preparesLatestMain": true,
+      "safePush": true,
+      "directPush": false
+    },
+    {
+      "workflow": "linkedin-posts.yml",
       "sharedConcurrency": true,
       "cancelInProgressFalse": true,
       "fullCheckout": true,

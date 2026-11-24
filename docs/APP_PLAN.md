@@ -79,7 +79,7 @@ reaches Write a letter in one tap, Back stays inside its tab, and nothing is orp
 printed in the run summary. Pin it with the repo variable `APPROVALPREP_APPETIZE_PUBLIC_KEY`.
 No `APPETIZE_API_TOKEN` secret → `NAMED STOP [APPETIZE_TOKEN_MISSING]` in the summary, the APK still
 attached. Android rather than the iOS simulator: this repo's workflow contract
-(`scripts/workflows/trace-all.mjs`) requires ubuntu-24.04 and Node 22.12.0 for every workflow.
+(`scripts/workflows/trace-all.mjs`) requires ubuntu-24.04 and, in every workflow, the Node version in `.nvmrc` (22.23.5; astro 7.4.5+ needs 22.23.4 or later). Cloudflare Pages builds with `.nvmrc` too.
 
 The workflow never builds or deploys the website. Proof for the scaffold PR: `npm run build` on the
 branch and on main gave the same 230 files, byte for byte, apart from the `generatedAt` stamps in
@@ -233,11 +233,11 @@ Run `npm run check` in `apps/mobile` after each task; the App preview run must s
 ## RevenueCat (set up 13 Nov 2026, her yes: "set up revenuecat for the other 3 apps")
 
 The project **ApprovalPrep** exists in her RevenueCat account. Everything inside it is made from the
-code by `apps/mobile/scripts/revenuecat/setup.ts`: the iOS and Android apps (`com.approvalprep.app`),
-the 14 one-time products on each store and the Test Store, one entitlement per product id (what
+code by the shared `~/bin/revenuecat-setup` tool (seq-bin) from the catalog in `apps/mobile/scripts/revenuecat/setup.ts`: the iOS and Android apps (`com.approvalprep.app`),
+the 14 one-time products on each store and the Test Store (each `non_consumable`; on Play RevenueCat holds them as `one_time` with `is_consumable: false`, which the tool checks), one entitlement per product id (what
 `ownershipFrom` reads), and the `default` offering in paywall order. It re-checks everything and
 fixes only what is missing, so it is safe to re-run after any product change:
-`cd ~/GitHub/boss-os && npm run -s vault:run -- npx --prefix ~/GitHub/approvalprep/apps/mobile tsx ~/GitHub/approvalprep/apps/mobile/scripts/revenuecat/setup.ts --save-keys`
+`cd ~/GitHub/boss-os && npm run -s vault:run -- ~/bin/revenuecat-setup ~/GitHub/approvalprep/apps/mobile/scripts/revenuecat/setup.ts --save-keys`
 (the public SDK keys go to the vault as `REVENUECAT_AP_{IOS,ANDROID,TEST}_PUBLIC_KEY`; at the store
 build they become `EXPO_PUBLIC_AP_REVENUECAT_IOS_KEY` / `_ANDROID_KEY`, never in git).
 

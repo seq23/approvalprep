@@ -8,6 +8,10 @@ import { DatabaseSync } from 'node:sqlite';
 // @ts-ignore Pages runtime is JavaScript
 import { BUNDLE_ENTITLEMENT, LIMITS, reviewStatus, reviewUnlock } from '../../../functions/_runtime/review.js';
 // @ts-ignore Pages runtime is JavaScript
+import { onRequestGet as statusRoute } from '../../../functions/api/review/index.js';
+// @ts-ignore Pages runtime is JavaScript
+import { ipPrefix } from '../../../functions/_runtime/rate-limit.js';
+// @ts-ignore Pages runtime is JavaScript
 import { onRequestPost as bundleDoor } from '../../../functions/api/app-bundle.js';
 // @ts-ignore Pages runtime is JavaScript
 import { onRequestPost as filesDoor } from '../../../functions/api/app-files.js';
@@ -48,14 +52,24 @@ type D1 = ReturnType<typeof d1>;
 function revenuecat() {
   const known = new Set<string>(), granted = new Map<string, number>(), bought = new Map<string, unknown[]>(), sandboxEntitled = new Set<string>();
   const calls: string[] = [];
-  let mode: 'ok' | '5xx' | 'timeout' | '403' = 'ok', active: 'ok' | '5xx' = 'ok', openLoops = 0;
+  let mode: 'ok' | '5xx' | 'timeout' | '403' = 'ok', active: 'ok' | '5xx' = 'ok', bills: 'ok' | '5xx' = 'ok', openLoops = 0;
+  const openLoopStops: string[] = [];
+  // Boss OS's intake: up (201), down (fetch throws), refusing (500), or hanging until the test releases it.
+  let intake: 'up' | 'throws' | '500' | 'hangs' = 'up';
+  const held: (() => void)[] = [];
   const fetcher = (async (input: unknown, init: RequestInit = {}) => {
     const url = String(input);
-    if (url.includes('open-loops/intake')) { openLoops++; return new Response('{}', { status: 201 }); }
+    if (url.includes('open-loops/intake')) {
+      openLoops++; openLoopStops.push(JSON.parse(String(init?.body)).stop);
+      if (intake === 'throws') throw new TypeError('fetch failed');
+      if (intake === '500') return new Response('{}', { status: 500 });
+      if (intake === 'hangs') return new Promise<Response>((_, fail) => held.push(() => fail(new DOMException('timed out', 'TimeoutError'))));
+      return new Response('{}', { status: 201 });
+    }
     if (url.includes('/products?')) return Response.json(products);
     calls.push(`${init.method ?? 'GET'} ${url.replace(/^.*\/customers\//, '')}`);
     const id = decodeURIComponent(url.split('/customers/')[1]!.split(/[/?]/)[0]!);
-    if (url.includes('/purchases?')) return Response.json({ object: 'list', items: bought.get(id) ?? [], next_page: null });
+    if (url.includes('/purchases?')) return bills === '5xx' ? new Response('{}', { status: 503 }) : Response.json({ object: 'list', items: bought.get(id) ?? [], next_page: null });
     if (url.includes('/active_entitlements')) {
       if (active === '5xx') return new Response('{}', { status: 503 });
       const items = [...(granted.has(id) && granted.get(id)! > Date.now() ? [{ object: 'customer.active_entitlement', entitlement_id: BUNDLE_ENTITLEMENT, expires_at: granted.get(id) }] : []),
@@ -72,25 +86,26 @@ function revenuecat() {
     granted.set(id, body.expires_at);
     return new Response('{}', { status: 201 });
   }) as unknown as typeof fetch;
-  return { known, granted, bought, sandboxEntitled, calls, fetcher, set(m: typeof mode) { mode = m; }, activeDown(on: boolean) { active = on ? '5xx' : 'ok'; }, get openLoops() { return openLoops; } };
+  return { known, granted, bought, sandboxEntitled, calls, fetcher, set(m: typeof mode) { mode = m; }, setIntake(m: typeof intake) { intake = m; }, release() { held.splice(0).forEach(f => f()); }, activeDown(on: boolean) { active = on ? '5xx' : 'ok'; }, purchasesDown(on: boolean) { bills = on ? '5xx' : 'ok'; }, get openLoops() { return openLoops; }, openLoopStops };
 }
 type RC = ReturnType<typeof revenuecat>;
 
 const assets = { get: async (key: string) => key.endsWith('.zip') ? { body: 'FAKE-ZIP' } : { json: async () => ({ kit: key }) }, head: async () => ({ size: 123 }) };
 function env(db: D1 = d1(), over: Record<string, unknown> = {}) {
-  return { REVIEW_CODE_SECRET: CODE, REVIEW_CODE_VERSION: 'v1', REVIEW_UNTIL: '2099-12-01', REVIEW_HASH_SECRET: 's'.repeat(40), REVIEW_MAX_DEVICES: '10',
+  return { REVIEW_CODE_SECRET: CODE, REVIEW_CODE_VERSION: 'v1', REVIEW_UNTIL: new Date(NOW + 20 * DAY).toISOString(), REVIEW_HASH_SECRET: 's'.repeat(40), REVIEW_MAX_DEVICES: '10',
     APPROVALPREP_REVENUECAT_SECRET: 'sk_fictional', BOSS_OPEN_LOOPS_TOKEN: 't', PRODUCTS_DB: db, DOWNLOAD_SIGNING_SECRET: 'fake-signing', PRODUCT_ASSETS_R2: assets, ...over };
 }
 type Env = ReturnType<typeof env>;
 const req = (body: unknown, ip = '203.0.113.7', type = 'application/json') =>
-  new Request('https://approvalprep.com/api/review/unlock', { method: 'POST', headers: { 'content-type': type, 'cf-connecting-ip': ip }, body: typeof body === 'string' ? body : JSON.stringify(body) });
-async function call(e: Env, rc: RC, body: unknown, ip?: string, now = NOW) {
+  new Request('https://approvalprep.com/api/review/unlock', { method: 'POST', headers: { 'content-type': type, 'cf-connecting-ip': ip }, body: body instanceof ReadableStream ? body : typeof body === 'string' ? body : JSON.stringify(body), duplex: 'half' } as RequestInit);
+/** Calls like Pages: work handed to waitUntil is collected and, unless `settle` is false, finished before returning. */
+async function call(e: Env, rc: RC, body: unknown, ip?: string, now = NOW, settle = true) {
   const waits: Promise<unknown>[] = [];
   const res = await reviewUnlock(req(body, ip), e, { now, fetcher: rc.fetcher, waitUntil: (p: Promise<unknown>) => waits.push(p) });
-  await Promise.all(waits);
-  return { status: res.status, body: await res.json() as { error?: string; unlocked?: boolean }, headers: res.headers };
+  if (settle) await Promise.all(waits);
+  return { status: res.status, body: await res.json() as { error?: string; unlocked?: boolean }, headers: res.headers, waits };
 }
-const triesTaken = (e: Env) => Number((e.PRODUCTS_DB as D1).raw.prepare("SELECT COALESCE(SUM(tries),0) AS n FROM review_try WHERE bucket LIKE 'all:%'").get()!.n);
+const triesTaken = (e: Env, bucket = 'all') => Number((e.PRODUCTS_DB as D1).raw.prepare("SELECT COALESCE(SUM(tries),0) AS n FROM review_try WHERE bucket LIKE ?").get(`${bucket}:%`)!.n);
 const slots = (e: Env) => Number((e.PRODUCTS_DB as D1).raw.prepare('SELECT COUNT(*) AS n FROM review_grant').get()!.n);
 
 /** The three doors for one ID, as the app calls them: [status, body text] each. */
@@ -139,19 +154,20 @@ test('the right code grants 7 days of the bundle to a known ID, never past the w
     assert.ok(!JSON.stringify((await call(e, rc, body, '198.51.100.1')).body).includes(CODE));
 });
 
-test('guessing: wrong code 403 and counted; burst 5 a minute, 20 per IP a day and the global cap all refuse BEFORE the compare', async () => {
+test('guessing: wrong code 403 and counted; per network 5 a minute and 20 a day, and the global cap, all refuse BEFORE the compare', async () => {
   const e = env(), rc = revenuecat(); rc.known.add(anon(1));
   assert.equal((await call(e, rc, { code: '0000000000', app_user_id: anon(1) })).body.error, 'WRONG_CODE');
   assert.equal(triesTaken(e), 1);
-  // Burst: the 6th try in a minute, even with the RIGHT code, never reaches the compare or RevenueCat.
+  // Burst: the 6th try in a minute from one network (each from a different install), even with the RIGHT code, never
+  // reaches the compare or RevenueCat.
   const b = env(), rcb = revenuecat(); rcb.known.add(anon(1));
-  for (let i = 0; i < LIMITS.burstPerMinute; i++) await call(b, rcb, { code: '0000000000', app_user_id: anon(1) });
+  for (let i = 0; i < LIMITS.perIpBurst; i++) assert.equal((await call(b, rcb, { code: '0000000000', app_user_id: anon(100 + i) })).status, 403);
   const burst = await call(b, rcb, { code: CODE, app_user_id: anon(1) });
   assert.equal(burst.status, 429); assert.equal(rcb.granted.size, 0); assert.deepEqual(rcb.calls, []);
-  // Per IP per day: 20 tries over minutes; the 21st (right code) is 429, never compared or granted.
+  // Per IP per day: 20 tries over minutes (from many installs); the 21st (right code) is 429, never compared or granted.
   const d = env(), rcd = revenuecat(); rcd.known.add(anon(1));
   const start = Date.parse(new Date(NOW).toISOString().slice(0, 10) + 'T00:00:00Z');
-  for (let i = 0; i < LIMITS.perIpDaily; i++) assert.equal((await call(d, rcd, { code: '0000000000', app_user_id: anon(1) }, undefined, start + i * 61_000)).status, 403);
+  for (let i = 0; i < LIMITS.perIpDaily; i++) assert.equal((await call(d, rcd, { code: '0000000000', app_user_id: anon(200 + i) }, undefined, start + i * 61_000)).status, 403);
   const late = await call(d, rcd, { code: CODE, app_user_id: anon(1) }, undefined, start + 30 * 61_000);
   assert.equal(late.status, 429); assert.equal(rcd.granted.size, 0); assert.deepEqual(rcd.calls, []);
   // Another IP is not blocked by that one; the global daily cap stops everyone.
@@ -160,6 +176,114 @@ test('guessing: wrong code 403 and counted; burst 5 a minute, 20 per IP a day an
   (g.PRODUCTS_DB as D1).raw.prepare('INSERT INTO review_try VALUES (?, ?, ?, ?)').run(`all:${new Date(NOW).toISOString().slice(0, 10)}`, 'all', LIMITS.globalDaily, NOW + DAY);
   const global = await call(g, rcg, { code: CODE, app_user_id: anon(1) });
   assert.equal(global.status, 429); assert.deepEqual(rcg.calls, []);
+  // The cap stops the reviewer too, so it files ONE Open Loops row that day, not one per refused try.
+  assert.deepEqual(rcg.openLoopStops, ['REVIEW_DAILY_CAP']);
+  assert.equal((await call(g, rcg, { code: CODE, app_user_id: anon(2) }, '198.51.100.50')).status, 429);
+  assert.deepEqual(rcg.openLoopStops, ['REVIEW_DAILY_CAP']);
+});
+
+test('one install: 5 tries a minute and 10 a day whatever network it hops to, refused before the compare and without spending anyone else’s tries', async () => {
+  const e = env(), rc = revenuecat(); rc.known.add(anon(1)); rc.known.add(anon(2));
+  const start = Date.parse(new Date(NOW).toISOString().slice(0, 10) + 'T00:00:30Z');
+  for (let i = 0; i < LIMITS.perInstallBurst; i++) assert.equal((await call(e, rc, { code: '0000000000', app_user_id: anon(1) }, `192.0.2.${i + 1}`, start)).status, 403);
+  // The 6th in that minute, from a fresh network with the RIGHT code: refused, never compared, no network or global try spent.
+  const ipTries = triesTaken(e, 'ip'), allTries = triesTaken(e);
+  const burst = await call(e, rc, { code: CODE, app_user_id: anon(1) }, '192.0.2.50', start);
+  assert.equal(burst.status, 429); assert.equal(rc.granted.size, 0); assert.deepEqual(rc.calls, []);
+  assert.equal(triesTaken(e, 'ip'), ipTries); assert.equal(triesTaken(e), allTries);
+  // Spread over minutes and networks, the 11th try that day is refused the same way.
+  for (let i = LIMITS.perInstallBurst; i < LIMITS.perInstallDaily; i++)
+    assert.equal((await call(e, rc, { code: '0000000000', app_user_id: anon(1) }, `192.0.2.${i + 1}`, start + i * 61_000)).status, 403);
+  const late = await call(e, rc, { code: CODE, app_user_id: anon(1) }, '192.0.2.60', start + 20 * 61_000);
+  assert.equal(late.status, 429); assert.equal(rc.granted.size, 0); assert.deepEqual(rc.calls, []);
+  assert.equal(triesTaken(e), LIMITS.perInstallDaily, 'refused tries never reach the shared daily budget');
+  // Anyone else (the reviewer) still gets in, and the same install is let back in the next UTC day.
+  assert.equal((await call(e, rc, { code: CODE, app_user_id: anon(2) }, '198.51.100.70', start + 21 * 61_000)).status, 200);
+  assert.equal((await call(e, rc, { code: CODE, app_user_id: anon(1) }, '198.51.100.71', start + DAY)).status, 200);
+});
+
+test('IPv6: every address in one /64 is one network, so rotating the low 64 bits buys no extra tries; another /64 is untouched', async () => {
+  const e = env(), rc = revenuecat(); rc.known.add(anon(1));
+  const start = Date.parse(new Date(NOW).toISOString().slice(0, 10) + 'T00:00:30Z');
+  for (let i = 0; i < LIMITS.perIpDaily; i++)
+    assert.equal((await call(e, rc, { code: '0000000000', app_user_id: anon(300 + i) }, `2001:db8:aa:bb:${(i + 1).toString(16)}::${i + 7}`, start + i * 61_000)).status, 403);
+  const rotated = await call(e, rc, { code: CODE, app_user_id: anon(1) }, '2001:0db8:00aa:00bb:ffff:ffff:ffff:fffe', start + 30 * 61_000);
+  assert.equal(rotated.status, 429); assert.equal(rc.granted.size, 0);
+  assert.equal((await call(e, rc, { code: CODE, app_user_id: anon(1) }, '2001:db8:aa:bc::1', start + 31 * 61_000)).status, 200);
+});
+
+test('IPv6 /48: one tunnel-broker block cannot spend the shared day by hopping /64s; its 41st try is refused before the compare and another /48 still gets in', async () => {
+  const e = env(), rc = revenuecat(); rc.known.add(anon(1));
+  const start = Date.parse(new Date(NOW).toISOString().slice(0, 10) + 'T00:00:30Z');
+  // 40 tries, each from its own /64 inside 2001:db8:77::/48 and its own install, all under every per-network cap.
+  for (let i = 0; i < LIMITS.perNet48Daily; i++)
+    assert.equal((await call(e, rc, { code: '0000000000', app_user_id: anon(400 + i) }, `2001:db8:77:${(i + 1).toString(16)}::9`, start + i * 61_000)).status, 403);
+  const before = triesTaken(e);
+  const hop = await call(e, rc, { code: CODE, app_user_id: anon(1) }, '2001:db8:77:ffff::1', start + 50 * 61_000);
+  assert.equal(hop.status, 429); assert.equal(rc.granted.size, 0); assert.deepEqual(rc.calls, []);
+  assert.equal(triesTaken(e), before, 'a refused /48 try never reaches the shared daily budget');
+  assert.equal(before, LIMITS.perNet48Daily);
+  assert.equal((await call(e, rc, { code: CODE, app_user_id: anon(1) }, '2001:db8:78::1', start + 51 * 61_000)).status, 200);
+});
+
+test('IPv4-mapped IPv6 (::ffff:a.b.c.d) is the IPv4 it carries: two such callers never share a bucket, and the mapped and plain forms of one address do', async () => {
+  // ipPrefix itself, both spellings of the mapped form.
+  assert.equal(ipPrefix('::ffff:198.51.100.1'), '198.51.100.1');
+  assert.equal(ipPrefix('::FFFF:c633:6402'), '198.51.100.2');
+  assert.equal(ipPrefix('2601:3cb:500:15e1:742a:4616:6d6c:4807'), '2601:3cb:500:15e1::/64');
+  assert.equal(ipPrefix('2601:3cb:500:15e1:742a:4616:6d6c:4807', 48), '2601:3cb:500::/48');
+  const e = env(), rc = revenuecat(); rc.known.add(anon(1));
+  const start = Date.parse(new Date(NOW).toISOString().slice(0, 10) + 'T00:00:30Z');
+  for (let i = 0; i < LIMITS.perIpDaily; i++)
+    assert.equal((await call(e, rc, { code: '0000000000', app_user_id: anon(500 + i) }, '::ffff:198.51.100.1', start + i * 61_000)).status, 403);
+  // The same address written plainly is the same caller: refused.
+  assert.equal((await call(e, rc, { code: CODE, app_user_id: anon(1) }, '198.51.100.1', start + 30 * 61_000)).status, 429);
+  // A different IPv4 behind the same mapped prefix is someone else: let in.
+  assert.equal((await call(e, rc, { code: CODE, app_user_id: anon(1) }, '::ffff:198.51.100.2', start + 31 * 61_000)).status, 200);
+});
+
+test('the window is one review, never a standing date: more than 30 days ahead is closed (code, status route and sandbox); exactly 30 is open', async () => {
+  const rc = revenuecat(); rc.known.add(anon(1));
+  const far = env(d1(), { REVIEW_UNTIL: new Date(NOW + (LIMITS.maxWindowDays * DAY) + 60_000).toISOString() });
+  assert.equal((await reviewStatus(far, NOW)).status, 404);
+  assert.equal((await call(far, rc, { code: CODE, app_user_id: anon(1) })).status, 404);
+  assert.deepEqual(rc.calls, []);
+  const edge = env(d1(), { REVIEW_UNTIL: new Date(NOW + LIMITS.maxWindowDays * DAY).toISOString() });
+  assert.equal((await reviewStatus(edge, NOW)).status, 200);
+  assert.equal((await call(edge, rc, { code: CODE, app_user_id: anon(1) })).status, 200);
+  // The live route reads the same rule with the real clock.
+  assert.equal((await statusRoute({ env: { ...far } })).status, 404);
+  // The dates on file agree: both wrangler.toml blocks name the same REVIEW_UNTIL, inside 30 days of today or already
+  // past (closed is safe), and the docs name the same date.
+  const toml = readFileSync('../../wrangler.toml', 'utf8');
+  const dates = [...toml.matchAll(/^REVIEW_UNTIL = "([^"]+)"$/gm)].map(m => m[1]!);
+  assert.equal(dates.length, 2); assert.equal(dates[0], dates[1]);
+  assert.ok(Date.parse(dates[0]!) - Date.now() <= LIMITS.maxWindowDays * DAY, `wrangler.toml REVIEW_UNTIL ${dates[0]} is more than ${LIMITS.maxWindowDays} days ahead: the code would stay closed`);
+  assert.ok(readFileSync('../../docs/APP_BUNDLE_DELIVERY.md', 'utf8').includes(`REVIEW_UNTIL = ${dates[0]}`), 'docs name the window on file');
+});
+
+test('sandbox purchases open the doors only while the switch is on AND the window is open; real purchases never depend on either', async t => {
+  const rc = revenuecat();
+  t.mock.method(globalThis, 'fetch', rc.fetcher);
+  // Every product bought, so every door (bundle, files and both single kits) has a purchase to find.
+  const all = [COMPLETE_BUNDLE.productId, 'ap_credit_kit', 'ap_explanation_kit'];
+  rc.known.add(anon(5)); rc.bought.set(anon(5), purchases(all, { store: 'app_store', environment: 'sandbox' }));
+  rc.known.add(anon(6)); rc.bought.set(anon(6), purchases(all, { store: 'play_store' }));
+  rc.known.add(anon(7));
+  const open = new Date(Date.now() + 10 * DAY).toISOString(), past = new Date(Date.now() - 60_000).toISOString(), far = new Date(Date.now() + 40 * DAY).toISOString();
+  const sandbox = (over: Record<string, unknown>) => env(d1(), { REVIEW_CODE_SECRET: undefined, ...over });
+  const noPurchase = await doors(sandbox({ APPROVALPREP_ACCEPT_SANDBOX_PURCHASES: '1', REVIEW_UNTIL: open }), anon(7));
+  for (const [k, [status]] of Object.entries(await doors(sandbox({ APPROVALPREP_ACCEPT_SANDBOX_PURCHASES: '1', REVIEW_UNTIL: open }), anon(5)))) assert.equal(status, 200, `open window: ${k}`);
+  for (const over of [{ APPROVALPREP_ACCEPT_SANDBOX_PURCHASES: '1', REVIEW_UNTIL: past }, { APPROVALPREP_ACCEPT_SANDBOX_PURCHASES: '1', REVIEW_UNTIL: far },
+    { APPROVALPREP_ACCEPT_SANDBOX_PURCHASES: '1', REVIEW_UNTIL: undefined }, { APPROVALPREP_ACCEPT_SANDBOX_PURCHASES: undefined, REVIEW_UNTIL: open }])
+    refusedEverywhere(await doors(sandbox(over), anon(5)), noPurchase);
+  // A real buyer opens every door with the window closed, missing or open, switch on or off.
+  for (const over of [{ REVIEW_UNTIL: past }, { REVIEW_UNTIL: undefined }, { APPROVALPREP_ACCEPT_SANDBOX_PURCHASES: '1', REVIEW_UNTIL: open }, { APPROVALPREP_ACCEPT_SANDBOX_PURCHASES: '1', REVIEW_UNTIL: past }])
+    for (const [k, [status]] of Object.entries(await doors(sandbox(over), anon(6)))) assert.equal(status, 200, `buyer ${JSON.stringify(over)}: ${k}`);
+  // RevenueCat's purchase list down, switch on and window open: nobody gets in free (sandbox or not).
+  rc.purchasesDown(true);
+  for (const id of [anon(5), anon(6)]) for (const [k, [status]] of Object.entries(await doors(sandbox({ APPROVALPREP_ACCEPT_SANDBOX_PURCHASES: '1', REVIEW_UNTIL: open }), id)))
+    assert.notEqual(status, 200, `RevenueCat down: ${k}`);
 });
 
 test('lying client: malformed, custom or oversized IDs and bodies are refused before any count or call; a made-up ID takes no slot', async () => {
@@ -168,6 +292,10 @@ test('lying client: malformed, custom or oversized IDs and bodies are refused be
     { code: 4815162342, app_user_id: anon(1) }, 'not json', JSON.stringify({ code: CODE, app_user_id: anon(1), pad: 'x'.repeat(2000) })])
     assert.equal((await call(e, rc, body)).status, 400);
   assert.equal((await reviewUnlock(req({ code: CODE, app_user_id: anon(1) }, undefined, 'text/plain'), e, { now: NOW, fetcher: rc.fetcher })).status, 400);
+  // An oversized body with no content-length (streamed) is cut off at 1 KB, not read to the end.
+  let pulled = 0;
+  const stream = new ReadableStream({ pull(c) { if (pulled++ < 64) c.enqueue(new TextEncoder().encode(' '.repeat(1024))); else c.close(); } });
+  assert.equal((await call(e, rc, stream)).status, 400); assert.ok(pulled <= 4, `read ${pulled} KB of an oversized body`);
   assert.equal(triesTaken(e), 0); assert.deepEqual(rc.calls, []);
   const r = await call(e, rc, { code: CODE, app_user_id: anon(99) });
   assert.equal(r.status, 503); assert.equal(slots(e), 0); assert.equal(rc.granted.size, 0);
@@ -197,6 +325,8 @@ test('outage: RevenueCat 5xx, timeout or read-only key = 503, slot given back, n
     const r = await call(e, rc, { code: CODE, app_user_id: anon(1) });
     assert.equal(r.status, 503, mode); assert.equal(r.body.error, 'TRY_AGAIN');
     assert.equal(slots(e), 0, mode); assert.ok(!rc.granted.has(anon(1)), `${mode}: nothing half-granted`);
+    // Only the read-only key (no retry fixes it) files an Open Loops row; a passing outage does not.
+    assert.deepEqual(rc.openLoopStops, mode === '403' ? ['REVIEW_RC_KEY_READONLY'] : [], mode);
     // The IP's new-device slot really came back: it can still open its two.
     rc.set('ok'); rc.known.add(anon(2));
     assert.equal((await call(e, rc, { code: CODE, app_user_id: anon(1) })).status, 200);
@@ -205,6 +335,28 @@ test('outage: RevenueCat 5xx, timeout or read-only key = 503, slot given back, n
   const db = d1(), e = env(db), rc = revenuecat(); rc.known.add(anon(1)); db.fail(true);
   const r = await call(e, rc, { code: CODE, app_user_id: anon(1) });
   assert.equal(r.status, 503); assert.deepEqual(rc.calls, []);
+});
+
+test('outage of the alert itself: Boss OS down, refusing or hanging never delays or changes the read-only-key 503', async t => {
+  const log = t.mock.method(console, 'log', () => {});
+  for (const [intake, logged] of [['throws', 'OPEN_LOOPS_UNREACHABLE'], ['500', 'OPEN_LOOPS_REFUSED'], ['hangs', 'OPEN_LOOPS_UNREACHABLE']] as const) {
+    log.mock.resetCalls();
+    const e = env(), rc = revenuecat(); rc.known.add(anon(1)); rc.set('403'); rc.setIntake(intake);
+    // The answer comes back while the alert is still in flight (a hung intake has not settled yet).
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const r = await Promise.race([call(e, rc, { code: CODE, app_user_id: anon(1) }, undefined, NOW, false), new Promise<'HUNG'>(ok => { timer = setTimeout(() => ok('HUNG'), 500); })]);
+    clearTimeout(timer);
+    assert.notEqual(r, 'HUNG', `${intake}: the 503 waited on the alert`);
+    if (r === 'HUNG') continue;
+    assert.equal(r.status, 503, intake); assert.equal(r.body.error, 'TRY_AGAIN');
+    assert.equal(slots(e), 0, intake); assert.ok(!rc.granted.has(anon(1)), `${intake}: nothing granted`);
+    assert.equal(r.waits.length, 1, `${intake}: the alert is scheduled through waitUntil`);
+    rc.release();
+    await Promise.all(r.waits);
+    assert.deepEqual(rc.openLoopStops, ['REVIEW_RC_KEY_READONLY'], intake);
+    const lines = log.mock.calls.map(c => c.arguments.join(' ')).join('\n');
+    assert.ok(lines.includes('REVIEW_RC_KEY_READONLY'), intake); assert.ok(lines.includes(logged), `${intake}: logs ${logged}`);
+  }
 });
 
 test('doors: a live review grant opens the bundle, both kits and the file kits; every other case is refused exactly like no purchase', async t => {
