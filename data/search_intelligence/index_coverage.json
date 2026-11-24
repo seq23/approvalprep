@@ -6,7 +6,7 @@
   "state": "OK",
   "named_stop": null,
   "sitemap_source": "public/sitemap.xml",
-  "sitemap_url_count": 114,
+  "sitemap_url_count": 115,
   "inspected_this_run": 114,
   "quota": {
     "daily_cap": 150,
@@ -32,11 +32,13 @@
     "by_coverage_state": {
       "Crawled - currently not indexed": 6,
       "Discovered - currently not indexed": 33,
+      "NOT_INSPECTED": 1,
       "Submitted and indexed": 44,
       "URL is unknown to Google": 31
     },
     "by_verdict": {
       "NEUTRAL": 70,
+      "NONE": 1,
       "PASS": 44
     },
     "buckets": {
@@ -45,7 +47,7 @@
       "discovered_not_indexed": 33,
       "unknown_to_google": 31,
       "other": 0,
-      "not_inspected": 0
+      "not_inspected": 1
     }
   },
   "truth_boundary": "URL Inspection reports Google's index state for each URL at inspected_at. It is not a ranking or traffic measure; impressions come from data/intelligence/gsc_search_analytics.json.",
@@ -817,6 +819,15 @@
       "googleCanonical": null,
       "userCanonical": null,
       "inspected_at": "2026-11-24T20:10:35.691Z"
+    },
+    {
+      "url": "https://approvalprep.com/questions/are-credit-repair-people-scams/",
+      "verdict": null,
+      "coverageState": "NOT_INSPECTED",
+      "lastCrawlTime": null,
+      "indexingState": null,
+      "inspected_at": null,
+      "not_inspected_reason": "published after the last inspection run; the next daily cycle inspects it"
     },
     {
       "url": "https://approvalprep.com/questions/diy-credit-repair-kit/",
