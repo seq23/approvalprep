@@ -1,0 +1,339 @@
+{
+  "app": "ApprovalPrep",
+  "brand": "approvalprep",
+  "about": "The app's own robot walk for every PR that changes a screen (boss-os scripts/ops/tap-through.mjs, ship-ready app-review.md). Preview purchases are pretend (session-only, nothing charged); every request that is not a read is blocked, so no email is sent and no order code is checked.",
+  "journeys": [
+    {
+      "name": "first-open",
+      "start": "/",
+      "steps": [
+        {
+          "see": "Open the free Letter Studio ›",
+          "id": "home"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    },
+    {
+      "name": "main-task",
+      "start": "/",
+      "steps": [
+        {
+          "tap": "Free credit bureau dispute letter ›",
+          "id": "dispute"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    },
+    {
+      "name": "letter-studio",
+      "start": "/",
+      "steps": [
+        {
+          "tap": "Open the free Letter Studio ›",
+          "id": "studio"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    },
+    {
+      "name": "credit-kit",
+      "start": "/",
+      "steps": [
+        {
+          "tap": "/^Credit Letter Kit · /",
+          "then": "Four more letters, paid once",
+          "id": "plans"
+        },
+        {
+          "see": "This is a preview: buying here is pretend, nothing is charged, and it lasts until you close the page."
+        },
+        {
+          "tap": "Restore purchase",
+          "then": "This is a preview, so there are no purchases to restore here.",
+          "id": "restore-purchase"
+        },
+        {
+          "tap": "/^Get this kit, /",
+          "id": "bought",
+          "then": "Open the PDF guide ›"
+        },
+        {
+          "tap": "Write a kit letter ›"
+        },
+        {
+          "tap": "/Goodwill letter/",
+          "id": "goodwill"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    },
+    {
+      "name": "explanation-kit",
+      "start": "/",
+      "steps": [
+        {
+          "tap": "/^Letter of Explanation Kit · /",
+          "then": "Nine explanation letters, paid once",
+          "id": "plans"
+        },
+        {
+          "tap": "/^Get this kit, /",
+          "id": "bought",
+          "then": "Open the PDF guide ›"
+        },
+        {
+          "tap": "Write a kit letter ›"
+        },
+        {
+          "tap": "/Income gap explanation letter/",
+          "id": "income-gap"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    },
+    {
+      "name": "income-employment-kit",
+      "start": "/",
+      "steps": [
+        {
+          "tap": "/^Income \\+ Employment Letter Kit · /",
+          "then": "/^Get this kit, \\$\\d/",
+          "id": "plans"
+        },
+        {
+          "tap": "/^Get this kit, /",
+          "then": "Open the PDF guide ›",
+          "id": "files"
+        }
+      ]
+    },
+    {
+      "name": "rental-application-kit",
+      "start": "/",
+      "steps": [
+        {
+          "tap": "/^Rental Application Kit · /",
+          "then": "/^Get this kit, \\$\\d/",
+          "id": "plans"
+        },
+        {
+          "tap": "/^Get this kit, /",
+          "then": "Open the PDF guide ›",
+          "id": "files"
+        }
+      ]
+    },
+    {
+      "name": "loan-prep-kit",
+      "start": "/",
+      "steps": [
+        {
+          "tap": "/^Loan Prep Letter Kit · /",
+          "then": "/^Get this kit, \\$\\d/",
+          "id": "plans"
+        },
+        {
+          "tap": "/^Get this kit, /",
+          "then": "Open the PDF guide ›",
+          "id": "files"
+        }
+      ]
+    },
+    {
+      "name": "business-funding-kit",
+      "start": "/",
+      "steps": [
+        {
+          "tap": "/^Business Funding Prep Kit · /",
+          "then": "/^Get this kit, \\$\\d/",
+          "id": "plans"
+        },
+        {
+          "tap": "/^Get this kit, /",
+          "then": "Open the PDF guide ›",
+          "id": "files"
+        }
+      ]
+    },
+    {
+      "name": "life-admin-kit",
+      "start": "/",
+      "steps": [
+        {
+          "tap": "/^Life Admin Letter Kit · /",
+          "then": "/^Get this kit, \\$\\d/",
+          "id": "plans"
+        },
+        {
+          "tap": "/^Get this kit, /",
+          "then": "Open the PDF guide ›",
+          "id": "files"
+        }
+      ]
+    },
+    {
+      "name": "bundle",
+      "start": "/",
+      "steps": [
+        {
+          "tap": "/^Complete ApprovalPrep Bundle · /",
+          "then": "/^Get the bundle, \\$\\d/",
+          "id": "plans"
+        },
+        {
+          "sweep": true
+        },
+        {
+          "tap": "/^Get the bundle, /",
+          "then": "Life Admin Letter Kit: your files ›",
+          "id": "bought"
+        },
+        {
+          "tap": "/^Income \\+ Employment Letter Kit: your files ›/",
+          "then": "Open the Word file ›",
+          "id": "files"
+        }
+      ]
+    },
+    {
+      "name": "my-letters",
+      "start": "/",
+      "steps": [
+        {
+          "tap": "Preview only: load sample letters and kits ›",
+          "then": "/answers to check/",
+          "id": "mine"
+        },
+        {
+          "sweep": true
+        }
+      ]
+    },
+    {
+      "name": "settings-and-delete",
+      "start": "/",
+      "steps": [
+        {
+          "tap": {
+            "role": "tab",
+            "name": "☰ More"
+          },
+          "then": "About ApprovalPrep",
+          "id": "more"
+        },
+        {
+          "sweep": true
+        },
+        {
+          "tap": "Delete all my letters",
+          "then": "Yes, delete"
+        },
+        {
+          "tap": "Yes, delete",
+          "then": "Your letters have been deleted from this phone.",
+          "id": "deleted"
+        }
+      ]
+    }
+  ],
+  "promises": [
+    {
+      "text": "Goodwill letter",
+      "on": "credit-kit:plans",
+      "built": "credit-kit:goodwill"
+    },
+    {
+      "text": "Mark as sent, the day count and a reminder on day 30",
+      "on": "credit-kit:plans",
+      "built": "my-letters:mine"
+    },
+    {
+      "text": "Income gap explanation letter",
+      "on": "explanation-kit:plans",
+      "built": "explanation-kit:income-gap"
+    },
+    {
+      "text": "Restore purchase",
+      "on": "credit-kit:plans",
+      "built": "credit-kit:restore-purchase"
+    },
+    {
+      "text": "It also gives you the website's Credit Letter Kit as files: a PDF guide and an editable Word file",
+      "on": "credit-kit:plans",
+      "built": "credit-kit:bought"
+    },
+    {
+      "text": "It also gives you the website's Letter of Explanation Kit as files: a PDF guide and an editable Word file",
+      "on": "explanation-kit:plans",
+      "built": "explanation-kit:bought"
+    },
+    {
+      "text": "A PDF guide and an editable Word file with these 7 documents.",
+      "on": "income-employment-kit:plans",
+      "built": "income-employment-kit:files"
+    },
+    {
+      "text": "A PDF guide and an editable Word file with these 10 documents.",
+      "on": "rental-application-kit:plans",
+      "built": "rental-application-kit:files"
+    },
+    {
+      "text": "A PDF guide and an editable Word file with these 9 documents.",
+      "on": "loan-prep-kit:plans",
+      "built": "loan-prep-kit:files"
+    },
+    {
+      "text": "A PDF guide and an editable Word file with these 9 documents.",
+      "on": "business-funding-kit:plans",
+      "built": "business-funding-kit:files"
+    },
+    {
+      "text": "A PDF guide and an editable Word file with these 9 documents.",
+      "on": "life-admin-kit:plans",
+      "built": "life-admin-kit:files"
+    },
+    {
+      "text": "All 7 kits, paid once",
+      "on": "bundle:plans",
+      "built": "bundle:bought"
+    },
+    {
+      "text": "The 7 website kits as files (a PDF guide and editable Word templates for each)",
+      "on": "bundle:plans",
+      "built": "bundle:files"
+    },
+    {
+      "text": "in one ZIP",
+      "on": "bundle:plans",
+      "native_only": "share sheet and file save"
+    }
+  ],
+  "native_only": [
+    {
+      "feature": "in-app purchase",
+      "why": "the web preview's purchases are pretend and session-only; the store sheet itself only exists on a phone",
+      "simulator": "a sandbox purchase on the simulator build (GitHub macOS runner, free: public repo)"
+    },
+    {
+      "feature": "share sheet and file save",
+      "why": "saving a PDF or Word file opens the phone's share sheet",
+      "simulator": "the simulator build"
+    },
+    {
+      "feature": "day-30 reminder notification",
+      "why": "local notifications only fire on a phone",
+      "simulator": "the simulator build"
+    }
+  ]
+}
