@@ -61,7 +61,8 @@
         },
         {
           "tap": "/^Get this kit, /",
-          "id": "bought"
+          "id": "bought",
+          "then": "Open the PDF guide ›"
         },
         {
           "tap": "Write a kit letter ›"
@@ -86,7 +87,8 @@
         },
         {
           "tap": "/^Get this kit, /",
-          "id": "bought"
+          "id": "bought",
+          "then": "Open the PDF guide ›"
         },
         {
           "tap": "Write a kit letter ›"
@@ -265,6 +267,16 @@
       "text": "Restore purchase",
       "on": "credit-kit:plans",
       "built": "credit-kit:restore-purchase"
+    },
+    {
+      "text": "It also gives you the website's Credit Letter Kit as files: a PDF guide and an editable Word file",
+      "on": "credit-kit:plans",
+      "built": "credit-kit:bought"
+    },
+    {
+      "text": "It also gives you the website's Letter of Explanation Kit as files: a PDF guide and an editable Word file",
+      "on": "explanation-kit:plans",
+      "built": "explanation-kit:bought"
     },
     {
       "text": "A PDF guide and an editable Word file with these 7 documents.",
