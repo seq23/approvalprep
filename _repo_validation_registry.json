@@ -637,6 +637,17 @@
       "scope": "data/pinterest/queue.json schema and copy rules, schedule (PINS_PER_DAY, no gaps, no page on consecutive days), on-site utm links incl. utm_content, dist/pins/<id>.png 1000x1500, feed exact at fixed America/Chicago clocks, refill threshold and batch, request-time Pages Function wiring"
     },
     {
+      "id": "linkedin-poster",
+      "npmScript": "validate:linkedin-poster",
+      "entrypoint": "scripts/validate/linkedin-poster.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "The weekday LinkedIn job posts publicly as the ApprovalPrep page with no human in the loop: R-ADV-13 wording, a missing self-help line, a double post, or a post before LinkedIn granted access is a break a follower sees",
+      "owner": "approvalprep-growth",
+      "group": "growth-critical",
+      "scope": "data/linkedin bank and record shape, R-ADV-13 and 3,000-character check, self-help line once, little-text escaping, no-access dormancy, one weekday post as urn:li:organization:147008522, named stops and OUTPUT line against a fake LinkedIn"
+    },
+    {
       "id": "brand-social",
       "npmScript": "validate:brand-social",
       "entrypoint": "scripts/validate/brand-social.mjs",
