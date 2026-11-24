@@ -74,4 +74,3 @@ jobs:
     uses: seq23/boss-os/.github/workflows/tap-through.yml@main
     with:
       target: ${{ needs.preview.outputs.url }}
-      runner_ref: feat/tap-through  # until seq23/boss-os#509 lands; then this line and the @ref go to main

@@ -101,15 +101,106 @@
       ]
     },
     {
+      "name": "income-employment-kit",
+      "start": "/",
+      "steps": [
+        {
+          "tap": "/^Income \\+ Employment Letter Kit · /",
+          "then": "/^Get this kit, \\$\\d/",
+          "id": "plans"
+        },
+        {
+          "tap": "/^Get this kit, /",
+          "then": "Open the PDF guide ›",
+          "id": "files"
+        }
+      ]
+    },
+    {
+      "name": "rental-application-kit",
+      "start": "/",
+      "steps": [
+        {
+          "tap": "/^Rental Application Kit · /",
+          "then": "/^Get this kit, \\$\\d/",
+          "id": "plans"
+        },
+        {
+          "tap": "/^Get this kit, /",
+          "then": "Open the PDF guide ›",
+          "id": "files"
+        }
+      ]
+    },
+    {
+      "name": "loan-prep-kit",
+      "start": "/",
+      "steps": [
+        {
+          "tap": "/^Loan Prep Letter Kit · /",
+          "then": "/^Get this kit, \\$\\d/",
+          "id": "plans"
+        },
+        {
+          "tap": "/^Get this kit, /",
+          "then": "Open the PDF guide ›",
+          "id": "files"
+        }
+      ]
+    },
+    {
+      "name": "business-funding-kit",
+      "start": "/",
+      "steps": [
+        {
+          "tap": "/^Business Funding Prep Kit · /",
+          "then": "/^Get this kit, \\$\\d/",
+          "id": "plans"
+        },
+        {
+          "tap": "/^Get this kit, /",
+          "then": "Open the PDF guide ›",
+          "id": "files"
+        }
+      ]
+    },
+    {
+      "name": "life-admin-kit",
+      "start": "/",
+      "steps": [
+        {
+          "tap": "/^Life Admin Letter Kit · /",
+          "then": "/^Get this kit, \\$\\d/",
+          "id": "plans"
+        },
+        {
+          "tap": "/^Get this kit, /",
+          "then": "Open the PDF guide ›",
+          "id": "files"
+        }
+      ]
+    },
+    {
       "name": "bundle",
       "start": "/",
       "steps": [
         {
           "tap": "/^Complete ApprovalPrep Bundle · /",
-          "id": "bundle"
+          "then": "/^Get the bundle, \\$\\d/",
+          "id": "plans"
         },
         {
           "sweep": true
+        },
+        {
+          "tap": "/^Get the bundle, /",
+          "then": "Life Admin Letter Kit: your files ›",
+          "id": "bought"
+        },
+        {
+          "tap": "/^Income \\+ Employment Letter Kit: your files ›/",
+          "then": "Open the Word file ›",
+          "id": "files"
         }
       ]
     },
@@ -174,6 +265,46 @@
       "text": "Restore purchase",
       "on": "credit-kit:plans",
       "built": "credit-kit:restore-purchase"
+    },
+    {
+      "text": "A PDF guide and an editable Word file with these 7 documents.",
+      "on": "income-employment-kit:plans",
+      "built": "income-employment-kit:files"
+    },
+    {
+      "text": "A PDF guide and an editable Word file with these 10 documents.",
+      "on": "rental-application-kit:plans",
+      "built": "rental-application-kit:files"
+    },
+    {
+      "text": "A PDF guide and an editable Word file with these 9 documents.",
+      "on": "loan-prep-kit:plans",
+      "built": "loan-prep-kit:files"
+    },
+    {
+      "text": "A PDF guide and an editable Word file with these 9 documents.",
+      "on": "business-funding-kit:plans",
+      "built": "business-funding-kit:files"
+    },
+    {
+      "text": "A PDF guide and an editable Word file with these 9 documents.",
+      "on": "life-admin-kit:plans",
+      "built": "life-admin-kit:files"
+    },
+    {
+      "text": "All 7 kits, paid once",
+      "on": "bundle:plans",
+      "built": "bundle:bought"
+    },
+    {
+      "text": "The 7 website kits as files (a PDF guide and editable Word templates for each)",
+      "on": "bundle:plans",
+      "built": "bundle:files"
+    },
+    {
+      "text": "in one ZIP",
+      "on": "bundle:plans",
+      "native_only": "share sheet and file save"
     }
   ],
   "native_only": [
