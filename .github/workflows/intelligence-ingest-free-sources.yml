@@ -18,6 +18,8 @@ concurrency:
 
 jobs:
   ingest:
+    if: github.ref == 'refs/heads/main'
+    environment: reviewed-main
     runs-on: ubuntu-24.04
     timeout-minutes: 12  # was 5 (~4x median 0.9m); +build and 99 URL inspections
     steps:

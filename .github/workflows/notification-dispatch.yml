@@ -22,6 +22,8 @@ concurrency:
 
 jobs:
   notification-dispatch:
+    if: github.ref == 'refs/heads/main'
+    environment: reviewed-main
     runs-on: ubuntu-24.04
     timeout-minutes: 5  # was 20; ~4x median 0.2m over 8 green runs
     env:
