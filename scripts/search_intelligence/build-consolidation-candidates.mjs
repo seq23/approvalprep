@@ -12,6 +12,7 @@
 import fs from "node:fs";
 import { readJson, writeJson } from "../intelligence/_lib.mjs";
 import { sitemapUrls } from "./collect-index-coverage.mjs";
+import { removeElements, stripTags } from '../lib/html_text.mjs';
 
 export const OUT = "data/search_intelligence/consolidation_candidates.json";
 export const THIN_WORDS = 600;
@@ -33,9 +34,8 @@ export function wordsOnBuiltPage(path) {
   const file = `dist${path === "/" ? "" : path}/index.html`;
   if (!fs.existsSync(file)) return null;
   const html = fs.readFileSync(file, "utf8");
-  const main = (html.match(/<main[^>]*>([\s\S]*)<\/main>/) || [null, html])[1]
-    .replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, "")
-    .replace(/<[^>]+>/g, " ").replace(/&[a-z#0-9]+;/gi, " ");
+  const main = stripTags(removeElements((html.match(/<main[^>]*>([\s\S]*)<\/main>/) || [null, html])[1], ["script", "style"], ""))
+    .replace(/&[a-z#0-9]+;/gi, " ");
   return main.split(/\s+/).filter(Boolean).length;
 }
 

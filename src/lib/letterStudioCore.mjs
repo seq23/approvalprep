@@ -256,7 +256,7 @@ export function buildLetter(situationId, answers = {}, { today = new Date() } = 
     const bureau = bureaus.find((b) => b.id === answers.bureau);
     if (bureau) recipient = [...bureau.lines]; else { blanks.push("The credit bureau"); recipient = ["[Credit bureau name]", "[Its mail address for disputes]"]; }
     salutation = "To whom it may concern:";
-    reference = [`Account: ${cap(need("account", "Company name and last 4 digits of the account"))}`.replace("Account: [C", "Account: [C")];
+    reference = [`Account: ${cap(need("account", "Company name and last 4 digits of the account"))}`];
     const shows = answers.shows && tidyFact(answers.shows) ? midSentence(answers.shows) : need("shows", "What the report says");
     const why = tidySentences(answers.happened);
     if (!why) blanks.push("Why it is wrong");

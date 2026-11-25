@@ -11,6 +11,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { priceLabelFromCents } from "../../src/lib/kitPrice.mjs";
+import { removeElements, stripTags } from '../lib/html_text.mjs';
 
 const ROOT = process.cwd();
 const DIST = path.join(ROOT, "dist");
@@ -33,7 +34,7 @@ function pages() {
 }
 const decode = (s) => s.replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(+n)).replace(/&#x([0-9a-f]+);/gi, (_, n) => String.fromCodePoint(parseInt(n, 16)))
   .replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&");
-const visibleText = (html) => decode(html.replace(/<head[\s\S]*?<\/head>/i, " ").replace(/<script[\s\S]*?<\/script>/gi, " ").replace(/<style[\s\S]*?<\/style>/gi, " ").replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ");
+const visibleText = (html) => decode(stripTags(removeElements(html.replace(/<head[\s\S]*?<\/head>/i, " "), ["script", "style"]))).replace(/\s+/g, " ");
 function jsonld(html, where) {
   const nodes = [];
   for (const m of html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)) {

@@ -2,7 +2,7 @@
 /**
  * Internal link-graph / orphan / click-depth analyser.
  *
- * Usage: node link_graph.js <root-dir> [--json] [--list-orphans] [--ignore=re,re]
+ * Usage: node link_graph.js <root-dir> [--json] [--list-orphans] [--ignore=part,part]  (literal path fragments, not regexes)
  *
  * Why this exists: the set of pages a search engine indexes tracks the set of
  * pages with inbound internal links far more closely than it tracks the sitemap.
@@ -19,7 +19,7 @@ const root = path.resolve(args.find(a => !a.startsWith('--')) || '.');
 const asJson = args.includes('--json');
 const listOrphans = args.includes('--list-orphans');
 const ignoreArg = (args.find(a => a.startsWith('--ignore=')) || '').slice('--ignore='.length);
-const ignorePatterns = ignoreArg ? ignoreArg.split(',').filter(Boolean).map(p => new RegExp(p)) : [];
+const ignorePatterns = ignoreArg ? ignoreArg.split(',').filter(Boolean) : [];
 
 function walk(dir, out = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -59,7 +59,7 @@ function keyForHref(href, fromKey) {
   return abs || '/';
 }
 
-const files = walk(root).filter(f => !ignorePatterns.some(re => re.test(path.relative(root, f))));
+const files = walk(root).filter(f => !ignorePatterns.some(part => path.relative(root, f).includes(part)));
 const pages = new Map(); // key -> file
 for (const f of files) {
   const k = keyForFile(f);

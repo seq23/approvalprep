@@ -8,6 +8,8 @@ on:
         default: "false"
   pull_request:
     paths: ["data/admin/**", "data/routes/**"]
+permissions:
+  contents: read
 jobs:
   admin:
     runs-on: ubuntu-24.04

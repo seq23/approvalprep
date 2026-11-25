@@ -6,6 +6,8 @@ on:
         description: "Run fixture workflow data trace only"
         required: false
         default: "false"
+permissions:
+  contents: read
 jobs:
   artifact:
     runs-on: ubuntu-24.04

@@ -37,6 +37,7 @@ import { paidSkusFrom } from "../../src/lib/skuForRoute.mjs";
 import { buildVariant, VARIANTS_PER_PAGE_PER_BATCH } from "./variants.mjs";
 import { PAPER_TEXT, QUESTION_LAYOUTS, wrapPx } from "./paper_layouts.mjs";
 import { gateQueue, SALES_WORDS } from "./quality.mjs";
+import { stripTags } from '../lib/html_text.mjs';
 
 const root = process.cwd();
 const readJson = (f) => JSON.parse(fs.readFileSync(path.join(root, f), "utf8"));
@@ -103,7 +104,7 @@ export function appendBatch(queue, pages, now = new Date()) {
 // sub-questions) never has, so it made zero pins for 14 days. A question page now shows its own
 // sub-questions and FAQ questions; a published letter page in the content registries shows the
 // opening of its own template. Every word on these pins comes from the page itself; no model.
-const decode = (s) => String(s || "").replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&#39;|&apos;|&#x27;/g, "'").replace(/&quot;/g, '"').replace(/&nbsp;/g, " ").replace(/\s+/g, " ").trim();
+const decode = (s) => stripTags(String(s || ""), "").replace(/&#39;|&apos;|&#x27;/g, "'").replace(/&quot;/g, '"').replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/\s+/g, " ").trim();
 const SMALL = new Set(["a", "an", "and", "as", "at", "by", "for", "from", "in", "of", "on", "or", "the", "to", "with", "vs"]);
 const STOP_END = new Set([...SMALL, "is", "are", "do", "does", "can", "you", "your", "i", "my", "what", "how", "when", "if"]);
 const ACRONYMS = new Set(["pdf", "sba", "llc", "fha", "va", "irs"]);

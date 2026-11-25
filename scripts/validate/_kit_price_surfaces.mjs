@@ -12,6 +12,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
 import { kitsDir, kitsDirPresent } from '../lib/kits-dir.mjs';
+import { escapeRegExp, stripTags } from '../lib/html_text.mjs';
 
 // Prices that existed before 8 Oct 2026 and match no current kit. Next to a
 // kit word they are always wrong, whatever kit the sentence names.
@@ -50,7 +51,7 @@ function zipEntries(buf) {
 export function docxText(file) {
   return zipEntries(fs.readFileSync(file))
     .filter((e) => /^word\/.*\.xml$/.test(e.name))
-    .map((e) => e.data.toString('utf8').replace(/<\/w:p>/g, '\n').replace(/<[^>]+>/g, ''))
+    .map((e) => stripTags(e.data.toString('utf8').replace(/<\/w:p>/g, '\n'), ''))
     .join('\n');
 }
 
@@ -168,7 +169,7 @@ export function sweepKitPrices(seedProducts, files) {
       const before = lower.slice(Math.max(0, m.index - 140), m.index);
       // "$29 Rental Application Kit" names the kit right after the price;
       // otherwise the nearest kit named before it in the same passage.
-      let hit = aliases.find((x) => new RegExp(`^\\s*(?:[a-z+]+\\s){0,1}${x.a.replace(/[+]/g, '\\+')}\\b`).test(after));
+      let hit = aliases.find((x) => new RegExp(`^\\s*(?:[a-z+]+\\s){0,1}${escapeRegExp(x.a)}\\b`).test(after));
       if (!hit) {
         let best = -1;
         for (const x of aliases) { const i = before.lastIndexOf(x.a); if (i > best) { best = i; hit = x; } }

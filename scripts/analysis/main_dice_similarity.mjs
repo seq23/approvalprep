@@ -14,6 +14,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
+import { removeElements, stripTags } from '../lib/html_text.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '../..');
 const DIST = path.join(ROOT, 'dist');
@@ -22,10 +23,7 @@ const THRESHOLD = 0.80;
 const mainText = (html) => {
   const m = html.match(/<main[^>]*>([\s\S]*?)<\/main>/i);
   const body = m ? m[1] : html;
-  return body
-    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
-    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
-    .replace(/<[^>]+>/g, ' ')
+  return stripTags(removeElements(body, ['script', 'style']))
     .replace(/&[a-z]+;|&#\d+;/gi, ' ')
     .toLowerCase()
     .replace(/[^a-z0-9\s]/g, ' ')

@@ -66,7 +66,7 @@ const subjects = (sent, to) => sent.filter((m) => !to || m.to === to).map((m) =>
     if (!m.text.includes(MAILING_ADDRESS) || !m.html.includes(MAILING_ADDRESS)) fail(`"${m.subject}" has no mailing address`);
     const link = /Unsubscribe \(one click\): (\S+)/.exec(m.text)?.[1];
     if (!link || m.headers['List-Unsubscribe'] !== `<${link}>` || m.headers['List-Unsubscribe-Post'] !== 'List-Unsubscribe=One-Click') fail(`"${m.subject}" has no one-click unsubscribe`);
-    if (link.includes('example.com')) fail('an unsubscribe link carries the address');
+    if (/example\.com/i.test(decodeURIComponent(link))) fail('an unsubscribe link carries the address');
     const u = new URL(link);
     if (!(await verifyUnsubscribe('s', u.searchParams.get('id'), u.searchParams.get('t')))) fail('an unsubscribe link does not verify');
   }

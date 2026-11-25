@@ -65,7 +65,7 @@ test('home and every paywall stay silent about buying on the website; the websit
     assert.ok(view.routes.length > 0, `${screen}: no button was pressed`);
     assert.ok(!view.routes.some(r => /"\/more"/.test(r)), `${screen} sends a buyer to the website-order unlock: ${view.routes.join(' ')}`);
     // Terms, Privacy and the credit-repair page open in app view only: no shop menu, no links onward.
-    for (const r of view.routes.filter(r => r.includes('approvalprep.com'))) assert.match(r, /approvalprep\.com\/api\/app-page\//, `${screen} opens a website page outside app view: ${r}`);
+    for (const r of view.routes.filter(r => /approvalprep\.com/.test(r))) assert.match(r, /approvalprep\.com\/api\/app-page\//, `${screen} opens a website page outside app view: ${r}`);
   }
 });
 

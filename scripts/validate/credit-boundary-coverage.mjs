@@ -2,6 +2,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { requireBuildOutput } from "./_common.mjs";
+import { removeElements, stripTags } from '../lib/html_text.mjs';
 
 // --- Existing assertion, unchanged: the self-service credit boundary phrases -----
 // must survive in the boundary data, the footer, and the catch-all page template.
@@ -164,7 +165,7 @@ const builtWithBlock = new Set();
 // recurring price, and exactly one paid product, the one-time credit kit.
 {
   const core = await import("../../src/lib/letterStudioCore.mjs");
-  const text = (html) => html.replace(/<script\b[\s\S]*?<\/script>|<style\b[\s\S]*?<\/style>/gi, " ").replace(/<[^>]+>/g, " ");
+  const text = (html) => stripTags(removeElements(html, ["script", "style"]));
   const main = (file) => { const html = fs.readFileSync(path.join(DIST, file), "utf8"); return html.slice(html.indexOf("<main"), html.indexOf("</main>")); };
   const answered = main("the-bureau-answered/index.html");
   const studio = main("letter-writing-studio/index.html");

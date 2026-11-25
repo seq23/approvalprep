@@ -7,6 +7,8 @@ on:
         required: false
         default: "false"
   # retired 1 Nov 2026: produced no real output (schedule removed; hand dispatch only)
+permissions:
+  contents: read
 jobs:
   growth:
     runs-on: ubuntu-24.04
