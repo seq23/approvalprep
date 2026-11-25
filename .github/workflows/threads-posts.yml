@@ -64,7 +64,7 @@ jobs:
           git commit -m "chore(threads): queued posts ledger"
           bash scripts/workflows/safe-push-main.sh
       - name: Send confirmed receipts to the growth ledger
-        if: ${{ always() && !cancelled() && inputs.fixture_trace != true }}
+        if: ${{ always() && !cancelled() && github.event.inputs.fixture_trace != 'true' }}
         uses: seq23/boss-os/.github/actions/ledger-rows@ef7270e2e758acb8dd166db4143e93c3563e228a
         with:
           business: approvalprep
