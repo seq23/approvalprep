@@ -57,7 +57,9 @@ export async function onRequestPost({ request, env, now = Date.now() }){
       .run();
     return json({ ok:true, recorded:true, acceptedEvent:event.event });
   } catch (e) {
-    return json({ ok:true, recorded:false, mode:'d1_write_failed', acceptedEvent:event.event, warning:String(e.message || e).slice(0,180) });
+    // The detail goes to the Worker log only; a public endpoint never returns error internals.
+    console.error('track-event: D1 write failed', e);
+    return json({ ok:true, recorded:false, mode:'d1_write_failed', acceptedEvent:event.event, warning:'D1_WRITE_FAILED' });
   }
 }
 export async function onRequestGet(){ return json({ ok:false, error:'POST_REQUIRED' }, 405); }

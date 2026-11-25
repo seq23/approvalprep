@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { inlineJson, removeComments, removeElements } from './lib/html_text.mjs';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /**
@@ -45,7 +46,7 @@ if (!Object.keys(projects).length) {
 
 // One loader for every page. It picks the project by host so a shared tree cannot
 // report one domain's sessions under another domain's project.
-const snippet = `<script ${MARKER}>(function(w,d,m){var h=(w.location.hostname||"").toLowerCase().replace(/^www\\./,"");var id=m[h];if(!id)return;w.clarity=w.clarity||function(){(w.clarity.q=w.clarity.q||[]).push(arguments)};var s=d.createElement("script");s.async=1;s.src="https://www.clarity.ms/tag/"+id;var f=d.getElementsByTagName("script")[0];f.parentNode.insertBefore(s,f)})(window,document,${JSON.stringify(projects)})</script>`;
+const snippet = `<script ${MARKER}>(function(w,d,m){var h=(w.location.hostname||"").toLowerCase().replace(/^www\\./,"");var id=m[h];if(!id)return;w.clarity=w.clarity||function(){(w.clarity.q=w.clarity.q||[]).push(arguments)};var s=d.createElement("script");s.async=1;s.src="https://www.clarity.ms/tag/"+id;var f=d.getElementsByTagName("script")[0];f.parentNode.insertBefore(s,f)})(window,document,${inlineJson(projects)})</script>`;
 
 let touched = 0;
 let already = 0;
@@ -55,7 +56,7 @@ let removed = 0;
 function hasFormOrBuyLink(html) {
   // Scripts, comments and styles can mention forms or checkout links without
   // rendering one. Only the page's actual markup decides whether it records.
-  const markup = html.replace(/<!--[\s\S]*?-->|<script\b[^>]*>[\s\S]*?<\/script>|<style\b[^>]*>[\s\S]*?<\/style>/gi, '');
+  const markup = removeElements(removeComments(html, ''), ['script', 'style'], '');
   if (/<form\b/i.test(markup)) return true;
   return [...markup.matchAll(/<a\b[^>]*\bhref\s*=\s*(?:"([^"]*)"|'([^']*)')/gi)].some((match) => {
     try {
@@ -79,7 +80,8 @@ function walk(dir, depth) {
     // A page that promises "nothing you type is sent to us" (the Letter Studio, the free
     // generators) opts out with data-no-session-recording: no recorder ever loads there.
     if (/\bdata-no-session-recording\b/.test(html) || !hasFormOrBuyLink(html)) {
-      const clean = html.replace(/<script\b[^>]*\bdata-clarity-loader\b[^>]*>[\s\S]*?<\/script>/gi, '');
+      let clean = html, prev;
+      do { prev = clean; clean = clean.replace(/<script\b[^>]*\bdata-clarity-loader\b[^>]*>[\s\S]*?<\/script\b[^>]*>/gi, ''); } while (clean !== prev);
       if (clean !== html) { fs.writeFileSync(abs, clean); removed += 1; }
       skipped += 1;
       continue;

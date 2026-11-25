@@ -34,6 +34,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { NamedStop, bufferClient, createPost, pendingPosts } from '../brand_social/buffer_queue.mjs';
+import { removeElements, stripTags } from '../lib/html_text.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 export const BANK_FILE = path.join(ROOT, 'data', 'threads', 'posts.json');
@@ -112,11 +113,12 @@ export function slotsAhead(now, { slot_time_ct: hhmm = '19:30', days_ahead: days
 // ---- sources ------------------------------------------------------------------------------
 export function pageText(html) {
   const decoded = String(html)
-    .replace(/<(script|style|noscript)[\s\S]*?<\/\1>/gi, ' ')
-    .replace(/<[^>]+>/g, '')
-    .replace(/&nbsp;|&#160;/g, ' ').replace(/&#36;|&dollar;/g, '$').replace(/&amp;/g, '&')
-    .replace(/&#8217;|&rsquo;|&#x2019;|’/g, "'").replace(/&#8220;|&#8221;|&ldquo;|&rdquo;|[“”]/g, '"');
-  return decoded.replace(/\s+/g, ' ');
+    ;
+  const text = stripTags(removeElements(decoded, ['script', 'style', 'noscript']), '')
+    .replace(/&nbsp;|&#160;/g, ' ').replace(/&#36;|&dollar;/g, '$')
+    .replace(/&#8217;|&rsquo;|&#x2019;|’/g, "'").replace(/&#8220;|&#8221;|&ldquo;|&rdquo;|[“”]/g, '"')
+    .replace(/&amp;/g, '&'); // last, so "&amp;#36;" stays "&#36;" (decoded once, not twice)
+  return text.replace(/\s+/g, ' ');
 }
 const squash = (s) => String(s).replace(/[’]/g, "'").replace(/\s+/g, ' ');
 

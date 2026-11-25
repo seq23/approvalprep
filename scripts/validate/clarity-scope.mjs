@@ -4,6 +4,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fail, requireBuildOutput, walk } from './_common.mjs';
+import { removeComments, removeElements } from '../lib/html_text.mjs';
 
 const name = 'clarity-scope';
 const dir = requireBuildOutput(name);
@@ -13,7 +14,7 @@ for (const file of walk(dir).filter((p) => p.endsWith('.html'))) {
   const html = fs.readFileSync(file, 'utf8');
   if (!/<head\b/i.test(html)) continue;
   pages++;
-  const markup = html.replace(/<!--[\s\S]*?-->|<script\b[^>]*>[\s\S]*?<\/script>|<style\b[^>]*>[\s\S]*?<\/style>/gi, '');
+  const markup = removeElements(removeComments(html, ''), ['script', 'style'], '');
   const form = /<form\b/i.test(markup);
   const buy = [...markup.matchAll(/<a\b[^>]*\bhref\s*=\s*(?:"([^"]*)"|'([^']*)')/gi)].some((m) => {
     try {
