@@ -26,6 +26,8 @@ concurrency:
   cancel-in-progress: false
 jobs:
   post:
+    if: github.ref == 'refs/heads/main'
+    environment: reviewed-main
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
@@ -81,3 +83,10 @@ jobs:
           git diff --cached --quiet && { echo "Nothing queued to record."; exit 0; }
           git commit -m "chore(brand-social): queued posts ledger"
           bash scripts/workflows/safe-push-main.sh
+      - name: Send confirmed receipts to the growth ledger
+        if: ${{ always() && !cancelled() && github.event.inputs.fixture_trace != 'true' }}
+        uses: seq23/boss-os/.github/actions/ledger-rows@ef7270e2e758acb8dd166db4143e93c3563e228a
+        with:
+          business: approvalprep
+          file: data/brand-social/posted.json
+          token: ${{ secrets.BOSS_OPEN_LOOPS_TOKEN }}

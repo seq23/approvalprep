@@ -46,12 +46,12 @@ function installReason(closure, manifest = pkg){
 const files = fs.readdirSync(dir).filter(f=>f.endsWith(".yml") || f.endsWith(".yaml")).sort().filter(f=>!only || f===only || `.github/workflows/${f}`===only);
 const traces = files.map(file => {
   let text = read(`.github/workflows/${file}`);
-  // A caller of the shared search loop (seq23/search-loop, pinned @v1) has no steps of
+  // A caller of the shared search loop (seq23/search-loop with an immutable wrapper pin) has no steps of
   // its own. The engine's reusable workflow owns the runner, the timeout and Node, and
   // checks out the default branch before it publishes; what this repo hands it is
   // post_build_command and commit_command. Those scripts are folded in as run: steps, so
   // their npm scripts are resolved and their push is judged like any other main writer.
-  const searchLoopCaller = /uses:\s*seq23\/search-loop\/\.github\/workflows\/search-loop\.yml@v1\s*$/m.test(text) && /engine_ref:\s*v1\s*$/m.test(text);
+  const searchLoopCaller = /uses:\s*seq23\/search-loop\/\.github\/workflows\/search-loop\.yml@[a-f0-9]{40}\s*$/m.test(text) && /engine_ref:\s*v1\s*$/m.test(text);
   // A caller of a shared seq23 workflow (search-loop, seq-bin's ship-ready-baseline) runs on the shared
   // workflow's runner, node and timeout; it is judged on what it hands that workflow.
   const sharedCaller = searchLoopCaller || /uses:\s*seq23\/seq-bin\/\.github\/workflows\/ship-ready-baseline\.yml@v1\s*$/m.test(text);
