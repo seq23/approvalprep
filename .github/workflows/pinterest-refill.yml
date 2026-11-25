@@ -31,6 +31,8 @@ concurrency:
   cancel-in-progress: false
 jobs:
   refill:
+    if: github.ref == 'refs/heads/main'
+    environment: reviewed-main
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -73,3 +75,10 @@ jobs:
           git add data/pinterest/queue.json
           git commit -m "chore(pinterest): refill the daily pin queue"
           bash scripts/workflows/safe-push-main.sh
+      - name: Send confirmed receipts to the growth ledger
+        if: ${{ always() && !cancelled() && inputs.fixture_trace != true }}
+        uses: seq23/boss-os/.github/actions/ledger-rows@ef7270e2e758acb8dd166db4143e93c3563e228a
+        with:
+          business: approvalprep
+          feed: https://www.pinterest.com/approvalprep/feed.rss
+          token: ${{ secrets.BOSS_OPEN_LOOPS_TOKEN }}
