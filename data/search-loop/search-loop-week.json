@@ -2,18 +2,18 @@
   "schema": "search-loop-week-v1",
   "week": "2026-W48",
   "site": "approvalprep.com",
-  "generated_at": "2026-11-27T17:52:49.638Z",
+  "generated_at": "2026-11-27T18:08:58.637Z",
   "state": "running",
   "published": 3,
   "indexed": 0,
   "pace": 10,
   "ai_visitors": 0,
-  "ai_bot_hits": 617,
+  "ai_bot_hits": 648,
   "conversions": "not read: no conversion source configured for this site (form fills / checkouts)",
   "wins": 0,
   "undone": 0,
   "merged": 0,
-  "held_by_cap": 59,
+  "held_by_cap": 69,
   "redirected": [
     {
       "query": "is credit repair worth it",
@@ -77,10 +77,12 @@
     "why": "up from 28 to 31: Google impressions 42 in the last 28 days beat 38 in the 28 before"
   },
   "notes": [
-    "not read: AI answer misses (no BOSS_OPEN_LOOPS_TOKEN in this run (pass it in the caller's secrets: block)); could not tell this run",
     "BUILD held by the cap: 31 live engine page(s), cap 31 (up from 28 to 31: Google impressions 42 in the last 28 days beat 38 in the 28 before); 10 more page(s) today would have gone over it, those searches stay queued",
-    "not read: Search Console page data (GSC_SERVICE_ACCOUNT_JSON is not set)",
-    "not read: index status for the pages 14-42 days old (URL Inspection: GSC_SERVICE_ACCOUNT_JSON is not set)"
+    "strengthen of /questions/how-to-send-letters-to-credit-bureaus/: the page was edited after its draft was saved, so a re-render would undo that edit; left as it is (the draft says \"disputing an error is free under federal law meaning you never need to...\", the page does not)",
+    "AI misses: strengthened /questions/diy-credit-repair-kit/ for 1 AI answer miss(es)",
+    "strengthen of /questions/is-paying-for-credit-repair-worth-it/ failed the gate, left as it was: invented: unsourced price \"Commercial services generally charge monthly subscription fees ranging from around sixty to over one\" (drop the amount, or move it into \"facts\" with a dated source that states it)",
+    "AI misses: strengthened /questions/how-to-dispute-a-credit-report-error/ for 2 AI answer miss(es)",
+    "strengthen of /questions/what-documents-do-mortgage-lenders-require/ failed the gate, left as it was: shape: the body needs at least one list or table (give one section \"bullets\")"
   ],
   "lanes": {
     "ratio": {
@@ -109,15 +111,45 @@
     "competition": "ok: 15 top-10 read(s) via brave"
   },
   "ai_misses": {
-    "read": "not read: no BOSS_OPEN_LOOPS_TOKEN in this run (pass it in the caller's secrets: block)",
-    "week": null,
-    "misses": 0,
-    "strengthened": [],
+    "read": "ok",
+    "week": "2026-W48",
+    "misses": 6,
+    "strengthened": [
+      {
+        "id": "98e0e41c769feb763a2508b39dd1c3b5f334ec5a",
+        "page_url": "https://approvalprep.com/questions/diy-credit-repair-kit/",
+        "at": "2026-11-27"
+      },
+      {
+        "id": "bc8fd9cd4532d4471b18e01c82d1b63bd8e295b0",
+        "page_url": "https://approvalprep.com/questions/how-to-dispute-a-credit-report-error/",
+        "at": "2026-11-27"
+      },
+      {
+        "id": "eed8e17c33ae5d08ed4ea3560efd711e8b10f270",
+        "page_url": "https://approvalprep.com/questions/how-to-dispute-a-credit-report-error/",
+        "at": "2026-11-27"
+      }
+    ],
     "new_candidates": [],
-    "skipped": [],
+    "skipped": [
+      {
+        "id": "4c1457c1b5378f29ac2b0704f4872ecea53d0bd8",
+        "reason": "the page was edited after its draft was saved, so a re-render would undo that edit; left as it is (the draft says \"disputing an error is free under federal law meaning you never need to...\", the page does not)"
+      },
+      {
+        "id": "b3dcc11bf8e3261882fc19ebc870bf6059b1e922",
+        "reason": "failed the gate, left as it was: invented: unsourced price \"Commercial services generally charge monthly subscription fees ranging from around sixty to over one\" (drop the amount, or move it into \"facts\" with a dated source that states it)"
+      },
+      {
+        "id": "c7de7b1ad278040989bf0ac062dd739d86a5c6bd",
+        "reason": "failed the gate, left as it was: shape: the body needs at least one list or table (give one section \"bullets\")"
+      }
+    ],
     "rejected": [],
     "could_not_tell": 5
   },
   "comparison": "not read: FIND has not run since v1.16.0",
-  "run_url": "https://github.com/seq23/approvalprep/actions/runs/46045180821"
+  "seeds": "not read: this site has no seeds in its config",
+  "run_url": "https://github.com/seq23/approvalprep/actions/runs/46047151538"
 }
