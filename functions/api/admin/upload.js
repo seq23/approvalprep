@@ -1,38 +1,48 @@
 import { json } from '../../_runtime/responses.js';
 import { requireAdmin, audit } from '../../_runtime/admin.js';
 import { productAssetKey } from '../../_runtime/asset-keys.js';
+import { sniffType } from '../../_runtime/file-sniff.js';
 async function sha256Hex(buf){ const hash=await crypto.subtle.digest('SHA-256', buf); return [...new Uint8Array(hash)].map(b=>b.toString(16).padStart(2,'0')).join(''); }
-const rules={ image:{mimes:['image/png','image/jpeg','image/webp'],max:null,ext:['png','jpg','jpeg','webp']}, pdf:{mimes:['application/pdf'],max:15*1024*1024,ext:['pdf']}, docx:{mimes:['application/vnd.openxmlformats-officedocument.wordprocessingml.document'],max:15*1024*1024,ext:['docx']} };
+const rules={ image:{mimes:['image/png','image/jpeg','image/webp'],max:10*1024*1024,ext:['png','jpg','jpeg','webp']}, pdf:{mimes:['application/pdf'],max:15*1024*1024,ext:['pdf']}, docx:{mimes:['application/vnd.openxmlformats-officedocument.wordprocessingml.document'],max:15*1024*1024,ext:['docx']} };
 export async function onRequestPost({ request, env }){
   const auth=await requireAdmin(request,env); if(!auth.ok) return auth.response;
   if(!env.PRODUCT_ASSETS_R2 || !env.PRODUCTS_DB) return json({ok:false,error:'R2_AND_D1_BINDINGS_REQUIRED'},500);
   const form=await request.formData();
   const productId=form.get('productId'); const assetType=form.get('assetType'); const file=form.get('file');
   if(!productId||!rules[assetType]||!file) return json({ok:false,error:'PRODUCT_ASSET_FILE_REQUIRED'},400);
-  if(!rules[assetType].mimes.includes(file.type)) return json({ok:false,error:'UNSUPPORTED_FILE_TYPE'},415);
-  if(rules[assetType].max && file.size>rules[assetType].max) return json({ok:false,error:'FILE_TOO_LARGE'},413);
+  const rule=rules[assetType];
+  // Size and type are read from the bytes, never from what the browser declares: a caller can claim
+  // any type it likes, and an HTML page or SVG stored as a "PDF" would reach buyers.
+  if(typeof file.arrayBuffer!=='function') return json({ok:false,error:'PRODUCT_ASSET_FILE_REQUIRED'},400);
+  const bytes=await file.arrayBuffer();
+  if(bytes.byteLength>rule.max) return json({ok:false,error:'FILE_TOO_LARGE',message:`That file is over the ${rule.max/1024/1024} MB limit.`},413);
+  const mimeType=sniffType(bytes);
+  if(!rule.mimes.includes(mimeType)) return json({ok:false,error:'UNSUPPORTED_FILE_TYPE',message:`That file is not a real ${rule.ext.join(', ')} file.`},415);
   const before=await env.PRODUCTS_DB.prepare('SELECT * FROM products WHERE id=? OR slug=?').bind(productId,productId).first();
   if(!before) return json({ok:false,error:'PRODUCT_NOT_FOUND'},404);
-  const bytes=await file.arrayBuffer();
   const hash=await sha256Hex(bytes);
   const id=crypto.randomUUID();
-  const safeName=String(file.name||`${assetType}`).replace(/[^a-zA-Z0-9._-]/g,'-');
+  // The stored name always ends in the extension of what the file really is, so "kit.html" holding a
+  // PDF downloads as "kit.pdf" and never opens as a page.
+  const base=String(file.name||`${assetType}`).replace(/[^a-zA-Z0-9._-]/g,'-').replace(/\.[^.]*$/,'') || assetType;
+  const realExt={'application/pdf':'pdf','image/png':'png','image/jpeg':'jpg','image/webp':'webp'}[mimeType] || 'docx';
+  const safeName=`${base}.${realExt}`;
   // This used to be `products/<slug>/<type>/<timestamp>-<name>`, a third key
   // shape that no other part of the system could construct. Every replacement
   // upload landed at a brand new key, so the superseded object stayed in R2
   // forever, billed and unreachable, while the runtime's own fallback pointed
   // somewhere else again. One deterministic key means a replacement replaces.
   const key=productAssetKey(before.slug, assetType, safeName);
-  await env.PRODUCT_ASSETS_R2.put(key, bytes, { httpMetadata:{ contentType:file.type }, customMetadata:{ productId:before.id, assetType, sha256:hash }});
+  await env.PRODUCT_ASSETS_R2.put(key, bytes, { httpMetadata:{ contentType:mimeType }, customMetadata:{ productId:before.id, assetType, sha256:hash }});
   const now=new Date().toISOString();
   // The resolver reads the newest active row for the pair. Retiring the old
   // rows keeps `active` meaning what it says rather than accumulating a stack
   // of live rows that all name the same object.
   await env.PRODUCTS_DB.prepare('UPDATE product_assets SET active=0 WHERE product_id=? AND asset_type=?').bind(before.id,assetType).run();
-  await env.PRODUCTS_DB.prepare('INSERT INTO product_assets (id,product_id,asset_type,r2_key,filename,mime_type,size_bytes,sha256,uploaded_by,active,created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?)').bind(id,before.id,assetType,key,safeName,file.type,file.size,hash,'admin',1,now).run();
+  await env.PRODUCTS_DB.prepare('INSERT INTO product_assets (id,product_id,asset_type,r2_key,filename,mime_type,size_bytes,sha256,uploaded_by,active,created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?)').bind(id,before.id,assetType,key,safeName,mimeType,bytes.byteLength,hash,'admin',1,now).run();
   const field=assetType+'_asset_id';
   await env.PRODUCTS_DB.prepare(`UPDATE products SET ${field}=?, updated_at=? WHERE id=?`).bind(id,now,before.id).run();
   const after=await env.PRODUCTS_DB.prepare('SELECT * FROM products WHERE id=?').bind(before.id).first();
   await audit(env,`asset.upload.${assetType}`,before.id,before,after,request);
-  return json({ok:true,asset:{id,key,filename:safeName,sizeBytes:file.size,sha256:hash},product:after});
+  return json({ok:true,asset:{id,key,filename:safeName,sizeBytes:bytes.byteLength,sha256:hash},product:after});
 }

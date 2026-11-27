@@ -218,6 +218,8 @@
     "validate:email-nurture": "node --experimental-sqlite scripts/validate/email-nurture.mjs",
     "validate:resend-download-email": "node --experimental-sqlite scripts/validate/resend-download-email.mjs",
     "validate:track-event-limits": "node --experimental-sqlite scripts/validate/track-event-limits.mjs",
+    "validate:checkout-promo-limits": "node --experimental-sqlite scripts/validate/checkout-promo-limits.mjs",
+    "validate:admin-upload-bytes": "node --experimental-sqlite scripts/validate/admin-upload-bytes.mjs",
     "validate:endpoint-auth": "node --experimental-sqlite scripts/validate/endpoint-auth.mjs",
     "pinterest:release-held": "node scripts/pinterest/release_held.mjs",
     "validate:medium-lane": "node scripts/validate/medium-lane.mjs",
