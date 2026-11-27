@@ -714,6 +714,28 @@
       "scope": "functions/api/track-event.js: 4 KB body cap (header and stream), per-network (IPv6 /64) minute and day caps, site day cap, nothing written when the limiter is down, blocked fields still refused"
     },
     {
+      "id": "checkout-promo-limits",
+      "npmScript": "validate:checkout-promo-limits",
+      "entrypoint": "scripts/validate/checkout-promo-limits.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "with no limit on promo-code tries a script reads which Stripe promotion codes exist, and a 100%-off one gives free kits",
+      "owner": "approvalprep-ops",
+      "group": "growth-critical",
+      "scope": "functions/api/create-checkout-session.js: promo-code tries capped per network (IPv6 /64) 10 an hour, per /48 30 an hour, site 500 a day; over-limit is a 429 that never reaches Stripe; no-code checkout never limited; a limiter that cannot be read is a 503"
+    },
+    {
+      "id": "admin-upload-bytes",
+      "npmScript": "validate:admin-upload-bytes",
+      "entrypoint": "scripts/validate/admin-upload-bytes.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "an upload typed by the browser's word could put an HTML page or SVG under a PDF key that buyers download",
+      "owner": "approvalprep-ops",
+      "group": "growth-critical",
+      "scope": "functions/api/admin/upload.js and functions/api/download-file.js: type read from the file's bytes (PDF, DOCX, PNG, JPEG, WEBP), stored name takes the real extension, images capped at 10 MB, refused uploads write nothing, downloads served only as PDF/DOCX with nosniff"
+    },
+    {
       "id": "endpoint-auth",
       "npmScript": "validate:endpoint-auth",
       "entrypoint": "scripts/validate/endpoint-auth.mjs",

@@ -75,7 +75,8 @@ export async function onRequestGet({ request, env }){
 
     let r2Key = r2KeyFor(product, type);
     let filename = filenameFor(product, type);
-    let mimeType = contentTypeFor(type);
+    // Always the type the download asks for, never a stored one: only pdf and docx leave here.
+    const mimeType = contentTypeFor(type);
 
     if (env.PRODUCTS_DB) {
       try {
@@ -83,14 +84,13 @@ export async function onRequestGet({ request, env }){
         if (asset?.r2_key) {
           r2Key = asset.r2_key;
           filename = asset.filename || filename;
-          mimeType = asset.mime_type || mimeType;
         }
       } catch {}
     }
 
     const obj=await env.PRODUCT_ASSETS_R2.get(r2Key);
     if(!obj) return json({ok:false,error:'R2_OBJECT_MISSING',r2Key},404);
-    return new Response(obj.body,{headers:{'content-type':mimeType,'content-disposition':`attachment; filename="${filename}"`,'cache-control':'private, no-store'}});
+    return new Response(obj.body,{headers:{'content-type':mimeType,'x-content-type-options':'nosniff','content-disposition':`attachment; filename="${filename}"`,'cache-control':'private, no-store'}});
   } catch (error) {
     return json({ok:false,error:'DOWNLOAD_FILE_EXCEPTION',message:error?.message || 'Unknown download-file exception'},500);
   }
