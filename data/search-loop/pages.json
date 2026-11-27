@@ -1543,7 +1543,9 @@
         "credit repair company cost",
         "is credit repair worth it",
         "is credit repair company worth it",
-        "is credit repair services worth it"
+        "is credit repair services worth it",
+        "how much does credit repair cost on average",
+        "how much does credit repair cost per month"
       ],
       "indexnow_at": "2026-11-17",
       "modified_at": "2026-11-18"
@@ -1593,7 +1595,11 @@
         "how to dispute a credit report error experian",
         "can you dispute credit report online",
         "how to dispute credit report for free",
-        "credit repair do it yourself"
+        "credit repair do it yourself",
+        "how to dispute stuff on my credit report",
+        "how to dispute a credit report error with transunion",
+        "how to dispute credit score errors",
+        "how to remove negative items from credit report yourself for free"
       ],
       "indexnow_at": "2026-11-17",
       "modified_at": "2026-11-27",
@@ -1821,7 +1827,12 @@
         }
       ],
       "checks": {},
-      "indexnow_at": "2026-11-25"
+      "indexnow_at": "2026-11-25",
+      "extra_queries": [
+        "credit repair scams",
+        "are credit repair services scams",
+        "do credit repair services work"
+      ]
     }
   ],
   "dropped": [
@@ -2232,6 +2243,38 @@
       "reason": [
         "facts: needs at least 2 distinct sources whose URLs answered 200 (found 0); these failed the check, replace each with a page that exists: https://www.consumer.ftc.gov/articles/disputing-errors-credit-reports (HTTP 403: this site refuses automated checks, so cite a different publisher); https://www.consumer.ftc.gov/articles/0058-credit-repair-scams (HTTP 403: this site refuses automated checks, so cite a different publisher)",
         "invented: unsourced price \"If you are ready to start, you can draft your dispute letter free, or get the DIY Credit Letter Kit \" (drop the amount, or move it into \"facts\" with a dated source that states it)"
+      ]
+    },
+    {
+      "query": "is lexington law credit repair worth it",
+      "at": "2026-11-27",
+      "gate": 2,
+      "reason": [
+        "b5 FAQ answer is 28 words (aim 40-60): \"Can a credit repair company remove accurate negati\"",
+        "b5 FAQ answer is 28 words (aim 40-60): \"How long do credit bureaus take to investigate a d\"",
+        "b5 FAQ answer is 25 words (aim 40-60): \"Do I need to pay a subscription to dispute credit \"",
+        "b5 FAQ answer is 28 words (aim 40-60): \"What happens if a disputed item is verified as acc\"",
+        "invented: unsourced price \"The Credit Letter Kit costs nineteen dollars, paid once, and is a PDF guide plus an editable Word fi\" (drop the amount, or move it into \"facts\" with a dated source that states it)"
+      ]
+    },
+    {
+      "query": "do credit repair agencies work",
+      "at": "2026-11-27",
+      "gate": 2,
+      "reason": [
+        "facts: needs at least 2 distinct sources whose URLs answered 200 (found 1); these failed the check, replace each with a page that exists: https://www.ftc.gov/legal-library/browse/statutes/credit-repair-organizations-act (HTTP 403: this site refuses automated checks, so cite a different publisher)",
+        "invented: unsourced price \"If you prefer a paid resource, the Credit Letter Kit costs nineteen dollars, paid once, and is a PDF\" (drop the amount, or move it into \"facts\" with a dated source that states it)"
+      ]
+    },
+    {
+      "query": "do any credit repair companies work",
+      "at": "2026-11-27",
+      "gate": 2,
+      "reason": [
+        "b5 FAQ answer is 27 words (aim 40-60): \"Is it legal to dispute inaccurate credit report it\"",
+        "b5 FAQ answer is 25 words (aim 40-60): \"What happens after I send a credit dispute letter?\"",
+        "b5 FAQ answer is 25 words (aim 40-60): \"How does self-service document preparation differ \"",
+        "invented: unsourced price \"They do not have special legal powers, and federal law permits anyone to dispute credit report error\" (drop the amount, or move it into \"facts\" with a dated source that states it)"
       ]
     }
   ],
@@ -2785,6 +2828,96 @@
       "matched_by": "high token overlap (0.60 >= 0.6)",
       "matched_text": "is paying for credit repair worth it",
       "stage": "search"
+    },
+    {
+      "query": "credit repair scams",
+      "at": "2026-11-27",
+      "url": "https://approvalprep.com/questions/are-credit-repair-people-scams/",
+      "route": "/questions/are-credit-repair-people-scams/",
+      "kind": "engine",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "matched_text": "are credit repair people scams",
+      "stage": "search"
+    },
+    {
+      "query": "are credit repair services scams",
+      "at": "2026-11-27",
+      "url": "https://approvalprep.com/questions/are-credit-repair-people-scams/",
+      "route": "/questions/are-credit-repair-people-scams/",
+      "kind": "engine",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "matched_text": "are credit repair people scams",
+      "stage": "search"
+    },
+    {
+      "query": "how to dispute stuff on my credit report",
+      "at": "2026-11-27",
+      "url": "https://approvalprep.com/questions/how-to-dispute-a-credit-report-error/",
+      "route": "/questions/how-to-dispute-a-credit-report-error/",
+      "kind": "engine",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "matched_text": "how to dispute a credit report error",
+      "stage": "search"
+    },
+    {
+      "query": "how to dispute a credit report error with transunion",
+      "at": "2026-11-27",
+      "url": "https://approvalprep.com/questions/how-to-dispute-a-credit-report-error/",
+      "route": "/questions/how-to-dispute-a-credit-report-error/",
+      "kind": "engine",
+      "matched_by": "high token overlap (0.80 >= 0.6)",
+      "matched_text": "how to dispute a credit report error",
+      "stage": "search"
+    },
+    {
+      "query": "how to dispute credit score errors",
+      "at": "2026-11-27",
+      "url": "https://approvalprep.com/questions/how-to-dispute-a-credit-report-error/",
+      "route": "/questions/how-to-dispute-a-credit-report-error/",
+      "kind": "engine",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "matched_text": "how to dispute a credit report error",
+      "stage": "search"
+    },
+    {
+      "query": "do credit repair services work",
+      "at": "2026-11-27",
+      "url": "https://approvalprep.com/questions/are-credit-repair-people-scams/",
+      "route": "/questions/are-credit-repair-people-scams/",
+      "kind": "page",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "matched_text": "Understanding Credit Repair Services — ApprovalPrep",
+      "stage": "search"
+    },
+    {
+      "query": "how much does credit repair cost on average",
+      "at": "2026-11-27",
+      "url": "https://approvalprep.com/questions/how-much-does-credit-repair-cost/",
+      "route": "/questions/how-much-does-credit-repair-cost/",
+      "kind": "engine",
+      "matched_by": "high token overlap (0.80 >= 0.6)",
+      "matched_text": "how much does credit repair cost",
+      "stage": "search"
+    },
+    {
+      "query": "how much does credit repair cost per month",
+      "at": "2026-11-27",
+      "url": "https://approvalprep.com/questions/how-much-does-credit-repair-cost/",
+      "route": "/questions/how-much-does-credit-repair-cost/",
+      "kind": "engine",
+      "matched_by": "high token overlap (0.80 >= 0.6)",
+      "matched_text": "how much does credit repair cost",
+      "stage": "search"
+    },
+    {
+      "query": "how to remove negative items from credit report yourself for free",
+      "at": "2026-11-27",
+      "url": "https://approvalprep.com/questions/how-to-dispute-a-credit-report-error/",
+      "route": "/questions/how-to-dispute-a-credit-report-error/",
+      "kind": "page",
+      "matched_by": "high token overlap (0.83 >= 0.6)",
+      "matched_text": "How to dispute a credit report error yourself",
+      "stage": "draft"
     }
   ]
 }

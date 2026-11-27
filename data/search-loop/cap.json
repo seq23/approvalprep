@@ -1,67 +1,27 @@
 {
   "schema": "search-loop-cap-v1",
-  "max_live_pages": 31,
-  "config_value": null,
-  "reason": "up from 28 to 31: Google impressions 42 in the last 28 days beat 38 in the 28 before",
+  "max_live_pages": 32,
+  "config_value": 36,
+  "reason": "down from 36 to 32: Google impressions fell to 34 in the last 28 days from 45 in the 28 before",
   "last_eval_week": "2026-W48",
   "history": [
     {
-      "at": "2026-11-03T11:15:21.876Z",
+      "at": "2026-11-27T19:55:13.619Z",
       "from": null,
-      "to": 20,
-      "reason": "started at 20: the site's 7 distinct live engine page(s), raised to the starting floor of 20"
+      "to": 36,
+      "reason": "set from the site config (cap.max_live_pages 36)"
     },
     {
-      "at": "2026-11-03T11:15:21.663Z",
-      "week": "2026-W45",
-      "from": 20,
-      "to": 22,
-      "reason": "up from 20 to 22: Google impressions 49 in the last 28 days beat 10 in the 28 before"
-    },
-    {
-      "at": "2026-11-09T11:14:51.402Z",
-      "week": "2026-W46",
-      "from": 22,
-      "to": 25,
-      "reason": "up from 22 to 25: Google impressions 55 in the last 28 days beat 10 in the 28 before"
-    },
-    {
-      "at": "2026-11-16T11:20:18.225Z",
-      "week": "2026-W47",
-      "from": 25,
-      "to": 28,
-      "reason": "up from 25 to 28: Google impressions 43 in the last 28 days beat 27 in the 28 before"
-    },
-    {
-      "at": "2026-11-23T22:35:28.453Z",
+      "at": "2026-11-27T19:55:12.920Z",
       "week": "2026-W48",
-      "from": 28,
-      "to": 31,
-      "reason": "up from 28 to 31: Google impressions 42 in the last 28 days beat 38 in the 28 before"
+      "from": 36,
+      "to": 32,
+      "reason": "down from 36 to 32: Google impressions fell to 34 in the last 28 days from 45 in the 28 before"
     }
   ],
-  "held": {
-    "2026-11-04": 8,
-    "2026-11-05": 10,
-    "2026-11-06": 10,
-    "2026-11-07": 10,
-    "2026-11-08": 10,
-    "2026-11-13": 9,
-    "2026-11-14": 10,
-    "2026-11-15": 10,
-    "2026-11-17": 9,
-    "2026-11-18": 10,
-    "2026-11-19": 10,
-    "2026-11-20": 10,
-    "2026-11-21": 10,
-    "2026-11-22": 10,
-    "2026-11-24": 9,
-    "2026-11-25": 10,
-    "2026-11-26": 10,
-    "2026-11-27": 20
-  },
+  "held": {},
   "impressions": {
-    "last_28": 42,
-    "prev_28": 38
+    "last_28": 34,
+    "prev_28": 45
   }
 }

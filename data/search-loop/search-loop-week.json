@@ -2,7 +2,7 @@
   "schema": "search-loop-week-v1",
   "week": "2026-W48",
   "site": "approvalprep.com",
-  "generated_at": "2026-11-27T18:08:58.637Z",
+  "generated_at": "2026-11-27T19:55:12.920Z",
   "state": "running",
   "published": 3,
   "indexed": 0,
@@ -13,7 +13,7 @@
   "wins": 0,
   "undone": 0,
   "merged": 0,
-  "held_by_cap": 69,
+  "held_by_cap": 0,
   "redirected": [
     {
       "query": "is credit repair worth it",
@@ -68,21 +68,72 @@
       "strengthen": "https://approvalprep.com/questions/is-paying-for-credit-repair-worth-it/",
       "matched_by": "high token overlap (0.60 >= 0.6)",
       "at": "2026-11-24"
+    },
+    {
+      "query": "credit repair scams",
+      "strengthen": "https://approvalprep.com/questions/are-credit-repair-people-scams/",
+      "matched_by": "high token overlap (0.75 >= 0.6)",
+      "at": "2026-11-27"
+    },
+    {
+      "query": "are credit repair services scams",
+      "strengthen": "https://approvalprep.com/questions/are-credit-repair-people-scams/",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-27"
+    },
+    {
+      "query": "how to dispute stuff on my credit report",
+      "strengthen": "https://approvalprep.com/questions/how-to-dispute-a-credit-report-error/",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-27"
+    },
+    {
+      "query": "how to dispute a credit report error with transunion",
+      "strengthen": "https://approvalprep.com/questions/how-to-dispute-a-credit-report-error/",
+      "matched_by": "high token overlap (0.80 >= 0.6)",
+      "at": "2026-11-27"
+    },
+    {
+      "query": "how to dispute credit score errors",
+      "strengthen": "https://approvalprep.com/questions/how-to-dispute-a-credit-report-error/",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-27"
+    },
+    {
+      "query": "do credit repair services work",
+      "strengthen": "https://approvalprep.com/questions/are-credit-repair-people-scams/",
+      "matched_by": "high token overlap (0.60 >= 0.6)",
+      "at": "2026-11-27"
+    },
+    {
+      "query": "how much does credit repair cost on average",
+      "strengthen": "https://approvalprep.com/questions/how-much-does-credit-repair-cost/",
+      "matched_by": "high token overlap (0.80 >= 0.6)",
+      "at": "2026-11-27"
+    },
+    {
+      "query": "how much does credit repair cost per month",
+      "strengthen": "https://approvalprep.com/questions/how-much-does-credit-repair-cost/",
+      "matched_by": "high token overlap (0.80 >= 0.6)",
+      "at": "2026-11-27"
+    },
+    {
+      "query": "how to remove negative items from credit report yourself for free",
+      "strengthen": "https://approvalprep.com/questions/how-to-dispute-a-credit-report-error/",
+      "matched_by": "high token overlap (0.83 >= 0.6)",
+      "at": "2026-11-27"
     }
   ],
   "cap": {
-    "max_live_pages": 31,
+    "max_live_pages": 32,
     "live": 31,
-    "room": 0,
-    "why": "up from 28 to 31: Google impressions 42 in the last 28 days beat 38 in the 28 before"
+    "room": 1,
+    "why": "down from 36 to 32: Google impressions fell to 34 in the last 28 days from 45 in the 28 before"
   },
   "notes": [
-    "BUILD held by the cap: 31 live engine page(s), cap 31 (up from 28 to 31: Google impressions 42 in the last 28 days beat 38 in the 28 before); 10 more page(s) today would have gone over it, those searches stay queued",
-    "strengthen of /questions/how-to-send-letters-to-credit-bureaus/: the page was edited after its draft was saved, so a re-render would undo that edit; left as it is (the draft says \"disputing an error is free under federal law meaning you never need to...\", the page does not)",
-    "AI misses: strengthened /questions/diy-credit-repair-kit/ for 1 AI answer miss(es)",
-    "strengthen of /questions/is-paying-for-credit-repair-worth-it/ failed the gate, left as it was: invented: unsourced price \"Commercial services generally charge monthly subscription fees ranging from around sixty to over one\" (drop the amount, or move it into \"facts\" with a dated source that states it)",
-    "AI misses: strengthened /questions/how-to-dispute-a-credit-report-error/ for 2 AI answer miss(es)",
-    "strengthen of /questions/what-documents-do-mortgage-lenders-require/ failed the gate, left as it was: shape: the body needs at least one list or table (give one section \"bullets\")"
+    "cap: down from 36 to 32: Google impressions fell to 34 in the last 28 days from 45 in the 28 before",
+    "BUILD distinct gate: 9 search(es) had the same intent as an existing page and became strengthen briefs, not new pages (pages.json \"redirected\")",
+    "BUILD published 0 of quota 1: 3 draft(s) failed the gate and were dropped; 0 got no answer from the free model and stay queued"
   ],
   "lanes": {
     "ratio": {
@@ -150,6 +201,54 @@
     "could_not_tell": 5
   },
   "comparison": "not read: FIND has not run since v1.16.0",
-  "seeds": "not read: this site has no seeds in its config",
-  "run_url": "https://github.com/seq23/approvalprep/actions/runs/46047151538"
+  "seeds": {
+    "configured": 10,
+    "built": [],
+    "strengthened": [],
+    "answered_by": [],
+    "refused": [],
+    "queued": [
+      {
+        "query": "app to write credit dispute letters",
+        "reason": "FIND has not read this seed yet"
+      },
+      {
+        "query": "free credit dispute letter generator that works",
+        "reason": "FIND has not read this seed yet"
+      },
+      {
+        "query": "credit dispute letter app with no monthly subscription",
+        "reason": "FIND has not read this seed yet"
+      },
+      {
+        "query": "how to dispute an item on experian or equifax by mail with a letter",
+        "reason": "FIND has not read this seed yet"
+      },
+      {
+        "query": "help with a rental application when you have bad credit",
+        "reason": "FIND has not read this seed yet"
+      },
+      {
+        "query": "how to write a credit report dispute letter yourself sample",
+        "reason": "FIND has not read this seed yet"
+      },
+      {
+        "query": "debt validation letter template for debt i dont recognize",
+        "reason": "FIND has not read this seed yet"
+      },
+      {
+        "query": "documents and letters to prepare for apartment application with bad credit",
+        "reason": "FIND has not read this seed yet"
+      },
+      {
+        "query": "what to do when credit bureau verifies disputed item",
+        "reason": "FIND has not read this seed yet"
+      },
+      {
+        "query": "one time credit checklist before applying for car loan or mortgage",
+        "reason": "FIND has not read this seed yet"
+      }
+    ]
+  },
+  "run_url": "https://github.com/seq23/approvalprep/actions/runs/46059891394"
 }
