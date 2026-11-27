@@ -24,7 +24,11 @@ await shot(2);
 const q = await (await b.newContext({ viewport: { width: 392, height: 720 }, deviceScaleFactor: 3 })).newPage();
 await q.goto(url, { waitUntil: 'networkidle' }); await q.waitForTimeout(1500);
 await q.getByText(/^Preview only: load sample letters and kits ›$/).filter({ visible: true }).first().click(); await q.waitForTimeout(1500);
-await q.goto(url + '/mine', { waitUntil: 'networkidle' }); await q.waitForTimeout(2300);
+// Shot 3 is captioned CREDIT LETTER KIT. The sample button loads the letters AND the kits (a pretend purchase that
+// lasts until the page closes), so move by tapping the tab, never by loading a URL; with the kit, My letters counts
+// the days to each answer.
+await q.getByText(/^My letters$/).filter({ visible: true }).last().click(); await q.waitForTimeout(2000);
+if (!(await q.getByText(/answers? to check/).filter({ visible: true }).count())) throw Error('NOT_KIT_STATE: My letters shows no answers-to-check count');
 await q.screenshot({ path: `${out}/screen-3.png` }); console.log('captured', 3);
 console.log('page errors', errs.length ? errs : 'none');
 await b.close();
