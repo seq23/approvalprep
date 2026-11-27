@@ -8,19 +8,25 @@
 //    page and record it; a second run the same day posts again; a weekend posts; a missing token is not
 //    SECRET_MISSING_LINKEDIN_APPROVALPREP_ACCESS_TOKEN; a 401 is not LINKEDIN_TOKEN_REFUSED and records
 //    anything; a 500 records anything; a blocked post is posted or not LINKEDIN_PHRASE_BLOCKED; an empty
-//    bank is not LINKEDIN_BANK_EMPTY; any run lacks the OUTPUT line.
+//    bank is not LINKEDIN_BANK_EMPTY; any run lacks the OUTPUT line;
+// 5. the workflow's growth-ledger step runs while access is none (its NO_POSTS_TO_LEDGER turned main red
+//    every weekday, 25-26 Nov 2026), or is skipped once access is granted: the workflow's own access step
+//    is run against both records.
 // Run by validate:all (HARD_FAIL). No network.
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
+import yaml from 'js-yaml';
 import { AUTHOR, SELF_HELP, finalText, littleText, main, planRun } from '../linkedin/linkedin_poster.mjs';
 import { r13Hits } from '../threads/threads_loop.mjs';
 
 const bank = JSON.parse(fs.readFileSync('data/linkedin/posts.json', 'utf8'));
 const record = JSON.parse(fs.readFileSync('data/linkedin/posted.json', 'utf8'));
 const fails = [];
-const check = async (name, fn) => { try { await fn(); } catch (e) { fails.push(`${name}: ${e.message.split('\n')[0]}`); } };
+let ran = 0;
+const check = async (name, fn) => { ran += 1; try { await fn(); } catch (e) { fails.push(`${name}: ${e.message.split('\n')[0]}`); } };
 const MON = Date.parse('2026-11-30T16:00:00Z'); // Monday 10:00 CT
 const SAT = Date.parse('2026-11-28T16:00:00Z');
 
@@ -116,5 +122,21 @@ await check('empty bank is a named stop', async () => {
   assert.equal(planRun({ bank: { posts: [] }, ledger: { posted: [] }, now: MON }).action, 'none');
 });
 
+await check('ledger step runs only once access is granted', () => {
+  const steps = yaml.load(fs.readFileSync('.github/workflows/linkedin-posts.yml', 'utf8')).jobs.post.steps;
+  const accessAt = steps.findIndex((s) => s.id === 'access');
+  const ledgerAt = steps.findIndex((s) => String(s.uses ?? '').includes('/actions/ledger-rows@'));
+  assert.ok(accessAt >= 0 && ledgerAt > accessAt, 'access step before the ledger step');
+  assert.ok(String(steps[ledgerAt].if).includes("steps.access.outputs.granted == 'true'"), 'ledger step gated on access');
+  for (const [access, want] of [['none', 'granted=false'], ['granted', 'granted=true']]) {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'li-wf-'));
+    fs.mkdirSync(path.join(dir, 'data/linkedin'), { recursive: true });
+    fs.writeFileSync(path.join(dir, 'data/linkedin/posted.json'), JSON.stringify({ access, posted: [] }));
+    const out = path.join(dir, 'out');
+    execFileSync('bash', ['-e', '-c', steps[accessAt].run], { cwd: dir, env: { ...process.env, GITHUB_OUTPUT: out } });
+    assert.equal(fs.readFileSync(out, 'utf8').trim(), want, `access ${access}`);
+  }
+});
+
 if (fails.length) { console.error(`[linkedin-poster] FAIL\n- ${fails.join('\n- ')}`); process.exit(1); }
-console.log('[linkedin-poster] PASS 10 checks');
+console.log(`[linkedin-poster] PASS ${ran} checks`);
