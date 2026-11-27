@@ -20,6 +20,30 @@ concurrency:
   group: app-preview-${{ github.ref }}
   cancel-in-progress: true
 jobs:
+  # The app's own checks on every pull request: the typecheck and apps/mobile/tests, which run the server's review
+  # code, doors and window date. No secrets and no environment. The preview job below runs only on reviewed main
+  # (since 25 Nov 2026), so without this job a pull request ran none of them and a red test first showed on main.
+  check:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: apps/mobile
+    env:
+      CI: '1'
+      EXPO_NO_TELEMETRY: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.23.5
+          cache: npm
+          cache-dependency-path: apps/mobile/package-lock.json
+      - run: npm ci --no-audit --no-fund
+      - run: npm run check
   preview:
     if: github.ref == 'refs/heads/main'
     environment: reviewed-main

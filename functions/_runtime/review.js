@@ -9,13 +9,16 @@
 //
 // Window: REVIEW_UNTIL is the end of ONE store review (submission + 21 days), never a standing date: a value more than
 // LIMITS.maxWindowDays ahead closes the window (fail closed), so the guessing budget below is a fact of the code.
-// Guessing budget per window: at most LIMITS.globalDaily x LIMITS.maxWindowDays = 30,000 tries against 10^10 codes
-// (a 3-in-a-million chance). Lockout: one install, one network (IPv6 by /64) and one IPv6 site block (/48, what one
-// tunnel-broker account hands out) each have their own small buckets, taken before the shared one, so a stranger has to
-// spread over 50+ IPv4 addresses or 25+ IPv6 /48s a day to fill the global cap; when that happens an Open Loops row says
-// so the same day (REVIEW_DAILY_CAP).
+// Lockout is per device, not shared: one install, one network (IPv6 by /64) and one IPv6 site block (/48, what one
+// tunnel-broker account hands out) each have their own small buckets, taken before the shared count, so one caller only
+// ever locks itself out. The shared count refuses everyone only at LIMITS.globalDaily (100,000 a day), a backstop that
+// takes 5,000+ IPv4 addresses or 2,500+ IPv6 /48s in one day to fill (it was 1,000 until 27 Nov 2026, which 50 addresses
+// filled, locking the reviewer out for the day). Guessing is seen long before that: the LIMITS.globalWarnDaily-th try of
+// a day (1,000) files an Open Loops row (REVIEW_GUESSING) and refuses no one; the backstop files REVIEW_DAILY_CAP.
+// Guessing budget per window: at most LIMITS.globalDaily x LIMITS.maxWindowDays = 3,000,000 tries against 10^10 codes
+// (3 in 10,000), and only if someone fills the backstop every day of the window.
 // Order: window -> body and ID format -> try limits (atomic, BEFORE the compare: per install 5 a minute and 10 a day,
-// per network 5 a minute and 20 a day, per IPv6 /48 40 a day, everyone 1,000 a day) -> constant-time compare -> ID known
+// per network 5 a minute and 20 a day, per IPv6 /48 40 a day, everyone 100,000 a day) -> constant-time compare -> ID known
 // to RevenueCat -> per-IP new-slot limit -> device slot (cap REVIEW_MAX_DEVICES per code version) -> grant. Any
 // RevenueCat failure revokes what this call granted (granted entitlements only, never a purchase), gives the slot
 // back and answers 503: never half-granted.
@@ -29,7 +32,7 @@ import { clientIp } from './rate-limit.js';
 // 22 Nov 2026): an identifier, not a secret. The bundle opens both kits and the five file kits (ownsBundle).
 export const BUNDLE_ENTITLEMENT = 'entl0ed811eba7';
 export const RC = `https://api.revenuecat.com/v2/projects/${REVENUECAT_PROJECT}`;
-export const LIMITS = { perInstallBurst: 5, perInstallDaily: 10, perIpBurst: 5, perIpDaily: 20, perNet48Daily: 40, globalDaily: 1000, newSlotsPerIpDaily: 2, maxDevices: 10, maxWindowDays: 30 };
+export const LIMITS = { perInstallBurst: 5, perInstallDaily: 10, perIpBurst: 5, perIpDaily: 20, perNet48Daily: 40, globalWarnDaily: 1000, globalDaily: 100_000, newSlotsPerIpDaily: 2, maxDevices: 10, maxWindowDays: 30 };
 const CODE = /^\d{10}$/;
 const ANON_ID = /^\$RCAnonymousID:[0-9a-f]{32}$/;
 const DAY = 86_400_000, WEEK = 7 * DAY, MAX_BODY = 1024;
@@ -69,11 +72,11 @@ async function same(secret, typed, real) {
   return diff === 0;
 }
 
-/** One atomic try against a cap: true when taken, false when the bucket is full. */
+/** One atomic try against a cap: the bucket's count after this try (1 or more) when taken, 0 when the bucket is full. */
 async function take(db, bucket, key, cap, until) {
   const row = await db.prepare('INSERT INTO review_try (bucket, key, tries, until) VALUES (?, ?, 1, ?) ON CONFLICT(bucket, key) DO UPDATE SET tries = tries + 1 WHERE tries < ? RETURNING tries')
     .bind(bucket, key, until, cap).first();
-  return !!row;
+  return Number(row?.tries ?? 0);
 }
 const giveBack = (db, bucket, key) => db.prepare('UPDATE review_try SET tries = tries - 1 WHERE bucket = ? AND key = ? AND tries > 0').bind(bucket, key).run();
 
@@ -118,14 +121,22 @@ export async function reviewUnlock(request, env, { now = Date.now(), fetcher = f
     if (!(await take(db, `ip:${day}`, ipHash, LIMITS.perIpDaily, dayEnd))) { stop('REVIEW_IP_DAILY_CAP'); return json({ error: 'SLOW_DOWN' }, 429); }
     // One /48 holds 65,536 /64s, so the per-network cap alone lets one tunnel-broker account fill the shared day.
     if (!(await take(db, `net48:${day}`, net48Hash, LIMITS.perNet48Daily, dayEnd))) { stop('REVIEW_NET48_DAILY_CAP'); return json({ error: 'SLOW_DOWN' }, 429); }
-    if (!(await take(db, `all:${day}`, 'all', LIMITS.globalDaily, dayEnd))) {
+    const all = await take(db, `all:${day}`, 'all', LIMITS.globalDaily, dayEnd);
+    if (!all) {
       stop('REVIEW_DAILY_CAP');
       // Everyone, the reviewer too, is refused until tomorrow: one Open Loops row the first time a day, so it is seen.
       if (await take(db, `alert:${day}`, 'all', 1, dayEnd)) {
         waitUntil(fileLoop(env, fetcher, 'REVIEW_DAILY_CAP', 'ApprovalPrep: the Play review code hit its daily try cap',
-          `${LIMITS.globalDaily} code tries in one day (UTC ${day}) from many networks: someone is guessing, and the Play reviewer cannot redeem until tomorrow. Check the review_try rows, rotate the code (new AP_PLAY_REVIEW_CODE, REVIEW_CODE_SECRET and REVIEW_CODE_VERSION) if it may have leaked, and tell her if a review is waiting.`));
+          `${LIMITS.globalDaily.toLocaleString('en-US')} code tries in one day (UTC ${day}) from thousands of networks: someone is guessing, and the Play reviewer cannot redeem until tomorrow. Check the review_try rows, rotate the code (new AP_PLAY_REVIEW_CODE, REVIEW_CODE_SECRET and REVIEW_CODE_VERSION) if it may have leaked, and tell her if a review is waiting.`));
       }
       return json({ error: 'SLOW_DOWN' }, 429);
+    }
+    // The count is atomic, so exactly one try a day lands on the warning line: one Open Loops row, and this try and every
+    // later one carry on as normal (nobody is refused until the backstop above).
+    if (all === LIMITS.globalWarnDaily) {
+      stop('REVIEW_GUESSING');
+      waitUntil(fileLoop(env, fetcher, 'REVIEW_GUESSING', 'ApprovalPrep: someone is guessing the Play review code',
+        `${LIMITS.globalWarnDaily.toLocaleString('en-US')} code tries so far today (UTC ${day}) from many networks: someone is guessing. The Play reviewer can still redeem: every install and network has its own small limit, and everyone is refused only at ${LIMITS.globalDaily.toLocaleString('en-US')} tries a day. Check the review_try rows, and rotate the code (new AP_PLAY_REVIEW_CODE, REVIEW_CODE_SECRET and REVIEW_CODE_VERSION) if it may have leaked.`));
     }
   } catch { stop('REVIEW_DB_UNAVAILABLE'); return json({ error: 'TRY_AGAIN' }, 503); }
 

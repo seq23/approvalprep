@@ -97,7 +97,10 @@ Google Play's reviewer cannot buy, and the app has no accounts, so every paid ki
   not for a bundle owner, and only while `GET /api/review` answers 200. iOS never shows it.
 - **Server**: `functions/api/review/{index,unlock}.js` -> `functions/_runtime/review.js`. Window -> body/ID format
   -> try limits (all before the compare: per install 5 a minute and 10 a day, per network 5 a minute and 20 a day
-  with IPv6 counted by its /64, everyone 1,000 a day; the 1,000th files one Open Loops row a day, `REVIEW_DAILY_CAP`) -> constant-time compare -> ID known to
+  with IPv6 counted by its /64, per IPv6 /48 40 a day, everyone 100,000 a day. Lockout is per device: one caller only
+  locks itself out. The 1,000th try of a day refuses no one and files one Open Loops row, `REVIEW_GUESSING`; the
+  100,000 backstop, which takes 5,000+ IPv4 addresses in one day to fill, refuses everyone until tomorrow and files
+  `REVIEW_DAILY_CAP`) -> constant-time compare -> ID known to
   RevenueCat -> 2 new devices per IP a day -> 10 devices per code version (the 11th files an Open Loops row,
   `REVIEW_DEVICE_CAP`) -> RevenueCat v2 `grant_entitlement` of `ap_complete_bundle` until `min(now + 7 days,
   REVIEW_UNTIL)`. Any RevenueCat failure revokes the granted entitlement (never a purchase), frees the slot, 503.
@@ -116,8 +119,8 @@ Google Play's reviewer cannot buy, and the app has no accounts, so every paid ki
   `REVIEW_CODE_SECRET`, so they stay closed.
 - **Window** (23 Nov 2026): `REVIEW_UNTIL = 2026-12-14` covers the Play production review sent 22 Nov and the
   App Store 1.0 review (send day + 21 days). It is ONE review's window, never a standing date: the code caps it at
-  30 days (`LIMITS.maxWindowDays`), so the guessing budget is at most 1,000 x 30 = 30,000 tries per window against
-  10^10 codes (3 in a million). For every later Play or App Store submission (an update re-review too), set
+  30 days (`LIMITS.maxWindowDays`), so the guessing budget is at most 100,000 x 30 = 3,000,000 tries per window against
+  10^10 codes (3 in 10,000), and only if someone fills the backstop every day of the window. For every later Play or App Store submission (an update re-review too), set
   `REVIEW_UNTIL` in both `wrangler.toml` blocks to send day + 21 days in the same PR that ships the build, and land
   it before pressing send. While it is closed, the Play Console "App access" code does nothing and the card is
   hidden.
