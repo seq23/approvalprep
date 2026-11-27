@@ -626,6 +626,17 @@
       "scope": "skuForRoute() run against every active_paid kit path in the route manifest"
     },
     {
+      "id": "promise-truth",
+      "npmScript": "validate:promise-truth",
+      "entrypoint": "scripts/validate/promise-truth.mjs",
+      "severity": "HARD_FAIL",
+      "blocksRelease": true,
+      "blockReason": "prevents a page promise from being false on the built site again (promise audit 27 Nov 2026): /templates and /reports list every published item with working anchors, checklists and folded previews name their kit and price, the glossary shows every term, /pricing compares every kit, /resources links every policy page, question pages say no person reads them first, store text counts the Studio's real situations, and retired false sentences stay out of dist/.",
+      "owner": "approvalprep-ux",
+      "group": "ux-critical",
+      "scope": "Built dist/ pages, apps/mobile/store text"
+    },
+    {
       "id": "pinterest-drip",
       "npmScript": "validate:pinterest-drip",
       "entrypoint": "scripts/validate/pinterest-drip.mjs",

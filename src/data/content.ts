@@ -92,6 +92,9 @@ export const productComparison = [
   { sku: "income-employment-letter-kit", product: "Income + Employment Letter Kit", bestFor: "Work, income, employment gaps, job changes", includes: "Employment verification for your employer to sign, proof of income, self-employment, job change and gap letters" },
   { sku: "credit-letter-kit", product: "Credit Letter Kit", bestFor: "DIY credit letters and follow-up", includes: "Three bureau follow-ups, direct dispute, validation, settlement terms, goodwill, late payment, checklist, log" },
   { sku: "rental-application-kit", product: "Rental Application Kit", bestFor: "Apartment and rental applications", includes: "Rental checklist, cover letter, income/rental history explanations" },
+  { sku: "loan-prep-letter-kit", product: "Loan Prep Letter Kit", bestFor: "Mortgage, auto and personal loan questions", includes: "Auto, mortgage and personal loan explanations, income, credit and bank statement letters, loan checklist, lender follow-up, log" },
+  { sku: "business-funding-prep-kit", product: "Business Funding Prep Kit", bestFor: "Business loans and SBA applications", includes: "Business loan and use of funds explanations, SBA checklist, business income, cash flow and bank statement letters, lender follow-up, log" },
+  { sku: "life-admin-letter-kit", product: "Life Admin Letter Kit", bestFor: "Address, identity, records and account letters", includes: "Address verification, proof of residency, name/address, records request, benefits and utility letters, ID checklist, log" },
   { sku: "complete-approvalprep-bundle", product: "Complete ApprovalPrep Bundle", bestFor: "The full self-service library", includes: "Every current kit, checklist, guide, and letter packet" },
 ].map((row) => ({ ...row, price: kitPriceOf(row.sku), href: `/pricing#${row.sku}` }));
 
@@ -627,7 +630,7 @@ const manualRouteCopy = {
     "secondaryCta": "Draft free in the Letter Studio",
     "heading": "ApprovalPrep Letter Template Previews",
     "metaDescription": "Previews of five ApprovalPrep letters: address history, employment gap, bank deposits, a rental cover letter, and self-employed proof of income.",
-    "lead": "Five public previews showing how each ApprovalPrep letter is structured: address history, employment gap, bank statement deposits, a rental application cover letter, and self-employed proof of income.",
+    "lead": "Five public previews showing how each ApprovalPrep letter is structured: address history, employment gap, bank statement deposits, a rental application cover letter, and self-employed proof of income. Each one sits inside the guide for its situation.",
     "shortAnswer": "Read the preview for the letter you need, use its structure to draft your own version in plain words, and buy the matching kit only if you want the editable PDF and DOCX files. The previews explain structure; the paid kits carry the files.",
     "decisionContext": [
       "Use this section when you know roughly what you have to explain but not how the explanation is supposed to be laid out. Each preview shows the order the facts belong in.",
@@ -696,10 +699,10 @@ const manualRouteCopy = {
     "secondaryCta": "Draft free in the Letter Studio",
     "heading": "ApprovalPrep Public Reports",
     "metaDescription": "Three ApprovalPrep public reports on what applicants are asked to produce: a checklist catalog, a rental prep report, and a business funding report.",
-    "lead": "Three public reports on what applicants are actually asked to produce: a catalog of public application checklists, a rental application prep report, and a small-business funding document prep report.",
-    "shortAnswer": "Each report states its own method, lists the sources it was built from, and says what it does not claim. Read the method first, then use the findings to decide what to gather before you apply.",
+    "lead": "Three public reports on what applicants are actually asked to produce: a full catalog of 100 public application checklists, and two shorter prep reports, on rental applications and small-business funding, published inside the guides they serve.",
+    "shortAnswer": "Each report states its method and what it does not claim. The full report lists the 100 public sources it catalogs; the two shorter reports were built from ApprovalPrep's own guides and say so. Read the method first, then use the findings to decide what to gather before you apply.",
     "decisionContext": [
-      "Use this section when you want the reasoning behind ApprovalPrep's guidance rather than the guidance itself. The reports show which public sources were read and how they were coded.",
+      "Use this section when you want the reasoning behind ApprovalPrep's guidance rather than the guidance itself. The full report shows which public sources were read and how they were coded.",
       "A report is useful for deciding what to prepare across a whole category. A checklist is better once you know your specific situation, and a letter template is better once you know what you have to explain.",
       "Every report names its limitations in the report itself. Those limits are part of the finding, not a disclaimer bolted onto the end of it."
     ],
@@ -711,16 +714,16 @@ const manualRouteCopy = {
     ],
     "value": [
       "Publishes the method alongside the finding, so a reader can judge how much weight the finding carries.",
-      "Names the public sources each report was built from rather than asserting conclusions without provenance.",
+      "Names what each report was built from: 100 public sources for the catalog, ApprovalPrep's own guides for the two shorter reports.",
       "States the limits of each report openly, including what the sample does not cover.",
-      "Connects each report to the checklists and kits for the same situation without overstating what a report proves."
+      "Connects each report to the kit for the same situation without overstating what a report proves."
     ],
     "whatYouGet": [
       "Three public reports covering application checklists in general, rental applications, and small-business funding.",
-      "The method used to select and code the sources behind each report.",
+      "The method behind each report.",
       "The document-prep areas each report identifies, described in plain language.",
       "An explicit statement of what each report does not claim.",
-      "Links from each report to the checklist, template, or kit built for the same situation."
+      "A link from each report to the kit built for the same situation."
     ],
     "useCases": [
       "You want to know what rental applications commonly ask for before you start viewing places.",
@@ -755,15 +758,15 @@ const manualRouteCopy = {
     ],
     "trustSignals": ["Method published", "Sources named", "Limitations stated", "No approval claims"],
     "faq": [
-      { "question": "Are these reports independent research?", "answer": "They are ApprovalPrep's own reports. Each one publishes the method it used and the public sources it was built from, so a reader can check the basis rather than take the finding on trust." },
+      { "question": "Are these reports independent research?", "answer": "They are ApprovalPrep's own reports. Each one publishes the method it used and what it was built from, so a reader can check the basis rather than take the finding on trust." },
       { "question": "Can a report tell me whether I will be approved?", "answer": "No. The reports describe what applicants are commonly asked to produce. They say nothing about approval odds, and ApprovalPrep does not promise any application outcome." },
       { "question": "Which should I read first, a report or a checklist?", "answer": "Read a report when you want the reasoning across a whole category. Go straight to a checklist when you already know your situation and want the list of what to gather." }
     ]
   },
   "/resources": {
     "heading": "Resources",
-    "lead": "Find ApprovalPrep guides, short answers, the glossary, prices and every policy page in one place.",
-    "shortAnswer": "Everything to read before you write or buy is linked from this page: the free Letter Studio, the short answers, how the kits are made, the glossary, prices, and the privacy and refund policies.",
+    "lead": "Find the main ApprovalPrep guides, the question pages, short answers, the glossary, prices and every policy page in one place.",
+    "shortAnswer": "The main things to read before you write or buy are linked from this page: the free Letter Studio, the question pages, the short answers, how the kits are made, the glossary, prices, and every policy page, refunds and terms included.",
     "primaryCta": "Read the short answers",
     "secondaryCta": "Draft free in the Letter Studio",
     "decisionContext": [
@@ -784,8 +787,8 @@ const manualRouteCopy = {
     ],
     "whatYouGet": [
       "A public resource hub.",
-      "Links to the blog, methodology, glossary, pricing, privacy, and disclaimers.",
-      "A plain explanation of where new content goes.",
+      "Links to the question pages, the blog, methodology, glossary, pricing, and every policy page.",
+      "Where new pages publish: daily question pages at /questions/, short answers on the Blog.",
       "A safe path back to the free Studio or paid kits."
     ],
     "useCases": [
@@ -821,7 +824,7 @@ const manualRouteCopy = {
       "Review the self-service boundary before sending anything."
     ],
     "faq": [
-      {"question":"Where does new content go?","answer":"Daily and cadenced publishing goes to the Blog, while evergreen policies and method pages remain in Resources."},
+      {"question":"Where does new content go?","answer":"New answers publish daily as question pages, listed at /questions/. The Blog holds a few short answers tied to guides and kits, and policies and method pages stay in Resources."},
       {"question":"Is Resources a paid product?","answer":"No. It is a public navigation and education hub."},
       {"question":"Does reading a resource replace professional advice?","answer":"No. ApprovalPrep is self-service only and does not provide legal, financial, lending, or credit repair advice."}
     ],
@@ -835,7 +838,7 @@ const manualRouteCopy = {
     "secondaryCta": "Browse resources",
     "decisionContext": [
       "A content engine without a public publishing surface creates hidden work. The answers may exist in JSON, LLM files, or internal reports, but users cannot browse them and search engines cannot treat them as a coherent editorial body.",
-      "The Blog solves that by giving daily and cadenced publishing a visible index. Each entry should be useful on its own, but it should also route users back to the related product, guide, policy, or free Studio path."
+      "The Blog gives ApprovalPrep's short answers a visible index, and the daily question pages have their own at /questions/. Each entry should be useful on its own, but it should also route users back to the related product, guide, policy, or free Studio path."
     ],
     "whoFor": [
       "Users who want short practical answers before choosing a kit.",
@@ -844,7 +847,7 @@ const manualRouteCopy = {
       "Users who prefer educational content before commercial pages."
     ],
     "value": [
-      "Creates a real home for daily publishing.",
+      "Gives the short answers a public home.",
       "Turns generated answer assets into a navigable public surface.",
       "Keeps regulated answers visibly governed through approval status.",
       "Supports SEO/AEO/GEO without pretending publication is proof of ranking or citations."
@@ -857,7 +860,7 @@ const manualRouteCopy = {
     ],
     "useCases": [
       "You want quick guidance on a document-prep topic.",
-      "You want to see what ApprovalPrep publishes daily.",
+      "You want ApprovalPrep's short answers in one place.",
       "You need to find the related product page after reading an answer.",
       "You want content that stays inside the self-service boundary."
     ],
@@ -888,11 +891,11 @@ const manualRouteCopy = {
       "Route readers to Studio, pricing, product pages, or policies."
     ],
     "faq": [
-      {"question":"Is the Blog where daily content goes?","answer":"Yes. The Blog is the public index for daily and cadenced ApprovalPrep publishing."},
-      {"question":"Do all generated answers publish automatically?","answer":"No. Regulated or approval-required answers must remain governed until reviewed."},
+      {"question":"Is the Blog where daily content goes?","answer":"No. Daily answers publish as question pages, listed at /questions/. The Blog lists a few short answers written for specific guides and kits."},
+      {"question":"Do all generated answers publish automatically?","answer":"Not on the Blog: an answer marked approval-required stays unpublished until it is approved. Question pages are different: they publish after automated checks, and no person reads each one before it goes live. The AI use policy explains the checks."},
       {"question":"Does publishing prove ranking or LLM citation wins?","answer":"No. Publication is a content surface. Ranking, indexing, and LLM surfacing require separate telemetry proof."}
     ],
-    "trustSignals": ["Daily publishing home", "Related-page links", "Approval queue separation", "Self-service only", "No ranking proof claims"]
+    "trustSignals": ["Short answers in one place", "Related-page links", "Approval queue separation", "Self-service only", "No ranking proof claims"]
   },
   "/letter-writing-studio": {
     "heading": "Free Letter Writing Studio",
@@ -911,7 +914,7 @@ const manualRouteCopy = {
     ],
     "value": [
       "Reduces anxiety by turning a messy situation into a structured first-pass letter.",
-      "Recommends the right paid kit only after the user sees the situation more clearly.",
+      "Names the kit that fits the situation you picked, while the free draft never needs it.",
       "Keeps the free tool zero-cost for ApprovalPrep because it uses static templates, not AI or server-side generation."
     ],
     "whatYouGet": [
@@ -962,7 +965,7 @@ const manualRouteCopy = {
   "/pricing": {
     "heading": "Pricing",
     "metaTitle": `ApprovalPrep Pricing: Compare ${kitCountWord} Kits and the Complete Bundle`,
-    "lead": `Compare all ${kitCountWord.toLowerCase()} ApprovalPrep kits and the Complete Bundle side by side: what each one covers, which situations it fits, and when the free Studio or a free checklist is enough.`,
+    "lead": `Compare all ${kitCountWord.toLowerCase()} ApprovalPrep kits and the Complete Bundle side by side: what each one covers and which situations it fits.`,
     "shortAnswer": `${kitCountWord} kits and one bundle, each a one-time purchase with no subscription: pick the one that matches the paperwork in front of you, or the bundle if you are facing several at once. Compare kits by the document you actually have to produce this month, not by item count; every kit downloads as both a PDF guide and an editable DOCX.`,
     "primaryCta": "See the kits and prices",
     "secondaryCta": "Draft free in the Letter Studio",
@@ -978,7 +981,7 @@ const manualRouteCopy = {
       { "question": "Is any kit a subscription?", "answer": "No. Each kit is a one-time payment for a PDF guide and an editable DOCX. Nothing renews, and ApprovalPrep does not charge you again." }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -1004,7 +1007,7 @@ const manualRouteCopy = {
       { "question": "Will a lender accept any letter of explanation I write?", "answer": "No letter guarantees acceptance. The underwriter decides, and ApprovalPrep does not contact your lender. The kit helps you answer the exact item they asked about, with proof attached." }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -1053,7 +1056,7 @@ const manualRouteCopy = {
       }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -1098,7 +1101,7 @@ const manualRouteCopy = {
     "faq": [
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -1143,7 +1146,7 @@ const manualRouteCopy = {
     "faq": [
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -1188,7 +1191,7 @@ const manualRouteCopy = {
     "faq": [
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -1234,7 +1237,7 @@ const manualRouteCopy = {
       { "question": "Can I write my own employment verification letter?", "answer": "No. It has to come from your employer, and verifiers usually call the company to confirm it. ApprovalPrep gives the employer a format; it does not verify employment for anyone." }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -1259,7 +1262,7 @@ const manualRouteCopy = {
       { "question": "Is a proof of income letter enough on its own?", "answer": "Usually not. Most landlords and lenders also want pay stubs, tax returns or bank statements behind it. ApprovalPrep does not create or certify income records." }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -1288,7 +1291,7 @@ const manualRouteCopy = {
       }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -1313,7 +1316,7 @@ const manualRouteCopy = {
       { "question": "Can ApprovalPrep get me approved for an apartment?", "answer": "No. The landlord decides using their own screening criteria. ApprovalPrep helps you send a complete application; it does not contact landlords or screening companies." }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -1359,7 +1362,7 @@ const manualRouteCopy = {
       { "question": "Do I have to bring every item on this checklist?", "answer": "No. Bring what your landlord's application asks for. The checklist covers what is commonly requested so you are not caught short; it does not replace the landlord's own list." }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -1404,7 +1407,7 @@ const manualRouteCopy = {
     "faq": [
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -1450,7 +1453,7 @@ const manualRouteCopy = {
       { "question": "Does ApprovalPrep arrange car financing?", "answer": "No. ApprovalPrep is not a lender or a broker. This page lists the documents lenders commonly ask for so you can apply with your file ready." }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -1496,7 +1499,7 @@ const manualRouteCopy = {
       { "question": "Does checking my credit before applying lower my score?", "answer": "No. Checking your own credit report is a soft inquiry and does not affect your score. A lender's application usually is a hard inquiry." }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -1542,7 +1545,7 @@ const manualRouteCopy = {
       { "question": "Can I send edited or cropped bank statements?", "answer": "No. Lenders treat edited statements as altered documents. Send every page as your bank issued it. ApprovalPrep does not alter or create financial documents." }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -1588,7 +1591,7 @@ const manualRouteCopy = {
       { "question": "Is ApprovalPrep affiliated with the SBA?", "answer": "No. ApprovalPrep is not affiliated with the U.S. Small Business Administration or any lender, and does not submit applications. Current SBA forms are on sba.gov." }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -1634,7 +1637,7 @@ const manualRouteCopy = {
       { "question": "Does ApprovalPrep review my business financials?", "answer": "No. ApprovalPrep does not review, prepare or certify financial statements. Use an accountant for that. This page helps you organise what a lender asks for." }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -1680,7 +1683,7 @@ const manualRouteCopy = {
       { "question": "Can I move money between accounts during the mortgage process?", "answer": "You can, but every transfer needs a paper trail, and the underwriter will ask about it. ApprovalPrep does not give lending advice, so ask your loan officer before large moves." }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -1725,7 +1728,7 @@ const manualRouteCopy = {
     "faq": [
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -1771,7 +1774,7 @@ const manualRouteCopy = {
       { "question": "Should I upload my documents to ApprovalPrep?", "answer": "No. ApprovalPrep does not store or ask for your documents. The checklist helps you organise originals and copies you keep yourself." }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -1817,7 +1820,7 @@ const manualRouteCopy = {
       { "question": "Does ApprovalPrep handle address changes for me?", "answer": "No. You file your USPS forwarding and update your bank, employer and license yourself. The checklist helps you remember each one; ApprovalPrep does not contact anyone for you." }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -1842,7 +1845,7 @@ const manualRouteCopy = {
       { "question": "Are these definitions legal advice?", "answer": "No. They are plain-language definitions of terms used on ApprovalPrep. They do not replace advice from a lawyer, lender or tax professional." }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -1852,7 +1855,7 @@ const manualRouteCopy = {
   "/methodology": {
     "heading": "ApprovalPrep Methodology",
     "lead": "ApprovalPrep Methodology helps you prepare for ApprovalPrep method with truthful details, organized supporting documents, and a clear next step before truthful document preparation becomes urgent.",
-    "shortAnswer": "ApprovalPrep works from one rule: organize true facts and your own documents, and send them yourself. Every kit follows the same order, which is clarify the request, gather proof, draft, check, and keep a copy.",
+    "shortAnswer": "ApprovalPrep works from one rule: organize true facts and your own documents, and send them yourself. Every kit gives each letter the same steps: find the letter for your moment, type your true facts in place of each bracket, print it, read it back and sign it, enclose your proof, mail it yourself, and write it on the log.",
     "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
     "steps": [
@@ -1867,7 +1870,7 @@ const manualRouteCopy = {
       { "question": "Does ApprovalPrep use AI to write my letter?", "answer": "No. The Studio and kits use fixed templates and your own facts. ApprovalPrep does not generate letters with an AI model or store what you type." }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -1891,7 +1894,7 @@ const manualRouteCopy = {
     "faq": [
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -1901,7 +1904,7 @@ const manualRouteCopy = {
   "/download": {
     "heading": "Download",
     "lead": "Your ApprovalPrep download page. Once Stripe confirms your payment, your PDF guide and editable Word file are ready to save from this page.",
-    "shortAnswer": "This is where a verified purchase collects its files. Use the same email address you bought with, and the page will show what your purchase includes.",
+    "shortAnswer": "This is where a verified purchase collects its files. Checkout brings you here with your order in the link; once Stripe confirms payment, the page shows what your purchase includes, and you can email yourself the link.",
     "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
     "steps": [
@@ -1915,7 +1918,7 @@ const manualRouteCopy = {
     "faq": [
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -1940,7 +1943,7 @@ const manualRouteCopy = {
     "faq": [
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -1965,7 +1968,7 @@ const manualRouteCopy = {
     "faq": [
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -1994,7 +1997,7 @@ const manualRouteCopy = {
       }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -2019,7 +2022,7 @@ const manualRouteCopy = {
     "faq": [
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -2044,7 +2047,7 @@ const manualRouteCopy = {
     "faq": [
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -2069,7 +2072,7 @@ const manualRouteCopy = {
     "faq": [
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -2094,7 +2097,7 @@ const manualRouteCopy = {
       { "question": "Can I send you my documents for review?", "answer": "No. ApprovalPrep does not review personal documents or act on your behalf. Write for help with a purchase, a download or a correction to a page." }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -2109,7 +2112,7 @@ const manualRouteCopy = {
     "secondaryCta": "Compare kits",
     "decisionContext": [
       "People reach this page when they are about to trust a site with a paperwork problem that matters: a rental application, a loan file, a credit report error, or an employer request. Before buying anything, it is reasonable to ask who is behind the site and what it will and will not do.",
-      "ApprovalPrep answers that plainly. It is a publication with a named editorial owner, a published method, a contact address that a person reads, and a boundary that does not move: you prepare and send your own documents, and no one here acts for you."
+      "ApprovalPrep answers that plainly. It is a publication with a named editorial owner, a published method, a contact address, and a boundary that does not move: you prepare and send your own documents, and no one here acts for you."
     ],
     "whoFor": [
       "Renters, borrowers, and job applicants deciding whether to use a self-service kit.",
@@ -2118,10 +2121,10 @@ const manualRouteCopy = {
       "Reviewers, journalists, and partners who need a clear statement of what ApprovalPrep is."
     ],
     "value": [
-      "A named publisher, ApprovalPrep Editorial, a subsidiary of Spry Labs, on every guide and in the page data.",
+      "A named publisher, ApprovalPrep Editorial, a subsidiary of Spry Labs, in the footer of every page and as the author in each article's page data.",
       "Kit prices stated up front, paid once, with no subscription.",
       "Free browser-only drafts that save nothing you type.",
-      "Guides checked against the primary sources linked on each page, and corrected when those sources change.",
+      "Where a page states a law, a rule or another company's price, the source is linked beside it.",
       "A boundary stated the same way everywhere: no legal advice, no credit repair, no third-party contact, no fake documents, no approval guarantee."
     ],
     "whatYouGet": [
@@ -2187,7 +2190,7 @@ const manualRouteCopy = {
   },
   "/editorial-policy": {
     "heading": "Editorial Policy",
-    "lead": "How ApprovalPrep writes and reviews its guides: plain and truthful, no overstated outcomes, extra review on credit, legal, and lending topics.",
+    "lead": "How ApprovalPrep writes and checks its pages: plain and truthful, no overstated outcomes, and which pages wait for owner approval before they publish.",
     "shortAnswer": "This page explains the editorial standards boundary in plain English. ApprovalPrep is a self-service document-prep site: it provides templates, checklists, and guidance, but you remain responsible for what you write, review, download, and send.",
     "primaryCta": "See the kits and prices",
     "secondaryCta": "Compare kits",
@@ -2203,7 +2206,7 @@ const manualRouteCopy = {
       { "question": "Do ApprovalPrep guides promise an outcome?", "answer": "No. The editorial rule is that no guide promises an approval, a score change or a deleted record, because ApprovalPrep does not control those decisions." }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -2228,7 +2231,7 @@ const manualRouteCopy = {
     "faq": [
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -2256,7 +2259,7 @@ const manualRouteCopy = {
       }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -2284,7 +2287,7 @@ const manualRouteCopy = {
       }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -2309,7 +2312,7 @@ const manualRouteCopy = {
       { "question": "Does this kit verify my employment?", "answer": "No. It gives you and your employer the letter formats; the employer signs and confirms. ApprovalPrep does not verify or certify employment or income." }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -2337,7 +2340,7 @@ const manualRouteCopy = {
       }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -2362,7 +2365,7 @@ const manualRouteCopy = {
       { "question": "Does this kit include a background or credit check?", "answer": "No. ApprovalPrep does not run screening. Landlords order their own reports. The kit helps you prepare the documents and explanation letters that go with your application." }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -2387,7 +2390,7 @@ const manualRouteCopy = {
       { "question": "Will this kit get my loan approved?", "answer": "No. The lender decides. The kit helps you answer underwriting requests with clear letters and the right proof; ApprovalPrep does not contact lenders." }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -2412,7 +2415,7 @@ const manualRouteCopy = {
       { "question": "Does this kit apply for funding for me?", "answer": "No. ApprovalPrep does not submit applications or contact lenders. The kit helps you assemble your formation documents, financials and use-of-funds summary before you apply." }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -2434,10 +2437,10 @@ const manualRouteCopy = {
       "Send the materials yourself and keep copies."
     ],
     "faq": [
-      { "question": "Does ApprovalPrep send these letters for me?", "answer": "No. You review, sign and send every letter yourself. ApprovalPrep does not contact anyone on your behalf." }
+      { "question": "Does ApprovalPrep send these letters for me?", "answer": "No. You review and send every letter yourself, and you sign every letter that is yours to sign; a few, such as a proof of residency letter, are signed by someone else. ApprovalPrep does not contact anyone on your behalf." }
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"
@@ -2461,7 +2464,7 @@ const manualRouteCopy = {
     "faq": [
     ],
     "trustSignals": [
-      "Instant verified download when a kit is purchased",
+      "Download opens as soon as Stripe confirms payment",
       "No account required",
       "PDF + editable DOCX for paid kits",
       "Self-service only"

@@ -6,16 +6,20 @@ import { routeCopy } from "../../data/content";
 // The `public_reports` route family from data/routes/route_manifest.json. Entries
 // are the published reports from the registry that governs the family, each named
 // by its own registered title and described by its own registered summary.
+// A report folded into a guide hub (consolidated_into_hub) still renders there, inside an element
+// whose id is the report id (src/components/FoldedPages.astro), so it is listed with a link to that spot.
 const entries = registry.reports
-  .filter((report) => report.status === "published_by_contract")
-  .map((report) => ({ path: report.path, title: report.title, summary: report.summary, label: "Public report" }));
+  .filter((report) => report.status === "published_by_contract" || (report.status === "consolidated_into_hub" && report.consolidatedInto))
+  .map((report) => report.status === "consolidated_into_hub"
+    ? { path: `${report.consolidatedInto}#${report.id}`, title: report.title, summary: report.summary, label: "Short report, inside its guide" }
+    : { path: report.path, title: report.title, summary: report.summary, label: "Full public report" });
 ---
 <LibraryIndexPage
   path="/reports"
   eyebrow="Public reports"
   entryEyebrow="Every published report"
   entriesHeading={`All ${entries.length} ApprovalPrep public reports`}
-  entriesLead="Each report states its own method, its sources, and what it does not claim. Read the method before you rely on a finding."
+  entriesLead="Each report states its method and what it does not claim. Read the method before you rely on a finding."
   entries={entries}
   copy={routeCopy["/reports"]}
 />

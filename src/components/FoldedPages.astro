@@ -10,31 +10,40 @@
 import reportRegistry from "../../data/reports/public_report_registry.json";
 import templateRegistry from "../../data/templates/template_registry.json";
 import { internalHref } from "../lib/schema";
+import { productForSku } from "../data/content";
 const { path } = Astro.props;
 const folded = (item) => item.status === "consolidated_into_hub" && item.consolidatedInto === path;
 const reports = reportRegistry.reports.filter(folded);
 const templates = templateRegistry.templates.filter(folded);
+// Each folded item names the kit that holds its editable file, with the price (the /templates and
+// /reports copy promise both). An unknown kit fails the build instead of rendering an unnamed button.
+const kitLink = (sku) => {
+  const kit = productForSku(sku);
+  if (!kit?.name || !kit?.priceLabel) throw new Error(`FoldedPages: ${path} names no live kit (${sku})`);
+  return { href: internalHref(`/pricing#${sku}`), label: `View the ${kit.name} — ${kit.priceLabel}` };
+};
 ---
 {(reports.length > 0 || templates.length > 0) && (
   <section class="band" data-content-block="folded-pages">
     <div class="shell">
       {reports.map((report) => (
-        <article class="copy-stack" data-folded-from={report.id}>
+        <article class="copy-stack" id={report.id} data-folded-from={report.id}>
           <p class="eyebrow">Prep report</p>
           <h2>{report.title}</h2>
           <p>{report.summary}</p>
           {(report.sections || []).map((section) => (<><h3>{section.heading}</h3><p>{section.body}</p></>))}
           {report.methodology && <p><em>{report.methodology}</em></p>}
+          {report.targetProductSku && <a class="button secondary-button" href={kitLink(report.targetProductSku).href}>{kitLink(report.targetProductSku).label}</a>}
         </article>
       ))}
       {templates.map((template) => (
-        <article class="copy-stack" data-folded-from={template.id}>
+        <article class="copy-stack" id={template.id} data-folded-from={template.id}>
           <p class="eyebrow">Template guidance</p>
           <h2>{template.title}</h2>
           <p>{template.summary}</p>
           <ol>{(template.safePreview || []).map((step) => <li>{step}</li>)}</ol>
           <p>{template.paidBoundary}</p>
-          {template.targetProductSku && <a class="button secondary-button" href={internalHref(`/pricing#${template.targetProductSku}`)}>Get the editable kit</a>}
+          {template.targetProductSku && <a class="button secondary-button" href={kitLink(template.targetProductSku).href}>{kitLink(template.targetProductSku).label}</a>}
         </article>
       ))}
     </div>

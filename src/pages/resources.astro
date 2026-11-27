@@ -5,13 +5,19 @@ import RecommendationSummary from "../components/RecommendationSummary.astro";
 import RouteFaq from "../components/RouteFaq.astro";
 import { faqSchema } from "../lib/schema";
 import { routeAnswers } from "../lib/routeAnswers";
+import manifest from "../../data/routes/route_manifest.json";
 import { routeCopy, kitCount } from "../data/content";
 const copy = routeCopy["/resources"];
+// Every policy page, read from the route manifest (type "legal"), so the "every policy page" in this
+// page's lead stays true when one is added. Each is named by its own registered heading.
+const policies = manifest.routes
+  .filter((route) => route.type === "legal")
+  .map((route) => ({ path: route.path, heading: routeCopy[route.path]?.heading || route.title }));
 // Published answers written about /resources, previously reachable only on
 // their own /blog/ pages. One list feeds both the block and the schema.
 const faq = routeAnswers("/resources");
 ---
-<BaseLayout title="ApprovalPrep Resources: Guides, Policies, and Glossary" description="Find ApprovalPrep guides, short answers, how the kits are made, the glossary, prices and every policy page, organized by the question you are trying to answer." canonical="https://approvalprep.com/resources" schema={faq.length ? [faqSchema(faq.map((i) => ({ question: i.question, answer: i.answer })))] : []}>
+<BaseLayout title="ApprovalPrep Resources: Guides, Policies, and Glossary" description="Find the main ApprovalPrep guides, question pages, short answers, how the kits are made, the glossary, prices and every policy page, organized by the question you are trying to answer." canonical="https://approvalprep.com/resources" schema={faq.length ? [faqSchema(faq.map((i) => ({ question: i.question, answer: i.answer })))] : []}>
   <section class="hero shell">
     <p class="eyebrow">Resources</p>
     <h1>Find the guide, answer or policy that matches your question.</h1>
@@ -30,6 +36,7 @@ const faq = routeAnswers("/resources");
     <p class="eyebrow">Resource paths</p>
     <h2>Choose the kind of help you need.</h2>
     <div class="resource-grid">
+      <a class="card resource-card" href="/questions/"><span>Questions</span><h3>Paperwork questions, answered</h3><p>New answers publish here daily, each with its short answer first and its sources.</p></a>
       <a class="card resource-card" href="/blog/"><span>Short answers</span><h3>ApprovalPrep answers</h3><p>Plain answers to common paperwork questions, each with the guide or kit that goes with it.</p></a>
       <a class="card resource-card" href="/methodology/"><span>How it works</span><h3>Methodology</h3><p>How the kits are made: true facts, supporting documents, a review step, and what ApprovalPrep does not do.</p></a>
       <a class="card resource-card" href="/glossary/"><span>Definitions</span><h3>Glossary</h3><p>Plain-language definitions for document prep, explanation letters, packets, and self-service boundaries.</p></a>
@@ -44,7 +51,7 @@ const faq = routeAnswers("/resources");
     <div class="resource-grid">
       <a class="card resource-card" href="/tools/"><span>Section index</span><h3>Free ApprovalPrep Document Checklists</h3><p>All six free checklists, one for each application situation, with the matching kit named on each.</p></a>
       <a class="card resource-card" href="/templates/"><span>Section index</span><h3>ApprovalPrep Letter Template Previews</h3><p>All five public previews showing how each ApprovalPrep letter is structured before you buy the editable file.</p></a>
-      <a class="card resource-card" href="/reports/"><span>Section index</span><h3>ApprovalPrep Public Reports</h3><p>All three public reports, each with its own method, its sources, and what it does not claim.</p></a>
+      <a class="card resource-card" href="/reports/"><span>Section index</span><h3>ApprovalPrep Public Reports</h3><p>The full 100-source report and two shorter prep reports, each with its method and what it does not claim.</p></a>
     </div>
   </div></section>
 
@@ -67,6 +74,11 @@ const faq = routeAnswers("/resources");
       <a class="card resource-card" href="/how-to-get-approved-for-an-apartment/"><span>Report</span><h3>Apartment application prep report</h3><p>Review the rental packet readiness areas before applying.</p></a>
       <a class="card resource-card" href="/business-loan-documents/"><span>Report</span><h3>Business funding document prep report</h3><p>Organize business funding documents before you apply. This is not lending advice.</p></a>
     </div>
+  </div></section>
+  <section class="band" data-content-block="policy-pages"><div class="shell">
+    <p class="eyebrow">Policies</p>
+    <h2>Every policy page.</h2>
+    <ul class="link-list">{policies.map((policy) => <li><a href={`${policy.path}/`}>{policy.heading}</a></li>)}</ul>
   </div></section>
   <RouteFaq items={faq} heading="Questions people ask about ApprovalPrep resources" />
   <TrustAndBoundaryBand />

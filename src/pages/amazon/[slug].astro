@@ -73,7 +73,7 @@ if (!product) throw new Error(`amazon book page ${page.path} has no product for 
 const kitAddsIntro = page.kitAddsIntro || "The kit is a time-saver, not a missing chapter. It is the same material as files you fill in instead of retype.";
 const finalCta = page.finalCta || {
   heading: `Keep the editable version: ${product.name}.`,
-  body: `Everything the book taught is yours already. The kit is ${product.priceLabel} paid once: a PDF guide plus editable DOCX files covering ${product.included_offerings.length} named documents, so you fill in blanks instead of retyping.`
+  body: `Everything the book taught is yours already. The kit is ${product.priceLabel} paid once: a PDF guide plus one editable Word file covering ${product.included_offerings.length} named documents, so you fill in blanks instead of retyping.`
 };
 const schema = [
   articleSchema({ title: page.title, description: page.description, url: canonical, datePublished: rawRegistry.generatedAt }),
