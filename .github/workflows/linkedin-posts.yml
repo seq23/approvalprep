@@ -3,7 +3,7 @@ name: LinkedIn Posts
 # through LinkedIn's own Posts API. Her words 24 Nov 2026: "make sure noelle is in charge of linkedin also
 # for the apps that have a linkedin page". Noelle (Boss OS) banks the posts in data/linkedin/posts.json.
 # Dormant until data/linkedin/posted.json says "access": "granted" (LinkedIn's Community Management API):
-# until then every run prints NAMED STOP [LINKEDIN_NO_ACCESS] and posts nothing, and exits 0.
+# until then every run prints NAMED STOP [LINKEDIN_NO_ACCESS], posts nothing, skips the growth-ledger step and exits 0.
 # Named stops (red): SECRET_MISSING_LINKEDIN_APPROVALPREP_ACCESS_TOKEN, LINKEDIN_TOKEN_REFUSED,
 # LINKEDIN_POST_REFUSED, LINKEDIN_PHRASE_BLOCKED (R-ADV-13), LINKEDIN_BANK_EMPTY.
 # Every run prints `OUTPUT: posted N, waiting M`. Logic and proof: scripts/linkedin/linkedin_poster.mjs,
@@ -41,6 +41,9 @@ jobs:
           cache: npm
       - name: Install locked dependencies
         run: npm ci --no-audit --no-fund
+      - name: Read whether LinkedIn has granted page access
+        id: access
+        run: echo "granted=$(node -e "process.stdout.write(String(JSON.parse(require('fs').readFileSync('data/linkedin/posted.json','utf8')).access === 'granted'))")" >> "$GITHUB_OUTPUT"
       - name: Run fixture workflow trace
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fixture_trace == 'true' }}
         run: npm run workflows:trace -- --workflow linkedin-posts.yml
@@ -60,7 +63,10 @@ jobs:
           git commit -m "chore(linkedin): posted ledger"
           bash scripts/workflows/safe-push-main.sh
       - name: Send confirmed receipts to the growth ledger
-        if: ${{ always() && !cancelled() && github.event.inputs.fixture_trace != 'true' }}
+        # Dormant (access none): nothing can have posted, so there is no receipt to send and the
+        # ledger's NO_POSTS_TO_LEDGER would turn main red every weekday. Once access is granted, a
+        # week with no posted receipt is red again, as it should be.
+        if: ${{ always() && !cancelled() && github.event.inputs.fixture_trace != 'true' && steps.access.outputs.granted == 'true' }}
         uses: seq23/boss-os/.github/actions/ledger-rows@ef7270e2e758acb8dd166db4143e93c3563e228a
         with:
           business: approvalprep
