@@ -21,6 +21,9 @@ test('keywords: commas only, no repeats, nothing already in the name or subtitle
   const shown = new Set(`${listing.name} ${listing.subtitle}`.toLowerCase().match(/[a-z0-9]+/g));
   for (const w of words) assert.ok(!shown.has(w), `${w} is already indexed from the name or subtitle`);
   assert.doesNotMatch(listing.keywords, /lexington|saint|versio|dovly|kikoff|credit ?karma|experian|equifax|transunion|dispute ?beast/i);
+  // R-ADV-13 and Apple 2.3.7 (store review 27 Nov 2026): no removal promise and nothing the app does not have
+  // (there is no "609 letter"; ApprovalPrep has no collections tool).
+  for (const w of words) assert.doesNotMatch(w, /^(delete|deletion|remove|removal|erase|609|collections|fix|repair)$/i, `${w} promises a result or names something the app lacks`);
 });
 
 test('the Play listing fits Google limits and carries no hashtags', () => {
