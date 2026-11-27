@@ -7,9 +7,18 @@ import { routeCopy } from "../../data/content";
 // the published template guidance pages from the registry that governs the family.
 // The URL segment between /templates and each page (letters, rental, income) has
 // no page of its own, so it is not linked here or in the breadcrumb trail.
+// A preview folded into a guide hub (status consolidated_into_hub) is still published: it renders
+// on that hub inside an element whose id is the template id (src/components/FoldedPages.astro), so
+// it is listed here with a link to that spot. Before 27 Nov 2026 only "published_by_contract" was
+// listed, and all five had been folded, so the page read "All 0 ... previews".
 const entries = registry.templates
-  .filter((template) => template.status === "published_by_contract")
-  .map((template) => ({ path: template.path, title: template.title, summary: template.summary, label: "Template guidance" }));
+  .filter((template) => template.status === "published_by_contract" || (template.status === "consolidated_into_hub" && template.consolidatedInto))
+  .map((template) => ({
+    path: template.status === "consolidated_into_hub" ? `${template.consolidatedInto}#${template.id}` : template.path,
+    title: template.title,
+    summary: template.summary,
+    label: "Template guidance"
+  }));
 ---
 <LibraryIndexPage
   path="/templates"

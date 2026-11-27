@@ -19,17 +19,18 @@ const pages = (book.pages || [])
   })
   .sort((a, b) => (a.published < b.published ? 1 : a.published > b.published ? -1 : a.h1.localeCompare(b.h1)));
 ---
-<BaseLayout title="Paperwork Questions, Answered Plainly | ApprovalPrep" description="Short, sourced answers to the paperwork questions people ask before a mortgage, rental, loan, job or credit application, each with what to prepare next." canonical="https://approvalprep.com/questions/" noindex={pages.length === 0}>
+<BaseLayout title="Paperwork Questions, Answered Plainly | ApprovalPrep" description="Short, sourced answers to the paperwork questions people ask before a mortgage, rental, loan, job or credit application, with the short answer first." canonical="https://approvalprep.com/questions/" noindex={pages.length === 0}>
   <section class="hero shell">
     <p class="eyebrow">Questions</p>
     <h1>Paperwork questions, answered plainly.</h1>
-    <p class="lead">Each answer starts with the short version, shows its sources, and ends with what to prepare next.</p>
+    <p class="lead">Each answer starts with the short version and shows its sources.</p>
+    <p class="fine" data-question-review-note>These pages are drafted with free AI models and publish after automated checks: the facts must rest on at least two sources whose links work, a price or statistic must match one of those sourced facts, and an invented review, credential or quote stops the page. No person reads each page before it goes live. <a href="/ai-use-policy/">How the checks work</a>.</p>
   </section>
   <section class="band"><div class="shell">
     {pages.length ? (
       <ul class="link-list">{pages.map((p) => <li><a href={p.route}>{p.h1}</a></li>)}</ul>
     ) : (
-      <p>The first answers publish here soon. Until then, the <a href="/resources/">resource hub</a> lists every guide.</p>
+      <p>The first answers publish here soon. Until then, the <a href="/resources/">resource hub</a> links the main guides.</p>
     )}
     <p><a class="button primary-button" href="/pricing/">Choose your kit</a></p>
   </div></section>

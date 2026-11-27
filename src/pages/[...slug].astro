@@ -36,6 +36,7 @@ import { routeAnswers } from "../lib/routeAnswers";
 import RecommendationSummary from "../components/RecommendationSummary.astro";
 import manifest from "../../data/routes/route_manifest.json";
 import demandCoverage from "../../data/content/demand_coverage_pages.json";
+import glossary from "../../data/content/glossary.json";
 import { routeCopy, boundary, kitCount, kitPriceOf, productCards, productComparison, routeFamilyCopy, offeringCategories, offeringsForSku, productForSku } from "../data/content";
 
 export function getStaticPaths() {
@@ -189,7 +190,7 @@ const childRoutes = manifest.routes
     <section class="band"><div class="shell">
       <p class="eyebrow">Pick your situation</p>
       <h2>{`All ${childRoutes.length} situations covered under ${route.title}`}</h2>
-      <p class="lead">Each page below covers one situation end to end. Open the one that matches what you have been asked to explain.</p>
+      <p class="lead">Each page below covers one situation. Open the one that matches what you have been asked to explain.</p>
       <div class="resource-grid">
         {childRoutes.map((child) => (
           <a class="card resource-card" href={internalHref(child.path)}>
@@ -254,10 +255,10 @@ const childRoutes = manifest.routes
       {pageFaq.length > 0 && <section class="band"><div class="shell"><FAQBlock faq={pageFaq} /></div></section>}
     </>
   ) : isGlossary ? (
-    <section class="band"><div class="shell grid">
-      <article class="card"><h2>Letter of explanation</h2><p>A short note that explains a gap, issue, or context in plain words.</p></article>
-      <article class="card"><h2>Self-service credit tools</h2><p>Tools that help you prepare your own paperwork. They do not fix credit for you.</p></article>
-      <article class="card"><h2>Kit</h2><p>A one-time download for one situation: a PDF guide plus editable letters and checklists you fill in and send yourself.</p></article>
+    <section class="band" data-content-block="glossary-terms"><div class="shell">
+      <div class="grid">{glossary.terms.map((item) => (
+        <article class="card" data-glossary-term><h2>{item.term}</h2><p>{item.definition}</p></article>
+      ))}</div>
     </div></section>
   ) : isLegal ? (
     <LegalPolicyPage route={route} copy={copy} />

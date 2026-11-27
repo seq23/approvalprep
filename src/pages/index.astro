@@ -29,7 +29,7 @@ const pageDescription = "Write and send your own credit dispute letters instead 
 // the homepage had no FAQ. Every answer keeps to risk R-ADV-13: self-help only, no
 // promise to remove items or change a score, accurate information stays. The one
 // competitor price carries its source and the date it was read.
-const CREDIT_SAINT_READ = "6 November 2026";
+const CREDIT_SAINT_READ = "27 November 2026";
 const homeFaq = [
   { question: "Can I do credit repair myself?", answer: "Yes. You can dispute errors on your credit report yourself, for free, directly with the credit bureaus and the business that reported them. Our letters are the do-it-yourself version of what a credit repair company charges for: you fill in your true facts and send them yourself. Accurate information usually stays on your report." },
   { question: "Is ApprovalPrep a credit repair company?", answer: "No. ApprovalPrep sells self-help letter templates. You write, review and send every letter yourself. We do not contact credit bureaus or creditors for you, and we do not act on your behalf." },
@@ -103,7 +103,7 @@ const homeSchema = [
       <tr><th scope="row">Who sends the letters</th><td data-label="Credit repair company">The company, on your behalf.</td><td data-label="Do it yourself">You do. We never contact bureaus or creditors for you.</td></tr>
       <tr><th scope="row">What the law says</th><td data-label="Credit repair company">The Credit Repair Organizations Act bars a credit repair company from charging you before the promised work is done (<a href="https://www.law.cornell.edu/uscode/text/15/1679b" rel="noopener" target="_blank">15 U.S.C. 1679b</a>).</td><td data-label="Do it yourself">Disputing an error is free: the credit bureau must investigate it free of charge (<a href="https://www.law.cornell.edu/uscode/text/15/1681i" rel="noopener" target="_blank">15 U.S.C. 1681i</a>).</td></tr>
     </tbody></table></div>
-    <p class="fine">Read more: <a href={internalHref("/not-a-credit-repair-company")}>why ApprovalPrep is not a credit repair company</a>. The full cost comparison page is <span class="ap-tag">planned</span>.</p>
+    <p class="fine">Read more: <a href={internalHref("/not-a-credit-repair-company")}>why ApprovalPrep is not a credit repair company</a>. The fuller cost breakdown: <a href={internalHref("/questions/how-much-does-credit-repair-cost/")}>what credit repair costs</a>.</p>
   </div></section>
 
   <section class="band"><div class="shell"><p class="eyebrow">Products</p><h2>Choose the kit that matches the application pressure.</h2><ProductGrid /></div></section>
@@ -175,7 +175,7 @@ const homeSchema = [
   <section class="band"><div class="shell">
     <p class="eyebrow">{`30+ self-service documents. ${kitCount} kits and one bundle.`}</p>
     <h2>Buy one kit, get the related letters and checklists together.</h2>
-    <p class="lead">The offer is intentionally simple: you do not buy every letter one by one. Each paid kit bundles the letters, checklists, examples, and next steps for that paperwork lane, then unlocks as PDF + editable DOCX after checkout.</p>
+    <p class="lead">The offer is intentionally simple: you do not buy every letter one by one. Each paid kit holds the letters for that paperwork lane, a filled example under each, a sent and received log, and checklists where the lane needs them, then unlocks as a PDF guide and an editable DOCX after checkout.</p>
     <OfferingUniverse categories={offeringCategories} variant="summary" />
   </div></section>
   <section class="band"><div class="shell"><HowItWorks steps={howItWorks} /></div></section>

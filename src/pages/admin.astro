@@ -60,7 +60,7 @@ const cockpitStats = [
   <section class="hero shell admin-hero">
     <p class="eyebrow">Runtime Product Admin</p>
     <h1>ApprovalPrep product dashboard</h1>
-    <p class="lead">Manage live, hidden, revoked, draft, and archived products. Upload images and paid downloads. Create Stripe products/prices from backend functions only.</p>
+    <p class="lead">Manage live, hidden, revoked, draft, and archived products. Upload images and paid downloads. Stripe products and prices are created by the backend functions (/api/admin/stripe-create-product and /api/admin/stripe-create-price); this page has no button for them.</p>
   </section>
 
   <section class="band"><div class="shell">
@@ -139,7 +139,7 @@ const cockpitStats = [
       <div id="productTable" class="admin-table"></div>
 
       <h2>Upload asset</h2>
-      <p class="fine">Images are checked for supported type and product fit, not an arbitrary 2MB ApprovalPrep cap. PDF and DOCX uploads still use the configured document safety limit.</p>
+      <p class="fine">Images must be PNG, JPEG or WebP (the type the browser declares) for a product that exists, with no size cap. PDF and DOCX uploads are limited to 15 MB.</p>
       <form id="uploadAsset" class="admin-form">
         <input name="productId" placeholder="Product slug or ID" required />
         <select name="assetType"><option value="image">Image</option><option value="pdf">PDF</option><option value="docx">DOCX</option></select>

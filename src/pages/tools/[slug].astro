@@ -8,6 +8,7 @@ import FoldedPages from "../../components/FoldedPages.astro";
 import { webPageSchema, breadcrumbSchema, itemListSchema, faqSchema, canonicalUrl, internalHref } from "../../lib/schema";
 import { routeAnswers } from "../../lib/routeAnswers";
 import registry from "../../../data/tools/tool_registry.json";
+import { productForSku } from "../../data/content";
 
 export function getStaticPaths() {
   return registry.tools
@@ -15,6 +16,11 @@ export function getStaticPaths() {
     .map((tool) => ({ params: { slug: tool.path.split("/").pop() }, props: { tool } }));
 }
 const { tool } = Astro.props;
+// The checklist names its kit and price (the /tools copy promises both). A tool pointing at a kit
+// with no live product card fails the build rather than showing an unnamed button.
+const kit = productForSku(tool.targetProductSku);
+if (!kit?.name || !kit?.priceLabel) throw new Error(`tools: ${tool.path} names no live kit (${tool.targetProductSku})`);
+const kitLabel = `View the ${kit.name} — ${kit.priceLabel}`;
 const canonical = canonicalUrl(tool.path);
 // The site already holds published answers written about this exact tool, in
 // data/content/generated_answers.json. They were rendered only on their own
@@ -36,7 +42,7 @@ const schema = [
       <p class="lead">{tool.summary}</p>
       <div class="hero-actions">
         <a class="button primary-button" href="/letter-writing-studio/">Draft free in the Letter Studio</a>
-        <a class="button secondary-button" href={internalHref(`/pricing#${tool.targetProductSku}`)}>Compare the matching kit</a>
+        <a class="button secondary-button" href={internalHref(`/pricing#${tool.targetProductSku}`)}>{kitLabel}</a>
       </div>
     </div>
     <aside class="hero-panel">
@@ -59,7 +65,7 @@ const schema = [
       headline={`What belongs on your ${tool.primaryQuery}?`}
       points={tool.checklist}
       ordered={true}
-      ctaLabel="Compare the matching kit"
+      ctaLabel={kitLabel}
       ctaHref={`/pricing#${tool.targetProductSku}`}
     />
   </div></section>
