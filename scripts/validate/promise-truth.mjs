@@ -30,7 +30,8 @@ const page = (route) => {
   return fs.existsSync(file) ? fs.readFileSync(file, "utf8") : null;
 };
 const check = (ok, message) => { checks += 1; if (!ok) fail.push(message); };
-const text = (html) => html.replace(/<[^>]+>/g, " ").replace(/&amp;/g, "&").replace(/&#39;/g, "'").replace(/&mdash;|&#8212;/g, "—").replace(/\s+/g, " ");
+// &amp; is decoded last, so "&amp;#39;" stays the literal text "&#39;" (no double unescape).
+const text = (html) => html.replace(/<[^>]+>/g, " ").replace(/&#39;/g, "'").replace(/&mdash;|&#8212;/g, "—").replace(/&amp;/g, "&").replace(/\s+/g, " ");
 
 if (!fs.existsSync(path.join(dist, "index.html"))) {
   console.error("[promise-truth] FAIL no dist/index.html: run the build first (nothing was checked)");
