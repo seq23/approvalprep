@@ -1476,7 +1476,17 @@
         "https://en.wikipedia.org/wiki/Credit_score_in_the_United_States"
       ],
       "linked_from": [],
-      "checks": {},
+      "checks": {
+        "w2": {
+          "at": "2026-11-27",
+          "source": "not read",
+          "note": "GSC_SERVICE_ACCOUNT_JSON is not set",
+          "ai_visits_today": "not read: CLOUDFLARE_API_TOKEN is not set",
+          "indexed": null,
+          "checkpoint": "w2",
+          "lane": "striking"
+        }
+      },
       "gate_notes": [
         "b5 FAQ answer is 32 words (aim 40-60): \"Can I call instead of writing a letter?\"",
         "b5 FAQ answer is 30 words (aim 40-60): \"Will a goodwill adjustment raise my score?\"",
