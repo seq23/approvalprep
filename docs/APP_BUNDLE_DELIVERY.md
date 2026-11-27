@@ -117,8 +117,8 @@ Google Play's reviewer cannot buy, and the app has no accounts, so every paid ki
   `REVIEW_UNTIL` (ISO date) are vars in `wrangler.toml` (production only). Missing, past or more than 30 days ahead
   = every review route 404, no RevenueCat call, and sandbox purchases refused. Preview deployments have no
   `REVIEW_CODE_SECRET`, so they stay closed.
-- **Window** (23 Nov 2026): `REVIEW_UNTIL = 2026-12-14` covers the Play production review sent 22 Nov and the
-  App Store 1.0 review (send day + 21 days). It is ONE review's window, never a standing date: the code caps it at
+- **Window** (27 Nov 2026): `REVIEW_UNTIL = 2026-12-18` covers the App Store 1.0 and Play resubmission of 27 Nov
+  (send day + 21 days; it replaced 2026-12-14, set 23 Nov for the 22 Nov sends). It is ONE review's window, never a standing date: the code caps it at
   30 days (`LIMITS.maxWindowDays`), so the guessing budget is at most 100,000 x 30 = 3,000,000 tries per window against
   10^10 codes (3 in 10,000), and only if someone fills the backstop every day of the window. For every later Play or App Store submission (an update re-review too), set
   `REVIEW_UNTIL` in both `wrangler.toml` blocks to send day + 21 days in the same PR that ships the build, and land

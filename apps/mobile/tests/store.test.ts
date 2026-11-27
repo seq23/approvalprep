@@ -34,3 +34,14 @@ test('Android build blocks permissions the app never uses (Play declarations sta
   for (const p of ['SYSTEM_ALERT_WINDOW', 'READ_EXTERNAL_STORAGE', 'WRITE_EXTERNAL_STORAGE', 'RECORD_AUDIO', 'CAMERA', 'ACCESS_FINE_LOCATION', 'READ_CONTACTS'])
     assert.ok(blocked.includes(`android.permission.${p}`), `${p} must be blocked`);
 });
+
+test('App Store screenshots are 6.9-inch PNGs (1320 x 2868), at least three', () => {
+  const dir = path.join(__dirname, '../store/app-store');
+  const shots = fs.readdirSync(dir).filter((f) => f.endsWith('.png'));
+  assert.ok(shots.length >= 3, `only ${shots.length} App Store screenshots`);
+  for (const f of shots) {
+    const png = fs.readFileSync(path.join(dir, f));
+    assert.equal(png.subarray(1, 4).toString('latin1'), 'PNG', `${f} is not a PNG`);
+    assert.deepEqual([png.readUInt32BE(16), png.readUInt32BE(20)], [1320, 2868], `${f} size`);
+  }
+});
