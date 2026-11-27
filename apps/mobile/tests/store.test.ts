@@ -21,6 +21,9 @@ test('keywords: commas only, no repeats, nothing already in the name or subtitle
   const shown = new Set(`${listing.name} ${listing.subtitle}`.toLowerCase().match(/[a-z0-9]+/g));
   for (const w of words) assert.ok(!shown.has(w), `${w} is already indexed from the name or subtitle`);
   assert.doesNotMatch(listing.keywords, /lexington|saint|versio|dovly|kikoff|credit ?karma|experian|equifax|transunion|dispute ?beast/i);
+  // R-ADV-13 and Apple 2.3.7 (store review 27 Nov 2026): no removal promise and nothing the app does not have
+  // (there is no "609 letter"; ApprovalPrep has no collections tool).
+  for (const w of words) assert.doesNotMatch(w, /^(delete|deletion|remove|removal|erase|609|collections|fix|repair)$/i, `${w} promises a result or names something the app lacks`);
 });
 
 test('the Play listing fits Google limits and carries no hashtags', () => {
@@ -33,4 +36,15 @@ test('Android build blocks permissions the app never uses (Play declarations sta
   const blocked = config.android?.blockedPermissions ?? [];
   for (const p of ['SYSTEM_ALERT_WINDOW', 'READ_EXTERNAL_STORAGE', 'WRITE_EXTERNAL_STORAGE', 'RECORD_AUDIO', 'CAMERA', 'ACCESS_FINE_LOCATION', 'READ_CONTACTS'])
     assert.ok(blocked.includes(`android.permission.${p}`), `${p} must be blocked`);
+});
+
+test('App Store screenshots are 6.9-inch PNGs (1320 x 2868), at least three', () => {
+  const dir = path.join(__dirname, '../store/app-store');
+  const shots = fs.readdirSync(dir).filter((f) => f.endsWith('.png'));
+  assert.ok(shots.length >= 3, `only ${shots.length} App Store screenshots`);
+  for (const f of shots) {
+    const png = fs.readFileSync(path.join(dir, f));
+    assert.equal(png.subarray(1, 4).toString('latin1'), 'PNG', `${f} is not a PNG`);
+    assert.deepEqual([png.readUInt32BE(16), png.readUInt32BE(20)], [1320, 2868], `${f} size`);
+  }
 });

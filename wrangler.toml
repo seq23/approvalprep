@@ -11,14 +11,14 @@ PUBLIC_ADMIN_GATE_ENABLED = "true"
 # of ONE store review (UTC midnight; send day + 21 days), never a standing date: more than 30 days ahead closes the
 # code AND sandbox purchases. Reopen it for each new Play or App Store submission, both blocks the same.
 REVIEW_CODE_VERSION = "v1"
-REVIEW_UNTIL = "2026-12-14"
+REVIEW_UNTIL = "2026-12-18"
 
 [env.production.vars]
 PUBLIC_SITE_URL = "https://approvalprep.com"
 PUBLIC_BRAND_NAME = "ApprovalPrep"
 PUBLIC_ADMIN_GATE_ENABLED = "true"
 REVIEW_CODE_VERSION = "v1"
-REVIEW_UNTIL = "2026-12-14"
+REVIEW_UNTIL = "2026-12-18"
 
 [env.preview.vars]
 PUBLIC_SITE_URL = "https://preview.approvalprep.com"

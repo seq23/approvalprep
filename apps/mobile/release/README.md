@@ -44,3 +44,10 @@ Google Play: the `internal` build profile (extends `production`, same full gate,
 `eas submit --profile internal` to the internal testing track as a **draft**, then `scripts/play-internal-check.mjs`
 fails the run unless Play shows that versionCode as a draft on internal and on no other track. `play-sa.json` is written
 from the `GOOGLE_PLAY_UPLOAD_SA_JSON` secret and deleted in an `always()` step. Production on Play is a later, separate step.
+
+App Store files (27 Nov 2026): `store/app-review-notes.txt` is the App Review Information > Notes text
+(`tests/appReviewNotes.test.ts`: at most 4,000 characters, every quoted label is on a screen). `store/app-store/` holds the
+three 6.9-inch screenshots (1320 x 2868), remade from the live app preview with
+`node scripts/app-store-shots-capture.mjs https://approvalprep-app-preview.pages.dev <dir>` then
+`node scripts/app-store-shots-compose.mjs <dir> store/app-store` (needs playwright and Chrome). Remake them whenever a
+pictured screen changes; `tests/store.test.ts` checks their size.

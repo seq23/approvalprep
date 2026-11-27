@@ -133,8 +133,8 @@ code (the Boss OS vault `AP_PLAY_REVIEW_CODE`, copied with
 `cd ~/GitHub/boss-os && npm run -s vault:run -- sh -c 'printf %s "$AP_PLAY_REVIEW_CODE" | pbcopy'`; never typed here
 or in the app); tick full access including paid content; paste the note below as "Any other instructions"
 (tests/reviewUnlock.test.ts holds it to 500 characters and to the screen's own labels). The code works only while the
-review window on the Pages project is open (`REVIEW_UNTIL`, kept open while the app is live on Play, renewed
-yearly); how it works and how to rotate it: `docs/APP_BUNDLE_DELIVERY.md` ("Play review access").
+review window on the Pages project is open (`REVIEW_UNTIL` in `wrangler.toml`, reopened to send day + 21 days for
+each Play or App Store submission); how it works and how to rotate it: `docs/APP_BUNDLE_DELIVERY.md` ("Play review access").
 
 > No account or sign-in. The free credit bureau dispute letter works at once from Home. To open every paid kit free: More > Have a review code?, type the 10-digit code from the password field, tap Use this code. The Complete Bundle (both letter kits and every kit's PDF and Word file) opens for 7 days. Self-help templates only: the app never contacts a bureau or creditor. 'Open my website kit' needs a website order; skip it.
 
