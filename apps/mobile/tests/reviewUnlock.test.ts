@@ -182,6 +182,48 @@ test('guessing: wrong code 403 and counted; per network 5 a minute and 20 a day,
   assert.deepEqual(rcg.openLoopStops, ['REVIEW_DAILY_CAP']);
 });
 
+test('lockout is per device: a stranger on 60 rotating networks spends every try each one has (1,200, past the old shared 1,000) and a different device still redeems; the 1,000th try files ONE warning and refuses no one', async () => {
+  const e = env(), rc = revenuecat(); rc.known.add(anon(1));
+  const start = Date.parse(new Date(NOW).toISOString().slice(0, 10) + 'T00:00:00Z');
+  const before = LIMITS.globalWarnDaily - 1;
+  let n = 0;
+  // Each network sends its full day (20 tries, 5 a minute), every try from a made-up install so no install cap is met.
+  for (let ip = 0; ip < 60; ip++) for (let i = 0; i < LIMITS.perIpDaily; i++) {
+    const res = await call(e, rc, { code: '0000000000', app_user_id: anon(5000 + n) }, `198.18.${Math.floor(ip / 250)}.${ip % 250 + 1}`, start + Math.floor(i / LIMITS.perIpBurst) * 61_000);
+    assert.equal(res.status, 403, `try ${n + 1} from network ${ip + 1} is counted and compared, never refused by the shared count`);
+    assert.equal(res.body.error, 'WRONG_CODE');
+    n++;
+    assert.deepEqual(rc.openLoopStops, n > before ? ['REVIEW_GUESSING'] : [], `after try ${n}`);
+    // Its own 21st try is the only thing a network loses.
+    if (i === LIMITS.perIpDaily - 1 && ip % 20 === 0) assert.equal((await call(e, rc, { code: CODE, app_user_id: anon(1) }, `198.18.0.${ip + 1}`, start + 10 * 61_000)).status, 429);
+  }
+  assert.equal(n, 1200); assert.equal(triesTaken(e), 1200);
+  assert.ok(n > LIMITS.globalWarnDaily && n < LIMITS.globalDaily);
+  // The real reviewer: another install on another network, the right code, the same day.
+  const reviewer = await call(e, rc, { code: CODE, app_user_id: anon(1) }, '203.0.113.200', start + 11 * 61_000);
+  assert.equal(reviewer.status, 200); assert.equal(reviewer.body.unlocked, true); assert.equal(rc.granted.size, 1);
+  assert.deepEqual(rc.openLoopStops, ['REVIEW_GUESSING']);
+});
+
+test('the warning line: the 1,000th try of the day is the reviewer’s own and Boss OS is down: still unlocked, one alert tried, the 1,001st files nothing', async () => {
+  const day = new Date(NOW).toISOString().slice(0, 10);
+  for (const intake of ['up', 'throws', '500'] as const) {
+    const e = env(), rc = revenuecat(); rc.known.add(anon(1)); rc.known.add(anon(2)); rc.setIntake(intake);
+    (e.PRODUCTS_DB as D1).raw.prepare('INSERT INTO review_try VALUES (?, ?, ?, ?)').run(`all:${day}`, 'all', LIMITS.globalWarnDaily - 1, NOW + DAY);
+    const at = await call(e, rc, { code: CODE, app_user_id: anon(1) });
+    assert.equal(at.status, 200, intake); assert.equal(at.body.unlocked, true, intake);
+    assert.deepEqual(rc.openLoopStops, ['REVIEW_GUESSING'], intake);
+    const after = await call(e, rc, { code: CODE, app_user_id: anon(2) }, '198.51.100.77');
+    assert.equal(after.status, 200, intake);
+    assert.deepEqual(rc.openLoopStops, ['REVIEW_GUESSING'], `${intake}: one row a day, not one per try`);
+  }
+  // No token for the alert: a named stop in the log, and the unlock is unchanged.
+  const e = env(d1(), { BOSS_OPEN_LOOPS_TOKEN: '' }), rc = revenuecat(); rc.known.add(anon(1));
+  (e.PRODUCTS_DB as D1).raw.prepare('INSERT INTO review_try VALUES (?, ?, ?, ?)').run(`all:${day}`, 'all', LIMITS.globalWarnDaily - 1, NOW + DAY);
+  assert.equal((await call(e, rc, { code: CODE, app_user_id: anon(1) })).status, 200);
+  assert.deepEqual(rc.openLoopStops, []);
+});
+
 test('one install: 5 tries a minute and 10 a day whatever network it hops to, refused before the compare and without spending anyone else’s tries', async () => {
   const e = env(), rc = revenuecat(); rc.known.add(anon(1)); rc.known.add(anon(2));
   const start = Date.parse(new Date(NOW).toISOString().slice(0, 10) + 'T00:00:30Z');
